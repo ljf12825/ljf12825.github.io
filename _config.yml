@@ -1,6 +1,6 @@
 title: "ljf12825's Blog"
-description: "Efficient&Elegent"
-logo: "assets/images/Avatar.png"
+description: "Efficient & Elegant"
+logo: "/assets/images/Avatar.png"
 
 remote_theme: "mmistakes/minimal-mistakes@4.27.1"
 plugins:
@@ -9,13 +9,14 @@ minimal_mistakes_skin: "dark"
 
 author:
   name : "Jeff Lee"
+  description: "Efficient & Elegant"
   avatar: "/assets/images/Avatar.png"
   location: "Unknown"
-  email: "2548278761@qq.com"
   links:
    - label: "GitHub:ljf12825"
      icon: "fab fa-github"
      url:  "https://github.com/ljf12825"
+  email: "2548278761@qq.com"
 
 reading_time: true
 
