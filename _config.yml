@@ -9,11 +9,11 @@ minimal_mistakes_skin: "dark"
 
 author:
   name : "Jeff Lee"
-  avatar: "assets/images/Avatar.png"
+  avatar: "/assets/images/Avatar.png"
   location: "Unknown"
   email: "2548278761@qq.com"
   links:
-   - label: "GitHub: https://github.com/ljf12825"
+   - label: "GitHub:ljf12825"
      icon: "fab fa-github"
      url:  "https://github.com/ljf12825"
 
