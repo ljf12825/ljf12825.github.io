@@ -1,2 +1,14 @@
 tittle: ljf12825blog
 description: Efficient&Elegent
+author: Jeff Lee
+
+remote_theme "mmistakes/minimal-mistakes@4.27.1"
+
+plugins:
+ - jekyll-include-cache
+
+ #导航菜单等配置
+ minimal_mistakes_skin: "default"
+ locale: zh-CN
+
+ markdown: kramdown
