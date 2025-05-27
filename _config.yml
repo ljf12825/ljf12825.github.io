@@ -1,6 +1,16 @@
 title: "ljf12825's Blog"
 description: "Efficient&Elegent"
-author: Jeff Lee
+author:
+name : "Jeff Lee"
+avatar: "C:\Users\Administrator\Pictures\Camera Roll\Triangle.png"
+location: "Unknown"
+links:
+ - label: "GitHub"
+   icon: "fab fa-github"
+   url:  "https://github.com/ljf12825"
+ - label: "E-Mail"
+   icon: "fas fa-envelope"
+   url: "2548278761@qq.com"
 
 remote_theme: "mmistakes/minimal-mistakes@4.27.1"
 
