@@ -39,4 +39,6 @@ footer:
       url: "https://github.com/ljf12825"
 
 markdown: kramdown
+kramdown:
+  input: GFM
 highlighter: rouge
