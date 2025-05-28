@@ -7,6 +7,8 @@ plugins:
 
 minimal_mistakes_skin: "dark"
 
+logo: "/assets/images/J.ico"
+
 author:
   name : "Jeff Lee"
   bio: "Efficient & Elegant"
