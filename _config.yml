@@ -9,31 +9,34 @@ minimal_mistakes_skin: "dark"
 
 author:
   name : "Jeff Lee"
-  description: "Efficient & Elegant"
+  bio: "Efficient & Elegant"
   avatar: "/assets/images/Avatar.png"
   location: "Unknown"
-  links:
-   - label: "GitHub:ljf12825"
-     icon: "fab fa-github"
-     url:  "https://github.com/ljf12825"
   email: "2548278761@qq.com"
+  links:
+  - label: "GitHub"
+    icon: "fab fa-github"
+    url:  "https://github.com/ljf12825"
 
 reading_time: true
 
 footer:
   links:
-    - label: "GitHub"
-      icon: "fab fa-github"
-      url: "https://githubcoomo/ljf12825"
+  - label: "GitHub"
+    icon: "fab fa-github"
+    url: "https://githubcoomo/ljf12825"
 
 
 navigation:
   - title: "Home"
     url: "/"
-  - title: "Blog"
-    url: "/blog"
   - title: "About"
     url: "/about"
+  - title: "Blog"
+    url: "/blog"
+  - title: "ContactMe"
+    url: "/contact"
+
 
 markdown: kramdown
 highlighter: rouge
