@@ -5,6 +5,7 @@ logo: "/assets/images/Avatar.png"
 remote_theme: "mmistakes/minimal-mistakes@4.27.1"
 plugins:
   - jekyll-include-cache
+  - jekyll-remote_theme
 minimal_mistakes_skin: "dark"
 
 author:
