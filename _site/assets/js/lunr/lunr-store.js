@@ -10,4 +10,10 @@ var store = [{
         "tags": ["Unity"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/05/28/UnityEditorWindow.html",
         "teaser": null
+      },{
+        "title": "test",
+        "excerpt":"if you can see this, it’s ok  ","categories": ["notes"],
+        "tags": ["test"],
+        "url": "/notes/2025/05/28/test-post.html",
+        "teaser": null
       }]

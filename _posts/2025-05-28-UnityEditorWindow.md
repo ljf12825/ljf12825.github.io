@@ -1,6 +1,7 @@
 ---
 title: "Unity编辑器的窗口"
-date: 2025-05-28 10:00:00 +0800
+layout: single
+date: 2025-05-28
 categories: [笔记]
 tags: [Unity]
 author: "ljf12825"
