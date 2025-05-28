@@ -94,3 +94,95 @@ void CreateBall()
     ball.AddComponent<Rigidbody>();
 }
 ```
+
+**GameObject的属性和方法**
+
+- GameObject常用属性
+
+| 属性                  | 类型          | 说明                                     |
+| ------------------- | ----------- | -------------------------------------- |
+| `name`              | `string`    | 游戏对象的名称                                |
+| `tag`               | `string`    | 标签，用于分类和查找                             |
+| `layer`             | `int`       | 层，用于渲染、碰撞等                             |
+| `activeSelf`        | `bool`      | 当前对象是否激活（自身状态）                         |
+| `activeInHierarchy` | `bool`      | 当前对象在层级中是否激活（受父级影响）                    |
+| `transform`         | `Transform` | 对象的位置/旋转/缩放组件（固定存在）                    |
+| `scene`             | `Scene`     | 当前对象所在的场景（UnityEngine.SceneManagement） |
+
+- GameObject常用方法
+
+| 方法                               | 说明              |
+| -------------------------------- | --------------- |
+| `AddComponent<T>()`              | 添加组件            |
+| `GetComponent<T>()`              | 获取组件            |
+| `GetComponentInChildren<T>()`    | 从子对象中获取组件       |
+| `GetComponentInParent<T>()`      | 从父对象中获取组件       |
+| `TryGetComponent<T>(out T comp)` | 安全地获取组件，不抛出异常   |
+| `GetComponents<T>()`             | 获取所有类型为 T 的组件数组 |
+| `GetComponentsInChildren<T>()`   | 获取所有子物体上的该组件    |
+
+
+- 激活与状态控制
+
+| 方法                              | 说明                 |
+| ------------------------------- | ------------------ |
+| `SetActive(bool)`               | 设置是否激活（自己及子物体是否运行） |
+| `CompareTag(string)`            | 比较标签               |
+| `FindGameObjectWithTag(string)` | 通过标签查找（不推荐频繁使用）    |
+
+- 创建与销毁
+
+| 方法                   | 说明                 |
+| -------------------- | ------------------ |
+| `Instantiate()`      | 创建一个 GameObject 实例 |
+| `Destroy()`          | 销毁一个对象             |
+| `DestroyImmediate()` | 立即销毁（编辑器用）         |
+
+
+- 查找对象（不推荐频繁使用）
+
+| 方法                                              | 说明              |
+| ----------------------------------------------- | --------------- |
+| `GameObject.Find(string name)`                  | 通过名字查找对象        |
+| `GameObject.FindWithTag(string tag)`            | 通过标签查找第一个匹配对象   |
+| `GameObject.FindGameObjectsWithTag(string tag)` | 找到所有标签为 tag 的对象 |
+
+**⚠注意：Find()、FindWithTag()效率低，建议缓存引用或用Inspector绑定引用**
+
+- GameObject静态方法
+
+| 方法                                              | 说明                     |
+| ----------------------------------------------- | ---------------------- |
+| `CreatePrimitive(PrimitiveType type)`           | 创建基本图形体（如 Cube、Sphere） |
+| `GameObject.Find(string name)`                  | 查找场景中某个名字的对象           |
+| `GameObject.FindWithTag(string tag)`            | 查找场景中某个标签的对象           |
+| `GameObject.FindGameObjectsWithTag(string tag)` | 查找所有拥有某个标签的对象          |
+
+**[Unity官方文档（GameObject）](https://docs.unity3d.com/2022.3/Documentation/ScriptReference/GameObject.html)**
+
+## 示例
+**1.动态创建一个Cube，并添加刚体**
+```csharp
+GameObject cube = GameObject.CentePrimitive(PrimitiveType.Cube);
+cube.AddComponenet<Rigidbody>();
+cube.name = "FallingCube";
+```
+
+**2.启用/禁用对象**
+```csharp
+gameObject.SetActive(false);
+if (!gameObject.activeSelf) Debug.Log("我被禁用了");
+```
+
+**3.查找并修改子对象**
+```csharp
+Transform arm = transform.Find("Body/RightArm");
+arm.gameObject.SetActive(true);
+```
+
+**4.组件缓存写法（性能优化）**
+```csharp
+private MeshRenderer renderer;
+
+void Awake() => renderer = GetComponenet<MeshRenderer>(); //只查一次
+```

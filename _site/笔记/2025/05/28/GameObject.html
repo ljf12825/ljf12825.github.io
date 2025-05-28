@@ -296,6 +296,241 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
+<p><strong>GameObject的属性和方法</strong></p>
+
+<ul>
+  <li>GameObject常用属性</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">name</code></td>
+      <td><code class="language-plaintext highlighter-rouge">string</code></td>
+      <td>游戏对象的名称</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">tag</code></td>
+      <td><code class="language-plaintext highlighter-rouge">string</code></td>
+      <td>标签，用于分类和查找</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">layer</code></td>
+      <td><code class="language-plaintext highlighter-rouge">int</code></td>
+      <td>层，用于渲染、碰撞等</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">activeSelf</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>当前对象是否激活（自身状态）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">activeInHierarchy</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>当前对象在层级中是否激活（受父级影响）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">transform</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Transform</code></td>
+      <td>对象的位置/旋转/缩放组件（固定存在）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">scene</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Scene</code></td>
+      <td>当前对象所在的场景（UnityEngine.SceneManagement）</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>GameObject常用方法</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">AddComponent&lt;T&gt;()</code></td>
+      <td>添加组件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetComponent&lt;T&gt;()</code></td>
+      <td>获取组件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetComponentInChildren&lt;T&gt;()</code></td>
+      <td>从子对象中获取组件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetComponentInParent&lt;T&gt;()</code></td>
+      <td>从父对象中获取组件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">TryGetComponent&lt;T&gt;(out T comp)</code></td>
+      <td>安全地获取组件，不抛出异常</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetComponents&lt;T&gt;()</code></td>
+      <td>获取所有类型为 T 的组件数组</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetComponentsInChildren&lt;T&gt;()</code></td>
+      <td>获取所有子物体上的该组件</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>激活与状态控制</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SetActive(bool)</code></td>
+      <td>设置是否激活（自己及子物体是否运行）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">CompareTag(string)</code></td>
+      <td>比较标签</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">FindGameObjectWithTag(string)</code></td>
+      <td>通过标签查找（不推荐频繁使用）</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>创建与销毁</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Instantiate()</code></td>
+      <td>创建一个 GameObject 实例</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Destroy()</code></td>
+      <td>销毁一个对象</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">DestroyImmediate()</code></td>
+      <td>立即销毁（编辑器用）</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>查找对象（不推荐频繁使用）</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GameObject.Find(string name)</code></td>
+      <td>通过名字查找对象</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GameObject.FindWithTag(string tag)</code></td>
+      <td>通过标签查找第一个匹配对象</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GameObject.FindGameObjectsWithTag(string tag)</code></td>
+      <td>找到所有标签为 tag 的对象</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>⚠注意：Find()、FindWithTag()效率低，建议缓存引用或用Inspector绑定引用</strong></p>
+
+<ul>
+  <li>GameObject静态方法</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">CreatePrimitive(PrimitiveType type)</code></td>
+      <td>创建基本图形体（如 Cube、Sphere）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GameObject.Find(string name)</code></td>
+      <td>查找场景中某个名字的对象</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GameObject.FindWithTag(string tag)</code></td>
+      <td>查找场景中某个标签的对象</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GameObject.FindGameObjectsWithTag(string tag)</code></td>
+      <td>查找所有拥有某个标签的对象</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong><a href="https://docs.unity3d.com/2022.3/Documentation/ScriptReference/GameObject.html">Unity官方文档（GameObject）</a></strong></p>
+
+<h2 id="示例">示例</h2>
+<p><strong>1.动态创建一个Cube，并添加刚体</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObject</span> <span class="n">cube</span> <span class="p">=</span> <span class="n">GameObject</span><span class="p">.</span><span class="nf">CentePrimitive</span><span class="p">(</span><span class="n">PrimitiveType</span><span class="p">.</span><span class="n">Cube</span><span class="p">);</span>
+<span class="n">cube</span><span class="p">.</span><span class="n">AddComponenet</span><span class="p">&lt;</span><span class="n">Rigidbody</span><span class="p">&gt;();</span>
+<span class="n">cube</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="s">"FallingCube"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><strong>2.启用/禁用对象</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gameObject</span><span class="p">.</span><span class="nf">SetActive</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(!</span><span class="n">gameObject</span><span class="p">.</span><span class="n">activeSelf</span><span class="p">)</span> <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"我被禁用了"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>3.查找并修改子对象</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Transform</span> <span class="n">arm</span> <span class="p">=</span> <span class="n">transform</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">"Body/RightArm"</span><span class="p">);</span>
+<span class="n">arm</span><span class="p">.</span><span class="n">gameObject</span><span class="p">.</span><span class="nf">SetActive</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>4.组件缓存写法（性能优化）</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="n">MeshRenderer</span> <span class="n">renderer</span><span class="p">;</span>
+
+<span class="k">void</span> <span class="nf">Awake</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">renderer</span> <span class="p">=</span> <span class="n">GetComponenet</span><span class="p">&lt;</span><span class="n">MeshRenderer</span><span class="p">&gt;();</span> <span class="c1">//只查一次</span>
+</code></pre></div></div>
+
         
       </section>
 

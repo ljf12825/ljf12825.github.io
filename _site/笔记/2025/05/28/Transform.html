@@ -187,17 +187,54 @@
 <p>可以理解为每个物体在三维世界中的“坐标轴和局部空间信息”。</p>
 
 <h2 id="二transform的重要属性和区别">二、Transform的重要属性和区别</h2>
-<p>**1.<code class="language-plaintext highlighter-rouge">position</code>和<code class="language-plaintext highlighter-rouge">localPosition</code>
-| 属性名 | 含义 | 示例用途 |
-|-|-|-|
-| <code class="language-plaintext highlighter-rouge">position</code> | 世界坐标（绝对位置） | 物体在整个场景中的位置 |
-| <code class="language-plaintext highlighter-rouge">localPosition</code> | 本地坐标（相对于父物体的位置） | 子物体相对于父物体的偏移 |</p>
 
-<p>**2.<code class="language-plaintext highlighter-rouge">rotation</code>和<code class="language-plaintext highlighter-rouge">localRotation</code>
-| 属性名             | 含义       | 类型         |
-| ————— | ——– | ———- |
-| <code class="language-plaintext highlighter-rouge">rotation</code>      | 世界旋转     | Quaternion |
-| <code class="language-plaintext highlighter-rouge">localRotation</code> | 相对父物体的旋转 | Quaternion |</p>
+<p>**1.<code class="language-plaintext highlighter-rouge">position</code>和<code class="language-plaintext highlighter-rouge">localPosition</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性名</th>
+      <th>含义</th>
+      <th>示例用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">position</code></td>
+      <td>世界坐标（绝对位置）</td>
+      <td>物体在整个场景中的位置</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">localPosition</code></td>
+      <td>本地坐标（相对于父物体的位置）</td>
+      <td>子物体相对于父物体的偏移</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>**2.<code class="language-plaintext highlighter-rouge">rotation</code>和<code class="language-plaintext highlighter-rouge">localRotation</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性名</th>
+      <th>含义</th>
+      <th>类型</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">rotation</code></td>
+      <td>世界旋转</td>
+      <td>Quaternion</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">localRotation</code></td>
+      <td>相对父物体的旋转</td>
+      <td>Quaternion</td>
+    </tr>
+  </tbody>
+</table>
 
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transform</span><span class="p">.</span><span class="n">rotation</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">Euler</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span> <span class="c1">//世界旋转</span>
 <span class="n">transform</span><span class="p">.</span><span class="n">localRotation</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="n">idetity</span><span class="p">;</span> <span class="c1">//本地旋转重置</span>
@@ -280,50 +317,192 @@
   </li>
 </ul>
 
-<p><strong>Transform的Property</strong>
-| 属性                 | 类型           | 说明                                        |
-| —————— | ———— | —————————————– |
-| <code class="language-plaintext highlighter-rouge">position</code>         | <code class="language-plaintext highlighter-rouge">Vector3</code>    | 游戏对象在世界空间中的位置                             |
-| <code class="language-plaintext highlighter-rouge">localPosition</code>    | <code class="language-plaintext highlighter-rouge">Vector3</code>    | 相对于父对象的本地位置                               |
-| <code class="language-plaintext highlighter-rouge">rotation</code>         | <code class="language-plaintext highlighter-rouge">Quaternion</code> | 世界空间的旋转（四元数）                              |
-| <code class="language-plaintext highlighter-rouge">localRotation</code>    | <code class="language-plaintext highlighter-rouge">Quaternion</code> | 相对于父对象的旋转                                 |
-| <code class="language-plaintext highlighter-rouge">eulerAngles</code>      | <code class="language-plaintext highlighter-rouge">Vector3</code>    | 世界空间的欧拉角（角度制）                             |
-| <code class="language-plaintext highlighter-rouge">localEulerAngles</code> | <code class="language-plaintext highlighter-rouge">Vector3</code>    | 本地空间的欧拉角                                  |
-| <code class="language-plaintext highlighter-rouge">right</code>            | <code class="language-plaintext highlighter-rouge">Vector3</code>    | 对象的右方向（本地 X 轴）                            |
-| <code class="language-plaintext highlighter-rouge">up</code>               | <code class="language-plaintext highlighter-rouge">Vector3</code>    | 对象的上方向（本地 Y 轴）                            |
-| <code class="language-plaintext highlighter-rouge">forward</code>          | <code class="language-plaintext highlighter-rouge">Vector3</code>    | 对象的前方向（本地 Z 轴）                            |
-| <code class="language-plaintext highlighter-rouge">localScale</code>       | <code class="language-plaintext highlighter-rouge">Vector3</code>    | 本地空间的缩放比例                                 |
-| <code class="language-plaintext highlighter-rouge">parent</code>           | <code class="language-plaintext highlighter-rouge">Transform</code>  | 父对象的 Transform                            |
-| <code class="language-plaintext highlighter-rouge">childCount</code>       | <code class="language-plaintext highlighter-rouge">int</code>        | 子对象数量                                     |
-| <code class="language-plaintext highlighter-rouge">lossyScale</code>       | <code class="language-plaintext highlighter-rouge">Vector3</code>    | 世界空间中的实际缩放（包含父缩放影响）                       |
-| <code class="language-plaintext highlighter-rouge">hasChanged</code>       | <code class="language-plaintext highlighter-rouge">bool</code>       | 表示 Transform 是否自上次检查后发生了变化（可以手动重置为 false） |
-| <code class="language-plaintext highlighter-rouge">root</code>             | <code class="language-plaintext highlighter-rouge">Transform</code>  | 当前 Transform 层级中的最上层对（根）                 |</p>
+<p><strong>Transform的Property</strong></p>
 
-<p>**Transform的Methods
-| 方法                                                           | 说明                |
-| ———————————————————— | —————– |
-| <code class="language-plaintext highlighter-rouge">Translate(Vector3 translation, Space space = Space.Self)</code>   | 沿给定方向移动对象（默认本地坐标） |
-| <code class="language-plaintext highlighter-rouge">Rotate(Vector3 eulerAngles, Space space = Space.Self)</code>      | 沿给定方向旋转对象         |
-| <code class="language-plaintext highlighter-rouge">LookAt(Transform target)</code> 或 <code class="language-plaintext highlighter-rouge">LookAt(Vector3 worldPosition)</code> | 使对象面向目标           |
-| <code class="language-plaintext highlighter-rouge">RotateAround(Vector3 point, Vector3 axis, float angle)</code>     | 绕某个点和轴旋转          |
-| <code class="language-plaintext highlighter-rouge">TransformDirection(Vector3 localDirection)</code>                 | 将本地方向转换为世界方向      |
-| <code class="language-plaintext highlighter-rouge">InverseTransformDirection(Vector3 worldDirection)</code>          | 将世界方向转换为本地方向      |
-| <code class="language-plaintext highlighter-rouge">TransformPoint(Vector3 localPosition)</code>                      | 本地坐标转世界坐标         |
-| <code class="language-plaintext highlighter-rouge">InverseTransformPoint(Vector3 worldPosition)</code>               | 世界坐标转本地坐标         |
-| <code class="language-plaintext highlighter-rouge">DetachChildren()</code>                                           | 解除所有子对象的父子关系      |</p>
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">position</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
+      <td>游戏对象在世界空间中的位置</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">localPosition</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
+      <td>相对于父对象的本地位置</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">rotation</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Quaternion</code></td>
+      <td>世界空间的旋转（四元数）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">localRotation</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Quaternion</code></td>
+      <td>相对于父对象的旋转</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">eulerAngles</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
+      <td>世界空间的欧拉角（角度制）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">localEulerAngles</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
+      <td>本地空间的欧拉角</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">right</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
+      <td>对象的右方向（本地 X 轴）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">up</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
+      <td>对象的上方向（本地 Y 轴）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">forward</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
+      <td>对象的前方向（本地 Z 轴）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">localScale</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
+      <td>本地空间的缩放比例</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">parent</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Transform</code></td>
+      <td>父对象的 Transform</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">childCount</code></td>
+      <td><code class="language-plaintext highlighter-rouge">int</code></td>
+      <td>子对象数量</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">lossyScale</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
+      <td>世界空间中的实际缩放（包含父缩放影响）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">hasChanged</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>表示 Transform 是否自上次检查后发生了变化（可以手动重置为 false）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">root</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Transform</code></td>
+      <td>当前 Transform 层级中的最上层对（根）</td>
+    </tr>
+  </tbody>
+</table>
 
-<p><strong>层级操作与结构</strong>
-| 方法                                                     | 说明                                 |
-| —————————————————— | ———————————- |
-| <code class="language-plaintext highlighter-rouge">SetParent(Transform parent)</code>                          | 设置父对象                              |
-| <code class="language-plaintext highlighter-rouge">SetParent(Transform parent, bool worldPositionStays)</code> | 设置父对象，同时控制是否保持世界坐标不变               |
-| <code class="language-plaintext highlighter-rouge">GetChild(int index)</code>                                  | 获取指定索引的子 Transform                 |
-| <code class="language-plaintext highlighter-rouge">Find(string name)</code>                                    | 查找名字为 name 的子物体（递归）                |
-| <code class="language-plaintext highlighter-rouge">IsChildOf(Transform parent)</code>                          | 判断当前 Transform 是否是某父 Transform 的子级 |
-| <code class="language-plaintext highlighter-rouge">SetAsFirstSibling()</code>                                  | 将当前对象设置为父对象的第一个子对象                 |
-| <code class="language-plaintext highlighter-rouge">SetAsLastSibling()</code>                                   | 设置为最后一个子对象                         |
-| <code class="language-plaintext highlighter-rouge">SetSiblingIndex(int index)</code>                           | 设置在父 Transform 下的子对象索引             |
-| <code class="language-plaintext highlighter-rouge">GetSiblingIndex()</code>                                    | 获取在父 Transform 下的索引位置              |</p>
+<p><strong>Transform的Methods</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Translate(Vector3 translation, Space space = Space.Self)</code></td>
+      <td>沿给定方向移动对象（默认本地坐标）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Rotate(Vector3 eulerAngles, Space space = Space.Self)</code></td>
+      <td>沿给定方向旋转对象</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LookAt(Transform target)</code> 或 <code class="language-plaintext highlighter-rouge">LookAt(Vector3 worldPosition)</code></td>
+      <td>使对象面向目标</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">RotateAround(Vector3 point, Vector3 axis, float angle)</code></td>
+      <td>绕某个点和轴旋转</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">TransformDirection(Vector3 localDirection)</code></td>
+      <td>将本地方向转换为世界方向</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">InverseTransformDirection(Vector3 worldDirection)</code></td>
+      <td>将世界方向转换为本地方向</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">TransformPoint(Vector3 localPosition)</code></td>
+      <td>本地坐标转世界坐标</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">InverseTransformPoint(Vector3 worldPosition)</code></td>
+      <td>世界坐标转本地坐标</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">DetachChildren()</code></td>
+      <td>解除所有子对象的父子关系</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>层级操作与结构</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SetParent(Transform parent)</code></td>
+      <td>设置父对象</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SetParent(Transform parent, bool worldPositionStays)</code></td>
+      <td>设置父对象，同时控制是否保持世界坐标不变</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetChild(int index)</code></td>
+      <td>获取指定索引的子 Transform</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Find(string name)</code></td>
+      <td>查找名字为 name 的子物体（递归）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">IsChildOf(Transform parent)</code></td>
+      <td>判断当前 Transform 是否是某父 Transform 的子级</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SetAsFirstSibling()</code></td>
+      <td>将当前对象设置为父对象的第一个子对象</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SetAsLastSibling()</code></td>
+      <td>设置为最后一个子对象</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SetSiblingIndex(int index)</code></td>
+      <td>设置在父 Transform 下的子对象索引</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetSiblingIndex()</code></td>
+      <td>获取在父 Transform 下的索引位置</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><strong>详见<a href="https://docs.unity3d.com/ScriptReference/Transform.html">Unity官方文档(Transform)</a></strong></p>
 
@@ -346,13 +525,37 @@
 </code></pre></div></div>
 
 <h2 id="容易混淆的几个方法说明">容易混淆的几个方法说明</h2>
-<p>| 方法/属性                        | 注意点                                         |
-| —————————- | ——————————————- |
-| <code class="language-plaintext highlighter-rouge">rotation.eulerAngles = ...</code> | 实际无效，应该用 <code class="language-plaintext highlighter-rouge">rotation = Quaternion.Euler(...)</code> |
-| <code class="language-plaintext highlighter-rouge">position += ...</code>            | 本质上是设置绝对世界位置                                |
-| <code class="language-plaintext highlighter-rouge">Translate(...)</code>             | 默认是相对于自身坐标系移动                               |
-| <code class="language-plaintext highlighter-rouge">LookAt()</code>                   | 会修改 rotation，旋转 Z 轴正方向指向目标                  |
-| <code class="language-plaintext highlighter-rouge">TransformDirection()</code>       | 是方向转换，不是位置转换！比如方向向量 <code class="language-plaintext highlighter-rouge">(0, 0, 1)</code> 表示前方        |</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法/属性</th>
+      <th>注意点</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">rotation.eulerAngles = ...</code></td>
+      <td>实际无效，应该用 <code class="language-plaintext highlighter-rouge">rotation = Quaternion.Euler(...)</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">position += ...</code></td>
+      <td>本质上是设置绝对世界位置</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Translate(...)</code></td>
+      <td>默认是相对于自身坐标系移动</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LookAt()</code></td>
+      <td>会修改 rotation，旋转 Z 轴正方向指向目标</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">TransformDirection()</code></td>
+      <td>是方向转换，不是位置转换！比如方向向量 <code class="language-plaintext highlighter-rouge">(0, 0, 1)</code> 表示前方</td>
+    </tr>
+  </tbody>
+</table>
 
 
         
