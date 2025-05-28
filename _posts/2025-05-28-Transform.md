@@ -18,13 +18,16 @@ Transform是Unity中控制物体位置、旋转、缩放和父子层级关系的
 可以理解为每个物体在三维世界中的“坐标轴和局部空间信息”。
 
 ## 二、Transform的重要属性和区别
+
 **1.`position`和`localPosition`
+
 | 属性名 | 含义 | 示例用途 |
 |-|-|-|
 | `position` | 世界坐标（绝对位置） | 物体在整个场景中的位置 |
 | `localPosition` | 本地坐标（相对于父物体的位置） | 子物体相对于父物体的偏移 |
 
 **2.`rotation`和`localRotation`
+
 | 属性名             | 含义       | 类型         |
 | --------------- | -------- | ---------- |
 | `rotation`      | 世界旋转     | Quaternion |
@@ -113,6 +116,7 @@ Vector3 world = transform.TransformPoint(localPos);
 ```
 
 **Transform的Property**
+
 | 属性                 | 类型           | 说明                                        |
 | ------------------ | ------------ | ----------------------------------------- |
 | `position`         | `Vector3`    | 游戏对象在世界空间中的位置                             |
@@ -131,7 +135,8 @@ Vector3 world = transform.TransformPoint(localPos);
 | `hasChanged`       | `bool`       | 表示 Transform 是否自上次检查后发生了变化（可以手动重置为 false） |
 | `root`             | `Transform`  | 当前 Transform 层级中的最上层对（根）                 |
 
-**Transform的Methods
+**Transform的Methods**
+
 | 方法                                                           | 说明                |
 | ------------------------------------------------------------ | ----------------- |
 | `Translate(Vector3 translation, Space space = Space.Self)`   | 沿给定方向移动对象（默认本地坐标） |
@@ -145,6 +150,7 @@ Vector3 world = transform.TransformPoint(localPos);
 | `DetachChildren()`                                           | 解除所有子对象的父子关系      |
 
 **层级操作与结构**
+
 | 方法                                                     | 说明                                 |
 | ------------------------------------------------------ | ---------------------------------- |
 | `SetParent(Transform parent)`                          | 设置父对象                              |
@@ -182,6 +188,7 @@ gun.localScale = Vector3.one * 2f;
 ```
 
 ## 容易混淆的几个方法说明
+
 | 方法/属性                        | 注意点                                         |
 | ---------------------------- | ------------------------------------------- |
 | `rotation.eulerAngles = ...` | 实际无效，应该用 `rotation = Quaternion.Euler(...)` |
