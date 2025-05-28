@@ -27,17 +27,5 @@ footer:
     icon: "fab fa-github"
     url: "https://githubcoomo/ljf12825"
 
-
-navigation:
-  - title: "Home"
-    url: "/"
-  - title: "About"
-    url: "/about"
-  - title: "Blog"
-    url: "/blog"
-  - title: "ContactMe"
-    url: "/contact"
-
-
 markdown: kramdown
 highlighter: rouge
