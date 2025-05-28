@@ -1,4 +1,28 @@
 var store = [{
+        "title": "About",
+        "excerpt":"        You want to know who I am?  It’s UB.            博客内容仅用于学习，如有侵权，请联系删除       &lt;-  &lt;-  &lt;-  ","categories": [],
+        "tags": [],
+        "url": "/about/",
+        "teaser": null
+      },{
+        "title": "Blog",
+        "excerpt":" ","categories": [],
+        "tags": [],
+        "url": "/blog/",
+        "teaser": null
+      },{
+        "title": "Categories",
+        "excerpt":" ","categories": [],
+        "tags": [],
+        "url": "/categories/",
+        "teaser": null
+      },{
+        "title": "Tags",
+        "excerpt":" ","categories": [],
+        "tags": [],
+        "url": "/tags/",
+        "teaser": null
+      },{
         "title": "first post",
         "excerpt":"Hello Minimal Mistakes! Hello Blog!  ","categories": ["another"],
         "tags": ["GitHub","GitHub Pages"],
@@ -11,9 +35,15 @@ var store = [{
         "url": "/%E7%AC%94%E8%AE%B0/2025/05/28/UnityEditorWindow.html",
         "teaser": null
       },{
-        "title": "test",
-        "excerpt":"if you can see this, it’s ok  ","categories": ["notes"],
-        "tags": ["test"],
-        "url": "/notes/2025/05/28/test-post.html",
-        "teaser": null
-      }]
+    "title": "About",
+    "excerpt":"        You want to know who I am?  It’s UB.            博客内容仅用于学习，如有侵权，请联系删除       &lt;-  &lt;-  &lt;-  ","url": "http://localhost:4000/about/"
+  },{
+    "title": "Blog",
+    "excerpt":" ","url": "http://localhost:4000/blog/"
+  },{
+    "title": "Categories",
+    "excerpt":" ","url": "http://localhost:4000/categories/"
+  },{
+    "title": "Tags",
+    "excerpt":" ","url": "http://localhost:4000/tags/"
+  }]
