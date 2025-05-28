@@ -1,0 +1,454 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.1 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Transform - ljf12825’s Blog</title>
+<meta name="description" content="Transform是Unity中控制物体位置、旋转、缩放和父子层级关系的核心组件">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="ljf12825's Blog">
+<meta property="og:title" content="Transform">
+<meta property="og:url" content="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/28/Transform.html">
+
+
+  <meta property="og:description" content="Transform是Unity中控制物体位置、旋转、缩放和父子层级关系的核心组件">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-05-28T00:00:00+08:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/28/Transform.html">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="ljf12825's Blog Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/J.ico" alt="ljf12825's Blog"></a>
+        
+        <a class="site-title" href="/">
+          ljf12825's Blog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/"
+                
+                
+              >Home</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/categories/"
+                
+                
+              >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/tags/"
+                
+                
+              >Tags</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/about/"
+                
+                
+              >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Transform">
+    <meta itemprop="description" content="Transform是Unity中控制物体位置、旋转、缩放和父子层级关系的核心组件">
+    <meta itemprop="datePublished" content="2025-05-28T00:00:00+08:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/28/Transform.html" itemprop="url">Transform
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>Transform是Unity中控制物体位置、旋转、缩放和父子层级关系的核心组件</p>
+
+<h2 id="一什么是transform">一、什么是Transform</h2>
+<p><code class="language-plaintext highlighter-rouge">Transfrom</code>是每个<code class="language-plaintext highlighter-rouge">GameObject</code>都自带的核心组件，主要负责：</p>
+<ul>
+  <li>位置（Position）</li>
+  <li>旋转（Rotation）</li>
+  <li>缩放（Scale）</li>
+  <li>父子关系（Hierarchy）</li>
+</ul>
+
+<p>可以理解为每个物体在三维世界中的“坐标轴和局部空间信息”。</p>
+
+<h2 id="二transform的重要属性和区别">二、Transform的重要属性和区别</h2>
+<p>**1.<code class="language-plaintext highlighter-rouge">position</code>和<code class="language-plaintext highlighter-rouge">localPosition</code>
+| 属性名 | 含义 | 示例用途 |
+|-|-|-|
+| <code class="language-plaintext highlighter-rouge">position</code> | 世界坐标（绝对位置） | 物体在整个场景中的位置 |
+| <code class="language-plaintext highlighter-rouge">localPosition</code> | 本地坐标（相对于父物体的位置） | 子物体相对于父物体的偏移 |</p>
+
+<p>**2.<code class="language-plaintext highlighter-rouge">rotation</code>和<code class="language-plaintext highlighter-rouge">localRotation</code>
+| 属性名             | 含义       | 类型         |
+| ————— | ——– | ———- |
+| <code class="language-plaintext highlighter-rouge">rotation</code>      | 世界旋转     | Quaternion |
+| <code class="language-plaintext highlighter-rouge">localRotation</code> | 相对父物体的旋转 | Quaternion |</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transform</span><span class="p">.</span><span class="n">rotation</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">Euler</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span> <span class="c1">//世界旋转</span>
+<span class="n">transform</span><span class="p">.</span><span class="n">localRotation</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="n">idetity</span><span class="p">;</span> <span class="c1">//本地旋转重置</span>
+</code></pre></div></div>
+
+<p><strong>3.localScale</strong></p>
+<ul>
+  <li>表示对象自身的缩放</li>
+  <li>注意：缩放不会自动传递到<code class="language-plaintext highlighter-rouge">position</code>，但会影响渲染尺寸和碰撞盒</li>
+</ul>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transform</span><span class="p">.</span><span class="n">localScale</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">);</span> <span class="c1">//放大两倍</span>
+</code></pre></div></div>
+
+<h2 id="三父子层级结构">三、父子层级结构*</h2>
+
+<p><strong>设置父物体</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">child</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">parent</span> <span class="p">=</span> <span class="n">parent</span><span class="p">.</span><span class="n">transform</span><span class="p">;</span>
+<span class="c1">//或</span>
+<span class="n">child</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="nf">SetParent</span><span class="p">(</span><span class="n">parent</span><span class="p">.</span><span class="n">transform</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>常见操作</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Transform</span> <span class="n">parent</span> <span class="p">=</span> <span class="n">transform</span><span class="p">.</span><span class="n">parent</span><span class="p">;</span> <span class="c1">//获取父对象</span>
+<span class="n">Transform</span> <span class="n">child</span> <span class="p">=</span> <span class="n">transform</span><span class="p">.</span><span class="nf">GetChild</span><span class="p">(</span><span class="m">0</span><span class="p">);</span> <span class="c1">//获取第一个子对象</span>
+<span class="kt">int</span> <span class="n">childCount</span> <span class="p">=</span> <span class="n">transform</span><span class="p">.</span><span class="n">childCount</span><span class="p">;</span> <span class="c1">//获取子对象数量</span>
+</code></pre></div></div>
+<p><strong>使用本地坐标的原因</strong>
+当物体成为子对象时，使用<code class="language-plaintext highlighter-rouge">localPosition</code>更容易控制其相对于父对象的偏移，比如角色头部、武器挂点等</p>
+
+<p><strong>为什么<code class="language-plaintext highlighter-rouge">Transform</code>可以决定父子结构？</strong>
+1.Unity中父子结构的本质
+在Unity中，一个GameObject能成为另一个GameObject的子对象，本质上是通过Transform组件的嵌套结构来实现的
+2.为什么<code class="language-plaintext highlighter-rouge">Transform</code>决定父子关系
+因为GameObject的位置、旋转、缩放、层级关系都是由<code class="language-plaintext highlighter-rouge">Transform</code>控制的，而Unity场景树（Hierarchy）实际上就是一个<code class="language-plaintext highlighter-rouge">Transform</code>树</p>
+
+<p><strong>举个例子</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObject</span> <span class="n">parent</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">GameObject</span><span class="p">(</span><span class="s">"Parent"</span><span class="p">);</span>
+<span class="n">GameObject</span> <span class="n">child</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">GameObject</span><span class="p">(</span><span class="s">"Child"</span><span class="p">);</span>
+
+<span class="n">child</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">parent</span> <span class="p">=</span> <span class="n">parent</span><span class="p">.</span><span class="n">transform</span><span class="p">;</span>
+</code></pre></div></div>
+<p>这段代码不会修改该GameObject的本体，它只是把<code class="language-plaintext highlighter-rouge">Child</code>的<code class="language-plaintext highlighter-rouge">Transform</code>挂到了<code class="language-plaintext highlighter-rouge">Parent</code>的<code class="language-plaintext highlighter-rouge">Transform</code>上</p>
+<ul>
+  <li>GameObject本身不存储层级结构，它只是一个容器</li>
+  <li>Transform组件内部有：
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">parent</code>：父级Transform</li>
+      <li><code class="language-plaintext highlighter-rouge">childCount</code>：子级数量</li>
+      <li><code class="language-plaintext highlighter-rouge">.GetChild(i)</code>：获取第i个子Transform</li>
+    </ul>
+  </li>
+  <li>场景中任何层级结构，其实就是多个Transform组件互相引用的结果</li>
+</ul>
+
+<h2 id="四transform的重要方法">四、Transform的重要方法</h2>
+<p><strong>移动（不考虑物理系统）</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transform</span><span class="p">.</span><span class="nf">Translate</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">forward</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTIme</span><span class="p">);</span>
+</code></pre></div></div>
+<p><strong>旋转</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tansform</span><span class="p">.</span><span class="nf">Rotate</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">up</span><span class="p">,</span> <span class="m">45</span><span class="p">);</span>
+</code></pre></div></div>
+<p><strong>查找</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Transform</span> <span class="n">arm</span> <span class="p">=</span> <span class="n">transform</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">"Body/LeftArm"</span><span class="p">);</span>
+</code></pre></div></div>
+<p><strong>向某点转向（LookAt）</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transform</span><span class="p">.</span><span class="nf">LookAt</span><span class="p">(</span><span class="n">target</span><span class="p">.</span><span class="n">transform</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="五使用技巧与注意事项">五、使用技巧与注意事项</h2>
+<p><strong>坐标转换</strong></p>
+<ul>
+  <li>世界坐标转本地坐标
+    <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector3</span> <span class="n">local</span> <span class="p">=</span> <span class="n">transform</span><span class="p">.</span><span class="nf">InverseTransformPoint</span><span class="p">(</span><span class="n">worldPos</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+  <li>本地坐标转世界坐标
+    <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector3</span> <span class="n">world</span> <span class="p">=</span> <span class="n">transform</span><span class="p">.</span><span class="nf">TransformPoint</span><span class="p">(</span><span class="n">localPos</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong>Transform的Property</strong>
+| 属性                 | 类型           | 说明                                        |
+| —————— | ———— | —————————————– |
+| <code class="language-plaintext highlighter-rouge">position</code>         | <code class="language-plaintext highlighter-rouge">Vector3</code>    | 游戏对象在世界空间中的位置                             |
+| <code class="language-plaintext highlighter-rouge">localPosition</code>    | <code class="language-plaintext highlighter-rouge">Vector3</code>    | 相对于父对象的本地位置                               |
+| <code class="language-plaintext highlighter-rouge">rotation</code>         | <code class="language-plaintext highlighter-rouge">Quaternion</code> | 世界空间的旋转（四元数）                              |
+| <code class="language-plaintext highlighter-rouge">localRotation</code>    | <code class="language-plaintext highlighter-rouge">Quaternion</code> | 相对于父对象的旋转                                 |
+| <code class="language-plaintext highlighter-rouge">eulerAngles</code>      | <code class="language-plaintext highlighter-rouge">Vector3</code>    | 世界空间的欧拉角（角度制）                             |
+| <code class="language-plaintext highlighter-rouge">localEulerAngles</code> | <code class="language-plaintext highlighter-rouge">Vector3</code>    | 本地空间的欧拉角                                  |
+| <code class="language-plaintext highlighter-rouge">right</code>            | <code class="language-plaintext highlighter-rouge">Vector3</code>    | 对象的右方向（本地 X 轴）                            |
+| <code class="language-plaintext highlighter-rouge">up</code>               | <code class="language-plaintext highlighter-rouge">Vector3</code>    | 对象的上方向（本地 Y 轴）                            |
+| <code class="language-plaintext highlighter-rouge">forward</code>          | <code class="language-plaintext highlighter-rouge">Vector3</code>    | 对象的前方向（本地 Z 轴）                            |
+| <code class="language-plaintext highlighter-rouge">localScale</code>       | <code class="language-plaintext highlighter-rouge">Vector3</code>    | 本地空间的缩放比例                                 |
+| <code class="language-plaintext highlighter-rouge">parent</code>           | <code class="language-plaintext highlighter-rouge">Transform</code>  | 父对象的 Transform                            |
+| <code class="language-plaintext highlighter-rouge">childCount</code>       | <code class="language-plaintext highlighter-rouge">int</code>        | 子对象数量                                     |
+| <code class="language-plaintext highlighter-rouge">lossyScale</code>       | <code class="language-plaintext highlighter-rouge">Vector3</code>    | 世界空间中的实际缩放（包含父缩放影响）                       |
+| <code class="language-plaintext highlighter-rouge">hasChanged</code>       | <code class="language-plaintext highlighter-rouge">bool</code>       | 表示 Transform 是否自上次检查后发生了变化（可以手动重置为 false） |
+| <code class="language-plaintext highlighter-rouge">root</code>             | <code class="language-plaintext highlighter-rouge">Transform</code>  | 当前 Transform 层级中的最上层对（根）                 |</p>
+
+<p>**Transform的Methods
+| 方法                                                           | 说明                |
+| ———————————————————— | —————– |
+| <code class="language-plaintext highlighter-rouge">Translate(Vector3 translation, Space space = Space.Self)</code>   | 沿给定方向移动对象（默认本地坐标） |
+| <code class="language-plaintext highlighter-rouge">Rotate(Vector3 eulerAngles, Space space = Space.Self)</code>      | 沿给定方向旋转对象         |
+| <code class="language-plaintext highlighter-rouge">LookAt(Transform target)</code> 或 <code class="language-plaintext highlighter-rouge">LookAt(Vector3 worldPosition)</code> | 使对象面向目标           |
+| <code class="language-plaintext highlighter-rouge">RotateAround(Vector3 point, Vector3 axis, float angle)</code>     | 绕某个点和轴旋转          |
+| <code class="language-plaintext highlighter-rouge">TransformDirection(Vector3 localDirection)</code>                 | 将本地方向转换为世界方向      |
+| <code class="language-plaintext highlighter-rouge">InverseTransformDirection(Vector3 worldDirection)</code>          | 将世界方向转换为本地方向      |
+| <code class="language-plaintext highlighter-rouge">TransformPoint(Vector3 localPosition)</code>                      | 本地坐标转世界坐标         |
+| <code class="language-plaintext highlighter-rouge">InverseTransformPoint(Vector3 worldPosition)</code>               | 世界坐标转本地坐标         |
+| <code class="language-plaintext highlighter-rouge">DetachChildren()</code>                                           | 解除所有子对象的父子关系      |</p>
+
+<p><strong>层级操作与结构</strong>
+| 方法                                                     | 说明                                 |
+| —————————————————— | ———————————- |
+| <code class="language-plaintext highlighter-rouge">SetParent(Transform parent)</code>                          | 设置父对象                              |
+| <code class="language-plaintext highlighter-rouge">SetParent(Transform parent, bool worldPositionStays)</code> | 设置父对象，同时控制是否保持世界坐标不变               |
+| <code class="language-plaintext highlighter-rouge">GetChild(int index)</code>                                  | 获取指定索引的子 Transform                 |
+| <code class="language-plaintext highlighter-rouge">Find(string name)</code>                                    | 查找名字为 name 的子物体（递归）                |
+| <code class="language-plaintext highlighter-rouge">IsChildOf(Transform parent)</code>                          | 判断当前 Transform 是否是某父 Transform 的子级 |
+| <code class="language-plaintext highlighter-rouge">SetAsFirstSibling()</code>                                  | 将当前对象设置为父对象的第一个子对象                 |
+| <code class="language-plaintext highlighter-rouge">SetAsLastSibling()</code>                                   | 设置为最后一个子对象                         |
+| <code class="language-plaintext highlighter-rouge">SetSiblingIndex(int index)</code>                           | 设置在父 Transform 下的子对象索引             |
+| <code class="language-plaintext highlighter-rouge">GetSiblingIndex()</code>                                    | 获取在父 Transform 下的索引位置              |</p>
+
+<p><strong>详见<a href="https://docs.unity3d.com/ScriptReference/Transform.html">Unity官方文档(Transform)</a></strong></p>
+
+<h2 id="常见组合用法示例">常见组合用法示例</h2>
+<p><strong>1.移动并保持世界坐标</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">child</span><span class="p">.</span><span class="nf">SetParent</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+</code></pre></div></div>
+<p><strong>2.朝向某一点</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transform</span><span class="p">.</span><span class="nf">LookAt</span><span class="p">(</span><span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">));</span>
+</code></pre></div></div>
+<p><strong>3.自转与公转</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//公转</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">RotateAround</span><span class="p">(</span><span class="n">center</span><span class="p">.</span><span class="n">position</span><span class="p">,</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">up</span><span class="p">,</span> <span class="m">20</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTIme</span><span class="p">);</span>
+<span class="c1">//自转</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">Rotate</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">up</span> <span class="p">*</span> <span class="m">45</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span><span class="p">);</span>
+</code></pre></div></div>
+<p><strong>4.查找指定子物体并设置缩放</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Transform</span> <span class="n">gun</span> <span class="p">=</span> <span class="n">transform</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">"Body/Hand/Gun"</span><span class="p">);</span>
+<span class="n">gun</span><span class="p">.</span><span class="n">localScale</span> <span class="p">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">one</span> <span class="p">*</span> <span class="m">2f</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="容易混淆的几个方法说明">容易混淆的几个方法说明</h2>
+<p>| 方法/属性                        | 注意点                                         |
+| —————————- | ——————————————- |
+| <code class="language-plaintext highlighter-rouge">rotation.eulerAngles = ...</code> | 实际无效，应该用 <code class="language-plaintext highlighter-rouge">rotation = Quaternion.Euler(...)</code> |
+| <code class="language-plaintext highlighter-rouge">position += ...</code>            | 本质上是设置绝对世界位置                                |
+| <code class="language-plaintext highlighter-rouge">Translate(...)</code>             | 默认是相对于自身坐标系移动                               |
+| <code class="language-plaintext highlighter-rouge">LookAt()</code>                   | 会修改 rotation，旋转 Z 轴正方向指向目标                  |
+| <code class="language-plaintext highlighter-rouge">TransformDirection()</code>       | 是方向转换，不是位置转换！比如方向向量 <code class="language-plaintext highlighter-rouge">(0, 0, 1)</code> 表示前方        |</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-05-28T00:00:00+08:00">May 28, 2025</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/%E7%AC%94%E8%AE%B0/2025/05/28/GameObject.html" class="pagination--pager" title="GameObject">Previous</a>
+    
+    
+      <a href="/%E7%AC%94%E8%AE%B0/2025/05/28/UnityEditorWindow.html" class="pagination--pager" title="Unity编辑器的窗口">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/ljf12825" rel="nofollow noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 <a href="http://localhost:4000">ljf12825's Blog</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

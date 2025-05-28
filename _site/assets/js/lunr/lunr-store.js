@@ -29,6 +29,18 @@ var store = [{
         "url": "/another/2025/05/27/first-post.html",
         "teaser": null
       },{
+        "title": "GameObject",
+        "excerpt":"在 Unity 中，GameObject 是游戏中所有对象的基础实体。可以理解为 Unity 世界中一切可见或不可见物体的“容器”，它本身没有实际行为或外观，而是通过添加各种组件（Component）来赋予其功能。 一、GameObject的核心概念 它是Unity中一切实体的基础类 没有组件的GameObject是一个空物体 所有可见（如角色、道具、地形）或不可见（如相机、灯光、空容器）的对象，都是GameObject或其派生 二、GameObject的结构与组成 一个GameObject至少包含一个组件：Transform 1.必备组件：Transform 控制GameObject的位置、旋转、缩放 组成了Unity的场景层级结构（父子关系） 所有GameObject都必须有Transform，不能移除 transform.position = new Vector3(0, 1, 0); transform.Rotate(Vector3.up, 90); 2.常见组件 组件 作用 MeshRenderer 渲染模型表面 Collider 物理碰撞检测 Rigidbody 让 GameObject 参与物理计算 Animator 控制动画状态机 AudioSource 播放声音 Camera 摄像头视角 Light 光源 自定义脚本 实现逻辑行为（继承自 MonoBehaviour） 3.添加组件方式 在Inspector面板中点击”Add Component” 代码中：...","categories": ["笔记"],
+        "tags": ["Unity"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/05/28/GameObject.html",
+        "teaser": null
+      },{
+        "title": "Transform",
+        "excerpt":"Transform是Unity中控制物体位置、旋转、缩放和父子层级关系的核心组件 一、什么是Transform Transfrom是每个GameObject都自带的核心组件，主要负责： 位置（Position） 旋转（Rotation） 缩放（Scale） 父子关系（Hierarchy） 可以理解为每个物体在三维世界中的“坐标轴和局部空间信息”。 二、Transform的重要属性和区别 **1.position和localPosition | 属性名 | 含义 | 示例用途 | |-|-|-| | position | 世界坐标（绝对位置） | 物体在整个场景中的位置 | | localPosition | 本地坐标（相对于父物体的位置） | 子物体相对于父物体的偏移 | **2.rotation和localRotation | 属性名 | 含义 | 类型 | | ————— | ——– | ———- | | rotation |...","categories": ["笔记"],
+        "tags": ["Unity"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/05/28/Transform.html",
+        "teaser": null
+      },{
         "title": "Unity编辑器的窗口",
         "excerpt":"   A:Toolbar工具栏，用于访问Unity账户和云服务。它还包括播放模式、撤销历史记录、Unity搜索、图层可见性菜单和编译器布局菜单等控件。   B:Hierarchy层级窗口，以层级形式呈现场景中每个游戏对象。场景中的每个item在hierarchy中都有一个entry，所以这两个窗口本质上是相互关联的。层级结构揭示了各个GameObject之间的连接结构。   C:Game游戏视图，通过场景中的摄像机模拟最终渲染游戏的外观效果。   D:Scene场景视图，可视化编辑和导航，可以显示3D或2D。   E:Overly叠加层包含用于操作场景视图及其中的游戏对象的基本工具。可以添加自定义叠加层来改进工作流程。   F:Inspector检查器，查看和编辑当前选定的GameObject的所有属性。   G:Project项目窗口，可以显示在项目中使用的资源库。   H:Statusbar状态栏提供有关Unity进程的通知，以及快速访问相关工具和设置。  ","categories": ["笔记"],
         "tags": ["Unity"],

@@ -2,191 +2,191 @@
 title: "Transform"
 layout: single
 date: 2025-05-28
-categories: [±Ê¼Ç]
+categories: [ç¬”è®°]
 tags: [Unity]
 author: "ljf12825"
 ---
-TransformÊÇUnityÖĞ¿ØÖÆÎïÌåÎ»ÖÃ¡¢Ğı×ª¡¢Ëõ·ÅºÍ¸¸×Ó²ã¼¶¹ØÏµµÄºËĞÄ×é¼ş
+Transformæ˜¯Unityä¸­æ§åˆ¶ç‰©ä½“ä½ç½®ã€æ—‹è½¬ã€ç¼©æ”¾å’Œçˆ¶å­å±‚çº§å…³ç³»çš„æ ¸å¿ƒç»„ä»¶
 
-## Ò»¡¢Ê²Ã´ÊÇTransform
-`Transfrom`ÊÇÃ¿¸ö`GameObject`¶¼×Ô´øµÄºËĞÄ×é¼ş£¬Ö÷Òª¸ºÔğ£º  
-- Î»ÖÃ£¨Position£©
-- Ğı×ª£¨Rotation£©
-- Ëõ·Å£¨Scale£©
-- ¸¸×Ó¹ØÏµ£¨Hierarchy£©
+## ä¸€ã€ä»€ä¹ˆæ˜¯Transform
+`Transfrom`æ˜¯æ¯ä¸ª`GameObject`éƒ½è‡ªå¸¦çš„æ ¸å¿ƒç»„ä»¶ï¼Œä¸»è¦è´Ÿè´£ï¼š  
+- ä½ç½®ï¼ˆPositionï¼‰
+- æ—‹è½¬ï¼ˆRotationï¼‰
+- ç¼©æ”¾ï¼ˆScaleï¼‰
+- çˆ¶å­å…³ç³»ï¼ˆHierarchyï¼‰
 
-¿ÉÒÔÀí½âÎªÃ¿¸öÎïÌåÔÚÈıÎ¬ÊÀ½çÖĞµÄ¡°×ø±êÖáºÍ¾Ö²¿¿Õ¼äĞÅÏ¢¡±¡£
+å¯ä»¥ç†è§£ä¸ºæ¯ä¸ªç‰©ä½“åœ¨ä¸‰ç»´ä¸–ç•Œä¸­çš„â€œåæ ‡è½´å’Œå±€éƒ¨ç©ºé—´ä¿¡æ¯â€ã€‚
 
-## ¶ş¡¢TransformµÄÖØÒªÊôĞÔºÍÇø±ğ
-**1.`position`ºÍ`localPosition`
-| ÊôĞÔÃû | º¬Òå | Ê¾ÀıÓÃÍ¾ |
+## äºŒã€Transformçš„é‡è¦å±æ€§å’ŒåŒºåˆ«
+**1.`position`å’Œ`localPosition`
+| å±æ€§å | å«ä¹‰ | ç¤ºä¾‹ç”¨é€” |
 |-|-|-|
-| `position` | ÊÀ½ç×ø±ê£¨¾ø¶ÔÎ»ÖÃ£© | ÎïÌåÔÚÕû¸ö³¡¾°ÖĞµÄÎ»ÖÃ |
-| `localPosition` | ±¾µØ×ø±ê£¨Ïà¶ÔÓÚ¸¸ÎïÌåµÄÎ»ÖÃ£© | ×ÓÎïÌåÏà¶ÔÓÚ¸¸ÎïÌåµÄÆ«ÒÆ |
+| `position` | ä¸–ç•Œåæ ‡ï¼ˆç»å¯¹ä½ç½®ï¼‰ | ç‰©ä½“åœ¨æ•´ä¸ªåœºæ™¯ä¸­çš„ä½ç½® |
+| `localPosition` | æœ¬åœ°åæ ‡ï¼ˆç›¸å¯¹äºçˆ¶ç‰©ä½“çš„ä½ç½®ï¼‰ | å­ç‰©ä½“ç›¸å¯¹äºçˆ¶ç‰©ä½“çš„åç§» |
 
-**2.`rotation`ºÍ`localRotation`
-| ÊôĞÔÃû             | º¬Òå       | ÀàĞÍ         |
+**2.`rotation`å’Œ`localRotation`
+| å±æ€§å             | å«ä¹‰       | ç±»å‹         |
 | --------------- | -------- | ---------- |
-| `rotation`      | ÊÀ½çĞı×ª     | Quaternion |
-| `localRotation` | Ïà¶Ô¸¸ÎïÌåµÄĞı×ª | Quaternion |
+| `rotation`      | ä¸–ç•Œæ—‹è½¬     | Quaternion |
+| `localRotation` | ç›¸å¯¹çˆ¶ç‰©ä½“çš„æ—‹è½¬ | Quaternion |
 
 
 ```csharp
-transform.rotation = Quaternion.Euler(0, 90, 0); //ÊÀ½çĞı×ª
-transform.localRotation = Quaternion.idetity; //±¾µØĞı×ªÖØÖÃ
+transform.rotation = Quaternion.Euler(0, 90, 0); //ä¸–ç•Œæ—‹è½¬
+transform.localRotation = Quaternion.idetity; //æœ¬åœ°æ—‹è½¬é‡ç½®
 ```
 
 **3.localScale**
-- ±íÊ¾¶ÔÏó×ÔÉíµÄËõ·Å
-- ×¢Òâ£ºËõ·Å²»»á×Ô¶¯´«µİµ½`position`£¬µ«»áÓ°ÏìäÖÈ¾³ß´çºÍÅö×²ºĞ
+- è¡¨ç¤ºå¯¹è±¡è‡ªèº«çš„ç¼©æ”¾
+- æ³¨æ„ï¼šç¼©æ”¾ä¸ä¼šè‡ªåŠ¨ä¼ é€’åˆ°`position`ï¼Œä½†ä¼šå½±å“æ¸²æŸ“å°ºå¯¸å’Œç¢°æ’ç›’
 
 ```csharp
-transform.localScale = new Vector3(2, 2, 2); //·Å´óÁ½±¶
+transform.localScale = new Vector3(2, 2, 2); //æ”¾å¤§ä¸¤å€
 ```
 
-## Èı¡¢¸¸×Ó²ã¼¶½á¹¹*
+## ä¸‰ã€çˆ¶å­å±‚çº§ç»“æ„*
 
-**ÉèÖÃ¸¸ÎïÌå**
+**è®¾ç½®çˆ¶ç‰©ä½“**
 ```csharp
 child.transform.parent = parent.transform;
-//»ò
+//æˆ–
 child.transform.SetParent(parent.transform);
 ```
 
-**³£¼û²Ù×÷**
+**å¸¸è§æ“ä½œ**
 ```csharp
-Transform parent = transform.parent; //»ñÈ¡¸¸¶ÔÏó
-Transform child = transform.GetChild(0); //»ñÈ¡µÚÒ»¸ö×Ó¶ÔÏó
-int childCount = transform.childCount; //»ñÈ¡×Ó¶ÔÏóÊıÁ¿
+Transform parent = transform.parent; //è·å–çˆ¶å¯¹è±¡
+Transform child = transform.GetChild(0); //è·å–ç¬¬ä¸€ä¸ªå­å¯¹è±¡
+int childCount = transform.childCount; //è·å–å­å¯¹è±¡æ•°é‡
 ```
-**Ê¹ÓÃ±¾µØ×ø±êµÄÔ­Òò**
-µ±ÎïÌå³ÉÎª×Ó¶ÔÏóÊ±£¬Ê¹ÓÃ`localPosition`¸üÈİÒ×¿ØÖÆÆäÏà¶ÔÓÚ¸¸¶ÔÏóµÄÆ«ÒÆ£¬±ÈÈç½ÇÉ«Í·²¿¡¢ÎäÆ÷¹ÒµãµÈ
+**ä½¿ç”¨æœ¬åœ°åæ ‡çš„åŸå› **
+å½“ç‰©ä½“æˆä¸ºå­å¯¹è±¡æ—¶ï¼Œä½¿ç”¨`localPosition`æ›´å®¹æ˜“æ§åˆ¶å…¶ç›¸å¯¹äºçˆ¶å¯¹è±¡çš„åç§»ï¼Œæ¯”å¦‚è§’è‰²å¤´éƒ¨ã€æ­¦å™¨æŒ‚ç‚¹ç­‰
 
-**ÎªÊ²Ã´`Transform`¿ÉÒÔ¾ö¶¨¸¸×Ó½á¹¹£¿**
-1.UnityÖĞ¸¸×Ó½á¹¹µÄ±¾ÖÊ
-ÔÚUnityÖĞ£¬Ò»¸öGameObjectÄÜ³ÉÎªÁíÒ»¸öGameObjectµÄ×Ó¶ÔÏó£¬±¾ÖÊÉÏÊÇÍ¨¹ıTransform×é¼şµÄÇ¶Ì×½á¹¹À´ÊµÏÖµÄ
-2.ÎªÊ²Ã´`Transform`¾ö¶¨¸¸×Ó¹ØÏµ
-ÒòÎªGameObjectµÄÎ»ÖÃ¡¢Ğı×ª¡¢Ëõ·Å¡¢²ã¼¶¹ØÏµ¶¼ÊÇÓÉ`Transform`¿ØÖÆµÄ£¬¶øUnity³¡¾°Ê÷£¨Hierarchy£©Êµ¼ÊÉÏ¾ÍÊÇÒ»¸ö`Transform`Ê÷
+**ä¸ºä»€ä¹ˆ`Transform`å¯ä»¥å†³å®šçˆ¶å­ç»“æ„ï¼Ÿ**
+1.Unityä¸­çˆ¶å­ç»“æ„çš„æœ¬è´¨
+åœ¨Unityä¸­ï¼Œä¸€ä¸ªGameObjectèƒ½æˆä¸ºå¦ä¸€ä¸ªGameObjectçš„å­å¯¹è±¡ï¼Œæœ¬è´¨ä¸Šæ˜¯é€šè¿‡Transformç»„ä»¶çš„åµŒå¥—ç»“æ„æ¥å®ç°çš„
+2.ä¸ºä»€ä¹ˆ`Transform`å†³å®šçˆ¶å­å…³ç³»
+å› ä¸ºGameObjectçš„ä½ç½®ã€æ—‹è½¬ã€ç¼©æ”¾ã€å±‚çº§å…³ç³»éƒ½æ˜¯ç”±`Transform`æ§åˆ¶çš„ï¼Œè€ŒUnityåœºæ™¯æ ‘ï¼ˆHierarchyï¼‰å®é™…ä¸Šå°±æ˜¯ä¸€ä¸ª`Transform`æ ‘
 
-**¾Ù¸öÀı×Ó**
+**ä¸¾ä¸ªä¾‹å­**
 ```csharp
 GameObject parent = new GameObject("Parent");
 GameObject child = new GameObject("Child");
 
 child.transform.parent = parent.transform;
 ```
-Õâ¶Î´úÂë²»»áĞŞ¸Ä¸ÃGameObjectµÄ±¾Ìå£¬ËüÖ»ÊÇ°Ñ`Child`µÄ`Transform`¹Òµ½ÁË`Parent`µÄ`Transform`ÉÏ
-- GameObject±¾Éí²»´æ´¢²ã¼¶½á¹¹£¬ËüÖ»ÊÇÒ»¸öÈİÆ÷
-- Transform×é¼şÄÚ²¿ÓĞ£º
-  - `parent`£º¸¸¼¶Transform
-  - `childCount`£º×Ó¼¶ÊıÁ¿
-  - `.GetChild(i)`£º»ñÈ¡µÚi¸ö×ÓTransform
-- ³¡¾°ÖĞÈÎºÎ²ã¼¶½á¹¹£¬ÆäÊµ¾ÍÊÇ¶à¸öTransform×é¼ş»¥ÏàÒıÓÃµÄ½á¹û
+è¿™æ®µä»£ç ä¸ä¼šä¿®æ”¹è¯¥GameObjectçš„æœ¬ä½“ï¼Œå®ƒåªæ˜¯æŠŠ`Child`çš„`Transform`æŒ‚åˆ°äº†`Parent`çš„`Transform`ä¸Š
+- GameObjectæœ¬èº«ä¸å­˜å‚¨å±‚çº§ç»“æ„ï¼Œå®ƒåªæ˜¯ä¸€ä¸ªå®¹å™¨
+- Transformç»„ä»¶å†…éƒ¨æœ‰ï¼š
+  - `parent`ï¼šçˆ¶çº§Transform
+  - `childCount`ï¼šå­çº§æ•°é‡
+  - `.GetChild(i)`ï¼šè·å–ç¬¬iä¸ªå­Transform
+- åœºæ™¯ä¸­ä»»ä½•å±‚çº§ç»“æ„ï¼Œå…¶å®å°±æ˜¯å¤šä¸ªTransformç»„ä»¶äº’ç›¸å¼•ç”¨çš„ç»“æœ
 
-## ËÄ¡¢TransformµÄÖØÒª·½·¨
-**ÒÆ¶¯£¨²»¿¼ÂÇÎïÀíÏµÍ³£©**
+## å››ã€Transformçš„é‡è¦æ–¹æ³•
+**ç§»åŠ¨ï¼ˆä¸è€ƒè™‘ç‰©ç†ç³»ç»Ÿï¼‰**
 ```csharp
 transform.Translate(Vector3.forward * Time.deltaTIme);
 ```
-**Ğı×ª**
+**æ—‹è½¬**
 ```csharp
 tansform.Rotate(Vector3.up, 45);
 ```
-**²éÕÒ**
+**æŸ¥æ‰¾**
 ```csharp
 Transform arm = transform.Find("Body/LeftArm");
 ```
-**ÏòÄ³µã×ªÏò£¨LookAt£©**
+**å‘æŸç‚¹è½¬å‘ï¼ˆLookAtï¼‰**
 ```csharp
 transform.LookAt(target.transform);
 ```
 
-## Îå¡¢Ê¹ÓÃ¼¼ÇÉÓë×¢ÒâÊÂÏî
-**×ø±ê×ª»»**
-- ÊÀ½ç×ø±ê×ª±¾µØ×ø±ê
+## äº”ã€ä½¿ç”¨æŠ€å·§ä¸æ³¨æ„äº‹é¡¹
+**åæ ‡è½¬æ¢**
+- ä¸–ç•Œåæ ‡è½¬æœ¬åœ°åæ ‡
 ```csharp
 Vector3 local = transform.InverseTransformPoint(worldPos);
 ```
-- ±¾µØ×ø±ê×ªÊÀ½ç×ø±ê
+- æœ¬åœ°åæ ‡è½¬ä¸–ç•Œåæ ‡
 ```csharp
 Vector3 world = transform.TransformPoint(localPos);
 ```
 
-**TransformµÄProperty**
-| ÊôĞÔ                 | ÀàĞÍ           | ËµÃ÷                                        |
+**Transformçš„Property**
+| å±æ€§                 | ç±»å‹           | è¯´æ˜                                        |
 | ------------------ | ------------ | ----------------------------------------- |
-| `position`         | `Vector3`    | ÓÎÏ·¶ÔÏóÔÚÊÀ½ç¿Õ¼äÖĞµÄÎ»ÖÃ                             |
-| `localPosition`    | `Vector3`    | Ïà¶ÔÓÚ¸¸¶ÔÏóµÄ±¾µØÎ»ÖÃ                               |
-| `rotation`         | `Quaternion` | ÊÀ½ç¿Õ¼äµÄĞı×ª£¨ËÄÔªÊı£©                              |
-| `localRotation`    | `Quaternion` | Ïà¶ÔÓÚ¸¸¶ÔÏóµÄĞı×ª                                 |
-| `eulerAngles`      | `Vector3`    | ÊÀ½ç¿Õ¼äµÄÅ·À­½Ç£¨½Ç¶ÈÖÆ£©                             |
-| `localEulerAngles` | `Vector3`    | ±¾µØ¿Õ¼äµÄÅ·À­½Ç                                  |
-| `right`            | `Vector3`    | ¶ÔÏóµÄÓÒ·½Ïò£¨±¾µØ X Öá£©                            |
-| `up`               | `Vector3`    | ¶ÔÏóµÄÉÏ·½Ïò£¨±¾µØ Y Öá£©                            |
-| `forward`          | `Vector3`    | ¶ÔÏóµÄÇ°·½Ïò£¨±¾µØ Z Öá£©                            |
-| `localScale`       | `Vector3`    | ±¾µØ¿Õ¼äµÄËõ·Å±ÈÀı                                 |
-| `parent`           | `Transform`  | ¸¸¶ÔÏóµÄ Transform                            |
-| `childCount`       | `int`        | ×Ó¶ÔÏóÊıÁ¿                                     |
-| `lossyScale`       | `Vector3`    | ÊÀ½ç¿Õ¼äÖĞµÄÊµ¼ÊËõ·Å£¨°üº¬¸¸Ëõ·ÅÓ°Ïì£©                       |
-| `hasChanged`       | `bool`       | ±íÊ¾ Transform ÊÇ·ñ×ÔÉÏ´Î¼ì²éºó·¢ÉúÁË±ä»¯£¨¿ÉÒÔÊÖ¶¯ÖØÖÃÎª false£© |
-| `root`             | `Transform`  | µ±Ç° Transform ²ã¼¶ÖĞµÄ×îÉÏ²ã¶Ô£¨¸ù£©                 |
+| `position`         | `Vector3`    | æ¸¸æˆå¯¹è±¡åœ¨ä¸–ç•Œç©ºé—´ä¸­çš„ä½ç½®                             |
+| `localPosition`    | `Vector3`    | ç›¸å¯¹äºçˆ¶å¯¹è±¡çš„æœ¬åœ°ä½ç½®                               |
+| `rotation`         | `Quaternion` | ä¸–ç•Œç©ºé—´çš„æ—‹è½¬ï¼ˆå››å…ƒæ•°ï¼‰                              |
+| `localRotation`    | `Quaternion` | ç›¸å¯¹äºçˆ¶å¯¹è±¡çš„æ—‹è½¬                                 |
+| `eulerAngles`      | `Vector3`    | ä¸–ç•Œç©ºé—´çš„æ¬§æ‹‰è§’ï¼ˆè§’åº¦åˆ¶ï¼‰                             |
+| `localEulerAngles` | `Vector3`    | æœ¬åœ°ç©ºé—´çš„æ¬§æ‹‰è§’                                  |
+| `right`            | `Vector3`    | å¯¹è±¡çš„å³æ–¹å‘ï¼ˆæœ¬åœ° X è½´ï¼‰                            |
+| `up`               | `Vector3`    | å¯¹è±¡çš„ä¸Šæ–¹å‘ï¼ˆæœ¬åœ° Y è½´ï¼‰                            |
+| `forward`          | `Vector3`    | å¯¹è±¡çš„å‰æ–¹å‘ï¼ˆæœ¬åœ° Z è½´ï¼‰                            |
+| `localScale`       | `Vector3`    | æœ¬åœ°ç©ºé—´çš„ç¼©æ”¾æ¯”ä¾‹                                 |
+| `parent`           | `Transform`  | çˆ¶å¯¹è±¡çš„ Transform                            |
+| `childCount`       | `int`        | å­å¯¹è±¡æ•°é‡                                     |
+| `lossyScale`       | `Vector3`    | ä¸–ç•Œç©ºé—´ä¸­çš„å®é™…ç¼©æ”¾ï¼ˆåŒ…å«çˆ¶ç¼©æ”¾å½±å“ï¼‰                       |
+| `hasChanged`       | `bool`       | è¡¨ç¤º Transform æ˜¯å¦è‡ªä¸Šæ¬¡æ£€æŸ¥åå‘ç”Ÿäº†å˜åŒ–ï¼ˆå¯ä»¥æ‰‹åŠ¨é‡ç½®ä¸º falseï¼‰ |
+| `root`             | `Transform`  | å½“å‰ Transform å±‚çº§ä¸­çš„æœ€ä¸Šå±‚å¯¹ï¼ˆæ ¹ï¼‰                 |
 
-**TransformµÄMethods
-| ·½·¨                                                           | ËµÃ÷                |
+**Transformçš„Methods
+| æ–¹æ³•                                                           | è¯´æ˜                |
 | ------------------------------------------------------------ | ----------------- |
-| `Translate(Vector3 translation, Space space = Space.Self)`   | ÑØ¸ø¶¨·½ÏòÒÆ¶¯¶ÔÏó£¨Ä¬ÈÏ±¾µØ×ø±ê£© |
-| `Rotate(Vector3 eulerAngles, Space space = Space.Self)`      | ÑØ¸ø¶¨·½ÏòĞı×ª¶ÔÏó         |
-| `LookAt(Transform target)` »ò `LookAt(Vector3 worldPosition)` | Ê¹¶ÔÏóÃæÏòÄ¿±ê           |
-| `RotateAround(Vector3 point, Vector3 axis, float angle)`     | ÈÆÄ³¸öµãºÍÖáĞı×ª          |
-| `TransformDirection(Vector3 localDirection)`                 | ½«±¾µØ·½Ïò×ª»»ÎªÊÀ½ç·½Ïò      |
-| `InverseTransformDirection(Vector3 worldDirection)`          | ½«ÊÀ½ç·½Ïò×ª»»Îª±¾µØ·½Ïò      |
-| `TransformPoint(Vector3 localPosition)`                      | ±¾µØ×ø±ê×ªÊÀ½ç×ø±ê         |
-| `InverseTransformPoint(Vector3 worldPosition)`               | ÊÀ½ç×ø±ê×ª±¾µØ×ø±ê         |
-| `DetachChildren()`                                           | ½â³ıËùÓĞ×Ó¶ÔÏóµÄ¸¸×Ó¹ØÏµ      |
+| `Translate(Vector3 translation, Space space = Space.Self)`   | æ²¿ç»™å®šæ–¹å‘ç§»åŠ¨å¯¹è±¡ï¼ˆé»˜è®¤æœ¬åœ°åæ ‡ï¼‰ |
+| `Rotate(Vector3 eulerAngles, Space space = Space.Self)`      | æ²¿ç»™å®šæ–¹å‘æ—‹è½¬å¯¹è±¡         |
+| `LookAt(Transform target)` æˆ– `LookAt(Vector3 worldPosition)` | ä½¿å¯¹è±¡é¢å‘ç›®æ ‡           |
+| `RotateAround(Vector3 point, Vector3 axis, float angle)`     | ç»•æŸä¸ªç‚¹å’Œè½´æ—‹è½¬          |
+| `TransformDirection(Vector3 localDirection)`                 | å°†æœ¬åœ°æ–¹å‘è½¬æ¢ä¸ºä¸–ç•Œæ–¹å‘      |
+| `InverseTransformDirection(Vector3 worldDirection)`          | å°†ä¸–ç•Œæ–¹å‘è½¬æ¢ä¸ºæœ¬åœ°æ–¹å‘      |
+| `TransformPoint(Vector3 localPosition)`                      | æœ¬åœ°åæ ‡è½¬ä¸–ç•Œåæ ‡         |
+| `InverseTransformPoint(Vector3 worldPosition)`               | ä¸–ç•Œåæ ‡è½¬æœ¬åœ°åæ ‡         |
+| `DetachChildren()`                                           | è§£é™¤æ‰€æœ‰å­å¯¹è±¡çš„çˆ¶å­å…³ç³»      |
 
-**²ã¼¶²Ù×÷Óë½á¹¹**
-| ·½·¨                                                     | ËµÃ÷                                 |
+**å±‚çº§æ“ä½œä¸ç»“æ„**
+| æ–¹æ³•                                                     | è¯´æ˜                                 |
 | ------------------------------------------------------ | ---------------------------------- |
-| `SetParent(Transform parent)`                          | ÉèÖÃ¸¸¶ÔÏó                              |
-| `SetParent(Transform parent, bool worldPositionStays)` | ÉèÖÃ¸¸¶ÔÏó£¬Í¬Ê±¿ØÖÆÊÇ·ñ±£³ÖÊÀ½ç×ø±ê²»±ä               |
-| `GetChild(int index)`                                  | »ñÈ¡Ö¸¶¨Ë÷ÒıµÄ×Ó Transform                 |
-| `Find(string name)`                                    | ²éÕÒÃû×ÖÎª name µÄ×ÓÎïÌå£¨µİ¹é£©                |
-| `IsChildOf(Transform parent)`                          | ÅĞ¶Ïµ±Ç° Transform ÊÇ·ñÊÇÄ³¸¸ Transform µÄ×Ó¼¶ |
-| `SetAsFirstSibling()`                                  | ½«µ±Ç°¶ÔÏóÉèÖÃÎª¸¸¶ÔÏóµÄµÚÒ»¸ö×Ó¶ÔÏó                 |
-| `SetAsLastSibling()`                                   | ÉèÖÃÎª×îºóÒ»¸ö×Ó¶ÔÏó                         |
-| `SetSiblingIndex(int index)`                           | ÉèÖÃÔÚ¸¸ Transform ÏÂµÄ×Ó¶ÔÏóË÷Òı             |
-| `GetSiblingIndex()`                                    | »ñÈ¡ÔÚ¸¸ Transform ÏÂµÄË÷ÒıÎ»ÖÃ              |
+| `SetParent(Transform parent)`                          | è®¾ç½®çˆ¶å¯¹è±¡                              |
+| `SetParent(Transform parent, bool worldPositionStays)` | è®¾ç½®çˆ¶å¯¹è±¡ï¼ŒåŒæ—¶æ§åˆ¶æ˜¯å¦ä¿æŒä¸–ç•Œåæ ‡ä¸å˜               |
+| `GetChild(int index)`                                  | è·å–æŒ‡å®šç´¢å¼•çš„å­ Transform                 |
+| `Find(string name)`                                    | æŸ¥æ‰¾åå­—ä¸º name çš„å­ç‰©ä½“ï¼ˆé€’å½’ï¼‰                |
+| `IsChildOf(Transform parent)`                          | åˆ¤æ–­å½“å‰ Transform æ˜¯å¦æ˜¯æŸçˆ¶ Transform çš„å­çº§ |
+| `SetAsFirstSibling()`                                  | å°†å½“å‰å¯¹è±¡è®¾ç½®ä¸ºçˆ¶å¯¹è±¡çš„ç¬¬ä¸€ä¸ªå­å¯¹è±¡                 |
+| `SetAsLastSibling()`                                   | è®¾ç½®ä¸ºæœ€åä¸€ä¸ªå­å¯¹è±¡                         |
+| `SetSiblingIndex(int index)`                           | è®¾ç½®åœ¨çˆ¶ Transform ä¸‹çš„å­å¯¹è±¡ç´¢å¼•             |
+| `GetSiblingIndex()`                                    | è·å–åœ¨çˆ¶ Transform ä¸‹çš„ç´¢å¼•ä½ç½®              |
 
-**Ïê¼û[Unity¹Ù·½ÎÄµµ(Transform)](https://docs.unity3d.com/ScriptReference/Transform.html)**
+**è¯¦è§[Unityå®˜æ–¹æ–‡æ¡£(Transform)](https://docs.unity3d.com/ScriptReference/Transform.html)**
 
-## ³£¼û×éºÏÓÃ·¨Ê¾Àı
-**1.ÒÆ¶¯²¢±£³ÖÊÀ½ç×ø±ê**
+## å¸¸è§ç»„åˆç”¨æ³•ç¤ºä¾‹
+**1.ç§»åŠ¨å¹¶ä¿æŒä¸–ç•Œåæ ‡**
 ```csharp
 child.SetParent(parent, false);
 ```
-**2.³¯ÏòÄ³Ò»µã**
+**2.æœå‘æŸä¸€ç‚¹**
 ```csharp
 transform.LookAt(new Vector3(0, 0, 0));
 ```
-**3.×Ô×ªÓë¹«×ª**
+**3.è‡ªè½¬ä¸å…¬è½¬**
 ```csharp
-//¹«×ª
+//å…¬è½¬
 transform.RotateAround(center.position, Vector3.up, 20 * Time.deltaTIme);
-//×Ô×ª
+//è‡ªè½¬
 transform.Rotate(Vector3.up * 45 * Time.deltaTime);
 ```
-**4.²éÕÒÖ¸¶¨×ÓÎïÌå²¢ÉèÖÃËõ·Å**
+**4.æŸ¥æ‰¾æŒ‡å®šå­ç‰©ä½“å¹¶è®¾ç½®ç¼©æ”¾**
 ```csharp
 Transform gun = transform.Find("Body/Hand/Gun");
 gun.localScale = Vector3.one * 2f;
 ```
 
-## ÈİÒ×»ìÏıµÄ¼¸¸ö·½·¨ËµÃ÷
-| ·½·¨/ÊôĞÔ                        | ×¢Òâµã                                         |
+## å®¹æ˜“æ··æ·†çš„å‡ ä¸ªæ–¹æ³•è¯´æ˜
+| æ–¹æ³•/å±æ€§                        | æ³¨æ„ç‚¹                                         |
 | ---------------------------- | ------------------------------------------- |
-| `rotation.eulerAngles = ...` | Êµ¼ÊÎŞĞ§£¬Ó¦¸ÃÓÃ `rotation = Quaternion.Euler(...)` |
-| `position += ...`            | ±¾ÖÊÉÏÊÇÉèÖÃ¾ø¶ÔÊÀ½çÎ»ÖÃ                                |
-| `Translate(...)`             | Ä¬ÈÏÊÇÏà¶ÔÓÚ×ÔÉí×ø±êÏµÒÆ¶¯                               |
-| `LookAt()`                   | »áĞŞ¸Ä rotation£¬Ğı×ª Z ÖáÕı·½ÏòÖ¸ÏòÄ¿±ê                  |
-| `TransformDirection()`       | ÊÇ·½Ïò×ª»»£¬²»ÊÇÎ»ÖÃ×ª»»£¡±ÈÈç·½ÏòÏòÁ¿ `(0, 0, 1)` ±íÊ¾Ç°·½        |
+| `rotation.eulerAngles = ...` | å®é™…æ— æ•ˆï¼Œåº”è¯¥ç”¨ `rotation = Quaternion.Euler(...)` |
+| `position += ...`            | æœ¬è´¨ä¸Šæ˜¯è®¾ç½®ç»å¯¹ä¸–ç•Œä½ç½®                                |
+| `Translate(...)`             | é»˜è®¤æ˜¯ç›¸å¯¹äºè‡ªèº«åæ ‡ç³»ç§»åŠ¨                               |
+| `LookAt()`                   | ä¼šä¿®æ”¹ rotationï¼Œæ—‹è½¬ Z è½´æ­£æ–¹å‘æŒ‡å‘ç›®æ ‡                  |
+| `TransformDirection()`       | æ˜¯æ–¹å‘è½¬æ¢ï¼Œä¸æ˜¯ä½ç½®è½¬æ¢ï¼æ¯”å¦‚æ–¹å‘å‘é‡ `(0, 0, 1)` è¡¨ç¤ºå‰æ–¹        |
 
