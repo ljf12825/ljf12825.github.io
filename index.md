@@ -1,11 +1,11 @@
 ---
 layout: home
 title: "Welcome!"
+entries_layout: list
 header:
   overlay_color: "#000"
   overlay_filter: "0.5"
   overlay_image: /assets/images/Picture.png
-  excerpt: "Share, Record, Learn"
 author_profile: true
 ---
 
