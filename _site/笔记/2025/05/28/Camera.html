@@ -1,0 +1,565 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.1 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Camera - ljf12825’s Blog</title>
+<meta name="description" content="在Unity中，Camera是游戏中视角呈现的核心组件，它决定了玩家从哪里、以什么方式看到游戏世界">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="ljf12825's Blog">
+<meta property="og:title" content="Camera">
+<meta property="og:url" content="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/28/Camera.html">
+
+
+  <meta property="og:description" content="在Unity中，Camera是游戏中视角呈现的核心组件，它决定了玩家从哪里、以什么方式看到游戏世界">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-05-28T00:00:00+08:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/28/Camera.html">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="ljf12825's Blog Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/J.ico" alt="ljf12825's Blog"></a>
+        
+        <a class="site-title" href="/">
+          ljf12825's Blog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/"
+                
+                
+              >Home</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/categories/"
+                
+                
+              >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/tags/"
+                
+                
+              >Tags</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/about/"
+                
+                
+              >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Camera">
+    <meta itemprop="description" content="在Unity中，Camera是游戏中视角呈现的核心组件，它决定了玩家从哪里、以什么方式看到游戏世界">
+    <meta itemprop="datePublished" content="2025-05-28T00:00:00+08:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/28/Camera.html" itemprop="url">Camera
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>在Unity中，<code class="language-plaintext highlighter-rouge">Camera</code>是游戏中视角呈现的核心组件，它决定了玩家从哪里、以什么方式看到游戏世界</p>
+
+<p><strong>Projection（投影模式）</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>模式</th>
+      <th>用途</th>
+      <th>特点</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>透视摄像机（Perspective）</td>
+      <td>3D 游戏</td>
+      <td>有近大远小的透视效果，真实</td>
+    </tr>
+    <tr>
+      <td>正交摄像机（Orthographic）</td>
+      <td>2D 游戏、UI</td>
+      <td>无透视变形，适合像素风或 UI 系统</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">camera</span><span class="p">.</span><span class="n">orthographic</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span> <span class="c1">//开启正交模式</span>
+<span class="n">camera</span><span class="p">.</span><span class="n">orthographicSize</span> <span class="p">=</span> <span class="m">5f</span><span class="p">;</span> <span class="c1">//视野高度一半</span>
+</code></pre></div></div>
+
+<p><strong>Clear Flag（清除模式）</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>ClearFlag 模式</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Skybox</strong></td>
+      <td>使用当前 Skybox 作为背景</td>
+    </tr>
+    <tr>
+      <td><strong>Solid Color</strong></td>
+      <td>使用指定背景颜色</td>
+    </tr>
+    <tr>
+      <td><strong>Depth Only</strong></td>
+      <td>仅清除深度缓冲区（常用于叠加 UI）</td>
+    </tr>
+    <tr>
+      <td><strong>Nothing</strong></td>
+      <td>什么都不清除（很少用）</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>视口渲染（rect）</strong></p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">camera</span><span class="p">.</span><span class="n">rec</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Rect</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">);</span>
+</code></pre></div></div>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">(x, y)</code>是起点（左下角0,0）</li>
+  <li><code class="language-plaintext highlighter-rouge">(w, h)</code>是宽度、高度 (0~1)</li>
+</ul>
+
+<p><strong>示例：左下角显示一个小窗口（小地图）</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">miniMapCamera</span><span class="p">.</span><span class="n">rect</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Rect</span><span class="p">(</span><span class="m">0.75f</span><span class="p">,</span> <span class="m">0.75f</span><span class="p">,</span> <span class="m">0.25f</span><span class="p">,</span> <span class="m">0.25f</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="常见用途举例">常见用途举例</h2>
+
+<p><strong>第一人称相机（FPS）</strong></p>
+
+<ul>
+  <li>绑定到角色头部</li>
+  <li>禁用摄像机的旋转控制，由玩家控制其角度</li>
+</ul>
+
+<p><strong>第三人称相机（TPS）</strong></p>
+
+<ul>
+  <li>设置跟随脚本，使摄像机在角色后方</li>
+  <li>可加上碰撞检测避免穿墙</li>
+</ul>
+
+<p><strong>动态镜头（电影感）</strong></p>
+
+<ul>
+  <li>使用Cinemachine插件</li>
+  <li>实现动态跟随、震动、拉远、过渡等高级镜头效果</li>
+</ul>
+
+<h2 id="脚本控制camera">脚本控制Camera</h2>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//跟随目标的简单实现</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">CameraFollow</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">Transform</span> <span class="n">target</span><span class="p">;</span>
+    <span class="k">public</span> <span class="n">Vector3</span> <span class="n">offset</span><span class="p">;</span>
+
+    <span class="k">void</span> <span class="nf">LateUpdate</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">transform</span><span class="p">.</span><span class="n">position</span> <span class="p">=</span> <span class="n">target</span><span class="p">.</span><span class="n">position</span> <span class="p">+</span> <span class="n">offset</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="常见使用案例">常见使用案例</h2>
+<p><strong>1.世界坐标转UI坐标（UI跟随物体）</strong></p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector3</span> <span class="n">screenPos</span> <span class="p">=</span> <span class="n">Camera</span><span class="p">.</span><span class="n">main</span><span class="p">.</span><span class="nf">WorldToScreenPoint</span><span class="p">(</span><span class="n">worldTarget</span><span class="p">.</span><span class="n">Position</span><span class="p">);</span>
+<span class="n">uiObject</span><span class="p">.</span><span class="n">position</span> <span class="p">=</span> <span class="n">screenPos</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><strong>2.鼠标点击获取世界坐标（射线）</strong></p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Ray</span> <span class="n">ray</span> <span class="p">=</span> <span class="n">Camera</span><span class="p">.</span><span class="n">main</span><span class="p">.</span><span class="nf">ScreenPointToRay</span><span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">mousePosition</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">Physics</span><span class="p">.</span><span class="nf">Raycast</span><span class="p">(</span><span class="n">ray</span><span class="p">,</span> <span class="k">out</span> <span class="n">RaycastHit</span> <span class="n">hit</span><span class="p">))</span> <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"点击位置是："</span> <span class="p">+</span> <span class="n">hit</span><span class="p">.</span><span class="n">point</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>3.多相机渲染UI与3D</strong></p>
+
+<ul>
+  <li>主相机渲染3D（depth = 0）</li>
+  <li>UI相机渲染UI， clearFlags = DepthOnly, depth = 1</li>
+</ul>
+
+<p><strong>Camera常用属性</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">clearFlags</code></td>
+      <td><code class="language-plaintext highlighter-rouge">CameraClearFlags</code></td>
+      <td>清除模式（背景如何处理）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">backgroundColor</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Color</code></td>
+      <td>背景颜色（Clear Flags 为 Color 时有效）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cullingMask</code></td>
+      <td><code class="language-plaintext highlighter-rouge">LayerMask</code></td>
+      <td>渲染哪些层的物体（通过 Layer 过滤）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">orthographic</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>是否为正交摄像机（2D 用）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">orthographicSize</code></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>正交相机的可视区域高度一半</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">fieldOfView</code></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>视野角度（仅透视模式下有效）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">nearClipPlane</code></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>最近可见距离</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">farClipPlane</code></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>最远可见距离</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">depth</code></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>相机渲染优先级（数字大者后绘制）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">targetTexture</code></td>
+      <td><code class="language-plaintext highlighter-rouge">RenderTexture</code></td>
+      <td>渲染输出目标（用于后处理、UI）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">aspect</code></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>宽高比，默认由屏幕决定</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">rect</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Rect</code></td>
+      <td>相机视口（屏幕中的显示区域）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pixelRect</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Rect</code></td>
+      <td>实际像素区域</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cameraType</code></td>
+      <td><code class="language-plaintext highlighter-rouge">CameraType</code></td>
+      <td>摄像机类型（Game、Scene、Preview）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">enabled</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>是否启用此相机</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Camera主要方法</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ScreenToWorldPoint(Vector3)</code></td>
+      <td>将屏幕坐标转为世界坐标（Z 轴代表深度）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">WorldToScreenPoint(Vector3)</code></td>
+      <td>将世界坐标转为屏幕坐标</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ScreenToViewportPoint(Vector3)</code></td>
+      <td>屏幕坐标转视口坐标（0~1）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ViewportToWorldPoint(Vector3)</code></td>
+      <td>视口转世界坐标</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Render()</code></td>
+      <td>手动触发相机渲染（常用于离屏渲染）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ResetAspect()</code></td>
+      <td>重置相机宽高比为屏幕比例</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ResetProjectionMatrix()</code></td>
+      <td>重置投影矩阵</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong><a href="https://docs.unity3d.com/ScriptReference/Camera.html">Unity官方文档（Camera）</a></strong></p>
+
+<h2 id="rendertexture高级">RenderTexture（高级）</h2>
+
+<p>可以将摄像机的输出画面渲染到一个纹理上</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">RenderTexture</span> <span class="n">rt</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RenderTexture</span><span class="p">(</span><span class="m">1920</span><span class="p">,</span> <span class="m">1080</span><span class="p">,</span> <span class="m">16</span><span class="p">);</span>
+<span class="n">camera</span><span class="p">.</span><span class="n">targetTexture</span> <span class="p">=</span> <span class="n">rt</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>用途：</p>
+<ul>
+  <li>监控摄像头</li>
+  <li>多人游戏中的小窗口视角</li>
+  <li>后处理特效（Blur, EdgeDetect）</li>
+</ul>
+
+<h2 id="优化建议">优化建议</h2>
+
+<ul>
+  <li>不要同时启用多个全屏相机</li>
+  <li>尽量合并摄像机输出（避免depth重叠）</li>
+  <li>用Layer + cullingMask控制渲染内容</li>
+  <li>使用Object Pool避免动态创建摄像机</li>
+</ul>
+
+<h2 id="摄像机插件推荐">摄像机插件推荐</h2>
+
+<p><strong>Cinemachine（Unity官方）</strong></p>
+
+<ul>
+  <li>更专业的摄像机管理系统</li>
+  <li>支持跟随、过渡、轨迹、抖动等</li>
+  <li>强烈推荐用来代替自定义相机控制脚本</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-05-28T00:00:00+08:00">May 28, 2025</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/another/2025/05/27/first-post.html" class="pagination--pager" title="first post">Previous</a>
+    
+    
+      <a href="/%E7%AC%94%E8%AE%B0/2025/05/28/GameObject.html" class="pagination--pager" title="GameObject">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/ljf12825" rel="nofollow noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 <a href="http://localhost:4000">ljf12825's Blog</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
