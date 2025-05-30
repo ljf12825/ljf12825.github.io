@@ -54,8 +54,8 @@ var store = [{
         "teaser": null
       },{
         "title": "Light",
-        "excerpt":"Unity中的Light是照亮场景和物体的核心组件，也是实现逼真视觉效果的关键之一。合理使用光源可以极大提升游戏画面质量，同时也对性能有重要影响 Light决定了场景中物体如何被照亮、阴影如何生成、氛围如何表现   Light的类型（Type）   Unity中有4种主要光源类型：                  类型       描述       用途示例                       Directional Light       没有位置，只有方向，光线平行       太阳光、月光                 Point Light       从一点向所有方向发散       灯泡、火把                 Spot Light       从一点向特定方向的锥体发散       手电筒、聚光灯                 Area Light（仅用于烘焙）       从一个平面区域发光       霓虹灯、窗户光线（仅用于静态对象）           光照模式（Mode）   Unity光源有三种模式，关系到实时性和性能：                  模式       描述       用途                       Realtime       每帧计算光照，支持动态物体       动态灯光，如手电筒、角色法术                 Mixed       静态对象使用烘焙，动态对象使用实时光       综合表现和性能                 Baked       所有光照预先烘焙，不支持动态阴影       静态场景，如建筑、地形           ","categories": ["笔记"],
-        "tags": ["Unity"],
+        "excerpt":"Unity中的Light是照亮场景和物体的核心组件，也是实现逼真视觉效果的关键之一。合理使用光源可以极大提升游戏画面质量，同时也对性能有重要影响 Light决定了场景中物体如何被照亮、阴影如何生成、氛围如何表现 Light的类型（Type） Unity中有4种主要光源类型： 类型 描述 用途示例 Directional Light 没有位置，只有方向，光线平行 太阳光、月光 Point Light 从一点向所有方向发散 灯泡、火把 Spot Light 从一点向特定方向的锥体发散 手电筒、聚光灯 Area Light（仅用于烘焙） 从一个平面区域发光 霓虹灯、窗户光线（仅用于静态对象） 光照模式（Mode） Unity光源有三种模式，关系到实时性和性能： 模式 描述 用途 Realtime 每帧计算光照，支持动态物体 动态灯光，如手电筒、角色法术 Mixed 静态对象使用烘焙，动态对象使用实时光 综合表现和性能 Baked 所有光照预先烘焙，不支持动态阴影 静态场景，如建筑、地形 Light属性 在Unity中，使用UnityEngine.Light类可以动态修改光源的各种属性，实现如灯光变化、闪烁、开关、颜色变化等效果 Light light = GetComponent&lt;Light&gt;(); namespace:UnityEngine Behaviour -&gt; Componenet -&gt; Object 常用字段与属性...","categories": ["笔记"],
+        "tags": ["Unity","Light","Render","Graphics"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/05/29/Light.html",
         "teaser": null
       },{

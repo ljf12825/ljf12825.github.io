@@ -243,6 +243,235 @@ Light决定了场景中物体如何被照亮、阴影如何生成、氛围如何
   </tbody>
 </table>
 
+<h2 id="light属性">Light属性</h2>
+<p>在Unity中，使用<code class="language-plaintext highlighter-rouge">UnityEngine.Light</code>类可以动态修改光源的各种属性，实现如灯光变化、闪烁、开关、颜色变化等效果</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Light</span> <span class="n">light</span> <span class="p">=</span> <span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">Light</span><span class="p">&gt;();</span>
+</code></pre></div></div>
+<p>namespace:<code class="language-plaintext highlighter-rouge">UnityEngine</code><br />
+<code class="language-plaintext highlighter-rouge">Behaviour -&gt; Componenet -&gt; Object</code></p>
+
+<p><strong>常用字段与属性</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性/方法</th>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">type</code></td>
+      <td><code class="language-plaintext highlighter-rouge">LightType</code></td>
+      <td>光源类型（<code class="language-plaintext highlighter-rouge">Directional</code>, <code class="language-plaintext highlighter-rouge">Point</code>, <code class="language-plaintext highlighter-rouge">Spot</code>, <code class="language-plaintext highlighter-rouge">Area</code>）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">color</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Color</code></td>
+      <td>光的颜色</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">intensity</code></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>光照强度</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">range</code></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>光照范围（Point/Spot）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">spotAngle</code></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>聚光灯角度（Spot）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">enabled</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>是否启用光源</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">shadows</code></td>
+      <td><code class="language-plaintext highlighter-rouge">LightShadows</code></td>
+      <td>阴影类型（None/Hard/Soft）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cookie</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Texture</code></td>
+      <td>光照投影纹理</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cookieSize</code></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>Cookie 范围（仅限 Directional Light）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">renderMode</code></td>
+      <td><code class="language-plaintext highlighter-rouge">LightRenderMode</code></td>
+      <td>自动/强制重要/强制非重要</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">bounceIntensity</code></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>间接光强度（GI 反射）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">flare</code></td>
+      <td><code class="language-plaintext highlighter-rouge">LensFlare</code></td>
+      <td>镜头光晕组件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cullingMask</code></td>
+      <td><code class="language-plaintext highlighter-rouge">LayerMask</code></td>
+      <td>此灯光影响的层（需要启用“Forward Rendering”）</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong><a href="https://docs.unity3d.com/2022.3/Documentation/ScriptReference/Light.html">Unit官方文档（Light）</a></strong></p>
+
+<h2 id="示例动态控制灯光">示例：动态控制灯光</h2>
+<p><strong>1.开关灯</strong></p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">ToggleLight</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">Light</span> <span class="n">light</span> <span class="p">=</span> <span class="n">GetComponenet</span><span class="p">&lt;</span><span class="n">Light</span><span class="p">&gt;();</span>
+    <span class="n">light</span><span class="p">.</span><span class="n">enabled</span> <span class="p">=</span> <span class="p">!</span><span class="n">light</span><span class="p">.</span><span class="n">enabled</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>2.改变颜色和强度</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">SetAlertMode</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">Light</span> <span class="n">light</span> <span class="p">=</span> <span class="n">GetCompenent</span><span class="p">&lt;</span><span class="n">Light</span><span class="p">&gt;();</span>
+    <span class="n">light</span><span class="p">.</span><span class="n">color</span> <span class="p">=</span> <span class="n">Color</span><span class="p">.</span><span class="n">red</span><span class="p">;</span>
+    <span class="n">light</span><span class="p">.</span><span class="n">instensity</span> <span class="p">=</span> <span class="m">5f</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>3.手电筒控制</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="n">Light</span> <span class="n">flashlight</span><span class="p">;</span>
+
+<span class="k">void</span> <span class="nf">Update</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="k">if</span><span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="nf">GetKeyDown</span><span class="p">(</span><span class="n">KeyCode</span><span class="p">.</span><span class="n">F</span><span class="p">))</span> <span class="n">flashlight</span><span class="p">.</span><span class="n">enable</span> <span class="p">=</span> <span class="p">!</span><span class="n">flashlight</span><span class="p">.</span><span class="n">enable</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="枚举类型">枚举类型</h2>
+
+<p><code class="language-plaintext highlighter-rouge">LightType</code></p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">LightType</span><span class="p">.</span><span class="n">Directional</span>
+<span class="n">LightType</span><span class="p">.</span><span class="n">Point</span>
+<span class="n">LightType</span><span class="p">.</span><span class="n">Spot</span>
+<span class="n">LightType</span><span class="p">.</span><span class="n">Area</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">LightShadows</code></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">LightShadows</span><span class="p">.</span><span class="n">None</span>
+<span class="n">LightShadows</span><span class="p">.</span><span class="n">Hard</span>
+<span class="n">LightShadows</span><span class="p">.</span><span class="n">Soft</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">LightRenderMode</code></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">LightRenderMode</span><span class="p">.</span><span class="n">Auto</span>
+<span class="n">LightRenderMode</span><span class="p">.</span><span class="n">ForcePixel</span>
+<span class="n">LightRenderMode</span><span class="p">.</span><span class="n">ForceVertex</span>
+</code></pre></div></div>
+
+<h2 id="动态创建光源">动态创建光源</h2>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObject</span> <span class="n">lightObj</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">GameObject</span><span class="p">(</span><span class="s">"My Light"</span><span class="p">);</span>
+<span class="n">Light</span> <span class="n">light</span> <span class="p">=</span> <span class="n">lightObj</span><span class="p">.</span><span class="n">AddComponenet</span><span class="p">&lt;</span><span class="n">Light</span><span class="p">&gt;();</span>
+<span class="n">light</span><span class="p">.</span><span class="n">type</span> <span class="p">=</span> <span class="n">LightType</span><span class="p">.</span><span class="n">Point</span><span class="p">;</span>
+<span class="n">light</span><span class="p">.</span><span class="n">color</span> <span class="p">=</span> <span class="n">Color</span><span class="p">.</span><span class="n">yellow</span><span class="p">;</span>
+<span class="n">light</span><span class="p">.</span><span class="n">range</span> <span class="p">=</span> <span class="m">10</span><span class="p">;</span>
+<span class="n">light</span><span class="p">.</span><span class="n">intensity</span> <span class="p">=</span> <span class="m">2</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="阴影shadows">阴影（Shadows）</h2>
+
+<p><strong>1.Type（类型）</strong></p>
+<ul>
+  <li><strong>Hard Shadows:</strong> 边缘锐利，性能好</li>
+  <li><strong>SoftShadows:</strong> 边缘柔和，更真实，但性能稍低</li>
+</ul>
+
+<p><strong>2.Strength（强度）</strong>
+控制阴影颜色的不透明度</p>
+
+<p><strong>3.Bias / Normal Bias</strong>
+用于消除“Peter Panning”（阴影漂浮）或自阴影伪影的问题</p>
+
+<h2 id="环境光">环境光</h2>
+
+<p>全局光照设置不依赖于某个 Light，而是在场景中作为基础光存在：</p>
+
+<ul>
+  <li>
+    <p>打开方式：Window &gt; Rendering &gt; Lighting &gt; Environment</p>
+  </li>
+  <li>
+    <p>设置：</p>
+
+    <ul>
+      <li>
+        <p>Ambient Source：Color / Gradient / Skybox</p>
+      </li>
+      <li>
+        <p>Ambient Intensity：环境光强度</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>可搭配天空盒（Skybox）提升视觉氛围</p>
+  </li>
+</ul>
+
+<h2 id="高级功能">高级功能</h2>
+<p><strong>1.Light Cookies（光照贴图）</strong>
+使用一张纹理控制光照形状，常用于：</p>
+<ul>
+  <li>手电筒</li>
+  <li>模拟窗户栅栏照进屋内的光影</li>
+  <li>火焰跳动的效果</li>
+</ul>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">light</span><span class="p">.</span><span class="n">cookie</span> <span class="p">=</span> <span class="n">yourTexture</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><strong>2.体积光</strong>
+Unity标准版本不自带，可通过插件实现（如HDRP或Volumetric Lighting插件）实现光柱、薄雾等效果</p>
+
+<h2 id="光照的重要系统">光照的重要系统</h2>
+<p><strong>1.Light Probes</strong></p>
+<ul>
+  <li>用于让动态对象接收静态光照烘培信息</li>
+  <li>适用于混合模式</li>
+</ul>
+
+<p><strong>2.Reflection Probes</strong></p>
+<ul>
+  <li>用于模拟镜面反射或高光反射效果</li>
+  <li>反射球贴图可影响PBR材质</li>
+</ul>
+
+<p><strong>3.Global Illumination（全局光照）</strong></p>
+<ul>
+  <li>计算间接光（比如光从墙上反射到地面）</li>
+  <li>分为实时GI和烘焙GI（通过Enlighten或Progressive）</li>
+</ul>
+
+<h2 id="光照调试技巧">光照调试技巧</h2>
+<ul>
+  <li>使用<code class="language-plaintext highlighter-rouge">Scene</code>视图右上角的Lighting工具查看光照影响</li>
+  <li>使用Light Explore（<code class="language-plaintext highlighter-rouge">Window &gt; Rendering &gt; Lighting &gt; Light Explorer</code>）快速管理所有光源</li>
+  <li>使用<code class="language-plaintext highlighter-rouge">Gizmos</code>选项查看光源范围</li>
+</ul>
+
+<h2 id="性能建议">性能建议</h2>
+<p><strong>1.实时光数量尽量控制在2~4个</strong><br />
+<strong>2.阴影数量建议仅关键光源开启阴影</strong><br />
+<strong>3.静态光使用Baked，可大幅提升帧率</strong><br />
+<strong>4.动态光照使用Light Probe + Mixed模式</strong></p>
 
         
       </section>
