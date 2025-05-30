@@ -1,9 +1,9 @@
 ---
-title: "Unity编辑器的窗口"
+title: "Unity编辑器窗口"
 layout: single
 date: 2025-05-28
 categories: [笔记]
-tags: [Unity]
+tags: [Unity, Unity Editor]
 author: "ljf12825"
 ---
 ![Unity编辑器窗口](/assets/images/UnityEditorWindow.jpg)

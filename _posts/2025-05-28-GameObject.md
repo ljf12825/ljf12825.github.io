@@ -3,9 +3,11 @@ title: "GameObject"
 layout: single
 date: 2025-05-28
 categories: [笔记]
-tags: [Unity]
+tags: [Unity, GameObject]
 author: "ljf12825"
 ---
+
+# GameObject
 在 Unity 中，GameObject 是游戏中所有对象的基础实体。可以理解为 Unity 世界中一切可见或不可见物体的“容器”，它本身没有实际行为或外观，而是通过添加各种组件（Component）来赋予其功能。
 
 ## 一、GameObject的核心概念

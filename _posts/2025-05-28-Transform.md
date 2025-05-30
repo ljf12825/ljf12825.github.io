@@ -3,7 +3,7 @@ title: "Transform"
 layout: single
 date: 2025-05-28
 categories: [笔记]
-tags: [Unity]
+tags: [Unity, Unity Componenet]
 author: "ljf12825"
 ---
 Transform是Unity中控制物体位置、旋转、缩放和父子层级关系的核心组件
