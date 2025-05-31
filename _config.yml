@@ -4,6 +4,12 @@ remote_theme: "mmistakes/minimal-mistakes@4.27.1"
 plugins:
   - jekyll-include-cache
   - jekyll-remote_theme
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-paginate
+  - jekyll-last-modified-at
+
+description: "Efficient & Elegant"
 
 minimal_mistakes_skin: "dark"
 
