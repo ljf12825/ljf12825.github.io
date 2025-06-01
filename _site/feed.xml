@@ -1,4 +1,179 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-01T20:31:50+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Layer</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layer.html" rel="alternate" type="text/html" title="Layer" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layer</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layer.html"><![CDATA[<p>在Unity中，Layer是要给非常重要的系统<br />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-01T21:09:00+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Import Assets</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-assets.html" rel="alternate" type="text/html" title="Import Assets" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-assets</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-assets.html"><![CDATA[<p>Unity支持多种格式的资源文件，并能自动识别并进行初步处理</p>
+
+<h2 id="资源导入基本流程">资源导入基本流程</h2>
+<p><strong>1.将资源文件拖入<code class="language-plaintext highlighter-rouge">Assets</code>目录中（Unity会自动导入）</strong><br />
+<strong>2.在Inspector面板中查看导入设置</strong><br />
+<strong>3.配置相关参数，比如压缩方式、贴图类型、是否生成碰撞体等</strong><br />
+<strong>4.使用资源（拖到场景、作为材质贴图、挂到AudioSource等）</strong></p>
+
+<h2 id="模型">模型</h2>
+
+<h3 id="支持格式">支持格式</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">.fbx</code>推荐</li>
+  <li><code class="language-plaintext highlighter-rouge">.obj</code></li>
+  <li><code class="language-plaintext highlighter-rouge">.dae</code>（Collada）</li>
+  <li><code class="language-plaintext highlighter-rouge">.blend</code>（需要Blender）</li>
+</ul>
+
+<h3 id="导入流程">导入流程</h3>
+<p>1.拖拽<code class="language-plaintext highlighter-rouge">.fbx</code>文件到<code class="language-plaintext highlighter-rouge">Assets</code>文件夹<br />
+2.选中模型文件，查看<code class="language-plaintext highlighter-rouge">Inspector</code>的导入设置</p>
+<ul>
+  <li>Scale Factor：缩放（一般保持默认）</li>
+  <li>Import Animations：是否导入动画</li>
+  <li>Import Materials：是否导入材质</li>
+  <li>Generate Colliders：是否自动生成碰撞体</li>
+</ul>
+
+<h3 id="导入后组成">导入后组成</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Model</code>: 3D网格</li>
+  <li><code class="language-plaintext highlighter-rouge">Rig</code>（如果有骨骼）：用于动画绑定</li>
+  <li><code class="language-plaintext highlighter-rouge">Animation</code>：包含的动画片段</li>
+  <li><code class="language-plaintext highlighter-rouge">Materials</code>：自动生成或关联的材质</li>
+</ul>
+
+<h2 id="贴图">贴图</h2>
+
+<h3 id="支持格式-1">支持格式</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">.png</code>、<code class="language-plaintext highlighter-rouge">.jpg</code>、<code class="language-plaintext highlighter-rouge">.tga</code>、<code class="language-plaintext highlighter-rouge">.psd</code>（支持图层）等</li>
+</ul>
+
+<h3 id="导入流程-1">导入流程</h3>
+
+<ol>
+  <li>拖入图片文件</li>
+  <li>在Inspector中设置：
+    <ul>
+      <li>Texture Type:</li>
+    </ul>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">Default</code>（通用）</li>
+      <li><code class="language-plaintext highlighter-rouge">Sprite</code>（用于UI）</li>
+      <li><code class="language-plaintext highlighter-rouge">Normal map</code>（法线贴图）</li>
+      <li><code class="language-plaintext highlighter-rouge">Lightmap</code>（光照图）
+      - sRGB（Color Texture）：颜色贴图用，法线贴图需取消勾选
+      - Alpha Is Transparency：如果使用透明通道
+      - Wrap Mode：Repeat（平铺）或Clamp（拉伸）
+      - Filter Mode：Bilinear、Trilinear、Point（像素风）
+      - Compression：高压缩（小体积）还是高质量（清晰）</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="音频">音频</h2>
+
+<h3 id="支持格式-2">支持格式</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">.mp3</code>（压缩）</li>
+  <li><code class="language-plaintext highlighter-rouge">.wav</code>（无损）</li>
+  <li><code class="language-plaintext highlighter-rouge">.ogg</code>（高效）</li>
+  <li><code class="language-plaintext highlighter-rouge">.aiff</code></li>
+</ul>
+
+<h2 id="导入流程-2">导入流程</h2>
+
+<p>1.拖入音频文件<br />
+2.在<code class="language-plaintext highlighter-rouge">Inspector</code>中设置：</p>
+<ul>
+  <li>Load Type：
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">Decompress On Load</code>（加载时解压，适合短音效）</li>
+      <li><code class="language-plaintext highlighter-rouge">Streaming</code>（边播放边加载，适合背景音乐）</li>
+    </ul>
+  </li>
+  <li>Compression Format:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">Vorbis</code>、<code class="language-plaintext highlighter-rouge">ADPCM</code>、<code class="language-plaintext highlighter-rouge">PCM</code></li>
+    </ul>
+  </li>
+  <li>3D Sound：是否启用3D空间化</li>
+  <li>Loop：是否循环播放</li>
+</ul>
+
+<blockquote>
+  <p><strong>资源组织建议：</strong> 使用好的文件夹结构和命名习惯，可以极大提高开发效率</p>
+</blockquote>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><summary type="html"><![CDATA[Unity支持多种格式的资源文件，并能自动识别并进行初步处理]]></summary></entry><entry><title type="html">Tag</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Tag.html" rel="alternate" type="text/html" title="Tag" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Tag</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Tag.html"><![CDATA[<p>在Unity中，Tag是用来标记和分类GameObject的一种轻量级方法，主要用于在代码中查找和判断物体的类型或身份</p>
+
+<h2 id="tag的核心作用">Tag的核心作用</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>功能</th>
+      <th>示例</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>分类物体</td>
+      <td>Player、Enemy、Item、UI 等</td>
+    </tr>
+    <tr>
+      <td>逻辑判断</td>
+      <td>判断一个物体是不是玩家</td>
+    </tr>
+    <tr>
+      <td>查找特定对象</td>
+      <td><code class="language-plaintext highlighter-rouge">GameObject.FindWithTag()</code></td>
+    </tr>
+    <tr>
+      <td>触发器/碰撞器逻辑判断</td>
+      <td><code class="language-plaintext highlighter-rouge">if (other.CompareTag("Enemy"))</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="tag的使用方法">Tag的使用方法</h2>
+
+<h3 id="1设置tag">1.设置Tag</h3>
+<p>1.选中一个 GameObject
+2.Inspector 面板 → 上方的 “Tag” 下拉菜单
+3.如果没有想要的标签 → 点击 Add Tag… → 添加一个新的字符串
+4.回到物体，设置为刚才新建的 Tag</p>
+<blockquote>
+  <p><strong>注意：</strong> Tag是字符串类型，但Unity会为你管理列表，不用硬编码</p>
+</blockquote>
+
+<h3 id="2使用tag查找对象">2.使用Tag查找对象</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObjec</span> <span class="n">player</span> <span class="p">=</span> <span class="n">GameObject</span><span class="p">.</span><span class="nf">FindWithTag</span><span class="p">(</span><span class="s">"Player"</span><span class="p">);</span>
+</code></pre></div></div>
+<p>或者查找多个对象：</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObject</span><span class="p">[]</span> <span class="n">enemies</span> <span class="p">=</span> <span class="n">GameObejct</span><span class="p">.</span><span class="nf">FindGameObjectsWithTag</span><span class="p">(</span><span class="s">"Enemy"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="3在触发器或碰撞中判断tag">3.在触发器或碰撞中判断Tag</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">OnTriggerEnter</span><span class="p">(</span><span class="n">Collider</span> <span class="n">other</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="k">if</span> <span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="nf">CompareTag</span><span class="p">(</span><span class="s">"Enemy"</span><span class="p">))</span> <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"撞到敌人了！"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>推荐使用CompareTag()，而不是<code class="language-plaintext highlighter-rouge">other.tag == "Enemy"</code>，性能更好，也可避免拼写错误引发异常</p>
+</blockquote>
+
+<h2 id="示例">示例</h2>
+<h3 id="标记玩家">标记玩家</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="nf">CompareTag</span><span class="p">(</span><span class="s">"Player"</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="n">PlayerHealth</span> <span class="n">hp</span> <span class="p">=</span> <span class="n">other</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">PlayerHealth</span><span class="p">&gt;();</span>
+    <span class="n">hp</span><span class="p">.</span><span class="nf">TakeDamage</span><span class="p">(</span><span class="m">10</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h3 id="标记子弹敌人道具等">标记子弹、敌人、道具等</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">collision</span><span class="p">.</span><span class="nf">CompareTag</span><span class="p">(</span><span class="s">"Projectile"</span><span class="p">))</span> <span class="nf">Destroy</span><span class="p">(</span><span class="n">collision</span><span class="p">.</span><span class="n">gameObject</span><span class="p">);</span>
+</code></pre></div></div>
+<h3 id="用于全局查找对象比如ui控件">用于全局查找对象（比如UI控件）</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObject</span> <span class="n">healthBar</span> <span class="p">=</span> <span class="n">GameObject</span><span class="p">.</span><span class="nf">FindWithTag</span><span class="p">(</span><span class="s">"HealthBar"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="建议">建议</h2>
+<ul>
+  <li>Tag符合逻辑判断</li>
+  <li>不适合控制物理、渲染行为，应交由Layer完成</li>
+  <li>避免硬编码字符串，建议自定义一个Tag常量类</li>
+</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[在Unity中，Tag是用来标记和分类GameObject的一种轻量级方法，主要用于在代码中查找和判断物体的类型或身份]]></summary></entry><entry><title type="html">Layer</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layer.html" rel="alternate" type="text/html" title="Layer" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layer</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layer.html"><![CDATA[<p>在Unity中，Layer是要给非常重要的系统<br />
 它主要用于：</p>
 <ul>
   <li>控制物体的渲染与相机的可见性</li>
@@ -140,84 +315,7 @@
 <ul>
   <li>给每种功能的对象分配专属Layer</li>
   <li>摄像机、光源、UI、Trigger检测都应依赖Layer控制逻辑</li>
-</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[在Unity中，Layer是要给非常重要的系统 它主要用于： 控制物体的渲染与相机的可见性 控制物理碰撞（配合Layer Collision Matrix） 通过脚本进行物体分类和筛选]]></summary></entry><entry><title type="html">Tag</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Tag.html" rel="alternate" type="text/html" title="Tag" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Tag</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Tag.html"><![CDATA[<p>在Unity中，Tag是用来标记和分类GameObject的一种轻量级方法，主要用于在代码中查找和判断物体的类型或身份</p>
-
-<h2 id="tag的核心作用">Tag的核心作用</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>功能</th>
-      <th>示例</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>分类物体</td>
-      <td>Player、Enemy、Item、UI 等</td>
-    </tr>
-    <tr>
-      <td>逻辑判断</td>
-      <td>判断一个物体是不是玩家</td>
-    </tr>
-    <tr>
-      <td>查找特定对象</td>
-      <td><code class="language-plaintext highlighter-rouge">GameObject.FindWithTag()</code></td>
-    </tr>
-    <tr>
-      <td>触发器/碰撞器逻辑判断</td>
-      <td><code class="language-plaintext highlighter-rouge">if (other.CompareTag("Enemy"))</code></td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="tag的使用方法">Tag的使用方法</h2>
-
-<h3 id="1设置tag">1.设置Tag</h3>
-<p>1.选中一个 GameObject
-2.Inspector 面板 → 上方的 “Tag” 下拉菜单
-3.如果没有想要的标签 → 点击 Add Tag… → 添加一个新的字符串
-4.回到物体，设置为刚才新建的 Tag</p>
-<blockquote>
-  <p><strong>注意：</strong> Tag是字符串类型，但Unity会为你管理列表，不用硬编码</p>
-</blockquote>
-
-<h3 id="2使用tag查找对象">2.使用Tag查找对象</h3>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObjec</span> <span class="n">player</span> <span class="p">=</span> <span class="n">GameObject</span><span class="p">.</span><span class="nf">FindWithTag</span><span class="p">(</span><span class="s">"Player"</span><span class="p">);</span>
-</code></pre></div></div>
-<p>或者查找多个对象：</p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObject</span><span class="p">[]</span> <span class="n">enemies</span> <span class="p">=</span> <span class="n">GameObejct</span><span class="p">.</span><span class="nf">FindGameObjectsWithTag</span><span class="p">(</span><span class="s">"Enemy"</span><span class="p">);</span>
-</code></pre></div></div>
-
-<h3 id="3在触发器或碰撞中判断tag">3.在触发器或碰撞中判断Tag</h3>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">OnTriggerEnter</span><span class="p">(</span><span class="n">Collider</span> <span class="n">other</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="k">if</span> <span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="nf">CompareTag</span><span class="p">(</span><span class="s">"Enemy"</span><span class="p">))</span> <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"撞到敌人了！"</span><span class="p">);</span>
-</code></pre></div></div>
-
-<blockquote>
-  <p>推荐使用CompareTag()，而不是<code class="language-plaintext highlighter-rouge">other.tag == "Enemy"</code>，性能更好，也可避免拼写错误引发异常</p>
-</blockquote>
-
-<h2 id="示例">示例</h2>
-<h3 id="标记玩家">标记玩家</h3>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="nf">CompareTag</span><span class="p">(</span><span class="s">"Player"</span><span class="p">))</span>
-<span class="p">{</span>
-    <span class="n">PlayerHealth</span> <span class="n">hp</span> <span class="p">=</span> <span class="n">other</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">PlayerHealth</span><span class="p">&gt;();</span>
-    <span class="n">hp</span><span class="p">.</span><span class="nf">TakeDamage</span><span class="p">(</span><span class="m">10</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<h3 id="标记子弹敌人道具等">标记子弹、敌人、道具等</h3>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">collision</span><span class="p">.</span><span class="nf">CompareTag</span><span class="p">(</span><span class="s">"Projectile"</span><span class="p">))</span> <span class="nf">Destroy</span><span class="p">(</span><span class="n">collision</span><span class="p">.</span><span class="n">gameObject</span><span class="p">);</span>
-</code></pre></div></div>
-<h3 id="用于全局查找对象比如ui控件">用于全局查找对象（比如UI控件）</h3>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObject</span> <span class="n">healthBar</span> <span class="p">=</span> <span class="n">GameObject</span><span class="p">.</span><span class="nf">FindWithTag</span><span class="p">(</span><span class="s">"HealthBar"</span><span class="p">);</span>
-</code></pre></div></div>
-
-<h2 id="建议">建议</h2>
-<ul>
-  <li>Tag符合逻辑判断</li>
-  <li>不适合控制物理、渲染行为，应交由Layer完成</li>
-  <li>避免硬编码字符串，建议自定义一个Tag常量类</li>
-</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[在Unity中，Tag是用来标记和分类GameObject的一种轻量级方法，主要用于在代码中查找和判断物体的类型或身份]]></summary></entry><entry><title type="html">Prefab System</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Prefab.html" rel="alternate" type="text/html" title="Prefab System" /><published>2025-05-31T00:00:00+08:00</published><updated>2025-05-31T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Prefab</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Prefab.html"><![CDATA[<p>Unity提供Prefab这种非常强大的机制，用来复用游戏对象，让开发更高效、项目更模块化<br />
+</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[在Unity中，Layer是要给非常重要的系统 它主要用于： 控制物体的渲染与相机的可见性 控制物理碰撞（配合Layer Collision Matrix） 通过脚本进行物体分类和筛选]]></summary></entry><entry><title type="html">Prefab System</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Prefab.html" rel="alternate" type="text/html" title="Prefab System" /><published>2025-05-31T00:00:00+08:00</published><updated>2025-05-31T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Prefab</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Prefab.html"><![CDATA[<p>Unity提供Prefab这种非常强大的机制，用来复用游戏对象，让开发更高效、项目更模块化<br />
 Prefab就是一个可以重复使用的GameObject模板</p>
 
 <h2 id="什么是prefab">什么是Prefab</h2>
@@ -696,7 +794,298 @@ Unity标准版本不自带，可通过插件实现（如HDRP或Volumetric Lighti
 <p><strong>1.实时光数量尽量控制在2~4个</strong><br />
 <strong>2.阴影数量建议仅关键光源开启阴影</strong><br />
 <strong>3.静态光使用Baked，可大幅提升帧率</strong><br />
-<strong>4.动态光照使用Light Probe + Mixed模式</strong></p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Component" /><category term="Light" /><category term="Render" /><category term="Graphics" /><summary type="html"><![CDATA[Unity中的Light是照亮场景和物体的核心组件，也是实现逼真视觉效果的关键之一。合理使用光源可以极大提升游戏画面质量，同时也对性能有重要影响 Light决定了场景中物体如何被照亮、阴影如何生成、氛围如何表现]]></summary></entry><entry><title type="html">Unity编辑器窗口</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/28/UnityEditorWindow.html" rel="alternate" type="text/html" title="Unity编辑器窗口" /><published>2025-05-28T00:00:00+08:00</published><updated>2025-05-28T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/28/UnityEditorWindow</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/28/UnityEditorWindow.html"><![CDATA[<p><img src="/assets/images/UnityEditorWindow.jpg" alt="Unity编辑器窗口" /></p>
+<strong>4.动态光照使用Light Probe + Mixed模式</strong></p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Component" /><category term="Light" /><category term="Render" /><category term="Graphics" /><summary type="html"><![CDATA[Unity中的Light是照亮场景和物体的核心组件，也是实现逼真视觉效果的关键之一。合理使用光源可以极大提升游戏画面质量，同时也对性能有重要影响 Light决定了场景中物体如何被照亮、阴影如何生成、氛围如何表现]]></summary></entry><entry><title type="html">Camera</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/28/Camera.html" rel="alternate" type="text/html" title="Camera" /><published>2025-05-28T00:00:00+08:00</published><updated>2025-05-28T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/28/Camera</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/28/Camera.html"><![CDATA[<p>在Unity中，<code class="language-plaintext highlighter-rouge">Camera</code>是游戏中视角呈现的核心组件，它决定了玩家从哪里、以什么方式看到游戏世界</p>
+
+<p><strong>Projection（投影模式）</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>模式</th>
+      <th>用途</th>
+      <th>特点</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>透视摄像机（Perspective）</td>
+      <td>3D 游戏</td>
+      <td>有近大远小的透视效果，真实</td>
+    </tr>
+    <tr>
+      <td>正交摄像机（Orthographic）</td>
+      <td>2D 游戏、UI</td>
+      <td>无透视变形，适合像素风或 UI 系统</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">camera</span><span class="p">.</span><span class="n">orthographic</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span> <span class="c1">//开启正交模式</span>
+<span class="n">camera</span><span class="p">.</span><span class="n">orthographicSize</span> <span class="p">=</span> <span class="m">5f</span><span class="p">;</span> <span class="c1">//视野高度一半</span>
+</code></pre></div></div>
+
+<p><strong>Clear Flag（清除模式）</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>ClearFlag 模式</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Skybox</strong></td>
+      <td>使用当前 Skybox 作为背景</td>
+    </tr>
+    <tr>
+      <td><strong>Solid Color</strong></td>
+      <td>使用指定背景颜色</td>
+    </tr>
+    <tr>
+      <td><strong>Depth Only</strong></td>
+      <td>仅清除深度缓冲区（常用于叠加 UI）</td>
+    </tr>
+    <tr>
+      <td><strong>Nothing</strong></td>
+      <td>什么都不清除（很少用）</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>视口渲染（rect）</strong></p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">camera</span><span class="p">.</span><span class="n">rec</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Rect</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">);</span>
+</code></pre></div></div>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">(x, y)</code>是起点（左下角0,0）</li>
+  <li><code class="language-plaintext highlighter-rouge">(w, h)</code>是宽度、高度 (0~1)</li>
+</ul>
+
+<p><strong>示例：左下角显示一个小窗口（小地图）</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">miniMapCamera</span><span class="p">.</span><span class="n">rect</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Rect</span><span class="p">(</span><span class="m">0.75f</span><span class="p">,</span> <span class="m">0.75f</span><span class="p">,</span> <span class="m">0.25f</span><span class="p">,</span> <span class="m">0.25f</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="常见用途举例">常见用途举例</h2>
+
+<p><strong>第一人称相机（FPS）</strong></p>
+
+<ul>
+  <li>绑定到角色头部</li>
+  <li>禁用摄像机的旋转控制，由玩家控制其角度</li>
+</ul>
+
+<p><strong>第三人称相机（TPS）</strong></p>
+
+<ul>
+  <li>设置跟随脚本，使摄像机在角色后方</li>
+  <li>可加上碰撞检测避免穿墙</li>
+</ul>
+
+<p><strong>动态镜头（电影感）</strong></p>
+
+<ul>
+  <li>使用Cinemachine插件</li>
+  <li>实现动态跟随、震动、拉远、过渡等高级镜头效果</li>
+</ul>
+
+<h2 id="脚本控制camera">脚本控制Camera</h2>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//跟随目标的简单实现</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">CameraFollow</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">Transform</span> <span class="n">target</span><span class="p">;</span>
+    <span class="k">public</span> <span class="n">Vector3</span> <span class="n">offset</span><span class="p">;</span>
+
+    <span class="k">void</span> <span class="nf">LateUpdate</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">transform</span><span class="p">.</span><span class="n">position</span> <span class="p">=</span> <span class="n">target</span><span class="p">.</span><span class="n">position</span> <span class="p">+</span> <span class="n">offset</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="常见使用案例">常见使用案例</h2>
+<p><strong>1.世界坐标转UI坐标（UI跟随物体）</strong></p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector3</span> <span class="n">screenPos</span> <span class="p">=</span> <span class="n">Camera</span><span class="p">.</span><span class="n">main</span><span class="p">.</span><span class="nf">WorldToScreenPoint</span><span class="p">(</span><span class="n">worldTarget</span><span class="p">.</span><span class="n">Position</span><span class="p">);</span>
+<span class="n">uiObject</span><span class="p">.</span><span class="n">position</span> <span class="p">=</span> <span class="n">screenPos</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><strong>2.鼠标点击获取世界坐标（射线）</strong></p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Ray</span> <span class="n">ray</span> <span class="p">=</span> <span class="n">Camera</span><span class="p">.</span><span class="n">main</span><span class="p">.</span><span class="nf">ScreenPointToRay</span><span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">mousePosition</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">Physics</span><span class="p">.</span><span class="nf">Raycast</span><span class="p">(</span><span class="n">ray</span><span class="p">,</span> <span class="k">out</span> <span class="n">RaycastHit</span> <span class="n">hit</span><span class="p">))</span> <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"点击位置是："</span> <span class="p">+</span> <span class="n">hit</span><span class="p">.</span><span class="n">point</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>3.多相机渲染UI与3D</strong></p>
+
+<ul>
+  <li>主相机渲染3D（depth = 0）</li>
+  <li>UI相机渲染UI， clearFlags = DepthOnly, depth = 1</li>
+</ul>
+
+<p><strong>Camera常用属性</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">clearFlags</code></td>
+      <td><code class="language-plaintext highlighter-rouge">CameraClearFlags</code></td>
+      <td>清除模式（背景如何处理）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">backgroundColor</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Color</code></td>
+      <td>背景颜色（Clear Flags 为 Color 时有效）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cullingMask</code></td>
+      <td><code class="language-plaintext highlighter-rouge">LayerMask</code></td>
+      <td>渲染哪些层的物体（通过 Layer 过滤）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">orthographic</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>是否为正交摄像机（2D 用）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">orthographicSize</code></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>正交相机的可视区域高度一半</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">fieldOfView</code></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>视野角度（仅透视模式下有效）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">nearClipPlane</code></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>最近可见距离</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">farClipPlane</code></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>最远可见距离</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">depth</code></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>相机渲染优先级（数字大者后绘制）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">targetTexture</code></td>
+      <td><code class="language-plaintext highlighter-rouge">RenderTexture</code></td>
+      <td>渲染输出目标（用于后处理、UI）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">aspect</code></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>宽高比，默认由屏幕决定</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">rect</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Rect</code></td>
+      <td>相机视口（屏幕中的显示区域）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pixelRect</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Rect</code></td>
+      <td>实际像素区域</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cameraType</code></td>
+      <td><code class="language-plaintext highlighter-rouge">CameraType</code></td>
+      <td>摄像机类型（Game、Scene、Preview）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">enabled</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>是否启用此相机</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Camera主要方法</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ScreenToWorldPoint(Vector3)</code></td>
+      <td>将屏幕坐标转为世界坐标（Z 轴代表深度）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">WorldToScreenPoint(Vector3)</code></td>
+      <td>将世界坐标转为屏幕坐标</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ScreenToViewportPoint(Vector3)</code></td>
+      <td>屏幕坐标转视口坐标（0~1）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ViewportToWorldPoint(Vector3)</code></td>
+      <td>视口转世界坐标</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Render()</code></td>
+      <td>手动触发相机渲染（常用于离屏渲染）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ResetAspect()</code></td>
+      <td>重置相机宽高比为屏幕比例</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ResetProjectionMatrix()</code></td>
+      <td>重置投影矩阵</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong><a href="https://docs.unity3d.com/ScriptReference/Camera.html">Unity官方文档（Camera）</a></strong></p>
+
+<h2 id="rendertexture高级">RenderTexture（高级）</h2>
+
+<p>可以将摄像机的输出画面渲染到一个纹理上</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">RenderTexture</span> <span class="n">rt</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RenderTexture</span><span class="p">(</span><span class="m">1920</span><span class="p">,</span> <span class="m">1080</span><span class="p">,</span> <span class="m">16</span><span class="p">);</span>
+<span class="n">camera</span><span class="p">.</span><span class="n">targetTexture</span> <span class="p">=</span> <span class="n">rt</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>用途：</p>
+<ul>
+  <li>监控摄像头</li>
+  <li>多人游戏中的小窗口视角</li>
+  <li>后处理特效（Blur, EdgeDetect）</li>
+</ul>
+
+<h2 id="优化建议">优化建议</h2>
+
+<ul>
+  <li>不要同时启用多个全屏相机</li>
+  <li>尽量合并摄像机输出（避免depth重叠）</li>
+  <li>用Layer + cullingMask控制渲染内容</li>
+  <li>使用Object Pool避免动态创建摄像机</li>
+</ul>
+
+<h2 id="摄像机插件推荐">摄像机插件推荐</h2>
+
+<p><strong>Cinemachine（Unity官方）</strong></p>
+
+<ul>
+  <li>更专业的摄像机管理系统</li>
+  <li>支持跟随、过渡、轨迹、抖动等</li>
+  <li>强烈推荐用来代替自定义相机控制脚本</li>
+</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Componenet" /><summary type="html"><![CDATA[在Unity中，Camera是游戏中视角呈现的核心组件，它决定了玩家从哪里、以什么方式看到游戏世界]]></summary></entry><entry><title type="html">Unity编辑器窗口</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/28/UnityEditorWindow.html" rel="alternate" type="text/html" title="Unity编辑器窗口" /><published>2025-05-28T00:00:00+08:00</published><updated>2025-05-28T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/28/UnityEditorWindow</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/28/UnityEditorWindow.html"><![CDATA[<p><img src="/assets/images/UnityEditorWindow.jpg" alt="Unity编辑器窗口" /></p>
 
 <p>A:Toolbar工具栏，用于访问Unity账户和云服务。它还包括播放模式、撤销历史记录、Unity搜索、图层可见性菜单和编译器布局菜单等控件。</p>
 
@@ -1450,296 +1839,4 @@ Unity标准版本不自带，可通过插件实现（如HDRP或Volumetric Lighti
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="n">MeshRenderer</span> <span class="n">renderer</span><span class="p">;</span>
 
 <span class="k">void</span> <span class="nf">Awake</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">renderer</span> <span class="p">=</span> <span class="n">GetComponenet</span><span class="p">&lt;</span><span class="n">MeshRenderer</span><span class="p">&gt;();</span> <span class="c1">//只查一次</span>
-</code></pre></div></div>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="GameObject" /><summary type="html"><![CDATA[在 Unity 中，GameObject 是游戏中所有对象的基础实体。可以理解为 Unity 世界中一切可见或不可见物体的“容器”，它本身没有实际行为或外观，而是通过添加各种组件（Component）来赋予其功能。]]></summary></entry><entry><title type="html">Camera</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/28/Camera.html" rel="alternate" type="text/html" title="Camera" /><published>2025-05-28T00:00:00+08:00</published><updated>2025-05-28T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/28/Camera</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/28/Camera.html"><![CDATA[<p>在Unity中，<code class="language-plaintext highlighter-rouge">Camera</code>是游戏中视角呈现的核心组件，它决定了玩家从哪里、以什么方式看到游戏世界</p>
-
-<p><strong>Projection（投影模式）</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>模式</th>
-      <th>用途</th>
-      <th>特点</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>透视摄像机（Perspective）</td>
-      <td>3D 游戏</td>
-      <td>有近大远小的透视效果，真实</td>
-    </tr>
-    <tr>
-      <td>正交摄像机（Orthographic）</td>
-      <td>2D 游戏、UI</td>
-      <td>无透视变形，适合像素风或 UI 系统</td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">camera</span><span class="p">.</span><span class="n">orthographic</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span> <span class="c1">//开启正交模式</span>
-<span class="n">camera</span><span class="p">.</span><span class="n">orthographicSize</span> <span class="p">=</span> <span class="m">5f</span><span class="p">;</span> <span class="c1">//视野高度一半</span>
-</code></pre></div></div>
-
-<p><strong>Clear Flag（清除模式）</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>ClearFlag 模式</th>
-      <th>描述</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Skybox</strong></td>
-      <td>使用当前 Skybox 作为背景</td>
-    </tr>
-    <tr>
-      <td><strong>Solid Color</strong></td>
-      <td>使用指定背景颜色</td>
-    </tr>
-    <tr>
-      <td><strong>Depth Only</strong></td>
-      <td>仅清除深度缓冲区（常用于叠加 UI）</td>
-    </tr>
-    <tr>
-      <td><strong>Nothing</strong></td>
-      <td>什么都不清除（很少用）</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>视口渲染（rect）</strong></p>
-
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">camera</span><span class="p">.</span><span class="n">rec</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Rect</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">);</span>
-</code></pre></div></div>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">(x, y)</code>是起点（左下角0,0）</li>
-  <li><code class="language-plaintext highlighter-rouge">(w, h)</code>是宽度、高度 (0~1)</li>
-</ul>
-
-<p><strong>示例：左下角显示一个小窗口（小地图）</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">miniMapCamera</span><span class="p">.</span><span class="n">rect</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Rect</span><span class="p">(</span><span class="m">0.75f</span><span class="p">,</span> <span class="m">0.75f</span><span class="p">,</span> <span class="m">0.25f</span><span class="p">,</span> <span class="m">0.25f</span><span class="p">);</span>
-</code></pre></div></div>
-
-<h2 id="常见用途举例">常见用途举例</h2>
-
-<p><strong>第一人称相机（FPS）</strong></p>
-
-<ul>
-  <li>绑定到角色头部</li>
-  <li>禁用摄像机的旋转控制，由玩家控制其角度</li>
-</ul>
-
-<p><strong>第三人称相机（TPS）</strong></p>
-
-<ul>
-  <li>设置跟随脚本，使摄像机在角色后方</li>
-  <li>可加上碰撞检测避免穿墙</li>
-</ul>
-
-<p><strong>动态镜头（电影感）</strong></p>
-
-<ul>
-  <li>使用Cinemachine插件</li>
-  <li>实现动态跟随、震动、拉远、过渡等高级镜头效果</li>
-</ul>
-
-<h2 id="脚本控制camera">脚本控制Camera</h2>
-
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//跟随目标的简单实现</span>
-<span class="k">public</span> <span class="k">class</span> <span class="nc">CameraFollow</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
-<span class="p">{</span>
-    <span class="k">public</span> <span class="n">Transform</span> <span class="n">target</span><span class="p">;</span>
-    <span class="k">public</span> <span class="n">Vector3</span> <span class="n">offset</span><span class="p">;</span>
-
-    <span class="k">void</span> <span class="nf">LateUpdate</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">transform</span><span class="p">.</span><span class="n">position</span> <span class="p">=</span> <span class="n">target</span><span class="p">.</span><span class="n">position</span> <span class="p">+</span> <span class="n">offset</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h2 id="常见使用案例">常见使用案例</h2>
-<p><strong>1.世界坐标转UI坐标（UI跟随物体）</strong></p>
-
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector3</span> <span class="n">screenPos</span> <span class="p">=</span> <span class="n">Camera</span><span class="p">.</span><span class="n">main</span><span class="p">.</span><span class="nf">WorldToScreenPoint</span><span class="p">(</span><span class="n">worldTarget</span><span class="p">.</span><span class="n">Position</span><span class="p">);</span>
-<span class="n">uiObject</span><span class="p">.</span><span class="n">position</span> <span class="p">=</span> <span class="n">screenPos</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p><strong>2.鼠标点击获取世界坐标（射线）</strong></p>
-
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Ray</span> <span class="n">ray</span> <span class="p">=</span> <span class="n">Camera</span><span class="p">.</span><span class="n">main</span><span class="p">.</span><span class="nf">ScreenPointToRay</span><span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">mousePosition</span><span class="p">);</span>
-<span class="k">if</span> <span class="p">(</span><span class="n">Physics</span><span class="p">.</span><span class="nf">Raycast</span><span class="p">(</span><span class="n">ray</span><span class="p">,</span> <span class="k">out</span> <span class="n">RaycastHit</span> <span class="n">hit</span><span class="p">))</span> <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"点击位置是："</span> <span class="p">+</span> <span class="n">hit</span><span class="p">.</span><span class="n">point</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p><strong>3.多相机渲染UI与3D</strong></p>
-
-<ul>
-  <li>主相机渲染3D（depth = 0）</li>
-  <li>UI相机渲染UI， clearFlags = DepthOnly, depth = 1</li>
-</ul>
-
-<p><strong>Camera常用属性</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>属性</th>
-      <th>类型</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">clearFlags</code></td>
-      <td><code class="language-plaintext highlighter-rouge">CameraClearFlags</code></td>
-      <td>清除模式（背景如何处理）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">backgroundColor</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Color</code></td>
-      <td>背景颜色（Clear Flags 为 Color 时有效）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">cullingMask</code></td>
-      <td><code class="language-plaintext highlighter-rouge">LayerMask</code></td>
-      <td>渲染哪些层的物体（通过 Layer 过滤）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">orthographic</code></td>
-      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
-      <td>是否为正交摄像机（2D 用）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">orthographicSize</code></td>
-      <td><code class="language-plaintext highlighter-rouge">float</code></td>
-      <td>正交相机的可视区域高度一半</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">fieldOfView</code></td>
-      <td><code class="language-plaintext highlighter-rouge">float</code></td>
-      <td>视野角度（仅透视模式下有效）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">nearClipPlane</code></td>
-      <td><code class="language-plaintext highlighter-rouge">float</code></td>
-      <td>最近可见距离</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">farClipPlane</code></td>
-      <td><code class="language-plaintext highlighter-rouge">float</code></td>
-      <td>最远可见距离</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">depth</code></td>
-      <td><code class="language-plaintext highlighter-rouge">float</code></td>
-      <td>相机渲染优先级（数字大者后绘制）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">targetTexture</code></td>
-      <td><code class="language-plaintext highlighter-rouge">RenderTexture</code></td>
-      <td>渲染输出目标（用于后处理、UI）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">aspect</code></td>
-      <td><code class="language-plaintext highlighter-rouge">float</code></td>
-      <td>宽高比，默认由屏幕决定</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">rect</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Rect</code></td>
-      <td>相机视口（屏幕中的显示区域）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">pixelRect</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Rect</code></td>
-      <td>实际像素区域</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">cameraType</code></td>
-      <td><code class="language-plaintext highlighter-rouge">CameraType</code></td>
-      <td>摄像机类型（Game、Scene、Preview）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">enabled</code></td>
-      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
-      <td>是否启用此相机</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Camera主要方法</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>方法</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">ScreenToWorldPoint(Vector3)</code></td>
-      <td>将屏幕坐标转为世界坐标（Z 轴代表深度）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">WorldToScreenPoint(Vector3)</code></td>
-      <td>将世界坐标转为屏幕坐标</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">ScreenToViewportPoint(Vector3)</code></td>
-      <td>屏幕坐标转视口坐标（0~1）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">ViewportToWorldPoint(Vector3)</code></td>
-      <td>视口转世界坐标</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Render()</code></td>
-      <td>手动触发相机渲染（常用于离屏渲染）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">ResetAspect()</code></td>
-      <td>重置相机宽高比为屏幕比例</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">ResetProjectionMatrix()</code></td>
-      <td>重置投影矩阵</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong><a href="https://docs.unity3d.com/ScriptReference/Camera.html">Unity官方文档（Camera）</a></strong></p>
-
-<h2 id="rendertexture高级">RenderTexture（高级）</h2>
-
-<p>可以将摄像机的输出画面渲染到一个纹理上</p>
-
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">RenderTexture</span> <span class="n">rt</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RenderTexture</span><span class="p">(</span><span class="m">1920</span><span class="p">,</span> <span class="m">1080</span><span class="p">,</span> <span class="m">16</span><span class="p">);</span>
-<span class="n">camera</span><span class="p">.</span><span class="n">targetTexture</span> <span class="p">=</span> <span class="n">rt</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>用途：</p>
-<ul>
-  <li>监控摄像头</li>
-  <li>多人游戏中的小窗口视角</li>
-  <li>后处理特效（Blur, EdgeDetect）</li>
-</ul>
-
-<h2 id="优化建议">优化建议</h2>
-
-<ul>
-  <li>不要同时启用多个全屏相机</li>
-  <li>尽量合并摄像机输出（避免depth重叠）</li>
-  <li>用Layer + cullingMask控制渲染内容</li>
-  <li>使用Object Pool避免动态创建摄像机</li>
-</ul>
-
-<h2 id="摄像机插件推荐">摄像机插件推荐</h2>
-
-<p><strong>Cinemachine（Unity官方）</strong></p>
-
-<ul>
-  <li>更专业的摄像机管理系统</li>
-  <li>支持跟随、过渡、轨迹、抖动等</li>
-  <li>强烈推荐用来代替自定义相机控制脚本</li>
-</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Componenet" /><summary type="html"><![CDATA[在Unity中，Camera是游戏中视角呈现的核心组件，它决定了玩家从哪里、以什么方式看到游戏世界]]></summary></entry><entry><title type="html">first post</title><link href="http://localhost:4000/another/2025/05/27/first-post.html" rel="alternate" type="text/html" title="first post" /><published>2025-05-27T00:00:00+08:00</published><updated>2025-05-27T00:00:00+08:00</updated><id>http://localhost:4000/another/2025/05/27/first-post</id><content type="html" xml:base="http://localhost:4000/another/2025/05/27/first-post.html"><![CDATA[<p>Hello Minimal Mistakes!<br />
-Hello Blog!</p>]]></content><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><category term="another" /><category term="GitHub" /><category term="GitHub Pages" /><summary type="html"><![CDATA[Hello Minimal Mistakes! Hello Blog!]]></summary></entry></feed>
+</code></pre></div></div>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="GameObject" /><summary type="html"><![CDATA[在 Unity 中，GameObject 是游戏中所有对象的基础实体。可以理解为 Unity 世界中一切可见或不可见物体的“容器”，它本身没有实际行为或外观，而是通过添加各种组件（Component）来赋予其功能。]]></summary></entry></feed>
