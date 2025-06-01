@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-01T20:10:45+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Layer</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layer.html" rel="alternate" type="text/html" title="Layer" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layer</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layer.html"><![CDATA[<p>在Unity中，Layer是要给非常重要的系统<br />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-01T20:31:50+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Layer</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layer.html" rel="alternate" type="text/html" title="Layer" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layer</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layer.html"><![CDATA[<p>在Unity中，Layer是要给非常重要的系统<br />
 它主要用于：</p>
 <ul>
   <li>控制物体的渲染与相机的可见性</li>
@@ -140,7 +140,84 @@
 <ul>
   <li>给每种功能的对象分配专属Layer</li>
   <li>摄像机、光源、UI、Trigger检测都应依赖Layer控制逻辑</li>
-</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[在Unity中，Layer是要给非常重要的系统 它主要用于： 控制物体的渲染与相机的可见性 控制物理碰撞（配合Layer Collision Matrix） 通过脚本进行物体分类和筛选]]></summary></entry><entry><title type="html">Prefab System</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Prefab.html" rel="alternate" type="text/html" title="Prefab System" /><published>2025-05-31T00:00:00+08:00</published><updated>2025-05-31T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Prefab</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Prefab.html"><![CDATA[<p>Unity提供Prefab这种非常强大的机制，用来复用游戏对象，让开发更高效、项目更模块化<br />
+</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[在Unity中，Layer是要给非常重要的系统 它主要用于： 控制物体的渲染与相机的可见性 控制物理碰撞（配合Layer Collision Matrix） 通过脚本进行物体分类和筛选]]></summary></entry><entry><title type="html">Tag</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Tag.html" rel="alternate" type="text/html" title="Tag" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Tag</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Tag.html"><![CDATA[<p>在Unity中，Tag是用来标记和分类GameObject的一种轻量级方法，主要用于在代码中查找和判断物体的类型或身份</p>
+
+<h2 id="tag的核心作用">Tag的核心作用</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>功能</th>
+      <th>示例</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>分类物体</td>
+      <td>Player、Enemy、Item、UI 等</td>
+    </tr>
+    <tr>
+      <td>逻辑判断</td>
+      <td>判断一个物体是不是玩家</td>
+    </tr>
+    <tr>
+      <td>查找特定对象</td>
+      <td><code class="language-plaintext highlighter-rouge">GameObject.FindWithTag()</code></td>
+    </tr>
+    <tr>
+      <td>触发器/碰撞器逻辑判断</td>
+      <td><code class="language-plaintext highlighter-rouge">if (other.CompareTag("Enemy"))</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="tag的使用方法">Tag的使用方法</h2>
+
+<h3 id="1设置tag">1.设置Tag</h3>
+<p>1.选中一个 GameObject
+2.Inspector 面板 → 上方的 “Tag” 下拉菜单
+3.如果没有想要的标签 → 点击 Add Tag… → 添加一个新的字符串
+4.回到物体，设置为刚才新建的 Tag</p>
+<blockquote>
+  <p><strong>注意：</strong> Tag是字符串类型，但Unity会为你管理列表，不用硬编码</p>
+</blockquote>
+
+<h3 id="2使用tag查找对象">2.使用Tag查找对象</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObjec</span> <span class="n">player</span> <span class="p">=</span> <span class="n">GameObject</span><span class="p">.</span><span class="nf">FindWithTag</span><span class="p">(</span><span class="s">"Player"</span><span class="p">);</span>
+</code></pre></div></div>
+<p>或者查找多个对象：</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObject</span><span class="p">[]</span> <span class="n">enemies</span> <span class="p">=</span> <span class="n">GameObejct</span><span class="p">.</span><span class="nf">FindGameObjectsWithTag</span><span class="p">(</span><span class="s">"Enemy"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="3在触发器或碰撞中判断tag">3.在触发器或碰撞中判断Tag</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">OnTriggerEnter</span><span class="p">(</span><span class="n">Collider</span> <span class="n">other</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="k">if</span> <span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="nf">CompareTag</span><span class="p">(</span><span class="s">"Enemy"</span><span class="p">))</span> <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"撞到敌人了！"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>推荐使用CompareTag()，而不是<code class="language-plaintext highlighter-rouge">other.tag == "Enemy"</code>，性能更好，也可避免拼写错误引发异常</p>
+</blockquote>
+
+<h2 id="示例">示例</h2>
+<h3 id="标记玩家">标记玩家</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="nf">CompareTag</span><span class="p">(</span><span class="s">"Player"</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="n">PlayerHealth</span> <span class="n">hp</span> <span class="p">=</span> <span class="n">other</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">PlayerHealth</span><span class="p">&gt;();</span>
+    <span class="n">hp</span><span class="p">.</span><span class="nf">TakeDamage</span><span class="p">(</span><span class="m">10</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h3 id="标记子弹敌人道具等">标记子弹、敌人、道具等</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">collision</span><span class="p">.</span><span class="nf">CompareTag</span><span class="p">(</span><span class="s">"Projectile"</span><span class="p">))</span> <span class="nf">Destroy</span><span class="p">(</span><span class="n">collision</span><span class="p">.</span><span class="n">gameObject</span><span class="p">);</span>
+</code></pre></div></div>
+<h3 id="用于全局查找对象比如ui控件">用于全局查找对象（比如UI控件）</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObject</span> <span class="n">healthBar</span> <span class="p">=</span> <span class="n">GameObject</span><span class="p">.</span><span class="nf">FindWithTag</span><span class="p">(</span><span class="s">"HealthBar"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="建议">建议</h2>
+<ul>
+  <li>Tag符合逻辑判断</li>
+  <li>不适合控制物理、渲染行为，应交由Layer完成</li>
+  <li>避免硬编码字符串，建议自定义一个Tag常量类</li>
+</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[在Unity中，Tag是用来标记和分类GameObject的一种轻量级方法，主要用于在代码中查找和判断物体的类型或身份]]></summary></entry><entry><title type="html">Prefab System</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Prefab.html" rel="alternate" type="text/html" title="Prefab System" /><published>2025-05-31T00:00:00+08:00</published><updated>2025-05-31T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Prefab</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Prefab.html"><![CDATA[<p>Unity提供Prefab这种非常强大的机制，用来复用游戏对象，让开发更高效、项目更模块化<br />
 Prefab就是一个可以重复使用的GameObject模板</p>
 
 <h2 id="什么是prefab">什么是Prefab</h2>

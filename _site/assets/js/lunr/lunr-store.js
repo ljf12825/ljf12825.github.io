@@ -77,6 +77,12 @@ var store = [{
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Layer.html",
         "teaser": null
       },{
+        "title": "Tag",
+        "excerpt":"在Unity中，Tag是用来标记和分类GameObject的一种轻量级方法，主要用于在代码中查找和判断物体的类型或身份 Tag的核心作用 功能 示例 分类物体 Player、Enemy、Item、UI 等 逻辑判断 判断一个物体是不是玩家 查找特定对象 GameObject.FindWithTag() 触发器/碰撞器逻辑判断 if (other.CompareTag(\"Enemy\")) Tag的使用方法 1.设置Tag 1.选中一个 GameObject 2.Inspector 面板 → 上方的 “Tag” 下拉菜单 3.如果没有想要的标签 → 点击 Add Tag… → 添加一个新的字符串 4.回到物体，设置为刚才新建的 Tag 注意： Tag是字符串类型，但Unity会为你管理列表，不用硬编码 2.使用Tag查找对象 GameObjec player = GameObject.FindWithTag(\"Player\"); 或者查找多个对象： GameObject[] enemies = GameObejct.FindGameObjectsWithTag(\"Enemy\"); 3.在触发器或碰撞中判断Tag void OnTriggerEnter(Collider other) =&gt;...","categories": ["笔记"],
+        "tags": ["Unity","Unity System"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Tag.html",
+        "teaser": null
+      },{
     "title": "About",
     "excerpt":"        You want to know who I am?  It’s UB.            博客内容仅用于学习，如有侵权，请联系删除       &lt;-  &lt;-  &lt;-  ","url": "http://localhost:4000/about/"
   },{
