@@ -36,7 +36,7 @@ var store = [{
         "teaser": null
       },{
         "title": "GameObject",
-        "excerpt":"GameObject 在 Unity 中，GameObject 是游戏中所有对象的基础实体。可以理解为 Unity 世界中一切可见或不可见物体的“容器”，它本身没有实际行为或外观，而是通过添加各种组件（Component）来赋予其功能。 一、GameObject的核心概念 它是Unity中一切实体的基础类 没有组件的GameObject是一个空物体 所有可见（如角色、道具、地形）或不可见（如相机、灯光、空容器）的对象，都是GameObject或其派生 二、GameObject的结构与组成 一个GameObject至少包含一个组件：Transform 1.必备组件：Transform 控制GameObject的位置、旋转、缩放 组成了Unity的场景层级结构（父子关系） 所有GameObject都必须有Transform，不能移除 transform.position = new Vector3(0, 1, 0); transform.Rotate(Vector3.up, 90); 2.常见组件 组件 作用 MeshRenderer 渲染模型表面 Collider 物理碰撞检测 Rigidbody 让 GameObject 参与物理计算 Animator 控制动画状态机 AudioSource 播放声音 Camera 摄像头视角 Light 光源 自定义脚本 实现逻辑行为（继承自 MonoBehaviour） 3.添加组件方式 在Inspector面板中点击”Add Component”...","categories": ["笔记"],
+        "excerpt":"在 Unity 中，GameObject 是游戏中所有对象的基础实体。可以理解为 Unity 世界中一切可见或不可见物体的“容器”，它本身没有实际行为或外观，而是通过添加各种组件（Component）来赋予其功能。 一、GameObject的核心概念 它是Unity中一切实体的基础类 没有组件的GameObject是一个空物体 所有可见（如角色、道具、地形）或不可见（如相机、灯光、空容器）的对象，都是GameObject或其派生 二、GameObject的结构与组成 一个GameObject至少包含一个组件：Transform 1.必备组件：Transform 控制GameObject的位置、旋转、缩放 组成了Unity的场景层级结构（父子关系） 所有GameObject都必须有Transform，不能移除 transform.position = new Vector3(0, 1, 0); transform.Rotate(Vector3.up, 90); 2.常见组件 组件 作用 MeshRenderer 渲染模型表面 Collider 物理碰撞检测 Rigidbody 让 GameObject 参与物理计算 Animator 控制动画状态机 AudioSource 播放声音 Camera 摄像头视角 Light 光源 自定义脚本 实现逻辑行为（继承自 MonoBehaviour） 3.添加组件方式 在Inspector面板中点击”Add Component” 代码中：...","categories": ["笔记"],
         "tags": ["Unity","GameObject"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/05/28/GameObject.html",
         "teaser": null
@@ -53,16 +53,22 @@ var store = [{
         "url": "/%E7%AC%94%E8%AE%B0/2025/05/28/UnityEditorWindow.html",
         "teaser": null
       },{
-        "title": "Prefab System",
-        "excerpt":"Unity提供Prefab这种非常强大的机制，用来复用游戏对象，让开发更高效、项目更模块化  Prefab就是一个可以重复使用的GameObject模板  ","categories": ["笔记"],
-        "tags": ["Unity，Unity System"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/05/28/Prefab.html",
-        "teaser": null
-      },{
         "title": "Light",
         "excerpt":"Unity中的Light是照亮场景和物体的核心组件，也是实现逼真视觉效果的关键之一。合理使用光源可以极大提升游戏画面质量，同时也对性能有重要影响 Light决定了场景中物体如何被照亮、阴影如何生成、氛围如何表现 Light的类型（Type） Unity中有4种主要光源类型： 类型 描述 用途示例 Directional Light 没有位置，只有方向，光线平行 太阳光、月光 Point Light 从一点向所有方向发散 灯泡、火把 Spot Light 从一点向特定方向的锥体发散 手电筒、聚光灯 Area Light（仅用于烘焙） 从一个平面区域发光 霓虹灯、窗户光线（仅用于静态对象） 光照模式（Mode） Unity光源有三种模式，关系到实时性和性能： 模式 描述 用途 Realtime 每帧计算光照，支持动态物体 动态灯光，如手电筒、角色法术 Mixed 静态对象使用烘焙，动态对象使用实时光 综合表现和性能 Baked 所有光照预先烘焙，不支持动态阴影 静态场景，如建筑、地形 Light属性 在Unity中，使用UnityEngine.Light类可以动态修改光源的各种属性，实现如灯光变化、闪烁、开关、颜色变化等效果 Light light = GetComponent&lt;Light&gt;(); namespace:UnityEngine Behaviour -&gt; Componenet -&gt; Object 常用字段与属性...","categories": ["笔记"],
         "tags": ["Unity","Unity Component","Light","Render","Graphics"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/05/29/Light.html",
+        "teaser": null
+      },{
+        "title": "Prefab System",
+        "excerpt":"Unity提供Prefab这种非常强大的机制，用来复用游戏对象，让开发更高效、项目更模块化 Prefab就是一个可以重复使用的GameObject模板 什么是Prefab Prefab是你在场景里创建好的GameObject（可以包含模型、脚本、组件、子物体等），然后把它拖到项目窗口中生成的资源文件。 之后就可以随时从Project中把这个模板拖入场景，生成和原始一样的对象 Prefab的创建和使用 创建 1.在Hierarchy中创建好一个GameObject及其组件和子对象 2.拖拽到Project视图中，Unity自动保存为.prefab 3.你可以删除场景中的对象，只保留Project中的预制体 使用 直接拖到场景中 Instantiate()动态生成 void Shoot() =&gt; Instantiate(bulletPrefab, transform.position, transform.rotation); Prefab特点 特性 描述 模板复用 一次创建，多次使用 改动同步 修改 Prefab，会自动同步所有实例 支持嵌套 Prefab 可以包含另一个 Prefab 可分离 Prefab 实例可以局部修改，不影响原始 Prefab Prefab实例与原型的关系 当你把Prefab拖入场景，它会成为Prefab实例，你可以 完全跟随原始Prefab 局部Override某些属性 解除连接（Unpack） 图标颜色 状态 蓝色立方体 与原 Prefab 保持连接 灰色立方体 已经解除连接（Unpacked） Prefab编辑方式 1.Open...","categories": ["笔记"],
+        "tags": ["Unity，Unity System"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/05/31/Prefab.html",
+        "teaser": null
+      },{
+        "title": "Material",
+        "excerpt":"Unity中的Material是用来定义一个物体外观的核心组件，它将Shader与各种Texture和属性值绑定到一起，决定了一个对象在场景中如何表现 Material的基本构成 Material包括： 1.Shader 决定了材质的渲染方式和它所支持的属性 常用Shader有： Standard：支持金属、粗糙度工作流 URP/Lit(Universal Render Pipeline)专用 HDRP/Lit(High Definition Render Pipeline)专用 Unlit：不受光照影响，用于UI、特效等 自定义Shader 2.Texture 常见类型： Albedo（基础颜色贴图） Normal Map（法线贴图，增加表面细节） Metallic Map / Roughness Map（金属度/粗糙度贴图） Emission Map（自发光贴图） Occlusion Map（遮蔽贴图） 3.属性值 颜色、金属度、粗糙度、透明度 创建和使用Material 创建材质 右键 -&gt; Create -&gt; Material 然后可以给材质命名，设置颜色、贴图等属性 应用材质 方式1：拖动到物体上 方式2：通过代码赋值 Renderer renderer = GetComponent&lt;Renderer&gt;(); renderer.material = myMaterial;...","categories": ["笔记"],
+        "tags": ["Unity"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/05/31/Material.html",
         "teaser": null
       },{
     "title": "About",
