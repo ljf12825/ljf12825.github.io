@@ -71,6 +71,12 @@ var store = [{
         "url": "/%E7%AC%94%E8%AE%B0/2025/05/31/Material.html",
         "teaser": null
       },{
+        "title": "Layer",
+        "excerpt":"在Unity中，Layer是要给非常重要的系统 它主要用于： 控制物体的渲染与相机的可见性 控制物理碰撞（配合Layer Collision Matrix） 通过脚本进行物体分类和筛选 什么是Layer Layer是给GameObject打的“标签”，但它和Tag不一样，Layer是用于功能性控制的，特别在： 摄像机的Culling Mask 光照影响（Light Culling） 物理碰撞（Physics Layer） 射线检测（Raycast Layer） Layer的使用场景 1.摄像机视野控制（Culling Mask） 在Camera组件中，你可以设置 Culling Mask -&gt; 选择哪些Layer可以被该相机看到 用途： UI相机只看UI层 小地图相机只看敌人层 分屏镜头每个只看自己的部分 2.物理碰撞控制（Layer Collision Matrix） 在菜单中： Edit -&gt; Project Settings -&gt; Physics 你可以看到Layer Collision Matrix，它控制： 哪些Layer和哪些Layer能发生物理碰撞 用途： 玩家层与敌人层可以碰撞，但不和自身碰撞 子弹不撞自己 角色不被UI的Collider打断 3.射线检测 可以通过Layer来控制射线是否命中某个对象 int...","categories": ["笔记"],
+        "tags": ["Unity","Unity System"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Layer.html",
+        "teaser": null
+      },{
     "title": "About",
     "excerpt":"        You want to know who I am?  It’s UB.            博客内容仅用于学习，如有侵权，请联系删除       &lt;-  &lt;-  &lt;-  ","url": "http://localhost:4000/about/"
   },{
