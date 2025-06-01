@@ -43,18 +43,19 @@ Unity支持多种格式的资源文件，并能自动识别并进行初步处理
 
 ### 导入流程
 
-1. 拖入图片文件
-2. 在Inspector中设置：
-  - Texture Type:
-    - `Default`（通用）
-    - `Sprite`（用于UI）
-    - `Normal map`（法线贴图）
-    - `Lightmap`（光照图）
+1.拖入图片文件
+2.在Inspector中设置：
   - sRGB（Color Texture）：颜色贴图用，法线贴图需取消勾选
   - Alpha Is Transparency：如果使用透明通道
   - Wrap Mode：Repeat（平铺）或Clamp（拉伸）
   - Filter Mode：Bilinear、Trilinear、Point（像素风）
   - Compression：高压缩（小体积）还是高质量（清晰）
+  - Texture Type:
+    - `Default`（通用）
+    - `Sprite`（用于UI）
+    - `Normal map`（法线贴图）
+    - `Lightmap`（光照图）    
+
 
 ## 音频
 
