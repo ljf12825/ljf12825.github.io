@@ -95,6 +95,18 @@ var store = [{
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Component.html",
         "teaser": null
       },{
+        "title": "Rigibody",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity Component"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Rigidbody.html",
+        "teaser": null
+      },{
+        "title": "Scripts",
+        "excerpt":"Unity脚本就是你编写的C#类，它控制游戏中物体的行为、交互、动画、输入、碰撞、UI等逻辑   绝大多数脚本都继承自MonoBehaviour类   C#如何运行这些脚本     将脚本挂载某个GameObject上   Unity引擎自动为这个类创建实例（托管对象）   Unity每帧调用该实例的生命周期函数   完全由Unity托管   脚本和Inspector的关系  可以使用[SerializeField]、public来让字段在Inspector中显示  public float speed = 5f;  [SerializeField] private GameObject bulletPrefab;  然后在Inspector中手动拖拽引用，或者编辑数值，来调整游戏行为   脚本间通信（引用其他组件）  void Start() {     Rigidbody rb = GetComponent&lt;Rigidbody&gt;();     rb.velocity = Vector3.up * 10; }  也可以访问其他GameObject:  public GameObject enemy;  void Update() =&gt; enemy.transform.LookAt(transform);   Unity生命周期函数（MonoBehaviour）  生命周期函数示意图  ","categories": ["笔记"],
+        "tags": ["Unity","Unity System"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Scripts.html",
+        "teaser": null
+      },{
         "title": "Unity Componenet-Driven Architecture",
         "excerpt":"Unity是如何驱动组件系统的 从运行架构、组件调度机制、底层实现三个方面来深度剖析 Unity的运行架构（经典GameObject-Component模型） Unity引擎的架构是 “组合优于继承” 的典范： GameObject：游戏世界中所有对象的容器 Component：挂在GameObject上的功能模块 MonoBehaviour：Unity脚本组件的基类，支持生命周期函数 //伪代码结构 class GameObject { List&lt;Component&gt; components; } class Component { GameObject gameObject; } Unity是如何调度组件的生命周期的 Unity在每一帧都会按以下顺序做一次组件调度遍历： For ever active GameObject: For every enable Component: If first frame: Call Awake() Call Start() Run physics: Call FixedUpdate() Handle rendering: Transform -&gt; Camera -&gt; Renderer...","categories": ["笔记"],
         "tags": ["Unity","Unity Engine"],

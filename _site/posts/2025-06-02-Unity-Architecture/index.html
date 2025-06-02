@@ -173,7 +173,7 @@
 
       <section class="page__content" itemprop="text">
         
-        <h2 id="unity是如何驱动组件系统的">Unity是如何驱动组件系统的</h2>
+        <p>Unity是如何驱动组件系统的</p>
 
 <p>从<strong>运行架构</strong>、<strong>组件调度机制</strong>、<strong>底层实现</strong>三个方面来深度剖析</p>
 
@@ -277,8 +277,107 @@
   <span class="p">...</span>
 <span class="p">};</span>
 </code></pre></div>    </div>
+    <h2 id="gameobject-与-component">GameObject 与 Component</h2>
+    <blockquote>
+      <p>一个GameObject本身只是一个空壳，组件赋予它行为和外观</p>
+    </blockquote>
   </li>
 </ul>
+
+<p>每个GameObject都至少由这三个组件（不可移除）：</p>
+<ul>
+  <li>Transform</li>
+  <li>Tag</li>
+  <li>Layer</li>
+</ul>
+
+<p>此外可以向GameObject添加任意数量的组件</p>
+
+<p>每个组件就是一块插件，GameObject就像是空机壳，插上不同“模块”就有不同功能</p>
+
+<p>Unity中组件影响GameObject的底层原理涉及到引擎的架构设计，主要是基于ECS的理念，虽然MonoBehaviour不是纯ECS，但是思想相近</p>
+
+<p>在底层， Unity的架构可以简化成</p>
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">GameObject</span> <span class="p">=</span> <span class="s">实体（Entity）</span>
+<span class="py">Component</span> <span class="p">=</span> <span class="s">数据 + 行为</span>
+</code></pre></div></div>
+
+<h3 id="gameobject本身">GameObject本身</h3>
+<ul>
+  <li>是一个空容器，并不做事</li>
+  <li>只持有一个Transform</li>
+  <li>它维护一个组件列表（Component List）</li>
+</ul>
+
+<h3 id="当添加组件时">当添加组件时</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gameObject</span><span class="p">.</span><span class="n">AddComponent</span><span class="p">&lt;</span><span class="n">Rigidbody</span><span class="p">&gt;();</span>
+</code></pre></div></div>
+<p>Unity引擎底层会：
+<strong>1.分配内存：在C++层面为<code class="language-plaintext highlighter-rouge">Rigidbody</code>组件实例分配空间</strong></p>
+
+<p><strong>2.注册行为：将这个组件加入到<code class="language-plaintext highlighter-rouge">GameObject</code>的组件列表中</strong></p>
+
+<p><strong>3.标记更新：将这个GameObject添加到物理系统更新队列中</strong></p>
+
+<p><strong>4.启用生命周期函数</strong></p>
+
+<h3 id="行为生效">行为生效</h3>
+<p>Unity引擎每帧进行如下操作：</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for each GameObject:
+    for each Component in GameObject:
+        if Component.enabled:
+            Call Component.Update() / Render() / PhysicsStep()
+</code></pre></div></div>
+<p>具体到组件类型：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>组件类型</th>
+      <th>引擎系统</th>
+      <th>调用方式</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">MonoBehaviour</code></td>
+      <td>脚本系统</td>
+      <td><code class="language-plaintext highlighter-rouge">Update()</code>、<code class="language-plaintext highlighter-rouge">FixedUpdate()</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Rigidbody</code></td>
+      <td>物理系统（PhysX）</td>
+      <td>每帧物理步计算</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Renderer</code></td>
+      <td>渲染系统（Graphics）</td>
+      <td>每帧调用 GPU 绘制命令</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Collider</code></td>
+      <td>碰撞系统</td>
+      <td>注册到空间分区中</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">AudioSource</code></td>
+      <td>音频系统</td>
+      <td>发出 PCM 数据到音频设备</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="unity引擎背后的底层结构简化">Unity引擎背后的底层结构（简化）</h3>
+<div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">GameObject</span> <span class="o">(</span><span class="nt">C</span><span class="nn">#</span><span class="err">层</span> <span class="nt">wrapper</span><span class="o">)</span>
+ <span class="err">└─</span> <span class="nt">native</span> <span class="nt">GameObject</span> <span class="o">(</span><span class="nt">C</span><span class="o">++</span><span class="err">层</span><span class="o">)</span>
+       <span class="err">├──</span> <span class="nt">Transform</span>
+       <span class="err">├──</span> <span class="nt">Component</span><span class="o">[]</span>
+       <span class="err">│</span>    <span class="err">├──</span> <span class="nt">MonoBehaviour</span><span class="err">（</span><span class="nt">C</span><span class="nn">#</span><span class="err">脚本）</span>
+       <span class="err">│</span>    <span class="err">├──</span> <span class="nt">Renderer</span>
+       <span class="err">│</span>    <span class="err">├──</span> <span class="nt">Rigidbody</span>
+       <span class="err">│</span>    <span class="err">└──</span> <span class="nc">...</span>
+</code></pre></div></div>
+<p>Unity通过“托管桥接机制（Managed to Native Binding）”来让C#脚本和底层C++引擎通讯</p>
 
 <h2 id="unity中生命周期函数的调度机制">Unity中生命周期函数的调度机制</h2>
 
@@ -321,6 +420,160 @@ Runtime 每帧：
 <blockquote>
   <p>Unity引擎内核就可以直接调用这个C++函数，避免了反射调用，提高性能</p>
 </blockquote>
+
+<h2 id="unity启动流程">Unity启动流程</h2>
+
+<h3 id="0平台入口本地程序启动">0.平台入口：本地程序启动</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>平台</th>
+      <th>实际入口函数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Windows</td>
+      <td><code class="language-plaintext highlighter-rouge">main()</code> 或 <code class="language-plaintext highlighter-rouge">WinMain()</code>（由 <code class="language-plaintext highlighter-rouge">UnityPlayer.dll</code> 调用）</td>
+    </tr>
+    <tr>
+      <td>Android</td>
+      <td><code class="language-plaintext highlighter-rouge">android_main()</code>（JNI 进入 <code class="language-plaintext highlighter-rouge">libunity.so</code>）</td>
+    </tr>
+    <tr>
+      <td>iOS</td>
+      <td><code class="language-plaintext highlighter-rouge">UIApplicationMain()</code>（Objective-C）</td>
+    </tr>
+    <tr>
+      <td>WebGL</td>
+      <td><code class="language-plaintext highlighter-rouge">Module.main()</code>（JavaScript/wasm）</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>这些都在C++写的引擎底层里，不可见且无法修改</p>
+
+<h3 id="1引擎初始化阶段">1.引擎初始化阶段</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>步骤</th>
+      <th>内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>加载配置</td>
+      <td>读取 PlayerSettings、Graphics API、质量设置等</td>
+    </tr>
+    <tr>
+      <td>初始化子系统</td>
+      <td>渲染器、输入系统、物理引擎、音频系统等</td>
+    </tr>
+    <tr>
+      <td>初始化脚本引擎</td>
+      <td>启动 Mono 或 IL2CPP 虚拟机</td>
+    </tr>
+    <tr>
+      <td>加载资源管理系统</td>
+      <td>AssetBundle / Resources 等</td>
+    </tr>
+    <tr>
+      <td>加载启动场景</td>
+      <td>SceneManager 加载 Build Settings 中第一个 Scene</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="2场景加载后-创建gameobjectcomponent实例">2.场景加载后-创建GameObject/Component实例</h3>
+<p>加载场景时：</p>
+<ul>
+  <li>逐个读取GameObejct</li>
+  <li>为每个GameObject绑定组件</li>
+  <li>为挂载了<code class="language-plaintext highlighter-rouge">MonoBehaviour</code>的对象创建托管对象实例（C#）</li>
+</ul>
+
+<h3 id="3生命周期调用顺序首次">3.生命周期调用顺序（首次）</h3>
+<p>Unity中的生命周期调度系统，每帧按照生命周期函数顺序依次调用</p>
+
+<h3 id="4游戏循环开始每帧">4.游戏循环开始（每帧）</h3>
+<p>Unity内部引擎每帧执行以下大致顺序：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>顺序</th>
+      <th>方法</th>
+      <th>功能</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Input Update</td>
+      <td>处理键鼠、触摸、手柄输入</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><code class="language-plaintext highlighter-rouge">Update()</code></td>
+      <td>调用所有激活脚本的 <code class="language-plaintext highlighter-rouge">Update()</code>（每帧）</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>动画更新</td>
+      <td>Animator 执行动画播放</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>物理模拟</td>
+      <td><code class="language-plaintext highlighter-rouge">FixedUpdate()</code> 调用 + Rigidbody 计算</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td><code class="language-plaintext highlighter-rouge">LateUpdate()</code></td>
+      <td>通常用于摄像机跟随等逻辑</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>渲染准备</td>
+      <td>剔除、光照、材质、阴影计算等</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>渲染提交</td>
+      <td>图像渲染到屏幕，执行 UI、特效等</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td><code class="language-plaintext highlighter-rouge">OnGUI()</code></td>
+      <td>Unity GUI 系统（少用）</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>PostProcessing</td>
+      <td>后期处理：Bloom、HDR、MotionBlur</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="5脚本执行机制mono-vs-il2cpp">5.脚本执行机制（Mono vs IL2CPP）</h3>
+
+<h4 id="mono模式editor-或-dev-build">Mono模式（Editor 或 Dev Build）</h4>
+<ul>
+  <li>每个脚本是托管C#类，由Mono VM动态加载与反射调用</li>
+  <li>优点：调试快，热重载方便</li>
+  <li>缺点：性能差，函数调度慢</li>
+</ul>
+
+<h4 id="il2cpp模式正式发布时">IL2CPP模式（正式发布时）</h4>
+<ul>
+  <li>Unity构建时将C#脚本编译为C++源码 -&gt; 原始代码</li>
+  <li>所有<code class="language-plaintext highlighter-rouge">Update()</code>、<code class="language-plaintext highlighter-rouge">Awake()</code>变成真正的C++函数</li>
+  <li>优点：性能极高、无法反编译</li>
+  <li>缺点：编译慢，不支持热重载</li>
+</ul>
 
 <h2 id="unity-ecs新架构entity-component-system">Unity ECS（新架构：Entity-Component-System）</h2>
 <p>传统GameObject模式虽然灵活，但性能瓶颈明显（组件查找慢、缓存不友好）<br />
@@ -372,7 +625,7 @@ Unity推出的ECS（DOTS）架构更接近底层系统编程</p>
       
   <nav class="pagination">
     
-      <a href="/%E7%AC%94%E8%AE%B0/2025/06/01/Component.html" class="pagination--pager" title="Component">Previous</a>
+      <a href="/%E7%AC%94%E8%AE%B0/2025/06/01/Scripts.html" class="pagination--pager" title="Scripts">Previous</a>
     
     
       <a href="#" class="pagination--pager disabled">Next</a>
