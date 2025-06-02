@@ -218,25 +218,23 @@
 
 <h3 id="导入流程-1">导入流程</h3>
 
-<ol>
-  <li>拖入图片文件</li>
-  <li>在Inspector中设置：
-    <ul>
-      <li>Texture Type:</li>
-    </ul>
+<p>1.拖入图片文件
+2.在Inspector中设置：</p>
+<ul>
+  <li>sRGB（Color Texture）：颜色贴图用，法线贴图需取消勾选</li>
+  <li>Alpha Is Transparency：如果使用透明通道</li>
+  <li>Wrap Mode：Repeat（平铺）或Clamp（拉伸）</li>
+  <li>Filter Mode：Bilinear、Trilinear、Point（像素风）</li>
+  <li>Compression：高压缩（小体积）还是高质量（清晰）</li>
+  <li>Texture Type:
     <ul>
       <li><code class="language-plaintext highlighter-rouge">Default</code>（通用）</li>
       <li><code class="language-plaintext highlighter-rouge">Sprite</code>（用于UI）</li>
       <li><code class="language-plaintext highlighter-rouge">Normal map</code>（法线贴图）</li>
-      <li><code class="language-plaintext highlighter-rouge">Lightmap</code>（光照图）
-      - sRGB（Color Texture）：颜色贴图用，法线贴图需取消勾选
-      - Alpha Is Transparency：如果使用透明通道
-      - Wrap Mode：Repeat（平铺）或Clamp（拉伸）
-      - Filter Mode：Bilinear、Trilinear、Point（像素风）
-      - Compression：高压缩（小体积）还是高质量（清晰）</li>
+      <li><code class="language-plaintext highlighter-rouge">Lightmap</code>（光照图）</li>
     </ul>
   </li>
-</ol>
+</ul>
 
 <h2 id="音频">音频</h2>
 

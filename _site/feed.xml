@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-01T21:09:00+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Import Assets</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-assets.html" rel="alternate" type="text/html" title="Import Assets" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-assets</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-assets.html"><![CDATA[<p>Unity支持多种格式的资源文件，并能自动识别并进行初步处理</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-02T17:51:33+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Import Assets</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-assets.html" rel="alternate" type="text/html" title="Import Assets" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-assets</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-assets.html"><![CDATA[<p>Unity支持多种格式的资源文件，并能自动识别并进行初步处理</p>
 
 <h2 id="资源导入基本流程">资源导入基本流程</h2>
 <p><strong>1.将资源文件拖入<code class="language-plaintext highlighter-rouge">Assets</code>目录中（Unity会自动导入）</strong><br />
@@ -43,25 +43,23 @@
 
 <h3 id="导入流程-1">导入流程</h3>
 
-<ol>
-  <li>拖入图片文件</li>
-  <li>在Inspector中设置：
-    <ul>
-      <li>Texture Type:</li>
-    </ul>
+<p>1.拖入图片文件
+2.在Inspector中设置：</p>
+<ul>
+  <li>sRGB（Color Texture）：颜色贴图用，法线贴图需取消勾选</li>
+  <li>Alpha Is Transparency：如果使用透明通道</li>
+  <li>Wrap Mode：Repeat（平铺）或Clamp（拉伸）</li>
+  <li>Filter Mode：Bilinear、Trilinear、Point（像素风）</li>
+  <li>Compression：高压缩（小体积）还是高质量（清晰）</li>
+  <li>Texture Type:
     <ul>
       <li><code class="language-plaintext highlighter-rouge">Default</code>（通用）</li>
       <li><code class="language-plaintext highlighter-rouge">Sprite</code>（用于UI）</li>
       <li><code class="language-plaintext highlighter-rouge">Normal map</code>（法线贴图）</li>
-      <li><code class="language-plaintext highlighter-rouge">Lightmap</code>（光照图）
-      - sRGB（Color Texture）：颜色贴图用，法线贴图需取消勾选
-      - Alpha Is Transparency：如果使用透明通道
-      - Wrap Mode：Repeat（平铺）或Clamp（拉伸）
-      - Filter Mode：Bilinear、Trilinear、Point（像素风）
-      - Compression：高压缩（小体积）还是高质量（清晰）</li>
+      <li><code class="language-plaintext highlighter-rouge">Lightmap</code>（光照图）</li>
     </ul>
   </li>
-</ol>
+</ul>
 
 <h2 id="音频">音频</h2>
 
@@ -96,7 +94,811 @@
 
 <blockquote>
   <p><strong>资源组织建议：</strong> 使用好的文件夹结构和命名习惯，可以极大提高开发效率</p>
-</blockquote>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><summary type="html"><![CDATA[Unity支持多种格式的资源文件，并能自动识别并进行初步处理]]></summary></entry><entry><title type="html">Tag</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Tag.html" rel="alternate" type="text/html" title="Tag" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Tag</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Tag.html"><![CDATA[<p>在Unity中，Tag是用来标记和分类GameObject的一种轻量级方法，主要用于在代码中查找和判断物体的类型或身份</p>
+</blockquote>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><summary type="html"><![CDATA[Unity支持多种格式的资源文件，并能自动识别并进行初步处理]]></summary></entry><entry><title type="html">Unity Componenet-Driven Architecture</title><link href="http://localhost:4000/posts/2025-06-02-Unity-Architecture/" rel="alternate" type="text/html" title="Unity Componenet-Driven Architecture" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Unity-Architecture</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-02-Unity-Architecture/"><![CDATA[<h2 id="unity是如何驱动组件系统的">Unity是如何驱动组件系统的</h2>
+
+<p>从<strong>运行架构</strong>、<strong>组件调度机制</strong>、<strong>底层实现</strong>三个方面来深度剖析</p>
+
+<h3 id="unity的运行架构经典gameobject-component模型">Unity的运行架构（经典GameObject-Component模型）</h3>
+<p>Unity引擎的架构是 <strong>“组合优于继承”</strong> 的典范：</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">GameObject</code>：游戏世界中所有对象的容器</li>
+  <li><code class="language-plaintext highlighter-rouge">Component</code>：挂在GameObject上的功能模块</li>
+  <li><code class="language-plaintext highlighter-rouge">MonoBehaviour</code>：Unity脚本组件的基类，支持生命周期函数</li>
+</ul>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//伪代码结构</span>
+<span class="k">class</span> <span class="nc">GameObject</span>
+<span class="p">{</span>
+    <span class="n">List</span><span class="p">&lt;</span><span class="n">Component</span><span class="p">&gt;</span> <span class="n">components</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Component</span>
+<span class="p">{</span>
+    <span class="n">GameObject</span> <span class="n">gameObject</span><span class="p">;</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<h2 id="unity是如何调度组件的生命周期的">Unity是如何调度组件的生命周期的</h2>
+<p>Unity在每一帧都会按以下顺序做一次组件调度遍历：</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>For ever active GameObject:
+    For every enable Component:
+        If first frame:
+            Call Awake()
+            Call Start()
+
+    Run physics:
+        Call FixedUpdate()
+
+    Handle rendering:
+        Transform -&gt; Camera -&gt; Renderer
+</code></pre></div></div>
+<ul>
+  <li>Unity引擎内部有个巨大的函数表（或反射表），知道哪些组件实现了哪些生命周期函数</li>
+  <li>每一帧自动去“调用你实现的函数”</li>
+  <li>C++内部利用RTTI或IL2CPP编译出的函数表映射进行调用</li>
+</ul>
+
+<h2 id="底层实现机制">底层实现机制</h2>
+<h3 id="在mono引擎早期或il2cpp编译后">在Mono引擎（早期）或IL2CPP编译后</h3>
+<ul>
+  <li>Unity会扫描所有<code class="language-plaintext highlighter-rouge">MonoBehaviour</code>脚本的继承结构和成员函数</li>
+  <li>使用反射或JIT（Mono）或AOT（IL2CPP）建立生命周期函数映射</li>
+  <li>每帧调用<code class="language-plaintext highlighter-rouge">Update()</code>时并不是逐个判断字符串，而是已建立了对应的“执行列表”
+    <blockquote>
+      <p>IL2CPP模式下，C#代码会被编译成C++，再编译成机器码，性能更好，但调试难</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h2 id="unity怎么知道你挂了什么组件">Unity怎么知道你挂了什么组件</h2>
+<p>每个GameObject内部维护了一个组件列表（通常是数组或链表），每个组件记录自己类型，并且Unity会为常见组件使用缓存优化</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">GetComponent&lt;T&gt;()</code>实际上会进行：
+    <ul>
+      <li>查缓存</li>
+      <li>缓存没有就遍历组件数组</li>
+      <li>找到就缓存下来，下次加速</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="unity-gameobject--component的底层存储结构">Unity <code class="language-plaintext highlighter-rouge">GameObject</code> + <code class="language-plaintext highlighter-rouge">Component</code>的底层存储结构</h2>
+<p>GameObject + Component架构时Unity的核心数据结构<br />
+大致如下：</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Scene
+ └── GameObjects (树状结构)
+      ├── GameObject A
+      │     ├── Transform (每个 GameObject 必有)
+      │     ├── MeshRenderer
+      │     ├── BoxCollider
+      │     └── MyScript (MonoBehaviour)
+      └── GameObject B
+            └── Transform
+</code></pre></div></div>
+<p>在内存中的布局</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[GameObject]
+ ├─ Name: "Enemy"
+ ├─ Tag: "Enemy"
+ ├─ Active: true
+ ├─ Component[] --&gt; 指向一组组件
+ │    ├─ [0] Transform*
+ │    ├─ [1] MeshRenderer
+ │    ├─ [2] MyScript : MonoBehaviour
+ └─ SceneNode / Parent / Children 等关系信息
+</code></pre></div></div>
+<ul>
+  <li>所有组件都存储在一个 <strong>Component列表（数组/链表）</strong> 中</li>
+  <li><code class="language-plaintext highlighter-rouge">Transform</code>总是第一个组件（内置逻辑保证）</li>
+  <li>每个<code class="language-plaintext highlighter-rouge">Component</code>内部都有一个指向所属<code class="language-plaintext highlighter-rouge">GameObject</code>的反向引用
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">GameObject</span>
+<span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Componenet</span><span class="o">*&gt;</span> <span class="n">components</span><span class="p">;</span>
+  <span class="n">Transform</span><span class="o">*</span> <span class="n">transform</span><span class="p">;</span>
+  <span class="p">...</span>
+<span class="p">};</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="unity中生命周期函数的调度机制">Unity中生命周期函数的调度机制</h2>
+
+<h3 id="per-frame">Per Frame</h3>
+<p>Unity的C++引擎内部维护了一套复杂的调度系统，它在每帧中会依次完成：</p>
+<ul>
+  <li>处理输入事件</li>
+  <li>调用<code class="language-plaintext highlighter-rouge">MonoBehaviour.Update()</code>等函数</li>
+  <li>执行物理模拟</li>
+  <li>渲染准备</li>
+  <li>真正渲染</li>
+</ul>
+
+<h3 id="调用过程以update为例">调用过程（以Update()为例）</h3>
+<p>**关键逻辑：Unity会在引擎启动时反射出所有含有Update()的脚本，并构建函数调度表（Invocation List）</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Startup:
+|___MonoScript Scanning（扫描所有脚本）
+       |___找出哪些脚本实现了Update()
+
+Runtime 每帧：
+|___遍历Update列表
+        |___调用脚本.Update()
+</code></pre></div></div>
+<blockquote>
+  <p>这个调度是Unity内部用C++写的调度器来完成的，不是C#代码自己管自己的调用</p>
+</blockquote>
+
+<h3 id="il2cpp行为">IL2CPP行为</h3>
+<p>当你开启IL2CPP编译</p>
+<ul>
+  <li>所有C#代码都会被编译成IL</li>
+  <li>Unity的IL2CPP工具将IL转成CXX</li>
+  <li>然后统一编译为Native Binary</li>
+</ul>
+
+<p><strong>以Update()为例</strong>
+最终会变成：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">PlayerMove_Update</span><span class="p">(</span><span class="n">MonoBehaviour</span><span class="o">*</span> <span class="k">this</span><span class="p">)</span> <span class="p">{}</span>
+</code></pre></div></div>
+<blockquote>
+  <p>Unity引擎内核就可以直接调用这个C++函数，避免了反射调用，提高性能</p>
+</blockquote>
+
+<h2 id="unity-ecs新架构entity-component-system">Unity ECS（新架构：Entity-Component-System）</h2>
+<p>传统GameObject模式虽然灵活，但性能瓶颈明显（组件查找慢、缓存不友好）<br />
+Unity推出的ECS（DOTS）架构更接近底层系统编程</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>架构元素</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Entity</code></td>
+      <td>轻量 ID，不是 GameObject，零开销。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Component</code></td>
+      <td>纯数据结构（无逻辑），类似 C struct。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">System</code></td>
+      <td>控制逻辑，处理所有符合条件的 Entity+Component 数据。</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>ECS通过内存连续布局 + SIMD + JobSystem实现了超高性能</p>
+</blockquote>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Engine" /><summary type="html"><![CDATA[Unity是如何驱动组件系统的]]></summary></entry><entry><title type="html">Component</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Component.html" rel="alternate" type="text/html" title="Component" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Component</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Component.html"><![CDATA[<p>Component是附加在GameObject上的功能模块，每个组件都提供了某种行为或属性，组成了游戏对象的功能</p>
+
+<h2 id="组件的特性">组件的特性</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>特性</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>附加性</strong></td>
+      <td>可以给 GameObject 添加多个组件。</td>
+    </tr>
+    <tr>
+      <td><strong>组合式设计</strong></td>
+      <td>Unity 的架构是组合优于继承，一个 GameObject 的行为是由多个组件组合而成的。</td>
+    </tr>
+    <tr>
+      <td><strong>可视化编辑</strong></td>
+      <td>在 Unity Inspector 面板中可以直接添加、删除或修改组件。</td>
+    </tr>
+    <tr>
+      <td><strong>脚本组件</strong></td>
+      <td>你写的 C# 脚本，本质上也是组件，继承自 <code class="language-plaintext highlighter-rouge">MonoBehaviour</code>。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="在代码中使用组件">在代码中使用组件</h2>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//获取组件</span>
+<span class="n">Rigidbody</span> <span class="n">rb</span> <span class="p">=</span> <span class="n">GetComponenet</span><span class="p">&lt;</span><span class="n">Rigidbody</span><span class="p">&gt;();</span>
+<span class="c1">//添加组件</span>
+<span class="n">gameObject</span><span class="p">.</span><span class="n">AddComponenet</span><span class="p">&lt;</span><span class="n">AudioSource</span><span class="p">&gt;();</span>
+</code></pre></div></div>
+<p>在Unity中，组件之所以能起作用，是因为Unity引擎在运行时会自动调度和执行组件的逻辑，这个背后是Unity引擎的核心“组件驱动”架构</p>
+
+<h2 id="简单理解unity的工作循环--组件系统">简单理解：Unity的工作循环 + 组件系统</h2>
+<p><strong>1.GameObject只是容器</strong>
+<strong>2.组件发挥功能</strong>
+<strong>3.Unity引擎每一帧都会遍历所有激活的GameObject，调度它们的组件做该做的事</strong></p>
+
+<p><a href="/posts/2025-06-02-Unity-Architecture/">Unity组件驱动架构</a></p>
+
+<h2 id="unity组件">Unity组件</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Component Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Audio</strong></td>
+      <td>Chorus Filter</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Distortion Filter</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Echo Filter</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>High Pass Filter</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Listener</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Low Pass Filter</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Reverv Filter</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Reverv Zone</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Source</td>
+    </tr>
+    <tr>
+      <td><strong>Effects</strong></td>
+      <td>Halo</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Lens Flare</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Line Renderer</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Particle System</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Projector</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Trail Renderer</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Visual Effect</td>
+    </tr>
+    <tr>
+      <td><strong>Event</strong></td>
+      <td>Event System</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Event Trigger</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Graphic Raycaster</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Physics 2D Raycaster</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Physics Raycaster</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Standalone Input Module</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Touch Input Module</td>
+    </tr>
+    <tr>
+      <td><strong>Layout</strong></td>
+      <td>Aspect Ratio Fitter</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Canvas</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Canvas Group</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Cancas Scaler</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Content Size Fitter</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Grid Layout Group</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Horizontal Layout Group</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Layout Element</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Rect Transform</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Vertical Layout Group</td>
+    </tr>
+    <tr>
+      <td><strong>Mesh</strong></td>
+      <td>Mesh Filter</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Mesh Renderer</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Skinned Mesh Renderer</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>TextMeshPro - Text</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Text Mesh <em>(Legacy)</em></td>
+    </tr>
+    <tr>
+      <td><strong>Miscellaneous</strong></td>
+      <td>Aim Constraint</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Animation</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Animator</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Billboard Renderer</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Grid</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Look At Constraint</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Parent Constraint</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Particle System Force Field</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Position Constraint</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Rotation Constraint</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Scale Constraint</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Sprite Mask</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Sprite Shape Renderer</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Terrain</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Wind Zone</td>
+    </tr>
+    <tr>
+      <td><strong>Navigation</strong></td>
+      <td>Nav Mesh Agent</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Nav Mesh Obstacle</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Off Mesh Link</td>
+    </tr>
+    <tr>
+      <td><strong>Physics 2D</strong></td>
+      <td>Area Effector 2D</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Box Collider 2D</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Buoyancy Effector 2D</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Capsule Collider 2D</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Circle Collider 2D</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Composite Collider 2D</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Constant Force 2D</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Custom Collider 2D</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Distance Joint 2D</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Edge Collider 2D</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Fixed Joint 2D</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Friction Joint 2D</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Hinge Joint 2D</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Platform Effector 2D</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Point Effector 2D</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Polygon Collider 2D</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Relative Joint 2D</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Rigidbody 2D</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Slider Joint 2D</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Spring Joint 2D</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Surface Effector 2D</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Target Joint 2D</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Wheel Joint 2D</td>
+    </tr>
+    <tr>
+      <td><strong>Physics</strong></td>
+      <td>Articulation Body</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Box Collider</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Capsule Collider</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Character Controller</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Character Joint</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Cloth</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Configurable Joint</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Constant Force</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Fixed Joint</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Hinge Joint</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Mesh Collider</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Rigidbody</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Sphere Collider</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Spring Joint</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Terrain Collider</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Wheel Collider</td>
+    </tr>
+    <tr>
+      <td><strong>Playables</strong></td>
+      <td>Playable Director</td>
+    </tr>
+    <tr>
+      <td><strong>Rendering</strong></td>
+      <td>Camera</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Canvas Renderer</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Flare Layer</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>LOD Group</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Light</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Light Probe Group</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Light Probe Proxy Volume</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Occlusion Area</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Occlusion Portal</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Reflection Probe</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Skybox</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Sorting Group</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Sprite Renderer</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Streaming Controller</td>
+    </tr>
+    <tr>
+      <td><strong>Scripts</strong></td>
+      <td><em>(空内容，如需添加请提供)</em></td>
+    </tr>
+    <tr>
+      <td><strong>Tilemap</strong></td>
+      <td>Tilemap</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Tilemap Collider 2D</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Tilemap Renderer</td>
+    </tr>
+    <tr>
+      <td><strong>UI Toolkit</strong></td>
+      <td>Panel Event Handler</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Panel Raycaster</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>UI Document</td>
+    </tr>
+    <tr>
+      <td><strong>UI</strong></td>
+      <td>Button</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Dropdown - TMP</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Effects - Outline</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Effects - Position As UV1</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Effects - Shadow</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Image</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Mask</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Raw Image</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Rect Mask 2D</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Scroll Rect</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Scrollbar</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Selectable</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Slider</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>TMP - Input Field</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>TMP - Text</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Toggle</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Toggle Group</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Dropdown <em>(Legacy)</em></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Input Field <em>(Legacy)</em></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Text <em>(Legacy)</em></td>
+    </tr>
+    <tr>
+      <td><strong>Video</strong></td>
+      <td>Video Player</td>
+    </tr>
+    <tr>
+      <td><strong>Visual Scripting</strong></td>
+      <td>Animator Message Listener <em>(Listener)</em></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Script Machine</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>State Machine</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Variables</td>
+    </tr>
+  </tbody>
+</table>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[Component是附加在GameObject上的功能模块，每个组件都提供了某种行为或属性，组成了游戏对象的功能]]></summary></entry><entry><title type="html">Tag</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Tag.html" rel="alternate" type="text/html" title="Tag" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Tag</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Tag.html"><![CDATA[<p>在Unity中，Tag是用来标记和分类GameObject的一种轻量级方法，主要用于在代码中查找和判断物体的类型或身份</p>
 
 <h2 id="tag的核心作用">Tag的核心作用</h2>
 
@@ -315,87 +1117,7 @@
 <ul>
   <li>给每种功能的对象分配专属Layer</li>
   <li>摄像机、光源、UI、Trigger检测都应依赖Layer控制逻辑</li>
-</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[在Unity中，Layer是要给非常重要的系统 它主要用于： 控制物体的渲染与相机的可见性 控制物理碰撞（配合Layer Collision Matrix） 通过脚本进行物体分类和筛选]]></summary></entry><entry><title type="html">Prefab System</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Prefab.html" rel="alternate" type="text/html" title="Prefab System" /><published>2025-05-31T00:00:00+08:00</published><updated>2025-05-31T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Prefab</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Prefab.html"><![CDATA[<p>Unity提供Prefab这种非常强大的机制，用来复用游戏对象，让开发更高效、项目更模块化<br />
-Prefab就是一个可以重复使用的GameObject模板</p>
-
-<h2 id="什么是prefab">什么是Prefab</h2>
-<p>Prefab是你在场景里创建好的GameObject（可以包含模型、脚本、组件、子物体等），然后把它拖到项目窗口中生成的资源文件。<br />
-之后就可以随时从Project中把这个模板拖入场景，生成和原始一样的对象</p>
-
-<h2 id="prefab的创建和使用">Prefab的创建和使用</h2>
-<p><strong>创建</strong>
-1.在<code class="language-plaintext highlighter-rouge">Hierarchy</code>中创建好一个GameObject及其组件和子对象<br />
-2.拖拽到<code class="language-plaintext highlighter-rouge">Project</code>视图中，Unity自动保存为<code class="language-plaintext highlighter-rouge">.prefab</code>
-3.你可以删除场景中的对象，只保留Project中的预制体</p>
-
-<p><strong>使用</strong></p>
-<ul>
-  <li>直接拖到场景中</li>
-  <li><code class="language-plaintext highlighter-rouge">Instantiate()</code>动态生成</li>
-</ul>
-
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Shoot</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="nf">Instantiate</span><span class="p">(</span><span class="n">bulletPrefab</span><span class="p">,</span> <span class="n">transform</span><span class="p">.</span><span class="n">position</span><span class="p">,</span> <span class="n">transform</span><span class="p">.</span><span class="n">rotation</span><span class="p">);</span>
-</code></pre></div></div>
-<h2 id="prefab特点">Prefab特点</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>特性</th>
-      <th>描述</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>模板复用</td>
-      <td>一次创建，多次使用</td>
-    </tr>
-    <tr>
-      <td>改动同步</td>
-      <td>修改 Prefab，会自动同步所有实例</td>
-    </tr>
-    <tr>
-      <td>支持嵌套</td>
-      <td>Prefab 可以包含另一个 Prefab</td>
-    </tr>
-    <tr>
-      <td>可分离</td>
-      <td>Prefab 实例可以局部修改，不影响原始 Prefab</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="prefab实例与原型的关系">Prefab实例与原型的关系</h2>
-<p>当你把Prefab拖入场景，它会成为Prefab实例，你可以</p>
-<ul>
-  <li>完全跟随原始Prefab</li>
-  <li>局部Override某些属性</li>
-  <li>解除连接（Unpack）</li>
-</ul>
-
-<table>
-  <thead>
-    <tr>
-      <th>图标颜色</th>
-      <th>状态</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>蓝色立方体</td>
-      <td>与原 Prefab 保持连接</td>
-    </tr>
-    <tr>
-      <td>灰色立方体</td>
-      <td>已经解除连接（Unpacked）</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="prefab编辑方式">Prefab编辑方式</h2>
-<p>1.Open Prefab：双击或点击小蓝箭头进入Prefab编辑模式
-2.Override面板：查看并应用或还原你对实例的修改
-3.Apply to Prefab：将实例的更改写入原始Prefab</p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity，Unity System" /><summary type="html"><![CDATA[Unity提供Prefab这种非常强大的机制，用来复用游戏对象，让开发更高效、项目更模块化 Prefab就是一个可以重复使用的GameObject模板]]></summary></entry><entry><title type="html">Material</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Material.html" rel="alternate" type="text/html" title="Material" /><published>2025-05-31T00:00:00+08:00</published><updated>2025-05-31T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Material</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Material.html"><![CDATA[<p>Unity中的Material是用来定义一个物体外观的核心组件，它将Shader与各种Texture和属性值绑定到一起，决定了一个对象在场景中如何表现</p>
+</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[在Unity中，Layer是要给非常重要的系统 它主要用于： 控制物体的渲染与相机的可见性 控制物理碰撞（配合Layer Collision Matrix） 通过脚本进行物体分类和筛选]]></summary></entry><entry><title type="html">Material</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Material.html" rel="alternate" type="text/html" title="Material" /><published>2025-05-31T00:00:00+08:00</published><updated>2025-05-31T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Material</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Material.html"><![CDATA[<p>Unity中的Material是用来定义一个物体外观的核心组件，它将Shader与各种Texture和属性值绑定到一起，决定了一个对象在场景中如何表现</p>
 
 <h2 id="material的基本构成">Material的基本构成</h2>
 <p>Material包括：<br />
@@ -496,7 +1218,87 @@ Prefab就是一个可以重复使用的GameObject模板</p>
 <span class="n">mat</span><span class="p">.</span><span class="nf">SetFloat</span><span class="p">(</span><span class="s">"_Glossiness"</span><span class="p">,</span> <span class="m">0.3f</span><span class="p">);</span>
 </code></pre></div></div>
 
-<p><strong>如果你修改的是<code class="language-plaintext highlighter-rouge">material</code>而不是<code class="language-plaintext highlighter-rouge">sharedMaterial</code>，Unity会在运行时创建该材质的副本（实例化材质）</strong></p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><summary type="html"><![CDATA[Unity中的Material是用来定义一个物体外观的核心组件，它将Shader与各种Texture和属性值绑定到一起，决定了一个对象在场景中如何表现]]></summary></entry><entry><title type="html">Light</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/29/Light.html" rel="alternate" type="text/html" title="Light" /><published>2025-05-29T00:00:00+08:00</published><updated>2025-05-29T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/29/Light</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/29/Light.html"><![CDATA[<p>Unity中的Light是照亮场景和物体的核心组件，也是实现逼真视觉效果的关键之一。合理使用光源可以极大提升游戏画面质量，同时也对性能有重要影响
+<p><strong>如果你修改的是<code class="language-plaintext highlighter-rouge">material</code>而不是<code class="language-plaintext highlighter-rouge">sharedMaterial</code>，Unity会在运行时创建该材质的副本（实例化材质）</strong></p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><summary type="html"><![CDATA[Unity中的Material是用来定义一个物体外观的核心组件，它将Shader与各种Texture和属性值绑定到一起，决定了一个对象在场景中如何表现]]></summary></entry><entry><title type="html">Prefab System</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Prefab.html" rel="alternate" type="text/html" title="Prefab System" /><published>2025-05-31T00:00:00+08:00</published><updated>2025-05-31T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Prefab</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Prefab.html"><![CDATA[<p>Unity提供Prefab这种非常强大的机制，用来复用游戏对象，让开发更高效、项目更模块化<br />
+Prefab就是一个可以重复使用的GameObject模板</p>
+
+<h2 id="什么是prefab">什么是Prefab</h2>
+<p>Prefab是你在场景里创建好的GameObject（可以包含模型、脚本、组件、子物体等），然后把它拖到项目窗口中生成的资源文件。<br />
+之后就可以随时从Project中把这个模板拖入场景，生成和原始一样的对象</p>
+
+<h2 id="prefab的创建和使用">Prefab的创建和使用</h2>
+<p><strong>创建</strong>
+1.在<code class="language-plaintext highlighter-rouge">Hierarchy</code>中创建好一个GameObject及其组件和子对象<br />
+2.拖拽到<code class="language-plaintext highlighter-rouge">Project</code>视图中，Unity自动保存为<code class="language-plaintext highlighter-rouge">.prefab</code>
+3.你可以删除场景中的对象，只保留Project中的预制体</p>
+
+<p><strong>使用</strong></p>
+<ul>
+  <li>直接拖到场景中</li>
+  <li><code class="language-plaintext highlighter-rouge">Instantiate()</code>动态生成</li>
+</ul>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Shoot</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="nf">Instantiate</span><span class="p">(</span><span class="n">bulletPrefab</span><span class="p">,</span> <span class="n">transform</span><span class="p">.</span><span class="n">position</span><span class="p">,</span> <span class="n">transform</span><span class="p">.</span><span class="n">rotation</span><span class="p">);</span>
+</code></pre></div></div>
+<h2 id="prefab特点">Prefab特点</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>特性</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>模板复用</td>
+      <td>一次创建，多次使用</td>
+    </tr>
+    <tr>
+      <td>改动同步</td>
+      <td>修改 Prefab，会自动同步所有实例</td>
+    </tr>
+    <tr>
+      <td>支持嵌套</td>
+      <td>Prefab 可以包含另一个 Prefab</td>
+    </tr>
+    <tr>
+      <td>可分离</td>
+      <td>Prefab 实例可以局部修改，不影响原始 Prefab</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="prefab实例与原型的关系">Prefab实例与原型的关系</h2>
+<p>当你把Prefab拖入场景，它会成为Prefab实例，你可以</p>
+<ul>
+  <li>完全跟随原始Prefab</li>
+  <li>局部Override某些属性</li>
+  <li>解除连接（Unpack）</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>图标颜色</th>
+      <th>状态</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>蓝色立方体</td>
+      <td>与原 Prefab 保持连接</td>
+    </tr>
+    <tr>
+      <td>灰色立方体</td>
+      <td>已经解除连接（Unpacked）</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="prefab编辑方式">Prefab编辑方式</h2>
+<p>1.Open Prefab：双击或点击小蓝箭头进入Prefab编辑模式<br />
+2.Override面板：查看并应用或还原你对实例的修改
+3.Apply to Prefab：将实例的更改写入原始Prefab</p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity，Unity System" /><summary type="html"><![CDATA[Unity提供Prefab这种非常强大的机制，用来复用游戏对象，让开发更高效、项目更模块化 Prefab就是一个可以重复使用的GameObject模板]]></summary></entry><entry><title type="html">Light</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/29/Light.html" rel="alternate" type="text/html" title="Light" /><published>2025-05-29T00:00:00+08:00</published><updated>2025-05-29T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/29/Light</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/29/Light.html"><![CDATA[<p>Unity中的Light是照亮场景和物体的核心组件，也是实现逼真视觉效果的关键之一。合理使用光源可以极大提升游戏画面质量，同时也对性能有重要影响
 Light决定了场景中物体如何被照亮、阴影如何生成、氛围如何表现</p>
 
 <h2 id="light的类型type">Light的类型（Type）</h2>
@@ -1101,742 +1903,4 @@ Unity标准版本不自带，可通过插件实现（如HDRP或Volumetric Lighti
 
 <p>G:Project项目窗口，可以显示在项目中使用的资源库。</p>
 
-<p>H:Statusbar状态栏提供有关Unity进程的通知，以及快速访问相关工具和设置。</p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Editor" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Transform</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/28/Transform.html" rel="alternate" type="text/html" title="Transform" /><published>2025-05-28T00:00:00+08:00</published><updated>2025-05-28T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/28/Transform</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/28/Transform.html"><![CDATA[<p>Transform是Unity中控制物体位置、旋转、缩放和父子层级关系的核心组件</p>
-
-<h2 id="一什么是transform">一、什么是Transform</h2>
-<p><code class="language-plaintext highlighter-rouge">Transfrom</code>是每个<code class="language-plaintext highlighter-rouge">GameObject</code>都自带的核心组件，主要负责：</p>
-<ul>
-  <li>位置（Position）</li>
-  <li>旋转（Rotation）</li>
-  <li>缩放（Scale）</li>
-  <li>父子关系（Hierarchy）</li>
-</ul>
-
-<p>可以理解为每个物体在三维世界中的“坐标轴和局部空间信息”。</p>
-
-<h2 id="二transform的重要属性和区别">二、Transform的重要属性和区别</h2>
-
-<p>**1.<code class="language-plaintext highlighter-rouge">position</code>和<code class="language-plaintext highlighter-rouge">localPosition</code></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>属性名</th>
-      <th>含义</th>
-      <th>示例用途</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">position</code></td>
-      <td>世界坐标（绝对位置）</td>
-      <td>物体在整个场景中的位置</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">localPosition</code></td>
-      <td>本地坐标（相对于父物体的位置）</td>
-      <td>子物体相对于父物体的偏移</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>**2.<code class="language-plaintext highlighter-rouge">rotation</code>和<code class="language-plaintext highlighter-rouge">localRotation</code></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>属性名</th>
-      <th>含义</th>
-      <th>类型</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">rotation</code></td>
-      <td>世界旋转</td>
-      <td>Quaternion</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">localRotation</code></td>
-      <td>相对父物体的旋转</td>
-      <td>Quaternion</td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transform</span><span class="p">.</span><span class="n">rotation</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">Euler</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span> <span class="c1">//世界旋转</span>
-<span class="n">transform</span><span class="p">.</span><span class="n">localRotation</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="n">idetity</span><span class="p">;</span> <span class="c1">//本地旋转重置</span>
-</code></pre></div></div>
-
-<p><strong>3.localScale</strong></p>
-<ul>
-  <li>表示对象自身的缩放</li>
-  <li>注意：缩放不会自动传递到<code class="language-plaintext highlighter-rouge">position</code>，但会影响渲染尺寸和碰撞盒</li>
-</ul>
-
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transform</span><span class="p">.</span><span class="n">localScale</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">);</span> <span class="c1">//放大两倍</span>
-</code></pre></div></div>
-
-<h2 id="三父子层级结构">三、父子层级结构*</h2>
-
-<p><strong>设置父物体</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">child</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">parent</span> <span class="p">=</span> <span class="n">parent</span><span class="p">.</span><span class="n">transform</span><span class="p">;</span>
-<span class="c1">//或</span>
-<span class="n">child</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="nf">SetParent</span><span class="p">(</span><span class="n">parent</span><span class="p">.</span><span class="n">transform</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p><strong>常见操作</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Transform</span> <span class="n">parent</span> <span class="p">=</span> <span class="n">transform</span><span class="p">.</span><span class="n">parent</span><span class="p">;</span> <span class="c1">//获取父对象</span>
-<span class="n">Transform</span> <span class="n">child</span> <span class="p">=</span> <span class="n">transform</span><span class="p">.</span><span class="nf">GetChild</span><span class="p">(</span><span class="m">0</span><span class="p">);</span> <span class="c1">//获取第一个子对象</span>
-<span class="kt">int</span> <span class="n">childCount</span> <span class="p">=</span> <span class="n">transform</span><span class="p">.</span><span class="n">childCount</span><span class="p">;</span> <span class="c1">//获取子对象数量</span>
-</code></pre></div></div>
-<p><strong>使用本地坐标的原因</strong>
-当物体成为子对象时，使用<code class="language-plaintext highlighter-rouge">localPosition</code>更容易控制其相对于父对象的偏移，比如角色头部、武器挂点等</p>
-
-<p><strong>为什么<code class="language-plaintext highlighter-rouge">Transform</code>可以决定父子结构？</strong>
-1.Unity中父子结构的本质
-在Unity中，一个GameObject能成为另一个GameObject的子对象，本质上是通过Transform组件的嵌套结构来实现的
-2.为什么<code class="language-plaintext highlighter-rouge">Transform</code>决定父子关系
-因为GameObject的位置、旋转、缩放、层级关系都是由<code class="language-plaintext highlighter-rouge">Transform</code>控制的，而Unity场景树（Hierarchy）实际上就是一个<code class="language-plaintext highlighter-rouge">Transform</code>树</p>
-
-<p><strong>举个例子</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObject</span> <span class="n">parent</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">GameObject</span><span class="p">(</span><span class="s">"Parent"</span><span class="p">);</span>
-<span class="n">GameObject</span> <span class="n">child</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">GameObject</span><span class="p">(</span><span class="s">"Child"</span><span class="p">);</span>
-
-<span class="n">child</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">parent</span> <span class="p">=</span> <span class="n">parent</span><span class="p">.</span><span class="n">transform</span><span class="p">;</span>
-</code></pre></div></div>
-<p>这段代码不会修改该GameObject的本体，它只是把<code class="language-plaintext highlighter-rouge">Child</code>的<code class="language-plaintext highlighter-rouge">Transform</code>挂到了<code class="language-plaintext highlighter-rouge">Parent</code>的<code class="language-plaintext highlighter-rouge">Transform</code>上</p>
-<ul>
-  <li>GameObject本身不存储层级结构，它只是一个容器</li>
-  <li>Transform组件内部有：
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">parent</code>：父级Transform</li>
-      <li><code class="language-plaintext highlighter-rouge">childCount</code>：子级数量</li>
-      <li><code class="language-plaintext highlighter-rouge">.GetChild(i)</code>：获取第i个子Transform</li>
-    </ul>
-  </li>
-  <li>场景中任何层级结构，其实就是多个Transform组件互相引用的结果</li>
-</ul>
-
-<h2 id="四transform的重要方法">四、Transform的重要方法</h2>
-<p><strong>移动（不考虑物理系统）</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transform</span><span class="p">.</span><span class="nf">Translate</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">forward</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTIme</span><span class="p">);</span>
-</code></pre></div></div>
-<p><strong>旋转</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tansform</span><span class="p">.</span><span class="nf">Rotate</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">up</span><span class="p">,</span> <span class="m">45</span><span class="p">);</span>
-</code></pre></div></div>
-<p><strong>查找</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Transform</span> <span class="n">arm</span> <span class="p">=</span> <span class="n">transform</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">"Body/LeftArm"</span><span class="p">);</span>
-</code></pre></div></div>
-<p><strong>向某点转向（LookAt）</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transform</span><span class="p">.</span><span class="nf">LookAt</span><span class="p">(</span><span class="n">target</span><span class="p">.</span><span class="n">transform</span><span class="p">);</span>
-</code></pre></div></div>
-
-<h2 id="五使用技巧与注意事项">五、使用技巧与注意事项</h2>
-<p><strong>坐标转换</strong></p>
-<ul>
-  <li>世界坐标转本地坐标
-    <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector3</span> <span class="n">local</span> <span class="p">=</span> <span class="n">transform</span><span class="p">.</span><span class="nf">InverseTransformPoint</span><span class="p">(</span><span class="n">worldPos</span><span class="p">);</span>
-</code></pre></div>    </div>
-  </li>
-  <li>本地坐标转世界坐标
-    <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector3</span> <span class="n">world</span> <span class="p">=</span> <span class="n">transform</span><span class="p">.</span><span class="nf">TransformPoint</span><span class="p">(</span><span class="n">localPos</span><span class="p">);</span>
-</code></pre></div>    </div>
-  </li>
-</ul>
-
-<p><strong>Transform的Property</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>属性</th>
-      <th>类型</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">position</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
-      <td>游戏对象在世界空间中的位置</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">localPosition</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
-      <td>相对于父对象的本地位置</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">rotation</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Quaternion</code></td>
-      <td>世界空间的旋转（四元数）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">localRotation</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Quaternion</code></td>
-      <td>相对于父对象的旋转</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">eulerAngles</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
-      <td>世界空间的欧拉角（角度制）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">localEulerAngles</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
-      <td>本地空间的欧拉角</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">right</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
-      <td>对象的右方向（本地 X 轴）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">up</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
-      <td>对象的上方向（本地 Y 轴）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">forward</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
-      <td>对象的前方向（本地 Z 轴）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">localScale</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
-      <td>本地空间的缩放比例</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">parent</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Transform</code></td>
-      <td>父对象的 Transform</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">childCount</code></td>
-      <td><code class="language-plaintext highlighter-rouge">int</code></td>
-      <td>子对象数量</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">lossyScale</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
-      <td>世界空间中的实际缩放（包含父缩放影响）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">hasChanged</code></td>
-      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
-      <td>表示 Transform 是否自上次检查后发生了变化（可以手动重置为 false）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">root</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Transform</code></td>
-      <td>当前 Transform 层级中的最上层对（根）</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Transform的Methods</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>方法</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Translate(Vector3 translation, Space space = Space.Self)</code></td>
-      <td>沿给定方向移动对象（默认本地坐标）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Rotate(Vector3 eulerAngles, Space space = Space.Self)</code></td>
-      <td>沿给定方向旋转对象</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">LookAt(Transform target)</code> 或 <code class="language-plaintext highlighter-rouge">LookAt(Vector3 worldPosition)</code></td>
-      <td>使对象面向目标</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">RotateAround(Vector3 point, Vector3 axis, float angle)</code></td>
-      <td>绕某个点和轴旋转</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">TransformDirection(Vector3 localDirection)</code></td>
-      <td>将本地方向转换为世界方向</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">InverseTransformDirection(Vector3 worldDirection)</code></td>
-      <td>将世界方向转换为本地方向</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">TransformPoint(Vector3 localPosition)</code></td>
-      <td>本地坐标转世界坐标</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">InverseTransformPoint(Vector3 worldPosition)</code></td>
-      <td>世界坐标转本地坐标</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">DetachChildren()</code></td>
-      <td>解除所有子对象的父子关系</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>层级操作与结构</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>方法</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">SetParent(Transform parent)</code></td>
-      <td>设置父对象</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">SetParent(Transform parent, bool worldPositionStays)</code></td>
-      <td>设置父对象，同时控制是否保持世界坐标不变</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">GetChild(int index)</code></td>
-      <td>获取指定索引的子 Transform</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Find(string name)</code></td>
-      <td>查找名字为 name 的子物体（递归）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">IsChildOf(Transform parent)</code></td>
-      <td>判断当前 Transform 是否是某父 Transform 的子级</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">SetAsFirstSibling()</code></td>
-      <td>将当前对象设置为父对象的第一个子对象</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">SetAsLastSibling()</code></td>
-      <td>设置为最后一个子对象</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">SetSiblingIndex(int index)</code></td>
-      <td>设置在父 Transform 下的子对象索引</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">GetSiblingIndex()</code></td>
-      <td>获取在父 Transform 下的索引位置</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>详见<a href="https://docs.unity3d.com/ScriptReference/Transform.html">Unity官方文档(Transform)</a></strong></p>
-
-<h2 id="常见组合用法示例">常见组合用法示例</h2>
-<p><strong>1.移动并保持世界坐标</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">child</span><span class="p">.</span><span class="nf">SetParent</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
-</code></pre></div></div>
-<p><strong>2.朝向某一点</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transform</span><span class="p">.</span><span class="nf">LookAt</span><span class="p">(</span><span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">));</span>
-</code></pre></div></div>
-<p><strong>3.自转与公转</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//公转</span>
-<span class="n">transform</span><span class="p">.</span><span class="nf">RotateAround</span><span class="p">(</span><span class="n">center</span><span class="p">.</span><span class="n">position</span><span class="p">,</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">up</span><span class="p">,</span> <span class="m">20</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTIme</span><span class="p">);</span>
-<span class="c1">//自转</span>
-<span class="n">transform</span><span class="p">.</span><span class="nf">Rotate</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">up</span> <span class="p">*</span> <span class="m">45</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span><span class="p">);</span>
-</code></pre></div></div>
-<p><strong>4.查找指定子物体并设置缩放</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Transform</span> <span class="n">gun</span> <span class="p">=</span> <span class="n">transform</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">"Body/Hand/Gun"</span><span class="p">);</span>
-<span class="n">gun</span><span class="p">.</span><span class="n">localScale</span> <span class="p">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">one</span> <span class="p">*</span> <span class="m">2f</span><span class="p">;</span>
-</code></pre></div></div>
-
-<h2 id="容易混淆的几个方法说明">容易混淆的几个方法说明</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>方法/属性</th>
-      <th>注意点</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">rotation.eulerAngles = ...</code></td>
-      <td>实际无效，应该用 <code class="language-plaintext highlighter-rouge">rotation = Quaternion.Euler(...)</code></td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">position += ...</code></td>
-      <td>本质上是设置绝对世界位置</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Translate(...)</code></td>
-      <td>默认是相对于自身坐标系移动</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">LookAt()</code></td>
-      <td>会修改 rotation，旋转 Z 轴正方向指向目标</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">TransformDirection()</code></td>
-      <td>是方向转换，不是位置转换！比如方向向量 <code class="language-plaintext highlighter-rouge">(0, 0, 1)</code> 表示前方</td>
-    </tr>
-  </tbody>
-</table>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Componenet" /><summary type="html"><![CDATA[Transform是Unity中控制物体位置、旋转、缩放和父子层级关系的核心组件]]></summary></entry><entry><title type="html">GameObject</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/28/GameObject.html" rel="alternate" type="text/html" title="GameObject" /><published>2025-05-28T00:00:00+08:00</published><updated>2025-05-28T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/28/GameObject</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/28/GameObject.html"><![CDATA[<p>在 Unity 中，GameObject 是游戏中所有对象的基础实体。可以理解为 Unity 世界中一切可见或不可见物体的“容器”，它本身没有实际行为或外观，而是通过添加各种组件（Component）来赋予其功能。</p>
-
-<h2 id="一gameobject的核心概念">一、GameObject的核心概念</h2>
-<ul>
-  <li>它是Unity中一切实体的基础类</li>
-  <li>没有组件的GameObject是一个空物体</li>
-  <li>所有可见（如角色、道具、地形）或不可见（如相机、灯光、空容器）的对象，都是GameObject或其派生</li>
-</ul>
-
-<h2 id="二gameobject的结构与组成">二、GameObject的结构与组成</h2>
-<p>一个GameObject至少包含一个组件：Transform</p>
-
-<p><strong>1.必备组件：Transform</strong></p>
-<ul>
-  <li>控制GameObject的位置、旋转、缩放</li>
-  <li>组成了Unity的场景层级结构（父子关系）</li>
-  <li>所有GameObject都必须有Transform，不能移除</li>
-</ul>
-
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transform</span><span class="p">.</span><span class="n">position</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
-<span class="n">transform</span><span class="p">.</span><span class="nf">Rotate</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">up</span><span class="p">,</span> <span class="m">90</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p><strong>2.常见组件</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>组件</th>
-      <th>作用</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">MeshRenderer</code></td>
-      <td>渲染模型表面</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Collider</code></td>
-      <td>物理碰撞检测</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Rigidbody</code></td>
-      <td>让 GameObject 参与物理计算</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Animator</code></td>
-      <td>控制动画状态机</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">AudioSource</code></td>
-      <td>播放声音</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Camera</code></td>
-      <td>摄像头视角</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Light</code></td>
-      <td>光源</td>
-    </tr>
-    <tr>
-      <td>自定义脚本</td>
-      <td>实现逻辑行为（继承自 <code class="language-plaintext highlighter-rouge">MonoBehaviour</code>）</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>3.添加组件方式</strong></p>
-<ul>
-  <li>在Inspector面板中点击”Add Component”</li>
-  <li>代码中：
-    <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gameObject</span><span class="p">.</span><span class="n">AddComponent</span><span class="p">&lt;</span><span class="n">ComponentName</span><span class="p">&gt;();</span>
-</code></pre></div>    </div>
-  </li>
-</ul>
-
-<h2 id="三gameobject生命周期">三、GameObject生命周期</h2>
-<p>生命周期由脚本组件（MonoBehaviour）控制</p>
-
-<h2 id="四gameobject常用操作">四、GameObject常用操作</h2>
-
-<p><strong>1.创建与销毁</strong></p>
-
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObject</span> <span class="n">obj</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">GameObject</span><span class="p">(</span><span class="s">"MyObject"</span><span class="p">);</span> <span class="c1">// Create Empty Object</span>
-<span class="nf">Destroy</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p><strong>2.获取组件</strong></p>
-
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ComponentName</span> <span class="n">varname</span> <span class="p">=</span> <span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">CompoenentName</span><span class="p">&gt;();</span>
-</code></pre></div></div>
-
-<p><strong>3.控制启用状态</strong></p>
-
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gameObject</span><span class="p">.</span><span class="nf">SetActive</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
-<span class="n">someObj</span><span class="p">.</span><span class="nf">SetActive</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p><strong>4.层级控制</strong></p>
-
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">childObj</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">parent</span> <span class="p">=</span> <span class="n">parentObj</span><span class="p">.</span><span class="n">transform</span><span class="p">;</span> <span class="c1">//设置父子关系</span>
-</code></pre></div></div>
-
-<h2 id="五gameobject与prefab的关系">五、GameObject与Prefab的关系</h2>
-<ul>
-  <li>Prefab是GameObject的模板，可以复用</li>
-  <li>你可以在场景中从一个Prefab实例化多个GameObject
-    <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">Instantiate</span><span class="p">(</span><span class="n">prefabObject</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">rotation</span><span class="p">);</span>
-</code></pre></div>    </div>
-  </li>
-</ul>
-
-<h2 id="示例创建一个带物理的球体对象">示例：创建一个带物理的球体对象</h2>
-
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">CreateBall</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="n">GameObject</span> <span class="n">ball</span> <span class="p">=</span> <span class="n">GameObject</span><span class="p">.</span><span class="nf">CreatePrimitive</span><span class="p">(</span><span class="n">PrimitiveType</span><span class="p">.</span><span class="n">Sphere</span><span class="p">);</span>
-    <span class="n">ball</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">position</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
-    <span class="n">ball</span><span class="p">.</span><span class="n">AddComponent</span><span class="p">&lt;</span><span class="n">Rigidbody</span><span class="p">&gt;();</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p><strong>GameObject的属性和方法</strong></p>
-
-<ul>
-  <li>GameObject常用属性</li>
-</ul>
-
-<table>
-  <thead>
-    <tr>
-      <th>属性</th>
-      <th>类型</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">name</code></td>
-      <td><code class="language-plaintext highlighter-rouge">string</code></td>
-      <td>游戏对象的名称</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">tag</code></td>
-      <td><code class="language-plaintext highlighter-rouge">string</code></td>
-      <td>标签，用于分类和查找</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">layer</code></td>
-      <td><code class="language-plaintext highlighter-rouge">int</code></td>
-      <td>层，用于渲染、碰撞等</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">activeSelf</code></td>
-      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
-      <td>当前对象是否激活（自身状态）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">activeInHierarchy</code></td>
-      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
-      <td>当前对象在层级中是否激活（受父级影响）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">transform</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Transform</code></td>
-      <td>对象的位置/旋转/缩放组件（固定存在）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">scene</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Scene</code></td>
-      <td>当前对象所在的场景（UnityEngine.SceneManagement）</td>
-    </tr>
-  </tbody>
-</table>
-
-<ul>
-  <li>GameObject常用方法</li>
-</ul>
-
-<table>
-  <thead>
-    <tr>
-      <th>方法</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">AddComponent&lt;T&gt;()</code></td>
-      <td>添加组件</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">GetComponent&lt;T&gt;()</code></td>
-      <td>获取组件</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">GetComponentInChildren&lt;T&gt;()</code></td>
-      <td>从子对象中获取组件</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">GetComponentInParent&lt;T&gt;()</code></td>
-      <td>从父对象中获取组件</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">TryGetComponent&lt;T&gt;(out T comp)</code></td>
-      <td>安全地获取组件，不抛出异常</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">GetComponents&lt;T&gt;()</code></td>
-      <td>获取所有类型为 T 的组件数组</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">GetComponentsInChildren&lt;T&gt;()</code></td>
-      <td>获取所有子物体上的该组件</td>
-    </tr>
-  </tbody>
-</table>
-
-<ul>
-  <li>激活与状态控制</li>
-</ul>
-
-<table>
-  <thead>
-    <tr>
-      <th>方法</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">SetActive(bool)</code></td>
-      <td>设置是否激活（自己及子物体是否运行）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">CompareTag(string)</code></td>
-      <td>比较标签</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">FindGameObjectWithTag(string)</code></td>
-      <td>通过标签查找（不推荐频繁使用）</td>
-    </tr>
-  </tbody>
-</table>
-
-<ul>
-  <li>创建与销毁</li>
-</ul>
-
-<table>
-  <thead>
-    <tr>
-      <th>方法</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Instantiate()</code></td>
-      <td>创建一个 GameObject 实例</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Destroy()</code></td>
-      <td>销毁一个对象</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">DestroyImmediate()</code></td>
-      <td>立即销毁（编辑器用）</td>
-    </tr>
-  </tbody>
-</table>
-
-<ul>
-  <li>查找对象（不推荐频繁使用）</li>
-</ul>
-
-<table>
-  <thead>
-    <tr>
-      <th>方法</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">GameObject.Find(string name)</code></td>
-      <td>通过名字查找对象</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">GameObject.FindWithTag(string tag)</code></td>
-      <td>通过标签查找第一个匹配对象</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">GameObject.FindGameObjectsWithTag(string tag)</code></td>
-      <td>找到所有标签为 tag 的对象</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>⚠注意：Find()、FindWithTag()效率低，建议缓存引用或用Inspector绑定引用</strong></p>
-
-<ul>
-  <li>GameObject静态方法</li>
-</ul>
-
-<table>
-  <thead>
-    <tr>
-      <th>方法</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">CreatePrimitive(PrimitiveType type)</code></td>
-      <td>创建基本图形体（如 Cube、Sphere）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">GameObject.Find(string name)</code></td>
-      <td>查找场景中某个名字的对象</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">GameObject.FindWithTag(string tag)</code></td>
-      <td>查找场景中某个标签的对象</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">GameObject.FindGameObjectsWithTag(string tag)</code></td>
-      <td>查找所有拥有某个标签的对象</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong><a href="https://docs.unity3d.com/2022.3/Documentation/ScriptReference/GameObject.html">Unity官方文档（GameObject）</a></strong></p>
-
-<h2 id="示例">示例</h2>
-<p><strong>1.动态创建一个Cube，并添加刚体</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObject</span> <span class="n">cube</span> <span class="p">=</span> <span class="n">GameObject</span><span class="p">.</span><span class="nf">CentePrimitive</span><span class="p">(</span><span class="n">PrimitiveType</span><span class="p">.</span><span class="n">Cube</span><span class="p">);</span>
-<span class="n">cube</span><span class="p">.</span><span class="n">AddComponenet</span><span class="p">&lt;</span><span class="n">Rigidbody</span><span class="p">&gt;();</span>
-<span class="n">cube</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="s">"FallingCube"</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p><strong>2.启用/禁用对象</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gameObject</span><span class="p">.</span><span class="nf">SetActive</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
-<span class="k">if</span> <span class="p">(!</span><span class="n">gameObject</span><span class="p">.</span><span class="n">activeSelf</span><span class="p">)</span> <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"我被禁用了"</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p><strong>3.查找并修改子对象</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Transform</span> <span class="n">arm</span> <span class="p">=</span> <span class="n">transform</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="s">"Body/RightArm"</span><span class="p">);</span>
-<span class="n">arm</span><span class="p">.</span><span class="n">gameObject</span><span class="p">.</span><span class="nf">SetActive</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p><strong>4.组件缓存写法（性能优化）</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="n">MeshRenderer</span> <span class="n">renderer</span><span class="p">;</span>
-
-<span class="k">void</span> <span class="nf">Awake</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">renderer</span> <span class="p">=</span> <span class="n">GetComponenet</span><span class="p">&lt;</span><span class="n">MeshRenderer</span><span class="p">&gt;();</span> <span class="c1">//只查一次</span>
-</code></pre></div></div>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="GameObject" /><summary type="html"><![CDATA[在 Unity 中，GameObject 是游戏中所有对象的基础实体。可以理解为 Unity 世界中一切可见或不可见物体的“容器”，它本身没有实际行为或外观，而是通过添加各种组件（Component）来赋予其功能。]]></summary></entry></feed>
+<p>H:Statusbar状态栏提供有关Unity进程的通知，以及快速访问相关工具和设置。</p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Editor" /><summary type="html"><![CDATA[]]></summary></entry></feed>

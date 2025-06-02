@@ -72,7 +72,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Import Assets",
-        "excerpt":"Unity支持多种格式的资源文件，并能自动识别并进行初步处理 资源导入基本流程 1.将资源文件拖入Assets目录中（Unity会自动导入） 2.在Inspector面板中查看导入设置 3.配置相关参数，比如压缩方式、贴图类型、是否生成碰撞体等 4.使用资源（拖到场景、作为材质贴图、挂到AudioSource等） 模型 支持格式 .fbx推荐 .obj .dae（Collada） .blend（需要Blender） 导入流程 1.拖拽.fbx文件到Assets文件夹 2.选中模型文件，查看Inspector的导入设置 Scale Factor：缩放（一般保持默认） Import Animations：是否导入动画 Import Materials：是否导入材质 Generate Colliders：是否自动生成碰撞体 导入后组成 Model: 3D网格 Rig（如果有骨骼）：用于动画绑定 Animation：包含的动画片段 Materials：自动生成或关联的材质 贴图 支持格式 .png、.jpg、.tga、.psd（支持图层）等 导入流程 拖入图片文件 在Inspector中设置： Texture Type: Default（通用） Sprite（用于UI） Normal map（法线贴图） Lightmap（光照图） - sRGB（Color Texture）：颜色贴图用，法线贴图需取消勾选 - Alpha Is Transparency：如果使用透明通道 -...","categories": ["笔记"],
+        "excerpt":"Unity支持多种格式的资源文件，并能自动识别并进行初步处理 资源导入基本流程 1.将资源文件拖入Assets目录中（Unity会自动导入） 2.在Inspector面板中查看导入设置 3.配置相关参数，比如压缩方式、贴图类型、是否生成碰撞体等 4.使用资源（拖到场景、作为材质贴图、挂到AudioSource等） 模型 支持格式 .fbx推荐 .obj .dae（Collada） .blend（需要Blender） 导入流程 1.拖拽.fbx文件到Assets文件夹 2.选中模型文件，查看Inspector的导入设置 Scale Factor：缩放（一般保持默认） Import Animations：是否导入动画 Import Materials：是否导入材质 Generate Colliders：是否自动生成碰撞体 导入后组成 Model: 3D网格 Rig（如果有骨骼）：用于动画绑定 Animation：包含的动画片段 Materials：自动生成或关联的材质 贴图 支持格式 .png、.jpg、.tga、.psd（支持图层）等 导入流程 1.拖入图片文件 2.在Inspector中设置： sRGB（Color Texture）：颜色贴图用，法线贴图需取消勾选 Alpha Is Transparency：如果使用透明通道 Wrap Mode：Repeat（平铺）或Clamp（拉伸） Filter Mode：Bilinear、Trilinear、Point（像素风） Compression：高压缩（小体积）还是高质量（清晰） Texture Type: Default（通用） Sprite（用于UI） Normal...","categories": ["笔记"],
         "tags": ["Unity"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Import-assets.html",
         "teaser": null
@@ -87,6 +87,18 @@ var store = [{
         "excerpt":"在Unity中，Tag是用来标记和分类GameObject的一种轻量级方法，主要用于在代码中查找和判断物体的类型或身份 Tag的核心作用 功能 示例 分类物体 Player、Enemy、Item、UI 等 逻辑判断 判断一个物体是不是玩家 查找特定对象 GameObject.FindWithTag() 触发器/碰撞器逻辑判断 if (other.CompareTag(\"Enemy\")) Tag的使用方法 1.设置Tag 1.选中一个 GameObject 2.Inspector 面板 → 上方的 “Tag” 下拉菜单 3.如果没有想要的标签 → 点击 Add Tag… → 添加一个新的字符串 4.回到物体，设置为刚才新建的 Tag 注意： Tag是字符串类型，但Unity会为你管理列表，不用硬编码 2.使用Tag查找对象 GameObjec player = GameObject.FindWithTag(\"Player\"); 或者查找多个对象： GameObject[] enemies = GameObejct.FindGameObjectsWithTag(\"Enemy\"); 3.在触发器或碰撞中判断Tag void OnTriggerEnter(Collider other) =&gt;...","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Tag.html",
+        "teaser": null
+      },{
+        "title": "Component",
+        "excerpt":"Component是附加在GameObject上的功能模块，每个组件都提供了某种行为或属性，组成了游戏对象的功能 组件的特性 特性 描述 附加性 可以给 GameObject 添加多个组件。 组合式设计 Unity 的架构是组合优于继承，一个 GameObject 的行为是由多个组件组合而成的。 可视化编辑 在 Unity Inspector 面板中可以直接添加、删除或修改组件。 脚本组件 你写的 C# 脚本，本质上也是组件，继承自 MonoBehaviour。 在代码中使用组件 //获取组件 Rigidbody rb = GetComponenet&lt;Rigidbody&gt;(); //添加组件 gameObject.AddComponenet&lt;AudioSource&gt;(); 在Unity中，组件之所以能起作用，是因为Unity引擎在运行时会自动调度和执行组件的逻辑，这个背后是Unity引擎的核心“组件驱动”架构 简单理解：Unity的工作循环 + 组件系统 1.GameObject只是容器 2.组件发挥功能 3.Unity引擎每一帧都会遍历所有激活的GameObject，调度它们的组件做该做的事 Unity组件驱动架构 Unity组件 Category Component Name Audio Chorus Filter   Distortion Filter  ...","categories": ["笔记"],
+        "tags": ["Unity","Unity System"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Component.html",
+        "teaser": null
+      },{
+        "title": "Unity Componenet-Driven Architecture",
+        "excerpt":"Unity是如何驱动组件系统的 从运行架构、组件调度机制、底层实现三个方面来深度剖析 Unity的运行架构（经典GameObject-Component模型） Unity引擎的架构是 “组合优于继承” 的典范： GameObject：游戏世界中所有对象的容器 Component：挂在GameObject上的功能模块 MonoBehaviour：Unity脚本组件的基类，支持生命周期函数 //伪代码结构 class GameObject { List&lt;Component&gt; components; } class Component { GameObject gameObject; } Unity是如何调度组件的生命周期的 Unity在每一帧都会按以下顺序做一次组件调度遍历： For ever active GameObject: For every enable Component: If first frame: Call Awake() Call Start() Run physics: Call FixedUpdate() Handle rendering: Transform -&gt; Camera -&gt; Renderer...","categories": ["笔记"],
+        "tags": ["Unity","Unity Engine"],
+        "url": "/posts/2025-06-02-Unity-Architecture/",
         "teaser": null
       },{
     "title": "About",
