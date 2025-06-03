@@ -96,8 +96,8 @@ var store = [{
         "teaser": null
       },{
         "title": "Rigibody",
-        "excerpt":" ","categories": ["笔记"],
-        "tags": ["Unity","Unity Component"],
+        "excerpt":"在Unity中，Rigidbody是一个用于实现物理行为的组件，它允许你的游戏对象受力、重力、碰撞等真实世界的物理规则影响 Rigidbody的基本功能 当你给一个GameObject添加Rigibody后，它具备以下能力： 功能 描述 重力 会受到 Unity 世界的重力影响。 力作用 可通过 AddForce() 施加力。 碰撞 可与带有 Collider 的物体发生物理碰撞。 移动 可通过物理方式（而不是直接修改 transform）移动。 RigidbodyPanel 基础物理参数 参数名 作用 默认值 建议用法 Mass（质量） 控制惯性、碰撞反应 1 设为真实世界比例（如车 1000、人 70） Drag（线性阻力） 模拟空气/水的阻力（减速） 0 移动物体逐渐停止，可设为 1~5 Angular Drag（角阻力） 减缓旋转速度 0.05 防止物体无限旋转，常设为 0.1~0.5 Automatic Center Of Mass（自动质心，默认为true） Unity会根据物体的形状（Collider）和质量分布，自动计算Rigidbody的中心点 通常质心在物体的几何中心，但加多个Collider后可能偏移 这是大多数情况下推荐的方式，因为它物理上是合理的...","categories": ["笔记"],
+        "tags": ["Unity","Unity Component","Physics System"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Rigidbody.html",
         "teaser": null
       },{
@@ -131,6 +131,18 @@ var store = [{
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/FSM.html",
         "teaser": null
       },{
+        "title": "Gizmos",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity System"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Gizmos.html",
+        "teaser": null
+      },{
+        "title": "Input System",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity System"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Input-System.html",
+        "teaser": null
+      },{
         "title": "Multithread",
         "excerpt":" ","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
@@ -141,6 +153,12 @@ var store = [{
         "excerpt":" ","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
         "url": "/posts/2025-06-03-Physics-System/",
+        "teaser": null
+      },{
+        "title": "Unity Build-in Types",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity System"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types.html",
         "teaser": null
       },{
     "title": "About",

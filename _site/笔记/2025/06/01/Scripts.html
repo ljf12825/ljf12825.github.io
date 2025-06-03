@@ -902,6 +902,136 @@ Unity Inspector面板显示脚本里字段的值，需要序列化这些字段�
 <span class="p">}</span>
 </code></pre></div></div>
 
+<h2 id="unity自带命名空间">Unity自带命名空间</h2>
+<h3 id="1unityengine">1.<code class="language-plaintext highlighter-rouge">UnityEngine</code></h3>
+<ul>
+  <li>功能：Unity核心功能的主命名空间</li>
+  <li>内容：
+    <ul>
+      <li>游戏对象相关类：<code class="language-plaintext highlighter-rouge">GameObject</code>,<code class="language-plaintext highlighter-rouge">Transform</code>,<code class="language-plaintext highlighter-rouge">Component</code></li>
+      <li>数学类型：<code class="language-plaintext highlighter-rouge">Vector2</code>, <code class="language-plaintext highlighter-rouge">Vector3</code>, <code class="language-plaintext highlighter-rouge">Quaternion</code>, <code class="language-plaintext highlighter-rouge">Matrix4x4</code></li>
+      <li>渲染相关：<code class="language-plaintext highlighter-rouge">Material</code>, <code class="language-plaintext highlighter-rouge">Shader</code>, <code class="language-plaintext highlighter-rouge">Camera</code>, <code class="language-plaintext highlighter-rouge">Light</code></li>
+      <li>物理系统：<code class="language-plaintext highlighter-rouge">Rigidbody</code>, <code class="language-plaintext highlighter-rouge">Collider</code>, <code class="language-plaintext highlighter-rouge">Physics</code></li>
+      <li>输入系统：<code class="language-plaintext highlighter-rouge">Input</code></li>
+      <li>时间系统：<code class="language-plaintext highlighter-rouge">Time</code></li>
+      <li>资源管理：<code class="language-plaintext highlighter-rouge">Resources</code>
+        <blockquote>
+          <p>几乎所有 Unity 游戏代码都依赖这个命名空间。</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="2unityengineui">2.<code class="language-plaintext highlighter-rouge">UnityEngine.UI</code></h3>
+<ul>
+  <li>功能：Unity 的传统 UI 系统。</li>
+  <li>内容：
+    <ul>
+      <li>UI 控件类：<code class="language-plaintext highlighter-rouge">Button</code>, <code class="language-plaintext highlighter-rouge">Text</code>, <code class="language-plaintext highlighter-rouge">Image</code>, <code class="language-plaintext highlighter-rouge">Slider</code>, <code class="language-plaintext highlighter-rouge">Canvas</code></li>
+      <li>事件系统相关：<code class="language-plaintext highlighter-rouge">EventSystem</code>, <code class="language-plaintext highlighter-rouge">PointerEventData</code>
+        <blockquote>
+          <p>用于构建游戏界面，处理用户交互。</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="3unityenginescenemanagement">3.<code class="language-plaintext highlighter-rouge">UnityEngine.SceneManagement</code></h3>
+<ul>
+  <li>功能：管理场景加载和卸载。</li>
+  <li>内容：
+    <ul>
+      <li>场景管理类：<code class="language-plaintext highlighter-rouge">SceneManager</code></li>
+      <li>场景信息类：<code class="language-plaintext highlighter-rouge">Scene</code></li>
+    </ul>
+  </li>
+  <li>典型用法：
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">SceneManager.LoadScene("SceneName")</code> 加载场景</li>
+      <li><code class="language-plaintext highlighter-rouge">SceneManager.GetActiveScene()</code> 获取当前场景</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="4unityengineaudio">4.<code class="language-plaintext highlighter-rouge">UnityEngine.Audio</code></h3>
+<ul>
+  <li>功能：音频系统相关类。</li>
+  <li>内容：
+    <ul>
+      <li>AudioSource, AudioClip, AudioListener</li>
+      <li>混音器类：AudioMixer
+        <blockquote>
+          <p>处理声音播放和混音控制。</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="5unityengineeventsystem">5.<code class="language-plaintext highlighter-rouge">UnityEngine.EventSystem</code></h3>
+<ul>
+  <li>功能：底层事件系统，支持 UI 和输入事件。</li>
+  <li>内容：
+    <ul>
+      <li>事件接口：IPointerClickHandler, IDragHandler 等</li>
+      <li>事件数据类：PointerEventData, BaseEventData
+        <blockquote>
+          <p>UI 交互和自定义输入处理常用。</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="6unityengineanimation">6.<code class="language-plaintext highlighter-rouge">UnityEngine.Animation</code></h3>
+<ul>
+  <li>功能：动画系统相关。</li>
+  <li>内容：
+    <ul>
+      <li>动画控制器：Animator</li>
+      <li>动画事件和状态机相关类
+        <blockquote>
+          <p>用于角色动画控制和状态机管理。</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="7unityeditor仅编辑器">7.<code class="language-plaintext highlighter-rouge">UnityEditor</code>（仅编辑器）</h3>
+<ul>
+  <li>功能：编辑器扩展相关</li>
+  <li>内容：
+    <ul>
+      <li>自定义Inspector、编辑器窗口、菜单项等
+        <blockquote>
+          <p>只能在编辑器环境使用，构建后不包含</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="8unitycollections--unityjobs--unityburst">8.<code class="language-plaintext highlighter-rouge">Unity.Collections</code> / <code class="language-plaintext highlighter-rouge">Unity.Jobs</code> / <code class="language-plaintext highlighter-rouge">Unity.Burst</code></h3>
+<ul>
+  <li>功能：高性能计算和多线程相关。</li>
+  <li>内容：
+    <ul>
+      <li>NativeArray, NativeList</li>
+      <li>作业系统：IJob, JobHandle</li>
+      <li>Burst 编译器加速
+        <blockquote>
+          <p>DOTS（Data-Oriented Technology Stack）架构核心。</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><a href="https://docs.unity3d.com/ScriptReference/">官方文档</a></p>
+
         
       </section>
 
