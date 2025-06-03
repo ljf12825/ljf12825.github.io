@@ -156,7 +156,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Unity Build-in Types",
-        "excerpt":" ","categories": ["笔记"],
+        "excerpt":"常见Unity内建类型（按用途分） 1.空间/几何类型（Transform相关） 类型 说明 Vector2, Vector3, Vector4 表示二维/三维/四维向量 Quaternion 四元数，表示旋转 Matrix4x4 4×4 矩阵，常用于转换 Bounds 包围盒（中心+尺寸） Ray, RaycastHit 射线检测相关类型 Plane 表示一个无限平面 Rect 二维矩形区域 Color, Color32 表示颜色（线性空间和 sRGB） Vector2 3 4 类型 维度 常见用途 Vector2 2D 向量 (x, y) UI 坐标、2D 游戏、纹理坐标 Vector3 3D 向量 (x, y, z) 位置、速度、方向、缩放 Vector4 4D 向量...","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types.html",
         "teaser": null

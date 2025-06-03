@@ -11,7 +11,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Unity Build-in Types - ljf12825’s Blog</title>
-<meta name="description" content="">
+<meta name="description" content="常见Unity内建类型（按用途分） 1.空间/几何类型（Transform相关）">
 
 
 
@@ -22,7 +22,7 @@
 <meta property="og:url" content="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types.html">
 
 
-  <meta property="og:description" content="">
+  <meta property="og:description" content="常见Unity内建类型（按用途分） 1.空间/几何类型（Transform相关）">
 
 
 
@@ -154,7 +154,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Unity Build-in Types">
-    <meta itemprop="description" content="">
+    <meta itemprop="description" content="常见Unity内建类型（按用途分）1.空间/几何类型（Transform相关）">
     <meta itemprop="datePublished" content="2025-06-01T00:00:00+08:00">
     
 
@@ -173,7 +173,297 @@
 
       <section class="page__content" itemprop="text">
         
-        
+        <h2 id="常见unity内建类型按用途分">常见Unity内建类型（按用途分）</h2>
+<h3 id="1空间几何类型transform相关">1.空间/几何类型（Transform相关）</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Vector2</code>, <code class="language-plaintext highlighter-rouge">Vector3</code>, <code class="language-plaintext highlighter-rouge">Vector4</code></td>
+      <td>表示二维/三维/四维向量</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Quaternion</code></td>
+      <td>四元数，表示旋转</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Matrix4x4</code></td>
+      <td>4×4 矩阵，常用于转换</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Bounds</code></td>
+      <td>包围盒（中心+尺寸）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ray</code>, <code class="language-plaintext highlighter-rouge">RaycastHit</code></td>
+      <td>射线检测相关类型</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Plane</code></td>
+      <td>表示一个无限平面</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Rect</code></td>
+      <td>二维矩形区域</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Color</code>, <code class="language-plaintext highlighter-rouge">Color32</code></td>
+      <td>表示颜色（线性空间和 sRGB）</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li><strong>Vector2 3 4</strong></li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>维度</th>
+      <th>常见用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Vector2</code></td>
+      <td>2D 向量 (x, y)</td>
+      <td>UI 坐标、2D 游戏、纹理坐标</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
+      <td>3D 向量 (x, y, z)</td>
+      <td>位置、速度、方向、缩放</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Vector4</code></td>
+      <td>4D 向量 (x, y, z, w)</td>
+      <td>齐次坐标、颜色、Shader 传参</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="2游戏对象相关">2.游戏对象相关</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GameObject</code></td>
+      <td>场景中所有对象的基本单元</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Component</code></td>
+      <td>所有组件的基类</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Transform</code></td>
+      <td>表示物体的位置、旋转、缩放</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">MonoBehaviour</code></td>
+      <td>用户自定义脚本的基类</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ScriptableObject</code></td>
+      <td>可创建的资产类，用于数据管理</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Object</code></td>
+      <td>Unity 所有对象的基类（包括资源）</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="3图形和渲染">3.图形和渲染</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Mesh</code>, <code class="language-plaintext highlighter-rouge">MeshRenderer</code></td>
+      <td>网格和其渲染组件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Material</code></td>
+      <td>材质资源</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Shader</code></td>
+      <td>控制材质渲染效果的程序</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Texture</code>, <code class="language-plaintext highlighter-rouge">Texture2D</code>, <code class="language-plaintext highlighter-rouge">RenderTexture</code></td>
+      <td>贴图资源</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Camera</code></td>
+      <td>摄像机组件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Light</code></td>
+      <td>灯光组件</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="4物理相关">4.物理相关</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Rigidbody</code>, <code class="language-plaintext highlighter-rouge">Rigidbody2D</code></td>
+      <td>刚体，驱动物体物理行为</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Collider</code>, <code class="language-plaintext highlighter-rouge">BoxCollider</code>, <code class="language-plaintext highlighter-rouge">SphereCollider</code>, 等</td>
+      <td>碰撞器</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Physics</code>, <code class="language-plaintext highlighter-rouge">Physics2D</code></td>
+      <td>提供物理检测和操作的静态类</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Joint</code> 系列</td>
+      <td>链接两个刚体（如 HingeJoint）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ContactPoint</code></td>
+      <td>碰撞点信息结构体</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="5输入和事件">5.输入和事件</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Input</code></td>
+      <td>输入系统静态类</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">KeyCode</code></td>
+      <td>键盘按键枚举</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Touch</code>, <code class="language-plaintext highlighter-rouge">TouchPhase</code></td>
+      <td>触摸输入相关</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Event</code>, <code class="language-plaintext highlighter-rouge">EventType</code></td>
+      <td>GUI 系统事件类型</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="6资源与序列化">6.资源与序列化</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Resources</code>, <code class="language-plaintext highlighter-rouge">AssetBundle</code></td>
+      <td>资源加载管理器</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">TextAsset</code></td>
+      <td>文本资源，如 JSON、配置文件等</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SerializableAttribute</code></td>
+      <td>允许自定义类型序列化存储</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="7uiugui">7.UI（UGUI）</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Canvas</code>, <code class="language-plaintext highlighter-rouge">CanvasRenderer</code></td>
+      <td>UI 根组件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">RectTransform</code></td>
+      <td>用于 UI 布局的 Transform</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Image</code>, <code class="language-plaintext highlighter-rouge">Text</code>, <code class="language-plaintext highlighter-rouge">Button</code>, <code class="language-plaintext highlighter-rouge">Slider</code> 等</td>
+      <td>基础 UI 组件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">EventSystem</code></td>
+      <td>管理 UI 输入事件</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="8时间协程与生命周期">8.时间、协程与生命周期</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Time</code></td>
+      <td>时间相关（如 deltaTime、timeScale）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">WaitForSeconds</code>, <code class="language-plaintext highlighter-rouge">WaitUntil</code></td>
+      <td>协程等待辅助类</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Coroutine</code></td>
+      <td>协程对象类型</td>
+    </tr>
+  </tbody>
+</table>
 
         
       </section>
