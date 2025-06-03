@@ -61,7 +61,7 @@ var store = [{
       },{
         "title": "Prefab System",
         "excerpt":"Unity提供Prefab这种非常强大的机制，用来复用游戏对象，让开发更高效、项目更模块化 Prefab就是一个可以重复使用的GameObject模板 什么是Prefab Prefab是你在场景里创建好的GameObject（可以包含模型、脚本、组件、子物体等），然后把它拖到项目窗口中生成的资源文件。 之后就可以随时从Project中把这个模板拖入场景，生成和原始一样的对象 Prefab的创建和使用 创建 1.在Hierarchy中创建好一个GameObject及其组件和子对象 2.拖拽到Project视图中，Unity自动保存为.prefab 3.你可以删除场景中的对象，只保留Project中的预制体 使用 直接拖到场景中 Instantiate()动态生成 void Shoot() =&gt; Instantiate(bulletPrefab, transform.position, transform.rotation); Prefab特点 特性 描述 模板复用 一次创建，多次使用 改动同步 修改 Prefab，会自动同步所有实例 支持嵌套 Prefab 可以包含另一个 Prefab 可分离 Prefab 实例可以局部修改，不影响原始 Prefab Prefab实例与原型的关系 当你把Prefab拖入场景，它会成为Prefab实例，你可以 完全跟随原始Prefab 局部Override某些属性 解除连接（Unpack） 图标颜色 状态 蓝色立方体 与原 Prefab 保持连接 灰色立方体 已经解除连接（Unpacked） Prefab编辑方式 1.Open...","categories": ["笔记"],
-        "tags": ["Unity，Unity System"],
+        "tags": ["Unity","Unity System"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/05/31/Prefab.html",
         "teaser": null
       },{
@@ -102,7 +102,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Scripts",
-        "excerpt":"Unity脚本就是你编写的C#类，它控制游戏中物体的行为、交互、动画、输入、碰撞、UI等逻辑   绝大多数脚本都继承自MonoBehaviour类   C#如何运行这些脚本     将脚本挂载某个GameObject上   Unity引擎自动为这个类创建实例（托管对象）   Unity每帧调用该实例的生命周期函数   完全由Unity托管   脚本和Inspector的关系  可以使用[SerializeField]、public来让字段在Inspector中显示  public float speed = 5f;  [SerializeField] private GameObject bulletPrefab;  然后在Inspector中手动拖拽引用，或者编辑数值，来调整游戏行为   脚本间通信（引用其他组件）  void Start() {     Rigidbody rb = GetComponent&lt;Rigidbody&gt;();     rb.velocity = Vector3.up * 10; }  也可以访问其他GameObject:  public GameObject enemy;  void Update() =&gt; enemy.transform.LookAt(transform);   Unity生命周期函数（MonoBehaviour）  生命周期函数示意图  ","categories": ["笔记"],
+        "excerpt":"Unity脚本就是你编写的C#类，它控制游戏中物体的行为、交互、动画、输入、碰撞、UI等逻辑 脚本类型 Unity中的脚本根据其用途可以分为3类： 特性 MonoBehaviour ScriptableObject 纯 C# 类 是否可挂载 ✅ 可以挂载到 GameObject ❌ 不行 ❌ 不行 生命周期函数 ✅ 有 Start、Update 等 ❌ 没有 ❌ 没有 是否能序列化 ✅ 支持 ✅ 支持 ❌ 默认不支持 支持协程 ✅ StartCoroutine() ❌ 不支持 ❌ 不支持 使用场景 行为脚本，控制对象 数据容器，可复用资源配置 工具类、算法类等逻辑单元 MonoBehaviour的派生类 必须挂载在场景中的GameObject上 用于控制逻辑、角色行为、输入响应等 有生命周期函数 ScriptableObject是数据容器 轻量级对象，不需要挂载，常用于数据复用（如技能表、配置表）...","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Scripts.html",
         "teaser": null
@@ -111,6 +111,36 @@ var store = [{
         "excerpt":"Unity是如何驱动组件系统的 从运行架构、组件调度机制、底层实现三个方面来深度剖析 Unity的运行架构（经典GameObject-Component模型） Unity引擎的架构是 “组合优于继承” 的典范： GameObject：游戏世界中所有对象的容器 Component：挂在GameObject上的功能模块 MonoBehaviour：Unity脚本组件的基类，支持生命周期函数 //伪代码结构 class GameObject { List&lt;Component&gt; components; } class Component { GameObject gameObject; } Unity是如何调度组件的生命周期的 Unity在每一帧都会按以下顺序做一次组件调度遍历： For ever active GameObject: For every enable Component: If first frame: Call Awake() Call Start() Run physics: Call FixedUpdate() Handle rendering: Transform -&gt; Camera -&gt; Renderer...","categories": ["笔记"],
         "tags": ["Unity","Unity Engine"],
         "url": "/posts/2025-06-02-Unity-Architecture/",
+        "teaser": null
+      },{
+        "title": "Coroutine",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity Engine"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Coroutine.html",
+        "teaser": null
+      },{
+        "title": "Event System",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity System"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Event-System.html",
+        "teaser": null
+      },{
+        "title": "FSM",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity System"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/FSM.html",
+        "teaser": null
+      },{
+        "title": "Multithread",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity System"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Multithread.html",
+        "teaser": null
+      },{
+        "title": "Physics System",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity System"],
+        "url": "/posts/2025-06-03-Physics-System/",
         "teaser": null
       },{
     "title": "About",

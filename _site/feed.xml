@@ -1,567 +1,81 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-02T22:12:34+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Import Assets</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-assets.html" rel="alternate" type="text/html" title="Import Assets" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-assets</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-assets.html"><![CDATA[<p>Unity支持多种格式的资源文件，并能自动识别并进行初步处理</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-03T16:49:06+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Physics System</title><link href="http://localhost:4000/posts/2025-06-03-Physics-System/" rel="alternate" type="text/html" title="Physics System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Physics-System</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-03-Physics-System/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Tag</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Tag.html" rel="alternate" type="text/html" title="Tag" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Tag</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Tag.html"><![CDATA[<p>在Unity中，Tag是用来标记和分类GameObject的一种轻量级方法，主要用于在代码中查找和判断物体的类型或身份</p>
 
-<h2 id="资源导入基本流程">资源导入基本流程</h2>
-<p><strong>1.将资源文件拖入<code class="language-plaintext highlighter-rouge">Assets</code>目录中（Unity会自动导入）</strong><br />
-<strong>2.在Inspector面板中查看导入设置</strong><br />
-<strong>3.配置相关参数，比如压缩方式、贴图类型、是否生成碰撞体等</strong><br />
-<strong>4.使用资源（拖到场景、作为材质贴图、挂到AudioSource等）</strong></p>
-
-<h2 id="模型">模型</h2>
-
-<h3 id="支持格式">支持格式</h3>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">.fbx</code>推荐</li>
-  <li><code class="language-plaintext highlighter-rouge">.obj</code></li>
-  <li><code class="language-plaintext highlighter-rouge">.dae</code>（Collada）</li>
-  <li><code class="language-plaintext highlighter-rouge">.blend</code>（需要Blender）</li>
-</ul>
-
-<h3 id="导入流程">导入流程</h3>
-<p>1.拖拽<code class="language-plaintext highlighter-rouge">.fbx</code>文件到<code class="language-plaintext highlighter-rouge">Assets</code>文件夹<br />
-2.选中模型文件，查看<code class="language-plaintext highlighter-rouge">Inspector</code>的导入设置</p>
-<ul>
-  <li>Scale Factor：缩放（一般保持默认）</li>
-  <li>Import Animations：是否导入动画</li>
-  <li>Import Materials：是否导入材质</li>
-  <li>Generate Colliders：是否自动生成碰撞体</li>
-</ul>
-
-<h3 id="导入后组成">导入后组成</h3>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">Model</code>: 3D网格</li>
-  <li><code class="language-plaintext highlighter-rouge">Rig</code>（如果有骨骼）：用于动画绑定</li>
-  <li><code class="language-plaintext highlighter-rouge">Animation</code>：包含的动画片段</li>
-  <li><code class="language-plaintext highlighter-rouge">Materials</code>：自动生成或关联的材质</li>
-</ul>
-
-<h2 id="贴图">贴图</h2>
-
-<h3 id="支持格式-1">支持格式</h3>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">.png</code>、<code class="language-plaintext highlighter-rouge">.jpg</code>、<code class="language-plaintext highlighter-rouge">.tga</code>、<code class="language-plaintext highlighter-rouge">.psd</code>（支持图层）等</li>
-</ul>
-
-<h3 id="导入流程-1">导入流程</h3>
-
-<p>1.拖入图片文件
-2.在Inspector中设置：</p>
-<ul>
-  <li>sRGB（Color Texture）：颜色贴图用，法线贴图需取消勾选</li>
-  <li>Alpha Is Transparency：如果使用透明通道</li>
-  <li>Wrap Mode：Repeat（平铺）或Clamp（拉伸）</li>
-  <li>Filter Mode：Bilinear、Trilinear、Point（像素风）</li>
-  <li>Compression：高压缩（小体积）还是高质量（清晰）</li>
-  <li>Texture Type:
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">Default</code>（通用）</li>
-      <li><code class="language-plaintext highlighter-rouge">Sprite</code>（用于UI）</li>
-      <li><code class="language-plaintext highlighter-rouge">Normal map</code>（法线贴图）</li>
-      <li><code class="language-plaintext highlighter-rouge">Lightmap</code>（光照图）</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="音频">音频</h2>
-
-<h3 id="支持格式-2">支持格式</h3>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">.mp3</code>（压缩）</li>
-  <li><code class="language-plaintext highlighter-rouge">.wav</code>（无损）</li>
-  <li><code class="language-plaintext highlighter-rouge">.ogg</code>（高效）</li>
-  <li><code class="language-plaintext highlighter-rouge">.aiff</code></li>
-</ul>
-
-<h2 id="导入流程-2">导入流程</h2>
-
-<p>1.拖入音频文件<br />
-2.在<code class="language-plaintext highlighter-rouge">Inspector</code>中设置：</p>
-<ul>
-  <li>Load Type：
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">Decompress On Load</code>（加载时解压，适合短音效）</li>
-      <li><code class="language-plaintext highlighter-rouge">Streaming</code>（边播放边加载，适合背景音乐）</li>
-    </ul>
-  </li>
-  <li>Compression Format:
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">Vorbis</code>、<code class="language-plaintext highlighter-rouge">ADPCM</code>、<code class="language-plaintext highlighter-rouge">PCM</code></li>
-    </ul>
-  </li>
-  <li>3D Sound：是否启用3D空间化</li>
-  <li>Loop：是否循环播放</li>
-</ul>
-
-<blockquote>
-  <p><strong>资源组织建议：</strong> 使用好的文件夹结构和命名习惯，可以极大提高开发效率</p>
-</blockquote>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><summary type="html"><![CDATA[Unity支持多种格式的资源文件，并能自动识别并进行初步处理]]></summary></entry><entry><title type="html">Unity Componenet-Driven Architecture</title><link href="http://localhost:4000/posts/2025-06-02-Unity-Architecture/" rel="alternate" type="text/html" title="Unity Componenet-Driven Architecture" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Unity-Architecture</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-02-Unity-Architecture/"><![CDATA[<p>Unity是如何驱动组件系统的</p>
-
-<p>从<strong>运行架构</strong>、<strong>组件调度机制</strong>、<strong>底层实现</strong>三个方面来深度剖析</p>
-
-<h3 id="unity的运行架构经典gameobject-component模型">Unity的运行架构（经典GameObject-Component模型）</h3>
-<p>Unity引擎的架构是 <strong>“组合优于继承”</strong> 的典范：</p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">GameObject</code>：游戏世界中所有对象的容器</li>
-  <li><code class="language-plaintext highlighter-rouge">Component</code>：挂在GameObject上的功能模块</li>
-  <li><code class="language-plaintext highlighter-rouge">MonoBehaviour</code>：Unity脚本组件的基类，支持生命周期函数</li>
-</ul>
-
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//伪代码结构</span>
-<span class="k">class</span> <span class="nc">GameObject</span>
-<span class="p">{</span>
-    <span class="n">List</span><span class="p">&lt;</span><span class="n">Component</span><span class="p">&gt;</span> <span class="n">components</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">class</span> <span class="nc">Component</span>
-<span class="p">{</span>
-    <span class="n">GameObject</span> <span class="n">gameObject</span><span class="p">;</span>
-<span class="p">}</span>
-
-</code></pre></div></div>
-
-<h2 id="unity是如何调度组件的生命周期的">Unity是如何调度组件的生命周期的</h2>
-<p>Unity在每一帧都会按以下顺序做一次组件调度遍历：</p>
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>For ever active GameObject:
-    For every enable Component:
-        If first frame:
-            Call Awake()
-            Call Start()
-
-    Run physics:
-        Call FixedUpdate()
-
-    Handle rendering:
-        Transform -&gt; Camera -&gt; Renderer
-</code></pre></div></div>
-<ul>
-  <li>Unity引擎内部有个巨大的函数表（或反射表），知道哪些组件实现了哪些生命周期函数</li>
-  <li>每一帧自动去“调用你实现的函数”</li>
-  <li>C++内部利用RTTI或IL2CPP编译出的函数表映射进行调用</li>
-</ul>
-
-<h2 id="底层实现机制">底层实现机制</h2>
-<h3 id="在mono引擎早期或il2cpp编译后">在Mono引擎（早期）或IL2CPP编译后</h3>
-<ul>
-  <li>Unity会扫描所有<code class="language-plaintext highlighter-rouge">MonoBehaviour</code>脚本的继承结构和成员函数</li>
-  <li>使用反射或JIT（Mono）或AOT（IL2CPP）建立生命周期函数映射</li>
-  <li>每帧调用<code class="language-plaintext highlighter-rouge">Update()</code>时并不是逐个判断字符串，而是已建立了对应的“执行列表”
-    <blockquote>
-      <p>IL2CPP模式下，C#代码会被编译成C++，再编译成机器码，性能更好，但调试难</p>
-    </blockquote>
-  </li>
-</ul>
-
-<h2 id="unity怎么知道你挂了什么组件">Unity怎么知道你挂了什么组件</h2>
-<p>每个GameObject内部维护了一个组件列表（通常是数组或链表），每个组件记录自己类型，并且Unity会为常见组件使用缓存优化</p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">GetComponent&lt;T&gt;()</code>实际上会进行：
-    <ul>
-      <li>查缓存</li>
-      <li>缓存没有就遍历组件数组</li>
-      <li>找到就缓存下来，下次加速</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="unity-gameobject--component的底层存储结构">Unity <code class="language-plaintext highlighter-rouge">GameObject</code> + <code class="language-plaintext highlighter-rouge">Component</code>的底层存储结构</h2>
-<p>GameObject + Component架构时Unity的核心数据结构<br />
-大致如下：</p>
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Scene
- └── GameObjects (树状结构)
-      ├── GameObject A
-      │     ├── Transform (每个 GameObject 必有)
-      │     ├── MeshRenderer
-      │     ├── BoxCollider
-      │     └── MyScript (MonoBehaviour)
-      └── GameObject B
-            └── Transform
-</code></pre></div></div>
-<p>在内存中的布局</p>
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[GameObject]
- ├─ Name: "Enemy"
- ├─ Tag: "Enemy"
- ├─ Active: true
- ├─ Component[] --&gt; 指向一组组件
- │    ├─ [0] Transform*
- │    ├─ [1] MeshRenderer
- │    ├─ [2] MyScript : MonoBehaviour
- └─ SceneNode / Parent / Children 等关系信息
-</code></pre></div></div>
-<ul>
-  <li>所有组件都存储在一个 <strong>Component列表（数组/链表）</strong> 中</li>
-  <li><code class="language-plaintext highlighter-rouge">Transform</code>总是第一个组件（内置逻辑保证）</li>
-  <li>每个<code class="language-plaintext highlighter-rouge">Component</code>内部都有一个指向所属<code class="language-plaintext highlighter-rouge">GameObject</code>的反向引用
-    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">GameObject</span>
-<span class="p">{</span>
-  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Componenet</span><span class="o">*&gt;</span> <span class="n">components</span><span class="p">;</span>
-  <span class="n">Transform</span><span class="o">*</span> <span class="n">transform</span><span class="p">;</span>
-  <span class="p">...</span>
-<span class="p">};</span>
-</code></pre></div>    </div>
-    <h2 id="gameobject-与-component">GameObject 与 Component</h2>
-    <blockquote>
-      <p>一个GameObject本身只是一个空壳，组件赋予它行为和外观</p>
-    </blockquote>
-  </li>
-</ul>
-
-<p>每个GameObject都至少由这三个组件（不可移除）：</p>
-<ul>
-  <li>Transform</li>
-  <li>Tag</li>
-  <li>Layer</li>
-</ul>
-
-<p>此外可以向GameObject添加任意数量的组件</p>
-
-<p>每个组件就是一块插件，GameObject就像是空机壳，插上不同“模块”就有不同功能</p>
-
-<p>Unity中组件影响GameObject的底层原理涉及到引擎的架构设计，主要是基于ECS的理念，虽然MonoBehaviour不是纯ECS，但是思想相近</p>
-
-<p>在底层， Unity的架构可以简化成</p>
-<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">GameObject</span> <span class="p">=</span> <span class="s">实体（Entity）</span>
-<span class="py">Component</span> <span class="p">=</span> <span class="s">数据 + 行为</span>
-</code></pre></div></div>
-
-<h3 id="gameobject本身">GameObject本身</h3>
-<ul>
-  <li>是一个空容器，并不做事</li>
-  <li>只持有一个Transform</li>
-  <li>它维护一个组件列表（Component List）</li>
-</ul>
-
-<h3 id="当添加组件时">当添加组件时</h3>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gameObject</span><span class="p">.</span><span class="n">AddComponent</span><span class="p">&lt;</span><span class="n">Rigidbody</span><span class="p">&gt;();</span>
-</code></pre></div></div>
-<p>Unity引擎底层会：
-<strong>1.分配内存：在C++层面为<code class="language-plaintext highlighter-rouge">Rigidbody</code>组件实例分配空间</strong></p>
-
-<p><strong>2.注册行为：将这个组件加入到<code class="language-plaintext highlighter-rouge">GameObject</code>的组件列表中</strong></p>
-
-<p><strong>3.标记更新：将这个GameObject添加到物理系统更新队列中</strong></p>
-
-<p><strong>4.启用生命周期函数</strong></p>
-
-<h3 id="行为生效">行为生效</h3>
-<p>Unity引擎每帧进行如下操作：</p>
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for each GameObject:
-    for each Component in GameObject:
-        if Component.enabled:
-            Call Component.Update() / Render() / PhysicsStep()
-</code></pre></div></div>
-<p>具体到组件类型：</p>
+<h2 id="tag的核心作用">Tag的核心作用</h2>
 
 <table>
   <thead>
     <tr>
-      <th>组件类型</th>
-      <th>引擎系统</th>
-      <th>调用方式</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">MonoBehaviour</code></td>
-      <td>脚本系统</td>
-      <td><code class="language-plaintext highlighter-rouge">Update()</code>、<code class="language-plaintext highlighter-rouge">FixedUpdate()</code></td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Rigidbody</code></td>
-      <td>物理系统（PhysX）</td>
-      <td>每帧物理步计算</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Renderer</code></td>
-      <td>渲染系统（Graphics）</td>
-      <td>每帧调用 GPU 绘制命令</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Collider</code></td>
-      <td>碰撞系统</td>
-      <td>注册到空间分区中</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">AudioSource</code></td>
-      <td>音频系统</td>
-      <td>发出 PCM 数据到音频设备</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="unity引擎背后的底层结构简化">Unity引擎背后的底层结构（简化）</h3>
-<div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">GameObject</span> <span class="o">(</span><span class="nt">C</span><span class="nn">#</span><span class="err">层</span> <span class="nt">wrapper</span><span class="o">)</span>
- <span class="err">└─</span> <span class="nt">native</span> <span class="nt">GameObject</span> <span class="o">(</span><span class="nt">C</span><span class="o">++</span><span class="err">层</span><span class="o">)</span>
-       <span class="err">├──</span> <span class="nt">Transform</span>
-       <span class="err">├──</span> <span class="nt">Component</span><span class="o">[]</span>
-       <span class="err">│</span>    <span class="err">├──</span> <span class="nt">MonoBehaviour</span><span class="err">（</span><span class="nt">C</span><span class="nn">#</span><span class="err">脚本）</span>
-       <span class="err">│</span>    <span class="err">├──</span> <span class="nt">Renderer</span>
-       <span class="err">│</span>    <span class="err">├──</span> <span class="nt">Rigidbody</span>
-       <span class="err">│</span>    <span class="err">└──</span> <span class="nc">...</span>
-</code></pre></div></div>
-<p>Unity通过“托管桥接机制（Managed to Native Binding）”来让C#脚本和底层C++引擎通讯</p>
-
-<h2 id="unity中生命周期函数的调度机制">Unity中生命周期函数的调度机制</h2>
-
-<h3 id="per-frame">Per Frame</h3>
-<p>Unity的C++引擎内部维护了一套复杂的调度系统，它在每帧中会依次完成：</p>
-<ul>
-  <li>处理输入事件</li>
-  <li>调用<code class="language-plaintext highlighter-rouge">MonoBehaviour.Update()</code>等函数</li>
-  <li>执行物理模拟</li>
-  <li>渲染准备</li>
-  <li>真正渲染</li>
-</ul>
-
-<h3 id="调用过程以update为例">调用过程（以Update()为例）</h3>
-<p>**关键逻辑：Unity会在引擎启动时反射出所有含有Update()的脚本，并构建函数调度表（Invocation List）</p>
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Startup:
-|___MonoScript Scanning（扫描所有脚本）
-       |___找出哪些脚本实现了Update()
-
-Runtime 每帧：
-|___遍历Update列表
-        |___调用脚本.Update()
-</code></pre></div></div>
-<blockquote>
-  <p>这个调度是Unity内部用C++写的调度器来完成的，不是C#代码自己管自己的调用</p>
-</blockquote>
-
-<h3 id="il2cpp行为">IL2CPP行为</h3>
-<p>当你开启IL2CPP编译</p>
-<ul>
-  <li>所有C#代码都会被编译成IL</li>
-  <li>Unity的IL2CPP工具将IL转成CXX</li>
-  <li>然后统一编译为Native Binary</li>
-</ul>
-
-<p><strong>以Update()为例</strong>
-最终会变成：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">PlayerMove_Update</span><span class="p">(</span><span class="n">MonoBehaviour</span><span class="o">*</span> <span class="k">this</span><span class="p">)</span> <span class="p">{}</span>
-</code></pre></div></div>
-<blockquote>
-  <p>Unity引擎内核就可以直接调用这个C++函数，避免了反射调用，提高性能</p>
-</blockquote>
-
-<h2 id="unity启动流程">Unity启动流程</h2>
-
-<h3 id="0平台入口本地程序启动">0.平台入口：本地程序启动</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>平台</th>
-      <th>实际入口函数</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Windows</td>
-      <td><code class="language-plaintext highlighter-rouge">main()</code> 或 <code class="language-plaintext highlighter-rouge">WinMain()</code>（由 <code class="language-plaintext highlighter-rouge">UnityPlayer.dll</code> 调用）</td>
-    </tr>
-    <tr>
-      <td>Android</td>
-      <td><code class="language-plaintext highlighter-rouge">android_main()</code>（JNI 进入 <code class="language-plaintext highlighter-rouge">libunity.so</code>）</td>
-    </tr>
-    <tr>
-      <td>iOS</td>
-      <td><code class="language-plaintext highlighter-rouge">UIApplicationMain()</code>（Objective-C）</td>
-    </tr>
-    <tr>
-      <td>WebGL</td>
-      <td><code class="language-plaintext highlighter-rouge">Module.main()</code>（JavaScript/wasm）</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>这些都在C++写的引擎底层里，不可见且无法修改</p>
-
-<h3 id="1引擎初始化阶段">1.引擎初始化阶段</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>步骤</th>
-      <th>内容</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>加载配置</td>
-      <td>读取 PlayerSettings、Graphics API、质量设置等</td>
-    </tr>
-    <tr>
-      <td>初始化子系统</td>
-      <td>渲染器、输入系统、物理引擎、音频系统等</td>
-    </tr>
-    <tr>
-      <td>初始化脚本引擎</td>
-      <td>启动 Mono 或 IL2CPP 虚拟机</td>
-    </tr>
-    <tr>
-      <td>加载资源管理系统</td>
-      <td>AssetBundle / Resources 等</td>
-    </tr>
-    <tr>
-      <td>加载启动场景</td>
-      <td>SceneManager 加载 Build Settings 中第一个 Scene</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="2场景加载后-创建gameobjectcomponent实例">2.场景加载后-创建GameObject/Component实例</h3>
-<p>加载场景时：</p>
-<ul>
-  <li>逐个读取GameObejct</li>
-  <li>为每个GameObject绑定组件</li>
-  <li>为挂载了<code class="language-plaintext highlighter-rouge">MonoBehaviour</code>的对象创建托管对象实例（C#）</li>
-</ul>
-
-<h3 id="3生命周期调用顺序首次">3.生命周期调用顺序（首次）</h3>
-<p>Unity中的生命周期调度系统，每帧按照生命周期函数顺序依次调用</p>
-
-<h3 id="4游戏循环开始每帧">4.游戏循环开始（每帧）</h3>
-<p>Unity内部引擎每帧执行以下大致顺序：</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>顺序</th>
-      <th>方法</th>
       <th>功能</th>
+      <th>示例</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>1</td>
-      <td>Input Update</td>
-      <td>处理键鼠、触摸、手柄输入</td>
+      <td>分类物体</td>
+      <td>Player、Enemy、Item、UI 等</td>
     </tr>
     <tr>
-      <td>2</td>
-      <td><code class="language-plaintext highlighter-rouge">Update()</code></td>
-      <td>调用所有激活脚本的 <code class="language-plaintext highlighter-rouge">Update()</code>（每帧）</td>
+      <td>逻辑判断</td>
+      <td>判断一个物体是不是玩家</td>
     </tr>
     <tr>
-      <td>3</td>
-      <td>动画更新</td>
-      <td>Animator 执行动画播放</td>
+      <td>查找特定对象</td>
+      <td><code class="language-plaintext highlighter-rouge">GameObject.FindWithTag()</code></td>
     </tr>
     <tr>
-      <td>4</td>
-      <td>物理模拟</td>
-      <td><code class="language-plaintext highlighter-rouge">FixedUpdate()</code> 调用 + Rigidbody 计算</td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td><code class="language-plaintext highlighter-rouge">LateUpdate()</code></td>
-      <td>通常用于摄像机跟随等逻辑</td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>渲染准备</td>
-      <td>剔除、光照、材质、阴影计算等</td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td>渲染提交</td>
-      <td>图像渲染到屏幕，执行 UI、特效等</td>
-    </tr>
-    <tr>
-      <td>8</td>
-      <td><code class="language-plaintext highlighter-rouge">OnGUI()</code></td>
-      <td>Unity GUI 系统（少用）</td>
-    </tr>
-    <tr>
-      <td>9</td>
-      <td>PostProcessing</td>
-      <td>后期处理：Bloom、HDR、MotionBlur</td>
+      <td>触发器/碰撞器逻辑判断</td>
+      <td><code class="language-plaintext highlighter-rouge">if (other.CompareTag("Enemy"))</code></td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="5脚本执行机制mono-vs-il2cpp">5.脚本执行机制（Mono vs IL2CPP）</h3>
+<h2 id="tag的使用方法">Tag的使用方法</h2>
 
-<h4 id="mono模式editor-或-dev-build">Mono模式（Editor 或 Dev Build）</h4>
-<ul>
-  <li>每个脚本是托管C#类，由Mono VM动态加载与反射调用</li>
-  <li>优点：调试快，热重载方便</li>
-  <li>缺点：性能差，函数调度慢</li>
-</ul>
+<h3 id="1设置tag">1.设置Tag</h3>
+<p>1.选中一个 GameObject
+2.Inspector 面板 → 上方的 “Tag” 下拉菜单
+3.如果没有想要的标签 → 点击 Add Tag… → 添加一个新的字符串
+4.回到物体，设置为刚才新建的 Tag</p>
+<blockquote>
+  <p><strong>注意：</strong> Tag是字符串类型，但Unity会为你管理列表，不用硬编码</p>
+</blockquote>
 
-<h4 id="il2cpp模式正式发布时">IL2CPP模式（正式发布时）</h4>
-<ul>
-  <li>Unity构建时将C#脚本编译为C++源码 -&gt; 原始代码</li>
-  <li>所有<code class="language-plaintext highlighter-rouge">Update()</code>、<code class="language-plaintext highlighter-rouge">Awake()</code>变成真正的C++函数</li>
-  <li>优点：性能极高、无法反编译</li>
-  <li>缺点：编译慢，不支持热重载</li>
-</ul>
+<h3 id="2使用tag查找对象">2.使用Tag查找对象</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObjec</span> <span class="n">player</span> <span class="p">=</span> <span class="n">GameObject</span><span class="p">.</span><span class="nf">FindWithTag</span><span class="p">(</span><span class="s">"Player"</span><span class="p">);</span>
+</code></pre></div></div>
+<p>或者查找多个对象：</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObject</span><span class="p">[]</span> <span class="n">enemies</span> <span class="p">=</span> <span class="n">GameObejct</span><span class="p">.</span><span class="nf">FindGameObjectsWithTag</span><span class="p">(</span><span class="s">"Enemy"</span><span class="p">);</span>
+</code></pre></div></div>
 
-<h2 id="unity-ecs新架构entity-component-system">Unity ECS（新架构：Entity-Component-System）</h2>
-<p>传统GameObject模式虽然灵活，但性能瓶颈明显（组件查找慢、缓存不友好）<br />
-Unity推出的ECS（DOTS）架构更接近底层系统编程</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>架构元素</th>
-      <th>作用</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Entity</code></td>
-      <td>轻量 ID，不是 GameObject，零开销。</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Component</code></td>
-      <td>纯数据结构（无逻辑），类似 C struct。</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">System</code></td>
-      <td>控制逻辑，处理所有符合条件的 Entity+Component 数据。</td>
-    </tr>
-  </tbody>
-</table>
+<h3 id="3在触发器或碰撞中判断tag">3.在触发器或碰撞中判断Tag</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">OnTriggerEnter</span><span class="p">(</span><span class="n">Collider</span> <span class="n">other</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="k">if</span> <span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="nf">CompareTag</span><span class="p">(</span><span class="s">"Enemy"</span><span class="p">))</span> <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"撞到敌人了！"</span><span class="p">);</span>
+</code></pre></div></div>
 
 <blockquote>
-  <p>ECS通过内存连续布局 + SIMD + JobSystem实现了超高性能</p>
-</blockquote>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Engine" /><summary type="html"><![CDATA[Unity是如何驱动组件系统的]]></summary></entry><entry><title type="html">Scripts</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Scripts.html" rel="alternate" type="text/html" title="Scripts" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Scripts</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Scripts.html"><![CDATA[<p>Unity脚本就是你编写的C#类，它控制游戏中物体的行为、交互、动画、输入、碰撞、UI等逻辑</p>
+  <p>推荐使用CompareTag()，而不是<code class="language-plaintext highlighter-rouge">other.tag == "Enemy"</code>，性能更好，也可避免拼写错误引发异常</p>
+</blockquote>
 
-<p>绝大多数脚本都继承自<code class="language-plaintext highlighter-rouge">MonoBehaviour</code>类</p>
-
-<h2 id="c如何运行这些脚本">C#如何运行这些脚本</h2>
-<ul>
-  <li>将脚本挂载某个GameObject上</li>
-  <li>Unity引擎自动为这个类创建实例（托管对象）</li>
-  <li>Unity每帧调用该实例的生命周期函数</li>
-</ul>
-
-<p>完全由Unity托管</p>
-
-<h2 id="脚本和inspector的关系">脚本和Inspector的关系</h2>
-<p>可以使用<code class="language-plaintext highlighter-rouge">[SerializeField]</code>、<code class="language-plaintext highlighter-rouge">public</code>来让字段在Inspector中显示</p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="kt">float</span> <span class="n">speed</span> <span class="p">=</span> <span class="m">5f</span><span class="p">;</span>
-
-<span class="p">[</span><span class="n">SerializeField</span><span class="p">]</span>
-<span class="k">private</span> <span class="n">GameObject</span> <span class="n">bulletPrefab</span><span class="p">;</span>
-</code></pre></div></div>
-<p>然后在Inspector中手动拖拽引用，或者编辑数值，来调整游戏行为</p>
-
-<h2 id="脚本间通信引用其他组件">脚本间通信（引用其他组件）</h2>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+<h2 id="示例">示例</h2>
+<h3 id="标记玩家">标记玩家</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="nf">CompareTag</span><span class="p">(</span><span class="s">"Player"</span><span class="p">))</span>
 <span class="p">{</span>
-    <span class="n">Rigidbody</span> <span class="n">rb</span> <span class="p">=</span> <span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">Rigidbody</span><span class="p">&gt;();</span>
-    <span class="n">rb</span><span class="p">.</span><span class="n">velocity</span> <span class="p">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">up</span> <span class="p">*</span> <span class="m">10</span><span class="p">;</span>
+    <span class="n">PlayerHealth</span> <span class="n">hp</span> <span class="p">=</span> <span class="n">other</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">PlayerHealth</span><span class="p">&gt;();</span>
+    <span class="n">hp</span><span class="p">.</span><span class="nf">TakeDamage</span><span class="p">(</span><span class="m">10</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
-<p>也可以访问其他GameObject:</p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="n">GameObject</span> <span class="n">enemy</span><span class="p">;</span>
-
-<span class="k">void</span> <span class="nf">Update</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">enemy</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="nf">LookAt</span><span class="p">(</span><span class="n">transform</span><span class="p">);</span>
+<h3 id="标记子弹敌人道具等">标记子弹、敌人、道具等</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">collision</span><span class="p">.</span><span class="nf">CompareTag</span><span class="p">(</span><span class="s">"Projectile"</span><span class="p">))</span> <span class="nf">Destroy</span><span class="p">(</span><span class="n">collision</span><span class="p">.</span><span class="n">gameObject</span><span class="p">);</span>
+</code></pre></div></div>
+<h3 id="用于全局查找对象比如ui控件">用于全局查找对象（比如UI控件）</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObject</span> <span class="n">healthBar</span> <span class="p">=</span> <span class="n">GameObject</span><span class="p">.</span><span class="nf">FindWithTag</span><span class="p">(</span><span class="s">"HealthBar"</span><span class="p">);</span>
 </code></pre></div></div>
 
-<h2 id="unity生命周期函数monobehaviour">Unity生命周期函数（MonoBehaviour）</h2>
-<p><a href="/assets/images/monobehaviour_flowchart.svg">生命周期函数示意图</a></p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[Unity脚本就是你编写的C#类，它控制游戏中物体的行为、交互、动画、输入、碰撞、UI等逻辑]]></summary></entry><entry><title type="html">Rigibody</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Rigidbody.html" rel="alternate" type="text/html" title="Rigibody" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Rigidbody</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Rigidbody.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Component" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Component</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Component.html" rel="alternate" type="text/html" title="Component" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Component</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Component.html"><![CDATA[<p>Component是附加在GameObject上的功能模块，每个组件都提供了某种行为或属性，组成了游戏对象的功能</p>
+<h2 id="建议">建议</h2>
+<ul>
+  <li>Tag符合逻辑判断</li>
+  <li>不适合控制物理、渲染行为，应交由Layer完成</li>
+  <li>避免硬编码字符串，建议自定义一个Tag常量类</li>
+</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[在Unity中，Tag是用来标记和分类GameObject的一种轻量级方法，主要用于在代码中查找和判断物体的类型或身份]]></summary></entry><entry><title type="html">Multithread</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Multithread.html" rel="alternate" type="text/html" title="Multithread" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Multithread</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Multithread.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">FSM</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/FSM.html" rel="alternate" type="text/html" title="FSM" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/FSM</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/FSM.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Event System</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Event-System.html" rel="alternate" type="text/html" title="Event System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Event-System</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Event-System.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Component</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Component.html" rel="alternate" type="text/html" title="Component" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Component</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Component.html"><![CDATA[<p>Component是附加在GameObject上的功能模块，每个组件都提供了某种行为或属性，组成了游戏对象的功能</p>
 
 <h2 id="组件的特性">组件的特性</h2>
 
@@ -1187,84 +701,7 @@ Unity推出的ECS（DOTS）架构更接近底层系统编程</p>
       <td>Variables</td>
     </tr>
   </tbody>
-</table>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[Component是附加在GameObject上的功能模块，每个组件都提供了某种行为或属性，组成了游戏对象的功能]]></summary></entry><entry><title type="html">Tag</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Tag.html" rel="alternate" type="text/html" title="Tag" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Tag</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Tag.html"><![CDATA[<p>在Unity中，Tag是用来标记和分类GameObject的一种轻量级方法，主要用于在代码中查找和判断物体的类型或身份</p>
-
-<h2 id="tag的核心作用">Tag的核心作用</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>功能</th>
-      <th>示例</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>分类物体</td>
-      <td>Player、Enemy、Item、UI 等</td>
-    </tr>
-    <tr>
-      <td>逻辑判断</td>
-      <td>判断一个物体是不是玩家</td>
-    </tr>
-    <tr>
-      <td>查找特定对象</td>
-      <td><code class="language-plaintext highlighter-rouge">GameObject.FindWithTag()</code></td>
-    </tr>
-    <tr>
-      <td>触发器/碰撞器逻辑判断</td>
-      <td><code class="language-plaintext highlighter-rouge">if (other.CompareTag("Enemy"))</code></td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="tag的使用方法">Tag的使用方法</h2>
-
-<h3 id="1设置tag">1.设置Tag</h3>
-<p>1.选中一个 GameObject
-2.Inspector 面板 → 上方的 “Tag” 下拉菜单
-3.如果没有想要的标签 → 点击 Add Tag… → 添加一个新的字符串
-4.回到物体，设置为刚才新建的 Tag</p>
-<blockquote>
-  <p><strong>注意：</strong> Tag是字符串类型，但Unity会为你管理列表，不用硬编码</p>
-</blockquote>
-
-<h3 id="2使用tag查找对象">2.使用Tag查找对象</h3>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObjec</span> <span class="n">player</span> <span class="p">=</span> <span class="n">GameObject</span><span class="p">.</span><span class="nf">FindWithTag</span><span class="p">(</span><span class="s">"Player"</span><span class="p">);</span>
-</code></pre></div></div>
-<p>或者查找多个对象：</p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObject</span><span class="p">[]</span> <span class="n">enemies</span> <span class="p">=</span> <span class="n">GameObejct</span><span class="p">.</span><span class="nf">FindGameObjectsWithTag</span><span class="p">(</span><span class="s">"Enemy"</span><span class="p">);</span>
-</code></pre></div></div>
-
-<h3 id="3在触发器或碰撞中判断tag">3.在触发器或碰撞中判断Tag</h3>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">OnTriggerEnter</span><span class="p">(</span><span class="n">Collider</span> <span class="n">other</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="k">if</span> <span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="nf">CompareTag</span><span class="p">(</span><span class="s">"Enemy"</span><span class="p">))</span> <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"撞到敌人了！"</span><span class="p">);</span>
-</code></pre></div></div>
-
-<blockquote>
-  <p>推荐使用CompareTag()，而不是<code class="language-plaintext highlighter-rouge">other.tag == "Enemy"</code>，性能更好，也可避免拼写错误引发异常</p>
-</blockquote>
-
-<h2 id="示例">示例</h2>
-<h3 id="标记玩家">标记玩家</h3>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="nf">CompareTag</span><span class="p">(</span><span class="s">"Player"</span><span class="p">))</span>
-<span class="p">{</span>
-    <span class="n">PlayerHealth</span> <span class="n">hp</span> <span class="p">=</span> <span class="n">other</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">PlayerHealth</span><span class="p">&gt;();</span>
-    <span class="n">hp</span><span class="p">.</span><span class="nf">TakeDamage</span><span class="p">(</span><span class="m">10</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<h3 id="标记子弹敌人道具等">标记子弹、敌人、道具等</h3>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">collision</span><span class="p">.</span><span class="nf">CompareTag</span><span class="p">(</span><span class="s">"Projectile"</span><span class="p">))</span> <span class="nf">Destroy</span><span class="p">(</span><span class="n">collision</span><span class="p">.</span><span class="n">gameObject</span><span class="p">);</span>
-</code></pre></div></div>
-<h3 id="用于全局查找对象比如ui控件">用于全局查找对象（比如UI控件）</h3>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObject</span> <span class="n">healthBar</span> <span class="p">=</span> <span class="n">GameObject</span><span class="p">.</span><span class="nf">FindWithTag</span><span class="p">(</span><span class="s">"HealthBar"</span><span class="p">);</span>
-</code></pre></div></div>
-
-<h2 id="建议">建议</h2>
-<ul>
-  <li>Tag符合逻辑判断</li>
-  <li>不适合控制物理、渲染行为，应交由Layer完成</li>
-  <li>避免硬编码字符串，建议自定义一个Tag常量类</li>
-</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[在Unity中，Tag是用来标记和分类GameObject的一种轻量级方法，主要用于在代码中查找和判断物体的类型或身份]]></summary></entry><entry><title type="html">Layer</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layer.html" rel="alternate" type="text/html" title="Layer" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layer</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layer.html"><![CDATA[<p>在Unity中，Layer是要给非常重要的系统<br />
+</table>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[Component是附加在GameObject上的功能模块，每个组件都提供了某种行为或属性，组成了游戏对象的功能]]></summary></entry><entry><title type="html">Layer</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layer.html" rel="alternate" type="text/html" title="Layer" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layer</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layer.html"><![CDATA[<p>在Unity中，Layer是要给非常重要的系统<br />
 它主要用于：</p>
 <ul>
   <li>控制物体的渲染与相机的可见性</li>
@@ -1406,483 +843,1258 @@ Unity推出的ECS（DOTS）架构更接近底层系统编程</p>
 <ul>
   <li>给每种功能的对象分配专属Layer</li>
   <li>摄像机、光源、UI、Trigger检测都应依赖Layer控制逻辑</li>
-</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[在Unity中，Layer是要给非常重要的系统 它主要用于： 控制物体的渲染与相机的可见性 控制物理碰撞（配合Layer Collision Matrix） 通过脚本进行物体分类和筛选]]></summary></entry><entry><title type="html">Material</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Material.html" rel="alternate" type="text/html" title="Material" /><published>2025-05-31T00:00:00+08:00</published><updated>2025-05-31T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Material</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Material.html"><![CDATA[<p>Unity中的Material是用来定义一个物体外观的核心组件，它将Shader与各种Texture和属性值绑定到一起，决定了一个对象在场景中如何表现</p>
+</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[在Unity中，Layer是要给非常重要的系统 它主要用于： 控制物体的渲染与相机的可见性 控制物理碰撞（配合Layer Collision Matrix） 通过脚本进行物体分类和筛选]]></summary></entry><entry><title type="html">Scripts</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Scripts.html" rel="alternate" type="text/html" title="Scripts" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Scripts</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Scripts.html"><![CDATA[<p>Unity脚本就是你编写的C#类，它控制游戏中物体的行为、交互、动画、输入、碰撞、UI等逻辑</p>
 
-<h2 id="material的基本构成">Material的基本构成</h2>
-<p>Material包括：<br />
-<strong>1.Shader</strong></p>
-<ul>
-  <li>决定了材质的渲染方式和它所支持的属性</li>
-  <li>常用Shader有：
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">Standard</code>：支持金属、粗糙度工作流</li>
-      <li><code class="language-plaintext highlighter-rouge">URP/Lit</code>(Universal Render Pipeline)专用</li>
-      <li><code class="language-plaintext highlighter-rouge">HDRP/Lit</code>(High Definition Render Pipeline)专用</li>
-      <li><code class="language-plaintext highlighter-rouge">Unlit</code>：不受光照影响，用于UI、特效等</li>
-      <li>自定义Shader</li>
-    </ul>
-  </li>
-</ul>
-
-<p><strong>2.Texture</strong></p>
-<ul>
-  <li>常见类型：
-    <ul>
-      <li>Albedo（基础颜色贴图）</li>
-      <li>Normal Map（法线贴图，增加表面细节）</li>
-      <li>Metallic Map / Roughness Map（金属度/粗糙度贴图）</li>
-      <li>Emission Map（自发光贴图）</li>
-      <li>Occlusion Map（遮蔽贴图）</li>
-    </ul>
-  </li>
-</ul>
-
-<p><strong>3.属性值</strong></p>
-<ul>
-  <li>颜色、金属度、粗糙度、透明度</li>
-</ul>
-
-<h2 id="创建和使用material">创建和使用Material</h2>
-
-<h3 id="创建材质">创建材质</h3>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>右键 -&gt; Create -&gt; Material
-</code></pre></div></div>
-
-<p>然后可以给材质命名，设置颜色、贴图等属性</p>
-
-<h3 id="应用材质">应用材质</h3>
-<ul>
-  <li>方式1：拖动到物体上</li>
-  <li>方式2：通过代码赋值
-    <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Renderer</span> <span class="n">renderer</span> <span class="p">=</span> <span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">Renderer</span><span class="p">&gt;();</span>
-<span class="n">renderer</span><span class="p">.</span><span class="n">material</span> <span class="p">=</span> <span class="n">myMaterial</span><span class="p">;</span>
-</code></pre></div>    </div>
-  </li>
-</ul>
-
-<h2 id="材质在不同渲染管线中的区别">材质在不同渲染管线中的区别</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>渲染管线</th>
-      <th>使用的着色器</th>
-      <th>特点</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Built-in</td>
-      <td>Standard Shader</td>
-      <td>默认渲染管线</td>
-    </tr>
-    <tr>
-      <td>URP</td>
-      <td>URP/Lit Shader</td>
-      <td>性能优化，适合中低端设备</td>
-    </tr>
-    <tr>
-      <td>HDRP</td>
-      <td>HDRP/Lit Shader</td>
-      <td>高质量视觉，适合高端项目</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="材质的进阶使用">材质的进阶使用</h2>
-
-<h3 id="1多材质">1.多材质</h3>
-<p>一个物体的每个sub-mesh都可以使用不同的材质</p>
-
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Renderer</span> <span class="n">renderer</span> <span class="p">=</span> <span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">Renderer</span><span class="p">&gt;();</span>
-<span class="n">renderer</span><span class="p">.</span><span class="n">materials</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="p">=</span> <span class="n">mat1</span><span class="p">;</span>
-<span class="n">renderer</span><span class="p">.</span><span class="n">materials</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="p">=</span> <span class="n">mat2</span><span class="p">;</span>
-</code></pre></div></div>
-
-<h3 id="2材质属性通过代码修改">2.材质属性通过代码修改</h3>
-
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Material</span> <span class="n">mat</span> <span class="p">=</span> <span class="n">renderer</span><span class="p">.</span><span class="n">material</span><span class="p">;</span>
-<span class="n">mat</span><span class="p">.</span><span class="nf">SetColor</span><span class="p">(</span><span class="s">"_Color"</span><span class="p">,</span> <span class="n">Color</span><span class="p">.</span><span class="n">red</span><span class="p">);</span>
-<span class="n">mat</span><span class="p">.</span><span class="nf">SetFloat</span><span class="p">(</span><span class="s">"_Glossiness"</span><span class="p">,</span> <span class="m">0.3f</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p><strong>如果你修改的是<code class="language-plaintext highlighter-rouge">material</code>而不是<code class="language-plaintext highlighter-rouge">sharedMaterial</code>，Unity会在运行时创建该材质的副本（实例化材质）</strong></p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><summary type="html"><![CDATA[Unity中的Material是用来定义一个物体外观的核心组件，它将Shader与各种Texture和属性值绑定到一起，决定了一个对象在场景中如何表现]]></summary></entry><entry><title type="html">Prefab System</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Prefab.html" rel="alternate" type="text/html" title="Prefab System" /><published>2025-05-31T00:00:00+08:00</published><updated>2025-05-31T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Prefab</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/31/Prefab.html"><![CDATA[<p>Unity提供Prefab这种非常强大的机制，用来复用游戏对象，让开发更高效、项目更模块化<br />
-Prefab就是一个可以重复使用的GameObject模板</p>
-
-<h2 id="什么是prefab">什么是Prefab</h2>
-<p>Prefab是你在场景里创建好的GameObject（可以包含模型、脚本、组件、子物体等），然后把它拖到项目窗口中生成的资源文件。<br />
-之后就可以随时从Project中把这个模板拖入场景，生成和原始一样的对象</p>
-
-<h2 id="prefab的创建和使用">Prefab的创建和使用</h2>
-<p><strong>创建</strong>
-1.在<code class="language-plaintext highlighter-rouge">Hierarchy</code>中创建好一个GameObject及其组件和子对象<br />
-2.拖拽到<code class="language-plaintext highlighter-rouge">Project</code>视图中，Unity自动保存为<code class="language-plaintext highlighter-rouge">.prefab</code>
-3.你可以删除场景中的对象，只保留Project中的预制体</p>
-
-<p><strong>使用</strong></p>
-<ul>
-  <li>直接拖到场景中</li>
-  <li><code class="language-plaintext highlighter-rouge">Instantiate()</code>动态生成</li>
-</ul>
-
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Shoot</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="nf">Instantiate</span><span class="p">(</span><span class="n">bulletPrefab</span><span class="p">,</span> <span class="n">transform</span><span class="p">.</span><span class="n">position</span><span class="p">,</span> <span class="n">transform</span><span class="p">.</span><span class="n">rotation</span><span class="p">);</span>
-</code></pre></div></div>
-<h2 id="prefab特点">Prefab特点</h2>
+<h2 id="脚本类型">脚本类型</h2>
+<p>Unity中的脚本根据其用途可以分为3类：</p>
 
 <table>
   <thead>
     <tr>
       <th>特性</th>
-      <th>描述</th>
+      <th><code class="language-plaintext highlighter-rouge">MonoBehaviour</code></th>
+      <th><code class="language-plaintext highlighter-rouge">ScriptableObject</code></th>
+      <th>纯 C# 类</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>模板复用</td>
-      <td>一次创建，多次使用</td>
+      <td>是否可挂载</td>
+      <td>✅ 可以挂载到 GameObject</td>
+      <td>❌ 不行</td>
+      <td>❌ 不行</td>
     </tr>
     <tr>
-      <td>改动同步</td>
-      <td>修改 Prefab，会自动同步所有实例</td>
+      <td>生命周期函数</td>
+      <td>✅ 有 <code class="language-plaintext highlighter-rouge">Start</code>、<code class="language-plaintext highlighter-rouge">Update</code> 等</td>
+      <td>❌ 没有</td>
+      <td>❌ 没有</td>
     </tr>
     <tr>
-      <td>支持嵌套</td>
-      <td>Prefab 可以包含另一个 Prefab</td>
+      <td>是否能序列化</td>
+      <td>✅ 支持</td>
+      <td>✅ 支持</td>
+      <td>❌ 默认不支持</td>
     </tr>
     <tr>
-      <td>可分离</td>
-      <td>Prefab 实例可以局部修改，不影响原始 Prefab</td>
+      <td>支持协程</td>
+      <td>✅ <code class="language-plaintext highlighter-rouge">StartCoroutine()</code></td>
+      <td>❌ 不支持</td>
+      <td>❌ 不支持</td>
+    </tr>
+    <tr>
+      <td>使用场景</td>
+      <td>行为脚本，控制对象</td>
+      <td>数据容器，可复用资源配置</td>
+      <td>工具类、算法类等逻辑单元</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="prefab实例与原型的关系">Prefab实例与原型的关系</h2>
-<p>当你把Prefab拖入场景，它会成为Prefab实例，你可以</p>
+<h3 id="monobehaviour的派生类"><code class="language-plaintext highlighter-rouge">MonoBehaviour</code>的派生类</h3>
 <ul>
-  <li>完全跟随原始Prefab</li>
-  <li>局部Override某些属性</li>
-  <li>解除连接（Unpack）</li>
+  <li>必须挂载在场景中的GameObject上</li>
+  <li>用于控制逻辑、角色行为、输入响应等</li>
+  <li>有生命周期函数</li>
 </ul>
 
+<h3 id="scriptableobject是数据容器"><code class="language-plaintext highlighter-rouge">ScriptableObject</code>是数据容器</h3>
+<ul>
+  <li>轻量级对象，不需要挂载，常用于数据复用（如技能表、配置表）</li>
+  <li>支持序列化，可以做成asset文件</li>
+  <li>没有生命周期函数，但可以在<code class="language-plaintext highlighter-rouge">OnEnable()</code>做初始化</li>
+  <li>更节省内存，不依赖场景</li>
+</ul>
+
+<h3 id="纯c类">纯C#类</h3>
+<ul>
+  <li>用于封装工具、算法、模型等逻辑（如A*算法、存档系统）</li>
+  <li>不支持Unity生命周期和序列化</li>
+  <li>适合在<code class="language-plaintext highlighter-rouge">MonoBehaviour</code>或<code class="language-plaintext highlighter-rouge">ScriptableObject</code>中调用</li>
+</ul>
+
+<h2 id="脚本和inspector的关系">脚本和Inspector的关系</h2>
+<p>可以使用<code class="language-plaintext highlighter-rouge">[SerializeField]</code>、<code class="language-plaintext highlighter-rouge">public</code>来让字段在Inspector中显示</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="kt">float</span> <span class="n">speed</span> <span class="p">=</span> <span class="m">5f</span><span class="p">;</span>
+
+<span class="p">[</span><span class="n">SerializeField</span><span class="p">]</span>
+<span class="k">private</span> <span class="n">GameObject</span> <span class="n">bulletPrefab</span><span class="p">;</span>
+</code></pre></div></div>
+<p>然后在Inspector中手动拖拽引用，或者编辑数值，来调整游戏行为</p>
+
+<h2 id="脚本间通信引用其他组件">脚本间通信（引用其他组件）</h2>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">Rigidbody</span> <span class="n">rb</span> <span class="p">=</span> <span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">Rigidbody</span><span class="p">&gt;();</span>
+    <span class="n">rb</span><span class="p">.</span><span class="n">velocity</span> <span class="p">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">up</span> <span class="p">*</span> <span class="m">10</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>也可以访问其他GameObject:</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="n">GameObject</span> <span class="n">enemy</span><span class="p">;</span>
+
+<span class="k">void</span> <span class="nf">Update</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">enemy</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="nf">LookAt</span><span class="p">(</span><span class="n">transform</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="基类-monobehaviour">基类: MonoBehaviour</h2>
+<p><code class="language-plaintext highlighter-rouge">MonoBehaviour</code>是Unity提供的一个基类，用于挂载在GameObject上的脚本组件。它提供了一系列生命周期函数和功能接口，使你的脚本可以与Unity引擎进行交互，比如更新、碰撞、协程、输入等</p>
+
+<h3 id="继承monobehaviour的作用">继承MonoBehaviour的作用</h3>
+<p>继承自 MonoBehaviour 的类，Unity 才会：</p>
+<ul>
+  <li>自动调用生命周期函数（Awake, Start, Update, OnDestroy 等）</li>
+  <li>让你可以把脚本拖到场景中的 GameObject 上</li>
+  <li>能访问 Unity API，如 transform, gameObject, Time.deltaTime, GetComponent 等</li>
+  <li>被 Unity 引擎管理，参与序列化、Inspector 展示等功能</li>
+</ul>
+
+<h3 id="使用规则和限制">使用规则和限制</h3>
+
 <table>
   <thead>
     <tr>
-      <th>图标颜色</th>
-      <th>状态</th>
+      <th>项目</th>
+      <th>是否允许 / 推荐</th>
+      <th>原因或说明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>蓝色立方体</td>
-      <td>与原 Prefab 保持连接</td>
+      <td>new 一个 MonoBehaviour</td>
+      <td>❌ 不允许</td>
+      <td>必须挂载在 GameObject 上，不能直接 <code class="language-plaintext highlighter-rouge">new</code></td>
     </tr>
     <tr>
-      <td>灰色立方体</td>
-      <td>已经解除连接（Unpacked）</td>
+      <td>静态类继承 MonoBehaviour</td>
+      <td>❌ 不允许</td>
+      <td>MonoBehaviour 必须是实例化组件</td>
+    </tr>
+    <tr>
+      <td>把类不继承 MonoBehaviour</td>
+      <td>✅ 允许</td>
+      <td>工具类、算法类无需继承</td>
+    </tr>
+    <tr>
+      <td>不挂载脚本是否执行逻辑</td>
+      <td>❌ 不执行</td>
+      <td>没有挂在 GameObject 上的脚本不会触发生命周期函数</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="prefab编辑方式">Prefab编辑方式</h2>
-<p>1.Open Prefab：双击或点击小蓝箭头进入Prefab编辑模式<br />
-2.Override面板：查看并应用或还原你对实例的修改
-3.Apply to Prefab：将实例的更改写入原始Prefab</p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity，Unity System" /><summary type="html"><![CDATA[Unity提供Prefab这种非常强大的机制，用来复用游戏对象，让开发更高效、项目更模块化 Prefab就是一个可以重复使用的GameObject模板]]></summary></entry><entry><title type="html">Light</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/29/Light.html" rel="alternate" type="text/html" title="Light" /><published>2025-05-29T00:00:00+08:00</published><updated>2025-05-29T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/29/Light</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/05/29/Light.html"><![CDATA[<p>Unity中的Light是照亮场景和物体的核心组件，也是实现逼真视觉效果的关键之一。合理使用光源可以极大提升游戏画面质量，同时也对性能有重要影响
-Light决定了场景中物体如何被照亮、阴影如何生成、氛围如何表现</p>
+<h3 id="原理">原理</h3>
+<ul>
+  <li>Unity使用反射系统查找是否存在<code class="language-plaintext highlighter-rouge">Start()</code>、<code class="language-plaintext highlighter-rouge">Update()</code>等函数，并在对应阶段自动调用它们</li>
+  <li><code class="language-plaintext highlighter-rouge">MonoBehaviour</code>的生命周期与GameObject的启用状态强关联：
+    <ul>
+      <li>如果GameObject被禁用，生命周期函数不会运行</li>
+      <li>如果脚本本身被禁用，生命周期函数也不会被调用</li>
+    </ul>
+  </li>
+</ul>
 
-<h2 id="light的类型type">Light的类型（Type）</h2>
+<h2 id="c如何运行这些脚本">C#如何运行这些脚本</h2>
+<ul>
+  <li>将脚本挂载某个GameObject上</li>
+  <li>Unity引擎自动为这个类创建实例（托管对象）</li>
+  <li>Unity每帧调用该实例的生命周期函数</li>
+</ul>
 
-<p>Unity中有4种主要光源类型：</p>
+<p>完全由Unity托管</p>
+
+<h2 id="unity生命周期函数monobehaviour">Unity生命周期函数（MonoBehaviour）</h2>
+
+<h3 id="生命周期函数示意图"><strong><a href="/assets/images/monobehaviour_flowchart.svg">生命周期函数示意图</a></strong></h3>
+
+<p>生命周期函数是Unity在特定时机自动调用的函数，比如初始化、每帧逻辑、物体销毁等</p>
+
+<h3 id="每个阶段和几个重要的函数">每个阶段和几个重要的函数</h3>
+
+<h4 id="初始化阶段只执行一次">初始化阶段（只执行一次）</h4>
+
+<p>初始化阶段的生命周期函数是游戏对象创建并激活后、正式开始游戏逻辑之前自动调用的一系列函数，主要用于初始化变量、加载资源、设置状态等操作</p>
 
 <table>
   <thead>
     <tr>
-      <th>类型</th>
-      <th>描述</th>
-      <th>用途示例</th>
+      <th>函数名</th>
+      <th>调用时机</th>
+      <th>用途</th>
+      <th>特点</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><strong>Directional Light</strong></td>
-      <td>没有位置，只有方向，光线平行</td>
-      <td>太阳光、月光</td>
+      <td><code class="language-plaintext highlighter-rouge">Awake()</code></td>
+      <td>脚本实例被 <strong>加载</strong> 后立刻调用（即使对象未启用也会调用）</td>
+      <td>初始化数据、引用等（最早）</td>
+      <td>初始化非依赖其他组件的逻辑</td>
     </tr>
     <tr>
-      <td><strong>Point Light</strong></td>
-      <td>从一点向所有方向发散</td>
-      <td>灯泡、火把</td>
+      <td><code class="language-plaintext highlighter-rouge">OnEnable()</code></td>
+      <td>对象启用时调用（<strong>每次启用都会调用</strong>）</td>
+      <td>脚本激活可以多次触发</td>
+      <td>常用于注册事件</td>
     </tr>
     <tr>
-      <td><strong>Spot Light</strong></td>
-      <td>从一点向特定方向的锥体发散</td>
-      <td>手电筒、聚光灯</td>
-    </tr>
-    <tr>
-      <td><strong>Area Light</strong>（仅用于烘焙）</td>
-      <td>从一个平面区域发光</td>
-      <td>霓虹灯、窗户光线（仅用于静态对象）</td>
+      <td><code class="language-plaintext highlighter-rouge">Start()</code></td>
+      <td>所有对象的<code class="language-plaintext highlighter-rouge">Awake()</code>调用完后，在对象启用的第一帧调用一次</td>
+      <td>初始化逻辑，如加载资源、启动协程</td>
+      <td>初始化依赖其他组件/对象的逻辑</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="光照模式mode">光照模式（Mode）</h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Awake()</code>
+    <ul>
+      <li>在脚本实例被加载时调用（即使对象未激活）</li>
+      <li>多个脚本中Awake的调用顺序是不确定的</li>
+      <li>通常用于
+        <ul>
+          <li>分配资源</li>
+          <li>设置初始状态</li>
+          <li>创建单例</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">OnEnable()</code>
+    <ul>
+      <li>当对象或脚本被启用时调用</li>
+      <li>会在每次启用时重复调用</li>
+      <li>通常用于：
+        <ul>
+          <li>注册事件</li>
+          <li>启动协程</li>
+          <li>绑定输入</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">Start()</code>
+    <ul>
+      <li>在启用的组件第一帧更新前调用，且只调用一次</li>
+      <li>所有<code class="language-plaintext highlighter-rouge">Awake()</code>执行完后才调用<code class="language-plaintext highlighter-rouge">Start()</code></li>
+      <li>通常用于
+        <ul>
+          <li>获取其他组件</li>
+          <li>设置UI、初始化依赖关系</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
 
-<p>Unity光源有三种模式，关系到实时性和性能：</p>
+<h4 id="运行时循环阶段重复执行">运行时循环阶段（重复执行）</h4>
 
 <table>
   <thead>
     <tr>
-      <th>模式</th>
-      <th>描述</th>
+      <th>函数名</th>
+      <th>调用频率</th>
       <th>用途</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><strong>Realtime</strong></td>
-      <td>每帧计算光照，支持动态物体</td>
-      <td>动态灯光，如手电筒、角色法术</td>
+      <td><code class="language-plaintext highlighter-rouge">FixedUpdate()</code></td>
+      <td>每固定时间（如 0.02 秒）</td>
+      <td>物理计算、施加力、碰撞检测等</td>
     </tr>
     <tr>
-      <td><strong>Mixed</strong></td>
-      <td>静态对象使用烘焙，动态对象使用实时光</td>
-      <td>综合表现和性能</td>
+      <td><code class="language-plaintext highlighter-rouge">Update()</code></td>
+      <td>每帧</td>
+      <td>常规逻辑、输入处理、状态更新</td>
     </tr>
     <tr>
-      <td><strong>Baked</strong></td>
-      <td>所有光照预先烘焙，不支持动态阴影</td>
-      <td>静态场景，如建筑、地形</td>
+      <td><code class="language-plaintext highlighter-rouge">LateUpdate()</code></td>
+      <td>每帧</td>
+      <td>摄像机追踪、骨骼动画等需要晚一点处理的逻辑</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnGUI()</code></td>
+      <td>每帧多次</td>
+      <td>IMGUI 绘图接口，用于旧 GUI 系统（已不推荐）</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="light属性">Light属性</h2>
-<p>在Unity中，使用<code class="language-plaintext highlighter-rouge">UnityEngine.Light</code>类可以动态修改光源的各种属性，实现如灯光变化、闪烁、开关、颜色变化等效果</p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Light</span> <span class="n">light</span> <span class="p">=</span> <span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">Light</span><span class="p">&gt;();</span>
-</code></pre></div></div>
-<p>namespace:<code class="language-plaintext highlighter-rouge">UnityEngine</code><br />
-<code class="language-plaintext highlighter-rouge">Behaviour -&gt; Componenet -&gt; Object</code></p>
+<h5 id="关于update">关于<code class="language-plaintext highlighter-rouge">Update()</code></h5>
+<ul>
+  <li>适合做需要实时响应和更新的逻辑，例如输入检测、动画控制、AI决策等</li>
+</ul>
 
-<p><strong>常用字段与属性</strong></p>
+<p><strong>在Update()中实现“时间无关”逻辑</strong>
+由于帧率变化，直接写逻辑会导致游戏表现不同步<br />
+解决方法：</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Update</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">float</span> <span class="n">moveSpeed</span> <span class="p">=</span> <span class="m">5f</span><span class="p">;</span>
+    <span class="n">transform</span><span class="p">.</span><span class="nf">Translate</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">forward</span> <span class="p">*</span> <span class="n">moveSpeed</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Time.deltaTime</code>是上一帧到当前帧的时间差</li>
+  <li>乘以<code class="language-plaintext highlighter-rouge">deltaTime</code>可以保证无论帧率多少，运动速度都一样</li>
+</ul>
+
+<p><strong>常见用法</strong>
+1.键盘输入控制移动</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Update</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">float</span> <span class="n">h</span> <span class="p">=</span> <span class="n">Input</span><span class="p">.</span><span class="nf">GetAxis</span><span class="p">(</span><span class="s">"Horizontal"</span><span class="p">);</span>
+    <span class="kt">float</span> <span class="n">v</span> <span class="p">=</span> <span class="n">Input</span><span class="p">.</span><span class="nf">GetAxis</span><span class="p">(</span><span class="s">"Vertical"</span><span class="p">);</span>
+    <span class="n">Vector3</span> <span class="n">dir</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span>
+    <span class="n">transform</span><span class="p">.</span><span class="nf">Translate</span><span class="p">(</span><span class="n">dir</span> <span class="p">*</span> <span class="m">5f</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>2.每帧检测条件触发事件</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Update</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="nf">GetKeyDown</span><span class="p">(</span><span class="n">KeyCode</span><span class="p">.</span><span class="n">Space</span><span class="p">))</span> <span class="nf">Jump</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>性能注意事项</strong></p>
+<ul>
+  <li>频繁且复杂的操作放在<code class="language-plaintext highlighter-rouge">Update()</code>中会影响帧率</li>
+  <li>可以考虑
+    <ul>
+      <li>减少<code class="language-plaintext highlighter-rouge">Update()</code>中的耗时计算</li>
+      <li>合理使用事件驱动替代轮询</li>
+      <li>利用<code class="language-plaintext highlighter-rouge">Coroutine</code>或<code class="language-plaintext highlighter-rouge">InvokeRepeating</code>控制调用频率</li>
+      <li>对复杂逻辑分帧处理或异步处理</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>当关闭或禁用脚本时，Update()不会被调用，当GameObejct被禁用时，所有附加脚本的Update()都停止调用</strong></p>
+
+<h4 id="关于lateupdate">关于<code class="language-plaintext highlighter-rouge">LateUpdate()</code></h4>
+<ul>
+  <li>每帧调用一次，但始终在所有<code class="language-plaintext highlighter-rouge">Update()</code>函数调用之后调用</li>
+  <li>用于需要在所有<code class="language-plaintext highlighter-rouge">Update()</code>完成后再处理的逻辑</li>
+</ul>
+
+<h5 id="典型用途">典型用途</h5>
+<p><strong>1.摄像机跟随</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">FollowTarget</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">Transform</span> <span class="n">target</span><span class="p">;</span>
+
+    <span class="k">void</span> <span class="nf">LateUpdate</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">target</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">transform</span><span class="p">.</span><span class="n">position</span> <span class="p">=</span> <span class="n">target</span><span class="p">.</span><span class="n">position</span> <span class="p">+</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="p">-</span><span class="m">10</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>假设主角的位置在<code class="language-plaintext highlighter-rouge">Update()</code>中移动</li>
+  <li>如果摄像机在<code class="language-plaintext highlighter-rouge">Update()</code>中跟随，就会比角色“慢一帧”</li>
+  <li>用<code class="language-plaintext highlighter-rouge">LateUpdate()</code>可以确保摄像机总是跟着角色最终的位置</li>
+</ul>
+
+<p><strong>2.骨骼/动画后处理</strong></p>
+<ul>
+  <li>动画系统也会在<code class="language-plaintext highlighter-rouge">Update()</code>后更新状态</li>
+  <li>用<code class="language-plaintext highlighter-rouge">LateUpdate()</code>来处理动画附属物的位置，如武器、特效等</li>
+</ul>
+
+<p><strong>3.平滑插值（Smooth Follow）</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">LateUpdate</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">transform</span><span class="p">.</span><span class="n">position</span> <span class="p">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="nf">Lerp</span><span class="p">(</span><span class="n">transform</span><span class="p">.</span><span class="n">position</span><span class="p">,</span> <span class="n">target</span><span class="p">.</span><span class="n">position</span><span class="p">,</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span> <span class="p">*</span> <span class="m">5</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>放在<code class="language-plaintext highlighter-rouge">LateUpdate()</code>可以让插值始终作用在最终位置上
+    <blockquote>
+      <p><code class="language-plaintext highlighter-rouge">LateUpdate()</code>是在每帧所有逻辑处理完之后调用的函数，适合做跟随、补偿、视觉同步、动画后处理等操作</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h4 id="关于fixedupdate">关于<code class="language-plaintext highlighter-rouge">FixedUpdate()</code></h4>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">FixedUpdate()</code>是MonoBehaviour提供的生命周期函数</li>
+  <li>以固定的时间间隔执行，默认每0.02s，而不是每帧执行一次</li>
+  <li>适用于物理引擎相关的逻辑（刚体、碰撞器、重力等）</li>
+  <li>使用<code class="language-plaintext highlighter-rouge">Time.fixedDeltaTime</code>进行时间控制
+    <blockquote>
+      <p><code class="language-plaintext highlighter-rouge">FixedUpdate()</code>不一定每帧都调用，也可能在一帧内被调用多次（为了补上落后时间）</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h5 id="为什么物理逻辑必须放在fixedupdate">为什么物理逻辑必须放在<code class="language-plaintext highlighter-rouge">FixedUpdate()</code></h5>
+<p>Unity的物理系统（Rigidbody、Collider等）是在物理引擎中执行的，它以固定步长（Fixed Timestep）计算模拟</p>
+
+<p>如果你在<code class="language-plaintext highlighter-rouge">Update()</code>中对刚体施加力</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Update</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">rb</span><span class="p">.</span><span class="nf">AddForce</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">forward</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>每帧调用一次，但帧率变化会导致模拟不准确</li>
+  <li>如果FPS降低，你的物体就加速慢了</li>
+</ul>
+
+<p>正确做法：</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">FixedUpdate</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">rb</span><span class="p">.</span><span class="nf">AddForce</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">forward</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>固定时间模拟，物理表现就一致</li>
+</ul>
+
+<h5 id="时间控制">时间控制</h5>
+<p>默认情况下：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Time.fixedDeltaTime = 0.02f(每秒调用50次)
+</code></pre></div></div>
+<p>可以通过<code class="language-plaintext highlighter-rouge">Edit &gt; Project Setting &gt; Time</code>修改</p>
+
+<p><strong>示例：让角色持续向前移动（基于物理）</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Rigidbody</span> <span class="n">rb</span><span class="p">;</span>
+
+<span class="k">void</span> <span class="nf">Start</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">rb</span> <span class="p">=</span> <span class="n">GetComponenet</span><span class="p">&lt;</span><span class="n">Rigidbody</span><span class="p">&gt;();</span>
+
+<span class="k">void</span> <span class="nf">FixedUpdate</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">rb</span><span class="p">.</span><span class="nf">MovePosition</span><span class="p">(</span><span class="n">rb</span><span class="p">.</span><span class="n">position</span> <span class="p">+</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">forward</span> <span class="p">*</span> <span class="m">5f</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">fixedDeltaTime</span><span class="p">);</span>
+</code></pre></div></div>
+<ul>
+  <li>用<code class="language-plaintext highlighter-rouge">MovePosition()</code>更适合刚体控制</li>
+  <li><code class="language-plaintext highlighter-rouge">Time.fixedDeltaTime</code>保持匀速</li>
+</ul>
+
+<p><strong>注意事项</strong>
+1.不要在<code class="language-plaintext highlighter-rouge">FixedUpdate()</code>中检测<code class="language-plaintext highlighter-rouge">Input.GetKey()</code><br />
+因为输入每帧更新，可能miss</p>
+
+<p>2.与物理系统交互统一放在<code class="language-plaintext highlighter-rouge">FixedUpdate()</code><br />
+避免不一致和jitter</p>
+
+<p>3.可能一帧内调用多次<code class="language-plaintext highlighter-rouge">FixedUpdate()</code>
+这是为了追上物理时间进度</p>
+
+<h4 id="碰撞触发事件">碰撞/触发事件</h4>
+
+<p>发生在物理更新阶段（即<code class="language-plaintext highlighter-rouge">FixedUpdate()</code>阶段）之后调用，调用频率和FixedUpdate()一致，不受帧率的影响</p>
+
+<p><strong>Rigidbody + Collider才能触发以下函数</strong></p>
 
 <table>
   <thead>
     <tr>
-      <th>属性/方法</th>
-      <th>类型</th>
+      <th>函数名</th>
+      <th>用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnCollisionEnter(Collision col)</code></td>
+      <td>碰撞开始</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnCollisionStay(Collision col)</code></td>
+      <td>碰撞持续</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnCollisionExit(Collision col)</code></td>
+      <td>碰撞结束</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnTriggerEnter(Collider col)</code></td>
+      <td>触发器进入</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnTriggerStay(Collider col)</code></td>
+      <td>触发器内持续</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnTriggerExit(Collider col)</code></td>
+      <td>触发器离开</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="/posts/2025-06-03-Physics-System/">Unity物理系统</a></p>
+
+<h4 id="渲染阶段">渲染阶段</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>阶段</th>
+      <th>用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnPreRender()</code></td>
+      <td>摄像机开始渲染前</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnRenderObject()</code></td>
+      <td>所有对象渲染时</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnPostRender()</code></td>
+      <td>摄像机完成渲染后</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnWillRenderObject()</code></td>
+      <td>对象将被摄像机渲染前</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnDrawGizmos()</code> / <code class="language-plaintext highlighter-rouge">OnDrawGizmosSelected()</code></td>
+      <td>编辑器中画 Gizmos</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="禁用销毁阶段">禁用/销毁阶段</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>函数名</th>
       <th>说明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">type</code></td>
-      <td><code class="language-plaintext highlighter-rouge">LightType</code></td>
-      <td>光源类型（<code class="language-plaintext highlighter-rouge">Directional</code>, <code class="language-plaintext highlighter-rouge">Point</code>, <code class="language-plaintext highlighter-rouge">Spot</code>, <code class="language-plaintext highlighter-rouge">Area</code>）</td>
+      <td><code class="language-plaintext highlighter-rouge">OnDisable()</code></td>
+      <td>脚本被禁用时调用（如 <code class="language-plaintext highlighter-rouge">enabled = false</code> 或 <code class="language-plaintext highlighter-rouge">SetActive(false)</code>）</td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">color</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Color</code></td>
-      <td>光的颜色</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">intensity</code></td>
-      <td><code class="language-plaintext highlighter-rouge">float</code></td>
-      <td>光照强度</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">range</code></td>
-      <td><code class="language-plaintext highlighter-rouge">float</code></td>
-      <td>光照范围（Point/Spot）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">spotAngle</code></td>
-      <td><code class="language-plaintext highlighter-rouge">float</code></td>
-      <td>聚光灯角度（Spot）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">enabled</code></td>
-      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
-      <td>是否启用光源</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">shadows</code></td>
-      <td><code class="language-plaintext highlighter-rouge">LightShadows</code></td>
-      <td>阴影类型（None/Hard/Soft）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">cookie</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Texture</code></td>
-      <td>光照投影纹理</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">cookieSize</code></td>
-      <td><code class="language-plaintext highlighter-rouge">float</code></td>
-      <td>Cookie 范围（仅限 Directional Light）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">renderMode</code></td>
-      <td><code class="language-plaintext highlighter-rouge">LightRenderMode</code></td>
-      <td>自动/强制重要/强制非重要</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">bounceIntensity</code></td>
-      <td><code class="language-plaintext highlighter-rouge">float</code></td>
-      <td>间接光强度（GI 反射）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">flare</code></td>
-      <td><code class="language-plaintext highlighter-rouge">LensFlare</code></td>
-      <td>镜头光晕组件</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">cullingMask</code></td>
-      <td><code class="language-plaintext highlighter-rouge">LayerMask</code></td>
-      <td>此灯光影响的层（需要启用“Forward Rendering”）</td>
+      <td><code class="language-plaintext highlighter-rouge">OnDestroy()</code></td>
+      <td>脚本被销毁前调用，用于释放资源、停止协程等</td>
     </tr>
   </tbody>
 </table>
 
-<p><strong><a href="https://docs.unity3d.com/2022.3/Documentation/ScriptReference/Light.html">Unit官方文档（Light）</a></strong></p>
+<h4 id="应用生命周期事件">应用生命周期事件</h4>
 
-<h2 id="示例动态控制灯光">示例：动态控制灯光</h2>
-<p><strong>1.开关灯</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>函数名</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnApplicationPause(bool pause)</code></td>
+      <td>应用暂停/恢复时调用（如手机切后台）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnApplicationFocus(bool focus)</code></td>
+      <td>是否获得焦点（如切到其他应用）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnApplicationQuit()</code></td>
+      <td>应用关闭前调用</td>
+    </tr>
+  </tbody>
+</table>
 
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">ToggleLight</span><span class="p">()</span>
+<h2 id="自定义生命周期顺序">自定义生命周期顺序</h2>
+<p>Unity默认调用顺序无法改变（例如A的Awake总在B前），但可以手动更改执行顺序</p>
+
+<h3 id="方法一inspector设置执行顺序">方法一：Inspector设置执行顺序</h3>
+<p>菜单栏：<code class="language-plaintext highlighter-rouge">Edit &gt; Project Settings &gt; Script Execution Order</code><br />
+把关键脚本设置为更早或更晚执行</p>
+
+<h3 id="方法二代码显示调用推荐">方法二：代码显示调用（推荐）</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Awake</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="n">Light</span> <span class="n">light</span> <span class="p">=</span> <span class="n">GetComponenet</span><span class="p">&lt;</span><span class="n">Light</span><span class="p">&gt;();</span>
-    <span class="n">light</span><span class="p">.</span><span class="n">enabled</span> <span class="p">=</span> <span class="p">!</span><span class="n">light</span><span class="p">.</span><span class="n">enabled</span><span class="p">;</span>
+    <span class="n">manager</span> <span class="p">=</span> <span class="n">FindObjectOfType</span><span class="p">&lt;</span><span class="n">GameManager</span><span class="p">&gt;();</span>
+    <span class="n">manager</span><span class="p">.</span><span class="nf">Register</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
+<h2 id="scriptableobject数据驱动">ScriptableObject（数据驱动）</h2>
+<p><code class="language-plaintext highlighter-rouge">ScriptableObject</code> 是 Unity 中的一个重要类，用于存储共享的、可序列化的数据，而无需将数据绑定到具体的场景或 GameObject 上。它是继承自 UnityEngine.Object 的一种轻量级的、可持久化的类，适合用于定义配置数据、全局变量、数据模板等。</p>
 
-<p><strong>2.改变颜色和强度</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">SetAlertMode</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="n">Light</span> <span class="n">light</span> <span class="p">=</span> <span class="n">GetCompenent</span><span class="p">&lt;</span><span class="n">Light</span><span class="p">&gt;();</span>
-    <span class="n">light</span><span class="p">.</span><span class="n">color</span> <span class="p">=</span> <span class="n">Color</span><span class="p">.</span><span class="n">red</span><span class="p">;</span>
-    <span class="n">light</span><span class="p">.</span><span class="n">instensity</span> <span class="p">=</span> <span class="m">5f</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p><strong>3.手电筒控制</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="n">Light</span> <span class="n">flashlight</span><span class="p">;</span>
-
-<span class="k">void</span> <span class="nf">Update</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="k">if</span><span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="nf">GetKeyDown</span><span class="p">(</span><span class="n">KeyCode</span><span class="p">.</span><span class="n">F</span><span class="p">))</span> <span class="n">flashlight</span><span class="p">.</span><span class="n">enable</span> <span class="p">=</span> <span class="p">!</span><span class="n">flashlight</span><span class="p">.</span><span class="n">enable</span><span class="p">;</span>
-</code></pre></div></div>
-
-<h2 id="枚举类型">枚举类型</h2>
-
-<p><code class="language-plaintext highlighter-rouge">LightType</code></p>
-
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">LightType</span><span class="p">.</span><span class="n">Directional</span>
-<span class="n">LightType</span><span class="p">.</span><span class="n">Point</span>
-<span class="n">LightType</span><span class="p">.</span><span class="n">Spot</span>
-<span class="n">LightType</span><span class="p">.</span><span class="n">Area</span>
-</code></pre></div></div>
-
-<p><code class="language-plaintext highlighter-rouge">LightShadows</code></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">LightShadows</span><span class="p">.</span><span class="n">None</span>
-<span class="n">LightShadows</span><span class="p">.</span><span class="n">Hard</span>
-<span class="n">LightShadows</span><span class="p">.</span><span class="n">Soft</span>
-</code></pre></div></div>
-
-<p><code class="language-plaintext highlighter-rouge">LightRenderMode</code></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">LightRenderMode</span><span class="p">.</span><span class="n">Auto</span>
-<span class="n">LightRenderMode</span><span class="p">.</span><span class="n">ForcePixel</span>
-<span class="n">LightRenderMode</span><span class="p">.</span><span class="n">ForceVertex</span>
-</code></pre></div></div>
-
-<h2 id="动态创建光源">动态创建光源</h2>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObject</span> <span class="n">lightObj</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">GameObject</span><span class="p">(</span><span class="s">"My Light"</span><span class="p">);</span>
-<span class="n">Light</span> <span class="n">light</span> <span class="p">=</span> <span class="n">lightObj</span><span class="p">.</span><span class="n">AddComponenet</span><span class="p">&lt;</span><span class="n">Light</span><span class="p">&gt;();</span>
-<span class="n">light</span><span class="p">.</span><span class="n">type</span> <span class="p">=</span> <span class="n">LightType</span><span class="p">.</span><span class="n">Point</span><span class="p">;</span>
-<span class="n">light</span><span class="p">.</span><span class="n">color</span> <span class="p">=</span> <span class="n">Color</span><span class="p">.</span><span class="n">yellow</span><span class="p">;</span>
-<span class="n">light</span><span class="p">.</span><span class="n">range</span> <span class="p">=</span> <span class="m">10</span><span class="p">;</span>
-<span class="n">light</span><span class="p">.</span><span class="n">intensity</span> <span class="p">=</span> <span class="m">2</span><span class="p">;</span>
-</code></pre></div></div>
-
-<h2 id="阴影shadows">阴影（Shadows）</h2>
-
-<p><strong>1.Type（类型）</strong></p>
+<h3 id="scriptableobject的常见用途">ScriptableObject的常见用途</h3>
 <ul>
-  <li><strong>Hard Shadows:</strong> 边缘锐利，性能好</li>
-  <li><strong>SoftShadows:</strong> 边缘柔和，更真实，但性能稍低</li>
+  <li>配置文件（如技能、道具、怪物数据等）</li>
+  <li>全局设置（如游戏设置、控制配置）</li>
+  <li>数据资产（如对话文本、地图配置）</li>
+  <li>状态管理（如状态机状态定义）</li>
 </ul>
 
-<p><strong>2.Strength（强度）</strong>
-控制阴影颜色的不透明度</p>
-
-<p><strong>3.Bias / Normal Bias</strong>
-用于消除“Peter Panning”（阴影漂浮）或自阴影伪影的问题</p>
-
-<h2 id="环境光">环境光</h2>
-
-<p>全局光照设置不依赖于某个 Light，而是在场景中作为基础光存在：</p>
-
+<h3 id="示例创建一个技能数据的scriptableobject">示例：创建一个技能数据的ScriptableObject</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+<span class="p">[</span><span class="nf">CreateAssetMenu</span><span class="p">(</span><span class="n">fileName</span> <span class="p">=</span> <span class="s">"NewSkill"</span><span class="p">,</span> <span class="n">menuName</span> <span class="p">=</span> <span class="s">"RPG/Skill"</span><span class="p">)]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Skill</span> <span class="p">:</span> <span class="n">ScriptableObject</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">skillName</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">power</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">float</span> <span class="n">cooldown</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 <ul>
+  <li>[CreateAssetMenu]方便在编译器中通过菜单创建资源</li>
+  <li>定义你想要保存的数据字段
+使用步骤：<br />
+1.把上述脚本命名为<code class="language-plaintext highlighter-rouge">Skill.cs</code> <br />
+2.在Unity编辑器中，右键-&gt;Create-&gt;RPG-&gt;Skill，即可创建一个Skill数据文件<br />
+3.你可以创建多个Skill数据文件，并在多个对象中引用它们，节省内存和维护成本</li>
+</ul>
+
+<p>在代码中使用ScriptableObject</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">SkillUser</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">Skill</span> <span class="n">skill</span><span class="p">;</span> <span class="c1">// 在Inspector中拖拽刚才创建的Skill资源</span>
+
+    <span class="k">void</span> <span class="nf">UseSkill</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">$"使用技能：</span><span class="p">{</span><span class="n">skill</span><span class="p">.</span><span class="n">skillName</span><span class="p">}</span><span class="s">, 伤害：</span><span class="p">{</span><span class="n">skill</span><span class="p">.</span><span class="n">power</span><span class="p">}</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h3 id="scriptableobject高级用法">ScriptableObject高级用法</h3>
+<ol>
   <li>
-    <p>打开方式：Window &gt; Rendering &gt; Lighting &gt; Environment</p>
+    <p>用它做游戏配置数据
+比如怪物属性、武器数据、UI 配置，都可以用 ScriptableObject 做成资产文件。</p>
   </li>
   <li>
-    <p>设置：</p>
+    <p>数据驱动设计（Data-Driven）
+通过 ScriptableObject 分离数据和逻辑，修改数据时不用改代码，方便调试和迭代。</p>
+  </li>
+  <li>
+    <p>状态机状态定义
+做 AI 或动画状态机时，每个状态可以是一个 ScriptableObject，对应一组数据和行为。</p>
+  </li>
+  <li>
+    <p>事件系统和观察者模式
+结合 UnityEvent 或自定义事件，ScriptableObject 能充当“事件资产”，实现跨对象通信。</p>
+  </li>
+</ol>
 
+<h3 id="scriptableobject的高级技巧">ScriptableObject的高级技巧</h3>
+<ul>
+  <li>避免重复加载资源：多个对象引用同一个ScriptableObject，可以减少重复实例化</li>
+  <li>与事件系统结合：搭配<code class="language-plaintext highlighter-rouge">UnityEvent</code>或观察者模式，可以做数据驱动的游戏逻辑</li>
+  <li>与Addressables结合：更好地支持热更新和资源管理</li>
+</ul>
+
+<h2 id="unity-attribute">Unity Attribute</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>特性名称</th>
+      <th>用途说明</th>
+      <th>示例</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[SerializeField]</code></td>
+      <td>让私有字段在 Inspector 面板可见且可编辑</td>
+      <td><code class="language-plaintext highlighter-rouge">private int hp;</code> + <code class="language-plaintext highlighter-rouge">[SerializeField]</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[HideInInspector]</code></td>
+      <td>隐藏公有字段或属性，不显示在 Inspector 面板</td>
+      <td><code class="language-plaintext highlighter-rouge">public float speed;</code> + <code class="language-plaintext highlighter-rouge">[HideInInspector]</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[Range(min, max)]</code></td>
+      <td>在 Inspector 显示滑动条控制数值范围</td>
+      <td><code class="language-plaintext highlighter-rouge">[Range(0, 100)] public int volume;</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[Header("标题")]</code></td>
+      <td>给 Inspector 中的字段添加标题分组</td>
+      <td><code class="language-plaintext highlighter-rouge">[Header("Player Settings")] public int hp;</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[Tooltip("说明")]</code></td>
+      <td>鼠标悬停字段时显示提示文本</td>
+      <td><code class="language-plaintext highlighter-rouge">[Tooltip("Player health points")] public int hp;</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[ContextMenu("方法名")]</code></td>
+      <td>在 Inspector 的组件右上菜单调用方法</td>
+      <td><code class="language-plaintext highlighter-rouge">[ContextMenu("Reset Stats")] void Reset() { ... }</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[CreateAssetMenu]</code></td>
+      <td>在编辑器菜单创建 ScriptableObject 资产</td>
+      <td><code class="language-plaintext highlighter-rouge">[CreateAssetMenu(menuName="RPG/Skill")]</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="序列化serialization">序列化（Serialization）</h2>
+<h3 id="什么是序列化">什么是序列化</h3>
+<p>简单来说，序列化就是把内存中的对象转换成可以存储或传输的格式的过程，比如转换成二进制、JSON、XML、或者Unity自己的资产格式<br />
+反过来，反序列化（Deserialization）就是把存储或传输的格式转换回程序内存分钟的对象</p>
+
+<h3 id="为什么要序列化">为什么要序列化</h3>
+<p>1.保存数据<br />
+游戏存档就是把游戏状态保存到磁盘上的过程，这个过程就是序列化</p>
+
+<p>2.编辑器显示与修改数据<br />
+Unity Inspector面板显示脚本里字段的值，需要序列化这些字段才能让编辑器读写它们</p>
+
+<p>3.网络传输<br />
+多人游戏中，玩家状态需要网络传输，也要序列化成网络能传输的格式</p>
+
+<h3 id="unity里的序列化">Unity里的序列化</h3>
+<p>Unity有自己的一套序列化规则，决定安歇数据会被序列化（保存、显示在Inspector）：</p>
+<ul>
+  <li>public字段 默认被序列化</li>
+  <li>private字段 需要加[SerializeField]才会序列化</li>
+  <li>Unity只序列化支持的类型，比如基本类型、Unity内置类型、自定义继承自UnityEngine.Object的类，和标记为[Serializable]的自定义类</li>
+  <li>属性（Property）默认不序列化，必须用字段</li>
+</ul>
+
+<p><strong>示例</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Player</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">health</span> <span class="p">=</span> <span class="m">100</span><span class="p">;</span>            <span class="c1">// 会序列化并显示在 Inspector</span>
+    <span class="p">[</span><span class="n">SerializeField</span><span class="p">]</span>
+    <span class="k">private</span> <span class="kt">int</span> <span class="n">mana</span> <span class="p">=</span> <span class="m">50</span><span class="p">;</span>              <span class="c1">// 虽然是private，但加了特性会序列化</span>
+
+    <span class="k">private</span> <span class="kt">int</span> <span class="n">secret</span> <span class="p">=</span> <span class="m">999</span><span class="p">;</span>           <span class="c1">// 不序列化，不显示在 Inspector</span>
+
+    <span class="p">[</span><span class="n">System</span><span class="p">.</span><span class="n">NonSerialized</span><span class="p">]</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">tempValue</span> <span class="p">=</span> <span class="m">123</span><span class="p">;</span>         <span class="c1">// 明确不序列化，即使public也不会序列化</span>
+<span class="p">}</span>
+</code></pre></div></div>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[Unity脚本就是你编写的C#类，它控制游戏中物体的行为、交互、动画、输入、碰撞、UI等逻辑]]></summary></entry><entry><title type="html">Unity Componenet-Driven Architecture</title><link href="http://localhost:4000/posts/2025-06-02-Unity-Architecture/" rel="alternate" type="text/html" title="Unity Componenet-Driven Architecture" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Unity-Architecture</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-02-Unity-Architecture/"><![CDATA[<p>Unity是如何驱动组件系统的</p>
+
+<p>从<strong>运行架构</strong>、<strong>组件调度机制</strong>、<strong>底层实现</strong>三个方面来深度剖析</p>
+
+<h3 id="unity的运行架构经典gameobject-component模型">Unity的运行架构（经典GameObject-Component模型）</h3>
+<p>Unity引擎的架构是 <strong>“组合优于继承”</strong> 的典范：</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">GameObject</code>：游戏世界中所有对象的容器</li>
+  <li><code class="language-plaintext highlighter-rouge">Component</code>：挂在GameObject上的功能模块</li>
+  <li><code class="language-plaintext highlighter-rouge">MonoBehaviour</code>：Unity脚本组件的基类，支持生命周期函数</li>
+</ul>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//伪代码结构</span>
+<span class="k">class</span> <span class="nc">GameObject</span>
+<span class="p">{</span>
+    <span class="n">List</span><span class="p">&lt;</span><span class="n">Component</span><span class="p">&gt;</span> <span class="n">components</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Component</span>
+<span class="p">{</span>
+    <span class="n">GameObject</span> <span class="n">gameObject</span><span class="p">;</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<h2 id="unity是如何调度组件的生命周期的">Unity是如何调度组件的生命周期的</h2>
+<p>Unity在每一帧都会按以下顺序做一次组件调度遍历：</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>For ever active GameObject:
+    For every enable Component:
+        If first frame:
+            Call Awake()
+            Call Start()
+
+    Run physics:
+        Call FixedUpdate()
+
+    Handle rendering:
+        Transform -&gt; Camera -&gt; Renderer
+</code></pre></div></div>
+<ul>
+  <li>Unity引擎内部有个巨大的函数表（或反射表），知道哪些组件实现了哪些生命周期函数</li>
+  <li>每一帧自动去“调用你实现的函数”</li>
+  <li>C++内部利用RTTI或IL2CPP编译出的函数表映射进行调用</li>
+</ul>
+
+<h2 id="底层实现机制">底层实现机制</h2>
+<h3 id="在mono引擎早期或il2cpp编译后">在Mono引擎（早期）或IL2CPP编译后</h3>
+<ul>
+  <li>Unity会扫描所有<code class="language-plaintext highlighter-rouge">MonoBehaviour</code>脚本的继承结构和成员函数</li>
+  <li>使用反射或JIT（Mono）或AOT（IL2CPP）建立生命周期函数映射</li>
+  <li>每帧调用<code class="language-plaintext highlighter-rouge">Update()</code>时并不是逐个判断字符串，而是已建立了对应的“执行列表”
+    <blockquote>
+      <p>IL2CPP模式下，C#代码会被编译成C++，再编译成机器码，性能更好，但调试难</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h2 id="unity怎么知道你挂了什么组件">Unity怎么知道你挂了什么组件</h2>
+<p>每个GameObject内部维护了一个组件列表（通常是数组或链表），每个组件记录自己类型，并且Unity会为常见组件使用缓存优化</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">GetComponent&lt;T&gt;()</code>实际上会进行：
     <ul>
-      <li>
-        <p>Ambient Source：Color / Gradient / Skybox</p>
-      </li>
-      <li>
-        <p>Ambient Intensity：环境光强度</p>
-      </li>
+      <li>查缓存</li>
+      <li>缓存没有就遍历组件数组</li>
+      <li>找到就缓存下来，下次加速</li>
     </ul>
   </li>
-  <li>
-    <p>可搭配天空盒（Skybox）提升视觉氛围</p>
+</ul>
+
+<h2 id="unity-gameobject--component的底层存储结构">Unity <code class="language-plaintext highlighter-rouge">GameObject</code> + <code class="language-plaintext highlighter-rouge">Component</code>的底层存储结构</h2>
+<p>GameObject + Component架构时Unity的核心数据结构<br />
+大致如下：</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Scene
+ └── GameObjects (树状结构)
+      ├── GameObject A
+      │     ├── Transform (每个 GameObject 必有)
+      │     ├── MeshRenderer
+      │     ├── BoxCollider
+      │     └── MyScript (MonoBehaviour)
+      └── GameObject B
+            └── Transform
+</code></pre></div></div>
+<p>在内存中的布局</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[GameObject]
+ ├─ Name: "Enemy"
+ ├─ Tag: "Enemy"
+ ├─ Active: true
+ ├─ Component[] --&gt; 指向一组组件
+ │    ├─ [0] Transform*
+ │    ├─ [1] MeshRenderer
+ │    ├─ [2] MyScript : MonoBehaviour
+ └─ SceneNode / Parent / Children 等关系信息
+</code></pre></div></div>
+<ul>
+  <li>所有组件都存储在一个 <strong>Component列表（数组/链表）</strong> 中</li>
+  <li><code class="language-plaintext highlighter-rouge">Transform</code>总是第一个组件（内置逻辑保证）</li>
+  <li>每个<code class="language-plaintext highlighter-rouge">Component</code>内部都有一个指向所属<code class="language-plaintext highlighter-rouge">GameObject</code>的反向引用
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">GameObject</span>
+<span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Componenet</span><span class="o">*&gt;</span> <span class="n">components</span><span class="p">;</span>
+  <span class="n">Transform</span><span class="o">*</span> <span class="n">transform</span><span class="p">;</span>
+  <span class="p">...</span>
+<span class="p">};</span>
+</code></pre></div>    </div>
+    <h2 id="gameobject-与-component">GameObject 与 Component</h2>
+    <blockquote>
+      <p>一个GameObject本身只是一个空壳，组件赋予它行为和外观</p>
+    </blockquote>
   </li>
 </ul>
 
-<h2 id="高级功能">高级功能</h2>
-<p><strong>1.Light Cookies（光照贴图）</strong>
-使用一张纹理控制光照形状，常用于：</p>
+<p>每个GameObject都至少由这三个组件（不可移除）：</p>
 <ul>
-  <li>手电筒</li>
-  <li>模拟窗户栅栏照进屋内的光影</li>
-  <li>火焰跳动的效果</li>
+  <li>Transform</li>
+  <li>Tag</li>
+  <li>Layer</li>
 </ul>
 
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">light</span><span class="p">.</span><span class="n">cookie</span> <span class="p">=</span> <span class="n">yourTexture</span><span class="p">;</span>
+<p>此外可以向GameObject添加任意数量的组件</p>
+
+<p>每个组件就是一块插件，GameObject就像是空机壳，插上不同“模块”就有不同功能</p>
+
+<p>Unity中组件影响GameObject的底层原理涉及到引擎的架构设计，主要是基于ECS的理念，虽然MonoBehaviour不是纯ECS，但是思想相近</p>
+
+<p>在底层， Unity的架构可以简化成</p>
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">GameObject</span> <span class="p">=</span> <span class="s">实体（Entity）</span>
+<span class="py">Component</span> <span class="p">=</span> <span class="s">数据 + 行为</span>
 </code></pre></div></div>
 
-<p><strong>2.体积光</strong>
-Unity标准版本不自带，可通过插件实现（如HDRP或Volumetric Lighting插件）实现光柱、薄雾等效果</p>
-
-<h2 id="光照的重要系统">光照的重要系统</h2>
-<p><strong>1.Light Probes</strong></p>
+<h3 id="gameobject本身">GameObject本身</h3>
 <ul>
-  <li>用于让动态对象接收静态光照烘培信息</li>
-  <li>适用于混合模式</li>
+  <li>是一个空容器，并不做事</li>
+  <li>只持有一个Transform</li>
+  <li>它维护一个组件列表（Component List）</li>
 </ul>
 
-<p><strong>2.Reflection Probes</strong></p>
+<h3 id="当添加组件时">当添加组件时</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gameObject</span><span class="p">.</span><span class="n">AddComponent</span><span class="p">&lt;</span><span class="n">Rigidbody</span><span class="p">&gt;();</span>
+</code></pre></div></div>
+<p>Unity引擎底层会：
+<strong>1.分配内存：在C++层面为<code class="language-plaintext highlighter-rouge">Rigidbody</code>组件实例分配空间</strong></p>
+
+<p><strong>2.注册行为：将这个组件加入到<code class="language-plaintext highlighter-rouge">GameObject</code>的组件列表中</strong></p>
+
+<p><strong>3.标记更新：将这个GameObject添加到物理系统更新队列中</strong></p>
+
+<p><strong>4.启用生命周期函数</strong></p>
+
+<h3 id="行为生效">行为生效</h3>
+<p>Unity引擎每帧进行如下操作：</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for each GameObject:
+    for each Component in GameObject:
+        if Component.enabled:
+            Call Component.Update() / Render() / PhysicsStep()
+</code></pre></div></div>
+<p>具体到组件类型：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>组件类型</th>
+      <th>引擎系统</th>
+      <th>调用方式</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">MonoBehaviour</code></td>
+      <td>脚本系统</td>
+      <td><code class="language-plaintext highlighter-rouge">Update()</code>、<code class="language-plaintext highlighter-rouge">FixedUpdate()</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Rigidbody</code></td>
+      <td>物理系统（PhysX）</td>
+      <td>每帧物理步计算</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Renderer</code></td>
+      <td>渲染系统（Graphics）</td>
+      <td>每帧调用 GPU 绘制命令</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Collider</code></td>
+      <td>碰撞系统</td>
+      <td>注册到空间分区中</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">AudioSource</code></td>
+      <td>音频系统</td>
+      <td>发出 PCM 数据到音频设备</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="unity引擎背后的底层结构简化">Unity引擎背后的底层结构（简化）</h3>
+<div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">GameObject</span> <span class="o">(</span><span class="nt">C</span><span class="nn">#</span><span class="err">层</span> <span class="nt">wrapper</span><span class="o">)</span>
+ <span class="err">└─</span> <span class="nt">native</span> <span class="nt">GameObject</span> <span class="o">(</span><span class="nt">C</span><span class="o">++</span><span class="err">层</span><span class="o">)</span>
+       <span class="err">├──</span> <span class="nt">Transform</span>
+       <span class="err">├──</span> <span class="nt">Component</span><span class="o">[]</span>
+       <span class="err">│</span>    <span class="err">├──</span> <span class="nt">MonoBehaviour</span><span class="err">（</span><span class="nt">C</span><span class="nn">#</span><span class="err">脚本）</span>
+       <span class="err">│</span>    <span class="err">├──</span> <span class="nt">Renderer</span>
+       <span class="err">│</span>    <span class="err">├──</span> <span class="nt">Rigidbody</span>
+       <span class="err">│</span>    <span class="err">└──</span> <span class="nc">...</span>
+</code></pre></div></div>
+<p>Unity通过“托管桥接机制（Managed to Native Binding）”来让C#脚本和底层C++引擎通讯</p>
+
+<h2 id="unity中生命周期函数的调度机制">Unity中生命周期函数的调度机制</h2>
+
+<h3 id="per-frame">Per Frame</h3>
+<p>Unity的C++引擎内部维护了一套复杂的调度系统，它在每帧中会依次完成：</p>
 <ul>
-  <li>用于模拟镜面反射或高光反射效果</li>
-  <li>反射球贴图可影响PBR材质</li>
+  <li>处理输入事件</li>
+  <li>调用<code class="language-plaintext highlighter-rouge">MonoBehaviour.Update()</code>等函数</li>
+  <li>执行物理模拟</li>
+  <li>渲染准备</li>
+  <li>真正渲染</li>
 </ul>
 
-<p><strong>3.Global Illumination（全局光照）</strong></p>
+<h3 id="调用过程以update为例">调用过程（以Update()为例）</h3>
+<p>**关键逻辑：Unity会在引擎启动时反射出所有含有Update()的脚本，并构建函数调度表（Invocation List）</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Startup:
+|___MonoScript Scanning（扫描所有脚本）
+       |___找出哪些脚本实现了Update()
+
+Runtime 每帧：
+|___遍历Update列表
+        |___调用脚本.Update()
+</code></pre></div></div>
+<blockquote>
+  <p>这个调度是Unity内部用C++写的调度器来完成的，不是C#代码自己管自己的调用</p>
+</blockquote>
+
+<h3 id="il2cpp行为">IL2CPP行为</h3>
+<p>当你开启IL2CPP编译</p>
 <ul>
-  <li>计算间接光（比如光从墙上反射到地面）</li>
-  <li>分为实时GI和烘焙GI（通过Enlighten或Progressive）</li>
+  <li>所有C#代码都会被编译成IL</li>
+  <li>Unity的IL2CPP工具将IL转成CXX</li>
+  <li>然后统一编译为Native Binary</li>
 </ul>
 
-<h2 id="光照调试技巧">光照调试技巧</h2>
+<p><strong>以Update()为例</strong>
+最终会变成：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">PlayerMove_Update</span><span class="p">(</span><span class="n">MonoBehaviour</span><span class="o">*</span> <span class="k">this</span><span class="p">)</span> <span class="p">{}</span>
+</code></pre></div></div>
+<blockquote>
+  <p>Unity引擎内核就可以直接调用这个C++函数，避免了反射调用，提高性能</p>
+</blockquote>
+
+<h2 id="unity启动流程">Unity启动流程</h2>
+
+<h3 id="0平台入口本地程序启动">0.平台入口：本地程序启动</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>平台</th>
+      <th>实际入口函数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Windows</td>
+      <td><code class="language-plaintext highlighter-rouge">main()</code> 或 <code class="language-plaintext highlighter-rouge">WinMain()</code>（由 <code class="language-plaintext highlighter-rouge">UnityPlayer.dll</code> 调用）</td>
+    </tr>
+    <tr>
+      <td>Android</td>
+      <td><code class="language-plaintext highlighter-rouge">android_main()</code>（JNI 进入 <code class="language-plaintext highlighter-rouge">libunity.so</code>）</td>
+    </tr>
+    <tr>
+      <td>iOS</td>
+      <td><code class="language-plaintext highlighter-rouge">UIApplicationMain()</code>（Objective-C）</td>
+    </tr>
+    <tr>
+      <td>WebGL</td>
+      <td><code class="language-plaintext highlighter-rouge">Module.main()</code>（JavaScript/wasm）</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>这些都在C++写的引擎底层里，不可见且无法修改</p>
+
+<h3 id="1引擎初始化阶段">1.引擎初始化阶段</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>步骤</th>
+      <th>内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>加载配置</td>
+      <td>读取 PlayerSettings、Graphics API、质量设置等</td>
+    </tr>
+    <tr>
+      <td>初始化子系统</td>
+      <td>渲染器、输入系统、物理引擎、音频系统等</td>
+    </tr>
+    <tr>
+      <td>初始化脚本引擎</td>
+      <td>启动 Mono 或 IL2CPP 虚拟机</td>
+    </tr>
+    <tr>
+      <td>加载资源管理系统</td>
+      <td>AssetBundle / Resources 等</td>
+    </tr>
+    <tr>
+      <td>加载启动场景</td>
+      <td>SceneManager 加载 Build Settings 中第一个 Scene</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="2场景加载后-创建gameobjectcomponent实例">2.场景加载后-创建GameObject/Component实例</h3>
+<p>加载场景时：</p>
 <ul>
-  <li>使用<code class="language-plaintext highlighter-rouge">Scene</code>视图右上角的Lighting工具查看光照影响</li>
-  <li>使用Light Explore（<code class="language-plaintext highlighter-rouge">Window &gt; Rendering &gt; Lighting &gt; Light Explorer</code>）快速管理所有光源</li>
-  <li>使用<code class="language-plaintext highlighter-rouge">Gizmos</code>选项查看光源范围</li>
+  <li>逐个读取GameObejct</li>
+  <li>为每个GameObject绑定组件</li>
+  <li>为挂载了<code class="language-plaintext highlighter-rouge">MonoBehaviour</code>的对象创建托管对象实例（C#）</li>
 </ul>
 
-<h2 id="性能建议">性能建议</h2>
-<p><strong>1.实时光数量尽量控制在2~4个</strong><br />
-<strong>2.阴影数量建议仅关键光源开启阴影</strong><br />
-<strong>3.静态光使用Baked，可大幅提升帧率</strong><br />
-<strong>4.动态光照使用Light Probe + Mixed模式</strong></p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Component" /><category term="Light" /><category term="Render" /><category term="Graphics" /><summary type="html"><![CDATA[Unity中的Light是照亮场景和物体的核心组件，也是实现逼真视觉效果的关键之一。合理使用光源可以极大提升游戏画面质量，同时也对性能有重要影响 Light决定了场景中物体如何被照亮、阴影如何生成、氛围如何表现]]></summary></entry></feed>
+<h3 id="3生命周期调用顺序首次">3.生命周期调用顺序（首次）</h3>
+<p>Unity中的生命周期调度系统，每帧按照生命周期函数顺序依次调用</p>
+
+<h3 id="4游戏循环开始每帧">4.游戏循环开始（每帧）</h3>
+<p>Unity内部引擎每帧执行以下大致顺序：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>顺序</th>
+      <th>方法</th>
+      <th>功能</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Input Update</td>
+      <td>处理键鼠、触摸、手柄输入</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><code class="language-plaintext highlighter-rouge">Update()</code></td>
+      <td>调用所有激活脚本的 <code class="language-plaintext highlighter-rouge">Update()</code>（每帧）</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>动画更新</td>
+      <td>Animator 执行动画播放</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>物理模拟</td>
+      <td><code class="language-plaintext highlighter-rouge">FixedUpdate()</code> 调用 + Rigidbody 计算</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td><code class="language-plaintext highlighter-rouge">LateUpdate()</code></td>
+      <td>通常用于摄像机跟随等逻辑</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>渲染准备</td>
+      <td>剔除、光照、材质、阴影计算等</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>渲染提交</td>
+      <td>图像渲染到屏幕，执行 UI、特效等</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td><code class="language-plaintext highlighter-rouge">OnGUI()</code></td>
+      <td>Unity GUI 系统（少用）</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>PostProcessing</td>
+      <td>后期处理：Bloom、HDR、MotionBlur</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="5脚本执行机制mono-vs-il2cpp">5.脚本执行机制（Mono vs IL2CPP）</h3>
+
+<h4 id="mono模式editor-或-dev-build">Mono模式（Editor 或 Dev Build）</h4>
+<ul>
+  <li>每个脚本是托管C#类，由Mono VM动态加载与反射调用</li>
+  <li>优点：调试快，热重载方便</li>
+  <li>缺点：性能差，函数调度慢</li>
+</ul>
+
+<h4 id="il2cpp模式正式发布时">IL2CPP模式（正式发布时）</h4>
+<ul>
+  <li>Unity构建时将C#脚本编译为C++源码 -&gt; 原始代码</li>
+  <li>所有<code class="language-plaintext highlighter-rouge">Update()</code>、<code class="language-plaintext highlighter-rouge">Awake()</code>变成真正的C++函数</li>
+  <li>优点：性能极高、无法反编译</li>
+  <li>缺点：编译慢，不支持热重载</li>
+</ul>
+
+<h2 id="unity-ecs新架构entity-component-system">Unity ECS（新架构：Entity-Component-System）</h2>
+<p>传统GameObject模式虽然灵活，但性能瓶颈明显（组件查找慢、缓存不友好）<br />
+Unity推出的ECS（DOTS）架构更接近底层系统编程</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>架构元素</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Entity</code></td>
+      <td>轻量 ID，不是 GameObject，零开销。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Component</code></td>
+      <td>纯数据结构（无逻辑），类似 C struct。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">System</code></td>
+      <td>控制逻辑，处理所有符合条件的 Entity+Component 数据。</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>ECS通过内存连续布局 + SIMD + JobSystem实现了超高性能</p>
+</blockquote>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Engine" /><summary type="html"><![CDATA[Unity是如何驱动组件系统的]]></summary></entry><entry><title type="html">Import Assets</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-assets.html" rel="alternate" type="text/html" title="Import Assets" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-assets</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-assets.html"><![CDATA[<p>Unity支持多种格式的资源文件，并能自动识别并进行初步处理</p>
+
+<h2 id="资源导入基本流程">资源导入基本流程</h2>
+<p><strong>1.将资源文件拖入<code class="language-plaintext highlighter-rouge">Assets</code>目录中（Unity会自动导入）</strong><br />
+<strong>2.在Inspector面板中查看导入设置</strong><br />
+<strong>3.配置相关参数，比如压缩方式、贴图类型、是否生成碰撞体等</strong><br />
+<strong>4.使用资源（拖到场景、作为材质贴图、挂到AudioSource等）</strong></p>
+
+<h2 id="模型">模型</h2>
+
+<h3 id="支持格式">支持格式</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">.fbx</code>推荐</li>
+  <li><code class="language-plaintext highlighter-rouge">.obj</code></li>
+  <li><code class="language-plaintext highlighter-rouge">.dae</code>（Collada）</li>
+  <li><code class="language-plaintext highlighter-rouge">.blend</code>（需要Blender）</li>
+</ul>
+
+<h3 id="导入流程">导入流程</h3>
+<p>1.拖拽<code class="language-plaintext highlighter-rouge">.fbx</code>文件到<code class="language-plaintext highlighter-rouge">Assets</code>文件夹<br />
+2.选中模型文件，查看<code class="language-plaintext highlighter-rouge">Inspector</code>的导入设置</p>
+<ul>
+  <li>Scale Factor：缩放（一般保持默认）</li>
+  <li>Import Animations：是否导入动画</li>
+  <li>Import Materials：是否导入材质</li>
+  <li>Generate Colliders：是否自动生成碰撞体</li>
+</ul>
+
+<h3 id="导入后组成">导入后组成</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Model</code>: 3D网格</li>
+  <li><code class="language-plaintext highlighter-rouge">Rig</code>（如果有骨骼）：用于动画绑定</li>
+  <li><code class="language-plaintext highlighter-rouge">Animation</code>：包含的动画片段</li>
+  <li><code class="language-plaintext highlighter-rouge">Materials</code>：自动生成或关联的材质</li>
+</ul>
+
+<h2 id="贴图">贴图</h2>
+
+<h3 id="支持格式-1">支持格式</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">.png</code>、<code class="language-plaintext highlighter-rouge">.jpg</code>、<code class="language-plaintext highlighter-rouge">.tga</code>、<code class="language-plaintext highlighter-rouge">.psd</code>（支持图层）等</li>
+</ul>
+
+<h3 id="导入流程-1">导入流程</h3>
+
+<p>1.拖入图片文件
+2.在Inspector中设置：</p>
+<ul>
+  <li>sRGB（Color Texture）：颜色贴图用，法线贴图需取消勾选</li>
+  <li>Alpha Is Transparency：如果使用透明通道</li>
+  <li>Wrap Mode：Repeat（平铺）或Clamp（拉伸）</li>
+  <li>Filter Mode：Bilinear、Trilinear、Point（像素风）</li>
+  <li>Compression：高压缩（小体积）还是高质量（清晰）</li>
+  <li>Texture Type:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">Default</code>（通用）</li>
+      <li><code class="language-plaintext highlighter-rouge">Sprite</code>（用于UI）</li>
+      <li><code class="language-plaintext highlighter-rouge">Normal map</code>（法线贴图）</li>
+      <li><code class="language-plaintext highlighter-rouge">Lightmap</code>（光照图）</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="音频">音频</h2>
+
+<h3 id="支持格式-2">支持格式</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">.mp3</code>（压缩）</li>
+  <li><code class="language-plaintext highlighter-rouge">.wav</code>（无损）</li>
+  <li><code class="language-plaintext highlighter-rouge">.ogg</code>（高效）</li>
+  <li><code class="language-plaintext highlighter-rouge">.aiff</code></li>
+</ul>
+
+<h2 id="导入流程-2">导入流程</h2>
+
+<p>1.拖入音频文件<br />
+2.在<code class="language-plaintext highlighter-rouge">Inspector</code>中设置：</p>
+<ul>
+  <li>Load Type：
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">Decompress On Load</code>（加载时解压，适合短音效）</li>
+      <li><code class="language-plaintext highlighter-rouge">Streaming</code>（边播放边加载，适合背景音乐）</li>
+    </ul>
+  </li>
+  <li>Compression Format:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">Vorbis</code>、<code class="language-plaintext highlighter-rouge">ADPCM</code>、<code class="language-plaintext highlighter-rouge">PCM</code></li>
+    </ul>
+  </li>
+  <li>3D Sound：是否启用3D空间化</li>
+  <li>Loop：是否循环播放</li>
+</ul>
+
+<blockquote>
+  <p><strong>资源组织建议：</strong> 使用好的文件夹结构和命名习惯，可以极大提高开发效率</p>
+</blockquote>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><summary type="html"><![CDATA[Unity支持多种格式的资源文件，并能自动识别并进行初步处理]]></summary></entry></feed>
