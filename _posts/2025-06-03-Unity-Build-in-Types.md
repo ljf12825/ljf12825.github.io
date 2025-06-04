@@ -6,6 +6,8 @@ categories: [笔记]
 tags: [Unity, Unity System]
 author: "ljf12825"
 ---
+Unity内建类型  
+
 
 ## 常见Unity内建类型（按用途分）
 ### 1.空间/几何类型（Transform相关）
@@ -21,7 +23,62 @@ author: "ljf12825"
 | `Rect`                          | 二维矩形区域           |
 | `Color`, `Color32`              | 表示颜色（线性空间和 sRGB） |
 
-- **Vector2 3 4**
+#### **Vector2 & Vector3 & Vector4**
+它们是Unity提供的三个核心向量类型，广泛用于位置、方向、速度、缩放、颜色等各种场景  
+
+##### 基本定义
+
+| 向量类型      | 维度                          | 作用                       |
+| --------- | --------------------------- | ------------------------ |
+| `Vector2` | 2D 向量，包含 `x`, `y`           | 用于 2D 空间中的位置、速度等         |
+| `Vector3` | 3D 向量，包含 `x`, `y`, `z`      | 用于 3D 空间中的大多数情况          |
+| `Vector4` | 4D 向量，包含 `x`, `y`, `z`, `w` | 用于更高级的计算，如齐次坐标、shader 编程 |
+
+**Vector2（二维向量）**  
+```csharp
+Vector2 position = new Vector2(1.5f, 3.0f);
+```
+常见用途：
+- 2D游戏中的对象位置、速度、加速度等
+- 屏幕空间坐标（如UI坐标）
+- 纹理坐标（UV mapping）
+
+**Vector3（三维向量）**  
+```csharp
+Vector3 direction = new Vector3(0f, 1f, 0f); //向上
+transform.position += direction * Time.deltaTime;
+```
+常见用途：
+- 3D对象的位置、方向、缩放
+- 物理运动（速度、加速度）
+- 相机方向、光照方向
+
+**Vector3常用静态变量**  
+```csharp
+Vector3.zero      // (0, 0, 0)
+Vector3.one       // (1, 1, 1)
+Vector3.up        // (0, 1, 0)
+Vector3.down      // (0, -1, 0)
+Vector3.left      // (-1, 0, 0)
+Vector3.right     // (1, 0, 0)
+Vector3.forward   // (0, 0, 1)
+Vector3.back      // (0, 0, -1)
+```
+
+**Vector3静态方法**  
+[Unity官方文档（Vector3）](https://docs.unity3d.com/ScriptReference/Vector3.html)
+
+
+**Vector4（四维向量）**
+```csharp
+Vector4 v = new Vector4(1, 2, 3, 4);
+```
+常见用途：
+- 齐次坐标（矩阵变换常用）
+- 传递颜色（Color在底层可能是Vector4(r,g,b,a)）
+- shader开发中用于高级数学运算（如平面方程、切线空间等）
+
+
 
 | 类型        | 维度                 | 常见用途              |
 | --------- | ------------------ | ----------------- |

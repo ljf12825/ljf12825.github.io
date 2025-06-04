@@ -11,7 +11,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Unity Build-in Types - ljf12825’s Blog</title>
-<meta name="description" content="常见Unity内建类型（按用途分） 1.空间/几何类型（Transform相关）">
+<meta name="description" content="Unity内建类型">
 
 
 
@@ -22,7 +22,7 @@
 <meta property="og:url" content="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types.html">
 
 
-  <meta property="og:description" content="常见Unity内建类型（按用途分） 1.空间/几何类型（Transform相关）">
+  <meta property="og:description" content="Unity内建类型">
 
 
 
@@ -154,7 +154,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Unity Build-in Types">
-    <meta itemprop="description" content="常见Unity内建类型（按用途分）1.空间/几何类型（Transform相关）">
+    <meta itemprop="description" content="Unity内建类型">
     <meta itemprop="datePublished" content="2025-06-01T00:00:00+08:00">
     
 
@@ -173,7 +173,9 @@
 
       <section class="page__content" itemprop="text">
         
-        <h2 id="常见unity内建类型按用途分">常见Unity内建类型（按用途分）</h2>
+        <p>Unity内建类型</p>
+
+<h2 id="常见unity内建类型按用途分">常见Unity内建类型（按用途分）</h2>
 <h3 id="1空间几何类型transform相关">1.空间/几何类型（Transform相关）</h3>
 
 <table>
@@ -219,8 +221,81 @@
   </tbody>
 </table>
 
+<h4 id="vector2--vector3--vector4"><strong>Vector2 &amp; Vector3 &amp; Vector4</strong></h4>
+<p>它们是Unity提供的三个核心向量类型，广泛用于位置、方向、速度、缩放、颜色等各种场景</p>
+
+<h5 id="基本定义">基本定义</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>向量类型</th>
+      <th>维度</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Vector2</code></td>
+      <td>2D 向量，包含 <code class="language-plaintext highlighter-rouge">x</code>, <code class="language-plaintext highlighter-rouge">y</code></td>
+      <td>用于 2D 空间中的位置、速度等</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
+      <td>3D 向量，包含 <code class="language-plaintext highlighter-rouge">x</code>, <code class="language-plaintext highlighter-rouge">y</code>, <code class="language-plaintext highlighter-rouge">z</code></td>
+      <td>用于 3D 空间中的大多数情况</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Vector4</code></td>
+      <td>4D 向量，包含 <code class="language-plaintext highlighter-rouge">x</code>, <code class="language-plaintext highlighter-rouge">y</code>, <code class="language-plaintext highlighter-rouge">z</code>, <code class="language-plaintext highlighter-rouge">w</code></td>
+      <td>用于更高级的计算，如齐次坐标、shader 编程</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Vector2（二维向量）</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector2</span> <span class="n">position</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector2</span><span class="p">(</span><span class="m">1.5f</span><span class="p">,</span> <span class="m">3.0f</span><span class="p">);</span>
+</code></pre></div></div>
+<p>常见用途：</p>
 <ul>
-  <li><strong>Vector2 3 4</strong></li>
+  <li>2D游戏中的对象位置、速度、加速度等</li>
+  <li>屏幕空间坐标（如UI坐标）</li>
+  <li>纹理坐标（UV mapping）</li>
+</ul>
+
+<p><strong>Vector3（三维向量）</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector3</span> <span class="n">direction</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0f</span><span class="p">,</span> <span class="m">1f</span><span class="p">,</span> <span class="m">0f</span><span class="p">);</span> <span class="c1">//向上</span>
+<span class="n">transform</span><span class="p">.</span><span class="n">position</span> <span class="p">+=</span> <span class="n">direction</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span><span class="p">;</span>
+</code></pre></div></div>
+<p>常见用途：</p>
+<ul>
+  <li>3D对象的位置、方向、缩放</li>
+  <li>物理运动（速度、加速度）</li>
+  <li>相机方向、光照方向</li>
+</ul>
+
+<p><strong>Vector3常用静态变量</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector3</span><span class="p">.</span><span class="n">zero</span>      <span class="c1">// (0, 0, 0)</span>
+<span class="n">Vector3</span><span class="p">.</span><span class="n">one</span>       <span class="c1">// (1, 1, 1)</span>
+<span class="n">Vector3</span><span class="p">.</span><span class="n">up</span>        <span class="c1">// (0, 1, 0)</span>
+<span class="n">Vector3</span><span class="p">.</span><span class="n">down</span>      <span class="c1">// (0, -1, 0)</span>
+<span class="n">Vector3</span><span class="p">.</span><span class="n">left</span>      <span class="c1">// (-1, 0, 0)</span>
+<span class="n">Vector3</span><span class="p">.</span><span class="n">right</span>     <span class="c1">// (1, 0, 0)</span>
+<span class="n">Vector3</span><span class="p">.</span><span class="n">forward</span>   <span class="c1">// (0, 0, 1)</span>
+<span class="n">Vector3</span><span class="p">.</span><span class="n">back</span>      <span class="c1">// (0, 0, -1)</span>
+</code></pre></div></div>
+
+<p><strong>Vector3静态方法</strong><br />
+<a href="https://docs.unity3d.com/ScriptReference/Vector3.html">Unity官方文档（Vector3）</a></p>
+
+<p><strong>Vector4（四维向量）</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector4</span> <span class="n">v</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector4</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">);</span>
+</code></pre></div></div>
+<p>常见用途：</p>
+<ul>
+  <li>齐次坐标（矩阵变换常用）</li>
+  <li>传递颜色（Color在底层可能是Vector4(r,g,b,a)）</li>
+  <li>shader开发中用于高级数学运算（如平面方程、切线空间等）</li>
 </ul>
 
 <table>
