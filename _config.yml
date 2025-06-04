@@ -40,6 +40,8 @@ toc: true
 toc_label: "Content"
 toc_sticky: true
 
+google_analytics: G-EF5SX6GV82
+
 footer:
   links:
     - label: "GitHub"
