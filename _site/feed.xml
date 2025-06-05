@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-04T22:06:10+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Unity Build-in Types</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types.html" rel="alternate" type="text/html" title="Unity Build-in Types" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types.html"><![CDATA[<p>Unity内建类型</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-05T17:28:02+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Unity Build-in Types</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types.html" rel="alternate" type="text/html" title="Unity Build-in Types" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types.html"><![CDATA[<p>Unity内建类型</p>
 
 <h2 id="常见unity内建类型按用途分">常见Unity内建类型（按用途分）</h2>
 <h3 id="1空间几何类型transform相关">1.空间/几何类型（Transform相关）</h3>
@@ -110,8 +110,126 @@
 <span class="n">Vector3</span><span class="p">.</span><span class="n">back</span>      <span class="c1">// (0, 0, -1)</span>
 </code></pre></div></div>
 
-<p><strong>Vector3静态方法</strong><br />
-<a href="https://docs.unity3d.com/ScriptReference/Vector3.html">Unity官方文档（Vector3）</a></p>
+<p><strong>Vector3静态方法</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Description</th>
+      <th>Declaration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Angel</td>
+      <td>求两向量夹角</td>
+      <td>public static float Angle(Vector3 from, Vector3 to);</td>
+    </tr>
+    <tr>
+      <td>ClampMagnitude</td>
+      <td>限制一个向量的长度，防止它超过maxLength，如果vector的长度小于等于maxLength返回原向量，否则返回一个等于maxLength的同向向量</td>
+      <td>public static Vector3 ClampMagnitude(Vector3 vector, float maxLength);</td>
+    </tr>
+    <tr>
+      <td>Cross</td>
+      <td>求叉积</td>
+      <td>public static Vector3 Cross(Vector3 lhs, Vector3 rhs);</td>
+    </tr>
+    <tr>
+      <td>Distance</td>
+      <td>求三维空间中两点的距离</td>
+      <td>public static float Distance(Vector3 point1, Vector3 point2);</td>
+    </tr>
+    <tr>
+      <td>Dot</td>
+      <td>求点乘</td>
+      <td>public static float Dot(Vector3 lhs, Vector3 rhs);</td>
+    </tr>
+    <tr>
+      <td>Lerp</td>
+      <td>求线插（不允许外推）,  t -&gt; [0, 1]</td>
+      <td>public static Vector3 Lerp(Vector3 a, Vector3 b, float t);</td>
+    </tr>
+    <tr>
+      <td>LerpUnclamped</td>
+      <td>求线插（允许外推，产生超调）</td>
+      <td>public static Vector3 LerpUnclamped(Vector3 a, Vector3 b, float t);</td>
+    </tr>
+    <tr>
+      <td>Max</td>
+      <td>返回两个向量所能组成的最大向量</td>
+      <td>public static Vector3 Max(Vector3 lhs, Vector3 rhs);</td>
+    </tr>
+    <tr>
+      <td>Min</td>
+      <td>返回最小</td>
+      <td>同上</td>
+    </tr>
+    <tr>
+      <td>MoveTowards</td>
+      <td>以恒定速度向目标位置靠近，直到到达</td>
+      <td>public static Vector3 MoveTowards(Vector3 current, Vector3 target, float maxDistanceDelta);</td>
+    </tr>
+    <tr>
+      <td>Normalize</td>
+      <td>归一化</td>
+      <td>public void Normalize();</td>
+    </tr>
+    <tr>
+      <td>OrthoNormalize</td>
+      <td>正交归一化</td>
+      <td>public static void OrthoNormalize(ref Vector3 normal, ref Vector3 tangent);  public static void OrthoNormalize(ref Vector3 normal, ref Vector3 tangent, ref Vector3 binormal);</td>
+    </tr>
+    <tr>
+      <td>Project</td>
+      <td>投影到onNormal</td>
+      <td>public static Vector3 Project(Vector3 vector, Vector3 onNormal);</td>
+    </tr>
+    <tr>
+      <td>ProjectOnPlane</td>
+      <td>投影到planeNormal</td>
+      <td>public static Vector3 ProjectOnPlane(Vector3 vector, Vector3 planeNormal);</td>
+    </tr>
+    <tr>
+      <td>Reflect</td>
+      <td>反射线，inNormal是法线</td>
+      <td>public static Vector3 Reflect(Vector3 inDirection, Vector3  inNormal);</td>
+    </tr>
+    <tr>
+      <td>RotateTowards</td>
+      <td>逐步旋转一个方向向量朝向另一个方向向量，maxRadiansDelta是每次最大允许旋转的角度（弧度），maxMagnitudeDelta是每次允许变化的向量长度</td>
+      <td>public static Vector3 RotateTowards(Vector3 current, Vector3 target, float maxRadiansDelta, float maxMagnitudeDelta);</td>
+    </tr>
+    <tr>
+      <td>Scale</td>
+      <td>两个向量分量相乘组成新向量</td>
+      <td>public static Vector3 Scale(Vector3 a, Vector3 b);</td>
+    </tr>
+    <tr>
+      <td>SignedAngle</td>
+      <td>求带符号夹角，axis是用于确定旋转方向的轴，正值是绕着axis左旋，负值是右旋</td>
+      <td>public static float SignedAngle(Vector3 from, Vector3 to, Vector3 axis);</td>
+    </tr>
+    <tr>
+      <td>Slerp</td>
+      <td>球面插值，球面为a，b点所在大圆所在的球的球面，插值在a，b点所在的圆上取</td>
+      <td>public static Vector3 Slerp(Vector3 a, Vector3 b, float t);</td>
+    </tr>
+    <tr>
+      <td>SlerpUnclamped</td>
+      <td>球面插值（允许外推，产生超调）</td>
+      <td>public static Vector3 SlerpUnclamped(Vector3 a, Vector3 b, float t);</td>
+    </tr>
+    <tr>
+      <td>SmoothDamp</td>
+      <td>平滑插值； ref currentVelocity当前速度向量；smoothTime到达目标值所需的预期时间，越小越快越敏感；maxSpeed最大速度（可选）；deltaTime每帧间隔时间（可选）</td>
+      <td>public static Vector3 SmoothDamp(Vector3 current, Vector3 target, ref Vector3 currentVelocity, float smoothTime, float maxSpeed = Mathf.Infinity, float deltaTime = Time.deltaTime);</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="https://docs.unity3d.com/ScriptReference/Vector3.html">Unity官方文档（Vector3）</a></p>
 
 <p><strong>Vector4（四维向量）</strong></p>
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector4</span> <span class="n">v</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector4</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">);</span>
@@ -123,32 +241,287 @@
   <li>shader开发中用于高级数学运算（如平面方程、切线空间等）</li>
 </ul>
 
+<h4 id="quaternion--euler-angles">Quaternion &amp; Euler Angles</h4>
+<p>在Unity中，Quaternion是用来表示旋转的核心数学结构，它避免了Euler Angles的万向节死锁问题，并且适用于平滑插值和复杂3D计算</p>
+
+<h5 id="quaternion">Quaternion</h5>
+<p>Quaternion表示绕某一条单位轴旋转一个角度的这个过程，简单来说：表示一个旋转</p>
+
+<p><strong>数学本质</strong>
+四元数是一种复数扩展：</p>
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">Q</span> <span class="p">=</span> <span class="s">w + xi + yj + zk</span>
+</code></pre></div></div>
+<p>在Unity中被表示为：</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">struct</span> <span class="nc">Quaternion</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">float</span> <span class="n">x</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">float</span> <span class="n">y</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">float</span> <span class="n">z</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">float</span> <span class="n">w</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">x, y, z</code>表示旋转轴的向量部分（方向）<br />
+<code class="language-plaintext highlighter-rouge">w</code>表示旋转的角度部分(cos(θ/2))</p>
+
+<p>四元数不是角度 + 轴直接拼成的，是通过以下方式构造：</p>
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">x</span><span class="p">=</span><span class="s">axis.x⋅sin(θ/2)</span>
+<span class="py">y</span><span class="p">=</span><span class="s">axis.y⋅sin(θ/2)</span>
+<span class="py">z</span><span class="p">=</span><span class="s">axis.z⋅sin(θ/2)</span>
+<span class="py">w</span><span class="p">=</span><span class="s">cos(θ/2)</span>
+</code></pre></div></div>
+<p>其中<code class="language-plaintext highlighter-rouge">axis</code>是归一化的旋转轴向量<br />
+<code class="language-plaintext highlighter-rouge">θ</code>是旋转角度（弧度）</p>
+
+<p>你可以把四元数想象成一个旋转操作，它编码了两个信息：</p>
+<ul>
+  <li>1.绕哪个轴旋转</li>
+  <li>2.旋转多少角度</li>
+</ul>
+
+<p><strong>Quaternion用途</strong></p>
+
 <table>
   <thead>
     <tr>
-      <th>类型</th>
-      <th>维度</th>
-      <th>常见用途</th>
+      <th>用途场景</th>
+      <th>描述</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">Vector2</code></td>
-      <td>2D 向量 (x, y)</td>
-      <td>UI 坐标、2D 游戏、纹理坐标</td>
+      <td>表示物体旋转</td>
+      <td>替代 <code class="language-plaintext highlighter-rouge">transform.rotation = new Vector3(...)</code>，更稳定</td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
-      <td>3D 向量 (x, y, z)</td>
-      <td>位置、速度、方向、缩放</td>
+      <td>做平滑旋转（Slerp/Lerp）</td>
+      <td>保持插值平滑、不跳跃、不变形</td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">Vector4</code></td>
-      <td>4D 向量 (x, y, z, w)</td>
-      <td>齐次坐标、颜色、Shader 传参</td>
+      <td>实现摄像机跟随</td>
+      <td>平滑跟随目标的朝向</td>
+    </tr>
+    <tr>
+      <td>构建旋转动画</td>
+      <td>可结合 Timeline、Animator 使用</td>
+    </tr>
+    <tr>
+      <td>控制角色面向</td>
+      <td>看向目标、追踪方向等</td>
     </tr>
   </tbody>
 </table>
+
+<p><strong>Quaternion API</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法/属性</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Quaternion.identity</code></td>
+      <td>零旋转（即不旋转）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Quaternion.Euler(x, y, z)</code></td>
+      <td>从欧拉角创建旋转</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Quaternion.LookRotation(dir)</code></td>
+      <td>让对象朝向某个方向</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Quaternion.Angle(a, b)</code></td>
+      <td>计算两个旋转之间的角度</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Quaternion.AngleAxis(float angle, Vector3 axis)</code></td>
+      <td>围绕axis旋转angle度</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Quaternion.Slerp(a, b, t)</code></td>
+      <td>在两个旋转之间平滑插值（匀速）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Quaternion.Lerp(a, b, t)</code></td>
+      <td>线性插值旋转（不推荐用于大角度）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Quaternion.RotateTowards(a, b, maxDegreesDelta)</code></td>
+      <td>限制最大旋转角度的平滑旋转</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">* 运算符</code>（例如 <code class="language-plaintext highlighter-rouge">rot * vector</code>）</td>
+      <td>将旋转应用于向量，旋转该方向向量</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>构建方式</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Quaternion</span> <span class="n">q</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">AngleAxis</span><span class="p">(</span><span class="m">90</span><span class="p">,</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">up</span><span class="p">);</span> <span class="c1">//绕Y轴旋转90°</span>
+</code></pre></div></div>
+<p>使用欧拉角构建：</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Quaternion</span> <span class="n">q</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">Euler</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span> <span class="c1">//XYZ分别是绕X Y Z轴的角度</span>
+</code></pre></div></div>
+<h5 id="euler-angles">Euler Angles</h5>
+
+<p><strong>欧拉角的定义</strong><br />
+欧拉角是用三个角度来描述3D空间中的一个旋转变换，每个角度表示围绕一个坐标轴的旋转量。<br />
+在Unity中，欧拉角就是一个<code class="language-plaintext highlighter-rouge">Vector3</code></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transform</span><span class="p">.</span><span class="n">eulerAngles</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">30</span><span class="p">,</span> <span class="m">45</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
+</code></pre></div></div>
+<p>这表示：</p>
+<ul>
+  <li>绕X轴旋转30°</li>
+  <li>然后绕Y轴旋转45°</li>
+  <li>然后绕Z轴旋转0°
+    <blockquote>
+      <p>欧拉角的本质是「分轴顺序旋转」，三个角度 + 一个旋转顺序（X -&gt; Y -&gt; Z），顺序不能出现问题，否则结果不同</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><strong>欧拉角的特点</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>特点</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>直观</td>
+      <td>直接写角度，容易理解和调试</td>
+    </tr>
+    <tr>
+      <td>顺序敏感</td>
+      <td>顺序不同，结果不同（ZYX ≠ XYZ）</td>
+    </tr>
+    <tr>
+      <td>有死锁</td>
+      <td>当某个轴旋转到特定位置时，另一个轴“失效”——<strong>万向节死锁（Gimbal Lock）</strong></td>
+    </tr>
+    <tr>
+      <td>插值难</td>
+      <td>在两个角度之间插值时可能会突然“跳动”或绕远路</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>欧拉角适用于：</strong></p>
+<ul>
+  <li>手动设置角度</li>
+  <li>UI显示</li>
+  <li>编辑器中拖拽角度时</li>
+  <li>简单旋转动画、摄像机控制</li>
+</ul>
+
+<p><strong>实际旋转逻辑中，建议使用Quaternion</strong></p>
+
+<p><strong>Euler Angels和Quaternion的关系</strong><br />
+Unity内部几乎不直接用欧拉角进行旋转运算，它会自动把你设置的欧拉角转换为四元数</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transform</span><span class="p">.</span><span class="n">eulerAngles</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
+<span class="c1">// 实际上自动转换为：</span>
+<span class="n">transform</span><span class="p">.</span><span class="n">rotation</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">Euler</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>欧拉角插值出现的问题</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector3</span> <span class="k">from</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
+<span class="n">Vector3</span> <span class="n">to</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">360</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
+
+<span class="n">Vector3</span> <span class="n">result</span> <span class="p">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="nf">Lerp</span><span class="p">(</span><span class="k">from</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="m">0.5f</span><span class="p">);</span> <span class="c1">//会插值到180°</span>
+</code></pre></div></div>
+<p>实际上，从0°到360°最短路径时0°，这就是欧拉角插值跳变的问题<br />
+使用四元数可以避免</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Quaternion</span> <span class="n">q1</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">Euler</span><span class="p">(</span><span class="k">from</span><span class="p">);</span>
+<span class="n">Quaternion</span> <span class="n">q2</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">Euler</span><span class="p">(</span><span class="n">to</span><span class="p">);</span>
+
+<span class="n">Quaternion</span> <span class="n">qResult</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">Slerp</span><span class="p">(</span><span class="n">q1</span><span class="p">,</span> <span class="n">q2</span><span class="p">,</span> <span class="m">0.5f</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>Euler Angles和Quaternion的转换</strong><br />
+欧拉角 -&gt; 四元数</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Quaternion</span> <span class="n">q</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">Euler</span><span class="p">(</span><span class="m">30</span><span class="p">,</span> <span class="m">45</span><span class="p">,</span> <span class="m">60</span><span class="p">);</span>
+</code></pre></div></div>
+<p>四元数 -&gt; 欧拉角</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector3</span> <span class="n">euler</span> <span class="p">=</span> <span class="n">q</span><span class="p">.</span><span class="n">eulerAngles</span><span class="p">;</span>
+</code></pre></div></div>
+<blockquote>
+  <p>四元数本身不会存储旋转顺序和原始角度，这个反转换可能会出现不寻常的角度，比如-180°、350°等</p>
+</blockquote>
+
+<p>欧拉角和四元数的关系：三次独立的XYZ轴旋转（Euler Angle）相当于对于某个特定轴旋转特定角度（Quaternion）<br />
+<strong>深入原理</strong>
+给定欧拉角 (𝛼, 𝛽, 𝛾)，表示绕 X、Y、Z 旋转，四元数变换公式如下（XYZ顺序）：</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Quaternion</span> <span class="n">q</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">Euler</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">);</span>
+</code></pre></div></div>
+<p>等价于</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Quaternion</span> <span class="n">qx</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">AngleAxis</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">right</span><span class="p">);</span>
+<span class="n">Quaternion</span> <span class="n">qy</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">AngleAxis</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">up</span><span class="p">);</span>
+<span class="n">Quaternion</span> <span class="n">qz</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">AngleAxis</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">forward</span><span class="p">);</span>
+<span class="n">Quaternion</span> <span class="n">q</span> <span class="p">=</span> <span class="n">qy</span> <span class="p">*</span> <span class="n">qx</span> <span class="p">*</span> <span class="n">qz</span><span class="p">;</span> <span class="c1">//组合旋转，顺序重要；Unity为左乘</span>
+</code></pre></div></div>
+
+<p><strong>万向节死锁（Gimbal Lock）</strong><br />
+Gimbal Lock是指使用欧拉角进行三维旋转时，当两个旋转轴重合，导致自由度从3变成2，某个方向的旋转无法表达的情况<br />
+产生Gimbal Lock的核心原因是欧拉角的特性:<br />
+一组欧拉角描述一个旋转过程：即，围绕每个轴的旋转角度和围绕每个轴旋转的顺序，顺序很重要，不同的顺序会带来不同的结果
+Gimbal Lock产生的核心是：先执行旋转的轴会带动后执行旋转的轴转动，即产生新轴；但后执行旋转的轴不会带动先执行旋转的轴转动，即一个轴旋转过后就不会出现新轴了，这就会出现轴重合问题，即导致万向节死锁的产生<br />
+<strong>数学本质是矩阵乘法的非交换性</strong><br />
+旋转在数学上是用矩阵表示的：</p>
+<ul>
+  <li>旋转操作使用矩阵乘法实现的</li>
+  <li>矩阵乘法不满足交换律，也就是说：Rx × Ry != Ry × Rx</li>
+</ul>
+
+<p><strong>核心关键是为什么后旋转的轴不能带动先旋转的轴？</strong><br />
+这个问题涉及到旋转的执行顺序本质上是“嵌套变换”，而不是“同步协商”的。这就像流水线的工序，是不可逆和不可交错的<br />
+核心结论：<br />
+每一步旋转都是在“当前局部坐标系”下完成的，而不是回头修改前面坐标系的历史状态<br />
+后面的旋转只是在前面旋转结果基础上叠加，它并不会“回头影响”之前已经旋转过的坐标系<br />
+举个例子：
+假设做一个蛋糕：<br />
+第一步：打鸡蛋  <br />
+第二步：加牛奶<br />
+第三步：搅拌<br />
+现在你问：为什么我搅拌的时候不能回头改变我打鸡蛋这个过程？<br />
+因为：打鸡蛋已经做完了，是个不可逆的状态变换，你在搅拌的时候，只能处理“鸡蛋 + 牛奶”的混合物，不能改变已经打完的蛋</p>
+
+<p><strong>数学视角：矩阵乘法是方向性的</strong>
+旋转是通过矩阵来表示的，顺序matters： <code class="language-plaintext highlighter-rouge">FinalRotation = Rz · Ry · Rx</code><br />
+你先执行Rx，然后再执行Ry,再执行Rz<br />
+每个旋转操作都是将当前状态乘上一个旋转矩阵<br />
+一旦Rx被应用，坐标系就已经变了<br />
+之后的Ry是在这个变了的坐标系下进行的<br />
+Ry不会也无法回头修改Rx的效果<br />
+因为矩阵乘法不是可交换的，所以这个顺序是“单向嵌套”，不是“双向影响”</p>
+
+<p><strong>欧拉角是旋转变换，每次旋转变换都是叠加了上次旋转的状态后再进行的，也就是说，虽然每次变换都是独立的，但都要经历从初始状态按顺序旋转，绕轴旋转角度达到目标状态这一系列流程，这就把时序包含在其中了</strong><br />
+<strong>初始状态是（0，0，0）</strong></p>
+
+<p><strong>为什么看到的变换是连续的</strong><br />
+欧拉角变换虽然顺序嵌套，但它们构成的是一个连续函数映射<br />
+欧拉角 → 四元数 → 变换矩阵 → 渲染出模型的姿态
+整个链条中：</p>
+
+<p>欧拉角：你手动输入的 (X, Y, Z) 是连续的（例如你拖动滑块）</p>
+
+<p>四元数：Unity 把欧拉角转换成一个四元数，这是一个连续光滑的旋转表示</p>
+
+<p>矩阵：四元数再转成 3×3 旋转矩阵，依然是平滑的</p>
+
+<p>模型：在世界中展示的姿态是自然旋转、连贯变化的</p>
+
+<p>所以你看到的旋转是连续的、平滑的。</p>
+
+<p><strong>哪些地方是不连续的</strong><br />
+1.万向节死锁，当某个周旋转到90°，两个轴重合，自由度减少，Unity为了保持“姿态”，可能会自动调整其他轴的值，此时Rotation的值再Inspector中跳变，但物体并没有跳<br />
+2.四元数存在加减号不唯一（180°对称）问题，一个方向可以由两个四元数表示：q和-q，它们作用在物体上是一样的，Unity在背后自动选择最短路径，所以视觉上依旧是连续旋转路径上的最短旋转</p>
 
 <h3 id="2游戏对象相关">2.游戏对象相关</h3>
 
