@@ -161,6 +161,12 @@ var store = [{
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types.html",
         "teaser": null
       },{
+        "title": "Collider & Trigger",
+        "excerpt":"Unity中的碰撞体是物理系统的重要组成部分，负责定义游戏对象的形状以进行碰撞检测。简单来说，Collider是一个无形的边界，用于检测物体是否接触或重叠，从而触发碰撞事件和物理响应 什么是Collider Collider是附加在游戏对象上的组件，用于告诉物理引擎这个对象的碰撞范围。Collider本身不会渲染形状，只是一个隐形的物理边界 常见的Collider类型 BoxCollider 立方体形状的碰撞体，适合方形或长方体物体 SphereCollider 球形碰撞体，适合球形或圆形物体 CapsuleCollider 胶囊碰撞体，适合人物、柱子等 MeshCollider 使用自定义网格模型做碰撞体，适合复杂形状，性能较差，且通常用于静态物体 WheelCollider 专门用于车辆轮胎的碰撞和物理模拟 Collider和Rigidbody的关系 Collider只负责检测碰撞，不会自定产生物理运动 Rigidbody组件负责物理运动和动力学 一个没有Rigidbody的物体的Collider会被当作“静态碰撞体”使用（静态障碍物），不会移动也不响应物理力 一个有Rigidbody的物体可以在物理引擎驱动下移动，Collider会随物体运动 Collider Panel Box Collider IsTrigger 默认false，此时Collider是实体碰撞体，会阻挡其他物体，发生物理碰撞和反弹 勾选时，Collider变成Trigger，不会阻挡其他物体，但会检测进入、离开和停留事件，可以用来做区域检测、事件触发等 Provides Contacts 用于物理引擎的碰撞检测和接触点信息提供 默认false，Collider可能只报告碰撞发生，但不提供详细的接触点信息，这样可以节省一些计算资源 勾选后，Collider会提供详细的碰撞接触点信息，这样物理引擎在碰撞时，可以把碰撞的具体接触点信息暴露出来，供脚本或物理系统使用 using UnityEngine; public class CollisionPointExample : MonoBehaviour { void OnCollisionEnter(Collision collision) { foreach (ContactPoint contact in collision.contacts) { //接触点位置...","categories": ["笔记"],
+        "tags": ["Unity","Unity Component","Physics System"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Collider-and-Trigger.html",
+        "teaser": null
+      },{
     "title": "About",
     "excerpt":"        You want to know who I am?  It’s UB.            博客内容仅用于学习，如有侵权，请联系删除       &lt;-  &lt;-  &lt;-  ","url": "http://localhost:4000/about/"
   },{
