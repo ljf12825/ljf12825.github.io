@@ -1,4 +1,861 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-06T20:48:13+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Collider &amp;amp; Trigger</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Collider-and-Trigger.html" rel="alternate" type="text/html" title="Collider &amp;amp; Trigger" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Collider-and-Trigger</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Collider-and-Trigger.html"><![CDATA[<p>Unity中的碰撞体是物理系统的重要组成部分，负责定义游戏对象的形状以进行碰撞检测。简单来说，Collider是一个无形的边界，用于检测物体是否接触或重叠，从而触发碰撞事件和物理响应</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-06T21:51:07+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Object Pooling</title><link href="http://localhost:4000/posts/2025-06-06-Object-Pooling/" rel="alternate" type="text/html" title="Object Pooling" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Object-Pooling</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-06-Object-Pooling/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Scripts</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Scripts.html" rel="alternate" type="text/html" title="Scripts" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Scripts</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Scripts.html"><![CDATA[<p>Unity脚本就是你编写的C#类，它控制游戏中物体的行为、交互、动画、输入、碰撞、UI等逻辑</p>
+
+<h2 id="脚本类型">脚本类型</h2>
+<p>Unity中的脚本根据其用途可以分为3类：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>特性</th>
+      <th><code class="language-plaintext highlighter-rouge">MonoBehaviour</code></th>
+      <th><code class="language-plaintext highlighter-rouge">ScriptableObject</code></th>
+      <th>纯 C# 类</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>是否可挂载</td>
+      <td>✅ 可以挂载到 GameObject</td>
+      <td>❌ 不行</td>
+      <td>❌ 不行</td>
+    </tr>
+    <tr>
+      <td>生命周期函数</td>
+      <td>✅ 有 <code class="language-plaintext highlighter-rouge">Start</code>、<code class="language-plaintext highlighter-rouge">Update</code> 等</td>
+      <td>❌ 没有</td>
+      <td>❌ 没有</td>
+    </tr>
+    <tr>
+      <td>是否能序列化</td>
+      <td>✅ 支持</td>
+      <td>✅ 支持</td>
+      <td>❌ 默认不支持</td>
+    </tr>
+    <tr>
+      <td>支持协程</td>
+      <td>✅ <code class="language-plaintext highlighter-rouge">StartCoroutine()</code></td>
+      <td>❌ 不支持</td>
+      <td>❌ 不支持</td>
+    </tr>
+    <tr>
+      <td>使用场景</td>
+      <td>行为脚本，控制对象</td>
+      <td>数据容器，可复用资源配置</td>
+      <td>工具类、算法类等逻辑单元</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="monobehaviour的派生类"><code class="language-plaintext highlighter-rouge">MonoBehaviour</code>的派生类</h3>
+<ul>
+  <li>必须挂载在场景中的GameObject上</li>
+  <li>用于控制逻辑、角色行为、输入响应等</li>
+  <li>有生命周期函数</li>
+</ul>
+
+<h3 id="scriptableobject是数据容器"><code class="language-plaintext highlighter-rouge">ScriptableObject</code>是数据容器</h3>
+<ul>
+  <li>轻量级对象，不需要挂载，常用于数据复用（如技能表、配置表）</li>
+  <li>支持序列化，可以做成asset文件</li>
+  <li>没有生命周期函数，但可以在<code class="language-plaintext highlighter-rouge">OnEnable()</code>做初始化</li>
+  <li>更节省内存，不依赖场景</li>
+</ul>
+
+<h3 id="纯c类">纯C#类</h3>
+<ul>
+  <li>用于封装工具、算法、模型等逻辑（如A*算法、存档系统）</li>
+  <li>不支持Unity生命周期和序列化</li>
+  <li>适合在<code class="language-plaintext highlighter-rouge">MonoBehaviour</code>或<code class="language-plaintext highlighter-rouge">ScriptableObject</code>中调用</li>
+</ul>
+
+<h2 id="脚本和inspector的关系">脚本和Inspector的关系</h2>
+<p>可以使用<code class="language-plaintext highlighter-rouge">[SerializeField]</code>、<code class="language-plaintext highlighter-rouge">public</code>来让字段在Inspector中显示</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="kt">float</span> <span class="n">speed</span> <span class="p">=</span> <span class="m">5f</span><span class="p">;</span>
+
+<span class="p">[</span><span class="n">SerializeField</span><span class="p">]</span>
+<span class="k">private</span> <span class="n">GameObject</span> <span class="n">bulletPrefab</span><span class="p">;</span>
+</code></pre></div></div>
+<p>然后在Inspector中手动拖拽引用，或者编辑数值，来调整游戏行为</p>
+
+<h2 id="脚本间通信引用其他组件">脚本间通信（引用其他组件）</h2>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">Rigidbody</span> <span class="n">rb</span> <span class="p">=</span> <span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">Rigidbody</span><span class="p">&gt;();</span>
+    <span class="n">rb</span><span class="p">.</span><span class="n">velocity</span> <span class="p">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">up</span> <span class="p">*</span> <span class="m">10</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>也可以访问其他GameObject:</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="n">GameObject</span> <span class="n">enemy</span><span class="p">;</span>
+
+<span class="k">void</span> <span class="nf">Update</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">enemy</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="nf">LookAt</span><span class="p">(</span><span class="n">transform</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="基类-monobehaviour">基类: MonoBehaviour</h2>
+<p><code class="language-plaintext highlighter-rouge">MonoBehaviour</code>是Unity提供的一个基类，用于挂载在GameObject上的脚本组件。它提供了一系列生命周期函数和功能接口，使你的脚本可以与Unity引擎进行交互，比如更新、碰撞、协程、输入等</p>
+
+<h3 id="继承monobehaviour的作用">继承MonoBehaviour的作用</h3>
+<p>继承自 MonoBehaviour 的类，Unity 才会：</p>
+<ul>
+  <li>自动调用生命周期函数（Awake, Start, Update, OnDestroy 等）</li>
+  <li>让你可以把脚本拖到场景中的 GameObject 上</li>
+  <li>能访问 Unity API，如 transform, gameObject, Time.deltaTime, GetComponent 等</li>
+  <li>被 Unity 引擎管理，参与序列化、Inspector 展示等功能</li>
+</ul>
+
+<h3 id="使用规则和限制">使用规则和限制</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>项目</th>
+      <th>是否允许 / 推荐</th>
+      <th>原因或说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>new 一个 MonoBehaviour</td>
+      <td>❌ 不允许</td>
+      <td>必须挂载在 GameObject 上，不能直接 <code class="language-plaintext highlighter-rouge">new</code></td>
+    </tr>
+    <tr>
+      <td>静态类继承 MonoBehaviour</td>
+      <td>❌ 不允许</td>
+      <td>MonoBehaviour 必须是实例化组件</td>
+    </tr>
+    <tr>
+      <td>把类不继承 MonoBehaviour</td>
+      <td>✅ 允许</td>
+      <td>工具类、算法类无需继承</td>
+    </tr>
+    <tr>
+      <td>不挂载脚本是否执行逻辑</td>
+      <td>❌ 不执行</td>
+      <td>没有挂在 GameObject 上的脚本不会触发生命周期函数</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="原理">原理</h3>
+<ul>
+  <li>Unity使用反射系统查找是否存在<code class="language-plaintext highlighter-rouge">Start()</code>、<code class="language-plaintext highlighter-rouge">Update()</code>等函数，并在对应阶段自动调用它们</li>
+  <li><code class="language-plaintext highlighter-rouge">MonoBehaviour</code>的生命周期与GameObject的启用状态强关联：
+    <ul>
+      <li>如果GameObject被禁用，生命周期函数不会运行</li>
+      <li>如果脚本本身被禁用，生命周期函数也不会被调用</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="c如何运行这些脚本">C#如何运行这些脚本</h2>
+<ul>
+  <li>将脚本挂载某个GameObject上</li>
+  <li>Unity引擎自动为这个类创建实例（托管对象）</li>
+  <li>Unity每帧调用该实例的生命周期函数</li>
+</ul>
+
+<p>完全由Unity托管</p>
+
+<h2 id="unity生命周期函数monobehaviour">Unity生命周期函数（MonoBehaviour）</h2>
+
+<h3 id="生命周期函数示意图"><strong><a href="/assets/images/monobehaviour_flowchart.svg">生命周期函数示意图</a></strong></h3>
+
+<p>生命周期函数是Unity在特定时机自动调用的函数，比如初始化、每帧逻辑、物体销毁等</p>
+
+<h3 id="每个阶段和几个重要的函数">每个阶段和几个重要的函数</h3>
+
+<h4 id="初始化阶段只执行一次">初始化阶段（只执行一次）</h4>
+
+<p>初始化阶段的生命周期函数是游戏对象创建并激活后、正式开始游戏逻辑之前自动调用的一系列函数，主要用于初始化变量、加载资源、设置状态等操作</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>函数名</th>
+      <th>调用时机</th>
+      <th>用途</th>
+      <th>特点</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Awake()</code></td>
+      <td>脚本实例被 <strong>加载</strong> 后立刻调用（即使对象未启用也会调用）</td>
+      <td>初始化数据、引用等（最早）</td>
+      <td>初始化非依赖其他组件的逻辑</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnEnable()</code></td>
+      <td>对象启用时调用（<strong>每次启用都会调用</strong>）</td>
+      <td>脚本激活可以多次触发</td>
+      <td>常用于注册事件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Start()</code></td>
+      <td>所有对象的<code class="language-plaintext highlighter-rouge">Awake()</code>调用完后，在对象启用的第一帧调用一次</td>
+      <td>初始化逻辑，如加载资源、启动协程</td>
+      <td>初始化依赖其他组件/对象的逻辑</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Awake()</code>
+    <ul>
+      <li>在脚本实例被加载时调用（即使对象未激活）</li>
+      <li>多个脚本中Awake的调用顺序是不确定的</li>
+      <li>通常用于
+        <ul>
+          <li>分配资源</li>
+          <li>设置初始状态</li>
+          <li>创建单例</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">OnEnable()</code>
+    <ul>
+      <li>当对象或脚本被启用时调用</li>
+      <li>会在每次启用时重复调用</li>
+      <li>通常用于：
+        <ul>
+          <li>注册事件</li>
+          <li>启动协程</li>
+          <li>绑定输入</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">Start()</code>
+    <ul>
+      <li>在启用的组件第一帧更新前调用，且只调用一次</li>
+      <li>所有<code class="language-plaintext highlighter-rouge">Awake()</code>执行完后才调用<code class="language-plaintext highlighter-rouge">Start()</code></li>
+      <li>通常用于
+        <ul>
+          <li>获取其他组件</li>
+          <li>设置UI、初始化依赖关系</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="运行时循环阶段重复执行">运行时循环阶段（重复执行）</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>函数名</th>
+      <th>调用频率</th>
+      <th>用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">FixedUpdate()</code></td>
+      <td>每固定时间（如 0.02 秒）</td>
+      <td>物理计算、施加力、碰撞检测等</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Update()</code></td>
+      <td>每帧</td>
+      <td>常规逻辑、输入处理、状态更新</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LateUpdate()</code></td>
+      <td>每帧</td>
+      <td>摄像机追踪、骨骼动画等需要晚一点处理的逻辑</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnGUI()</code></td>
+      <td>每帧多次</td>
+      <td>IMGUI 绘图接口，用于旧 GUI 系统（已不推荐）</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="关于update">关于<code class="language-plaintext highlighter-rouge">Update()</code></h5>
+<ul>
+  <li>适合做需要实时响应和更新的逻辑，例如输入检测、动画控制、AI决策等</li>
+</ul>
+
+<p><strong>在Update()中实现“时间无关”逻辑</strong>
+由于帧率变化，直接写逻辑会导致游戏表现不同步<br />
+解决方法：</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Update</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">float</span> <span class="n">moveSpeed</span> <span class="p">=</span> <span class="m">5f</span><span class="p">;</span>
+    <span class="n">transform</span><span class="p">.</span><span class="nf">Translate</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">forward</span> <span class="p">*</span> <span class="n">moveSpeed</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Time.deltaTime</code>是上一帧到当前帧的时间差</li>
+  <li>乘以<code class="language-plaintext highlighter-rouge">deltaTime</code>可以保证无论帧率多少，运动速度都一样</li>
+</ul>
+
+<p><strong>常见用法</strong>
+1.键盘输入控制移动</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Update</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">float</span> <span class="n">h</span> <span class="p">=</span> <span class="n">Input</span><span class="p">.</span><span class="nf">GetAxis</span><span class="p">(</span><span class="s">"Horizontal"</span><span class="p">);</span>
+    <span class="kt">float</span> <span class="n">v</span> <span class="p">=</span> <span class="n">Input</span><span class="p">.</span><span class="nf">GetAxis</span><span class="p">(</span><span class="s">"Vertical"</span><span class="p">);</span>
+    <span class="n">Vector3</span> <span class="n">dir</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span>
+    <span class="n">transform</span><span class="p">.</span><span class="nf">Translate</span><span class="p">(</span><span class="n">dir</span> <span class="p">*</span> <span class="m">5f</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>2.每帧检测条件触发事件</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Update</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="nf">GetKeyDown</span><span class="p">(</span><span class="n">KeyCode</span><span class="p">.</span><span class="n">Space</span><span class="p">))</span> <span class="nf">Jump</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>性能注意事项</strong></p>
+<ul>
+  <li>频繁且复杂的操作放在<code class="language-plaintext highlighter-rouge">Update()</code>中会影响帧率</li>
+  <li>可以考虑
+    <ul>
+      <li>减少<code class="language-plaintext highlighter-rouge">Update()</code>中的耗时计算</li>
+      <li>合理使用事件驱动替代轮询</li>
+      <li>利用<code class="language-plaintext highlighter-rouge">Coroutine</code>或<code class="language-plaintext highlighter-rouge">InvokeRepeating</code>控制调用频率</li>
+      <li>对复杂逻辑分帧处理或异步处理</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>当关闭或禁用脚本时，Update()不会被调用，当GameObejct被禁用时，所有附加脚本的Update()都停止调用</strong></p>
+
+<h4 id="关于lateupdate">关于<code class="language-plaintext highlighter-rouge">LateUpdate()</code></h4>
+<ul>
+  <li>每帧调用一次，但始终在所有<code class="language-plaintext highlighter-rouge">Update()</code>函数调用之后调用</li>
+  <li>用于需要在所有<code class="language-plaintext highlighter-rouge">Update()</code>完成后再处理的逻辑</li>
+</ul>
+
+<h5 id="典型用途">典型用途</h5>
+<p><strong>1.摄像机跟随</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">FollowTarget</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">Transform</span> <span class="n">target</span><span class="p">;</span>
+
+    <span class="k">void</span> <span class="nf">LateUpdate</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">target</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">transform</span><span class="p">.</span><span class="n">position</span> <span class="p">=</span> <span class="n">target</span><span class="p">.</span><span class="n">position</span> <span class="p">+</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="p">-</span><span class="m">10</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>假设主角的位置在<code class="language-plaintext highlighter-rouge">Update()</code>中移动</li>
+  <li>如果摄像机在<code class="language-plaintext highlighter-rouge">Update()</code>中跟随，就会比角色“慢一帧”</li>
+  <li>用<code class="language-plaintext highlighter-rouge">LateUpdate()</code>可以确保摄像机总是跟着角色最终的位置</li>
+</ul>
+
+<p><strong>2.骨骼/动画后处理</strong></p>
+<ul>
+  <li>动画系统也会在<code class="language-plaintext highlighter-rouge">Update()</code>后更新状态</li>
+  <li>用<code class="language-plaintext highlighter-rouge">LateUpdate()</code>来处理动画附属物的位置，如武器、特效等</li>
+</ul>
+
+<p><strong>3.平滑插值（Smooth Follow）</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">LateUpdate</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">transform</span><span class="p">.</span><span class="n">position</span> <span class="p">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="nf">Lerp</span><span class="p">(</span><span class="n">transform</span><span class="p">.</span><span class="n">position</span><span class="p">,</span> <span class="n">target</span><span class="p">.</span><span class="n">position</span><span class="p">,</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span> <span class="p">*</span> <span class="m">5</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>放在<code class="language-plaintext highlighter-rouge">LateUpdate()</code>可以让插值始终作用在最终位置上
+    <blockquote>
+      <p><code class="language-plaintext highlighter-rouge">LateUpdate()</code>是在每帧所有逻辑处理完之后调用的函数，适合做跟随、补偿、视觉同步、动画后处理等操作</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h4 id="关于fixedupdate">关于<code class="language-plaintext highlighter-rouge">FixedUpdate()</code></h4>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">FixedUpdate()</code>是MonoBehaviour提供的生命周期函数</li>
+  <li>以固定的时间间隔执行，默认每0.02s，而不是每帧执行一次</li>
+  <li>适用于物理引擎相关的逻辑（刚体、碰撞器、重力等）</li>
+  <li>使用<code class="language-plaintext highlighter-rouge">Time.fixedDeltaTime</code>进行时间控制
+    <blockquote>
+      <p><code class="language-plaintext highlighter-rouge">FixedUpdate()</code>不一定每帧都调用，也可能在一帧内被调用多次（为了补上落后时间）</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h5 id="为什么物理逻辑必须放在fixedupdate">为什么物理逻辑必须放在<code class="language-plaintext highlighter-rouge">FixedUpdate()</code></h5>
+<p>Unity的物理系统（Rigidbody、Collider等）是在物理引擎中执行的，它以固定步长（Fixed Timestep）计算模拟</p>
+
+<p>如果你在<code class="language-plaintext highlighter-rouge">Update()</code>中对刚体施加力</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Update</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">rb</span><span class="p">.</span><span class="nf">AddForce</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">forward</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>每帧调用一次，但帧率变化会导致模拟不准确</li>
+  <li>如果FPS降低，你的物体就加速慢了</li>
+</ul>
+
+<p>正确做法：</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">FixedUpdate</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">rb</span><span class="p">.</span><span class="nf">AddForce</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">forward</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>固定时间模拟，物理表现就一致</li>
+</ul>
+
+<h5 id="时间控制">时间控制</h5>
+<p>默认情况下：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Time.fixedDeltaTime = 0.02f(每秒调用50次)
+</code></pre></div></div>
+<p>可以通过<code class="language-plaintext highlighter-rouge">Edit &gt; Project Setting &gt; Time</code>修改</p>
+
+<p><strong>示例：让角色持续向前移动（基于物理）</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Rigidbody</span> <span class="n">rb</span><span class="p">;</span>
+
+<span class="k">void</span> <span class="nf">Start</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">rb</span> <span class="p">=</span> <span class="n">GetComponenet</span><span class="p">&lt;</span><span class="n">Rigidbody</span><span class="p">&gt;();</span>
+
+<span class="k">void</span> <span class="nf">FixedUpdate</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">rb</span><span class="p">.</span><span class="nf">MovePosition</span><span class="p">(</span><span class="n">rb</span><span class="p">.</span><span class="n">position</span> <span class="p">+</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">forward</span> <span class="p">*</span> <span class="m">5f</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">fixedDeltaTime</span><span class="p">);</span>
+</code></pre></div></div>
+<ul>
+  <li>用<code class="language-plaintext highlighter-rouge">MovePosition()</code>更适合刚体控制</li>
+  <li><code class="language-plaintext highlighter-rouge">Time.fixedDeltaTime</code>保持匀速</li>
+</ul>
+
+<p><strong>注意事项</strong>
+1.不要在<code class="language-plaintext highlighter-rouge">FixedUpdate()</code>中检测<code class="language-plaintext highlighter-rouge">Input.GetKey()</code><br />
+因为输入每帧更新，可能miss</p>
+
+<p>2.与物理系统交互统一放在<code class="language-plaintext highlighter-rouge">FixedUpdate()</code><br />
+避免不一致和jitter</p>
+
+<p>3.可能一帧内调用多次<code class="language-plaintext highlighter-rouge">FixedUpdate()</code>
+这是为了追上物理时间进度</p>
+
+<h4 id="碰撞触发事件">碰撞/触发事件</h4>
+
+<p>发生在物理更新阶段（即<code class="language-plaintext highlighter-rouge">FixedUpdate()</code>阶段）之后调用，调用频率和FixedUpdate()一致，不受帧率的影响</p>
+
+<p><strong>Rigidbody + Collider才能触发以下函数</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>函数名</th>
+      <th>用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnCollisionEnter(Collision col)</code></td>
+      <td>碰撞开始</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnCollisionStay(Collision col)</code></td>
+      <td>碰撞持续</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnCollisionExit(Collision col)</code></td>
+      <td>碰撞结束</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnTriggerEnter(Collider col)</code></td>
+      <td>触发器进入</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnTriggerStay(Collider col)</code></td>
+      <td>触发器内持续</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnTriggerExit(Collider col)</code></td>
+      <td>触发器离开</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="/posts/2025-06-03-Physics-System/">Unity物理系统</a></p>
+
+<h4 id="渲染阶段">渲染阶段</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>阶段</th>
+      <th>用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnPreRender()</code></td>
+      <td>摄像机开始渲染前</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnRenderObject()</code></td>
+      <td>所有对象渲染时</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnPostRender()</code></td>
+      <td>摄像机完成渲染后</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnWillRenderObject()</code></td>
+      <td>对象将被摄像机渲染前</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnDrawGizmos()</code> / <code class="language-plaintext highlighter-rouge">OnDrawGizmosSelected()</code></td>
+      <td>编辑器中画 Gizmos</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="禁用销毁阶段">禁用/销毁阶段</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>函数名</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnDisable()</code></td>
+      <td>脚本被禁用时调用（如 <code class="language-plaintext highlighter-rouge">enabled = false</code> 或 <code class="language-plaintext highlighter-rouge">SetActive(false)</code>）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnDestroy()</code></td>
+      <td>脚本被销毁前调用，用于释放资源、停止协程等</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="应用生命周期事件">应用生命周期事件</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>函数名</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnApplicationPause(bool pause)</code></td>
+      <td>应用暂停/恢复时调用（如手机切后台）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnApplicationFocus(bool focus)</code></td>
+      <td>是否获得焦点（如切到其他应用）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnApplicationQuit()</code></td>
+      <td>应用关闭前调用</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="自定义生命周期顺序">自定义生命周期顺序</h2>
+<p>Unity默认调用顺序无法改变（例如A的Awake总在B前），但可以手动更改执行顺序</p>
+
+<h3 id="方法一inspector设置执行顺序">方法一：Inspector设置执行顺序</h3>
+<p>菜单栏：<code class="language-plaintext highlighter-rouge">Edit &gt; Project Settings &gt; Script Execution Order</code><br />
+把关键脚本设置为更早或更晚执行</p>
+
+<h3 id="方法二代码显示调用推荐">方法二：代码显示调用（推荐）</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Awake</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">manager</span> <span class="p">=</span> <span class="n">FindObjectOfType</span><span class="p">&lt;</span><span class="n">GameManager</span><span class="p">&gt;();</span>
+    <span class="n">manager</span><span class="p">.</span><span class="nf">Register</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h2 id="scriptableobject数据驱动">ScriptableObject（数据驱动）</h2>
+<p><code class="language-plaintext highlighter-rouge">ScriptableObject</code> 是 Unity 中的一个重要类，用于存储共享的、可序列化的数据，而无需将数据绑定到具体的场景或 GameObject 上。它是继承自 UnityEngine.Object 的一种轻量级的、可持久化的类，适合用于定义配置数据、全局变量、数据模板等。</p>
+
+<h3 id="scriptableobject的常见用途">ScriptableObject的常见用途</h3>
+<ul>
+  <li>配置文件（如技能、道具、怪物数据等）</li>
+  <li>全局设置（如游戏设置、控制配置）</li>
+  <li>数据资产（如对话文本、地图配置）</li>
+  <li>状态管理（如状态机状态定义）</li>
+</ul>
+
+<h3 id="示例创建一个技能数据的scriptableobject">示例：创建一个技能数据的ScriptableObject</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+<span class="p">[</span><span class="nf">CreateAssetMenu</span><span class="p">(</span><span class="n">fileName</span> <span class="p">=</span> <span class="s">"NewSkill"</span><span class="p">,</span> <span class="n">menuName</span> <span class="p">=</span> <span class="s">"RPG/Skill"</span><span class="p">)]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Skill</span> <span class="p">:</span> <span class="n">ScriptableObject</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">skillName</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">power</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">float</span> <span class="n">cooldown</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>[CreateAssetMenu]方便在编译器中通过菜单创建资源</li>
+  <li>定义你想要保存的数据字段
+使用步骤：<br />
+1.把上述脚本命名为<code class="language-plaintext highlighter-rouge">Skill.cs</code> <br />
+2.在Unity编辑器中，右键-&gt;Create-&gt;RPG-&gt;Skill，即可创建一个Skill数据文件<br />
+3.你可以创建多个Skill数据文件，并在多个对象中引用它们，节省内存和维护成本</li>
+</ul>
+
+<p>在代码中使用ScriptableObject</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">SkillUser</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">Skill</span> <span class="n">skill</span><span class="p">;</span> <span class="c1">// 在Inspector中拖拽刚才创建的Skill资源</span>
+
+    <span class="k">void</span> <span class="nf">UseSkill</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">$"使用技能：</span><span class="p">{</span><span class="n">skill</span><span class="p">.</span><span class="n">skillName</span><span class="p">}</span><span class="s">, 伤害：</span><span class="p">{</span><span class="n">skill</span><span class="p">.</span><span class="n">power</span><span class="p">}</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h3 id="scriptableobject高级用法">ScriptableObject高级用法</h3>
+<ol>
+  <li>
+    <p>用它做游戏配置数据
+比如怪物属性、武器数据、UI 配置，都可以用 ScriptableObject 做成资产文件。</p>
+  </li>
+  <li>
+    <p>数据驱动设计（Data-Driven）
+通过 ScriptableObject 分离数据和逻辑，修改数据时不用改代码，方便调试和迭代。</p>
+  </li>
+  <li>
+    <p>状态机状态定义
+做 AI 或动画状态机时，每个状态可以是一个 ScriptableObject，对应一组数据和行为。</p>
+  </li>
+  <li>
+    <p>事件系统和观察者模式
+结合 UnityEvent 或自定义事件，ScriptableObject 能充当“事件资产”，实现跨对象通信。</p>
+  </li>
+</ol>
+
+<h3 id="scriptableobject的高级技巧">ScriptableObject的高级技巧</h3>
+<ul>
+  <li>避免重复加载资源：多个对象引用同一个ScriptableObject，可以减少重复实例化</li>
+  <li>与事件系统结合：搭配<code class="language-plaintext highlighter-rouge">UnityEvent</code>或观察者模式，可以做数据驱动的游戏逻辑</li>
+  <li>与Addressables结合：更好地支持热更新和资源管理</li>
+</ul>
+
+<h2 id="unity-attribute">Unity Attribute</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>特性名称</th>
+      <th>用途说明</th>
+      <th>示例</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[SerializeField]</code></td>
+      <td>让私有字段在 Inspector 面板可见且可编辑</td>
+      <td><code class="language-plaintext highlighter-rouge">private int hp;</code> + <code class="language-plaintext highlighter-rouge">[SerializeField]</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[HideInInspector]</code></td>
+      <td>隐藏公有字段或属性，不显示在 Inspector 面板</td>
+      <td><code class="language-plaintext highlighter-rouge">public float speed;</code> + <code class="language-plaintext highlighter-rouge">[HideInInspector]</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[Range(min, max)]</code></td>
+      <td>在 Inspector 显示滑动条控制数值范围</td>
+      <td><code class="language-plaintext highlighter-rouge">[Range(0, 100)] public int volume;</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[Header("标题")]</code></td>
+      <td>给 Inspector 中的字段添加标题分组</td>
+      <td><code class="language-plaintext highlighter-rouge">[Header("Player Settings")] public int hp;</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[Tooltip("说明")]</code></td>
+      <td>鼠标悬停字段时显示提示文本</td>
+      <td><code class="language-plaintext highlighter-rouge">[Tooltip("Player health points")] public int hp;</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[ContextMenu("方法名")]</code></td>
+      <td>在 Inspector 的组件右上菜单调用方法</td>
+      <td><code class="language-plaintext highlighter-rouge">[ContextMenu("Reset Stats")] void Reset() { ... }</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[CreateAssetMenu]</code></td>
+      <td>在编辑器菜单创建 ScriptableObject 资产</td>
+      <td><code class="language-plaintext highlighter-rouge">[CreateAssetMenu(menuName="RPG/Skill")]</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="序列化serialization">序列化（Serialization）</h2>
+<h3 id="什么是序列化">什么是序列化</h3>
+<p>简单来说，序列化就是把内存中的对象转换成可以存储或传输的格式的过程，比如转换成二进制、JSON、XML、或者Unity自己的资产格式<br />
+反过来，反序列化（Deserialization）就是把存储或传输的格式转换回程序内存分钟的对象</p>
+
+<h3 id="为什么要序列化">为什么要序列化</h3>
+<p>1.保存数据<br />
+游戏存档就是把游戏状态保存到磁盘上的过程，这个过程就是序列化</p>
+
+<p>2.编辑器显示与修改数据<br />
+Unity Inspector面板显示脚本里字段的值，需要序列化这些字段才能让编辑器读写它们</p>
+
+<p>3.网络传输<br />
+多人游戏中，玩家状态需要网络传输，也要序列化成网络能传输的格式</p>
+
+<h3 id="unity里的序列化">Unity里的序列化</h3>
+<p>Unity有自己的一套序列化规则，决定安歇数据会被序列化（保存、显示在Inspector）：</p>
+<ul>
+  <li>public字段 默认被序列化</li>
+  <li>private字段 需要加[SerializeField]才会序列化</li>
+  <li>Unity只序列化支持的类型，比如基本类型、Unity内置类型、自定义继承自UnityEngine.Object的类，和标记为[Serializable]的自定义类</li>
+  <li>属性（Property）默认不序列化，必须用字段</li>
+</ul>
+
+<p><strong>示例</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Player</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">health</span> <span class="p">=</span> <span class="m">100</span><span class="p">;</span>            <span class="c1">// 会序列化并显示在 Inspector</span>
+    <span class="p">[</span><span class="n">SerializeField</span><span class="p">]</span>
+    <span class="k">private</span> <span class="kt">int</span> <span class="n">mana</span> <span class="p">=</span> <span class="m">50</span><span class="p">;</span>              <span class="c1">// 虽然是private，但加了特性会序列化</span>
+
+    <span class="k">private</span> <span class="kt">int</span> <span class="n">secret</span> <span class="p">=</span> <span class="m">999</span><span class="p">;</span>           <span class="c1">// 不序列化，不显示在 Inspector</span>
+
+    <span class="p">[</span><span class="n">System</span><span class="p">.</span><span class="n">NonSerialized</span><span class="p">]</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">tempValue</span> <span class="p">=</span> <span class="m">123</span><span class="p">;</span>         <span class="c1">// 明确不序列化，即使public也不会序列化</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="unity自带命名空间">Unity自带命名空间</h2>
+<h3 id="1unityengine">1.<code class="language-plaintext highlighter-rouge">UnityEngine</code></h3>
+<ul>
+  <li>功能：Unity核心功能的主命名空间</li>
+  <li>内容：
+    <ul>
+      <li>游戏对象相关类：<code class="language-plaintext highlighter-rouge">GameObject</code>,<code class="language-plaintext highlighter-rouge">Transform</code>,<code class="language-plaintext highlighter-rouge">Component</code></li>
+      <li>数学类型：<code class="language-plaintext highlighter-rouge">Vector2</code>, <code class="language-plaintext highlighter-rouge">Vector3</code>, <code class="language-plaintext highlighter-rouge">Quaternion</code>, <code class="language-plaintext highlighter-rouge">Matrix4x4</code></li>
+      <li>渲染相关：<code class="language-plaintext highlighter-rouge">Material</code>, <code class="language-plaintext highlighter-rouge">Shader</code>, <code class="language-plaintext highlighter-rouge">Camera</code>, <code class="language-plaintext highlighter-rouge">Light</code></li>
+      <li>物理系统：<code class="language-plaintext highlighter-rouge">Rigidbody</code>, <code class="language-plaintext highlighter-rouge">Collider</code>, <code class="language-plaintext highlighter-rouge">Physics</code></li>
+      <li>输入系统：<code class="language-plaintext highlighter-rouge">Input</code></li>
+      <li>时间系统：<code class="language-plaintext highlighter-rouge">Time</code></li>
+      <li>资源管理：<code class="language-plaintext highlighter-rouge">Resources</code>
+        <blockquote>
+          <p>几乎所有 Unity 游戏代码都依赖这个命名空间。</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="2unityengineui">2.<code class="language-plaintext highlighter-rouge">UnityEngine.UI</code></h3>
+<ul>
+  <li>功能：Unity 的传统 UI 系统。</li>
+  <li>内容：
+    <ul>
+      <li>UI 控件类：<code class="language-plaintext highlighter-rouge">Button</code>, <code class="language-plaintext highlighter-rouge">Text</code>, <code class="language-plaintext highlighter-rouge">Image</code>, <code class="language-plaintext highlighter-rouge">Slider</code>, <code class="language-plaintext highlighter-rouge">Canvas</code></li>
+      <li>事件系统相关：<code class="language-plaintext highlighter-rouge">EventSystem</code>, <code class="language-plaintext highlighter-rouge">PointerEventData</code>
+        <blockquote>
+          <p>用于构建游戏界面，处理用户交互。</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="3unityenginescenemanagement">3.<code class="language-plaintext highlighter-rouge">UnityEngine.SceneManagement</code></h3>
+<ul>
+  <li>功能：管理场景加载和卸载。</li>
+  <li>内容：
+    <ul>
+      <li>场景管理类：<code class="language-plaintext highlighter-rouge">SceneManager</code></li>
+      <li>场景信息类：<code class="language-plaintext highlighter-rouge">Scene</code></li>
+    </ul>
+  </li>
+  <li>典型用法：
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">SceneManager.LoadScene("SceneName")</code> 加载场景</li>
+      <li><code class="language-plaintext highlighter-rouge">SceneManager.GetActiveScene()</code> 获取当前场景</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="4unityengineaudio">4.<code class="language-plaintext highlighter-rouge">UnityEngine.Audio</code></h3>
+<ul>
+  <li>功能：音频系统相关类。</li>
+  <li>内容：
+    <ul>
+      <li>AudioSource, AudioClip, AudioListener</li>
+      <li>混音器类：AudioMixer
+        <blockquote>
+          <p>处理声音播放和混音控制。</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="5unityengineeventsystem">5.<code class="language-plaintext highlighter-rouge">UnityEngine.EventSystem</code></h3>
+<ul>
+  <li>功能：底层事件系统，支持 UI 和输入事件。</li>
+  <li>内容：
+    <ul>
+      <li>事件接口：IPointerClickHandler, IDragHandler 等</li>
+      <li>事件数据类：PointerEventData, BaseEventData
+        <blockquote>
+          <p>UI 交互和自定义输入处理常用。</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="6unityengineanimation">6.<code class="language-plaintext highlighter-rouge">UnityEngine.Animation</code></h3>
+<ul>
+  <li>功能：动画系统相关。</li>
+  <li>内容：
+    <ul>
+      <li>动画控制器：Animator</li>
+      <li>动画事件和状态机相关类
+        <blockquote>
+          <p>用于角色动画控制和状态机管理。</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="7unityeditor仅编辑器">7.<code class="language-plaintext highlighter-rouge">UnityEditor</code>（仅编辑器）</h3>
+<ul>
+  <li>功能：编辑器扩展相关</li>
+  <li>内容：
+    <ul>
+      <li>自定义Inspector、编辑器窗口、菜单项等
+        <blockquote>
+          <p>只能在编辑器环境使用，构建后不包含</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="8unitycollections--unityjobs--unityburst">8.<code class="language-plaintext highlighter-rouge">Unity.Collections</code> / <code class="language-plaintext highlighter-rouge">Unity.Jobs</code> / <code class="language-plaintext highlighter-rouge">Unity.Burst</code></h3>
+<ul>
+  <li>功能：高性能计算和多线程相关。</li>
+  <li>内容：
+    <ul>
+      <li>NativeArray, NativeList</li>
+      <li>作业系统：IJob, JobHandle</li>
+      <li>Burst 编译器加速
+        <blockquote>
+          <p>DOTS（Data-Oriented Technology Stack）架构核心。</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><a href="https://docs.unity3d.com/ScriptReference/">官方文档</a></p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[Unity脚本就是你编写的C#类，它控制游戏中物体的行为、交互、动画、输入、碰撞、UI等逻辑]]></summary></entry><entry><title type="html">Addressables System</title><link href="http://localhost:4000/posts/2025-06-05-Addressables-System/" rel="alternate" type="text/html" title="Addressables System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Addressables-System</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-05-Addressables-System/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Collider &amp;amp; Trigger</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Collider-and-Trigger.html" rel="alternate" type="text/html" title="Collider &amp;amp; Trigger" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Collider-and-Trigger</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Collider-and-Trigger.html"><![CDATA[<p>Unity中的碰撞体是物理系统的重要组成部分，负责定义游戏对象的形状以进行碰撞检测。简单来说，Collider是一个无形的边界，用于检测物体是否接触或重叠，从而触发碰撞事件和物理响应</p>
 
 <h2 id="什么是collider">什么是Collider</h2>
 <p>Collider是附加在游戏对象上的组件，用于告诉物理引擎这个对象的碰撞范围。Collider本身不会渲染形状，只是一个隐形的物理边界</p>
@@ -167,8 +1024,7 @@ The axis of the capsule’s lengthwise orientation in the GameObject’s local s
 <ul>
   <li>Cooking Options
 用于控制在碰撞体生成（或烘焙）过程中如何处理网格数据，以提高碰撞效率或调试准确性<br />
-Unity在运行时将网格数据转换为物理引擎能使用的碰撞形式格式，这个过程叫做Mesh Cooking
-//TODO</li>
+Unity在运行时将网格数据转换为物理引擎能使用的碰撞形式格式，这个过程叫做Mesh Cooking</li>
 </ul>
 
 <h3 id="terrian-collider">Terrian Collider</h3>
@@ -430,965 +1286,7 @@ Trigger是Collider的感应区域模式</p>
 </ul>
 
 <p><strong>本模块仅讲Collider作为组件的使用，详细物理系统请参照：</strong><br />
-<a href="/posts/2025-06-03-Physics-System/">Physics System</a></p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Component" /><category term="Physics System" /><summary type="html"><![CDATA[Unity中的碰撞体是物理系统的重要组成部分，负责定义游戏对象的形状以进行碰撞检测。简单来说，Collider是一个无形的边界，用于检测物体是否接触或重叠，从而触发碰撞事件和物理响应]]></summary></entry><entry><title type="html">Rigibody</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Rigidbody.html" rel="alternate" type="text/html" title="Rigibody" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Rigidbody</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Rigidbody.html"><![CDATA[<p>在Unity中，<code class="language-plaintext highlighter-rouge">Rigidbody</code>是一个用于实现物理行为的组件，它允许你的游戏对象受力、重力、碰撞等真实世界的物理规则影响</p>
-
-<h2 id="rigidbody的基本功能">Rigidbody的基本功能</h2>
-<p>当你给一个<code class="language-plaintext highlighter-rouge">GameObject</code>添加Rigibody后，它具备以下能力：</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>功能</th>
-      <th>描述</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>重力</td>
-      <td>会受到 Unity 世界的重力影响。</td>
-    </tr>
-    <tr>
-      <td>力作用</td>
-      <td>可通过 <code class="language-plaintext highlighter-rouge">AddForce()</code> 施加力。</td>
-    </tr>
-    <tr>
-      <td>碰撞</td>
-      <td>可与带有 <code class="language-plaintext highlighter-rouge">Collider</code> 的物体发生物理碰撞。</td>
-    </tr>
-    <tr>
-      <td>移动</td>
-      <td>可通过物理方式（而不是直接修改 transform）移动。</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="rigidbodypanel">RigidbodyPanel</h3>
-
-<p><img src="/assets/images/RigidbodyPanel.jpg" alt="RigidbodyPanel" /></p>
-
-<p><strong>基础物理参数</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>参数名</th>
-      <th>作用</th>
-      <th>默认值</th>
-      <th>建议用法</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Mass</strong>（质量）</td>
-      <td>控制惯性、碰撞反应</td>
-      <td><code class="language-plaintext highlighter-rouge">1</code></td>
-      <td>设为真实世界比例（如车 1000、人 70）</td>
-    </tr>
-    <tr>
-      <td><strong>Drag</strong>（线性阻力）</td>
-      <td>模拟空气/水的阻力（减速）</td>
-      <td><code class="language-plaintext highlighter-rouge">0</code></td>
-      <td>移动物体逐渐停止，可设为 <code class="language-plaintext highlighter-rouge">1~5</code></td>
-    </tr>
-    <tr>
-      <td><strong>Angular Drag</strong>（角阻力）</td>
-      <td>减缓旋转速度</td>
-      <td><code class="language-plaintext highlighter-rouge">0.05</code></td>
-      <td>防止物体无限旋转，常设为 <code class="language-plaintext highlighter-rouge">0.1~0.5</code></td>
-    </tr>
-  </tbody>
-</table>
-
-<ul>
-  <li><strong>Automatic Center Of Mass</strong>（自动质心，默认为true）
-    <ul>
-      <li>Unity会根据物体的形状（Collider）和质量分布，自动计算Rigidbody的中心点</li>
-      <li>通常质心在物体的几何中心，但加多个Collider后可能偏移</li>
-      <li>这是大多数情况下推荐的方式，因为它物理上是合理的</li>
-    </ul>
-  </li>
-</ul>
-
-<p><strong>手动设置质心</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rb</span><span class="p">.</span><span class="n">centerOfMass</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="p">-</span><span class="m">1f</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span> <span class="c1">//手动设一个偏移量</span>
-</code></pre></div></div>
-<blockquote>
-  <p>设置后将覆盖自动计算值，适用于如车辆、飞船平衡优化、ragdoll调整等高级用途</p>
-</blockquote>
-
-<p>可视化质心方法：</p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">OnDrawGizmo</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">rb</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">Gizmos</span><span class="p">.</span><span class="n">color</span> <span class="p">=</span> <span class="n">Color</span><span class="p">.</span><span class="n">red</span><span class="p">;</span>
-        <span class="n">Gizmos</span><span class="p">.</span><span class="nf">DrawSphere</span><span class="p">(</span><span class="n">rb</span><span class="p">.</span><span class="n">worldCenterOfMess</span><span class="p">,</span> <span class="m">0.1f</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p><strong>为什么质心重要</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>应用场景</th>
-      <th>影响</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>飞船 / 载具</td>
-      <td>若质心偏上，容易翻车或晃动</td>
-    </tr>
-    <tr>
-      <td>摆锤 / 吊挂物体</td>
-      <td>旋转效果中心点取决于质心</td>
-    </tr>
-    <tr>
-      <td>多 Collider 组合物体</td>
-      <td>自动质心可能不在视觉中心</td>
-    </tr>
-    <tr>
-      <td>被力击打（AddForce）</td>
-      <td>力不作用在质心会引起旋转（力矩）</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Automatic Tensor</strong>（自动惯性张量，默认为true）</p>
-
-<p><strong>什么是Tensor</strong></p>
-<ul>
-  <li>在物理学中，惯性张量是描述刚体如何响应旋转力（力矩）的数学结构</li>
-  <li>它是质量分布的一个三维矩阵，决定了刚体绕每个轴的旋转惯性</li>
-  <li>简单理解：惯性张量 = “旋转版的质量”</li>
-</ul>
-
-<p><strong>默认自动计算惯性张量</strong></p>
-<ul>
-  <li>Unity默认根据物体的<code class="language-plaintext highlighter-rouge">Collider</code>形状和<code class="language-plaintext highlighter-rouge">Mass</code>自动计算惯性张量</li>
-  <li>这就是<code class="language-plaintext highlighter-rouge">Rigidbody.inertiaTensor</code>和<code class="language-plaintext highlighter-rouge">inertiaTensorRotation</code>的来源</li>
-  <li>所以刚体自然会表现出“越大越难转”“形状影响旋转惯性”等真实行为</li>
-</ul>
-
-<p><strong>手动设置惯性张量（自动覆盖）</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rb</span><span class="p">.</span><span class="n">inertiaTensor</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">);</span> <span class="c1">//自定义旋转惯性</span>
-<span class="n">rb</span><span class="p">.</span><span class="n">inertiaTensorRotation</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="n">identity</span><span class="p">;</span> <span class="c1">//张量方向</span>
-</code></pre></div></div>
-<p>但这样做有前提条件：</p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rb</span><span class="p">.</span><span class="nf">ResetInertiaTensor</span><span class="p">();</span> <span class="c1">//可重置为自动计算值</span>
-</code></pre></div></div>
-<blockquote>
-  <p>设置之前你要禁用自动张量</p>
-</blockquote>
-
-<p><strong>什么情况需要自定义惯性张量</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>应用</th>
-      <th>目的</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>物理模拟器 / 实验工具</td>
-      <td>精确控制旋转行为</td>
-    </tr>
-    <tr>
-      <td>异形刚体（如飞船、复杂机器人）</td>
-      <td>人为调整旋转惯性，防止旋转太快或不稳定</td>
-    </tr>
-    <tr>
-      <td>某些游戏设计</td>
-      <td>让角色或物体转得更“重”或更“灵活”</td>
-    </tr>
-    <tr>
-      <td>制作旋转玩具 / 陀螺仪</td>
-      <td>可控惯性带来物理可玩性</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>运动状态设置</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>参数</th>
-      <th>作用</th>
-      <th>默认</th>
-      <th>使用场景</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Use Gravity</strong></td>
-      <td>是否受重力影响</td>
-      <td>true</td>
-      <td>用于自由下落、角色跳跃等</td>
-    </tr>
-    <tr>
-      <td><strong>Is Kinematic</strong></td>
-      <td>是否由代码控制，不参与物理</td>
-      <td>false</td>
-      <td>静态平台、动画控制角色等</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Interpolate（插值）</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>选项</th>
-      <th>说明</th>
-      <th>使用场景</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>None</strong></td>
-      <td>不插值，可能抖动</td>
-      <td>一般默认</td>
-    </tr>
-    <tr>
-      <td><strong>Interpolate</strong></td>
-      <td>使用上一帧数据进行平滑</td>
-      <td>摄像机跟随刚体时防抖动</td>
-    </tr>
-    <tr>
-      <td><strong>Extrapolate</strong></td>
-      <td>使用下一帧数据预测位置</td>
-      <td>一般不推荐，容易导致位置错误</td>
-    </tr>
-  </tbody>
-</table>
-
-<blockquote>
-  <p>插值仅影响视觉表现，不影响物理逻辑，适合处理低帧率时的视觉平滑</p>
-</blockquote>
-
-<p><strong>Collision Detection（碰撞检测模式）</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>模式</th>
-      <th>描述</th>
-      <th>使用场景</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Discrete</strong></td>
-      <td>默认，普通对象</td>
-      <td>慢速运动、低精度要求</td>
-    </tr>
-    <tr>
-      <td><strong>Continuous</strong></td>
-      <td>防穿透</td>
-      <td>快速移动物体（如子弹）</td>
-    </tr>
-    <tr>
-      <td><strong>Continuous Dynamic</strong></td>
-      <td>防止快速刚体穿过静态物体</td>
-      <td>用于导弹、飞行物</td>
-    </tr>
-    <tr>
-      <td><strong>Continuous Speculative</strong></td>
-      <td>预测未来路径是否碰撞</td>
-      <td>用于需要超高稳定性的对象</td>
-    </tr>
-  </tbody>
-</table>
-
-<blockquote>
-  <p>连续检测会增加计算量，不建议用于大量物体</p>
-</blockquote>
-
-<p><strong>Constraints（冻结轴向）</strong>
-用于锁定物体的移动或旋转，防止不受控的漂移或翻滚</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>选项</th>
-      <th>说明</th>
-      <th>常用组合</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Freeze Position X/Y/Z</td>
-      <td>锁定对应轴上的移动</td>
-      <td>冻住平台等静态物体</td>
-    </tr>
-    <tr>
-      <td>Freeze Rotation X/Y/Z</td>
-      <td>锁定对应轴上的旋转</td>
-      <td>防止角色倒地、车轮翻转</td>
-    </tr>
-    <tr>
-      <td>Freeze All</td>
-      <td>锁定所有轴</td>
-      <td>彻底不动，用于静态物体</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Layer Overrides（图层覆盖）</strong><br />
-允许刚体在物理世界中临时使用不同的Layer设置进行碰撞和检测计算，不会影响物体本身的Layer<br />
-影响范围：物理模拟（碰撞、Raycast、Force、Overlap等），不会影响渲染、标签识别、脚本逻辑</p>
-<ul>
-  <li>Include Layers
-    <ul>
-      <li>表示允许此刚体与哪些Layer的对象发生物理交互</li>
-      <li>这实质上是一个LayerMask</li>
-    </ul>
-  </li>
-  <li>Exclude Layers
-    <ul>
-      <li>表示在物理交互中忽略的Layer
-        <blockquote>
-          <p>Exclude Layers优先于Include Layers</p>
-        </blockquote>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="rigidbody常见用法">Rigidbody常见用法：</h2>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Rigidbody</span> <span class="n">rb</span> <span class="p">=</span> <span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">Rigidbody</span><span class="p">&gt;();</span>
-
-<span class="n">rb</span><span class="p">.</span><span class="nf">AddForce</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">forward</span> <span class="p">*</span> <span class="m">10f</span><span class="p">);</span> <span class="c1">//施加一个向前的力</span>
-<span class="n">rb</span><span class="p">.</span><span class="nf">AddTorque</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">up</span> <span class="p">*</span> <span class="m">5f</span><span class="p">);</span> <span class="c1">//添加一个旋转力</span>
-<span class="n">rb</span><span class="p">.</span><span class="nf">MovePosition</span><span class="p">(</span><span class="n">newPos</span><span class="p">);</span> <span class="c1">//平滑低移动Rigidbody</span>
-<span class="n">rb</span><span class="p">.</span><span class="n">velocity</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span> <span class="c1">//设置线速度</span>
-</code></pre></div></div>
-
-<h3 id="iskinematic-和-非-kinematic">isKinematic 和 非 Kinematic</h3>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">isKinematic = false</code>（默认）：受物理引擎控制（例如重力、碰撞、AddForce）</li>
-  <li><code class="language-plaintext highlighter-rouge">isKinematic = true</code>：完全由你控制<code class="language-plaintext highlighter-rouge">transform</code>或<code class="language-plaintext highlighter-rouge">MovePosition()</code>，不会被物理引擎影响</li>
-</ul>
-
-<p>用途：</p>
-<ul>
-  <li>Kinematic常用于移动平台、动画角色骨骼、摄像机跟随等</li>
-</ul>
-
-<h3 id="rigidbody-vs-transform控制">Rigidbody vs Transform控制</h3>
-<p><strong>不要在有Rigidbody的物体上直接用<code class="language-plaintext highlighter-rouge">transform.position += ...</code>来移动，这会跳过物理系统，导致碰撞问题</strong></p>
-
-<p>正确做法：</p>
-<ul>
-  <li>用<code class="language-plaintext highlighter-rouge">Rigidbody.MovePosition()</code>移动</li>
-  <li>或使用<code class="language-plaintext highlighter-rouge">AddForce()</code>、<code class="language-plaintext highlighter-rouge">velocity</code>等物理方式</li>
-</ul>
-
-<p>问题本质：
-在Unity中，Rigidbody是由物理系统控制的，一旦你给GameObject添加了Rigidbody，它的位置和旋转应该只通过物理系统来控制。</p>
-
-<p>使用<code class="language-plaintext highlighter-rouge">transform.position += ...</code>会出现的问题</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>问题</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>绕过物理引擎</strong></td>
-      <td><code class="language-plaintext highlighter-rouge">transform.position += ...</code> 是<strong>立即改变 Transform 的位置</strong>，Unity 物理系统（PhysX）对此毫不知情</td>
-    </tr>
-    <tr>
-      <td><strong>不会产生碰撞检测</strong></td>
-      <td>物体“穿越”其他碰撞体而不产生物理响应（穿模）</td>
-    </tr>
-    <tr>
-      <td><strong>不会产生力或速度变化</strong></td>
-      <td><code class="language-plaintext highlighter-rouge">Rigidbody.velocity</code> 不会更新，你也不能检测运动趋势</td>
-    </tr>
-    <tr>
-      <td><strong>打乱内部物理状态</strong></td>
-      <td>会破坏 Rigidbody 的睡眠状态、插值、运动预测等机制，造成 jitter（抖动）或奇怪弹跳</td>
-    </tr>
-    <tr>
-      <td><strong>失去重力/摩擦等作用</strong></td>
-      <td>物体移动但没有物理感，导致操作不自然</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>只有在以下三种情况中可以使用<code class="language-plaintext highlighter-rouge">transform.position</code>:<br />
-1.没有<code class="language-plaintext highlighter-rouge">Rigidbody</code>的对象（纯UI/特效/场景物体）</p>
-
-<p>2.临时调整位置，如传送、重置</p>
-
-<p>3.<code class="language-plaintext highlighter-rouge">isKinematic = true</code></p>
-
-<h3 id="示例角色控制器使用rigidbody">示例：角色控制器使用Rigidbody</h3>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">PlayerMovement</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
-<span class="p">{</span>
-    <span class="k">public</span> <span class="kt">float</span> <span class="n">speed</span> <span class="p">=</span> <span class="m">5f</span><span class="p">;</span>
-    <span class="k">private</span> <span class="n">Rigidbody</span> <span class="n">rb</span><span class="p">;</span>
-
-    <span class="k">void</span> <span class="nf">Start</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">rb</span> <span class="p">=</span> <span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">Rigidbody</span><span class="p">&gt;();</span>
-
-    <span class="k">void</span> <span class="nf">FixedUpdate</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="kt">float</span> <span class="n">h</span> <span class="p">=</span> <span class="n">Input</span><span class="p">.</span><span class="nf">GetAxis</span><span class="p">(</span><span class="s">"Horizontal"</span><span class="p">);</span>
-        <span class="kt">float</span> <span class="n">v</span> <span class="p">=</span> <span class="n">Input</span><span class="p">.</span><span class="nf">GetAxis</span><span class="p">(</span><span class="s">"Vertical"</span><span class="p">);</span>
-
-        <span class="n">Vector3</span> <span class="n">move</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span>
-        <span class="n">rb</span><span class="p">.</span><span class="nf">MovePosition</span><span class="p">(</span><span class="n">rb</span><span class="p">.</span><span class="n">position</span> <span class="p">+</span> <span class="n">move</span> <span class="p">*</span> <span class="n">speed</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">fixedDeltaTime</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<h2 id="物理力应用的类型">物理力应用的类型</h2>
-<p>Unity提供了多种物理力应用方式，你可以根据物理效果需求选择合适的模式</p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rb</span><span class="p">.</span><span class="nf">AddForce</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">force</span><span class="p">,</span> <span class="n">ForceMode</span><span class="p">.</span><span class="n">Force</span><span class="p">);</span>
-</code></pre></div></div>
-
-<table>
-  <thead>
-    <tr>
-      <th>ForceMode</th>
-      <th>作用</th>
-      <th>适用场景</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Force</code></td>
-      <td>持续施加力（受质量影响）</td>
-      <td>模拟发动机、风力等持续力</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Impulse</code></td>
-      <td>瞬时冲量（受质量影响）</td>
-      <td>子弹击中、跳跃、爆炸推动</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">VelocityChange</code></td>
-      <td>改变速度（忽略质量）</td>
-      <td>快速位移、瞬间反弹</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Acceleration</code></td>
-      <td>施加加速度（不受质量影响）</td>
-      <td>飞行器推进、不考虑质量时</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="爆炸力addexplosionforce">爆炸力：<code class="language-plaintext highlighter-rouge">AddExplosionForce</code></h2>
-<p>模拟爆炸冲击力，自动考虑距离衰减和力方向</p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rb</span><span class="p">.</span><span class="nf">AddExplosionForce</span><span class="p">(</span><span class="n">force</span><span class="p">,</span> <span class="n">explosionPosition</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">upwardsModifier</span><span class="p">);</span>
-</code></pre></div></div>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">force</code>:爆炸的最大力</li>
-  <li><code class="language-plaintext highlighter-rouge">explosionPosition</code>:爆炸中心</li>
-  <li><code class="language-plaintext highlighter-rouge">radius</code>:爆炸影响范围</li>
-  <li><code class="language-plaintext highlighter-rouge">upwardsModifier</code>:向上的推力（可增强爆炸效果）</li>
-</ul>
-
-<h2 id="rigidbody-constraints锁定轴向">Rigidbody Constraints（锁定轴向）</h2>
-<p>锁定位置或旋转，常用于平台类游戏角色防止翻滚</p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rb</span><span class="p">.</span><span class="n">constraints</span> <span class="p">=</span> <span class="n">RigidbodyConstraints</span><span class="p">.</span><span class="n">FreezeRotationX</span> <span class="p">|</span> <span class="n">RigidbodyConstraints</span><span class="p">.</span><span class="n">FreezeRotationZ</span><span class="p">;</span>
-</code></pre></div></div>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">FreezePositionX/Y/Z</code></li>
-  <li><code class="language-plaintext highlighter-rouge">FreezeRotationX/Y/Z</code></li>
-  <li><code class="language-plaintext highlighter-rouge">FreezeAll</code></li>
-</ul>
-
-<h2 id="rigidbody-interpolation插值">Rigidbody Interpolation（插值）</h2>
-<p>用于缓解物体抖动或物理更新频率和渲染帧率不一致的问题<br />
-插值实在渲染帧之间平滑显示刚体位置或旋转，防止因物理更新滞后造成的抖动或卡顿</p>
-
-<blockquote>
-  <p>渲染帧和物理帧
-在Unity游戏循环中，渲染帧（Update）和物理帧（Fixed Update）是分开的
-渲染帧率和物理帧率可能不同，这样一来，在两次物理更新之间可能要渲染一次或多次画面，此时刚体的位置还没更新，就会导致物体“跳跃”，摄像机跟随刚体时抖动</p>
-</blockquote>
-
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rb</span><span class="p">.</span><span class="n">interpolation</span> <span class="p">=</span> <span class="n">RigidbodyInterpolation</span><span class="p">.</span><span class="n">Interpolate</span><span class="p">;</span>
-</code></pre></div></div>
-
-<table>
-  <thead>
-    <tr>
-      <th>插值类型</th>
-      <th>描述</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>None</td>
-      <td>不插值，最性能优先</td>
-    </tr>
-    <tr>
-      <td>Interpolate</td>
-      <td>插值上一次位置</td>
-    </tr>
-    <tr>
-      <td>Extrapolate</td>
-      <td>预测下一帧位置</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>适用于：摄像机跟随物体 + Rigidbody，平滑动画等</p>
-
-<p><strong>插值不是同步手段</strong><br />
-插值只影响视觉显示，不影响实际物理行为或碰撞检测</p>
-
-<h2 id="rigidbody连接joint系统">Rigidbody连接（Joint系统）</h2>
-<p>Unity提供了多个<code class="language-plaintext highlighter-rouge">Joint</code>来连接两个Rigidbody，来实现机械、吊挂、弹簧等效果</p>
-
-<p>常用Joint类型</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Joint 类型</th>
-      <th>功能</th>
-      <th>应用</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">FixedJoint</code></td>
-      <td>完全绑定两个刚体</td>
-      <td>构建刚性结构</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">HingeJoint</code></td>
-      <td>像门铰链一样旋转</td>
-      <td>车轮、门</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">SpringJoint</code></td>
-      <td>模拟弹簧连接</td>
-      <td>弹簧、绳索末端</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">ConfigurableJoint</code></td>
-      <td>自定义约束自由度</td>
-      <td>高级物理装置</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">CharacterJoint</code></td>
-      <td>模拟人体骨骼</td>
-      <td>人物 ragdoll</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>示例：固定一个物体</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">joint</span> <span class="p">=</span> <span class="n">gameObject</span><span class="p">.</span><span class="n">AddComponent</span><span class="p">&lt;</span><span class="n">FixedJoint</span><span class="p">&gt;();</span>
-<span class="n">joint</span><span class="p">.</span><span class="n">connectedBody</span> <span class="p">=</span> <span class="n">otherRigidbody</span><span class="p">;</span>
-</code></pre></div></div>
-
-<h2 id="刚体时间管理">刚体时间管理</h2>
-<p>你可以临时控制刚体行为。例如冻结、暂停、缓动</p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rb</span><span class="p">.</span><span class="n">isKinematic</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span> <span class="c1">// 暂停物理影响</span>
-<span class="n">rb</span><span class="p">.</span><span class="n">detectCollisions</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span> <span class="c1">//禁用碰撞响应</span>
-<span class="n">rb</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">();</span> <span class="c1">//进入“休眠”状态，除非外力唤醒</span>
-<span class="n">rb</span><span class="p">.</span><span class="nf">WakeUp</span><span class="p">();</span> <span class="c1">//强制唤醒</span>
-</code></pre></div></div>
-<h2 id="手动模拟物理少见但强大">手动模拟物理（少见但强大）</h2>
-<p>Unity默认每帧自动调用<code class="language-plaintext highlighter-rouge">Physics.Simulate()</code>，你可以关闭自动模拟并手动调用它</p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Physics</span><span class="p">.</span><span class="n">autoSimulation</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
-<span class="n">Physics</span><span class="p">.</span><span class="nf">Simulate</span><span class="p">(</span><span class="n">Time</span><span class="p">.</span><span class="n">fixedDeltaTime</span><span class="p">);</span>
-</code></pre></div></div>
-<p>用于录制、回放、预测系统、AI训练等</p>
-
-<h2 id="实践建议">实践建议</h2>
-<h3 id="1性能优化">1.性能优化</h3>
-<ul>
-  <li>尽量使用<code class="language-plaintext highlighter-rouge">MovePosition</code>和<code class="language-plaintext highlighter-rouge">MoveRotation</code>代替直接设置<code class="language-plaintext highlighter-rouge">transform</code></li>
-  <li>使用<code class="language-plaintext highlighter-rouge">Rigidbody.Sleep()</code>来节省性能，尤其是大量静态物体</li>
-</ul>
-
-<h3 id="2碰撞过滤">2.碰撞过滤</h3>
-<ul>
-  <li>使用<code class="language-plaintext highlighter-rouge">Layer</code> + <code class="language-plaintext highlighter-rouge">Physics.IngoreCollision()</code>或<code class="language-plaintext highlighter-rouge">Physics.IgnoreLayerCollision()</code>控制碰撞逻辑</li>
-</ul>
-
-<h3 id="3组合joint">3.组合Joint</h3>
-<ul>
-  <li>复杂角色物理（如ragdoll）可通过多个Joint配合约束自由度实现真实物理表现</li>
-</ul>
-
-<h3 id="4多刚体组合">4.多刚体组合</h3>
-<ul>
-  <li>使用空物体为父物体挂多个子物体加不同Rigidbody，用<code class="language-plaintext highlighter-rouge">Joint</code>连接</li>
-</ul>
-
-<h2 id="刚体不能直接禁用">刚体不能直接禁用</h2>
-<h3 id="1刚体不是一个标准行为组件">1.刚体不是一个标准行为组件</h3>
-<ul>
-  <li>Unity中大多数组件都继承自<code class="language-plaintext highlighter-rouge">Behaviour</code>类，这类组件有一个通用的enable属性</li>
-  <li>但Rigidbody继承自<code class="language-plaintext highlighter-rouge">Component</code>，因此没有<code class="language-plaintext highlighter-rouge">enable</code>属性4
-    <h3 id="2rigidbody是物理系统的一部分关闭它的逻辑很复杂">2.Rigidbody是物理系统的一部分，关闭它的逻辑很复杂</h3>
-    <p>Unity的Rigidbody是底层物理引擎（NVIDIA PhysX）注册的一个刚体对象，它包含大量复杂的状态（如质量、速度、力、碰撞状态等），不能简单“关掉”</p>
-  </li>
-</ul>
-
-<p>如果允许直接<code class="language-plaintext highlighter-rouge">enabled = false</code>，Unity就得把它从物理世界中注销，可能会导致：</p>
-<ul>
-  <li>打乱碰撞检测状态</li>
-  <li>丢失动力学状态</li>
-  <li>导致其他与之交互的刚体行为出错</li>
-</ul>
-
-<p>替代方法：</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>方法</th>
-      <th>效果</th>
-      <th>场景</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">rb.isKinematic = true</code></td>
-      <td>不再受物理引擎驱动</td>
-      <td>暂停物理交互，但可以通过 transform 控制</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">rb.detectCollisions = false</code></td>
-      <td>不再检测碰撞</td>
-      <td>让它“穿透”其他物体</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">rb.Sleep()</code></td>
-      <td>让刚体进入休眠</td>
-      <td>减少物理计算开销</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Destroy(rb)</code></td>
-      <td>彻底移除刚体</td>
-      <td>完全不再参与物理</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="rigidbody-api"><code class="language-plaintext highlighter-rouge">Rigidbody</code> API</h2>
-
-<h3 id="常用字段属性">常用字段/属性</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>属性</th>
-      <th>类型</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">mass</code></td>
-      <td><code class="language-plaintext highlighter-rouge">float</code></td>
-      <td>质量（默认 1）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">drag</code></td>
-      <td><code class="language-plaintext highlighter-rouge">float</code></td>
-      <td>线性阻力</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">angularDrag</code></td>
-      <td><code class="language-plaintext highlighter-rouge">float</code></td>
-      <td>角阻力</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">useGravity</code></td>
-      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
-      <td>是否启用重力</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">isKinematic</code></td>
-      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
-      <td>是否受物理引擎影响</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">velocity</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
-      <td>当前线速度</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">angularVelocity</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
-      <td>当前角速度</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">position</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
-      <td>世界空间位置</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">rotation</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Quaternion</code></td>
-      <td>世界旋转</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">centerOfMass</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
-      <td>质心位置</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">inertiaTensor</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
-      <td>惯性张量</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">constraints</code></td>
-      <td><code class="language-plaintext highlighter-rouge">RigidbodyConstraints</code></td>
-      <td>锁定移动或旋转轴</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">interpolation</code></td>
-      <td><code class="language-plaintext highlighter-rouge">RigidbodyInterpolation</code></td>
-      <td>插值方式</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">collisionDetectionMode</code></td>
-      <td><code class="language-plaintext highlighter-rouge">CollisionDetectionMode</code></td>
-      <td>碰撞检测模式</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="常用方法控制移动施加力">常用方法（控制移动、施加力）</h3>
-<h4 id="施加力的方法力学模拟">施加力的方法（力学模拟）</h4>
-
-<table>
-  <thead>
-    <tr>
-      <th>方法</th>
-      <th>描述</th>
-      <th>常用参数说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">AddForce(Vector3 force, ForceMode mode = ForceMode.Force)</code></td>
-      <td>向刚体施加一个世界空间的力</td>
-      <td>- <code class="language-plaintext highlighter-rouge">ForceMode</code> 可选：<code class="language-plaintext highlighter-rouge">Force</code>, <code class="language-plaintext highlighter-rouge">Impulse</code>, <code class="language-plaintext highlighter-rouge">Acceleration</code>, <code class="language-plaintext highlighter-rouge">VelocityChange</code></td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">AddRelativeForce(Vector3 force, ForceMode mode = ForceMode.Force)</code></td>
-      <td>向刚体施加一个<strong>相对于自身方向</strong>的力</td>
-      <td>用于局部方向推进，如飞船、角色局部移动</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">AddTorque(Vector3 torque, ForceMode mode = ForceMode.Force)</code></td>
-      <td>添加一个旋转力（转矩）</td>
-      <td>控制刚体的旋转，比如陀螺仪效果</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">AddRelativeTorque(Vector3 torque, ForceMode mode = ForceMode.Force)</code></td>
-      <td>添加一个<strong>相对坐标</strong>的转矩</td>
-      <td>以自身坐标轴方向旋转</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">AddExplosionForce(float force, Vector3 position, float radius, float upwardsModifier = 0.0f, ForceMode mode = ForceMode.Force)</code></td>
-      <td>模拟爆炸力</td>
-      <td>常用于爆炸、炸飞物体等效果</td>
-    </tr>
-  </tbody>
-</table>
-
-<h4 id="移动与旋转物理友好方式">移动与旋转（物理友好方式）</h4>
-<p>这些方法在<code class="language-plaintext highlighter-rouge">FixedUpdate()</code>中调用，以物理方式平滑移动对象</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>方法</th>
-      <th>描述</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">MovePosition(Vector3 position)</code></td>
-      <td>让刚体以物理方式移动到某位置（会产生碰撞）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">MoveRotation(Quaternion rot)</code></td>
-      <td>让刚体以物理方式旋转到目标旋转角度</td>
-    </tr>
-  </tbody>
-</table>
-
-<blockquote>
-  <p>不要使用transform.position = … 替代移动刚体，会破坏物理系统</p>
-</blockquote>
-
-<h4 id="状态控制">状态控制</h4>
-
-<table>
-  <thead>
-    <tr>
-      <th>方法</th>
-      <th>描述</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Sleep()</code></td>
-      <td>让刚体休眠（不再进行物理更新，除非唤醒）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">WakeUp()</code></td>
-      <td>唤醒休眠的刚体</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">IsSleeping()</code></td>
-      <td>检查当前是否处于休眠状态</td>
-    </tr>
-  </tbody>
-</table>
-
-<h4 id="速度与点速度获取">速度与点速度获取</h4>
-
-<table>
-  <thead>
-    <tr>
-      <th>方法</th>
-      <th>描述</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">GetPointVelocity(Vector3 worldPoint)</code></td>
-      <td>获取世界空间中某一点的实际速度</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">GetRelativePointVelocity(Vector3 relativePoint)</code></td>
-      <td>获取某个相对位置的速度（少用）</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="状态检测与设置">状态检测与设置</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>方法 / 属性</th>
-      <th>类型</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">IsSleeping()</code></td>
-      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
-      <td>当前是否休眠</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">detectCollisions</code></td>
-      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
-      <td>是否响应碰撞</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">maxDepenetrationVelocity</code></td>
-      <td><code class="language-plaintext highlighter-rouge">float</code></td>
-      <td>最大穿透修正速度（用于防止卡住）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">solverIterations</code></td>
-      <td><code class="language-plaintext highlighter-rouge">int</code></td>
-      <td>物理求解器迭代次数（越高越精准）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">sleepThreshold</code></td>
-      <td><code class="language-plaintext highlighter-rouge">float</code></td>
-      <td>控制何时休眠</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="高级设置">高级设置</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>属性 / 方法</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">inertiaTensorRotation</code></td>
-      <td>惯性张量旋转</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">maxAngularVelocity</code></td>
-      <td>最大角速度</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">centerOfMass</code></td>
-      <td>自定义质心位置</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">ResetCenterOfMass()</code></td>
-      <td>重置为默认质心</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">ResetInertiaTensor()</code></td>
-      <td>重置惯性张量</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="与collider配合相关">与Collider配合相关</h3>
-<p>Rigidbody本身不处理碰撞细节，但需配合<code class="language-plaintext highlighter-rouge">Collider</code>组件才能参与物理交互</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>方法</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">ClosestPointOnBounds(Vector3 position)</code></td>
-      <td>获取边界上最接近某点的位置</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">SweepTest(Vector3 direction, out RaycastHit hit, float maxDistance)</code></td>
-      <td>模拟刚体沿方向运动是否会撞到东西</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">SweepTestAll(...)</code></td>
-      <td>返回所有碰撞信息</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">GetRelativePointVelocity(Vector3 relativePoint)</code></td>
-      <td>获取某点相对速度</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">GetPointVelocity(Vector3 worldPoint)</code></td>
-      <td>获取世界空间下某点速度</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong><a href="https://docs.unity3d.com/ScriptReference/Rigidbody.html">Unity官方文档（Rigidbody）</a></strong></p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Component" /><category term="Physics System" /><summary type="html"><![CDATA[在Unity中，Rigidbody是一个用于实现物理行为的组件，它允许你的游戏对象受力、重力、碰撞等真实世界的物理规则影响]]></summary></entry><entry><title type="html">Unity Build-in Types</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types.html" rel="alternate" type="text/html" title="Unity Build-in Types" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types.html"><![CDATA[<p>Unity内建类型</p>
+<a href="/posts/2025-06-03-Physics-System/">Physics System</a></p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Component" /><category term="Physics System" /><summary type="html"><![CDATA[Unity中的碰撞体是物理系统的重要组成部分，负责定义游戏对象的形状以进行碰撞检测。简单来说，Collider是一个无形的边界，用于检测物体是否接触或重叠，从而触发碰撞事件和物理响应]]></summary></entry><entry><title type="html">Unity Build-in Types</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types.html" rel="alternate" type="text/html" title="Unity Build-in Types" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types.html"><![CDATA[<p>Unity内建类型</p>
 
 <h2 id="常见unity内建类型按用途分">常见Unity内建类型（按用途分）</h2>
 <h3 id="1空间几何类型transform相关">1.空间/几何类型（Transform相关）</h3>
@@ -2126,10 +2024,11 @@ Ry不会也无法回头修改Rx的效果<br />
       <td>协程对象类型</td>
     </tr>
   </tbody>
-</table>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[Unity内建类型]]></summary></entry><entry><title type="html">Physics System</title><link href="http://localhost:4000/posts/2025-06-03-Physics-System/" rel="alternate" type="text/html" title="Physics System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Physics-System</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-03-Physics-System/"><![CDATA[<ul>
+</table>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[Unity内建类型]]></summary></entry><entry><title type="html">Multithread</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Multithread.html" rel="alternate" type="text/html" title="Multithread" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Multithread</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Multithread.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Physics System</title><link href="http://localhost:4000/posts/2025-06-03-Physics-System/" rel="alternate" type="text/html" title="Physics System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Physics-System</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-03-Physics-System/"><![CDATA[<ul>
   <li>1.Raycast</li>
   <li>2.碰撞和触发器以及函数的回调流程</li>
-</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[1.Raycast 2.碰撞和触发器以及函数的回调流程]]></summary></entry><entry><title type="html">Multithread</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Multithread.html" rel="alternate" type="text/html" title="Multithread" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Multithread</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Multithread.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Gizmos</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Gizmos.html" rel="alternate" type="text/html" title="Gizmos" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Gizmos</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Gizmos.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Input System</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Input-System.html" rel="alternate" type="text/html" title="Input System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Input-System</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Input-System.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">FSM</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/FSM.html" rel="alternate" type="text/html" title="FSM" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/FSM</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/FSM.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Import Assets</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-assets.html" rel="alternate" type="text/html" title="Import Assets" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-assets</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-assets.html"><![CDATA[<p>Unity支持多种格式的资源文件，并能自动识别并进行初步处理</p>
+  <li>3.碰撞检测的性能</li>
+</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[1.Raycast 2.碰撞和触发器以及函数的回调流程 3.碰撞检测的性能]]></summary></entry><entry><title type="html">Input System</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Input-System.html" rel="alternate" type="text/html" title="Input System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Input-System</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Input-System.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Import Assets</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-assets.html" rel="alternate" type="text/html" title="Import Assets" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-assets</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-assets.html"><![CDATA[<p>Unity支持多种格式的资源文件，并能自动识别并进行初步处理</p>
 
 <h2 id="资源导入基本流程">资源导入基本流程</h2>
 <p><strong>1.将资源文件拖入<code class="language-plaintext highlighter-rouge">Assets</code>目录中（Unity会自动导入）</strong><br />
