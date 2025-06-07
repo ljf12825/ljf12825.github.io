@@ -179,6 +179,18 @@ var store = [{
         "url": "/posts/2025-06-06-Object-Pooling/",
         "teaser": null
       },{
+        "title": "Joint",
+        "excerpt":"Joint（关节）系统是物理系统的一部分，用于将两个Rigidbody通过某种方式连接起来，从而形成如机械臂、门铰链、车轮悬挂等复杂的物理结构 常见Joint组件（3D） Joint 类型 功能简介 应用场景 Fixed Joint 固定连接两个刚体（类似粘在一起） 粘接物体，如断裂木桥 Hinge Joint 限制物体绕一个轴旋转 门铰链、车轮 Spring Joint 使用弹簧连接两个物体 弹簧、吊绳 Character Joint 模拟生物骨骼的铰接关节 角色 ragdoll 系统 Configurable Joint 高级自定义关节，可设置自由度 自定义复杂机械结构 使用Joint基本原则 Joint总是连接两个Rigidbody：当前GameObject上的Rigidbody与Connected Body 如果Connected Body为空，则连接的是世界坐标系 添加Joint后，Unity会自动处理物理约束和力反馈 示例：Hinge Joint（门铰链） HingeJoint joint = gameObject.AddComponent&lt;HingeJoint&gt;(); joint.connectedBody = otherRigidbody; joint.useLimits = true; JointLimits limits = joint.limits;...","categories": ["笔记"],
+        "tags": ["Unity","Unity Component","Physics System"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Joint.html",
+        "teaser": null
+      },{
+        "title": "UI System",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity System"],
+        "url": "/posts/2025-06-07-UI-System/",
+        "teaser": null
+      },{
     "title": "About",
     "excerpt":"        You want to know who I am?  It’s UB.            博客内容仅用于学习，如有侵权，请联系删除       &lt;-  &lt;-  &lt;-  ","url": "http://localhost:4000/about/"
   },{
