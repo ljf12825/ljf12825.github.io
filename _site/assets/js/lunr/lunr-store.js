@@ -98,7 +98,7 @@ var store = [{
         "title": "Rigibody",
         "excerpt":"在Unity中，Rigidbody是一个用于实现物理行为的组件，它允许你的游戏对象受力、重力、碰撞等真实世界的物理规则影响 Rigidbody的基本功能 当你给一个GameObject添加Rigibody后，它具备以下能力： 功能 描述 重力 会受到 Unity 世界的重力影响。 力作用 可通过 AddForce() 施加力。 碰撞 可与带有 Collider 的物体发生物理碰撞。 移动 可通过物理方式（而不是直接修改 transform）移动。 RigidbodyPanel 基础物理参数 参数名 作用 默认值 建议用法 Mass（质量） 控制惯性、碰撞反应 1 设为真实世界比例（如车 1000、人 70） Drag（线性阻力） 模拟空气/水的阻力（减速） 0 移动物体逐渐停止，可设为 1~5 Angular Drag（角阻力） 减缓旋转速度 0.05 防止物体无限旋转，常设为 0.1~0.5 Automatic Center Of Mass（自动质心，默认为true） Unity会根据物体的形状（Collider）和质量分布，自动计算Rigidbody的中心点 通常质心在物体的几何中心，但加多个Collider后可能偏移 这是大多数情况下推荐的方式，因为它物理上是合理的...","categories": ["笔记"],
         "tags": ["Unity","Unity Component","Physics System"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Rigidbody.html",
+        "url": "/posts/2025-06-02-Rigidbody/",
         "teaser": null
       },{
         "title": "Scripts",
@@ -150,7 +150,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Physics System",
-        "excerpt":"   1.Raycast   2.碰撞和触发器以及函数的回调流程   3.碰撞检测的性能  ","categories": ["笔记"],
+        "excerpt":"Unity实际上提供了两个物理系统：3D物理（基于PhysX）和2D物理（基于Box2D），它们是独立的 物理系统的核心职责 分类 内容 示例 1. 碰撞检测 检测物体之间是否发生接触（重叠、触发、碰撞） 玩家与墙体碰撞、子弹击中敌人 2. 碰撞响应 根据碰撞产生反作用力、反弹、停止等 小球碰撞墙壁后弹开 3. 力与运动 模拟重力、加速度、摩擦力、空气阻力等 角色掉落、物体滚动、滑动 4. 刚体动力学 使用 Rigidbody 模拟真实世界中的质量、惯性、力矩等 推箱子、砸东西、车子加速转弯 5. 关节系统 使用 Joint 或 ArticulationBody 模拟多刚体之间的约束连接 吊桥、机器人手臂、门铰链 6. 触发器检测 使用 isTrigger 实现非物理交互 进入危险区域触发警报、检测拾取道具 7. 布料、软体、车辆 特定模拟，如布料系统、软体物理、车轮碰撞和悬挂 Unity 的 WheelCollider, Cloth 8. 碰撞信息收集 获取碰撞点、法线、力大小、接触信息等 用于播放音效、粒子、震动反馈等 9.射线检测 用于看到什么，而非物理互动...","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
         "url": "/posts/2025-06-03-Physics-System/",
         "teaser": null
@@ -164,7 +164,7 @@ var store = [{
         "title": "Collider & Trigger",
         "excerpt":"Unity中的碰撞体是物理系统的重要组成部分，负责定义游戏对象的形状以进行碰撞检测。简单来说，Collider是一个无形的边界，用于检测物体是否接触或重叠，从而触发碰撞事件和物理响应 什么是Collider Collider是附加在游戏对象上的组件，用于告诉物理引擎这个对象的碰撞范围。Collider本身不会渲染形状，只是一个隐形的物理边界 常见的Collider类型 BoxCollider 立方体形状的碰撞体，适合方形或长方体物体 SphereCollider 球形碰撞体，适合球形或圆形物体 CapsuleCollider 胶囊碰撞体，适合人物、柱子等 MeshCollider 使用自定义网格模型做碰撞体，适合复杂形状，性能较差，且通常用于静态物体 WheelCollider 专门用于车辆轮胎的碰撞和物理模拟 Collider和Rigidbody的关系 Collider只负责检测碰撞，不会自定产生物理运动 Rigidbody组件负责物理运动和动力学 一个没有Rigidbody的物体的Collider会被当作“静态碰撞体”使用（静态障碍物），不会移动也不响应物理力 一个有Rigidbody的物体可以在物理引擎驱动下移动，Collider会随物体运动 Collider Panel Box Collider IsTrigger 默认false，此时Collider是实体碰撞体，会阻挡其他物体，发生物理碰撞和反弹 勾选时，Collider变成Trigger，不会阻挡其他物体，但会检测进入、离开和停留事件，可以用来做区域检测、事件触发等 Provides Contacts 用于物理引擎的碰撞检测和接触点信息提供 默认false，Collider可能只报告碰撞发生，但不提供详细的接触点信息，这样可以节省一些计算资源 勾选后，Collider会提供详细的碰撞接触点信息，这样物理引擎在碰撞时，可以把碰撞的具体接触点信息暴露出来，供脚本或物理系统使用 using UnityEngine; public class CollisionPointExample : MonoBehaviour { void OnCollisionEnter(Collision collision) { foreach (ContactPoint contact in collision.contacts) { //接触点位置...","categories": ["笔记"],
         "tags": ["Unity","Unity Component","Physics System"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Collider-and-Trigger.html",
+        "url": "/posts/2025-06-04-Collider-and-Trigger/",
         "teaser": null
       },{
         "title": "Addressables System",
@@ -179,10 +179,22 @@ var store = [{
         "url": "/posts/2025-06-06-Object-Pooling/",
         "teaser": null
       },{
+        "title": "Articulation Body",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity Component","Physics System"],
+        "url": "/posts/2025-06-07-Articulation-Body/",
+        "teaser": null
+      },{
+        "title": "Character Controller",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity Component","Physics System"],
+        "url": "/posts/2025-06-07-Character-Controller/",
+        "teaser": null
+      },{
         "title": "Joint",
         "excerpt":"Joint（关节）系统是物理系统的一部分，用于将两个Rigidbody通过某种方式连接起来，从而形成如机械臂、门铰链、车轮悬挂等复杂的物理结构 常见Joint组件（3D） Joint 类型 功能简介 应用场景 Fixed Joint 固定连接两个刚体（类似粘在一起） 粘接物体，如断裂木桥 Hinge Joint 限制物体绕一个轴旋转 门铰链、车轮 Spring Joint 使用弹簧连接两个物体 弹簧、吊绳 Character Joint 模拟生物骨骼的铰接关节 角色 ragdoll 系统 Configurable Joint 高级自定义关节，可设置自由度 自定义复杂机械结构 使用Joint基本原则 Joint总是连接两个Rigidbody：当前GameObject上的Rigidbody与Connected Body 如果Connected Body为空，则连接的是世界坐标系 添加Joint后，Unity会自动处理物理约束和力反馈 示例：Hinge Joint（门铰链） HingeJoint joint = gameObject.AddComponent&lt;HingeJoint&gt;(); joint.connectedBody = otherRigidbody; joint.useLimits = true; JointLimits limits = joint.limits;...","categories": ["笔记"],
         "tags": ["Unity","Unity Component","Physics System"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Joint.html",
+        "url": "/posts/2025-06-07-Joint/",
         "teaser": null
       },{
         "title": "UI System",

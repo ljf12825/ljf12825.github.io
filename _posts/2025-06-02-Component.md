@@ -148,7 +148,7 @@ gameObject.AddComponenet<AudioSource>();
 |                     | Sorting Group                          |
 |                     | Sprite Renderer                        |
 |                     | Streaming Controller                   |
-| **Scripts**         | *(空内容，如需添加请提供)*           |
+| **Scripts**         | 自定义脚本           |
 | **Tilemap**         | Tilemap                                |
 |                     | Tilemap Collider 2D                    |
 |                     | Tilemap Renderer                       |

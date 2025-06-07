@@ -5,6 +5,7 @@ date: 2025-06-01
 categories: [笔记]
 tags: [Unity, Unity Component, Physics System]
 author: "ljf12825"
+permalink: /posts/2025-06-04-Collider-and-Trigger/
 ---
 Unity中的碰撞体是物理系统的重要组成部分，负责定义游戏对象的形状以进行碰撞检测。简单来说，Collider是一个无形的边界，用于检测物体是否接触或重叠，从而触发碰撞事件和物理响应  
 
