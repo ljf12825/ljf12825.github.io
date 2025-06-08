@@ -138,7 +138,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Input System",
-        "excerpt":" ","categories": ["笔记"],
+        "excerpt":"Unity目前存在新旧两个输入系统，旧输入系统（Input类）和新输入系统（Input System包） Unity旧输入系统（UnityEngine.Input） 这是Unity默认内建的输入方式，无配置即可用，使用非常直观，主要通过静态类Input获取各种输入信息 适合快速开发与小型项目 不支持热插拔和玩家映射 键盘/鼠标输入最简单最稳定 建议仅在不考虑复杂输入要求的项目中使用 键盘输入 基本方法： Input.GetKey(KeyCode.X); //判断某键是否按住 Input.GetKeyDown(KeyCode.X); // 是否按下（只触发一帧） Input.GetKeyUp(KeyCode.X)l // 是否刚抬起 KeyCode是一个枚举，表示各种键盘和鼠标按键 鼠标输入 鼠标按钮 Input.GetMouseButton(int button); // 0左键，1右键，2中键 Input.GetMouseButtonDown(int button); Input.GetMouseButtonUp(int button); 鼠标位置和滚轮 Vector3 mousePos = Input.mousePosition; // 屏幕坐标 float scrollDelta = Input.mouseScrollDelta.y; // 滚轮滑动 触摸屏输入（Touch） 移动端专用，支持多点触控 int count = Input.touchCount; if (count...","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Input-System.html",
         "teaser": null
