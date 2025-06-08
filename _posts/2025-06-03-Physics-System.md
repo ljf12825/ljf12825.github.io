@@ -72,8 +72,178 @@ Unity提供了碰撞层和遮罩机制来控制哪些物体会发生碰撞：
 - 为每个具有Collider的对象添加Rigidbody，否则不会碰撞检测
 - 控制器角色不见时使用物理控制，推荐使用[CharacterController]({{site.baseurl}}/posts/2025-06-07-Character-Controller/)
 
+## 碰撞机制（Collision）
+PhysX下的碰撞系统  
+
+### 碰撞系统的三大核心组件
+
+| 组件            | 用途               |
+| ------------- | ---------------- |
+| **Collider**  | 定义形状、体积，用于检测碰撞   |
+| **Rigidbody** | 让物体参与物理计算（受力、运动） |
+| **Physics**   | Unity 提供的物理引擎系统类 |
+
+### 碰撞发生条件
+
+| 物体A                   | 物体B       | 是否有碰撞事件 | 是否物理反应 |
+| --------------------- | --------- | ------- | ------ |
+| Rigidbody             | Rigidbody |  是     |  是    |
+| Rigidbody             | Collider  |  是     |  是    |
+| Collider              | Collider  |  否     |  否    |
+| IsTrigger             | 任意        |  触发事件  |  否    |
+| Rigidbody+IsKinematic | Rigidbody |  可检测   |  否    |
+
+> 触发碰撞事件的最小可行：Both Collider & at least one Rigidbody
+
+### 碰撞回调函数
+```cs
+void OnCollisionEnter(Collision collision)     // 第一次接触
+void OnCollisionStay(Collision collision)      // 持续接触
+void OnCollisionExit(Collision collision)      // 分离时
+```
+```cs
+void OnTriggerEnter(Collider other)            // 进入 Trigger 区域
+void OnTriggerStay(Collider other)             // 停留在 Trigger 区域
+void OnTriggerExit(Collider other)             // 离开 Trigger 区域
+```
+这些函数只有当GameObject上
+- 含有`Collider`
+- 至少一个对象含有`Rigidbody`时才会触发
+
+### 碰撞信息
+`OnCollisionEnter(Collision collision)`
+- `collision.gameObject`:对方物体
+- `collision.contacts`：碰撞点数组
+- `collision.relativeVelocity`：相对速度
+- `collision.impulse`：冲击力
+- `collision.collider`：对方的 Collider
+`OnTriggerEnter(Collider other)`
+- `other.gameObject`:触发进入的对象
+- `other.attachedRigidbody`：对方的刚体
+
+### 碰撞流程图
+```lua
++--------------+         +--------------+
+| 物体A        |         | 物体B        |
+| Rigidbody A  |<------->| Rigidbody B  |
+| Collider A   |   碰撞  | Collider B   |
++--------------+         +--------------+
+         ↓
+  Physics Engine 处理（反弹、摩擦、事件）
+         ↓
+调用 MonoBehaviour 回调函数（如 OnCollisionEnter）
+```
+
+### 碰撞和触发器函数的回调流程
+Collision 和 Trigger的回调函数是由物理系统在FixedUpdate()周期中根据物体的运动和物理交互自动触发的  
+
+#### 前提条件：发生回调的必要条件
+##### 碰撞回调
+发生碰撞回调必须满足以下条件：
+- 两个物体中至少有一个拥有Rigidbody
+- 两个物体都必须有Collider
+- 两个Collider都不能设置为isTrigger = true
+#### 触发器回调
+触发器发生需满足：
+- 至少有一个物体有Rigidbody
+- 其中一个Collider设置为isTrigger = true
+- 另一个对象可以是静态的，但必须有Collider
+
+### 回调函数执行流程
+**1.FixedUpdate()执行**  
+Unity的物理系统在此阶段检查所有Rigidbody的运动与交互  
+
+**2.碰撞检测**  
+Unity内部使用Broad Phase + Narrow Phase检查两个Collider是否发生接触  
+
+**3.判定类型**  
+- 如果任意一方isTrigger = true -> 触发器事件
+- 否则 -> 碰撞事件
+
+**4.调用回调函数**
+
+#### 内部调用机制
+```plaintext
+1. FixedUpdate() 周期开始
+2. 物理世界更新 Rigidbody 的位置与速度
+3. Broad Phase 找出可能接触的 Collider 对
+4. Narrow Phase 精确计算接触点
+5. 判断是否为 Trigger 还是 Collision
+6. 封装成 C# 对象（Collision / Collider）
+7. 找到相关脚本组件
+8. 依次调用符合条件的 MonoBehaviour 回调函数
+```
+Unity利用内部的消息机制（如SendMessage）在检测到事件时对拥有相关函数的脚本组件发消息  
+
+#### 注意
+- 只有启用的GameObject和启用的MonoBehaviour脚本才会收到回调
+- Unity使用反射查找函数名，因此必须命名准确
+- 如果GameObject上挂载了多个组件，每个实现了相关回调的组件都会被调用
+
+### 碰撞检测的性能
+Unity的碰撞检测系统性能在于碰撞检测阶段（Collision Detection）的复杂度和参与物体的数量与类型  
+
+#### 碰撞检测的两个阶段
+Unity的碰撞检测使用了标准的两阶段检测机制： 
+
+| 阶段    | 名称                | 描述                          | 性能影响   |
+| ----- | ----------------- | --------------------------- | ------ |
+| **1** | Broad Phase（宽阶段）  | 快速粗略筛选可能接触的物体对              | 高频但代价小 |
+| **2** | Narrow Phase（窄阶段） | 精确计算两个 Collider 的交点、接触面、法线等 | 耗性能最大  |
+
+#### 影响性能的关键因素
+**1.碰撞体数量**  
+数量越多，Broad Phase的计算复杂度越高（通常是O(n log n)甚至O(n^2)）  
+
+**2.碰撞体类型**
+
+| Collider 类型     | 性能排序（快 → 慢）    |
+| --------------- | -------------- |
+| BoxCollider     | 最快（AABB）      |
+| SphereCollider  | 次快（数学简洁）      |
+| CapsuleCollider | 较快             |
+| MeshCollider    | 最慢（需三角面片精确计算） |
+
+> MeshCollider + Convex = 速度提升（但仍比原始体慢）
+
+**3.碰撞体是否为Trigger**  
+`isTrigger = true`仍参与Broad Phase和部分 Narrow Phase，但不产生物理反应，性能提升有限  
+
+**4.是否使用Rigidbody**
+- 静态Collider（无Rigidbody）：性能最好
+- 动态Rigidbody：每帧更新位置，参与碰撞检测，性能开销更高
+- Kinematic Rigidbody（使用Transform移动）：需要手动检测碰撞（效率更差）
+
+**5.碰撞检测模式**  
+Rigidbody组件有三种检测模式：
+
+| 模式                     | 描述            | 性能      |
+| ---------------------- | ------------- | ------- |
+| Discrete               | 默认，逐帧计算接触     | 最快     |
+| Continuous             | 检查穿透，适用于高速小物体 | 较慢     |
+| Continuous Speculative | 更智能的预测碰撞      | 慢但安全性高 |
+
+##### 性能优化建议
+**1.减少碰撞体数量**  
+- 合并多个小Collider为一个大Collider
+- 非必要的GameObject不加Collider
+- 批量物体使用静态合批（Static Batching）
+
+**2.使用简单形状的Collider**
+- 优先使用Box/Sphere/Capsule
+- 尽量避免MeshCollider，必要时使用Convex并限制顶点数
+
+**3.合理使用Rigidbody**
+- 静态物体不要加Rigidbody
+- 使用Kinematic Rigidbody替代频繁创建销毁物体
+
+**4.合理设置Layer和Layer Collision Matrix**
+- 使用Physics -> Layer Collision Matrix关闭不必要的碰撞检测组合
+- 精细划分物体层级，减少不必要检测
+
+**5.分区检测（空间分割）**
+- 利用网格划分，八叉树，四叉树，分区加载等算法减少碰撞检测范围（自定义或插件）
+
 
 
 - 1.Raycast  
-- 2.碰撞和触发器以及函数的回调流程
-- 3.碰撞检测的性能

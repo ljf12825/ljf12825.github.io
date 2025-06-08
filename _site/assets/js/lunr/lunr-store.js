@@ -203,6 +203,12 @@ var store = [{
         "url": "/posts/2025-06-07-UI-System/",
         "teaser": null
       },{
+        "title": "Scene System",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity System"],
+        "url": "/posts/2025-06-08-Scene-System/",
+        "teaser": null
+      },{
     "title": "About",
     "excerpt":"        You want to know who I am?  It’s UB.            博客内容仅用于学习，如有侵权，请联系删除       &lt;-  &lt;-  &lt;-  ","url": "http://localhost:4000/about/"
   },{

@@ -301,12 +301,320 @@
   <li>不要用<code class="language-plaintext highlighter-rouge">transform.position</code>移动物体（绕过物理系统），应使用<code class="language-plaintext highlighter-rouge">Rigidbody.MovePosition()</code>或<code class="language-plaintext highlighter-rouge">AddForce()</code></li>
   <li>所有施加力的操作应在<code class="language-plaintext highlighter-rouge">FixedUpdate()</code>中完成</li>
   <li>为每个具有Collider的对象添加Rigidbody，否则不会碰撞检测</li>
-  <li>
-    <p>控制器角色不见时使用物理控制，推荐使用<a href="/posts/2025-06-07-Character-Controller/">CharacterController</a></p>
+  <li>控制器角色不见时使用物理控制，推荐使用<a href="/posts/2025-06-07-Character-Controller/">CharacterController</a></li>
+</ul>
+
+<h2 id="碰撞机制collision">碰撞机制（Collision）</h2>
+<p>PhysX下的碰撞系统</p>
+
+<h3 id="碰撞系统的三大核心组件">碰撞系统的三大核心组件</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>组件</th>
+      <th>用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Collider</strong></td>
+      <td>定义形状、体积，用于检测碰撞</td>
+    </tr>
+    <tr>
+      <td><strong>Rigidbody</strong></td>
+      <td>让物体参与物理计算（受力、运动）</td>
+    </tr>
+    <tr>
+      <td><strong>Physics</strong></td>
+      <td>Unity 提供的物理引擎系统类</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="碰撞发生条件">碰撞发生条件</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>物体A</th>
+      <th>物体B</th>
+      <th>是否有碰撞事件</th>
+      <th>是否物理反应</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Rigidbody</td>
+      <td>Rigidbody</td>
+      <td>是</td>
+      <td>是</td>
+    </tr>
+    <tr>
+      <td>Rigidbody</td>
+      <td>Collider</td>
+      <td>是</td>
+      <td>是</td>
+    </tr>
+    <tr>
+      <td>Collider</td>
+      <td>Collider</td>
+      <td>否</td>
+      <td>否</td>
+    </tr>
+    <tr>
+      <td>IsTrigger</td>
+      <td>任意</td>
+      <td>触发事件</td>
+      <td>否</td>
+    </tr>
+    <tr>
+      <td>Rigidbody+IsKinematic</td>
+      <td>Rigidbody</td>
+      <td>可检测</td>
+      <td>否</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>触发碰撞事件的最小可行：Both Collider &amp; at least one Rigidbody</p>
+</blockquote>
+
+<h3 id="碰撞回调函数">碰撞回调函数</h3>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">OnCollisionEnter</span><span class="p">(</span><span class="n">Collision</span> <span class="n">collision</span><span class="p">)</span>     <span class="c1">// 第一次接触</span>
+<span class="k">void</span> <span class="nf">OnCollisionStay</span><span class="p">(</span><span class="n">Collision</span> <span class="n">collision</span><span class="p">)</span>      <span class="c1">// 持续接触</span>
+<span class="k">void</span> <span class="nf">OnCollisionExit</span><span class="p">(</span><span class="n">Collision</span> <span class="n">collision</span><span class="p">)</span>      <span class="c1">// 分离时</span>
+</code></pre></div></div>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">OnTriggerEnter</span><span class="p">(</span><span class="n">Collider</span> <span class="n">other</span><span class="p">)</span>            <span class="c1">// 进入 Trigger 区域</span>
+<span class="k">void</span> <span class="nf">OnTriggerStay</span><span class="p">(</span><span class="n">Collider</span> <span class="n">other</span><span class="p">)</span>             <span class="c1">// 停留在 Trigger 区域</span>
+<span class="k">void</span> <span class="nf">OnTriggerExit</span><span class="p">(</span><span class="n">Collider</span> <span class="n">other</span><span class="p">)</span>             <span class="c1">// 离开 Trigger 区域</span>
+</code></pre></div></div>
+<p>这些函数只有当GameObject上</p>
+<ul>
+  <li>含有<code class="language-plaintext highlighter-rouge">Collider</code></li>
+  <li>至少一个对象含有<code class="language-plaintext highlighter-rouge">Rigidbody</code>时才会触发</li>
+</ul>
+
+<h3 id="碰撞信息">碰撞信息</h3>
+<p><code class="language-plaintext highlighter-rouge">OnCollisionEnter(Collision collision)</code></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">collision.gameObject</code>:对方物体</li>
+  <li><code class="language-plaintext highlighter-rouge">collision.contacts</code>：碰撞点数组</li>
+  <li><code class="language-plaintext highlighter-rouge">collision.relativeVelocity</code>：相对速度</li>
+  <li><code class="language-plaintext highlighter-rouge">collision.impulse</code>：冲击力</li>
+  <li><code class="language-plaintext highlighter-rouge">collision.collider</code>：对方的 Collider
+<code class="language-plaintext highlighter-rouge">OnTriggerEnter(Collider other)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">other.gameObject</code>:触发进入的对象</li>
+  <li><code class="language-plaintext highlighter-rouge">other.attachedRigidbody</code>：对方的刚体</li>
+</ul>
+
+<h3 id="碰撞流程图">碰撞流程图</h3>
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">+</span><span class="c1">--------------+         +--------------+</span>
+<span class="err">|</span> <span class="err">物体</span><span class="n">A</span>        <span class="err">|</span>         <span class="err">|</span> <span class="err">物体</span><span class="n">B</span>        <span class="err">|</span>
+<span class="err">|</span> <span class="n">Rigidbody</span> <span class="n">A</span>  <span class="err">|</span><span class="o">&lt;</span><span class="c1">-------&gt;| Rigidbody B  |</span>
+<span class="err">|</span> <span class="n">Collider</span> <span class="n">A</span>   <span class="err">|</span>   <span class="err">碰撞</span>  <span class="err">|</span> <span class="n">Collider</span> <span class="n">B</span>   <span class="err">|</span>
+<span class="o">+</span><span class="c1">--------------+         +--------------+</span>
+         <span class="err">↓</span>
+  <span class="n">Physics</span> <span class="n">Engine</span> <span class="err">处理（反弹、摩擦、事件）</span>
+         <span class="err">↓</span>
+<span class="err">调用</span> <span class="n">MonoBehaviour</span> <span class="err">回调函数（如</span> <span class="n">OnCollisionEnter</span><span class="err">）</span>
+</code></pre></div></div>
+
+<h3 id="碰撞和触发器函数的回调流程">碰撞和触发器函数的回调流程</h3>
+<p>Collision 和 Trigger的回调函数是由物理系统在FixedUpdate()周期中根据物体的运动和物理交互自动触发的</p>
+
+<h4 id="前提条件发生回调的必要条件">前提条件：发生回调的必要条件</h4>
+<h5 id="碰撞回调">碰撞回调</h5>
+<p>发生碰撞回调必须满足以下条件：</p>
+<ul>
+  <li>两个物体中至少有一个拥有Rigidbody</li>
+  <li>两个物体都必须有Collider</li>
+  <li>两个Collider都不能设置为isTrigger = true
+    <h4 id="触发器回调">触发器回调</h4>
+    <p>触发器发生需满足：</p>
   </li>
-  <li>1.Raycast</li>
-  <li>2.碰撞和触发器以及函数的回调流程</li>
-  <li>3.碰撞检测的性能</li>
+  <li>至少有一个物体有Rigidbody</li>
+  <li>其中一个Collider设置为isTrigger = true</li>
+  <li>另一个对象可以是静态的，但必须有Collider</li>
+</ul>
+
+<h3 id="回调函数执行流程">回调函数执行流程</h3>
+<p><strong>1.FixedUpdate()执行</strong><br />
+Unity的物理系统在此阶段检查所有Rigidbody的运动与交互</p>
+
+<p><strong>2.碰撞检测</strong><br />
+Unity内部使用Broad Phase + Narrow Phase检查两个Collider是否发生接触</p>
+
+<p><strong>3.判定类型</strong></p>
+<ul>
+  <li>如果任意一方isTrigger = true -&gt; 触发器事件</li>
+  <li>否则 -&gt; 碰撞事件</li>
+</ul>
+
+<p><strong>4.调用回调函数</strong></p>
+
+<h4 id="内部调用机制">内部调用机制</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. FixedUpdate() 周期开始
+2. 物理世界更新 Rigidbody 的位置与速度
+3. Broad Phase 找出可能接触的 Collider 对
+4. Narrow Phase 精确计算接触点
+5. 判断是否为 Trigger 还是 Collision
+6. 封装成 C# 对象（Collision / Collider）
+7. 找到相关脚本组件
+8. 依次调用符合条件的 MonoBehaviour 回调函数
+</code></pre></div></div>
+<p>Unity利用内部的消息机制（如SendMessage）在检测到事件时对拥有相关函数的脚本组件发消息</p>
+
+<h4 id="注意">注意</h4>
+<ul>
+  <li>只有启用的GameObject和启用的MonoBehaviour脚本才会收到回调</li>
+  <li>Unity使用反射查找函数名，因此必须命名准确</li>
+  <li>如果GameObject上挂载了多个组件，每个实现了相关回调的组件都会被调用</li>
+</ul>
+
+<h3 id="碰撞检测的性能">碰撞检测的性能</h3>
+<p>Unity的碰撞检测系统性能在于碰撞检测阶段（Collision Detection）的复杂度和参与物体的数量与类型</p>
+
+<h4 id="碰撞检测的两个阶段">碰撞检测的两个阶段</h4>
+<p>Unity的碰撞检测使用了标准的两阶段检测机制：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>阶段</th>
+      <th>名称</th>
+      <th>描述</th>
+      <th>性能影响</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>1</strong></td>
+      <td>Broad Phase（宽阶段）</td>
+      <td>快速粗略筛选可能接触的物体对</td>
+      <td>高频但代价小</td>
+    </tr>
+    <tr>
+      <td><strong>2</strong></td>
+      <td>Narrow Phase（窄阶段）</td>
+      <td>精确计算两个 Collider 的交点、接触面、法线等</td>
+      <td>耗性能最大</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="影响性能的关键因素">影响性能的关键因素</h4>
+<p><strong>1.碰撞体数量</strong><br />
+数量越多，Broad Phase的计算复杂度越高（通常是O(n log n)甚至O(n^2)）</p>
+
+<p><strong>2.碰撞体类型</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Collider 类型</th>
+      <th>性能排序（快 → 慢）</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>BoxCollider</td>
+      <td>最快（AABB）</td>
+    </tr>
+    <tr>
+      <td>SphereCollider</td>
+      <td>次快（数学简洁）</td>
+    </tr>
+    <tr>
+      <td>CapsuleCollider</td>
+      <td>较快</td>
+    </tr>
+    <tr>
+      <td>MeshCollider</td>
+      <td>最慢（需三角面片精确计算）</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>MeshCollider + Convex = 速度提升（但仍比原始体慢）</p>
+</blockquote>
+
+<p><strong>3.碰撞体是否为Trigger</strong><br />
+<code class="language-plaintext highlighter-rouge">isTrigger = true</code>仍参与Broad Phase和部分 Narrow Phase，但不产生物理反应，性能提升有限</p>
+
+<p><strong>4.是否使用Rigidbody</strong></p>
+<ul>
+  <li>静态Collider（无Rigidbody）：性能最好</li>
+  <li>动态Rigidbody：每帧更新位置，参与碰撞检测，性能开销更高</li>
+  <li>Kinematic Rigidbody（使用Transform移动）：需要手动检测碰撞（效率更差）</li>
+</ul>
+
+<p><strong>5.碰撞检测模式</strong><br />
+Rigidbody组件有三种检测模式：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>模式</th>
+      <th>描述</th>
+      <th>性能</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Discrete</td>
+      <td>默认，逐帧计算接触</td>
+      <td>最快</td>
+    </tr>
+    <tr>
+      <td>Continuous</td>
+      <td>检查穿透，适用于高速小物体</td>
+      <td>较慢</td>
+    </tr>
+    <tr>
+      <td>Continuous Speculative</td>
+      <td>更智能的预测碰撞</td>
+      <td>慢但安全性高</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="性能优化建议">性能优化建议</h5>
+<p><strong>1.减少碰撞体数量</strong></p>
+<ul>
+  <li>合并多个小Collider为一个大Collider</li>
+  <li>非必要的GameObject不加Collider</li>
+  <li>批量物体使用静态合批（Static Batching）</li>
+</ul>
+
+<p><strong>2.使用简单形状的Collider</strong></p>
+<ul>
+  <li>优先使用Box/Sphere/Capsule</li>
+  <li>尽量避免MeshCollider，必要时使用Convex并限制顶点数</li>
+</ul>
+
+<p><strong>3.合理使用Rigidbody</strong></p>
+<ul>
+  <li>静态物体不要加Rigidbody</li>
+  <li>使用Kinematic Rigidbody替代频繁创建销毁物体</li>
+</ul>
+
+<p><strong>4.合理设置Layer和Layer Collision Matrix</strong></p>
+<ul>
+  <li>使用Physics -&gt; Layer Collision Matrix关闭不必要的碰撞检测组合</li>
+  <li>精细划分物体层级，减少不必要检测</li>
+</ul>
+
+<p><strong>5.分区检测（空间分割）</strong></p>
+<ul>
+  <li>
+    <p>利用网格划分，八叉树，四叉树，分区加载等算法减少碰撞检测范围（自定义或插件）</p>
+  </li>
+  <li>
+    <p>1.Raycast</p>
+  </li>
 </ul>
 
         
