@@ -88,3 +88,98 @@ float raw = Input.GetAxisRaw("Horizontal"); //不经过平滑处理
 ## Unity新输入系统（Input System Package）
 Unity为了解决旧系统的局限，引入了新输入系统，是一个模块化、可配置、支持多设备的专业输入方案
 
+### 核心概念
+**Input System**包
+你需要在Unity的Package Manager中安装`Input System`包
+
+**与旧系统的对比**
+
+| 对比项   | 旧系统（Input Manager） | 新系统（Input System） |
+| ----- | ------------------ | ----------------- |
+| 支持设备  | 键鼠、手柄（有限）          | 键鼠、手柄、触控、移动传感器等   |
+| 输入模式  | 较为被动，基于轮询          | 支持事件、轮询、回调        |
+| 自定义操作 | 不支持                | 强大的 Action Map 系统 |
+| 多玩家支持 | 手动管理               | 内建支持玩家输入分离        |
+| 绑定方式  | 硬编码字符串             | 数据驱动 Asset 绑定     |
+
+### 关键组成
+**Input Action（输入动作）**  
+核心概念是“输入动作”，它是抽象层，将具体按键与游戏行为解耦  
+例如：Jump动作绑定Space键、Gamepad A键  
+你可以创建一个`.inputactions`文件来集中管理动作映射
+
+**Action Map**  
+是Input Action的集合，例如：
+- `Player`：Move、Jump、Fire
+- `UI`：Navigate、Click、Cancel
+
+**控制方案**
+用于支持不同设备类型的输入方案，如：
+- Keyboard&Mouse
+- Gamepad
+- Touch
+
+### 使用流程（常规项目）
+
+- 安装 Input System
+  打开 Package Manager
+  安装 Input System 包
+  Unity 会提示是否启用新的输入系统（可双系统兼容）
+- 创建 .inputactions 文件
+  Assets -> Create -> Input Actions
+  配置 Action Maps、Actions、Bindings
+- 生成 C# 类
+  勾选 Generate C# Class
+  命名生成的类，如 PlayerInputActions.cs
+- 在代码中使用
+```cs
+public class PlayerController : MonoBehaviour
+{
+    private PlayerInputActions inputActions;
+
+    private void Awake() => inputActions = new PlayerInputActions();
+
+    private void OnEnable()
+    {
+        inputActions.Enable();
+        inputActions.Player.Jump.performed += OnJump;
+    }
+
+    private void OnDisable()
+    {
+        inputActions.Disable();
+        inputActions.Player.Jump.performed -= OnJump;
+    }
+
+    private void OnJump(InputAction.CallbackContext context) => Debug.Log("Jump!");
+}
+```
+### 配合PlayerInput组件
+`PlayerInput`是Unity提供的MonoBehaviour，用于快速接入`.inputactions`资产，支持：
+- 自动绑定事件
+- 自动识别控制器
+- 支持多玩家分离（Join/Leave）
+```cs
+void OnMove(InputValue value) => Vector2 move = value.Get<Vector2>();
+```
+
+### 事件类型
+
+| 类型          | 描述            |
+| ----------- | ------------- |
+| `started`   | 按下的那一帧        |
+| `performed` | 动作生效（按住、滑动）   |
+| `canceled`  | 动作取消（松开、停止滑动） |
+
+### 实用技巧
+**动态绑定**  
+```cs
+inputActions.Player.Fire.start += ctx => Shoot();
+```
+
+**支持UI操作**
+Unity的`Input System UI Input Module`替代源EventSystem，需绑定Input Actions到UI
+
+**多人输入管理**
+- 配合`PlayerInputManager`
+- 支持热插拔、多设备控制

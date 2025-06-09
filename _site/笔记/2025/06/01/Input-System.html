@@ -315,6 +315,154 @@
 <h2 id="unity新输入系统input-system-package">Unity新输入系统（Input System Package）</h2>
 <p>Unity为了解决旧系统的局限，引入了新输入系统，是一个模块化、可配置、支持多设备的专业输入方案</p>
 
+<h3 id="核心概念">核心概念</h3>
+<p><strong>Input System</strong>包
+你需要在Unity的Package Manager中安装<code class="language-plaintext highlighter-rouge">Input System</code>包</p>
+
+<p><strong>与旧系统的对比</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>对比项</th>
+      <th>旧系统（Input Manager）</th>
+      <th>新系统（Input System）</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>支持设备</td>
+      <td>键鼠、手柄（有限）</td>
+      <td>键鼠、手柄、触控、移动传感器等</td>
+    </tr>
+    <tr>
+      <td>输入模式</td>
+      <td>较为被动，基于轮询</td>
+      <td>支持事件、轮询、回调</td>
+    </tr>
+    <tr>
+      <td>自定义操作</td>
+      <td>不支持</td>
+      <td>强大的 Action Map 系统</td>
+    </tr>
+    <tr>
+      <td>多玩家支持</td>
+      <td>手动管理</td>
+      <td>内建支持玩家输入分离</td>
+    </tr>
+    <tr>
+      <td>绑定方式</td>
+      <td>硬编码字符串</td>
+      <td>数据驱动 Asset 绑定</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="关键组成">关键组成</h3>
+<p><strong>Input Action（输入动作）</strong><br />
+核心概念是“输入动作”，它是抽象层，将具体按键与游戏行为解耦<br />
+例如：Jump动作绑定Space键、Gamepad A键<br />
+你可以创建一个<code class="language-plaintext highlighter-rouge">.inputactions</code>文件来集中管理动作映射</p>
+
+<p><strong>Action Map</strong><br />
+是Input Action的集合，例如：</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Player</code>：Move、Jump、Fire</li>
+  <li><code class="language-plaintext highlighter-rouge">UI</code>：Navigate、Click、Cancel</li>
+</ul>
+
+<p><strong>控制方案</strong>
+用于支持不同设备类型的输入方案，如：</p>
+<ul>
+  <li>Keyboard&amp;Mouse</li>
+  <li>Gamepad</li>
+  <li>Touch</li>
+</ul>
+
+<h3 id="使用流程常规项目">使用流程（常规项目）</h3>
+
+<ul>
+  <li>安装 Input System
+打开 Package Manager
+安装 Input System 包
+Unity 会提示是否启用新的输入系统（可双系统兼容）</li>
+  <li>创建 .inputactions 文件
+Assets -&gt; Create -&gt; Input Actions
+配置 Action Maps、Actions、Bindings</li>
+  <li>生成 C# 类
+勾选 Generate C# Class
+命名生成的类，如 PlayerInputActions.cs</li>
+  <li>在代码中使用
+    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">PlayerController</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+  <span class="k">private</span> <span class="n">PlayerInputActions</span> <span class="n">inputActions</span><span class="p">;</span>
+
+  <span class="k">private</span> <span class="k">void</span> <span class="nf">Awake</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">inputActions</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">PlayerInputActions</span><span class="p">();</span>
+
+  <span class="k">private</span> <span class="k">void</span> <span class="nf">OnEnable</span><span class="p">()</span>
+  <span class="p">{</span>
+      <span class="n">inputActions</span><span class="p">.</span><span class="nf">Enable</span><span class="p">();</span>
+      <span class="n">inputActions</span><span class="p">.</span><span class="n">Player</span><span class="p">.</span><span class="n">Jump</span><span class="p">.</span><span class="n">performed</span> <span class="p">+=</span> <span class="n">OnJump</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">private</span> <span class="k">void</span> <span class="nf">OnDisable</span><span class="p">()</span>
+  <span class="p">{</span>
+      <span class="n">inputActions</span><span class="p">.</span><span class="nf">Disable</span><span class="p">();</span>
+      <span class="n">inputActions</span><span class="p">.</span><span class="n">Player</span><span class="p">.</span><span class="n">Jump</span><span class="p">.</span><span class="n">performed</span> <span class="p">-=</span> <span class="n">OnJump</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">private</span> <span class="k">void</span> <span class="nf">OnJump</span><span class="p">(</span><span class="n">InputAction</span><span class="p">.</span><span class="n">CallbackContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"Jump!"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <h3 id="配合playerinput组件">配合PlayerInput组件</h3>
+    <p><code class="language-plaintext highlighter-rouge">PlayerInput</code>是Unity提供的MonoBehaviour，用于快速接入<code class="language-plaintext highlighter-rouge">.inputactions</code>资产，支持：</p>
+  </li>
+  <li>自动绑定事件</li>
+  <li>自动识别控制器</li>
+  <li>支持多玩家分离（Join/Leave）
+    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">OnMove</span><span class="p">(</span><span class="n">InputValue</span> <span class="k">value</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">Vector2</span> <span class="n">move</span> <span class="p">=</span> <span class="k">value</span><span class="p">.</span><span class="n">Get</span><span class="p">&lt;</span><span class="n">Vector2</span><span class="p">&gt;();</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="事件类型">事件类型</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">started</code></td>
+      <td>按下的那一帧</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">performed</code></td>
+      <td>动作生效（按住、滑动）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">canceled</code></td>
+      <td>动作取消（松开、停止滑动）</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="实用技巧">实用技巧</h3>
+<p><strong>动态绑定</strong></p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inputActions</span><span class="p">.</span><span class="n">Player</span><span class="p">.</span><span class="n">Fire</span><span class="p">.</span><span class="n">start</span> <span class="p">+=</span> <span class="n">ctx</span> <span class="p">=&gt;</span> <span class="nf">Shoot</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p><strong>支持UI操作</strong>
+Unity的<code class="language-plaintext highlighter-rouge">Input System UI Input Module</code>替代源EventSystem，需绑定Input Actions到UI</p>
+
+<p><strong>多人输入管理</strong></p>
+<ul>
+  <li>配合<code class="language-plaintext highlighter-rouge">PlayerInputManager</code></li>
+  <li>支持热插拔、多设备控制</li>
+</ul>
 
         
       </section>
