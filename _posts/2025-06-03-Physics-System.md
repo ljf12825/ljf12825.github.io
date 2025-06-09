@@ -244,6 +244,184 @@ Rigidbody组件有三种检测模式：
 **5.分区检测（空间分割）**
 - 利用网格划分，八叉树，四叉树，分区加载等算法减少碰撞检测范围（自定义或插件）
 
+## class Physics
+`Physics`是Unity提供的物理系统的静态类，用于进行各种物理计算、查询和控制，例如：
+- 发射射线
+- 碰撞检测
+- 控制刚体
+- 设置物理世界参数（如重力）
+
+### API
+
+#### Static Properties
+
+| 名称                                | 描述                          | 签名                                              |
+| --------------------------------- | --------------------------- | ----------------------------------------------- |
+| `AllLayers`                       | 层级掩码常量，选择所有层。               | `int Physics.AllLayers`                         |
+| `autoSyncTransforms`              | 是否在 Transform 变更时自动同步到物理系统。 | `bool Physics.autoSyncTransforms`               |
+| `bounceThreshold`                 | 小于该速度的碰撞不会发生弹跳。             | `float Physics.bounceThreshold`                 |
+| `clothGravity`                    | 设置所有布料组件使用的重力。              | `Vector3 Physics.clothGravity`                  |
+| `defaultContactOffset`            | 新创建碰撞体的默认接触间距。              | `float Physics.defaultContactOffset`            |
+| `defaultMaxAngularSpeed`          | 刚体的默认最大角速度（弧度）。             | `float Physics.defaultMaxAngularSpeed`          |
+| `defaultMaxDepenetrationVelocity` | 默认最大分离速度（用于解决穿透）。           | `float Physics.defaultMaxDepenetrationVelocity` |
+| `defaultPhysicsScene`             | Unity 启动时创建的默认物理场景。         | `PhysicsScene Physics.defaultPhysicsScene`      |
+| `DefaultRaycastLayers`            | 默认射线检测层掩码。                  | `int Physics.DefaultRaycastLayers`              |
+| `defaultSolverIterations`         | 默认求解器迭代次数，影响刚体关节/碰撞精度。      | `int Physics.defaultSolverIterations`           |
+| `defaultSolverVelocityIterations` | 默认速度迭代次数，影响碰撞响应。            | `int Physics.defaultSolverVelocityIterations`   |
+| `gravity`                         | 应用于场景中所有刚体的重力。              | `Vector3 Physics.gravity`                       |
+| `IgnoreRaycastLayer`              | 忽略射线检测的层常量。                 | `int Physics.IgnoreRaycastLayer`                |
+| `improvedPatchFriction`           | 启用改进的摩擦计算方式。                | `bool Physics.improvedPatchFriction`            |
+| `interCollisionDistance`          | 布料之间的最小分离距离。                | `float Physics.interCollisionDistance`          |
+| `interCollisionStiffness`         | 布料交互刚性。                     | `float Physics.interCollisionStiffness`         |
+| `invokeCollisionCallbacks`        | 是否启用 MonoBehaviour 的碰撞回调。   | `bool Physics.invokeCollisionCallbacks`         |
+| `queriesHitBackfaces`             | 射线等是否检测背面。                  | `bool Physics.queriesHitBackfaces`              |
+| `queriesHitTriggers`              | 射线等是否检测触发器。                 | `bool Physics.queriesHitTriggers`               |
+| `reuseCollisionCallbacks`         | 是否重用 Collision 实例减少 GC。     | `bool Physics.reuseCollisionCallbacks`          |
+| `simulationMode`                  | 控制物理模拟执行的时机。                | `SimulationMode Physics.simulationMode`         |
+| `sleepThreshold`                  | 刚体休眠的能量阈值。                  | `float Physics.sleepThreshold`                  |
+
+#### Static Methods
+
+| 名称                        | 描述                       | 签名                                                               |
+| ------------------------- | ------------------------ | ---------------------------------------------------------------- |
+| `BakeMesh`                | 准备 Mesh 用于 MeshCollider。 | `void BakeMesh(Mesh mesh, bool convex)`                          |
+| `BoxCast`                 | 发出盒子投射并返回第一个命中信息。        | `bool BoxCast(...)`                                              |
+| `BoxCastAll`              | 类似 BoxCast，返回所有命中信息。     | `RaycastHit[] BoxCastAll(...)`                                   |
+| `BoxCastNonAlloc`         | 不分配内存地进行 BoxCast。        | `int BoxCastNonAlloc(..., RaycastHit[] results)`                 |
+| `CapsuleCast`             | 胶囊体投射并返回第一个命中。           | `bool CapsuleCast(...)`                                          |
+| `CapsuleCastAll`          | 返回所有命中的胶囊投射。             | `RaycastHit[] CapsuleCastAll(...)`                               |
+| `CapsuleCastNonAlloc`     | 胶囊体投射，结果放入缓存数组。          | `int CapsuleCastNonAlloc(..., RaycastHit[] results)`             |
+| `CheckBox`                | 检查一个盒子是否与其他碰撞体重叠。        | `bool CheckBox(...)`                                             |
+| `CheckCapsule`            | 检查一个胶囊区域是否重叠其他碰撞体。       | `bool CheckCapsule(...)`                                         |
+| `CheckSphere`             | 检查一个球体是否与其他碰撞体重叠。        | `bool CheckSphere(Vector3 position, float radius)`               |
+| `ClosestPoint`            | 获取 collider 上最靠近某点的位置。   | `Vector3 ClosestPoint(Vector3 position, Collider collider)`      |
+| `ComputePenetration`      | 计算两个碰撞体的最小分离向量和距离。       | `bool ComputePenetration(...)`                                   |
+| `GetIgnoreCollision`      | 查询两个 collider 是否忽略碰撞。    | `bool GetIgnoreCollision(Collider a, Collider b)`                |
+| `GetIgnoreLayerCollision` | 查询两个 Layer 是否忽略碰撞。       | `bool GetIgnoreLayerCollision(int layer1, int layer2)`           |
+| `IgnoreCollision`         | 忽略两个碰撞体的碰撞。              | `void IgnoreCollision(Collider a, Collider b, bool ignore)`      |
+| `IgnoreLayerCollision`    | 忽略两个 Layer 之间的所有碰撞。      | `void IgnoreLayerCollision(int layer1, int layer2, bool ignore)` |
+| `Linecast`                | 检测两点之间是否有碰撞体。            | `bool Linecast(Vector3 start, Vector3 end)`                      |
+| `OverlapBox`              | 获取与指定盒子区域重叠的碰撞体。         | `Collider[] OverlapBox(...)`                                     |
+| `OverlapBoxNonAlloc`      | 无 GC 版本的 OverlapBox。     | `int OverlapBoxNonAlloc(..., Collider[] results)`                |
+| `OverlapCapsule`          | 获取与胶囊区域重叠的碰撞体。           | `Collider[] OverlapCapsule(...)`                                 |
+| `OverlapCapsuleNonAlloc`  | 无 GC 版本的 OverlapCapsule。 | `int OverlapCapsuleNonAlloc(..., Collider[] results)`            |
+| `OverlapSphere`           | 获取与球形区域重叠的碰撞体。           | `Collider[] OverlapSphere(Vector3 pos, float radius)`            |
+| `OverlapSphereNonAlloc`   | 无 GC 版本的 OverlapSphere。  | `int OverlapSphereNonAlloc(..., Collider[] results)`             |
+| `Raycast`                 | 发出射线，检测碰撞体。              | `bool Raycast(...)`                                              |
+| `RaycastAll`              | 返回射线经过的所有命中体。            | `RaycastHit[] RaycastAll(...)`                                   |
+| `RaycastNonAlloc`         | 射线检测，结果放入已有数组。           | `int RaycastNonAlloc(..., RaycastHit[] results)`                 |
+| `Simulate`                | 手动推进物理模拟。                | `bool Simulate(float deltaTime)`                                 |
+| `SphereCast`              | 球形投射检测。                  | `bool SphereCast(...)`                                           |
+| `SphereCastAll`           | 球形投射并返回所有命中信息。           | `RaycastHit[] SphereCastAll(...)`                                |
+| `SphereCastNonAlloc`      | 无 GC 版本的 SphereCast。     | `int SphereCastNonAlloc(..., RaycastHit[] results)`              |
+| `SyncTransforms`          | 手动同步 Transform 改变。       | `void SyncTransforms()`                                          |
+
+#### Event
+
+| 名称                      | 描述               | 签名                                                                                                    |
+| ----------------------- | ---------------- | ----------------------------------------------------------------------------------------------------- |
+| `ContactEvent`          | 订阅该事件可在每帧读取所有碰撞。 | `static event Action<PhysicsScene, NativeArray<ModifiableContactPair>> Physics.ContactEvent`          |
+| `ContactModifyEvent`    | 自定义非 CCD 碰撞对的响应。 | `static event Action<PhysicsScene, NativeArray<ModifiableContactPair>> Physics.ContactModifyEvent`    |
+| `ContactModifyEventCCD` | 自定义 CCD 碰撞对的响应。  | `static event Action<PhysicsScene, NativeArray<ModifiableContactPair>> Physics.ContactModifyEventCCD` |
 
 
-- 1.Raycast  
+#### Delegates
+
+| 名称                     | 描述                       | 签名                                                                                                        |
+| ---------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------- |
+| `ContactEventDelegate` | 用于处理 ContactEvent 的回调委托。 | `delegate void ContactEventDelegate(PhysicsScene scene, NativeArray<ModifiableContactPair> contactPairs)` |
+
+
+[UnityManual Physics](https://docs.unity3d.com/ScriptReference/Physics.html)
+
+
+### 射线
+射线主要用检测场景中物体之间是否发生了“可视”或“空间”上的交互，比如：
+- 玩家点击鼠标，判断点中了哪个物体
+- AI视野检测玩家是否在它的视野范围
+- 判断前方是否有障碍物
+- 物理检测，如子弹是否击中目标
+
+#### 射线的核心类和方法
+1.`Physics.Raycast()`  
+这是最常用的射线方法  
+```cs
+bool hit = Physics.Raycast(origin, direction);
+
+if (Physics.Raycast(origin, direction, out RaycastHit hitInfo, maxDistance))
+    Debug.Log("Hit: "+ hitInfo.collider.name);
+```
+**参数说明：**
+
+| 参数                        | 类型                        | 说明                      |
+| ------------------------- | ------------------------- | ----------------------- |
+| `origin`                  | `Vector3`                 | 射线起点                    |
+| `direction`               | `Vector3`                 | 射线方向（通常需要 `normalized`） |
+| `hitInfo`                 | `RaycastHit`              | 输出参数，包含命中的信息            |
+| `maxDistance`             | `float`                   | 射线长度                    |
+| `layerMask`               | `int`                     | 指定检测哪些 Layer 的物体        |
+| `queryTriggerInteraction` | `QueryTriggerInteraction` | 是否检测 Trigger            |
+
+2.`Physics.RaycastAll()`  
+返回所有被命中的物体  
+```cs
+RaycastHit[] hits = Physics.RaycastAll(origin, direction);
+foreach (var hit in hits) Debug.Log("Hit: " + hit.collider.name);
+```
+3.`Physics.RaycastNonAlloc()`  
+提高性能用，避免分配新内存（适合频繁调用情况） 
+```cs
+RaycastHit[] results = new RaycastHit[10];
+int count = Physics.RaycastNonAlloc(origin, direction, result);
+```
+
+#### 常用辅助类
+1.`Ray`  
+代表一条射线，由起点和方向组成  
+```cs
+Ray ray = new Ray(origin, direction);
+```
+
+2.`RaycastHit`  
+当射线击中目标时，用来保存信息的结构体  
+常用属性：
+- `collider`：命中的Collider
+- `point`：命中的世界坐标
+- `normal`：碰撞点的法线方向
+- `distance`：距离起点的距离
+- `rigidbody`：命中的刚体
+
+**示例：从摄像机发射射线**
+用于点击检测场景物体  
+```cs
+Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+if (Physics.Raycast(ray, out RaycastHit hit)) Debug.Log("Clicked on: " + hit.collider.name);
+```
+
+#### 常见用途
+
+| 用途        | 示例代码                          |
+| --------- | ----------------------------- |
+| 鼠标点击检测    | `ScreenPointToRay()` 发射射线     |
+| 角色前方障碍检测  | 从角色 `transform.position` 向前发射 |
+| AI视野判断    | 用射线判断敌人与自己之间是否被遮挡             |
+| 射击游戏命中判断  | 每次开枪发射射线                      |
+| VR/AR激光指示 | 用 Ray + LineRenderer 实现视觉射线   |
+
+#### 可视化调试射线
+```cs
+Debug.DrawRay(origin, direction * maxDistance, Color.red);
+```
+在Scene视图中可以看到射线轨迹，方便调试  
+
+#### 注意事项
+1.方向需归一化，否则射线长度不准确  
+2.触发器默认不检测，可设置参数`QueryTriggerInteraction.Collide`  
+3.性能考虑：
+- 不要每帧生成GC（用`RaycastNonAlloc`）
+- 控制射线长度，避免无谓检测
+4.LayerMask使用：过滤不相关对象提升效率
+```cs
+int layerMask = LayerMake.GetMask("Enemy", "Obstacle");
+Physics.Raycast(origin, direction, out hit, maxDistance, layerMask);
+```
