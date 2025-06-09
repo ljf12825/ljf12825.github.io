@@ -13,12 +13,10 @@ description: "Efficient & Elegant"
 
 minimal_mistakes_skin: "dark"
 
-logo: "/assets/images/J.ico"
-
 author:
   name : "Jeff Lee"
   bio: "Efficient & Elegant"
-  avatar: "/assets/images/Avatar.png"
+  avatar: "/assets/images/HollowKnight.jpg"
   location: "China"
   email: "2548278761@qq.com"
   links:
