@@ -332,7 +332,7 @@ Rigidbody组件有三种检测模式：
 | `ContactEventDelegate` | 用于处理 ContactEvent 的回调委托。 | `delegate void ContactEventDelegate(PhysicsScene scene, NativeArray<ModifiableContactPair> contactPairs)` |
 
 
-[UnityManual Physics](https://docs.unity3d.com/ScriptReference/Physics.html)
+[UnityScripting Physics](https://docs.unity3d.com/ScriptReference/Physics.html)
 
 
 ### 射线

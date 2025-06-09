@@ -11,7 +11,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Character Controller - ljf12825’s Blog</title>
-<meta name="description" content="">
+<meta name="description" content="Character Controller是专为角色移动设计的物理组件，适合用于第一人称、第三人称角色控制，尤其适合需要“脚贴地”“走坡不滑”的场景 它和Rigidbody不同，不依赖物理引擎施加力，而是手动控制角色移动的逻辑，更稳定、精准、游戏性更强">
 
 
 
@@ -22,7 +22,7 @@
 <meta property="og:url" content="http://localhost:4000/posts/2025-06-07-Character-Controller/">
 
 
-  <meta property="og:description" content="">
+  <meta property="og:description" content="Character Controller是专为角色移动设计的物理组件，适合用于第一人称、第三人称角色控制，尤其适合需要“脚贴地”“走坡不滑”的场景 它和Rigidbody不同，不依赖物理引擎施加力，而是手动控制角色移动的逻辑，更稳定、精准、游戏性更强">
 
 
 
@@ -149,7 +149,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Character Controller">
-    <meta itemprop="description" content="">
+    <meta itemprop="description" content="Character Controller是专为角色移动设计的物理组件，适合用于第一人称、第三人称角色控制，尤其适合需要“脚贴地”“走坡不滑”的场景它和Rigidbody不同，不依赖物理引擎施加力，而是手动控制角色移动的逻辑，更稳定、精准、游戏性更强">
     <meta itemprop="datePublished" content="2025-06-01T00:00:00+08:00">
     
 
@@ -168,7 +168,152 @@
 
       <section class="page__content" itemprop="text">
         
+        <p>Character Controller是专为角色移动设计的物理组件，适合用于第一人称、第三人称角色控制，尤其适合需要“脚贴地”“走坡不滑”的场景<br />
+它和Rigidbody不同，不依赖物理引擎施加力，而是手动控制角色移动的逻辑，更稳定、精准、游戏性更强</p>
+
+<h2 id="character-controller组件概览">Character Controller组件概览</h2>
+<p>它本质是一个内置Capsule Collider + 内部碰撞处理器，支持走地、上坡、碰撞、阻挡等功能</p>
+
+<p><img src="/assets/images/CharacterControllerPanel.jpg" alt="CharacterControllerPanel" /></p>
+
+<p><strong>主要属性</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Center</strong></td>
+      <td>控制胶囊体中心位置</td>
+    </tr>
+    <tr>
+      <td><strong>Radius</strong></td>
+      <td>胶囊体的半径</td>
+    </tr>
+    <tr>
+      <td><strong>Height</strong></td>
+      <td>胶囊体高度</td>
+    </tr>
+    <tr>
+      <td><strong>Slope Limit</strong></td>
+      <td>可行走的最大坡度角（超过会滑下来）</td>
+    </tr>
+    <tr>
+      <td><strong>Step Offset</strong></td>
+      <td>可“跨越”的台阶高度</td>
+    </tr>
+    <tr>
+      <td><strong>Skin Width</strong></td>
+      <td>贴地/贴墙容差，过小会穿透，过大会卡住</td>
+    </tr>
+    <tr>
+      <td><strong>Min Move Distance</strong></td>
+      <td>小于这个值的移动会被忽略</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="https://docs.unity3d.com/Manual/class-CharacterController.html">UnityManual CharacterController</a></p>
+
+<h3 id="常用方法">常用方法</h3>
+<p><code class="language-plaintext highlighter-rouge">Move(Vector3 motion)</code><br />
+移动角色，内部会自动处理碰撞，返回碰撞信息</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">controller</span><span class="p">.</span><span class="nf">Move</span><span class="p">(</span><span class="n">Vector3</span> <span class="n">motion</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span><span class="p">);</span>
+</code></pre></div></div>
+<blockquote>
+  <p>支持斜坡、台阶检测、滑动、墙体推开等逻辑</p>
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">SimpleMobe(Vector3 motion)</code><br />
+简化版移动，自动应用重力，不需要乘以<code class="language-plaintext highlighter-rouge">Time.deltaTime</code></p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">controller</span><span class="p">.</span><span class="nf">SimpleMove</span><span class="p">(</span><span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">z</span><span class="p">));</span>
+</code></pre></div></div>
+<p>适合简单控制，不建议用于精细角色控制</p>
+
+<h3 id="示例">示例</h3>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">PlayerMove</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">float</span> <span class="n">speed</span> <span class="p">=</span> <span class="m">5f</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">float</span> <span class="n">gravity</span> <span class="p">=</span> <span class="p">-</span><span class="m">9.81f</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">float</span> <span class="n">jumpHeight</span> <span class="p">=</span> <span class="m">1.5f</span><span class="p">;</span>
+
+    <span class="k">private</span> <span class="n">CharacterController</span> <span class="n">controller</span><span class="p">;</span>
+    <span class="k">private</span> <span class="n">Vector3</span> <span class="n">velocity</span><span class="p">;</span>
+    <span class="k">private</span> <span class="kt">bool</span> <span class="n">isGrounded</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="n">Transform</span> <span class="n">groundCheck</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">float</span> <span class="n">groundDistance</span> <span class="p">=</span> <span class="m">0.4f</span><span class="p">;</span>
+    <span class="k">public</span> <span class="n">LayerMask</span> <span class="n">groundMask</span><span class="p">;</span>
+
+    <span class="k">void</span> <span class="nf">Start</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">controller</span> <span class="p">=</span> <span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">CharacterController</span><span class="p">&gt;();</span>
+
+    <span class="n">voie</span> <span class="nf">Update</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">isGrounded</span> <span class="p">=</span> <span class="n">Physics</span><span class="p">.</span><span class="nf">CheckSphere</span><span class="p">(</span><span class="n">groundCheck</span><span class="p">.</span><span class="n">position</span><span class="p">,</span> <span class="n">groundDistance</span><span class="p">,</span> <span class="n">groundMask</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">isGrounded</span> <span class="p">&amp;&amp;</span> <span class="n">velocity</span><span class="p">.</span><span class="n">y</span> <span class="p">&lt;</span> <span class="m">0</span><span class="p">)</span> <span class="n">velocity</span><span class="p">.</span><span class="n">y</span> <span class="p">=</span> <span class="p">-</span><span class="m">2f</span><span class="p">;</span>
+
+        <span class="kt">float</span> <span class="n">x</span> <span class="p">=</span> <span class="n">Input</span><span class="p">.</span><span class="nf">GetAxis</span><span class="p">(</span><span class="s">"Horizontal"</span><span class="p">);</span>
+        <span class="kt">float</span> <span class="n">z</span> <span class="p">=</span> <span class="n">Input</span><span class="p">.</span><span class="nf">GetAxis</span><span class="p">(</span><span class="s">"Vertical"</span><span class="p">);</span>
+
+        <span class="n">Vector3</span> <span class="n">move</span> <span class="p">=</span> <span class="n">transform</span><span class="p">.</span><span class="n">right</span> <span class="p">*</span> <span class="n">x</span> <span class="p">+</span> <span class="n">transform</span><span class="p">.</span><span class="n">forward</span> <span class="p">*</span> <span class="n">z</span><span class="p">;</span>
+
+        <span class="n">controller</span><span class="p">.</span><span class="nf">Move</span><span class="p">(</span><span class="n">move</span> <span class="p">*</span> <span class="n">speed</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="nf">GetButtonDown</span><span class="p">(</span><span class="s">"Jump"</span><span class="p">)</span> <span class="p">&amp;&amp;</span> <span class="n">isGrounded</span><span class="p">)</span>
+            <span class="n">velocity</span><span class="p">.</span><span class="n">y</span> <span class="p">=</span> <span class="n">Mathf</span><span class="p">.</span><span class="nf">Sqrt</span><span class="p">(</span><span class="n">jumpHeight</span> <span class="p">*</span> <span class="p">-</span><span class="m">2f</span> <span class="p">*</span> <span class="n">gravity</span><span class="p">);</span>
         
+        <span class="n">velocity</span><span class="p">.</span><span class="n">y</span> <span class="p">+=</span> <span class="n">gravity</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span><span class="p">;</span>
+        <span class="n">controller</span><span class="p">.</span><span class="nf">Move</span><span class="p">(</span><span class="n">velocity</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h3 id="chractercontroller-vs-rigidbody">ChracterController vs Rigidbody</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>特性</th>
+      <th>CharacterController</th>
+      <th>Rigidbody</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>物理碰撞响应</td>
+      <td>自动响应</td>
+      <td>更精确</td>
+    </tr>
+    <tr>
+      <td>控制移动方式</td>
+      <td>手动调用 Move</td>
+      <td>通过力或 velocity</td>
+    </tr>
+    <tr>
+      <td>支持旋转</td>
+      <td>需要手动转动 transform</td>
+      <td>支持</td>
+    </tr>
+    <tr>
+      <td>上坡台阶检测</td>
+      <td>自动处理</td>
+      <td>需要额外实现</td>
+    </tr>
+    <tr>
+      <td>重力</td>
+      <td>需手动实现</td>
+      <td>内建</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="api">API</h3>
+
+<p><a href="https://docs.unity3d.com/ScriptReference/CharacterController.html">UnityScripting CharacterController</a></p>
 
         
       </section>

@@ -186,7 +186,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Character Controller",
-        "excerpt":" ","categories": ["笔记"],
+        "excerpt":"Character Controller是专为角色移动设计的物理组件，适合用于第一人称、第三人称角色控制，尤其适合需要“脚贴地”“走坡不滑”的场景 它和Rigidbody不同，不依赖物理引擎施加力，而是手动控制角色移动的逻辑，更稳定、精准、游戏性更强 Character Controller组件概览 它本质是一个内置Capsule Collider + 内部碰撞处理器，支持走地、上坡、碰撞、阻挡等功能 主要属性 属性 描述 Center 控制胶囊体中心位置 Radius 胶囊体的半径 Height 胶囊体高度 Slope Limit 可行走的最大坡度角（超过会滑下来） Step Offset 可“跨越”的台阶高度 Skin Width 贴地/贴墙容差，过小会穿透，过大会卡住 Min Move Distance 小于这个值的移动会被忽略 UnityManual CharacterController 常用方法 Move(Vector3 motion) 移动角色，内部会自动处理碰撞，返回碰撞信息 controller.Move(Vector3 motion * Time.deltaTime); 支持斜坡、台阶检测、滑动、墙体推开等逻辑 SimpleMobe(Vector3 motion) 简化版移动，自动应用重力，不需要乘以Time.deltaTime controller.SimpleMove(new Vector3(x, 0, z)); 适合简单控制，不建议用于精细角色控制...","categories": ["笔记"],
         "tags": ["Unity","Unity Component","Physics System"],
         "url": "/posts/2025-06-07-Character-Controller/",
         "teaser": null
@@ -207,6 +207,12 @@ var store = [{
         "excerpt":" ","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
         "url": "/posts/2025-06-08-Scene-System/",
+        "teaser": null
+      },{
+        "title": "Time System",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity System"],
+        "url": "/posts/2025-06-09-Time-System/",
         "teaser": null
       },{
     "title": "About",
