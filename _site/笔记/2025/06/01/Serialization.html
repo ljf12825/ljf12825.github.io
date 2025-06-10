@@ -10,19 +10,19 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Frame - ljf12825’s Blog</title>
-<meta name="description" content="">
+<!-- begin _includes/seo.html --><title>Serialization - ljf12825’s Blog</title>
+<meta name="description" content="序列化（Serialization） 什么是序列化 简单来说，序列化就是把内存中的对象转换成可以存储或传输的格式的过程，比如转换成二进制、JSON、XML、或者Unity自己的资产格式 反过来，反序列化（Deserialization）就是把存储或传输的格式转换回程序内存分钟的对象">
 
 
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="ljf12825's Blog">
-<meta property="og:title" content="Frame">
-<meta property="og:url" content="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Frame.html">
+<meta property="og:title" content="Serialization">
+<meta property="og:url" content="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Serialization.html">
 
 
-  <meta property="og:description" content="">
+  <meta property="og:description" content="序列化（Serialization） 什么是序列化 简单来说，序列化就是把内存中的对象转换成可以存储或传输的格式的过程，比如转换成二进制、JSON、XML、或者Unity自己的资产格式 反过来，反序列化（Deserialization）就是把存储或传输的格式转换回程序内存分钟的对象">
 
 
 
@@ -37,7 +37,7 @@
 
 
 
-<link rel="canonical" href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Frame.html">
+<link rel="canonical" href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Serialization.html">
 
 
 
@@ -148,8 +148,8 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Frame">
-    <meta itemprop="description" content="">
+    <meta itemprop="headline" content="Serialization">
+    <meta itemprop="description" content="序列化（Serialization）什么是序列化简单来说，序列化就是把内存中的对象转换成可以存储或传输的格式的过程，比如转换成二进制、JSON、XML、或者Unity自己的资产格式反过来，反序列化（Deserialization）就是把存储或传输的格式转换回程序内存分钟的对象">
     <meta itemprop="datePublished" content="2025-06-01T00:00:00+08:00">
     
 
@@ -157,7 +157,7 @@
       
         <header>
           <h1 id="page-title" class="page__title" itemprop="headline">
-            <a href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Frame.html" itemprop="url">Frame
+            <a href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Serialization.html" itemprop="url">Serialization
 </a>
           </h1>
           
@@ -168,7 +168,45 @@
 
       <section class="page__content" itemprop="text">
         
-        
+        <h2 id="序列化serialization">序列化（Serialization）</h2>
+<h3 id="什么是序列化">什么是序列化</h3>
+<p>简单来说，序列化就是把内存中的对象转换成可以存储或传输的格式的过程，比如转换成二进制、JSON、XML、或者Unity自己的资产格式<br />
+反过来，反序列化（Deserialization）就是把存储或传输的格式转换回程序内存分钟的对象</p>
+
+<h3 id="为什么要序列化">为什么要序列化</h3>
+<p>1.保存数据<br />
+游戏存档就是把游戏状态保存到磁盘上的过程，这个过程就是序列化</p>
+
+<p>2.编辑器显示与修改数据<br />
+Unity Inspector面板显示脚本里字段的值，需要序列化这些字段才能让编辑器读写它们</p>
+
+<p>3.网络传输<br />
+多人游戏中，玩家状态需要网络传输，也要序列化成网络能传输的格式</p>
+
+<h3 id="unity里的序列化">Unity里的序列化</h3>
+<p>Unity有自己的一套序列化规则，决定安歇数据会被序列化（保存、显示在Inspector）：</p>
+<ul>
+  <li>public字段 默认被序列化</li>
+  <li>private字段 需要加[SerializeField]才会序列化</li>
+  <li>Unity只序列化支持的类型，比如基本类型、Unity内置类型、自定义继承自UnityEngine.Object的类，和标记为[Serializable]的自定义类</li>
+  <li>属性（Property）默认不序列化，必须用字段</li>
+</ul>
+
+<p><strong>示例</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Player</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">health</span> <span class="p">=</span> <span class="m">100</span><span class="p">;</span>            <span class="c1">// 会序列化并显示在 Inspector</span>
+    <span class="p">[</span><span class="n">SerializeField</span><span class="p">]</span>
+    <span class="k">private</span> <span class="kt">int</span> <span class="n">mana</span> <span class="p">=</span> <span class="m">50</span><span class="p">;</span>              <span class="c1">// 虽然是private，但加了特性会序列化</span>
+
+    <span class="k">private</span> <span class="kt">int</span> <span class="n">secret</span> <span class="p">=</span> <span class="m">999</span><span class="p">;</span>           <span class="c1">// 不序列化，不显示在 Inspector</span>
+
+    <span class="p">[</span><span class="n">System</span><span class="p">.</span><span class="n">NonSerialized</span><span class="p">]</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">tempValue</span> <span class="p">=</span> <span class="m">123</span><span class="p">;</span>         <span class="c1">// 明确不序列化，即使public也不会序列化</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
         
       </section>
@@ -189,10 +227,10 @@
       
   <nav class="pagination">
     
-      <a href="/posts/2025-06-09-Time-System/" class="pagination--pager" title="Time System">Previous</a>
+      <a href="/%E7%AC%94%E8%AE%B0/2025/06/01/Frame.html" class="pagination--pager" title="Frame">Previous</a>
     
     
-      <a href="/%E7%AC%94%E8%AE%B0/2025/06/01/Serialization.html" class="pagination--pager" title="Serialization">Next</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
     
   </nav>
 
