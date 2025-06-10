@@ -210,7 +210,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Time System",
-        "excerpt":" ","categories": ["笔记"],
+        "excerpt":"Unity的时间系统管理游戏中的时间流逝，包括帧率、时间步长、暂停和加速等 几个核心概念 1.Time.deltaTime 这是Unity时间系统中最常用的属性之一，它表示上一帧和当前帧之间的时间（单位为秒），通常用于实现与帧率无关的平滑运动和动画 float speed = 5f; void Update() =&gt; transform.Translate(Vector3.forward * speed * Time.deltaTime); Time.deltaTime确保无论游戏的帧率是多少，物体的移动速度始终相同 2.Time.time 表示自游戏开始以来经过的时间（单位为秒） 3.Time.timeScale timeScale是Unity时间系统中一个非常重要的属性。它控制整个游戏的时间流速。默认值是1，表示正常速度。如果将其设置为0，游戏将暂停。如果设置为大于1的值，时间将加速。 4.Time.fixedDeltaTime 与Time.deltaTime类似，fixedDeltaTime是每个固定时间步长的时间（单位为秒）。它用于FixedUpdate()方法，确保物理计算在所有帧率下都是一致的，默认值为0.02s，表示每秒更新50次 void FixedUpdate() =&gt; transform.Translate(Vector3.forward * speed * Time.fixedDeltaTime); 5.Time.unscaledDeltaTime 类似于Time.deltaTime，但unscaledDeltaTime不会受到Time.timeScale的影响。用于不受时间缩放影响的功能（如UI动画、计时器等） void Update() { float countdown = 10f; countdown -= Time.unscaledDeltaTime; } 6.Time.realtimeSinceStartup 返回自游戏启动以来的实际时间（单位为秒），不受timeScale影响 7.Time.smoothDeltaTime 类似于Time.deltaTime，但它提供了更平滑的值，适用于需要更平滑的插值计算的场景。通常在帧率不稳定时，可以使用它来减少跳动 8.Time.captureDeltaTime captureDeltaTime提供的是实时的时间间隔，而不受Unity内部时间优化的影响。用于精确时间测量...","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
         "url": "/posts/2025-06-09-Time-System/",
         "teaser": null

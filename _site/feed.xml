@@ -1,4 +1,164 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-10T22:19:09+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Frame</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Frame.html" rel="alternate" type="text/html" title="Frame" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Frame</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Frame.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Event System</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Event-System.html" rel="alternate" type="text/html" title="Event System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Event-System</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Event-System.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Time System</title><link href="http://localhost:4000/posts/2025-06-09-Time-System/" rel="alternate" type="text/html" title="Time System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Time-System</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-09-Time-System/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Scene System</title><link href="http://localhost:4000/posts/2025-06-08-Scene-System/" rel="alternate" type="text/html" title="Scene System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Scene-System</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-08-Scene-System/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">UI System</title><link href="http://localhost:4000/posts/2025-06-07-UI-System/" rel="alternate" type="text/html" title="UI System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/UI-System</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-07-UI-System/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Character Controller</title><link href="http://localhost:4000/posts/2025-06-07-Character-Controller/" rel="alternate" type="text/html" title="Character Controller" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Character-Controller</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-07-Character-Controller/"><![CDATA[<p>Character Controller是专为角色移动设计的物理组件，适合用于第一人称、第三人称角色控制，尤其适合需要“脚贴地”“走坡不滑”的场景<br />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-10T22:47:51+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Frame</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Frame.html" rel="alternate" type="text/html" title="Frame" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Frame</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Frame.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Event System</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Event-System.html" rel="alternate" type="text/html" title="Event System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Event-System</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Event-System.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Time System</title><link href="http://localhost:4000/posts/2025-06-09-Time-System/" rel="alternate" type="text/html" title="Time System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Time-System</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-09-Time-System/"><![CDATA[<p>Unity的时间系统管理游戏中的时间流逝，包括帧率、时间步长、暂停和加速等</p>
+
+<h2 id="几个核心概念">几个核心概念</h2>
+<h3 id="1timedeltatime">1.Time.deltaTime</h3>
+<p>这是Unity时间系统中最常用的属性之一，它表示上一帧和当前帧之间的时间（单位为秒），通常用于实现与帧率无关的平滑运动和动画</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">float</span> <span class="n">speed</span> <span class="p">=</span> <span class="m">5f</span><span class="p">;</span>
+<span class="k">void</span> <span class="nf">Update</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">transform</span><span class="p">.</span><span class="nf">Translate</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">forward</span> <span class="p">*</span> <span class="n">speed</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span><span class="p">);</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">Time.deltaTime</code>确保无论游戏的帧率是多少，物体的移动速度始终相同</p>
+
+<h3 id="2timetime">2.Time.time</h3>
+<p>表示自游戏开始以来经过的时间（单位为秒）</p>
+
+<h3 id="3timetimescale">3.Time.timeScale</h3>
+<p><code class="language-plaintext highlighter-rouge">timeScale</code>是Unity时间系统中一个非常重要的属性。它控制整个游戏的时间流速。默认值是1，表示正常速度。如果将其设置为0，游戏将暂停。如果设置为大于1的值，时间将加速。</p>
+
+<h3 id="4timefixeddeltatime">4.Time.fixedDeltaTime</h3>
+<p>与<code class="language-plaintext highlighter-rouge">Time.deltaTime</code>类似，<code class="language-plaintext highlighter-rouge">fixedDeltaTime</code>是每个固定时间步长的时间（单位为秒）。它用于<code class="language-plaintext highlighter-rouge">FixedUpdate()</code>方法，确保物理计算在所有帧率下都是一致的，默认值为0.02s，表示每秒更新50次</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">FixedUpdate</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">transform</span><span class="p">.</span><span class="nf">Translate</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">forward</span> <span class="p">*</span> <span class="n">speed</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">fixedDeltaTime</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="5timeunscaleddeltatime">5.Time.unscaledDeltaTime</h3>
+<p>类似于<code class="language-plaintext highlighter-rouge">Time.deltaTime</code>，但<code class="language-plaintext highlighter-rouge">unscaledDeltaTime</code>不会受到<code class="language-plaintext highlighter-rouge">Time.timeScale</code>的影响。用于不受时间缩放影响的功能（如UI动画、计时器等）</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Update</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">float</span> <span class="n">countdown</span> <span class="p">=</span> <span class="m">10f</span><span class="p">;</span>
+    <span class="n">countdown</span> <span class="p">-=</span> <span class="n">Time</span><span class="p">.</span><span class="n">unscaledDeltaTime</span><span class="p">;</span> 
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="6timerealtimesincestartup">6.Time.realtimeSinceStartup</h3>
+<p>返回自游戏启动以来的实际时间（单位为秒），不受<code class="language-plaintext highlighter-rouge">timeScale</code>影响</p>
+
+<h3 id="7timesmoothdeltatime">7.Time.smoothDeltaTime</h3>
+<p>类似于<code class="language-plaintext highlighter-rouge">Time.deltaTime</code>，但它提供了更平滑的值，适用于需要更平滑的插值计算的场景。通常在帧率不稳定时，可以使用它来减少跳动</p>
+
+<h3 id="8timecapturedeltatime">8.Time.captureDeltaTime</h3>
+<p><code class="language-plaintext highlighter-rouge">captureDeltaTime</code>提供的是实时的时间间隔，而不受Unity内部时间优化的影响。用于精确时间测量</p>
+
+<h2 id="time-api">Time API</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>属性</strong></th>
+      <th><strong>描述</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>captureDeltaTime</strong></td>
+      <td>通过减慢应用程序的播放时间，使Unity可以在帧之间保存截图。</td>
+    </tr>
+    <tr>
+      <td><strong>captureDeltaTimeRational</strong></td>
+      <td>通过减慢应用程序的播放时间，使Unity可以在帧之间保存截图。</td>
+    </tr>
+    <tr>
+      <td><strong>captureFramerate</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">Time.captureDeltaTime</code>的倒数。</td>
+    </tr>
+    <tr>
+      <td><strong>deltaTime</strong></td>
+      <td>从上一帧到当前帧的时间间隔（单位：秒，只读）。</td>
+    </tr>
+    <tr>
+      <td><strong>fixedDeltaTime</strong></td>
+      <td>游戏内物理和其他固定帧率更新（如<code class="language-plaintext highlighter-rouge">FixedUpdate</code>）执行的时间间隔（单位：秒）。</td>
+    </tr>
+    <tr>
+      <td><strong>fixedTime</strong></td>
+      <td>当前<code class="language-plaintext highlighter-rouge">FixedUpdate</code>开始的时间，单位为自游戏开始以来的秒数（只读）。</td>
+    </tr>
+    <tr>
+      <td><strong>fixedTimeAsDouble</strong></td>
+      <td>上一次<code class="language-plaintext highlighter-rouge">FixedUpdate</code>开始的双精度时间（只读）。这是自游戏开始以来的时间（单位：秒）。</td>
+    </tr>
+    <tr>
+      <td><strong>fixedUnscaledDeltaTime</strong></td>
+      <td>时间流速独立的（“真实”）时间间隔，用于物理和其他固定帧率更新（如<code class="language-plaintext highlighter-rouge">FixedUpdate</code>）的执行（只读）。</td>
+    </tr>
+    <tr>
+      <td><strong>fixedUnscaledTime</strong></td>
+      <td>上一次<code class="language-plaintext highlighter-rouge">FixedUpdate</code>阶段开始时的时间，时间流速独立（只读）。这是自游戏开始以来的时间（单位：秒）。</td>
+    </tr>
+    <tr>
+      <td><strong>fixedUnscaledTimeAsDouble</strong></td>
+      <td>上一次<code class="language-plaintext highlighter-rouge">FixedUpdate</code>阶段开始时的双精度时间，时间流速独立（只读）。这是自游戏开始以来的时间（单位：秒）。</td>
+    </tr>
+    <tr>
+      <td><strong>frameCount</strong></td>
+      <td>自游戏开始以来的总帧数（只读）。</td>
+    </tr>
+    <tr>
+      <td><strong>inFixedTimeStep</strong></td>
+      <td>如果在固定时间步长回调（如<code class="language-plaintext highlighter-rouge">FixedUpdate</code>）中调用，则返回<code class="language-plaintext highlighter-rouge">true</code>，否则返回<code class="language-plaintext highlighter-rouge">false</code>（只读）。</td>
+    </tr>
+    <tr>
+      <td><strong>maximumDeltaTime</strong></td>
+      <td>每帧<code class="language-plaintext highlighter-rouge">Time.deltaTime</code>的最大值。限制了两个帧之间<code class="language-plaintext highlighter-rouge">Time.time</code>的最大增量，单位为秒。</td>
+    </tr>
+    <tr>
+      <td><strong>maximumParticleDeltaTime</strong></td>
+      <td>每帧可用于粒子更新的最大时间。如果一帧时间超过此值，则更新将被分成多个较小的更新。</td>
+    </tr>
+    <tr>
+      <td><strong>realtimeSinceStartup</strong></td>
+      <td>自游戏启动以来的真实时间（单位：秒，只读）。</td>
+    </tr>
+    <tr>
+      <td><strong>realtimeSinceStartupAsDouble</strong></td>
+      <td>自游戏启动以来的真实时间（单位：秒，只读）。<code class="language-plaintext highlighter-rouge">realtimeSinceStartup</code>的双精度版本。</td>
+    </tr>
+    <tr>
+      <td><strong>smoothDeltaTime</strong></td>
+      <td>平滑过的<code class="language-plaintext highlighter-rouge">Time.deltaTime</code>（只读）。</td>
+    </tr>
+    <tr>
+      <td><strong>time</strong></td>
+      <td>当前帧开始时的时间，单位为自应用程序启动以来的秒数（只读）。</td>
+    </tr>
+    <tr>
+      <td><strong>timeAsDouble</strong></td>
+      <td>当前帧开始时的双精度时间（只读）。这是自游戏开始以来的时间（单位：秒）。</td>
+    </tr>
+    <tr>
+      <td><strong>timeAsRational</strong></td>
+      <td>本帧开始时的时间（只读）。这是自游戏开始以来的时间，表示为<code class="language-plaintext highlighter-rouge">RationalTime</code>。</td>
+    </tr>
+    <tr>
+      <td><strong>timeScale</strong></td>
+      <td>时间流速的比例。</td>
+    </tr>
+    <tr>
+      <td><strong>timeSinceLevelLoad</strong></td>
+      <td>自上一个非附加场景加载完成以来的时间（单位：秒，只读）。</td>
+    </tr>
+    <tr>
+      <td><strong>timeSinceLevelLoadAsDouble</strong></td>
+      <td>自上一个非附加场景加载完成以来的双精度时间（单位：秒，只读）。</td>
+    </tr>
+    <tr>
+      <td><strong>unscaledDeltaTime</strong></td>
+      <td>时间流速独立的，从上一帧到当前帧的时间间隔（单位：秒，只读）。</td>
+    </tr>
+    <tr>
+      <td><strong>unscaledTime</strong></td>
+      <td>本帧的时间，时间流速独立（只读）。这是自游戏开始以来的时间（单位：秒）。</td>
+    </tr>
+    <tr>
+      <td><strong>unscaledTimeAsDouble</strong></td>
+      <td>本帧的双精度时间，时间流速独立（只读）。这是自游戏开始以来的时间（单位：秒）。</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="https://docs.unity3d.com/ScriptReference/Time.html">UnityScripting Time</a></p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[Unity的时间系统管理游戏中的时间流逝，包括帧率、时间步长、暂停和加速等]]></summary></entry><entry><title type="html">Scene System</title><link href="http://localhost:4000/posts/2025-06-08-Scene-System/" rel="alternate" type="text/html" title="Scene System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Scene-System</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-08-Scene-System/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">UI System</title><link href="http://localhost:4000/posts/2025-06-07-UI-System/" rel="alternate" type="text/html" title="UI System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/UI-System</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-07-UI-System/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Character Controller</title><link href="http://localhost:4000/posts/2025-06-07-Character-Controller/" rel="alternate" type="text/html" title="Character Controller" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Character-Controller</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-07-Character-Controller/"><![CDATA[<p>Character Controller是专为角色移动设计的物理组件，适合用于第一人称、第三人称角色控制，尤其适合需要“脚贴地”“走坡不滑”的场景<br />
 它和Rigidbody不同，不依赖物理引擎施加力，而是手动控制角色移动的逻辑，更稳定、精准、游戏性更强</p>
 
 <h2 id="character-controller组件概览">Character Controller组件概览</h2>
