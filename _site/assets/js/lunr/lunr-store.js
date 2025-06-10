@@ -31,7 +31,7 @@ var store = [{
       },{
         "title": "Camera",
         "excerpt":"在Unity中，Camera是游戏中视角呈现的核心组件，它决定了玩家从哪里、以什么方式看到游戏世界 Projection（投影模式） 模式 用途 特点 透视摄像机（Perspective） 3D 游戏 有近大远小的透视效果，真实 正交摄像机（Orthographic） 2D 游戏、UI 无透视变形，适合像素风或 UI 系统 camera.orthographic = true; //开启正交模式 camera.orthographicSize = 5f; //视野高度一半 Clear Flag（清除模式） ClearFlag 模式 描述 Skybox 使用当前 Skybox 作为背景 Solid Color 使用指定背景颜色 Depth Only 仅清除深度缓冲区（常用于叠加 UI） Nothing 什么都不清除（很少用） 视口渲染（rect） camera.rec = new Rect(x, y, w, h); (x,...","categories": ["笔记"],
-        "tags": ["Unity","Unity Componenet"],
+        "tags": ["Unity","Unity Component"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/05/28/Camera.html",
         "teaser": null
       },{
@@ -43,7 +43,7 @@ var store = [{
       },{
         "title": "Transform",
         "excerpt":"Transform是Unity中控制物体位置、旋转、缩放和父子层级关系的核心组件 一、什么是Transform Transfrom是每个GameObject都自带的核心组件，主要负责： 位置（Position） 旋转（Rotation） 缩放（Scale） 父子关系（Hierarchy） 可以理解为每个物体在三维世界中的“坐标轴和局部空间信息”。 二、Transform的重要属性和区别 **1.position和localPosition 属性名 含义 示例用途 position 世界坐标（绝对位置） 物体在整个场景中的位置 localPosition 本地坐标（相对于父物体的位置） 子物体相对于父物体的偏移 **2.rotation和localRotation 属性名 含义 类型 rotation 世界旋转 Quaternion localRotation 相对父物体的旋转 Quaternion transform.rotation = Quaternion.Euler(0, 90, 0); //世界旋转 transform.localRotation = Quaternion.idetity; //本地旋转重置 3.localScale 表示对象自身的缩放 注意：缩放不会自动传递到position，但会影响渲染尺寸和碰撞盒 transform.localScale = new Vector3(2, 2, 2); //放大两倍 三、父子层级结构*...","categories": ["笔记"],
-        "tags": ["Unity","Unity Componenet"],
+        "tags": ["Unity","Unity Component"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/05/28/Transform.html",
         "teaser": null
       },{
@@ -67,7 +67,7 @@ var store = [{
       },{
         "title": "Material",
         "excerpt":"Unity中的Material是用来定义一个物体外观的核心组件，它将Shader与各种Texture和属性值绑定到一起，决定了一个对象在场景中如何表现 Material的基本构成 Material包括： 1.Shader 决定了材质的渲染方式和它所支持的属性 常用Shader有： Standard：支持金属、粗糙度工作流 URP/Lit(Universal Render Pipeline)专用 HDRP/Lit(High Definition Render Pipeline)专用 Unlit：不受光照影响，用于UI、特效等 自定义Shader 2.Texture 常见类型： Albedo（基础颜色贴图） Normal Map（法线贴图，增加表面细节） Metallic Map / Roughness Map（金属度/粗糙度贴图） Emission Map（自发光贴图） Occlusion Map（遮蔽贴图） 3.属性值 颜色、金属度、粗糙度、透明度 创建和使用Material 创建材质 右键 -&gt; Create -&gt; Material 然后可以给材质命名，设置颜色、贴图等属性 应用材质 方式1：拖动到物体上 方式2：通过代码赋值 Renderer renderer = GetComponent&lt;Renderer&gt;(); renderer.material = myMaterial;...","categories": ["笔记"],
-        "tags": ["Unity"],
+        "tags": ["Unity","Material","Graphic"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/05/31/Material.html",
         "teaser": null
       },{
@@ -114,7 +114,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Coroutine",
-        "excerpt":" ","categories": ["笔记"],
+        "excerpt":"Unity Coroutine是一种允许在多帧中分布执行代码的机制，它通常用于处理一些需要在多个帧之间等待的任务，比如延时操作、动画播放、资源加载等 协程本质上是通过一种特殊的方式执行代码，它可以在执行过程中“暂停”并在后续的帧继续执行 基本使用 启动协程 协程是通过StartCoroutine()来启动的。协程通常返回一个IEnumerator类型的方法 using UnityEngine; using System.Collections; public class CoroutineExample : MonoBehaviour { void Start() =&gt; StartCoroutine(MyCoroutine()); IEnumerator MyCoroutine() { //在这里执行某些操作 Debug.Log(\"协程开始\"); // Wait 2 seconds yield return new WaitForSeconds(2); // 等待结束后继续执行 Debug.Log(\"2秒后继续执行\"); // 继续执行其他操作 yield return null; // 等待下一帧 Debug.Log(\"协程执行完毕\"); } } 在这个例子中，MyCoroutine协程将在开始时打印“协程开始”，然后等待2秒后打印“2秒后继续执行”，最后在下一帧打印“协程执行完毕” 协程的暂停与恢复 协程可以通过yield return暂停执行，直到某个条件满足。常见的暂停类型有：...","categories": ["笔记"],
         "tags": ["Unity","Unity Engine"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Coroutine.html",
         "teaser": null
@@ -213,6 +213,12 @@ var store = [{
         "excerpt":" ","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
         "url": "/posts/2025-06-09-Time-System/",
+        "teaser": null
+      },{
+        "title": "Frame",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Frame.html",
         "teaser": null
       },{
     "title": "About",
