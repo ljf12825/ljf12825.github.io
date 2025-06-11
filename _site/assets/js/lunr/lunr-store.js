@@ -74,7 +74,7 @@ var store = [{
         "title": "Import Assets",
         "excerpt":"Unity支持多种格式的资源文件，并能自动识别并进行初步处理 资源导入基本流程 1.将资源文件拖入Assets目录中（Unity会自动导入） 2.在Inspector面板中查看导入设置 3.配置相关参数，比如压缩方式、贴图类型、是否生成碰撞体等 4.使用资源（拖到场景、作为材质贴图、挂到AudioSource等） 模型 支持格式 .fbx推荐 .obj .dae（Collada） .blend（需要Blender） 导入流程 1.拖拽.fbx文件到Assets文件夹 2.选中模型文件，查看Inspector的导入设置 Scale Factor：缩放（一般保持默认） Import Animations：是否导入动画 Import Materials：是否导入材质 Generate Colliders：是否自动生成碰撞体 导入后组成 Model: 3D网格 Rig（如果有骨骼）：用于动画绑定 Animation：包含的动画片段 Materials：自动生成或关联的材质 贴图 支持格式 .png、.jpg、.tga、.psd（支持图层）等 导入流程 1.拖入图片文件 2.在Inspector中设置： sRGB（Color Texture）：颜色贴图用，法线贴图需取消勾选 Alpha Is Transparency：如果使用透明通道 Wrap Mode：Repeat（平铺）或Clamp（拉伸） Filter Mode：Bilinear、Trilinear、Point（像素风） Compression：高压缩（小体积）还是高质量（清晰） Texture Type: Default（通用） Sprite（用于UI） Normal...","categories": ["笔记"],
         "tags": ["Unity"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Import-assets.html",
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets.html",
         "teaser": null
       },{
         "title": "Layer",
@@ -127,7 +127,7 @@ var store = [{
       },{
         "title": "FSM",
         "excerpt":" ","categories": ["笔记"],
-        "tags": ["Unity","Unity System"],
+        "tags": ["Unity","Unity System","AI"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/FSM.html",
         "teaser": null
       },{
@@ -143,16 +143,16 @@ var store = [{
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Input-System.html",
         "teaser": null
       },{
-        "title": "Multithread",
-        "excerpt":" ","categories": ["笔记"],
-        "tags": ["Unity","Unity System"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Multithread.html",
-        "teaser": null
-      },{
         "title": "Physics System",
         "excerpt":"Unity实际上提供了两个物理系统：3D物理（基于PhysX）和2D物理（基于Box2D），它们是独立的 物理系统的核心职责 分类 内容 示例 1. 碰撞检测 检测物体之间是否发生接触（重叠、触发、碰撞） 玩家与墙体碰撞、子弹击中敌人 2. 碰撞响应 根据碰撞产生反作用力、反弹、停止等 小球碰撞墙壁后弹开 3. 力与运动 模拟重力、加速度、摩擦力、空气阻力等 角色掉落、物体滚动、滑动 4. 刚体动力学 使用 Rigidbody 模拟真实世界中的质量、惯性、力矩等 推箱子、砸东西、车子加速转弯 5. 关节系统 使用 Joint 或 ArticulationBody 模拟多刚体之间的约束连接 吊桥、机器人手臂、门铰链 6. 触发器检测 使用 isTrigger 实现非物理交互 进入危险区域触发警报、检测拾取道具 7. 布料、软体、车辆 特定模拟，如布料系统、软体物理、车轮碰撞和悬挂 Unity 的 WheelCollider, Cloth 8. 碰撞信息收集 获取碰撞点、法线、力大小、接触信息等 用于播放音效、粒子、震动反馈等 9.射线检测 用于看到什么，而非物理互动...","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
         "url": "/posts/2025-06-03-Physics-System/",
+        "teaser": null
+      },{
+        "title": "Thread",
+        "excerpt":"Unity中的线程机制和使用方式，包括： Unity的线程模型概览 Unity API与线程限制 在Unity中使用线程的四种方式（Thread/Task/Job System/DOTS） 回到主线程的方法 Unity线程模型概览 Unity整个运行环境围绕主线程组织，它的执行流程大致如下： 主线程（Unity Loop）： ├─ Start() ├─ Update() ├─ 渲染提交 ├─ 动画更新 ├─ 物理处理（同步 PhysX） └─ LateUpdate() 主线程的作用： 唯一能安全访问大多数Unity API的线程 游戏逻辑、生命周期函数、事件处理等全部在主线程中执行 Unity API的线程限制 Unity引擎的绝大多数API不是线程安全的，只能在主线程中访问 常见不可在子线程中调用的内容： 类型 示例 场景对象 transform.position、gameObject.SetActive() UI 操作 Text.text、Image.sprite、CanvasGroup.alpha 加载资源 Resources.Load、AssetBundle.LoadAsset UnityEvent Invoke()、AddListener() 摄像机/渲染设置 Camera.fieldOfView、RenderSettings.ambientLight 为什么大多数Unity API不是线程安全的 线程安全是指多个线程同时访问某个资源时，不会出现数据竞争、资源冲突或者状态不一致； 换句话说，线程安全的代码能保证即使多个线程同时调用，也不会导致程序崩溃或出现错误 1.引擎设计的历史和架构...","categories": ["笔记"],
+        "tags": ["Unity","Unity System"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Thread.html",
         "teaser": null
       },{
         "title": "Unity Build-in Types",
@@ -221,10 +221,52 @@ var store = [{
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Frame.html",
         "teaser": null
       },{
-        "title": "Serialization",
+        "title": "Resources, Serialization and Data Persistence",
         "excerpt":"序列化（Serialization） 什么是序列化 简单来说，序列化就是把内存中的对象转换成可以存储或传输的格式的过程，比如转换成二进制、JSON、XML、或者Unity自己的资产格式 反过来，反序列化（Deserialization）就是把存储或传输的格式转换回程序内存分钟的对象 为什么要序列化 1.保存数据 游戏存档就是把游戏状态保存到磁盘上的过程，这个过程就是序列化 2.编辑器显示与修改数据 Unity Inspector面板显示脚本里字段的值，需要序列化这些字段才能让编辑器读写它们 3.网络传输 多人游戏中，玩家状态需要网络传输，也要序列化成网络能传输的格式 Unity里的序列化 Unity有自己的一套序列化规则，决定安歇数据会被序列化（保存、显示在Inspector）： public字段 默认被序列化 private字段 需要加[SerializeField]才会序列化 Unity只序列化支持的类型，比如基本类型、Unity内置类型、自定义继承自UnityEngine.Object的类，和标记为[Serializable]的自定义类 属性（Property）默认不序列化，必须用字段 示例 using UnityEngine; public class Player : MonoBehaviour { public int health = 100; // 会序列化并显示在 Inspector [SerializeField] private int mana = 50; // 虽然是private，但加了特性会序列化 private int secret = 999;...","categories": ["笔记"],
         "tags": ["Unity"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Serialization.html",
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Resources-Serialization-and-Data-Persistance.html",
+        "teaser": null
+      },{
+        "title": "Animation System",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity System"],
+        "url": "/posts/2025-06-11-Animation-System/",
+        "teaser": null
+      },{
+        "title": "Audio System",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity System"],
+        "url": "/posts/2025-06-11-Audio-System/",
+        "teaser": null
+      },{
+        "title": "Layout",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity System"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Layout.html",
+        "teaser": null
+      },{
+        "title": "Mesh",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Renderer","Graphic"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Mesh.html",
+        "teaser": null
+      },{
+        "title": "Navigation System",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity System","AI"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Navigation.html",
+        "teaser": null
+      },{
+        "title": "Terrain",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Renderer","Unity System","Unity Component"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain.html",
+        "teaser": null
+      },{
+        "title": "TileMap",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity System","Unity Component"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap.html",
         "teaser": null
       },{
     "title": "About",

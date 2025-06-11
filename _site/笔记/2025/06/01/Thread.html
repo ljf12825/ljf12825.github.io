@@ -1,0 +1,540 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.1 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Thread - ljf12825’s Blog</title>
+<meta name="description" content="Unity中的线程机制和使用方式，包括：    Unity的线程模型概览   Unity API与线程限制   在Unity中使用线程的四种方式（Thread/Task/Job System/DOTS）   回到主线程的方法">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="ljf12825's Blog">
+<meta property="og:title" content="Thread">
+<meta property="og:url" content="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Thread.html">
+
+
+  <meta property="og:description" content="Unity中的线程机制和使用方式，包括：    Unity的线程模型概览   Unity API与线程限制   在Unity中使用线程的四种方式（Thread/Task/Job System/DOTS）   回到主线程的方法">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-06-01T00:00:00+08:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Thread.html">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="ljf12825's Blog Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- favicon -->
+<link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          ljf12825's Blog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/"
+                
+                
+              >Home</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/categories/"
+                
+                
+              >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/tags/"
+                
+                
+              >Tags</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/about/"
+                
+                
+              >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Thread">
+    <meta itemprop="description" content="Unity中的线程机制和使用方式，包括：  Unity的线程模型概览  Unity API与线程限制  在Unity中使用线程的四种方式（Thread/Task/Job System/DOTS）  回到主线程的方法">
+    <meta itemprop="datePublished" content="2025-06-01T00:00:00+08:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Thread.html" itemprop="url">Thread
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>Unity中的线程机制和使用方式，包括：</p>
+<ul>
+  <li>Unity的线程模型概览</li>
+  <li>Unity API与线程限制</li>
+  <li>在Unity中使用线程的四种方式（Thread/Task/Job System/DOTS）</li>
+  <li>回到主线程的方法</li>
+</ul>
+
+<h2 id="unity线程模型概览">Unity线程模型概览</h2>
+<p>Unity整个运行环境围绕主线程组织，它的执行流程大致如下：</p>
+<div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">主线程（</span><span class="nt">Unity</span> <span class="nt">Loop</span><span class="err">）：</span>
+ <span class="err">├─</span> <span class="nt">Start</span><span class="o">()</span>
+ <span class="err">├─</span> <span class="nt">Update</span><span class="o">()</span>
+ <span class="err">├─</span> <span class="err">渲染提交</span>
+ <span class="err">├─</span> <span class="err">动画更新</span>
+ <span class="err">├─</span> <span class="err">物理处理（同步</span> <span class="nt">PhysX</span><span class="err">）</span>
+ <span class="err">└─</span> <span class="nt">LateUpdate</span><span class="o">()</span>
+</code></pre></div></div>
+<p><strong>主线程的作用：</strong></p>
+<ul>
+  <li>唯一能安全访问大多数Unity API的线程</li>
+  <li>游戏逻辑、生命周期函数、事件处理等全部在主线程中执行</li>
+</ul>
+
+<h2 id="unity-api的线程限制">Unity API的线程限制</h2>
+<blockquote>
+  <p>Unity引擎的绝大多数API不是线程安全的，只能在主线程中访问</p>
+</blockquote>
+
+<p>常见不可在子线程中调用的内容：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>示例</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>场景对象</td>
+      <td><code class="language-plaintext highlighter-rouge">transform.position</code>、<code class="language-plaintext highlighter-rouge">gameObject.SetActive()</code></td>
+    </tr>
+    <tr>
+      <td>UI 操作</td>
+      <td><code class="language-plaintext highlighter-rouge">Text.text</code>、<code class="language-plaintext highlighter-rouge">Image.sprite</code>、<code class="language-plaintext highlighter-rouge">CanvasGroup.alpha</code></td>
+    </tr>
+    <tr>
+      <td>加载资源</td>
+      <td><code class="language-plaintext highlighter-rouge">Resources.Load</code>、<code class="language-plaintext highlighter-rouge">AssetBundle.LoadAsset</code></td>
+    </tr>
+    <tr>
+      <td>UnityEvent</td>
+      <td><code class="language-plaintext highlighter-rouge">Invoke()</code>、<code class="language-plaintext highlighter-rouge">AddListener()</code></td>
+    </tr>
+    <tr>
+      <td>摄像机/渲染设置</td>
+      <td><code class="language-plaintext highlighter-rouge">Camera.fieldOfView</code>、<code class="language-plaintext highlighter-rouge">RenderSettings.ambientLight</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="为什么大多数unity-api不是线程安全的">为什么大多数Unity API不是线程安全的</h3>
+<blockquote>
+  <p>线程安全是指多个线程同时访问某个资源时，不会出现数据竞争、资源冲突或者状态不一致；
+换句话说，线程安全的代码能保证即使多个线程同时调用，也不会导致程序崩溃或出现错误</p>
+</blockquote>
+
+<h4 id="1引擎设计的历史和架构">1.引擎设计的历史和架构</h4>
+<ul>
+  <li>Unity是基于单线程渲染和游戏逻辑设计的引擎</li>
+  <li>主线程同时负责游戏逻辑更新、场景管理、物理模拟和渲染指令的提交</li>
+  <li>内部实现很多数据结构和资源管理是非并发安全的，没有加锁保护</li>
+</ul>
+
+<h4 id="2性能考虑">2.性能考虑</h4>
+<ul>
+  <li>加锁和同步机制会引入性能开销，尤其在游戏高帧率需求下非常敏感</li>
+  <li>Unity为了最大化性能，避免在API层面使用大量锁机制，导致API不是线程安全</li>
+  <li>线程安全的实现往往会降低性能，而Unity选择了“主线程访问”策略，性能和复杂度间的平衡</li>
+</ul>
+
+<h4 id="3复杂的状态和资源管理">3.复杂的状态和资源管理</h4>
+<ul>
+  <li>Unity API涉及大量复杂资源（场景、纹理、网格、动画、物理对象等）</li>
+  <li>这些资源的状态常常依赖于引擎内部复杂的生命周期管理和渲染管线</li>
+  <li>多线程访问同一资源可能导致状态不同步、竞争条件和崩溃</li>
+</ul>
+
+<h4 id="4引擎内部很多操作并非原子性">4.引擎内部很多操作并非原子性</h4>
+<ul>
+  <li>例如<code class="language-plaintext highlighter-rouge">transform.position</code>实际是底层C++引擎中的一个复杂结构体操作</li>
+  <li>多线程同时读写可能破坏数据一致性，导致场景物体“错乱”或崩溃</li>
+</ul>
+
+<h2 id="unity中使用多线程的四种方式">Unity中使用多线程的四种方式</h2>
+<h3 id="1thread类低级方案">1.<code class="language-plaintext highlighter-rouge">Thread</code>类（低级方案）</h3>
+<p>适用场景：非常简单的子线程计算任务</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">System.Threading</span><span class="p">;</span>
+
+<span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">Thread</span> <span class="n">t</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Thread</span><span class="p">(()</span> <span class="p">=&gt;{</span>
+        <span class="kt">int</span> <span class="n">result</span> <span class="p">=</span> <span class="nf">HeavyCompute</span><span class="p">();</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"不能再这里操作 Unity API!"</span><span class="p">);</span>
+    <span class="p">});</span>
+    <span class="n">t</span><span class="p">.</span><span class="nf">Start</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>缺点：</p>
+<ul>
+  <li>手动管理生命周期</li>
+  <li>无法直接“回主线程”</li>
+  <li>不支持返回值</li>
+</ul>
+
+<h3 id="2task--asyncawait推荐方式">2.<code class="language-plaintext highlighter-rouge">Task</code> + <code class="language-plaintext highlighter-rouge">async/await</code>（推荐方式）</h3>
+<p>适合：异步加载、复杂逻辑封装</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">result</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Task</span><span class="p">.</span><span class="nf">Run</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="nf">HeavyCompute</span><span class="p">());</span>
+    <span class="c1">// 回到主线程，可以安全使用 Unity API</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">$"计算结果：</span><span class="p">{</span><span class="n">result</span><span class="p">}</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>优点：</p>
+<ul>
+  <li>语法简洁</li>
+  <li>自动线程切换</li>
+  <li>支持异常处理
+注意：</li>
+  <li><code class="language-plaintext highlighter-rouge">await</code>后续代码回自动返回主线程（如果是Unity编译器）</li>
+</ul>
+
+<h3 id="3unity-job-system高性能并发">3.Unity Job System（高性能并发）</h3>
+<p>适用场景：大量数据并发处理（如物理模拟、AI批量计算）</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">Unity.Burst</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Unity.Collections</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Unity.Jobs</span><span class="p">;</span>
+
+<span class="p">[</span><span class="n">BurstCompile</span><span class="p">]</span>
+<span class="k">public</span> <span class="k">struct</span> <span class="nc">MyJob</span> <span class="p">:</span> <span class="n">IJob</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">NativeArray</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">data</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Execute</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">data</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">*</span> <span class="m">2</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">NativeArray</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">arr</span> <span class="p">=</span> <span class="k">new</span> <span class="n">NativeArray</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;(</span><span class="m">100</span><span class="p">,</span> <span class="n">Allocator</span><span class="p">.</span><span class="n">TempJob</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">arr</span><span class="p">.</span><span class="n">Length</span> <span class="p">++</span><span class="n">i</span><span class="p">)</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">=</span> <span class="n">i</span><span class="p">;</span>
+
+    <span class="kt">var</span> <span class="n">job</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyJob</span> <span class="p">{</span> <span class="n">data</span> <span class="p">=</span> <span class="n">arr</span> <span class="p">};</span>
+    <span class="n">JobHandle</span> <span class="n">handle</span> <span class="p">=</span> <span class="n">job</span><span class="p">.</span><span class="nf">Schedule</span><span class="p">();</span>
+    <span class="n">handle</span><span class="p">.</span><span class="nf">Complete</span><span class="p">();</span>
+
+    <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="m">10</span><span class="p">]);</span>
+    <span class="n">arr</span><span class="p">.</span><span class="nf">Dispose</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>特点：</p>
+<ul>
+  <li>Job数据结构需使用<code class="language-plaintext highlighter-rouge">NativeArray</code></li>
+  <li>不支持引用类型（string, class, GameObject）</li>
+  <li>高性能（支持Burst编译器）</li>
+</ul>
+
+<h3 id="4unity-dots-ecs--job--burst">4.Unity DOTS （ECS + Job + Burst）</h3>
+<p>适用场景：高度并发的大型项目（如模拟类游戏、成千上万个实体）<br />
+ECS配合Job System形成完整的数据驱动架构<br />
+优点：</p>
+<ul>
+  <li>极致性能</li>
+  <li>自动调度系统和Job</li>
+  <li>易于并行化和分布式
+缺点：</li>
+  <li>和传统GameObject不兼容</li>
+</ul>
+
+<h2 id="回到主线程的方法">回到主线程的方法</h2>
+<h3 id="场景你在子线程或task中获得数据想更新ui或gameobject">场景：你在子线程或Task中获得数据，想更新UI或GameObject</h3>
+<h4 id="方法一使用asyncawait自动切换回主线程">方法一、使用<code class="language-plaintext highlighter-rouge">async/await</code>自动切换回主线程</h4>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="k">void</span> <span class="nf">LoadData</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Task</span><span class="p">.</span><span class="nf">Run</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="n">File</span><span class="p">.</span><span class="nf">ReadAllText</span><span class="p">(</span><span class="s">"config.json"</span><span class="p">));</span>
+    <span class="n">myText</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">json</span><span class="p">;</span> <span class="c1">// 主线程</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="方法二自己封装一个主线程执行器">方法二、自己封装一个主线程执行器</h4>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">MainThreadDispatcher</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">Queue</span><span class="p">&lt;</span><span class="n">Action</span><span class="p">&gt;</span> <span class="n">actions</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Queue</span><span class="p">&lt;</span><span class="n">Action</span><span class="p">&gt;();</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Enqueue</span><span class="p">(</span><span class="n">Action</span> <span class="n">action</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">lock</span> <span class="p">(</span><span class="n">actions</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">actions</span><span class="p">.</span><span class="nf">Enqueue</span><span class="p">(</span><span class="n">action</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">void</span> <span class="nf">Update</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">lock</span> <span class="p">(</span><span class="n">actions</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">actions</span><span class="p">.</span><span class="n">Count</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span>
+                <span class="n">actions</span><span class="p">.</span><span class="nf">Dequeue</span><span class="p">()?.</span><span class="nf">Invoke</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>使用：</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ThreadPool</span><span class="p">.</span><span class="nf">QueueUserWorkItem</span><span class="p">(</span><span class="n">_</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kt">string</span> <span class="n">data</span> <span class="p">=</span> <span class="nf">HeavyLoad</span><span class="p">();</span>
+    <span class="n">MainThreadDispatcher</span><span class="p">.</span><span class="nf">Enqueue</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="n">myText</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">data</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="使用多线程的场景">使用多线程的场景</h2>
+<ul>
+  <li>重计算任务（如路径寻路、AI、噪声生成）</li>
+  <li>网络请求、数据库访问</li>
+  <li>文件读写、图片压缩等I/O操作</li>
+  <li>海量数据处理（如ECS中的大量实体模型）
+    <blockquote>
+      <p>主线程外只用于非Unity API的计算，不允许访问Unity对象，执行完毕后记得退回主线程</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="unity引擎内部是多线程的">Unity引擎内部是多线程的</h3>
+<p>虽热大多数逻辑跑在主线程，但Unity引擎内部会使用多线程来提升性能</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>功能</th>
+      <th>是否多线程</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>PhysX 物理引擎</td>
+      <td>多线程</td>
+      <td>Unity 会自动并行化处理</td>
+    </tr>
+    <tr>
+      <td>Audio 音频系统</td>
+      <td>多线程</td>
+      <td>音频解码、播放管理在后台</td>
+    </tr>
+    <tr>
+      <td>渲染管线（SRP）</td>
+      <td>多线程</td>
+      <td>在某些平台支持多线程提交渲染指令</td>
+    </tr>
+    <tr>
+      <td>Animation 系统</td>
+      <td>多线程（部分）</td>
+      <td>有些姿态计算在 Job 系统中进行</td>
+    </tr>
+  </tbody>
+</table>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-06-01T00:00:00+08:00">June 1, 2025</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/posts/2025-06-03-Physics-System/" class="pagination--pager" title="Physics System">Previous</a>
+    
+    
+      <a href="/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types.html" class="pagination--pager" title="Unity Build-in Types">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/ljf12825" rel="nofollow noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 <a href="http://localhost:4000">ljf12825's Blog</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
