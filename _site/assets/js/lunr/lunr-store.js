@@ -102,9 +102,9 @@ var store = [{
         "teaser": null
       },{
         "title": "Scripts",
-        "excerpt":"Unity脚本就是你编写的C#类，它控制游戏中物体的行为、交互、动画、输入、碰撞、UI等逻辑 脚本类型 Unity中的脚本根据其用途可以分为3类： 特性 MonoBehaviour ScriptableObject 纯 C# 类 是否可挂载 ✅ 可以挂载到 GameObject ❌ 不行 ❌ 不行 生命周期函数 ✅ 有 Start、Update 等 ❌ 没有 ❌ 没有 是否能序列化 ✅ 支持 ✅ 支持 ❌ 默认不支持 支持协程 ✅ StartCoroutine() ❌ 不支持 ❌ 不支持 使用场景 行为脚本，控制对象 数据容器，可复用资源配置 工具类、算法类等逻辑单元 MonoBehaviour的派生类 必须挂载在场景中的GameObject上 用于控制逻辑、角色行为、输入响应等 有生命周期函数 ScriptableObject是数据容器 轻量级对象，不需要挂载，常用于数据复用（如技能表、配置表）...","categories": ["笔记"],
+        "excerpt":"Unity脚本就是你编写的C#类，它控制游戏中物体的行为、交互、动画、输入、碰撞、UI等逻辑 脚本类型 Unity中的脚本根据其用途可以分为3类： 特性 MonoBehaviour ScriptableObject 纯 C# 类 是否可挂载 可以挂载到 GameObject 不行 不行 生命周期函数 有 Start、Update 等 没有 没有 是否能序列化 支持 支持 默认不支持 支持协程 StartCoroutine() 不支持 不支持 使用场景 行为脚本，控制对象 数据容器，可复用资源配置 工具类、算法类等逻辑单元 MonoBehaviour的派生类 必须挂载在场景中的GameObject上 用于控制逻辑、角色行为、输入响应等 有生命周期函数 ScriptableObject是数据容器 轻量级对象，不需要挂载，常用于数据复用（如技能表、配置表） 支持序列化，可以做成asset文件 没有生命周期函数，但可以在OnEnable()做初始化 更节省内存，不依赖场景 纯C#类 用于封装工具、算法、模型等逻辑（如A*算法、存档系统） 不支持Unity生命周期和序列化 适合在MonoBehaviour或ScriptableObject中调用 脚本和Inspector的关系 可以使用[SerializeField]、public来让字段在Inspector中显示 public float speed...","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Scripts.html",
+        "url": "/posts/2025-06-02-Scripts/",
         "teaser": null
       },{
         "title": "Unity Componenet-Driven Architecture",
@@ -216,7 +216,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Frame",
-        "excerpt":" ","categories": ["笔记"],
+        "excerpt":"在Unity中，Frame（帧）是游戏运行的基本时间单位   什么是Frame     Frame：指游戏每渲染并更新一次画面所经历的完整周期 一个Frame包含了物理模拟、逻辑更新、渲染提交等多个阶段         游戏每秒运行多个帧，成为FPS（Frame Per Second），帧率越高越流畅     如果帧率是60FPS，表示每秒执行60次完整的Frame逻辑      Frame的生命周期  [Input] -&gt; [Physics] -&gt; [Update] -&gt; [AI/Animator] -&gt; [LateUpdate] -&gt; [Rendering] -&gt; [Present]  详见Scripts   不同帧的分类                  帧类型       描述                       逻辑帧（Update 帧）       每帧都会执行的脚本逻辑                 物理帧（FixedUpdate）       固定时间调用一次，与帧率无关                 渲染帧       Unity 渲染一次画面           Frame与多线程   Frame性能调优   帧的底层原理   Unity的高效框架优化  ","categories": ["笔记"],
         "tags": ["Unity"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Frame.html",
         "teaser": null
@@ -267,6 +267,18 @@ var store = [{
         "excerpt":" ","categories": ["笔记"],
         "tags": ["Unity","Unity System","Unity Component"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap.html",
+        "teaser": null
+      },{
+        "title": "Unity NetWork",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity NetWork"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork.html",
+        "teaser": null
+      },{
+        "title": "Unity Profiler",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity Tool"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler.html",
         "teaser": null
       },{
     "title": "About",
