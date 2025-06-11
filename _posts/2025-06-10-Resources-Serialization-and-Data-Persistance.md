@@ -1,5 +1,5 @@
 ---
-title: "Serialization"
+title: "Resources, Serialization and Data Persistence"
 layout: single
 date: 2025-06-01
 categories: [笔记]
