@@ -246,7 +246,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Mesh",
-        "excerpt":" ","categories": ["笔记"],
+        "excerpt":"Unity中的Mesh（网格）是一切3D模型、地形、角色、道具、甚至某些UI元素的几何基础，是“物体的骨架” 包含顶点、面、法线、UV、颜色等数据，是3D图形渲染的核心单位 Mesh的构成 数据 作用 顶点（Vertices） 网格的点，构成形状的基础 三角形（Triangles） 每三个顶点组成一个三角面，是渲染最小单元 法线（Normals） 每个顶点的方向，用于光照计算 UV 坐标（UVs） 纹理坐标，用来决定贴图怎么铺在模型上 顶点色（Colors） 每个顶点的颜色，用于特效、调色 切线（Tangents） 用于法线贴图的方向辅助向量 这些数据最终会交给GPU，进行渲染 Mesh在Unity中的用途 用途 举例 渲染模型 静态模型、角色模型、环境场景 自定义几何体 Procedural Mesh（如地形、波浪、水面） 碰撞体数据 Mesh Collider 也使用 Mesh 特效/轨迹 线性 Mesh（如剑气轨迹、能量波） 角色换装 动态换装系统中组合不同 Mesh 如何创建、操作Mesh Unity提供Mesh类，支持自定义几何体 示例：创建一个简单三角形Mesh Mesh mesh = new Mesh(); Vector3[] vertices = new...","categories": ["笔记"],
         "tags": ["Unity","Renderer","Graphic"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Mesh.html",
         "teaser": null

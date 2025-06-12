@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-11T22:22:36+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Unity Profiler</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler.html" rel="alternate" type="text/html" title="Unity Profiler" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Tool" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Thread</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Thread.html" rel="alternate" type="text/html" title="Thread" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Thread</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Thread.html"><![CDATA[<p>Unity中的线程机制和使用方式，包括：</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-12T21:43:56+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Unity Profiler</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler.html" rel="alternate" type="text/html" title="Unity Profiler" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Tool" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Thread</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Thread.html" rel="alternate" type="text/html" title="Thread" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Thread</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Thread.html"><![CDATA[<p>Unity中的线程机制和使用方式，包括：</p>
 <ul>
   <li>Unity的线程模型概览</li>
   <li>Unity API与线程限制</li>
@@ -268,7 +268,210 @@ ECS配合Job System形成完整的数据驱动架构<br />
       <td>有些姿态计算在 Job 系统中进行</td>
     </tr>
   </tbody>
-</table>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[Unity中的线程机制和使用方式，包括： Unity的线程模型概览 Unity API与线程限制 在Unity中使用线程的四种方式（Thread/Task/Job System/DOTS） 回到主线程的方法]]></summary></entry><entry><title type="html">Unity NetWork</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork.html" rel="alternate" type="text/html" title="Unity NetWork" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity NetWork" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">TileMap</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap.html" rel="alternate" type="text/html" title="TileMap" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><category term="Unity Component" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Terrain</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain.html" rel="alternate" type="text/html" title="Terrain" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Renderer" /><category term="Unity System" /><category term="Unity Component" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Mesh</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Mesh.html" rel="alternate" type="text/html" title="Mesh" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Mesh</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Mesh.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Renderer" /><category term="Graphic" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Navigation System</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Navigation.html" rel="alternate" type="text/html" title="Navigation System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Navigation</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Navigation.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><category term="AI" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Layout</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layout.html" rel="alternate" type="text/html" title="Layout" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layout</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layout.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Import Assets</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets.html" rel="alternate" type="text/html" title="Import Assets" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets.html"><![CDATA[<p>Unity支持多种格式的资源文件，并能自动识别并进行初步处理</p>
+</table>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[Unity中的线程机制和使用方式，包括： Unity的线程模型概览 Unity API与线程限制 在Unity中使用线程的四种方式（Thread/Task/Job System/DOTS） 回到主线程的方法]]></summary></entry><entry><title type="html">Unity NetWork</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork.html" rel="alternate" type="text/html" title="Unity NetWork" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity NetWork" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">TileMap</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap.html" rel="alternate" type="text/html" title="TileMap" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><category term="Unity Component" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Terrain</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain.html" rel="alternate" type="text/html" title="Terrain" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Renderer" /><category term="Unity System" /><category term="Unity Component" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Mesh</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Mesh.html" rel="alternate" type="text/html" title="Mesh" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Mesh</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Mesh.html"><![CDATA[<p>Unity中的Mesh（网格）是一切3D模型、地形、角色、道具、甚至某些UI元素的几何基础，是“物体的骨架”<br />
+包含顶点、面、法线、UV、颜色等数据，是3D图形渲染的核心单位</p>
+
+<h2 id="mesh的构成">Mesh的构成</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>数据</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>顶点（Vertices）</strong></td>
+      <td>网格的点，构成形状的基础</td>
+    </tr>
+    <tr>
+      <td><strong>三角形（Triangles）</strong></td>
+      <td>每三个顶点组成一个三角面，是渲染最小单元</td>
+    </tr>
+    <tr>
+      <td><strong>法线（Normals）</strong></td>
+      <td>每个顶点的方向，用于光照计算</td>
+    </tr>
+    <tr>
+      <td><strong>UV 坐标（UVs）</strong></td>
+      <td>纹理坐标，用来决定贴图怎么铺在模型上</td>
+    </tr>
+    <tr>
+      <td><strong>顶点色（Colors）</strong></td>
+      <td>每个顶点的颜色，用于特效、调色</td>
+    </tr>
+    <tr>
+      <td><strong>切线（Tangents）</strong></td>
+      <td>用于法线贴图的方向辅助向量</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>这些数据最终会交给GPU，进行渲染</p>
+
+<h2 id="mesh在unity中的用途">Mesh在Unity中的用途</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>用途</th>
+      <th>举例</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>渲染模型</td>
+      <td>静态模型、角色模型、环境场景</td>
+    </tr>
+    <tr>
+      <td>自定义几何体</td>
+      <td>Procedural Mesh（如地形、波浪、水面）</td>
+    </tr>
+    <tr>
+      <td>碰撞体数据</td>
+      <td>Mesh Collider 也使用 Mesh</td>
+    </tr>
+    <tr>
+      <td>特效/轨迹</td>
+      <td>线性 Mesh（如剑气轨迹、能量波）</td>
+    </tr>
+    <tr>
+      <td>角色换装</td>
+      <td>动态换装系统中组合不同 Mesh</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="如何创建操作mesh">如何创建、操作Mesh</h2>
+<p>Unity提供<code class="language-plaintext highlighter-rouge">Mesh</code>类，支持自定义几何体</p>
+
+<h3 id="示例创建一个简单三角形mesh">示例：创建一个简单三角形Mesh</h3>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Mesh</span> <span class="n">mesh</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Mesh</span><span class="p">();</span>
+
+<span class="n">Vector3</span><span class="p">[]</span> <span class="n">vertices</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Vector3</span><span class="p">[]</span>
+<span class="p">{</span>
+    <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span>
+    <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span>
+    <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span>
+<span class="p">};</span>
+
+<span class="kt">int</span><span class="p">[]</span> <span class="n">triangles</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[]</span> <span class="p">{</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">};</span>
+
+<span class="n">mesh</span><span class="p">.</span><span class="n">vertices</span> <span class="p">=</span> <span class="n">vertices</span><span class="p">;</span>
+<span class="n">mesh</span><span class="p">.</span><span class="n">triangles</span> <span class="p">=</span> <span class="n">triangles</span><span class="p">;</span>
+<span class="n">mesh</span><span class="p">.</span><span class="nf">RecalculateNormals</span><span class="p">();</span> <span class="c1">// 自动生成法线</span>
+
+<span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">MeshFilter</span><span class="p">&gt;().</span><span class="n">mesh</span> <span class="p">=</span> <span class="n">mesh</span><span class="p">;</span>
+</code></pre></div></div>
+<h2 id="meshfilter-和-meshrenderer">MeshFilter 和 MeshRenderer</h2>
+<p>在Unity中，<code class="language-plaintext highlighter-rouge">MeshFilter</code>和<code class="language-plaintext highlighter-rouge">MeshRenderer</code>是构成立体物体（3D模型）渲染的核心组件</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">MeshFilter</code>：提供集合形状（顶点、三角形等）</li>
+  <li><code class="language-plaintext highlighter-rouge">MeshRenderer</code>：将形状渲染到屏幕上（使用材质、光照等）</li>
+</ul>
+
+<p><img src="/assets/images/MeshFilterandMeshRenderer.jpg" alt="MeshFilterandMeshRenderer" />;</p>
+
+<h3 id="meshfilter提供模型数据">MeshFilter：提供模型数据</h3>
+<ul>
+  <li>MeshFilter包含一个Mesh对象，这是3D模型的几何体，比如立方体、球体、角色模型等</li>
+  <li>这些Mesh是<code class="language-plaintext highlighter-rouge">.fbx</code>、<code class="language-plaintext highlighter-rouge">.obj</code>导入的，或运行时通过代码生成</li>
+</ul>
+
+<p>可以通过以下方式获取或赋值Mesh</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MeshFilter</span> <span class="n">mf</span> <span class="p">=</span> <span class="n">GetComponenet</span><span class="p">&lt;</span><span class="n">MeshFilter</span><span class="p">&gt;();</span>
+<span class="n">Mesh</span> <span class="n">mesh</span> <span class="p">=</span> <span class="n">mf</span><span class="p">.</span><span class="n">mesh</span><span class="p">;</span> <span class="c1">// 当前使用的实例化mesh</span>
+<span class="n">mf</span><span class="p">.</span><span class="n">mesh</span> <span class="p">=</span> <span class="n">someOtherMesh</span><span class="p">;</span> <span class="c1">// 替换为新的Mesh</span>
+</code></pre></div></div>
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">.mesh</code>是一个实例副本，你修改它不会影响原始资源；<code class="language-plaintext highlighter-rouge">.sharedMesh</code>是共享原始资源</p>
+</blockquote>
+
+<h3 id="meshrenderer负责把模型画出来">MeshRenderer：负责把模型画出来</h3>
+<ul>
+  <li>MeshRenderer负责把<code class="language-plaintext highlighter-rouge">MeshFilter</code>提供的几何体渲染到屏幕上</li>
+  <li>控制材质、阴影、光照、剔除、光照探针等参数</li>
+</ul>
+
+<h4 id="面板参数">面板参数</h4>
+<h5 id="element-0-1">Element 0, 1…</h5>
+<ul>
+  <li>控制使用哪个材质渲染对应子网格</li>
+  <li>通常一个对象只有一个材质，如果是多个SubMesh，会有多个材质槽
+适用场景：</li>
+  <li>多材质角色：身体/衣服/装备使用不同的材质</li>
+  <li>不同部件不同特效：一个材质透明，一个闪光</li>
+</ul>
+
+<h5 id="lighting">Lighting</h5>
+<p><strong>Cast Shadows(投射阴影)</strong></p>
+<ul>
+  <li>控制该物体是否想地面等对象投影</li>
+  <li>选项：
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">On</code>：始终投射阴影</li>
+      <li><code class="language-plaintext highlighter-rouge">Off</code>：不投影</li>
+      <li><code class="language-plaintext highlighter-rouge">Two Sided</code>：背面也能投影（适用于双面平面）</li>
+      <li><code class="language-plaintext highlighter-rouge">Shadows Only</code>：只显示阴影，不渲染模型本体（隐形）</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Receive Shadows(接收阴影)</strong></p>
+<ul>
+  <li>是否接收其他物体的阴影（比如树被房子挡住时）</li>
+  <li>关闭可提升性能，但视觉上可能不真实</li>
+</ul>
+
+<h5 id="probes探针相关环境光间接光">Probes（探针相关，环境光/间接光）</h5>
+<p>在Unity中，<code class="language-plaintext highlighter-rouge">Probes</code>是一类帮助处理间接光照和环境反射的技术，目的是让动态物体（如角色、道具）在光照和反射效果上看起来更自然，融入环境</p>
+
+<p><strong>为什么需要探针</strong></p>
+
+<p>Unity中有两类光照</p>
+<ul>
+  <li>直接光照：来自灯光（如Dirctional Light）</li>
+  <li>间接光照：来自物体间的反弹、环境照明</li>
+</ul>
+
+<p>对于静态物体，Unity可以烘焙光照贴图（Lightmap）来记录间接光照<br />
+但动态物体（移动的角色、道具）不能使用烘焙光照贴图，这时候就需要探针来帮它“感受环境的光”</p>
+
+<blockquote>
+  <p>探针是一种轻量级采样方式，让动态物体获得类似烘焙光照/环境反射的技术，从而避免使用高开销的实时光照和实时反射</p>
+</blockquote>
+
+<p><strong>Light Probes</strong></p>
+<ul>
+  <li>是否接受光照探针（动态光照采样，用于小物体，如动态角色）</li>
+  <li>一般设置为<code class="language-plaintext highlighter-rouge">Blend Probes</code>（自动采样探针）</li>
+</ul>
+
+<p><strong>Reflection Probes</strong></p>
+<ul>
+  <li>是否使用反射探针（环境反射用）</li>
+  <li>选项：
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">Off</code></li>
+      <li><code class="language-plaintext highlighter-rouge">Blend Probes</code>（常用）</li>
+      <li><code class="language-plaintext highlighter-rouge">Simple</code>（不混合，只是用最近一个）</li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="additional-settings附加设置">Additional Settings（附加设置）</h5>
+<p><strong>Motion Vectors</strong></p>
+<ul>
+  <li>控制是否为该物体生成运动矢量（供后处理如动态模糊使用）</li>
+  <li>推荐开启：<code class="language-plaintext highlighter-rouge">Per Object Motion</code></li>
+</ul>
+
+<p><strong>Lightmap Static</strong></p>
+<ul>
+  <li>如果你将对象标记为静态，会自动启用Lightmap烘焙支持</li>
+  <li>静态光照适用于不动的建筑、地面等</li>
+</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Renderer" /><category term="Graphic" /><summary type="html"><![CDATA[Unity中的Mesh（网格）是一切3D模型、地形、角色、道具、甚至某些UI元素的几何基础，是“物体的骨架” 包含顶点、面、法线、UV、颜色等数据，是3D图形渲染的核心单位]]></summary></entry><entry><title type="html">Navigation System</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Navigation.html" rel="alternate" type="text/html" title="Navigation System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Navigation</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Navigation.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><category term="AI" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Layout</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layout.html" rel="alternate" type="text/html" title="Layout" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layout</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layout.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Import Assets</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets.html" rel="alternate" type="text/html" title="Import Assets" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets.html"><![CDATA[<p>Unity支持多种格式的资源文件，并能自动识别并进行初步处理</p>
 
 <h2 id="资源导入基本流程">资源导入基本流程</h2>
 <p><strong>1.将资源文件拖入<code class="language-plaintext highlighter-rouge">Assets</code>目录中（Unity会自动导入）</strong><br />
