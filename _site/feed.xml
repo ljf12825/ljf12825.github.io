@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-12T21:43:56+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Unity Profiler</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler.html" rel="alternate" type="text/html" title="Unity Profiler" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Tool" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Thread</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Thread.html" rel="alternate" type="text/html" title="Thread" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Thread</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Thread.html"><![CDATA[<p>Unity中的线程机制和使用方式，包括：</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-12T22:06:29+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Unity Profiler</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler.html" rel="alternate" type="text/html" title="Unity Profiler" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Tool" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Thread</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Thread.html" rel="alternate" type="text/html" title="Thread" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Thread</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Thread.html"><![CDATA[<p>Unity中的线程机制和使用方式，包括：</p>
 <ul>
   <li>Unity的线程模型概览</li>
   <li>Unity API与线程限制</li>
@@ -268,7 +268,76 @@ ECS配合Job System形成完整的数据驱动架构<br />
       <td>有些姿态计算在 Job 系统中进行</td>
     </tr>
   </tbody>
-</table>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[Unity中的线程机制和使用方式，包括： Unity的线程模型概览 Unity API与线程限制 在Unity中使用线程的四种方式（Thread/Task/Job System/DOTS） 回到主线程的方法]]></summary></entry><entry><title type="html">Unity NetWork</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork.html" rel="alternate" type="text/html" title="Unity NetWork" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity NetWork" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">TileMap</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap.html" rel="alternate" type="text/html" title="TileMap" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><category term="Unity Component" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Terrain</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain.html" rel="alternate" type="text/html" title="Terrain" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Renderer" /><category term="Unity System" /><category term="Unity Component" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Mesh</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Mesh.html" rel="alternate" type="text/html" title="Mesh" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Mesh</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Mesh.html"><![CDATA[<p>Unity中的Mesh（网格）是一切3D模型、地形、角色、道具、甚至某些UI元素的几何基础，是“物体的骨架”<br />
+</table>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[Unity中的线程机制和使用方式，包括： Unity的线程模型概览 Unity API与线程限制 在Unity中使用线程的四种方式（Thread/Task/Job System/DOTS） 回到主线程的方法]]></summary></entry><entry><title type="html">Unity NetWork</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork.html" rel="alternate" type="text/html" title="Unity NetWork" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity NetWork" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">TileMap</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap.html" rel="alternate" type="text/html" title="TileMap" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><category term="Unity Component" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Terrain</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain.html" rel="alternate" type="text/html" title="Terrain" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain.html"><![CDATA[<p>在Unity中，Terrain是一个专门用于制作大规模、自然风格场景的强大工具</p>
+
+<h2 id="什么是terrain">什么是Terrain</h2>
+<p>Terrain是Unity提供的一个内置组件，用于在场景中创建可编辑的地形<br />
+它由多个部分组成：</p>
+<ul>
+  <li>地形本体（高度图控制的网格）</li>
+  <li>纹理涂层（地表材质贴图）</li>
+  <li>植被/树木/草</li>
+  <li>光照支持（光照贴图、探针）</li>
+  <li>LOD和剔除</li>
+</ul>
+
+<h2 id="terrain的核心结构">Terrain的核心结构</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>模块</th>
+      <th>功能</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>高度图（Heightmap）</strong></td>
+      <td>决定地形的高低起伏</td>
+    </tr>
+    <tr>
+      <td><strong>绘制材质（Layers）</strong></td>
+      <td>地面纹理（如草地、岩石、雪）混合涂刷</td>
+    </tr>
+    <tr>
+      <td><strong>细节对象（Details）</strong></td>
+      <td>草、石头、花等低多边形细节（大量渲染优化）</td>
+    </tr>
+    <tr>
+      <td><strong>树木系统（Trees）</strong></td>
+      <td>批量放置支持 LOD 的树</td>
+    </tr>
+    <tr>
+      <td><strong>碰撞体</strong></td>
+      <td>自动生成地形碰撞</td>
+    </tr>
+    <tr>
+      <td><strong>光照支持</strong></td>
+      <td>支持烘焙光照图、Light Probe、反射探针</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="/assets/images/CreateNeighborTerrains.jpg" alt="CreateNeighborTerrains" />
+<img src="/assets/images/PaintTerrain.jpg" alt="PaintTerrain" />
+<img src="/assets/images/PaintTrees.jpg" alt="PaintTrees" />
+<img src="/assets/images/PaintDetails.jpg" alt="PaintDetails" />
+<img src="/assets/images/TerrainSetting_1.jpg" alt="TerrainSetting_1" />
+<img src="/assets/images/TerrainSetting_2.jpg" alt="TerrainSetting_2" /></p>
+
+<h2 id="terrain-lod-编写调优">Terrain LOD 编写/调优</h2>
+
+<h2 id="terrain-gpu-instancing草树渲染优化">Terrain GPU Instancing（草、树渲染优化）</h2>
+
+<h2 id="使用terrain-toolkit插件或gaia等地形生成工具">使用Terrain Toolkit插件或Gaia等地形生成工具</h2>
+
+<h2 id="多地形拼接无缝过渡">多地形拼接、无缝过渡</h2>
+
+<h2 id="结合导航烘焙navmesh--terrain">结合导航烘焙（NavMesh + Terrain）</h2>
+
+<h2 id="runtime地形修改voxel地形破坏">Runtime地形修改（Voxel、地形破坏）</h2>
+
+<h2 id="terrain-api">Terrain API</h2>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Renderer" /><category term="Unity System" /><category term="Unity Component" /><summary type="html"><![CDATA[在Unity中，Terrain是一个专门用于制作大规模、自然风格场景的强大工具]]></summary></entry><entry><title type="html">Mesh</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Mesh.html" rel="alternate" type="text/html" title="Mesh" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Mesh</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Mesh.html"><![CDATA[<p>Unity中的Mesh（网格）是一切3D模型、地形、角色、道具、甚至某些UI元素的几何基础，是“物体的骨架”<br />
 包含顶点、面、法线、UV、颜色等数据，是3D图形渲染的核心单位</p>
 
 <h2 id="mesh的构成">Mesh的构成</h2>

@@ -258,7 +258,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Terrain",
-        "excerpt":" ","categories": ["笔记"],
+        "excerpt":"在Unity中，Terrain是一个专门用于制作大规模、自然风格场景的强大工具   什么是Terrain  Terrain是Unity提供的一个内置组件，用于在场景中创建可编辑的地形  它由多个部分组成：     地形本体（高度图控制的网格）   纹理涂层（地表材质贴图）   植被/树木/草   光照支持（光照贴图、探针）   LOD和剔除   Terrain的核心结构                  模块       功能                       高度图（Heightmap）       决定地形的高低起伏                 绘制材质（Layers）       地面纹理（如草地、岩石、雪）混合涂刷                 细节对象（Details）       草、石头、花等低多边形细节（大量渲染优化）                 树木系统（Trees）       批量放置支持 LOD 的树                 碰撞体       自动生成地形碰撞                 光照支持       支持烘焙光照图、Light Probe、反射探针                   Terrain LOD 编写/调优   Terrain GPU Instancing（草、树渲染优化）   使用Terrain Toolkit插件或Gaia等地形生成工具   多地形拼接、无缝过渡   结合导航烘焙（NavMesh + Terrain）   Runtime地形修改（Voxel、地形破坏）   Terrain API   ","categories": ["笔记"],
         "tags": ["Unity","Renderer","Unity System","Unity Component"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain.html",
         "teaser": null
