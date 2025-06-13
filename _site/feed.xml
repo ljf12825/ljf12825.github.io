@@ -1,274 +1,742 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-12T22:06:29+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Unity Profiler</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler.html" rel="alternate" type="text/html" title="Unity Profiler" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Tool" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Thread</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Thread.html" rel="alternate" type="text/html" title="Thread" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Thread</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Thread.html"><![CDATA[<p>Unity中的线程机制和使用方式，包括：</p>
-<ul>
-  <li>Unity的线程模型概览</li>
-  <li>Unity API与线程限制</li>
-  <li>在Unity中使用线程的四种方式（Thread/Task/Job System/DOTS）</li>
-  <li>回到主线程的方法</li>
-</ul>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-13T20:28:35+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Unity Performance Tuning</title><link href="http://localhost:4000/posts/2025-06-13-Unity-Performance-Tuning/" rel="alternate" type="text/html" title="Unity Performance Tuning" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Unity-Performance-Tuning</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-13-Unity-Performance-Tuning/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Unity Build-in Types</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types.html" rel="alternate" type="text/html" title="Unity Build-in Types" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types.html"><![CDATA[<p>Unity内建类型</p>
 
-<h2 id="unity线程模型概览">Unity线程模型概览</h2>
-<p>Unity整个运行环境围绕主线程组织，它的执行流程大致如下：</p>
-<div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">主线程（</span><span class="nt">Unity</span> <span class="nt">Loop</span><span class="err">）：</span>
- <span class="err">├─</span> <span class="nt">Start</span><span class="o">()</span>
- <span class="err">├─</span> <span class="nt">Update</span><span class="o">()</span>
- <span class="err">├─</span> <span class="err">渲染提交</span>
- <span class="err">├─</span> <span class="err">动画更新</span>
- <span class="err">├─</span> <span class="err">物理处理（同步</span> <span class="nt">PhysX</span><span class="err">）</span>
- <span class="err">└─</span> <span class="nt">LateUpdate</span><span class="o">()</span>
-</code></pre></div></div>
-<p><strong>主线程的作用：</strong></p>
-<ul>
-  <li>唯一能安全访问大多数Unity API的线程</li>
-  <li>游戏逻辑、生命周期函数、事件处理等全部在主线程中执行</li>
-</ul>
-
-<h2 id="unity-api的线程限制">Unity API的线程限制</h2>
-<blockquote>
-  <p>Unity引擎的绝大多数API不是线程安全的，只能在主线程中访问</p>
-</blockquote>
-
-<p>常见不可在子线程中调用的内容：</p>
+<h2 id="常见unity内建类型按用途分">常见Unity内建类型（按用途分）</h2>
+<h3 id="1空间几何类型transform相关">1.空间/几何类型（Transform相关）</h3>
 
 <table>
   <thead>
     <tr>
       <th>类型</th>
-      <th>示例</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>场景对象</td>
-      <td><code class="language-plaintext highlighter-rouge">transform.position</code>、<code class="language-plaintext highlighter-rouge">gameObject.SetActive()</code></td>
-    </tr>
-    <tr>
-      <td>UI 操作</td>
-      <td><code class="language-plaintext highlighter-rouge">Text.text</code>、<code class="language-plaintext highlighter-rouge">Image.sprite</code>、<code class="language-plaintext highlighter-rouge">CanvasGroup.alpha</code></td>
-    </tr>
-    <tr>
-      <td>加载资源</td>
-      <td><code class="language-plaintext highlighter-rouge">Resources.Load</code>、<code class="language-plaintext highlighter-rouge">AssetBundle.LoadAsset</code></td>
-    </tr>
-    <tr>
-      <td>UnityEvent</td>
-      <td><code class="language-plaintext highlighter-rouge">Invoke()</code>、<code class="language-plaintext highlighter-rouge">AddListener()</code></td>
-    </tr>
-    <tr>
-      <td>摄像机/渲染设置</td>
-      <td><code class="language-plaintext highlighter-rouge">Camera.fieldOfView</code>、<code class="language-plaintext highlighter-rouge">RenderSettings.ambientLight</code></td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="为什么大多数unity-api不是线程安全的">为什么大多数Unity API不是线程安全的</h3>
-<blockquote>
-  <p>线程安全是指多个线程同时访问某个资源时，不会出现数据竞争、资源冲突或者状态不一致；
-换句话说，线程安全的代码能保证即使多个线程同时调用，也不会导致程序崩溃或出现错误</p>
-</blockquote>
-
-<h4 id="1引擎设计的历史和架构">1.引擎设计的历史和架构</h4>
-<ul>
-  <li>Unity是基于单线程渲染和游戏逻辑设计的引擎</li>
-  <li>主线程同时负责游戏逻辑更新、场景管理、物理模拟和渲染指令的提交</li>
-  <li>内部实现很多数据结构和资源管理是非并发安全的，没有加锁保护</li>
-</ul>
-
-<h4 id="2性能考虑">2.性能考虑</h4>
-<ul>
-  <li>加锁和同步机制会引入性能开销，尤其在游戏高帧率需求下非常敏感</li>
-  <li>Unity为了最大化性能，避免在API层面使用大量锁机制，导致API不是线程安全</li>
-  <li>线程安全的实现往往会降低性能，而Unity选择了“主线程访问”策略，性能和复杂度间的平衡</li>
-</ul>
-
-<h4 id="3复杂的状态和资源管理">3.复杂的状态和资源管理</h4>
-<ul>
-  <li>Unity API涉及大量复杂资源（场景、纹理、网格、动画、物理对象等）</li>
-  <li>这些资源的状态常常依赖于引擎内部复杂的生命周期管理和渲染管线</li>
-  <li>多线程访问同一资源可能导致状态不同步、竞争条件和崩溃</li>
-</ul>
-
-<h4 id="4引擎内部很多操作并非原子性">4.引擎内部很多操作并非原子性</h4>
-<ul>
-  <li>例如<code class="language-plaintext highlighter-rouge">transform.position</code>实际是底层C++引擎中的一个复杂结构体操作</li>
-  <li>多线程同时读写可能破坏数据一致性，导致场景物体“错乱”或崩溃</li>
-</ul>
-
-<h2 id="unity中使用多线程的四种方式">Unity中使用多线程的四种方式</h2>
-<h3 id="1thread类低级方案">1.<code class="language-plaintext highlighter-rouge">Thread</code>类（低级方案）</h3>
-<p>适用场景：非常简单的子线程计算任务</p>
-<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">System.Threading</span><span class="p">;</span>
-
-<span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="n">Thread</span> <span class="n">t</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Thread</span><span class="p">(()</span> <span class="p">=&gt;{</span>
-        <span class="kt">int</span> <span class="n">result</span> <span class="p">=</span> <span class="nf">HeavyCompute</span><span class="p">();</span>
-        <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"不能再这里操作 Unity API!"</span><span class="p">);</span>
-    <span class="p">});</span>
-    <span class="n">t</span><span class="p">.</span><span class="nf">Start</span><span class="p">();</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>缺点：</p>
-<ul>
-  <li>手动管理生命周期</li>
-  <li>无法直接“回主线程”</li>
-  <li>不支持返回值</li>
-</ul>
-
-<h3 id="2task--asyncawait推荐方式">2.<code class="language-plaintext highlighter-rouge">Task</code> + <code class="language-plaintext highlighter-rouge">async/await</code>（推荐方式）</h3>
-<p>适合：异步加载、复杂逻辑封装</p>
-<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="kt">int</span> <span class="n">result</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Task</span><span class="p">.</span><span class="nf">Run</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="nf">HeavyCompute</span><span class="p">());</span>
-    <span class="c1">// 回到主线程，可以安全使用 Unity API</span>
-    <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">$"计算结果：</span><span class="p">{</span><span class="n">result</span><span class="p">}</span><span class="s">"</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>优点：</p>
-<ul>
-  <li>语法简洁</li>
-  <li>自动线程切换</li>
-  <li>支持异常处理
-注意：</li>
-  <li><code class="language-plaintext highlighter-rouge">await</code>后续代码回自动返回主线程（如果是Unity编译器）</li>
-</ul>
-
-<h3 id="3unity-job-system高性能并发">3.Unity Job System（高性能并发）</h3>
-<p>适用场景：大量数据并发处理（如物理模拟、AI批量计算）</p>
-<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">Unity.Burst</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">Unity.Collections</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">Unity.Jobs</span><span class="p">;</span>
-
-<span class="p">[</span><span class="n">BurstCompile</span><span class="p">]</span>
-<span class="k">public</span> <span class="k">struct</span> <span class="nc">MyJob</span> <span class="p">:</span> <span class="n">IJob</span>
-<span class="p">{</span>
-    <span class="k">public</span> <span class="n">NativeArray</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">data</span><span class="p">;</span>
-
-    <span class="k">public</span> <span class="k">void</span> <span class="nf">Execute</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">data</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span>
-            <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">*</span> <span class="m">2</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="n">NativeArray</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">arr</span> <span class="p">=</span> <span class="k">new</span> <span class="n">NativeArray</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;(</span><span class="m">100</span><span class="p">,</span> <span class="n">Allocator</span><span class="p">.</span><span class="n">TempJob</span><span class="p">);</span>
-
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">arr</span><span class="p">.</span><span class="n">Length</span> <span class="p">++</span><span class="n">i</span><span class="p">)</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">=</span> <span class="n">i</span><span class="p">;</span>
-
-    <span class="kt">var</span> <span class="n">job</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyJob</span> <span class="p">{</span> <span class="n">data</span> <span class="p">=</span> <span class="n">arr</span> <span class="p">};</span>
-    <span class="n">JobHandle</span> <span class="n">handle</span> <span class="p">=</span> <span class="n">job</span><span class="p">.</span><span class="nf">Schedule</span><span class="p">();</span>
-    <span class="n">handle</span><span class="p">.</span><span class="nf">Complete</span><span class="p">();</span>
-
-    <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="m">10</span><span class="p">]);</span>
-    <span class="n">arr</span><span class="p">.</span><span class="nf">Dispose</span><span class="p">();</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>特点：</p>
-<ul>
-  <li>Job数据结构需使用<code class="language-plaintext highlighter-rouge">NativeArray</code></li>
-  <li>不支持引用类型（string, class, GameObject）</li>
-  <li>高性能（支持Burst编译器）</li>
-</ul>
-
-<h3 id="4unity-dots-ecs--job--burst">4.Unity DOTS （ECS + Job + Burst）</h3>
-<p>适用场景：高度并发的大型项目（如模拟类游戏、成千上万个实体）<br />
-ECS配合Job System形成完整的数据驱动架构<br />
-优点：</p>
-<ul>
-  <li>极致性能</li>
-  <li>自动调度系统和Job</li>
-  <li>易于并行化和分布式
-缺点：</li>
-  <li>和传统GameObject不兼容</li>
-</ul>
-
-<h2 id="回到主线程的方法">回到主线程的方法</h2>
-<h3 id="场景你在子线程或task中获得数据想更新ui或gameobject">场景：你在子线程或Task中获得数据，想更新UI或GameObject</h3>
-<h4 id="方法一使用asyncawait自动切换回主线程">方法一、使用<code class="language-plaintext highlighter-rouge">async/await</code>自动切换回主线程</h4>
-<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="k">void</span> <span class="nf">LoadData</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Task</span><span class="p">.</span><span class="nf">Run</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="n">File</span><span class="p">.</span><span class="nf">ReadAllText</span><span class="p">(</span><span class="s">"config.json"</span><span class="p">));</span>
-    <span class="n">myText</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">json</span><span class="p">;</span> <span class="c1">// 主线程</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h4 id="方法二自己封装一个主线程执行器">方法二、自己封装一个主线程执行器</h4>
-<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">MainThreadDispatcher</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
-<span class="p">{</span>
-    <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">Queue</span><span class="p">&lt;</span><span class="n">Action</span><span class="p">&gt;</span> <span class="n">actions</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Queue</span><span class="p">&lt;</span><span class="n">Action</span><span class="p">&gt;();</span>
-
-    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Enqueue</span><span class="p">(</span><span class="n">Action</span> <span class="n">action</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">lock</span> <span class="p">(</span><span class="n">actions</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="n">actions</span><span class="p">.</span><span class="nf">Enqueue</span><span class="p">(</span><span class="n">action</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="k">void</span> <span class="nf">Update</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="k">lock</span> <span class="p">(</span><span class="n">actions</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="k">while</span> <span class="p">(</span><span class="n">actions</span><span class="p">.</span><span class="n">Count</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span>
-                <span class="n">actions</span><span class="p">.</span><span class="nf">Dequeue</span><span class="p">()?.</span><span class="nf">Invoke</span><span class="p">();</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>使用：</p>
-<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ThreadPool</span><span class="p">.</span><span class="nf">QueueUserWorkItem</span><span class="p">(</span><span class="n">_</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="kt">string</span> <span class="n">data</span> <span class="p">=</span> <span class="nf">HeavyLoad</span><span class="p">();</span>
-    <span class="n">MainThreadDispatcher</span><span class="p">.</span><span class="nf">Enqueue</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="n">myText</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">data</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre></div></div>
-
-<h2 id="使用多线程的场景">使用多线程的场景</h2>
-<ul>
-  <li>重计算任务（如路径寻路、AI、噪声生成）</li>
-  <li>网络请求、数据库访问</li>
-  <li>文件读写、图片压缩等I/O操作</li>
-  <li>海量数据处理（如ECS中的大量实体模型）
-    <blockquote>
-      <p>主线程外只用于非Unity API的计算，不允许访问Unity对象，执行完毕后记得退回主线程</p>
-    </blockquote>
-  </li>
-</ul>
-
-<h3 id="unity引擎内部是多线程的">Unity引擎内部是多线程的</h3>
-<p>虽热大多数逻辑跑在主线程，但Unity引擎内部会使用多线程来提升性能</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>功能</th>
-      <th>是否多线程</th>
       <th>说明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>PhysX 物理引擎</td>
-      <td>多线程</td>
-      <td>Unity 会自动并行化处理</td>
+      <td><code class="language-plaintext highlighter-rouge">Vector2</code>, <code class="language-plaintext highlighter-rouge">Vector3</code>, <code class="language-plaintext highlighter-rouge">Vector4</code></td>
+      <td>表示二维/三维/四维向量</td>
     </tr>
     <tr>
-      <td>Audio 音频系统</td>
-      <td>多线程</td>
-      <td>音频解码、播放管理在后台</td>
+      <td><code class="language-plaintext highlighter-rouge">Quaternion</code></td>
+      <td>四元数，表示旋转</td>
     </tr>
     <tr>
-      <td>渲染管线（SRP）</td>
-      <td>多线程</td>
-      <td>在某些平台支持多线程提交渲染指令</td>
+      <td><code class="language-plaintext highlighter-rouge">Matrix4x4</code></td>
+      <td>4×4 矩阵，常用于转换</td>
     </tr>
     <tr>
-      <td>Animation 系统</td>
-      <td>多线程（部分）</td>
-      <td>有些姿态计算在 Job 系统中进行</td>
+      <td><code class="language-plaintext highlighter-rouge">Bounds</code></td>
+      <td>包围盒（中心+尺寸）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ray</code>, <code class="language-plaintext highlighter-rouge">RaycastHit</code></td>
+      <td>射线检测相关类型</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Plane</code></td>
+      <td>表示一个无限平面</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Rect</code></td>
+      <td>二维矩形区域</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Color</code>, <code class="language-plaintext highlighter-rouge">Color32</code></td>
+      <td>表示颜色（线性空间和 sRGB）</td>
     </tr>
   </tbody>
-</table>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[Unity中的线程机制和使用方式，包括： Unity的线程模型概览 Unity API与线程限制 在Unity中使用线程的四种方式（Thread/Task/Job System/DOTS） 回到主线程的方法]]></summary></entry><entry><title type="html">Unity NetWork</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork.html" rel="alternate" type="text/html" title="Unity NetWork" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity NetWork" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">TileMap</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap.html" rel="alternate" type="text/html" title="TileMap" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><category term="Unity Component" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Terrain</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain.html" rel="alternate" type="text/html" title="Terrain" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain.html"><![CDATA[<p>在Unity中，Terrain是一个专门用于制作大规模、自然风格场景的强大工具</p>
+</table>
+
+<h4 id="vector2--vector3--vector4"><strong>Vector2 &amp; Vector3 &amp; Vector4</strong></h4>
+<p>它们是Unity提供的三个核心向量类型，广泛用于位置、方向、速度、缩放、颜色等各种场景</p>
+
+<h5 id="基本定义">基本定义</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>向量类型</th>
+      <th>维度</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Vector2</code></td>
+      <td>2D 向量，包含 <code class="language-plaintext highlighter-rouge">x</code>, <code class="language-plaintext highlighter-rouge">y</code></td>
+      <td>用于 2D 空间中的位置、速度等</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
+      <td>3D 向量，包含 <code class="language-plaintext highlighter-rouge">x</code>, <code class="language-plaintext highlighter-rouge">y</code>, <code class="language-plaintext highlighter-rouge">z</code></td>
+      <td>用于 3D 空间中的大多数情况</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Vector4</code></td>
+      <td>4D 向量，包含 <code class="language-plaintext highlighter-rouge">x</code>, <code class="language-plaintext highlighter-rouge">y</code>, <code class="language-plaintext highlighter-rouge">z</code>, <code class="language-plaintext highlighter-rouge">w</code></td>
+      <td>用于更高级的计算，如齐次坐标、shader 编程</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Vector2（二维向量）</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector2</span> <span class="n">position</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector2</span><span class="p">(</span><span class="m">1.5f</span><span class="p">,</span> <span class="m">3.0f</span><span class="p">);</span>
+</code></pre></div></div>
+<p>常见用途：</p>
+<ul>
+  <li>2D游戏中的对象位置、速度、加速度等</li>
+  <li>屏幕空间坐标（如UI坐标）</li>
+  <li>纹理坐标（UV mapping）</li>
+</ul>
+
+<p><strong>Vector3（三维向量）</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector3</span> <span class="n">direction</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0f</span><span class="p">,</span> <span class="m">1f</span><span class="p">,</span> <span class="m">0f</span><span class="p">);</span> <span class="c1">//向上</span>
+<span class="n">transform</span><span class="p">.</span><span class="n">position</span> <span class="p">+=</span> <span class="n">direction</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span><span class="p">;</span>
+</code></pre></div></div>
+<p>常见用途：</p>
+<ul>
+  <li>3D对象的位置、方向、缩放</li>
+  <li>物理运动（速度、加速度）</li>
+  <li>相机方向、光照方向</li>
+</ul>
+
+<p><strong>Vector3常用静态变量</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector3</span><span class="p">.</span><span class="n">zero</span>      <span class="c1">// (0, 0, 0)</span>
+<span class="n">Vector3</span><span class="p">.</span><span class="n">one</span>       <span class="c1">// (1, 1, 1)</span>
+<span class="n">Vector3</span><span class="p">.</span><span class="n">up</span>        <span class="c1">// (0, 1, 0)</span>
+<span class="n">Vector3</span><span class="p">.</span><span class="n">down</span>      <span class="c1">// (0, -1, 0)</span>
+<span class="n">Vector3</span><span class="p">.</span><span class="n">left</span>      <span class="c1">// (-1, 0, 0)</span>
+<span class="n">Vector3</span><span class="p">.</span><span class="n">right</span>     <span class="c1">// (1, 0, 0)</span>
+<span class="n">Vector3</span><span class="p">.</span><span class="n">forward</span>   <span class="c1">// (0, 0, 1)</span>
+<span class="n">Vector3</span><span class="p">.</span><span class="n">back</span>      <span class="c1">// (0, 0, -1)</span>
+</code></pre></div></div>
+
+<p><strong>Vector3静态方法</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Description</th>
+      <th>Declaration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Angel</td>
+      <td>求两向量夹角</td>
+      <td>public static float Angle(Vector3 from, Vector3 to);</td>
+    </tr>
+    <tr>
+      <td>ClampMagnitude</td>
+      <td>限制一个向量的长度，防止它超过maxLength，如果vector的长度小于等于maxLength返回原向量，否则返回一个等于maxLength的同向向量</td>
+      <td>public static Vector3 ClampMagnitude(Vector3 vector, float maxLength);</td>
+    </tr>
+    <tr>
+      <td>Cross</td>
+      <td>求叉积</td>
+      <td>public static Vector3 Cross(Vector3 lhs, Vector3 rhs);</td>
+    </tr>
+    <tr>
+      <td>Distance</td>
+      <td>求三维空间中两点的距离</td>
+      <td>public static float Distance(Vector3 point1, Vector3 point2);</td>
+    </tr>
+    <tr>
+      <td>Dot</td>
+      <td>求点乘</td>
+      <td>public static float Dot(Vector3 lhs, Vector3 rhs);</td>
+    </tr>
+    <tr>
+      <td>Lerp</td>
+      <td>求线插（不允许外推）,  t -&gt; [0, 1]</td>
+      <td>public static Vector3 Lerp(Vector3 a, Vector3 b, float t);</td>
+    </tr>
+    <tr>
+      <td>LerpUnclamped</td>
+      <td>求线插（允许外推，产生超调）</td>
+      <td>public static Vector3 LerpUnclamped(Vector3 a, Vector3 b, float t);</td>
+    </tr>
+    <tr>
+      <td>Max</td>
+      <td>返回两个向量所能组成的最大向量</td>
+      <td>public static Vector3 Max(Vector3 lhs, Vector3 rhs);</td>
+    </tr>
+    <tr>
+      <td>Min</td>
+      <td>返回最小</td>
+      <td>同上</td>
+    </tr>
+    <tr>
+      <td>MoveTowards</td>
+      <td>以恒定速度向目标位置靠近，直到到达</td>
+      <td>public static Vector3 MoveTowards(Vector3 current, Vector3 target, float maxDistanceDelta);</td>
+    </tr>
+    <tr>
+      <td>Normalize</td>
+      <td>归一化</td>
+      <td>public void Normalize();</td>
+    </tr>
+    <tr>
+      <td>OrthoNormalize</td>
+      <td>正交归一化</td>
+      <td>public static void OrthoNormalize(ref Vector3 normal, ref Vector3 tangent);  public static void OrthoNormalize(ref Vector3 normal, ref Vector3 tangent, ref Vector3 binormal);</td>
+    </tr>
+    <tr>
+      <td>Project</td>
+      <td>投影到onNormal</td>
+      <td>public static Vector3 Project(Vector3 vector, Vector3 onNormal);</td>
+    </tr>
+    <tr>
+      <td>ProjectOnPlane</td>
+      <td>投影到planeNormal</td>
+      <td>public static Vector3 ProjectOnPlane(Vector3 vector, Vector3 planeNormal);</td>
+    </tr>
+    <tr>
+      <td>Reflect</td>
+      <td>反射线，inNormal是法线</td>
+      <td>public static Vector3 Reflect(Vector3 inDirection, Vector3  inNormal);</td>
+    </tr>
+    <tr>
+      <td>RotateTowards</td>
+      <td>逐步旋转一个方向向量朝向另一个方向向量，maxRadiansDelta是每次最大允许旋转的角度（弧度），maxMagnitudeDelta是每次允许变化的向量长度</td>
+      <td>public static Vector3 RotateTowards(Vector3 current, Vector3 target, float maxRadiansDelta, float maxMagnitudeDelta);</td>
+    </tr>
+    <tr>
+      <td>Scale</td>
+      <td>两个向量分量相乘组成新向量</td>
+      <td>public static Vector3 Scale(Vector3 a, Vector3 b);</td>
+    </tr>
+    <tr>
+      <td>SignedAngle</td>
+      <td>求带符号夹角，axis是用于确定旋转方向的轴，正值是绕着axis左旋，负值是右旋</td>
+      <td>public static float SignedAngle(Vector3 from, Vector3 to, Vector3 axis);</td>
+    </tr>
+    <tr>
+      <td>Slerp</td>
+      <td>球面插值，球面为a，b点所在大圆所在的球的球面，插值在a，b点所在的圆上取</td>
+      <td>public static Vector3 Slerp(Vector3 a, Vector3 b, float t);</td>
+    </tr>
+    <tr>
+      <td>SlerpUnclamped</td>
+      <td>球面插值（允许外推，产生超调）</td>
+      <td>public static Vector3 SlerpUnclamped(Vector3 a, Vector3 b, float t);</td>
+    </tr>
+    <tr>
+      <td>SmoothDamp</td>
+      <td>平滑插值； ref currentVelocity当前速度向量；smoothTime到达目标值所需的预期时间，越小越快越敏感；maxSpeed最大速度（可选）；deltaTime每帧间隔时间（可选）</td>
+      <td>public static Vector3 SmoothDamp(Vector3 current, Vector3 target, ref Vector3 currentVelocity, float smoothTime, float maxSpeed = Mathf.Infinity, float deltaTime = Time.deltaTime);</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="https://docs.unity3d.com/ScriptReference/Vector3.html">Unity官方文档（Vector3）</a></p>
+
+<p><strong>Vector4（四维向量）</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector4</span> <span class="n">v</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector4</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">);</span>
+</code></pre></div></div>
+<p>常见用途：</p>
+<ul>
+  <li>齐次坐标（矩阵变换常用）</li>
+  <li>传递颜色（Color在底层可能是Vector4(r,g,b,a)）</li>
+  <li>shader开发中用于高级数学运算（如平面方程、切线空间等）</li>
+</ul>
+
+<h4 id="quaternion--euler-angles">Quaternion &amp; Euler Angles</h4>
+<p>在Unity中，Quaternion是用来表示旋转的核心数学结构，它避免了Euler Angles的万向节死锁问题，并且适用于平滑插值和复杂3D计算</p>
+
+<h5 id="quaternion">Quaternion</h5>
+<p>Quaternion表示绕某一条单位轴旋转一个角度的这个过程，简单来说：表示一个旋转</p>
+
+<p><strong>数学本质</strong>
+四元数是一种复数扩展：</p>
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">Q</span> <span class="p">=</span> <span class="s">w + xi + yj + zk</span>
+</code></pre></div></div>
+<p>在Unity中被表示为：</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">struct</span> <span class="nc">Quaternion</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">float</span> <span class="n">x</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">float</span> <span class="n">y</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">float</span> <span class="n">z</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">float</span> <span class="n">w</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">x, y, z</code>表示旋转轴的向量部分（方向）<br />
+<code class="language-plaintext highlighter-rouge">w</code>表示旋转的角度部分(cos(θ/2))</p>
+
+<p>四元数不是角度 + 轴直接拼成的，是通过以下方式构造：</p>
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">x</span><span class="p">=</span><span class="s">axis.x⋅sin(θ/2)</span>
+<span class="py">y</span><span class="p">=</span><span class="s">axis.y⋅sin(θ/2)</span>
+<span class="py">z</span><span class="p">=</span><span class="s">axis.z⋅sin(θ/2)</span>
+<span class="py">w</span><span class="p">=</span><span class="s">cos(θ/2)</span>
+</code></pre></div></div>
+<p>其中<code class="language-plaintext highlighter-rouge">axis</code>是归一化的旋转轴向量<br />
+<code class="language-plaintext highlighter-rouge">θ</code>是旋转角度（弧度）</p>
+
+<p>你可以把四元数想象成一个旋转操作，它编码了两个信息：</p>
+<ul>
+  <li>1.绕哪个轴旋转</li>
+  <li>2.旋转多少角度</li>
+</ul>
+
+<p><strong>Quaternion用途</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>用途场景</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>表示物体旋转</td>
+      <td>替代 <code class="language-plaintext highlighter-rouge">transform.rotation = new Vector3(...)</code>，更稳定</td>
+    </tr>
+    <tr>
+      <td>做平滑旋转（Slerp/Lerp）</td>
+      <td>保持插值平滑、不跳跃、不变形</td>
+    </tr>
+    <tr>
+      <td>实现摄像机跟随</td>
+      <td>平滑跟随目标的朝向</td>
+    </tr>
+    <tr>
+      <td>构建旋转动画</td>
+      <td>可结合 Timeline、Animator 使用</td>
+    </tr>
+    <tr>
+      <td>控制角色面向</td>
+      <td>看向目标、追踪方向等</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Quaternion API</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法/属性</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Quaternion.identity</code></td>
+      <td>零旋转（即不旋转）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Quaternion.Euler(x, y, z)</code></td>
+      <td>从欧拉角创建旋转</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Quaternion.LookRotation(dir)</code></td>
+      <td>让对象朝向某个方向</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Quaternion.Angle(a, b)</code></td>
+      <td>计算两个旋转之间的角度</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Quaternion.AngleAxis(float angle, Vector3 axis)</code></td>
+      <td>围绕axis旋转angle度</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Quaternion.Slerp(a, b, t)</code></td>
+      <td>在两个旋转之间平滑插值（匀速）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Quaternion.Lerp(a, b, t)</code></td>
+      <td>线性插值旋转（不推荐用于大角度）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Quaternion.RotateTowards(a, b, maxDegreesDelta)</code></td>
+      <td>限制最大旋转角度的平滑旋转</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">* 运算符</code>（例如 <code class="language-plaintext highlighter-rouge">rot * vector</code>）</td>
+      <td>将旋转应用于向量，旋转该方向向量</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>构建方式</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Quaternion</span> <span class="n">q</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">AngleAxis</span><span class="p">(</span><span class="m">90</span><span class="p">,</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">up</span><span class="p">);</span> <span class="c1">//绕Y轴旋转90°</span>
+</code></pre></div></div>
+<p>使用欧拉角构建：</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Quaternion</span> <span class="n">q</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">Euler</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span> <span class="c1">//XYZ分别是绕X Y Z轴的角度</span>
+</code></pre></div></div>
+<h5 id="euler-angles">Euler Angles</h5>
+
+<p><strong>欧拉角的定义</strong><br />
+欧拉角是用三个角度来描述3D空间中的一个旋转变换，每个角度表示围绕一个坐标轴的旋转量。<br />
+在Unity中，欧拉角就是一个<code class="language-plaintext highlighter-rouge">Vector3</code></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transform</span><span class="p">.</span><span class="n">eulerAngles</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">30</span><span class="p">,</span> <span class="m">45</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
+</code></pre></div></div>
+<p>这表示：</p>
+<ul>
+  <li>绕X轴旋转30°</li>
+  <li>然后绕Y轴旋转45°</li>
+  <li>然后绕Z轴旋转0°
+    <blockquote>
+      <p>欧拉角的本质是「分轴顺序旋转」，三个角度 + 一个旋转顺序（X -&gt; Y -&gt; Z），顺序不能出现问题，否则结果不同</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><strong>欧拉角的特点</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>特点</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>直观</td>
+      <td>直接写角度，容易理解和调试</td>
+    </tr>
+    <tr>
+      <td>顺序敏感</td>
+      <td>顺序不同，结果不同（ZYX ≠ XYZ）</td>
+    </tr>
+    <tr>
+      <td>有死锁</td>
+      <td>当某个轴旋转到特定位置时，另一个轴“失效”——<strong>万向节死锁（Gimbal Lock）</strong></td>
+    </tr>
+    <tr>
+      <td>插值难</td>
+      <td>在两个角度之间插值时可能会突然“跳动”或绕远路</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>欧拉角适用于：</strong></p>
+<ul>
+  <li>手动设置角度</li>
+  <li>UI显示</li>
+  <li>编辑器中拖拽角度时</li>
+  <li>简单旋转动画、摄像机控制</li>
+</ul>
+
+<p><strong>实际旋转逻辑中，建议使用Quaternion</strong></p>
+
+<p><strong>Euler Angels和Quaternion的关系</strong><br />
+Unity内部几乎不直接用欧拉角进行旋转运算，它会自动把你设置的欧拉角转换为四元数</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transform</span><span class="p">.</span><span class="n">eulerAngles</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
+<span class="c1">// 实际上自动转换为：</span>
+<span class="n">transform</span><span class="p">.</span><span class="n">rotation</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">Euler</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>欧拉角插值出现的问题</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector3</span> <span class="k">from</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
+<span class="n">Vector3</span> <span class="n">to</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">360</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
+
+<span class="n">Vector3</span> <span class="n">result</span> <span class="p">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="nf">Lerp</span><span class="p">(</span><span class="k">from</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="m">0.5f</span><span class="p">);</span> <span class="c1">//会插值到180°</span>
+</code></pre></div></div>
+<p>实际上，从0°到360°最短路径时0°，这就是欧拉角插值跳变的问题<br />
+使用四元数可以避免</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Quaternion</span> <span class="n">q1</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">Euler</span><span class="p">(</span><span class="k">from</span><span class="p">);</span>
+<span class="n">Quaternion</span> <span class="n">q2</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">Euler</span><span class="p">(</span><span class="n">to</span><span class="p">);</span>
+
+<span class="n">Quaternion</span> <span class="n">qResult</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">Slerp</span><span class="p">(</span><span class="n">q1</span><span class="p">,</span> <span class="n">q2</span><span class="p">,</span> <span class="m">0.5f</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>Euler Angles和Quaternion的转换</strong><br />
+欧拉角 -&gt; 四元数</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Quaternion</span> <span class="n">q</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">Euler</span><span class="p">(</span><span class="m">30</span><span class="p">,</span> <span class="m">45</span><span class="p">,</span> <span class="m">60</span><span class="p">);</span>
+</code></pre></div></div>
+<p>四元数 -&gt; 欧拉角</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector3</span> <span class="n">euler</span> <span class="p">=</span> <span class="n">q</span><span class="p">.</span><span class="n">eulerAngles</span><span class="p">;</span>
+</code></pre></div></div>
+<blockquote>
+  <p>四元数本身不会存储旋转顺序和原始角度，这个反转换可能会出现不寻常的角度，比如-180°、350°等</p>
+</blockquote>
+
+<p>欧拉角和四元数的关系：三次独立的XYZ轴旋转（Euler Angle）相当于对于某个特定轴旋转特定角度（Quaternion）<br />
+<strong>深入原理</strong>
+给定欧拉角 (𝛼, 𝛽, 𝛾)，表示绕 X、Y、Z 旋转，四元数变换公式如下（XYZ顺序）：</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Quaternion</span> <span class="n">q</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">Euler</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">);</span>
+</code></pre></div></div>
+<p>等价于</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Quaternion</span> <span class="n">qx</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">AngleAxis</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">right</span><span class="p">);</span>
+<span class="n">Quaternion</span> <span class="n">qy</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">AngleAxis</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">up</span><span class="p">);</span>
+<span class="n">Quaternion</span> <span class="n">qz</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">AngleAxis</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">forward</span><span class="p">);</span>
+<span class="n">Quaternion</span> <span class="n">q</span> <span class="p">=</span> <span class="n">qy</span> <span class="p">*</span> <span class="n">qx</span> <span class="p">*</span> <span class="n">qz</span><span class="p">;</span> <span class="c1">//组合旋转，顺序重要；Unity为左乘</span>
+</code></pre></div></div>
+
+<p><strong>万向节死锁（Gimbal Lock）</strong><br />
+Gimbal Lock是指使用欧拉角进行三维旋转时，当两个旋转轴重合，导致自由度从3变成2，某个方向的旋转无法表达的情况<br />
+产生Gimbal Lock的核心原因是欧拉角的特性:<br />
+一组欧拉角描述一个旋转过程：即，围绕每个轴的旋转角度和围绕每个轴旋转的顺序，顺序很重要，不同的顺序会带来不同的结果
+Gimbal Lock产生的核心是：先执行旋转的轴会带动后执行旋转的轴转动，即产生新轴；但后执行旋转的轴不会带动先执行旋转的轴转动，即一个轴旋转过后就不会出现新轴了，这就会出现轴重合问题，即导致万向节死锁的产生<br />
+<strong>数学本质是矩阵乘法的非交换性</strong><br />
+旋转在数学上是用矩阵表示的：</p>
+<ul>
+  <li>旋转操作使用矩阵乘法实现的</li>
+  <li>矩阵乘法不满足交换律，也就是说：Rx × Ry != Ry × Rx</li>
+</ul>
+
+<p><strong>核心关键是为什么后旋转的轴不能带动先旋转的轴？</strong><br />
+这个问题涉及到旋转的执行顺序本质上是“嵌套变换”，而不是“同步协商”的。这就像流水线的工序，是不可逆和不可交错的<br />
+核心结论：<br />
+每一步旋转都是在“当前局部坐标系”下完成的，而不是回头修改前面坐标系的历史状态<br />
+后面的旋转只是在前面旋转结果基础上叠加，它并不会“回头影响”之前已经旋转过的坐标系<br />
+举个例子：
+假设做一个蛋糕：<br />
+第一步：打鸡蛋  <br />
+第二步：加牛奶<br />
+第三步：搅拌<br />
+现在你问：为什么我搅拌的时候不能回头改变我打鸡蛋这个过程？<br />
+因为：打鸡蛋已经做完了，是个不可逆的状态变换，你在搅拌的时候，只能处理“鸡蛋 + 牛奶”的混合物，不能改变已经打完的蛋</p>
+
+<p><strong>数学视角：矩阵乘法是方向性的</strong>
+旋转是通过矩阵来表示的，顺序matters： <code class="language-plaintext highlighter-rouge">FinalRotation = Rz · Ry · Rx</code><br />
+你先执行Rx，然后再执行Ry,再执行Rz<br />
+每个旋转操作都是将当前状态乘上一个旋转矩阵<br />
+一旦Rx被应用，坐标系就已经变了<br />
+之后的Ry是在这个变了的坐标系下进行的<br />
+Ry不会也无法回头修改Rx的效果<br />
+因为矩阵乘法不是可交换的，所以这个顺序是“单向嵌套”，不是“双向影响”</p>
+
+<p><strong>欧拉角是旋转变换，每次旋转变换都是叠加了上次旋转的状态后再进行的，也就是说，虽然每次变换都是独立的，但都要经历从初始状态按顺序旋转，绕轴旋转角度达到目标状态这一系列流程，这就把时序包含在其中了</strong><br />
+<strong>初始状态是（0，0，0）</strong></p>
+
+<p><strong>为什么看到的变换是连续的</strong><br />
+欧拉角变换虽然顺序嵌套，但它们构成的是一个连续函数映射<br />
+欧拉角 → 四元数 → 变换矩阵 → 渲染出模型的姿态
+整个链条中：</p>
+
+<p>欧拉角：你手动输入的 (X, Y, Z) 是连续的（例如你拖动滑块）</p>
+
+<p>四元数：Unity 把欧拉角转换成一个四元数，这是一个连续光滑的旋转表示</p>
+
+<p>矩阵：四元数再转成 3×3 旋转矩阵，依然是平滑的</p>
+
+<p>模型：在世界中展示的姿态是自然旋转、连贯变化的</p>
+
+<p>所以你看到的旋转是连续的、平滑的。</p>
+
+<p><strong>哪些地方是不连续的</strong><br />
+1.万向节死锁，当某个周旋转到90°，两个轴重合，自由度减少，Unity为了保持“姿态”，可能会自动调整其他轴的值，此时Rotation的值再Inspector中跳变，但物体并没有跳<br />
+2.四元数存在加减号不唯一（180°对称）问题，一个方向可以由两个四元数表示：q和-q，它们作用在物体上是一样的，Unity在背后自动选择最短路径，所以视觉上依旧是连续旋转路径上的最短旋转</p>
+
+<h3 id="2游戏对象相关">2.游戏对象相关</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GameObject</code></td>
+      <td>场景中所有对象的基本单元</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Component</code></td>
+      <td>所有组件的基类</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Transform</code></td>
+      <td>表示物体的位置、旋转、缩放</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">MonoBehaviour</code></td>
+      <td>用户自定义脚本的基类</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ScriptableObject</code></td>
+      <td>可创建的资产类，用于数据管理</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Object</code></td>
+      <td>Unity 所有对象的基类（包括资源）</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="3图形和渲染">3.图形和渲染</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Mesh</code>, <code class="language-plaintext highlighter-rouge">MeshRenderer</code></td>
+      <td>网格和其渲染组件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Material</code></td>
+      <td>材质资源</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Shader</code></td>
+      <td>控制材质渲染效果的程序</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Texture</code>, <code class="language-plaintext highlighter-rouge">Texture2D</code>, <code class="language-plaintext highlighter-rouge">RenderTexture</code></td>
+      <td>贴图资源</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Camera</code></td>
+      <td>摄像机组件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Light</code></td>
+      <td>灯光组件</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="4物理相关">4.物理相关</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Rigidbody</code>, <code class="language-plaintext highlighter-rouge">Rigidbody2D</code></td>
+      <td>刚体，驱动物体物理行为</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Collider</code>, <code class="language-plaintext highlighter-rouge">BoxCollider</code>, <code class="language-plaintext highlighter-rouge">SphereCollider</code>, 等</td>
+      <td>碰撞器</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Physics</code>, <code class="language-plaintext highlighter-rouge">Physics2D</code></td>
+      <td>提供物理检测和操作的静态类</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Joint</code> 系列</td>
+      <td>链接两个刚体（如 HingeJoint）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ContactPoint</code></td>
+      <td>碰撞点信息结构体</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="5输入和事件">5.输入和事件</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Input</code></td>
+      <td>输入系统静态类</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">KeyCode</code></td>
+      <td>键盘按键枚举</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Touch</code>, <code class="language-plaintext highlighter-rouge">TouchPhase</code></td>
+      <td>触摸输入相关</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Event</code>, <code class="language-plaintext highlighter-rouge">EventType</code></td>
+      <td>GUI 系统事件类型</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="6资源与序列化">6.资源与序列化</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Resources</code>, <code class="language-plaintext highlighter-rouge">AssetBundle</code></td>
+      <td>资源加载管理器</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">TextAsset</code></td>
+      <td>文本资源，如 JSON、配置文件等</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SerializableAttribute</code></td>
+      <td>允许自定义类型序列化存储</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="7uiugui">7.UI（UGUI）</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Canvas</code>, <code class="language-plaintext highlighter-rouge">CanvasRenderer</code></td>
+      <td>UI 根组件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">RectTransform</code></td>
+      <td>用于 UI 布局的 Transform</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Image</code>, <code class="language-plaintext highlighter-rouge">Text</code>, <code class="language-plaintext highlighter-rouge">Button</code>, <code class="language-plaintext highlighter-rouge">Slider</code> 等</td>
+      <td>基础 UI 组件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">EventSystem</code></td>
+      <td>管理 UI 输入事件</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="8时间协程与生命周期">8.时间、协程与生命周期</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Time</code></td>
+      <td>时间相关（如 deltaTime、timeScale）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">WaitForSeconds</code>, <code class="language-plaintext highlighter-rouge">WaitUntil</code></td>
+      <td>协程等待辅助类</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Coroutine</code></td>
+      <td>协程对象类型</td>
+    </tr>
+  </tbody>
+</table>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[Unity内建类型]]></summary></entry><entry><title type="html">Unity Profiler</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler.html" rel="alternate" type="text/html" title="Unity Profiler" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Tool" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Unity NetWork</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork.html" rel="alternate" type="text/html" title="Unity NetWork" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity NetWork" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">TileMap</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap.html" rel="alternate" type="text/html" title="TileMap" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><category term="Unity Component" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Navigation System</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Navigation.html" rel="alternate" type="text/html" title="Navigation System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Navigation</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Navigation.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><category term="AI" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Terrain</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain.html" rel="alternate" type="text/html" title="Terrain" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain.html"><![CDATA[<p>在Unity中，Terrain是一个专门用于制作大规模、自然风格场景的强大工具</p>
 
 <h2 id="什么是terrain">什么是Terrain</h2>
 <p>Terrain是Unity提供的一个内置组件，用于在场景中创建可编辑的地形<br />
@@ -540,7 +1008,7 @@ ECS配合Job System形成完整的数据驱动架构<br />
 <ul>
   <li>如果你将对象标记为静态，会自动启用Lightmap烘焙支持</li>
   <li>静态光照适用于不动的建筑、地面等</li>
-</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Renderer" /><category term="Graphic" /><summary type="html"><![CDATA[Unity中的Mesh（网格）是一切3D模型、地形、角色、道具、甚至某些UI元素的几何基础，是“物体的骨架” 包含顶点、面、法线、UV、颜色等数据，是3D图形渲染的核心单位]]></summary></entry><entry><title type="html">Navigation System</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Navigation.html" rel="alternate" type="text/html" title="Navigation System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Navigation</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Navigation.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><category term="AI" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Layout</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layout.html" rel="alternate" type="text/html" title="Layout" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layout</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layout.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Import Assets</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets.html" rel="alternate" type="text/html" title="Import Assets" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets.html"><![CDATA[<p>Unity支持多种格式的资源文件，并能自动识别并进行初步处理</p>
+</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Renderer" /><category term="Graphic" /><summary type="html"><![CDATA[Unity中的Mesh（网格）是一切3D模型、地形、角色、道具、甚至某些UI元素的几何基础，是“物体的骨架” 包含顶点、面、法线、UV、颜色等数据，是3D图形渲染的核心单位]]></summary></entry><entry><title type="html">Import Assets</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets.html" rel="alternate" type="text/html" title="Import Assets" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets.html"><![CDATA[<p>Unity支持多种格式的资源文件，并能自动识别并进行初步处理</p>
 
 <h2 id="资源导入基本流程">资源导入基本流程</h2>
 <p><strong>1.将资源文件拖入<code class="language-plaintext highlighter-rouge">Assets</code>目录中（Unity会自动导入）</strong><br />

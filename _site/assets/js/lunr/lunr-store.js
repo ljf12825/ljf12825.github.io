@@ -216,8 +216,8 @@ var store = [{
         "teaser": null
       },{
         "title": "Frame",
-        "excerpt":"在Unity中，Frame（帧）是游戏运行的基本时间单位   什么是Frame     Frame：指游戏每渲染并更新一次画面所经历的完整周期 一个Frame包含了物理模拟、逻辑更新、渲染提交等多个阶段         游戏每秒运行多个帧，成为FPS（Frame Per Second），帧率越高越流畅     如果帧率是60FPS，表示每秒执行60次完整的Frame逻辑      Frame的生命周期  [Input] -&gt; [Physics] -&gt; [Update] -&gt; [AI/Animator] -&gt; [LateUpdate] -&gt; [Rendering] -&gt; [Present]  详见Scripts   不同帧的分类                  帧类型       描述                       逻辑帧（Update 帧）       每帧都会执行的脚本逻辑                 物理帧（FixedUpdate）       固定时间调用一次，与帧率无关                 渲染帧       Unity 渲染一次画面           Frame与多线程   Frame性能调优   帧的底层原理   Unity的高效框架优化  ","categories": ["笔记"],
-        "tags": ["Unity"],
+        "excerpt":"在Unity中，Frame（帧）是游戏运行的基本时间单位 什么是Frame Frame：指游戏每渲染并更新一次画面所经历的完整周期 一个Frame包含了物理模拟、逻辑更新、渲染提交等多个阶段 游戏每秒运行多个帧，成为FPS（Frame Per Second），帧率越高越流畅 如果帧率是60FPS，表示每秒执行60次完整的Frame逻辑 Frame的生命周期 [Input] -&gt; [Physics] -&gt; [Update] -&gt; [AI/Animator] -&gt; [LateUpdate] -&gt; [Rendering] -&gt; [Present] 详见Scripts 不同帧的分类 帧类型 描述 逻辑帧（Update 帧） 每帧都会执行的脚本逻辑 物理帧（FixedUpdate） 固定时间调用一次，与帧率无关 渲染帧 Unity 渲染一次画面 Frame与多线程 Unity中每一帧可以大致分为如下几个阶段： Frame 开始 │ ├─ Script Update（MonoBehaviour Update） ├─ FixedUpdate（每 N 帧触发） ├─ Animation Update...","categories": ["笔记"],
+        "tags": ["Unity","Renderer","Graphic"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Frame.html",
         "teaser": null
       },{
@@ -279,6 +279,12 @@ var store = [{
         "excerpt":" ","categories": ["笔记"],
         "tags": ["Unity","Unity Tool"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler.html",
+        "teaser": null
+      },{
+        "title": "Unity Performance Tuning",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity"],
+        "url": "/posts/2025-06-13-Unity-Performance-Tuning/",
         "teaser": null
       },{
     "title": "About",
