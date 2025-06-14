@@ -198,8 +198,8 @@ var store = [{
         "teaser": null
       },{
         "title": "UI System",
-        "excerpt":" ","categories": ["笔记"],
-        "tags": ["Unity","Unity System"],
+        "excerpt":"Unity UI系统是Unity引擎内置的用于构建用户界面的工具集。它基于Canvas（画布）架构，支持制作按钮、文本、图片、滑动条、输入框等各种交互元素 UGUI和NGUI 特性 UGUI（Unity GUI） NGUI（Next-Gen UI） 开发方 Unity 官方 第三方（Tasharen Entertainment） 引入版本 Unity 4.6+ 内置 Unity 3.x 时期的主流 UI 插件 集成性 原生集成，支持 Canvas、EventSystem、Animation 等 插件形式，较早期版本需手动集成 渲染系统 使用 Unity 内部渲染系统（Canvas） 自定义渲染系统，Draw Call 优化依赖面板拆分 编辑器支持 所见即所得，Scene View 拖拽 UI 早期需要反复预览，后期版本改善较多 多分辨率适配 有自动布局系统、Anchor、RectTransform 依赖自定义 Anchor 系统 动画支持 支持 Unity Animation 和...","categories": ["笔记"],
+        "tags": ["Unity","Unity System","Render"],
         "url": "/posts/2025-06-07-UI-System/",
         "teaser": null
       },{
@@ -285,6 +285,12 @@ var store = [{
         "excerpt":" ","categories": ["笔记"],
         "tags": ["Unity"],
         "url": "/posts/2025-06-13-Unity-Performance-Tuning/",
+        "teaser": null
+      },{
+        "title": "Behaviour Tree",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity System","AI"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Behaviour-Tree.html",
         "teaser": null
       },{
     "title": "About",
