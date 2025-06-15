@@ -132,7 +132,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Gizmos",
-        "excerpt":" ","categories": ["笔记"],
+        "excerpt":"Gizmos是一种用于在Scene视图中可视化调试信息的工具，常用于开发阶段来辅助设计和调试，但不会在游戏运行时显示在Game视图中 Gizmos的作用 Gizmos主要用于以下目的： 可视化对象的范围（如碰撞体、攻击范围、视野等） 表示路径、方向、目标点等 调试数据结构（如八叉树、导航网格等） 可视化音效区或光源影响范围 使用方式 可以在脚本中通过OnDrawGizmos()或OnDrawGizmosSelected()函数来自定义Gizmo的绘制 1.OnDrawGizmos() 无论是否选中物体，都会绘制 void OnDrawGizmos() { Gizmos.color = Color.yellow; Gizmos.DrawWireSphere(transform.position, 1f)l } 2.OnDrawGizmosSelected() 只有在选中该GameObject时才会绘制 void OnDrawGizmosSelected() { Gizmos.color = Color.red; Gizmos.DrawWireCube(transform.position, Vector3.one * 2); } Tips Gizmos只在Scene视图中起作用，不会影响实际游戏运行逻辑 可以使用Handles绘制更高级的Gizmos 复杂场景可封装Gizmo可视化模块，提升调试效率 Gizmos API Static Properties 属性名 类型 说明 color Color 设置下一个 Gizmo 图形的颜色 matrix...","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Gizmos.html",
         "teaser": null
