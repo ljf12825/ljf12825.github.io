@@ -311,16 +311,670 @@ UGUI时Unity官方退出的新UI系统，功能更强大，易于扩展，且原
 <h4 id="screen-space---camera">Screen Space - Camera</h4>
 <p><img src="/assets/images/Canvas-ScreenSpace-Camera.jpg/" alt="CanvasScreenSpace-Camera" /></p>
 
+<ul>
+  <li>Render Camera：The Camera whitch will render the canvas. This is also the camera used to send events
+A Screen Space Canvas with no specified camera acts like an Overlay Canvas</li>
+</ul>
+
 <h4 id="world-space">World Space</h4>
 <p><img src="/assets/images/Canvas-WorldSpace.jpg/" alt="CanvasWorldSpace" /></p>
 
-<h3 id="canvas-scaler">Canvas Scaler</h3>
+<ul>
+  <li>Event Camera：用于处理射线点击UI的相机（通常是主摄像机），必须设置，否则点击无效</li>
+</ul>
+
+<h3 id="canvasscaler">CanvasScaler</h3>
+<p>Canvas通常会搭配CanvasScaler使用，控制UI的缩放和适配，CanvasScaler用于根据不同分辨率、屏幕尺寸，动态调整UI大小，保证UI在不同设备上的一致性</p>
+
+<h4 id="三种缩放模式">三种缩放模式</h4>
+<p>1.Constant Pixel Size（固定像素大小）</p>
+
+<p><img src="/assets/images/CanvasScaler-ConstantPixelSize.jpg/" alt="Constant Pixel Size" /></p>
+
+<ul>
+  <li>UI元素大小固定为设计时的像素值，不会随屏幕尺寸变化缩放</li>
+  <li>适合UI对像素精度要求高，不想变形的场景</li>
+  <li>缺点：不同分辨率下UI大小不一致，低分辨率屏幕上UI显得很大，高分辨率上显得很小</li>
+</ul>
+
+<p>参数：</p>
+<ul>
+  <li>Scale Factor：控制Canvas上所有UI元素的整体缩放倍数</li>
+  <li>Reference Pixels Per Unit：单位像素参考值，决定1个世界单位中包含多少个像素</li>
+</ul>
+
+<p>2.Scale With Screen Size（随屏幕尺寸缩放）</p>
+
+<p><img src="/assets/images/CanvasScaler-ScaleWithScreenSize.jpg/" alt="Scale With Screen Size" /></p>
+
+<ul>
+  <li>根据屏幕分辨率，按比例缩放UI，使得UI在不同分辨率下保持视觉一致</li>
+  <li>通过<code class="language-plaintext highlighter-rouge">Reference Resolution</code>设置参考设计分辨率</li>
+  <li>通过<code class="language-plaintext highlighter-rouge">Screen Match Mode</code>决定缩放如何适配宽高比
+    <ul>
+      <li>Match Width Or Height：在宽和高之间插值，<code class="language-plaintext highlighter-rouge">Match</code>属性控制偏重那一边（0为宽，1为高）</li>
+      <li>Expand：适配屏幕，保证UI不会裁剪，但可能留空白</li>
+      <li>Shrink：保证UI填满屏幕，可能裁剪一部分</li>
+    </ul>
+  </li>
+  <li>这是最常用的模式，推荐用于大多数UI适配</li>
+</ul>
+
+<p>3.Constant Physical Size（固定物理大小）</p>
+
+<p><img src="/assets/images/CanvasScaler-ConstantPhysicalSize.jpg/" alt="Constant Physical Size" /></p>
+
+<ul>
+  <li>UI元素在物理尺寸上保持不变（以英寸、毫米为单位），无论屏幕分辨率如何变化</li>
+  <li>依赖设备DPI（屏幕像素密度），适用于对物理尺寸有要求的UI</li>
+</ul>
+
+<p>参数：</p>
+<ul>
+  <li>Physical Unit：物理单位，告诉Unity希望使用哪种单位作为UI元素的尺寸基准
+可选项：
+    <ul>
+      <li>Points</li>
+      <li>Pixels</li>
+      <li>Millimeters</li>
+      <li>Centimeters</li>
+      <li>Inches</li>
+    </ul>
+  </li>
+  <li>Fallback Screen DPI：当Unity无法获取当前设备的DPI时，就会使用这个值来代替实际DPI</li>
+  <li>Default Sprite DPI：控制UI中Sprite贴图的物理尺寸缩放基准</li>
+</ul>
 
 <h3 id="graphic-raycaster">Graphic Raycaster</h3>
+<p>在屏幕空间内把点击（Pointer）或触摸事件，转换成UI元素的响应事件</p>
+
+<p>面板属性：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性名</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Ignore Reversed Graphics</strong></td>
+      <td>是否忽略背面 UI 图形（比如被旋转了 180° 的 UI 元素）</td>
+    </tr>
+    <tr>
+      <td><strong>Blocking Objects</strong></td>
+      <td>控制是否允许 3D/2D 物体阻挡 UI 点击（比如 3D 模型挡住了按钮）</td>
+    </tr>
+    <tr>
+      <td><strong>Blocking Mask</strong></td>
+      <td>用于限制哪些 Layer 的物体会阻挡 UI 射线</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="工作原理ui射线检测">工作原理：UI射线检测</h4>
+<p>当你点击屏幕时，Unity的Event System会：</p>
+<ul>
+  <li>发出一条射线（Ray）</li>
+  <li>交给<code class="language-plaintext highlighter-rouge">Grphic Raycaster</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Graphic Raycaster</code>会检测这条射线是否与某些UI元素相交</li>
+  <li>若相交，就触发这些元素的<code class="language-plaintext highlighter-rouge">OnPointerClick()</code>、<code class="language-plaintext highlighter-rouge">OnPointerDown()</code>、<code class="language-plaintext highlighter-rouge">OnDrag()</code>等事件</li>
+</ul>
+
+<p>要让Graphic Paycaster正常工作，必须保证：</p>
+<ul>
+  <li>Canvas上挂了<code class="language-plaintext highlighter-rouge">Graphic Raycaster</code></li>
+  <li>场景中有一个<code class="language-plaintext highlighter-rouge">Event System</code></li>
+  <li>UI元素上有<code class="language-plaintext highlighter-rouge">Graphic</code>组件（如<code class="language-plaintext highlighter-rouge">Image</code>、<code class="language-plaintext highlighter-rouge">Text</code>，才能被Raycaster检测到）</li>
+  <li>UI元素有<code class="language-plaintext highlighter-rouge">Raycast Target</code>为勾选状态</li>
+  <li>没有被<code class="language-plaintext highlighter-rouge">Canvas Group</code>阻挡（其<code class="language-plaintext highlighter-rouge">Blocks Raycasts</code>属性必须为true）</li>
+</ul>
+
+<h3 id="canvas-group">Canvas Group</h3>
+
+<p><img src="/assets/images/CanvasGroupPanel.jpg/" alt="CanvasGroupPanel" /></p>
+
+<p>控制一组UI元素的整体透明度、交互性和射线响应<br />
+用它可以实现：</p>
+<ul>
+  <li>一整个面板淡入淡出</li>
+  <li>临时禁用一组按钮</li>
+  <li>某些UI遮罩区域不响应点击</li>
+</ul>
+
+<h4 id="属性">属性</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性名</th>
+      <th>类型</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Alpha</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code> (0 ~ 1)</td>
+      <td>控制透明度，0 = 全透明，1 = 不透明。会影响 <strong>UI 的视觉透明</strong> 和 <strong>交互性（如果 Block Raycasts = true）</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Interactable</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>是否允许子元素响应交互事件（如点击 Button）</td>
+    </tr>
+    <tr>
+      <td><strong>Blocks Raycasts</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>是否拦截 UI 射线，决定子元素是否能被点击、拖动等</td>
+    </tr>
+    <tr>
+      <td><strong>Ignore Parent Groups</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>是否忽略父级 Canvas Group 的控制（<strong>重要属性</strong>）</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="canvas的层级关系">Canvas的层级关系</h3>
+<p>Unity允许UI层级中存在多个Canvas组件，这时，Canvas本身就能作为字节点存在，形成嵌套结构</p>
+
+<ul>
+  <li>子Canvas布置主Canvas的一部分，它是一个“独立渲染单元”</li>
+  <li>每个Canvas都是一个独立的渲染批次（Draw Call）</li>
+  <li>子Canvas不会因为父Canvas中其他UI元素变化而重绘，反之亦然</li>
+</ul>
+
+<h4 id="为什么要用子canvas">为什么要用子Canvas</h4>
+<p>子Canvas主要用于优化性能和分离逻辑</p>
+
+<h5 id="性能优化">性能优化</h5>
+<blockquote>
+  <p>如果你有一个排行榜界面，只有当排行榜打开时才需要刷新内容，其他UI不变，这可以这样：</p>
+  <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">Canvas</span><span class="o">(</span><span class="nt">主UI</span><span class="o">)</span>
+<span class="o">|</span><span class="err">——</span><span class="nt">背景UI</span><span class="o">(</span><span class="nt">静态</span><span class="o">)</span>
+<span class="o">|</span><span class="err">——</span><span class="nt">Canvas</span><span class="o">(</span><span class="nt">排行榜</span><span class="o">)</span> <span class="o">&lt;</span><span class="nt">-</span> <span class="nt">单独Canvas</span><span class="err">，</span><span class="nt">打开时才激活和更新</span>
+</code></pre></div>  </div>
+  <p>这样排行榜刷新不会引起整个主UI Canvas的重建批次</p>
+</blockquote>
+
+<h5 id="ui分区逻辑清晰">UI分区逻辑清晰</h5>
+<blockquote>
+  <p>把HUD、弹窗、系统提示各放到子Canvas中，方便管理和控制层级、显隐、动画等</p>
+</blockquote>
+
+<h4 id="父子canvas的排序--显示顺序">父子Canvas的排序 &amp; 显示顺序</h4>
+<h5 id="排序层控制sorting-layer--order-in-layer">排序层控制（Sorting Layer + Order in Layer）</h5>
+<p>每个Canvas都有：</p>
+<ul>
+  <li>Sorting Layer（图层）</li>
+  <li>Order in Layer（在该图层的顺序）
+这两个参数决定Canvas之间的渲染先后顺序，数值越高越在前，越晚渲染
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">Canvas HUD(Sorting Layer</span><span class="pi">:</span> <span class="s">UI, Order</span><span class="err">:</span> <span class="s">0)</span>
+<span class="na">Canvas Popup(Sorting Layer</span><span class="pi">:</span> <span class="s">UI, Order</span><span class="err">:</span> <span class="s">10)</span>
+</code></pre></div>    </div>
+    <p>Popup会在HUD上方显示，即使它是子物体也一样</p>
+  </li>
+</ul>
+
+<h4 id="recttransform父子关系的影响">RectTransform父子关系的影响</h4>
+<ul>
+  <li>子UI元素会继承父节点的位置、旋转、缩放等变换</li>
+  <li>子UI的位置是相对于父节点的（本地坐标）</li>
+  <li>适用于做面板嵌套、按钮列表、滑动区域等结构</li>
+</ul>
+
+<h3 id="canvas性能">Canvas性能</h3>
+<ul>
+  <li>尽量减少Canvas数量，因为每个Canvas都是单独的渲染批次</li>
+  <li>将频繁变动的UI元素放到单独的Canvas，避免整个UI重绘</li>
+  <li>使用Canvas Group控制UI整体显示和透明度，可以减少重绘</li>
+  <li>关闭不需要显示的UI，避免额外渲染</li>
+</ul>
+
+<h3 id="canvas-api">Canvas API</h3>
+<h4 id="properties">Properties</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性名</th>
+      <th>类型</th>
+      <th>说明</th>
+      <th>常见用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">renderMode</code></td>
+      <td><code class="language-plaintext highlighter-rouge">RenderMode</code></td>
+      <td>渲染模式（Overlay、ScreenSpaceCamera、WorldSpace）</td>
+      <td>决定Canvas如何渲染和视图方式</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">worldCamera</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Camera</code></td>
+      <td>渲染用摄像机（适用于 Camera、World 模式）</td>
+      <td>控制UI投射方向、接收事件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pixelPerfect</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>是否启用像素完美对齐（仅限Screen Space）</td>
+      <td>像素风格游戏的UI清晰对齐</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">planeDistance</code></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>距摄像机的距离（仅Screen Space - Camera）</td>
+      <td>控制Canvas深度层级</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">scaleFactor</code></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>缩放因子（通常由 CanvasScaler 控制）</td>
+      <td>适配不同分辨率</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">referencePixelsPerUnit</code></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>每单位像素数，决定图像缩放清晰度</td>
+      <td>确保 UI 图像缩放一致</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sortingLayerID</code></td>
+      <td><code class="language-plaintext highlighter-rouge">int</code></td>
+      <td>渲染图层 ID</td>
+      <td>控制 Canvas 渲染层</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sortingLayerName</code></td>
+      <td><code class="language-plaintext highlighter-rouge">string</code></td>
+      <td>渲染图层名称</td>
+      <td>可读性更强的层级控制</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sortingOrder</code></td>
+      <td><code class="language-plaintext highlighter-rouge">int</code></td>
+      <td>同图层中的渲染顺序，越大越前面</td>
+      <td>控制 UI 显示前后关系</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">overrideSorting</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>是否覆盖父 Canvas 的排序逻辑</td>
+      <td>弹窗、特效UI 的独立排序</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">targetDisplay</code></td>
+      <td><code class="language-plaintext highlighter-rouge">int</code></td>
+      <td>目标显示屏幕编号（用于多显示器）</td>
+      <td>多屏幕UI部署</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">isRootCanvas</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code> (只读)</td>
+      <td>是否为根 Canvas</td>
+      <td>判断是否主 Canvas（用于布局判断）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">rootCanvas</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Canvas</code> (只读)</td>
+      <td>所属的顶级 Canvas</td>
+      <td>获取当前 Canvas 的上级主容器</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">renderOrder</code></td>
+      <td><code class="language-plaintext highlighter-rouge">int</code> (只读)</td>
+      <td>实际渲染顺序（自动计算）</td>
+      <td>调试 Canvas 渲染先后</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pixelRect</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Rect</code> (只读)</td>
+      <td>当前 Canvas 实际的像素渲染区域</td>
+      <td>渲染区域调试</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">renderingDisplaySize</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Vector2</code> (只读)</td>
+      <td>渲染显示区域的像素尺寸</td>
+      <td>获取目标显示区域尺寸</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">overridePixelPerfect</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>是否允许覆盖父Canvas的像素对齐设置</td>
+      <td>子 Canvas 不启用像素对齐时用</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">additionalShaderChannels</code></td>
+      <td><code class="language-plaintext highlighter-rouge">AdditionalShaderChannels</code></td>
+      <td>指定额外的 shader 顶点数据传输通道</td>
+      <td>用于自定义UI Shader</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cachedSortingLayerValue</code></td>
+      <td><code class="language-plaintext highlighter-rouge">int</code> (只读)</td>
+      <td>当前排序图层的底层缓存值，用于排序计算</td>
+      <td>系统内部优化（一般不手动使用）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">normalizedSortingGridSize</code></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>Canvas 分割的排序网格单元大小</td>
+      <td>高阶排序控制，与 SRP 结合使用</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">updateRectTransformForStandalone</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>在手动 <code class="language-plaintext highlighter-rouge">Camera.Render()</code> 时是否自动更新 RectTransform</td>
+      <td>手动渲染UI场景</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">vertexColorAlwaysGammaSpace</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>在使用线性空间渲染时是否强制顶点颜色使用 Gamma 空间传递</td>
+      <td>确保 UI 颜色一致性（线性渲染）</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="static-method">Static Method</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法名</th>
+      <th>返回类型</th>
+      <th>描述</th>
+      <th>常见用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Canvas.ForceUpdateCanvases()</code></td>
+      <td><code class="language-plaintext highlighter-rouge">void</code></td>
+      <td><strong>强制更新所有 Canvas</strong> 的布局和绘制内容</td>
+      <td>用于在下一帧前立即刷新 UI 状态（比如修改布局元素后）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Canvas.GetDefaultCanvasMaterial()</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Material</code></td>
+      <td>返回一个<strong>默认 Canvas 材质</strong>，用于普通 UI 元素的渲染</td>
+      <td>如果需要自定义绘制或替换默认材质时使用</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Canvas.GetETC1SupportedCanvasMaterial()</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Material</code></td>
+      <td>获取或生成支持 <strong>ETC1 格式贴图的 UI 材质</strong>（主要用于 Android）</td>
+      <td>在使用 ETC1 压缩纹理时提供透明通道支持（Alpha 拆分）</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="events">Events</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>事件名</th>
+      <th>调用时机</th>
+      <th>描述</th>
+      <th>常见用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">preWillRenderCanvases</code></td>
+      <td><strong>Canvas 渲染前，最先调用</strong></td>
+      <td>在 Canvas 渲染流程开始前立即触发（早于布局和绘制）</td>
+      <td>在渲染前动态调整 UI 布局、刷新数据</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">willRenderCanvases</code></td>
+      <td><strong>Canvas 渲染前，紧接上一步</strong></td>
+      <td>在 Canvas 渲染流程开始前触发，但晚于 <code class="language-plaintext highlighter-rouge">preWillRenderCanvases</code></td>
+      <td>绑定动画播放、状态更新逻辑、依赖布局结果的修改操作</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="事件区别和调用顺序">事件区别和调用顺序</h5>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Canvas</span><span class="p">.</span><span class="n">preWillRederCanvases</span> <span class="p">-&gt;</span> <span class="n">Canvas</span><span class="p">.</span><span class="n">willRenderCanvases</span> <span class="p">-&gt;</span> <span class="n">Canvas</span> <span class="err">渲染</span>
+</code></pre></div></div>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">preWilldRenderCanvases</code>：在所有布局系统更新之前调用，用于准备UI状态、尺寸、数据等</li>
+  <li><code class="language-plaintext highlighter-rouge">willRenderCanvases</code>：在布局完成后、渲染开始前调用，适合根据最终布局做动画、视觉状态处理</li>
+</ul>
+
+<p><a href="https://docs.unity3d.com/ScriptReference/Canvas.html">UnityScripting Canvas</a></p>
 
 <h2 id="ui-componenet">UI Componenet</h2>
+<h3 id="通用组件">通用组件</h3>
+<p><img src="/assets/images/UI-CommonComponent.jpg" alt="UICommonComponent" /></p>
+<h4 id="rect-transform">Rect Transform</h4>
+<p><code class="language-plaintext highlighter-rouge">RectTransform</code>继承自<code class="language-plaintext highlighter-rouge">Transform</code>，专门用于2D UI布局。<br />
+所有UI元素都依赖<code class="language-plaintext highlighter-rouge">RectTransform</code>来定位和缩放</p>
+
+<h5 id="核心属性">核心属性</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性名</th>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">anchorMin</code></td>
+      <td>Vector2</td>
+      <td>锚点区域左下角（归一化坐标，0~1）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">anchorMax</code></td>
+      <td>Vector2</td>
+      <td>锚点区域右上角</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">anchoredPosition</code></td>
+      <td>Vector2</td>
+      <td>相对于锚点区域中心的偏移量</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pivot</code></td>
+      <td>Vector2</td>
+      <td>本地坐标的参考中心（范围 0~1）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sizeDelta</code></td>
+      <td>Vector2</td>
+      <td>元素宽高，或拉伸模式下的偏移</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">rect</code></td>
+      <td>Rect (只读)</td>
+      <td>实际的矩形框（位置、宽高）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">localPosition</code></td>
+      <td>Vector3</td>
+      <td>相对于父节点的本地坐标（不推荐直接用于 UI）</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="anchor">Anchor</h5>
+<p>Anchor（锚点）是<code class="language-plaintext highlighter-rouge">RectTransform</code>的关键组成部分，决定了UI元素相对于父物体的位置和尺寸的参考点</p>
+
+<p>Anchor实际上是一对二维坐标：<code class="language-plaintext highlighter-rouge">anchorMin</code>和<code class="language-plaintext highlighter-rouge">anchorMax</code>，每个值都是<code class="language-plaintext highlighter-rouge">[0, 1]</code>范围内归一化坐标，表示在父元素矩形中的相对位置</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">anchorMin = (0, 0)</code>表示父物体的左下角</li>
+  <li><code class="language-plaintext highlighter-rouge">anchorMax = (1, 1)</code>表示父物体的右上角</li>
+</ul>
+
+<p><strong>锚点的几种模式</strong>
+1.固定位置（不拉伸）<br />
+当：<code class="language-plaintext highlighter-rouge">anchorMin</code> = <code class="language-plaintext highlighter-rouge">anchorMax</code></p>
+<ul>
+  <li>元素位置相对于这个锚点点位</li>
+  <li>用<code class="language-plaintext highlighter-rouge">anchoredPosition</code>来控制偏移</li>
+  <li>常用于角落按钮、图标等</li>
+</ul>
+
+<p>2.拉伸尺寸（适应父物体）
+当：<code class="language-plaintext highlighter-rouge">anchorMin</code> != <code class="language-plaintext highlighter-rouge">anchorMax</code></p>
+<ul>
+  <li>元素会随着父容器的尺寸变化而拉伸</li>
+  <li><code class="language-plaintext highlighter-rouge">sizeDelta</code>不是绝对宽高，而是拉伸结果的偏移</li>
+</ul>
+
+<h5 id="pivot">Pivot</h5>
+<p>pivot（枢轴点）定义的是UI元素自身的参考点（中心点），它决定了：</p>
+<ul>
+  <li>元素的位置是以自身哪个位置为参考（锚点对齐）</li>
+  <li>元素在旋转时围绕哪里旋转</li>
+  <li>元素在缩放时以哪个点为中心缩放</li>
+</ul>
+
+<p>它的值是一个二维向量，范围在<code class="language-plaintext highlighter-rouge">[0, 1]</code>之间，表示相对于自身矩形的位置：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><code class="language-plaintext highlighter-rouge">pivot</code> 值</th>
+      <th>位置说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>(0, 0)</td>
+      <td>左下角</td>
+    </tr>
+    <tr>
+      <td>(0.5, 0.5)</td>
+      <td>中心（默认）</td>
+    </tr>
+    <tr>
+      <td>(1, 1)</td>
+      <td>右上角</td>
+    </tr>
+    <tr>
+      <td>(0, 1)</td>
+      <td>左上角</td>
+    </tr>
+    <tr>
+      <td>(1, 0)</td>
+      <td>右下角</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="布局">布局</h4>
+<p><strong>布局演示</strong>
+假设Canvas是1920*1080的全屏UI</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">RectTransform</span> <span class="n">rt</span> <span class="p">=</span> <span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">RectTransform</span><span class="p">&gt;();</span>
+
+<span class="n">rt</span><span class="p">.</span><span class="n">anchorMin</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector2</span><span class="p">(</span><span class="m">0.5f</span><span class="p">,</span> <span class="m">0.5f</span><span class="p">);</span>
+<span class="n">rt</span><span class="p">.</span><span class="n">anchorMax</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector2</span><span class="p">(</span><span class="m">0.5f</span><span class="p">,</span> <span class="m">0.5f</span><span class="p">);</span>
+<span class="n">rt</span><span class="p">.</span><span class="n">pivot</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector2</span><span class="p">(</span><span class="m">0.5f</span><span class="p">,</span> <span class="m">0.5f</span><span class="p">);</span>
+<span class="n">rt</span><span class="p">.</span><span class="n">anchoredPosition</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector2</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
+<span class="n">rt</span><span class="p">.</span><span class="n">sizeDelta</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector2</span><span class="p">(</span><span class="m">200</span><span class="p">,</span> <span class="m">100</span><span class="p">);</span>
+</code></pre></div></div>
+<p>这个UI元素将被放置在屏幕正中央，宽度为200，高度为100</p>
+
+<h5 id="坐标系层级关系">坐标系层级关系</h5>
+<p>1.<code class="language-plaintext highlighter-rouge">anchorMin</code> / <code class="language-plaintext highlighter-rouge">anchorMax</code>决定锚点区域</p>
+
+<p>2.<code class="language-plaintext highlighter-rouge">anchoredPosition</code>是相对于锚点区域的中心</p>
+
+<p>3.<code class="language-plaintext highlighter-rouge">pivot</code>是UI元素自身的中心点</p>
+
+<p>4.最终位置由这些共同计算得到</p>
+
+<p><strong>实际计算公式（简化版）</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>最终位置 = 锚点区域中心 + anchoredPosition - pivot * sizeDelta
+</code></pre></div></div>
+<p>这个公式说明了设置的位置不是直接坐标，而是围绕锚点和pivot共同计算的结果</p>
+
+<p><img src="/assets/images/AnchorPresets.jpg" alt="AnchorPreSets" /></p>
+
+<ul>
+  <li>按住Alt + Shift拖动可以同时设置pivot和anchor</li>
+  <li>Unity提供Anchor Preset快速布局</li>
+  <li>蓝线表示Anchors，红点表示Pivot，灰框表示实际UI区域</li>
+</ul>
+
+<h5 id="recttransform-api">RectTransform API</h5>
+<p><strong>Properties</strong></p>
+
+<h4 id="canvas-renderer">Canvas Renderer</h4>
+<p><code class="language-plaintext highlighter-rouge">CanvasRenderer</code>是Unity UI系统中挂在每个可见UI上的一个底层组件，负责UI的绘制提交，它是Graphic类的渲染后台</p>
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">CanvasRenderer</code>是连接UI元素和底层渲染管线的桥梁</p>
+</blockquote>
+
+<h5 id="canvasrenderer的作用">CanvasRenderer的作用</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>功能方向</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>渲染控制</td>
+      <td>负责把 UI 元素的顶点数据、颜色、材质提交给 Canvas 系统渲染</td>
+    </tr>
+    <tr>
+      <td>可见性控制</td>
+      <td>控制是否显示（通过 <code class="language-plaintext highlighter-rouge">cull</code>, <code class="language-plaintext highlighter-rouge">SetAlpha</code>, <code class="language-plaintext highlighter-rouge">SetColor</code> 等）</td>
+    </tr>
+    <tr>
+      <td>材质支持</td>
+      <td>支持单个或多个材质绘制（比如 <code class="language-plaintext highlighter-rouge">SetMaterial</code>, <code class="language-plaintext highlighter-rouge">SetPopMaterial</code>）</td>
+    </tr>
+    <tr>
+      <td>顶点缓存</td>
+      <td>维护每个 UI 元素的 Mesh 数据</td>
+    </tr>
+    <tr>
+      <td>Mask 支持</td>
+      <td>与 UI Mask 系统配合使用进行遮罩裁剪处理</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="canvasrenderer和ui的绘制流程">CanvasRenderer和UI的绘制流程</h5>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UI组件（Image/Text 等）
+    ↓
+生成顶点、UV、颜色等数据
+    ↓
+传给 CanvasRenderer
+    ↓
+CanvasRenderer 将数据提交给 Canvas 系统
+    ↓
+Canvas 系统统一批处理渲染
+</code></pre></div></div>
+
+<h5 id="canvasrenderer-api">CanvasRenderer API</h5>
+
+<h4 id="image">Image</h4>
 
 <h2 id="layout-system">Layout System</h2>
+<h3 id="layout-group">Layout Group</h3>
+
+<h3 id="contentsizefitter">ContentSizeFitter</h3>
+
+<h3 id="aspectratiofitter">AspectRatioFitter</h3>
+
+<h3 id="mask--rectmask2d">Mask / RectMask2D</h3>
 
 <h2 id="event-system">Event System</h2>
 
