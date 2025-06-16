@@ -11,7 +11,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Scene System - ljf12825’s Blog</title>
-<meta name="description" content="">
+<meta name="description" content="Unity Scene System是Unity中用于组织和管理游戏世界的基础结构，Unity支持多个Scene的加载与卸载，允许构建出大型、分块化的世界">
 
 
 
@@ -22,7 +22,7 @@
 <meta property="og:url" content="http://localhost:4000/posts/2025-06-08-Scene-System/">
 
 
-  <meta property="og:description" content="">
+  <meta property="og:description" content="Unity Scene System是Unity中用于组织和管理游戏世界的基础结构，Unity支持多个Scene的加载与卸载，允许构建出大型、分块化的世界">
 
 
 
@@ -149,7 +149,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Scene System">
-    <meta itemprop="description" content="">
+    <meta itemprop="description" content="Unity Scene System是Unity中用于组织和管理游戏世界的基础结构，Unity支持多个Scene的加载与卸载，允许构建出大型、分块化的世界">
     <meta itemprop="datePublished" content="2025-06-01T00:00:00+08:00">
     
 
@@ -168,7 +168,58 @@
 
       <section class="page__content" itemprop="text">
         
-        
+        <p>Unity Scene System是Unity中用于组织和管理游戏世界的基础结构，Unity支持多个Scene的加载与卸载，允许构建出大型、分块化的世界</p>
+
+<h2 id="scene">Scene</h2>
+<p>Scene是Unity游戏项目中的一个基础构建单元，它就像游戏世界中的一个“地图”或“关卡”，一个Scene就是一个逻辑/物理空间的容器，包含了：</p>
+<ul>
+  <li>GameObject</li>
+  <li>地形、UI、声音</li>
+  <li>脚本、组件</li>
+  <li>光照信息、烘焙数据等</li>
+</ul>
+
+<p>在Unity中，一个Scene对应一个<code class="language-plaintext highlighter-rouge">.unity</code>文件</p>
+
+<h3 id="scene-生命周期">Scene 生命周期</h3>
+<p>1.创建或打开场景（<code class="language-plaintext highlighter-rouge">.unity</code>文件）</p>
+
+<p>2.布置场景内容</p>
+
+<p>3.保存场景</p>
+
+<p>4.构建和加载场景（Build Settings里添加场景）</p>
+
+<p>5.运行时加载和卸载场景</p>
+
+<h3 id="场景最佳实践">场景最佳实践</h3>
+<ul>
+  <li>保持每个场景的职责单一（比如UI与游戏逻辑分离）</li>
+  <li>使用Prefab来管理重复对象</li>
+  <li>使用场景加载器或管理器来控制场景切换和数据传递</li>
+  <li>合理使用DontDestroyOnLoad来跨场景保存数据或对象</li>
+</ul>
+
+<h2 id="multi-scene">Multi Scene</h2>
+
+<h3 id="scenemanager">SceneManager</h3>
+
+<h3 id="加载与切换场景">加载与切换场景</h3>
+
+<h3 id="additive-load">Additive Load</h3>
+
+<h3 id="多场景编辑工作流">多场景编辑工作流</h3>
+
+<h3 id="场景打包与构建设置">场景打包与构建设置</h3>
+
+<h3 id="场景分块加载">场景分块加载</h3>
+
+<h3 id="触发器加载机制">触发器加载机制</h3>
+
+<h3 id="addressable--scene-loading">Addressable + Scene Loading</h3>
+
+<h3 id="性能优化">性能优化</h3>
+
 
         
       </section>
