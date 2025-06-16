@@ -59,12 +59,6 @@ var store = [{
         "url": "/%E7%AC%94%E8%AE%B0/2025/05/29/Light.html",
         "teaser": null
       },{
-        "title": "Skybox",
-        "excerpt":" ","categories": ["笔记"],
-        "tags": ["Unity","Unity Component","Light","Render","Graphics"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/05/29/Skybox.html",
-        "teaser": null
-      },{
         "title": "Prefab System",
         "excerpt":"Unity提供Prefab这种非常强大的机制，用来复用游戏对象，让开发更高效、项目更模块化 Prefab就是一个可以重复使用的GameObject模板 什么是Prefab Prefab是你在场景里创建好的GameObject（可以包含模型、脚本、组件、子物体等），然后把它拖到项目窗口中生成的资源文件。 之后就可以随时从Project中把这个模板拖入场景，生成和原始一样的对象 Prefab特点 特性 描述 模板复用 一次创建，多次使用 改动同步 修改 Prefab，会自动同步所有实例 支持嵌套 Prefab 可以包含另一个 Prefab 可分离 Prefab 实例可以局部修改，不影响原始 Prefab Prefab实例与原型的关系 当你把Prefab拖入场景，它会成为Prefab实例，你可以 完全跟随原始Prefab 局部Override某些属性 解除连接（Unpack） 图标颜色 状态 蓝色立方体 与原 Prefab 保持连接 灰色立方体 已经解除连接（Unpacked） Prefab编辑方式 1.Open Prefab：双击或点击小蓝箭头进入Prefab编辑模式 2.Override面板：查看并应用或还原你对实例的修改 3.Apply to Prefab：将实例的更改写入原始Prefab Prefab的创建和使用 创建 1.在Hierarchy中创建好一个GameObject及其组件和子对象 2.拖拽到Project视图中，Unity自动保存为.prefab 3.你可以删除场景中的对象，只保留Project中的预制体 使用 直接拖到场景中 Instantiate()动态生成 void...","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
@@ -297,6 +291,12 @@ var store = [{
         "excerpt":" ","categories": ["笔记"],
         "tags": ["Unity","Unity System","AI"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Behaviour-Tree.html",
+        "teaser": null
+      },{
+        "title": "Skybox",
+        "excerpt":"Skybox是一种渲染技术，用于在3D场景中创建远景背景，例如天空、宇宙、城市天际线等 它本质上是一种把纹理图贴在一个立方体（或球体）内侧的技巧，玩家看不到边界，只能看到包裹在四周的“天空” Skybox的类型 Unity中支持几种常见类型的Skybox材质（Shader）： Shader 类型 描述 6 Sided 使用六张图片分别贴在立方体六个面上（一般来自 HDRI 贴图拆分） Cubemap 使用一个立方体贴图（.cubemap）进行渲染 Procedural 程序化天空（可设置太阳、云层、颜色渐变） HDRI Skybox (PBR) 用于高清真实感环境的 HDR 渲染，常用于 Unity HDRP 设置Skybox的方法 1.通过Lighting设置全局Skybox 1.创建一个Skybox材质： Assets-&gt;右键-&gt;Create &gt; Material Shader选择为Skybox/6 Sided或Skybox/Cubemap或Skybox/Procedural 2.在材质中设置贴图（textures）或参数 3.打开Window &gt; Rendering &gt; Lighting面板 4.在Environment &gt; Skybox Material中拖入刚刚的材质 这会将该Skybox应用于整个场景 2.通过摄像机设置局部Skybox（高级） RenderSettings.skybox = mySkyboxMaterial; 或为相机设置Skybox组件并赋值 Skybox与Lighting的关系 Skybox不只是视觉上的背景，它还影响了：...","categories": ["笔记"],
+        "tags": ["Unity","Unity Component","Light","Render","Graphics"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Skybox.html",
         "teaser": null
       },{
     "title": "About",

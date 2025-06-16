@@ -1,742 +1,502 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-15T22:59:10+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Behaviour Tree</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Behaviour-Tree.html" rel="alternate" type="text/html" title="Behaviour Tree" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Behaviour-Tree</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Behaviour-Tree.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><category term="AI" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Unity Build-in Types</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types.html" rel="alternate" type="text/html" title="Unity Build-in Types" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types.html"><![CDATA[<p>Unity内建类型</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-16T21:26:30+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Skybox</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Skybox.html" rel="alternate" type="text/html" title="Skybox" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Skybox</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Skybox.html"><![CDATA[<p>Skybox是一种渲染技术，用于在3D场景中创建远景背景，例如天空、宇宙、城市天际线等<br />
+它本质上是一种把纹理图贴在一个立方体（或球体）内侧的技巧，玩家看不到边界，只能看到包裹在四周的“天空”</p>
 
-<h2 id="常见unity内建类型按用途分">常见Unity内建类型（按用途分）</h2>
-<h3 id="1空间几何类型transform相关">1.空间/几何类型（Transform相关）</h3>
+<h2 id="skybox的类型">Skybox的类型</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>类型</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Vector2</code>, <code class="language-plaintext highlighter-rouge">Vector3</code>, <code class="language-plaintext highlighter-rouge">Vector4</code></td>
-      <td>表示二维/三维/四维向量</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Quaternion</code></td>
-      <td>四元数，表示旋转</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Matrix4x4</code></td>
-      <td>4×4 矩阵，常用于转换</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Bounds</code></td>
-      <td>包围盒（中心+尺寸）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Ray</code>, <code class="language-plaintext highlighter-rouge">RaycastHit</code></td>
-      <td>射线检测相关类型</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Plane</code></td>
-      <td>表示一个无限平面</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Rect</code></td>
-      <td>二维矩形区域</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Color</code>, <code class="language-plaintext highlighter-rouge">Color32</code></td>
-      <td>表示颜色（线性空间和 sRGB）</td>
-    </tr>
-  </tbody>
-</table>
-
-<h4 id="vector2--vector3--vector4"><strong>Vector2 &amp; Vector3 &amp; Vector4</strong></h4>
-<p>它们是Unity提供的三个核心向量类型，广泛用于位置、方向、速度、缩放、颜色等各种场景</p>
-
-<h5 id="基本定义">基本定义</h5>
+<p>Unity中支持几种常见类型的Skybox材质（Shader）：</p>
 
 <table>
   <thead>
     <tr>
-      <th>向量类型</th>
-      <th>维度</th>
-      <th>作用</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Vector2</code></td>
-      <td>2D 向量，包含 <code class="language-plaintext highlighter-rouge">x</code>, <code class="language-plaintext highlighter-rouge">y</code></td>
-      <td>用于 2D 空间中的位置、速度等</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
-      <td>3D 向量，包含 <code class="language-plaintext highlighter-rouge">x</code>, <code class="language-plaintext highlighter-rouge">y</code>, <code class="language-plaintext highlighter-rouge">z</code></td>
-      <td>用于 3D 空间中的大多数情况</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Vector4</code></td>
-      <td>4D 向量，包含 <code class="language-plaintext highlighter-rouge">x</code>, <code class="language-plaintext highlighter-rouge">y</code>, <code class="language-plaintext highlighter-rouge">z</code>, <code class="language-plaintext highlighter-rouge">w</code></td>
-      <td>用于更高级的计算，如齐次坐标、shader 编程</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Vector2（二维向量）</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector2</span> <span class="n">position</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector2</span><span class="p">(</span><span class="m">1.5f</span><span class="p">,</span> <span class="m">3.0f</span><span class="p">);</span>
-</code></pre></div></div>
-<p>常见用途：</p>
-<ul>
-  <li>2D游戏中的对象位置、速度、加速度等</li>
-  <li>屏幕空间坐标（如UI坐标）</li>
-  <li>纹理坐标（UV mapping）</li>
-</ul>
-
-<p><strong>Vector3（三维向量）</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector3</span> <span class="n">direction</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0f</span><span class="p">,</span> <span class="m">1f</span><span class="p">,</span> <span class="m">0f</span><span class="p">);</span> <span class="c1">//向上</span>
-<span class="n">transform</span><span class="p">.</span><span class="n">position</span> <span class="p">+=</span> <span class="n">direction</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span><span class="p">;</span>
-</code></pre></div></div>
-<p>常见用途：</p>
-<ul>
-  <li>3D对象的位置、方向、缩放</li>
-  <li>物理运动（速度、加速度）</li>
-  <li>相机方向、光照方向</li>
-</ul>
-
-<p><strong>Vector3常用静态变量</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector3</span><span class="p">.</span><span class="n">zero</span>      <span class="c1">// (0, 0, 0)</span>
-<span class="n">Vector3</span><span class="p">.</span><span class="n">one</span>       <span class="c1">// (1, 1, 1)</span>
-<span class="n">Vector3</span><span class="p">.</span><span class="n">up</span>        <span class="c1">// (0, 1, 0)</span>
-<span class="n">Vector3</span><span class="p">.</span><span class="n">down</span>      <span class="c1">// (0, -1, 0)</span>
-<span class="n">Vector3</span><span class="p">.</span><span class="n">left</span>      <span class="c1">// (-1, 0, 0)</span>
-<span class="n">Vector3</span><span class="p">.</span><span class="n">right</span>     <span class="c1">// (1, 0, 0)</span>
-<span class="n">Vector3</span><span class="p">.</span><span class="n">forward</span>   <span class="c1">// (0, 0, 1)</span>
-<span class="n">Vector3</span><span class="p">.</span><span class="n">back</span>      <span class="c1">// (0, 0, -1)</span>
-</code></pre></div></div>
-
-<p><strong>Vector3静态方法</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Method</th>
-      <th>Description</th>
-      <th>Declaration</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Angel</td>
-      <td>求两向量夹角</td>
-      <td>public static float Angle(Vector3 from, Vector3 to);</td>
-    </tr>
-    <tr>
-      <td>ClampMagnitude</td>
-      <td>限制一个向量的长度，防止它超过maxLength，如果vector的长度小于等于maxLength返回原向量，否则返回一个等于maxLength的同向向量</td>
-      <td>public static Vector3 ClampMagnitude(Vector3 vector, float maxLength);</td>
-    </tr>
-    <tr>
-      <td>Cross</td>
-      <td>求叉积</td>
-      <td>public static Vector3 Cross(Vector3 lhs, Vector3 rhs);</td>
-    </tr>
-    <tr>
-      <td>Distance</td>
-      <td>求三维空间中两点的距离</td>
-      <td>public static float Distance(Vector3 point1, Vector3 point2);</td>
-    </tr>
-    <tr>
-      <td>Dot</td>
-      <td>求点乘</td>
-      <td>public static float Dot(Vector3 lhs, Vector3 rhs);</td>
-    </tr>
-    <tr>
-      <td>Lerp</td>
-      <td>求线插（不允许外推）,  t -&gt; [0, 1]</td>
-      <td>public static Vector3 Lerp(Vector3 a, Vector3 b, float t);</td>
-    </tr>
-    <tr>
-      <td>LerpUnclamped</td>
-      <td>求线插（允许外推，产生超调）</td>
-      <td>public static Vector3 LerpUnclamped(Vector3 a, Vector3 b, float t);</td>
-    </tr>
-    <tr>
-      <td>Max</td>
-      <td>返回两个向量所能组成的最大向量</td>
-      <td>public static Vector3 Max(Vector3 lhs, Vector3 rhs);</td>
-    </tr>
-    <tr>
-      <td>Min</td>
-      <td>返回最小</td>
-      <td>同上</td>
-    </tr>
-    <tr>
-      <td>MoveTowards</td>
-      <td>以恒定速度向目标位置靠近，直到到达</td>
-      <td>public static Vector3 MoveTowards(Vector3 current, Vector3 target, float maxDistanceDelta);</td>
-    </tr>
-    <tr>
-      <td>Normalize</td>
-      <td>归一化</td>
-      <td>public void Normalize();</td>
-    </tr>
-    <tr>
-      <td>OrthoNormalize</td>
-      <td>正交归一化</td>
-      <td>public static void OrthoNormalize(ref Vector3 normal, ref Vector3 tangent);  public static void OrthoNormalize(ref Vector3 normal, ref Vector3 tangent, ref Vector3 binormal);</td>
-    </tr>
-    <tr>
-      <td>Project</td>
-      <td>投影到onNormal</td>
-      <td>public static Vector3 Project(Vector3 vector, Vector3 onNormal);</td>
-    </tr>
-    <tr>
-      <td>ProjectOnPlane</td>
-      <td>投影到planeNormal</td>
-      <td>public static Vector3 ProjectOnPlane(Vector3 vector, Vector3 planeNormal);</td>
-    </tr>
-    <tr>
-      <td>Reflect</td>
-      <td>反射线，inNormal是法线</td>
-      <td>public static Vector3 Reflect(Vector3 inDirection, Vector3  inNormal);</td>
-    </tr>
-    <tr>
-      <td>RotateTowards</td>
-      <td>逐步旋转一个方向向量朝向另一个方向向量，maxRadiansDelta是每次最大允许旋转的角度（弧度），maxMagnitudeDelta是每次允许变化的向量长度</td>
-      <td>public static Vector3 RotateTowards(Vector3 current, Vector3 target, float maxRadiansDelta, float maxMagnitudeDelta);</td>
-    </tr>
-    <tr>
-      <td>Scale</td>
-      <td>两个向量分量相乘组成新向量</td>
-      <td>public static Vector3 Scale(Vector3 a, Vector3 b);</td>
-    </tr>
-    <tr>
-      <td>SignedAngle</td>
-      <td>求带符号夹角，axis是用于确定旋转方向的轴，正值是绕着axis左旋，负值是右旋</td>
-      <td>public static float SignedAngle(Vector3 from, Vector3 to, Vector3 axis);</td>
-    </tr>
-    <tr>
-      <td>Slerp</td>
-      <td>球面插值，球面为a，b点所在大圆所在的球的球面，插值在a，b点所在的圆上取</td>
-      <td>public static Vector3 Slerp(Vector3 a, Vector3 b, float t);</td>
-    </tr>
-    <tr>
-      <td>SlerpUnclamped</td>
-      <td>球面插值（允许外推，产生超调）</td>
-      <td>public static Vector3 SlerpUnclamped(Vector3 a, Vector3 b, float t);</td>
-    </tr>
-    <tr>
-      <td>SmoothDamp</td>
-      <td>平滑插值； ref currentVelocity当前速度向量；smoothTime到达目标值所需的预期时间，越小越快越敏感；maxSpeed最大速度（可选）；deltaTime每帧间隔时间（可选）</td>
-      <td>public static Vector3 SmoothDamp(Vector3 current, Vector3 target, ref Vector3 currentVelocity, float smoothTime, float maxSpeed = Mathf.Infinity, float deltaTime = Time.deltaTime);</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><a href="https://docs.unity3d.com/ScriptReference/Vector3.html">Unity官方文档（Vector3）</a></p>
-
-<p><strong>Vector4（四维向量）</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector4</span> <span class="n">v</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector4</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">);</span>
-</code></pre></div></div>
-<p>常见用途：</p>
-<ul>
-  <li>齐次坐标（矩阵变换常用）</li>
-  <li>传递颜色（Color在底层可能是Vector4(r,g,b,a)）</li>
-  <li>shader开发中用于高级数学运算（如平面方程、切线空间等）</li>
-</ul>
-
-<h4 id="quaternion--euler-angles">Quaternion &amp; Euler Angles</h4>
-<p>在Unity中，Quaternion是用来表示旋转的核心数学结构，它避免了Euler Angles的万向节死锁问题，并且适用于平滑插值和复杂3D计算</p>
-
-<h5 id="quaternion">Quaternion</h5>
-<p>Quaternion表示绕某一条单位轴旋转一个角度的这个过程，简单来说：表示一个旋转</p>
-
-<p><strong>数学本质</strong>
-四元数是一种复数扩展：</p>
-<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">Q</span> <span class="p">=</span> <span class="s">w + xi + yj + zk</span>
-</code></pre></div></div>
-<p>在Unity中被表示为：</p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">struct</span> <span class="nc">Quaternion</span>
-<span class="p">{</span>
-    <span class="k">public</span> <span class="kt">float</span> <span class="n">x</span><span class="p">;</span>
-    <span class="k">public</span> <span class="kt">float</span> <span class="n">y</span><span class="p">;</span>
-    <span class="k">public</span> <span class="kt">float</span> <span class="n">z</span><span class="p">;</span>
-    <span class="k">public</span> <span class="kt">float</span> <span class="n">w</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p><code class="language-plaintext highlighter-rouge">x, y, z</code>表示旋转轴的向量部分（方向）<br />
-<code class="language-plaintext highlighter-rouge">w</code>表示旋转的角度部分(cos(θ/2))</p>
-
-<p>四元数不是角度 + 轴直接拼成的，是通过以下方式构造：</p>
-<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">x</span><span class="p">=</span><span class="s">axis.x⋅sin(θ/2)</span>
-<span class="py">y</span><span class="p">=</span><span class="s">axis.y⋅sin(θ/2)</span>
-<span class="py">z</span><span class="p">=</span><span class="s">axis.z⋅sin(θ/2)</span>
-<span class="py">w</span><span class="p">=</span><span class="s">cos(θ/2)</span>
-</code></pre></div></div>
-<p>其中<code class="language-plaintext highlighter-rouge">axis</code>是归一化的旋转轴向量<br />
-<code class="language-plaintext highlighter-rouge">θ</code>是旋转角度（弧度）</p>
-
-<p>你可以把四元数想象成一个旋转操作，它编码了两个信息：</p>
-<ul>
-  <li>1.绕哪个轴旋转</li>
-  <li>2.旋转多少角度</li>
-</ul>
-
-<p><strong>Quaternion用途</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>用途场景</th>
+      <th>Shader 类型</th>
       <th>描述</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>表示物体旋转</td>
-      <td>替代 <code class="language-plaintext highlighter-rouge">transform.rotation = new Vector3(...)</code>，更稳定</td>
+      <td><strong>6 Sided</strong></td>
+      <td>使用六张图片分别贴在立方体六个面上（一般来自 HDRI 贴图拆分）</td>
     </tr>
     <tr>
-      <td>做平滑旋转（Slerp/Lerp）</td>
-      <td>保持插值平滑、不跳跃、不变形</td>
+      <td><strong>Cubemap</strong></td>
+      <td>使用一个立方体贴图（.cubemap）进行渲染</td>
     </tr>
     <tr>
-      <td>实现摄像机跟随</td>
-      <td>平滑跟随目标的朝向</td>
+      <td><strong>Procedural</strong></td>
+      <td>程序化天空（可设置太阳、云层、颜色渐变）</td>
     </tr>
     <tr>
-      <td>构建旋转动画</td>
-      <td>可结合 Timeline、Animator 使用</td>
-    </tr>
-    <tr>
-      <td>控制角色面向</td>
-      <td>看向目标、追踪方向等</td>
+      <td><strong>HDRI Skybox (PBR)</strong></td>
+      <td>用于高清真实感环境的 HDR 渲染，常用于 Unity HDRP</td>
     </tr>
   </tbody>
 </table>
 
-<p><strong>Quaternion API</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>方法/属性</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Quaternion.identity</code></td>
-      <td>零旋转（即不旋转）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Quaternion.Euler(x, y, z)</code></td>
-      <td>从欧拉角创建旋转</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Quaternion.LookRotation(dir)</code></td>
-      <td>让对象朝向某个方向</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Quaternion.Angle(a, b)</code></td>
-      <td>计算两个旋转之间的角度</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Quaternion.AngleAxis(float angle, Vector3 axis)</code></td>
-      <td>围绕axis旋转angle度</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Quaternion.Slerp(a, b, t)</code></td>
-      <td>在两个旋转之间平滑插值（匀速）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Quaternion.Lerp(a, b, t)</code></td>
-      <td>线性插值旋转（不推荐用于大角度）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Quaternion.RotateTowards(a, b, maxDegreesDelta)</code></td>
-      <td>限制最大旋转角度的平滑旋转</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">* 运算符</code>（例如 <code class="language-plaintext highlighter-rouge">rot * vector</code>）</td>
-      <td>将旋转应用于向量，旋转该方向向量</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>构建方式</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Quaternion</span> <span class="n">q</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">AngleAxis</span><span class="p">(</span><span class="m">90</span><span class="p">,</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">up</span><span class="p">);</span> <span class="c1">//绕Y轴旋转90°</span>
-</code></pre></div></div>
-<p>使用欧拉角构建：</p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Quaternion</span> <span class="n">q</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">Euler</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span> <span class="c1">//XYZ分别是绕X Y Z轴的角度</span>
-</code></pre></div></div>
-<h5 id="euler-angles">Euler Angles</h5>
-
-<p><strong>欧拉角的定义</strong><br />
-欧拉角是用三个角度来描述3D空间中的一个旋转变换，每个角度表示围绕一个坐标轴的旋转量。<br />
-在Unity中，欧拉角就是一个<code class="language-plaintext highlighter-rouge">Vector3</code></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transform</span><span class="p">.</span><span class="n">eulerAngles</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">30</span><span class="p">,</span> <span class="m">45</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
-</code></pre></div></div>
-<p>这表示：</p>
+<h2 id="设置skybox的方法">设置Skybox的方法</h2>
+<h3 id="1通过lighting设置全局skybox">1.通过Lighting设置全局Skybox</h3>
+<p>1.创建一个Skybox材质：</p>
 <ul>
-  <li>绕X轴旋转30°</li>
-  <li>然后绕Y轴旋转45°</li>
-  <li>然后绕Z轴旋转0°
-    <blockquote>
-      <p>欧拉角的本质是「分轴顺序旋转」，三个角度 + 一个旋转顺序（X -&gt; Y -&gt; Z），顺序不能出现问题，否则结果不同</p>
-    </blockquote>
+  <li><code class="language-plaintext highlighter-rouge">Assets</code>-&gt;右键-&gt;<code class="language-plaintext highlighter-rouge">Create &gt; Material</code></li>
+  <li>Shader选择为<code class="language-plaintext highlighter-rouge">Skybox/6 Sided</code>或<code class="language-plaintext highlighter-rouge">Skybox/Cubemap</code>或<code class="language-plaintext highlighter-rouge">Skybox/Procedural</code></li>
+</ul>
+
+<p>2.在材质中设置贴图（textures）或参数</p>
+
+<p>3.打开<code class="language-plaintext highlighter-rouge">Window &gt; Rendering &gt; Lighting</code>面板</p>
+
+<p>4.在<code class="language-plaintext highlighter-rouge">Environment &gt; Skybox Material</code>中拖入刚刚的材质</p>
+
+<p>这会将该Skybox应用于整个场景</p>
+
+<h3 id="2通过摄像机设置局部skybox高级">2.通过摄像机设置局部Skybox（高级）</h3>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">RenderSettings</span><span class="p">.</span><span class="n">skybox</span> <span class="p">=</span> <span class="n">mySkyboxMaterial</span><span class="p">;</span>
+</code></pre></div></div>
+<p>或为相机设置<code class="language-plaintext highlighter-rouge">Skybox</code>组件并赋值</p>
+
+<h3 id="skybox与lighting的关系">Skybox与Lighting的关系</h3>
+<p>Skybox不只是视觉上的背景，它还影响了：</p>
+<ul>
+  <li>Ambient Lighting（环境光）</li>
+  <li>Reflection Probe（反射探针）</li>
+  <li>全局光照（GI）计算</li>
+</ul>
+
+<p>所以换Skybox后记得：</p>
+<ul>
+  <li>在Lighting界面点击“Generate Lighting”</li>
+  <li>使用Reflection Probe重新采样环境反射</li>
+</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Component" /><category term="Light" /><category term="Render" /><category term="Graphics" /><summary type="html"><![CDATA[Skybox是一种渲染技术，用于在3D场景中创建远景背景，例如天空、宇宙、城市天际线等 它本质上是一种把纹理图贴在一个立方体（或球体）内侧的技巧，玩家看不到边界，只能看到包裹在四周的“天空”]]></summary></entry><entry><title type="html">Collider &amp;amp; Trigger</title><link href="http://localhost:4000/posts/2025-06-04-Collider-and-Trigger/" rel="alternate" type="text/html" title="Collider &amp;amp; Trigger" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Collider-and-Trigger</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-04-Collider-and-Trigger/"><![CDATA[<p>Unity中的碰撞体是物理系统的重要组成部分，负责定义游戏对象的形状以进行碰撞检测。简单来说，Collider是一个无形的边界，用于检测物体是否接触或重叠，从而触发碰撞事件和物理响应</p>
+
+<h2 id="什么是collider">什么是Collider</h2>
+<p>Collider是附加在游戏对象上的组件，用于告诉物理引擎这个对象的碰撞范围。Collider本身不会渲染形状，只是一个隐形的物理边界</p>
+
+<h2 id="常见的collider类型">常见的Collider类型</h2>
+<ul>
+  <li>BoxCollider<br />
+立方体形状的碰撞体，适合方形或长方体物体</li>
+  <li>SphereCollider
+球形碰撞体，适合球形或圆形物体</li>
+  <li>CapsuleCollider
+胶囊碰撞体，适合人物、柱子等</li>
+  <li>MeshCollider
+使用自定义网格模型做碰撞体，适合复杂形状，性能较差，且通常用于静态物体</li>
+  <li>WheelCollider
+专门用于车辆轮胎的碰撞和物理模拟</li>
+</ul>
+
+<h2 id="collider和rigidbody的关系">Collider和Rigidbody的关系</h2>
+<ul>
+  <li>Collider只负责检测碰撞，不会自定产生物理运动</li>
+  <li>Rigidbody组件负责物理运动和动力学</li>
+  <li>一个没有Rigidbody的物体的Collider会被当作“静态碰撞体”使用（静态障碍物），不会移动也不响应物理力</li>
+  <li>一个有Rigidbody的物体可以在物理引擎驱动下移动，Collider会随物体运动</li>
+</ul>
+
+<h2 id="collider-panel">Collider Panel</h2>
+<h3 id="box-collider">Box Collider</h3>
+<p><img src="/assets/images/BoxColliderPanel.jpg" alt="BoxColliderPanel" /></p>
+<ul>
+  <li>IsTrigger
+默认false，此时Collider是实体碰撞体，会阻挡其他物体，发生物理碰撞和反弹<br />
+勾选时，Collider变成Trigger，不会阻挡其他物体，但会检测进入、离开和停留事件，可以用来做区域检测、事件触发等</li>
+  <li>Provides Contacts
+用于物理引擎的碰撞检测和接触点信息提供<br />
+默认false，Collider可能只报告碰撞发生，但不提供详细的接触点信息，这样可以节省一些计算资源<br />
+勾选后，Collider会提供详细的碰撞接触点信息，这样物理引擎在碰撞时，可以把碰撞的具体接触点信息暴露出来，供脚本或物理系统使用
+    <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">CollisionPointExample</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+  <span class="k">void</span> <span class="nf">OnCollisionEnter</span><span class="p">(</span><span class="n">Collision</span> <span class="n">collision</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">foreach</span> <span class="p">(</span><span class="n">ContactPoint</span> <span class="n">contact</span> <span class="k">in</span> <span class="n">collision</span><span class="p">.</span><span class="n">contacts</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="c1">//接触点位置</span>
+      <span class="n">Vector3</span> <span class="n">contactPoint</span> <span class="p">=</span> <span class="n">contact</span><span class="p">.</span><span class="n">point</span><span class="p">;</span>
+      <span class="c1">//接触点法线方向</span>
+      <span class="n">Vector3</span> <span class="n">contactNormal</span> <span class="p">=</span> <span class="n">contact</span><span class="p">.</span><span class="n">normal</span><span class="p">;</span>
+
+      <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">$"</span><span class="p">{</span><span class="n">contactPoint</span><span class="p">}</span><span class="s">, </span><span class="p">{</span><span class="n">contactNormal</span><span class="p">}</span><span class="s">"</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <p>如果时触发碰撞，IsTrigger勾选情况下，用的是OnTriggerEnter(Collider other)，这个回调中没有接触点信息，只能检测触发</p>
+  </li>
+  <li>Material
+指的是Physics Material，用于控制物理行为的材质<br />
+Create -&gt; Physics Material，编辑后拖入使用<br />
+作用：Physics Material用于定义物体在碰撞时的物理特性，比如摩擦力（Friction）、弹性（Bounciness）
+常用属性
+    <ul>
+      <li>Dynamic Friction 动摩擦力</li>
+      <li>Static Friction 静摩擦力</li>
+      <li>Bounciness 弹力（0到1之间，1表示完全反弹）</li>
+      <li>Friction Combine 摩擦组合方式（与另一个碰撞体交互时如何合成摩擦）</li>
+      <li>Bounce Combine 弹性组合方式（与另一个碰撞体交互时如何合成弹性）</li>
+    </ul>
+  </li>
+  <li>Center
+    <ul>
+      <li>指的是碰撞体在物体局部坐标系中的中心点位置</li>
+      <li>类型是Vector3</li>
+      <li>不会移动GameObject本身，只会改变碰撞体的位置</li>
+    </ul>
+  </li>
+  <li>Size
+    <ul>
+      <li>指碰撞体的尺寸</li>
+      <li>类型是Vector3</li>
+      <li>控制这个碰撞盒子的大小</li>
+    </ul>
+  </li>
+  <li>Layer Overrides
+    <ul>
+      <li>Layer Override Priority
+用于控制多个Collider在同一物体或子物体上时，哪个Collider的物理层优先生效<br />
+如果一个物体上有多个Collider，并且它们分别设置了不同的Layer，Unity需要一个优先级来判断最终物体的碰撞行为应该归属哪个Layer<br />
+When 2 Colliders have conflicting overrides, the settings of the collider with the higher priority are taken</li>
+      <li>Include Layers
+Layers to include when producing collisions</li>
+      <li>Exclude Layers
+Layers to exclude when producing collisions</li>
+    </ul>
   </li>
 </ul>
 
-<p><strong>欧拉角的特点</strong></p>
+<h3 id="capsulecollider">CapsuleCollider</h3>
+<p><img src="/assets/images/CapsuleColliderPanel.jpg" alt="CapsuleColliderPanel" /></p>
+<ul>
+  <li>Edit Collider
+显示Collider边界<br />
+Hold Alt after clicking control handle to pin center in place（中心缩放） 
+Hold Shift after clicking control handle to scale uniformly（等比缩放）</li>
+  <li>Direction
+The axis of the capsule’s lengthwise orientation in the GameObject’s local space</li>
+</ul>
+
+<h3 id="meshcollider">MeshCollider</h3>
+<p><img src="/assets/images/MeshColliderPanel.jpg" alt="MeshColliderPanel" />
+<code class="language-plaintext highlighter-rouge">MeshCollider</code>是Unity提供的一个基于Mesh的碰撞体组件，它允许你使用一个Mesh的集合外形作为碰撞体检测的形状<br />
+它可以让你的碰撞体检测看起来和你的物体一样精细</p>
+
+<ul>
+  <li>Convex
+是否把Mesh处理为凸包<br />
+如果勾选了：
+    <ul>
+      <li>可以用于动态刚体</li>
+      <li>可以用作Trigger</li>
+      <li>不能太复杂（最多255个三角形）</li>
+    </ul>
+
+    <p>如果不勾选：</p>
+    <ul>
+      <li>可精确表示复杂网格，但只能用于静态物体</li>
+      <li>不支持Trigger和Rigidbody</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>MeshCollider Convex使用注意事项</strong></p>
 
 <table>
   <thead>
     <tr>
-      <th>特点</th>
-      <th>描述</th>
+      <th>场景</th>
+      <th>是否适合用 MeshCollider</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>直观</td>
-      <td>直接写角度，容易理解和调试</td>
+      <td>地形、建筑（静态）</td>
+      <td>非 Convex MeshCollider</td>
     </tr>
     <tr>
-      <td>顺序敏感</td>
-      <td>顺序不同，结果不同（ZYX ≠ XYZ）</td>
+      <td>可交互物体 + Rigidbody</td>
+      <td>Convex MeshCollider</td>
     </tr>
     <tr>
-      <td>有死锁</td>
-      <td>当某个轴旋转到特定位置时，另一个轴“失效”——<strong>万向节死锁（Gimbal Lock）</strong></td>
+      <td>复杂模型 + Trigger</td>
+      <td>Convex MeshCollider（前提是够简单）</td>
     </tr>
     <tr>
-      <td>插值难</td>
-      <td>在两个角度之间插值时可能会突然“跳动”或绕远路</td>
+      <td>移动物体 + 非 Convex</td>
+      <td>不支持，会报错</td>
+    </tr>
+    <tr>
+      <td>高性能要求的游戏</td>
+      <td>尽量少用 MeshCollider，建议用简化碰撞体代替</td>
     </tr>
   </tbody>
 </table>
 
-<p><strong>欧拉角适用于：</strong></p>
 <ul>
-  <li>手动设置角度</li>
-  <li>UI显示</li>
-  <li>编辑器中拖拽角度时</li>
-  <li>简单旋转动画、摄像机控制</li>
+  <li>Cooking Options
+用于控制在碰撞体生成（或烘焙）过程中如何处理网格数据，以提高碰撞效率或调试准确性<br />
+Unity在运行时将网格数据转换为物理引擎能使用的碰撞形式格式，这个过程叫做Mesh Cooking</li>
 </ul>
 
-<p><strong>实际旋转逻辑中，建议使用Quaternion</strong></p>
+<h3 id="terrian-collider">Terrian Collider</h3>
+<ul>
+  <li>Enable Tree Colliders
+When selected, Tree Colliders will be enabled</li>
+</ul>
 
-<p><strong>Euler Angels和Quaternion的关系</strong><br />
-Unity内部几乎不直接用欧拉角进行旋转运算，它会自动把你设置的欧拉角转换为四元数</p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transform</span><span class="p">.</span><span class="n">eulerAngles</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
-<span class="c1">// 实际上自动转换为：</span>
-<span class="n">transform</span><span class="p">.</span><span class="n">rotation</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">Euler</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
+<h3 id="wheel-collider">Wheel Collider</h3>
+<p><img src="/assets/images/WheelColliderPanel.jpg" alt="WheelColliderPanel" /></p>
+<ul>
+  <li>Wheel Damping Rate
+轮阻，轮子滚动时的摩擦衰减速度</li>
+  <li>Suspension Distance
+悬挂行程，表示悬挂系统允许轮子从默认位置向下延伸的最大距离，单位是米</li>
+  <li>Force App Point Distance
+力施加点距离，控制Unity向车体施加力的位置，距离轮子中心的垂直距离，单位是米；可以理解为手推玩具车的高度</li>
+  <li>Suspension Spring
+用于模拟汽车的避震器（弹簧 + 阻尼）
+    <ul>
+      <li>Spring
+弹簧刚度，越大越硬</li>
+      <li>Damper
+阻尼，阻止弹簧震荡的速度，越大越稳定</li>
+      <li>Target Position
+悬挂初始压缩程度，0表示全伸展，1表示全压缩</li>
+    </ul>
+  </li>
+  <li>Forward Friction &amp; Sideways Friction
+控制轮子在前进方向/侧向的摩擦行为
+<code class="language-plaintext highlighter-rouge">Forward Friction</code>：控制加速、刹车的打滑程度
+<code class="language-plaintext highlighter-rouge">Sideways Friction</code>：控制漂移、转弯时的打滑程度
+    <ul>
+      <li>Extremum Slip
+轮胎开始打滑时的滑动值阈值</li>
+      <li>Extremum Value
+极限摩擦力值（未打滑前）</li>
+      <li>Asymptote Slip
+完全失控打滑时的滑动值阈值</li>
+      <li>Asymptote Value
+极限打滑摩擦力值</li>
+      <li>Stiffness
+总体摩擦刚度系数（0-1）。调节摩擦强度的“乘法器”
+<strong>Wheel Collider API</strong></li>
+    </ul>
+  </li>
+  <li>Motor Torque
+通过代码向轮子添加驱动力（加速）
+    <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wheelCollider</span><span class="p">.</span><span class="n">motorTorque</span> <span class="p">=</span> <span class="m">200f</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Brake Torque
+刹车力
+    <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wheelCollider</span><span class="p">.</span><span class="n">brakeTorque</span> <span class="p">=</span> <span class="m">500f</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Steer Angle
+控制论在（尤其是前轮）的转向角度
+    <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wheelCollider</span><span class="p">.</span><span class="n">steerAngle</span> <span class="p">=</span> <span class="m">30f</span><span class="p">;</span>
+</code></pre></div>    </div>
+    <p><strong>使用WheelCollider</strong></p>
+  </li>
+</ul>
+
+<p>在车体下放置空 GameObject，添加 <code class="language-plaintext highlighter-rouge">WheelCollider</code>。</p>
+
+<p>设置合适的 <code class="language-plaintext highlighter-rouge">Radius</code> 和 <code class="language-plaintext highlighter-rouge">Suspension</code>。</p>
+
+<p>使用一个轮胎模型作为视觉轮子（但它自己不加 Collider）。</p>
+
+<p>每帧用代码同步 <code class="language-plaintext highlighter-rouge">WheelCollider.GetWorldPose()</code> 更新轮胎模型位置旋转。</p>
+
+<p>用 <code class="language-plaintext highlighter-rouge">motorTorque</code>、<code class="language-plaintext highlighter-rouge">brakeTorque</code>、<code class="language-plaintext highlighter-rouge">steerAngle</code> 控制车轮。</p>
+
+<p><strong>示例：同步轮子模型</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="n">WheelCollider</span> <span class="n">wheelCollider</span><span class="p">;</span>
+<span class="k">public</span> <span class="n">Transform</span> <span class="n">wheelModel</span><span class="p">;</span>
+
+<span class="k">void</span> <span class="nf">Update</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">Vector3</span> <span class="n">pos</span><span class="p">;</span>
+  <span class="n">Quaternion</span> <span class="n">rot</span><span class="p">;</span>
+  <span class="n">wheelCollider</span><span class="p">.</span><span class="nf">GetWorldPose</span><span class="p">(</span><span class="k">out</span> <span class="n">pos</span><span class="p">,</span> <span class="k">out</span> <span class="n">rot</span><span class="p">);</span>
+  <span class="n">wheelModel</span><span class="p">.</span><span class="n">position</span> <span class="p">=</span> <span class="n">pos</span><span class="p">;</span>
+  <span class="n">wheelModel</span><span class="p">.</span><span class="n">rotation</span> <span class="p">=</span> <span class="n">rot</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
-<p><strong>欧拉角插值出现的问题</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector3</span> <span class="k">from</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
-<span class="n">Vector3</span> <span class="n">to</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">360</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
+<h2 id="对齐collider和gameobject">对齐Collider和GameObject</h2>
+<p>要保证Collider与GameObject完全重合，要让Collider的Center对准模型的中心，并让他的Size或Radius匹配模型的尺寸</p>
 
-<span class="n">Vector3</span> <span class="n">result</span> <span class="p">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="nf">Lerp</span><span class="p">(</span><span class="k">from</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="m">0.5f</span><span class="p">);</span> <span class="c1">//会插值到180°</span>
-</code></pre></div></div>
-<p>实际上，从0°到360°最短路径时0°，这就是欧拉角插值跳变的问题<br />
-使用四元数可以避免</p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Quaternion</span> <span class="n">q1</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">Euler</span><span class="p">(</span><span class="k">from</span><span class="p">);</span>
-<span class="n">Quaternion</span> <span class="n">q2</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">Euler</span><span class="p">(</span><span class="n">to</span><span class="p">);</span>
+<h3 id="方法一使用mesh-renderer的bounds手动对齐">方法一：使用Mesh Renderer的Bounds手动对齐</h3>
+<p>1.选中GameObject<br />
+2.查看Inspector面板中的Mesh Renderer或Mesh Filter：</p>
+<ul>
+  <li>记下它的Bounds和Center</li>
+</ul>
 
-<span class="n">Quaternion</span> <span class="n">qResult</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">Slerp</span><span class="p">(</span><span class="n">q1</span><span class="p">,</span> <span class="n">q2</span><span class="p">,</span> <span class="m">0.5f</span><span class="p">);</span>
-</code></pre></div></div>
+<p>3.在Collider中手动设置</p>
 
-<p><strong>Euler Angles和Quaternion的转换</strong><br />
-欧拉角 -&gt; 四元数</p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Quaternion</span> <span class="n">q</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">Euler</span><span class="p">(</span><span class="m">30</span><span class="p">,</span> <span class="m">45</span><span class="p">,</span> <span class="m">60</span><span class="p">);</span>
-</code></pre></div></div>
-<p>四元数 -&gt; 欧拉角</p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector3</span> <span class="n">euler</span> <span class="p">=</span> <span class="n">q</span><span class="p">.</span><span class="n">eulerAngles</span><span class="p">;</span>
-</code></pre></div></div>
+<h3 id="方法二使用unity自动对齐">方法二：使用Unity自动对齐</h3>
+<p>在Inspector面板中，点击组件右上角的菜单-&gt;<code class="language-plaintext highlighter-rouge">Reset</code><br />
+或删除后重新添加Box Collider，Unity会自动用Mesh尺寸初始化</p>
 <blockquote>
-  <p>四元数本身不会存储旋转顺序和原始角度，这个反转换可能会出现不寻常的角度，比如-180°、350°等</p>
+  <p>注意：自动添加只对Unity支持的标志Mesh效果好，对导入模型FBX有时不准确</p>
 </blockquote>
 
-<p>欧拉角和四元数的关系：三次独立的XYZ轴旋转（Euler Angle）相当于对于某个特定轴旋转特定角度（Quaternion）<br />
-<strong>深入原理</strong>
-给定欧拉角 (𝛼, 𝛽, 𝛾)，表示绕 X、Y、Z 旋转，四元数变换公式如下（XYZ顺序）：</p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Quaternion</span> <span class="n">q</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">Euler</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">);</span>
-</code></pre></div></div>
-<p>等价于</p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Quaternion</span> <span class="n">qx</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">AngleAxis</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">right</span><span class="p">);</span>
-<span class="n">Quaternion</span> <span class="n">qy</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">AngleAxis</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">up</span><span class="p">);</span>
-<span class="n">Quaternion</span> <span class="n">qz</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">AngleAxis</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">forward</span><span class="p">);</span>
-<span class="n">Quaternion</span> <span class="n">q</span> <span class="p">=</span> <span class="n">qy</span> <span class="p">*</span> <span class="n">qx</span> <span class="p">*</span> <span class="n">qz</span><span class="p">;</span> <span class="c1">//组合旋转，顺序重要；Unity为左乘</span>
-</code></pre></div></div>
+<h3 id="方法三通过脚本自动匹配mesh-bounds">方法三：通过脚本自动匹配Mesh Bounds</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
 
-<p><strong>万向节死锁（Gimbal Lock）</strong><br />
-Gimbal Lock是指使用欧拉角进行三维旋转时，当两个旋转轴重合，导致自由度从3变成2，某个方向的旋转无法表达的情况<br />
-产生Gimbal Lock的核心原因是欧拉角的特性:<br />
-一组欧拉角描述一个旋转过程：即，围绕每个轴的旋转角度和围绕每个轴旋转的顺序，顺序很重要，不同的顺序会带来不同的结果
-Gimbal Lock产生的核心是：先执行旋转的轴会带动后执行旋转的轴转动，即产生新轴；但后执行旋转的轴不会带动先执行旋转的轴转动，即一个轴旋转过后就不会出现新轴了，这就会出现轴重合问题，即导致万向节死锁的产生<br />
-<strong>数学本质是矩阵乘法的非交换性</strong><br />
-旋转在数学上是用矩阵表示的：</p>
+<span class="p">[</span><span class="nf">RequireComponent</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">BoxCollider</span><span class="p">))]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">FitColliderToMesh</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+  <span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+  <span class="p">{</span>
+    <span class="kt">var</span> <span class="n">mesh</span> <span class="p">=</span> <span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">MeshFilter</span><span class="p">&gt;().</span><span class="n">sharedMesh</span><span class="p">;</span>
+    <span class="kt">var</span> <span class="n">bounds</span> <span class="p">=</span> <span class="n">mesh</span><span class="p">.</span><span class="n">bounds</span><span class="p">;</span>
+
+    <span class="kt">var</span> <span class="n">collider</span> <span class="p">=</span> <span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">BoxCollider</span><span class="p">&gt;();</span>
+    <span class="n">collider</span><span class="p">.</span><span class="n">center</span> <span class="p">=</span> <span class="n">bounds</span><span class="p">.</span><span class="n">center</span><span class="p">;</span>
+    <span class="n">collider</span><span class="p">.</span><span class="n">size</span> <span class="p">=</span> <span class="n">bounds</span><span class="p">.</span><span class="n">size</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>注意：<code class="language-plaintext highlighter-rouge">mesh.bounds</code>是局部坐标系下的范围<br />
+如果模型被缩放，需要做缩放修正</p>
+
+<h3 id="检查是否重合的方法">检查是否重合的方法</h3>
+<p>1.Gizmo显示：Scene视图中选中物体，勾选Gizmo，可以看到Collider的框是否保住模型<br />
+2.调试代码验证接触：你可以在运行是打印<code class="language-plaintext highlighter-rouge">Collider.contacts[0].point</code>看碰撞点位置是否符合预期<br />
+3.把Mesh设成透明或关闭渲染，观察Collider是否贴合</p>
+
+<h3 id="collider基类-api">Collider基类 API</h3>
+<p><strong>常用属性</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性名</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">enabled</code></td>
+      <td>是否启用该碰撞体，禁用后不参与碰撞检测。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">isTrigger</code></td>
+      <td>是否作为触发器（Trigger），开启后不阻挡，只触发事件。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">attachedRigidbody</code></td>
+      <td>关联的 Rigidbody 组件（如果有的话）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">bounds</code></td>
+      <td>碰撞体的世界轴对齐包围盒（<code class="language-plaintext highlighter-rouge">Bounds</code> 类型）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sharedMaterial</code></td>
+      <td>物理材质，控制摩擦力和弹力。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">material</code></td>
+      <td>碰撞体当前使用的物理材质实例。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">contactOffset</code></td>
+      <td>碰撞体接触判定的偏移距离，影响物理碰撞的灵敏度。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>常用方法</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法名</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ClosestPoint(Vector3 position)</code></td>
+      <td>返回碰撞体表面上距离指定点最近的点。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Raycast(Ray ray, out RaycastHit hitInfo, float maxDistance)</code></td>
+      <td>以射线检测碰撞体是否被击中，返回击中信息。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetComponent&lt;T&gt;()</code></td>
+      <td>获取挂载在同一GameObject上的组件（Collider继承自Component，所以可用此方法）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnCollisionEnter/OnTriggerEnter</code></td>
+      <td>物理事件回调，不是Collider自带的方法，但Collider触发时会调用对应脚本方法。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>事件相关</strong><br />
+Collider本身没有事件接口，但它的物理交互会调用以下MonoBehaviour的回调方法</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>事件名</th>
+      <th>触发条件</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnCollisionEnter(Collision collision)</code></td>
+      <td>碰撞开始</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnCollisionStay(Collision collision)</code></td>
+      <td>碰撞持续</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnCollisionExit(Collision collision)</code></td>
+      <td>碰撞结束</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnTriggerEnter(Collider other)</code></td>
+      <td>触发器进入</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnTriggerStay(Collider other)</code></td>
+      <td>触发器持续</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnTriggerExit(Collider other)</code></td>
+      <td>触发器离开</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="什么是trigger">什么是Trigger</h2>
+<p>Trigger是Collider组件的一个特殊状态，用来检测物体的进入、停留和离开事件，但不会产生物理碰撞和响应<br />
+Trigger是Collider的感应区域模式</p>
+
+<h3 id="trigger应用场景">Trigger应用场景</h3>
 <ul>
-  <li>旋转操作使用矩阵乘法实现的</li>
-  <li>矩阵乘法不满足交换律，也就是说：Rx × Ry != Ry × Rx</li>
+  <li>检测角色进入某个区域（陷阱、传送门、对话触发区）</li>
+  <li>收集物品（进入物品碰撞区域后触发拾取）</li>
+  <li>触发游戏事件（比如开门、启动机关）</li>
+  <li>检测敌人视野范围</li>
 </ul>
 
-<p><strong>核心关键是为什么后旋转的轴不能带动先旋转的轴？</strong><br />
-这个问题涉及到旋转的执行顺序本质上是“嵌套变换”，而不是“同步协商”的。这就像流水线的工序，是不可逆和不可交错的<br />
-核心结论：<br />
-每一步旋转都是在“当前局部坐标系”下完成的，而不是回头修改前面坐标系的历史状态<br />
-后面的旋转只是在前面旋转结果基础上叠加，它并不会“回头影响”之前已经旋转过的坐标系<br />
-举个例子：
-假设做一个蛋糕：<br />
-第一步：打鸡蛋  <br />
-第二步：加牛奶<br />
-第三步：搅拌<br />
-现在你问：为什么我搅拌的时候不能回头改变我打鸡蛋这个过程？<br />
-因为：打鸡蛋已经做完了，是个不可逆的状态变换，你在搅拌的时候，只能处理“鸡蛋 + 牛奶”的混合物，不能改变已经打完的蛋</p>
+<h3 id="注意事项">注意事项</h3>
+<ul>
+  <li>触发器本身不会组织物体移动，物体可以自由穿过</li>
+  <li>要保证触发事件能被调用，涉及的GameObject至少一个带有Collider（且其中至少一个是Trigger）和Rigidbody组件，一般建议被检测的物体带Rigidbody</li>
+  <li>如果两个物体都没有Rigidbody，触发事件不会发生</li>
+</ul>
 
-<p><strong>数学视角：矩阵乘法是方向性的</strong>
-旋转是通过矩阵来表示的，顺序matters： <code class="language-plaintext highlighter-rouge">FinalRotation = Rz · Ry · Rx</code><br />
-你先执行Rx，然后再执行Ry,再执行Rz<br />
-每个旋转操作都是将当前状态乘上一个旋转矩阵<br />
-一旦Rx被应用，坐标系就已经变了<br />
-之后的Ry是在这个变了的坐标系下进行的<br />
-Ry不会也无法回头修改Rx的效果<br />
-因为矩阵乘法不是可交换的，所以这个顺序是“单向嵌套”，不是“双向影响”</p>
-
-<p><strong>欧拉角是旋转变换，每次旋转变换都是叠加了上次旋转的状态后再进行的，也就是说，虽然每次变换都是独立的，但都要经历从初始状态按顺序旋转，绕轴旋转角度达到目标状态这一系列流程，这就把时序包含在其中了</strong><br />
-<strong>初始状态是（0，0，0）</strong></p>
-
-<p><strong>为什么看到的变换是连续的</strong><br />
-欧拉角变换虽然顺序嵌套，但它们构成的是一个连续函数映射<br />
-欧拉角 → 四元数 → 变换矩阵 → 渲染出模型的姿态
-整个链条中：</p>
-
-<p>欧拉角：你手动输入的 (X, Y, Z) 是连续的（例如你拖动滑块）</p>
-
-<p>四元数：Unity 把欧拉角转换成一个四元数，这是一个连续光滑的旋转表示</p>
-
-<p>矩阵：四元数再转成 3×3 旋转矩阵，依然是平滑的</p>
-
-<p>模型：在世界中展示的姿态是自然旋转、连贯变化的</p>
-
-<p>所以你看到的旋转是连续的、平滑的。</p>
-
-<p><strong>哪些地方是不连续的</strong><br />
-1.万向节死锁，当某个周旋转到90°，两个轴重合，自由度减少，Unity为了保持“姿态”，可能会自动调整其他轴的值，此时Rotation的值再Inspector中跳变，但物体并没有跳<br />
-2.四元数存在加减号不唯一（180°对称）问题，一个方向可以由两个四元数表示：q和-q，它们作用在物体上是一样的，Unity在背后自动选择最短路径，所以视觉上依旧是连续旋转路径上的最短旋转</p>
-
-<h3 id="2游戏对象相关">2.游戏对象相关</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>类型</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">GameObject</code></td>
-      <td>场景中所有对象的基本单元</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Component</code></td>
-      <td>所有组件的基类</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Transform</code></td>
-      <td>表示物体的位置、旋转、缩放</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">MonoBehaviour</code></td>
-      <td>用户自定义脚本的基类</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">ScriptableObject</code></td>
-      <td>可创建的资产类，用于数据管理</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Object</code></td>
-      <td>Unity 所有对象的基类（包括资源）</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="3图形和渲染">3.图形和渲染</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>类型</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Mesh</code>, <code class="language-plaintext highlighter-rouge">MeshRenderer</code></td>
-      <td>网格和其渲染组件</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Material</code></td>
-      <td>材质资源</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Shader</code></td>
-      <td>控制材质渲染效果的程序</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Texture</code>, <code class="language-plaintext highlighter-rouge">Texture2D</code>, <code class="language-plaintext highlighter-rouge">RenderTexture</code></td>
-      <td>贴图资源</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Camera</code></td>
-      <td>摄像机组件</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Light</code></td>
-      <td>灯光组件</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="4物理相关">4.物理相关</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>类型</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Rigidbody</code>, <code class="language-plaintext highlighter-rouge">Rigidbody2D</code></td>
-      <td>刚体，驱动物体物理行为</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Collider</code>, <code class="language-plaintext highlighter-rouge">BoxCollider</code>, <code class="language-plaintext highlighter-rouge">SphereCollider</code>, 等</td>
-      <td>碰撞器</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Physics</code>, <code class="language-plaintext highlighter-rouge">Physics2D</code></td>
-      <td>提供物理检测和操作的静态类</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Joint</code> 系列</td>
-      <td>链接两个刚体（如 HingeJoint）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">ContactPoint</code></td>
-      <td>碰撞点信息结构体</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="5输入和事件">5.输入和事件</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>类型</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Input</code></td>
-      <td>输入系统静态类</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">KeyCode</code></td>
-      <td>键盘按键枚举</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Touch</code>, <code class="language-plaintext highlighter-rouge">TouchPhase</code></td>
-      <td>触摸输入相关</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Event</code>, <code class="language-plaintext highlighter-rouge">EventType</code></td>
-      <td>GUI 系统事件类型</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="6资源与序列化">6.资源与序列化</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>类型</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Resources</code>, <code class="language-plaintext highlighter-rouge">AssetBundle</code></td>
-      <td>资源加载管理器</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">TextAsset</code></td>
-      <td>文本资源，如 JSON、配置文件等</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">SerializableAttribute</code></td>
-      <td>允许自定义类型序列化存储</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="7uiugui">7.UI（UGUI）</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>类型</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Canvas</code>, <code class="language-plaintext highlighter-rouge">CanvasRenderer</code></td>
-      <td>UI 根组件</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">RectTransform</code></td>
-      <td>用于 UI 布局的 Transform</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Image</code>, <code class="language-plaintext highlighter-rouge">Text</code>, <code class="language-plaintext highlighter-rouge">Button</code>, <code class="language-plaintext highlighter-rouge">Slider</code> 等</td>
-      <td>基础 UI 组件</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">EventSystem</code></td>
-      <td>管理 UI 输入事件</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="8时间协程与生命周期">8.时间、协程与生命周期</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>类型</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Time</code></td>
-      <td>时间相关（如 deltaTime、timeScale）</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">WaitForSeconds</code>, <code class="language-plaintext highlighter-rouge">WaitUntil</code></td>
-      <td>协程等待辅助类</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Coroutine</code></td>
-      <td>协程对象类型</td>
-    </tr>
-  </tbody>
-</table>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[Unity内建类型]]></summary></entry><entry><title type="html">Unity Performance Tuning</title><link href="http://localhost:4000/posts/2025-06-13-Unity-Performance-Tuning/" rel="alternate" type="text/html" title="Unity Performance Tuning" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Unity-Performance-Tuning</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-13-Unity-Performance-Tuning/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Unity Profiler</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler.html" rel="alternate" type="text/html" title="Unity Profiler" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Tool" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Unity NetWork</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork.html" rel="alternate" type="text/html" title="Unity NetWork" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity NetWork" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Terrain</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain.html" rel="alternate" type="text/html" title="Terrain" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain.html"><![CDATA[<p>在Unity中，Terrain是一个专门用于制作大规模、自然风格场景的强大工具</p>
+<p><strong>本模块仅讲Collider作为组件的使用，详细物理系统请参照：</strong><br />
+<a href="/posts/2025-06-03-Physics-System/">Physics System</a></p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Component" /><category term="Physics System" /><summary type="html"><![CDATA[Unity中的碰撞体是物理系统的重要组成部分，负责定义游戏对象的形状以进行碰撞检测。简单来说，Collider是一个无形的边界，用于检测物体是否接触或重叠，从而触发碰撞事件和物理响应]]></summary></entry><entry><title type="html">Behaviour Tree</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Behaviour-Tree.html" rel="alternate" type="text/html" title="Behaviour Tree" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Behaviour-Tree</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Behaviour-Tree.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><category term="AI" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Unity Performance Tuning</title><link href="http://localhost:4000/posts/2025-06-13-Unity-Performance-Tuning/" rel="alternate" type="text/html" title="Unity Performance Tuning" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Unity-Performance-Tuning</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-13-Unity-Performance-Tuning/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Unity Profiler</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler.html" rel="alternate" type="text/html" title="Unity Profiler" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Tool" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">TileMap</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap.html" rel="alternate" type="text/html" title="TileMap" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><category term="Unity Component" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Unity NetWork</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork.html" rel="alternate" type="text/html" title="Unity NetWork" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity NetWork" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Terrain</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain.html" rel="alternate" type="text/html" title="Terrain" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain.html"><![CDATA[<p>在Unity中，Terrain是一个专门用于制作大规模、自然风格场景的强大工具</p>
 
 <h2 id="什么是terrain">什么是Terrain</h2>
 <p>Terrain是Unity提供的一个内置组件，用于在场景中创建可编辑的地形<br />
@@ -2375,210 +2135,7 @@ Pass{
   </tbody>
 </table>
 
-<p><strong>详见<a href="https://docs.unity3d.com/ScriptReference/Terrain.html">UnityScripting Terrain</a></strong></p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Renderer" /><category term="Unity System" /><category term="Unity Component" /><summary type="html"><![CDATA[在Unity中，Terrain是一个专门用于制作大规模、自然风格场景的强大工具]]></summary></entry><entry><title type="html">TileMap</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap.html" rel="alternate" type="text/html" title="TileMap" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><category term="Unity Component" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Mesh</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Mesh.html" rel="alternate" type="text/html" title="Mesh" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Mesh</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Mesh.html"><![CDATA[<p>Unity中的Mesh（网格）是一切3D模型、地形、角色、道具、甚至某些UI元素的几何基础，是“物体的骨架”<br />
-包含顶点、面、法线、UV、颜色等数据，是3D图形渲染的核心单位</p>
-
-<h2 id="mesh的构成">Mesh的构成</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>数据</th>
-      <th>作用</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>顶点（Vertices）</strong></td>
-      <td>网格的点，构成形状的基础</td>
-    </tr>
-    <tr>
-      <td><strong>三角形（Triangles）</strong></td>
-      <td>每三个顶点组成一个三角面，是渲染最小单元</td>
-    </tr>
-    <tr>
-      <td><strong>法线（Normals）</strong></td>
-      <td>每个顶点的方向，用于光照计算</td>
-    </tr>
-    <tr>
-      <td><strong>UV 坐标（UVs）</strong></td>
-      <td>纹理坐标，用来决定贴图怎么铺在模型上</td>
-    </tr>
-    <tr>
-      <td><strong>顶点色（Colors）</strong></td>
-      <td>每个顶点的颜色，用于特效、调色</td>
-    </tr>
-    <tr>
-      <td><strong>切线（Tangents）</strong></td>
-      <td>用于法线贴图的方向辅助向量</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>这些数据最终会交给GPU，进行渲染</p>
-
-<h2 id="mesh在unity中的用途">Mesh在Unity中的用途</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>用途</th>
-      <th>举例</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>渲染模型</td>
-      <td>静态模型、角色模型、环境场景</td>
-    </tr>
-    <tr>
-      <td>自定义几何体</td>
-      <td>Procedural Mesh（如地形、波浪、水面）</td>
-    </tr>
-    <tr>
-      <td>碰撞体数据</td>
-      <td>Mesh Collider 也使用 Mesh</td>
-    </tr>
-    <tr>
-      <td>特效/轨迹</td>
-      <td>线性 Mesh（如剑气轨迹、能量波）</td>
-    </tr>
-    <tr>
-      <td>角色换装</td>
-      <td>动态换装系统中组合不同 Mesh</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="如何创建操作mesh">如何创建、操作Mesh</h2>
-<p>Unity提供<code class="language-plaintext highlighter-rouge">Mesh</code>类，支持自定义几何体</p>
-
-<h3 id="示例创建一个简单三角形mesh">示例：创建一个简单三角形Mesh</h3>
-<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Mesh</span> <span class="n">mesh</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Mesh</span><span class="p">();</span>
-
-<span class="n">Vector3</span><span class="p">[]</span> <span class="n">vertices</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Vector3</span><span class="p">[]</span>
-<span class="p">{</span>
-    <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span>
-    <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span>
-    <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span>
-<span class="p">};</span>
-
-<span class="kt">int</span><span class="p">[]</span> <span class="n">triangles</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[]</span> <span class="p">{</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">};</span>
-
-<span class="n">mesh</span><span class="p">.</span><span class="n">vertices</span> <span class="p">=</span> <span class="n">vertices</span><span class="p">;</span>
-<span class="n">mesh</span><span class="p">.</span><span class="n">triangles</span> <span class="p">=</span> <span class="n">triangles</span><span class="p">;</span>
-<span class="n">mesh</span><span class="p">.</span><span class="nf">RecalculateNormals</span><span class="p">();</span> <span class="c1">// 自动生成法线</span>
-
-<span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">MeshFilter</span><span class="p">&gt;().</span><span class="n">mesh</span> <span class="p">=</span> <span class="n">mesh</span><span class="p">;</span>
-</code></pre></div></div>
-<h2 id="meshfilter-和-meshrenderer">MeshFilter 和 MeshRenderer</h2>
-<p>在Unity中，<code class="language-plaintext highlighter-rouge">MeshFilter</code>和<code class="language-plaintext highlighter-rouge">MeshRenderer</code>是构成立体物体（3D模型）渲染的核心组件</p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">MeshFilter</code>：提供集合形状（顶点、三角形等）</li>
-  <li><code class="language-plaintext highlighter-rouge">MeshRenderer</code>：将形状渲染到屏幕上（使用材质、光照等）</li>
-</ul>
-
-<p><img src="/assets/images/MeshFilterandMeshRenderer.jpg" alt="MeshFilterandMeshRenderer" />;</p>
-
-<h3 id="meshfilter提供模型数据">MeshFilter：提供模型数据</h3>
-<ul>
-  <li>MeshFilter包含一个Mesh对象，这是3D模型的几何体，比如立方体、球体、角色模型等</li>
-  <li>这些Mesh是<code class="language-plaintext highlighter-rouge">.fbx</code>、<code class="language-plaintext highlighter-rouge">.obj</code>导入的，或运行时通过代码生成</li>
-</ul>
-
-<p>可以通过以下方式获取或赋值Mesh</p>
-<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MeshFilter</span> <span class="n">mf</span> <span class="p">=</span> <span class="n">GetComponenet</span><span class="p">&lt;</span><span class="n">MeshFilter</span><span class="p">&gt;();</span>
-<span class="n">Mesh</span> <span class="n">mesh</span> <span class="p">=</span> <span class="n">mf</span><span class="p">.</span><span class="n">mesh</span><span class="p">;</span> <span class="c1">// 当前使用的实例化mesh</span>
-<span class="n">mf</span><span class="p">.</span><span class="n">mesh</span> <span class="p">=</span> <span class="n">someOtherMesh</span><span class="p">;</span> <span class="c1">// 替换为新的Mesh</span>
-</code></pre></div></div>
-<blockquote>
-  <p><code class="language-plaintext highlighter-rouge">.mesh</code>是一个实例副本，你修改它不会影响原始资源；<code class="language-plaintext highlighter-rouge">.sharedMesh</code>是共享原始资源</p>
-</blockquote>
-
-<h3 id="meshrenderer负责把模型画出来">MeshRenderer：负责把模型画出来</h3>
-<ul>
-  <li>MeshRenderer负责把<code class="language-plaintext highlighter-rouge">MeshFilter</code>提供的几何体渲染到屏幕上</li>
-  <li>控制材质、阴影、光照、剔除、光照探针等参数</li>
-</ul>
-
-<h4 id="面板参数">面板参数</h4>
-<h5 id="element-0-1">Element 0, 1…</h5>
-<ul>
-  <li>控制使用哪个材质渲染对应子网格</li>
-  <li>通常一个对象只有一个材质，如果是多个SubMesh，会有多个材质槽
-适用场景：</li>
-  <li>多材质角色：身体/衣服/装备使用不同的材质</li>
-  <li>不同部件不同特效：一个材质透明，一个闪光</li>
-</ul>
-
-<h5 id="lighting">Lighting</h5>
-<p><strong>Cast Shadows(投射阴影)</strong></p>
-<ul>
-  <li>控制该物体是否想地面等对象投影</li>
-  <li>选项：
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">On</code>：始终投射阴影</li>
-      <li><code class="language-plaintext highlighter-rouge">Off</code>：不投影</li>
-      <li><code class="language-plaintext highlighter-rouge">Two Sided</code>：背面也能投影（适用于双面平面）</li>
-      <li><code class="language-plaintext highlighter-rouge">Shadows Only</code>：只显示阴影，不渲染模型本体（隐形）</li>
-    </ul>
-  </li>
-</ul>
-
-<p><strong>Receive Shadows(接收阴影)</strong></p>
-<ul>
-  <li>是否接收其他物体的阴影（比如树被房子挡住时）</li>
-  <li>关闭可提升性能，但视觉上可能不真实</li>
-</ul>
-
-<h5 id="probes探针相关环境光间接光">Probes（探针相关，环境光/间接光）</h5>
-<p>在Unity中，<code class="language-plaintext highlighter-rouge">Probes</code>是一类帮助处理间接光照和环境反射的技术，目的是让动态物体（如角色、道具）在光照和反射效果上看起来更自然，融入环境</p>
-
-<p><strong>为什么需要探针</strong></p>
-
-<p>Unity中有两类光照</p>
-<ul>
-  <li>直接光照：来自灯光（如Dirctional Light）</li>
-  <li>间接光照：来自物体间的反弹、环境照明</li>
-</ul>
-
-<p>对于静态物体，Unity可以烘焙光照贴图（Lightmap）来记录间接光照<br />
-但动态物体（移动的角色、道具）不能使用烘焙光照贴图，这时候就需要探针来帮它“感受环境的光”</p>
-
-<blockquote>
-  <p>探针是一种轻量级采样方式，让动态物体获得类似烘焙光照/环境反射的技术，从而避免使用高开销的实时光照和实时反射</p>
-</blockquote>
-
-<p><strong>Light Probes</strong></p>
-<ul>
-  <li>是否接受光照探针（动态光照采样，用于小物体，如动态角色）</li>
-  <li>一般设置为<code class="language-plaintext highlighter-rouge">Blend Probes</code>（自动采样探针）</li>
-</ul>
-
-<p><strong>Reflection Probes</strong></p>
-<ul>
-  <li>是否使用反射探针（环境反射用）</li>
-  <li>选项：
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">Off</code></li>
-      <li><code class="language-plaintext highlighter-rouge">Blend Probes</code>（常用）</li>
-      <li><code class="language-plaintext highlighter-rouge">Simple</code>（不混合，只是用最近一个）</li>
-    </ul>
-  </li>
-</ul>
-
-<h5 id="additional-settings附加设置">Additional Settings（附加设置）</h5>
-<p><strong>Motion Vectors</strong></p>
-<ul>
-  <li>控制是否为该物体生成运动矢量（供后处理如动态模糊使用）</li>
-  <li>推荐开启：<code class="language-plaintext highlighter-rouge">Per Object Motion</code></li>
-</ul>
-
-<p><strong>Lightmap Static</strong></p>
-<ul>
-  <li>如果你将对象标记为静态，会自动启用Lightmap烘焙支持</li>
-  <li>静态光照适用于不动的建筑、地面等</li>
-</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Renderer" /><category term="Graphic" /><summary type="html"><![CDATA[Unity中的Mesh（网格）是一切3D模型、地形、角色、道具、甚至某些UI元素的几何基础，是“物体的骨架” 包含顶点、面、法线、UV、颜色等数据，是3D图形渲染的核心单位]]></summary></entry><entry><title type="html">Navigation System</title><link href="http://localhost:4000/posts/2025-06-11-Navigation/" rel="alternate" type="text/html" title="Navigation System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Navigation</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-11-Navigation/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><category term="AI" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Import Assets</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets.html" rel="alternate" type="text/html" title="Import Assets" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets.html"><![CDATA[<p>Unity支持多种格式的资源文件，并能自动识别并进行初步处理</p>
+<p><strong>详见<a href="https://docs.unity3d.com/ScriptReference/Terrain.html">UnityScripting Terrain</a></strong></p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Renderer" /><category term="Unity System" /><category term="Unity Component" /><summary type="html"><![CDATA[在Unity中，Terrain是一个专门用于制作大规模、自然风格场景的强大工具]]></summary></entry><entry><title type="html">Import Assets</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets.html" rel="alternate" type="text/html" title="Import Assets" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets.html"><![CDATA[<p>Unity支持多种格式的资源文件，并能自动识别并进行初步处理</p>
 
 <h2 id="资源导入基本流程">资源导入基本流程</h2>
 <p><strong>1.将资源文件拖入<code class="language-plaintext highlighter-rouge">Assets</code>目录中（Unity会自动导入）</strong><br />
@@ -2674,4 +2231,146 @@ Pass{
 
 <blockquote>
   <p><strong>资源组织建议：</strong> 使用好的文件夹结构和命名习惯，可以极大提高开发效率</p>
-</blockquote>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><summary type="html"><![CDATA[Unity支持多种格式的资源文件，并能自动识别并进行初步处理]]></summary></entry></feed>
+</blockquote>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><summary type="html"><![CDATA[Unity支持多种格式的资源文件，并能自动识别并进行初步处理]]></summary></entry><entry><title type="html">Layer</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layer.html" rel="alternate" type="text/html" title="Layer" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layer</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Layer.html"><![CDATA[<p>在Unity中，Layer是要给非常重要的系统<br />
+它主要用于：</p>
+<ul>
+  <li>控制物体的渲染与相机的可见性</li>
+  <li>控制物理碰撞（配合Layer Collision Matrix）</li>
+  <li>通过脚本进行物体分类和筛选</li>
+</ul>
+
+<h2 id="什么是layer">什么是Layer</h2>
+
+<p>Layer是给GameObject打的“标签”，但它和<code class="language-plaintext highlighter-rouge">Tag</code>不一样，Layer是用于功能性控制的，特别在：</p>
+<ul>
+  <li>摄像机的Culling Mask</li>
+  <li>光照影响（Light Culling）</li>
+  <li>物理碰撞（Physics Layer）</li>
+  <li>射线检测（Raycast Layer）</li>
+</ul>
+
+<h2 id="layer的使用场景">Layer的使用场景</h2>
+<h3 id="1摄像机视野控制culling-mask">1.摄像机视野控制（Culling Mask）</h3>
+<p>在Camera组件中，你可以设置</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Culling Mask -&gt; 选择哪些Layer可以被该相机看到
+</code></pre></div></div>
+
+<p><strong>用途：</strong></p>
+<ul>
+  <li>UI相机只看UI层</li>
+  <li>小地图相机只看敌人层</li>
+  <li>分屏镜头每个只看自己的部分</li>
+</ul>
+
+<h3 id="2物理碰撞控制layer-collision-matrix">2.物理碰撞控制（Layer Collision Matrix）</h3>
+<p>在菜单中：</p>
+
+<div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">Edit</span> <span class="s">-&gt;</span> <span class="s">Project</span> <span class="s">Settings</span> <span class="s">-&gt;</span> <span class="s">Physics</span>
+</code></pre></div></div>
+
+<p>你可以看到Layer Collision Matrix，它控制：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>哪些Layer和哪些Layer能发生物理碰撞
+</code></pre></div></div>
+
+<p><strong>用途：</strong></p>
+<ul>
+  <li>玩家层与敌人层可以碰撞，但不和自身碰撞</li>
+  <li>子弹不撞自己</li>
+  <li>角色不被UI的Collider打断</li>
+</ul>
+
+<h3 id="3射线检测">3.射线检测</h3>
+<p>可以通过Layer来控制射线是否命中某个对象</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">layerMask</span> <span class="p">=</span> <span class="m">1</span> <span class="p">&lt;&lt;</span> <span class="n">LayerMask</span><span class="p">.</span><span class="nf">NameToLayer</span><span class="p">(</span><span class="s">"Enemy"</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">Physics</span><span class="p">.</span><span class="nf">Raycast</span><span class="p">(</span><span class="n">ray</span><span class="p">,</span> <span class="k">out</span> <span class="n">hit</span><span class="p">,</span> <span class="m">100f</span><span class="p">,</span> <span class="n">layerMask</span><span class="p">))</span> <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"Hit enemy"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>也可以多层合并：</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">mask</span> <span class="p">=</span> <span class="p">(</span><span class="m">1</span> <span class="p">&lt;&lt;</span> <span class="n">LayerMask</span><span class="p">.</span><span class="nf">NameToLayer</span><span class="p">(</span><span class="s">"Enemy"</span><span class="p">))</span> <span class="p">|</span> <span class="p">(</span><span class="m">1</span> <span class="p">&lt;&lt;</span> <span class="n">LayerMask</span><span class="p">.</span><span class="nf">NameToLayer</span><span class="p">(</span><span class="s">"NPC"</span><span class="p">));</span>
+</code></pre></div></div>
+<h2 id="内置与自定义layer">内置与自定义Layer</h2>
+
+<h3 id="内置layerunity默认的">内置Layer（Unity默认的）</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>编号</th>
+      <th>名称</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>Default</td>
+      <td>默认层</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Water</td>
+      <td>水体特效</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>UI</td>
+      <td>UI 专用</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="自定义layer">自定义Layer</h3>
+<p>Unity允许你最多使用32个Layer（编号 0~31），其中前几个是保留的<br />
+自定义方式：</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">选中</span> <span class="n">GameObject</span> <span class="o">-&gt;</span> <span class="n">Inspector</span> <span class="o">-&gt;</span> <span class="n">Layer</span> <span class="o">-&gt;</span> <span class="k">Add</span> <span class="n">Layer</span><span class="p">...</span>
+</code></pre></div></div>
+<p>添加后可为GameObject设置：</p>
+<div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">Layer</span> <span class="s">-&gt;</span> <span class="s">你刚添加的层名</span>
+</code></pre></div></div>
+<h2 id="layer与tag的区别">Layer与Tag的区别</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>特性</th>
+      <th>Layer</th>
+      <th>Tag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>数量限制</td>
+      <td>最多 32 个</td>
+      <td>无限制</td>
+    </tr>
+    <tr>
+      <td>用于渲染控制</td>
+      <td>✅</td>
+      <td>❌</td>
+    </tr>
+    <tr>
+      <td>用于物理控制</td>
+      <td>✅</td>
+      <td>❌</td>
+    </tr>
+    <tr>
+      <td>用于分类查找</td>
+      <td>有限制（用 LayerMask）</td>
+      <td>✅（用 CompareTag 等）</td>
+    </tr>
+    <tr>
+      <td>性能优化</td>
+      <td>✅（用于剔除、射线过滤）</td>
+      <td>❌</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="建议">建议</h3>
+<ul>
+  <li>给每种功能的对象分配专属Layer</li>
+  <li>摄像机、光源、UI、Trigger检测都应依赖Layer控制逻辑</li>
+</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[在Unity中，Layer是要给非常重要的系统 它主要用于： 控制物体的渲染与相机的可见性 控制物理碰撞（配合Layer Collision Matrix） 通过脚本进行物体分类和筛选]]></summary></entry></feed>
