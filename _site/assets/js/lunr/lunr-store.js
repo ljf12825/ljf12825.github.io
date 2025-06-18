@@ -234,7 +234,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Audio System",
-        "excerpt":" ","categories": ["笔记"],
+        "excerpt":"Audio System 是 Unity中处理游戏所有声音播放、管理和混音的核心模块   主要组件                  Category       Component Name                       Audio       Chorus Filter                         Distortion Filter                         Echo Filter                         High Pass Filter                         Listener                         Low Pass Filter                         Reverv Filter                         Reverv Zone                         Source           组件   结合   脚本   性能  ","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
         "url": "/posts/2025-06-11-Audio-System/",
         "teaser": null
