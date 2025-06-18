@@ -965,7 +965,453 @@ Canvas 系统统一批处理渲染
 
 <h5 id="canvasrenderer-api">CanvasRenderer API</h5>
 
+<p><strong>Properties</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>类型</th>
+      <th>含义</th>
+      <th>用途/说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">absoluteDepth</code></td>
+      <td><code class="language-plaintext highlighter-rouge">int</code></td>
+      <td>相对于<strong>根 Canvas 的深度值</strong></td>
+      <td>用于判断当前 UI 元素在整个 UI 渲染中的层级。数值越大，越“靠上”渲染。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">relativeDepth</code></td>
+      <td><code class="language-plaintext highlighter-rouge">int</code></td>
+      <td>相对于<strong>父 Canvas 的深度值</strong></td>
+      <td>可用于局部 Canvas 中排序。配合 <code class="language-plaintext highlighter-rouge">absoluteDepth</code> 理解 UI 层级渲染顺序。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">materialCount</code></td>
+      <td><code class="language-plaintext highlighter-rouge">int</code></td>
+      <td>当前可用于渲染的<strong>材质数量</strong></td>
+      <td>用于分配和管理 UI 材质。你可以通过 <code class="language-plaintext highlighter-rouge">SetMaterial()</code> 为每个 index 设置材质。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">popMaterialCount</code></td>
+      <td><code class="language-plaintext highlighter-rouge">int</code></td>
+      <td>内部用于 Mask（遮罩）的材质数量</td>
+      <td>这个通常配合 UI Masking 使用（如 <code class="language-plaintext highlighter-rouge">Image.maskable = true</code>）。设置 <code class="language-plaintext highlighter-rouge">PopMaterial</code> 用于控制遮罩剥离行为。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">hasPopInstruction</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>是否启用了 “渲染堆栈 pop draw call”</td>
+      <td>和 <code class="language-plaintext highlighter-rouge">PopMaterial</code> 有关。你可以开启它来显式控制何时 pop 遮罩渲染状态。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">hasMoved</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>如果 UI 位置发生变更，则为 <code class="language-plaintext highlighter-rouge">true</code></td>
+      <td>用于判断当前帧是否需要重新生成 UI 顶点几何。优化 UI 刷新频率用。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cull</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>是否<strong>剔除</strong>当前元素</td>
+      <td>设置为 <code class="language-plaintext highlighter-rouge">true</code> 时，这个元素不再渲染（即使它可见）。用于节省性能。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cullTransparentMesh</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>如果顶点颜色 alpha 接近 0，是否剔除渲染</td>
+      <td>用于透明 UI 元素的剔除优化。默认为 <code class="language-plaintext highlighter-rouge">true</code>，避免无意义绘制。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">hasRectClipping</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>是否启用了矩形剪裁区域</td>
+      <td>是否启用了 <code class="language-plaintext highlighter-rouge">EnableRectClipping(Rect)</code>。常用于 <code class="language-plaintext highlighter-rouge">ScrollRect</code> 中的裁剪效果。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">clippingSoftness</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Vector2</code></td>
+      <td>设置裁剪的“软边缘”范围</td>
+      <td>使裁剪边缘变得平滑渐变，不是硬切。单位像素值，适合美术优化。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Public Method</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>中文解释</th>
+      <th>常见用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">Clear()</code></strong></td>
+      <td>清除所有缓存的顶点数据</td>
+      <td>自定义 UI 元素重绘前清空数据</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">DisableRectClipping()</code></strong></td>
+      <td>关闭矩形裁剪区域</td>
+      <td>让 UI 元素可以渲染到全屏（常见于浮动 UI）</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">EnableRectClipping(Rect rect)</code></strong></td>
+      <td>启用矩形裁剪区域，只显示 <code class="language-plaintext highlighter-rouge">rect</code> 内内容</td>
+      <td>用于 <code class="language-plaintext highlighter-rouge">ScrollRect</code> 滚动列表裁剪或自定义遮罩逻辑</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">GetAlpha()</code></strong></td>
+      <td>获取当前的透明度值</td>
+      <td>判断当前透明度状态，常用于动画/过渡控制</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">GetColor()</code></strong></td>
+      <td>获取当前设置的颜色</td>
+      <td>一般配合 <code class="language-plaintext highlighter-rouge">SetColor</code> 使用，读取当前 UI 颜色</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">GetInheritedAlpha()</code></strong></td>
+      <td>获取包括所有父级 CanvasGroup 的总 alpha 值</td>
+      <td>透明度层级继承计算，适合判断是否实际可见</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">GetMaterial(int index)</code></strong></td>
+      <td>获取某个索引的材质</td>
+      <td>适合高级渲染管理，如多 Pass 材质</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">GetPopMaterial(int index)</code></strong></td>
+      <td>获取 Pop 材质（用于 UI 遮罩的反向操作）</td>
+      <td>用于 UI Mask / Stencil Buffer 中的剪裁恢复逻辑</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">GetMesh()</code></strong></td>
+      <td>获取当前用于渲染的 Mesh</td>
+      <td>常用于自定义绘制调试和顶点处理</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">GetSecondaryTexture(int index)</code></strong></td>
+      <td>获取指定索引的第二纹理</td>
+      <td>用于多纹理 UI Shader，例如溶解图、遮罩图</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">GetSecondaryTextureCount()</code></strong></td>
+      <td>获取当前可用第二纹理数量</td>
+      <td>用于管理复杂 Shader UI 结构</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">GetSecondaryTextureName(int index)</code></strong></td>
+      <td>获取指定索引的 Shader 属性名</td>
+      <td>获取传入的纹理对应的 <code class="language-plaintext highlighter-rouge">_SomeTexName</code></td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">SetAlpha(float alpha)</code></strong></td>
+      <td>设置透明度，会与 <code class="language-plaintext highlighter-rouge">UIVertex alpha</code> 和 <code class="language-plaintext highlighter-rouge">Canvas alpha</code> 相乘</td>
+      <td>快速设置 UI 淡入淡出、不透明状态等</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">SetAlphaTexture(Texture tex)</code></strong></td>
+      <td>将 <code class="language-plaintext highlighter-rouge">_AlphaTex</code> 指定为某个纹理，传给 Shader</td>
+      <td>适用于字体抗锯齿、自定义透明纹理渲染</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">SetColor(Color color)</code></strong></td>
+      <td>设置颜色，会与 <code class="language-plaintext highlighter-rouge">UIVertex.color</code> 和 <code class="language-plaintext highlighter-rouge">Canvas.color</code> 混合</td>
+      <td>比如红色血条：<code class="language-plaintext highlighter-rouge">SetColor(Color.red)</code></td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">SetMaterial(Material mat, int index)</code></strong></td>
+      <td>为指定索引设置材质</td>
+      <td>UI Shader 控制，如多 pass 渲染、特效图层等</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">SetPopMaterial(Material mat, int index)</code></strong></td>
+      <td>设置 Pop 材质（内部用于 Mask 反剪裁）</td>
+      <td>控制遮罩关闭后的恢复材质</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">SetMesh(Mesh mesh)</code></strong></td>
+      <td>设置渲染用的 Mesh，Mesh 必须启用读写</td>
+      <td>你可以自定义顶点图形绘制复杂 UI</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">SetSecondaryTextureCount(int count)</code></strong></td>
+      <td>设置可用第二纹理数量</td>
+      <td>Shader 中有多个纹理输入时要提前设置</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">SetSecondaryTexture(int index, string shaderProp, Texture tex)</code></strong></td>
+      <td>设置指定索引的纹理及其 Shader 属性名</td>
+      <td>给 UI Shader 传多个纹理，如 <code class="language-plaintext highlighter-rouge">_MaskTex</code>, <code class="language-plaintext highlighter-rouge">_NoiseTex</code></td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">SetTexture(Texture tex)</code></strong></td>
+      <td>设置用于 UI 材质中的主纹理</td>
+      <td>相当于设定 Shader 的 <code class="language-plaintext highlighter-rouge">_MainTex</code>，适用于 <code class="language-plaintext highlighter-rouge">Image</code> 或 <code class="language-plaintext highlighter-rouge">RawImage</code> 渲染</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Static Method</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法名</th>
+      <th>作用</th>
+      <th>常见用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">SplitUIVertexStreams</code></strong></td>
+      <td>将 <code class="language-plaintext highlighter-rouge">UIVertex</code> 列表拆分成各个属性数组（位置、颜色、UV、法线、切线）</td>
+      <td>修改顶点颜色、UV、法线等时使用</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">AddUIVertexStream</code></strong></td>
+      <td>将 <code class="language-plaintext highlighter-rouge">UIVertex</code> 中的数据<strong>添加</strong>到现有的顶点属性列表</td>
+      <td>组合多个顶点来源数据，叠加处理</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">CreateUIVertexStream</code></strong></td>
+      <td>将单独的顶点属性数组（位置、颜色、UV等）<strong>合成为一个 <code class="language-plaintext highlighter-rouge">UIVertex</code> 流</strong></td>
+      <td>自定义 UI 图形顶点数据，如渐变、闪光、圆形 UI 等</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>静态方法参数说明</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>参数名</th>
+      <th>类型</th>
+      <th>含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">verts</code></td>
+      <td><code class="language-plaintext highlighter-rouge">List&lt;UIVertex&gt;</code></td>
+      <td>完整顶点数据流</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">positions</code></td>
+      <td><code class="language-plaintext highlighter-rouge">List&lt;Vector3&gt;</code></td>
+      <td>每个顶点的位置</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">colors</code></td>
+      <td><code class="language-plaintext highlighter-rouge">List&lt;Color32&gt;</code></td>
+      <td>每个顶点的颜色</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">uv0S</code> / <code class="language-plaintext highlighter-rouge">uv1S</code></td>
+      <td><code class="language-plaintext highlighter-rouge">List&lt;Vector4&gt;</code></td>
+      <td>UV 坐标（第0、1通道）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">normals</code></td>
+      <td><code class="language-plaintext highlighter-rouge">List&lt;Vector3&gt;</code></td>
+      <td>法线</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">tangents</code></td>
+      <td><code class="language-plaintext highlighter-rouge">List&lt;Vector4&gt;</code></td>
+      <td>切线，用于光照方向等</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">stream</code></td>
+      <td><code class="language-plaintext highlighter-rouge">List&lt;UIVertex&gt;</code></td>
+      <td>用于最终生成的合并数据</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Event</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>事件名</th>
+      <th>作用</th>
+      <th>使用场景</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">onRequestRebuild</code></strong></td>
+      <td><strong>（仅在 Editor 模式下）</strong>当 CanvasRenderer 中的数据无效、需要重建时触发</td>
+      <td>编辑器下自定义 UI 编辑、自动刷新组件、响应布局更新等</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="image">Image</h4>
+<p>Image用于在<code class="language-plaintext highlighter-rouge">Canvas</code>上渲染2D图像</p>
+
+<h5 id="属性-1">属性</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Source Image</strong></td>
+      <td>要显示的图片（Sprite）</td>
+    </tr>
+    <tr>
+      <td><strong>Color</strong></td>
+      <td>渲染颜色，会乘上图片原色，可用于变色、淡入淡出</td>
+    </tr>
+    <tr>
+      <td><strong>Material</strong></td>
+      <td>自定义渲染材质（通常用于特殊效果，如描边、渐变）</td>
+    </tr>
+    <tr>
+      <td><strong>Raycast Target</strong></td>
+      <td>是否响应点击事件（勾选表示能被 <code class="language-plaintext highlighter-rouge">GraphicRaycaster</code> 检测）</td>
+    </tr>
+    <tr>
+      <td><strong>Maskable</strong></td>
+      <td>是否允许被遮罩裁剪（勾选表示允许）</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Image Type</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>描述</th>
+      <th>用途示例</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Simple</strong></td>
+      <td>直接绘制整张图片</td>
+      <td>图标、贴图、UI背景</td>
+    </tr>
+    <tr>
+      <td><strong>Sliced</strong></td>
+      <td>使用 9 宫格方式拉伸</td>
+      <td>按钮、对话框、面板背景</td>
+    </tr>
+    <tr>
+      <td><strong>Tiled</strong></td>
+      <td>将图像平铺（不拉伸）填满区域</td>
+      <td>网格背景、重复纹理</td>
+    </tr>
+    <tr>
+      <td><strong>Filled</strong></td>
+      <td>根据百分比填充图像</td>
+      <td>血条、技能冷却、进度圈</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="image-type-simple">Image Type: Simple</h5>
+<ul>
+  <li>Use Sprite Mesh
+是否使用Sprite导入时生成的精细网格来渲染这张图片
+    <ul>
+      <li>勾选：使用Sprite的自定义网格（Polygon Mesh）</li>
+      <li>取消：使用默认的矩形网格（Quad）</li>
+    </ul>
+  </li>
+  <li>Preserve Aspect
+图片在拉伸时是否保持原始宽高比</li>
+</ul>
+
+<h5 id="image-type-sliced">Image Type: Sliced</h5>
+<ul>
+  <li>Fill Center
+是否绘制九宫格中间的中心区域（中心填充）
+    <ul>
+      <li>勾选：中间区域会被绘制，整个九宫格都会显示</li>
+      <li>取消：中间区域不会绘制，只绘制九宫格的四个边和四个角， 这样中心部分会变透明，常用于制作空心边框、框线效果</li>
+    </ul>
+  </li>
+  <li>Pixels Per Unit Multiplier
+像素与Unity单位之间的转换比例，以调整图片显示的大小，从而不必修改RectTransform大小</li>
+</ul>
+
+<h5 id="image-type-tiled">Image Type: Tiled</h5>
+<p>同上</p>
+
+<h5 id="image-type-filled">Image Type: Filled</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Fill Method</strong></td>
+      <td>填充方式（Horizontal、Vertical、Radial360、Radial180 等）</td>
+    </tr>
+    <tr>
+      <td><strong>Fill Origin</strong></td>
+      <td>填充起点（左/右/上/下/中心）</td>
+    </tr>
+    <tr>
+      <td><strong>Fill Amount</strong></td>
+      <td>填充比例（0 到 1）</td>
+    </tr>
+    <tr>
+      <td><strong>Clockwise</strong></td>
+      <td>是否顺时针填充</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="性能建议">性能建议</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>建议</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>尽量合批</td>
+      <td>使用相同材质和图片可减少 draw call</td>
+    </tr>
+    <tr>
+      <td>禁用 <code class="language-plaintext highlighter-rouge">Raycast Target</code></td>
+      <td>如果不需要点击事件，记得取消勾选提高效率</td>
+    </tr>
+    <tr>
+      <td>使用 <code class="language-plaintext highlighter-rouge">Sliced</code></td>
+      <td>比 <code class="language-plaintext highlighter-rouge">Simple</code> 更适合可拉伸的 UI 元素，避免失真</td>
+    </tr>
+    <tr>
+      <td>用 <code class="language-plaintext highlighter-rouge">Mask</code> 做裁剪</td>
+      <td>可配合小地图/头像/UI 视窗裁剪区域</td>
+    </tr>
+  </tbody>
+</table>
 
 <h2 id="layout-system">Layout System</h2>
 <h3 id="layout-group">Layout Group</h3>
