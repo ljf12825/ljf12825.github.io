@@ -911,6 +911,126 @@ A Screen Space Canvas with no specified camera acts like an Overlay Canvas</li>
 <h5 id="recttransform-api">RectTransform API</h5>
 <p><strong>Properties</strong></p>
 
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">anchoredPosition</code></td>
+      <td>相对于锚点参考位置的<strong>二维坐标</strong>，表示此 <code class="language-plaintext highlighter-rouge">RectTransform</code> 的<strong>pivot（枢轴点）</strong>的位置。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">anchoredPosition3D</code></td>
+      <td>相对于锚点参考位置的<strong>三维坐标</strong>，主要用于支持 Z 轴（例如 3D UI 或特殊布局需求）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">anchorMax</code></td>
+      <td>右上角锚点在父 <code class="language-plaintext highlighter-rouge">RectTransform</code> 中的<strong>归一化坐标</strong>（范围 0~1），例如 (1,1) 表示父物体的右上角。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">anchorMin</code></td>
+      <td>左下角锚点在父 <code class="language-plaintext highlighter-rouge">RectTransform</code> 中的<strong>归一化坐标</strong>，例如 (0,0) 表示父物体的左下角。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">drivenByObject</code></td>
+      <td>如果该 <code class="language-plaintext highlighter-rouge">RectTransform</code> 的属性被其他对象驱动（如 Layout 组件），会显示驱动它的对象；否则为 <code class="language-plaintext highlighter-rouge">null</code>。常用于调试自动布局。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">offsetMax</code></td>
+      <td>当前矩形右上角相对于右上锚点的偏移值（本地坐标）。可以理解为 <code class="language-plaintext highlighter-rouge">Top</code> 和 <code class="language-plaintext highlighter-rouge">Right</code> 的偏移。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">offsetMin</code></td>
+      <td>当前矩形左下角相对于左下锚点的偏移值。可以理解为 <code class="language-plaintext highlighter-rouge">Left</code> 和 <code class="language-plaintext highlighter-rouge">Bottom</code> 的偏移。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pivot</code></td>
+      <td>当前 <code class="language-plaintext highlighter-rouge">RectTransform</code> 的<strong>枢轴点</strong>，用归一化坐标表示 (0~1)，如 (0.5, 0.5) 表示中心点，(0, 0) 表示左下角。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">rect</code></td>
+      <td>在本地坐标系下计算出的实际矩形区域，是一个 <code class="language-plaintext highlighter-rouge">Rect</code> 结构体（包含 x, y, width, height）。只读属性。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sizeDelta</code></td>
+      <td>表示当前矩形的宽高 <strong>相对于 anchor 之间距离的增量值</strong>。如果 anchorMin 和 anchorMax 相同，则这个值就是最终尺寸。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Public Method</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ForceUpdateRectTransforms()</code></td>
+      <td>强制重新计算 <code class="language-plaintext highlighter-rouge">RectTransform</code> 的内部数据（通常在布局改变后使用，用来立即更新布局）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetLocalCorners(Vector3[] fourCornersArray)</code></td>
+      <td>获取该 <code class="language-plaintext highlighter-rouge">RectTransform</code> 在本地空间中的四个角的坐标，按顺序为：左下、左上、右上、右下。结果会填充到传入的 <code class="language-plaintext highlighter-rouge">Vector3[4]</code> 数组中。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetWorldCorners(Vector3[] fourCornersArray)</code></td>
+      <td>获取该 <code class="language-plaintext highlighter-rouge">RectTransform</code> 在<strong>世界空间</strong>中的四个角的坐标（顺序同上）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SetInsetAndSizeFromParentEdge(RectTransform.Edge edge, float inset, float size)</code></td>
+      <td>以父物体的某条边为参考，设置当前 <code class="language-plaintext highlighter-rouge">RectTransform</code> 距离该边的<strong>偏移值（inset）</strong>和自身的<strong>尺寸（size）</strong>。适用于锚点固定在某一边的场景。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SetSizeWithCurrentAnchors(RectTransform.Axis axis, float size)</code></td>
+      <td>在指定轴（水平或垂直）上，按照当前锚点设置矩形大小。它会考虑锚点之间的拉伸距离，<strong>相对于锚点调整 sizeDelta</strong>。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Event</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>事件</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">reapplyDrivenProperties</code></td>
+      <td>当一个 <code class="language-plaintext highlighter-rouge">RectTransform</code> 的某些属性（由外部系统如 Layout、Animation 或代码控制）需要被重新应用时触发的事件。开发者可以订阅这个事件来自定义处理逻辑。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Delegate</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>委托</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ReapplyDrivenProperties</code></td>
+      <td>用于 <code class="language-plaintext highlighter-rouge">RectTransform.reapplyDrivenProperties</code> 事件的委托类型，定义了事件回调的签名。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="https://docs.unity3d.com/ScriptReference/RectTransform.html">UnityScripting RectTransform</a></p>
+
 <h4 id="canvas-renderer">Canvas Renderer</h4>
 <p><code class="language-plaintext highlighter-rouge">CanvasRenderer</code>是Unity UI系统中挂在每个可见UI上的一个底层组件，负责UI的绘制提交，它是Graphic类的渲染后台</p>
 <blockquote>
@@ -1256,6 +1376,8 @@ Canvas 系统统一批处理渲染
   </tbody>
 </table>
 
+<p><a href="https://docs.unity3d.com/ScriptReference/CanvasRenderer.html">CanvasRenderer</a></p>
+
 <h4 id="image">Image</h4>
 <p>Image用于在<code class="language-plaintext highlighter-rouge">Canvas</code>上渲染2D图像</p>
 
@@ -1413,6 +1535,68 @@ Canvas 系统统一批处理渲染
   </tbody>
 </table>
 
+<h5 id="image-api">Image API</h5>
+
+<p><strong>Static Properties</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ussClassName</code></td>
+      <td>该类型元素默认的 <strong>USS（Unity Style Sheets）类名</strong>。用于样式表（USS 文件）中选择和定义该类型元素的默认样式。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Properties</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性名</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">image</code></td>
+      <td>要显示的贴图（<code class="language-plaintext highlighter-rouge">Texture</code> 或 <code class="language-plaintext highlighter-rouge">Texture2D</code>）。设置后，<code class="language-plaintext highlighter-rouge">Image</code> 会使用此纹理渲染，控件大小可能自动适应纹理尺寸。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">scaleMode</code></td>
+      <td>图片的缩放模式，使用 <code class="language-plaintext highlighter-rouge">ScaleMode</code> 枚举值（如 <code class="language-plaintext highlighter-rouge">StretchToFill</code>, <code class="language-plaintext highlighter-rouge">ScaleAndCrop</code>, <code class="language-plaintext highlighter-rouge">ScaleToFit</code>）控制图片如何适应控件大小。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sourceRect</code></td>
+      <td>指定贴图中哪一部分作为源区域显示，使用左上角为参考点的坐标和尺寸（单位为像素）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sprite</code></td>
+      <td>显示的精灵（<code class="language-plaintext highlighter-rouge">Sprite</code> 类型）。这是 UI Toolkit 中推荐的图像显示方式，比原始 <code class="language-plaintext highlighter-rouge">Texture</code> 更灵活。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">tintColor</code></td>
+      <td>渲染图片时使用的着色颜色（默认为白色，设置为其他颜色可以改变图片颜色）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">uv</code></td>
+      <td>图片的 UV 坐标范围，基于左下角为原点（通常用于手动设置 UV 区域，控制显示纹理的哪一部分）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">vectorImage</code></td>
+      <td>用于显示的矢量图（<code class="language-plaintext highlighter-rouge">VectorImage</code> 类型，SVG 样式的图像）。适合需要分辨率无损缩放的图标或 UI 图案。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="https://docs.unity3d.com/ScriptReference/UIElements.Image.html">UnityScrpting Image</a></p>
+
 <h2 id="layout-system">Layout System</h2>
 <h3 id="layout-group">Layout Group</h3>
 
@@ -1421,6 +1605,10 @@ Canvas 系统统一批处理渲染
 <h3 id="aspectratiofitter">AspectRatioFitter</h3>
 
 <h3 id="mask--rectmask2d">Mask / RectMask2D</h3>
+
+<h2 id="draw-call">Draw Call</h2>
+
+<h2 id="unity-ui-tookit">Unity UI Tookit</h2>
 
 <h2 id="event-system">Event System</h2>
 
