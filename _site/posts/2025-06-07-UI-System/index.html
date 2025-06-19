@@ -1597,6 +1597,105 @@ Canvas 系统统一批处理渲染
 
 <p><a href="https://docs.unity3d.com/ScriptReference/UIElements.Image.html">UnityScrpting Image</a></p>
 
+<h2 id="ui-element">UI Element</h2>
+<h3 id="panel">Panel</h3>
+<p>Panel是用来组织、分组、控制一组UI元素的容器，是UI架构中最基本的结构单位</p>
+
+<p>本质上是一个普通的<code class="language-plaintext highlighter-rouge">GameObject</code></p>
+
+<blockquote>
+  <p>Panel = GameObject + RectTransform + Other Optional Component</p>
+</blockquote>
+
+<h4 id="常见用途">常见用途</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>用途</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>UI 分组容器</strong></td>
+      <td>将一组相关的 UI 元素包在一起（如背包、商店、设置等）</td>
+    </tr>
+    <tr>
+      <td><strong>背景视觉层</strong></td>
+      <td>给 UI 添加一个背景板（通常使用半透明黑色）</td>
+    </tr>
+    <tr>
+      <td><strong>控制显示/隐藏</strong></td>
+      <td>通过 <code class="language-plaintext highlighter-rouge">SetActive()</code> 控制整组 UI 显示与否</td>
+    </tr>
+    <tr>
+      <td><strong>蒙版裁剪</strong></td>
+      <td>配合 <code class="language-plaintext highlighter-rouge">Mask</code> 或 <code class="language-plaintext highlighter-rouge">RectMask2D</code> 使用，裁剪子内容</td>
+    </tr>
+    <tr>
+      <td><strong>动画过渡</strong></td>
+      <td>面板之间切换时做位移、渐变等 UI 动画</td>
+    </tr>
+    <tr>
+      <td><strong>局部布局控制</strong></td>
+      <td>配合 <code class="language-plaintext highlighter-rouge">LayoutGroup</code> 使用，控制子元素的自动排列</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="image-1">Image</h3>
+<p>Image = RectTransform + Image<br />
+组件Image不能脱离RectTransform和CanvasRenderer<br />
+Image组件见上</p>
+
+<h3 id="raw-image">Raw Image</h3>
+<p>Raw Image = RectTransform + Canvas Renderer + Raw Image</p>
+
+<p><img src="/assets/images/RawImagePanel.jpg" alt="RawImagePanel" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">Raw Image</code>是Unity UI中用于直接显示<code class="language-plaintext highlighter-rouge">Texture</code>的组件，区别于<code class="language-plaintext highlighter-rouge">Image</code>显示<code class="language-plaintext highlighter-rouge">Sprite</code>，<code class="language-plaintext highlighter-rouge">RawImage</code>更灵活，适合直接显示非Sprite类型的纹理</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">RawImage</code>继承自<code class="language-plaintext highlighter-rouge">MaskableGraphic</code>，是一个UI可视化组件</li>
+  <li>它直接使用一个<code class="language-plaintext highlighter-rouge">Texture</code>对象进行绘制，而不需要把纹理先转换成<code class="language-plaintext highlighter-rouge">Sprite</code></li>
+  <li>适合展示视频帧、RenderTexture、摄像头画面或自定义生成的纹理</li>
+</ul>
+
+<h4 id="image-vs-rawimage">Image vs RawImage</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>方面</th>
+      <th>RawImage</th>
+      <th>Image</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>显示资源类型</td>
+      <td><code class="language-plaintext highlighter-rouge">Texture</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Sprite</code></td>
+    </tr>
+    <tr>
+      <td>是否支持 9 切片</td>
+      <td>不支持</td>
+      <td>支持</td>
+    </tr>
+    <tr>
+      <td>适合用途</td>
+      <td>视频播放、动态纹理显示、非 Sprite 纹理</td>
+      <td>UI 图标、按钮、九宫格背景</td>
+    </tr>
+    <tr>
+      <td>是否自动处理边缘</td>
+      <td>不支持</td>
+      <td>支持切片自动拉伸</td>
+    </tr>
+  </tbody>
+</table>
+
 <h2 id="layout-system">Layout System</h2>
 <h3 id="layout-group">Layout Group</h3>
 
