@@ -1698,7 +1698,7 @@ Image组件见上</p>
   </tbody>
 </table>
 
-<h3 id="text-legacy">Text-Legacy</h3>
+<h3 id="textlegacy">Text(Legacy)</h3>
 <p>UGUI中最早期的文本显示方式之一，Legacy代表它已经被新的系统所取代，但它依然存在于Unity中，作为一种兼容性方案</p>
 
 <p><img src="/assets/images/TextPanel.jpg" alt="TextPanel" /></p>
@@ -1783,7 +1783,7 @@ Image组件见上</p>
 </table>
 
 <h4 id="工作流程">工作流程</h4>
-<p>Text-Legacy的渲染流程大致如下：</p>
+<p>Text(Legacy)的渲染流程大致如下：</p>
 <ul>
   <li>将文本用指定字体转换为字符图形</li>
   <li>用字体的字符图集（Font Atlas）作为纹理采样源</li>
@@ -1791,7 +1791,7 @@ Image组件见上</p>
   <li>通过Canvas Renderer渲染出来</li>
 </ul>
 
-<h4 id="text-legacy的缺点">Text-Legacy的缺点</h4>
+<h4 id="textlegacy的缺点">Text(Legacy)的缺点</h4>
 
 <table>
   <thead>
@@ -1831,6 +1831,187 @@ Image组件见上</p>
   <li>配合Shadow/Outline效果增强可读性</li>
   <li>避免频繁更新文本，防止GC</li>
 </ul>
+
+<h4 id="textlegacy-api">Text(Legacy) API</h4>
+<h5 id="properties-1">Properties</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性名</th>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>alignByGeometry</strong></td>
+      <td>bool</td>
+      <td>是否根据字形几何范围对齐，而非字形度量（更精确的水平对齐）。</td>
+    </tr>
+    <tr>
+      <td><strong>alignment</strong></td>
+      <td>TextAnchor</td>
+      <td>文本相对于 RectTransform 的对齐方式（左中右，上中下等）。</td>
+    </tr>
+    <tr>
+      <td><strong>cachedTextGenerator</strong></td>
+      <td>TextGenerator</td>
+      <td>缓存的文本生成器，用于渲染当前可见文本。</td>
+    </tr>
+    <tr>
+      <td><strong>cachedTextGeneratorForLayout</strong></td>
+      <td>TextGenerator</td>
+      <td>缓存的文本生成器，用于布局计算。</td>
+    </tr>
+    <tr>
+      <td><strong>flexibleHeight</strong></td>
+      <td>float</td>
+      <td>布局系统调用，表示布局弹性高度。</td>
+    </tr>
+    <tr>
+      <td><strong>flexibleWidth</strong></td>
+      <td>float</td>
+      <td>布局系统调用，表示布局弹性宽度。</td>
+    </tr>
+    <tr>
+      <td><strong>font</strong></td>
+      <td>Font</td>
+      <td>使用的字体资源。</td>
+    </tr>
+    <tr>
+      <td><strong>fontSize</strong></td>
+      <td>int</td>
+      <td>字体渲染大小（像素）。</td>
+    </tr>
+    <tr>
+      <td><strong>fontStyle</strong></td>
+      <td>FontStyle</td>
+      <td>字体样式，如正常、斜体、粗体等。</td>
+    </tr>
+    <tr>
+      <td><strong>horizontalOverflow</strong></td>
+      <td>HorizontalWrapMode</td>
+      <td>水平溢出模式（Wrap 或 Overflow），控制文本是否换行。</td>
+    </tr>
+    <tr>
+      <td><strong>layoutPriority</strong></td>
+      <td>int</td>
+      <td>布局系统调用，布局优先级。</td>
+    </tr>
+    <tr>
+      <td><strong>lineSpacing</strong></td>
+      <td>float</td>
+      <td>行间距，相对于字体行高的比例，1为正常。</td>
+    </tr>
+    <tr>
+      <td><strong>mainTexture</strong></td>
+      <td>Texture</td>
+      <td>字体纹理，用于渲染字体。</td>
+    </tr>
+    <tr>
+      <td><strong>minHeight</strong></td>
+      <td>float</td>
+      <td>布局系统调用，最小高度。</td>
+    </tr>
+    <tr>
+      <td><strong>minWidth</strong></td>
+      <td>float</td>
+      <td>布局系统调用，最小宽度。</td>
+    </tr>
+    <tr>
+      <td><strong>pixelsPerUnit</strong></td>
+      <td>float (只读)</td>
+      <td>字体缩放的像素单位，描述字体渲染的像素密度。</td>
+    </tr>
+    <tr>
+      <td><strong>preferredHeight</strong></td>
+      <td>float</td>
+      <td>由文本生成器计算的理想高度。</td>
+    </tr>
+    <tr>
+      <td><strong>preferredWidth</strong></td>
+      <td>float</td>
+      <td>由文本生成器计算的理想宽度。</td>
+    </tr>
+    <tr>
+      <td><strong>resizeTextForBestFit</strong></td>
+      <td>bool</td>
+      <td>是否允许文本自动调整大小以适应容器。</td>
+    </tr>
+    <tr>
+      <td><strong>resizeTextMaxSize</strong></td>
+      <td>int</td>
+      <td>自动调整时允许的最大字体大小。</td>
+    </tr>
+    <tr>
+      <td><strong>resizeTextMinSize</strong></td>
+      <td>int</td>
+      <td>自动调整时允许的最小字体大小。</td>
+    </tr>
+    <tr>
+      <td><strong>supportRichText</strong></td>
+      <td>bool</td>
+      <td>是否支持富文本格式（例如 <code class="language-plaintext highlighter-rouge">&lt;b&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;i&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;color&gt;</code> 标签）。</td>
+    </tr>
+    <tr>
+      <td><strong>text</strong></td>
+      <td>string</td>
+      <td>当前显示的文本内容。</td>
+    </tr>
+    <tr>
+      <td><strong>verticalOverflow</strong></td>
+      <td>VerticalWrapMode</td>
+      <td>垂直溢出模式，控制文本超出垂直边界时的处理方式（裁剪或溢出）。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="public-method">Public Method</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法名</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>CalculateLayoutInputHorizontal</strong></td>
+      <td>由布局系统调用，用于计算水平布局输入（如宽度需求）。</td>
+    </tr>
+    <tr>
+      <td><strong>CalculateLayoutInputVertical</strong></td>
+      <td>由布局系统调用，用于计算垂直布局输入（如高度需求）。</td>
+    </tr>
+    <tr>
+      <td><strong>FontTextureChanged</strong></td>
+      <td>由 <code class="language-plaintext highlighter-rouge">FontUpdateTracker</code> 调用，当字体纹理更新时触发的回调。</td>
+    </tr>
+    <tr>
+      <td><strong>GetGenerationSettings</strong></td>
+      <td>便捷函数，用于生成并填充文本生成器（TextGenerator）的设置参数。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="protected-method">Protected Method</h5>
+
+<p><strong>OnDisable</strong></p>
+
+<h5 id="static-method-1">Static Method</h5>
+
+<p><strong>GetTextAnchorPivot</strong> 提供一个便捷方法计算锚点向量偏移量</p>
+
+<p><a href="https://docs.unity3d.com/2019.1/Documentation/ScriptReference/UI.Text.html">UnityScrpting Text(2019.1)</a></p>
+
+<h3 id="buttonlegacy">Button(Legacy)</h3>
+<p>Unity早期标准控件（UnityEngine.UI.Button）</p>
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">Button(Legacy)</span> <span class="err">=</span> <span class="err">`Rect</span> <span class="err">Transform`</span> <span class="err">+</span> <span class="err">`Canvas</span> <span class="err">Renderer`</span> <span class="err">+</span> <span class="err">`Image`</span> <span class="err">+</span> <span class="err">`Button`</span>
+  <span class="err">|__</span> <span class="err">Text(Legacy)</span>
+</code></pre></div></div>
+<p><img src="/assets/images/Button(Legacy)Panel.jpg" alt="Button(Legacy)Panel" /></p>
 
 <h2 id="effect">Effect</h2>
 
