@@ -244,6 +244,8 @@ UGUI时Unity官方退出的新UI系统，功能更强大，易于扩展，且原
 
 <p><img src="/assets/images/CreateUI.jpg/" alt="CreateUI" /></p>
 
+<p><a href="https://docs.unity3d.com/Packages/com.unity.ugui@2.0/manual/index.html">UnityUI2.0.0</a></p>
+
 <h2 id="canvas">Canvas</h2>
 <p>Canvas是Unity中所有UI元素的容器，所有UI控件都必须是Canvas的子对象，否则它们不会被渲染成UI</p>
 
@@ -1695,6 +1697,142 @@ Image组件见上</p>
     </tr>
   </tbody>
 </table>
+
+<h3 id="text-legacy">Text-Legacy</h3>
+<p>UGUI中最早期的文本显示方式之一，Legacy代表它已经被新的系统所取代，但它依然存在于Unity中，作为一种兼容性方案</p>
+
+<p><img src="/assets/images/TextPanel.jpg" alt="TextPanel" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">Text</code>是Unity UGUI系统（UnityEngine.UI.Text）中的标准UI组件，用来在Canvas上显示简单的2D文本</p>
+
+<h4 id="基本属性">基本属性</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性名</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Text</strong></td>
+      <td>要显示的字符串</td>
+    </tr>
+    <tr>
+      <td><strong>Font</strong></td>
+      <td>使用的字体（<code class="language-plaintext highlighter-rouge">.ttf</code>）资源</td>
+    </tr>
+    <tr>
+      <td><strong>Font Style</strong></td>
+      <td>字体样式（Normal / Bold / Italic）</td>
+    </tr>
+    <tr>
+      <td><strong>Font Size</strong></td>
+      <td>字号大小（整数）</td>
+    </tr>
+    <tr>
+      <td><strong>Line Spacing</strong></td>
+      <td>行间距倍数</td>
+    </tr>
+    <tr>
+      <td><strong>Rich Text</strong></td>
+      <td>是否启用 <code class="language-plaintext highlighter-rouge">&lt;b&gt;</code>,<code class="language-plaintext highlighter-rouge">&lt;i&gt;</code> 等富文本语法</td>
+    </tr>
+    <tr>
+      <td><strong>Alignment</strong></td>
+      <td>对齐方式（左中右 / 上中下）</td>
+    </tr>
+    <tr>
+      <td><strong>Align By Geometry</strong></td>
+      <td>按几何对齐</td>
+    </tr>
+    <tr>
+      <td><strong>Horizontal Overflow</strong></td>
+      <td>超出边框时的处理方式（Wrap（换行）/Overflow（溢出）</td>
+    </tr>
+    <tr>
+      <td><strong>Vertical Overflow</strong></td>
+      <td>同上，垂直方向 (Truncate/Overflow)</td>
+    </tr>
+    <tr>
+      <td><strong>Best Fit</strong></td>
+      <td>是否自动缩放字体以适应文本框大小</td>
+    </tr>
+    <tr>
+      <td><strong>Color</strong></td>
+      <td>文本颜色</td>
+    </tr>
+    <tr>
+      <td><strong>Material</strong></td>
+      <td>可替换字体材质（如实现描边/阴影）</td>
+    </tr>
+    <tr>
+      <td><strong>Raycast Target</strong></td>
+      <td>是否参与事件响应（一般设为 false 提升性能）</td>
+    </tr>
+    <tr>
+      <td><strong>Raycast Padding</strong></td>
+      <td>用于扩大或缩小UI元素对射线检测（点击、触摸等交互）的响应区域</td>
+    </tr>
+    <tr>
+      <td><strong>Maskable</strong></td>
+      <td>可被遮罩剔除</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="工作流程">工作流程</h4>
+<p>Text-Legacy的渲染流程大致如下：</p>
+<ul>
+  <li>将文本用指定字体转换为字符图形</li>
+  <li>用字体的字符图集（Font Atlas）作为纹理采样源</li>
+  <li>把这些字母绘制为UI顶点</li>
+  <li>通过Canvas Renderer渲染出来</li>
+</ul>
+
+<h4 id="text-legacy的缺点">Text-Legacy的缺点</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>问题</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>清晰度差</td>
+      <td>字体在不同分辨率下可能模糊（Bitmap-based）</td>
+    </tr>
+    <tr>
+      <td>无动态字形支持</td>
+      <td>不支持多语言自动扩展字体图集</td>
+    </tr>
+    <tr>
+      <td>没有高级排版功能</td>
+      <td>不支持富排版、嵌入图标、文本裁剪等高级功能</td>
+    </tr>
+    <tr>
+      <td>不支持富样式</td>
+      <td>难以实现多颜色、高级描边、背景等需求</td>
+    </tr>
+    <tr>
+      <td>性能低</td>
+      <td>每次修改文本都会重新生成 UI 顶点，占 GC 和 CPU</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="性能提升">性能提升</h4>
+<ul>
+  <li>使用高质量<code class="language-plaintext highlighter-rouge">.tff</code>字体（防止边缘锯齿）</li>
+  <li>打开Best Fit或设置合理的Font Size</li>
+  <li>配合Shadow/Outline效果增强可读性</li>
+  <li>避免频繁更新文本，防止GC</li>
+</ul>
+
+<h2 id="effect">Effect</h2>
 
 <h2 id="layout-system">Layout System</h2>
 <h3 id="layout-group">Layout Group</h3>
