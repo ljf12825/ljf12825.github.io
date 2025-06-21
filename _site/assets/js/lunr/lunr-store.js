@@ -119,10 +119,10 @@ var store = [{
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Coroutine.html",
         "teaser": null
       },{
-        "title": "Event",
+        "title": "Event Bus",
         "excerpt":" ","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Event.html",
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Event-Bus.html",
         "teaser": null
       },{
         "title": "FSM",

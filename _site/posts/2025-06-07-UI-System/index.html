@@ -2011,7 +2011,199 @@ Image组件见上</p>
 <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">Button(Legacy)</span> <span class="err">=</span> <span class="err">`Rect</span> <span class="err">Transform`</span> <span class="err">+</span> <span class="err">`Canvas</span> <span class="err">Renderer`</span> <span class="err">+</span> <span class="err">`Image`</span> <span class="err">+</span> <span class="err">`Button`</span>
   <span class="err">|__</span> <span class="err">Text(Legacy)</span>
 </code></pre></div></div>
+<p><img src="/assets/images/ButtonCantAddTextComponent.jpg" alt="ButtonCantAddTextComponent" /></p>
+
+<p>Button组件只能绑定一个<code class="language-plaintext highlighter-rouge">Graphic</code>来做交互反馈，比如颜色变化、高亮、禁用状态<br />
+这个<code class="language-plaintext highlighter-rouge">Graphic</code>是通过<code class="language-plaintext highlighter-rouge">Button.targetGraphic</code>这个字段指定的，通常是绑定在同一个GameObject上的<code class="language-plaintext highlighter-rouge">Image</code>或<code class="language-plaintext highlighter-rouge">RawImage</code><br />
+Unity的默认交互逻辑只能作用于一个</p>
+
 <p><img src="/assets/images/Button(Legacy)Panel.jpg" alt="Button(Legacy)Panel" /></p>
+
+<h4 id="panel-properties">Panel Properties</h4>
+
+<ul>
+  <li>
+    <p>Interactable
+bool 是否允许按钮响应点击，取消勾选按钮将进入禁用状态（由Transition决定视觉反馈）</p>
+  </li>
+  <li>Transition（状态切换方式）
+决定按钮在不同状态下的视觉反馈<br />
+可选项：
+    <ul>
+      <li>None 没有任何状态变化</li>
+      <li>Color Tint（默认）
+        <ul>
+          <li>改变<code class="language-plaintext highlighter-rouge">targetGraphic</code>的颜色</li>
+          <li>会出现以下设置：
+            <ul>
+              <li>Target Graphic：颜色变化作用的目标</li>
+              <li>Normal Color：正常状态</li>
+              <li>Highlighted Color：鼠标悬停</li>
+              <li>Press Color：点击中</li>
+              <li>Selected Color：被选中状态（用于导航）</li>
+              <li>Disabled Color：禁用状态</li>
+              <li>Color Multiplier：颜色强度乘数</li>
+              <li>Fade Duration：颜色渐变持续时间（秒）</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Sprite Swap
+        <ul>
+          <li>会切换不同的图片</li>
+          <li>会出现以下设置：
+            <ul>
+              <li>Target Graphic</li>
+              <li>Highlighted Sprite</li>
+              <li>Pressed Sprite</li>
+              <li>Disabled Sprite</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Animation
+        <ul>
+          <li>触发Animator控制器中的动画状态</li>
+          <li>要求你设置一个带有动画状态机的Animator Controller</li>
+          <li>字段：
+            <ul>
+              <li>Normal Trigger</li>
+              <li>Highlighted Trigger</li>
+              <li>Pressed Trigger</li>
+              <li>Disabled Trigger</li>
+            </ul>
+          </li>
+          <li>配合Animator参数使用</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Target Graphic
+    <ul>
+      <li>设置受Transition控制的<code class="language-plaintext highlighter-rouge">Graphic</code>组件</li>
+      <li>通常是按钮本体上的<code class="language-plaintext highlighter-rouge">Image</code></li>
+    </ul>
+  </li>
+  <li>Navigation
+    <ul>
+      <li>控制键盘或手柄方向键操作时，焦点如何移动</li>
+      <li>有四种模式：
+        <ul>
+          <li>None：不使用导航</li>
+          <li>Horizontal / Vertical：自动查找上下左右按钮</li>
+          <li>Explicit：手动指定上下左右的按钮</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>OnClick()事件
+    <ul>
+      <li>设置点击按钮时调用的函数</li>
+      <li>类型：UnityEvent（可以托脚本组件 + 指定公开方法）</li>
+      <li>多个函数可以同时绑定，按顺序依次调用</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="button的继承结构">Button的继承结构</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UIBehaviour
+|___ Selectable
+          |___Button
+</code></pre></div></div>
+
+<p><strong>Selectable</strong>提供了核心交互逻辑：</p>
+<ul>
+  <li>状态切换</li>
+  <li>导航</li>
+  <li>是否可交互等逻辑</li>
+</ul>
+
+<p><strong>Button</strong>在此基础上扩展了：</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">onClick</code>事件触发机制</li>
+  <li>响应鼠标点击和键盘操作</li>
+</ul>
+
+<h4 id="button的点击事件流程底层">Button的点击事件流程（底层）</h4>
+<p>1.场景中有<code class="language-plaintext highlighter-rouge">EventSystem</code> + <code class="language-plaintext highlighter-rouge">GraphicRaycaster</code>
+2.鼠标点击UI Canvas上的对象
+3.<code class="language-plaintext highlighter-rouge">GraphicRaycaster</code>计算哪个UI元素被点击
+4.被点到的UI触发<code class="language-plaintext highlighter-rouge">IPointerClickHandler</code>接口
+5.Button继承这个接口，调用<code class="language-plaintext highlighter-rouge">.onClick.Invoke()</code></p>
+
+<h4 id="button示例">Button示例</h4>
+<h5 id="基础绑定--点击回调">基础绑定 + 点击回调</h5>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">UnityEngine.UI</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">ButtonExample</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="n">Button</span> <span class="n">myButton</span><span class="p">;</span>
+
+  <span class="k">void</span> <span class="nf">Start</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">myButton</span><span class="p">.</span><span class="n">onClick</span><span class="p">.</span><span class="nf">AddListener</span><span class="p">(</span><span class="n">OnButtonClick</span><span class="p">);</span>
+
+  <span class="k">void</span> <span class="nf">OnButtonClick</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"Click!"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h5 id="动态创建按钮--设置点击事件">动态创建按钮 + 设置点击事件</h5>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObject</span> <span class="n">buttonObj</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">GameObject</span><span class="p">(</span><span class="s">"MyButton"</span><span class="p">,</span> <span class="k">typeof</span><span class="p">(</span><span class="n">RectTransform</span><span class="p">),</span> <span class="k">typeof</span><span class="p">(</span><span class="n">CanvasRenderer</span><span class="p">),</span> <span class="k">typeof</span><span class="p">(</span><span class="n">Image</span><span class="p">),</span> <span class="k">typeof</span><span class="p">(</span><span class="n">Button</span><span class="p">));</span>
+
+<span class="n">Button</span> <span class="n">btn</span> <span class="p">=</span> <span class="n">buttonObj</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">Button</span><span class="p">&gt;();</span>
+<span class="n">btn</span><span class="p">.</span><span class="n">onClick</span><span class="p">.</span><span class="nf">AddListener</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"动态按钮点击"</span><span class="p">));</span>
+</code></pre></div></div>
+
+<h5 id="控制按钮状态变化">控制按钮状态变化</h5>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">myButton</span><span class="p">.</span><span class="n">interactable</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+
+<span class="n">myButton</span><span class="p">.</span><span class="n">colors</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ColorBlock</span>
+<span class="p">{</span>
+  <span class="n">normalColor</span> <span class="p">=</span> <span class="n">Color</span><span class="p">.</span><span class="n">white</span><span class="p">,</span> 
+  <span class="n">highlightedColor</span> <span class="p">=</span> <span class="n">Color</span><span class="p">.</span><span class="n">yellow</span><span class="p">,</span> 
+  <span class="n">pressedColor</span> <span class="p">=</span> <span class="n">Color</span><span class="p">,</span><span class="n">red</span><span class="p">,</span> 
+  <span class="n">disabledColor</span> <span class="p">=</span> <span class="n">Color</span><span class="p">.</span><span class="n">gray</span><span class="p">,</span> 
+  <span class="n">colorMultiplier</span> <span class="p">=</span> <span class="m">1f</span><span class="p">,</span> 
+  <span class="n">fadeDuration</span> <span class="p">=</span> <span class="m">0.1f</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h4 id="自定义扩展">自定义扩展</h4>
+<p>可以通过接口实现更复杂的行为</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>接口</th>
+      <th>功能</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">IPointerEnterHandler</code></td>
+      <td>鼠标进入时触发</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">IPointerExitHandler</code></td>
+      <td>鼠标离开时触发</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">IPointerClickHandler</code></td>
+      <td>鼠标点击时触发</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ISubmitHandler</code></td>
+      <td>键盘回车时触发（按钮聚焦状态下）</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">MyButtonEx</span> <span class="p">:</span> <span class="n">MonoBehaviour</span><span class="p">,</span> <span class="n">IPointerEnterHandler</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">OnPointerEnter</span><span class="p">(</span><span class="n">PointerEventData</span> <span class="n">eventData</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"鼠标进入按钮"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h5 id="高级交互">高级交互</h5>
+<p>原始<code class="language-plaintext highlighter-rouge">Button</code>不支持长按、双击、右键等高级操作，可以通过扩展<code class="language-plaintext highlighter-rouge">EventTrigger</code>或实现接口自己处理，或自定义实现Button组件</p>
 
 <h2 id="effect">Effect</h2>
 
