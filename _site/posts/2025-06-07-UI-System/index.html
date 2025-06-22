@@ -242,14 +242,14 @@
 <p>NGUI是在Unity官方UI系统还不成熟时的“事实标准”，很多Unity3.x和4.x的项目大量使用<br />
 UGUI时Unity官方退出的新UI系统，功能更强大，易于扩展，且原生支持多平台和工具链</p>
 
-<p><img src="/assets/images/CreateUI.jpg/" alt="CreateUI" /></p>
+<p><img src="/assets/images/CreateUI.jpg" alt="CreateUI" /></p>
 
 <p><a href="https://docs.unity3d.com/Packages/com.unity.ugui@2.0/manual/index.html">UnityUI2.0.0</a></p>
 
 <h2 id="canvas">Canvas</h2>
 <p>Canvas是Unity中所有UI元素的容器，所有UI控件都必须是Canvas的子对象，否则它们不会被渲染成UI</p>
 
-<p><img src="/assets/images/CanvasInspector.jpg/" alt="CanvasInspector" /></p>
+<p><img src="/assets/images/CanvasInspector.jpg" alt="CanvasInspector" /></p>
 
 <h3 id="canvas的渲染模式">Canvas的渲染模式</h3>
 <p>Canvas有三种渲染模式，不同模式影响UI的显示方式、渲染顺序以及与摄像机的关系</p>
@@ -284,7 +284,7 @@ UGUI时Unity官方退出的新UI系统，功能更强大，易于扩展，且原
 
 <h3 id="canvas组件的重要属性">Canvas组件的重要属性</h3>
 <h4 id="screen-space---overlay">Screen Space - Overlay</h4>
-<p><img src="/assets/images/Canvas-ScreenSpace-Overlay.jpg/" alt="CanvasScreenSpace-Overlay" /></p>
+<p><img src="/assets/images/Canvas-ScreenSpace-Overlay.jpg" alt="CanvasScreenSpace-Overlay" /></p>
 
 <p>默认模式</p>
 
@@ -311,7 +311,7 @@ UGUI时Unity官方退出的新UI系统，功能更强大，易于扩展，且原
 </ul>
 
 <h4 id="screen-space---camera">Screen Space - Camera</h4>
-<p><img src="/assets/images/Canvas-ScreenSpace-Camera.jpg/" alt="CanvasScreenSpace-Camera" /></p>
+<p><img src="/assets/images/Canvas-ScreenSpace-Camera.jpg" alt="CanvasScreenSpace-Camera" /></p>
 
 <ul>
   <li>Render Camera：The Camera whitch will render the canvas. This is also the camera used to send events
@@ -319,7 +319,7 @@ A Screen Space Canvas with no specified camera acts like an Overlay Canvas</li>
 </ul>
 
 <h4 id="world-space">World Space</h4>
-<p><img src="/assets/images/Canvas-WorldSpace.jpg/" alt="CanvasWorldSpace" /></p>
+<p><img src="/assets/images/Canvas-WorldSpace.jpg" alt="CanvasWorldSpace" /></p>
 
 <ul>
   <li>Event Camera：用于处理射线点击UI的相机（通常是主摄像机），必须设置，否则点击无效</li>
@@ -331,7 +331,7 @@ A Screen Space Canvas with no specified camera acts like an Overlay Canvas</li>
 <h4 id="三种缩放模式">三种缩放模式</h4>
 <p>1.Constant Pixel Size（固定像素大小）</p>
 
-<p><img src="/assets/images/CanvasScaler-ConstantPixelSize.jpg/" alt="Constant Pixel Size" /></p>
+<p><img src="/assets/images/CanvasScaler-ConstantPixelSize.jpg" alt="Constant Pixel Size" /></p>
 
 <ul>
   <li>UI元素大小固定为设计时的像素值，不会随屏幕尺寸变化缩放</li>
@@ -347,7 +347,7 @@ A Screen Space Canvas with no specified camera acts like an Overlay Canvas</li>
 
 <p>2.Scale With Screen Size（随屏幕尺寸缩放）</p>
 
-<p><img src="/assets/images/CanvasScaler-ScaleWithScreenSize.jpg/" alt="Scale With Screen Size" /></p>
+<p><img src="/assets/images/CanvasScaler-ScaleWithScreenSize.jpg" alt="Scale With Screen Size" /></p>
 
 <ul>
   <li>根据屏幕分辨率，按比例缩放UI，使得UI在不同分辨率下保持视觉一致</li>
@@ -364,7 +364,7 @@ A Screen Space Canvas with no specified camera acts like an Overlay Canvas</li>
 
 <p>3.Constant Physical Size（固定物理大小）</p>
 
-<p><img src="/assets/images/CanvasScaler-ConstantPhysicalSize.jpg/" alt="Constant Physical Size" /></p>
+<p><img src="/assets/images/CanvasScaler-ConstantPhysicalSize.jpg" alt="Constant Physical Size" /></p>
 
 <ul>
   <li>UI元素在物理尺寸上保持不变（以英寸、毫米为单位），无论屏幕分辨率如何变化</li>
@@ -435,7 +435,7 @@ A Screen Space Canvas with no specified camera acts like an Overlay Canvas</li>
 
 <h3 id="canvas-group">Canvas Group</h3>
 
-<p><img src="/assets/images/CanvasGroupPanel.jpg/" alt="CanvasGroupPanel" /></p>
+<p><img src="/assets/images/CanvasGroupPanel.jpg" alt="CanvasGroupPanel" /></p>
 
 <p>控制一组UI元素的整体透明度、交互性和射线响应<br />
 用它可以实现：</p>
@@ -2204,6 +2204,326 @@ bool 是否允许按钮响应点击，取消勾选按钮将进入禁用状态（
 </code></pre></div></div>
 <h5 id="高级交互">高级交互</h5>
 <p>原始<code class="language-plaintext highlighter-rouge">Button</code>不支持长按、双击、右键等高级操作，可以通过扩展<code class="language-plaintext highlighter-rouge">EventTrigger</code>或实现接口自己处理，或自定义实现Button组件</p>
+
+<h3 id="dropdownlegacy">Dropdown(Legacy)</h3>
+<div class="language-mathematica highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">Dropdown</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">RectTransform</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">Canvas</span><span class="w"> </span><span class="nv">Renderer</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Image</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">Dropdown</span><span class="w">
+  </span><span class="o">|___</span><span class="nb">Label</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="err">当前选中项</span><span class="w">
+  </span><span class="o">|___</span><span class="nb">Arrow</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="err">小箭头实现</span><span class="w">
+  </span><span class="o">|___</span><span class="nv">Template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">RectTransform</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">Canvas</span><span class="w"> </span><span class="nv">Renderer</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Image</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">Scroll</span><span class="w"> </span><span class="nv">Rect</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="err">下拉菜单模板</span><span class="w">
+        </span><span class="o">|___</span><span class="nv">Viewport</span><span class="w">
+        </span><span class="o">|</span><span class="w">      </span><span class="o">|___</span><span class="nv">Content</span><span class="w">
+        </span><span class="o">|</span><span class="w">             </span><span class="o">|___</span><span class="nb">Item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">RectTransform</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">Toggle</span><span class="w">
+        </span><span class="o">|</span><span class="w">                   </span><span class="o">|___</span><span class="nb">Item</span><span class="w"> </span><span class="nb">Background</span><span class="w">
+        </span><span class="o">|</span><span class="w">                   </span><span class="o">|___</span><span class="nb">Item</span><span class="w"> </span><span class="nv">Checkmark</span><span class="w">
+        </span><span class="o">|</span><span class="w">                   </span><span class="o">|___</span><span class="nb">Item</span><span class="w"> </span><span class="nb">Label</span><span class="w">
+        </span><span class="o">|___</span><span class="nv">Scrollbar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">RectTransform</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">Canvas</span><span class="w"> </span><span class="nv">Renderer</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Image</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">Scrollbar</span><span class="w">
+                </span><span class="o">|___</span><span class="nv">Sliding</span><span class="w"> </span><span class="nb">Area</span><span class="w">
+                           </span><span class="o">|___</span><span class="nv">Handle</span><span class="w">
+</span></code></pre></div></div>
+
+<h4 id="dropdown-panel">Dropdown Panel</h4>
+
+<p><img src="/assets/images/DropdownPanel.jpg" alt="DropdownPanel" /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性名</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Template</strong></td>
+      <td>展开后的菜单列表的模板（Template）</td>
+    </tr>
+    <tr>
+      <td><strong>Caption Text</strong></td>
+      <td>当前选项显示的 Label 文本组件</td>
+    </tr>
+    <tr>
+      <td><strong>Caption Image</strong></td>
+      <td>当前选项显示的 Image（可选）</td>
+    </tr>
+    <tr>
+      <td><strong>Item Text</strong></td>
+      <td>下拉项显示用的 Text</td>
+    </tr>
+    <tr>
+      <td><strong>Item Image</strong></td>
+      <td>下拉项使用的图片（可选）</td>
+    </tr>
+    <tr>
+      <td><strong>Options</strong></td>
+      <td>所有的选项，<code class="language-plaintext highlighter-rouge">Dropdown.OptionData</code> 列表</td>
+    </tr>
+    <tr>
+      <td><strong>Value</strong></td>
+      <td>当前选中项的索引</td>
+    </tr>
+    <tr>
+      <td><strong>Alpha Fade Speed</strong></td>
+      <td>下拉列表打开或关闭时，列表的透明度变化速度</td>
+    </tr>
+    <tr>
+      <td><strong>OnValueChanged</strong></td>
+      <td>回调事件（当选项改变时触发）</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="scroll-rect-panel">Scroll Rect Panel</h4>
+
+<p><img src="/assets/images/ScrollRectPanel.jpg" alt="ScrollRectPanel" /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>组件/属性</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Content</strong></td>
+      <td>要滚动的内容（通常是一个RectTransform，里面包含所有需要滚动的元素）</td>
+    </tr>
+    <tr>
+      <td><strong>Viewport</strong></td>
+      <td>可视区域（显示区域），内容超出部分会被裁剪</td>
+    </tr>
+    <tr>
+      <td><strong>Horizontal/Vertical</strong></td>
+      <td>是否开启水平或垂直滚动</td>
+    </tr>
+    <tr>
+      <td><strong>Movement Type</strong></td>
+      <td>滚动行为类型：</td>
+    </tr>
+    <tr>
+      <td>    - Unrestricted</td>
+      <td>内容滚动无限制，超出视口可自由移动</td>
+    </tr>
+    <tr>
+      <td>    - Elastic</td>
+      <td>弹性滚动，拖拽到边界时会有弹回效果</td>
+    </tr>
+    <tr>
+      <td>    - Clamped</td>
+      <td>内容滚动被限制在边界内，无法拖出视口之外</td>
+    </tr>
+    <tr>
+      <td><strong>Elasticity</strong></td>
+      <td>弹性系数，决定弹性滚动的“软硬度”</td>
+    </tr>
+    <tr>
+      <td><strong>Inertia</strong></td>
+      <td>惯性开关，决定拖拽释放后内容是否继续滑动</td>
+    </tr>
+    <tr>
+      <td><strong>Deceleration Rate</strong></td>
+      <td>惯性减速度，惯性滚动速度衰减快慢</td>
+    </tr>
+    <tr>
+      <td><strong>Scroll Sensitivity</strong></td>
+      <td>鼠标滚轮或触控滑动的灵敏度</td>
+    </tr>
+    <tr>
+      <td><strong>OnValueChanged</strong></td>
+      <td>滚动事件</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="工作原理">工作原理</h5>
+<ul>
+  <li>Scroll Rect监听用户的拖拽操作，根据拖动距离改变Content的位置</li>
+  <li>超出Viewport的区域的内容会被裁剪</li>
+  <li>支持惯性滚动，让滚动更自然流畅</li>
+  <li>可以通过代码控制滚动位置、滚动监听事件等</li>
+</ul>
+
+<h4 id="viewport">Viewport</h4>
+
+<ul>
+  <li>Viewport是一个RectTransform，它定义了下拉列表展开时可视的区域大小和位置</li>
+  <li>Viewport通常带有一个<code class="language-plaintext highlighter-rouge">Mask</code>组件（或<code class="language-plaintext highlighter-rouge">RectMask2D</code>），用来裁剪内容， 确保超出范围的内容不显示</li>
+  <li>Viewport下挂载<code class="language-plaintext highlighter-rouge">Content</code>，Content里会动态生成每个选项 （Item）</li>
+  <li>Content是一个垂直排列的容器（通常有Vertical Layout Group和 Content Size Fitter），它控制所有选项的排列和尺寸</li>
+</ul>
+
+<h4 id="示例">示例</h4>
+<p><strong>创建一个Dropdown并监听选择变化</strong></p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">UnityEngine.UI</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">DropdownExample</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="n">Dropdown</span> <span class="n">myDropdown</span><span class="p">;</span>
+
+  <span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+  <span class="p">{</span>
+    <span class="n">myDropdown</span><span class="p">.</span><span class="n">onValueChanged</span><span class="p">.</span><span class="nf">AddListener</span><span class="p">(</span><span class="n">OnDropdownValueChanged</span><span class="p">);</span>
+
+    <span class="n">myDropdown</span><span class="p">.</span><span class="n">options</span><span class="p">.</span><span class="nf">Clear</span><span class="p">();</span>
+    <span class="n">myDropdown</span><span class="p">.</span><span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="k">new</span> <span class="n">Dropdown</span><span class="p">.</span><span class="nf">OptionData</span><span class="p">(</span><span class="s">"选项 A"</span><span class="p">));</span>
+    <span class="n">myDropdown</span><span class="p">.</span><span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="k">new</span> <span class="n">Dropdown</span><span class="p">.</span><span class="nf">OptionData</span><span class="p">(</span><span class="s">"选项 B"</span><span class="p">));</span>
+    <span class="n">myDropdown</span><span class="p">.</span><span class="n">options</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="k">new</span> <span class="n">Dropdown</span><span class="p">.</span><span class="nf">OptionData</span><span class="p">(</span><span class="s">"选项 C"</span><span class="p">));</span>
+
+    <span class="n">myDropdown</span><span class="p">.</span><span class="k">value</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">void</span> <span class="nf">OnDropdownValueChanged</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"当前选择索引："</span> <span class="p">+</span> <span class="n">index</span><span class="p">);</span>
+    <span class="n">Dubug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"当前选择内容："</span> <span class="p">+</span> <span class="n">myDropdown</span><span class="p">.</span><span class="n">options</span><span class="p">[</span><span class="n">index</span><span class="p">].</span><span class="n">text</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h4 id="扩展">扩展</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>用法</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>动态加载选项</td>
+      <td>用代码控制 options 数据源，比如从配置文件读取</td>
+    </tr>
+    <tr>
+      <td>多级联动</td>
+      <td>比如：国家 -&gt; 城市，选择国家后动态更新城市列表</td>
+    </tr>
+    <tr>
+      <td>自定义表现</td>
+      <td>替换 Item 的 Toggle 结构，实现自定义布局或图标</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="api">API</h4>
+
+<p><strong>Properties</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>名称</th>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">options</code></td>
+      <td><code class="language-plaintext highlighter-rouge">List&lt;Dropdown.OptionData&gt;</code></td>
+      <td>Dropdown 的所有选项列表</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">value</code></td>
+      <td><code class="language-plaintext highlighter-rouge">int</code></td>
+      <td>当前选中选项的索引（从 0 开始）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">captionText</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Text</code></td>
+      <td>用于显示当前选择文本的 UI Text 组件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">captionImage</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Image</code></td>
+      <td>显示当前选择图片的 Image 组件（可选）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">itemText</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Text</code></td>
+      <td>Dropdown 选项模板中 Item 的文本组件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">itemImage</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Image</code></td>
+      <td>Dropdown 选项模板中 Item 的图片组件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">template</code></td>
+      <td><code class="language-plaintext highlighter-rouge">RectTransform</code></td>
+      <td>Dropdown 选项列表模板（包含 Viewport 等）</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Event</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>名称</th>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">onValueChanged</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Dropdown.DropdownEvent</code></td>
+      <td>选中项改变时触发，带选中索引</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Method</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>名称</th>
+      <th>签名</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ClearOptions()</code></td>
+      <td><code class="language-plaintext highlighter-rouge">void ClearOptions()</code></td>
+      <td>清空所有选项</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">AddOptions(List&lt;string&gt;)</code></td>
+      <td><code class="language-plaintext highlighter-rouge">void AddOptions(List&lt;string&gt; options)</code></td>
+      <td>添加字符串选项列表</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">AddOptions(List&lt;Sprite&gt;)</code></td>
+      <td><code class="language-plaintext highlighter-rouge">void AddOptions(List&lt;Sprite&gt; options)</code></td>
+      <td>添加图片选项列表</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">AddOptions(List&lt;Dropdown.OptionData&gt;)</code></td>
+      <td><code class="language-plaintext highlighter-rouge">void AddOptions(List&lt;Dropdown.OptionData&gt; options)</code></td>
+      <td>添加 OptionData 列表</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">RefreshShownValue()</code></td>
+      <td><code class="language-plaintext highlighter-rouge">void RefreshShownValue()</code></td>
+      <td>刷新当前显示的选项文本和图片</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Show()</code></td>
+      <td><code class="language-plaintext highlighter-rouge">void Show()</code></td>
+      <td>展开下拉列表</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Hide()</code></td>
+      <td><code class="language-plaintext highlighter-rouge">void Hide()</code></td>
+      <td>关闭下拉列表</td>
+    </tr>
+  </tbody>
+</table>
 
 <h2 id="effect">Effect</h2>
 
