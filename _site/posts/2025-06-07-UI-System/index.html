@@ -2526,6 +2526,409 @@ bool 是否允许按钮响应点击，取消勾选按钮将进入禁用状态（
 </table>
 
 <h3 id="input-fieldlegacy">Input Field(Legacy)</h3>
+<p><code class="language-plaintext highlighter-rouge">Input Field</code>是Unity中用于接收用户输入的UI组件，主要用于文本输入（如用户名，密码，聊天框等）</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>InputField
+|—— Palceholder(Text或TMP_Text)
+|__ Text
+</code></pre></div></div>
+
+<ul>
+  <li>InputField：主控件，管理交互逻辑</li>
+  <li>Placeholder：提示文字，内容为空时显示</li>
+  <li>Text：用户输入文本</li>
+</ul>
+
+<h4 id="input-field-panel">Input Field Panel</h4>
+
+<p><img src="/assets/images/InputFieldPanel.jpg" alt="InputFieldPanel" /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Text Component</code></td>
+      <td>用户输入文字组件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">text</code></td>
+      <td>当前输入的字符串</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">placeholder</code></td>
+      <td>占位文字组件（Text 或 TMP_Text）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">characterLimit</code></td>
+      <td>输入字符数限制</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">contentType</code></td>
+      <td>内容类型（如密码、整数、电子邮件等）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">lineType</code></td>
+      <td>单行或多行</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">inputType</code></td>
+      <td>是否隐藏输入字符（如密码）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">keyboardType</code></td>
+      <td>移动端的虚拟键盘类型</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">readOnly</code></td>
+      <td>是否只读</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">caretBlinkRate</code></td>
+      <td>光标闪烁速度</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Custom Caret Color</code></td>
+      <td>自定义光标颜色</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Hide Mobile Input</code></td>
+      <td>隐藏移动设备键盘上方的原生输入框</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">selectionColor</code></td>
+      <td>选中文本的背景色</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">should Activate OnSelect</code></td>
+      <td>当InputField被选中时，是否自动激活并弹出键盘</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">On Value Changed</code></td>
+      <td>当用户每次修改输入内容时调用（每个字符变动都会触发）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">On Submit</code></td>
+      <td>当用户提交输入时触发即按下回车键时</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">On End Edit</code></td>
+      <td>当输入框失去焦点或用户按下回车键时触发</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="api-1">API</h4>
+
+<h5 id="properties-2">Properties</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性名</th>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">text</code></td>
+      <td><code class="language-plaintext highlighter-rouge">string</code></td>
+      <td>当前输入框中的文本内容</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">textComponent</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Text</code></td>
+      <td>用于显示文本的 UI 组件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">placeholder</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Graphic</code></td>
+      <td>占位符（提示文本）组件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">characterLimit</code></td>
+      <td><code class="language-plaintext highlighter-rouge">int</code></td>
+      <td>最大输入字符数，0 表示不限制</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">contentType</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ContentType</code></td>
+      <td>输入内容类型（标准、密码、数字等）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">inputType</code></td>
+      <td><code class="language-plaintext highlighter-rouge">InputType</code></td>
+      <td>输入显示方式（标准、密码隐藏等）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">keyboardType</code></td>
+      <td><code class="language-plaintext highlighter-rouge">TouchScreenKeyboardType</code></td>
+      <td>移动端软键盘类型</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">characterValidation</code></td>
+      <td><code class="language-plaintext highlighter-rouge">CharacterValidation</code></td>
+      <td>字符校验规则</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">multiLine</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>是否支持多行输入</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">lineType</code></td>
+      <td><code class="language-plaintext highlighter-rouge">LineType</code></td>
+      <td>输入框的换行方式</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">readOnly</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>是否只读</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">onValidateInput</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Func&lt;string, int, char&gt;</code></td>
+      <td>自定义输入字符验证回调</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">caretPosition</code></td>
+      <td><code class="language-plaintext highlighter-rouge">int</code></td>
+      <td>当前光标位置</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">caretWidth</code></td>
+      <td><code class="language-plaintext highlighter-rouge">int</code></td>
+      <td>光标宽度（像素）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">caretBlinkRate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>光标闪烁速度（次数/秒）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">caretColor</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Color</code></td>
+      <td>光标颜色</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">customCaretColor</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>是否使用自定义光标颜色</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">selectionColor</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Color</code></td>
+      <td>文本选中时的背景色</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">selectionAnchorPosition</code></td>
+      <td><code class="language-plaintext highlighter-rouge">int</code></td>
+      <td>选中起点</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">selectionFocusPosition</code></td>
+      <td><code class="language-plaintext highlighter-rouge">int</code></td>
+      <td>选中终点</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">shouldHideMobileInput</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>是否隐藏移动端原生输入框</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">touchScreenKeyboard</code></td>
+      <td><code class="language-plaintext highlighter-rouge">TouchScreenKeyboard</code></td>
+      <td>当前软键盘实例</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">isFocused</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>输入框当前是否获得焦点</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">wasCanceled</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>输入是否被取消（如按返回键）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">onValueChanged</code></td>
+      <td><code class="language-plaintext highlighter-rouge">UnityEvent&lt;string&gt;</code></td>
+      <td>输入内容改变时触发</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">onEndEdit</code></td>
+      <td><code class="language-plaintext highlighter-rouge">UnityEvent&lt;string&gt;</code></td>
+      <td>输入结束时触发（失焦或按回车）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">asteriskChar</code></td>
+      <td><code class="language-plaintext highlighter-rouge">char</code></td>
+      <td>密码输入时显示的字符（默认是 <code class="language-plaintext highlighter-rouge">*</code>）</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="public-methods">Public Methods</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法名</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ActivateInputField()</code></td>
+      <td>激活输入框，开始处理输入事件（获得焦点，弹出软键盘）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">DeactivateInputField()</code></td>
+      <td>取消激活输入框，停止处理事件；如果输入未取消，会发送提交事件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ForceLabelUpdate()</code></td>
+      <td>强制立即刷新文本显示（重新计算光标位置和可见文本）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GraphicUpdateComplete()</code></td>
+      <td>（接口方法）通知画布图形更新完成</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LayoutComplete()</code></td>
+      <td>（接口方法）通知布局更新完成</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">MoveTextEnd()</code></td>
+      <td>将光标移动到文本末尾</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">MoveTextStart()</code></td>
+      <td>将光标移动到文本开头</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnBeginDrag()</code></td>
+      <td>处理开始拖动事件，判断是否监听拖动</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnDeselect()</code></td>
+      <td>处理失去焦点事件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnDrag()</code></td>
+      <td>处理拖动事件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnEndDrag()</code></td>
+      <td>处理拖动结束事件，停止监听拖动</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnPointerClick()</code></td>
+      <td>处理指针点击事件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnPointerDown()</code></td>
+      <td>处理指针按下事件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnSubmit()</code></td>
+      <td>处理提交事件（通常是按回车或软键盘上的提交键）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnUpdateSelected()</code></td>
+      <td>处理选中更新事件（持续输入、光标移动等）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ProcessEvent()</code></td>
+      <td>内部辅助函数，用于处理输入事件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Rebuild()</code></td>
+      <td>重建输入框几何体（光标、选中高亮等）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SetTextWithoutNotify()</code></td>
+      <td>设置输入框文本内容但不触发 <code class="language-plaintext highlighter-rouge">onValueChanged</code> 事件，常用于程序内部修改文本时避免事件递归触发</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="protected-methods">Protected Methods</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法名</th>
+      <th>功能说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Append(char c)</code></td>
+      <td>在输入框当前文本末尾追加一个字符。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ClampPos(ref int pos)</code></td>
+      <td>限制传入的光标或选择位置，保证不超过文本长度范围。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetCharacterIndexFromPosition(Vector2 pos)</code></td>
+      <td>根据鼠标/指针位置计算对应文本中的字符索引。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">KeyPressed(Event evt)</code></td>
+      <td>处理键盘事件，根据按键执行对应动作（输入、删除、光标移动等）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnDisable()</code></td>
+      <td>MonoBehaviour 生命周期函数，输入框禁用时调用（做清理等）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnFocus()</code></td>
+      <td>输入框获得焦点时初始化相关属性，准备输入。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SelectAll()</code></td>
+      <td>选中输入框内所有文本，通常用于快捷键 Ctrl+A 操作。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SendOnSubmit()</code></td>
+      <td>触发提交事件（相当于用户确认输入，如按回车）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">UpdateLabel()</code></td>
+      <td>刷新显示的文本内容，更新 UI 视图（光标和选区位置）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Validate(string text, int charIndex, char addedChar)</code></td>
+      <td>对输入的字符进行校验（依据 <code class="language-plaintext highlighter-rouge">characterValidation</code> 设置）。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="delegates">Delegates</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性名</th>
+      <th>类型</th>
+      <th>作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">onValidateInput</code></td>
+      <td><code class="language-plaintext highlighter-rouge">InputField.OnValidateInput</code></td>
+      <td>自定义每个输入字符的校验</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="texttmp">Text(TMP)</h3>
 
@@ -2544,6 +2947,8 @@ bool 是否允许按钮响应点击，取消勾选按钮将进入禁用状态（
 <h3 id="scrollbar">Scrollbar</h3>
 
 <h3 id="scroll-view">Scroll View</h3>
+
+<h2 id="focus">Focus</h2>
 
 <h2 id="effect">Effect</h2>
 
