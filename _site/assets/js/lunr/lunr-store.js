@@ -222,7 +222,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Resources, Serialization and Data Persistence",
-        "excerpt":"序列化（Serialization） 什么是序列化 简单来说，序列化就是把内存中的对象转换成可以存储或传输的格式的过程，比如转换成二进制、JSON、XML、或者Unity自己的资产格式 反过来，反序列化（Deserialization）就是把存储或传输的格式转换回程序内存分钟的对象 为什么要序列化 1.保存数据 游戏存档就是把游戏状态保存到磁盘上的过程，这个过程就是序列化 2.编辑器显示与修改数据 Unity Inspector面板显示脚本里字段的值，需要序列化这些字段才能让编辑器读写它们 3.网络传输 多人游戏中，玩家状态需要网络传输，也要序列化成网络能传输的格式 Unity里的序列化 Unity有自己的一套序列化规则，决定安歇数据会被序列化（保存、显示在Inspector）： public字段 默认被序列化 private字段 需要加[SerializeField]才会序列化 Unity只序列化支持的类型，比如基本类型、Unity内置类型、自定义继承自UnityEngine.Object的类，和标记为[Serializable]的自定义类 属性（Property）默认不序列化，必须用字段 示例 using UnityEngine; public class Player : MonoBehaviour { public int health = 100; // 会序列化并显示在 Inspector [SerializeField] private int mana = 50; // 虽然是private，但加了特性会序列化 private int secret = 999;...","categories": ["笔记"],
+        "excerpt":"序列化（Serialization） 什么是序列化 简单来说，序列化就是把内存中的对象转换成可以存储或传输的格式的过程，比如转换成二进制、JSON、XML、或者Unity自己的资产格式 反过来，反序列化（Deserialization）就是把存储或传输的格式转换回程序内存分钟的对象 为什么要序列化 1.保存数据 游戏存档就是把游戏状态保存到磁盘上的过程，这个过程就是序列化 2.编辑器显示与修改数据 Unity Inspector面板显示脚本里字段的值，需要序列化这些字段才能让编辑器读写它们 3.网络传输 多人游戏中，玩家状态需要网络传输，也要序列化成网络能传输的格式 Unity里的序列化 Unity有自己的一套序列化规则，决定哪些数据会被序列化（保存、显示在Inspector）： public字段 默认被序列化 private字段 需要加[SerializeField]才会序列化 Unity只序列化支持的类型，比如基本类型、Unity内置类型、自定义继承自UnityEngine.Object的类，和标记为[Serializable]的自定义类 属性（Property）默认不序列化，必须用字段 示例 using UnityEngine; public class Player : MonoBehaviour { public int health = 100; // 会序列化并显示在 Inspector [SerializeField] private int mana = 50; // 虽然是private，但加了特性会序列化 private int secret = 999;...","categories": ["笔记"],
         "tags": ["Unity"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Resources-Serialization-and-Data-Persistance.html",
         "teaser": null
@@ -297,6 +297,12 @@ var store = [{
         "excerpt":"Skybox是一种渲染技术，用于在3D场景中创建远景背景，例如天空、宇宙、城市天际线等 它本质上是一种把纹理图贴在一个立方体（或球体）内侧的技巧，玩家看不到边界，只能看到包裹在四周的“天空” Skybox的类型 Unity中支持几种常见类型的Skybox材质（Shader）： Shader 类型 描述 6 Sided 使用六张图片分别贴在立方体六个面上（一般来自 HDRI 贴图拆分） Cubemap 使用一个立方体贴图（.cubemap）进行渲染 Procedural 程序化天空（可设置太阳、云层、颜色渐变） HDRI Skybox (PBR) 用于高清真实感环境的 HDR 渲染，常用于 Unity HDRP 设置Skybox的方法 1.通过Lighting设置全局Skybox 1.创建一个Skybox材质： Assets-&gt;右键-&gt;Create &gt; Material Shader选择为Skybox/6 Sided或Skybox/Cubemap或Skybox/Procedural 2.在材质中设置贴图（textures）或参数 3.打开Window &gt; Rendering &gt; Lighting面板 4.在Environment &gt; Skybox Material中拖入刚刚的材质 这会将该Skybox应用于整个场景 2.通过摄像机设置局部Skybox（高级） RenderSettings.skybox = mySkyboxMaterial; 或为相机设置Skybox组件并赋值 Skybox与Lighting的关系 Skybox不只是视觉上的背景，它还影响了：...","categories": ["笔记"],
         "tags": ["Unity","Unity Component","Light","Render","Graphics"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Skybox.html",
+        "teaser": null
+      },{
+        "title": "Unity Invisible Trap",
+        "excerpt":"Unity实际开发中，有很多“看起来正常、实则容易出错”的奇怪问题（或称为隐形陷阱）   Class 1 交互相关  1.多个可交互物体，输入触发多个     场景：靠近多个箱子同时按下E，多个箱子一起打开   原因：所有物体监听E，没有加距离或唯一判定   解决方案：只响应最近/朝向前方的一个对象   2.Trigger触发多次Enter/Exit     场景：一个对象靠近某个Trigger区域，OnTriggerEnter被触发两次   原因：            可能身上挂有多个Collider       或包含子物体的Collider也触发了           解决方案：确认是否是重复触发，加入other.gameObject == expectedObject判断   3.Button UI点击两次才响应     原因：            UI按钮背后有透明/未关闭的UI元素挡住射线       或者EventSystem被禁用、Canvas未设置正确Sorting Order           解决方案：调试Graphic Raycaster、Canvas排序、Raycast Target勾选项   Class 2 物理系统相关   ","categories": ["Debug"],
+        "tags": ["Unity","Unity Trap","Debug"],
+        "url": "/debug/2025/06/01/Unity-Invisible-Trap.html",
         "teaser": null
       },{
     "title": "About",

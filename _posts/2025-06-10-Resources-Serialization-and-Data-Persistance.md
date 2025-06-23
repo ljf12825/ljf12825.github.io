@@ -23,7 +23,7 @@ Unity Inspector面板显示脚本里字段的值，需要序列化这些字段�
 多人游戏中，玩家状态需要网络传输，也要序列化成网络能传输的格式
 
 ### Unity里的序列化
-Unity有自己的一套序列化规则，决定安歇数据会被序列化（保存、显示在Inspector）：
+Unity有自己的一套序列化规则，决定哪些数据会被序列化（保存、显示在Inspector）：
 - public字段 默认被序列化
 - private字段 需要加[SerializeField]才会序列化
 - Unity只序列化支持的类型，比如基本类型、Unity内置类型、自定义继承自UnityEngine.Object的类，和标记为[Serializable]的自定义类
