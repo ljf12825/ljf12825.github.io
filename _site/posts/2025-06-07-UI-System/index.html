@@ -2930,15 +2930,199 @@ bool 是否允许按钮响应点击，取消勾选按钮将进入禁用状态（
   </tbody>
 </table>
 
-<h3 id="texttmp">Text(TMP)</h3>
+<h3 id="textmeshprotmp">TextMeshPro(TMP)</h3>
+<p>TextMeshPro是Unity提供的高级文本渲染系统，相比传统的<code class="language-plaintext highlighter-rouge">UI.Text</code>和<code class="language-plaintext highlighter-rouge">TextMesh</code>，它提供了：</p>
+<ul>
+  <li>更清晰的字体渲染（支持SDF技术）</li>
+  <li>丰富的排版控制（文字间距、行距、边框、阴影等）</li>
+  <li>更强的富文本支持（颜色、图标、动画）</li>
+  <li>更高的性能（批量合并、材质复用）</li>
+</ul>
 
-<h3 id="buttontmp">Button(TMP)</h3>
+<h4 id="tmp组件类型">TMP组件类型</h4>
 
-<h3 id="dropdowntmp">Dropdown(TMP)</h3>
+<table>
+  <thead>
+    <tr>
+      <th>组件名称</th>
+      <th>用途说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>TextMeshPro (3D)</strong></td>
+      <td>用于3D世界的文本渲染（替代 <code class="language-plaintext highlighter-rouge">TextMesh</code>）</td>
+    </tr>
+    <tr>
+      <td><strong>TextMeshProUGUI (UI)</strong></td>
+      <td>用于UI Canvas的文本渲染（替代 <code class="language-plaintext highlighter-rouge">UI.Text</code>）</td>
+    </tr>
+  </tbody>
+</table>
 
-<h3 id="input-fieldtmp">Input Field(TMP)</h3>
+<h4 id="tmp-importer">TMP Importer</h4>
 
-<h3 id="legacy-vs-textmeshpro">Legacy vs TextMeshPro</h3>
+<p><img src="/assets/images/TMPImporter.jpg" alt="TMP Importer" /></p>
+
+<p>TMP Importer是Unity第一次导入TextMeshPro包时自动弹出的一个向导窗口，也可以手动从菜单中打开<br />
+它的作用是：</p>
+<ul>
+  <li>导入TMP的资源（默认字体、材质、示例场景等）</li>
+  <li>升级旧的UI元素（可选，把现有的<code class="language-plaintext highlighter-rouge">Text</code>升级为<code class="language-plaintext highlighter-rouge">TextMeshProUGUI</code>）</li>
+  <li>帮助初始化TMP设置</li>
+</ul>
+
+<h5 id="何时会看到tmp-importer">何时会看到TMP Importer</h5>
+<ul>
+  <li>第一次使用TMP功能时</li>
+  <li>第一次安装TMP包时</li>
+  <li>手动打开 <code class="language-plaintext highlighter-rouge">Window -&gt; TextMeshPro -&gt; Import TMP Essential Resources</code></li>
+</ul>
+
+<h5 id="tmp-importer提供的资源内容">TMP Importer提供的资源内容</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>内容</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Default Font Asset</strong></td>
+      <td>默认使用的字体（LiberationSans SDF）</td>
+    </tr>
+    <tr>
+      <td><strong>Default Material Presets</strong></td>
+      <td>支持描边、阴影的材质</td>
+    </tr>
+    <tr>
+      <td><strong>TMP Settings.asset</strong></td>
+      <td>全局设置配置</td>
+    </tr>
+    <tr>
+      <td><strong>Shaders</strong></td>
+      <td>TMP 的渲染器使用的 SDF Shader</td>
+    </tr>
+    <tr>
+      <td><strong>Examples &amp; Extras（可选）</strong></td>
+      <td>示例场景、脚本、UI 风格演示等</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="tmp-vs-textlegacy">TMP vs Text(Legacy)</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>功能/特性</th>
+      <th>Unity UI.Text</th>
+      <th>TextMeshPro</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>清晰度</td>
+      <td>低</td>
+      <td>高（SDF）</td>
+    </tr>
+    <tr>
+      <td>富文本支持</td>
+      <td>有限</td>
+      <td>强大</td>
+    </tr>
+    <tr>
+      <td>图文混排</td>
+      <td>无</td>
+      <td>有</td>
+    </tr>
+    <tr>
+      <td>字体控制</td>
+      <td>基本</td>
+      <td>精细</td>
+    </tr>
+    <tr>
+      <td>性能（大批量）</td>
+      <td>低</td>
+      <td>高</td>
+    </tr>
+    <tr>
+      <td>动态字体加载</td>
+      <td>有</td>
+      <td>支持</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>SDF字体</strong>
+TMP使用SDF来实现高质量的文本缩放和效果（描边、投影）</p>
+<ul>
+  <li>在导入字体时会生成一个<code class="language-plaintext highlighter-rouge">.asset</code>文件（字体图集 + 字形信息）</li>
+  <li>SDF渲染不依赖分辨率，UI可以任意缩放不失真</li>
+</ul>
+
+<h4 id="tmp---text">TMP - Text</h4>
+
+<p><img src="/assets/images/TMPTextPanel_1.jpg" alt="TMPTextPanel_1" />
+<img src="/assets/images/TMPTextPanel_2.jpg" alt="TMPTextPanel_2" /></p>
+
+<h5 id="基础设置区">基础设置区</h5>
+<ul>
+  <li>Text Input：文字内容输入框（直接修改会改变显示内容）</li>
+  <li>Enable RTL Editor：启用从右到左语言支持（如阿拉伯语、希伯来语）</li>
+  <li>Text Style：选择预设的文字样式（一般用不到，除非用Style Sheet）</li>
+</ul>
+
+<h5 id="main-settings">Main Settings</h5>
+<ul>
+  <li>Font Asset：当前使用的字体资源</li>
+  <li>Material Preset：当前字体使用的材质（会影响颜色、描边等）</li>
+  <li>Font Style：B（粗体）、I（斜体）、U（下划线）、S（删除线）、AB（全部大写）、SC（小型大写）</li>
+  <li>Font Size / Auto Size：字号和是否自动缩放</li>
+  <li>Vertex Color：文字的顶点色（可用于动态变色）</li>
+  <li>Spacing Options：控制字符、单词、段落、行的间距</li>
+  <li>Mapping：水平/垂直映射方式，一般设为Character即可</li>
+</ul>
+
+<h5 id="extra-settings">Extra Settings</h5>
+
+<ul>
+  <li>Margins：文字四边内边距</li>
+  <li>Geometry Sorting：渲染顺序（用于粒子、透明叠加等高级场景）</li>
+  <li>Is Scale Static：是否标记为静态缩放（用于性能优化）</li>
+  <li>Rich Text：是否允许富文本标签（如 <color>）</color></li>
+  <li>Raycast Target：是否能被点击或射线检测命中</li>
+  <li>Maskable：是否允许被 UI Mask 遮罩裁剪</li>
+  <li>Parse Escape Characters：是否解析转义符 \n、\t</li>
+  <li>Visible Descender：显示下沉字符（如 g, y）的空间</li>
+  <li>Sprite Asset：图文混排用的精灵图集</li>
+  <li>Style Sheet Asset：文字样式预设集合</li>
+  <li>Kerning：特定字符对之间的间距微调，用于让文本在视觉上更加美观、易读</li>
+  <li>Extra Padding：给字符添加额外的像素充填区域，以避免某些视觉效果被裁剪或显示不完整</li>
+</ul>
+
+<h5 id="material-inspector">Material Inspector</h5>
+
+<ul>
+  <li>Shader</li>
+  <li>Face（主体文字）
+    <ul>
+      <li>Color：字体本体颜色</li>
+      <li>Softness：模糊程度（文字边缘越柔和）</li>
+      <li>Dilate：扩张/收缩字体（负值让文字细一点）</li>
+    </ul>
+  </li>
+  <li>Outline（描边）
+    <ul>
+      <li>Color：描边颜色</li>
+      <li>Thickness：描边厚度（默认是0，没有描边）</li>
+    </ul>
+  </li>
+  <li>Underlay（阴影）</li>
+  <li>Debug Settings（Shader调试）</li>
+</ul>
 
 <h3 id="toggle">Toggle</h3>
 
