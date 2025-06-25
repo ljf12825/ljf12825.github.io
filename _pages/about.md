@@ -5,11 +5,6 @@ permalink: /about/
 author_profile: true
 ---
 
-- You want to know who I am?  
-It's UB.
+Do not define me, that is UB!
 
-- 博客内容仅用于学习，如有侵权，请联系删除  
-  
-<-  
-<-  
-<-  
+博客内容仅用于学习，如有侵权，请联系删除    
