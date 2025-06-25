@@ -2042,7 +2042,7 @@ bool 是否允许按钮响应点击，取消勾选按钮将进入禁用状态（
               <li>Press Color：点击中</li>
               <li>Selected Color：被选中状态（用于导航）</li>
               <li>Disabled Color：禁用状态</li>
-              <li>Color Multiplier：颜色强度乘数</li>
+              <li>Color Multiplier：颜色强度乘数，<code class="language-plaintext highlighter-rouge">最终颜色 = 原始颜色 * Color Multiplier</code></li>
               <li>Fade Duration：颜色渐变持续时间（秒）</li>
             </ul>
           </li>
@@ -3317,10 +3317,210 @@ TMP使用SDF来实现高质量的文本缩放和效果（描边、投影）</p>
 </table>
 
 <h3 id="slider">Slider</h3>
+<h4 id="结构-1">结构</h4>
+<pre><code class="language-mathamatic">Slider = Rect Transform + Slider
+|___Background(Image)：滑动条颜色（不可变部分）
+|___Fill Area：包裹Fill区域
+|       |___Fill(image)：实际充填区域，随着值的改变而拉伸/缩放
+|___Handle Slide Area：可滑动范围的区域容器
+             |___Handle(image)：可拖动的滑块，通常是个图标或者圆点
+</code></pre>
+
+<h4 id="slider-panel">Slider Panel</h4>
+<p><img src="/assets/images/SliderPanel.jpg" alt="SliderPanel" /></p>
+
+<ul>
+  <li>Whole Numbers：是否只允许整数</li>
+</ul>
+
+<h4 id="api-3">API</h4>
+<h5 id="properties-4">Properties</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">direction</code></strong></td>
+      <td><code class="language-plaintext highlighter-rouge">Slider.Direction</code></td>
+      <td>滑动条的方向，从最小值到最大值的滑动方向。<br />可选：<br />• <code class="language-plaintext highlighter-rouge">LeftToRight</code><br />• <code class="language-plaintext highlighter-rouge">RightToLeft</code><br />• <code class="language-plaintext highlighter-rouge">BottomToTop</code><br />• <code class="language-plaintext highlighter-rouge">TopToBottom</code></td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">fillRect</code></strong></td>
+      <td><code class="language-plaintext highlighter-rouge">RectTransform</code></td>
+      <td>指定一个 <code class="language-plaintext highlighter-rouge">RectTransform</code>，作为滑动条的填充区域。滑动值变化时会调整此区域的大小。</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">handleRect</code></strong></td>
+      <td><code class="language-plaintext highlighter-rouge">RectTransform</code></td>
+      <td>指定滑块的 <code class="language-plaintext highlighter-rouge">RectTransform</code>，用于显示可拖动的手柄。</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">maxValue</code></strong></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>滑动条允许的最大值。</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">minValue</code></strong></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>滑动条允许的最小值。</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">value</code></strong></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>当前的滑动值。可以手动设置，会同步更新滑块位置和填充。</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">normalizedValue</code></strong></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code> (只读/可设)</td>
+      <td>当前值归一化后（范围 0 到 1）的表示。设置它可以等价于设置 <code class="language-plaintext highlighter-rouge">value</code>。</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">onValueChanged</code></strong></td>
+      <td><code class="language-plaintext highlighter-rouge">UnityEvent&lt;float&gt;</code></td>
+      <td>当 <code class="language-plaintext highlighter-rouge">value</code> 改变时触发的回调事件。可以在 Inspector 中指定函数响应变化。</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">wholeNumbers</code></strong></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>是否只允许整数值。勾选后即使你滑动到小数位置，也会自动取整。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>示例：设置Slider参数</strong></p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="n">Slider</span> <span class="n">mySlider</span><span class="p">;</span>
+
+<span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">mySlider</span><span class="p">.</span><span class="n">minValue</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+  <span class="n">mySlider</span><span class="p">.</span><span class="n">maxValue</span> <span class="p">=</span> <span class="m">100</span><span class="p">;</span>
+  <span class="n">mySlider</span><span class="p">.</span><span class="k">value</span> <span class="p">=</span> <span class="m">50</span><span class="p">;;</span>
+  <span class="n">mySlider</span><span class="p">.</span><span class="n">wholeNumbers</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+
+  <span class="n">mySlider</span><span class="p">.</span><span class="n">onValueChanged</span><span class="p">.</span><span class="nf">AddListener</span><span class="p">(</span><span class="n">OnSliderValueChanged</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">void</span> <span class="nf">OnSliderValueChanged</span><span class="p">(</span><span class="kt">float</span> <span class="n">val</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"当前值"</span> <span class="p">+</span> <span class="n">val</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h5 id="public-methods-2">Public Methods</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法名</th>
+      <th>来源接口 / 基类</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>FindSelectableOnDown()</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">Selectable</code></td>
+      <td>返回下方的可选 UI 元素（用于键盘/手柄导航）。</td>
+    </tr>
+    <tr>
+      <td><strong>FindSelectableOnUp()</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">Selectable</code></td>
+      <td>返回上方的可选 UI 元素。</td>
+    </tr>
+    <tr>
+      <td><strong>FindSelectableOnLeft()</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">Selectable</code></td>
+      <td>返回左侧的可选 UI 元素。</td>
+    </tr>
+    <tr>
+      <td><strong>FindSelectableOnRight()</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">Selectable</code></td>
+      <td>返回右侧的可选 UI 元素。</td>
+    </tr>
+    <tr>
+      <td><strong>GraphicUpdateComplete()</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">ICanvasElement</code></td>
+      <td>在 UI 图形重绘完成时调用。</td>
+    </tr>
+    <tr>
+      <td><strong>LayoutComplete()</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">ICanvasElement</code></td>
+      <td>在 UI 布局更新完成时调用。</td>
+    </tr>
+    <tr>
+      <td><strong>Rebuild(CanvasUpdate update)</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">ICanvasElement</code></td>
+      <td>当 Canvas 需要重建 UI 时调用（刷新布局和图形）。</td>
+    </tr>
+    <tr>
+      <td><strong>OnInitializePotentialDrag(PointerEventData)</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">IInitializePotentialDragHandler</code></td>
+      <td>初始化拖拽状态，设置拖拽方向或行为。</td>
+    </tr>
+    <tr>
+      <td><strong>OnDrag(PointerEventData)</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">IDragHandler</code></td>
+      <td>当用户拖动 Handle 时调用，更新滑动值。</td>
+    </tr>
+    <tr>
+      <td><strong>OnMove(AxisEventData)</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">IMoveHandler</code></td>
+      <td>当使用键盘或手柄操作滑块时调用（如方向键）。</td>
+    </tr>
+    <tr>
+      <td><strong>SetDirection(Direction, bool)</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">Slider</code> 自身</td>
+      <td>设置滑动方向，并决定是否调整 Fill 和 Handle 的布局。</td>
+    </tr>
+    <tr>
+      <td><strong>SetValueWithoutNotify(float)</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">Slider</code> 自身</td>
+      <td>设置数值但不触发 <code class="language-plaintext highlighter-rouge">onValueChanged</code> 回调事件。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="protected-methods-1">Protected Methods</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法名</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnDisable</code></td>
+      <td>参照MonoBehaviour.OnDisable</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Set</code></td>
+      <td>设置Slider的值</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="scrollbar">Scrollbar</h3>
+<h4 id="结构-2">结构</h4>
+<pre><code class="language-mathamatic">Scrollbar = Rect Transform + Canvas Renderer + Image + Scrollbar
+|___Sliding Area（滑动轨道范围）
+           |___Handle（滑块） = Rect Transform + Canvas Renderer + Image
+</code></pre>
+
+<h4 id="scrollbar-panel">Scrollbar Panel</h4>
+<p><img src="/assets/images/ScrollbarPanel.jpg" alt="ScrollbarPanel" /></p>
+
+<ul>
+  <li>Size：</li>
+</ul>
 
 <h3 id="scroll-view">Scroll View</h3>
+
+<h2 id="event-system">Event System</h2>
 
 <h2 id="focus">Focus</h2>
 
@@ -3338,8 +3538,6 @@ TMP使用SDF来实现高质量的文本缩放和效果（描边、投影）</p>
 <h2 id="draw-call">Draw Call</h2>
 
 <h2 id="unity-ui-tookit">Unity UI Tookit</h2>
-
-<h2 id="event-system">Event System</h2>
 
 <h2 id="ui动画">UI动画</h2>
 
