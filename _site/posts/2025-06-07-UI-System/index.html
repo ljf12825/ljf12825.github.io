@@ -3126,6 +3126,196 @@ TMP使用SDF来实现高质量的文本缩放和效果（描边、投影）</p>
 
 <h3 id="toggle">Toggle</h3>
 
+<h4 id="结构">结构</h4>
+
+<pre><code class="language-mathmatic">Toggle = Rect Transform + Toggle
+|___Background(Image):勾选框的背景
+|        |___Checkmark（Image）：√
+|___Label(Text)：名称
+</code></pre>
+
+<h4 id="toggle-panel">Toggle Panel</h4>
+<p><img src="/assets/images/TogglePanel.jpg" alt="TogglePanel" /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性名</th>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">isOn</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>当前是否勾选，<code class="language-plaintext highlighter-rouge">true</code> 表示已选中</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">onValueChanged</code></td>
+      <td><code class="language-plaintext highlighter-rouge">UnityEvent&lt;bool&gt;</code></td>
+      <td>状态切换时的回调，传入参数为新的状态</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">interactable</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>是否可以被点击</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">graphic</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Graphic</code></td>
+      <td>勾选图像（Checkmark）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">group</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ToggleGroup</code></td>
+      <td>所属的 ToggleGroup（用于单选）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Toggle Transition</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Toggle Transition</code></td>
+      <td>状态切换时的视觉过渡效果</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="示例-1">示例</h4>
+<h5 id="获取并监听toggle状态">获取并监听Toggle状态</h5>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">UnityEngine.UI</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">ToggleExample</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="n">Toggle</span> <span class="n">myToggle</span><span class="p">;</span>
+
+  <span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+  <span class="p">{</span>
+    <span class="n">myToggle</span><span class="p">.</span><span class="n">onValueChanged</span><span class="p">.</span><span class="nf">AddListener</span><span class="p">(</span><span class="n">OnToggleChanged</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">void</span> <span class="nf">OnToggleChanged</span><span class="p">(</span><span class="kt">bool</span> <span class="n">isOn</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"当前 Toggle 状态"</span> <span class="p">+</span> <span class="n">isOn</span><span class="p">);</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+<h4 id="toggle-group单选组">Toggle Group(单选组)</h4>
+<p><code class="language-plaintext highlighter-rouge">ToggleGroup</code>组件用于实现多个Toggle的单选功能，类似于网页中的<code class="language-plaintext highlighter-rouge">radio button</code></p>
+
+<p>设置方法：<br />
+1.创建一个空物体并挂载<code class="language-plaintext highlighter-rouge">ToggleGroup</code><br />
+2.将多个Toggle拖入该物体并在Inspector中的Toggle组件上设置<code class="language-plaintext highlighter-rouge">Group</code>为这个ToggleGroup<br />
+3.每次只能勾选一个Toggle</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="n">ToggleGroup</span> <span class="n">toggleGroup</span><span class="p">;</span>
+
+<span class="k">void</span> <span class="nf">GetSelectedToggle</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">Toggle</span> <span class="n">selected</span> <span class="p">=</span> <span class="n">toggleGroup</span><span class="p">.</span><span class="nf">ActiveToggles</span><span class="p">().</span><span class="nf">FirstOrDefault</span><span class="p">();</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">selected</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span> <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"当前选中项： "</span> <span class="p">+</span> <span class="n">selected</span><span class="p">.</span><span class="n">name</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="api-2">API</h4>
+<h5 id="properties-3">Properties</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性名</th>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">graphic</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Graphic</code></td>
+      <td>受状态影响的图像，通常是用于显示勾选标记的 <code class="language-plaintext highlighter-rouge">Checkmark</code>（<code class="language-plaintext highlighter-rouge">Image</code> 或其他 <code class="language-plaintext highlighter-rouge">Graphic</code>）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">group</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ToggleGroup</code></td>
+      <td>当前 Toggle 所属于的 ToggleGroup，用于实现“单选”逻辑。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">isOn</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>当前 Toggle 是否被选中，<code class="language-plaintext highlighter-rouge">true</code> 表示“开”；也可用于代码设置状态。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">onValueChanged</code></td>
+      <td><code class="language-plaintext highlighter-rouge">UnityEvent&lt;bool&gt;</code></td>
+      <td>当 Toggle 状态发生改变时触发的事件回调，参数是新的状态（true/false）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">toggleTransition</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Toggle.ToggleTransition</code></td>
+      <td>状态切换的视觉过渡方式，枚举类型：<code class="language-plaintext highlighter-rouge">None</code> 或 <code class="language-plaintext highlighter-rouge">Fade</code>（淡入淡出）。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="public-methods-1">Public Methods</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法 / 接口</th>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GraphicUpdateComplete()</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ICanvasElement</code> 接口方法</td>
+      <td>图形更新完成时被调用（Canvas 渲染流程的一部分）。通常无需手动调用。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LayoutComplete()</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ICanvasElement</code> 接口方法</td>
+      <td>布局更新完成时调用，确保组件根据布局正确显示。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Rebuild(CanvasUpdate update)</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ICanvasElement</code> 接口方法</td>
+      <td>当 UI Canvas 需要重建时被调用，用于更新 Toggle 的布局或图形状态。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnPointerClick(PointerEventData eventData)</code></td>
+      <td><code class="language-plaintext highlighter-rouge">IPointerClickHandler</code> 接口方法</td>
+      <td>当 Toggle 被鼠标点击或触控点击时触发。会自动切换 <code class="language-plaintext highlighter-rouge">isOn</code> 状态并触发 <code class="language-plaintext highlighter-rouge">onValueChanged</code>。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnSubmit(BaseEventData eventData)</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ISubmitHandler</code> 接口方法</td>
+      <td>当用户按下“提交键”（如 Enter）时触发（用于键盘/手柄操作 UI）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SetIsOnWithoutNotify(bool value)</code></td>
+      <td>自定义方法</td>
+      <td><strong>设置 Toggle 状态但不触发 <code class="language-plaintext highlighter-rouge">onValueChanged</code> 回调</strong>，适合你在代码中手动切换状态但不希望触发监听器时使用。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="protected-mehtods">Protected Mehtods</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnDisable</code></td>
+      <td>参照MonoBehaviour.OnDisable</td>
+    </tr>
+  </tbody>
+</table>
+
 <h3 id="slider">Slider</h3>
 
 <h3 id="scrollbar">Scrollbar</h3>
