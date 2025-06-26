@@ -4133,6 +4133,66 @@ OnPointerUp 或 OnDisable 停止协程
 <span class="p">}</span>
 </code></pre></div></div>
 
+<h2 id="ui更新">UI更新</h2>
+<p>Unity的UI系统在每一帧里，都按照一定顺序对所有UI元素做布局计算、绘制更新、交互处理，这个顺序被划分成了几个阶段</p>
+
+<h3 id="ui更新流程的3个阶段canvasupdate">UI更新流程的3个阶段（CanvasUpdate）</h3>
+<p>Unity会调用实现了<code class="language-plaintext highlighter-rouge">ICanvasElement</code>接口的UI组件（如<code class="language-plaintext highlighter-rouge">Text</code>，<code class="language-plaintext highlighter-rouge">Image</code>，<code class="language-plaintext highlighter-rouge">ScrollRect</code>等），按顺序执行：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>阶段</th>
+      <th>意义</th>
+      <th>常见调用的方法</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1.<code class="language-plaintext highlighter-rouge">Layout</code> 阶段</td>
+      <td>计算大小、位置</td>
+      <td><code class="language-plaintext highlighter-rouge">CalculateLayoutInputHorizontal/Vertical</code>, <code class="language-plaintext highlighter-rouge">SetLayoutHorizontal/Vertical</code></td>
+    </tr>
+    <tr>
+      <td>2.<code class="language-plaintext highlighter-rouge">Graphic</code> 阶段</td>
+      <td>更新可视内容，比如文字、图片、颜色等</td>
+      <td><code class="language-plaintext highlighter-rouge">GraphicUpdateComplete</code></td>
+    </tr>
+    <tr>
+      <td>3.<code class="language-plaintext highlighter-rouge">LatePreRender</code> 阶段</td>
+      <td>最后准备渲染前的调整</td>
+      <td>比如强制设置滚动位置等</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="timelineper-frame">TimeLine(Per Frame)</h3>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Update()
+↓
+Layout阶段：
+<span class="p">    -</span> ScrollRect：计算内容区域位置
+<span class="p">    -</span> Text：计算文字排版
+↓
+Graphic阶段：
+<span class="p">    -</span> Image：更新贴图
+<span class="p">    -</span> Text：更新文字网格
+↓
+LatePreRender阶段：
+<span class="p">    -</span> ScrollRect：修正 normalizedPosition
+↓
+渲染 → 显示画面
+</code></pre></div></div>
+
+<p>某些UI行为必须等到布局计算完成后才能准确执行，比如：</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scrollRect</span><span class="p">.</span><span class="n">verticalNormalizedPosition</span> <span class="p">=</span> <span class="m">0f</span><span class="p">;</span>
+</code></pre></div></div>
+<p>如果放在<code class="language-plaintext highlighter-rouge">Start()</code>里，它可能在布局阶段之前就执行了，所以不会生效</p>
+
+<p>正确的方式是：</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Canvas</span><span class="p">.</span><span class="nf">ForceUpdateCanvases</span><span class="p">();</span> <span class="c1">// 强制执行Layout阶段</span>
+<span class="n">scrollRect</span><span class="p">.</span><span class="n">verticalNormalizedPosition</span> <span class="p">=</span> <span class="m">0f</span><span class="p">;</span>
+</code></pre></div></div>
+
 <h2 id="event-system">Event System</h2>
 
 <h2 id="focus">Focus</h2>
