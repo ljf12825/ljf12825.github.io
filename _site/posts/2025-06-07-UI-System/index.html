@@ -3128,11 +3128,11 @@ TMP使用SDF来实现高质量的文本缩放和效果（描边、投影）</p>
 
 <h4 id="结构">结构</h4>
 
-<pre><code class="language-mathmatic">Toggle = Rect Transform + Toggle
-|___Background(Image):勾选框的背景
-|        |___Checkmark（Image）：√
-|___Label(Text)：名称
-</code></pre>
+<div class="language-mathematica highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">Toggle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Rect</span><span class="w"> </span><span class="nv">Transform</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">Toggle</span><span class="w">
+</span><span class="o">|___</span><span class="nb">Background</span><span class="p">(</span><span class="nb">Image</span><span class="p">)</span><span class="o">:</span><span class="err">勾选框的背景</span><span class="w">
+</span><span class="o">|</span><span class="w">        </span><span class="o">|___</span><span class="nv">Checkmark</span><span class="err">（</span><span class="nb">Image</span><span class="err">）：√</span><span class="w">
+</span><span class="o">|___</span><span class="nb">Label</span><span class="p">(</span><span class="nb">Text</span><span class="p">)</span><span class="err">：名称</span><span class="w">
+</span></code></pre></div></div>
 
 <h4 id="toggle-panel">Toggle Panel</h4>
 <p><img src="/assets/images/TogglePanel.jpg" alt="TogglePanel" /></p>
@@ -3318,13 +3318,13 @@ TMP使用SDF来实现高质量的文本缩放和效果（描边、投影）</p>
 
 <h3 id="slider">Slider</h3>
 <h4 id="结构-1">结构</h4>
-<pre><code class="language-mathamatic">Slider = Rect Transform + Slider
-|___Background(Image)：滑动条颜色（不可变部分）
-|___Fill Area：包裹Fill区域
-|       |___Fill(image)：实际充填区域，随着值的改变而拉伸/缩放
-|___Handle Slide Area：可滑动范围的区域容器
-             |___Handle(image)：可拖动的滑块，通常是个图标或者圆点
-</code></pre>
+<div class="language-mathematica highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Slider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Rect</span><span class="w"> </span><span class="nv">Transform</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Slider</span><span class="w">
+</span><span class="o">|___</span><span class="nb">Background</span><span class="p">(</span><span class="nb">Image</span><span class="p">)</span><span class="err">：滑动条颜色（不可变部分）</span><span class="w">
+</span><span class="o">|___</span><span class="nv">Fill</span><span class="w"> </span><span class="nb">Area</span><span class="err">：包裹</span><span class="nv">Fill</span><span class="err">区域</span><span class="w">
+</span><span class="o">|</span><span class="w">       </span><span class="o">|___</span><span class="nv">Fill</span><span class="p">(</span><span class="nv">image</span><span class="p">)</span><span class="err">：实际充填区域，随着值的改变而拉伸</span><span class="o">/</span><span class="err">缩放</span><span class="w">
+</span><span class="o">|___</span><span class="nv">Handle</span><span class="w"> </span><span class="nv">Slide</span><span class="w"> </span><span class="nb">Area</span><span class="err">：可滑动范围的区域容器</span><span class="w">
+             </span><span class="o">|___</span><span class="nv">Handle</span><span class="p">(</span><span class="nv">image</span><span class="p">)</span><span class="err">：可拖动的滑块，通常是个图标或者圆点</span><span class="w">
+</span></code></pre></div></div>
 
 <h4 id="slider-panel">Slider Panel</h4>
 <p><img src="/assets/images/SliderPanel.jpg" alt="SliderPanel" /></p>
@@ -3505,18 +3505,211 @@ TMP使用SDF来实现高质量的文本缩放和效果（描边、投影）</p>
 </table>
 
 <h3 id="scrollbar">Scrollbar</h3>
+<p><code class="language-plaintext highlighter-rouge">Scrollbar</code>是一个用于滚动控制的UI组件，常与<code class="language-plaintext highlighter-rouge">ScrollRect</code>搭配使用，控制列表、文本区域、图片等内容的滚动</p>
+
 <h4 id="结构-2">结构</h4>
-<pre><code class="language-mathamatic">Scrollbar = Rect Transform + Canvas Renderer + Image + Scrollbar
-|___Sliding Area（滑动轨道范围）
-           |___Handle（滑块） = Rect Transform + Canvas Renderer + Image
-</code></pre>
+<div class="language-mathematica highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">Scrollbar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Rect</span><span class="w"> </span><span class="nv">Transform</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">Canvas</span><span class="w"> </span><span class="nv">Renderer</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Image</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">Scrollbar</span><span class="w">
+</span><span class="o">|___</span><span class="nv">Sliding</span><span class="w"> </span><span class="nb">Area</span><span class="err">（滑动轨道范围）</span><span class="w">
+           </span><span class="o">|___</span><span class="nv">Handle</span><span class="err">（滑块）</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Rect</span><span class="w"> </span><span class="nv">Transform</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">Canvas</span><span class="w"> </span><span class="nv">Renderer</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Image</span><span class="w">
+</span></code></pre></div></div>
 
 <h4 id="scrollbar-panel">Scrollbar Panel</h4>
 <p><img src="/assets/images/ScrollbarPanel.jpg" alt="ScrollbarPanel" /></p>
 
 <ul>
-  <li>Size：</li>
+  <li>Size：滑块所占比率，值越小，滑块越短，内容和视口的比例的反映，由ScrollRect进行调节</li>
+  <li>numberOfSteps：可选值个数，如果设置 &gt; 1，滑块将分段跳动</li>
 </ul>
+
+<h4 id="scrollbar-vs-slider">Scrollbar vs Slider</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>比较项</th>
+      <th><code class="language-plaintext highlighter-rouge">Scrollbar</code></th>
+      <th><code class="language-plaintext highlighter-rouge">Slider</code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>用途</td>
+      <td>滚动内容控制</td>
+      <td>数值选择器</td>
+    </tr>
+    <tr>
+      <td>是否可设置 <code class="language-plaintext highlighter-rouge">size</code></td>
+      <td>是</td>
+      <td>否</td>
+    </tr>
+    <tr>
+      <td>与 <code class="language-plaintext highlighter-rouge">ScrollRect</code> 结合</td>
+      <td>常用</td>
+      <td>较少</td>
+    </tr>
+    <tr>
+      <td>滑动方式</td>
+      <td>滚轮、拖拽、点击轨道</td>
+      <td>拖拽或编程控制</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="api-4">API</h4>
+<h5 id="properties-5">Properties</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>成员</th>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>handleRect</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">RectTransform</code></td>
+      <td>滑块（Handle）的 RectTransform。</td>
+    </tr>
+    <tr>
+      <td><strong>direction</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">Scrollbar.Direction</code></td>
+      <td>滑动方向（枚举）。</td>
+    </tr>
+    <tr>
+      <td><strong>value</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>当前滚动值，范围 [0, 1]。</td>
+    </tr>
+    <tr>
+      <td><strong>size</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">float</code></td>
+      <td>滑块在轨道中所占比例 [0, 1]。值越小，滑块越短。</td>
+    </tr>
+    <tr>
+      <td><strong>numberOfSteps</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">int</code></td>
+      <td>分段数量。&gt;1 时启用分段滚动。</td>
+    </tr>
+    <tr>
+      <td><strong>onValueChanged</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">UnityEvent&lt;float&gt;</code></td>
+      <td>滚动值变化时调用。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h6 id="public-methods-3">Public Methods</h6>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法名</th>
+      <th>类型 / 接口</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>FindSelectableOnDown()</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">Selectable</code>（基类）</td>
+      <td>返回下方可选的 UI 控件（用于键盘/手柄方向导航）。</td>
+    </tr>
+    <tr>
+      <td><strong>FindSelectableOnLeft()</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">Selectable</code>（基类）</td>
+      <td>返回左侧可选的 UI 控件。</td>
+    </tr>
+    <tr>
+      <td><strong>FindSelectableOnRight()</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">Selectable</code>（基类）</td>
+      <td>返回右侧可选的 UI 控件。</td>
+    </tr>
+    <tr>
+      <td><strong>FindSelectableOnUp()</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">Selectable</code>（基类）</td>
+      <td>返回上方可选的 UI 控件。</td>
+    </tr>
+    <tr>
+      <td><strong>GraphicUpdateComplete()</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">ICanvasElement</code></td>
+      <td>在图形系统更新完成后调用，用于重绘完 UI 后的清理/处理。</td>
+    </tr>
+    <tr>
+      <td><strong>LayoutComplete()</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">ICanvasElement</code></td>
+      <td>布局系统更新完成时调用，通常用于收尾处理。</td>
+    </tr>
+    <tr>
+      <td><strong>OnBeginDrag(PointerEventData)</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">IBeginDragHandler</code></td>
+      <td>当开始拖动滑块时触发（鼠标按下并准备拖动）。</td>
+    </tr>
+    <tr>
+      <td><strong>OnDrag(PointerEventData)</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">IDragHandler</code></td>
+      <td>拖动过程中持续触发，更新 <code class="language-plaintext highlighter-rouge">value</code>。</td>
+    </tr>
+    <tr>
+      <td><strong>OnInitializePotentialDrag(PointerEventData)</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">IInitializePotentialDragHandler</code></td>
+      <td>拖拽开始前初始化拖拽设置（如拖拽方向等）。</td>
+    </tr>
+    <tr>
+      <td><strong>OnMove(AxisEventData)</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">IMoveHandler</code></td>
+      <td>响应键盘/手柄的移动事件（如方向键、左摇杆）。</td>
+    </tr>
+    <tr>
+      <td><strong>OnPointerDown(PointerEventData)</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">IPointerDownHandler</code></td>
+      <td>当鼠标或触控按下滑条时触发。</td>
+    </tr>
+    <tr>
+      <td><strong>OnPointerUp(PointerEventData)</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">IPointerUpHandler</code></td>
+      <td>当鼠标或触控释放时触发。</td>
+    </tr>
+    <tr>
+      <td><strong>Rebuild(CanvasUpdate)</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">ICanvasElement</code></td>
+      <td>在 Canvas 需要重新构建 UI 时调用，如尺寸或内容更新。</td>
+    </tr>
+    <tr>
+      <td><strong>SetDirection(Direction, bool)</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">Scrollbar</code> 本身</td>
+      <td>设置滑动方向，并决定是否重新布置滑块布局。</td>
+    </tr>
+    <tr>
+      <td><strong>SetValueWithoutNotify(float)</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">Scrollbar</code> 本身</td>
+      <td>设置 <code class="language-plaintext highlighter-rouge">value</code> 但不触发 <code class="language-plaintext highlighter-rouge">onValueChanged</code> 回调，用于静默初始化。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="protected-methods-2">Protected Methods</h5>
+<p>| 方法名                               | 所属                     | 说明                                                                             |
+| ——————————— | ———————- | —————————————————————————— |
+| <strong>ClickRepeat(PointerEventData)</strong> | 协程函数（Coroutine）        | 当按住滑条空白区域（非 Handle）时启动，用于模拟持续点击（滚动），直到释放。通常由 <code class="language-plaintext highlighter-rouge">OnPointerDown</code> 启动，用于实现“点住滚动”的行为。 |
+| <strong>OnDisable()</strong>                   | <code class="language-plaintext highlighter-rouge">MonoBehaviour</code> 生命周期方法 | 当组件或 GameObject 被禁用时调用。用于清理状态，比如停止滑动协程、取消事件等。                                  |</p>
+
+<p><strong>ClickRepeat工作原理</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>用户点击 Scrollbar 空白区域（非 Handle）
+↓
+OnPointerDown 被触发
+↓
+启动协程 ClickRepeat
+↓
+每隔一段时间不断调整value，模拟“持续按压”
+↓
+OnPointerUp 或 OnDisable 停止协程
+</code></pre></div></div>
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">ClickRepeat</code>不会在拖动Handle时触发，仅当点击轨道空白部分时才会执行通常用于快速向上/向下滚动</p>
+</blockquote>
 
 <h3 id="scroll-view">Scroll View</h3>
 
