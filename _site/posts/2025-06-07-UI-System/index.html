@@ -4194,6 +4194,306 @@ LatePreRender阶段：
 </code></pre></div></div>
 
 <h2 id="event-system">Event System</h2>
+<p><code class="language-plaintext highlighter-rouge">Event System</code>是Unity UI System中的核心交互管理器，掌控了所有鼠标点击、键盘输入、触摸事件、UI导航的逻辑</p>
+
+<p>Unity的Event System是一个处理用户输入事件的系统，用于发送“点击了谁”“选中了谁”之类的事件，属于UnityEngine.EventSystems命名空间</p>
+
+<p><img src="/assets/images/EventSystemPanel.jpg" alt="EventSystemPanel" /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>组件</th>
+      <th>用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>EventSystem</strong></td>
+      <td>整个输入系统的“大脑”</td>
+    </tr>
+    <tr>
+      <td><strong>Input Module</strong></td>
+      <td>输入方式模块，比如处理鼠标、键盘、手柄（你可以切换）</td>
+    </tr>
+    <tr>
+      <td><strong>Raycaster（挂在 Canvas 或 3D 对象上）</strong></td>
+      <td>实际检测点击了哪个物体，比如：<code class="language-plaintext highlighter-rouge">GraphicRaycaster</code>, <code class="language-plaintext highlighter-rouge">PhysicsRaycaster</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>EventSystem会追踪以下交互：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>描述</th>
+      <th>接口</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>点击 Click</td>
+      <td>鼠标/触摸点击 UI</td>
+      <td><code class="language-plaintext highlighter-rouge">IPointerClickHandler</code></td>
+    </tr>
+    <tr>
+      <td>拖拽 Drag</td>
+      <td>拖拽 ScrollRect、物品、滑块</td>
+      <td><code class="language-plaintext highlighter-rouge">IDragHandler</code>, <code class="language-plaintext highlighter-rouge">IBeginDragHandler</code>, <code class="language-plaintext highlighter-rouge">IEndDragHandler</code></td>
+    </tr>
+    <tr>
+      <td>悬停 Hover</td>
+      <td>鼠标移动到 UI 上</td>
+      <td><code class="language-plaintext highlighter-rouge">IPointerEnterHandler</code>, <code class="language-plaintext highlighter-rouge">IPointerExitHandler</code></td>
+    </tr>
+    <tr>
+      <td>按钮按下</td>
+      <td>长按、释放</td>
+      <td><code class="language-plaintext highlighter-rouge">IPointerDownHandler</code>, <code class="language-plaintext highlighter-rouge">IPointerUpHandler</code></td>
+    </tr>
+    <tr>
+      <td>键盘导航</td>
+      <td>方向键移动焦点</td>
+      <td><code class="language-plaintext highlighter-rouge">IMoveHandler</code></td>
+    </tr>
+    <tr>
+      <td>输入</td>
+      <td>表单输入</td>
+      <td><code class="language-plaintext highlighter-rouge">ISubmitHandler</code>, <code class="language-plaintext highlighter-rouge">ISelectHandler</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>任何的UI交互脚本，都是通过这些接口连接到Event System</p>
+
+<h3 id="eventsystem的工作流程图">EventSystem的工作流程图</h3>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="nt">鼠标</span><span class="o">/</span><span class="nt">键盘</span><span class="o">/</span><span class="nt">触摸输入</span><span class="o">]</span>
+      <span class="err">↓</span>
+<span class="o">[</span><span class="nt">Input</span> <span class="nt">Module</span><span class="o">]</span> <span class="err">→</span> <span class="nt">分析输入</span><span class="err">（</span><span class="nt">比如点击</span><span class="err">、</span><span class="nt">拖动</span><span class="err">、</span><span class="nt">导航</span><span class="err">）</span>
+      <span class="err">↓</span>
+<span class="o">[</span><span class="nt">Raycaster</span><span class="o">]</span> <span class="err">→</span> <span class="nt">检测点击了哪个</span> <span class="nt">UI</span> <span class="nt">元素</span>
+      <span class="err">↓</span>
+<span class="o">[</span><span class="nt">EventSystem</span><span class="o">]</span> <span class="err">→</span> <span class="nt">通知对应的组件执行接口函数</span><span class="err">（</span><span class="nt">如</span> <span class="nt">OnClick</span><span class="err">）</span>
+</code></pre></div></div>
+
+<h3 id="eventsystem-component">EventSystem Component</h3>
+<h4 id="eventsystem"><code class="language-plaintext highlighter-rouge">EventSystem</code></h4>
+<p>挂载在GameObject上，只有一个<br />
+功能：</p>
+<ul>
+  <li>管理当前选中的UI对象</li>
+  <li>管理输入模块</li>
+  <li>分发事件：比如点击、拖动、选中等</li>
+</ul>
+
+<h4 id="eventsystem-panel">EventSystem Panel</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>First Selected</strong></td>
+      <td>初始选中的 UI 对象（用于导航/手柄）</td>
+    </tr>
+    <tr>
+      <td><strong>Send Navigation Events</strong></td>
+      <td>是否允许方向键或手柄移动选中项</td>
+    </tr>
+    <tr>
+      <td><strong>Drag Threshold</strong></td>
+      <td>拖拽时鼠标/手指移动多少才视为“拖拽”</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="standalone-input-module"><code class="language-plaintext highlighter-rouge">Standalone Input Module</code></h4>
+<p>适合：鼠标 + 键盘控制<br />
+Unity默认生成<br />
+功能：把输入映射为事件（点击、拖动、导航）</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Send Pointer Hover To Parent</td>
+      <td>是否强制启用这个模块</td>
+    </tr>
+    <tr>
+      <td>Horizontal Axis / Vertical Axis</td>
+      <td>对应键盘方向键（默认是 “Horizontal” 和 “Vertical”）</td>
+    </tr>
+    <tr>
+      <td>Submit Button / Cancel Button</td>
+      <td>默认是 “Submit”（Enter）和 “Cancel”（Esc）</td>
+    </tr>
+    <tr>
+      <td>Input Actions Per Second</td>
+      <td>每秒导航几次</td>
+    </tr>
+    <tr>
+      <td>Repeat Delay</td>
+      <td>长按导航前的延迟时间</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="input-system-ui-input-module新系统"><code class="language-plaintext highlighter-rouge">Input System UI Input Module</code>（新系统）</h4>
+
+<p>详见<a href="/posts/2025-06-03-Input-System/">Input System</a></p>
+
+<p>适合：新版Unity Input System（使用<code class="language-plaintext highlighter-rouge">Input Actions</code>的）</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Actions Asset</td>
+      <td>你设置好的 <code class="language-plaintext highlighter-rouge">.inputactions</code> 文件</td>
+    </tr>
+    <tr>
+      <td>Point / Click / Navigate / Submit 等</td>
+      <td>分别绑定触摸、点击、方向等操作</td>
+    </tr>
+    <tr>
+      <td>Move Repeat Rate / Delay</td>
+      <td>同样是手柄方向键长按节奏</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="raycaster">Raycaster</h4>
+<p>EventSystem本身不会知道你点到谁，它需要Raycaster组件配合UI或3D元素</p>
+
+<h5 id="graphic-raycaster用于canvas-ui"><code class="language-plaintext highlighter-rouge">Graphic Raycaster</code>（用于Canvas UI）</h5>
+<p>挂在<code class="language-plaintext highlighter-rouge">Canvas</code>上，专门检测UI元素是否被点中</p>
+
+<p><a href="#graphic-raycaster">Canvas Graphic Raycaster</a></p>
+
+<h5 id="physics-raycaster用于3d物体"><code class="language-plaintext highlighter-rouge">Physics Raycaster</code>（用于3D物体）</h5>
+<p>挂在摄像机上，配合3D对象（带Collider）使用，检测鼠标是否点击到物体</p>
+
+<h5 id="physics2d-raycaster用于2d物体"><code class="language-plaintext highlighter-rouge">Physics2D Raycaster</code>（用于2D物体）</h5>
+<p>配合2D Collider检测点击或拖动等交互</p>
+
+<h3 id="api-6">API</h3>
+<h4 id="static-properties">Static Properties</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">current</code></td>
+      <td>返回当前EventSystem</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="properties-7">Properties</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">alreadySelecting</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td><strong>只读</strong>属性，表示 EventSystem 当前是否正在执行 <code class="language-plaintext highlighter-rouge">SetSelectedGameObject()</code>。<br />⚠️ 一般用于内部防止递归调用选中事件。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">currentInputModule</code></td>
+      <td><code class="language-plaintext highlighter-rouge">BaseInputModule</code></td>
+      <td>当前正在使用的输入模块（如 <code class="language-plaintext highlighter-rouge">StandaloneInputModule</code> 或 <code class="language-plaintext highlighter-rouge">InputSystemUIInputModule</code>）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">currentSelectedGameObject</code></td>
+      <td><code class="language-plaintext highlighter-rouge">GameObject</code></td>
+      <td>当前选中的 UI 对象（例如当前焦点在某个按钮上时，这就是那个按钮）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">firstSelectedGameObject</code></td>
+      <td><code class="language-plaintext highlighter-rouge">GameObject</code></td>
+      <td>场景加载或 EventSystem 启动时最初被选中的对象（通常用于手柄/键盘导航）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">isFocused</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>表示 EventSystem 是否处于“聚焦”状态。<br />在 PC 上，这通常意味着游戏窗口是否处于激活状态（失焦时不响应输入）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pixelDragThreshold</code></td>
+      <td><code class="language-plaintext highlighter-rouge">int</code></td>
+      <td>拖动时鼠标或手指要移动多少像素才算开始拖拽（用来防止误触拖动）。默认是 5。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sendNavigationEvents</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>是否启用方向键/手柄的导航事件（如按 ↑↓←→ 移动 UI 选择框）。关闭后不能用方向键移动焦点。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="publicf-methods">Publicf Methods</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>作用</th>
+      <th>常见用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">IsPointerOverGameObject()</code></td>
+      <td>判断鼠标/手指是否悬停在 UI 上</td>
+      <td>做点击穿透判断</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">RaycastAll()</code></td>
+      <td>手动执行一次 UI 射线检测</td>
+      <td>获取所有命中的 UI 元素</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SetSelectedGameObject()</code></td>
+      <td>设置当前聚焦的 UI</td>
+      <td>控制导航焦点</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">UpdateModules()</code></td>
+      <td>刷新输入模块</td>
+      <td>很少手动用，一般系统自动处理</td>
+    </tr>
+  </tbody>
+</table>
 
 <h2 id="focus">Focus</h2>
 
