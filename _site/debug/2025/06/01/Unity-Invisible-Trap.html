@@ -202,6 +202,45 @@
 </ul>
 
 <h1 id="class-2-物理系统相关">Class 2 物理系统相关</h1>
+<h2 id="1rigidbody设置position导致穿透">1.Rigidbody设置position导致穿透</h2>
+<ul>
+  <li>使用<code class="language-plaintext highlighter-rouge">transform.position = ...</code>设置刚体位置，会跳过物理引擎检测，导致穿墙</li>
+  <li>正确做法：使用<code class="language-plaintext highlighter-rouge">Rigidbody.MovePosition()</code></li>
+</ul>
+
+<h2 id="2collider和rigidbody的组合错误">2.Collider和Rigidbody的组合错误</h2>
+<ul>
+  <li>常见错误组合
+    <ul>
+      <li>静态物体（如地面）用了非Kinematic的Rigidbody</li>
+      <li>移动物体没加Rigidbody，靠transform移动导致物理行为异常</li>
+    </ul>
+  </li>
+  <li>Unity的推荐：
+    <ul>
+      <li>静态物体（地面）用Collider，无Rigidbody</li>
+      <li>动态物体加Rigidbody，控制用物理接口</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="class-3-生命周期相关">Class 3 生命周期相关</h1>
+<h2 id="1协程中的waitforseconds在timescale为0时失效">1.协程中的<code class="language-plaintext highlighter-rouge">WaitForSeconds</code>在TimeScale为0时失效</h2>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">StartCoroutine</span><span class="p">(</span><span class="nf">Example</span><span class="p">());</span>
+
+<span class="n">IEnumerator</span> <span class="nf">Example</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="k">yield</span> <span class="k">return</span> <span class="k">new</span> <span class="nf">WaitForSeconds</span><span class="p">(</span><span class="m">2f</span><span class="p">);</span> <span class="c1">// 如果Time.timeScale == 0，不会等待</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>解决方案：用`WaitForSecondRealtime(2f);</li>
+</ul>
+
+<h2 id="2脚本的update仍被调用虽然物体不可见">2.脚本的<code class="language-plaintext highlighter-rouge">Update()</code>仍被调用，虽然物体不可见</h2>
+<ul>
+  <li>即使物体在摄像机外、隐藏或inactive子物体，只要GameObject时active的、脚本时enable的，Update就会继续执行</li>
+</ul>
 
 
         

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-27T22:00:15+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Unity Invisible Trap</title><link href="http://localhost:4000/debug/2025/06/01/Unity-Invisible-Trap.html" rel="alternate" type="text/html" title="Unity Invisible Trap" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/debug/2025/06/01/Unity-Invisible-Trap</id><content type="html" xml:base="http://localhost:4000/debug/2025/06/01/Unity-Invisible-Trap.html"><![CDATA[<p>Unity实际开发中，有很多“看起来正常、实则容易出错”的<strong>奇怪问题</strong>（或称为<strong>隐形陷阱</strong>）</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-27T22:09:17+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Unity Invisible Trap</title><link href="http://localhost:4000/debug/2025/06/01/Unity-Invisible-Trap.html" rel="alternate" type="text/html" title="Unity Invisible Trap" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/debug/2025/06/01/Unity-Invisible-Trap</id><content type="html" xml:base="http://localhost:4000/debug/2025/06/01/Unity-Invisible-Trap.html"><![CDATA[<p>Unity实际开发中，有很多“看起来正常、实则容易出错”的<strong>奇怪问题</strong>（或称为<strong>隐形陷阱</strong>）</p>
 
 <h1 id="class-1-交互相关">Class 1 交互相关</h1>
 <h2 id="1多个可交互物体输入触发多个">1.多个可交互物体，输入触发多个</h2>
@@ -31,7 +31,46 @@
   <li>解决方案：调试Graphic Raycaster、Canvas排序、Raycast Target勾选项</li>
 </ul>
 
-<h1 id="class-2-物理系统相关">Class 2 物理系统相关</h1>]]></content><author><name>ljf12825</name></author><category term="Debug" /><category term="Unity" /><category term="Unity Trap" /><category term="Debug" /><summary type="html"><![CDATA[Unity实际开发中，有很多“看起来正常、实则容易出错”的奇怪问题（或称为隐形陷阱）]]></summary></entry><entry><title type="html">Collider &amp;amp; Trigger</title><link href="http://localhost:4000/posts/2025-06-04-Collider-and-Trigger/" rel="alternate" type="text/html" title="Collider &amp;amp; Trigger" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Collider-and-Trigger</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-04-Collider-and-Trigger/"><![CDATA[<p>Unity中的碰撞体是物理系统的重要组成部分，负责定义游戏对象的形状以进行碰撞检测。简单来说，Collider是一个无形的边界，用于检测物体是否接触或重叠，从而触发碰撞事件和物理响应</p>
+<h1 id="class-2-物理系统相关">Class 2 物理系统相关</h1>
+<h2 id="1rigidbody设置position导致穿透">1.Rigidbody设置position导致穿透</h2>
+<ul>
+  <li>使用<code class="language-plaintext highlighter-rouge">transform.position = ...</code>设置刚体位置，会跳过物理引擎检测，导致穿墙</li>
+  <li>正确做法：使用<code class="language-plaintext highlighter-rouge">Rigidbody.MovePosition()</code></li>
+</ul>
+
+<h2 id="2collider和rigidbody的组合错误">2.Collider和Rigidbody的组合错误</h2>
+<ul>
+  <li>常见错误组合
+    <ul>
+      <li>静态物体（如地面）用了非Kinematic的Rigidbody</li>
+      <li>移动物体没加Rigidbody，靠transform移动导致物理行为异常</li>
+    </ul>
+  </li>
+  <li>Unity的推荐：
+    <ul>
+      <li>静态物体（地面）用Collider，无Rigidbody</li>
+      <li>动态物体加Rigidbody，控制用物理接口</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="class-3-生命周期相关">Class 3 生命周期相关</h1>
+<h2 id="1协程中的waitforseconds在timescale为0时失效">1.协程中的<code class="language-plaintext highlighter-rouge">WaitForSeconds</code>在TimeScale为0时失效</h2>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">StartCoroutine</span><span class="p">(</span><span class="nf">Example</span><span class="p">());</span>
+
+<span class="n">IEnumerator</span> <span class="nf">Example</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="k">yield</span> <span class="k">return</span> <span class="k">new</span> <span class="nf">WaitForSeconds</span><span class="p">(</span><span class="m">2f</span><span class="p">);</span> <span class="c1">// 如果Time.timeScale == 0，不会等待</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>解决方案：用`WaitForSecondRealtime(2f);</li>
+</ul>
+
+<h2 id="2脚本的update仍被调用虽然物体不可见">2.脚本的<code class="language-plaintext highlighter-rouge">Update()</code>仍被调用，虽然物体不可见</h2>
+<ul>
+  <li>即使物体在摄像机外、隐藏或inactive子物体，只要GameObject时active的、脚本时enable的，Update就会继续执行</li>
+</ul>]]></content><author><name>ljf12825</name></author><category term="Debug" /><category term="Unity" /><category term="Unity Trap" /><category term="Debug" /><summary type="html"><![CDATA[Unity实际开发中，有很多“看起来正常、实则容易出错”的奇怪问题（或称为隐形陷阱）]]></summary></entry><entry><title type="html">Collider &amp;amp; Trigger</title><link href="http://localhost:4000/posts/2025-06-04-Collider-and-Trigger/" rel="alternate" type="text/html" title="Collider &amp;amp; Trigger" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Collider-and-Trigger</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-04-Collider-and-Trigger/"><![CDATA[<p>Unity中的碰撞体是物理系统的重要组成部分，负责定义游戏对象的形状以进行碰撞检测。简单来说，Collider是一个无形的边界，用于检测物体是否接触或重叠，从而触发碰撞事件和物理响应</p>
 
 <h2 id="什么是collider">什么是Collider</h2>
 <p>Collider是附加在游戏对象上的组件，用于告诉物理引擎这个对象的碰撞范围。Collider本身不会渲染形状，只是一个隐形的物理边界</p>

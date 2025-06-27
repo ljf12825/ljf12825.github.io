@@ -28,4 +28,33 @@ Unity实际开发中，有很多“看起来正常、实则容易出错”的**�
 - 解决方案：调试Graphic Raycaster、Canvas排序、Raycast Target勾选项
 
 # Class 2 物理系统相关
+## 1.Rigidbody设置position导致穿透
+- 使用`transform.position = ...`设置刚体位置，会跳过物理引擎检测，导致穿墙
+- 正确做法：使用`Rigidbody.MovePosition()`
+
+## 2.Collider和Rigidbody的组合错误
+- 常见错误组合
+  - 静态物体（如地面）用了非Kinematic的Rigidbody
+  - 移动物体没加Rigidbody，靠transform移动导致物理行为异常
+
+- Unity的推荐：
+  - 静态物体（地面）用Collider，无Rigidbody
+  - 动态物体加Rigidbody，控制用物理接口
+
+# Class 3 生命周期相关
+## 1.协程中的`WaitForSeconds`在TimeScale为0时失效
+```cs
+StartCoroutine(Example());
+
+IEnumerator Example()
+{
+  yield return new WaitForSeconds(2f); // 如果Time.timeScale == 0，不会等待
+}
+```
+- 解决方案：用`WaitForSecondRealtime(2f);
+
+## 2.脚本的`Update()`仍被调用，虽然物体不可见
+- 即使物体在摄像机外、隐藏或inactive子物体，只要GameObject时active的、脚本时enable的，Update就会继续执行
+
+
 
