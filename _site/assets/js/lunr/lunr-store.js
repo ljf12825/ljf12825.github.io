@@ -240,9 +240,9 @@ var store = [{
         "teaser": null
       },{
         "title": "Layout",
-        "excerpt":" ","categories": ["笔记"],
+        "excerpt":"Layout System Layout Group Layout Group是Unity UI自动布局系统的核心组件之一，用于在UI Canvas下自动排列其他子物体。它极大地简化了UI元素的排列和适配逻辑，让UI开发变得更结构化、响应式、更易维护 Layout Group是一类MonoBehaviour脚本，用于自动排列RectTransform子物体的位置与尺寸，不需要你手动拖动它们 类型 说明 用途示例 HorizontalLayoutGroup 子物体沿 水平方向排列 菜单栏、工具条、横向列表 VerticalLayoutGroup 子物体沿 垂直方向排列 聊天记录、竖向按钮组 GridLayoutGroup 子物体按 网格排列（行列） 背包格子、关卡选择界面 LayoutGroup 抽象基类 不直接使用 Horizontal / Vertical Layout Group 属性 说明 Padding 容器四周的边距 Spacing 子物体之间的间隔 Child Alignment 子物体在主轴上的对齐方式（左/中/右） Reverse Arrangement 排列方向反转：从上到下 → 从下到上 Control Child Size...","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Layout.html",
+        "url": "/posts/2025-06-11-Layout/",
         "teaser": null
       },{
         "title": "Mesh",

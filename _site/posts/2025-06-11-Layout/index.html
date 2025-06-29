@@ -1,0 +1,682 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.1 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Layout - ljf12825’s Blog</title>
+<meta name="description" content="Layout System">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="ljf12825's Blog">
+<meta property="og:title" content="Layout">
+<meta property="og:url" content="http://localhost:4000/posts/2025-06-11-Layout/">
+
+
+  <meta property="og:description" content="Layout System">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-06-01T00:00:00+08:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/posts/2025-06-11-Layout/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="ljf12825's Blog Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- favicon -->
+<link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          ljf12825's Blog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/"
+                
+                
+              >Home</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/categories/"
+                
+                
+              >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/tags/"
+                
+                
+              >Tags</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/about/"
+                
+                
+              >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Layout">
+    <meta itemprop="description" content="Layout System">
+    <meta itemprop="datePublished" content="2025-06-01T00:00:00+08:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/posts/2025-06-11-Layout/" itemprop="url">Layout
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h2 id="layout-system">Layout System</h2>
+<p><img src="/assets/images/LayoutSystem.jpg" alt="LayoutSystem" /></p>
+
+<h3 id="layout-group">Layout Group</h3>
+<p><code class="language-plaintext highlighter-rouge">Layout Group</code>是Unity UI自动布局系统的核心组件之一，用于在UI Canvas下自动排列其他子物体。它极大地简化了UI元素的排列和适配逻辑，让UI开发变得更结构化、响应式、更易维护</p>
+
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">Layout Group</code>是一类MonoBehaviour脚本，用于自动排列RectTransform子物体的位置与尺寸，不需要你手动拖动它们</p>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>说明</th>
+      <th>用途示例</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">HorizontalLayoutGroup</code></td>
+      <td>子物体沿 <strong>水平方向排列</strong></td>
+      <td>菜单栏、工具条、横向列表</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">VerticalLayoutGroup</code></td>
+      <td>子物体沿 <strong>垂直方向排列</strong></td>
+      <td>聊天记录、竖向按钮组</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GridLayoutGroup</code></td>
+      <td>子物体按 <strong>网格排列</strong>（行列）</td>
+      <td>背包格子、关卡选择界面</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LayoutGroup</code></td>
+      <td>抽象基类</td>
+      <td>不直接使用</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="horizontal--vertical-layout-group">Horizontal / Vertical Layout Group</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Padding</code></td>
+      <td>容器四周的边距</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Spacing</code></td>
+      <td>子物体之间的间隔</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Child Alignment</code></td>
+      <td>子物体在主轴上的对齐方式（左/中/右）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Reverse Arrangement</code></td>
+      <td>排列方向反转：从上到下 → 从下到上</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Control Child Size</code></td>
+      <td>控制子物体是否填满空间</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Use Child Scale</code></td>
+      <td>是否使用子物体的缩放比例</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Child Force Expand</code></td>
+      <td>启用时多个子物体会调整间距，以填充满Width或Height</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>Horizontal Layout Group适用场景：菜单栏、Tab标签页、道具快捷栏等</p>
+</blockquote>
+
+<blockquote>
+  <p>Vertical Layout Group适用场景：排行榜列表、聊天内容、选项按钮组等</p>
+</blockquote>
+
+<h4 id="grid-layout-group">Grid Layout Group</h4>
+<p>用于将子物体排列成规则网格，每个格子的大小统一</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Padding</code></td>
+      <td>容器四周的边距</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Cell Size</code></td>
+      <td>每个格子的宽高</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Spacing</code></td>
+      <td>格子之间的间距</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Start Corner</code></td>
+      <td>从哪个角开始排列</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Start Axis</code></td>
+      <td>是优先横向填充还是纵向</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Child Alignment</code></td>
+      <td>子物体整体对齐方式</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Constraint</code></td>
+      <td>行数/列数限制（可固定行或列）</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>使用场景：背包系统、九宫格、商城道具、分页列表</p>
+</blockquote>
+
+<h4 id="常见问题">常见问题</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>问题</th>
+      <th>原因 / 解决方式</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>改了内容不刷新布局</td>
+      <td>调用 <code class="language-plaintext highlighter-rouge">LayoutRebuilder.ForceRebuildLayoutImmediate()</code></td>
+    </tr>
+    <tr>
+      <td>动态添加元素时抖动</td>
+      <td>先 <code class="language-plaintext highlighter-rouge">SetActive(false)</code> 再添加，最后 <code class="language-plaintext highlighter-rouge">SetActive(true)</code></td>
+    </tr>
+    <tr>
+      <td>动画或手动设置位置被覆盖</td>
+      <td>LayoutGroup 会自动控制，需禁用 LayoutGroup 才能手动操作</td>
+    </tr>
+    <tr>
+      <td>ContentSizeFitter + LayoutGroup 死循环</td>
+      <td>不要放在同一个 GameObject 上</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="layout-element">Layout Element</h3>
+<p><code class="language-plaintext highlighter-rouge">Layout Element</code>用于告诉布局系统如何排布当前UI元素，它本身不会影响UI的大小或位置，而是为其所在的<code class="language-plaintext highlighter-rouge">Layout Group</code>提供布局建议（尺寸、优先级等），从而参与整个UI的自动布局流程</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>含义</th>
+      <th>举例说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Ignore Layout</strong></td>
+      <td>是否忽略布局系统</td>
+      <td>设置为 <code class="language-plaintext highlighter-rouge">true</code> 会让 Layout Group 忽略它</td>
+    </tr>
+    <tr>
+      <td><strong>Min Width / Height</strong></td>
+      <td>最小宽高</td>
+      <td>不小于这个尺寸</td>
+    </tr>
+    <tr>
+      <td><strong>Preferred Width / Height</strong></td>
+      <td>首选宽高</td>
+      <td>想要的尺寸（如果有空间）</td>
+    </tr>
+    <tr>
+      <td><strong>Flexible Width / Height</strong></td>
+      <td>灵活宽高</td>
+      <td>有多大就能占多大，类似“权重” ，多个元素剩余空间分配按权重计算</td>
+    </tr>
+    <tr>
+      <td><strong>Layout Priority</strong></td>
+      <td>优先级</td>
+      <td>如果GameObject上有多个布局相关组件，按优先级顺序计算，优先级与数值成正比</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="常见用途">常见用途</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>场景</th>
+      <th>使用方式</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>某个按钮不想自动拉伸</td>
+      <td>设置 <code class="language-plaintext highlighter-rouge">Flexible Width = 0</code></td>
+    </tr>
+    <tr>
+      <td>聊天条自动增长宽度</td>
+      <td>设置 <code class="language-plaintext highlighter-rouge">Preferred Width = Text 宽度</code></td>
+    </tr>
+    <tr>
+      <td>图片强制保持比例</td>
+      <td>设置 <code class="language-plaintext highlighter-rouge">Preferred Width/Height</code> 同步更新</td>
+    </tr>
+    <tr>
+      <td>某个子元素不参与布局</td>
+      <td>勾选 <code class="language-plaintext highlighter-rouge">Ignore Layout</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="content-size-fitter">Content Size Fitter</h3>
+<p><code class="language-plaintext highlighter-rouge">Content Size Fitter</code>用于让UI元素根据其子元素或自身内容的大小，自动调整RectTransform的尺寸，是实现响应式UI的关键工具之一</p>
+
+<p>比如：让聊天气泡、弹窗、按钮、文字背景根据内容自动扩展</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性名</th>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Horizontal Fit</strong></td>
+      <td>enum</td>
+      <td>控制横向尺寸的自动适配方式</td>
+    </tr>
+    <tr>
+      <td><strong>Vertical Fit</strong></td>
+      <td>enum</td>
+      <td>控制纵向尺寸的自动适配方式</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>每个方向的选项有三种：</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Unconstrained</code>（不自动适配，默认）</li>
+  <li><code class="language-plaintext highlighter-rouge">Min Size</code>（缩小到最小可用大小）</li>
+  <li><code class="language-plaintext highlighter-rouge">Preferred Size</code>（扩展到推荐大小）</li>
+</ul>
+
+<h4 id="常见用途-1">常见用途</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>使用场景</th>
+      <th>使用方式</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>聊天气泡自动撑开</td>
+      <td><code class="language-plaintext highlighter-rouge">Vertical Fit = Preferred Size</code>（文本高度）<br /><code class="language-plaintext highlighter-rouge">Horizontal Fit = Preferred Size</code>（文本宽度）</td>
+    </tr>
+    <tr>
+      <td>按钮随文字自适应宽度</td>
+      <td>按钮 Image + Text + <code class="language-plaintext highlighter-rouge">ContentSizeFitter</code></td>
+    </tr>
+    <tr>
+      <td>ScrollView 内容自动撑开</td>
+      <td>在 Content 上加 <code class="language-plaintext highlighter-rouge">ContentSizeFitter</code> + <code class="language-plaintext highlighter-rouge">Layout Group</code></td>
+    </tr>
+    <tr>
+      <td>警告弹窗根据文本自动扩展大小</td>
+      <td>Text + 背景图 + ContentSizeFitter</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="常见问题-1">常见问题</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>问题</th>
+      <th>原因 &amp; 解决方案</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>和 LayoutGroup 冲突</td>
+      <td><strong>不要把 ContentSizeFitter 和 LayoutGroup 放在同一个 GameObject 上</strong>，要分开：父挂 LayoutGroup，子挂 ContentSizeFitter</td>
+    </tr>
+    <tr>
+      <td>内容变了但尺寸没变</td>
+      <td>调用：<code class="language-plaintext highlighter-rouge">LayoutRebuilder.ForceRebuildLayoutImmediate(transform as RectTransform)</code> 手动刷新</td>
+    </tr>
+    <tr>
+      <td>不生效</td>
+      <td>子物体未使用 <code class="language-plaintext highlighter-rouge">LayoutElement</code> 或未正确设置 <code class="language-plaintext highlighter-rouge">Preferred Size</code></td>
+    </tr>
+    <tr>
+      <td>UI 抖动</td>
+      <td>动态内容更新太频繁，建议只在必要时刷新布局</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="示例">示例</h4>
+<h5 id="动态文字撑开背景">动态文字撑开背景</h5>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="n">TextMeshProUGUI</span> <span class="n">messageText</span><span class="p">;</span>
+<span class="k">public</span> <span class="n">RectTransform</span> <span class="n">bubble</span><span class="p">;</span>
+
+<span class="k">void</span> <span class="nf">SetMessage</span><span class="p">(</span><span class="kt">string</span> <span class="n">msg</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">messageText</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">msg</span><span class="p">;</span>
+  <span class="n">LayoutRebuilder</span><span class="p">.</span><span class="nf">ForceRebuildLayoutImmediate</span><span class="p">(</span><span class="n">bubble</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h5 id="聊天列表自动滚到底">聊天列表自动滚到底</h5>
+<p>搭配<code class="language-plaintext highlighter-rouge">ScrollRect</code>：</p>
+<ul>
+  <li>在<code class="language-plaintext highlighter-rouge">Content</code>上加<code class="language-plaintext highlighter-rouge">VerticalLayoutGroup + ContentSizeFitter</code></li>
+  <li>发送新消息后滚动到底部</li>
+</ul>
+
+<h3 id="aspect-ratio-fitter">Aspect Ratio Fitter</h3>
+<p><code class="language-plaintext highlighter-rouge">Aspect Ratio Fitter</code>用于强制一个UI元素保持固定的宽高比（Aspect Ratio），无论父物体如何拉伸、屏幕怎么变化，它都能保持比例不变</p>
+
+<p>通常用于：</p>
+<ul>
+  <li>图片防拉伸</li>
+  <li>视频播放器窗口</li>
+  <li>正方形/圆形按钮保持比例</li>
+  <li>多分辨率适配中的UI统一性</li>
+</ul>
+
+<h4 id="属性说明">属性说明</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性名</th>
+      <th>类型</th>
+      <th>含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Aspect Mode</strong></td>
+      <td>枚举</td>
+      <td>控制哪个方向跟随调整以维持宽高比</td>
+    </tr>
+    <tr>
+      <td><strong>Aspect Ratio</strong></td>
+      <td>float</td>
+      <td>目标宽高比（width / height）</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="aspect-mode">Aspect Mode</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>模式</th>
+      <th>含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">None</code></td>
+      <td>不启用比例适配</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Width Controls Height</code></td>
+      <td>宽度不变，根据宽度调整高度</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Height Controls Width</code></td>
+      <td>高度不变，根据高度调整宽度</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Fit In Parent</code></td>
+      <td>保持比例并完全包含在父物体内（不裁剪）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Envelope Parent</code></td>
+      <td>保持比例并<strong>覆盖整个父物体</strong>（可能裁剪）</td>
+    </tr>
+  </tbody>
+</table>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-06-01T00:00:00+08:00">June 1, 2025</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/posts/2025-06-11-Audio-System/" class="pagination--pager" title="Audio System">Previous</a>
+    
+    
+      <a href="/%E7%AC%94%E8%AE%B0/2025/06/01/Mesh.html" class="pagination--pager" title="Mesh">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/ljf12825" rel="nofollow noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 <a href="http://localhost:4000">ljf12825's Blog</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
