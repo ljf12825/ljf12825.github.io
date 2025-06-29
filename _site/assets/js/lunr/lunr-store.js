@@ -241,7 +241,7 @@ var store = [{
       },{
         "title": "Layout",
         "excerpt":"Layout System Layout Group Layout Group是Unity UI自动布局系统的核心组件之一，用于在UI Canvas下自动排列其他子物体。它极大地简化了UI元素的排列和适配逻辑，让UI开发变得更结构化、响应式、更易维护 Layout Group是一类MonoBehaviour脚本，用于自动排列RectTransform子物体的位置与尺寸，不需要你手动拖动它们 类型 说明 用途示例 HorizontalLayoutGroup 子物体沿 水平方向排列 菜单栏、工具条、横向列表 VerticalLayoutGroup 子物体沿 垂直方向排列 聊天记录、竖向按钮组 GridLayoutGroup 子物体按 网格排列（行列） 背包格子、关卡选择界面 LayoutGroup 抽象基类 不直接使用 Horizontal / Vertical Layout Group 属性 说明 Padding 容器四周的边距 Spacing 子物体之间的间隔 Child Alignment 子物体在主轴上的对齐方式（左/中/右） Reverse Arrangement 排列方向反转：从上到下 → 从下到上 Control Child Size...","categories": ["笔记"],
-        "tags": ["Unity","Unity System"],
+        "tags": ["Unity","Unity System","UGUI"],
         "url": "/posts/2025-06-11-Layout/",
         "teaser": null
       },{
@@ -307,7 +307,7 @@ var store = [{
       },{
         "title": "Mask",
         "excerpt":"Mask Mask用于裁剪UI子元素的显示区域，通常搭配图片、Scroll View、头像裁剪等使用 核心功能和行为 特点 说明 子物体只在 Mask 图像区域内显示 超出部分不可见（不销毁，只裁剪） 遮罩区域基于 Image 的透明度 非透明部分就是显示区域 不支持软遮罩（软边缘） 默认是硬裁剪，想要软遮罩需用 Shader 或 UIEffect 等插件 使用方法 MaskParent(Image + Mask) |___Content(Text / Image /等UI) 父物体挂Image + Mask，并设置图片为遮罩区域 子物体放置UI内容，超出遮罩图形范围会被裁剪 常见用途 场景 使用方式 ScrollView 滚动列表 Viewport 挂 Image + Mask，内容只显示在视窗中 圆形头像裁剪 使用圆形 Image + Mask 裁剪方形头像图片 进度条遮罩 遮罩下滑动另一个图片或文字，实现“擦除”或“揭示”效果...","categories": ["笔记"],
-        "tags": ["Unity","Unity Component","Render","Graphics"],
+        "tags": ["Unity","Unity Component","Render","Graphics","UGUI"],
         "url": "/posts/2025-06-29-Mask/",
         "teaser": null
       },{
@@ -315,6 +315,12 @@ var store = [{
         "excerpt":" ","categories": ["笔记"],
         "tags": ["Unity","Unity Component","Render","Graphics"],
         "url": "/posts/2025-06-29-Texture/",
+        "teaser": null
+      },{
+        "title": "UI Event System",
+        "excerpt":"Event System Event System是Unity UI System中的核心交互管理器，掌控了所有鼠标点击、键盘输入、触摸事件、UI导航的逻辑 Unity的Event System是一个处理用户输入事件的系统，用于发送“点击了谁”“选中了谁”之类的事件，属于UnityEngine.EventSystems命名空间 组件 用途 EventSystem 整个输入系统的“大脑” Input Module 输入方式模块，比如处理鼠标、键盘、手柄（你可以切换） Raycaster（挂在 Canvas 或 3D 对象上） 实际检测点击了哪个物体，比如：GraphicRaycaster, PhysicsRaycaster EventSystem会追踪以下交互： 类型 描述 接口 点击 Click 鼠标/触摸点击 UI IPointerClickHandler 拖拽 Drag 拖拽 ScrollRect、物品、滑块 IDragHandler, IBeginDragHandler, IEndDragHandler 悬停 Hover 鼠标移动到 UI 上 IPointerEnterHandler, IPointerExitHandler 按钮按下 长按、释放 IPointerDownHandler, IPointerUpHandler 键盘导航...","categories": ["笔记"],
+        "tags": ["Unity","Unity Component","UGUI"],
+        "url": "/posts/2025-06-29-UI-Event-System/",
         "teaser": null
       },{
     "title": "About",
