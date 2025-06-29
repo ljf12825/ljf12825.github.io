@@ -4613,6 +4613,61 @@ Unity默认生成<br />
 
 <h2 id="effect">Effect</h2>
 
+<p><img src="/assets/images/UIEffectsPanel.jpg" alt="UIEffectsPanel" /></p>
+
+<h3 id="outline">Outline</h3>
+<p><code class="language-plaintext highlighter-rouge">Outline</code>是UI元素（特别是Text或Image）边缘的描边效果，常用于：</p>
+<ul>
+  <li>让文字在复杂背景上更清晰</li>
+  <li>做出“激活态、高亮态、按钮描边”等视觉反馈</li>
+</ul>
+
+<p>可以使用Unity内置组件或者自定义Shader</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>原理</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Unity 内置效果</td>
+      <td>给文字/图片添加一个 UI 组件 <code class="language-plaintext highlighter-rouge">Outline</code>，复制顶点并偏移渲染多次</td>
+    </tr>
+    <tr>
+      <td>Shader 实现</td>
+      <td>将 UI 元素边缘偏移若干方向采样贴图，合成边缘</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>内置Outline的原理：</p>
+<ul>
+  <li>一个文字变成多个（通常4~8）方向偏移的副本，每个副本绘制为描边颜色</li>
+  <li>性能相对差一些，特别是在大量UI上使用</li>
+</ul>
+
+<h3 id="position-as-uv1">Position As UV1</h3>
+<p>这是一个技术手段：将某个偏移后的顶点坐标值（如描边方向的位移）写入UV1通道，让Shader在片元阶段使用它来做偏移采样</p>
+
+<p>用途：</p>
+<ul>
+  <li>把需要的特效位移、数据提前写入UV1（节省顶点数据或避免增加新通道）</li>
+  <li>Shader在Fragment阶段用UV1执行各种偏移采样，如做模糊、描边、阴影</li>
+</ul>
+
+<h3 id="shadow">Shadow</h3>
+<p><code class="language-plaintext highlighter-rouge">Shadow</code>是给UI文本或图形加上的下投影阴影，常用于：</p>
+<ul>
+  <li>提高层次感</li>
+  <li>模拟立体感</li>
+  <li>UI Hover时的强调效果</li>
+</ul>
+
+<p>实现方式和Outline类似，也常用顶点偏移 + 颜色叠加实现；通常只需1此偏移绘制，不像Outline要多个方向</p>
+
 <h2 id="layout-system">Layout System</h2>
 <h3 id="layout-group">Layout Group</h3>
 
