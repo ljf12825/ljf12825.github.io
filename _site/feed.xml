@@ -1,4 +1,279 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-29T19:44:51+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Unity Invisible Trap</title><link href="http://localhost:4000/debug/2025/06/01/Unity-Invisible-Trap.html" rel="alternate" type="text/html" title="Unity Invisible Trap" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/debug/2025/06/01/Unity-Invisible-Trap</id><content type="html" xml:base="http://localhost:4000/debug/2025/06/01/Unity-Invisible-Trap.html"><![CDATA[<p>Unity实际开发中，有很多“看起来正常、实则容易出错”的<strong>奇怪问题</strong>（或称为<strong>隐形陷阱</strong>）</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-29T21:37:00+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Mask</title><link href="http://localhost:4000/posts/2025-06-29-Mask/" rel="alternate" type="text/html" title="Mask" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Mask</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-29-Mask/"><![CDATA[<p><img src="/assets/images/MaskPanel.jpg" alt="MaskPanel" /></p>
+
+<h2 id="mask">Mask</h2>
+<p><code class="language-plaintext highlighter-rouge">Mask</code>用于裁剪UI子元素的显示区域，通常搭配图片、Scroll View、头像裁剪等使用</p>
+
+<h3 id="核心功能和行为">核心功能和行为</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>特点</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>子物体只在 Mask 图像区域内显示</td>
+      <td>超出部分不可见（不销毁，只裁剪）</td>
+    </tr>
+    <tr>
+      <td>遮罩区域基于 <code class="language-plaintext highlighter-rouge">Image</code> 的透明度</td>
+      <td>非透明部分就是显示区域</td>
+    </tr>
+    <tr>
+      <td>不支持软遮罩（软边缘）</td>
+      <td>默认是硬裁剪，想要软遮罩需用 Shader 或 <code class="language-plaintext highlighter-rouge">UIEffect</code> 等插件</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="使用方法">使用方法</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MaskParent(Image + Mask)
+|___Content(Text / Image /等UI)
+</code></pre></div></div>
+<ul>
+  <li>父物体挂<code class="language-plaintext highlighter-rouge">Image</code> + <code class="language-plaintext highlighter-rouge">Mask</code>，并设置图片为遮罩区域</li>
+  <li>子物体放置UI内容，超出遮罩图形范围会被裁剪</li>
+</ul>
+
+<h3 id="常见用途">常见用途</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>场景</th>
+      <th>使用方式</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ScrollView 滚动列表</td>
+      <td>Viewport 挂 <code class="language-plaintext highlighter-rouge">Image + Mask</code>，内容只显示在视窗中</td>
+    </tr>
+    <tr>
+      <td>圆形头像裁剪</td>
+      <td>使用圆形 <code class="language-plaintext highlighter-rouge">Image + Mask</code> 裁剪方形头像图片</td>
+    </tr>
+    <tr>
+      <td>进度条遮罩</td>
+      <td>遮罩下滑动另一个图片或文字，实现“擦除”或“揭示”效果</td>
+    </tr>
+    <tr>
+      <td>文字遮挡/选中效果</td>
+      <td>对文字进行遮罩只显示一部分或高亮部分</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="裁剪区域">裁剪区域</h3>
+<p><code class="language-plaintext highlighter-rouge">Mask</code>裁剪的区域由挂载<code class="language-plaintext highlighter-rouge">Mask</code>的GameObject的<code class="language-plaintext highlighter-rouge">Image</code>的Alpha通道决定</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Image 类型</th>
+      <th>Mask 效果</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sprite (Alpha通道)</td>
+      <td>透明处裁剪，实色处显示</td>
+    </tr>
+    <tr>
+      <td>Sprite (无 Alpha 通道)</td>
+      <td>整张图片为裁剪区域</td>
+    </tr>
+    <tr>
+      <td>没有 Image 组件</td>
+      <td><code class="language-plaintext highlighter-rouge">Mask</code> 不起作用（它依赖 <code class="language-plaintext highlighter-rouge">Image</code>）</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>Image的<code class="language-plaintext highlighter-rouge">Raycast Target</code>设置不影响裁剪，但影响事件响应</p>
+</blockquote>
+
+<h2 id="rect-mask-2d">Rect Mask 2D</h2>
+<p><code class="language-plaintext highlighter-rouge">RectMask2D</code>是Unity UI中专为矩形区域裁剪而设计的遮罩组件，功能和<code class="language-plaintext highlighter-rouge">Mask</code>类似，但更高效、轻量，只适用于矩形裁剪</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>特性</th>
+      <th><code class="language-plaintext highlighter-rouge">RectMask2D</code></th>
+      <th><code class="language-plaintext highlighter-rouge">Mask</code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>遮罩形状</strong></td>
+      <td>只能是矩形</td>
+      <td>任意形状（基于 alpha 通道）</td>
+    </tr>
+    <tr>
+      <td><strong>性能</strong></td>
+      <td>高效</td>
+      <td>相对较低（使用 Stencil Buffer）</td>
+    </tr>
+    <tr>
+      <td><strong>软遮罩支持</strong></td>
+      <td>不支持</td>
+      <td>也不支持（需 Shader 实现）</td>
+    </tr>
+    <tr>
+      <td><strong>需要 Image 吗</strong></td>
+      <td>不需要</td>
+      <td>必须有 Image（带 alpha）</td>
+    </tr>
+    <tr>
+      <td><strong>ScrollView 默认用谁？</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">RectMask2D</code></td>
+      <td>不是默认组件</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>Softness：控制边缘模糊程度，让裁剪区域的边缘不再是生硬的“硬切线”，而是具有渐隐的柔和效果，也就是软遮罩</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RectMask2D.softness = new Vector2(x, y);
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>分量</th>
+      <th>含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">x</code></td>
+      <td>左右边缘的模糊像素距离</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">y</code></td>
+      <td>上下边缘的模糊像素距离</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>单位是像素数（会随Canvas的Pixel-Per-Unit放大缩小）</li>
+  <li>值越大，模糊过渡越宽</li>
+  <li>值为0时，表现为传统的硬遮罩</li>
+</ul>
+
+<h3 id="结构示例聊天滚动列表">结构示例：聊天滚动列表</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Scroll View
+|——Viewport(RectMask2D)
+      |__Content（垂直布局 + 自动扩展）
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Viewport</code>是可视区域，挂<code class="language-plaintext highlighter-rouge">RectMask2D</code></li>
+  <li>子元素（Content）会被限制在Viewport范围内，超出部分不可见</li>
+</ul>
+
+<h3 id="工作原理">工作原理</h3>
+<ul>
+  <li>裁剪区域 = RectTransform可视区域</li>
+  <li>所有超出这个矩形范围的子元素将不被渲染</li>
+  <li>实现方式基于剪裁矩形，无需stencil buffer，比<code class="language-plaintext highlighter-rouge">Mask</code>性能更高</li>
+  <li>不依赖图片、不使用alpha通道</li>
+</ul>
+
+<h2 id="sprite-mask">Sprite Mask</h2>
+<p><code class="language-plaintext highlighter-rouge">Sprite Mask</code>时Unity中专为2D精灵系统设计的遮罩组件，用来让某些Sprite按遮罩的形状显示或隐藏，相比UI中的传统<code class="language-plaintext highlighter-rouge">Mask</code>和<code class="language-plaintext highlighter-rouge">RectMask2D</code>，它属于2D渲染层级遮罩机制，用于SpriteRenderer渲染对象的裁剪</p>
+
+<p><code class="language-plaintext highlighter-rouge">Sprite Mask</code>是一个形状遮罩，允许受控的Sprite只在遮罩区域内渲染，超出部分将不可见</p>
+
+<p>它通常用于：</p>
+<ul>
+  <li>地图”探索雾“</li>
+  <li>道具高亮显示</li>
+  <li>角色潜行、隐身剪影</li>
+  <li>Sprite动画部分揭示</li>
+  <li>类似”圆形裁剪头像“的2D实现</li>
+</ul>
+
+<h3 id="使用结构示例">使用结构示例</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SpriteMask (Mask 控制区域)
+└── SpriteA (Renderer 被遮罩)
+</code></pre></div></div>
+<p>或者平行结构也可以</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SpriteMask
+SpriteA (设置受 Sprite Mask 控制)
+</code></pre></div></div>
+<h3 id="使用方法-1">使用方法</h3>
+<p>1.添加Sprite Mask</p>
+<ul>
+  <li>添加一个空物体，挂<code class="language-plaintext highlighter-rouge">Sprite Mask</code>组件</li>
+  <li>设置遮罩图形：选择一个带alpha的Sprite（通常是圆形/自定义形状）</li>
+</ul>
+
+<p>2.被遮罩的Sprite设置：<br />
+在<code class="language-plaintext highlighter-rouge">Sprite Renderer</code>上：</p>
+<ul>
+  <li>Mask Interaction设置为：
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">None</code>：不受任何遮罩影响</li>
+      <li><code class="language-plaintext highlighter-rouge">Visible Inside Mask</code>：仅在遮罩区域内可见</li>
+      <li><code class="language-plaintext highlighter-rouge">Visible Outside Mask</code>：仅在遮罩区域外可见</li>
+    </ul>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>参数</th>
+      <th>含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Sprite</strong></td>
+      <td>遮罩形状，使用 Sprite 的 alpha 通道</td>
+    </tr>
+    <tr>
+      <td><strong>Alpha Cutoff</strong></td>
+      <td>判定透明与非透明的阈值</td>
+    </tr>
+    <tr>
+      <td><strong>Custom Range</strong></td>
+      <td>设置可见层范围（Sorting Layer 和 Order）</td>
+    </tr>
+    <tr>
+      <td><strong>Sprite Sort Point</strong></td>
+      <td>以哪个点作为Sprite的排序基准点</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="示例">示例</h3>
+<h4 id="地图探索雾系统">地图探索雾系统</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>地图遮罩 (SpriteMask：黑色圆形)
+角色头顶 (Sprite：Visible Inside Mask)
+→ 角色周围区域可见，其余为黑
+</code></pre></div></div>
+
+<h4 id="裁剪头像">裁剪头像</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>头像边框 (圆形 SpriteMask)
+头像图片 (SpriteRenderer：Visible Inside Mask)
+</code></pre></div></div>
+
+<h4 id="潜行效果">潜行效果</h4>
+<p>遮罩外隐藏角色：</p>
+<ul>
+  <li>SpriteRenderer设置为<code class="language-plaintext highlighter-rouge">Visible Inside Mask</code></li>
+  <li>动画移动<code class="language-plaintext highlighter-rouge">SpriteMask</code>即可动态揭示角色</li>
+</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Component" /><category term="Render" /><category term="Graphics" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Addressables System</title><link href="http://localhost:4000/posts/2025-06-05-Addressables-System/" rel="alternate" type="text/html" title="Addressables System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Addressables-System</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-05-Addressables-System/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Unity Invisible Trap</title><link href="http://localhost:4000/debug/2025/06/01/Unity-Invisible-Trap.html" rel="alternate" type="text/html" title="Unity Invisible Trap" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/debug/2025/06/01/Unity-Invisible-Trap</id><content type="html" xml:base="http://localhost:4000/debug/2025/06/01/Unity-Invisible-Trap.html"><![CDATA[<p>Unity实际开发中，有很多“看起来正常、实则容易出错”的<strong>奇怪问题</strong>（或称为<strong>隐形陷阱</strong>）</p>
 
 <h1 id="quick-list">Quick List</h1>
 <h2 id="class1-交互相关">Class1 交互相关</h2>
@@ -396,438 +671,7 @@
 <ul>
   <li>某些Prefab被脚本<code class="language-plaintext highlighter-rouge">Instantiate()</code>出来了，但在场景中没看到</li>
   <li>检查脚本逻辑力是否有运行时代码加载或启动对象</li>
-</ul>]]></content><author><name>ljf12825</name></author><category term="Debug" /><category term="Unity" /><category term="Debug Log" /><summary type="html"><![CDATA[Unity实际开发中，有很多“看起来正常、实则容易出错”的奇怪问题（或称为隐形陷阱）]]></summary></entry><entry><title type="html">Collider &amp;amp; Trigger</title><link href="http://localhost:4000/posts/2025-06-04-Collider-and-Trigger/" rel="alternate" type="text/html" title="Collider &amp;amp; Trigger" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Collider-and-Trigger</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-04-Collider-and-Trigger/"><![CDATA[<p>Unity中的碰撞体是物理系统的重要组成部分，负责定义游戏对象的形状以进行碰撞检测。简单来说，Collider是一个无形的边界，用于检测物体是否接触或重叠，从而触发碰撞事件和物理响应</p>
-
-<h2 id="什么是collider">什么是Collider</h2>
-<p>Collider是附加在游戏对象上的组件，用于告诉物理引擎这个对象的碰撞范围。Collider本身不会渲染形状，只是一个隐形的物理边界</p>
-
-<h2 id="常见的collider类型">常见的Collider类型</h2>
-<ul>
-  <li>BoxCollider<br />
-立方体形状的碰撞体，适合方形或长方体物体</li>
-  <li>SphereCollider
-球形碰撞体，适合球形或圆形物体</li>
-  <li>CapsuleCollider
-胶囊碰撞体，适合人物、柱子等</li>
-  <li>MeshCollider
-使用自定义网格模型做碰撞体，适合复杂形状，性能较差，且通常用于静态物体</li>
-  <li>WheelCollider
-专门用于车辆轮胎的碰撞和物理模拟</li>
-</ul>
-
-<h2 id="collider和rigidbody的关系">Collider和Rigidbody的关系</h2>
-<ul>
-  <li>Collider只负责检测碰撞，不会自定产生物理运动</li>
-  <li>Rigidbody组件负责物理运动和动力学</li>
-  <li>一个没有Rigidbody的物体的Collider会被当作“静态碰撞体”使用（静态障碍物），不会移动也不响应物理力</li>
-  <li>一个有Rigidbody的物体可以在物理引擎驱动下移动，Collider会随物体运动</li>
-</ul>
-
-<h2 id="collider-panel">Collider Panel</h2>
-<h3 id="box-collider">Box Collider</h3>
-<p><img src="/assets/images/BoxColliderPanel.jpg" alt="BoxColliderPanel" /></p>
-<ul>
-  <li>IsTrigger
-默认false，此时Collider是实体碰撞体，会阻挡其他物体，发生物理碰撞和反弹<br />
-勾选时，Collider变成Trigger，不会阻挡其他物体，但会检测进入、离开和停留事件，可以用来做区域检测、事件触发等</li>
-  <li>Provides Contacts
-用于物理引擎的碰撞检测和接触点信息提供<br />
-默认false，Collider可能只报告碰撞发生，但不提供详细的接触点信息，这样可以节省一些计算资源<br />
-勾选后，Collider会提供详细的碰撞接触点信息，这样物理引擎在碰撞时，可以把碰撞的具体接触点信息暴露出来，供脚本或物理系统使用
-    <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
-
-<span class="k">public</span> <span class="k">class</span> <span class="nc">CollisionPointExample</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
-<span class="p">{</span>
-  <span class="k">void</span> <span class="nf">OnCollisionEnter</span><span class="p">(</span><span class="n">Collision</span> <span class="n">collision</span><span class="p">)</span>
-  <span class="p">{</span>
-    <span class="k">foreach</span> <span class="p">(</span><span class="n">ContactPoint</span> <span class="n">contact</span> <span class="k">in</span> <span class="n">collision</span><span class="p">.</span><span class="n">contacts</span><span class="p">)</span>
-    <span class="p">{</span>
-      <span class="c1">//接触点位置</span>
-      <span class="n">Vector3</span> <span class="n">contactPoint</span> <span class="p">=</span> <span class="n">contact</span><span class="p">.</span><span class="n">point</span><span class="p">;</span>
-      <span class="c1">//接触点法线方向</span>
-      <span class="n">Vector3</span> <span class="n">contactNormal</span> <span class="p">=</span> <span class="n">contact</span><span class="p">.</span><span class="n">normal</span><span class="p">;</span>
-
-      <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">$"</span><span class="p">{</span><span class="n">contactPoint</span><span class="p">}</span><span class="s">, </span><span class="p">{</span><span class="n">contactNormal</span><span class="p">}</span><span class="s">"</span><span class="p">);</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>    </div>
-    <p>如果时触发碰撞，IsTrigger勾选情况下，用的是OnTriggerEnter(Collider other)，这个回调中没有接触点信息，只能检测触发</p>
-  </li>
-  <li>Material
-指的是Physics Material，用于控制物理行为的材质<br />
-Create -&gt; Physics Material，编辑后拖入使用<br />
-作用：Physics Material用于定义物体在碰撞时的物理特性，比如摩擦力（Friction）、弹性（Bounciness）
-常用属性
-    <ul>
-      <li>Dynamic Friction 动摩擦力</li>
-      <li>Static Friction 静摩擦力</li>
-      <li>Bounciness 弹力（0到1之间，1表示完全反弹）</li>
-      <li>Friction Combine 摩擦组合方式（与另一个碰撞体交互时如何合成摩擦）</li>
-      <li>Bounce Combine 弹性组合方式（与另一个碰撞体交互时如何合成弹性）</li>
-    </ul>
-  </li>
-  <li>Center
-    <ul>
-      <li>指的是碰撞体在物体局部坐标系中的中心点位置</li>
-      <li>类型是Vector3</li>
-      <li>不会移动GameObject本身，只会改变碰撞体的位置</li>
-    </ul>
-  </li>
-  <li>Size
-    <ul>
-      <li>指碰撞体的尺寸</li>
-      <li>类型是Vector3</li>
-      <li>控制这个碰撞盒子的大小</li>
-    </ul>
-  </li>
-  <li>Layer Overrides
-    <ul>
-      <li>Layer Override Priority
-用于控制多个Collider在同一物体或子物体上时，哪个Collider的物理层优先生效<br />
-如果一个物体上有多个Collider，并且它们分别设置了不同的Layer，Unity需要一个优先级来判断最终物体的碰撞行为应该归属哪个Layer<br />
-When 2 Colliders have conflicting overrides, the settings of the collider with the higher priority are taken</li>
-      <li>Include Layers
-Layers to include when producing collisions</li>
-      <li>Exclude Layers
-Layers to exclude when producing collisions</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="capsulecollider">CapsuleCollider</h3>
-<p><img src="/assets/images/CapsuleColliderPanel.jpg" alt="CapsuleColliderPanel" /></p>
-<ul>
-  <li>Edit Collider
-显示Collider边界<br />
-Hold Alt after clicking control handle to pin center in place（中心缩放） 
-Hold Shift after clicking control handle to scale uniformly（等比缩放）</li>
-  <li>Direction
-The axis of the capsule’s lengthwise orientation in the GameObject’s local space</li>
-</ul>
-
-<h3 id="meshcollider">MeshCollider</h3>
-<p><img src="/assets/images/MeshColliderPanel.jpg" alt="MeshColliderPanel" />
-<code class="language-plaintext highlighter-rouge">MeshCollider</code>是Unity提供的一个基于Mesh的碰撞体组件，它允许你使用一个Mesh的集合外形作为碰撞体检测的形状<br />
-它可以让你的碰撞体检测看起来和你的物体一样精细</p>
-
-<ul>
-  <li>Convex
-是否把Mesh处理为凸包<br />
-如果勾选了：
-    <ul>
-      <li>可以用于动态刚体</li>
-      <li>可以用作Trigger</li>
-      <li>不能太复杂（最多255个三角形）</li>
-    </ul>
-
-    <p>如果不勾选：</p>
-    <ul>
-      <li>可精确表示复杂网格，但只能用于静态物体</li>
-      <li>不支持Trigger和Rigidbody</li>
-    </ul>
-  </li>
-</ul>
-
-<p><strong>MeshCollider Convex使用注意事项</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>场景</th>
-      <th>是否适合用 MeshCollider</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>地形、建筑（静态）</td>
-      <td>非 Convex MeshCollider</td>
-    </tr>
-    <tr>
-      <td>可交互物体 + Rigidbody</td>
-      <td>Convex MeshCollider</td>
-    </tr>
-    <tr>
-      <td>复杂模型 + Trigger</td>
-      <td>Convex MeshCollider（前提是够简单）</td>
-    </tr>
-    <tr>
-      <td>移动物体 + 非 Convex</td>
-      <td>不支持，会报错</td>
-    </tr>
-    <tr>
-      <td>高性能要求的游戏</td>
-      <td>尽量少用 MeshCollider，建议用简化碰撞体代替</td>
-    </tr>
-  </tbody>
-</table>
-
-<ul>
-  <li>Cooking Options
-用于控制在碰撞体生成（或烘焙）过程中如何处理网格数据，以提高碰撞效率或调试准确性<br />
-Unity在运行时将网格数据转换为物理引擎能使用的碰撞形式格式，这个过程叫做Mesh Cooking</li>
-</ul>
-
-<h3 id="terrian-collider">Terrian Collider</h3>
-<ul>
-  <li>Enable Tree Colliders
-When selected, Tree Colliders will be enabled</li>
-</ul>
-
-<h3 id="wheel-collider">Wheel Collider</h3>
-<p><img src="/assets/images/WheelColliderPanel.jpg" alt="WheelColliderPanel" /></p>
-<ul>
-  <li>Wheel Damping Rate
-轮阻，轮子滚动时的摩擦衰减速度</li>
-  <li>Suspension Distance
-悬挂行程，表示悬挂系统允许轮子从默认位置向下延伸的最大距离，单位是米</li>
-  <li>Force App Point Distance
-力施加点距离，控制Unity向车体施加力的位置，距离轮子中心的垂直距离，单位是米；可以理解为手推玩具车的高度</li>
-  <li>Suspension Spring
-用于模拟汽车的避震器（弹簧 + 阻尼）
-    <ul>
-      <li>Spring
-弹簧刚度，越大越硬</li>
-      <li>Damper
-阻尼，阻止弹簧震荡的速度，越大越稳定</li>
-      <li>Target Position
-悬挂初始压缩程度，0表示全伸展，1表示全压缩</li>
-    </ul>
-  </li>
-  <li>Forward Friction &amp; Sideways Friction
-控制轮子在前进方向/侧向的摩擦行为
-<code class="language-plaintext highlighter-rouge">Forward Friction</code>：控制加速、刹车的打滑程度
-<code class="language-plaintext highlighter-rouge">Sideways Friction</code>：控制漂移、转弯时的打滑程度
-    <ul>
-      <li>Extremum Slip
-轮胎开始打滑时的滑动值阈值</li>
-      <li>Extremum Value
-极限摩擦力值（未打滑前）</li>
-      <li>Asymptote Slip
-完全失控打滑时的滑动值阈值</li>
-      <li>Asymptote Value
-极限打滑摩擦力值</li>
-      <li>Stiffness
-总体摩擦刚度系数（0-1）。调节摩擦强度的“乘法器”
-<strong>Wheel Collider API</strong></li>
-    </ul>
-  </li>
-  <li>Motor Torque
-通过代码向轮子添加驱动力（加速）
-    <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wheelCollider</span><span class="p">.</span><span class="n">motorTorque</span> <span class="p">=</span> <span class="m">200f</span><span class="p">;</span>
-</code></pre></div>    </div>
-  </li>
-  <li>Brake Torque
-刹车力
-    <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wheelCollider</span><span class="p">.</span><span class="n">brakeTorque</span> <span class="p">=</span> <span class="m">500f</span><span class="p">;</span>
-</code></pre></div>    </div>
-  </li>
-  <li>Steer Angle
-控制论在（尤其是前轮）的转向角度
-    <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wheelCollider</span><span class="p">.</span><span class="n">steerAngle</span> <span class="p">=</span> <span class="m">30f</span><span class="p">;</span>
-</code></pre></div>    </div>
-    <p><strong>使用WheelCollider</strong></p>
-  </li>
-</ul>
-
-<p>在车体下放置空 GameObject，添加 <code class="language-plaintext highlighter-rouge">WheelCollider</code>。</p>
-
-<p>设置合适的 <code class="language-plaintext highlighter-rouge">Radius</code> 和 <code class="language-plaintext highlighter-rouge">Suspension</code>。</p>
-
-<p>使用一个轮胎模型作为视觉轮子（但它自己不加 Collider）。</p>
-
-<p>每帧用代码同步 <code class="language-plaintext highlighter-rouge">WheelCollider.GetWorldPose()</code> 更新轮胎模型位置旋转。</p>
-
-<p>用 <code class="language-plaintext highlighter-rouge">motorTorque</code>、<code class="language-plaintext highlighter-rouge">brakeTorque</code>、<code class="language-plaintext highlighter-rouge">steerAngle</code> 控制车轮。</p>
-
-<p><strong>示例：同步轮子模型</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="n">WheelCollider</span> <span class="n">wheelCollider</span><span class="p">;</span>
-<span class="k">public</span> <span class="n">Transform</span> <span class="n">wheelModel</span><span class="p">;</span>
-
-<span class="k">void</span> <span class="nf">Update</span><span class="p">()</span>
-<span class="p">{</span>
-  <span class="n">Vector3</span> <span class="n">pos</span><span class="p">;</span>
-  <span class="n">Quaternion</span> <span class="n">rot</span><span class="p">;</span>
-  <span class="n">wheelCollider</span><span class="p">.</span><span class="nf">GetWorldPose</span><span class="p">(</span><span class="k">out</span> <span class="n">pos</span><span class="p">,</span> <span class="k">out</span> <span class="n">rot</span><span class="p">);</span>
-  <span class="n">wheelModel</span><span class="p">.</span><span class="n">position</span> <span class="p">=</span> <span class="n">pos</span><span class="p">;</span>
-  <span class="n">wheelModel</span><span class="p">.</span><span class="n">rotation</span> <span class="p">=</span> <span class="n">rot</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h2 id="对齐collider和gameobject">对齐Collider和GameObject</h2>
-<p>要保证Collider与GameObject完全重合，要让Collider的Center对准模型的中心，并让他的Size或Radius匹配模型的尺寸</p>
-
-<h3 id="方法一使用mesh-renderer的bounds手动对齐">方法一：使用Mesh Renderer的Bounds手动对齐</h3>
-<p>1.选中GameObject<br />
-2.查看Inspector面板中的Mesh Renderer或Mesh Filter：</p>
-<ul>
-  <li>记下它的Bounds和Center</li>
-</ul>
-
-<p>3.在Collider中手动设置</p>
-
-<h3 id="方法二使用unity自动对齐">方法二：使用Unity自动对齐</h3>
-<p>在Inspector面板中，点击组件右上角的菜单-&gt;<code class="language-plaintext highlighter-rouge">Reset</code><br />
-或删除后重新添加Box Collider，Unity会自动用Mesh尺寸初始化</p>
-<blockquote>
-  <p>注意：自动添加只对Unity支持的标志Mesh效果好，对导入模型FBX有时不准确</p>
-</blockquote>
-
-<h3 id="方法三通过脚本自动匹配mesh-bounds">方法三：通过脚本自动匹配Mesh Bounds</h3>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
-
-<span class="p">[</span><span class="nf">RequireComponent</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">BoxCollider</span><span class="p">))]</span>
-<span class="k">public</span> <span class="k">class</span> <span class="nc">FitColliderToMesh</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
-<span class="p">{</span>
-  <span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
-  <span class="p">{</span>
-    <span class="kt">var</span> <span class="n">mesh</span> <span class="p">=</span> <span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">MeshFilter</span><span class="p">&gt;().</span><span class="n">sharedMesh</span><span class="p">;</span>
-    <span class="kt">var</span> <span class="n">bounds</span> <span class="p">=</span> <span class="n">mesh</span><span class="p">.</span><span class="n">bounds</span><span class="p">;</span>
-
-    <span class="kt">var</span> <span class="n">collider</span> <span class="p">=</span> <span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">BoxCollider</span><span class="p">&gt;();</span>
-    <span class="n">collider</span><span class="p">.</span><span class="n">center</span> <span class="p">=</span> <span class="n">bounds</span><span class="p">.</span><span class="n">center</span><span class="p">;</span>
-    <span class="n">collider</span><span class="p">.</span><span class="n">size</span> <span class="p">=</span> <span class="n">bounds</span><span class="p">.</span><span class="n">size</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>注意：<code class="language-plaintext highlighter-rouge">mesh.bounds</code>是局部坐标系下的范围<br />
-如果模型被缩放，需要做缩放修正</p>
-
-<h3 id="检查是否重合的方法">检查是否重合的方法</h3>
-<p>1.Gizmo显示：Scene视图中选中物体，勾选Gizmo，可以看到Collider的框是否保住模型<br />
-2.调试代码验证接触：你可以在运行是打印<code class="language-plaintext highlighter-rouge">Collider.contacts[0].point</code>看碰撞点位置是否符合预期<br />
-3.把Mesh设成透明或关闭渲染，观察Collider是否贴合</p>
-
-<h3 id="collider基类-api">Collider基类 API</h3>
-<p><strong>常用属性</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>属性名</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">enabled</code></td>
-      <td>是否启用该碰撞体，禁用后不参与碰撞检测。</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">isTrigger</code></td>
-      <td>是否作为触发器（Trigger），开启后不阻挡，只触发事件。</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">attachedRigidbody</code></td>
-      <td>关联的 Rigidbody 组件（如果有的话）。</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">bounds</code></td>
-      <td>碰撞体的世界轴对齐包围盒（<code class="language-plaintext highlighter-rouge">Bounds</code> 类型）。</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">sharedMaterial</code></td>
-      <td>物理材质，控制摩擦力和弹力。</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">material</code></td>
-      <td>碰撞体当前使用的物理材质实例。</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">contactOffset</code></td>
-      <td>碰撞体接触判定的偏移距离，影响物理碰撞的灵敏度。</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>常用方法</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>方法名</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">ClosestPoint(Vector3 position)</code></td>
-      <td>返回碰撞体表面上距离指定点最近的点。</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">Raycast(Ray ray, out RaycastHit hitInfo, float maxDistance)</code></td>
-      <td>以射线检测碰撞体是否被击中，返回击中信息。</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">GetComponent&lt;T&gt;()</code></td>
-      <td>获取挂载在同一GameObject上的组件（Collider继承自Component，所以可用此方法）。</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">OnCollisionEnter/OnTriggerEnter</code></td>
-      <td>物理事件回调，不是Collider自带的方法，但Collider触发时会调用对应脚本方法。</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>事件相关</strong><br />
-Collider本身没有事件接口，但它的物理交互会调用以下MonoBehaviour的回调方法</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>事件名</th>
-      <th>触发条件</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">OnCollisionEnter(Collision collision)</code></td>
-      <td>碰撞开始</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">OnCollisionStay(Collision collision)</code></td>
-      <td>碰撞持续</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">OnCollisionExit(Collision collision)</code></td>
-      <td>碰撞结束</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">OnTriggerEnter(Collider other)</code></td>
-      <td>触发器进入</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">OnTriggerStay(Collider other)</code></td>
-      <td>触发器持续</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">OnTriggerExit(Collider other)</code></td>
-      <td>触发器离开</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="什么是trigger">什么是Trigger</h2>
-<p>Trigger是Collider组件的一个特殊状态，用来检测物体的进入、停留和离开事件，但不会产生物理碰撞和响应<br />
-Trigger是Collider的感应区域模式</p>
-
-<h3 id="trigger应用场景">Trigger应用场景</h3>
-<ul>
-  <li>检测角色进入某个区域（陷阱、传送门、对话触发区）</li>
-  <li>收集物品（进入物品碰撞区域后触发拾取）</li>
-  <li>触发游戏事件（比如开门、启动机关）</li>
-  <li>检测敌人视野范围</li>
-</ul>
-
-<h3 id="注意事项">注意事项</h3>
-<ul>
-  <li>触发器本身不会组织物体移动，物体可以自由穿过</li>
-  <li>要保证触发事件能被调用，涉及的GameObject至少一个带有Collider（且其中至少一个是Trigger）和Rigidbody组件，一般建议被检测的物体带Rigidbody</li>
-  <li>如果两个物体都没有Rigidbody，触发事件不会发生</li>
-</ul>
-
-<p><strong>本模块仅讲Collider作为组件的使用，详细物理系统请参照：</strong><br />
-<a href="/posts/2025-06-03-Physics-System/">Physics System</a></p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Component" /><category term="Physics System" /><summary type="html"><![CDATA[Unity中的碰撞体是物理系统的重要组成部分，负责定义游戏对象的形状以进行碰撞检测。简单来说，Collider是一个无形的边界，用于检测物体是否接触或重叠，从而触发碰撞事件和物理响应]]></summary></entry><entry><title type="html">Skybox</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Skybox.html" rel="alternate" type="text/html" title="Skybox" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Skybox</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Skybox.html"><![CDATA[<p>Skybox是一种渲染技术，用于在3D场景中创建远景背景，例如天空、宇宙、城市天际线等<br />
+</ul>]]></content><author><name>ljf12825</name></author><category term="Debug" /><category term="Unity" /><category term="Debug Log" /><summary type="html"><![CDATA[Unity实际开发中，有很多“看起来正常、实则容易出错”的奇怪问题（或称为隐形陷阱）]]></summary></entry><entry><title type="html">Skybox</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Skybox.html" rel="alternate" type="text/html" title="Skybox" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Skybox</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Skybox.html"><![CDATA[<p>Skybox是一种渲染技术，用于在3D场景中创建远景背景，例如天空、宇宙、城市天际线等<br />
 它本质上是一种把纹理图贴在一个立方体（或球体）内侧的技巧，玩家看不到边界，只能看到包裹在四周的“天空”</p>
 
 <h2 id="skybox的类型">Skybox的类型</h2>
@@ -894,7 +738,7 @@ Trigger是Collider的感应区域模式</p>
 <ul>
   <li>在Lighting界面点击“Generate Lighting”</li>
   <li>使用Reflection Probe重新采样环境反射</li>
-</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Component" /><category term="Light" /><category term="Render" /><category term="Graphics" /><summary type="html"><![CDATA[Skybox是一种渲染技术，用于在3D场景中创建远景背景，例如天空、宇宙、城市天际线等 它本质上是一种把纹理图贴在一个立方体（或球体）内侧的技巧，玩家看不到边界，只能看到包裹在四周的“天空”]]></summary></entry><entry><title type="html">Behaviour Tree</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Behaviour-Tree.html" rel="alternate" type="text/html" title="Behaviour Tree" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Behaviour-Tree</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Behaviour-Tree.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><category term="AI" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Unity Performance Tuning</title><link href="http://localhost:4000/posts/2025-06-13-Unity-Performance-Tuning/" rel="alternate" type="text/html" title="Unity Performance Tuning" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Unity-Performance-Tuning</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-13-Unity-Performance-Tuning/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Unity NetWork</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork.html" rel="alternate" type="text/html" title="Unity NetWork" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity NetWork" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Unity Profiler</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler.html" rel="alternate" type="text/html" title="Unity Profiler" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Tool" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">TileMap</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap.html" rel="alternate" type="text/html" title="TileMap" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><category term="Unity Component" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Import Assets</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets.html" rel="alternate" type="text/html" title="Import Assets" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets.html"><![CDATA[<p>Unity支持多种格式的资源文件，并能自动识别并进行初步处理</p>
+</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Component" /><category term="Light" /><category term="Render" /><category term="Graphics" /><summary type="html"><![CDATA[Skybox是一种渲染技术，用于在3D场景中创建远景背景，例如天空、宇宙、城市天际线等 它本质上是一种把纹理图贴在一个立方体（或球体）内侧的技巧，玩家看不到边界，只能看到包裹在四周的“天空”]]></summary></entry><entry><title type="html">Behaviour Tree</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Behaviour-Tree.html" rel="alternate" type="text/html" title="Behaviour Tree" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Behaviour-Tree</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Behaviour-Tree.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><category term="AI" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Unity Profiler</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler.html" rel="alternate" type="text/html" title="Unity Profiler" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Tool" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Unity Performance Tuning</title><link href="http://localhost:4000/posts/2025-06-13-Unity-Performance-Tuning/" rel="alternate" type="text/html" title="Unity Performance Tuning" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Unity-Performance-Tuning</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-13-Unity-Performance-Tuning/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Unity NetWork</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork.html" rel="alternate" type="text/html" title="Unity NetWork" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-NetWork.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity NetWork" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Import Assets</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets.html" rel="alternate" type="text/html" title="Import Assets" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets.html"><![CDATA[<p>Unity支持多种格式的资源文件，并能自动识别并进行初步处理</p>
 
 <h2 id="资源导入基本流程">资源导入基本流程</h2>
 <p><strong>1.将资源文件拖入<code class="language-plaintext highlighter-rouge">Assets</code>目录中（Unity会自动导入）</strong><br />
