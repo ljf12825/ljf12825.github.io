@@ -324,7 +324,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Unity Projects Examples",
-        "excerpt":"项目管理   Quick List                  项目       简介       标签       状态                                                          ","categories": ["笔记"],
+        "excerpt":"项目管理 Quick List 状态说明： Planning：规划中，生成需求和说明文档 TODO：已立项，未开始 In Progress：开发中 Code Review：审查 Testing：测试 Bugfixing：缺陷修复 Paused：暂停 Cancelled：已取消 Archived : 已归档 标签说明： Unity GamePlay：Unity游戏逻辑实现 Unity Graph：Unity图形学实现 Primary：初级 Intermediate：中级 Advanced：进阶 High Rank：高级 项目 简介 要点 标签 状态 滚动球 Ball Roll WASD控制球滚动，捡起金币 物理系统、Rigidbody、输入系统 Unity GamePlay Primary Planning 打砖块 Breakout 实现经典打砖块玩法 2D物理、碰撞、射线检测、UI Unity GamePlay Primary Planning Flappy...","categories": ["笔记"],
         "tags": ["Unity","Project"],
         "url": "/posts/2025-06-29-Unity-Projects-Examples/",
         "teaser": null

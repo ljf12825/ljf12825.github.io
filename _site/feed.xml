@@ -1,22 +1,247 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-30T21:08:49+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Unity Projects Examples</title><link href="http://localhost:4000/posts/2025-06-29-Unity-Projects-Examples/" rel="alternate" type="text/html" title="Unity Projects Examples" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Unity-Projects-Examples</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-29-Unity-Projects-Examples/"><![CDATA[<p>项目管理</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-30T22:34:24+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Unity Projects Examples</title><link href="http://localhost:4000/posts/2025-06-29-Unity-Projects-Examples/" rel="alternate" type="text/html" title="Unity Projects Examples" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Unity-Projects-Examples</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-29-Unity-Projects-Examples/"><![CDATA[<p>项目管理</p>
 
 <h2 id="quick-list">Quick List</h2>
+
+<blockquote>
+  <p>状态说明：</p>
+  <ul>
+    <li><code class="language-plaintext highlighter-rouge">Planning</code>：规划中，生成需求和说明文档</li>
+    <li><code class="language-plaintext highlighter-rouge">TODO</code>：已立项，未开始</li>
+    <li><code class="language-plaintext highlighter-rouge">In Progress</code>：开发中</li>
+    <li><code class="language-plaintext highlighter-rouge">Code Review</code>：审查</li>
+    <li><code class="language-plaintext highlighter-rouge">Testing</code>：测试</li>
+    <li><code class="language-plaintext highlighter-rouge">Bugfixing</code>：缺陷修复</li>
+    <li><code class="language-plaintext highlighter-rouge">Paused</code>：暂停</li>
+    <li><code class="language-plaintext highlighter-rouge">Cancelled</code>：已取消</li>
+    <li><code class="language-plaintext highlighter-rouge">Archived</code> : 已归档</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <p>标签说明：</p>
+  <ul>
+    <li><code class="language-plaintext highlighter-rouge">Unity GamePlay</code>：Unity游戏逻辑实现</li>
+    <li><code class="language-plaintext highlighter-rouge">Unity Graph</code>：Unity图形学实现</li>
+    <li><code class="language-plaintext highlighter-rouge">Primary</code>：初级</li>
+    <li><code class="language-plaintext highlighter-rouge">Intermediate</code>：中级</li>
+    <li><code class="language-plaintext highlighter-rouge">Advanced</code>：进阶</li>
+    <li><code class="language-plaintext highlighter-rouge">High Rank</code>：高级</li>
+  </ul>
+</blockquote>
 
 <table>
   <thead>
     <tr>
       <th>项目</th>
       <th>简介</th>
+      <th>要点</th>
       <th>标签</th>
       <th>状态</th>
     </tr>
   </thead>
   <tbody>
     <tr>
+      <td>滚动球 Ball Roll</td>
+      <td>WASD控制球滚动，捡起金币</td>
+      <td>物理系统、Rigidbody、输入系统</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Primary</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>打砖块 Breakout</td>
+      <td>实现经典打砖块玩法</td>
+      <td>2D物理、碰撞、射线检测、UI</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Primary</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>Flappy Bird</td>
+      <td>鸟穿越管道、简单随机化</td>
+      <td>2D动画、Trigger触发、对象池</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Primary</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>计时小游戏</td>
+      <td>倒计时 + 得分显示</td>
+      <td>UI、Text、Button、Timer</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Primary</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>第一人称走路模拟</td>
+      <td>基础FPS移动逻辑</td>
+      <td>CharacterController、摄像机控制</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Primary</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>任务系统</td>
+      <td> </td>
+      <td>接受/完成任务、进度追踪、数据结构设计</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>成就系统</td>
       <td> </td>
       <td> </td>
       <td> </td>
       <td> </td>
+    </tr>
+    <tr>
+      <td>技能系统</td>
+      <td> </td>
+      <td>技能冷却、连招组合、动画事件绑定</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>状态机系统</td>
+      <td> </td>
+      <td>多角色状态、AI状态、战斗状态解耦</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>道具拾取 + 背包系统</td>
+      <td> </td>
+      <td>拖拽、叠加、存储、装备栏</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>Save/Load存档系统</td>
+      <td> </td>
+      <td>本地JSON/二进制保存、读取场景状态</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>抽卡、开箱、开包类</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Rouge-like</td>
+      <td> </td>
+      <td>程序生成地图、道具系统</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>节奏点击游戏</td>
+      <td> </td>
+      <td>节奏匹配、音频事件绑定</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>平台跳跃 Platformer</td>
+      <td>可拓展成高级动作系统</td>
+      <td>动画、状态机、跳跃逻辑、碰撞检测</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>塔防游戏 Tower Defense</td>
+      <td>使用导航网格或自定义路径系统</td>
+      <td>路径系统、对象池、攻击逻辑</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>基础RPG Demo</td>
+      <td>包含拾取、装备、攻击等</td>
+      <td>Inventory、UI、任务系统、简单AI</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>TopDown射击</td>
+      <td>包括Boss逻辑、多种敌人</td>
+      <td>射线检测、特效、敌人AI</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>Unity UI交互系统</td>
+      <td>侧重交互与UI动效</td>
+      <td>UnityEvent、Button、EventSystem</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>第三人称动作游戏</td>
+      <td>可使用Animation Rigging提升表现</td>
+      <td>Blend Tree、Root Motion、攻击系统、受击反馈</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Advanced</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>回合制战斗系统（战棋）</td>
+      <td>逻辑结构较为复杂</td>
+      <td>网格管理、战斗管理器、状态系统</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Advanced</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>简易MMO Demo</td>
+      <td>适合入门多人联机项目</td>
+      <td>多人同步、角色同步、基本聊天系统、房间机制</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Advanced</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>城市模拟/建设类游戏</td>
+      <td>游戏逻辑和状态同步挑战大</td>
+      <td>地图系统、建筑放置、数据持久化</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Advanced</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>虚拟摄像机系统</td>
+      <td>更适合图形学表现和演示项目</td>
+      <td>Cinemachine、Timeline、关键帧控制</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity Graph</code> <code class="language-plaintext highlighter-rouge">Advanced</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>Open World (mini)</td>
+      <td>需考虑资源管理、加载逻辑</td>
+      <td>Streaming、世界管理、AI导航、场景优化</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">High Rank</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>ARPG(DMC like)</td>
+      <td>动作响应和打击感难度大</td>
+      <td>Combo系统、时间轴管理、动画事件</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">High Rank</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>Shader Collection</td>
+      <td>图形学展示</td>
+      <td>自定义Shader、VFX Graph、Render Feature</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity Graph</code> <code class="language-plaintext highlighter-rouge">High Rank</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>Visual Novel System</td>
+      <td>更偏向结构设计与数据处理</td>
+      <td>数据驱动、UI演出、状态管理</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">High Rank</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>SRP</td>
+      <td>高度定制，图形学开发方向</td>
+      <td>图形学、SRP、Render Graph</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity Graph</code> <code class="language-plaintext highlighter-rouge">High Rank</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
     </tr>
   </tbody>
 </table>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Project" /><summary type="html"><![CDATA[项目管理]]></summary></entry><entry><title type="html">Object Pooling</title><link href="http://localhost:4000/posts/2025-06-06-Object-Pooling/" rel="alternate" type="text/html" title="Object Pooling" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Object-Pooling</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-06-Object-Pooling/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">UI Event System</title><link href="http://localhost:4000/posts/2025-06-29-UI-Event-System/" rel="alternate" type="text/html" title="UI Event System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/UI-Event-System</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-29-UI-Event-System/"><![CDATA[<h2 id="event-system">Event System</h2>
