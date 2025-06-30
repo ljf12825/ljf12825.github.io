@@ -306,7 +306,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Mask",
-        "excerpt":"Mask Mask用于裁剪UI子元素的显示区域，通常搭配图片、Scroll View、头像裁剪等使用 核心功能和行为 特点 说明 子物体只在 Mask 图像区域内显示 超出部分不可见（不销毁，只裁剪） 遮罩区域基于 Image 的透明度 非透明部分就是显示区域 不支持软遮罩（软边缘） 默认是硬裁剪，想要软遮罩需用 Shader 或 UIEffect 等插件 使用方法 MaskParent(Image + Mask) |___Content(Text / Image /等UI) 父物体挂Image + Mask，并设置图片为遮罩区域 子物体放置UI内容，超出遮罩图形范围会被裁剪 常见用途 场景 使用方式 ScrollView 滚动列表 Viewport 挂 Image + Mask，内容只显示在视窗中 圆形头像裁剪 使用圆形 Image + Mask 裁剪方形头像图片 进度条遮罩 遮罩下滑动另一个图片或文字，实现“擦除”或“揭示”效果...","categories": ["笔记"],
+        "excerpt":"遮罩，用于实现遮挡效果，控制子物体的显示区域 Mask Mask用于裁剪UI子元素的显示区域，通常搭配图片、Scroll View、头像裁剪等使用 核心功能和行为 特点 说明 子物体只在 Mask 图像区域内显示 超出部分不可见（不销毁，只裁剪） 遮罩区域基于 Image 的透明度 非透明部分就是显示区域 不支持软遮罩（软边缘） 默认是硬裁剪，想要软遮罩需用 Shader 或 UIEffect 等插件 使用方法 MaskParent(Image + Mask) |___Content(Text / Image /等UI) 父物体挂Image + Mask，并设置图片为遮罩区域 子物体放置UI内容，超出遮罩图形范围会被裁剪 常见用途 场景 使用方式 ScrollView 滚动列表 Viewport 挂 Image + Mask，内容只显示在视窗中 圆形头像裁剪 使用圆形 Image + Mask 裁剪方形头像图片 进度条遮罩...","categories": ["笔记"],
         "tags": ["Unity","Unity Component","Render","Graphics","UGUI"],
         "url": "/posts/2025-06-29-Mask/",
         "teaser": null
