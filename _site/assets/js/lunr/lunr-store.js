@@ -318,7 +318,7 @@ var store = [{
         "teaser": null
       },{
         "title": "UI Event System",
-        "excerpt":"Event System Event System是Unity UI System中的核心交互管理器，掌控了所有鼠标点击、键盘输入、触摸事件、UI导航的逻辑 Unity的Event System是一个处理用户输入事件的系统，用于发送“点击了谁”“选中了谁”之类的事件，属于UnityEngine.EventSystems命名空间 组件 用途 EventSystem 整个输入系统的“大脑” Input Module 输入方式模块，比如处理鼠标、键盘、手柄（你可以切换） Raycaster（挂在 Canvas 或 3D 对象上） 实际检测点击了哪个物体，比如：GraphicRaycaster, PhysicsRaycaster EventSystem会追踪以下交互： 类型 描述 接口 点击 Click 鼠标/触摸点击 UI IPointerClickHandler 拖拽 Drag 拖拽 ScrollRect、物品、滑块 IDragHandler, IBeginDragHandler, IEndDragHandler 悬停 Hover 鼠标移动到 UI 上 IPointerEnterHandler, IPointerExitHandler 按钮按下 长按、释放 IPointerDownHandler, IPointerUpHandler 键盘导航...","categories": ["笔记"],
+        "excerpt":"Event System是Unity UI System中的核心交互管理器，掌控了所有鼠标点击、键盘输入、触摸事件、UI导航的逻辑 Unity的Event System是一个处理用户输入事件的系统，用于发送“点击了谁”“选中了谁”之类的事件，属于UnityEngine.EventSystems命名空间 组件 用途 Event System 整个输入系统的“大脑” Input Module 输入方式模块，比如处理鼠标、键盘、手柄（你可以切换） Raycaster（挂在 Canvas 或 3D 对象上） 实际检测点击了哪个物体，比如：GraphicRaycaster, PhysicsRaycaster Event Trigger 通过Inspector可视化配置多种事件响应 Touch Input Module 输入方式模块，专门负责处理触摸输入事件，适用于手机、平板等触控设备 EventSystem会追踪以下交互： 类型 描述 接口 点击 Click 鼠标/触摸点击 UI IPointerClickHandler 拖拽 Drag 拖拽 ScrollRect、物品、滑块 IDragHandler, IBeginDragHandler, IEndDragHandler 悬停 Hover 鼠标移动到 UI 上 IPointerEnterHandler,...","categories": ["笔记"],
         "tags": ["Unity","Unity Component","UGUI"],
         "url": "/posts/2025-06-29-UI-Event-System/",
         "teaser": null

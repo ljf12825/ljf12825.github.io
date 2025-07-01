@@ -11,7 +11,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>UI Event System - ljf12825’s Blog</title>
-<meta name="description" content="Event System Event System是Unity UI System中的核心交互管理器，掌控了所有鼠标点击、键盘输入、触摸事件、UI导航的逻辑">
+<meta name="description" content="Event System是Unity UI System中的核心交互管理器，掌控了所有鼠标点击、键盘输入、触摸事件、UI导航的逻辑">
 
 
 
@@ -22,7 +22,7 @@
 <meta property="og:url" content="http://localhost:4000/posts/2025-06-29-UI-Event-System/">
 
 
-  <meta property="og:description" content="Event System Event System是Unity UI System中的核心交互管理器，掌控了所有鼠标点击、键盘输入、触摸事件、UI导航的逻辑">
+  <meta property="og:description" content="Event System是Unity UI System中的核心交互管理器，掌控了所有鼠标点击、键盘输入、触摸事件、UI导航的逻辑">
 
 
 
@@ -149,7 +149,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="UI Event System">
-    <meta itemprop="description" content="Event SystemEvent System是Unity UI System中的核心交互管理器，掌控了所有鼠标点击、键盘输入、触摸事件、UI导航的逻辑">
+    <meta itemprop="description" content="Event System是Unity UI System中的核心交互管理器，掌控了所有鼠标点击、键盘输入、触摸事件、UI导航的逻辑">
     <meta itemprop="datePublished" content="2025-06-01T00:00:00+08:00">
     
 
@@ -168,8 +168,7 @@
 
       <section class="page__content" itemprop="text">
         
-        <h2 id="event-system">Event System</h2>
-<p><code class="language-plaintext highlighter-rouge">Event System</code>是Unity UI System中的核心交互管理器，掌控了所有鼠标点击、键盘输入、触摸事件、UI导航的逻辑</p>
+        <p><code class="language-plaintext highlighter-rouge">Event System</code>是Unity UI System中的核心交互管理器，掌控了所有鼠标点击、键盘输入、触摸事件、UI导航的逻辑</p>
 
 <p>Unity的Event System是一个处理用户输入事件的系统，用于发送“点击了谁”“选中了谁”之类的事件，属于UnityEngine.EventSystems命名空间</p>
 
@@ -184,7 +183,7 @@
   </thead>
   <tbody>
     <tr>
-      <td><strong>EventSystem</strong></td>
+      <td><strong>Event System</strong></td>
       <td>整个输入系统的“大脑”</td>
     </tr>
     <tr>
@@ -194,6 +193,14 @@
     <tr>
       <td><strong>Raycaster（挂在 Canvas 或 3D 对象上）</strong></td>
       <td>实际检测点击了哪个物体，比如：<code class="language-plaintext highlighter-rouge">GraphicRaycaster</code>, <code class="language-plaintext highlighter-rouge">PhysicsRaycaster</code></td>
+    </tr>
+    <tr>
+      <td><strong>Event Trigger</strong></td>
+      <td>通过Inspector可视化配置多种事件响应</td>
+    </tr>
+    <tr>
+      <td><strong>Touch Input Module</strong></td>
+      <td>输入方式模块，专门负责处理触摸输入事件，适用于手机、平板等触控设备</td>
     </tr>
   </tbody>
 </table>
@@ -244,7 +251,7 @@
 
 <p>任何的UI交互脚本，都是通过这些接口连接到Event System</p>
 
-<h3 id="eventsystem的工作流程图">EventSystem的工作流程图</h3>
+<h2 id="eventsystem的工作流程图">EventSystem的工作流程图</h2>
 
 <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="nt">鼠标</span><span class="o">/</span><span class="nt">键盘</span><span class="o">/</span><span class="nt">触摸输入</span><span class="o">]</span>
       <span class="err">↓</span>
@@ -255,8 +262,8 @@
 <span class="o">[</span><span class="nt">EventSystem</span><span class="o">]</span> <span class="err">→</span> <span class="nt">通知对应的组件执行接口函数</span><span class="err">（</span><span class="nt">如</span> <span class="nt">OnClick</span><span class="err">）</span>
 </code></pre></div></div>
 
-<h3 id="eventsystem-component">EventSystem Component</h3>
-<h4 id="eventsystem"><code class="language-plaintext highlighter-rouge">EventSystem</code></h4>
+<h2 id="eventsystem-component">EventSystem Component</h2>
+<h3 id="eventsystem"><code class="language-plaintext highlighter-rouge">EventSystem</code></h3>
 <p>挂载在GameObject上，只有一个<br />
 功能：</p>
 <ul>
@@ -265,7 +272,7 @@
   <li>分发事件：比如点击、拖动、选中等</li>
 </ul>
 
-<h4 id="eventsystem-panel">EventSystem Panel</h4>
+<h3 id="eventsystem-panel">EventSystem Panel</h3>
 
 <table>
   <thead>
@@ -290,7 +297,7 @@
   </tbody>
 </table>
 
-<h4 id="standalone-input-module"><code class="language-plaintext highlighter-rouge">Standalone Input Module</code></h4>
+<h3 id="standalone-input-module"><code class="language-plaintext highlighter-rouge">Standalone Input Module</code></h3>
 <p>适合：鼠标 + 键盘控制<br />
 Unity默认生成<br />
 功能：把输入映射为事件（点击、拖动、导航）</p>
@@ -326,7 +333,7 @@ Unity默认生成<br />
   </tbody>
 </table>
 
-<h4 id="input-system-ui-input-module新系统"><code class="language-plaintext highlighter-rouge">Input System UI Input Module</code>（新系统）</h4>
+<h3 id="input-system-ui-input-module新系统"><code class="language-plaintext highlighter-rouge">Input System UI Input Module</code>（新系统）</h3>
 
 <p>详见<a href="/posts/2025-06-03-Input-System/">Input System</a></p>
 
@@ -355,22 +362,80 @@ Unity默认生成<br />
   </tbody>
 </table>
 
-<h4 id="raycaster">Raycaster</h4>
+<h3 id="raycaster">Raycaster</h3>
 <p>EventSystem本身不会知道你点到谁，它需要Raycaster组件配合UI或3D元素</p>
 
-<h5 id="graphic-raycaster用于canvas-ui"><code class="language-plaintext highlighter-rouge">Graphic Raycaster</code>（用于Canvas UI）</h5>
+<h4 id="graphic-raycaster用于canvas-ui"><code class="language-plaintext highlighter-rouge">Graphic Raycaster</code>（用于Canvas UI）</h4>
 <p>挂在<code class="language-plaintext highlighter-rouge">Canvas</code>上，专门检测UI元素是否被点中</p>
 
 <p><a href="#graphic-raycaster">Canvas Graphic Raycaster</a></p>
 
-<h5 id="physics-raycaster用于3d物体"><code class="language-plaintext highlighter-rouge">Physics Raycaster</code>（用于3D物体）</h5>
+<h4 id="physics-raycaster用于3d物体"><code class="language-plaintext highlighter-rouge">Physics Raycaster</code>（用于3D物体）</h4>
 <p>挂在摄像机上，配合3D对象（带Collider）使用，检测鼠标是否点击到物体</p>
 
-<h5 id="physics2d-raycaster用于2d物体"><code class="language-plaintext highlighter-rouge">Physics2D Raycaster</code>（用于2D物体）</h5>
+<h4 id="physics2d-raycaster用于2d物体"><code class="language-plaintext highlighter-rouge">Physics2D Raycaster</code>（用于2D物体）</h4>
 <p>配合2D Collider检测点击或拖动等交互</p>
 
-<h3 id="api">API</h3>
-<h4 id="static-properties">Static Properties</h4>
+<h3 id="event-trigger">Event Trigger</h3>
+<ul>
+  <li>方便地给一个UI元素或者任何GameObject绑定多种事件回调</li>
+  <li>支持的事件类型包括点击、拖拽、指针进入、指针离开等常用事件</li>
+  <li>不需要写代码实现接口，只需要在Inspector面板力配置回调函数（比如拖拽一个脚本组件的方法）</li>
+</ul>
+
+<h4 id="内部原理">内部原理</h4>
+<ul>
+  <li>EventTrigger继承自MonoBehaviour，实现了<code class="language-plaintext highlighter-rouge">IEventSystemHandler</code>中所有相关事件接口（如<code class="language-plaintext highlighter-rouge">IPointerClickHandler</code>、<code class="language-plaintext highlighter-rouge">IDragHandler</code>等）</li>
+  <li>当事件被派发到该GameObject时，EventTrigger会收到回调（例如<code class="language-plaintext highlighter-rouge">OnPointerClick</code>）</li>
+  <li>EventTrigger根据收到的事件类型，在它的事件列表中查找对应的<code class="language-plaintext highlighter-rouge">Entry</code>，然后调用所有绑定的回调函数</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>优点</th>
+      <th>缺点</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>方便快捷，适合快速绑定事件</td>
+      <td>性能稍差，复杂项目不建议大量使用</td>
+    </tr>
+    <tr>
+      <td>无需写代码，设计灵活</td>
+      <td>事件流程不透明，调试困难</td>
+    </tr>
+    <tr>
+      <td>适合简单交互原型</td>
+      <td>绑定过多事件会影响维护和阅读</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>EventTrigger适用于设计师或非程序员，使其能够在Inspector里直接配置各种事件响应</p>
+
+<h3 id="touch-input-module">Touch Input Module</h3>
+<h4 id="工作原理">工作原理</h4>
+<p>1.检测触摸事件<br />
+<code class="language-plaintext highlighter-rouge">TouchInputModule</code>监听<code class="language-plaintext highlighter-rouge">Input.touches</code>，获取当前所有触摸点<br />
+2.生成PointerEventData<br />
+每个触摸点对应一个PointerEventData，包含位置、按下时间、手指ID等信息<br />
+3.射线检测 <br />
+根据触摸点位置对场景进行射线检测，找到被触摸的UI或物体<br />
+4.事件分发<br />
+通过<code class="language-plaintext highlighter-rouge">ExecuteEvents</code>把对应事件派发给目标物体的事件处理接口<br />
+5.处理多点触控<br />
+支持同时跟踪多个触摸点，分别生成和管理多个PointerEventData</p>
+
+<ul>
+  <li>早期Unity中，StandaloneInputModule主要处理键鼠，TouchInputModule专门处理触摸</li>
+  <li>现在，StandaloneInputModule已经扩展支持触摸事件</li>
+  <li>使用新版Unity输入系统时，推荐用<code class="language-plaintext highlighter-rouge">Input System UI Input Module</code></li>
+</ul>
+
+<h2 id="api">API</h2>
+<h3 id="static-properties">Static Properties</h3>
 
 <table>
   <thead>
@@ -387,7 +452,7 @@ Unity默认生成<br />
   </tbody>
 </table>
 
-<h4 id="properties">Properties</h4>
+<h3 id="properties">Properties</h3>
 
 <table>
   <thead>
@@ -436,7 +501,7 @@ Unity默认生成<br />
   </tbody>
 </table>
 
-<h4 id="public-methods">Public Methods</h4>
+<h3 id="public-methods">Public Methods</h3>
 
 <table>
   <thead>

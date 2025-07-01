@@ -7,8 +7,6 @@ tags: [Unity, Unity Component, UGUI]
 author: "ljf12825"
 permalink: /posts/2025-06-29-UI-Event-System/
 ---
-
-## Event System
 `Event System`是Unity UI System中的核心交互管理器，掌控了所有鼠标点击、键盘输入、触摸事件、UI导航的逻辑
 
 Unity的Event System是一个处理用户输入事件的系统，用于发送“点击了谁”“选中了谁”之类的事件，属于UnityEngine.EventSystems命名空间
@@ -17,9 +15,11 @@ Unity的Event System是一个处理用户输入事件的系统，用于发送“
 
 | 组件                                | 用途                                                    |
 | --------------------------------- | ----------------------------------------------------- |
-| **EventSystem**                   | 整个输入系统的“大脑”                                           |
+| **Event System**                   | 整个输入系统的“大脑”                                           |
 | **Input Module**                  | 输入方式模块，比如处理鼠标、键盘、手柄（你可以切换）                            |
 | **Raycaster（挂在 Canvas 或 3D 对象上）** | 实际检测点击了哪个物体，比如：`GraphicRaycaster`, `PhysicsRaycaster` |
+| **Event Trigger**                 | 通过Inspector可视化配置多种事件响应 |
+| **Touch Input Module**            | 输入方式模块，专门负责处理触摸输入事件，适用于手机、平板等触控设备 |
 
 EventSystem会追踪以下交互：
 
@@ -34,7 +34,7 @@ EventSystem会追踪以下交互：
 
 任何的UI交互脚本，都是通过这些接口连接到Event System
 
-### EventSystem的工作流程图
+## EventSystem的工作流程图
 
 ```css
 [鼠标/键盘/触摸输入]
@@ -46,15 +46,15 @@ EventSystem会追踪以下交互：
 [EventSystem] → 通知对应的组件执行接口函数（如 OnClick）
 ```
 
-### EventSystem Component
-#### `EventSystem`
+## EventSystem Component
+### `EventSystem`
 挂载在GameObject上，只有一个  
 功能：  
 - 管理当前选中的UI对象
 - 管理输入模块
 - 分发事件：比如点击、拖动、选中等
 
-#### EventSystem Panel
+### EventSystem Panel
 
 | 属性                         | 含义                   |
 | -------------------------- | -------------------- |
@@ -62,7 +62,7 @@ EventSystem会追踪以下交互：
 | **Send Navigation Events** | 是否允许方向键或手柄移动选中项      |
 | **Drag Threshold**         | 拖拽时鼠标/手指移动多少才视为“拖拽”  |
 
-#### `Standalone Input Module`
+### `Standalone Input Module`
 适合：鼠标 + 键盘控制  
 Unity默认生成  
 功能：把输入映射为事件（点击、拖动、导航）
@@ -75,7 +75,7 @@ Unity默认生成
 | Input Actions Per Second        | 每秒导航几次                                 |
 | Repeat Delay                    | 长按导航前的延迟时间                             |
 
-#### `Input System UI Input Module`（新系统）
+### `Input System UI Input Module`（新系统）
 
 详见[Input System]({{site.baseurl}}/posts/2025-06-03-Input-System/)
 
@@ -88,28 +88,65 @@ Unity默认生成
 | Move Repeat Rate / Delay            | 同样是手柄方向键长按节奏             |
 
 
-#### Raycaster
+### Raycaster
 EventSystem本身不会知道你点到谁，它需要Raycaster组件配合UI或3D元素
 
-##### `Graphic Raycaster`（用于Canvas UI）
+#### `Graphic Raycaster`（用于Canvas UI）
 挂在`Canvas`上，专门检测UI元素是否被点中
 
 [Canvas Graphic Raycaster](#graphic-raycaster)
 
-##### `Physics Raycaster`（用于3D物体）
+#### `Physics Raycaster`（用于3D物体）
 挂在摄像机上，配合3D对象（带Collider）使用，检测鼠标是否点击到物体
 
-##### `Physics2D Raycaster`（用于2D物体）
+#### `Physics2D Raycaster`（用于2D物体）
 配合2D Collider检测点击或拖动等交互
 
-### API
-#### Static Properties
+### Event Trigger
+- 方便地给一个UI元素或者任何GameObject绑定多种事件回调
+- 支持的事件类型包括点击、拖拽、指针进入、指针离开等常用事件
+- 不需要写代码实现接口，只需要在Inspector面板力配置回调函数（比如拖拽一个脚本组件的方法）
+
+#### 内部原理
+- EventTrigger继承自MonoBehaviour，实现了`IEventSystemHandler`中所有相关事件接口（如`IPointerClickHandler`、`IDragHandler`等）
+- 当事件被派发到该GameObject时，EventTrigger会收到回调（例如`OnPointerClick`）
+- EventTrigger根据收到的事件类型，在它的事件列表中查找对应的`Entry`，然后调用所有绑定的回调函数
+
+| 优点            | 缺点               |
+| ------------- | ---------------- |
+| 方便快捷，适合快速绑定事件 | 性能稍差，复杂项目不建议大量使用 |
+| 无需写代码，设计灵活    | 事件流程不透明，调试困难     |
+| 适合简单交互原型      | 绑定过多事件会影响维护和阅读   |
+
+EventTrigger适用于设计师或非程序员，使其能够在Inspector里直接配置各种事件响应
+
+### Touch Input Module
+#### 工作原理
+1.检测触摸事件  
+`TouchInputModule`监听`Input.touches`，获取当前所有触摸点  
+2.生成PointerEventData  
+每个触摸点对应一个PointerEventData，包含位置、按下时间、手指ID等信息  
+3.射线检测   
+根据触摸点位置对场景进行射线检测，找到被触摸的UI或物体  
+4.事件分发  
+通过`ExecuteEvents`把对应事件派发给目标物体的事件处理接口  
+5.处理多点触控  
+支持同时跟踪多个触摸点，分别生成和管理多个PointerEventData
+
+- 早期Unity中，StandaloneInputModule主要处理键鼠，TouchInputModule专门处理触摸
+- 现在，StandaloneInputModule已经扩展支持触摸事件
+- 使用新版Unity输入系统时，推荐用`Input System UI Input Module`
+
+
+
+## API
+### Static Properties
 
 | 属性 | 描述 |
 | - | - |
 | `current` | 返回当前EventSystem |
 
-#### Properties
+### Properties
 
 | 属性                          | 类型                | 说明                                                                                  |
 | --------------------------- | ----------------- | ----------------------------------------------------------------------------------- |
@@ -121,7 +158,7 @@ EventSystem本身不会知道你点到谁，它需要Raycaster组件配合UI或3
 | `pixelDragThreshold`        | `int`             | 拖动时鼠标或手指要移动多少像素才算开始拖拽（用来防止误触拖动）。默认是 5。                                              |
 | `sendNavigationEvents`      | `bool`            | 是否启用方向键/手柄的导航事件（如按 ↑↓←→ 移动 UI 选择框）。关闭后不能用方向键移动焦点。                                   |
 
-#### Public Methods
+### Public Methods
 
 | 方法                          | 作用                | 常见用途           |
 | --------------------------- | ----------------- | -------------- |
