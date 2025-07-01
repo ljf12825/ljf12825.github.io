@@ -3064,7 +3064,7 @@ TMP使用SDF来实现高质量的文本缩放和效果（描边、投影）</p>
   <li>SDF渲染不依赖分辨率，UI可以任意缩放不失真</li>
 </ul>
 
-<h4 id="tmp---text">TMP - Text</h4>
+<h4 id="texttmp">Text（TMP）</h4>
 
 <p><img src="/assets/images/TMPTextPanel_1.jpg" alt="TMPTextPanel_1" />
 <img src="/assets/images/TMPTextPanel_2.jpg" alt="TMPTextPanel_2" /></p>
@@ -4259,6 +4259,86 @@ LatePreRender阶段：
 <h2 id="mask">Mask</h2>
 <p>详见<a href="/posts/2025-06-29-Mask/">Mask</a></p>
 
+<h2 id="ugui渲染流程">UGUI渲染流程</h2>
+<p>UGUI的渲染是基于Canvas来驱动和管理的，Canvas是UGUI的核心渲染单元</p>
+
+<h3 id="ugui组成核心">UGUI组成核心</h3>
+<ul>
+  <li>Canvas：UI的根节点，管理批处理和渲染</li>
+  <li>RectTransform：UI元素的定位组件</li>
+  <li>Graphic（Image、Text等）：UI的可绘制元素，负责生成顶点数据</li>
+  <li>CanvasRenderer：负责将顶点数据提交给GPU绘制</li>
+</ul>
+
+<h3 id="ugui渲染总体流程">UGUI渲染总体流程</h3>
+<p>1.UI元素状态改变触发重建（Dirty）</p>
+<ul>
+  <li>位置、大小、颜色、材质、文本内容等变化，都会标记对应Graphic为Dirty</li>
+  <li>Dirty的Graphic会触发它所属的Canvas的重建流程</li>
+</ul>
+
+<p>2.Canvas重建</p>
+<ul>
+  <li>Unity会重新收集所有需要渲染的Graphic，生成顶点缓冲（Vertex Buffer）</li>
+  <li>会合并材质和纹理相同的Graphic，尽量批处理减少Draw Call</li>
+</ul>
+
+<p>3.Canvas批处理</p>
+<ul>
+  <li>批处理把相同材质的Graphic合并成一个Draw Call</li>
+  <li>Unity会更具是否启用Canvas分割（拆分Canvas）、动态批处理、GPU Instancing决定合批方案</li>
+</ul>
+
+<p>4.顶点提交</p>
+<ul>
+  <li>CanvasRenderer组件负责把生成的顶点数据传给GPU</li>
+  <li>通过Unity内置的UI Shader渲染UI元素</li>
+</ul>
+
+<p>5.GPU渲染</p>
+<ul>
+  <li>GPU执行顶点着色、像素着色，最终把UI绘制到屏幕</li>
+</ul>
+
+<p>示意图：</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">UI元素变化</span><span class="err">（</span><span class="nt">Dirty</span><span class="err">）</span> 
+        <span class="err">↓</span>
+<span class="nt">Canvas重建</span>
+        <span class="err">↓</span>
+<span class="nt">顶点缓冲区重新生成</span><span class="err">（</span><span class="nt">OnPopulateMesh</span><span class="err">）</span>
+        <span class="err">↓</span>
+<span class="nt">批处理合并</span><span class="err">（</span><span class="nt">Batching</span><span class="err">）</span>
+        <span class="err">↓</span>
+<span class="nt">CanvasRenderer提交顶点</span>
+        <span class="err">↓</span>
+<span class="nt">GPU渲染绘制</span>
+</code></pre></div></div>
+
+<h3 id="重要细节">重要细节</h3>
+<ul>
+  <li>Canvas重建代价大
+    <ul>
+      <li>UI元素变化会触发Canvas重建，代价主要在CPU端的顶点生成和批处理</li>
+    </ul>
+  </li>
+  <li>Canvas的划分影响渲染效率
+    <ul>
+      <li>单一大Canvas变动小部分时，整个Canvas都需要重建</li>
+      <li>拆分多个Canvas能减少重建范围，提高性能</li>
+    </ul>
+  </li>
+  <li>使用Mask、ScrollRect会增加Draw Call
+    <ul>
+      <li>Mask会强制拆分批处理，影响性能</li>
+    </ul>
+  </li>
+  <li>TextMeshPro相比原生Text性能更优
+    <ul>
+      <li>生成的顶点少，渲染更高效</li>
+    </ul>
+  </li>
+</ul>
+
 <h2 id="ui性能优化">UI性能优化</h2>
 <h3 id="ui性能瓶颈来源">UI性能瓶颈来源</h3>
 <ul>
@@ -4359,7 +4439,7 @@ LatePreRender阶段：
 
 <p>使用Pool技术复用UI元素</p>
 <ul>
-  <li>对动态生成的大量Ui（如列表、格子），用对象池复用而非反复创建销毁</li>
+  <li>对动态生成的大量UI（如列表、格子），用对象池复用而非反复创建销毁</li>
 </ul>
 
 <h2 id="unity-ui-tookit">Unity UI Tookit</h2>
