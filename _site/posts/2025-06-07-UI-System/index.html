@@ -4259,9 +4259,108 @@ LatePreRender阶段：
 <h2 id="mask">Mask</h2>
 <p>详见<a href="/posts/2025-06-29-Mask/">Mask</a></p>
 
-<h2 id="draw-call">Draw Call</h2>
-
 <h2 id="ui性能优化">UI性能优化</h2>
+<h3 id="ui性能瓶颈来源">UI性能瓶颈来源</h3>
+<ul>
+  <li>Canvas重绘（Canvas Batching）
+    <ul>
+      <li>Unity UI的核心瓶颈，任何UI元素的改变都会触发Canvas重绘</li>
+      <li>重绘会导致大量Draw Call和CPU消耗</li>
+    </ul>
+  </li>
+  <li>过多Draw Call
+    <ul>
+      <li>UI元素数量多，切换材质、纹理时会产生更多Draw Call</li>
+    </ul>
+  </li>
+  <li>过度的布局计算
+    <ul>
+      <li>Layout Group、ContentSizeFitter频繁更新会触发布局计算，消耗CPU</li>
+    </ul>
+  </li>
+  <li>频繁的UI更新
+    <ul>
+      <li>文本、图片频繁更改，尤其是动态更新时</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="重点优化方向和方法">重点优化方向和方法</h3>
+<p>减少Canvas重绘范围</p>
+<ul>
+  <li>拆分Canvas
+    <ul>
+      <li>把经常变动的UI元素放在单独的Canvas，避免整屏重绘</li>
+    </ul>
+  </li>
+  <li>避免频繁更改UI属性
+    <ul>
+      <li>避免频繁修改RectTransform、颜色、图片等触发Canvas重绘的操作</li>
+    </ul>
+  </li>
+  <li>使用Canvas的分区刷新
+    <ul>
+      <li>Unity在2020+版本有更好的Canvas局部刷新</li>
+    </ul>
+  </li>
+</ul>
+
+<p>控制Draw Call数量</p>
+<ul>
+  <li>使用UI图集（Sprite Atlas）
+    <ul>
+      <li>减少纹理切换，批量合并Draw Call</li>
+    </ul>
+  </li>
+  <li>合理使用Image Type
+    <ul>
+      <li>对于简单图形使用Simple，避免复杂的Sliced或Tiled导致额外计算</li>
+    </ul>
+  </li>
+  <li>减少Mask数量
+    <ul>
+      <li>Mask会导致额外Draw Call，尽量复用或用RectMask2D替代</li>
+    </ul>
+  </li>
+</ul>
+
+<p>优化布局系统</p>
+<ul>
+  <li>避免使用过多Layout Group和ContentSizeFitter
+    <ul>
+      <li>这两个组件会频繁触发布局刷新，影响性能</li>
+    </ul>
+  </li>
+  <li>尽量在UI静态阶段完成布局计算
+    <ul>
+      <li>动态添加、删除时手动刷新布局</li>
+    </ul>
+  </li>
+</ul>
+
+<p>文本优化</p>
+<ul>
+  <li>避免频繁修改Text内容
+    <ul>
+      <li>文本更新会重建顶点，代价大</li>
+    </ul>
+  </li>
+  <li>使用TextMeshPro
+    <ul>
+      <li>性能更好，支持更灵活的排版和渲染</li>
+    </ul>
+  </li>
+  <li>启用文本的“字体缓存”功能
+    <ul>
+      <li>减少文本绘制成本</li>
+    </ul>
+  </li>
+</ul>
+
+<p>使用Pool技术复用UI元素</p>
+<ul>
+  <li>对动态生成的大量Ui（如列表、格子），用对象池复用而非反复创建销毁</li>
+</ul>
 
 <h2 id="unity-ui-tookit">Unity UI Tookit</h2>
 
