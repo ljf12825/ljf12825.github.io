@@ -37,15 +37,15 @@ permalink: /posts/2025-06-29-Unity-Projects-Examples/
 | Flappy Bird     | 鸟穿越管道、简单随机化 | 2D动画、Trigger触发、对象池     | `Unity GamePlay` `Primary` | `Planning` |
 | 计时小游戏       | 倒计时 + 得分显示     | UI、Text、Button、Timer        | `Unity GamePlay` `Primary` | `Planning` |
 | 第一人称走路模拟  | 基础FPS移动逻辑      | CharacterController、摄像机控制 | `Unity GamePlay` `Primary` | `Planning` |
-| 任务系统           | | 接受/完成任务、进度追踪、数据结构设计 | `Unity GamePlay` `System` `Intermediate`| `Planning` |
-| 成就系统           | ||||
-| 技能系统           | | 技能冷却、连招组合、动画事件绑定 | `Unity GamePlay` `System` `Intermediate` | `Planning` |
-| 状态机系统         | | 多角色状态、AI状态、战斗状态解耦 | `Unity GamePlay` `System` `Intermediate` | `Planning` |
-| 道具拾取 + 背包系统 | | 拖拽、叠加、存储、装备栏 | `Unity GamePlay` `System` `Intermediate` | `Planning` |
-| Save/Load存档系统  | | 本地JSON/二进制保存、读取场景状态 | `Unity GamePlay` `System` `Intermediate` | `Planning` |
-| 抽卡、开箱、开包类  | ||||
-| Rouge-like        | | 程序生成地图、道具系统 | `Unity GamePlay` `System` `Intermediate`      | `Planning` |
-| 节奏点击游戏       | | 节奏匹配、音频事件绑定 | `Unity GamePlay` `System` `Intermediate`      | `Planning` |
+| 任务系统           | 任务分类、接受/完成任务、进度追踪 | 数据来源、存档机制、事件系统、任务链 | `Unity GamePlay` `System` `Intermediate` | `Planning` |
+| 成就系统           | 完成特定条件自动解锁成就 | 模块化架构、事件驱动、进度追踪、数据持久化 | `Unity GamePlay` `System` `Intermediate` | `Planning` |
+| 技能系统           | 统一管理技能相关功能 | 静态数据 + 运行时状态、冷却&消耗管理、逻辑流 | `Unity GamePlay` `System` `Intermediate` | `Planning` |
+| 状态机系统         | 管理对象在不同状态间切换和行为控制 | 多角色状态、AI状态、战斗状态解耦 | `Unity GamePlay` `System` `Intermediate` | `Planning` |
+| 道具拾取 + 背包系统 | 游戏内拾取，物品存储和管理 | 拖拽、叠加、存储、装备栏 | `Unity GamePlay` `System` `Intermediate` | `Planning` |
+| Save/Load存档系统  | 持久化保存游戏的关键数据 | 本地JSON/二进制保存、读取场景状态 | `Unity GamePlay` `System` `Intermediate` | `Planning` |
+| 抽卡、开箱、开包类  | 随机概率 + 权重算法、奖池管理、玩家消耗 | 奖池设计和概率控制、抽取逻辑、消耗与次数管理 | `Unity GamePlay` `System` `Intermediate` | `Planning` |
+| Rouge-like        | 强调随机生成地图、资源和事件，Permadeath | 程序生成地图、道具系统 | `Unity GamePlay` `System` `Intermediate`      | `Planning` |
+| 节奏点击游戏       | 根据音乐节奏，在指定时间点点击、滑动或长按 | 节奏匹配、音频事件绑定 | `Unity GamePlay` `System` `Intermediate`      | `Planning` |
 | 平台跳跃 Platformer | 可拓展成高级动作系统 | 动画、状态机、跳跃逻辑、碰撞检测 | `Unity GamePlay` `Intermediate` | `Planning` |
 | 塔防游戏 Tower Defense | 使用导航网格或自定义路径系统 | 路径系统、对象池、攻击逻辑 | `Unity GamePlay` `Intermediate` | `Planning` |
 | 基础RPG Demo     | 包含拾取、装备、攻击等 | Inventory、UI、任务系统、简单AI   | `Unity GamePlay` `Intermediate` | `Planning` |
@@ -57,7 +57,7 @@ permalink: /posts/2025-06-29-Unity-Projects-Examples/
 | 城市模拟/建设类游戏 | 游戏逻辑和状态同步挑战大 | 地图系统、建筑放置、数据持久化 | `Unity GamePlay` `Advanced` | `Planning` |
 | 虚拟摄像机系统    | 更适合图形学表现和演示项目 | Cinemachine、Timeline、关键帧控制 | `Unity Graph` `Advanced` | `Planning` |
 | Open World (mini) | 需考虑资源管理、加载逻辑 | Streaming、世界管理、AI导航、场景优化 | `Unity GamePlay` `High Rank` | `Planning` |
-| ARPG(DMC like)    | 动作响应和打击感难度大   | Combo系统、时间轴管理、动画事件       | `Unity GamePlay` `High Rank` | `Planning` |
+| ARPG(DMC-like)    | 动作响应和打击感难度大   | Combo系统、时间轴管理、动画事件       | `Unity GamePlay` `High Rank` | `Planning` |
 | Shader Collection | 图形学展示              | 自定义Shader、VFX Graph、Render Feature | `Unity Graph` `High Rank` | `Planning` |
 | Visual Novel System | 更偏向结构设计与数据处理 | 数据驱动、UI演出、状态管理  | `Unity GamePlay` `High Rank`  | `Planning` |
 | SRP               | 高度定制，图形学开发方向  | 图形学、SRP、Render Graph   | `Unity Graph` `High Rank`     | `Planning` |

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-06-30T22:34:24+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Unity Projects Examples</title><link href="http://localhost:4000/posts/2025-06-29-Unity-Projects-Examples/" rel="alternate" type="text/html" title="Unity Projects Examples" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Unity-Projects-Examples</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-29-Unity-Projects-Examples/"><![CDATA[<p>项目管理</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-07-01T17:52:23+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Unity Projects Examples</title><link href="http://localhost:4000/posts/2025-06-29-Unity-Projects-Examples/" rel="alternate" type="text/html" title="Unity Projects Examples" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Unity-Projects-Examples</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-29-Unity-Projects-Examples/"><![CDATA[<p>项目管理</p>
 
 <h2 id="quick-list">Quick List</h2>
 
@@ -77,63 +77,63 @@
     </tr>
     <tr>
       <td>任务系统</td>
-      <td> </td>
-      <td>接受/完成任务、进度追踪、数据结构设计</td>
+      <td>任务分类、接受/完成任务、进度追踪</td>
+      <td>数据来源、存档机制、事件系统、任务链</td>
       <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
       <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
     </tr>
     <tr>
       <td>成就系统</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td>完成特定条件自动解锁成就</td>
+      <td>模块化架构、事件驱动、进度追踪、数据持久化</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
     </tr>
     <tr>
       <td>技能系统</td>
-      <td> </td>
-      <td>技能冷却、连招组合、动画事件绑定</td>
+      <td>统一管理技能相关功能</td>
+      <td>静态数据 + 运行时状态、冷却&amp;消耗管理、逻辑流</td>
       <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
       <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
     </tr>
     <tr>
       <td>状态机系统</td>
-      <td> </td>
+      <td>管理对象在不同状态间切换和行为控制</td>
       <td>多角色状态、AI状态、战斗状态解耦</td>
       <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
       <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
     </tr>
     <tr>
       <td>道具拾取 + 背包系统</td>
-      <td> </td>
+      <td>游戏内拾取，物品存储和管理</td>
       <td>拖拽、叠加、存储、装备栏</td>
       <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
       <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
     </tr>
     <tr>
       <td>Save/Load存档系统</td>
-      <td> </td>
+      <td>持久化保存游戏的关键数据</td>
       <td>本地JSON/二进制保存、读取场景状态</td>
       <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
       <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
     </tr>
     <tr>
       <td>抽卡、开箱、开包类</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td>随机概率 + 权重算法、奖池管理、玩家消耗</td>
+      <td>奖池设计和概率控制、抽取逻辑、消耗与次数管理</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
     </tr>
     <tr>
       <td>Rouge-like</td>
-      <td> </td>
+      <td>强调随机生成地图、资源和事件，Permadeath</td>
       <td>程序生成地图、道具系统</td>
       <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
       <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
     </tr>
     <tr>
       <td>节奏点击游戏</td>
-      <td> </td>
+      <td>根据音乐节奏，在指定时间点点击、滑动或长按</td>
       <td>节奏匹配、音频事件绑定</td>
       <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
       <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
@@ -216,7 +216,7 @@
       <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
     </tr>
     <tr>
-      <td>ARPG(DMC like)</td>
+      <td>ARPG(DMC-like)</td>
       <td>动作响应和打击感难度大</td>
       <td>Combo系统、时间轴管理、动画事件</td>
       <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">High Rank</code></td>
