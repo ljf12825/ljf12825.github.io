@@ -4443,6 +4443,135 @@ LatePreRender阶段：
 </ul>
 
 <h2 id="unity-ui-tookit">Unity UI Tookit</h2>
+<p>Unity UI Tookit是Unity推出的新一代UI框架，用于狗i按Editor UI（编译器工具）以及运行时UI（Runtime UI），逐渐称为UGUI的继任者。<br />
+它借鉴了Web的开发理念，使用类似HTML + CSS的语法（UXML + USS），结合C#逻辑代码</p>
+
+<h3 id="ui-toolkit组成">UI Toolkit组成</h3>
+<p>1.UXML（Unity XML）</p>
+<ul>
+  <li>类似HTML，定义UI结构</li>
+  <li>示例：
+  ```xml</li>
+</ul>
+<engine:VisualElement class="container">
+    <engine:Label text="Hello UI Toolkit" class="title-label" />
+  </engine:VisualElement>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+2.USS（Unity Style Sheets）
+  - 类似CSS，用于样式设置
+  - 示例：
+  ```css
+  .container {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+.title-label {
+    font-size: 20px;
+    color: white;
+  }
+</code></pre></div></div>
+
+<p>3.C#脚本</p>
+<ul>
+  <li>控制逻辑，加载UI，注册事件</li>
+  <li>示例：
+    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kt">var</span> <span class="n">root</span> <span class="p">=</span> <span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">UIDocument</span><span class="p">&gt;().</span><span class="n">rootVisualElement</span><span class="p">;</span>
+  <span class="kt">var</span> <span class="n">button</span> <span class="p">=</span> <span class="n">root</span><span class="p">.</span><span class="n">Q</span><span class="p">&lt;</span><span class="n">Button</span><span class="p">&gt;(</span><span class="s">"myButton"</span><span class="p">);</span>
+  <span class="n">button</span><span class="p">.</span><span class="n">clicked</span> <span class="p">+=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"Button clicked"</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="ui-tookit的优势">UI Tookit的优势</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>优点</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>数据驱动</td>
+      <td>更好地支持 MVC/MVVM 等架构。</td>
+    </tr>
+    <tr>
+      <td>样式分离</td>
+      <td>USS 类似 CSS，使样式和逻辑分离，维护性强。</td>
+    </tr>
+    <tr>
+      <td>高度自定义</td>
+      <td>支持自定义控件、继承组件等。</td>
+    </tr>
+    <tr>
+      <td>原生支持编辑器工具</td>
+      <td>创建自定义 Inspector、工具面板更加方便。</td>
+    </tr>
+    <tr>
+      <td>性能更好（Runtime UI）</td>
+      <td>尤其在静态 UI 上比 UGUI 更高效。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>UI Tookit vs UGUI</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>特性</th>
+      <th>UI Toolkit</th>
+      <th>UGUI</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>样式机制</td>
+      <td>USS（类似 CSS）</td>
+      <td>内联属性</td>
+    </tr>
+    <tr>
+      <td>布局方式</td>
+      <td>Flexbox</td>
+      <td>Anchors + RectTransform</td>
+    </tr>
+    <tr>
+      <td>可编程性</td>
+      <td>更接近 Web 构建方式</td>
+      <td>Unity 特有组件方式</td>
+    </tr>
+    <tr>
+      <td>编辑器支持</td>
+      <td>完善，Inspector、EditorWindow</td>
+      <td>需要自写代码</td>
+    </tr>
+    <tr>
+      <td>动态创建元素</td>
+      <td>支持（动态加载 UXML）</td>
+      <td>支持，但较繁琐</td>
+    </tr>
+    <tr>
+      <td>性能（静态 UI）</td>
+      <td>更优</td>
+      <td>中等</td>
+    </tr>
+    <tr>
+      <td>学习曲线</td>
+      <td>偏陡峭（对 Web 不熟悉的人）</td>
+      <td>更直观</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="使用场景">使用场景</h3>
+<ul>
+  <li>自定义编辑器（如Inspector、EditorWindow）</li>
+  <li>数据面板、工具插件等</li>
+  <li>复杂动态UI游戏界面</li>
+  <li>动画复杂、过渡多的UI</li>
+</ul>
 
 <h2 id="ui动画">UI动画</h2>
 
