@@ -312,7 +312,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Texture",
-        "excerpt":" ","categories": ["笔记"],
+        "excerpt":"Texture是图形学开发中的一个核心概念，用于在3D模型、UI、地形等物体表面显示图像或图案 它不仅包含颜色信息，还可能包含法线、位移、金属度、粗糙度等各种数据，用于实现丰富的视觉效果 基本概念 Texture本质上是一张图片，用于“贴”在模型表面，使其看起来更真实 在GPU层面，是一个二维数组，存储颜色或其他类型的数据 Texture类型 类型 描述 常见用途 Texture2D 最常见的二维纹理 UI、模型贴图、Sprite Texture3D 三维纹理 体积渲染、噪声函数 Texture2DArray 一组相同大小的2D纹理 批量渲染、材质变体 Cubemap 六面贴图的立方体 天空盒、反射 RenderTexture 可以被摄像机写入的纹理 后处理、实时渲染结果 MovieTexture（已废弃） 视频纹理 使用 VideoPlayer 替代 导入 在Unity中，图片导入后会成为Texture，可以通过Inspector查看其属性 1.Texture Type（纹理类型） Default：普通模型贴图 Normal Map：法线贴图，用于模拟表面细节 Sprite（2D and UI）：用于2D项目和UI Cursor：用于鼠标指针 Lightmap：烘焙光照图 Single Channel：单通道纹理，如Mask 2.Alpha Source 从图片的Alpha通道提取透明度信息 3.Wrap Mode（包裹模式） Repeat：超出部分重复 Clamp：超出部分拉伸边缘...","categories": ["笔记"],
         "tags": ["Unity","Unity Component","Render","Graphics"],
         "url": "/posts/2025-06-29-Texture/",
         "teaser": null
