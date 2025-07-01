@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-07-01T20:43:53+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Unity Projects Examples</title><link href="http://localhost:4000/posts/2025-06-29-Unity-Projects-Examples/" rel="alternate" type="text/html" title="Unity Projects Examples" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Unity-Projects-Examples</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-29-Unity-Projects-Examples/"><![CDATA[<p>项目管理</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-07-01T20:51:27+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Unity Projects Examples</title><link href="http://localhost:4000/posts/2025-06-29-Unity-Projects-Examples/" rel="alternate" type="text/html" title="Unity Projects Examples" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Unity-Projects-Examples</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-29-Unity-Projects-Examples/"><![CDATA[<p>项目管理</p>
 
 <h2 id="quick-list">Quick List</h2>
 
@@ -1853,23 +1853,23 @@ SpriteA (设置受 Sprite Mask 控制)
     </tr>
     <tr>
       <td>用于渲染控制</td>
-      <td>✅</td>
-      <td>❌</td>
+      <td>是</td>
+      <td>否</td>
     </tr>
     <tr>
       <td>用于物理控制</td>
-      <td>✅</td>
-      <td>❌</td>
+      <td>是</td>
+      <td>否</td>
     </tr>
     <tr>
       <td>用于分类查找</td>
       <td>有限制（用 LayerMask）</td>
-      <td>✅（用 CompareTag 等）</td>
+      <td>可以（用 CompareTag 等）</td>
     </tr>
     <tr>
       <td>性能优化</td>
-      <td>✅（用于剔除、射线过滤）</td>
-      <td>❌</td>
+      <td>优化（用于剔除、射线过滤）</td>
+      <td>无优化</td>
     </tr>
   </tbody>
 </table>
