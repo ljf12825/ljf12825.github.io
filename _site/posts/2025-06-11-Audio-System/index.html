@@ -170,6 +170,96 @@
         
         <p>Audio System 是 Unity中处理游戏所有声音播放、管理和混音的核心模块</p>
 
+<h2 id="audio-clip">Audio Clip</h2>
+<p>在Unity中，<code class="language-plaintext highlighter-rouge">AudioClip</code>是表示音频资源的核心类，用于播放、管理和处理音频数据（如音乐、音效、语音等）</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">AudioCilp</span> <span class="p">:</span> <span class="n">Object</span>
+</code></pre></div></div>
+<ul>
+  <li>它存储音频数据，可以被<code class="language-plaintext highlighter-rouge">AudioSource</code>组件播放</li>
+  <li>通常通过将音频文件（如<code class="language-plaintext highlighter-rouge">.wav</code>、<code class="language-plaintext highlighter-rouge">.mp3</code>、<code class="language-plaintext highlighter-rouge">.ogg</code>）导入到Unity项目中生成AudioClip</li>
+  <li>可用来播放背景音乐（BGM）、音效（SFX）、语音（VO）等</li>
+</ul>
+
+<p><img src="/assets/images/AudioClipExample.jpg" alt="AudioClipExample" /></p>
+
+<h3 id="audioclip的常见使用方式">AudioClip的常见使用方式</h3>
+<p>1.在Inspector中拖入音频文件</p>
+<ul>
+  <li>拖一个音频文件到<code class="language-plaintext highlighter-rouge">Assets</code>文件夹</li>
+  <li>Unity自动将其导入为<code class="language-plaintext highlighter-rouge">AudioClip</code></li>
+  <li>拖到<code class="language-plaintext highlighter-rouge">AudioSource.clip</code>上即可播放</li>
+</ul>
+
+<p>2.通过代码播放AudioClip</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="n">AudioSource</span> <span class="n">audioSource</span><span class="p">;</span>
+<span class="k">public</span> <span class="n">AudioClip</span> <span class="n">clip</span><span class="p">;</span>
+
+<span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">autioSource</span><span class="p">.</span><span class="n">clip</span> <span class="p">=</span> <span class="n">clip</span><span class="p">;</span>
+    <span class="n">audioSource</span><span class="p">.</span><span class="nf">Play</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="audioclip的导入设置">AudioClip的导入设置</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Force To Mono</strong></td>
+      <td>强制单声道</td>
+    </tr>
+    <tr>
+      <td><strong>Normalize</strong></td>
+      <td>自动将音频的音量标准化到一个统一的最大音量水平，避免音量过低或过高</td>
+    </tr>
+    <tr>
+      <td><strong>Ambisonic</strong></td>
+      <td>沉浸式3D空间音频，启用后Unity会使用Ambisonic解码器处理音频方向，需安装第三方插件使用</td>
+    </tr>
+    <tr>
+      <td><strong>Load Type</strong></td>
+      <td>Streaming（长音频），Decompress on Load（短音效）</td>
+    </tr>
+    <tr>
+      <td><strong>Compression Format</strong></td>
+      <td>压缩格式 PCM（无压缩） / Vorbis（有损压缩，开源格式，推荐） / MP3（有损压缩，商业格式）</td>
+    </tr>
+    <tr>
+      <td><strong>Sample Rate</strong></td>
+      <td>音质与性能平衡 Preserve Sample Rate（保留原始采样率）, Optimize Sample Rate（优化采样率）, Override Sample Rate（强制指定采样）</td>
+    </tr>
+    <tr>
+      <td><strong>Preload Audio Data</strong></td>
+      <td>是否在启动时加载到内存</td>
+    </tr>
+    <tr>
+      <td><strong>Load in Background</strong></td>
+      <td>是否异步加载</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="创建自定义audioclip">创建自定义AudioClip</h3>
+<p>可以在运行时动态生成AudioClip，例如用于程序化音效或语言合成</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">AudioClip</span> <span class="n">myClip</span> <span class="p">=</span> <span class="n">AudioClip</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">"MySine"</span><span class="p">,</span> <span class="n">sampleLength</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="n">sampleRate</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+<span class="n">myClip</span><span class="p">.</span><span class="nf">SetData</span><span class="p">(</span><span class="n">floatArray</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="注意事项">注意事项</h3>
+<ul>
+  <li>AudioClip是资源，不等于播放器，需要<code class="language-plaintext highlighter-rouge">AudioSource</code>来播放</li>
+  <li>不要在频繁播放音效时反复创建AudioClip实例，应使用对象池或缓存机制</li>
+  <li><code class="language-plaintext highlighter-rouge">.m4a</code>等不推荐格式导入可能生成不了可用的<code class="language-plaintext highlighter-rouge">AudioClip</code></li>
+</ul>
+
 <h2 id="主要组件">主要组件</h2>
 
 <table>
@@ -220,6 +310,10 @@
 </table>
 
 <h2 id="组件">组件</h2>
+<h3 id="audio-source">Audio Source</h3>
+<p><code class="language-plaintext highlighter-rouge">AudioSource</code>是Unity中用于播放声音的核心组件，负责控制音频的播放、暂停、停止、3D效果、音量等</p>
+
+<p><img src="/assets/images/AudioSourcePanel.jpg" alt="AudioSourcePanel" /></p>
 
 <h2 id="结合">结合</h2>
 

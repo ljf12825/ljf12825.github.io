@@ -234,7 +234,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Audio System",
-        "excerpt":"Audio System 是 Unity中处理游戏所有声音播放、管理和混音的核心模块   主要组件                  Category       Component Name                       Audio       Chorus Filter                         Distortion Filter                         Echo Filter                         High Pass Filter                         Listener                         Low Pass Filter                         Reverv Filter                         Reverv Zone                         Source           组件   结合   脚本   性能  ","categories": ["笔记"],
+        "excerpt":"Audio System 是 Unity中处理游戏所有声音播放、管理和混音的核心模块 Audio Clip 在Unity中，AudioClip是表示音频资源的核心类，用于播放、管理和处理音频数据（如音乐、音效、语音等） public class AudioCilp : Object 它存储音频数据，可以被AudioSource组件播放 通常通过将音频文件（如.wav、.mp3、.ogg）导入到Unity项目中生成AudioClip 可用来播放背景音乐（BGM）、音效（SFX）、语音（VO）等 AudioClip的常见使用方式 1.在Inspector中拖入音频文件 拖一个音频文件到Assets文件夹 Unity自动将其导入为AudioClip 拖到AudioSource.clip上即可播放 2.通过代码播放AudioClip public AudioSource audioSource; public AudioClip clip; void Start() { autioSource.clip = clip; audioSource.Play(); } AudioClip的导入设置 属性 说明 Force To Mono 强制单声道 Normalize 自动将音频的音量标准化到一个统一的最大音量水平，避免音量过低或过高 Ambisonic 沉浸式3D空间音频，启用后Unity会使用Ambisonic解码器处理音频方向，需安装第三方插件使用 Load Type Streaming（长音频），Decompress on...","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
         "url": "/posts/2025-06-11-Audio-System/",
         "teaser": null
