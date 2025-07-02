@@ -174,8 +174,8 @@ var store = [{
         "teaser": null
       },{
         "title": "Object Pooling",
-        "excerpt":" ","categories": ["笔记"],
-        "tags": ["Unity","Unity System"],
+        "excerpt":"对象池是一种优化性能和内存分配的设计模式，尤其常用于游戏开发和高频率实例化的场景中 概念 对象池是一个事先创建好的一组可复用对象的容器，避免频繁地创建和销毁对象。在需要时，从池中取一个对象；使用完毕后，不销毁，而是回收进池中待复用 适用场景 需要频繁创建/销毁的对象（子弹、特效、敌人） 性能敏感场景（高帧率要求） GC带来的性能抖动要避免的场合 工作流程 1.初始化：创建一定量的对象并放入池中，默认设置为非激活状态 2.取出对象（Spawn/Get）： 如果池中有可用对象，返回它并激活 如果池为空，可选是否创建新对象 3.回收对象（Recycle/Release）： 使用完后，将对象设为非激活并放回池中 4.自动扩展或缩减池大小（可选） 简单实现 public class ObjectPool&lt;T&gt; where T : Component { private Queue&lt;T&gt; pool = new Queue&lt;T&gt;(); private T prefab; public ObjectPool(T prefab, int initialSize) { this.prefab = prefab; for (int i = 0; i &lt; initialSize;...","categories": ["笔记"],
+        "tags": ["Unity","Design Pattern"],
         "url": "/posts/2025-06-06-Object-Pooling/",
         "teaser": null
       },{
