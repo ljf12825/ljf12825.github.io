@@ -4574,12 +4574,48 @@ LatePreRender阶段：
 </ul>
 
 <h2 id="ui动画">UI动画</h2>
+<p>Unity中做UI动画，有以下几种常见方式</p>
 
-<h2 id="ui资源管理">UI资源管理</h2>
+<h3 id="unity-animator-controller做ui动画">Unity Animator Controller做UI动画</h3>
+<ul>
+  <li>可以用<code class="language-plaintext highlighter-rouge">Animator</code>组件对UI元素做复杂动画，类似角色动画</li>
+  <li>配合<code class="language-plaintext highlighter-rouge">Animation</code>窗口，制作位置、缩放、旋转、颜色、透明度等属性动画</li>
+  <li>适合状态切换、复杂动画序列，比如按钮按下弹跳、菜单打开过渡等</li>
+</ul>
 
-<h2 id="ui动态生成">UI动态生成</h2>
+<h3 id="tween动画库">Tween动画库</h3>
+<ul>
+  <li>比较常用且高效的方式，很多第三方Tween库都支持UI动画：
+    <ul>
+      <li>DOTween（Dimigiant）</li>
+      <li>LeanTween</li>
+      <li>iTween</li>
+    </ul>
+  </li>
+</ul>
 
-<h2 id="ui-manager-system">UI Manager System</h2>
+<h3 id="利用ui-canvasgroup做渐隐渐显动画">利用UI CanvasGroup做渐隐渐显动画</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">CanvasGroup</code>组件可以控制整体UI透明度、交互和射线阻挡</li>
+  <li>搭配Tween库做淡入淡出效果</li>
+</ul>
+
+<h3 id="使用代码插值做自定义动画">使用代码插值做自定义动画</h3>
+<ul>
+  <li>使用<code class="language-plaintext highlighter-rouge">Update()</code>里的插值控制位置、颜色等</li>
+  <li>灵活，但代码复杂度高，不推荐做复杂UI动画</li>
+</ul>
+
+<h3 id="ui粒子动画和shader动画">UI粒子动画和Shader动画</h3>
+<ul>
+  <li>结合粒子系统、Shader特效提升UI表现</li>
+  <li>适合特殊需求，比如炫酷按钮发光、粒子飞散等</li>
+</ul>
+
+<h3 id="timeline与ui动画">Timeline与UI动画</h3>
+<ul>
+  <li>Unity Timeline也支持控制UI动画，适合需要同步多动画的场景</li>
+</ul>
 
 
         
