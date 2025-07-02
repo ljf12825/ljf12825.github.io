@@ -1,250 +1,192 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-07-02T16:44:07+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Unity Projects Examples</title><link href="http://localhost:4000/posts/2025-06-29-Unity-Projects-Examples/" rel="alternate" type="text/html" title="Unity Projects Examples" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Unity-Projects-Examples</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-29-Unity-Projects-Examples/"><![CDATA[<p>项目管理</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-07-02T17:17:36+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Unity Rendering Principle</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Rendering-Principle.html" rel="alternate" type="text/html" title="Unity Rendering Principle" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Rendering-Principle</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Rendering-Principle.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Render" /><category term="Graphics" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Character Controller</title><link href="http://localhost:4000/posts/2025-06-07-Character-Controller/" rel="alternate" type="text/html" title="Character Controller" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Character-Controller</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-07-Character-Controller/"><![CDATA[<p>Character Controller是专为角色移动设计的物理组件，适合用于第一人称、第三人称角色控制，尤其适合需要“脚贴地”“走坡不滑”的场景<br />
+它和Rigidbody不同，不依赖物理引擎施加力，而是手动控制角色移动的逻辑，更稳定、精准、游戏性更强</p>
 
-<h2 id="quick-list">Quick List</h2>
+<h2 id="character-controller组件概览">Character Controller组件概览</h2>
+<p>它本质是一个内置Capsule Collider + 内部碰撞处理器，支持走地、上坡、碰撞、阻挡等功能</p>
 
-<blockquote>
-  <p>状态说明：</p>
-  <ul>
-    <li><code class="language-plaintext highlighter-rouge">Planning</code>：规划中，生成需求和说明文档</li>
-    <li><code class="language-plaintext highlighter-rouge">TODO</code>：已立项，未开始</li>
-    <li><code class="language-plaintext highlighter-rouge">In Progress</code>：开发中</li>
-    <li><code class="language-plaintext highlighter-rouge">Code Review</code>：审查</li>
-    <li><code class="language-plaintext highlighter-rouge">Testing</code>：测试</li>
-    <li><code class="language-plaintext highlighter-rouge">Bugfixing</code>：缺陷修复</li>
-    <li><code class="language-plaintext highlighter-rouge">Paused</code>：暂停</li>
-    <li><code class="language-plaintext highlighter-rouge">Cancelled</code>：已取消</li>
-    <li><code class="language-plaintext highlighter-rouge">Archived</code> : 已归档</li>
-  </ul>
-</blockquote>
+<p><img src="/assets/images/CharacterControllerPanel.jpg" alt="CharacterControllerPanel" /></p>
 
-<blockquote>
-  <p>标签说明：</p>
-  <ul>
-    <li><code class="language-plaintext highlighter-rouge">Unity GamePlay</code>：Unity游戏逻辑实现</li>
-    <li><code class="language-plaintext highlighter-rouge">Unity Graph</code>：Unity图形学实现</li>
-    <li><code class="language-plaintext highlighter-rouge">Primary</code>：初级</li>
-    <li><code class="language-plaintext highlighter-rouge">Intermediate</code>：中级</li>
-    <li><code class="language-plaintext highlighter-rouge">Advanced</code>：进阶</li>
-    <li><code class="language-plaintext highlighter-rouge">High Rank</code>：高级</li>
-  </ul>
-</blockquote>
+<p><strong>主要属性</strong></p>
 
 <table>
   <thead>
     <tr>
-      <th>项目</th>
-      <th>简介</th>
-      <th>要点</th>
-      <th>标签</th>
-      <th>状态</th>
+      <th>属性</th>
+      <th>描述</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>滚动球 Ball Roll</td>
-      <td>WASD控制球滚动，捡起金币</td>
-      <td>物理系统、Rigidbody、输入系统</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Primary</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+      <td><strong>Center</strong></td>
+      <td>控制胶囊体中心位置</td>
     </tr>
     <tr>
-      <td>打砖块 Breakout</td>
-      <td>实现经典打砖块玩法</td>
-      <td>2D物理、碰撞、射线检测、UI</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Primary</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+      <td><strong>Radius</strong></td>
+      <td>胶囊体的半径</td>
     </tr>
     <tr>
-      <td>Flappy Bird</td>
-      <td>鸟穿越管道、简单随机化</td>
-      <td>2D动画、Trigger触发、对象池</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Primary</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+      <td><strong>Height</strong></td>
+      <td>胶囊体高度</td>
     </tr>
     <tr>
-      <td>计时小游戏</td>
-      <td>倒计时 + 得分显示</td>
-      <td>UI、Text、Button、Timer</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Primary</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+      <td><strong>Slope Limit</strong></td>
+      <td>可行走的最大坡度角（超过会滑下来）</td>
     </tr>
     <tr>
-      <td>第一人称走路模拟</td>
-      <td>基础FPS移动逻辑</td>
-      <td>CharacterController、摄像机控制</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Primary</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+      <td><strong>Step Offset</strong></td>
+      <td>可“跨越”的台阶高度</td>
     </tr>
     <tr>
-      <td>任务系统</td>
-      <td>任务分类、接受/完成任务、进度追踪</td>
-      <td>数据来源、存档机制、事件系统、任务链</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+      <td><strong>Skin Width</strong></td>
+      <td>贴地/贴墙容差，过小会穿透，过大会卡住</td>
     </tr>
     <tr>
-      <td>成就系统</td>
-      <td>完成特定条件自动解锁成就</td>
-      <td>模块化架构、事件驱动、进度追踪、数据持久化</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
-    </tr>
-    <tr>
-      <td>技能系统</td>
-      <td>统一管理技能相关功能</td>
-      <td>静态数据 + 运行时状态、冷却&amp;消耗管理、逻辑流</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
-    </tr>
-    <tr>
-      <td>状态机系统</td>
-      <td>管理对象在不同状态间切换和行为控制</td>
-      <td>多角色状态、AI状态、战斗状态解耦</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
-    </tr>
-    <tr>
-      <td>道具拾取 + 背包系统</td>
-      <td>游戏内拾取，物品存储和管理</td>
-      <td>拖拽、叠加、存储、装备栏</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
-    </tr>
-    <tr>
-      <td>Save/Load存档系统</td>
-      <td>持久化保存游戏的关键数据</td>
-      <td>本地JSON/二进制保存、读取场景状态</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
-    </tr>
-    <tr>
-      <td>抽卡、开箱、开包类</td>
-      <td>随机概率 + 权重算法、奖池管理、玩家消耗</td>
-      <td>奖池设计和概率控制、抽取逻辑、消耗与次数管理</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
-    </tr>
-    <tr>
-      <td>Rouge-like</td>
-      <td>强调随机生成地图、资源和事件，Permadeath</td>
-      <td>程序生成地图、道具系统</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
-    </tr>
-    <tr>
-      <td>节奏点击游戏</td>
-      <td>根据音乐节奏，在指定时间点点击、滑动或长按</td>
-      <td>节奏匹配、音频事件绑定</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
-    </tr>
-    <tr>
-      <td>平台跳跃 Platformer</td>
-      <td>可拓展成高级动作系统</td>
-      <td>动画、状态机、跳跃逻辑、碰撞检测</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
-    </tr>
-    <tr>
-      <td>塔防游戏 Tower Defense</td>
-      <td>使用导航网格或自定义路径系统</td>
-      <td>路径系统、对象池、攻击逻辑</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
-    </tr>
-    <tr>
-      <td>基础RPG Demo</td>
-      <td>包含拾取、装备、攻击等</td>
-      <td>Inventory、UI、任务系统、简单AI</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
-    </tr>
-    <tr>
-      <td>TopDown射击</td>
-      <td>包括Boss逻辑、多种敌人</td>
-      <td>射线检测、特效、敌人AI</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
-    </tr>
-    <tr>
-      <td>Unity UI交互系统</td>
-      <td>侧重交互与UI动效</td>
-      <td>UnityEvent、Button、EventSystem</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
-    </tr>
-    <tr>
-      <td>第三人称动作游戏</td>
-      <td>可使用Animation Rigging提升表现</td>
-      <td>Blend Tree、Root Motion、攻击系统、受击反馈</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Advanced</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
-    </tr>
-    <tr>
-      <td>回合制战斗系统（战棋）</td>
-      <td>逻辑结构较为复杂</td>
-      <td>网格管理、战斗管理器、状态系统</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Advanced</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
-    </tr>
-    <tr>
-      <td>简易MMO Demo</td>
-      <td>适合入门多人联机项目</td>
-      <td>多人同步、角色同步、基本聊天系统、房间机制</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Advanced</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
-    </tr>
-    <tr>
-      <td>城市模拟/建设类游戏</td>
-      <td>游戏逻辑和状态同步挑战大</td>
-      <td>地图系统、建筑放置、数据持久化</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Advanced</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
-    </tr>
-    <tr>
-      <td>虚拟摄像机系统</td>
-      <td>更适合图形学表现和演示项目</td>
-      <td>Cinemachine、Timeline、关键帧控制</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity Graph</code> <code class="language-plaintext highlighter-rouge">Advanced</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
-    </tr>
-    <tr>
-      <td>Open World (mini)</td>
-      <td>需考虑资源管理、加载逻辑</td>
-      <td>Streaming、世界管理、AI导航、场景优化</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">High Rank</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
-    </tr>
-    <tr>
-      <td>ARPG(DMC-like)</td>
-      <td>动作响应和打击感难度大</td>
-      <td>Combo系统、时间轴管理、动画事件</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">High Rank</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
-    </tr>
-    <tr>
-      <td>Shader Collection</td>
-      <td>图形学展示</td>
-      <td>自定义Shader、VFX Graph、Render Feature</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity Graph</code> <code class="language-plaintext highlighter-rouge">High Rank</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
-    </tr>
-    <tr>
-      <td>Visual Novel System</td>
-      <td>更偏向结构设计与数据处理</td>
-      <td>数据驱动、UI演出、状态管理</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">High Rank</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
-    </tr>
-    <tr>
-      <td>SRP</td>
-      <td>高度定制，图形学开发方向</td>
-      <td>图形学、SRP、Render Graph</td>
-      <td><code class="language-plaintext highlighter-rouge">Unity Graph</code> <code class="language-plaintext highlighter-rouge">High Rank</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+      <td><strong>Min Move Distance</strong></td>
+      <td>小于这个值的移动会被忽略</td>
     </tr>
   </tbody>
-</table>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Project" /><summary type="html"><![CDATA[项目管理]]></summary></entry><entry><title type="html">Object Pooling</title><link href="http://localhost:4000/posts/2025-06-06-Object-Pooling/" rel="alternate" type="text/html" title="Object Pooling" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Object-Pooling</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-06-Object-Pooling/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">UI Event System</title><link href="http://localhost:4000/posts/2025-06-29-UI-Event-System/" rel="alternate" type="text/html" title="UI Event System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/UI-Event-System</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-29-UI-Event-System/"><![CDATA[<p><code class="language-plaintext highlighter-rouge">Event System</code>是Unity UI System中的核心交互管理器，掌控了所有鼠标点击、键盘输入、触摸事件、UI导航的逻辑</p>
+</table>
+
+<p><a href="https://docs.unity3d.com/Manual/class-CharacterController.html">UnityManual CharacterController</a></p>
+
+<h3 id="常用方法">常用方法</h3>
+<p><code class="language-plaintext highlighter-rouge">Move(Vector3 motion)</code><br />
+移动角色，内部会自动处理碰撞，返回碰撞信息</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">controller</span><span class="p">.</span><span class="nf">Move</span><span class="p">(</span><span class="n">Vector3</span> <span class="n">motion</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span><span class="p">);</span>
+</code></pre></div></div>
+<blockquote>
+  <p>支持斜坡、台阶检测、滑动、墙体推开等逻辑</p>
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">SimpleMobe(Vector3 motion)</code><br />
+简化版移动，自动应用重力，不需要乘以<code class="language-plaintext highlighter-rouge">Time.deltaTime</code></p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">controller</span><span class="p">.</span><span class="nf">SimpleMove</span><span class="p">(</span><span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">z</span><span class="p">));</span>
+</code></pre></div></div>
+<p>适合简单控制，不建议用于精细角色控制</p>
+
+<h3 id="示例">示例</h3>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">PlayerMove</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">float</span> <span class="n">speed</span> <span class="p">=</span> <span class="m">5f</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">float</span> <span class="n">gravity</span> <span class="p">=</span> <span class="p">-</span><span class="m">9.81f</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">float</span> <span class="n">jumpHeight</span> <span class="p">=</span> <span class="m">1.5f</span><span class="p">;</span>
+
+    <span class="k">private</span> <span class="n">CharacterController</span> <span class="n">controller</span><span class="p">;</span>
+    <span class="k">private</span> <span class="n">Vector3</span> <span class="n">velocity</span><span class="p">;</span>
+    <span class="k">private</span> <span class="kt">bool</span> <span class="n">isGrounded</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="n">Transform</span> <span class="n">groundCheck</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">float</span> <span class="n">groundDistance</span> <span class="p">=</span> <span class="m">0.4f</span><span class="p">;</span>
+    <span class="k">public</span> <span class="n">LayerMask</span> <span class="n">groundMask</span><span class="p">;</span>
+
+    <span class="k">void</span> <span class="nf">Start</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">controller</span> <span class="p">=</span> <span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">CharacterController</span><span class="p">&gt;();</span>
+
+    <span class="n">voie</span> <span class="nf">Update</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">isGrounded</span> <span class="p">=</span> <span class="n">Physics</span><span class="p">.</span><span class="nf">CheckSphere</span><span class="p">(</span><span class="n">groundCheck</span><span class="p">.</span><span class="n">position</span><span class="p">,</span> <span class="n">groundDistance</span><span class="p">,</span> <span class="n">groundMask</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">isGrounded</span> <span class="p">&amp;&amp;</span> <span class="n">velocity</span><span class="p">.</span><span class="n">y</span> <span class="p">&lt;</span> <span class="m">0</span><span class="p">)</span> <span class="n">velocity</span><span class="p">.</span><span class="n">y</span> <span class="p">=</span> <span class="p">-</span><span class="m">2f</span><span class="p">;</span>
+
+        <span class="kt">float</span> <span class="n">x</span> <span class="p">=</span> <span class="n">Input</span><span class="p">.</span><span class="nf">GetAxis</span><span class="p">(</span><span class="s">"Horizontal"</span><span class="p">);</span>
+        <span class="kt">float</span> <span class="n">z</span> <span class="p">=</span> <span class="n">Input</span><span class="p">.</span><span class="nf">GetAxis</span><span class="p">(</span><span class="s">"Vertical"</span><span class="p">);</span>
+
+        <span class="n">Vector3</span> <span class="n">move</span> <span class="p">=</span> <span class="n">transform</span><span class="p">.</span><span class="n">right</span> <span class="p">*</span> <span class="n">x</span> <span class="p">+</span> <span class="n">transform</span><span class="p">.</span><span class="n">forward</span> <span class="p">*</span> <span class="n">z</span><span class="p">;</span>
+
+        <span class="n">controller</span><span class="p">.</span><span class="nf">Move</span><span class="p">(</span><span class="n">move</span> <span class="p">*</span> <span class="n">speed</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="nf">GetButtonDown</span><span class="p">(</span><span class="s">"Jump"</span><span class="p">)</span> <span class="p">&amp;&amp;</span> <span class="n">isGrounded</span><span class="p">)</span>
+            <span class="n">velocity</span><span class="p">.</span><span class="n">y</span> <span class="p">=</span> <span class="n">Mathf</span><span class="p">.</span><span class="nf">Sqrt</span><span class="p">(</span><span class="n">jumpHeight</span> <span class="p">*</span> <span class="p">-</span><span class="m">2f</span> <span class="p">*</span> <span class="n">gravity</span><span class="p">);</span>
+        
+        <span class="n">velocity</span><span class="p">.</span><span class="n">y</span> <span class="p">+=</span> <span class="n">gravity</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span><span class="p">;</span>
+        <span class="n">controller</span><span class="p">.</span><span class="nf">Move</span><span class="p">(</span><span class="n">velocity</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h3 id="chractercontroller-vs-rigidbody">ChracterController vs Rigidbody</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>特性</th>
+      <th>CharacterController</th>
+      <th>Rigidbody</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>物理碰撞响应</td>
+      <td>自动响应</td>
+      <td>更精确</td>
+    </tr>
+    <tr>
+      <td>控制移动方式</td>
+      <td>手动调用 Move</td>
+      <td>通过力或 velocity</td>
+    </tr>
+    <tr>
+      <td>支持旋转</td>
+      <td>需要手动转动 transform</td>
+      <td>支持</td>
+    </tr>
+    <tr>
+      <td>上坡台阶检测</td>
+      <td>自动处理</td>
+      <td>需要额外实现</td>
+    </tr>
+    <tr>
+      <td>重力</td>
+      <td>需手动实现</td>
+      <td>内建</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="api">API</h3>
+
+<p><a href="https://docs.unity3d.com/ScriptReference/CharacterController.html">UnityScripting CharacterController</a></p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Component" /><category term="Physics System" /><summary type="html"><![CDATA[Character Controller是专为角色移动设计的物理组件，适合用于第一人称、第三人称角色控制，尤其适合需要“脚贴地”“走坡不滑”的场景 它和Rigidbody不同，不依赖物理引擎施加力，而是手动控制角色移动的逻辑，更稳定、精准、游戏性更强]]></summary></entry><entry><title type="html">Shader</title><link href="http://localhost:4000/posts/2025-07-02-Shader/" rel="alternate" type="text/html" title="Shader" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Shader</id><content type="html" xml:base="http://localhost:4000/posts/2025-07-02-Shader/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Render" /><category term="Graphics" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Particle System</title><link href="http://localhost:4000/posts/2025-07-02-Particle-System/" rel="alternate" type="text/html" title="Particle System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Particle-System</id><content type="html" xml:base="http://localhost:4000/posts/2025-07-02-Particle-System/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Render" /><category term="Graphics" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Engineering Mathematics</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Engineering-Mathematics.html" rel="alternate" type="text/html" title="Engineering Mathematics" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Engineering-Mathematics</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Engineering-Mathematics.html"><![CDATA[<p>图形开发中的常用数学</p>
+
+<h2 id="向量">向量</h2>
+
+<h2 id="三角函数">三角函数</h2>
+
+<h2 id="线性代数">线性代数</h2>
+<h3 id="向量空间">向量空间</h3>
+<h3 id="矩阵乘法">矩阵乘法</h3>
+<h3 id="变换矩阵">变换矩阵</h3>
+<h3 id="正交">正交</h3>
+<h3 id="特征向量">特征向量</h3>
+<h3 id="线性变换本质">线性变换本质</h3>
+
+<h2 id="齐次坐标">齐次坐标</h2>
+<h3 id="44矩阵">4×4矩阵</h3>
+<h3 id="w分量">w分量</h3>
+<h3 id="透视投影">透视投影</h3>
+
+<h2 id="空间几何">空间几何</h2>
+<h3 id="点线面关系">点线面关系</h3>
+<h3 id="空间夹角">空间夹角</h3>
+<h3 id="包围盒">包围盒</h3>
+<h3 id="相交检测">相交检测</h3>
+
+<h2 id="物理数学">物理数学</h2>
+<h3 id="速度">速度</h3>
+<h3 id="加速度">加速度</h3>
+<h3 id="抛物线公式">抛物线公式</h3>
+
+<h2 id="曲线曲面">曲线曲面</h2>
+<h3 id="bézier">Bézier</h3>
+<h3 id="catmull-rom">Catmull-Rom</h3>
+<h3 id="样条曲线">样条曲线</h3>
+
+<h2 id="概率统计">概率统计</h2>
+<h3 id="概率分布">概率分布</h3>
+<h3 id="采样">采样</h3>
+<h3 id="蒙特卡洛">蒙特卡洛</h3>
+
+<h2 id="微积分">微积分</h2>
+<h3 id="导数">导数</h3>
+<h3 id="函数斜率">函数斜率</h3>
+<h3 id="积分思想">积分思想</h3>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Graphics" /><category term="Mathematics" /><summary type="html"><![CDATA[图形开发中的常用数学]]></summary></entry><entry><title type="html">UI Event System</title><link href="http://localhost:4000/posts/2025-06-29-UI-Event-System/" rel="alternate" type="text/html" title="UI Event System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/UI-Event-System</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-29-UI-Event-System/"><![CDATA[<p><code class="language-plaintext highlighter-rouge">Event System</code>是Unity UI System中的核心交互管理器，掌控了所有鼠标点击、键盘输入、触摸事件、UI导航的逻辑</p>
 
 <p>Unity的Event System是一个处理用户输入事件的系统，用于发送“点击了谁”“选中了谁”之类的事件，属于UnityEngine.EventSystems命名空间</p>
 
@@ -725,7 +667,253 @@ Unity默认生成<br />
   <li>同一帧中多个<code class="language-plaintext highlighter-rouge">SetSelectedGameObject</code>造成焦点混乱</li>
   <li>Navigation设置为None/Automatic导致意外行为</li>
   <li>多个可交互对象重叠或遮挡，Unity自动导航判定错误</li>
-</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Component" /><category term="UGUI" /><summary type="html"><![CDATA[Event System是Unity UI System中的核心交互管理器，掌控了所有鼠标点击、键盘输入、触摸事件、UI导航的逻辑]]></summary></entry><entry><title type="html">Texture</title><link href="http://localhost:4000/posts/2025-06-29-Texture/" rel="alternate" type="text/html" title="Texture" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Texture</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-29-Texture/"><![CDATA[<p><code class="language-plaintext highlighter-rouge">Texture</code>是图形学开发中的一个核心概念，用于在3D模型、UI、地形等物体表面显示图像或图案<br />
+</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Component" /><category term="UGUI" /><summary type="html"><![CDATA[Event System是Unity UI System中的核心交互管理器，掌控了所有鼠标点击、键盘输入、触摸事件、UI导航的逻辑]]></summary></entry><entry><title type="html">Unity Projects Examples</title><link href="http://localhost:4000/posts/2025-06-29-Unity-Projects-Examples/" rel="alternate" type="text/html" title="Unity Projects Examples" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Unity-Projects-Examples</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-29-Unity-Projects-Examples/"><![CDATA[<p>项目管理</p>
+
+<h2 id="quick-list">Quick List</h2>
+
+<blockquote>
+  <p>状态说明：</p>
+  <ul>
+    <li><code class="language-plaintext highlighter-rouge">Planning</code>：规划中，生成需求和说明文档</li>
+    <li><code class="language-plaintext highlighter-rouge">TODO</code>：已立项，未开始</li>
+    <li><code class="language-plaintext highlighter-rouge">In Progress</code>：开发中</li>
+    <li><code class="language-plaintext highlighter-rouge">Code Review</code>：审查</li>
+    <li><code class="language-plaintext highlighter-rouge">Testing</code>：测试</li>
+    <li><code class="language-plaintext highlighter-rouge">Bugfixing</code>：缺陷修复</li>
+    <li><code class="language-plaintext highlighter-rouge">Paused</code>：暂停</li>
+    <li><code class="language-plaintext highlighter-rouge">Cancelled</code>：已取消</li>
+    <li><code class="language-plaintext highlighter-rouge">Archived</code> : 已归档</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <p>标签说明：</p>
+  <ul>
+    <li><code class="language-plaintext highlighter-rouge">Unity GamePlay</code>：Unity游戏逻辑实现</li>
+    <li><code class="language-plaintext highlighter-rouge">Unity Graph</code>：Unity图形学实现</li>
+    <li><code class="language-plaintext highlighter-rouge">Primary</code>：初级</li>
+    <li><code class="language-plaintext highlighter-rouge">Intermediate</code>：中级</li>
+    <li><code class="language-plaintext highlighter-rouge">Advanced</code>：进阶</li>
+    <li><code class="language-plaintext highlighter-rouge">High Rank</code>：高级</li>
+  </ul>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th>项目</th>
+      <th>简介</th>
+      <th>要点</th>
+      <th>标签</th>
+      <th>状态</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>滚动球 Ball Roll</td>
+      <td>WASD控制球滚动，捡起金币</td>
+      <td>物理系统、Rigidbody、输入系统</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Primary</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>打砖块 Breakout</td>
+      <td>实现经典打砖块玩法</td>
+      <td>2D物理、碰撞、射线检测、UI</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Primary</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>Flappy Bird</td>
+      <td>鸟穿越管道、简单随机化</td>
+      <td>2D动画、Trigger触发、对象池</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Primary</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>计时小游戏</td>
+      <td>倒计时 + 得分显示</td>
+      <td>UI、Text、Button、Timer</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Primary</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>第一人称走路模拟</td>
+      <td>基础FPS移动逻辑</td>
+      <td>CharacterController、摄像机控制</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Primary</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>任务系统</td>
+      <td>任务分类、接受/完成任务、进度追踪</td>
+      <td>数据来源、存档机制、事件系统、任务链</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>成就系统</td>
+      <td>完成特定条件自动解锁成就</td>
+      <td>模块化架构、事件驱动、进度追踪、数据持久化</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>技能系统</td>
+      <td>统一管理技能相关功能</td>
+      <td>静态数据 + 运行时状态、冷却&amp;消耗管理、逻辑流</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>状态机系统</td>
+      <td>管理对象在不同状态间切换和行为控制</td>
+      <td>多角色状态、AI状态、战斗状态解耦</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>道具拾取 + 背包系统</td>
+      <td>游戏内拾取，物品存储和管理</td>
+      <td>拖拽、叠加、存储、装备栏</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>Save/Load存档系统</td>
+      <td>持久化保存游戏的关键数据</td>
+      <td>本地JSON/二进制保存、读取场景状态</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>抽卡、开箱、开包类</td>
+      <td>随机概率 + 权重算法、奖池管理、玩家消耗</td>
+      <td>奖池设计和概率控制、抽取逻辑、消耗与次数管理</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>Rouge-like</td>
+      <td>强调随机生成地图、资源和事件，Permadeath</td>
+      <td>程序生成地图、道具系统</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>节奏点击游戏</td>
+      <td>根据音乐节奏，在指定时间点点击、滑动或长按</td>
+      <td>节奏匹配、音频事件绑定</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">System</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>平台跳跃 Platformer</td>
+      <td>可拓展成高级动作系统</td>
+      <td>动画、状态机、跳跃逻辑、碰撞检测</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>塔防游戏 Tower Defense</td>
+      <td>使用导航网格或自定义路径系统</td>
+      <td>路径系统、对象池、攻击逻辑</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>基础RPG Demo</td>
+      <td>包含拾取、装备、攻击等</td>
+      <td>Inventory、UI、任务系统、简单AI</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>TopDown射击</td>
+      <td>包括Boss逻辑、多种敌人</td>
+      <td>射线检测、特效、敌人AI</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>Unity UI交互系统</td>
+      <td>侧重交互与UI动效</td>
+      <td>UnityEvent、Button、EventSystem</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Intermediate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>第三人称动作游戏</td>
+      <td>可使用Animation Rigging提升表现</td>
+      <td>Blend Tree、Root Motion、攻击系统、受击反馈</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Advanced</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>回合制战斗系统（战棋）</td>
+      <td>逻辑结构较为复杂</td>
+      <td>网格管理、战斗管理器、状态系统</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Advanced</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>简易MMO Demo</td>
+      <td>适合入门多人联机项目</td>
+      <td>多人同步、角色同步、基本聊天系统、房间机制</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Advanced</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>城市模拟/建设类游戏</td>
+      <td>游戏逻辑和状态同步挑战大</td>
+      <td>地图系统、建筑放置、数据持久化</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">Advanced</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>虚拟摄像机系统</td>
+      <td>更适合图形学表现和演示项目</td>
+      <td>Cinemachine、Timeline、关键帧控制</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity Graph</code> <code class="language-plaintext highlighter-rouge">Advanced</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>Open World (mini)</td>
+      <td>需考虑资源管理、加载逻辑</td>
+      <td>Streaming、世界管理、AI导航、场景优化</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">High Rank</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>ARPG(DMC-like)</td>
+      <td>动作响应和打击感难度大</td>
+      <td>Combo系统、时间轴管理、动画事件</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">High Rank</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>Shader Collection</td>
+      <td>图形学展示</td>
+      <td>自定义Shader、VFX Graph、Render Feature</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity Graph</code> <code class="language-plaintext highlighter-rouge">High Rank</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>Visual Novel System</td>
+      <td>更偏向结构设计与数据处理</td>
+      <td>数据驱动、UI演出、状态管理</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity GamePlay</code> <code class="language-plaintext highlighter-rouge">High Rank</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+    <tr>
+      <td>SRP</td>
+      <td>高度定制，图形学开发方向</td>
+      <td>图形学、SRP、Render Graph</td>
+      <td><code class="language-plaintext highlighter-rouge">Unity Graph</code> <code class="language-plaintext highlighter-rouge">High Rank</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Planning</code></td>
+    </tr>
+  </tbody>
+</table>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Project" /><summary type="html"><![CDATA[项目管理]]></summary></entry><entry><title type="html">Texture</title><link href="http://localhost:4000/posts/2025-06-29-Texture/" rel="alternate" type="text/html" title="Texture" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Texture</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-29-Texture/"><![CDATA[<p><code class="language-plaintext highlighter-rouge">Texture</code>是图形学开发中的一个核心概念，用于在3D模型、UI、地形等物体表面显示图像或图案<br />
 它不仅包含颜色信息，还可能包含法线、位移、金属度、粗糙度等各种数据，用于实现丰富的视觉效果</p>
 
 <h2 id="基本概念">基本概念</h2>
@@ -898,749 +1086,7 @@ Unity默认生成<br />
   <li>UI尽量使用<code class="language-plaintext highlighter-rouge">Sprite Atlas</code></li>
   <li>使用Mipmap减少远距离采样时的闪烁</li>
   <li>不要在频繁更新的场景中使用<code class="language-plaintext highlighter-rouge">Texture2D.SetPixel</code>，效率低下</li>
-</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Component" /><category term="Render" /><category term="Graphics" /><summary type="html"><![CDATA[Texture是图形学开发中的一个核心概念，用于在3D模型、UI、地形等物体表面显示图像或图案 它不仅包含颜色信息，还可能包含法线、位移、金属度、粗糙度等各种数据，用于实现丰富的视觉效果]]></summary></entry><entry><title type="html">Mask</title><link href="http://localhost:4000/posts/2025-06-29-Mask/" rel="alternate" type="text/html" title="Mask" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Mask</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-29-Mask/"><![CDATA[<p>遮罩，用于实现遮挡效果，控制子物体的显示区域</p>
-
-<p><img src="/assets/images/MaskPanel.jpg" alt="MaskPanel" /></p>
-
-<h2 id="mask">Mask</h2>
-<p><code class="language-plaintext highlighter-rouge">Mask</code>用于裁剪UI子元素的显示区域，通常搭配图片、Scroll View、头像裁剪等使用</p>
-
-<h3 id="核心功能和行为">核心功能和行为</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>特点</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>子物体只在 Mask 图像区域内显示</td>
-      <td>超出部分不可见（不销毁，只裁剪）</td>
-    </tr>
-    <tr>
-      <td>遮罩区域基于 <code class="language-plaintext highlighter-rouge">Image</code> 的透明度</td>
-      <td>非透明部分就是显示区域</td>
-    </tr>
-    <tr>
-      <td>不支持软遮罩（软边缘）</td>
-      <td>默认是硬裁剪，想要软遮罩需用 Shader 或 <code class="language-plaintext highlighter-rouge">UIEffect</code> 等插件</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="使用方法">使用方法</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MaskParent(Image + Mask)
-|___Content(Text / Image /等UI)
-</code></pre></div></div>
-<ul>
-  <li>父物体挂<code class="language-plaintext highlighter-rouge">Image</code> + <code class="language-plaintext highlighter-rouge">Mask</code>，并设置图片为遮罩区域</li>
-  <li>子物体放置UI内容，超出遮罩图形范围会被裁剪</li>
-</ul>
-
-<h3 id="常见用途">常见用途</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>场景</th>
-      <th>使用方式</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>ScrollView 滚动列表</td>
-      <td>Viewport 挂 <code class="language-plaintext highlighter-rouge">Image + Mask</code>，内容只显示在视窗中</td>
-    </tr>
-    <tr>
-      <td>圆形头像裁剪</td>
-      <td>使用圆形 <code class="language-plaintext highlighter-rouge">Image + Mask</code> 裁剪方形头像图片</td>
-    </tr>
-    <tr>
-      <td>进度条遮罩</td>
-      <td>遮罩下滑动另一个图片或文字，实现“擦除”或“揭示”效果</td>
-    </tr>
-    <tr>
-      <td>文字遮挡/选中效果</td>
-      <td>对文字进行遮罩只显示一部分或高亮部分</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="裁剪区域">裁剪区域</h3>
-<p><code class="language-plaintext highlighter-rouge">Mask</code>裁剪的区域由挂载<code class="language-plaintext highlighter-rouge">Mask</code>的GameObject的<code class="language-plaintext highlighter-rouge">Image</code>的Alpha通道决定</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Image 类型</th>
-      <th>Mask 效果</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Sprite (Alpha通道)</td>
-      <td>透明处裁剪，实色处显示</td>
-    </tr>
-    <tr>
-      <td>Sprite (无 Alpha 通道)</td>
-      <td>整张图片为裁剪区域</td>
-    </tr>
-    <tr>
-      <td>没有 Image 组件</td>
-      <td><code class="language-plaintext highlighter-rouge">Mask</code> 不起作用（它依赖 <code class="language-plaintext highlighter-rouge">Image</code>）</td>
-    </tr>
-  </tbody>
-</table>
-
-<blockquote>
-  <p>Image的<code class="language-plaintext highlighter-rouge">Raycast Target</code>设置不影响裁剪，但影响事件响应</p>
-</blockquote>
-
-<h2 id="rect-mask-2d">Rect Mask 2D</h2>
-<p><code class="language-plaintext highlighter-rouge">RectMask2D</code>是Unity UI中专为矩形区域裁剪而设计的遮罩组件，功能和<code class="language-plaintext highlighter-rouge">Mask</code>类似，但更高效、轻量，只适用于矩形裁剪</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>特性</th>
-      <th><code class="language-plaintext highlighter-rouge">RectMask2D</code></th>
-      <th><code class="language-plaintext highlighter-rouge">Mask</code></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>遮罩形状</strong></td>
-      <td>只能是矩形</td>
-      <td>任意形状（基于 alpha 通道）</td>
-    </tr>
-    <tr>
-      <td><strong>性能</strong></td>
-      <td>高效</td>
-      <td>相对较低（使用 Stencil Buffer）</td>
-    </tr>
-    <tr>
-      <td><strong>软遮罩支持</strong></td>
-      <td>不支持</td>
-      <td>也不支持（需 Shader 实现）</td>
-    </tr>
-    <tr>
-      <td><strong>需要 Image 吗</strong></td>
-      <td>不需要</td>
-      <td>必须有 Image（带 alpha）</td>
-    </tr>
-    <tr>
-      <td><strong>ScrollView 默认用谁？</strong></td>
-      <td><code class="language-plaintext highlighter-rouge">RectMask2D</code></td>
-      <td>不是默认组件</td>
-    </tr>
-  </tbody>
-</table>
-
-<ul>
-  <li>Softness：控制边缘模糊程度，让裁剪区域的边缘不再是生硬的“硬切线”，而是具有渐隐的柔和效果，也就是软遮罩</li>
-</ul>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RectMask2D.softness = new Vector2(x, y);
-</code></pre></div></div>
-
-<table>
-  <thead>
-    <tr>
-      <th>分量</th>
-      <th>含义</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">x</code></td>
-      <td>左右边缘的模糊像素距离</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">y</code></td>
-      <td>上下边缘的模糊像素距离</td>
-    </tr>
-  </tbody>
-</table>
-
-<ul>
-  <li>单位是像素数（会随Canvas的Pixel-Per-Unit放大缩小）</li>
-  <li>值越大，模糊过渡越宽</li>
-  <li>值为0时，表现为传统的硬遮罩</li>
-</ul>
-
-<h3 id="结构示例聊天滚动列表">结构示例：聊天滚动列表</h3>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Scroll View
-|——Viewport(RectMask2D)
-      |__Content（垂直布局 + 自动扩展）
-</code></pre></div></div>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">Viewport</code>是可视区域，挂<code class="language-plaintext highlighter-rouge">RectMask2D</code></li>
-  <li>子元素（Content）会被限制在Viewport范围内，超出部分不可见</li>
-</ul>
-
-<h3 id="工作原理">工作原理</h3>
-<ul>
-  <li>裁剪区域 = RectTransform可视区域</li>
-  <li>所有超出这个矩形范围的子元素将不被渲染</li>
-  <li>实现方式基于剪裁矩形，无需stencil buffer，比<code class="language-plaintext highlighter-rouge">Mask</code>性能更高</li>
-  <li>不依赖图片、不使用alpha通道</li>
-</ul>
-
-<h2 id="sprite-mask">Sprite Mask</h2>
-<p><code class="language-plaintext highlighter-rouge">Sprite Mask</code>时Unity中专为2D精灵系统设计的遮罩组件，用来让某些Sprite按遮罩的形状显示或隐藏，相比UI中的传统<code class="language-plaintext highlighter-rouge">Mask</code>和<code class="language-plaintext highlighter-rouge">RectMask2D</code>，它属于2D渲染层级遮罩机制，用于SpriteRenderer渲染对象的裁剪</p>
-
-<p><code class="language-plaintext highlighter-rouge">Sprite Mask</code>是一个形状遮罩，允许受控的Sprite只在遮罩区域内渲染，超出部分将不可见</p>
-
-<p>它通常用于：</p>
-<ul>
-  <li>地图”探索雾“</li>
-  <li>道具高亮显示</li>
-  <li>角色潜行、隐身剪影</li>
-  <li>Sprite动画部分揭示</li>
-  <li>类似”圆形裁剪头像“的2D实现</li>
-</ul>
-
-<h3 id="使用结构示例">使用结构示例</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SpriteMask (Mask 控制区域)
-└── SpriteA (Renderer 被遮罩)
-</code></pre></div></div>
-<p>或者平行结构也可以</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SpriteMask
-SpriteA (设置受 Sprite Mask 控制)
-</code></pre></div></div>
-<h3 id="使用方法-1">使用方法</h3>
-<p>1.添加Sprite Mask</p>
-<ul>
-  <li>添加一个空物体，挂<code class="language-plaintext highlighter-rouge">Sprite Mask</code>组件</li>
-  <li>设置遮罩图形：选择一个带alpha的Sprite（通常是圆形/自定义形状）</li>
-</ul>
-
-<p>2.被遮罩的Sprite设置：<br />
-在<code class="language-plaintext highlighter-rouge">Sprite Renderer</code>上：</p>
-<ul>
-  <li>Mask Interaction设置为：
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">None</code>：不受任何遮罩影响</li>
-      <li><code class="language-plaintext highlighter-rouge">Visible Inside Mask</code>：仅在遮罩区域内可见</li>
-      <li><code class="language-plaintext highlighter-rouge">Visible Outside Mask</code>：仅在遮罩区域外可见</li>
-    </ul>
-  </li>
-</ul>
-
-<table>
-  <thead>
-    <tr>
-      <th>参数</th>
-      <th>含义</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Sprite</strong></td>
-      <td>遮罩形状，使用 Sprite 的 alpha 通道</td>
-    </tr>
-    <tr>
-      <td><strong>Alpha Cutoff</strong></td>
-      <td>判定透明与非透明的阈值</td>
-    </tr>
-    <tr>
-      <td><strong>Custom Range</strong></td>
-      <td>设置可见层范围（Sorting Layer 和 Order）</td>
-    </tr>
-    <tr>
-      <td><strong>Sprite Sort Point</strong></td>
-      <td>以哪个点作为Sprite的排序基准点</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="示例">示例</h3>
-<h4 id="地图探索雾系统">地图探索雾系统</h4>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>地图遮罩 (SpriteMask：黑色圆形)
-角色头顶 (Sprite：Visible Inside Mask)
-→ 角色周围区域可见，其余为黑
-</code></pre></div></div>
-
-<h4 id="裁剪头像">裁剪头像</h4>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>头像边框 (圆形 SpriteMask)
-头像图片 (SpriteRenderer：Visible Inside Mask)
-</code></pre></div></div>
-
-<h4 id="潜行效果">潜行效果</h4>
-<p>遮罩外隐藏角色：</p>
-<ul>
-  <li>SpriteRenderer设置为<code class="language-plaintext highlighter-rouge">Visible Inside Mask</code></li>
-  <li>动画移动<code class="language-plaintext highlighter-rouge">SpriteMask</code>即可动态揭示角色</li>
-</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Component" /><category term="Render" /><category term="Graphics" /><category term="UGUI" /><summary type="html"><![CDATA[遮罩，用于实现遮挡效果，控制子物体的显示区域]]></summary></entry><entry><title type="html">Skybox</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Skybox.html" rel="alternate" type="text/html" title="Skybox" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Skybox</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Skybox.html"><![CDATA[<p>Skybox是一种渲染技术，用于在3D场景中创建远景背景，例如天空、宇宙、城市天际线等<br />
-它本质上是一种把纹理图贴在一个立方体（或球体）内侧的技巧，玩家看不到边界，只能看到包裹在四周的“天空”</p>
-
-<h2 id="skybox的类型">Skybox的类型</h2>
-
-<p>Unity中支持几种常见类型的Skybox材质（Shader）：</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Shader 类型</th>
-      <th>描述</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>6 Sided</strong></td>
-      <td>使用六张图片分别贴在立方体六个面上（一般来自 HDRI 贴图拆分）</td>
-    </tr>
-    <tr>
-      <td><strong>Cubemap</strong></td>
-      <td>使用一个立方体贴图（.cubemap）进行渲染</td>
-    </tr>
-    <tr>
-      <td><strong>Procedural</strong></td>
-      <td>程序化天空（可设置太阳、云层、颜色渐变）</td>
-    </tr>
-    <tr>
-      <td><strong>HDRI Skybox (PBR)</strong></td>
-      <td>用于高清真实感环境的 HDR 渲染，常用于 Unity HDRP</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="设置skybox的方法">设置Skybox的方法</h2>
-<h3 id="1通过lighting设置全局skybox">1.通过Lighting设置全局Skybox</h3>
-<p>1.创建一个Skybox材质：</p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">Assets</code>-&gt;右键-&gt;<code class="language-plaintext highlighter-rouge">Create &gt; Material</code></li>
-  <li>Shader选择为<code class="language-plaintext highlighter-rouge">Skybox/6 Sided</code>或<code class="language-plaintext highlighter-rouge">Skybox/Cubemap</code>或<code class="language-plaintext highlighter-rouge">Skybox/Procedural</code></li>
-</ul>
-
-<p>2.在材质中设置贴图（textures）或参数</p>
-
-<p>3.打开<code class="language-plaintext highlighter-rouge">Window &gt; Rendering &gt; Lighting</code>面板</p>
-
-<p>4.在<code class="language-plaintext highlighter-rouge">Environment &gt; Skybox Material</code>中拖入刚刚的材质</p>
-
-<p>这会将该Skybox应用于整个场景</p>
-
-<h3 id="2通过摄像机设置局部skybox高级">2.通过摄像机设置局部Skybox（高级）</h3>
-<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">RenderSettings</span><span class="p">.</span><span class="n">skybox</span> <span class="p">=</span> <span class="n">mySkyboxMaterial</span><span class="p">;</span>
-</code></pre></div></div>
-<p>或为相机设置<code class="language-plaintext highlighter-rouge">Skybox</code>组件并赋值</p>
-
-<h3 id="skybox与lighting的关系">Skybox与Lighting的关系</h3>
-<p>Skybox不只是视觉上的背景，它还影响了：</p>
-<ul>
-  <li>Ambient Lighting（环境光）</li>
-  <li>Reflection Probe（反射探针）</li>
-  <li>全局光照（GI）计算</li>
-</ul>
-
-<p>所以换Skybox后记得：</p>
-<ul>
-  <li>在Lighting界面点击“Generate Lighting”</li>
-  <li>使用Reflection Probe重新采样环境反射</li>
-</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Component" /><category term="Light" /><category term="Render" /><category term="Graphics" /><summary type="html"><![CDATA[Skybox是一种渲染技术，用于在3D场景中创建远景背景，例如天空、宇宙、城市天际线等 它本质上是一种把纹理图贴在一个立方体（或球体）内侧的技巧，玩家看不到边界，只能看到包裹在四周的“天空”]]></summary></entry><entry><title type="html">Unity Invisible Trap</title><link href="http://localhost:4000/debug/2025/06/01/Unity-Invisible-Trap.html" rel="alternate" type="text/html" title="Unity Invisible Trap" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/debug/2025/06/01/Unity-Invisible-Trap</id><content type="html" xml:base="http://localhost:4000/debug/2025/06/01/Unity-Invisible-Trap.html"><![CDATA[<p>Unity实际开发中，有很多“看起来正常、实则容易出错”的<strong>奇怪问题</strong>（或称为<strong>隐形陷阱</strong>）</p>
-
-<h1 id="quick-list">Quick List</h1>
-<h2 id="class1-交互相关">Class1 交互相关</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>现象</th>
-      <th>原因</th>
-      <th>解决方式</th>
-      <th>标签</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="#1多个可交互物体输入触发多个">按下交互键时多个箱子同时打开</a></td>
-      <td>范围内存在多个交互体，未判断距离</td>
-      <td>使用 <code class="language-plaintext highlighter-rouge">OverlapSphere</code> + 计算最近距离</td>
-      <td>输入、交互</td>
-    </tr>
-    <tr>
-      <td>鼠标点击物体无反应</td>
-      <td>被 UI 或透明物体挡住，Raycast 被拦截</td>
-      <td>检查 UI 的 Raycast Target 设置</td>
-      <td>输入、射线</td>
-    </tr>
-    <tr>
-      <td>射线打不中目标</td>
-      <td>射线层级错误或未设置 LayerMask</td>
-      <td>使用正确 Layer 和 LayerMask</td>
-      <td>输入、射线</td>
-    </tr>
-    <tr>
-      <td>玩家进入 Trigger 区域被触发两次</td>
-      <td>存在多个 Collider 重叠，重复触发</td>
-      <td>判断 <code class="language-plaintext highlighter-rouge">other.gameObject</code> 是否重复</td>
-      <td>触发器、碰撞</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="class2-动画控制">Class2 动画控制</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>现象</th>
-      <th>原因</th>
-      <th>解决方式</th>
-      <th>标签</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">SetTrigger</code> 后动画无反应</td>
-      <td>没有关闭 <code class="language-plaintext highlighter-rouge">Has Exit Time</code> 或过渡设置错误</td>
-      <td>调整 Animator Transition 设置</td>
-      <td>动画、状态机</td>
-    </tr>
-    <tr>
-      <td>动画状态切换卡顿</td>
-      <td>切换时未等待上一状态结束</td>
-      <td>使用 CrossFade，设置合理 transition duration</td>
-      <td>动画</td>
-    </tr>
-    <tr>
-      <td>动画参数更新后立即调用 <code class="language-plaintext highlighter-rouge">Play</code> 无效</td>
-      <td>Animator 状态未刷新</td>
-      <td>等待一帧或避免立即 <code class="language-plaintext highlighter-rouge">Play</code></td>
-      <td>动画、代码时序</td>
-    </tr>
-    <tr>
-      <td>动画过渡后恢复原始状态</td>
-      <td>未使用 <code class="language-plaintext highlighter-rouge">Animator.ResetTrigger</code></td>
-      <td>设置状态触发后重置 Trigger</td>
-      <td>动画、状态机</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="class3-ui系统">Class3 UI系统</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>现象</th>
-      <th>原因</th>
-      <th>解决方式</th>
-      <th>标签</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>UI 按钮点击无效</td>
-      <td>被其他透明 UI 挡住</td>
-      <td>检查 Canvas 层级，关闭遮挡物的 Raycast Target</td>
-      <td>UI、输入</td>
-    </tr>
-    <tr>
-      <td>Text 性能差、频繁 GC</td>
-      <td>使用 <code class="language-plaintext highlighter-rouge">Text</code> 频繁更新</td>
-      <td>使用 <code class="language-plaintext highlighter-rouge">TextMeshPro</code> + 对象池</td>
-      <td>UI、性能</td>
-    </tr>
-    <tr>
-      <td>UI 点击穿透到底部物体</td>
-      <td>未正确使用 <code class="language-plaintext highlighter-rouge">CanvasGroup.blocksRaycasts</code></td>
-      <td>设置为 false 阻止穿透</td>
-      <td>UI、射线</td>
-    </tr>
-    <tr>
-      <td>ScrollView 滚动方向错乱</td>
-      <td>锚点、Pivot 设置错误</td>
-      <td>调整 Content 和 Viewport 的锚点</td>
-      <td>UI、布局</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="class4-物理系统">Class4 物理系统</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>现象</th>
-      <th>原因</th>
-      <th>解决方式</th>
-      <th>标签</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>移动物体穿过墙体</td>
-      <td>使用了 <code class="language-plaintext highlighter-rouge">transform.position</code> 移动刚体</td>
-      <td>改用 <code class="language-plaintext highlighter-rouge">Rigidbody.MovePosition()</code></td>
-      <td>物理、穿透</td>
-    </tr>
-    <tr>
-      <td>刚体滑动不自然</td>
-      <td>没有设置 Drag、Mass 等属性</td>
-      <td>设置合理的阻力与摩擦系数</td>
-      <td>物理</td>
-    </tr>
-    <tr>
-      <td>触发器触发失效</td>
-      <td>Collider 未勾选 isTrigger，或 Rigidbody 缺失</td>
-      <td>确保至少一方含 Rigidbody 且 Collider 是触发器</td>
-      <td>物理、触发器</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="class5-资源加载与管理">Class5 资源加载与管理</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>现象</th>
-      <th>原因</th>
-      <th>解决方式</th>
-      <th>标签</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Resources.Load 的资源未释放</td>
-      <td>Destroy 了物体但资源仍驻留内存</td>
-      <td>调用 <code class="language-plaintext highlighter-rouge">Resources.UnloadUnusedAssets()</code></td>
-      <td>内存、加载</td>
-    </tr>
-    <tr>
-      <td>Addressables 资源释放失败</td>
-      <td>未调用 <code class="language-plaintext highlighter-rouge">Release()</code></td>
-      <td>每次加载后使用 <code class="language-plaintext highlighter-rouge">Addressables.Release(handle)</code></td>
-      <td>Addressables</td>
-    </tr>
-    <tr>
-      <td>AudioClip 提前中断</td>
-      <td>多个 AudioSource 播放相同 Clip 被覆盖</td>
-      <td>用 <code class="language-plaintext highlighter-rouge">PlayOneShot</code> 或动态创建 AudioSource</td>
-      <td>音频、资源</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="class6-生命周期与协程">Class6 生命周期与协程</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>现象</th>
-      <th>原因</th>
-      <th>解决方式</th>
-      <th>标签</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">WaitForSeconds()</code> 在暂停时不起作用</td>
-      <td>依赖 <code class="language-plaintext highlighter-rouge">Time.timeScale</code>，暂停后为 0</td>
-      <td>使用 <code class="language-plaintext highlighter-rouge">WaitForSecondsRealtime()</code></td>
-      <td>协程、暂停</td>
-    </tr>
-    <tr>
-      <td>Update 在隐藏物体时仍执行</td>
-      <td>脚本和 GameObject 仍处于 enabled 状态</td>
-      <td>手动控制 <code class="language-plaintext highlighter-rouge">enabled = false</code></td>
-      <td>生命周期</td>
-    </tr>
-    <tr>
-      <td>OnDisable 未被调用</td>
-      <td>GameObject 被销毁不是禁用</td>
-      <td>区分 <code class="language-plaintext highlighter-rouge">Destroy</code> 与 <code class="language-plaintext highlighter-rouge">SetActive(false)</code></td>
-      <td>生命周期、事件</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="class7-性能优化相关">Class7 性能优化相关</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>现象</th>
-      <th>原因</th>
-      <th>解决方式</th>
-      <th>标签</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>场景切换时卡顿</td>
-      <td>同步加载资源或过多 Awake 初始化</td>
-      <td>用 <code class="language-plaintext highlighter-rouge">LoadSceneAsync</code>，资源异步预加载</td>
-      <td>性能、加载</td>
-    </tr>
-    <tr>
-      <td>Update() 性能开销大</td>
-      <td>多个脚本使用 Update，逻辑分散</td>
-      <td>使用事件驱动 + 管理器合并 Update</td>
-      <td>性能、架构</td>
-    </tr>
-    <tr>
-      <td>GC Alloc 频繁</td>
-      <td>每帧创建新对象（如字符串、new Vector3）</td>
-      <td>复用变量、使用对象池</td>
-      <td>性能、GC</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="class8-编译器-vs-构建行为差异">Class8 编译器 vs 构建行为差异</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>现象</th>
-      <th>原因</th>
-      <th>解决方式</th>
-      <th>标签</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>编辑器正常，打包后报错</td>
-      <td>使用了 <code class="language-plaintext highlighter-rouge">UnityEditor</code> API</td>
-      <td>用 <code class="language-plaintext highlighter-rouge">#if UNITY_EDITOR</code> 包裹</td>
-      <td>构建、平台差异</td>
-    </tr>
-    <tr>
-      <td>场景中未勾选物体在运行时出现</td>
-      <td>被代码运行时 Instantiate</td>
-      <td>确认代码逻辑未动态生成</td>
-      <td>构建、场景管理</td>
-    </tr>
-    <tr>
-      <td>路径访问失败</td>
-      <td>各平台 <code class="language-plaintext highlighter-rouge">persistentDataPath</code> 不一致</td>
-      <td>使用平台判断封装路径</td>
-      <td>IO、平台兼容</td>
-    </tr>
-  </tbody>
-</table>
-
-<h1 id="class1-交互相关-1">Class1 交互相关</h1>
-<h2 id="1多个可交互物体输入触发多个">1.多个可交互物体，输入触发多个</h2>
-<ul>
-  <li>场景：靠近多个箱子同时按下<code class="language-plaintext highlighter-rouge">E</code>，多个箱子一起打开</li>
-  <li>原因：所有物体监听<code class="language-plaintext highlighter-rouge">E</code>，没有加距离或唯一判定</li>
-  <li>解决方案：只响应最近/朝向前方的一个对象</li>
-</ul>
-
-<h2 id="2trigger触发多次enterexit">2.Trigger触发多次Enter/Exit</h2>
-<ul>
-  <li>场景：一个对象靠近某个Trigger区域，<code class="language-plaintext highlighter-rouge">OnTriggerEnter</code>被触发两次</li>
-  <li>原因：
-    <ul>
-      <li>可能身上挂有多个Collider</li>
-      <li>或包含子物体的Collider也触发了</li>
-    </ul>
-  </li>
-  <li>解决方案：确认是否是重复触发，加入<code class="language-plaintext highlighter-rouge">other.gameObject == expectedObject</code>判断</li>
-</ul>
-
-<h2 id="3button-ui点击两次才响应">3.Button UI点击两次才响应</h2>
-<ul>
-  <li>原因：
-    <ul>
-      <li>UI按钮背后有透明/未关闭的UI元素挡住射线</li>
-      <li>或者EventSystem被禁用、Canvas未设置正确Sorting Order</li>
-    </ul>
-  </li>
-  <li>解决方案：调试Graphic Raycaster、Canvas排序、Raycast Target勾选项</li>
-</ul>
-
-<h1 id="class2-物理系统相关">Class2 物理系统相关</h1>
-<h2 id="1rigidbody设置position导致穿透">1.Rigidbody设置position导致穿透</h2>
-<ul>
-  <li>使用<code class="language-plaintext highlighter-rouge">transform.position = ...</code>设置刚体位置，会跳过物理引擎检测，导致穿墙</li>
-  <li>正确做法：使用<code class="language-plaintext highlighter-rouge">Rigidbody.MovePosition()</code></li>
-</ul>
-
-<h2 id="2collider和rigidbody的组合错误">2.Collider和Rigidbody的组合错误</h2>
-<ul>
-  <li>常见错误组合
-    <ul>
-      <li>静态物体（如地面）用了非Kinematic的Rigidbody</li>
-      <li>移动物体没加Rigidbody，靠transform移动导致物理行为异常</li>
-    </ul>
-  </li>
-  <li>Unity的推荐：
-    <ul>
-      <li>静态物体（地面）用Collider，无Rigidbody</li>
-      <li>动态物体加Rigidbody，控制用物理接口</li>
-    </ul>
-  </li>
-</ul>
-
-<h1 id="class3-生命周期相关">Class3 生命周期相关</h1>
-<h2 id="1协程中的waitforseconds在timescale为0时失效">1.协程中的<code class="language-plaintext highlighter-rouge">WaitForSeconds</code>在TimeScale为0时失效</h2>
-<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">StartCoroutine</span><span class="p">(</span><span class="nf">Example</span><span class="p">());</span>
-
-<span class="n">IEnumerator</span> <span class="nf">Example</span><span class="p">()</span>
-<span class="p">{</span>
-  <span class="k">yield</span> <span class="k">return</span> <span class="k">new</span> <span class="nf">WaitForSeconds</span><span class="p">(</span><span class="m">2f</span><span class="p">);</span> <span class="c1">// 如果Time.timeScale == 0，不会等待</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<ul>
-  <li>解决方案：用`WaitForSecondRealtime(2f);</li>
-</ul>
-
-<h2 id="2脚本的update仍被调用虽然物体不可见">2.脚本的<code class="language-plaintext highlighter-rouge">Update()</code>仍被调用，虽然物体不可见</h2>
-<ul>
-  <li>即使物体在摄像机外、隐藏或inactive子物体，只要GameObject时active的、脚本时enable的，Update就会继续执行</li>
-</ul>
-
-<h1 id="class4-动画系统相关">Class4 动画系统相关</h1>
-<h2 id="1animator动画不能立即切换">1.Animator动画不能立即切换</h2>
-<ul>
-  <li>使用<code class="language-plaintext highlighter-rouge">SetTrigger</code>后动画没反应，原因是当前状态没有达到可以跳转的条件或冷却没完成</li>
-  <li>解决方案：Animator控制器中正确配置Transition，并关闭<code class="language-plaintext highlighter-rouge">Has Exit Time</code>（除非需要完整播放）</li>
-</ul>
-
-<h2 id="2animator状态机切换卡顿或不触发">2.Animator状态机切换卡顿或不触发</h2>
-<ul>
-  <li>在代码里调用了：
-    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">animator</span><span class="p">.</span><span class="nf">SetBool</span><span class="p">(</span><span class="s">"isOpen"</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
-<span class="n">animator</span><span class="p">.</span><span class="nf">Play</span><span class="p">(</span><span class="s">"Open"</span><span class="p">);</span>
-</code></pre></div>    </div>
-  </li>
-  <li>原因：设置参数后马上<code class="language-plaintext highlighter-rouge">Play</code>，但Unity还没更新Animator的状态，应延迟一帧或合并状态逻辑</li>
-</ul>
-
-<h1 id="class5-资源加载与内存相关">Class5 资源加载与内存相关</h1>
-<h2 id="1addressables或resourcesload的资源加载了但没释放">1.Addressables或Resources.Load的资源加载了但没释放</h2>
-<ul>
-  <li>开发中用完资源后<code class="language-plaintext highlighter-rouge">Destroy(obj)</code>了，却发现内存依然飙高</li>
-  <li>原因：Unity对部分资源（如Texture、Mesh）会做缓存，要手动调用<code class="language-plaintext highlighter-rouge">Resources.UnloadUnusedAssets()</code>或<code class="language-plaintext highlighter-rouge">Addressables.Release(handle)</code></li>
-</ul>
-
-<h2 id="2audioclip播放一半没声音或提前中断">2.AudioClip播放一半没声音或提前中断</h2>
-<ul>
-  <li>多个<code class="language-plaintext highlighter-rouge">AudioSource</code>播放相同Clip时，其中一个会抢断另一个</li>
-  <li>使用<code class="language-plaintext highlighter-rouge">PlayOneShot()</code>或实例化新的AudioSource</li>
-</ul>
-
-<h1 id="class6-编译器运行与构建差异">Class6 编译器运行与构建差异</h1>
-<h2 id="1在editor模式下一切正常打包后就崩溃">1.在Editor模式下一切正常，打包后就崩溃</h2>
-<ul>
-  <li>原因：用了<code class="language-plaintext highlighter-rouge">AssetDatabase</code>、<code class="language-plaintext highlighter-rouge">EditorUtility</code>、<code class="language-plaintext highlighter-rouge">UnityEditor</code>命名空间代码</li>
-  <li>加<code class="language-plaintext highlighter-rouge">#if UNITY_EDITOR</code>包裹相关逻辑</li>
-</ul>
-
-<h2 id="2场景中物体没勾选但运行中出现了">2.场景中物体没勾选但运行中出现了</h2>
-<ul>
-  <li>某些Prefab被脚本<code class="language-plaintext highlighter-rouge">Instantiate()</code>出来了，但在场景中没看到</li>
-  <li>检查脚本逻辑力是否有运行时代码加载或启动对象</li>
-</ul>]]></content><author><name>ljf12825</name></author><category term="Debug" /><category term="Unity" /><category term="Debug Log" /><summary type="html"><![CDATA[Unity实际开发中，有很多“看起来正常、实则容易出错”的奇怪问题（或称为隐形陷阱）]]></summary></entry><entry><title type="html">Behaviour Tree</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Behaviour-Tree.html" rel="alternate" type="text/html" title="Behaviour Tree" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Behaviour-Tree</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Behaviour-Tree.html"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><category term="AI" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Import Assets</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets.html" rel="alternate" type="text/html" title="Import Assets" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets.html"><![CDATA[<p>Unity支持多种格式的资源文件，并能自动识别并进行初步处理</p>
+</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Component" /><category term="Render" /><category term="Graphics" /><summary type="html"><![CDATA[Texture是图形学开发中的一个核心概念，用于在3D模型、UI、地形等物体表面显示图像或图案 它不仅包含颜色信息，还可能包含法线、位移、金属度、粗糙度等各种数据，用于实现丰富的视觉效果]]></summary></entry><entry><title type="html">Import Assets</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets.html" rel="alternate" type="text/html" title="Import Assets" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets.html"><![CDATA[<p>Unity支持多种格式的资源文件，并能自动识别并进行初步处理</p>
 
 <h2 id="资源导入基本流程">资源导入基本流程</h2>
 <p><strong>1.将资源文件拖入<code class="language-plaintext highlighter-rouge">Assets</code>目录中（Unity会自动导入）</strong><br />

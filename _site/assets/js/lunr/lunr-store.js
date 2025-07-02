@@ -329,6 +329,30 @@ var store = [{
         "url": "/posts/2025-06-29-Unity-Projects-Examples/",
         "teaser": null
       },{
+        "title": "Engineering Mathematics",
+        "excerpt":"图形开发中的常用数学   向量   三角函数   线性代数  向量空间  矩阵乘法  变换矩阵  正交  特征向量  线性变换本质   齐次坐标  4×4矩阵  w分量  透视投影   空间几何  点线面关系  空间夹角  包围盒  相交检测   物理数学  速度  加速度  抛物线公式   曲线曲面  Bézier  Catmull-Rom  样条曲线   概率统计  概率分布  采样  蒙特卡洛   微积分  导数  函数斜率  积分思想   ","categories": ["笔记"],
+        "tags": ["Graphics","Mathematics"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Engineering-Mathematics.html",
+        "teaser": null
+      },{
+        "title": "Particle System",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Render","Graphics"],
+        "url": "/posts/2025-07-02-Particle-System/",
+        "teaser": null
+      },{
+        "title": "Shader",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Render","Graphics"],
+        "url": "/posts/2025-07-02-Shader/",
+        "teaser": null
+      },{
+        "title": "Unity Rendering Principle",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Render","Graphics"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Rendering-Principle.html",
+        "teaser": null
+      },{
     "title": "About",
     "excerpt":"Do not define me, that is UB!   博客内容仅用于学习，如有侵权，请联系删除  ","url": "http://localhost:4000/about/"
   },{
