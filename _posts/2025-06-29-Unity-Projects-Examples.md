@@ -32,7 +32,7 @@ permalink: /posts/2025-06-29-Unity-Projects-Examples/
 
 | 项目 | 简介 | 要点 | 标签 | 状态 |
 | ---- | ---- | ---- | ---- | ---- |
-| 滚动球 Ball Roll | WASD控制球滚动，捡起金币 | 物理系统、Rigidbody、输入系统 | `Unity GamePlay` `Primary` | `Planning` |
+| 滚动球 BallRoll  | WASD控制球滚动，捡起金币 | 物理系统、Rigidbody、输入系统 | `Unity GamePlay` `Primary` | `In Progress` |
 | 打砖块 Breakout  | 实现经典打砖块玩法       | 2D物理、碰撞、射线检测、UI    | `Unity GamePlay` `Primary` | `Planning` |
 | Flappy Bird     | 鸟穿越管道、简单随机化 | 2D动画、Trigger触发、对象池     | `Unity GamePlay` `Primary` | `Planning` |
 | 计时小游戏       | 倒计时 + 得分显示     | UI、Text、Button、Timer        | `Unity GamePlay` `Primary` | `Planning` |
@@ -61,3 +61,9 @@ permalink: /posts/2025-06-29-Unity-Projects-Examples/
 | Shader Collection | 图形学展示              | 自定义Shader、VFX Graph、Render Feature | `Unity Graph` `High Rank` | `Planning` |
 | Visual Novel System | 更偏向结构设计与数据处理 | 数据驱动、UI演出、状态管理  | `Unity GamePlay` `High Rank`  | `Planning` |
 | SRP               | 高度定制，图形学开发方向  | 图形学、SRP、Render Graph   | `Unity Graph` `High Rank`     | `Planning` |
+
+
+## Details
+
+### 滚动球 BallRoll
+[项目文档](https://github.com/ljf12825/HowUnity/blob/main/UnityProjectIndex/%E6%BB%9A%E5%8A%A8%E7%90%83-BallRoll.md)
