@@ -204,7 +204,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Scene System",
-        "excerpt":"Unity Scene System是Unity中用于组织和管理游戏世界的基础结构，Unity支持多个Scene的加载与卸载，允许构建出大型、分块化的世界   Scene  Scene是Unity游戏项目中的一个基础构建单元，它就像游戏世界中的一个“地图”或“关卡”，一个Scene就是一个逻辑/物理空间的容器，包含了：     GameObject   地形、UI、声音   脚本、组件   光照信息、烘焙数据等   在Unity中，一个Scene对应一个.unity文件   Scene 生命周期  1.创建或打开场景（.unity文件）   2.布置场景内容   3.保存场景   4.构建和加载场景（Build Settings里添加场景）   5.运行时加载和卸载场景   场景最佳实践     保持每个场景的职责单一（比如UI与游戏逻辑分离）   使用Prefab来管理重复对象   使用场景加载器或管理器来控制场景切换和数据传递   合理使用DontDestroyOnLoad来跨场景保存数据或对象   Multi Scene   SceneManager   加载与切换场景   Additive Load   多场景编辑工作流   场景打包与构建设置   场景分块加载   触发器加载机制   Addressable + Scene Loading   性能优化   ","categories": ["笔记"],
+        "excerpt":"Unity Scene System是Unity中用于组织和管理游戏世界的基础结构，Unity支持多个Scene的加载与卸载，允许构建出大型、分块化的世界 Scene Scene是Unity游戏项目中的一个基础构建单元，它就像游戏世界中的一个“地图”或“关卡”，一个Scene就是一个逻辑/物理空间的容器，包含了： GameObject 地形、UI、声音 脚本、组件 光照信息、烘焙数据等 在Unity中，一个Scene对应一个.unity文件 Scene 生命周期 1.创建或打开场景（.unity文件） 2.布置场景内容 3.保存场景 4.构建和加载场景（Build Settings里添加场景） 5.运行时加载和卸载场景 场景最佳实践 保持每个场景的职责单一（比如UI与游戏逻辑分离） 使用Prefab来管理重复对象 使用场景加载器或管理器来控制场景切换和数据传递 合理使用DontDestroyOnLoad来跨场景保存数据或对象 Multi Scene 多场景允许你同时加载和管理多个场景，不同场景可以同时存在并且运行在游戏中，允许你灵活地处理加载、切换和卸载场景的需求 加载和卸载场景 Additive加载：可以在现有场景的基础上加载新的场景，这种方式不会卸载当前场景，而是将多个场景叠加在一起 Single加载：可以将一个场景替换当前场景，这种方式会卸载当前场景并加载新的场景 常见的多场景应用场景 主菜单 + 游戏场景：主菜单和游戏场景可以同时加载，用户操作菜单时，游戏场景依然在后台运行 动态加载关卡：可以根据游戏的进度或玩家行为动态加载或卸载不同的场景，比如一个大世界分为多个小场景，按需加载 UI和游戏场景分离：UI可以独立于游戏场景加载，确保UI始终可用，而不受游戏场景加载状态的影响 如何使用多场景 加载场景（Additive 和 Single） Additive加载：将新场景加载到现有场景中，保持当前场景不变 // Additive SceneManager.LoadScene(\"NewScene\", LoadSceneMode.Additive); Single加载：加载一个新场景并卸载当前场景 // 加载场景（Single） SceneManager.LoadScene(\"NewScene\", LoadSceneMode.Single); 卸载场景...","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
         "url": "/posts/2025-06-08-Scene-System/",
         "teaser": null
@@ -324,7 +324,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Unity Projects Examples",
-        "excerpt":"项目管理 Quick List 状态说明： Planning：规划中，生成需求和说明文档 TODO：已立项，未开始 In Progress：开发中 Code Review：审查 Testing：测试 Bugfixing：缺陷修复 Paused：暂停 Cancelled：已取消 Archived : 已归档 标签说明： Unity GamePlay：Unity游戏逻辑实现 Unity Graph：Unity图形学实现 Primary：初级 Intermediate：中级 Advanced：进阶 High Rank：高级 项目 简介 要点 标签 状态 滚动球 Ball Roll WASD控制球滚动，捡起金币 物理系统、Rigidbody、输入系统 Unity GamePlay Primary In Progress 打砖块 Breakout 实现经典打砖块玩法 2D物理、碰撞、射线检测、UI Unity GamePlay Primary Planning...","categories": ["笔记"],
+        "excerpt":"项目管理 Quick List 状态说明： Planning：规划中，生成需求和说明文档 TODO：已立项，未开始 In Progress：开发中 Code Review：审查 Testing：测试 Bugfixing：缺陷修复 Paused：暂停 Cancelled：已取消 Archived : 已归档 标签说明： Unity GamePlay：Unity游戏逻辑实现 Unity Graph：Unity图形学实现 Primary：初级 Intermediate：中级 Advanced：进阶 High Rank：高级 项目 简介 要点 标签 状态 滚动球 BallRoll WASD控制球滚动，捡起金币 物理系统、Rigidbody、输入系统 Unity GamePlay Primary In Progress 打砖块 Breakout 实现经典打砖块玩法 2D物理、碰撞、射线检测、UI Unity GamePlay Primary Planning Flappy...","categories": ["笔记"],
         "tags": ["Unity","Project"],
         "url": "/posts/2025-06-29-Unity-Projects-Examples/",
         "teaser": null

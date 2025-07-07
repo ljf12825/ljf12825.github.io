@@ -201,6 +201,80 @@
 </ul>
 
 <h2 id="multi-scene">Multi Scene</h2>
+<p>多场景允许你同时加载和管理多个场景，不同场景可以同时存在并且运行在游戏中，允许你灵活地处理加载、切换和卸载场景的需求</p>
+
+<ol>
+  <li>加载和卸载场景
+    <ul>
+      <li>Additive加载：可以在现有场景的基础上加载新的场景，这种方式不会卸载当前场景，而是将多个场景叠加在一起</li>
+      <li>Single加载：可以将一个场景替换当前场景，这种方式会卸载当前场景并加载新的场景</li>
+    </ul>
+  </li>
+  <li>常见的多场景应用场景
+    <ul>
+      <li>主菜单 + 游戏场景：主菜单和游戏场景可以同时加载，用户操作菜单时，游戏场景依然在后台运行</li>
+      <li>动态加载关卡：可以根据游戏的进度或玩家行为动态加载或卸载不同的场景，比如一个大世界分为多个小场景，按需加载</li>
+      <li>UI和游戏场景分离：UI可以独立于游戏场景加载，确保UI始终可用，而不受游戏场景加载状态的影响</li>
+    </ul>
+  </li>
+  <li>如何使用多场景
+    <h3 id="加载场景additive-和-single">加载场景（Additive 和 Single）</h3>
+    <ul>
+      <li>Additive加载：将新场景加载到现有场景中，保持当前场景不变
+        <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Additive</span>
+<span class="n">SceneManager</span><span class="p">.</span><span class="nf">LoadScene</span><span class="p">(</span><span class="s">"NewScene"</span><span class="p">,</span> <span class="n">LoadSceneMode</span><span class="p">.</span><span class="n">Additive</span><span class="p">);</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<ul>
+  <li>Single加载：加载一个新场景并卸载当前场景
+    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 加载场景（Single）</span>
+<span class="n">SceneManager</span><span class="p">.</span><span class="nf">LoadScene</span><span class="p">(</span><span class="s">"NewScene"</span><span class="p">,</span> <span class="n">LoadSceneMode</span><span class="p">.</span><span class="n">Single</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="卸载场景">卸载场景</h3>
+<p>如果你使用了<code class="language-plaintext highlighter-rouge">Additive</code>加载多个场景，可以选择卸载某个场景</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 卸载场景</span>
+<span class="n">SceneManager</span><span class="p">.</span><span class="nf">UnloadSceneAsync</span><span class="p">(</span><span class="s">"OldScene"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="切换场景并保持场景之间的交互">切换场景并保持场景之间的交互</h3>
+<p>使用多场景时，有时候你希望不同的场景之间可以交互。比如，可以在一个场景中控制另一个场景中的对象。<br />
+可以通过<code class="language-plaintext highlighter-rouge">SceneManager.GetSceneByName</code>或<code class="language-plaintext highlighter-rouge">SceneManager.GetSceneAt</code>获取其他加载的场景，然后通过<code class="language-plaintext highlighter-rouge">Scene.GetRootGameObjects()</code>获取该场景中的所有根级对象，进一步操作它们</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 获取其他场景的根物体</span>
+<span class="n">Scene</span> <span class="n">otherScene</span> <span class="p">=</span> <span class="n">SceneManager</span><span class="p">.</span><span class="nf">GetSceneByName</span><span class="p">(</span><span class="s">"OtherScene"</span><span class="p">);</span>
+<span class="n">GameObject</span><span class="p">[]</span> <span class="n">rootObjects</span> <span class="p">=</span> <span class="n">otherScene</span><span class="p">.</span><span class="nf">GetRootGameObjects</span><span class="p">();</span>
+
+<span class="c1">// 操作场景中的物体</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="n">GameObject</span> <span class="n">obj</span> <span class="k">in</span> <span class="n">rootObjects</span><span class="p">)</span> <span class="n">obj</span><span class="p">.</span><span class="nf">SetActive</span><span class="p">(</span><span class="k">false</span><span class="p">);</span> <span class="c1">// 隐藏物体</span>
+</code></pre></div></div>
+
+<h3 id="场景加载优化">场景加载优化</h3>
+<ul>
+  <li>异步加载：如果场景很大，加载时可能会卡顿，可以使用异步加载来平滑过渡：</li>
+</ul>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 异步加载场景</span>
+<span class="n">IEnumerator</span> <span class="nf">LoadSceneAsync</span><span class="p">(</span><span class="kt">string</span> <span class="n">sceneName</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">AsyncOperation</span> <span class="n">asyncLoad</span> <span class="p">=</span> <span class="n">SceneManager</span><span class="p">.</span><span class="nf">LoadSceneAsync</span><span class="p">(</span><span class="n">sceneName</span><span class="p">,</span> <span class="n">LoadSceneMode</span><span class="p">.</span><span class="n">Additive</span><span class="p">);</span>
+
+    <span class="k">while</span><span class="p">(!</span><span class="n">asyncLoad</span><span class="p">.</span><span class="n">isDone</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// 可以在这里显示加载进度条</span>
+        <span class="k">yield</span> <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>场景切换动画：为了避免切换场景时的黑屏，你可以在场景切换之前播放一个加载动画或者过渡动画</li>
+</ul>
 
 <h3 id="scenemanager">SceneManager</h3>
 
