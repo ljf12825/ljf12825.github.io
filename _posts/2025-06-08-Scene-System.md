@@ -99,6 +99,37 @@ IEnumerator LoadSceneAsync(string sceneName)
 ```
 - 场景切换动画：为了避免切换场景时的黑屏，你可以在场景切换之前播放一个加载动画或者过渡动画
 
+### 多场景注意事项
+- 场景间的依赖：确保每个场景的独立性。如果一个场景依赖于另一个场景中的对象，加载时可能会出现问题，特别是在异步加载时
+- 内存管理：加载多个场景会消耗更多内存，尤其是大型场景。确保合理管理内存，及时卸载不再需要的场景
+
+### 实例：多场景管理器
+可以创建一个管理多个场景加载的系统
+```cs
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class MultiSceneManager : MonoBehaviour
+{
+    public string mainScene = "MainScene";
+    public string uiScene = "UIScene";
+
+    void Start()
+    {
+        // 加载主场景和UI场景
+        LoadMainScene();
+        LoadUIScene();
+    }
+
+    public void LoadMainScene() => SceneManager.LoadScene(mainScene, LoadSceneMode.Additive);
+
+    public void LoadUIScene() => SceneManager.LoadScene(uiScene, LoadSceneMode.Additive);
+
+    public void UnloadMainScene() => SceneManager.UnloadSceneAsync(mainScene);
+
+    public void UnloadUIScene() => SceneManager.UnloadSceneAsync(uiScene);
+}
+```
 
 ### SceneManager
 
