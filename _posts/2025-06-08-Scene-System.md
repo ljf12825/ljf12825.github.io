@@ -49,13 +49,29 @@ Scene是Unity游戏项目中的一个基础构建单元，它就像游戏世界�
 
 
 ### 加载场景（Additive 和 Single）
-- Additive加载：将新场景加载到现有场景中，保持当前场景不变
+- `Additive`加载：将新场景加载到现有场景中，保持当前场景不变
+
+`Additive`加载意味着将一个新场景加载到现有场景的基础上，当前场景不会被卸载，而是与新场景一起共存。使用这种方式可以让多个场景并行运行，从而实现一些复杂的场景管理，例如分割大型场景，或者在后台加载新的场景内容
+
+使用场景：
+
+- 动态加载关卡：例如一个开放世界游戏，场景可以按需加载。加载一个新的区域时，现有区域不会被卸载
+- UI 和游戏分离：UI 可以作为一个单独的场景加载并保持活跃，而游戏逻辑场景则可以独立运行
+- 多人游戏：在多人游戏中，玩家可能在多个子场景中互动，Additive 加载可以实现多个玩家在多个区域间的无缝切换
+
 ```cs
 // Additive
 SceneManager.LoadScene("NewScene", LoadSceneMode.Additive);
 ```
 
-- Single加载：加载一个新场景并卸载当前场景
+- `Single`加载：加载一个新场景并卸载当前场景
+
+`Single`加载模式表示加载一个新场景并卸载当前的场景。这是传统的场景切换方式，通常用于当你需要完全切换到另一个场景时
+
+使用场景：
+- 关卡切换：当玩家从一个关卡进入另一个关卡时，Single 加载通常是最常用的方式
+- 游戏状态管理：如果你的游戏有明确的关卡结构或状态，切换到新场景时，可以使用 Single 模式来清空当前场景，加载一个全新的游戏状态
+
 ```cs
 // 加载场景（Single）
 SceneManager.LoadScene("NewScene", LoadSceneMode.Single);
@@ -67,6 +83,9 @@ SceneManager.LoadScene("NewScene", LoadSceneMode.Single);
 // 卸载场景
 SceneManager.UnloadSceneAsync("OldScene");
 ```
+
+### 多场景加载的复杂性和管理
+
 
 ### 切换场景并保持场景之间的交互
 使用多场景时，有时候你希望不同的场景之间可以交互。比如，可以在一个场景中控制另一个场景中的对象。  
@@ -239,7 +258,64 @@ void OnSceneUnloaded(Scene scene) => Debug.Log("Scene " + scene.name + " unloade
 
 [UnityScripting SceneManager](https://docs.unity3d.com/ScriptReference/SceneManagement.SceneManager.html)
 
-### 多场景编辑工作流
+### Dont Destroy OnLoad
+`DontDestroyOnLoad`是Unity中一个非常使用的函数，它可以将某个对象在加载新场景时保持不被销毁。这对于需要在多个场景间共享的对象（如音频管理器、玩家数据等）非常有用
+
+1. 基本使用
+
+通过`DontDestroyOnLoad`，你可以使一个游戏对象在场景切换时不被销毁。当你加载一个新场景时，默认情况下，当前场景中所有对象都会被卸载。但如果某个对象调用了`DontDestroyOnLoad`，它就会被保留，直到手动销毁它
+
+```cs
+void Start() => DontDestroyOnLoad(gameObject); // 保持这个对象不被销毁
+```
+
+2. 适用场景
+
+`DontDestroyOnLoad`通常适用于以下情况：
+- 音频管理器：游戏中有一个音频管理器对象，需要在不同场景之间共享音乐和音效设置。通过`DontDestroyOnLoad`，你可以确保音频管理器在场景切换时不被销毁
+- 玩家数据：例如，玩家的得分、背包内容、任务进度等需要在多个场景之间保持一致。在这种情况下，你可以将数据存储在一个不销毁的对象中
+- 全局控制器：如果你有一个控制器或管理器（例如游戏状态控制器、广告管理器等），这些也可以通过`DontDestroyOnLoad`保持跨场景存在
+
+3. 注意事项
+
+**可能引起的问题**
+- 对象重复创建：`DontDestroyOnLoad`会让对象保持在所有场景之间。但是，如果在多个场景中分别创建了同样的对象，这可能会导致重复的对象。例如，如果你在一个场景中已经有一个音频管理器，并且在加载另一个场景时有创建了一个新的音频管理器，结果可能时两个音频管理器同时存在。为了避免这种情况，需要确保只有一个对象调用了`DontDestroyOnLoad`
+
+解决办法：通常做法是在脚本中加上一个检查，确保只有第一个创建的对象调用`DontDestroyOnLoad`，而其他对象则销毁自己
+```cs
+void Start()
+{
+    if (FindObjectsOfType(typeof(MyManager)).Length > 1)
+        Destroy(gameObject); // 如果场景中已经有一个该类型的对象，销毁当前对象
+    
+    else DontDestroyOnLoad(gameObject); // 否则保留该对象
+}
+```
+
+**使用`DontDestroyOnLoad`时的对象管理**
+- 生命周期管理：虽然`DontDestroyOnLoad`防止对象在场景切换时销毁，但它并不会阻止对象在运行时被销毁，如果想在特定时刻销毁该对象，需要手动调用`Destroy()`
+
+
+**跨场景对象命名问题**
+`DontDestroyOnLoad`对象仍然存在于内存中，因此你需要特别注意它们的名字。为了避免在多个场景中有相同名称的对象，通常可以将`DontDestroyOnLoad`对象的名称修改为唯一的标识符
+```cs
+void Start()
+{
+    if (FindObjectOfType<MyManager>() == null)
+    {
+        gameObject.name = "UniqueManager";
+        DontDestroyOnLoad(gameObject);
+    }
+    else Destroy(gameObject);
+}
+```
+
+#### 底层实现（推测）
+Unity的底层实现并没有公开`DontDestroyOnLoad`的具体源码，但我们可以推测它的工作原理基于以下几个步骤：
+- 场景对象管理器：当Unity进行场景切换时，它会遍历场景中的所有对象，并将标记为`DontDestroyOnLoad`的对象移除场景的管理队列
+- 全局管理容器：这些标记为不销毁的对象会被一如一个全局的容器中，保持在内存中，直到程序结束或手动销毁这些对象
+- 不被卸载：这些对象的生命周期与当前场景无关，它们会在Unity的内部管理中维持直到销毁
+
 
 ### 场景打包与构建设置
 

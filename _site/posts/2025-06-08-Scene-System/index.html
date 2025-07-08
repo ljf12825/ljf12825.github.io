@@ -221,23 +221,46 @@
 
 <h3 id="加载场景additive-和-single">加载场景（Additive 和 Single）</h3>
 <ul>
-  <li>Additive加载：将新场景加载到现有场景中，保持当前场景不变
-    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Additive</span>
-<span class="n">SceneManager</span><span class="p">.</span><span class="nf">LoadScene</span><span class="p">(</span><span class="s">"NewScene"</span><span class="p">,</span> <span class="n">LoadSceneMode</span><span class="p">.</span><span class="n">Additive</span><span class="p">);</span>
-</code></pre></div>    </div>
-  </li>
-  <li>Single加载：加载一个新场景并卸载当前场景
-    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 加载场景（Single）</span>
-<span class="n">SceneManager</span><span class="p">.</span><span class="nf">LoadScene</span><span class="p">(</span><span class="s">"NewScene"</span><span class="p">,</span> <span class="n">LoadSceneMode</span><span class="p">.</span><span class="n">Single</span><span class="p">);</span>
-</code></pre></div>    </div>
-  </li>
+  <li><code class="language-plaintext highlighter-rouge">Additive</code>加载：将新场景加载到现有场景中，保持当前场景不变</li>
 </ul>
+
+<p><code class="language-plaintext highlighter-rouge">Additive</code>加载意味着将一个新场景加载到现有场景的基础上，当前场景不会被卸载，而是与新场景一起共存。使用这种方式可以让多个场景并行运行，从而实现一些复杂的场景管理，例如分割大型场景，或者在后台加载新的场景内容</p>
+
+<p>使用场景：</p>
+
+<ul>
+  <li>动态加载关卡：例如一个开放世界游戏，场景可以按需加载。加载一个新的区域时，现有区域不会被卸载</li>
+  <li>UI 和游戏分离：UI 可以作为一个单独的场景加载并保持活跃，而游戏逻辑场景则可以独立运行</li>
+  <li>多人游戏：在多人游戏中，玩家可能在多个子场景中互动，Additive 加载可以实现多个玩家在多个区域间的无缝切换</li>
+</ul>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Additive</span>
+<span class="n">SceneManager</span><span class="p">.</span><span class="nf">LoadScene</span><span class="p">(</span><span class="s">"NewScene"</span><span class="p">,</span> <span class="n">LoadSceneMode</span><span class="p">.</span><span class="n">Additive</span><span class="p">);</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Single</code>加载：加载一个新场景并卸载当前场景</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">Single</code>加载模式表示加载一个新场景并卸载当前的场景。这是传统的场景切换方式，通常用于当你需要完全切换到另一个场景时</p>
+
+<p>使用场景：</p>
+<ul>
+  <li>关卡切换：当玩家从一个关卡进入另一个关卡时，Single 加载通常是最常用的方式</li>
+  <li>游戏状态管理：如果你的游戏有明确的关卡结构或状态，切换到新场景时，可以使用 Single 模式来清空当前场景，加载一个全新的游戏状态</li>
+</ul>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 加载场景（Single）</span>
+<span class="n">SceneManager</span><span class="p">.</span><span class="nf">LoadScene</span><span class="p">(</span><span class="s">"NewScene"</span><span class="p">,</span> <span class="n">LoadSceneMode</span><span class="p">.</span><span class="n">Single</span><span class="p">);</span>
+</code></pre></div></div>
 
 <h3 id="卸载场景">卸载场景</h3>
 <p>如果你使用了<code class="language-plaintext highlighter-rouge">Additive</code>加载多个场景，可以选择卸载某个场景</p>
 <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 卸载场景</span>
 <span class="n">SceneManager</span><span class="p">.</span><span class="nf">UnloadSceneAsync</span><span class="p">(</span><span class="s">"OldScene"</span><span class="p">);</span>
 </code></pre></div></div>
+
+<h3 id="多场景加载的复杂性和管理">多场景加载的复杂性和管理</h3>
 
 <h3 id="切换场景并保持场景之间的交互">切换场景并保持场景之间的交互</h3>
 <p>使用多场景时，有时候你希望不同的场景之间可以交互。比如，可以在一个场景中控制另一个场景中的对象。<br />
@@ -419,7 +442,73 @@
 
 <p><a href="https://docs.unity3d.com/ScriptReference/SceneManagement.SceneManager.html">UnityScripting SceneManager</a></p>
 
-<h3 id="多场景编辑工作流">多场景编辑工作流</h3>
+<h3 id="dont-destroy-onload">Dont Destroy OnLoad</h3>
+<p><code class="language-plaintext highlighter-rouge">DontDestroyOnLoad</code>是Unity中一个非常使用的函数，它可以将某个对象在加载新场景时保持不被销毁。这对于需要在多个场景间共享的对象（如音频管理器、玩家数据等）非常有用</p>
+
+<ol>
+  <li>基本使用</li>
+</ol>
+
+<p>通过<code class="language-plaintext highlighter-rouge">DontDestroyOnLoad</code>，你可以使一个游戏对象在场景切换时不被销毁。当你加载一个新场景时，默认情况下，当前场景中所有对象都会被卸载。但如果某个对象调用了<code class="language-plaintext highlighter-rouge">DontDestroyOnLoad</code>，它就会被保留，直到手动销毁它</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Start</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="nf">DontDestroyOnLoad</span><span class="p">(</span><span class="n">gameObject</span><span class="p">);</span> <span class="c1">// 保持这个对象不被销毁</span>
+</code></pre></div></div>
+
+<ol>
+  <li>适用场景</li>
+</ol>
+
+<p><code class="language-plaintext highlighter-rouge">DontDestroyOnLoad</code>通常适用于以下情况：</p>
+<ul>
+  <li>音频管理器：游戏中有一个音频管理器对象，需要在不同场景之间共享音乐和音效设置。通过<code class="language-plaintext highlighter-rouge">DontDestroyOnLoad</code>，你可以确保音频管理器在场景切换时不被销毁</li>
+  <li>玩家数据：例如，玩家的得分、背包内容、任务进度等需要在多个场景之间保持一致。在这种情况下，你可以将数据存储在一个不销毁的对象中</li>
+  <li>全局控制器：如果你有一个控制器或管理器（例如游戏状态控制器、广告管理器等），这些也可以通过<code class="language-plaintext highlighter-rouge">DontDestroyOnLoad</code>保持跨场景存在</li>
+</ul>
+
+<ol>
+  <li>注意事项</li>
+</ol>
+
+<p><strong>可能引起的问题</strong></p>
+<ul>
+  <li>对象重复创建：<code class="language-plaintext highlighter-rouge">DontDestroyOnLoad</code>会让对象保持在所有场景之间。但是，如果在多个场景中分别创建了同样的对象，这可能会导致重复的对象。例如，如果你在一个场景中已经有一个音频管理器，并且在加载另一个场景时有创建了一个新的音频管理器，结果可能时两个音频管理器同时存在。为了避免这种情况，需要确保只有一个对象调用了<code class="language-plaintext highlighter-rouge">DontDestroyOnLoad</code></li>
+</ul>
+
+<p>解决办法：通常做法是在脚本中加上一个检查，确保只有第一个创建的对象调用<code class="language-plaintext highlighter-rouge">DontDestroyOnLoad</code>，而其他对象则销毁自己</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nf">FindObjectsOfType</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">MyManager</span><span class="p">)).</span><span class="n">Length</span> <span class="p">&gt;</span> <span class="m">1</span><span class="p">)</span>
+        <span class="nf">Destroy</span><span class="p">(</span><span class="n">gameObject</span><span class="p">);</span> <span class="c1">// 如果场景中已经有一个该类型的对象，销毁当前对象</span>
+    
+    <span class="k">else</span> <span class="nf">DontDestroyOnLoad</span><span class="p">(</span><span class="n">gameObject</span><span class="p">);</span> <span class="c1">// 否则保留该对象</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>使用<code class="language-plaintext highlighter-rouge">DontDestroyOnLoad</code>时的对象管理</strong></p>
+<ul>
+  <li>生命周期管理：虽然<code class="language-plaintext highlighter-rouge">DontDestroyOnLoad</code>防止对象在场景切换时销毁，但它并不会阻止对象在运行时被销毁，如果想在特定时刻销毁该对象，需要手动调用<code class="language-plaintext highlighter-rouge">Destroy()</code></li>
+</ul>
+
+<p><strong>跨场景对象命名问题</strong>
+<code class="language-plaintext highlighter-rouge">DontDestroyOnLoad</code>对象仍然存在于内存中，因此你需要特别注意它们的名字。为了避免在多个场景中有相同名称的对象，通常可以将<code class="language-plaintext highlighter-rouge">DontDestroyOnLoad</code>对象的名称修改为唯一的标识符</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">FindObjectOfType</span><span class="p">&lt;</span><span class="n">MyManager</span><span class="p">&gt;()</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">gameObject</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="s">"UniqueManager"</span><span class="p">;</span>
+        <span class="nf">DontDestroyOnLoad</span><span class="p">(</span><span class="n">gameObject</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="nf">Destroy</span><span class="p">(</span><span class="n">gameObject</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="底层实现推测">底层实现（推测）</h4>
+<p>Unity的底层实现并没有公开<code class="language-plaintext highlighter-rouge">DontDestroyOnLoad</code>的具体源码，但我们可以推测它的工作原理基于以下几个步骤：</p>
+<ul>
+  <li>场景对象管理器：当Unity进行场景切换时，它会遍历场景中的所有对象，并将标记为<code class="language-plaintext highlighter-rouge">DontDestroyOnLoad</code>的对象移除场景的管理队列</li>
+  <li>全局管理容器：这些标记为不销毁的对象会被一如一个全局的容器中，保持在内存中，直到程序结束或手动销毁这些对象</li>
+  <li>不被卸载：这些对象的生命周期与当前场景无关，它们会在Unity的内部管理中维持直到销毁</li>
+</ul>
 
 <h3 id="场景打包与构建设置">场景打包与构建设置</h3>
 
