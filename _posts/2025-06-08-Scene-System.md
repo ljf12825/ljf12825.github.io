@@ -47,7 +47,7 @@ Scene是Unity游戏项目中的一个基础构建单元，它就像游戏世界�
 - 动态加载关卡：可以根据游戏的进度或玩家行为动态加载或卸载不同的场景，比如一个大世界分为多个小场景，按需加载
 - UI和游戏场景分离：UI可以独立于游戏场景加载，确保UI始终可用，而不受游戏场景加载状态的影响
 
-3. 如何使用多场景
+
 ### 加载场景（Additive 和 Single）
 - Additive加载：将新场景加载到现有场景中，保持当前场景不变
 ```cs
@@ -132,10 +132,112 @@ public class MultiSceneManager : MonoBehaviour
 ```
 
 ### SceneManager
+`SceneManager`是Unity中用来管理场景加载、卸载和切换的一个类。它提供了许多用于操作场景的方法，比如异步加载场景、场景之间切换、场景的同步加载、查询场景信息等。
 
-### 加载与切换场景
+`SceneManager`是`UnityEngine.SceneManagement`命名空间的一部分
 
-### Additive Load
+#### 常用API
+##### 加载场景
+- 加载单一场景
+
+`SceneManager.LoadScene`用于加载指定的场景
+```cs
+SceneManager.LoadScene("SceneName");
+```
+
+- 异步加载场景
+
+异步加载场景是为了避免在加载时阻塞主线程，可以提高游戏体验
+```cs
+AsyncOperation asyncOp = SceneManager.LoadSceneAsync("SceneName");
+```
+
+异步加载场景时，可以通过`AsyncOperation`对象来获取加载进度，甚至可以控制场景是否在加载完成后自动激活
+```cs
+asyncOp.allowSceneActivation = false; // 控制场景是否自动激活
+```
+
+##### 卸载场景
+- 卸载当前场景
+
+`SceneManager.UnloadSceneAsync`用于卸载一个场景，通常用于切换场景时
+```cs
+SceneManager.UnloadSceneAsync("SceneName");
+```
+
+这个方法是异步的，因此可以在后台卸载场景，不会影响游戏的运行
+
+##### 获取当前场景
+- 获取当前激活的场景
+
+`SceneManager.GetActiveScene`用于获取当前激活的场景，返回的是一个`Scene`对象
+```cs
+Scene currentScene = SceneManager.GetActiveScene();
+```
+
+可以通过`Scene`对象获取场景的名称、路径、索引等信息
+```cs
+string sceneName = currentScene.name;
+```
+
+##### 场景切换
+- 加载多个场景
+
+可以使用`SceneManager.LoadScene`来加载多个场景，这对于一些需要同时存在多个场景的情况（如多人联机或大场景加载）非常有用
+```cs
+SceneManager.LoadScene("Scene1", LoadSceneMode.Additive); // 加载一个附加场景
+```
+通过`LoadSceneMode.Additive`，新的场景会叠加到现有场景上
+
+- 切换场景
+
+如果你要切换到一个新的场景并卸载当前场景，可以在加载新场景时使用`LoadSceneMode.Single`，它会在加载新场景的同时卸载当前场景
+```cs
+SceneManager.LoadScene("NewScene", LoadSceneMode.Single);
+```
+##### 场景索引
+可以通过`Scene`对象来查询更多关于场景的信息：
+- 获取场景的名称
+```cs
+string sceneName = currentScene.name
+```
+
+- 获取场景的索引
+```cs
+int sceneIndex = currentScene.buildIndex
+```
+
+- 获取场景的根游戏对象
+```cs
+GameObject[] rootObjects = currentScene.GetRootGameObjects();
+```
+
+##### 事件和回调
+Unity提供了一些事件和回调来监听场景加载的状态
+
+- `SceneManager.sceneLoaded`事件
+
+这个事件会在场景加载完成时触发，你可以通过订阅这个事件来执行场景加载后的操作
+
+```cs
+SceneManger.sceneLoaded += OnSceneLoaded;
+
+void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+{
+    Debug.Log("Scene " + scene.name + " loaded.");
+}
+```
+
+- `SceneManager.sceneUnloaded`事件
+
+这个事件会在场景卸载时触发
+```cs
+SceneManager.sceneUnloaded += OnSceneUnloaded;
+
+void OnSceneUnloaded(Scene scene) => Debug.Log("Scene " + scene.name + " unloaded.");
+```
+
+[UnityScripting SceneManager](https://docs.unity3d.com/ScriptReference/SceneManagement.SceneManager.html)
 
 ### 多场景编辑工作流
 
