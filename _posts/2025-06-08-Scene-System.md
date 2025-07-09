@@ -85,7 +85,16 @@ SceneManager.UnloadSceneAsync("OldScene");
 ```
 
 ### 多场景加载的复杂性和管理
+在使用`Additive`加载时，场景之间的资源管理尤为重要。不同场景之间共享资源，可能会导致以下问题：
+- 资源冲突：多个场景中可能会使用相同的资源（如材质、纹理、音效等），如果没有适当的管理，可能会发生资源覆盖或重复加载
+- 性能瓶颈：加载多个场景会增加内存使用量，尤其是在大型场景中。如果不及时卸载不需要的场景，可能会导致性能下降
 
+**避免场景间资源冲突**  
+1. 资源打包：利用Unity的资源打包系统（例如Asset Bundles或Addressables），可以让每个场景只加载所需的资源，避免多个场景之间的资源冲突
+
+2. 场景划分与依赖管理：避免场景间有过强的依赖关系。例如，将游戏逻辑与UI、背景和音效分开，确保每个场景只包含特定职责的内容
+
+3. 共享资源：通过`DontDestroyOnLoad`来管理那些需要跨场景的共享资源（如音频管理器、玩家数据管理器等）
 
 ### 切换场景并保持场景之间的交互
 使用多场景时，有时候你希望不同的场景之间可以交互。比如，可以在一个场景中控制另一个场景中的对象。  
@@ -100,23 +109,80 @@ GameObject[] rootObjects = otherScene.GetRootGameObjects();
 foreach (GameObject obj in rootObjects) obj.SetActive(false); // 隐藏物体
 ```
 
-### 场景加载优化
-- 异步加载：如果场景很大，加载时可能会卡顿，可以使用异步加载来平滑过渡：
+- 场景切换动画：为了避免切换场景时的黑屏，你可以在场景切换之前播放一个加载动画或者过渡动画
 
+### 异步加载场景
+#### 为什么使用异步加载
+异步加载允许你在场景加载的过程中保持游戏的流畅运行。异步加载时，Unity会在后台加载场景，不会阻塞主线程，因此可以避免游戏界面卡顿或掉帧  
+异步加载常用于：
+- 避免卡顿：在加载大型场景或资源时，异步加载可以有效减少游戏界面卡顿的现象
+- 展示加载进度：可以展示进度条或者加载动画，提升用户体验
+
+#### 异步加载基础
+通过`SceneManager.LoadSceneAsync`可以异步加载场景，可以使用`AsyncOperation`对象来监控加载进度
+
+**示例：**
 ```cs
-// 异步加载场景
 IEnumerator LoadSceneAsync(string sceneName)
 {
-    AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+    // 异步加载场景
+    AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
 
-    while(!asyncLoad.isDone)
+    // 等待场景加载完成
+    while (!asyncLoad.isDone)
     {
-        // 可以在这里显示加载进度条
-        yield return null;
+        // 显示加载进度
+        float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f); // 进度值[0, 1]
+        Debug.Log("Loading progress: " + progress);
+
+        // 可以在这里更新进度条UI
+
+        yield return null; // 每帧执行
     }
 }
 ```
-- 场景切换动画：为了避免切换场景时的黑屏，你可以在场景切换之前播放一个加载动画或者过渡动画
+
+#### `async`和`await`异步加载
+Unity在2017之后对C#的异步功能支持更好，支持使用`async`和`await`来简化异步操作。你可以将异步加载过程包装成一个异步方法，从而避免繁琐的协程逻辑
+```cs
+saync Task LoadSceneAsync(string sceneName)
+{
+    AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+
+    // 等待加载完成
+    while (!asyncLoad.isDone)
+    {
+        float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
+        Debug.Log("Loading progress: " + progress);
+        await Task.Yield(); // 等待下一帧
+    }
+}
+```
+
+#### 资源顺序加载
+有时候，我们希望保证某些资源或场景按特定顺序加载，或者在某些资源完全加载后才能加载其他资源。使用异步加载时，`async`和`await`可以让你控制加载的顺序
+```cs
+async Task LoadSceneInOrider()
+{
+    // 加载第一个场景
+    await LoadSceneAsync("Scene1");
+
+    // 加载第二个场景
+    await LoadSceneAsync("Scene2");
+
+    // 继续加载其他资源
+}
+```
+
+#### 避免资源加载顺序问题
+确保在加载多个场景时，场景中的资源顺序正确。对于大型场景或者有依赖关系的资源，可以使用`Addressables`系统来更细粒度地控制资源的加载顺序
+
+#### 资源优化
+异步加载场景和资源时，性能优化是非常重要的。可以使用以下方法：
+- 使用`async`和`await`配合加载不同类型的资源：例如先加载场景，然后在后台加载音频、纹理等资源
+- 场景切换前缓冲资源：提前加载必要的资源，避免在切换场景时发生卡顿
+- 分步加载资源：不必一次性加载所有资源，可以分批次地进行加载，确保用户界面的流畅性
+
 
 ### 多场景注意事项
 - 场景间的依赖：确保每个场景的独立性。如果一个场景依赖于另一个场景中的对象，加载时可能会出现问题，特别是在异步加载时
@@ -258,10 +324,10 @@ void OnSceneUnloaded(Scene scene) => Debug.Log("Scene " + scene.name + " unloade
 
 [UnityScripting SceneManager](https://docs.unity3d.com/ScriptReference/SceneManagement.SceneManager.html)
 
-### Dont Destroy OnLoad
+### DontDestroyOnLoad
 `DontDestroyOnLoad`是Unity中一个非常使用的函数，它可以将某个对象在加载新场景时保持不被销毁。这对于需要在多个场景间共享的对象（如音频管理器、玩家数据等）非常有用
 
-1. 基本使用
+1.基本使用
 
 通过`DontDestroyOnLoad`，你可以使一个游戏对象在场景切换时不被销毁。当你加载一个新场景时，默认情况下，当前场景中所有对象都会被卸载。但如果某个对象调用了`DontDestroyOnLoad`，它就会被保留，直到手动销毁它
 
@@ -269,14 +335,14 @@ void OnSceneUnloaded(Scene scene) => Debug.Log("Scene " + scene.name + " unloade
 void Start() => DontDestroyOnLoad(gameObject); // 保持这个对象不被销毁
 ```
 
-2. 适用场景
+2.适用场景
 
 `DontDestroyOnLoad`通常适用于以下情况：
 - 音频管理器：游戏中有一个音频管理器对象，需要在不同场景之间共享音乐和音效设置。通过`DontDestroyOnLoad`，你可以确保音频管理器在场景切换时不被销毁
 - 玩家数据：例如，玩家的得分、背包内容、任务进度等需要在多个场景之间保持一致。在这种情况下，你可以将数据存储在一个不销毁的对象中
 - 全局控制器：如果你有一个控制器或管理器（例如游戏状态控制器、广告管理器等），这些也可以通过`DontDestroyOnLoad`保持跨场景存在
 
-3. 注意事项
+3.注意事项
 
 **可能引起的问题**
 - 对象重复创建：`DontDestroyOnLoad`会让对象保持在所有场景之间。但是，如果在多个场景中分别创建了同样的对象，这可能会导致重复的对象。例如，如果你在一个场景中已经有一个音频管理器，并且在加载另一个场景时有创建了一个新的音频管理器，结果可能时两个音频管理器同时存在。为了避免这种情况，需要确保只有一个对象调用了`DontDestroyOnLoad`

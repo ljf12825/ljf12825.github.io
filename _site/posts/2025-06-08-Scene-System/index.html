@@ -261,6 +261,24 @@
 </code></pre></div></div>
 
 <h3 id="多场景加载的复杂性和管理">多场景加载的复杂性和管理</h3>
+<p>在使用<code class="language-plaintext highlighter-rouge">Additive</code>加载时，场景之间的资源管理尤为重要。不同场景之间共享资源，可能会导致以下问题：</p>
+<ul>
+  <li>资源冲突：多个场景中可能会使用相同的资源（如材质、纹理、音效等），如果没有适当的管理，可能会发生资源覆盖或重复加载</li>
+  <li>性能瓶颈：加载多个场景会增加内存使用量，尤其是在大型场景中。如果不及时卸载不需要的场景，可能会导致性能下降</li>
+</ul>
+
+<p><strong>避免场景间资源冲突</strong></p>
+<ol>
+  <li>
+    <p>资源打包：利用Unity的资源打包系统（例如Asset Bundles或Addressables），可以让每个场景只加载所需的资源，避免多个场景之间的资源冲突</p>
+  </li>
+  <li>
+    <p>场景划分与依赖管理：避免场景间有过强的依赖关系。例如，将游戏逻辑与UI、背景和音效分开，确保每个场景只包含特定职责的内容</p>
+  </li>
+  <li>
+    <p>共享资源：通过<code class="language-plaintext highlighter-rouge">DontDestroyOnLoad</code>来管理那些需要跨场景的共享资源（如音频管理器、玩家数据管理器等）</p>
+  </li>
+</ol>
 
 <h3 id="切换场景并保持场景之间的交互">切换场景并保持场景之间的交互</h3>
 <p>使用多场景时，有时候你希望不同的场景之间可以交互。比如，可以在一个场景中控制另一个场景中的对象。<br />
@@ -274,25 +292,81 @@
 <span class="k">foreach</span> <span class="p">(</span><span class="n">GameObject</span> <span class="n">obj</span> <span class="k">in</span> <span class="n">rootObjects</span><span class="p">)</span> <span class="n">obj</span><span class="p">.</span><span class="nf">SetActive</span><span class="p">(</span><span class="k">false</span><span class="p">);</span> <span class="c1">// 隐藏物体</span>
 </code></pre></div></div>
 
-<h3 id="场景加载优化">场景加载优化</h3>
 <ul>
-  <li>异步加载：如果场景很大，加载时可能会卡顿，可以使用异步加载来平滑过渡：</li>
+  <li>场景切换动画：为了避免切换场景时的黑屏，你可以在场景切换之前播放一个加载动画或者过渡动画</li>
 </ul>
 
-<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 异步加载场景</span>
-<span class="n">IEnumerator</span> <span class="nf">LoadSceneAsync</span><span class="p">(</span><span class="kt">string</span> <span class="n">sceneName</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">AsyncOperation</span> <span class="n">asyncLoad</span> <span class="p">=</span> <span class="n">SceneManager</span><span class="p">.</span><span class="nf">LoadSceneAsync</span><span class="p">(</span><span class="n">sceneName</span><span class="p">,</span> <span class="n">LoadSceneMode</span><span class="p">.</span><span class="n">Additive</span><span class="p">);</span>
+<h3 id="异步加载场景">异步加载场景</h3>
+<h4 id="为什么使用异步加载">为什么使用异步加载</h4>
+<p>异步加载允许你在场景加载的过程中保持游戏的流畅运行。异步加载时，Unity会在后台加载场景，不会阻塞主线程，因此可以避免游戏界面卡顿或掉帧<br />
+异步加载常用于：</p>
+<ul>
+  <li>避免卡顿：在加载大型场景或资源时，异步加载可以有效减少游戏界面卡顿的现象</li>
+  <li>展示加载进度：可以展示进度条或者加载动画，提升用户体验</li>
+</ul>
 
-    <span class="k">while</span><span class="p">(!</span><span class="n">asyncLoad</span><span class="p">.</span><span class="n">isDone</span><span class="p">)</span>
+<h4 id="异步加载基础">异步加载基础</h4>
+<p>通过<code class="language-plaintext highlighter-rouge">SceneManager.LoadSceneAsync</code>可以异步加载场景，可以使用<code class="language-plaintext highlighter-rouge">AsyncOperation</code>对象来监控加载进度</p>
+
+<p><strong>示例：</strong></p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">IEnumerator</span> <span class="nf">LoadSceneAsync</span><span class="p">(</span><span class="kt">string</span> <span class="n">sceneName</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// 异步加载场景</span>
+    <span class="n">AsyncOperation</span> <span class="n">asyncLoad</span> <span class="p">=</span> <span class="n">SceneManager</span><span class="p">.</span><span class="nf">LoadSceneAsync</span><span class="p">(</span><span class="n">sceneName</span><span class="p">);</span>
+
+    <span class="c1">// 等待场景加载完成</span>
+    <span class="k">while</span> <span class="p">(!</span><span class="n">asyncLoad</span><span class="p">.</span><span class="n">isDone</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="c1">// 可以在这里显示加载进度条</span>
-        <span class="k">yield</span> <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+        <span class="c1">// 显示加载进度</span>
+        <span class="kt">float</span> <span class="n">progress</span> <span class="p">=</span> <span class="n">Mathf</span><span class="p">.</span><span class="nf">Clamp01</span><span class="p">(</span><span class="n">asyncLoad</span><span class="p">.</span><span class="n">progress</span> <span class="p">/</span> <span class="m">0.9f</span><span class="p">);</span> <span class="c1">// 进度值[0, 1]</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"Loading progress: "</span> <span class="p">+</span> <span class="n">progress</span><span class="p">);</span>
+
+        <span class="c1">// 可以在这里更新进度条UI</span>
+
+        <span class="k">yield</span> <span class="k">return</span> <span class="k">null</span><span class="p">;</span> <span class="c1">// 每帧执行</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
+
+<h4 id="async和await异步加载"><code class="language-plaintext highlighter-rouge">async</code>和<code class="language-plaintext highlighter-rouge">await</code>异步加载</h4>
+<p>Unity在2017之后对C#的异步功能支持更好，支持使用<code class="language-plaintext highlighter-rouge">async</code>和<code class="language-plaintext highlighter-rouge">await</code>来简化异步操作。你可以将异步加载过程包装成一个异步方法，从而避免繁琐的协程逻辑</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">saync</span> <span class="n">Task</span> <span class="nf">LoadSceneAsync</span><span class="p">(</span><span class="kt">string</span> <span class="n">sceneName</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">AsyncOperation</span> <span class="n">asyncLoad</span> <span class="p">=</span> <span class="n">SceneManager</span><span class="p">.</span><span class="nf">LoadSceneAsync</span><span class="p">(</span><span class="n">sceneName</span><span class="p">);</span>
+
+    <span class="c1">// 等待加载完成</span>
+    <span class="k">while</span> <span class="p">(!</span><span class="n">asyncLoad</span><span class="p">.</span><span class="n">isDone</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">float</span> <span class="n">progress</span> <span class="p">=</span> <span class="n">Mathf</span><span class="p">.</span><span class="nf">Clamp01</span><span class="p">(</span><span class="n">asyncLoad</span><span class="p">.</span><span class="n">progress</span> <span class="p">/</span> <span class="m">0.9f</span><span class="p">);</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"Loading progress: "</span> <span class="p">+</span> <span class="n">progress</span><span class="p">);</span>
+        <span class="k">await</span> <span class="n">Task</span><span class="p">.</span><span class="nf">Yield</span><span class="p">();</span> <span class="c1">// 等待下一帧</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="资源顺序加载">资源顺序加载</h4>
+<p>有时候，我们希望保证某些资源或场景按特定顺序加载，或者在某些资源完全加载后才能加载其他资源。使用异步加载时，<code class="language-plaintext highlighter-rouge">async</code>和<code class="language-plaintext highlighter-rouge">await</code>可以让你控制加载的顺序</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="n">Task</span> <span class="nf">LoadSceneInOrider</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// 加载第一个场景</span>
+    <span class="k">await</span> <span class="nf">LoadSceneAsync</span><span class="p">(</span><span class="s">"Scene1"</span><span class="p">);</span>
+
+    <span class="c1">// 加载第二个场景</span>
+    <span class="k">await</span> <span class="nf">LoadSceneAsync</span><span class="p">(</span><span class="s">"Scene2"</span><span class="p">);</span>
+
+    <span class="c1">// 继续加载其他资源</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="避免资源加载顺序问题">避免资源加载顺序问题</h4>
+<p>确保在加载多个场景时，场景中的资源顺序正确。对于大型场景或者有依赖关系的资源，可以使用<code class="language-plaintext highlighter-rouge">Addressables</code>系统来更细粒度地控制资源的加载顺序</p>
+
+<h4 id="资源优化">资源优化</h4>
+<p>异步加载场景和资源时，性能优化是非常重要的。可以使用以下方法：</p>
 <ul>
-  <li>场景切换动画：为了避免切换场景时的黑屏，你可以在场景切换之前播放一个加载动画或者过渡动画</li>
+  <li>使用<code class="language-plaintext highlighter-rouge">async</code>和<code class="language-plaintext highlighter-rouge">await</code>配合加载不同类型的资源：例如先加载场景，然后在后台加载音频、纹理等资源</li>
+  <li>场景切换前缓冲资源：提前加载必要的资源，避免在切换场景时发生卡顿</li>
+  <li>分步加载资源：不必一次性加载所有资源，可以分批次地进行加载，确保用户界面的流畅性</li>
 </ul>
 
 <h3 id="多场景注意事项">多场景注意事项</h3>
@@ -442,21 +516,17 @@
 
 <p><a href="https://docs.unity3d.com/ScriptReference/SceneManagement.SceneManager.html">UnityScripting SceneManager</a></p>
 
-<h3 id="dont-destroy-onload">Dont Destroy OnLoad</h3>
+<h3 id="dontdestroyonload">DontDestroyOnLoad</h3>
 <p><code class="language-plaintext highlighter-rouge">DontDestroyOnLoad</code>是Unity中一个非常使用的函数，它可以将某个对象在加载新场景时保持不被销毁。这对于需要在多个场景间共享的对象（如音频管理器、玩家数据等）非常有用</p>
 
-<ol>
-  <li>基本使用</li>
-</ol>
+<p>1.基本使用</p>
 
 <p>通过<code class="language-plaintext highlighter-rouge">DontDestroyOnLoad</code>，你可以使一个游戏对象在场景切换时不被销毁。当你加载一个新场景时，默认情况下，当前场景中所有对象都会被卸载。但如果某个对象调用了<code class="language-plaintext highlighter-rouge">DontDestroyOnLoad</code>，它就会被保留，直到手动销毁它</p>
 
 <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Start</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="nf">DontDestroyOnLoad</span><span class="p">(</span><span class="n">gameObject</span><span class="p">);</span> <span class="c1">// 保持这个对象不被销毁</span>
 </code></pre></div></div>
 
-<ol>
-  <li>适用场景</li>
-</ol>
+<p>2.适用场景</p>
 
 <p><code class="language-plaintext highlighter-rouge">DontDestroyOnLoad</code>通常适用于以下情况：</p>
 <ul>
@@ -465,9 +535,7 @@
   <li>全局控制器：如果你有一个控制器或管理器（例如游戏状态控制器、广告管理器等），这些也可以通过<code class="language-plaintext highlighter-rouge">DontDestroyOnLoad</code>保持跨场景存在</li>
 </ul>
 
-<ol>
-  <li>注意事项</li>
-</ol>
+<p>3.注意事项</p>
 
 <p><strong>可能引起的问题</strong></p>
 <ul>
