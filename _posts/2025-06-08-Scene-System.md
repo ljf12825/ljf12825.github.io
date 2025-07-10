@@ -384,12 +384,122 @@ Unity的底层实现并没有公开`DontDestroyOnLoad`的具体源码，但我�
 
 
 ### 场景打包与构建设置
+#### 构建设置
+##### 访问构建设置
+构建设置可以通过Unity编辑器的菜单访问：
+- `File` -> `Build Settings`
+
+构建设置窗口列出了所有可用的场景、平台选项、打包模式、构建设置等。你可以通过它来管理场景、选择构建平台、设置构建选项
+
+![Build Settings](/assets/images/BuildSettings.jpg)
+
+##### 场景的添加与移除
+在构建设置中，所有需要包含在游戏构建中的场景都必须被添加到场景列表中
+- 添加场景：点击`Add Open Scenes`按钮，Unity会将当前打开的场景添加到场景列表中
+- 移除场景：点击场景旁边的`-`按钮，移除该场景
+
+场景顺序：场景在构建设置中的顺序很重要。Unity会按顺序加载这些场景，并且默认加载列表中的第一个场景作为游戏启动场景
+
+##### 构建平台选择
+Unity支持多个平台的构建，包括PC、Mac、Linux、WebGL、iOS、Android、Console等，可以选择目标平台并进行构建。不同平台可能会有不同的构建要求
+- 选择平台：在构建设置窗口中，点击平台名称（例如PC，Mac & Linux Standalone）来选择目标平台
+- 平台切换：点击`Switch Platform`按钮来切换目标平台，Unity会根据选择的平台进行相应的调整
+
+##### 场景打包模式
+在构建设置中，场景的加载方式分为两种模式：
+- Additive
+- Single
+
+通常情况下，需要选择不同的加载模式来优化内存管理和加载时间
+
+#### 场景构建与打包优化
+##### 资源优化
+优化游戏的场景和资源打包时提升游戏性能的重要步骤，以下是常见的优化方法：
+- 精简资源：确保每个场景中只包含必要的资源，避免冗余的材质、纹理、音频等
+- 静态合批：将场景中的静态物体合并成一个大网格，减少draw call，提升渲染效率
+- 光照与阴影：减少场景中动态光源数量，合理使用光照贴图（Lightmaps）来优化性能
+
+##### 场景打包设置
+Unity提供了对场景打包的一些设置，帮助你控制场景打包的方式：
+- 压缩选项：可以选择是否对场景中的资源进行压缩，通常选择压缩可以减少打包文件的大小
+- 场景的内存管理：在构建设置中，你可以选择是否将场景资源分离到不同的资源包中（例如Asset Bundles或Addressables），这样可以减少初始加载时间，并按需加载资源
+
+##### 多平台支持
+Unity支持在不同平台上进行构建。你可以针对每个平台选择不同的场景优化策略：
+- PC和Mac：通常场景中的资源较大，可以通过压缩和剔除不必要的内容来减小文件体积
+- 移动平台：对于移动平台，通常需要更严格的内存管理和性能优化，避免过大的场景和冗余资源
+- WebGL：Web平台通常有更严格的内存和资源限制，因此需要优化场景资源，减少加载时间
+
+##### 构建设置中的其他选项
+- Player Settings：可以对每个平台的构建进行详细配置，例如分辨率、图形设置、资源加载策略等
+- Development Build：启用此选项可以使构建版本包含调试信息，用于开发和调试
+- Script Debugging：启用后，可以进行脚本调试，适用于开发阶段
+
 
 ### 场景分块加载
+对于大型游戏，特别是开放世界类型的游戏，将场景分割成小的块（Chunk）是非常重要的，这样可以按需加载场景，从而减小内存消耗并提高游戏性能
+
+分块加载场景的优势：
+- 按需加载：根据玩家的位置或游戏进度，动态加载和卸载场景
+- 减少内存占用：只加载当前玩家需要的场景，减少不必要的内存消耗
+
+#### 如何实现场景分块加载：
+1. 将一个大场景拆分成多个小场景（例如，分成多个区域）
+2. 使用`SceneManager.LoadScene`或`SceneManger.LoadSceneAsync`按需加载这些小场景
+3. 使用`LoadSceneMode.Additive`加载多个场景，而不卸载当前场景
+
+```cs
+// 异步加载多个场景
+IEnumerator LoadChunksAsync()
+{
+    AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Chunk1", LoadSceneMode.Additive);
+
+    while(!asyncLoad.isDone) yield return null;
+
+    asyncLoad = SceneManager.LoadSceneAsync("Chunk2", LoadSceneMode.Additive);
+
+    while (!asyncLoad.isDone) yield return null;
+}
+```
+
+#### 场景分层管理
+通过分层管理来控制场景的加载，主要将游戏内容和UI、背景音乐等资源分离，可以提高场景的加载效率，例如：
+- 游戏场景：包含主游戏逻辑、任务、敌人、地形等
+- UI场景：包含主菜单、设置、游戏暂停界面等
+- 音频场景：音频资源可以独立成一个场景，保证游戏时音效不会受到场景切换的影响
+
 
 ### 触发器加载机制
 
-### Addressable + Scene Loading
+### Addressable与场景加载
+#### Addressable Asset System
+Unity的Addressable Asset System是一个非常强大的资源管理和加载系统，可以让你更精确地控制资源的加载、卸载、分发和优化。它可以用于按需加载资源，特别适合大规模场景的动态加载
 
-### 性能优化
+主要特点：
+- 按需加载：通过地址引用来加载资源，而不需要将所有资源打包在场景中
+- 优化加载：支持异步加载和缓存优化，减少内存消耗
+
+在构建场景时，可以通过Addressable资源来管理和加载场景文件及资源。例如，可以将场景预先打包为Addressable，并在运行时加载它
+
+示例：
+```cs
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+
+void LoadSceneWithAddressable(string sceneName)
+{
+    // 使用Addressable加载场景
+    AsyncOperationHandle<SceneInstance> handle = Addressables.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+
+    // 可以监听加载过程
+    handle.Completed += (op) => { Debug.Log("Scene Loaded: " + sceneName);};
+}
+```
+
+#### 场景打包为Addressable
+将场景打包为Addressable可以极大地优化场景的加载过程，特别是在资源分发和网络加载时，Unity提供了专门的工具来标记场景为Addressable，并管理它们的加载
+1. 在Addressable中创建一个项目条目
+2. 通过Asset Bundle管理器，将场景资源标记为`Addressable`
+3. 使用异步加载方法来加载场景并优化内存使用
+
 
