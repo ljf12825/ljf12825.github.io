@@ -3,7 +3,7 @@ title: "Event and Callback in Unity"
 layout: single
 date: 2025-06-01
 categories: [笔记]
-tags: [Unity, Unity System]
+tags: [Unity, Unity Syntax]
 author: "ljf12825"
 ---
 在Unity中，事件和回调时实现解耦和响应式编程的核心机制。它们能够在不同的组件之间传递消息或相应某些操作
