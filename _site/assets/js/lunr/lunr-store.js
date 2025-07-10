@@ -119,10 +119,10 @@ var store = [{
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Coroutine.html",
         "teaser": null
       },{
-        "title": "Event Bus",
-        "excerpt":" ","categories": ["笔记"],
+        "title": "Event and Callback in Unity",
+        "excerpt":"在Unity中，事件和回调时实现解耦和响应式编程的核心机制。它们能够在不同的组件之间传递消息或相应某些操作 事件（Event） 事件是一种特殊的委托类型，允许其他对象订阅并响应某个特定的行为或状态变化。通常用于对象之间的通信，避免了直接调用，使代码更具解耦性 基本使用 在Unity中，可以使用C#的event关键字来声明一个事件。事件的订阅和触发通常会在组件之间完成 // 定义事件的委托类型 public delegate void PlayerScored(int score); public class GameManager : MonoBehaviour { // 声明一个事件 public event PlayerScored OnPlayerScored; public void PlayerScore(int score) { // 触发事件 OnPlayerScored?.Invoke(score); } } public class UIManager : MonoBehaviour { public GameManager gameManager; private void OnEnable() { // 订阅事件 gameManager.OnPlayerScored...","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Event-Bus.html",
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Event-and-Callback-in-Unity.html",
         "teaser": null
       },{
         "title": "FSM",
