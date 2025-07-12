@@ -5,6 +5,7 @@ date: 2025-06-01
 categories: [笔记]
 tags: [Unity, Unity Engine]
 author: "ljf12825"
+permalink: /posts/2025-06-03-Coroutine/
 ---
 Unity Coroutine是一种允许在多帧中分布执行代码的机制，它通常用于处理一些需要在多个帧之间等待的任务，比如延时操作、动画播放、资源加载等  
 协程本质上是通过一种特殊的方式执行代码，它可以在执行过程中“暂停”并在后续的帧继续执行  
