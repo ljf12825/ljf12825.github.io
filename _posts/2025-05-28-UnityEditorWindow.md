@@ -1,11 +1,13 @@
 ---
-title: "Unity编辑器窗口"
+title: "Unity Editor Window"
 layout: single
 date: 2025-05-28
 categories: [笔记]
 tags: [Unity, Unity Editor]
 author: "ljf12825"
 ---
+关于Unity编辑器窗口的概览
+
 ![Unity编辑器窗口](/assets/images/UnityEditorWindow.jpg)
 
 A:Toolbar工具栏，用于访问Unity账户和云服务。它还包括播放模式、撤销历史记录、Unity搜索、图层可见性菜单和编译器布局菜单等控件。
