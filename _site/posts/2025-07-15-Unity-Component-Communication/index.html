@@ -10,19 +10,19 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Unity Test Runner - ljf12825’s Blog</title>
-<meta name="description" content="">
+<!-- begin _includes/seo.html --><title>Unity Component Communication - ljf12825’s Blog</title>
+<meta name="description" content="通信方式       类型       是否推荐       示例                       GetComponent&lt;T&gt;() 直接调用       显式调用       推荐       GetComponent&lt;Health&gt;().TakeDamage(10);                 UnityEvent       事件系统       推荐       在 Inspector 中绑定事件                 C# 委托/事件 (delegate, event)       原生 C#       推荐       public event Action OnDead;                 接口调用（如 IDamageable）       解耦方式       推荐       target.GetComponent&lt;IDamageable&gt;()?.TakeDamage()                 ScriptableObject 事件       高级数据驱动       推荐       Game-wide event bus                 SendMessage() / BroadcastMessage()       反射调用       不推荐       SendMessage(&quot;Explode&quot;)">
 
 
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="ljf12825's Blog">
-<meta property="og:title" content="Unity Test Runner">
-<meta property="og:url" content="http://localhost:4000/posts/2025-07-12-Unity-Test-Runner/">
+<meta property="og:title" content="Unity Component Communication">
+<meta property="og:url" content="http://localhost:4000/posts/2025-07-15-Unity-Component-Communication/">
 
 
-  <meta property="og:description" content="">
+  <meta property="og:description" content="通信方式       类型       是否推荐       示例                       GetComponent&lt;T&gt;() 直接调用       显式调用       推荐       GetComponent&lt;Health&gt;().TakeDamage(10);                 UnityEvent       事件系统       推荐       在 Inspector 中绑定事件                 C# 委托/事件 (delegate, event)       原生 C#       推荐       public event Action OnDead;                 接口调用（如 IDamageable）       解耦方式       推荐       target.GetComponent&lt;IDamageable&gt;()?.TakeDamage()                 ScriptableObject 事件       高级数据驱动       推荐       Game-wide event bus                 SendMessage() / BroadcastMessage()       反射调用       不推荐       SendMessage(&quot;Explode&quot;)">
 
 
 
@@ -37,7 +37,7 @@
 
 
 
-<link rel="canonical" href="http://localhost:4000/posts/2025-07-12-Unity-Test-Runner/">
+<link rel="canonical" href="http://localhost:4000/posts/2025-07-15-Unity-Component-Communication/">
 
 
 
@@ -148,8 +148,8 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Unity Test Runner">
-    <meta itemprop="description" content="">
+    <meta itemprop="headline" content="Unity Component Communication">
+    <meta itemprop="description" content="            通信方式      类型      是否推荐      示例                  GetComponent&lt;T&gt;() 直接调用      显式调用      推荐      GetComponent&lt;Health&gt;().TakeDamage(10);              UnityEvent      事件系统      推荐      在 Inspector 中绑定事件              C# 委托/事件 (delegate, event)      原生 C#      推荐      public event Action OnDead;              接口调用（如 IDamageable）      解耦方式      推荐      target.GetComponent&lt;IDamageable&gt;()?.TakeDamage()              ScriptableObject 事件      高级数据驱动      推荐      Game-wide event bus              SendMessage() / BroadcastMessage()      反射调用      不推荐      SendMessage(&quot;Explode&quot;)      ">
     <meta itemprop="datePublished" content="2025-06-01T00:00:00+08:00">
     
 
@@ -157,7 +157,7 @@
       
         <header>
           <h1 id="page-title" class="page__title" itemprop="headline">
-            <a href="http://localhost:4000/posts/2025-07-12-Unity-Test-Runner/" itemprop="url">Unity Test Runner
+            <a href="http://localhost:4000/posts/2025-07-15-Unity-Component-Communication/" itemprop="url">Unity Component Communication
 </a>
           </h1>
           
@@ -168,7 +168,54 @@
 
       <section class="page__content" itemprop="text">
         
-        
+        <table>
+  <thead>
+    <tr>
+      <th>通信方式</th>
+      <th>类型</th>
+      <th>是否推荐</th>
+      <th>示例</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetComponent&lt;T&gt;()</code> 直接调用</td>
+      <td>显式调用</td>
+      <td>推荐</td>
+      <td><code class="language-plaintext highlighter-rouge">GetComponent&lt;Health&gt;().TakeDamage(10);</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">UnityEvent</code></td>
+      <td>事件系统</td>
+      <td>推荐</td>
+      <td>在 Inspector 中绑定事件</td>
+    </tr>
+    <tr>
+      <td>C# 委托/事件 (<code class="language-plaintext highlighter-rouge">delegate</code>, <code class="language-plaintext highlighter-rouge">event</code>)</td>
+      <td>原生 C#</td>
+      <td>推荐</td>
+      <td><code class="language-plaintext highlighter-rouge">public event Action OnDead;</code></td>
+    </tr>
+    <tr>
+      <td>接口调用（如 <code class="language-plaintext highlighter-rouge">IDamageable</code>）</td>
+      <td>解耦方式</td>
+      <td>推荐</td>
+      <td><code class="language-plaintext highlighter-rouge">target.GetComponent&lt;IDamageable&gt;()?.TakeDamage()</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ScriptableObject</code> 事件</td>
+      <td>高级数据驱动</td>
+      <td>推荐</td>
+      <td>Game-wide event bus</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">SendMessage()</code> / <code class="language-plaintext highlighter-rouge">BroadcastMessage()</code></strong></td>
+      <td>反射调用</td>
+      <td>不推荐</td>
+      <td><code class="language-plaintext highlighter-rouge">SendMessage("Explode")</code></td>
+    </tr>
+  </tbody>
+</table>
 
         
       </section>
@@ -189,10 +236,10 @@
       
   <nav class="pagination">
     
-      <a href="/posts/2025-07-12-Unity-Memory-Profiler/" class="pagination--pager" title="Unity Memory Profiler">Previous</a>
+      <a href="/posts/2025-07-11-Object/" class="pagination--pager" title="Object">Previous</a>
     
     
-      <a href="/posts/2025-07-15-Data-Driven-Design/" class="pagination--pager" title="Data Driven Design">Next</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
     
   </nav>
 

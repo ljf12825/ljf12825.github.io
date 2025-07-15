@@ -36,7 +36,7 @@ var store = [{
         "teaser": null
       },{
         "title": "GameObject",
-        "excerpt":"在 Unity 中，GameObject 是游戏中所有对象的基础实体。可以理解为 Unity 世界中一切可见或不可见物体的“容器”，它本身没有实际行为或外观，而是通过添加各种组件（Component）来赋予其功能。 一、GameObject的核心概念 它是Unity中一切实体的基础类 没有组件的GameObject是一个空物体 所有可见（如角色、道具、地形）或不可见（如相机、灯光、空容器）的对象，都是GameObject或其派生 二、GameObject的结构与组成 一个GameObject至少包含一个组件：Transform 1.必备组件：Transform 控制GameObject的位置、旋转、缩放 组成了Unity的场景层级结构（父子关系） 所有GameObject都必须有Transform，不能移除 transform.position = new Vector3(0, 1, 0); transform.Rotate(Vector3.up, 90); 2.常见组件 组件 作用 MeshRenderer 渲染模型表面 Collider 物理碰撞检测 Rigidbody 让 GameObject 参与物理计算 Animator 控制动画状态机 AudioSource 播放声音 Camera 摄像头视角 Light 光源 自定义脚本 实现逻辑行为（继承自 MonoBehaviour） 3.添加组件方式 在Inspector面板中点击”Add Component” 代码中：...","categories": ["笔记"],
+        "excerpt":"GameObject继承自Object，是所有可以存在于场景中的物体的基类 可以理解为 Unity 世界中一切可见或不可见物体的“容器”，它本身没有实际行为或外观，而是通过添加各种组件（Component）来赋予其功能。 一、GameObject的核心概念 它是Unity中一切实体的基础类 没有组件的GameObject是一个空物体 所有可见（如角色、道具、地形）或不可见（如相机、灯光、空容器）的对象，都是GameObject或其派生 Active status 默认是激活状态，可以手动设置为非激活状态，在非激活状态下，GameObject会变得不可见，不会接收任何的回调或事件 可以通过GameObject.SetActive设置 Static status Unity的某些系统（例如全局照明、遮挡、批处理、导航和反射探针）依赖于GameObject的静态状态，可以使用GameObjectUtility.SetStaticEditorFlags来控制Unity的哪些系统将GameObject视为静态的 Tag and Layer Tag Layer 二、GameObject的结构与组成 一个GameObject至少包含一个组件：Transform 1.必备组件：Transform 控制GameObject的位置、旋转、缩放 组成了Unity的场景层级结构（父子关系） 所有GameObject都必须有Transform，不能移除 transform.position = new Vector3(0, 1, 0); transform.Rotate(Vector3.up, 90); 2.常见组件 组件 作用 MeshRenderer 渲染模型表面 Collider 物理碰撞检测 Rigidbody 让 GameObject 参与物理计算 Animator 控制动画状态机 AudioSource 播放声音 Camera...","categories": ["笔记"],
         "tags": ["Unity","GameObject"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/05/28/GameObject.html",
         "teaser": null
@@ -80,13 +80,13 @@ var store = [{
         "title": "Layer",
         "excerpt":"在Unity中，Layer是要给非常重要的系统 它主要用于： 控制物体的渲染与相机的可见性 控制物理碰撞（配合Layer Collision Matrix） 通过脚本进行物体分类和筛选 什么是Layer Layer是给GameObject打的“标签”，但它和Tag不一样，Layer是用于功能性控制的，特别在： 摄像机的Culling Mask 光照影响（Light Culling） 物理碰撞（Physics Layer） 射线检测（Raycast Layer） Layer的使用场景 1.摄像机视野控制（Culling Mask） 在Camera组件中，你可以设置 Culling Mask -&gt; 选择哪些Layer可以被该相机看到 用途： UI相机只看UI层 小地图相机只看敌人层 分屏镜头每个只看自己的部分 Layer不仅能控制每个物体是否被摄像机看到，还能与多个摄像机协作实现更加复杂的视图效果 例如，在多人游戏中，你可以为每个玩家设置独立的摄像机，每个摄像机通过不同的Culling Mask来渲染不同的场景部分 示例：多摄像头分屏控制 在分屏游戏中，可以设置多个摄像机，每个摄像机只渲染属于特定玩家的物体 camera1.cullingMask = 1 &lt;&lt; LayerMask.NameToLayer(\"Player1\"); camera2.cullingMask = 1 &lt;&lt; LaeryMask.NameToLayer(\"Player2\"); 通过这种方式，你能够在同一个场景中显示不同的物体，仅限于特定玩家的视野 2.物理碰撞控制（Layer Collision Matrix） 在菜单中： Edit...","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Layer.html",
+        "url": "/posts/2025-06-01-Layer/",
         "teaser": null
       },{
         "title": "Tag",
         "excerpt":"在Unity中，Tag是用来标记和分类GameObject的一种轻量级方法，主要用于在代码中查找和判断物体的类型或身份 Tag的核心作用 功能 示例 分类物体 Player、Enemy、Item、UI 等 逻辑判断 判断一个物体是不是玩家 查找特定对象 GameObject.FindWithTag() 触发器/碰撞器逻辑判断 if (other.CompareTag(\"Enemy\")) Tag的使用方法 1.设置Tag 1.选中一个 GameObject 2.Inspector 面板 → 上方的 “Tag” 下拉菜单 3.如果没有想要的标签 → 点击 Add Tag… → 添加一个新的字符串 4.回到物体，设置为刚才新建的 Tag 注意： Tag是字符串类型，但Unity会为你管理列表，不用硬编码 2.使用Tag查找对象 GameObject player = GameObject.FindWithTag(\"Player\"); 或者查找多个对象： GameObject[] enemies = GameObject.FindGameObjectsWithTag(\"Enemy\"); 3.在触发器或碰撞中判断Tag void OnTriggerEnter(Collider other) =&gt;...","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Tag.html",
+        "url": "/posts/2025-06-01-Tag/",
         "teaser": null
       },{
         "title": "Component",
@@ -401,10 +401,52 @@ var store = [{
         "url": "/posts/2025-07-12-Unity-Test-Runner/",
         "teaser": null
       },{
+        "title": "Data Driven Design",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Architecture"],
+        "url": "/posts/2025-07-15-Data-Driven-Design/",
+        "teaser": null
+      },{
+        "title": "Game Architecture",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Architecture"],
+        "url": "/posts/2025-07-15-Game-Architecture/",
+        "teaser": null
+      },{
+        "title": "Game Design Patterns",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Architecture"],
+        "url": "/posts/2025-07-15-Game-Design-Patterns/",
+        "teaser": null
+      },{
+        "title": "Interface Oriented Design",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Architecture"],
+        "url": "/posts/2025-07-15-Interface-Oriented-Design/",
+        "teaser": null
+      },{
+        "title": "Loose Coupling",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Architecture"],
+        "url": "/posts/2025-07-15-Loose-Coupling/",
+        "teaser": null
+      },{
+        "title": "Native Layer to C# Layer",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Underlying Principle"],
+        "url": "/posts/2025-07-15-Native-Layer-to-C#-Layer/",
+        "teaser": null
+      },{
         "title": "Object",
         "excerpt":"Object是Unity中所有内建物体的基类，实现在UnityEngine.CoreModule中，不同于C#中的System.Object，它是托管层（C#）和原生引擎层（C++）之间的桥梁，背后绑定着Unity C++引擎层的资源句柄 Object的特点（Unity的特有行为） 引擎资源的绑定 每个UnityEngine.Object对象都对应一个C++层对象，它们通过一个instance 2D来关联，且资源的生命周期不由GC管理 比如： GameObject go = new GameObject(); Object.Destroy(go); Debug.Log(go == null); // true 这就是Object的“鬼行为”，此处的go == null并非等价于object is null Unity的“fake null”机制 Unity重写了==操作符 如果一个Object对象在引擎层已经被销毁（Destroy过），但C#还保有托管引用，这时候： Debug.Log(go == null); // true Debug.Log(go.Equals(null)); // false Debug.Log(ReferenceEquals(go, null)); // false 这是Unity为了安全做的改动行为，防止对已经销毁的对象操作，引起native崩溃 底层原理 Unity的Object在C#层其实只是一个代理，它对应的C++引擎层对象通过C#层的IntPtr m_CachedPtr与C++对象通信（该字段可以在反编译时看到） 资源对象（比如一个贴图）在编译器导入时会被转换为native object，保存在场景或资源文件中，加载时通过Unity自己的反序列化系统生成C#代理对象，并挂接m_CachedPtr Unity会使用C++引擎进行资源生命周期的管理，而不是C#的GC，所以Destroy调的是C++的释放接口 Sometimes an instance of...","categories": ["笔记"],
         "tags": ["Unity","Syntax","Unity Class"],
         "url": "/posts/2025-07-11-Object/",
+        "teaser": null
+      },{
+        "title": "Unity Component Communication",
+        "excerpt":"               通信方式       类型       是否推荐       示例                       GetComponent&lt;T&gt;() 直接调用       显式调用       推荐       GetComponent&lt;Health&gt;().TakeDamage(10);                 UnityEvent       事件系统       推荐       在 Inspector 中绑定事件                 C# 委托/事件 (delegate, event)       原生 C#       推荐       public event Action OnDead;                 接口调用（如 IDamageable）       解耦方式       推荐       target.GetComponent&lt;IDamageable&gt;()?.TakeDamage()                 ScriptableObject 事件       高级数据驱动       推荐       Game-wide event bus                 SendMessage() / BroadcastMessage()       反射调用       不推荐       SendMessage(\"Explode\")          ","categories": ["笔记"],
+        "tags": ["Unity","Syntax","Unity Class"],
+        "url": "/posts/2025-07-15-Unity-Component-Communication/",
         "teaser": null
       },{
     "title": "About",
