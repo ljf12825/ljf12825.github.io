@@ -200,16 +200,27 @@
   <li>分屏镜头每个只看自己的部分</li>
 </ul>
 
+<p>Layer不仅能控制每个物体是否被摄像机看到，还能与多个摄像机协作实现更加复杂的视图效果</p>
+
+<p>例如，在多人游戏中，你可以为每个玩家设置独立的摄像机，每个摄像机通过不同的Culling Mask来渲染不同的场景部分</p>
+
+<p>示例：多摄像头分屏控制</p>
+
+<p>在分屏游戏中，可以设置多个摄像机，每个摄像机只渲染属于特定玩家的物体</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">camera1</span><span class="p">.</span><span class="n">cullingMask</span> <span class="p">=</span> <span class="m">1</span> <span class="p">&lt;&lt;</span> <span class="n">LayerMask</span><span class="p">.</span><span class="nf">NameToLayer</span><span class="p">(</span><span class="s">"Player1"</span><span class="p">);</span>
+<span class="n">camera2</span><span class="p">.</span><span class="n">cullingMask</span> <span class="p">=</span> <span class="m">1</span> <span class="p">&lt;&lt;</span> <span class="n">LaeryMask</span><span class="p">.</span><span class="nf">NameToLayer</span><span class="p">(</span><span class="s">"Player2"</span><span class="p">);</span>
+</code></pre></div></div>
+<p>通过这种方式，你能够在同一个场景中显示不同的物体，仅限于特定玩家的视野</p>
+
 <h3 id="2物理碰撞控制layer-collision-matrix">2.物理碰撞控制（Layer Collision Matrix）</h3>
 <p>在菜单中：</p>
 
 <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">Edit</span> <span class="s">-&gt;</span> <span class="s">Project</span> <span class="s">Settings</span> <span class="s">-&gt;</span> <span class="s">Physics</span>
 </code></pre></div></div>
 
-<p>你可以看到Layer Collision Matrix，它控制：</p>
+<p>你可以看到Layer Collision Matrix，它控制哪些Layer和哪些Layer能发生物理碰撞</p>
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>哪些Layer和哪些Layer能发生物理碰撞
-</code></pre></div></div>
+<p>如果在游戏中有多个物体不需要彼此发生碰撞，可以通过Layer来减少不必要的碰撞检测，提高性能</p>
 
 <p><strong>用途：</strong></p>
 <ul>
@@ -311,6 +322,30 @@
   <li>给每种功能的对象分配专属Layer</li>
   <li>摄像机、光源、UI、Trigger检测都应依赖Layer控制逻辑</li>
 </ul>
+
+<h2 id="layer性能优化与管理">Layer性能优化与管理</h2>
+<h3 id="layer管理的最佳实践">Layer管理的最佳实践</h3>
+<ul>
+  <li>避免过多的Layer：虽然Unity最多允许32个Layer，但不建议频繁使用大量的Layer。过多的Layer会增加管理和维护的难度，且可能会影响性能。建议将层次结构设计得尽量简洁，避免无谓的冗余</li>
+  <li>分层管理：根据物体的功能将其分配到不同的Layer中，例如：
+    <ul>
+      <li>游戏角色：<code class="language-plaintext highlighter-rouge">Player</code>,<code class="language-plaintext highlighter-rouge">Enemy</code></li>
+      <li>UI界面：<code class="language-plaintext highlighter-rouge">UI</code>,<code class="language-plaintext highlighter-rouge">Menu</code></li>
+      <li>特效：<code class="language-plaintext highlighter-rouge">PerticleEffects</code></li>
+      <li>背景：<code class="language-plaintext highlighter-rouge">Background</code></li>
+    </ul>
+  </li>
+</ul>
+
+<p>通过合理的分层，既能提高渲染效率，也便于后期维护</p>
+
+<h3 id="动态控制layer">动态控制Layer</h3>
+<p>在一些场景中，可能需要根据物体的状态动态改变其Layer。比如，当玩家接触到某个特殊的物体时，可以改变其Layer，使其在某些摄像机的视野中不可见或不可碰撞</p>
+
+<p>示例：动态更改Layer：</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gameObject</span><span class="p">.</span><span class="n">layer</span> <span class="p">=</span> <span class="n">LayerMask</span><span class="p">.</span><span class="nf">NameToLayer</span><span class="p">(</span><span class="s">"Invisible"</span><span class="p">);</span>
+</code></pre></div></div>
+<p>通过动态修改Layer，能够灵活控制物体的行为和渲染效果</p>
 
         
       </section>

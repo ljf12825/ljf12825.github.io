@@ -1,0 +1,436 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.1 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Attribute in Unity - ljf12825’s Blog</title>
+<meta name="description" content="Unity中的特性用于控制Unity编译器的行为，或者用于运行时特定的逻辑">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="ljf12825's Blog">
+<meta property="og:title" content="Attribute in Unity">
+<meta property="og:url" content="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Attribute-in-Unity.html">
+
+
+  <meta property="og:description" content="Unity中的特性用于控制Unity编译器的行为，或者用于运行时特定的逻辑">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-06-01T00:00:00+08:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Attribute-in-Unity.html">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="ljf12825's Blog Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- favicon -->
+<link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          ljf12825's Blog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/"
+                
+                
+              >Home</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/categories/"
+                
+                
+              >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/tags/"
+                
+                
+              >Tags</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/about/"
+                
+                
+              >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Attribute in Unity">
+    <meta itemprop="description" content="Unity中的特性用于控制Unity编译器的行为，或者用于运行时特定的逻辑">
+    <meta itemprop="datePublished" content="2025-06-01T00:00:00+08:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Attribute-in-Unity.html" itemprop="url">Attribute in Unity
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>Unity中的特性用于控制Unity编译器的行为，或者用于运行时特定的逻辑</p>
+
+<h2 id="unity中常见特性">Unity中常见特性</h2>
+<p>Unity为许多常见的操作都提供了特性</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">SerializeField</code></li>
+</ol>
+
+<ul>
+  <li>作用：使私有字段在Unity的Inspector面板中可见。通常用于控制字段访问性，但仍希望它出现在Inspector中进行编辑</li>
+</ul>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">SerializeField</span><span class="p">]</span>
+<span class="k">private</span> <span class="kt">int</span> <span class="n">playerHealth</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">HideInInspector</code></li>
+</ol>
+
+<ul>
+  <li>作用：标记字段不显示在Inspector中，但它仍然是类的成员，仍然可以在代码中使用</li>
+</ul>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">HideInInspector</span><span class="p">]</span>
+<span class="k">public</span> <span class="kt">int</span> <span class="n">secretValur</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">Range</code></li>
+</ol>
+
+<ul>
+  <li>作用：为字段设置一个值的范围，通常用于浮动值或整数值。Range会在Inspector中为字段添加一个滑块</li>
+</ul>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nf">Range</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">100</span><span class="p">)]</span>
+<span class="k">public</span> <span class="kt">int</span> <span class="n">speed</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">Head</code></li>
+</ol>
+
+<ul>
+  <li>作用：在Inspector中为字段添加一个标题或标签，通常用于分组和提高可读性</li>
+</ul>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nf">Header</span><span class="p">(</span><span class="s">"Player Settings"</span><span class="p">)]</span>
+<span class="k">public</span> <span class="kt">float</span> <span class="n">speed</span><span class="p">;</span>
+<span class="k">public</span> <span class="kt">int</span> <span class="n">health</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">Tooltip</code></li>
+</ol>
+
+<ul>
+  <li>作用：在Inspector中为字段提供一个悬浮提示文本，鼠标悬停在字段上时显示该提示</li>
+</ul>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nf">Tooltip</span><span class="p">(</span><span class="s">"Player's health value"</span><span class="p">)]</span>
+<span class="k">public</span> <span class="kt">float</span> <span class="n">health</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">ExecuteInEditMode</code></li>
+</ol>
+
+<ul>
+  <li>作用：使脚本在编辑模式下运行，而不仅仅是在播放模式下运行。这对于需要在编辑模式下进行自定义操作的脚本（如编辑器扩展）非常有用</li>
+</ul>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">ExecuteInEditMode</span><span class="p">]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">CustomEditorScript</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">void</span> <span class="nf">Update</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// 在编辑模式下也会执行</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">ContextMenu</code></li>
+</ol>
+
+<ul>
+  <li>作用：为字段或方法添加一个右键菜单选项。在Unity编辑器的Inspector中，右键点击该字段或方法时，可以显示一个上下文菜单，允许快速执行该方法</li>
+</ul>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nf">ContextMenu</span><span class="p">(</span><span class="s">"Reset Health"</span><span class="p">)]</span>
+<span class="k">public</span> <span class="k">void</span> <span class="nf">ResetHealth</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">health</span> <span class="p">=</span> <span class="m">100</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">FormerlySerializedAs</code></li>
+</ol>
+
+<ul>
+  <li>作用：当字段名称更改后，Unity仍能够反序列化旧的数据，并保持数据的兼容性。适用于字段重命名后仍想保持对旧数据的支持</li>
+</ul>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nf">FormerlySerializedAs</span><span class="p">(</span><span class="s">"oldPlayerHealth"</span><span class="p">)]</span>
+<span class="p">[</span><span class="n">SerializeField</span><span class="p">]</span>
+<span class="k">private</span> <span class="kt">int</span> <span class="n">health</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">DisallowMultipleComponent</code></li>
+</ol>
+
+<ul>
+  <li>作用：防止同一个GameObject上添加多个同类组件。适用于那些只应当存在一个实例的组件，如<code class="language-plaintext highlighter-rouge">Camera</code>组件</li>
+</ul>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">DisallowMultipleComponent</span><span class="p">]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">MainCamera</span> <span class="p">:</span> <span class="n">MonoBehaviour</span><span class="p">{}</span>
+</code></pre></div></div>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">RequireComponent</code></li>
+</ol>
+
+<ul>
+  <li>作用：确保在同一个GameObject上附加这个脚本时，自动添加指定的组件。如果没有指定的组件，Unity会自动将其添加</li>
+</ul>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nf">RequireComponent</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">Rigidbody</span><span class="p">))]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Player</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="p">{}</span>
+</code></pre></div></div>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">HideFlags</code></li>
+</ol>
+
+<ul>
+  <li>作用：控制一个对象在Hierarchy面板、Inspector面板中的显示行为。可以设置为隐藏对象（例如，场景中的某些对象可能只用于逻辑，不需要再编辑器中显示）</li>
+</ul>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gameObject</span><span class="p">.</span><span class="n">hideFlags</span> <span class="p">=</span> <span class="n">HideFlags</span><span class="p">.</span><span class="n">HideInHierarchy</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">MenuItem</code></li>
+</ol>
+
+<ul>
+  <li>作用：在Unity的顶部菜单中添加自定义菜单项，点击该菜单项可以执行自定义代码</li>
+</ul>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nf">MenuItem</span><span class="p">(</span><span class="s">"Tools/Custom Action"</span><span class="p">)]</span>
+<span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">CustomAction</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"Custom action executed!"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>13.<code class="language-plaintext highlighter-rouge">Obsolete</code></p>
+
+<ul>
+  <li>作用：标记一个方法或类为过时的，通常会在Unity中显示警告消息，提示开发者不要再使用该方法或类</li>
+</ul>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nf">Obsolete</span><span class="p">(</span><span class="s">"This method is obsolete. Use NewMethod() instead."</span><span class="p">)]</span>
+<span class="k">public</span> <span class="k">void</span> <span class="nf">OldMethod</span><span class="p">()</span> <span class="p">{}</span>
+</code></pre></div></div>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-06-01T00:00:00+08:00">June 1, 2025</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Rendering-Principle.html" class="pagination--pager" title="Unity Rendering Principle">Previous</a>
+    
+    
+      <a href="/%E7%AC%94%E8%AE%B0/2025/06/01/PInvoke-in-Unity.html" class="pagination--pager" title="P/Invoke in Unity">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/ljf12825" rel="nofollow noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 <a href="http://localhost:4000">ljf12825's Blog</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

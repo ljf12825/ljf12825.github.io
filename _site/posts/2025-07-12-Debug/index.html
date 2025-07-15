@@ -1,0 +1,434 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.1 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Unity Debug - ljf12825’s Blog</title>
+<meta name="description" content="Unity调试时游戏开发中非常重要的一环，能够帮助开发者快速定位和解决问题。Unity提供了多种调试工具和方法，主要包括日志输出、断点调试、内存和性能分析等">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="ljf12825's Blog">
+<meta property="og:title" content="Unity Debug">
+<meta property="og:url" content="http://localhost:4000/posts/2025-07-12-Debug/">
+
+
+  <meta property="og:description" content="Unity调试时游戏开发中非常重要的一环，能够帮助开发者快速定位和解决问题。Unity提供了多种调试工具和方法，主要包括日志输出、断点调试、内存和性能分析等">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-06-01T00:00:00+08:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/posts/2025-07-12-Debug/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="ljf12825's Blog Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- favicon -->
+<link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          ljf12825's Blog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/"
+                
+                
+              >Home</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/categories/"
+                
+                
+              >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/tags/"
+                
+                
+              >Tags</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/about/"
+                
+                
+              >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Unity Debug">
+    <meta itemprop="description" content="Unity调试时游戏开发中非常重要的一环，能够帮助开发者快速定位和解决问题。Unity提供了多种调试工具和方法，主要包括日志输出、断点调试、内存和性能分析等">
+    <meta itemprop="datePublished" content="2025-06-01T00:00:00+08:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/posts/2025-07-12-Debug/" itemprop="url">Unity Debug
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>Unity调试时游戏开发中非常重要的一环，能够帮助开发者快速定位和解决问题。Unity提供了多种调试工具和方法，主要包括日志输出、断点调试、内存和性能分析等</p>
+
+<h2 id="日志输出logging">日志输出（Logging）</h2>
+<p>在Unity中，最常用的调试方法时通过输入日志，查看游戏运行时的状态。这些日志通常包括错误、警告和信息</p>
+
+<h3 id="class-debug">class Debug</h3>
+<p><code class="language-plaintext highlighter-rouge">Debug</code>类是Unity中的一个非常重要的工具类，用于在开发过程中输出调试信息、记录错误、警告以及其他状态信息。它位于<code class="language-plaintext highlighter-rouge">UnityEngine</code>命名空间下，提供了几个常用的方法，帮助开发者在运行时查看日志、跟踪错误以及确保游戏的逻辑正确性</p>
+
+<h3 id="api">API</h3>
+<h4 id="static-properties">Static Properties</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">developerConsoleEnabled</code></td>
+      <td>允许启用或禁用开发者控制台。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">developerConsoleVisible</code></td>
+      <td>控制开发者控制台是否可见。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">isDebugBuild</code></td>
+      <td>检查当前是否为开发构建（Development Build）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">unityLogger</code></td>
+      <td>获取默认的调试日志记录器。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="static-methods">Static Methods</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Assert()</code></td>
+      <td>断言条件，如果条件为假，记录错误信息。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">AssertFormat()</code></td>
+      <td>断言条件并记录格式化的错误信息。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Break()</code></td>
+      <td>暂停编辑器的执行，通常用于调试时暂停游戏。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">CheckIntegrity()</code></td>
+      <td>执行当前进程的完整性检查并返回发现的错误。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ClearDeveloperConsole()</code></td>
+      <td>清除开发者控制台中的所有日志。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">DrawLine()</code></td>
+      <td>在场景中绘制一条线段。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">DrawRay()</code></td>
+      <td>在场景中绘制一条射线。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ExtractStackTraceNoAlloc()</code></td>
+      <td>提取当前调用栈并将其填充到未管理的缓冲区中，不会分配GC内存。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">IsValidationLevelEnabled()</code></td>
+      <td>返回指定的验证级别是否已启用。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Log()</code></td>
+      <td>记录常规日志消息到控制台。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LogAssertion()</code></td>
+      <td>记录断言日志消息到控制台。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LogAssertionFormat()</code></td>
+      <td>记录格式化的断言日志消息到控制台。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LogError()</code></td>
+      <td>记录错误日志消息到控制台。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LogErrorFormat()</code></td>
+      <td>记录格式化的错误日志消息到控制台。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LogException()</code></td>
+      <td>记录异常信息到控制台。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LogFormat()</code></td>
+      <td>记录格式化的日志消息到控制台。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LogWarning()</code></td>
+      <td>记录警告日志消息到控制台。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LogWarningFormat()</code></td>
+      <td>记录格式化的警告日志消息到控制台。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">RetrieveStartupLogs()</code></td>
+      <td>返回捕获的启动日志信息。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="断点调试breakpoint-debugging">断点调试（Breakpoint Debugging）</h2>
+<p>Unity与Visual Studio等IDE集成，支持断点调试。可以通过设置断点来暂停程序的执行，查看变量值、调用栈等信息</p>
+<ul>
+  <li>在Visual Studio中，打开需要调试的脚本，然后点击行号旁边的空白处，设置断点</li>
+  <li>在Visual Studio中，点击”Attach to Unity”按钮，这将把Visual Studio与Unity连接</li>
+  <li>在Unity运行时，程序会在断点处暂停，可以查看当前的变量、堆栈信息等，帮助定位问题</li>
+</ul>
+
+<h2 id="visual-studio调试插件">Visual Studio调试插件</h2>
+<p>Unity默认支持与Visual Studio的集成，在Visual Studio中可以使用许多调试功能：</p>
+<ul>
+  <li>Watch变量：在断点停下时，可以通过”Watch”窗口观察指变量的实时值</li>
+  <li>调用栈（Call Stack）：查看当前执行路径，帮助定位错误的来源</li>
+  <li>本地变量（Locals）：查看当前函数的局部变量，检查它们的状态是否符合预期</li>
+</ul>
+
+<h2 id="profiler性能分析器">Profiler（性能分析器）</h2>
+<p><a href="/posts/2025-06-11-Unity-Profiler/">Unity Profiler</a></p>
+
+<h2 id="memory-profiler-内存分析器">Memory Profiler （内存分析器）</h2>
+<p><a href="/posts/2025-07-12-Unity-Memory-Profiler/">Unity Memory Profiler</a></p>
+
+<h2 id="unity-console">Unity Console</h2>
+<p>Unity的控制台时查看日志的主要地方</p>
+
+<ul>
+  <li>
+    <p>过滤日志：通过控制台顶部的过滤器，你可以选择只显示<code class="language-plaintext highlighter-rouge">Error</code>、<code class="language-plaintext highlighter-rouge">Warning</code>或<code class="language-plaintext highlighter-rouge">Info</code>，让你更专注于当前需要的日志信息</p>
+  </li>
+  <li>
+    <p>双击日志：在控制台中，双击日志信息，会自动跳转到日志触发的代码行，便于快速定位问题</p>
+  </li>
+</ul>
+
+<h2 id="输入模拟input-simulation">输入模拟（Input Simulation）</h2>
+<p>如果你要调试控制器或输入相关的代码，Unity提供了输入模拟工具。你可以使用Unity编辑器内的<code class="language-plaintext highlighter-rouge">Input</code>工具进行模拟和测试。例如，测试不同设备的控制器输入，模拟键盘、鼠标或触摸事件</p>
+
+<h2 id="test-runner单元测试">Test Runner（单元测试）</h2>
+<p><a href="/posts/2025-07-12-Unity-Test-Runner/">Unity Test Runner</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-06-01T00:00:00+08:00">June 1, 2025</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/%E7%AC%94%E8%AE%B0/2025/06/01/ScriptedImporter.html" class="pagination--pager" title="ScriptedImporter">Previous</a>
+    
+    
+      <a href="/posts/2025-07-12-Unity-Memory-Profiler/" class="pagination--pager" title="Unity Memory Profiler">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/ljf12825" rel="nofollow noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 <a href="http://localhost:4000">ljf12825's Blog</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

@@ -30,7 +30,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Camera",
-        "excerpt":"在Unity中，Camera是游戏中视角呈现的核心组件，它决定了玩家从哪里、以什么方式看到游戏世界 Projection（投影模式） 模式 用途 特点 透视摄像机（Perspective） 3D 游戏 有近大远小的透视效果，真实 正交摄像机（Orthographic） 2D 游戏、UI 无透视变形，适合像素风或 UI 系统 camera.orthographic = true; //开启正交模式 camera.orthographicSize = 5f; //视野高度一半 Clear Flag（清除模式） ClearFlag 模式 描述 Skybox 使用当前 Skybox 作为背景 Solid Color 使用指定背景颜色 Depth Only 仅清除深度缓冲区（常用于叠加 UI） Nothing 什么都不清除（很少用） 视口渲染（rect） camera.rec = new Rect(x, y, w, h); (x,...","categories": ["笔记"],
+        "excerpt":"在Unity中，Camera是游戏中视角呈现的核心组件，它决定了玩家从哪里、以什么方式看到游戏世界。 可以将它理解为游戏世界的“观察者”，通过相机的视角来渲染和展示游戏世界的内容 Camera的核心概念 视野（Field of View, FOV） 视野决定了相机的可见范围，单位通常是角度。FOV越大，显示的范围越广；FOV越小，显示的范围越窄。常见的游戏视角有第一人称（FOV通常较小）和第三人称（FOV较大） 对于透视相机，FOV越大，物体看起来就越远，越小则物体看起来越近 对于正交相机，FOV不影响物体的大小，物体的大小保持不变 摄像机类型 透视摄像机（Perspective）：像人眼一样 透视摄像机FOV = 60 透视摄像机FOV = 20 透视摄像机FOV = 80 正交摄像机（Orthographic）：精确而非真实 正交摄像机 消除透视畸变 正交摄像机的最大特点是不考虑透视，即： 远处的物体不会变小 近处的物体不会变大 这在某些场景下非常有用，比如： 工程图、建筑图、UI界面、2D游戏等 便于精确计算与对齐 因为所有对象的投影都是平行的，没有缩放失真，所以： 对象之间的相对位置更容易计算 适合用于网格对齐（Grid Snap）和像素精确的渲染 适用于2D游戏开发 大多数2D游戏使用正交摄像机，这样才能保持像素美术不被拉伸或缩放失真 例如：平台跳跃、塔防、策略类游戏 用于UI和HUD绘制 UI元素通常使用正交摄像机绘制，以确保在不同屏幕分辨率下保持相同的外观 技术与设计简化 对于一些需要标准比例的场景（如棋盘游戏、等距地图编辑器），正交摄像机可以让开发者更轻松地布局和设计 裁剪平面（Clipping Planes） 每个相机有一个近裁剪面和远裁剪面，这些平面决定了相机能够渲染的场景区域。任何在近裁剪面之前或远裁剪面之后的物体都会被剔除，无法渲染 这两个值非常重要，过小的近裁剪面可能导致深度精度问题，过大的远裁剪面可能会降低性能 深度（Depth） 深度是多个相机渲染顺序的控制参数。较大的深度值表示该相机会在渲染顺序中排在较后，优先渲染的相机会覆盖深度较小的相机。可以使用深度来控制不同相机的渲染顺序 例如，第一人称相机的深度应该大于第三人称相机的深度，这样在同一场景中，第一人称相机的渲染会覆盖第三人称相机 渲染目标（Render Target）...","categories": ["笔记"],
         "tags": ["Unity","Unity Component"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/05/28/Camera.html",
         "teaser": null
@@ -47,8 +47,8 @@ var store = [{
         "url": "/%E7%AC%94%E8%AE%B0/2025/05/28/Transform.html",
         "teaser": null
       },{
-        "title": "Unity编辑器窗口",
-        "excerpt":"   A:Toolbar工具栏，用于访问Unity账户和云服务。它还包括播放模式、撤销历史记录、Unity搜索、图层可见性菜单和编译器布局菜单等控件。   B:Hierarchy层级窗口，以层级形式呈现场景中每个游戏对象。场景中的每个item在hierarchy中都有一个entry，所以这两个窗口本质上是相互关联的。层级结构揭示了各个GameObject之间的连接结构。   C:Game游戏视图，通过场景中的摄像机模拟最终渲染游戏的外观效果。   D:Scene场景视图，可视化编辑和导航，可以显示3D或2D。   E:Overly叠加层包含用于操作场景视图及其中的游戏对象的基本工具。可以添加自定义叠加层来改进工作流程。   F:Inspector检查器，查看和编辑当前选定的GameObject的所有属性。   G:Project项目窗口，可以显示在项目中使用的资源库。   H:Statusbar状态栏提供有关Unity进程的通知，以及快速访问相关工具和设置。  ","categories": ["笔记"],
+        "title": "Unity Editor Window",
+        "excerpt":"关于Unity编辑器窗口的概览      A:Toolbar工具栏，用于访问Unity账户和云服务。它还包括播放模式、撤销历史记录、Unity搜索、图层可见性菜单和编译器布局菜单等控件。   B:Hierarchy层级窗口，以层级形式呈现场景中每个游戏对象。场景中的每个item在hierarchy中都有一个entry，所以这两个窗口本质上是相互关联的。层级结构揭示了各个GameObject之间的连接结构。   C:Game游戏视图，通过场景中的摄像机模拟最终渲染游戏的外观效果。   D:Scene场景视图，可视化编辑和导航，可以显示3D或2D。   E:Overly叠加层包含用于操作场景视图及其中的游戏对象的基本工具。可以添加自定义叠加层来改进工作流程。   F:Inspector检查器，查看和编辑当前选定的GameObject的所有属性。   G:Project项目窗口，可以显示在项目中使用的资源库。   H:Statusbar状态栏提供有关Unity进程的通知，以及快速访问相关工具和设置。  ","categories": ["笔记"],
         "tags": ["Unity","Unity Editor"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/05/28/UnityEditorWindow.html",
         "teaser": null
@@ -78,13 +78,13 @@ var store = [{
         "teaser": null
       },{
         "title": "Layer",
-        "excerpt":"在Unity中，Layer是要给非常重要的系统 它主要用于： 控制物体的渲染与相机的可见性 控制物理碰撞（配合Layer Collision Matrix） 通过脚本进行物体分类和筛选 什么是Layer Layer是给GameObject打的“标签”，但它和Tag不一样，Layer是用于功能性控制的，特别在： 摄像机的Culling Mask 光照影响（Light Culling） 物理碰撞（Physics Layer） 射线检测（Raycast Layer） Layer的使用场景 1.摄像机视野控制（Culling Mask） 在Camera组件中，你可以设置 Culling Mask -&gt; 选择哪些Layer可以被该相机看到 用途： UI相机只看UI层 小地图相机只看敌人层 分屏镜头每个只看自己的部分 2.物理碰撞控制（Layer Collision Matrix） 在菜单中： Edit -&gt; Project Settings -&gt; Physics 你可以看到Layer Collision Matrix，它控制： 哪些Layer和哪些Layer能发生物理碰撞 用途： 玩家层与敌人层可以碰撞，但不和自身碰撞 子弹不撞自己 角色不被UI的Collider打断 3.射线检测 可以通过Layer来控制射线是否命中某个对象 int...","categories": ["笔记"],
+        "excerpt":"在Unity中，Layer是要给非常重要的系统 它主要用于： 控制物体的渲染与相机的可见性 控制物理碰撞（配合Layer Collision Matrix） 通过脚本进行物体分类和筛选 什么是Layer Layer是给GameObject打的“标签”，但它和Tag不一样，Layer是用于功能性控制的，特别在： 摄像机的Culling Mask 光照影响（Light Culling） 物理碰撞（Physics Layer） 射线检测（Raycast Layer） Layer的使用场景 1.摄像机视野控制（Culling Mask） 在Camera组件中，你可以设置 Culling Mask -&gt; 选择哪些Layer可以被该相机看到 用途： UI相机只看UI层 小地图相机只看敌人层 分屏镜头每个只看自己的部分 Layer不仅能控制每个物体是否被摄像机看到，还能与多个摄像机协作实现更加复杂的视图效果 例如，在多人游戏中，你可以为每个玩家设置独立的摄像机，每个摄像机通过不同的Culling Mask来渲染不同的场景部分 示例：多摄像头分屏控制 在分屏游戏中，可以设置多个摄像机，每个摄像机只渲染属于特定玩家的物体 camera1.cullingMask = 1 &lt;&lt; LayerMask.NameToLayer(\"Player1\"); camera2.cullingMask = 1 &lt;&lt; LaeryMask.NameToLayer(\"Player2\"); 通过这种方式，你能够在同一个场景中显示不同的物体，仅限于特定玩家的视野 2.物理碰撞控制（Layer Collision Matrix） 在菜单中： Edit...","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Layer.html",
         "teaser": null
       },{
         "title": "Tag",
-        "excerpt":"在Unity中，Tag是用来标记和分类GameObject的一种轻量级方法，主要用于在代码中查找和判断物体的类型或身份 Tag的核心作用 功能 示例 分类物体 Player、Enemy、Item、UI 等 逻辑判断 判断一个物体是不是玩家 查找特定对象 GameObject.FindWithTag() 触发器/碰撞器逻辑判断 if (other.CompareTag(\"Enemy\")) Tag的使用方法 1.设置Tag 1.选中一个 GameObject 2.Inspector 面板 → 上方的 “Tag” 下拉菜单 3.如果没有想要的标签 → 点击 Add Tag… → 添加一个新的字符串 4.回到物体，设置为刚才新建的 Tag 注意： Tag是字符串类型，但Unity会为你管理列表，不用硬编码 2.使用Tag查找对象 GameObjec player = GameObject.FindWithTag(\"Player\"); 或者查找多个对象： GameObject[] enemies = GameObejct.FindGameObjectsWithTag(\"Enemy\"); 3.在触发器或碰撞中判断Tag void OnTriggerEnter(Collider other) =&gt;...","categories": ["笔记"],
+        "excerpt":"在Unity中，Tag是用来标记和分类GameObject的一种轻量级方法，主要用于在代码中查找和判断物体的类型或身份 Tag的核心作用 功能 示例 分类物体 Player、Enemy、Item、UI 等 逻辑判断 判断一个物体是不是玩家 查找特定对象 GameObject.FindWithTag() 触发器/碰撞器逻辑判断 if (other.CompareTag(\"Enemy\")) Tag的使用方法 1.设置Tag 1.选中一个 GameObject 2.Inspector 面板 → 上方的 “Tag” 下拉菜单 3.如果没有想要的标签 → 点击 Add Tag… → 添加一个新的字符串 4.回到物体，设置为刚才新建的 Tag 注意： Tag是字符串类型，但Unity会为你管理列表，不用硬编码 2.使用Tag查找对象 GameObject player = GameObject.FindWithTag(\"Player\"); 或者查找多个对象： GameObject[] enemies = GameObject.FindGameObjectsWithTag(\"Enemy\"); 3.在触发器或碰撞中判断Tag void OnTriggerEnter(Collider other) =&gt;...","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Tag.html",
         "teaser": null
@@ -116,12 +116,12 @@ var store = [{
         "title": "Coroutine",
         "excerpt":"Unity Coroutine是一种允许在多帧中分布执行代码的机制，它通常用于处理一些需要在多个帧之间等待的任务，比如延时操作、动画播放、资源加载等 协程本质上是通过一种特殊的方式执行代码，它可以在执行过程中“暂停”并在后续的帧继续执行 基本使用 启动协程 协程是通过StartCoroutine()来启动的。协程通常返回一个IEnumerator类型的方法 using UnityEngine; using System.Collections; public class CoroutineExample : MonoBehaviour { void Start() =&gt; StartCoroutine(MyCoroutine()); IEnumerator MyCoroutine() { //在这里执行某些操作 Debug.Log(\"协程开始\"); // Wait 2 seconds yield return new WaitForSeconds(2); // 等待结束后继续执行 Debug.Log(\"2秒后继续执行\"); // 继续执行其他操作 yield return null; // 等待下一帧 Debug.Log(\"协程执行完毕\"); } } 在这个例子中，MyCoroutine协程将在开始时打印“协程开始”，然后等待2秒后打印“2秒后继续执行”，最后在下一帧打印“协程执行完毕” 协程的暂停与恢复 协程可以通过yield return暂停执行，直到某个条件满足。常见的暂停类型有：...","categories": ["笔记"],
         "tags": ["Unity","Unity Engine"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Coroutine.html",
+        "url": "/posts/2025-06-03-Coroutine/",
         "teaser": null
       },{
         "title": "Event and Callback in Unity",
         "excerpt":"在Unity中，事件和回调时实现解耦和响应式编程的核心机制。它们能够在不同的组件之间传递消息或相应某些操作 事件（Event） 事件是一种特殊的委托类型，允许其他对象订阅并响应某个特定的行为或状态变化。通常用于对象之间的通信，避免了直接调用，使代码更具解耦性 基本使用 在Unity中，可以使用C#的event关键字来声明一个事件。事件的订阅和触发通常会在组件之间完成 // 定义事件的委托类型 public delegate void PlayerScored(int score); public class GameManager : MonoBehaviour { // 声明一个事件 public event PlayerScored OnPlayerScored; public void PlayerScore(int score) { // 触发事件 OnPlayerScored?.Invoke(score); } } public class UIManager : MonoBehaviour { public GameManager gameManager; private void OnEnable() { // 订阅事件 gameManager.OnPlayerScored...","categories": ["笔记"],
-        "tags": ["Unity","Unity System"],
+        "tags": ["Unity","Unity Syntax"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Event-and-Callback-in-Unity.html",
         "teaser": null
       },{
@@ -278,7 +278,7 @@ var store = [{
         "title": "Unity Profiler",
         "excerpt":" ","categories": ["笔记"],
         "tags": ["Unity","Unity Tool"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Profiler.html",
+        "url": "/posts/2025-06-11-Unity-Profiler/",
         "teaser": null
       },{
         "title": "Unity Performance Tuning",
@@ -351,6 +351,60 @@ var store = [{
         "excerpt":" ","categories": ["笔记"],
         "tags": ["Unity","Render","Graphics"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Rendering-Principle.html",
+        "teaser": null
+      },{
+        "title": "Attribute in Unity",
+        "excerpt":"Unity中的特性用于控制Unity编译器的行为，或者用于运行时特定的逻辑 Unity中常见特性 Unity为许多常见的操作都提供了特性 SerializeField 作用：使私有字段在Unity的Inspector面板中可见。通常用于控制字段访问性，但仍希望它出现在Inspector中进行编辑 [SerializeField] private int playerHealth; HideInInspector 作用：标记字段不显示在Inspector中，但它仍然是类的成员，仍然可以在代码中使用 [HideInInspector] public int secretValur; Range 作用：为字段设置一个值的范围，通常用于浮动值或整数值。Range会在Inspector中为字段添加一个滑块 [Range(0, 100)] public int speed; Head 作用：在Inspector中为字段添加一个标题或标签，通常用于分组和提高可读性 [Header(\"Player Settings\")] public float speed; public int health; Tooltip 作用：在Inspector中为字段提供一个悬浮提示文本，鼠标悬停在字段上时显示该提示 [Tooltip(\"Player's health value\")] public float health; ExecuteInEditMode 作用：使脚本在编辑模式下运行，而不仅仅是在播放模式下运行。这对于需要在编辑模式下进行自定义操作的脚本（如编辑器扩展）非常有用 [ExecuteInEditMode] public class CustomEditorScript : MonoBehaviour { void...","categories": ["笔记"],
+        "tags": ["Unity","Syntax"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Attribute-in-Unity.html",
+        "teaser": null
+      },{
+        "title": "P/Invoke in Unity",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Syntax"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/PInvoke-in-Unity.html",
+        "teaser": null
+      },{
+        "title": "MonoBehaviour",
+        "excerpt":"MonoBehaviour是Unity中最重要的基类之一，它是所有挂载到GameObject上的脚本的基础。每当在Unity编译器中创建也给C#脚本，并将其附加到一个GameObject时，这个脚本默认会继承MonoBehaviour MonoBehaviour提供了一些非常强大的功能，尤其是在场景生命周期和事件处理方面 MonoBehaviour继承自Behaviour Behaviour Behaviour继承自Component，是MonoBehaviour、Renderer、Collider等类的基类，它为所有脚本提供了一些通用的启用/禁用功能和调度机制 API Properties 属性 类型 描述 enabled bool 决定了当前Behaviour是否启用，当启用时，该组件会响应更新（如Update()等声明周期方法），禁用则不会 isActiveAndEnable bool 是一个只读属性，返回当前组件是否被启用并且它的GameObject也启用 示例 enable用法 void Start() { // 禁用这个脚本 this.enabled = false; } void Update() { if (this.enabled) { // 如果脚本启用，这部分代码才会执行 Debug.Log(\"Script is enabled.\"); } } enable在继承时的行为 如果你继承自Behaviour，并且禁用该组件，那么Unity会停止调用该组件的方法。但是，如果Behaviour的父类被禁用，你仍然可以控制enable属性来启用或禁用某些组件行为 启用和禁用的实际应用 控制游戏对象的行为 动态启用/禁用：你可以根据游戏的状态动态启用或禁用脚本、组件或整个GameObject 例如在游戏中按下按钮时禁用某些功能或暂停某些操作 public class GameController :...","categories": ["笔记"],
+        "tags": ["Unity","Syntax","Unity Class"],
+        "url": "/posts/2025-07-11-MonoBehaviour/",
+        "teaser": null
+      },{
+        "title": "ScriptableObject",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Syntax"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/ScriptableObject.html",
+        "teaser": null
+      },{
+        "title": "ScriptedImporter",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Syntax"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/ScriptedImporter.html",
+        "teaser": null
+      },{
+        "title": "Unity Debug",
+        "excerpt":"Unity调试时游戏开发中非常重要的一环，能够帮助开发者快速定位和解决问题。Unity提供了多种调试工具和方法，主要包括日志输出、断点调试、内存和性能分析等 日志输出（Logging） 在Unity中，最常用的调试方法时通过输入日志，查看游戏运行时的状态。这些日志通常包括错误、警告和信息 class Debug Debug类是Unity中的一个非常重要的工具类，用于在开发过程中输出调试信息、记录错误、警告以及其他状态信息。它位于UnityEngine命名空间下，提供了几个常用的方法，帮助开发者在运行时查看日志、跟踪错误以及确保游戏的逻辑正确性 API Static Properties Property Description developerConsoleEnabled 允许启用或禁用开发者控制台。 developerConsoleVisible 控制开发者控制台是否可见。 isDebugBuild 检查当前是否为开发构建（Development Build）。 unityLogger 获取默认的调试日志记录器。 Static Methods Method Description Assert() 断言条件，如果条件为假，记录错误信息。 AssertFormat() 断言条件并记录格式化的错误信息。 Break() 暂停编辑器的执行，通常用于调试时暂停游戏。 CheckIntegrity() 执行当前进程的完整性检查并返回发现的错误。 ClearDeveloperConsole() 清除开发者控制台中的所有日志。 DrawLine() 在场景中绘制一条线段。 DrawRay() 在场景中绘制一条射线。 ExtractStackTraceNoAlloc() 提取当前调用栈并将其填充到未管理的缓冲区中，不会分配GC内存。 IsValidationLevelEnabled() 返回指定的验证级别是否已启用。 Log() 记录常规日志消息到控制台。 LogAssertion() 记录断言日志消息到控制台。 LogAssertionFormat() 记录格式化的断言日志消息到控制台。 LogError() 记录错误日志消息到控制台。...","categories": ["笔记"],
+        "tags": ["Unity","UnityTool"],
+        "url": "/posts/2025-07-12-Debug/",
+        "teaser": null
+      },{
+        "title": "Unity Memory Profiler",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity Tool"],
+        "url": "/posts/2025-07-12-Unity-Memory-Profiler/",
+        "teaser": null
+      },{
+        "title": "Unity Test Runner",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity Tool"],
+        "url": "/posts/2025-07-12-Unity-Test-Runner/",
+        "teaser": null
+      },{
+        "title": "Object",
+        "excerpt":"Object是Unity中所有内建物体的基类，实现在UnityEngine.CoreModule中，不同于C#中的System.Object，它是托管层（C#）和原生引擎层（C++）之间的桥梁，背后绑定着Unity C++引擎层的资源句柄 Object的特点（Unity的特有行为） 引擎资源的绑定 每个UnityEngine.Object对象都对应一个C++层对象，它们通过一个instance 2D来关联，且资源的生命周期不由GC管理 比如： GameObject go = new GameObject(); Object.Destroy(go); Debug.Log(go == null); // true 这就是Object的“鬼行为”，此处的go == null并非等价于object is null Unity的“fake null”机制 Unity重写了==操作符 如果一个Object对象在引擎层已经被销毁（Destroy过），但C#还保有托管引用，这时候： Debug.Log(go == null); // true Debug.Log(go.Equals(null)); // false Debug.Log(ReferenceEquals(go, null)); // false 这是Unity为了安全做的改动行为，防止对已经销毁的对象操作，引起native崩溃 底层原理 Unity的Object在C#层其实只是一个代理，它对应的C++引擎层对象通过C#层的IntPtr m_CachedPtr与C++对象通信（该字段可以在反编译时看到） 资源对象（比如一个贴图）在编译器导入时会被转换为native object，保存在场景或资源文件中，加载时通过Unity自己的反序列化系统生成C#代理对象，并挂接m_CachedPtr Unity会使用C++引擎进行资源生命周期的管理，而不是C#的GC，所以Destroy调的是C++的释放接口 Sometimes an instance of...","categories": ["笔记"],
+        "tags": ["Unity","Syntax","Unity Class"],
+        "url": "/posts/2025-07-11-Object/",
         "teaser": null
       },{
     "title": "About",

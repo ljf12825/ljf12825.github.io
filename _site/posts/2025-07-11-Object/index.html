@@ -1,0 +1,518 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.1 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Object - ljf12825’s Blog</title>
+<meta name="description" content="Object是Unity中所有内建物体的基类，实现在UnityEngine.CoreModule中，不同于C#中的System.Object，它是托管层（C#）和原生引擎层（C++）之间的桥梁，背后绑定着Unity C++引擎层的资源句柄">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="ljf12825's Blog">
+<meta property="og:title" content="Object">
+<meta property="og:url" content="http://localhost:4000/posts/2025-07-11-Object/">
+
+
+  <meta property="og:description" content="Object是Unity中所有内建物体的基类，实现在UnityEngine.CoreModule中，不同于C#中的System.Object，它是托管层（C#）和原生引擎层（C++）之间的桥梁，背后绑定着Unity C++引擎层的资源句柄">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-06-01T00:00:00+08:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/posts/2025-07-11-Object/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="ljf12825's Blog Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- favicon -->
+<link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          ljf12825's Blog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/"
+                
+                
+              >Home</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/categories/"
+                
+                
+              >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/tags/"
+                
+                
+              >Tags</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/about/"
+                
+                
+              >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Object">
+    <meta itemprop="description" content="Object是Unity中所有内建物体的基类，实现在UnityEngine.CoreModule中，不同于C#中的System.Object，它是托管层（C#）和原生引擎层（C++）之间的桥梁，背后绑定着Unity C++引擎层的资源句柄">
+    <meta itemprop="datePublished" content="2025-06-01T00:00:00+08:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/posts/2025-07-11-Object/" itemprop="url">Object
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>Object是Unity中所有内建物体的基类，实现在UnityEngine.CoreModule中，不同于C#中的<code class="language-plaintext highlighter-rouge">System.Object</code>，它是托管层（C#）和原生引擎层（C++）之间的桥梁，背后绑定着Unity C++引擎层的资源句柄</p>
+
+<h2 id="object的特点unity的特有行为">Object的特点（Unity的特有行为）</h2>
+<p><strong>引擎资源的绑定</strong></p>
+
+<p>每个<code class="language-plaintext highlighter-rouge">UnityEngine.Object</code>对象都对应一个C++层对象，它们通过一个<code class="language-plaintext highlighter-rouge">instance 2D</code>来关联，且资源的生命周期不由GC管理</p>
+
+<p>比如：</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObject</span> <span class="n">go</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">GameObject</span><span class="p">();</span>
+<span class="n">Object</span><span class="p">.</span><span class="nf">Destroy</span><span class="p">(</span><span class="n">go</span><span class="p">);</span>
+<span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="n">go</span> <span class="p">==</span> <span class="k">null</span><span class="p">);</span>  <span class="c1">// true</span>
+</code></pre></div></div>
+<p>这就是Object的“鬼行为”，此处的<code class="language-plaintext highlighter-rouge">go == null</code>并非等价于<code class="language-plaintext highlighter-rouge">object is null</code></p>
+
+<p><strong>Unity的“fake null”机制</strong></p>
+
+<p>Unity重写了<code class="language-plaintext highlighter-rouge">==</code>操作符</p>
+
+<p>如果一个<code class="language-plaintext highlighter-rouge">Object</code>对象在引擎层已经被销毁（Destroy过），但C#还保有托管引用，这时候：</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="n">go</span> <span class="p">==</span> <span class="k">null</span><span class="p">);</span> <span class="c1">// true</span>
+<span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="n">go</span><span class="p">.</span><span class="nf">Equals</span><span class="p">(</span><span class="k">null</span><span class="p">));</span> <span class="c1">// false</span>
+<span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="nf">ReferenceEquals</span><span class="p">(</span><span class="n">go</span><span class="p">,</span> <span class="k">null</span><span class="p">));</span> <span class="c1">// false</span>
+</code></pre></div></div>
+<p>这是Unity为了安全做的改动行为，防止对已经销毁的对象操作，引起native崩溃</p>
+
+<h3 id="底层原理">底层原理</h3>
+<p>Unity的<code class="language-plaintext highlighter-rouge">Object</code>在C#层其实只是一个代理，它对应的C++引擎层对象通过C#层的<code class="language-plaintext highlighter-rouge">IntPtr m_CachedPtr</code>与C++对象通信（该字段可以在反编译时看到）</p>
+
+<p>资源对象（比如一个贴图）在编译器导入时会被转换为native object，保存在场景或资源文件中，加载时通过Unity自己的反序列化系统生成C#代理对象，并挂接<code class="language-plaintext highlighter-rouge">m_CachedPtr</code></p>
+
+<p>Unity会使用C++引擎进行资源生命周期的管理，而不是C#的GC，所以Destroy调的是C++的释放接口</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Sometimes an instance of Object can be in detached state, where there is no underlying native object. T
+his can happen if the instance references an native object that has been destroyed, or a missing Asset or missing type. 
+Detached objects retain their InstanceID, but the object cannot be used to call methods or access properties. 
+An object in this state will appear to be null, because of special implementations of operator==, operator!= and Ojbect.bool.
+Because the object is not truly null, a call to Object.ReferenceEquals(myobject, null) will return false.
+
+The null-comditional operator(?.)and the null-coalescing operator(??)are not supported with Unity Object because they cannot be overridden to treat detached objects the same as null.
+It is only safe to use those operators in your scripts if there is certainty that the objects being checked are never in a detached state.
+</code></pre></div></div>
+
+<h2 id="object-api">Object API</h2>
+<p><strong>Properties</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>类型</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">name</code></td>
+      <td><code class="language-plaintext highlighter-rouge">string</code></td>
+      <td>对象名称（可读写）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">hideFlags</code></td>
+      <td><code class="language-plaintext highlighter-rouge">HideFlags</code></td>
+      <td>控制对象是否可隐藏/可编辑/保存</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong><code class="language-plaintext highlighter-rouge">hideFlags</code></strong><br />
+常见用途：</p>
+<ul>
+  <li>隐藏对象</li>
+  <li>防止误删或编辑</li>
+  <li>不让对象随着场景保存（通常用于运行时生成的对象）</li>
+</ul>
+
+<p>常用枚举值</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>枚举值</th>
+      <th>含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">HideFlags.None</code></td>
+      <td>默认行为，无隐藏</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">HideFlags.HideInHierarchy</code></td>
+      <td>在 Hierarchy 视图中隐藏</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">HideFlags.HideInInspector</code></td>
+      <td>在 Inspector 中隐藏</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">HideFlags.NotEditable</code></td>
+      <td>不允许用户编辑（灰掉）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">HideFlags.DontSave</code></td>
+      <td>场景保存时不保存该对象</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">HideFlags.DontSaveInBuild</code></td>
+      <td>打包时不保存该对象</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">HideFlags.DontSaveInEditor</code></td>
+      <td>编辑器中不保存该对象</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">HideFlags.HideAndDontSave</code></td>
+      <td>隐藏并不保存（临时对象）</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Public Methods</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetInstanceID</code></td>
+      <td>获得object的实例ID</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ToString</code></td>
+      <td>返回<code class="language-plaintext highlighter-rouge">object.name</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Static Methods</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>描述</th>
+      <th>示例/说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Destroy(Object obj)</code></td>
+      <td>销毁一个对象，在当前帧结束时生效</td>
+      <td><code class="language-plaintext highlighter-rouge">Destroy(gameObject);</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Destroy(Object obj, float t)</code></td>
+      <td>延迟 t 秒销毁对象</td>
+      <td><code class="language-plaintext highlighter-rouge">Destroy(gameObject, 2.0f);</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">DestroyImmediate(Object obj)</code></td>
+      <td>立刻销毁对象，<strong>只推荐在编辑器中使用</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">DestroyImmediate(gameObject);</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">DontDestroyOnLoad(Object target)</code></td>
+      <td>场景切换时不销毁该对象</td>
+      <td>常用于单例或管理器类</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">FindAnyObjectByType&lt;T&gt;()</code></td>
+      <td>获取任何已加载的指定类型对象（不保证顺序）</td>
+      <td>替代旧版 <code class="language-plaintext highlighter-rouge">FindObjectOfType</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">FindFirstObjectByType&lt;T&gt;()</code></td>
+      <td>获取第一个找到的指定类型对象（可能更快）</td>
+      <td>常用于初始化查找</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">FindObjectsByType&lt;T&gt;()</code></td>
+      <td>获取所有已加载的指定类型对象</td>
+      <td><code class="language-plaintext highlighter-rouge">var allEnemies = FindObjectsByType&lt;Enemy&gt;();</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Instantiate(Object original)</code></td>
+      <td>克隆一个对象（创建副本）</td>
+      <td><code class="language-plaintext highlighter-rouge">Instantiate(prefab);</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Instantiate(Object original, Vector3 position, Quaternion rotation)</code></td>
+      <td>在指定位置和旋转创建克隆</td>
+      <td><code class="language-plaintext highlighter-rouge">Instantiate(prefab, pos, rot);</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">InstantiateAsync(Object original)</code></td>
+      <td>异步克隆对象，返回 <code class="language-plaintext highlighter-rouge">AsyncInstantiateOperation</code></td>
+      <td>用于 Addressables 或大型对象，节省主线程开销</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Operators</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>操作符</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>是否存在</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">operator!=</code></td>
+      <td>比较两个object是否引用不同的物体</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">operator==</code></td>
+      <td>是否引用相同</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="object与资源的关系">Object与资源的关系</h2>
+<p>几乎所有资源类型（包括预制体、贴图、材质、音频、动画等）都继承自<code class="language-plaintext highlighter-rouge">Object</code></p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Texture</span> <span class="n">tex</span> <span class="p">=</span> <span class="n">Resources</span><span class="p">.</span><span class="n">Load</span><span class="p">&lt;</span><span class="n">Texture</span><span class="p">&gt;(</span><span class="s">"MyTexture"</span><span class="p">);</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">Resources.Load&lt;T&gt;()</code>返回的其实就是一个<code class="language-plaintext highlighter-rouge">Object</code>的子类（这里是Texture）</p>
+
+<h2 id="继承关系">继承关系</h2>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Object
+  ├── GameObject
+  └── Component
+        ├── MonoBehaviour
+        └── Transform / Collider / Renderer / ...
+</code></pre></div></div>
+<p>所以可以有：</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObject</span> <span class="n">go</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">GameObject</span><span class="p">();</span>
+<span class="n">Object</span> <span class="n">obj</span> <span class="p">=</span> <span class="n">go</span><span class="p">;</span> <span class="c1">// legal</span>
+<span class="n">Component</span> <span class="n">comp</span> <span class="p">=</span> <span class="n">go</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">Transform</span><span class="p">&gt;();</span>
+<span class="n">Object</span> <span class="n">o2</span> <span class="p">=</span> <span class="n">comp</span><span class="p">;</span> <span class="c1">// legal</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">new</code>出来的<code class="language-plaintext highlighter-rouge">GameObject</code>是合法的，但不能<code class="language-plaintext highlighter-rouge">new</code> <code class="language-plaintext highlighter-rouge">Transform</code>或<code class="language-plaintext highlighter-rouge">Renderer</code>，必须用<code class="language-plaintext highlighter-rouge">AddComponent</code>等引擎API创建</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-06-01T00:00:00+08:00">June 1, 2025</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/posts/2025-07-12-Unity-Test-Runner/" class="pagination--pager" title="Unity Test Runner">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/ljf12825" rel="nofollow noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 <a href="http://localhost:4000">ljf12825's Blog</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

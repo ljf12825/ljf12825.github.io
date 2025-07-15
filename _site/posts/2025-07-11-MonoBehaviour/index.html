@@ -1,0 +1,810 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.1 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>MonoBehaviour - ljf12825’s Blog</title>
+<meta name="description" content="MonoBehaviour是Unity中最重要的基类之一，它是所有挂载到GameObject上的脚本的基础。每当在Unity编译器中创建也给C#脚本，并将其附加到一个GameObject时，这个脚本默认会继承MonoBehaviour">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="ljf12825's Blog">
+<meta property="og:title" content="MonoBehaviour">
+<meta property="og:url" content="http://localhost:4000/posts/2025-07-11-MonoBehaviour/">
+
+
+  <meta property="og:description" content="MonoBehaviour是Unity中最重要的基类之一，它是所有挂载到GameObject上的脚本的基础。每当在Unity编译器中创建也给C#脚本，并将其附加到一个GameObject时，这个脚本默认会继承MonoBehaviour">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-06-01T00:00:00+08:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/posts/2025-07-11-MonoBehaviour/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="ljf12825's Blog Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- favicon -->
+<link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          ljf12825's Blog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/"
+                
+                
+              >Home</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/categories/"
+                
+                
+              >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/tags/"
+                
+                
+              >Tags</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/about/"
+                
+                
+              >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="MonoBehaviour">
+    <meta itemprop="description" content="MonoBehaviour是Unity中最重要的基类之一，它是所有挂载到GameObject上的脚本的基础。每当在Unity编译器中创建也给C#脚本，并将其附加到一个GameObject时，这个脚本默认会继承MonoBehaviour">
+    <meta itemprop="datePublished" content="2025-06-01T00:00:00+08:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/posts/2025-07-11-MonoBehaviour/" itemprop="url">MonoBehaviour
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p><code class="language-plaintext highlighter-rouge">MonoBehaviour</code>是Unity中最重要的基类之一，它是所有挂载到GameObject上的脚本的基础。每当在Unity编译器中创建也给C#脚本，并将其附加到一个GameObject时，这个脚本默认会继承<code class="language-plaintext highlighter-rouge">MonoBehaviour</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">MonoBehaviour</code>提供了一些非常强大的功能，尤其是在场景生命周期和事件处理方面</p>
+
+<p><code class="language-plaintext highlighter-rouge">MonoBehaviour</code>继承自<code class="language-plaintext highlighter-rouge">Behaviour</code></p>
+
+<h2 id="behaviour"><code class="language-plaintext highlighter-rouge">Behaviour</code></h2>
+<p><code class="language-plaintext highlighter-rouge">Behaviour</code>继承自<code class="language-plaintext highlighter-rouge">Component</code>，是<code class="language-plaintext highlighter-rouge">MonoBehaviour</code>、<code class="language-plaintext highlighter-rouge">Renderer</code>、<code class="language-plaintext highlighter-rouge">Collider</code>等类的基类，它为所有脚本提供了一些通用的启用/禁用功能和调度机制</p>
+
+<h3 id="api">API</h3>
+<p><strong>Properties</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>类型</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">enabled</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>决定了当前<code class="language-plaintext highlighter-rouge">Behaviour</code>是否启用，当启用时，该组件会响应更新（如<code class="language-plaintext highlighter-rouge">Update()</code>等声明周期方法），禁用则不会</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">isActiveAndEnable</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td>是一个只读属性，返回当前组件是否被启用并且它的GameObject也启用</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>示例</strong><br />
+<code class="language-plaintext highlighter-rouge">enable</code>用法</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// 禁用这个脚本</span>
+    <span class="k">this</span><span class="p">.</span><span class="n">enabled</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">void</span> <span class="nf">Update</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">enabled</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// 如果脚本启用，这部分代码才会执行</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"Script is enabled."</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">enable</code>在继承时的行为<br />
+如果你继承自<code class="language-plaintext highlighter-rouge">Behaviour</code>，并且禁用该组件，那么Unity会停止调用该组件的方法。但是，如果<code class="language-plaintext highlighter-rouge">Behaviour</code>的父类被禁用，你仍然可以控制<code class="language-plaintext highlighter-rouge">enable</code>属性来启用或禁用某些组件行为</p>
+
+<h4 id="启用和禁用的实际应用">启用和禁用的实际应用</h4>
+<h5 id="控制游戏对象的行为">控制游戏对象的行为</h5>
+<ul>
+  <li>动态启用/禁用：你可以根据游戏的状态动态启用或禁用脚本、组件或整个GameObject</li>
+</ul>
+
+<p>例如在游戏中按下按钮时禁用某些功能或暂停某些操作</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GameController</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">GameObject</span> <span class="n">player</span><span class="p">;</span>
+
+    <span class="k">void</span> <span class="nf">PauseGame</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// 禁用玩家脚本，暂停玩家控制</span>
+        <span class="n">player</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">PlayerController</span><span class="p">&gt;().</span><span class="n">enabled</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">void</span> <span class="nf">ResumeGame</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// 启用玩家脚本，恢复玩家控制</span>
+        <span class="n">player</span><span class="p">.</span><span class="n">GetComponenet</span><span class="p">&lt;</span><span class="n">PlayerController</span><span class="p">&gt;().</span><span class="n">enabled</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h5 id="控制物体动画与行为">控制物体动画与行为</h5>
+<ul>
+  <li>暂停和恢复：在游戏中，可能会遇到暂停菜单时，禁用和启用某些脚本或动画</li>
+</ul>
+
+<h5 id="控制物理行为">控制物理行为</h5>
+<ul>
+  <li>禁用物理计算：在某些情况下，你可能只希望在特定条件下启用物理计算</li>
+</ul>
+
+<h2 id="monobehaviour"><code class="language-plaintext highlighter-rouge">MonoBehaviour</code></h2>
+<p><code class="language-plaintext highlighter-rouge">MonoBehaviour</code>是Unity中最核心的类之一，它为游戏开发者提供了许多功能和特性，使得脚本能够与Unity引擎进行交互<br />
+通过继承<code class="language-plaintext highlighter-rouge">MonoBehaviour</code>，可以让自定义类称为Unity组件，并使用Unity引擎提供的生命周期方法、事件处理、协程支持等功能</p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">MonoBehaviour</code>会提供以下特性：</strong></p>
+
+<h3 id="1生命周期方法">1.生命周期方法</h3>
+<p><code class="language-plaintext highlighter-rouge">MonoBehaviour</code>提供了多个生命周期方法，让你能够在合适的时机执行代码。这些方法涵盖了Unity引擎中的许多重要事件，包括初始化、更新、碰撞检测等</p>
+
+<p><a href="/assets/images/monobehaviour_flowchart.svg">生命周期函数示意图</a></p>
+
+<h4 id="初始化阶段只执行一次">初始化阶段（只执行一次）</h4>
+
+<p>初始化阶段的生命周期函数是游戏对象创建并激活后、正式开始游戏逻辑之前自动调用的一系列函数，主要用于初始化变量、加载资源、设置状态等操作</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>函数名</th>
+      <th>调用时机</th>
+      <th>用途</th>
+      <th>特点</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Awake()</code></td>
+      <td>脚本实例被 <strong>加载</strong> 后立刻调用（即使对象未启用也会调用）</td>
+      <td>初始化数据、引用等（最早）</td>
+      <td>初始化非依赖其他组件的逻辑</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnEnable()</code></td>
+      <td>对象启用时调用（<strong>每次启用都会调用</strong>）</td>
+      <td>脚本激活可以多次触发</td>
+      <td>常用于注册事件</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Start()</code></td>
+      <td>所有对象的<code class="language-plaintext highlighter-rouge">Awake()</code>调用完后，在对象启用的第一帧调用一次</td>
+      <td>初始化逻辑，如加载资源、启动协程</td>
+      <td>初始化依赖其他组件/对象的逻辑</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Awake()</code>
+    <ul>
+      <li>在脚本实例被加载时调用（即使对象未激活）</li>
+      <li>多个脚本中Awake的调用顺序是不确定的</li>
+      <li>通常用于
+        <ul>
+          <li>分配资源</li>
+          <li>设置初始状态</li>
+          <li>创建单例</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">OnEnable()</code>
+    <ul>
+      <li>当对象或脚本被启用时调用</li>
+      <li>会在每次启用时重复调用</li>
+      <li>通常用于：
+        <ul>
+          <li>注册事件</li>
+          <li>启动协程</li>
+          <li>绑定输入</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">Start()</code>
+    <ul>
+      <li>在启用的组件第一帧更新前调用，且只调用一次</li>
+      <li>所有<code class="language-plaintext highlighter-rouge">Awake()</code>执行完后才调用<code class="language-plaintext highlighter-rouge">Start()</code></li>
+      <li>通常用于
+        <ul>
+          <li>获取其他组件</li>
+          <li>设置UI、初始化依赖关系</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="运行时循环阶段重复执行">运行时循环阶段（重复执行）</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>函数名</th>
+      <th>调用频率</th>
+      <th>用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">FixedUpdate()</code></td>
+      <td>每固定时间（如 0.02 秒）</td>
+      <td>物理计算、施加力、碰撞检测等</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Update()</code></td>
+      <td>每帧</td>
+      <td>常规逻辑、输入处理、状态更新</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LateUpdate()</code></td>
+      <td>每帧</td>
+      <td>摄像机追踪、骨骼动画等需要晚一点处理的逻辑</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnGUI()</code></td>
+      <td>每帧多次</td>
+      <td>IMGUI 绘图接口，用于旧 GUI 系统（已不推荐）</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="关于update">关于<code class="language-plaintext highlighter-rouge">Update()</code></h5>
+<ul>
+  <li>适合做需要实时响应和更新的逻辑，例如输入检测、动画控制、AI决策等</li>
+</ul>
+
+<p><strong>在Update()中实现“时间无关”逻辑</strong>
+由于帧率变化，直接写逻辑会导致游戏表现不同步<br />
+解决方法：</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Update</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">float</span> <span class="n">moveSpeed</span> <span class="p">=</span> <span class="m">5f</span><span class="p">;</span>
+    <span class="n">transform</span><span class="p">.</span><span class="nf">Translate</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">forward</span> <span class="p">*</span> <span class="n">moveSpeed</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Time.deltaTime</code>是上一帧到当前帧的时间差</li>
+  <li>乘以<code class="language-plaintext highlighter-rouge">deltaTime</code>可以保证无论帧率多少，运动速度都一样</li>
+</ul>
+
+<p><strong>常见用法</strong>
+1.键盘输入控制移动</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Update</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">float</span> <span class="n">h</span> <span class="p">=</span> <span class="n">Input</span><span class="p">.</span><span class="nf">GetAxis</span><span class="p">(</span><span class="s">"Horizontal"</span><span class="p">);</span>
+    <span class="kt">float</span> <span class="n">v</span> <span class="p">=</span> <span class="n">Input</span><span class="p">.</span><span class="nf">GetAxis</span><span class="p">(</span><span class="s">"Vertical"</span><span class="p">);</span>
+    <span class="n">Vector3</span> <span class="n">dir</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span>
+    <span class="n">transform</span><span class="p">.</span><span class="nf">Translate</span><span class="p">(</span><span class="n">dir</span> <span class="p">*</span> <span class="m">5f</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>2.每帧检测条件触发事件</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Update</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="nf">GetKeyDown</span><span class="p">(</span><span class="n">KeyCode</span><span class="p">.</span><span class="n">Space</span><span class="p">))</span> <span class="nf">Jump</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>性能注意事项</strong></p>
+<ul>
+  <li>频繁且复杂的操作放在<code class="language-plaintext highlighter-rouge">Update()</code>中会影响帧率</li>
+  <li>可以考虑
+    <ul>
+      <li>减少<code class="language-plaintext highlighter-rouge">Update()</code>中的耗时计算</li>
+      <li>合理使用事件驱动替代轮询</li>
+      <li>利用<code class="language-plaintext highlighter-rouge">Coroutine</code>或<code class="language-plaintext highlighter-rouge">InvokeRepeating</code>控制调用频率</li>
+      <li>对复杂逻辑分帧处理或异步处理</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>当关闭或禁用脚本时，Update()不会被调用，当GameObejct被禁用时，所有附加脚本的Update()都停止调用</strong></p>
+
+<h4 id="关于lateupdate">关于<code class="language-plaintext highlighter-rouge">LateUpdate()</code></h4>
+<ul>
+  <li>每帧调用一次，但始终在所有<code class="language-plaintext highlighter-rouge">Update()</code>函数调用之后调用</li>
+  <li>用于需要在所有<code class="language-plaintext highlighter-rouge">Update()</code>完成后再处理的逻辑</li>
+</ul>
+
+<h5 id="典型用途">典型用途</h5>
+<p><strong>1.摄像机跟随</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">FollowTarget</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">Transform</span> <span class="n">target</span><span class="p">;</span>
+
+    <span class="k">void</span> <span class="nf">LateUpdate</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">target</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">transform</span><span class="p">.</span><span class="n">position</span> <span class="p">=</span> <span class="n">target</span><span class="p">.</span><span class="n">position</span> <span class="p">+</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="p">-</span><span class="m">10</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>假设主角的位置在<code class="language-plaintext highlighter-rouge">Update()</code>中移动</li>
+  <li>如果摄像机在<code class="language-plaintext highlighter-rouge">Update()</code>中跟随，就会比角色“慢一帧”</li>
+  <li>用<code class="language-plaintext highlighter-rouge">LateUpdate()</code>可以确保摄像机总是跟着角色最终的位置</li>
+</ul>
+
+<p><strong>2.骨骼/动画后处理</strong></p>
+<ul>
+  <li>动画系统也会在<code class="language-plaintext highlighter-rouge">Update()</code>后更新状态</li>
+  <li>用<code class="language-plaintext highlighter-rouge">LateUpdate()</code>来处理动画附属物的位置，如武器、特效等</li>
+</ul>
+
+<p><strong>3.平滑插值（Smooth Follow）</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">LateUpdate</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">transform</span><span class="p">.</span><span class="n">position</span> <span class="p">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="nf">Lerp</span><span class="p">(</span><span class="n">transform</span><span class="p">.</span><span class="n">position</span><span class="p">,</span> <span class="n">target</span><span class="p">.</span><span class="n">position</span><span class="p">,</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span> <span class="p">*</span> <span class="m">5</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>放在<code class="language-plaintext highlighter-rouge">LateUpdate()</code>可以让插值始终作用在最终位置上
+    <blockquote>
+      <p><code class="language-plaintext highlighter-rouge">LateUpdate()</code>是在每帧所有逻辑处理完之后调用的函数，适合做跟随、补偿、视觉同步、动画后处理等操作</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h4 id="关于fixedupdate">关于<code class="language-plaintext highlighter-rouge">FixedUpdate()</code></h4>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">FixedUpdate()</code>是MonoBehaviour提供的生命周期函数</li>
+  <li>以固定的时间间隔执行，默认每0.02s，而不是每帧执行一次</li>
+  <li>适用于物理引擎相关的逻辑（刚体、碰撞器、重力等）</li>
+  <li>使用<code class="language-plaintext highlighter-rouge">Time.fixedDeltaTime</code>进行时间控制
+    <blockquote>
+      <p><code class="language-plaintext highlighter-rouge">FixedUpdate()</code>不一定每帧都调用，也可能在一帧内被调用多次（为了补上落后时间）</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h5 id="为什么物理逻辑必须放在fixedupdate">为什么物理逻辑必须放在<code class="language-plaintext highlighter-rouge">FixedUpdate()</code></h5>
+<p>Unity的物理系统（Rigidbody、Collider等）是在物理引擎中执行的，它以固定步长（Fixed Timestep）计算模拟</p>
+
+<p>如果你在<code class="language-plaintext highlighter-rouge">Update()</code>中对刚体施加力</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Update</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">rb</span><span class="p">.</span><span class="nf">AddForce</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">forward</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>每帧调用一次，但帧率变化会导致模拟不准确</li>
+  <li>如果FPS降低，你的物体就加速慢了</li>
+</ul>
+
+<p>正确做法：</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">FixedUpdate</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">rb</span><span class="p">.</span><span class="nf">AddForce</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">forward</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>固定时间模拟，物理表现就一致</li>
+</ul>
+
+<h5 id="时间控制">时间控制</h5>
+<p>默认情况下：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Time.fixedDeltaTime = 0.02f(每秒调用50次)
+</code></pre></div></div>
+<p>可以通过<code class="language-plaintext highlighter-rouge">Edit &gt; Project Setting &gt; Time</code>修改</p>
+
+<p><strong>示例：让角色持续向前移动（基于物理）</strong></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Rigidbody</span> <span class="n">rb</span><span class="p">;</span>
+
+<span class="k">void</span> <span class="nf">Start</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">rb</span> <span class="p">=</span> <span class="n">GetComponenet</span><span class="p">&lt;</span><span class="n">Rigidbody</span><span class="p">&gt;();</span>
+
+<span class="k">void</span> <span class="nf">FixedUpdate</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">rb</span><span class="p">.</span><span class="nf">MovePosition</span><span class="p">(</span><span class="n">rb</span><span class="p">.</span><span class="n">position</span> <span class="p">+</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">forward</span> <span class="p">*</span> <span class="m">5f</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">fixedDeltaTime</span><span class="p">);</span>
+</code></pre></div></div>
+<ul>
+  <li>用<code class="language-plaintext highlighter-rouge">MovePosition()</code>更适合刚体控制</li>
+  <li><code class="language-plaintext highlighter-rouge">Time.fixedDeltaTime</code>保持匀速</li>
+</ul>
+
+<p><strong>注意事项</strong>
+1.不要在<code class="language-plaintext highlighter-rouge">FixedUpdate()</code>中检测<code class="language-plaintext highlighter-rouge">Input.GetKey()</code><br />
+因为输入每帧更新，可能miss</p>
+
+<p>2.与物理系统交互统一放在<code class="language-plaintext highlighter-rouge">FixedUpdate()</code><br />
+避免不一致和jitter</p>
+
+<p>3.可能一帧内调用多次<code class="language-plaintext highlighter-rouge">FixedUpdate()</code>
+这是为了追上物理时间进度</p>
+
+<h4 id="碰撞触发事件">碰撞/触发事件</h4>
+
+<p>发生在物理更新阶段（即<code class="language-plaintext highlighter-rouge">FixedUpdate()</code>阶段）之后调用，调用频率和FixedUpdate()一致，不受帧率的影响</p>
+
+<p><strong>Rigidbody + Collider才能触发以下函数</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>函数名</th>
+      <th>用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnCollisionEnter(Collision col)</code></td>
+      <td>碰撞开始</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnCollisionStay(Collision col)</code></td>
+      <td>碰撞持续</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnCollisionExit(Collision col)</code></td>
+      <td>碰撞结束</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnTriggerEnter(Collider col)</code></td>
+      <td>触发器进入</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnTriggerStay(Collider col)</code></td>
+      <td>触发器内持续</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnTriggerExit(Collider col)</code></td>
+      <td>触发器离开</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="/posts/2025-06-03-Physics-System/">Unity物理系统</a></p>
+
+<h4 id="渲染阶段">渲染阶段</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>阶段</th>
+      <th>用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnPreRender()</code></td>
+      <td>摄像机开始渲染前</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnRenderObject()</code></td>
+      <td>所有对象渲染时</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnPostRender()</code></td>
+      <td>摄像机完成渲染后</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnWillRenderObject()</code></td>
+      <td>对象将被摄像机渲染前</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnDrawGizmos()</code> / <code class="language-plaintext highlighter-rouge">OnDrawGizmosSelected()</code></td>
+      <td>编辑器中画 Gizmos</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="禁用销毁阶段">禁用/销毁阶段</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>函数名</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnDisable()</code></td>
+      <td>脚本被禁用时调用（如 <code class="language-plaintext highlighter-rouge">enabled = false</code> 或 <code class="language-plaintext highlighter-rouge">SetActive(false)</code>）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnDestroy()</code></td>
+      <td>脚本被销毁前调用，用于释放资源、停止协程等</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="应用生命周期事件">应用生命周期事件</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>函数名</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnApplicationPause(bool pause)</code></td>
+      <td>应用暂停/恢复时调用（如手机切后台）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnApplicationFocus(bool focus)</code></td>
+      <td>是否获得焦点（如切到其他应用）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">OnApplicationQuit()</code></td>
+      <td>应用关闭前调用</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="自定义生命周期顺序">自定义生命周期顺序</h2>
+<p>Unity默认调用顺序无法改变（例如A的Awake总在B前），但可以手动更改执行顺序</p>
+
+<h3 id="方法一inspector设置执行顺序">方法一：Inspector设置执行顺序</h3>
+<p>菜单栏：<code class="language-plaintext highlighter-rouge">Edit &gt; Project Settings &gt; Script Execution Order</code><br />
+把关键脚本设置为更早或更晚执行</p>
+
+<h3 id="方法二代码显示调用推荐">方法二：代码显示调用（推荐）</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Awake</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">manager</span> <span class="p">=</span> <span class="n">FindObjectOfType</span><span class="p">&lt;</span><span class="n">GameManager</span><span class="p">&gt;();</span>
+    <span class="n">manager</span><span class="p">.</span><span class="nf">Register</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="2协程coroutine">2.协程（Coroutine）</h3>
+<p><code class="language-plaintext highlighter-rouge">MonoBehaviour</code>提供了对协程的支持，协程允许你在多个帧之间暂停执行某些代码，而不会阻塞主线程。使用协程，你可以轻松实现延迟、定时任务、动画过渡等功能
+<a href="/posts/2025-06-03-Coroutine/">Coroutine</a></p>
+
+<h3 id="3输入处理">3.输入处理</h3>
+<p><a href="/posts/2025-06-03-Input-System/">Input-System</a></p>
+
+<h3 id="4物理与碰撞">4.物理与碰撞</h3>
+<p><a href="/posts/2025-06-03-Physics-System/">Physics-System</a></p>
+
+<h3 id="5组件管理">5.组件管理</h3>
+<p>可以使用<code class="language-plaintext highlighter-rouge">GetComponent</code>和<code class="language-plaintext highlighter-rouge">AddComponent</code>等方法来访问和控制其他组件。例如，获取物体的Rigidbody`组件或添加新的组件</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Rigidbody</span> <span class="n">rb</span> <span class="p">=</span> <span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">Rigidbody</span><span class="p">&gt;();</span> <span class="c1">// 获取组件</span>
+<span class="n">rb</span><span class="p">.</span><span class="nf">AddForce</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">up</span> <span class="p">*</span> <span class="m">10f</span><span class="p">);</span> <span class="c1">// 应用力</span>
+
+<span class="c1">// 动态添加组件</span>
+<span class="n">gameObject</span><span class="p">.</span><span class="n">AddComponent</span><span class="p">&lt;</span><span class="n">BoxCollider</span><span class="p">&gt;();</span>
+</code></pre></div></div>
+
+<h3 id="6monobehaviour特性">6.<code class="language-plaintext highlighter-rouge">MonoBehaviour</code>特性</h3>
+<ul>
+  <li>附加到GameObject上：通过<code class="language-plaintext highlighter-rouge">MonoBehaviour</code>，你可以将脚本附加到GameObject上，从而使该GameObject拥有行为</li>
+  <li>可在Inspector中配置：<code class="language-plaintext highlighter-rouge">MonoBehaviour</code>的公共字段（如<code class="language-plaintext highlighter-rouge">public</code>变量）可以在Unity编辑器的Inspector面板中查看和修改</li>
+  <li>生命周期管理：提供了许多生命周期方法，如<code class="language-plaintext highlighter-rouge">Awake</code>、 <code class="language-plaintext highlighter-rouge">Start</code>、<code class="language-plaintext highlighter-rouge">Update</code>，以及与物理和碰撞相关的方法</li>
+</ul>
+
+<h3 id="7其他功能">7.其他功能</h3>
+<ul>
+  <li>场景管理:<a href="/posts/2025-06-08-Scene-System/">Scene-System</a></li>
+  <li>日志输出：<a href="/posts/2025-07-12-Debug/">Debug</a></li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-06-01T00:00:00+08:00">June 1, 2025</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/%E7%AC%94%E8%AE%B0/2025/06/01/PInvoke-in-Unity.html" class="pagination--pager" title="P/Invoke in Unity">Previous</a>
+    
+    
+      <a href="/%E7%AC%94%E8%AE%B0/2025/06/01/ScriptableObject.html" class="pagination--pager" title="ScriptableObject">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/ljf12825" rel="nofollow noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 <a href="http://localhost:4000">ljf12825's Blog</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
