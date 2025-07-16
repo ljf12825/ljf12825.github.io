@@ -90,7 +90,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Component",
-        "excerpt":"Component是附加在GameObject上的功能模块，每个组件都提供了某种行为或属性，组成了游戏对象的功能 组件的特性 特性 描述 附加性 可以给 GameObject 添加多个组件。 组合式设计 Unity 的架构是组合优于继承，一个 GameObject 的行为是由多个组件组合而成的。 可视化编辑 在 Unity Inspector 面板中可以直接添加、删除或修改组件。 脚本组件 你写的 C# 脚本，本质上也是组件，继承自 MonoBehaviour。 在代码中使用组件 //获取组件 Rigidbody rb = GetComponenet&lt;Rigidbody&gt;(); //添加组件 gameObject.AddComponenet&lt;AudioSource&gt;(); 在Unity中，组件之所以能起作用，是因为Unity引擎在运行时会自动调度和执行组件的逻辑，这个背后是Unity引擎的核心“组件驱动”架构 简单理解：Unity的工作循环 + 组件系统 1.GameObject只是容器 2.组件发挥功能 3.Unity引擎每一帧都会遍历所有激活的GameObject，调度它们的组件做该做的事 Unity组件驱动架构 Unity组件 Category Component Name Audio Chorus Filter   Distortion Filter  ...","categories": ["笔记"],
+        "excerpt":"Component是附加在GameObject上的功能模块，每个组件都提供了某种行为或属性，组成了游戏对象的功能 class Component继承自Object，在UnityEngine.CoreModule中实现 class Component 是所有可依附在GameObject上的类的基类 不可以直接创建Component API Properties Property Description gameObject component附加的GameObject tag gameObject的tag transform gameObject的Transform Public Methods 方法 描述 BroadcastMessage 调用当前 GameObject 或其所有子对象的指定方法。 CompareTag 比较 GameObject 的标签（tag）与给定标签。 GetComponent 获取当前 GameObject 上的指定类型的组件。 GetComponentInChildren 获取当前 GameObject 或其子对象上的指定类型的组件。 GetComponentIndex 获取组件在其父对象中的索引。 GetComponentInParent 获取当前 GameObject 或其父对象上的指定类型的组件。 GetComponents 获取当前 GameObject 上的所有指定类型的组件。 GetComponentsInChildren 获取当前 GameObject...","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Component.html",
         "teaser": null
@@ -126,7 +126,7 @@ var store = [{
         "teaser": null
       },{
         "title": "FSM",
-        "excerpt":" ","categories": ["笔记"],
+        "excerpt":"FSM(Finite State Machine，有限状态机)是一种常用的编程模型，广泛应用于游戏开发中，尤其是在行为控制、游戏角色AI、UI系统、动画控制方面 它的核心就是在一组有限的状态中进行切换，且每次状态转移都遵循一定的规则 基本概念 FSM由以下几个基本元素构成： 状态（State）：系统当前的状态，表示系统的一种具体行为或情境 状态转移（Transition）：从一个状态到另一个状态的路径，通常基于某种条件或事件触发 事件（Event）：触发状态转移的条件或输入，通常由外部世界的变化或内部系统的某些操作引起 动作（Action）：状态进入、退出或在某个状态时发生的具体行为 FSM的组成部分 状态：状态机的每个状态都表示某一特定的系统情境。每个状态可能有自己的内部逻辑和行为。 状态转移：从一个状态到另一个状态的过渡。转移通常由条件（如事件、输入、计时等）触发，状态机的核心就是处理这些条件，并做出相应的状态转换。 事件与触发器：状态转移的条件。通常是由外部输入（如玩家输入、定时器超时、游戏中的其他事件）来触发。 动作：当状态转移时会执行某些动作。比如，进入某个状态时播放动画，退出某个状态时停止某个动作等。 FSM的工作流程 FSM的工作过程可以概括为：每个时刻系统处于某个状态，系统等待某个事件的发生，一旦事件发生，就会根据事件的定义从当前状态转移到下一个状态，并可能触发某些动作。这个过程是循环的，状态机一直在不断地检查事件、进行状态转移。 FSM示例：AI行为 假设开发一个游戏中的敌人AI，敌人的行为可以通过FSM来管理，比如敌人有以下几个行为状态： 巡逻（Patrolling）：敌人沿着一个固定路径来回走 追击（Chasing）：敌人发现玩家并开始追逐 攻击（Attacking）：敌人接近玩家并进行攻击 待机（Idle）：敌人没有做任何事情，处于等待状态 状态转移图： 如果敌人没有发现玩家，状态保持在巡逻 如果敌人发现玩家并进入追击状态，当玩家进入攻击范围时，切换到攻击状态 如果玩家离开视野，回到巡逻状态 如果敌人不再追击或攻击，返回待机状态 每当敌人状态发生变化时，会有相应的动作，比如进入追击时播放追击动画，攻击时播放攻击动画 FSM在Unity中的实现 在Unity中，FSM通常通过脚本来实现。可以使用enum来定义状态，if条件判断或switch语句来管理状态转移，甚至用状态机设计模式来封装整个逻辑 一个简单FSM实现 public enum EnemyState { Patrolling, Chasing, Attacking, Idle } public class EnemyAI : MonoBehaviour { public EnemyState currentState;...","categories": ["笔记"],
         "tags": ["Unity","Unity System","AI"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/FSM.html",
         "teaser": null
@@ -359,12 +359,6 @@ var store = [{
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Attribute-in-Unity.html",
         "teaser": null
       },{
-        "title": "P/Invoke in Unity",
-        "excerpt":" ","categories": ["笔记"],
-        "tags": ["Unity","Syntax"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/PInvoke-in-Unity.html",
-        "teaser": null
-      },{
         "title": "MonoBehaviour",
         "excerpt":"MonoBehaviour是Unity中最重要的基类之一，它是所有挂载到GameObject上的脚本的基础。每当在Unity编译器中创建也给C#脚本，并将其附加到一个GameObject时，这个脚本默认会继承MonoBehaviour MonoBehaviour提供了一些非常强大的功能，尤其是在场景生命周期和事件处理方面 MonoBehaviour继承自Behaviour Behaviour Behaviour继承自Component，是MonoBehaviour、Renderer、Collider等类的基类，它为所有脚本提供了一些通用的启用/禁用功能和调度机制 API Properties 属性 类型 描述 enabled bool 决定了当前Behaviour是否启用，当启用时，该组件会响应更新（如Update()等声明周期方法），禁用则不会 isActiveAndEnable bool 是一个只读属性，返回当前组件是否被启用并且它的GameObject也启用 示例 enable用法 void Start() { // 禁用这个脚本 this.enabled = false; } void Update() { if (this.enabled) { // 如果脚本启用，这部分代码才会执行 Debug.Log(\"Script is enabled.\"); } } enable在继承时的行为 如果你继承自Behaviour，并且禁用该组件，那么Unity会停止调用该组件的方法。但是，如果Behaviour的父类被禁用，你仍然可以控制enable属性来启用或禁用某些组件行为 启用和禁用的实际应用 控制游戏对象的行为 动态启用/禁用：你可以根据游戏的状态动态启用或禁用脚本、组件或整个GameObject 例如在游戏中按下按钮时禁用某些功能或暂停某些操作 public class GameController :...","categories": ["笔记"],
         "tags": ["Unity","Syntax","Unity Class"],
@@ -431,14 +425,14 @@ var store = [{
         "url": "/posts/2025-07-15-Loose-Coupling/",
         "teaser": null
       },{
-        "title": "Native Layer to C# Layer",
-        "excerpt":" ","categories": ["笔记"],
+        "title": "Native Layer to Script Layer",
+        "excerpt":"The Bridge between Native Layer and Script Layer Unity引擎运行时，本质上是一个C++引擎内核 + C#脚本层的结构 所写的MonoBehaviour只是在C#中的一个代理对象，真正控制游戏运行的逻辑、渲染、物理等是C++层在执行 所以从UnityEngine.Object开始，Unity构建了一个“双向映射体系” C++对象（native） &lt;--- instance ID --- UnityEngine.Object（C#托管对象） ↑ ↑ 内存资源 脚本代理 从Object到MonoBehaviour的完整继承链 System.Object （纯托管） └── UnityEngine.Object （托管对象，桥梁类） ├── GameObject（托管对象） └── Component ├── Transform / Renderer / Collider...（托管对象） └── MonoBehaviour （托管行为对象，支持生命周期方法） 它们都不是普通的C#对象，它们都与C++侧的“实体”挂钩，甚至生命周期也是引擎控制的 native layer 与 script layer的绑定方式 Unity会通过一套机制将C++层对象暴露给C#层，这其中最关键的桥梁是：instance ID...","categories": ["笔记"],
         "tags": ["Unity","Underlying Principle"],
-        "url": "/posts/2025-07-15-Native-Layer-to-C#-Layer/",
+        "url": "/posts/2025-07-15-Native-Layer-to-Script-Layer/",
         "teaser": null
       },{
         "title": "Object",
-        "excerpt":"Object是Unity中所有内建物体的基类，实现在UnityEngine.CoreModule中，不同于C#中的System.Object，它是托管层（C#）和原生引擎层（C++）之间的桥梁，背后绑定着Unity C++引擎层的资源句柄 Object的特点（Unity的特有行为） 引擎资源的绑定 每个UnityEngine.Object对象都对应一个C++层对象，它们通过一个instance 2D来关联，且资源的生命周期不由GC管理 比如： GameObject go = new GameObject(); Object.Destroy(go); Debug.Log(go == null); // true 这就是Object的“鬼行为”，此处的go == null并非等价于object is null Unity的“fake null”机制 Unity重写了==操作符 如果一个Object对象在引擎层已经被销毁（Destroy过），但C#还保有托管引用，这时候： Debug.Log(go == null); // true Debug.Log(go.Equals(null)); // false Debug.Log(ReferenceEquals(go, null)); // false 这是Unity为了安全做的改动行为，防止对已经销毁的对象操作，引起native崩溃 底层原理 Unity的Object在C#层其实只是一个代理，它对应的C++引擎层对象通过C#层的IntPtr m_CachedPtr与C++对象通信（该字段可以在反编译时看到） 资源对象（比如一个贴图）在编译器导入时会被转换为native object，保存在场景或资源文件中，加载时通过Unity自己的反序列化系统生成C#代理对象，并挂接m_CachedPtr Unity会使用C++引擎进行资源生命周期的管理，而不是C#的GC，所以Destroy调的是C++的释放接口 Sometimes an instance of...","categories": ["笔记"],
+        "excerpt":"Object是Unity中所有内建物体的基类，实现在UnityEngine.CoreModule中，不同于C#中的System.Object，它是托管层（C#）和原生引擎层（C++）之间的桥梁，背后绑定着Unity C++引擎层的资源句柄 Object的特点（Unity的特有行为） 引擎资源的绑定 每个UnityEngine.Object对象都对应一个C++层对象，它们通过一个instance 2D来关联，且资源的生命周期不由GC管理 比如： GameObject go = new GameObject(); Object.Destroy(go); Debug.Log(go == null); // true 这就是Object的“鬼行为”，此处的go == null并非等价于object is null Unity的“fake null”机制 fake null是Unity中一个特有的概念，通常用来描述已经销毁的对象或者已经不再有效的对象的引用。尽管对象被销毁了，但它仍然存在一个“假”引用，这个引用就像是一个假的null，它指向的对象实际上已经不再有效，但在代码层面看起来却任然是一个对象。具体来说，fake null让你能够获得一个对象引用，但该对象的属性和方法无法被正常访问，或者会返回默认值，或者不会产生期望的结果 Unity重写了==操作符 如果一个Object对象在引擎层已经被销毁（Destroy过），但C#还保有托管引用，这时候： Debug.Log(go == null); // true Debug.Log(go.Equals(null)); // false Debug.Log(ReferenceEquals(go, null)); // false 为什么需要fake null 避免NullReferenceException 在传统的编程中，如果一个对象被销毁或设为null，而你还试图访问它的属性或方法，就会引发NullReferenceException错误。在Unity中，许多对象的销毁并不立即释放内存，尤其是当销毁了一个游戏对象或组件时。为了避免频繁的null检查和避免程序崩溃，Unity引入了fake null 内存管理的优化 Unity并不是立即销毁对象，而是将其“标记”为无效，保持它的引用存在，但无法访问。这使得Unity可以更高效地管理内存。内存的实际释放通常依赖于垃圾回收器，而不是对象销毁后立即释放内存，从而避免频繁的内存分配和释放造成的性能瓶颈 fake...","categories": ["笔记"],
         "tags": ["Unity","Syntax","Unity Class"],
         "url": "/posts/2025-07-11-Object/",
         "teaser": null

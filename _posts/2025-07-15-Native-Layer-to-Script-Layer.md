@@ -5,7 +5,7 @@ date: 2025-06-01
 categories: [笔记]
 tags: [Unity, Underlying Principle]
 author: "ljf12825"
-permalink: /posts/2025-07-15-Native-Layer-to-C#-Layer/
+permalink: /posts/2025-07-15-Native-Layer-to-Script-Layer/
 ---
 ## The Bridge between Native Layer and Script Layer
 Unity引擎运行时，本质上是一个C++引擎内核 + C#脚本层的结构

@@ -182,7 +182,8 @@
 </code></pre></div></div>
 <p>这就是Object的“鬼行为”，此处的<code class="language-plaintext highlighter-rouge">go == null</code>并非等价于<code class="language-plaintext highlighter-rouge">object is null</code></p>
 
-<p><strong>Unity的“fake null”机制</strong></p>
+<p><strong>Unity的“fake null”机制</strong>
+<code class="language-plaintext highlighter-rouge">fake null</code>是Unity中一个特有的概念，通常用来描述已经销毁的对象或者已经不再有效的对象的引用。尽管对象被销毁了，但它仍然存在一个“假”引用，这个引用就像是一个假的<code class="language-plaintext highlighter-rouge">null</code>，它指向的对象实际上已经不再有效，但在代码层面看起来却任然是一个对象。具体来说，<code class="language-plaintext highlighter-rouge">fake null</code>让你能够获得一个对象引用，但该对象的属性和方法无法被正常访问，或者会返回默认值，或者不会产生期望的结果</p>
 
 <p>Unity重写了<code class="language-plaintext highlighter-rouge">==</code>操作符</p>
 
@@ -191,7 +192,25 @@
 <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="n">go</span><span class="p">.</span><span class="nf">Equals</span><span class="p">(</span><span class="k">null</span><span class="p">));</span> <span class="c1">// false</span>
 <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="nf">ReferenceEquals</span><span class="p">(</span><span class="n">go</span><span class="p">,</span> <span class="k">null</span><span class="p">));</span> <span class="c1">// false</span>
 </code></pre></div></div>
-<p>这是Unity为了安全做的改动行为，防止对已经销毁的对象操作，引起native崩溃</p>
+
+<p>为什么需要fake null</p>
+<ol>
+  <li>
+    <p>避免NullReferenceException
+在传统的编程中，如果一个对象被销毁或设为<code class="language-plaintext highlighter-rouge">null</code>，而你还试图访问它的属性或方法，就会引发<code class="language-plaintext highlighter-rouge">NullReferenceException</code>错误。在Unity中，许多对象的销毁并不立即释放内存，尤其是当销毁了一个游戏对象或组件时。为了避免频繁的<code class="language-plaintext highlighter-rouge">null</code>检查和避免程序崩溃，Unity引入了<code class="language-plaintext highlighter-rouge">fake null</code></p>
+  </li>
+  <li>
+    <p>内存管理的优化
+Unity并不是立即销毁对象，而是将其“标记”为无效，保持它的引用存在，但无法访问。这使得Unity可以更高效地管理内存。内存的实际释放通常依赖于垃圾回收器，而不是对象销毁后立即释放内存，从而避免频繁的内存分配和释放造成的性能瓶颈</p>
+  </li>
+</ol>
+
+<p><code class="language-plaintext highlighter-rouge">fake null</code>行为总结</p>
+<ol>
+  <li>引用存在，但对象无效</li>
+  <li>不抛出异常</li>
+  <li>确保内存管理不会立即释放内存</li>
+</ol>
 
 <h3 id="底层原理">底层原理</h3>
 <p>Unity的<code class="language-plaintext highlighter-rouge">Object</code>在C#层其实只是一个代理，它对应的C++引擎层对象通过C#层的<code class="language-plaintext highlighter-rouge">IntPtr m_CachedPtr</code>与C++对象通信（该字段可以在反编译时看到）</p>
@@ -438,7 +457,7 @@ It is only safe to use those operators in your scripts if there is certainty tha
       
   <nav class="pagination">
     
-      <a href="/posts/2025-07-15-Native-Layer-to-C#-Layer/" class="pagination--pager" title="Native Layer to C# Layer">Previous</a>
+      <a href="/posts/2025-07-15-Native-Layer-to-Script-Layer/" class="pagination--pager" title="Native Layer to Script Layer">Previous</a>
     
     
       <a href="/posts/2025-07-15-Unity-Component-Communication/" class="pagination--pager" title="Unity Component Communication">Next</a>

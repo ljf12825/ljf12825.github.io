@@ -11,7 +11,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Component - ljf12825’s Blog</title>
-<meta name="description" content="Component是附加在GameObject上的功能模块，每个组件都提供了某种行为或属性，组成了游戏对象的功能">
+<meta name="description" content="Component是附加在GameObject上的功能模块，每个组件都提供了某种行为或属性，组成了游戏对象的功能 class Component继承自Object，在UnityEngine.CoreModule中实现">
 
 
 
@@ -22,7 +22,7 @@
 <meta property="og:url" content="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Component.html">
 
 
-  <meta property="og:description" content="Component是附加在GameObject上的功能模块，每个组件都提供了某种行为或属性，组成了游戏对象的功能">
+  <meta property="og:description" content="Component是附加在GameObject上的功能模块，每个组件都提供了某种行为或属性，组成了游戏对象的功能 class Component继承自Object，在UnityEngine.CoreModule中实现">
 
 
 
@@ -149,7 +149,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Component">
-    <meta itemprop="description" content="Component是附加在GameObject上的功能模块，每个组件都提供了某种行为或属性，组成了游戏对象的功能">
+    <meta itemprop="description" content="Component是附加在GameObject上的功能模块，每个组件都提供了某种行为或属性，组成了游戏对象的功能class Component继承自Object，在UnityEngine.CoreModule中实现">
     <meta itemprop="datePublished" content="2025-06-01T00:00:00+08:00">
     
 
@@ -168,7 +168,102 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>Component是附加在GameObject上的功能模块，每个组件都提供了某种行为或属性，组成了游戏对象的功能</p>
+        <p>Component是附加在GameObject上的功能模块，每个组件都提供了某种行为或属性，组成了游戏对象的功能
+class Component继承自Object，在UnityEngine.CoreModule中实现</p>
+
+<h2 id="class-component">class Component</h2>
+<p>是所有可依附在GameObject上的类的基类</p>
+
+<p>不可以直接创建Component</p>
+
+<h3 id="api">API</h3>
+<p><strong>Properties</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>gameObject</td>
+      <td>component附加的GameObject</td>
+    </tr>
+    <tr>
+      <td>tag</td>
+      <td>gameObject的tag</td>
+    </tr>
+    <tr>
+      <td>transform</td>
+      <td>gameObject的Transform</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Public Methods</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">BroadcastMessage</code></td>
+      <td>调用当前 <code class="language-plaintext highlighter-rouge">GameObject</code> 或其所有子对象的指定方法。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">CompareTag</code></td>
+      <td>比较 <code class="language-plaintext highlighter-rouge">GameObject</code> 的标签（tag）与给定标签。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetComponent</code></td>
+      <td>获取当前 <code class="language-plaintext highlighter-rouge">GameObject</code> 上的指定类型的组件。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetComponentInChildren</code></td>
+      <td>获取当前 <code class="language-plaintext highlighter-rouge">GameObject</code> 或其子对象上的指定类型的组件。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetComponentIndex</code></td>
+      <td>获取组件在其父对象中的索引。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetComponentInParent</code></td>
+      <td>获取当前 <code class="language-plaintext highlighter-rouge">GameObject</code> 或其父对象上的指定类型的组件。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetComponents</code></td>
+      <td>获取当前 <code class="language-plaintext highlighter-rouge">GameObject</code> 上的所有指定类型的组件。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetComponentsInChildren</code></td>
+      <td>获取当前 <code class="language-plaintext highlighter-rouge">GameObject</code> 和其子对象上的所有指定类型的组件。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetComponentsInParent</code></td>
+      <td>获取当前 <code class="language-plaintext highlighter-rouge">GameObject</code> 和其父对象上的所有指定类型的组件。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SendMessage</code></td>
+      <td>在当前 <code class="language-plaintext highlighter-rouge">GameObject</code> 上调用指定的方法，所有附加的 MonoBehaviour 都会收到此消息。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SendMessageUpwards</code></td>
+      <td>调用当前 <code class="language-plaintext highlighter-rouge">GameObject</code> 及其所有祖先对象上的指定方法。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">TryGetComponent</code></td>
+      <td>尝试获取指定类型的组件，如果存在则返回该组件，否则返回 <code class="language-plaintext highlighter-rouge">null</code>。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="https://docs.unity3d.com/ScriptReference/Component.html">Unity Scripting Component</a></p>
 
 <h2 id="组件的特性">组件的特性</h2>
 
