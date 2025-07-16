@@ -7,6 +7,40 @@ tags: [Unity, Unity System]
 author: "ljf12825"
 ---
 Component是附加在GameObject上的功能模块，每个组件都提供了某种行为或属性，组成了游戏对象的功能
+class Component继承自Object，在UnityEngine.CoreModule中实现
+
+## class Component
+是所有可依附在GameObject上的类的基类
+
+不可以直接创建Component
+
+### API
+**Properties**
+
+| Property | Description |
+| - | - |
+| gameObject | component附加的GameObject |
+| tag | gameObject的tag |
+| transform | gameObject的Transform |
+
+**Public Methods**
+
+| 方法                        | 描述                                                         |
+|-----------------------------|--------------------------------------------------------------|
+| `BroadcastMessage`           | 调用当前 `GameObject` 或其所有子对象的指定方法。                      |
+| `CompareTag`                 | 比较 `GameObject` 的标签（tag）与给定标签。                        |
+| `GetComponent`               | 获取当前 `GameObject` 上的指定类型的组件。                         |
+| `GetComponentInChildren`     | 获取当前 `GameObject` 或其子对象上的指定类型的组件。                |
+| `GetComponentIndex`          | 获取组件在其父对象中的索引。                                    |
+| `GetComponentInParent`       | 获取当前 `GameObject` 或其父对象上的指定类型的组件。                |
+| `GetComponents`              | 获取当前 `GameObject` 上的所有指定类型的组件。                      |
+| `GetComponentsInChildren`    | 获取当前 `GameObject` 和其子对象上的所有指定类型的组件。            |
+| `GetComponentsInParent`      | 获取当前 `GameObject` 和其父对象上的所有指定类型的组件。            |
+| `SendMessage`                | 在当前 `GameObject` 上调用指定的方法，所有附加的 MonoBehaviour 都会收到此消息。 |
+| `SendMessageUpwards`         | 调用当前 `GameObject` 及其所有祖先对象上的指定方法。                  |
+| `TryGetComponent`            | 尝试获取指定类型的组件，如果存在则返回该组件，否则返回 `null`。       |
+
+[Unity Scripting Component](https://docs.unity3d.com/ScriptReference/Component.html)
 
 ## 组件的特性
 
