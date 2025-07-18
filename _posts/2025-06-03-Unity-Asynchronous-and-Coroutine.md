@@ -5,13 +5,65 @@ date: 2025-06-01
 categories: [笔记]
 tags: [Unity, Unity Engine]
 author: "ljf12825"
-permalink: /posts/2025-06-03-Coroutine/
+permalink: /posts/2025-06-03-Unity-Asynchronous-and-Coroutine/
 ---
+在Unity中，异步编程主要应用于长时间运行的操作或I/O操作，例如加载场景、资源（如纹理、音频文件）、进行网络请求或其他非阻塞操作。Unity提供了几种常见的方式来实现异步操作，通常通过协程和异步编程API（如`async/await`）来实现
+
+## Asynchronous
+Unity 从 2017 版本开始支持 `async/await` 异步编程方式，它是 C# 的一部分，适用于处理 耗时的异步操作，如网络请求、文件操作等。通过 `async` 标记方法，并在需要等待的地方使用 `await`，可以简化代码并使其更加可读
+
+**示例：异步加载资源（UnityWebRequest）**  
+假设你要从网络上下载文件，可以使用`async/await`来实现非阻塞的异步操作：
+```cs
+using UnityEngine;
+using UnityEngine.Networking;
+using System.Threading.Task;
+
+public class AsyncExample : MonoBehaviour
+{
+    async void Start()
+    {
+        string url = "https://example.com/resource";
+        string result = await DownloadDataAsync(url);
+        Debug.Log("下载完成：" + result);
+    }
+
+    // 异步下载数据
+    private async Task<string> DownloadDataAsync(string url)
+    {
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
+        {
+            // 发送请求并等待结果
+            await webRequest.SendWebRequest();
+
+            if (webRequest.result == UnityWebRequest.Result.Success)
+                return webRequest.downloadHandler.text; // 返回下载的文本内容
+            else return "错误：" + webRequest.error;
+        }
+    }
+}
+```
+在这个例子中，`DownloadDataAsync`使用`async/await`来处理异步操作。`awatiwebRequest.SendWebRequest()`会等待请求完成，避免阻塞主线程
+
+异步操作的常见用途：
+- 网络请求：例如从服务器获取数据或上传数据
+- 文件操作：读取/写入大文件时避免主线程阻塞
+- 资源加载：异步加载资源（比如大型的纹理、音频文件等）
+
+异步编程优缺点：
+- 优点：
+  - 代码更简洁、易于理解
+  - 支持现代C#异步模式，错误处理更加方便
+  - 完全非阻塞主线程，不会影响UI和游戏的流畅性
+
+- 缺点：
+  - 对于资源加载（如场景加载）等操作，仍然需要通过Unity自带的API来实现
+  - 不适用于每一类异步操作，尤其是涉及到Unity特有的对象和接口时
+
+## Coroutine
 Unity Coroutine是一种允许在多帧中分布执行代码的机制，它通常用于处理一些需要在多个帧之间等待的任务，比如延时操作、动画播放、资源加载等  
 协程本质上是通过一种特殊的方式执行代码，它可以在执行过程中“暂停”并在后续的帧继续执行  
 
-## 基本使用
-### 启动协程
 协程是通过`StartCoroutine()`来启动的。协程通常返回一个`IEnumerator`类型的方法
 ```cs
 using UnityEngine;
@@ -40,14 +92,12 @@ public class CoroutineExample : MonoBehaviour
 ```
 在这个例子中，`MyCoroutine`协程将在开始时打印“协程开始”，然后等待2秒后打印“2秒后继续执行”，最后在下一帧打印“协程执行完毕”  
 
-### 协程的暂停与恢复
 协程可以通过`yield return`暂停执行，直到某个条件满足。常见的暂停类型有：  
 - `WaitForSeconds`：等待指定的时间
 - `WaitForEndOfFrame`：等待当前帧渲染结束后继续执行
 - `WaitForFixedUpdate`：等待下一次物理更新
 - `null`：等到下一帧执行
 
-### 停止协程
 协程并不是自动停止的，你需要显示地停止它  
 使用`StopCoroutine()`方法可以停止某个协程，或者通过`StopAllCoroutine()`停止当前对象的所有协程  
 ```cs
@@ -55,23 +105,27 @@ StartCoroutine(MyCoroutine());
 StopCoroutine(MyCoroutine());
 ```
 
-### 协程的返回值
 协程通常返回一个`IEnumerator`，但也可以有不同的返回类型，比如`WaitForSeconds`或其他等待条件类型  
 
-## 协程的优点
+### 协程的优缺点
+优点：
 - 简洁性：相比于传统的`Update`或者使用定时器的方式，协程让代码更简洁、更易于理解
 - 灵活性：可以处理复杂的等待逻辑，比如按帧延迟、动态等待、分步执行等 
 - 性能优化：协程可以有效避免不必要的多次计算或事件处理，提升游戏性能  
 
-## 注意
+缺点：
+- 容易受到Unity引擎主线程调度的影响
+- 错误处理不如`async/await`简单
+
+### 注意
 - 协程是在主线程中执行的，所以它们会被游戏的主循环驱动，而不能跨线程操作数据
 - 协程一旦启动，默认会在对象生命周期内有效，如果对象被销毁，协程会自动停止
 - 如果需要频繁控制协程的暂停或停止，可能需要考虑使用更复杂的状态机或事件系统来更好的管理它们
 
-## 进阶应用
+### 进阶应用
 协程不仅仅仅限于等待固定时间，也可以与其他逻辑结合实现复杂的功能
 
-### 等待某个条件满足后继续执行
+**等待某个条件满足后继续执行**
 ```cs
 IEnumerator WaitForCondition()
 {
@@ -89,7 +143,7 @@ IEnumerator DynamicWait(float time)
 }
 ```
 
-### 实现动画或缓动
+**实现动画或缓动**
 可以用协程来实现逐个改变的某个值，例如实现一个平滑的动画过渡  
 ```cs
 IEnumerator LerpPosition(Vector3 targetPosition, float duration)
@@ -108,11 +162,10 @@ IEnumerator LerpPosition(Vector3 targetPosition, float duration)
 }
 ```
 
-## 协程的底层机制
-### 调用与执行过程
+### 协程的底层机制
 在Unity中，协程的执行是通过`IEnumerator`类型的函数来定义的，协程的调用、暂停、恢复都与Unity的主线程紧密结合  
 协程不是传统意义上的线程，而是通过Unity引擎内部的协程调度系统来管理的  
-#### 调用
+
 通过`StartCoroutine()`方法启动，这个方法接收一个`IEnumerator`类型的函数，或者是一个字符串（表示方法名）
 ```cs
 StartCoroutine(MyCoroutine());
@@ -122,39 +175,38 @@ StartCoroutine("MyCoroutine");
 当调用`StartCoroutine()`时，Unity会为该协程分配一个任务，并把它加入到协程调度队列中  
 之后Unity的主循环会负责在每一帧执行协程的代码  
 
-#### 协程的底层执行过程
 协程本质上时被Unity的引擎框架所调度的，协程代码并不会一次性执行完，而是会按需执行  
 **调度流程**  
 1.挂起状态：当协程执行到`yield return`语句时，Unity会暂停协程的执行，并把协程的执行状态保存下来（即当前的执行位置和上下文）  
 2.等待状态：协程会等待指定的时间、条件、或事件。在等待期间，协程的执行被挂起  
 3.恢复执行：当协程等待的条件满足，Unity会再次将协程的执行任务加入到下一帧的调度队列中，并从挂起点继续执行
 
-### 协程调度的底层实现机制
+#### 协程调度的底层实现机制
 大致底层实现：  
 - 每个协程有一个状态机，包含当前的执行位置、等待的条件等信息
 - Unity会管理所有的协程的队列，在每帧中，根据协程的状态和等待条件，决定哪些协程应该继续执行，哪些需要暂停或恢复
 - Unity引擎通过`MonoBehaviour`类的`Update()`函数来调度协程，保证协程的状态更新和执行是与游戏主线程同步的
 - 每次协程的恢复操作本质上是在下一帧的`Update()`或`LateUpdate()`中继续执行。协程的执行是由Unity内部的协程管理系统控制的  
 
-### 协程的性能与限制
+#### 协程的性能与限制
 - 协程过多会影响性能：如果你创建了大量的协程，并且每个协程的执行时间都比较长，可能会导致性能下降。建议根据时间需求合理使用协程
 - 协程不能跨线程：协程只能在主线程上允许，它们并不会生成新的线程，因此不能在协程中执行线程相关的任务
 - 协程与对象生命周期：协程与对象的生命周期紧密关联，当独享被销毁时，所有挂载该对象上的协程都会自动停止
 
-### Unity中协程的状态是如何被保存的
-#### 1.Coroutine对象
+#### Unity中协程的状态是如何被保存的
+1. Coroutine对象
 协程的状态是通过`Coroutine`对象来管理的，每个协程在运行时都会创建一个`Coroutine`对象，Unity会使用这个对象来跟踪协程执行状态  
 
-#### 2.IEnumerator状态机
+2. IEnumerator状态机
 协程通常返回一个`IEnumerator`对象，这实际上就是一个状态机的实现。在协程函数中，你可以通过`yield return`语句控制协程的执行。当协程遇到`yield`语句时，Unity会保存当前的执行上下文（如执行位置、局部变量等），并在下一帧继续从这个位置开始执行
 
-#### 3.内存和堆栈
+3. 内存和堆栈
 在协程执行过程中，Unity会使用内存中的堆栈来保存函数调用的上下文，每次协程被挂起时，它的局部变量、执行位置等信息会被保存在堆栈中，当协程恢复时，这些信息会被取出，协程继续执行  
 
-#### 4.协程调度器
+4. 协程调度器
 Unity会管理一个协程调度器，它负责跟踪所有活动的协程，并在每一帧更新它们。协程调度器会检查每个协程的状态，如果协程已经完成，它就会被销毁
 
-#### 5.状态保存与恢复
+5. 状态保存与恢复
 Unity通过以下方式来保存和恢复协程状态：
 - yield条件：`yield return`语句时协程的暂停点，Unity会记录当前的暂停点（如等待的时间、是否等待某个事件等）
 - 协程生命周期：协程的生命周期和GameObject、MonoBehaviour的生命周期有关，只有当对象被销毁或协程被停止时，协程才会完全退出
