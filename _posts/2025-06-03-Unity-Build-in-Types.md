@@ -8,9 +8,7 @@ author: "ljf12825"
 ---
 Unity内建类型  
 
-
-## 常见Unity内建类型（按用途分）
-### 1.空间/几何类型（Transform相关）
+## 1.空间/几何类型（Transform相关）
 
 | 类型                              | 说明               |
 | ------------------------------- | ---------------- |
@@ -23,10 +21,10 @@ Unity内建类型
 | `Rect`                          | 二维矩形区域           |
 | `Color`, `Color32`              | 表示颜色（线性空间和 sRGB） |
 
-#### **Vector2 & Vector3 & Vector4**
-它们是Unity提供的三个核心向量类型，广泛用于位置、方向、速度、缩放、颜色等各种场景  
+### Vector
+`Vector2`、`Vector3`、`Vector4`
 
-##### 基本定义
+它们是Unity提供的三个核心向量类型，广泛用于位置、方向、速度、缩放、颜色等各种场景  
 
 | 向量类型      | 维度                          | 作用                       |
 | --------- | --------------------------- | ------------------------ |
@@ -34,7 +32,7 @@ Unity内建类型
 | `Vector3` | 3D 向量，包含 `x`, `y`, `z`      | 用于 3D 空间中的大多数情况          |
 | `Vector4` | 4D 向量，包含 `x`, `y`, `z`, `w` | 用于更高级的计算，如齐次坐标、shader 编程 |
 
-**Vector2（二维向量）**  
+#### Vector2（二维向量）
 ```csharp
 Vector2 position = new Vector2(1.5f, 3.0f);
 ```
@@ -43,7 +41,7 @@ Vector2 position = new Vector2(1.5f, 3.0f);
 - 屏幕空间坐标（如UI坐标）
 - 纹理坐标（UV mapping）
 
-**Vector3（三维向量）**  
+#### Vector3（三维向量）  
 ```csharp
 Vector3 direction = new Vector3(0f, 1f, 0f); //向上
 transform.position += direction * Time.deltaTime;
@@ -53,43 +51,100 @@ transform.position += direction * Time.deltaTime;
 - 物理运动（速度、加速度）
 - 相机方向、光照方向
 
-**Vector3常用静态变量**  
-```csharp
-Vector3.zero      // (0, 0, 0)
-Vector3.one       // (1, 1, 1)
-Vector3.up        // (0, 1, 0)
-Vector3.down      // (0, -1, 0)
-Vector3.left      // (-1, 0, 0)
-Vector3.right     // (1, 0, 0)
-Vector3.forward   // (0, 0, 1)
-Vector3.back      // (0, 0, -1)
-```
+##### API
+**Static Properties**  
+这些属性是`Vector3`结构体的常用快捷方式，简化了常见的方向或特殊值的表示，使得代码更简洁易读
 
-**Vector3静态方法**  
+| Property           | Description                                                                            |
+| ------------------ | -------------------------------------------------------------------------------------- |
+| `back`             | 等价于 `Vector3(0, 0, -1)`。                                                               |
+| `down`             | 等价于 `Vector3(0, -1, 0)`。                                                               |
+| `forward`          | 等价于 `Vector3(0, 0, 1)`。                                                                |
+| `left`             | 等价于 `Vector3(-1, 0, 0)`。                                                               |
+| `negativeInfinity` | 等价于 `Vector3(float.NegativeInfinity, float.NegativeInfinity, float.NegativeInfinity)`，表示`-∞` |
+| `one`              | 等价于 `Vector3(1, 1, 1)`。                                                                |
+| `positiveInfinity` | 等价于 `Vector3(float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity)`，表示`+∞` |
+| `right`            | 等价于 `Vector3(1, 0, 0)`。                                                                |
+| `up`               | 等价于 `Vector3(0, 1, 0)`。                                                                |
+| `zero`             | 等价于 `Vector3(0, 0, 0)`。                                                                |
 
-| Method | Description | Declaration |
-| - | - | - |
-| Angel | 求两向量夹角 | public static float Angle(Vector3 from, Vector3 to); |
-| ClampMagnitude | 限制一个向量的长度，防止它超过maxLength，如果vector的长度小于等于maxLength返回原向量，否则返回一个等于maxLength的同向向量 | public static Vector3 ClampMagnitude(Vector3 vector, float maxLength); |
-| Cross | 求叉积 | public static Vector3 Cross(Vector3 lhs, Vector3 rhs); |
-| Distance | 求三维空间中两点的距离 | public static float Distance(Vector3 point1, Vector3 point2); |
-| Dot | 求点乘 | public static float Dot(Vector3 lhs, Vector3 rhs); |
-| Lerp | 求线插（不允许外推）,  t -> [0, 1]  | public static Vector3 Lerp(Vector3 a, Vector3 b, float t); |
-| LerpUnclamped | 求线插（允许外推，产生超调） | public static Vector3 LerpUnclamped(Vector3 a, Vector3 b, float t); |
-| Max | 返回两个向量所能组成的最大向量 | public static Vector3 Max(Vector3 lhs, Vector3 rhs); |
-| Min | 返回最小 | 同上 |
-| MoveTowards | 以恒定速度向目标位置靠近，直到到达 | public static Vector3 MoveTowards(Vector3 current, Vector3 target, float maxDistanceDelta); |
-| Normalize | 归一化 | public void Normalize(); |
-| OrthoNormalize | 正交归一化 | public static void OrthoNormalize(ref Vector3 normal, ref Vector3 tangent);  public static void OrthoNormalize(ref Vector3 normal, ref Vector3 tangent, ref Vector3 binormal); |
-| Project | 投影到onNormal | public static Vector3 Project(Vector3 vector, Vector3 onNormal); |
-| ProjectOnPlane | 投影到planeNormal | public static Vector3 ProjectOnPlane(Vector3 vector, Vector3 planeNormal); |
-| Reflect | 反射线，inNormal是法线 | public static Vector3 Reflect(Vector3 inDirection, Vector3  inNormal);
-| RotateTowards | 逐步旋转一个方向向量朝向另一个方向向量，maxRadiansDelta是每次最大允许旋转的角度（弧度），maxMagnitudeDelta是每次允许变化的向量长度 | public static Vector3 RotateTowards(Vector3 current, Vector3 target, float maxRadiansDelta, float maxMagnitudeDelta); |
-| Scale | 两个向量分量相乘组成新向量 | public static Vector3 Scale(Vector3 a, Vector3 b); |
-| SignedAngle | 求带符号夹角，axis是用于确定旋转方向的轴，正值是绕着axis左旋，负值是右旋 | public static float SignedAngle(Vector3 from, Vector3 to, Vector3 axis); |
-| Slerp | 球面插值，球面为a，b点所在大圆所在的球的球面，插值在a，b点所在的圆上取 | public static Vector3 Slerp(Vector3 a, Vector3 b, float t); |
-| SlerpUnclamped | 球面插值（允许外推，产生超调） | public static Vector3 SlerpUnclamped(Vector3 a, Vector3 b, float t); |
-| SmoothDamp | 平滑插值； ref currentVelocity当前速度向量；smoothTime到达目标值所需的预期时间，越小越快越敏感；maxSpeed最大速度（可选）；deltaTime每帧间隔时间（可选） | public static Vector3 SmoothDamp(Vector3 current, Vector3 target, ref Vector3 currentVelocity, float smoothTime, float maxSpeed = Mathf.Infinity, float deltaTime = Time.deltaTime);
+- `negativeInfinity`（负无穷）
+  - 定义：表示负无穷大的值
+  - 类型：`float.NegativeInfinity`
+  - 常见用途
+    - 初始化最小值：可以用`negativeInfinity`来初始化一个变量，使其值总是比任何数值都小。例如，在计算最小值时，可以用它来确保首次比较时能正确地更新最小值
+    - 比较：用于处理在算法中可能遇到的负无穷大值，比如图形计算中的不可达距离
+
+- `positiveInfinity`（正无穷）
+  - 定义：表示正无穷大的值
+  - 类型：`float.PositiveInfinity`
+  - 常见用途：
+      - 初始化最大值：用 `positiveInfinity` 来初始化一个变量，使其值总是比任何数值都大。例如，在计算最大值时，可以用它来确保首次比较时能正确地更新最大值。
+      - 比较：用于处理可能出现的正无穷大值，例如在图形学中表示无法到达的最大距离或算法中的最大值。
+
+**Properties**
+
+| Property       | Description                                            |
+| -------------- | ------------------------------------------------------ |
+| `magnitude`    | 返回此向量的长度（只读）。                                          |
+| `normalized`   | 返回基于当前向量的标准化向量。标准化后的向量长度为 1，并与当前向量方向相同。如果当前向量太小，返回零向量。 |
+| `sqrMagnitude` | 返回此向量的平方长度（只读）。                                        |
+| `this[int]`    | 通过 `[0]`、`[1]`、`[2]` 分别访问向量的 x、y、z 分量。                 |
+| `x`            | 向量的 x 分量。                                              |
+| `y`            | 向量的 y 分量。                                              |
+| `z`            | 向量的 z 分量。                                              |
+
+**Constructors**
+
+| COnstructor | Description |
+| - | - |
+| `Vector3` | 创建一个三维向量或点 | 
+
+**Public Methods**
+
+| Method     | Description                  |
+| ---------- | ---------------------------- |
+| `Equals`   | 如果给定的向量与当前向量完全相等，返回 `true`。  |
+| `Set`      | 设置现有 `Vector3` 的 x、y 和 z 分量。 |
+| `ToString` | 返回该向量的格式化字符串表示。"(x, y, z)" |
+
+
+**Static Methods**
+
+| Method           | Description                                    |
+| ---------------- | ---------------------------------------------- |
+| `Angle`          | 计算两个向量之间的夹角。                                   |
+| `ClampMagnitude` | 返回一个新的向量，最大长度被限制为 `maxLength`。                 |
+| `Cross`          | 计算两个三维向量的叉积。                                   |
+| `Distance`       | 计算两个三维点之间的距离。                                  |
+| `Dot`            | 计算两个三维向量的点积，定义在相同坐标空间中。                        |
+| `Lerp`           | 在两个点之间进行线性插值。                                  |
+| `LerpUnclamped`  | 在两个向量之间进行线性插值，不限制插值范围。                         |
+| `Max`            | 返回一个由两个向量中最大分量组成的向量。                           |
+| `Min`            | 返回一个由两个向量中最小分量组成的向量。                           |
+| `MoveTowards`    | 计算一个位置，当前位置到目标位置的最大移动距离不超过 `maxDistanceDelta`。 |
+| `Normalize`      | 将向量标准化，使其长度为 1。                                |
+| `OrthoNormalize` | 使两个向量都标准化并且相互正交。                               |
+| `Project`        | 将一个向量投影到另一个向量上。                                |
+| `ProjectOnPlane` | 将一个向量投影到一个平面上。                                 |
+| `Reflect`        | 将向量反射到由法线定义的平面上。                               |
+| `RotateTowards`  | 将一个向量 `current` 旋转到目标向量 `target`，并计算旋转。        |
+| `Scale`          | 逐分量地将两个向量相乘。                                   |
+| `SignedAngle`    | 计算两个向量之间相对于某一轴的带符号夹角。                          |
+| `Slerp`          | 在两个三维向量之间进行球面线性插值。                             |
+| `SlerpUnclamped` | 在两个向量之间进行球面线性插值，不限制插值范围。                       |
+| `SmoothDamp`     | 逐渐地将向量朝着目标位置变化，随着时间变化。                         |
+
+**Operators**
+
+| Operator      | Description            |
+| ------------- | ---------------------- |
+| `operator -`  | 将一个向量从另一个向量中减去。        |
+| `operator !=` | 如果两个向量不同，则返回 `true`。   |
+| `operator *`  | 将一个向量与一个数值相乘（逐分量相乘）。   |
+| `operator /`  | 将一个向量与一个数值相除（逐分量相除）。   |
+| `operator +`  | 两个三维向量进行逐分量加法。         |
+| `operator ==` | 如果两个向量大致相等，则返回 `true`。 |
 
 [Unity官方文档（Vector3）](https://docs.unity3d.com/ScriptReference/Vector3.html)
 
@@ -103,10 +158,10 @@ Vector4 v = new Vector4(1, 2, 3, 4);
 - 传递颜色（Color在底层可能是Vector4(r,g,b,a)）
 - shader开发中用于高级数学运算（如平面方程、切线空间等）
 
-#### Quaternion & Euler Angles
+### Quaternion & Euler Angles
 在Unity中，Quaternion是用来表示旋转的核心数学结构，它避免了Euler Angles的万向节死锁问题，并且适用于平滑插值和复杂3D计算  
 
-##### Quaternion
+#### Quaternion
 Quaternion表示绕某一条单位轴旋转一个角度的这个过程，简单来说：表示一个旋转
 
 **数学本质**
@@ -309,7 +364,7 @@ Ry不会也无法回头修改Rx的效果
 
 
 
-### 2.游戏对象相关
+## 2.游戏对象相关
 
 | 类型                 | 说明                  |
 | ------------------ | ------------------- |
@@ -321,7 +376,7 @@ Ry不会也无法回头修改Rx的效果
 | `Object`           | Unity 所有对象的基类（包括资源） |
 
 
-### 3.图形和渲染
+## 3.图形和渲染
 
 | 类型                                      | 说明          |
 | --------------------------------------- | ----------- |
@@ -333,7 +388,7 @@ Ry不会也无法回头修改Rx的效果
 | `Light`                                 | 灯光组件        |
 
 
-### 4.物理相关
+## 4.物理相关
 
 | 类型                                             | 说明                   |
 | ---------------------------------------------- | -------------------- |
@@ -344,7 +399,7 @@ Ry不会也无法回头修改Rx的效果
 | `ContactPoint`                                 | 碰撞点信息结构体             |
 
 
-### 5.输入和事件
+## 5.输入和事件
 
 | 类型                    | 说明         |
 | --------------------- | ---------- |
@@ -354,7 +409,7 @@ Ry不会也无法回头修改Rx的效果
 | `Event`, `EventType`  | GUI 系统事件类型 |
 
 
-### 6.资源与序列化
+## 6.资源与序列化
 
 | 类型                         | 说明                |
 | -------------------------- | ----------------- |
@@ -363,7 +418,7 @@ Ry不会也无法回头修改Rx的效果
 | `SerializableAttribute`    | 允许自定义类型序列化存储      |
 
 
-### 7.UI（UGUI）
+## 7.UI（UGUI）
 
 | 类型                                    | 说明                  |
 | ------------------------------------- | ------------------- |
@@ -373,7 +428,7 @@ Ry不会也无法回头修改Rx的效果
 | `EventSystem`                         | 管理 UI 输入事件          |
 
 
-### 8.时间、协程与生命周期
+## 8.时间、协程与生命周期
 
 | 类型                            | 说明                          |
 | ----------------------------- | --------------------------- |
