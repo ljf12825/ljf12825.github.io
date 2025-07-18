@@ -1,4 +1,868 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-07-16T18:38:18+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Unity Component Communication</title><link href="http://localhost:4000/posts/2025-07-15-Unity-Component-Communication/" rel="alternate" type="text/html" title="Unity Component Communication" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Unity-Component-Communication</id><content type="html" xml:base="http://localhost:4000/posts/2025-07-15-Unity-Component-Communication/"><![CDATA[<table>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-07-18T22:22:48+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Unity Packaging and Building</title><link href="http://localhost:4000/posts/2025-07-18-Unity-Packaging-and-Building/" rel="alternate" type="text/html" title="Unity Packaging and Building" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Unity-Packaging-and-Building</id><content type="html" xml:base="http://localhost:4000/posts/2025-07-18-Unity-Packaging-and-Building/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Build" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Layout</title><link href="http://localhost:4000/posts/2025-06-11-Layout/" rel="alternate" type="text/html" title="Layout" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Layout</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-11-Layout/"><![CDATA[<h2 id="layout-system">Layout System</h2>
+<p><img src="/assets/images/LayoutSystem.jpg" alt="LayoutSystem" /></p>
+
+<h3 id="layout-group">Layout Group</h3>
+<p><code class="language-plaintext highlighter-rouge">Layout Group</code>是Unity UI自动布局系统的核心组件之一，用于在UI Canvas下自动排列其他子物体。它极大地简化了UI元素的排列和适配逻辑，让UI开发变得更结构化、响应式、更易维护</p>
+
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">Layout Group</code>是一类MonoBehaviour脚本，用于自动排列RectTransform子物体的位置与尺寸，不需要你手动拖动它们</p>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th>类型</th>
+      <th>说明</th>
+      <th>用途示例</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">HorizontalLayoutGroup</code></td>
+      <td>子物体沿 <strong>水平方向排列</strong></td>
+      <td>菜单栏、工具条、横向列表</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">VerticalLayoutGroup</code></td>
+      <td>子物体沿 <strong>垂直方向排列</strong></td>
+      <td>聊天记录、竖向按钮组</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GridLayoutGroup</code></td>
+      <td>子物体按 <strong>网格排列</strong>（行列）</td>
+      <td>背包格子、关卡选择界面</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LayoutGroup</code></td>
+      <td>抽象基类</td>
+      <td>不直接使用</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="horizontal--vertical-layout-group">Horizontal / Vertical Layout Group</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Padding</code></td>
+      <td>容器四周的边距</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Spacing</code></td>
+      <td>子物体之间的间隔</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Child Alignment</code></td>
+      <td>子物体在主轴上的对齐方式（左/中/右）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Reverse Arrangement</code></td>
+      <td>排列方向反转：从上到下 → 从下到上</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Control Child Size</code></td>
+      <td>控制子物体是否填满空间</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Use Child Scale</code></td>
+      <td>是否使用子物体的缩放比例</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Child Force Expand</code></td>
+      <td>启用时多个子物体会调整间距，以填充满Width或Height</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>Horizontal Layout Group适用场景：菜单栏、Tab标签页、道具快捷栏等</p>
+</blockquote>
+
+<blockquote>
+  <p>Vertical Layout Group适用场景：排行榜列表、聊天内容、选项按钮组等</p>
+</blockquote>
+
+<h4 id="grid-layout-group">Grid Layout Group</h4>
+<p>用于将子物体排列成规则网格，每个格子的大小统一</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Padding</code></td>
+      <td>容器四周的边距</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Cell Size</code></td>
+      <td>每个格子的宽高</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Spacing</code></td>
+      <td>格子之间的间距</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Start Corner</code></td>
+      <td>从哪个角开始排列</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Start Axis</code></td>
+      <td>是优先横向填充还是纵向</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Child Alignment</code></td>
+      <td>子物体整体对齐方式</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Constraint</code></td>
+      <td>行数/列数限制（可固定行或列）</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>使用场景：背包系统、九宫格、商城道具、分页列表</p>
+</blockquote>
+
+<h4 id="常见问题">常见问题</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>问题</th>
+      <th>原因 / 解决方式</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>改了内容不刷新布局</td>
+      <td>调用 <code class="language-plaintext highlighter-rouge">LayoutRebuilder.ForceRebuildLayoutImmediate()</code></td>
+    </tr>
+    <tr>
+      <td>动态添加元素时抖动</td>
+      <td>先 <code class="language-plaintext highlighter-rouge">SetActive(false)</code> 再添加，最后 <code class="language-plaintext highlighter-rouge">SetActive(true)</code></td>
+    </tr>
+    <tr>
+      <td>动画或手动设置位置被覆盖</td>
+      <td>LayoutGroup 会自动控制，需禁用 LayoutGroup 才能手动操作</td>
+    </tr>
+    <tr>
+      <td>ContentSizeFitter + LayoutGroup 死循环</td>
+      <td>不要放在同一个 GameObject 上</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="layout-element">Layout Element</h3>
+<p><code class="language-plaintext highlighter-rouge">Layout Element</code>用于告诉布局系统如何排布当前UI元素，它本身不会影响UI的大小或位置，而是为其所在的<code class="language-plaintext highlighter-rouge">Layout Group</code>提供布局建议（尺寸、优先级等），从而参与整个UI的自动布局流程</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性</th>
+      <th>含义</th>
+      <th>举例说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Ignore Layout</strong></td>
+      <td>是否忽略布局系统</td>
+      <td>设置为 <code class="language-plaintext highlighter-rouge">true</code> 会让 Layout Group 忽略它</td>
+    </tr>
+    <tr>
+      <td><strong>Min Width / Height</strong></td>
+      <td>最小宽高</td>
+      <td>不小于这个尺寸</td>
+    </tr>
+    <tr>
+      <td><strong>Preferred Width / Height</strong></td>
+      <td>首选宽高</td>
+      <td>想要的尺寸（如果有空间）</td>
+    </tr>
+    <tr>
+      <td><strong>Flexible Width / Height</strong></td>
+      <td>灵活宽高</td>
+      <td>有多大就能占多大，类似“权重” ，多个元素剩余空间分配按权重计算</td>
+    </tr>
+    <tr>
+      <td><strong>Layout Priority</strong></td>
+      <td>优先级</td>
+      <td>如果GameObject上有多个布局相关组件，按优先级顺序计算，优先级与数值成正比</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="常见用途">常见用途</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>场景</th>
+      <th>使用方式</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>某个按钮不想自动拉伸</td>
+      <td>设置 <code class="language-plaintext highlighter-rouge">Flexible Width = 0</code></td>
+    </tr>
+    <tr>
+      <td>聊天条自动增长宽度</td>
+      <td>设置 <code class="language-plaintext highlighter-rouge">Preferred Width = Text 宽度</code></td>
+    </tr>
+    <tr>
+      <td>图片强制保持比例</td>
+      <td>设置 <code class="language-plaintext highlighter-rouge">Preferred Width/Height</code> 同步更新</td>
+    </tr>
+    <tr>
+      <td>某个子元素不参与布局</td>
+      <td>勾选 <code class="language-plaintext highlighter-rouge">Ignore Layout</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="content-size-fitter">Content Size Fitter</h3>
+<p><code class="language-plaintext highlighter-rouge">Content Size Fitter</code>用于让UI元素根据其子元素或自身内容的大小，自动调整RectTransform的尺寸，是实现响应式UI的关键工具之一</p>
+
+<p>比如：让聊天气泡、弹窗、按钮、文字背景根据内容自动扩展</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性名</th>
+      <th>类型</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Horizontal Fit</strong></td>
+      <td>enum</td>
+      <td>控制横向尺寸的自动适配方式</td>
+    </tr>
+    <tr>
+      <td><strong>Vertical Fit</strong></td>
+      <td>enum</td>
+      <td>控制纵向尺寸的自动适配方式</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>每个方向的选项有三种：</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Unconstrained</code>（不自动适配，默认）</li>
+  <li><code class="language-plaintext highlighter-rouge">Min Size</code>（缩小到最小可用大小）</li>
+  <li><code class="language-plaintext highlighter-rouge">Preferred Size</code>（扩展到推荐大小）</li>
+</ul>
+
+<h4 id="常见用途-1">常见用途</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>使用场景</th>
+      <th>使用方式</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>聊天气泡自动撑开</td>
+      <td><code class="language-plaintext highlighter-rouge">Vertical Fit = Preferred Size</code>（文本高度）<br /><code class="language-plaintext highlighter-rouge">Horizontal Fit = Preferred Size</code>（文本宽度）</td>
+    </tr>
+    <tr>
+      <td>按钮随文字自适应宽度</td>
+      <td>按钮 Image + Text + <code class="language-plaintext highlighter-rouge">ContentSizeFitter</code></td>
+    </tr>
+    <tr>
+      <td>ScrollView 内容自动撑开</td>
+      <td>在 Content 上加 <code class="language-plaintext highlighter-rouge">ContentSizeFitter</code> + <code class="language-plaintext highlighter-rouge">Layout Group</code></td>
+    </tr>
+    <tr>
+      <td>警告弹窗根据文本自动扩展大小</td>
+      <td>Text + 背景图 + ContentSizeFitter</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="常见问题-1">常见问题</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>问题</th>
+      <th>原因 &amp; 解决方案</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>和 LayoutGroup 冲突</td>
+      <td><strong>不要把 ContentSizeFitter 和 LayoutGroup 放在同一个 GameObject 上</strong>，要分开：父挂 LayoutGroup，子挂 ContentSizeFitter</td>
+    </tr>
+    <tr>
+      <td>内容变了但尺寸没变</td>
+      <td>调用：<code class="language-plaintext highlighter-rouge">LayoutRebuilder.ForceRebuildLayoutImmediate(transform as RectTransform)</code> 手动刷新</td>
+    </tr>
+    <tr>
+      <td>不生效</td>
+      <td>子物体未使用 <code class="language-plaintext highlighter-rouge">LayoutElement</code> 或未正确设置 <code class="language-plaintext highlighter-rouge">Preferred Size</code></td>
+    </tr>
+    <tr>
+      <td>UI 抖动</td>
+      <td>动态内容更新太频繁，建议只在必要时刷新布局</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="示例">示例</h4>
+<h5 id="动态文字撑开背景">动态文字撑开背景</h5>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="n">TextMeshProUGUI</span> <span class="n">messageText</span><span class="p">;</span>
+<span class="k">public</span> <span class="n">RectTransform</span> <span class="n">bubble</span><span class="p">;</span>
+
+<span class="k">void</span> <span class="nf">SetMessage</span><span class="p">(</span><span class="kt">string</span> <span class="n">msg</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">messageText</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">msg</span><span class="p">;</span>
+  <span class="n">LayoutRebuilder</span><span class="p">.</span><span class="nf">ForceRebuildLayoutImmediate</span><span class="p">(</span><span class="n">bubble</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h5 id="聊天列表自动滚到底">聊天列表自动滚到底</h5>
+<p>搭配<code class="language-plaintext highlighter-rouge">ScrollRect</code>：</p>
+<ul>
+  <li>在<code class="language-plaintext highlighter-rouge">Content</code>上加<code class="language-plaintext highlighter-rouge">VerticalLayoutGroup + ContentSizeFitter</code></li>
+  <li>发送新消息后滚动到底部</li>
+</ul>
+
+<h3 id="aspect-ratio-fitter">Aspect Ratio Fitter</h3>
+<p><code class="language-plaintext highlighter-rouge">Aspect Ratio Fitter</code>用于强制一个UI元素保持固定的宽高比（Aspect Ratio），无论父物体如何拉伸、屏幕怎么变化，它都能保持比例不变</p>
+
+<p>通常用于：</p>
+<ul>
+  <li>图片防拉伸</li>
+  <li>视频播放器窗口</li>
+  <li>正方形/圆形按钮保持比例</li>
+  <li>多分辨率适配中的UI统一性</li>
+</ul>
+
+<h4 id="属性说明">属性说明</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性名</th>
+      <th>类型</th>
+      <th>含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Aspect Mode</strong></td>
+      <td>枚举</td>
+      <td>控制哪个方向跟随调整以维持宽高比</td>
+    </tr>
+    <tr>
+      <td><strong>Aspect Ratio</strong></td>
+      <td>float</td>
+      <td>目标宽高比（width / height）</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="aspect-mode">Aspect Mode</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>模式</th>
+      <th>含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">None</code></td>
+      <td>不启用比例适配</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Width Controls Height</code></td>
+      <td>宽度不变，根据宽度调整高度</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Height Controls Width</code></td>
+      <td>高度不变，根据高度调整宽度</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Fit In Parent</code></td>
+      <td>保持比例并完全包含在父物体内（不裁剪）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Envelope Parent</code></td>
+      <td>保持比例并<strong>覆盖整个父物体</strong>（可能裁剪）</td>
+    </tr>
+  </tbody>
+</table>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><category term="UGUI" /><summary type="html"><![CDATA[Layout System]]></summary></entry><entry><title type="html">Assets Import and Load</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Assets-Import-and-Load.html" rel="alternate" type="text/html" title="Assets Import and Load" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Assets-Import-and-Load</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Assets-Import-and-Load.html"><![CDATA[<p>如何将外部资源导入到Unity中并在运行时使用</p>
+
+<h2 id="资源导入">资源导入</h2>
+<p>资源导入是指Unity将外部资源文件（如.fbx、.png、.mp3等）转换为引擎可以使用的内部格式。导入过程不仅包括将资源放入Unity项目中，还涉及到Unity如何优化、压缩、管理这些资源</p>
+
+<h3 id="资源导入的关键步骤">资源导入的关键步骤</h3>
+<ul>
+  <li>文件放置：在资源文件中放入Unity项目的<code class="language-plaintext highlighter-rouge">Assets</code>文件中。Unity会自动检测到这些文件，并开始导入流程</li>
+  <li>导入设置：在Inspector面板中，选中资源文件后，可以看到不同类型资源的导入设置（如<code class="language-plaintext highlighter-rouge">Texture Type</code>、<code class="language-plaintext highlighter-rouge">Model Import Settings</code>等）。不同的资源类型有不同的设置，影响最终的导入结果
+    <ul>
+      <li>对于纹理，可以设置纹理的类型（如2D或Sprite），以及压缩选项（如DXT1、DXT5等）</li>
+      <li>对于模型，可以设置模型的网格、骨骼、动画等导入选项</li>
+      <li>对于音频，可以设置压缩类型、采样率等</li>
+    </ul>
+  </li>
+  <li>资源优化：Unity会根据导入设置自动处理资源，可能会进行压缩、网格简化、生成多种LOD等优化操作</li>
+  <li>Meta文件：Unity会为每个导入的资源创建一个<code class="language-plaintext highlighter-rouge">.meta</code>文件，用于保存资源的设置、ID等信息。这个文件对资源管理非常重要，尤其是在团队协作时，避免丢失资源链接</li>
+</ul>
+
+<h3 id="常见的资源类型导入">常见的资源类型导入</h3>
+<ul>
+  <li>
+    <p>纹理（Texture）：Unity会自动识别常见的纹理文件类型，并提供压缩、过滤等选项
+详见<a href="/posts/2025-06-29-Texture/">Texture 导入</a></p>
+  </li>
+  <li>
+    <p>模型（Models）：Unity支持多种3D模型格式，尤其是<code class="language-plaintext highlighter-rouge">.fbx</code>，并支持自动生成碰撞体、网格和骨骼动画
+详见<a href="/posts/2025-06-07-Model/">Model</a></p>
+  </li>
+  <li>
+    <p>音频（Audio）：音频文件支持不同的压缩格式，可以设置为单声道、立体声等
+详见<a href="/posts/2025-06-11-Audio-System/">Audio System</a></p>
+  </li>
+  <li>
+    <p>动画（Animations）：可以通过<code class="language-plaintext highlighter-rouge">Animator</code>系统来管理和播放
+详见<a href="/posts/2025-06-11-Animation-System/">Animation System</a></p>
+  </li>
+</ul>
+
+<h2 id="资源加载">资源加载</h2>
+<p>在游戏运行时，如何高效地加载和管理这些已经导入的资源至关重要，尤其是在需要加载大量资源时。Unity提供了多种加载资源的方式，以便优化性能和内存使用</p>
+
+<h3 id="class-resources">class Resources</h3>
+<p><code class="language-plaintext highlighter-rouge">Resources</code>类在Unity中提供了一种动态加载资产的方式，允许你访问存储在特定文件夹中的对象，如Texture，Prefab，Audio Clips等。这些文件必须存放在项目中名为“Resources”的文件夹内</p>
+
+<h4 id="存放资产到resources文件夹">存放资产到Resources文件夹</h4>
+<ul>
+  <li>希望在运行时动态加载的所有资产必须存放在名为“Resources”的文件夹中。你可以在<code class="language-plaintext highlighter-rouge">Assets</code>目录下创建多个“Resources”文件夹</li>
+  <li>存放在这些文件夹中的资产不会通过Inspector自动引用，因此Unity无法对它们进行优化，直接包含在最终构建中</li>
+</ul>
+
+<h4 id="加载方式">加载方式</h4>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Resources.Load()</code>和<code class="language-plaintext highlighter-rouge">Resources.FindObjectsOfTypeAll()</code>函数可以用来加载和访问资产
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">Resouces.Load()</code>：按路径加载单个资产</li>
+      <li><code class="language-plaintext highlighter-rouge">Resouces.FindObjectsOfTypeAll()</code>：用于查找并访问场景中或<code class="language-plaintext highlighter-rouge">Resources</code>文件夹下的所有对象</li>
+    </ul>
+  </li>
+  <li>使用路径加载资产时，所有存放在<code class="language-plaintext highlighter-rouge">Resources</code>文件夹中的资产会被纳入构建中，这可能导致构建大小增加</li>
+</ul>
+
+<h4 id="构建优化问题">构建优化问题</h4>
+<p>通常，Unity 会通过 Inspector 曝露对资产的引用，这样在构建时它可以自动计算出哪些资产是实际使用的，从而避免不必要的资源被包含在最终构建中。但如果使用 <code class="language-plaintext highlighter-rouge">Resources</code> 文件夹，Unity 无法做到这一点，因此所有资产都会被包含在构建中，即使你没有使用它们</p>
+
+<h4 id="不推荐过度使用路径加载">不推荐过度使用路径加载</h4>
+<p>使用路径名来加载资产会导致代码不那么可复用，因为脚本会硬编码依赖于资产存放的位置。这不如通过Inspector暴露的引用直观和易于维护</p>
+
+<h4 id="使用场景">使用场景</h4>
+<p>在一些情况下，直接通过代码加载资产会更方便，特别是在你需要在运行时生成对象时。例如，程序化生成一个游戏物体并为其赋予纹理，或者加载动态生成的资源时，使用 Resources.Load() 会非常方便</p>
+
+<h4 id="内存管理">内存管理</h4>
+<p>使用 <code class="language-plaintext highlighter-rouge">Resources.Load()</code> 加载的资产，特别是纹理等资源，可能会占用内存，即使这些实例没有出现在场景中。为了释放内存，可以调用 <code class="language-plaintext highlighter-rouge">Resources.UnloadUnusedAssets()</code> 来卸载不再使用的资源。</p>
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">Resources</code>文件夹在创建项目时不会自动生成，需要手动创建这个文件夹才能使用</p>
+</blockquote>
+
+<h4 id="api">API</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">FindObjectsOfTypeAll</code></td>
+      <td>返回当前内存中所有指定类型 <code class="language-plaintext highlighter-rouge">T</code> 的对象列表。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">InstanceIDIsValid</code></td>
+      <td>如果给定的实例 ID 对应一个有效的对象，则返回 <code class="language-plaintext highlighter-rouge">true</code>。该对象可能已经被删除或尚未加载到内存中。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">InstanceIDsToValidArray</code></td>
+      <td>将实例 ID 数组转换为布尔数组，指示每个实例 ID 是否对应内存中的有效对象。对象可能已删除或未加载。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">InstanceIDToObject</code></td>
+      <td>将实例 ID 转换为对象引用。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">InstanceIDToObjectList</code></td>
+      <td>将实例 ID 数组转换为对象引用列表。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Load</code></td>
+      <td>加载存储在 <code class="language-plaintext highlighter-rouge">Resources</code> 文件夹路径下的指定类型的资源。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LoadAll</code></td>
+      <td>加载 <code class="language-plaintext highlighter-rouge">Resources</code> 文件夹路径下的文件夹或文件中的所有资源。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LoadAsync</code></td>
+      <td>异步加载存储在 <code class="language-plaintext highlighter-rouge">Resources</code> 文件夹路径下的资源。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">UnloadAsset</code></td>
+      <td>从内存中卸载指定的资源。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">UnloadUnusedAssets</code></td>
+      <td>卸载未使用的资源，释放内存。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="https://docs.unity3d.com/ScriptReference/Resources.html">Unity Scripting Resources</a></p>
+
+<h3 id="asset-bundles">Asset Bundles</h3>
+<p>Asset Bundles是Unity的一个资源打包系统，允许开发者将游戏中的资源（如模型、纹理、音频等）打包成一个或多个独立的文件（称为Asset Bundles），以便按需加载。</p>
+
+<p>这种方式适用于大规模资源的管理，尤其是当资源文件较大或需要动态加载时，Asset Bundles提供了比<code class="language-plaintext highlighter-rouge">Resources</code>文件夹更灵活的资源加载和内存管理方式</p>
+
+<h4 id="asset-bundles的核心概念">Asset Bundles的核心概念</h4>
+<ul>
+  <li>打包：将游戏资源（如纹理、模型、音频等）打包成独立的文件，以便后期按需加载</li>
+  <li>加载：通过代码加载Asset Bundles中的资源，而不是将所有资源一次性加载到内存中，从而优化内存使用和加载速度</li>
+  <li>卸载：通过代码释放已加载的Asset Bundles资源，确保内存得到有效管理</li>
+</ul>
+
+<h4 id="创建asset-bundles">创建Asset Bundles</h4>
+<p>创建Asset Bundles的过程涉及将资源打包成独立的文件，这些文件可以在运行时动态加载</p>
+
+<p>打包资源步骤：</p>
+<ol>
+  <li>设置资源为Asset Bundle：
+  在Unity编辑器中，选择资源（如纹理、模型、音频等），在<code class="language-plaintext highlighter-rouge">Inspector</code>面板中为资源分配一个Asset Bundles名称
+    <ul>
+      <li>在<code class="language-plaintext highlighter-rouge">Inspector</code>中的<code class="language-plaintext highlighter-rouge">Asset Bundle</code>选项设置中，给资源指定一个名字，例如：<code class="language-plaintext highlighter-rouge">MyBundle/Textures</code></li>
+    </ul>
+  </li>
+  <li>构建Asset Bundles
+  使用BuildPipeline API构建 Asset Bundles
+  ```cs
+  using UnityEditor;</li>
+</ol>
+
+<p>public class AssetBundleBuilder
+  {
+    [MenuItem(“Assets/Build Asset Bundles”)]
+    static void BuildAllAssetBundles()
+    {
+      BuildPipeline.BuildAssetBundles(“Assets/AssetBundles”, BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows);
+    }
+  }</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  这段代码会将所有标记为Asset Bundle的资源打包到`Assets/Bundles`目录中，并生成适用于Windows平台的Asset Bundle
+    - `BuildAssetBundleOptionjs.None`：没有特殊选项，可以根据需要选择不同的选项（例如压缩、增量构建等）
+    - `BuildTarget.StandaloneWindows`：指定构建目标平台，可以选择其他平台
+
+3. 输出：
+  构建后，Unity会在指定的目录中生成Asset Bundle文件
+
+#### 加载Asset Bundles
+在游戏运行时，可以通过以下方式加载和使用Asset Bundles
+
+加载Asset Bundle：
+加载Asset Bundle通常是异步的，避免阻塞主线程，保证游戏运行流畅
+- 从文件系统加载Asset Bundle
+  ```cs
+  using UnityEngine;
+
+  public class AssetBundleLoader : MonoBehaviour
+  {
+    AssetBundle myLoadedAssetBundle;
+
+    void Start()
+    {
+      // 异步加载 Asset Bundle
+      StartCoroutine(LoadAssetBundleAsync("Assets/AssetBundles/MyBundle"));
+    }
+
+    IEnumerator LoadAssetBundleAsync(string bundleUrl)
+    {
+      // 异步加载Asset Bundle
+      AssetBundleCreateRequest bundleRequest = AssetBundle.LoadFromFileAsync(bundleUrl);
+      yield return bundleRequest;
+
+      myLoadedAssetBundle = bundleRequest.assetBundle;
+      if (myLoadedAssetBundle == null)
+      {
+        Debug.LogError("Failed to load AssetBundle!");
+        yield break;
+      }
+
+      // 加载资源
+      AssetBundleRequest assetRequest = myLoadedAssetBundle.LoadAssetAsync&lt;Texture&gt;("MyTextrue");
+      yield reutrn assetRequest;
+
+      Texture texture = assetRequest.asset as Texture;
+      // 使用加载的资源
+
+    }
+  }
+</code></pre></div></div>
+
+<ul>
+  <li>从URL加载Asset Bundle（适用于远程资源）
+  如果Asset Bundle存储在远程服务器上，可以使用<code class="language-plaintext highlighter-rouge">UnityWebRequest</code>从URL加载资源
+  ```cs
+  using UnityEngine;
+  using UnityEngine.Networking;</li>
+</ul>
+
+<p>public class AssetBundleRemoteLoader : MonoBehaviour
+  {
+    AssetBundle myLoadedAssetBundle;</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void Start()
+{
+  StartCoroutine(LoadAssetBundleFromURL("http://mycdn.com/assets/MyBundle"));
+}
+
+IEnumerator LoadAssetBundleFromURL(string url)
+{
+  UnityWebRequest www = UnityWebRequestAssetBundle.GetAssetBundle(url);
+  yield return www.SendWebRequest();
+
+  if (www.result != UnityWebRequest.Result.Success)
+  {
+    Debug.LogError("Failed to load AssetBundle from URL!");
+    yield break;
+  }
+
+  myLoadedAssetBundle = DownloadHandlerAssetBundle.GetContent(www);
+  AssetBundleRequest assetRequest = myLoadedAssetBundle.LoadAssetAsync&lt;Texture&gt;("MyTexture");
+  yield return assetRequest;
+
+  Texture texture = assetRequest.asset as Texture;
+  // 使用加载的资源
+
+}   }   ```
+</code></pre></div></div>
+
+<ul>
+  <li>加载资源：通过<code class="language-plaintext highlighter-rouge">LoadAssetAsync()</code>或<code class="language-plaintext highlighter-rouge">LoadAsset()</code>方法加载Asset Bundle中的资源， <code class="language-plaintext highlighter-rouge">LoadAssetAsync()</code>更适合异步加载，可以避免阻塞主线程</li>
+</ul>
+
+<h4 id="卸载asset-bundle">卸载Asset Bundle</h4>
+<p>加载后的Asset Bundle和资源可以通过<code class="language-plaintext highlighter-rouge">Unload()</code>方法释放，以防止内存泄露</p>
+<ul>
+  <li>卸载资源和Asset Bundle
+    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">myLoadAssetBundle</span><span class="p">.</span><span class="nf">Unload</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+</code></pre></div>    </div>
+    <p><code class="language-plaintext highlighter-rouge">false</code>参数意味着只卸载Asset Bundle，不会卸载已经加载的资源。如果设置为<code class="language-plaintext highlighter-rouge">true</code>，则会卸载资源和Asset Bundle</p>
+  </li>
+</ul>
+
+<h4 id="asset-bundle的优点和缺点">Asset Bundle的优点和缺点</h4>
+<p>优点：</p>
+<ol>
+  <li>按需加载：Asset Bundles 允许你将资源分离成不同的包，并且按需加载，这减少了内存的占用，并提高了加载速度。</li>
+  <li>资源分组和优化：你可以将资源按类型或加载频率进行分组（例如，UI 资源、场景资源、远程资源），并根据需要加载，提高游戏性能。</li>
+  <li>远程资源加载：Asset Bundles 支持从远程服务器加载资源，非常适合动态内容更新、DLC（可下载内容）和游戏数据包的分发。</li>
+  <li>平台兼容性：你可以为不同的平台（Windows、Android、iOS）构建不同的 Asset Bundle，确保在不同平台上使用合适的资源格式。</li>
+</ol>
+
+<p>缺点：</p>
+<ol>
+  <li>管理复杂：随着游戏项目变得越来越大，Asset Bundles 的管理和维护可能变得更加复杂。你需要合理分配资源、管理多个 Asset Bundle、确保版本一致性等。</li>
+  <li>版本控制：由于 Asset Bundles 是外部资源包，Unity 并不直接将它们与项目文件一起进行版本控制。你需要单独管理 Asset Bundles 的版本和依赖关系。</li>
+  <li>构建时间：Asset Bundles 构建过程可能需要一些时间，尤其是当项目包含大量资源时。</li>
+  <li>缓存管理：在远程加载资源时，可能会遇到缓存问题，需要合理设置 CDN 或服务器端的缓存策略，确保资源的最新版本被加载。</li>
+</ol>
+
+<h4 id="api-1">API</h4>
+<p><strong>Static Properties</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">memoryBudgetKB</code></td>
+      <td>控制共享的 AssetBundle 加载缓存的大小，默认值为 1MB。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Properties</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">isStreamedSceneAssetBundle</code></td>
+      <td>如果 AssetBundle 包含 Unity 场景文件，则返回 <code class="language-plaintext highlighter-rouge">true</code>。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Public Methods</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Contains</code></td>
+      <td>检查 AssetBundle 是否包含特定的对象。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetAllAssetNames</code></td>
+      <td>返回 AssetBundle 中所有资源的名称。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetAllScenePaths</code></td>
+      <td>返回 AssetBundle 中所有场景的路径。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LoadAllAssets</code></td>
+      <td>同步加载 AssetBundle 中包含的所有资源。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LoadAllAssetsAsync</code></td>
+      <td>异步加载 AssetBundle 中包含的所有资源。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LoadAsset</code></td>
+      <td>同步加载 AssetBundle 中的某个资源。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LoadAssetAsync</code></td>
+      <td>异步加载 AssetBundle 中的某个资源。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LoadAssetWithSubAssets</code></td>
+      <td>同步加载 AssetBundle 中的资源及其子资源。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LoadAssetWithSubAssetsAsync</code></td>
+      <td>异步加载 AssetBundle 中的资源及其子资源。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Unload</code></td>
+      <td>卸载 AssetBundle，释放其占用的数据。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">UnloadAsync</code></td>
+      <td>异步卸载 AssetBundle 中的资源。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Static Methods</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetAllLoadedAssetBundles</code></td>
+      <td>获取当前所有已加载的 AssetBundle 的枚举。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LoadFromFile</code></td>
+      <td>从磁盘文件同步加载 AssetBundle。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LoadFromFileAsync</code></td>
+      <td>从磁盘文件异步加载 AssetBundle。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LoadFromMemory</code></td>
+      <td>从内存区域同步加载 AssetBundle。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LoadFromMemoryAsync</code></td>
+      <td>从内存区域异步加载 AssetBundle。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LoadFromStream</code></td>
+      <td>从托管流同步加载 AssetBundle。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LoadFromStreamAsync</code></td>
+      <td>从托管流异步加载 AssetBundle。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">RecompressAssetBundleAsync</code></td>
+      <td>异步将下载或存储的 AssetBundle 从一个构建压缩格式重新压缩到另一个。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">UnloadAllAssetBundles</code></td>
+      <td>卸载所有当前加载的 AssetBundle。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="https://docs.unity3d.com/ScriptReference/AssetBundle.html">Unity Scripting AssetBundle</a></p>
+
+<h3 id="addressable-assets-system">Addressable Assets System</h3>
+<p>这是Unity推荐的现代资源加载方式，通过Addressable Asset System，开发者可以将资源分组并动态加载，支持远程加载资源包，极大地提升了资源管理的灵活性和性能</p>
+
+<h4 id="简介">简介</h4>
+<p>Addressable Asset System允许开发者通过地址使用资产，一旦一个资产被标记为“addressable”，它便生成一个地址，可以在任何地方被调用；无论这个资产是在本地或远程，系统都会定位它和它的依赖，然后返回它</p>
+
+<p>通过<code class="language-plaintext highlighter-rouge">Windows-&gt;Asset Management-&gt;Addressables</code>使用地址资源系统</p>
+
+<p>Addressables使用异步加载技术，支持从任意位置加载任意依赖项集合。无论是使用直接引用、传统Asset Bundle还是Resources文件夹，Addressables都可以提供一种更简便的方法</p>
+
+<p><a href="/posts/2025-06-05-Addressables/">Addressables</a></p>
+
+<h2 id="资源卸载">资源卸载</h2>
+<p>资源加载后，不及时释放也可能导致内存泄露</p>
+
+<h2 id="资源优化">资源优化</h2>
+<p>为了优化资源的加载与使用，Unity有多种工具和策略</p>
+<ul>
+  <li>Asset Bundles：Unity提供的Asset Bundles可以将资源打包成一个文件，支持按需加载，适合于游戏内容更新或者大规模的资源管理</li>
+  <li>内存管理：Unity的内存管理非常关键，尤其是在移动设备或者内存受限的设备上。通过精确的资源加载和卸载策略，可以避免内存占用过多</li>
+</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Asset" /><summary type="html"><![CDATA[如何将外部资源导入到Unity中并在运行时使用]]></summary></entry><entry><title type="html">Unity Component Communication</title><link href="http://localhost:4000/posts/2025-07-15-Unity-Component-Communication/" rel="alternate" type="text/html" title="Unity Component Communication" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Unity-Component-Communication</id><content type="html" xml:base="http://localhost:4000/posts/2025-07-15-Unity-Component-Communication/"><![CDATA[<table>
   <thead>
     <tr>
       <th>通信方式</th>
@@ -45,720 +909,7 @@
       <td><code class="language-plaintext highlighter-rouge">SendMessage("Explode")</code></td>
     </tr>
   </tbody>
-</table>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Syntax" /><category term="Unity Class" /><summary type="html"><![CDATA[通信方式 类型 是否推荐 示例 GetComponent&lt;T&gt;() 直接调用 显式调用 推荐 GetComponent&lt;Health&gt;().TakeDamage(10); UnityEvent 事件系统 推荐 在 Inspector 中绑定事件 C# 委托/事件 (delegate, event) 原生 C# 推荐 public event Action OnDead; 接口调用（如 IDamageable） 解耦方式 推荐 target.GetComponent&lt;IDamageable&gt;()?.TakeDamage() ScriptableObject 事件 高级数据驱动 推荐 Game-wide event bus SendMessage() / BroadcastMessage() 反射调用 不推荐 SendMessage("Explode")]]></summary></entry><entry><title type="html">Audio System</title><link href="http://localhost:4000/posts/2025-06-11-Audio-System/" rel="alternate" type="text/html" title="Audio System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Audio-System</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-11-Audio-System/"><![CDATA[<p>Audio System 是 Unity中处理游戏所有声音播放、管理和混音的核心模块</p>
-
-<h2 id="audio-clip">Audio Clip</h2>
-<p>在Unity中，<code class="language-plaintext highlighter-rouge">AudioClip</code>是表示音频资源的核心类，用于播放、管理和处理音频数据（如音乐、音效、语音等）</p>
-
-<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">AudioCilp</span> <span class="p">:</span> <span class="n">Object</span>
-</code></pre></div></div>
-<ul>
-  <li>它存储音频数据，可以被<code class="language-plaintext highlighter-rouge">AudioSource</code>组件播放</li>
-  <li>通常通过将音频文件（如<code class="language-plaintext highlighter-rouge">.wav</code>、<code class="language-plaintext highlighter-rouge">.mp3</code>、<code class="language-plaintext highlighter-rouge">.ogg</code>）导入到Unity项目中生成AudioClip</li>
-  <li>可用来播放背景音乐（BGM）、音效（SFX）、语音（VO）等</li>
-</ul>
-
-<p><img src="/assets/images/AudioClipExample.jpg" alt="AudioClipExample" /></p>
-
-<h3 id="audioclip的常见使用方式">AudioClip的常见使用方式</h3>
-<p>1.在Inspector中拖入音频文件</p>
-<ul>
-  <li>拖一个音频文件到<code class="language-plaintext highlighter-rouge">Assets</code>文件夹</li>
-  <li>Unity自动将其导入为<code class="language-plaintext highlighter-rouge">AudioClip</code></li>
-  <li>拖到<code class="language-plaintext highlighter-rouge">AudioSource.clip</code>上即可播放</li>
-</ul>
-
-<p>2.通过代码播放AudioClip</p>
-<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="n">AudioSource</span> <span class="n">audioSource</span><span class="p">;</span>
-<span class="k">public</span> <span class="n">AudioClip</span> <span class="n">clip</span><span class="p">;</span>
-
-<span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="n">autioSource</span><span class="p">.</span><span class="n">clip</span> <span class="p">=</span> <span class="n">clip</span><span class="p">;</span>
-    <span class="n">audioSource</span><span class="p">.</span><span class="nf">Play</span><span class="p">();</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h3 id="audioclip的导入设置">AudioClip的导入设置</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>属性</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Force To Mono</strong></td>
-      <td>强制单声道</td>
-    </tr>
-    <tr>
-      <td><strong>Normalize</strong></td>
-      <td>自动将音频的音量标准化到一个统一的最大音量水平，避免音量过低或过高</td>
-    </tr>
-    <tr>
-      <td><strong>Ambisonic</strong></td>
-      <td>沉浸式3D空间音频，启用后Unity会使用Ambisonic解码器处理音频方向，需安装第三方插件使用</td>
-    </tr>
-    <tr>
-      <td><strong>Load Type</strong></td>
-      <td>Streaming（长音频），Decompress on Load（短音效）</td>
-    </tr>
-    <tr>
-      <td><strong>Compression Format</strong></td>
-      <td>压缩格式 PCM（无压缩） / Vorbis（有损压缩，开源格式，推荐） / MP3（有损压缩，商业格式）</td>
-    </tr>
-    <tr>
-      <td><strong>Sample Rate</strong></td>
-      <td>音质与性能平衡 Preserve Sample Rate（保留原始采样率）, Optimize Sample Rate（优化采样率）, Override Sample Rate（强制指定采样）</td>
-    </tr>
-    <tr>
-      <td><strong>Preload Audio Data</strong></td>
-      <td>是否在启动时加载到内存</td>
-    </tr>
-    <tr>
-      <td><strong>Load in Background</strong></td>
-      <td>是否异步加载</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="创建自定义audioclip">创建自定义AudioClip</h3>
-<p>可以在运行时动态生成AudioClip，例如用于程序化音效或语言合成</p>
-<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">AudioClip</span> <span class="n">myClip</span> <span class="p">=</span> <span class="n">AudioClip</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">"MySine"</span><span class="p">,</span> <span class="n">sampleLength</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="n">sampleRate</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
-<span class="n">myClip</span><span class="p">.</span><span class="nf">SetData</span><span class="p">(</span><span class="n">floatArray</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
-</code></pre></div></div>
-
-<h3 id="注意事项">注意事项</h3>
-<ul>
-  <li>AudioClip是资源，不等于播放器，需要<code class="language-plaintext highlighter-rouge">AudioSource</code>来播放</li>
-  <li>不要在频繁播放音效时反复创建AudioClip实例，应使用对象池或缓存机制</li>
-  <li><code class="language-plaintext highlighter-rouge">.m4a</code>等不推荐格式导入可能生成不了可用的<code class="language-plaintext highlighter-rouge">AudioClip</code></li>
-</ul>
-
-<h2 id="主要组件">主要组件</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>Category</th>
-      <th>Component Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Audio</strong></td>
-      <td>Chorus Filter</td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td>Distortion Filter</td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td>Echo Filter</td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td>High Pass Filter</td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td>Listener</td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td>Low Pass Filter</td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td>Reverv Filter</td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td>Reverv Zone</td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td>Source</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="组件">组件</h2>
-<h3 id="audio-source">Audio Source</h3>
-<p><code class="language-plaintext highlighter-rouge">AudioSource</code>是Unity中用于播放声音的核心组件，负责控制音频的播放、暂停、停止、3D效果、音量等</p>
-
-<p><img src="/assets/images/AudioSourcePanel.jpg" alt="AudioSourcePanel" /></p>
-
-<h4 id="面板字段">面板字段</h4>
-
-<table>
-  <thead>
-    <tr>
-      <th><strong>属性</strong></th>
-      <th><strong>描述</strong></th>
-      <th><strong>使用场景</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Audio Clip</strong></td>
-      <td>音频片段的引用，指定播放的声音文件。</td>
-      <td>通过此属性指定要播放的音频文件。</td>
-    </tr>
-    <tr>
-      <td><strong>Output</strong></td>
-      <td>默认情况下，音频直接输出到场景中的 <code class="language-plaintext highlighter-rouge">AudioListener</code>，也可以输出到 <code class="language-plaintext highlighter-rouge">AudioMixer</code> 进行处理。</td>
-      <td>如果需要使用 <code class="language-plaintext highlighter-rouge">AudioMixer</code> 对音频进行处理，设置此属性。</td>
-    </tr>
-    <tr>
-      <td><strong>Mute</strong></td>
-      <td>启用时，声音播放但被静音。</td>
-      <td>用于临时静音音频，但不停止播放。</td>
-    </tr>
-    <tr>
-      <td><strong>Bypass Effects</strong></td>
-      <td>启用时，跳过应用于 <code class="language-plaintext highlighter-rouge">AudioSource</code> 的所有音效。</td>
-      <td>用于快速禁用所有音频效果，音频将以原始状态播放。</td>
-    </tr>
-    <tr>
-      <td><strong>Bypass Listener Effects</strong></td>
-      <td>启用时，跳过 <code class="language-plaintext highlighter-rouge">AudioListener</code> 上的所有音效。</td>
-      <td>用于快速禁用所有监听器效果，影响的是音频在场景中的接收。</td>
-    </tr>
-    <tr>
-      <td><strong>Bypass Reverb Zones</strong></td>
-      <td>启用时，跳过场景中的所有混响区域。</td>
-      <td>如果场景中有多个混响区域，使用此属性来禁用它们对音频的影响。</td>
-    </tr>
-    <tr>
-      <td><strong>Play On Awake</strong></td>
-      <td>启用时，场景启动时会自动播放音频。</td>
-      <td>背景音乐等需要在场景启动时自动播放的音频可以启用此属性。</td>
-    </tr>
-    <tr>
-      <td><strong>Loop</strong></td>
-      <td>启用时，音频在播放完毕后会自动循环播放。</td>
-      <td>用于循环播放音效或背景音乐。</td>
-    </tr>
-    <tr>
-      <td><strong>Priority</strong></td>
-      <td>音频源的优先级。值越低，音频优先级越高。0 表示最重要，256 表示最不重要。</td>
-      <td>在多个音频源同时播放时，优先级较低的音频可能会被系统暂停或降低音量。音乐通常设置为 0，确保它不会被临时停掉。</td>
-    </tr>
-    <tr>
-      <td><strong>Volume</strong></td>
-      <td>音量控制，表示距离 <code class="language-plaintext highlighter-rouge">AudioListener</code> 一米时的音量大小。</td>
-      <td>控制音效的音量大小，通常在 0 到 1 之间调节。</td>
-    </tr>
-    <tr>
-      <td><strong>Pitch</strong></td>
-      <td>控制音频的音高和播放速度，1 为正常速度，大于 1 提高音高，低于 1 降低音高。</td>
-      <td>用于调节音效的音调或播放速度。</td>
-    </tr>
-    <tr>
-      <td><strong>Stereo Pan</strong></td>
-      <td>控制音频在立体声中的位置，-1 为左声道，1 为右声道，0 为中央。</td>
-      <td>适用于 2D 音频，调整音效在左右声道中的位置。</td>
-    </tr>
-    <tr>
-      <td><strong>Spatial Blend</strong></td>
-      <td>控制音频的 3D 空间效果，0 为纯 2D 音频，1 为纯 3D 音频。</td>
-      <td>用于控制音频是否为 3D 音效，3D 音效会受到音源和监听器位置的影响。</td>
-    </tr>
-    <tr>
-      <td><strong>Reverb Zone Mix</strong></td>
-      <td>控制音频信号与混响区域的混合比例，范围为 0 到 1，1 到 1.1 范围内允许 10 dB 的放大效果。</td>
-      <td>用于将音频信号与场景中的混响效果混合，模拟不同的环境音效。</td>
-    </tr>
-    <tr>
-      <td><strong>3D Sound Settings</strong></td>
-      <td>3D 音效设置，具体依赖于 <code class="language-plaintext highlighter-rouge">Spatial Blend</code>。</td>
-      <td>用于调整 3D 音效的各种参数，比如声音的衰减、距离等。</td>
-    </tr>
-    <tr>
-      <td><strong>Doppler Level</strong></td>
-      <td>控制 Doppler 效应的强度，设置为 0 时不会有 Doppler 效果。</td>
-      <td>模拟运动物体产生的音高变化效应，常用于车辆、飞行物等的音效。</td>
-    </tr>
-    <tr>
-      <td><strong>Spread</strong></td>
-      <td>设置 3D 音效的扩散角度，适用于立体声或多声道音频。</td>
-      <td>用于调整声音的扩散角度，尤其是 3D 音频和多声道音频的效果。</td>
-    </tr>
-    <tr>
-      <td><strong>Min Distance</strong></td>
-      <td>当监听器与音源的距离小于此值时，音频会保持最大音量，超出该距离后开始衰减。</td>
-      <td>控制音效在 3D 空间中的音量范围。</td>
-    </tr>
-    <tr>
-      <td><strong>Max Distance</strong></td>
-      <td>控制音频停止衰减的最大距离，超过此距离时音量保持恒定。</td>
-      <td>设置音效衰减的最大距离。超出此距离后音效音量不再变化。</td>
-    </tr>
-    <tr>
-      <td><strong>Rolloff Mode</strong></td>
-      <td>控制音效衰减的方式。</td>
-      <td>根据需要选择不同的衰减模式：</td>
-    </tr>
-    <tr>
-      <td>- <strong>Logarithmic Rolloff</strong></td>
-      <td>音效在接近时非常响亮，但随着距离增加衰减得很快。</td>
-      <td>用于模拟自然的音量衰减。</td>
-    </tr>
-    <tr>
-      <td>- <strong>Linear Rolloff</strong></td>
-      <td>音效随着距离增加而逐渐变小，衰减线性。</td>
-      <td>用于模拟更平滑的音量衰减。</td>
-    </tr>
-    <tr>
-      <td>- <strong>Custom Rolloff</strong></td>
-      <td>根据自定义图表设置音效衰减。</td>
-      <td>用于实现自定义的衰减曲线，适应特殊的音效需求。</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="audio-listener">Audio Listener</h3>
-<p>行为类似耳机类设备，接收场景内AudioSource的输入，通过计算机扬声器输出，通常挂载主摄像机上<br />
-如果音源是3D的，监听器将模拟声音在3D世界中的位置、速度和方向<br />
-每个场景中只能有一个Audio Listener</p>
-
-<h3 id="audio-mixer">Audio Mixer</h3>
-<p><code class="language-plaintext highlighter-rouge">Audio Mixer</code>是Unity中用于处理和控制游戏音频的强大工具，它允许你对音频信号进行多轨编辑、实时混音、效果处理和音量控制</p>
-
-<h4 id="功能和用法">功能和用法</h4>
-
-<p>1.音频轨道管理（Channels）<br />
-在 Audio Mixer 中，你可以将多个音频源（如背景音乐、环境音效、UI 音效等）分配到不同的轨道上进行独立控制。每个轨道都可以有自己的音量、效果和其他处理器。</p>
-
-<p>2.实时音效处理<br />
-Audio Mixer 提供了多种内置的音效处理器（如 Reverb、Echo、Low-pass filter、Distortion 等），你可以实时调整这些效果来改变音频的听感。例如，你可以模拟一个声音在大房间中的回响，或者调整音频的高频和低频响应。</p>
-
-<p>3.音量控制和动态调整<br />
-你可以通过 Audio Mixer 中的 Volume Faders 来控制每个音频轨道的音量，并且支持实时调节。比如，你可以设定背景音乐的音量在游戏的某些场景中变化，或者根据游戏的状态（如玩家的行动、战斗、对话等）来调节音量。</p>
-
-<p>4.Duck/Sidechain Compression<br />
-Duck 是 Audio Mixer 中常用的动态处理功能，通常用于背景音乐和环境音效，避免这些音效与重要声音（如角色对话或枪声）发生冲突。你可以通过设置侧链压缩（sidechain compression）来实现这种效果。例如，当敌人发出声音时，背景音乐的音量会自动降低。</p>
-
-<p>5.Snapshot 和过渡效果（Transitions）<br />
-Snapshot 是一种音频状态，允许你在不同的游戏场景或条件下迅速切换音频的设置。例如，切换到战斗场景时，你可以通过切换到战斗音效的 Snapshot，来提升战斗音乐的音量并加入额外的音效处理。</p>
-
-<p>6.控制游戏中的音频混合器<br />
-你可以通过代码动态控制音频混合器的参数（例如音量、效果和 Snapshot）：</p>
-<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">UnityEngine.Audio</span><span class="p">;</span>
-
-<span class="k">public</span> <span class="k">class</span> <span class="nc">AudioManager</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
-<span class="p">{</span>
-    <span class="k">public</span> <span class="n">AudioMixer</span> <span class="n">audioMixer</span><span class="p">;</span>
-
-    <span class="c1">// 设置音量</span>
-    <span class="k">public</span> <span class="k">void</span> <span class="nf">SetVolume</span><span class="p">(</span><span class="kt">float</span> <span class="n">volume</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">audioMixer</span><span class="p">.</span><span class="nf">SetFloat</span><span class="p">(</span><span class="s">"MasterVolume"</span><span class="p">,</span> <span class="n">volume</span><span class="p">);</span>
-
-    <span class="c1">// 切换到一个音频快照</span>
-    <span class="k">public</span> <span class="k">void</span> <span class="nf">SwitchToSnapshot</span><span class="p">(</span><span class="n">AudioMixerSnapshot</span> <span class="n">snapshot</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">snapshot</span><span class="p">.</span><span class="nf">TransitionTo</span><span class="p">(</span><span class="m">1.0f</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>7.Audio Mixer 和 Audio Sources 的结合<br />
-Audio Mixer 还与 AudioSource 结合使用，通过将多个 AudioSource 连接到同一个 Audio Mixer，你可以统一管理所有音频的效果。例如，背景音乐、UI 音效和环境音效都可以通过一个混音器进行调整。具体操作可以在 Audio Source 的 Output 属性中设置。</p>
-
-<h4 id="使用方法">使用方法</h4>
-<p>1.创建一个 Audio Mixer</p>
-<ul>
-  <li>在 Project 窗口中，右击并选择 Create -&gt; Audio Mixer，然后给它命名。</li>
-  <li>双击创建的 Audio Mixer 以打开音频混音器窗口。</li>
-</ul>
-
-<p>2.添加音频轨道</p>
-<ul>
-  <li>在 Audio Mixer 窗口中，点击右上角的 + 按钮，选择 Create Group，然后为该轨道命名。每个音频源将连接到这个轨道。</li>
-  <li>你可以为每个轨道添加 效果（比如 Reverb 或 Echo）和 音量控制（通过 Fader）。</li>
-</ul>
-
-<p>3.连接 Audio Source 到 Audio Mixer</p>
-<ul>
-  <li>选择你想要控制的 AudioSource，然后在 Inspector 面板中的 Output 部分，选择你刚刚创建的 Audio Mixer 的轨道。
-4.设置 Snapshot 和过渡效果</li>
-  <li>在 Audio Mixer 中，点击 Snapshots 标签页，创建新的 Snapshot，设置需要的音量和效果。</li>
-  <li>你可以使用代码或事件系统来切换快照。例如，战斗开始时，可以切换到一个包含增强音效和音乐的 Snapshot。</li>
-</ul>
-
-<p>5.调整实时音效</p>
-<ul>
-  <li>在音频轨道上添加效果，调整参数并实时监听效果的变化。比如你可以使用 Low-Pass Filter 来调整环境音效，使其在不同的环境下具有不同的氛围。</li>
-</ul>
-
-<h2 id="结合">结合</h2>
-
-<h2 id="api">API</h2>
-<h3 id="audio-source-1">Audio Source</h3>
-<h4 id="properties">Properties</h4>
-
-<table>
-  <thead>
-    <tr>
-      <th><strong>属性</strong></th>
-      <th><strong>说明</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>bypassEffects</strong></td>
-      <td>跳过音频源的效果处理（如滤波器组件或全局监听器滤波器）。</td>
-    </tr>
-    <tr>
-      <td><strong>bypassListenerEffects</strong></td>
-      <td>设置为 <code class="language-plaintext highlighter-rouge">true</code> 时，音频源的音频信号不会应用全局监听器效果。</td>
-    </tr>
-    <tr>
-      <td><strong>bypassReverbZones</strong></td>
-      <td>设置为 <code class="language-plaintext highlighter-rouge">true</code> 时，音频源不会路由到全局混响区域。</td>
-    </tr>
-    <tr>
-      <td><strong>clip</strong></td>
-      <td>默认播放的 <code class="language-plaintext highlighter-rouge">AudioClip</code>。</td>
-    </tr>
-    <tr>
-      <td><strong>dopplerLevel</strong></td>
-      <td>设置音频源的多普勒效应比例。</td>
-    </tr>
-    <tr>
-      <td><strong>gamepadSpeakerOutputType</strong></td>
-      <td>获取或设置音频源的游戏手柄音频输出类型。</td>
-    </tr>
-    <tr>
-      <td><strong>ignoreListenerPause</strong></td>
-      <td>允许音频源在 <code class="language-plaintext highlighter-rouge">AudioListener.pause</code> 为 <code class="language-plaintext highlighter-rouge">true</code> 时继续播放（用于菜单音效或暂停菜单中的背景音乐）。</td>
-    </tr>
-    <tr>
-      <td><strong>ignoreListenerVolume</strong></td>
-      <td>使音频源忽略 <code class="language-plaintext highlighter-rouge">AudioListener</code> 的音量设置。</td>
-    </tr>
-    <tr>
-      <td><strong>isPlaying</strong></td>
-      <td>返回音频源是否正在播放音频资源（只读）。</td>
-    </tr>
-    <tr>
-      <td><strong>isVirtual</strong></td>
-      <td>如果所有由该音频源播放的声音都被音频系统剔除，则为 <code class="language-plaintext highlighter-rouge">true</code>。</td>
-    </tr>
-    <tr>
-      <td><strong>loop</strong></td>
-      <td>检查音频剪辑是否循环播放。</td>
-    </tr>
-    <tr>
-      <td><strong>maxDistance</strong></td>
-      <td>设置声音不再变得更轻或停止衰减的距离，取决于衰减模式。</td>
-    </tr>
-    <tr>
-      <td><strong>minDistance</strong></td>
-      <td>在该距离内，音频源的音量将不再增大。</td>
-    </tr>
-    <tr>
-      <td><strong>mute</strong></td>
-      <td>静音或取消静音音频源。</td>
-    </tr>
-    <tr>
-      <td><strong>outputAudioMixerGroup</strong></td>
-      <td>设置音频源的音频信号路由到的目标混音器组。</td>
-    </tr>
-    <tr>
-      <td><strong>panStereo</strong></td>
-      <td>对播放声音进行立体声平移（左或右）。仅适用于单声道或立体声的声音。</td>
-    </tr>
-    <tr>
-      <td><strong>pitch</strong></td>
-      <td>设置音频源的音高。</td>
-    </tr>
-    <tr>
-      <td><strong>playOnAwake</strong></td>
-      <td>启用该属性可以使音频源在组件或游戏对象激活时自动播放音频源。</td>
-    </tr>
-    <tr>
-      <td><strong>priority</strong></td>
-      <td>设置音频源的优先级。</td>
-    </tr>
-    <tr>
-      <td><strong>resource</strong></td>
-      <td>默认播放的音频资源。</td>
-    </tr>
-    <tr>
-      <td><strong>reverbZoneMix</strong></td>
-      <td>设置音频源信号混合到与混响区域相关的全局混响效果的程度。</td>
-    </tr>
-    <tr>
-      <td><strong>rolloffMode</strong></td>
-      <td>设置或获取音频源如何根据距离进行衰减。</td>
-    </tr>
-    <tr>
-      <td><strong>spatialBlend</strong></td>
-      <td>设置音频源受 3D 空间化计算（如衰减、多普勒效应等）的影响程度。0.0 为完全 2D，1.0 为完全 3D。</td>
-    </tr>
-    <tr>
-      <td><strong>spatialize</strong></td>
-      <td>启用或禁用空间化处理。</td>
-    </tr>
-    <tr>
-      <td><strong>spatializePostEffects</strong></td>
-      <td>设置空间化效果是在效果过滤器之前还是之后插入的。</td>
-    </tr>
-    <tr>
-      <td><strong>spread</strong></td>
-      <td>设置 3D 立体或多声道声音的扩展角度（单位：度）。</td>
-    </tr>
-    <tr>
-      <td><strong>time</strong></td>
-      <td>音频源播放位置（单位：秒）。</td>
-    </tr>
-    <tr>
-      <td><strong>timeSamples</strong></td>
-      <td>音频源的当前播放位置（单位：PCM 样本）。</td>
-    </tr>
-    <tr>
-      <td><strong>velocityUpdateMode</strong></td>
-      <td>设置音频源是否应在固定更新或动态更新时更新。</td>
-    </tr>
-    <tr>
-      <td><strong>volume</strong></td>
-      <td>设置音频源的音量（范围：0.0 到 1.0）。</td>
-    </tr>
-  </tbody>
-</table>
-
-<h4 id="public-methods">Public Methods</h4>
-
-<table>
-  <thead>
-    <tr>
-      <th><strong>方法/属性</strong></th>
-      <th><strong>说明</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>DisableGamepadOutput</strong></td>
-      <td>禁用此音频源的游戏手柄音频输出。</td>
-    </tr>
-    <tr>
-      <td><strong>GetAmbisonicDecoderFloat</strong></td>
-      <td>读取附加在 <code class="language-plaintext highlighter-rouge">AudioSource</code> 上的自定义 Ambisonic 解码器效果的用户定义参数。</td>
-    </tr>
-    <tr>
-      <td><strong>GetCustomCurve</strong></td>
-      <td>获取指定 <code class="language-plaintext highlighter-rouge">AudioSourceCurveType</code> 的当前自定义曲线。</td>
-    </tr>
-    <tr>
-      <td><strong>GetOutputData</strong></td>
-      <td>提供当前播放的音频源的输出数据块。</td>
-    </tr>
-    <tr>
-      <td><strong>GetSpatializerFloat</strong></td>
-      <td>读取附加在 <code class="language-plaintext highlighter-rouge">AudioSource</code> 上的自定义空间化效果的用户定义参数。</td>
-    </tr>
-    <tr>
-      <td><strong>GetSpectrumData</strong></td>
-      <td>提供当前播放的音频源的音频频率数据块（频谱数据）。</td>
-    </tr>
-    <tr>
-      <td><strong>Pause</strong></td>
-      <td>暂停当前播放的音频剪辑。</td>
-    </tr>
-    <tr>
-      <td><strong>Play</strong></td>
-      <td>播放音频剪辑。</td>
-    </tr>
-    <tr>
-      <td><strong>PlayDelayed</strong></td>
-      <td>延迟指定秒数后播放音频剪辑。建议使用此函数替代旧的 <code class="language-plaintext highlighter-rouge">Play(delay)</code> 函数，后者接受样本数作为参数。</td>
-    </tr>
-    <tr>
-      <td><strong>PlayOneShot</strong></td>
-      <td>播放一个 <code class="language-plaintext highlighter-rouge">AudioClip</code>，并根据 <code class="language-plaintext highlighter-rouge">volumeScale</code> 调整音频源的音量。</td>
-    </tr>
-    <tr>
-      <td><strong>PlayOnGamepad</strong></td>
-      <td>启用音频源通过指定的游戏手柄播放。</td>
-    </tr>
-    <tr>
-      <td><strong>PlayScheduled</strong></td>
-      <td>在绝对时间线上（由 <code class="language-plaintext highlighter-rouge">AudioSettings.dspTime</code> 提供）指定的时间播放音频剪辑。</td>
-    </tr>
-    <tr>
-      <td><strong>SetAmbisonicDecoderFloat</strong></td>
-      <td>设置附加在 <code class="language-plaintext highlighter-rouge">AudioSource</code> 上的自定义 Ambisonic 解码器效果的用户定义参数。</td>
-    </tr>
-    <tr>
-      <td><strong>SetCustomCurve</strong></td>
-      <td>设置指定 <code class="language-plaintext highlighter-rouge">AudioSourceCurveType</code> 的自定义曲线。</td>
-    </tr>
-    <tr>
-      <td><strong>SetScheduledEndTime</strong></td>
-      <td>更改已调度播放的声音的结束时间。注意，由于时序的原因，某些重新调度的请求可能无法完成。</td>
-    </tr>
-    <tr>
-      <td><strong>SetScheduledStartTime</strong></td>
-      <td>更改已调度播放的声音的开始时间。</td>
-    </tr>
-    <tr>
-      <td><strong>SetSpatializerFloat</strong></td>
-      <td>设置附加在 <code class="language-plaintext highlighter-rouge">AudioSource</code> 上的自定义空间化效果的用户定义参数。</td>
-    </tr>
-    <tr>
-      <td><strong>Stop</strong></td>
-      <td>停止播放音频剪辑。</td>
-    </tr>
-    <tr>
-      <td><strong>UnPause</strong></td>
-      <td>取消暂停，恢复播放此音频源。</td>
-    </tr>
-  </tbody>
-</table>
-
-<h4 id="static-methods">Static Methods</h4>
-
-<table>
-  <thead>
-    <tr>
-      <th><strong>方法/属性</strong></th>
-      <th><strong>说明</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>GamepadSpeakerSupportsOutputType</strong></td>
-      <td>检查平台是否支持在游戏手柄上输出音频的特定类型。</td>
-    </tr>
-    <tr>
-      <td><strong>PlayClipAtPoint</strong></td>
-      <td>在世界空间中的指定位置播放一个 <code class="language-plaintext highlighter-rouge">AudioClip</code>。这个方法会自动为音频源创建一个临时的 <code class="language-plaintext highlighter-rouge">AudioSource</code>。</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="audio-listener-1">Audio Listener</h3>
-<h4 id="static-properties">Static Properties</h4>
-
-<table>
-  <thead>
-    <tr>
-      <th><strong>属性</strong></th>
-      <th><strong>说明</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>pause</strong></td>
-      <td>获取或设置音频系统的暂停状态。若为 <code class="language-plaintext highlighter-rouge">true</code>，音频将暂停播放。</td>
-    </tr>
-    <tr>
-      <td><strong>volume</strong></td>
-      <td>控制游戏音量的全局设置（范围从 0.0 到 1.0），用于调节整个游戏的音量。</td>
-    </tr>
-  </tbody>
-</table>
-
-<h4 id="properties-1">Properties</h4>
-
-<table>
-  <thead>
-    <tr>
-      <th><strong>属性</strong></th>
-      <th><strong>说明</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>velocityUpdateMode</strong></td>
-      <td>设置 <code class="language-plaintext highlighter-rouge">AudioListener</code> 是否应在固定更新或动态更新时进行更新。<code class="language-plaintext highlighter-rouge">FixedUpdate</code> 或 <code class="language-plaintext highlighter-rouge">Update</code> 中更新监听器的位置和速度。</td>
-    </tr>
-  </tbody>
-</table>
-
-<h4 id="static-methods-1">Static Methods</h4>
-
-<table>
-  <thead>
-    <tr>
-      <th><strong>方法</strong></th>
-      <th><strong>说明</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>GetOutputData</strong></td>
-      <td>提供音频监听器（主监听器）输出数据的一个数据块。通常用于实时分析音频输出的信号。</td>
-    </tr>
-    <tr>
-      <td><strong>GetSpectrumData</strong></td>
-      <td>提供音频监听器（主监听器）的频谱数据的一个数据块，用于音频的频率分析，常用于音频可视化和动态效果处理。</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="audio-mixer-1">Audio Mixer</h3>
-<h4 id="properties-2">Properties</h4>
-
-<table>
-  <thead>
-    <tr>
-      <th><strong>属性</strong></th>
-      <th><strong>说明</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>outputAudioMixerGroup</strong></td>
-      <td><strong>路由目标</strong>：设置音频源的音频信号应该输出到哪个音频混音器组。每个音频源可以选择一个目标音频混音器组，这决定了音频信号的路由路径，常用于将不同类型的音频信号（如背景音乐、效果音、语音等）分配到不同的处理组中。</td>
-    </tr>
-    <tr>
-      <td><strong>updateMode</strong></td>
-      <td><strong>音频混音器时间更新模式</strong>：设置 <code class="language-plaintext highlighter-rouge">AudioMixer</code> 的时间如何进展，尤其在 <strong>Snapshot</strong> 过渡期间。可以控制在时间过渡（如混音器快照转换）过程中，混音器的行为。常用于调整音频的渐变、平滑过渡等效果。</td>
-    </tr>
-  </tbody>
-</table>
-
-<h4 id="public-methods-1">Public Methods</h4>
-
-<table>
-  <thead>
-    <tr>
-      <th><strong>方法/属性</strong></th>
-      <th><strong>说明</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>ClearFloat</strong></td>
-      <td>重置一个暴露的参数到其初始值。通常用于清除在混音器中对某个暴露参数的修改。</td>
-    </tr>
-    <tr>
-      <td><strong>FindMatchingGroups</strong></td>
-      <td>在混音器中查找与指定路径匹配的组。该路径形式为 “Master Group/Child Group/Grandchild Group”，例如，<code class="language-plaintext highlighter-rouge">Master/WATER/DROPS</code> 返回组 DROPS。</td>
-    </tr>
-    <tr>
-      <td><strong>FindSnapshot</strong></td>
-      <td>根据指定的名称查找并返回匹配的快照（名称必须完全匹配）。</td>
-    </tr>
-    <tr>
-      <td><strong>GetFloat</strong></td>
-      <td>返回指定暴露参数的值。如果该参数不存在，函数将返回 <code class="language-plaintext highlighter-rouge">false</code>。在调用 <code class="language-plaintext highlighter-rouge">SetFloat</code> 或 <code class="language-plaintext highlighter-rouge">ClearFloat</code> 后，返回的值将是当前快照或快照过渡期间的值。</td>
-    </tr>
-    <tr>
-      <td><strong>SetFloat</strong></td>
-      <td>设置指定暴露参数的值。一旦调用该方法，混音器快照将不再控制此暴露参数，并且只能通过 <code class="language-plaintext highlighter-rouge">AudioMixer.SetFloat</code> 方法修改该参数。</td>
-    </tr>
-    <tr>
-      <td><strong>TransitionToSnapshots</strong></td>
-      <td>转换到指定快照的加权混合。可用于游戏中根据状态的不同在不同的音频快照之间过渡，或通过三角插值来实现快照之间的平滑过渡。</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="性能">性能</h2>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[Audio System 是 Unity中处理游戏所有声音播放、管理和混音的核心模块]]></summary></entry><entry><title type="html">Object</title><link href="http://localhost:4000/posts/2025-07-11-Object/" rel="alternate" type="text/html" title="Object" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Object</id><content type="html" xml:base="http://localhost:4000/posts/2025-07-11-Object/"><![CDATA[<p>Object是Unity中所有内建物体的基类，实现在UnityEngine.CoreModule中，不同于C#中的<code class="language-plaintext highlighter-rouge">System.Object</code>，它是托管层（C#）和原生引擎层（C++）之间的桥梁，背后绑定着Unity C++引擎层的资源句柄</p>
+</table>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Syntax" /><category term="Unity Class" /><summary type="html"><![CDATA[通信方式 类型 是否推荐 示例 GetComponent&lt;T&gt;() 直接调用 显式调用 推荐 GetComponent&lt;Health&gt;().TakeDamage(10); UnityEvent 事件系统 推荐 在 Inspector 中绑定事件 C# 委托/事件 (delegate, event) 原生 C# 推荐 public event Action OnDead; 接口调用（如 IDamageable） 解耦方式 推荐 target.GetComponent&lt;IDamageable&gt;()?.TakeDamage() ScriptableObject 事件 高级数据驱动 推荐 Game-wide event bus SendMessage() / BroadcastMessage() 反射调用 不推荐 SendMessage("Explode")]]></summary></entry><entry><title type="html">Object</title><link href="http://localhost:4000/posts/2025-07-11-Object/" rel="alternate" type="text/html" title="Object" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Object</id><content type="html" xml:base="http://localhost:4000/posts/2025-07-11-Object/"><![CDATA[<p>Object是Unity中所有内建物体的基类，实现在UnityEngine.CoreModule中，不同于C#中的<code class="language-plaintext highlighter-rouge">System.Object</code>，它是托管层（C#）和原生引擎层（C++）之间的桥梁，背后绑定着Unity C++引擎层的资源句柄</p>
 
 <h2 id="object的特点unity的特有行为">Object的特点（Unity的特有行为）</h2>
 <p><strong>引擎资源的绑定</strong></p>
@@ -1026,7 +1177,7 @@ It is only safe to use those operators in your scripts if there is certainty tha
 <span class="n">Component</span> <span class="n">comp</span> <span class="p">=</span> <span class="n">go</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">Transform</span><span class="p">&gt;();</span>
 <span class="n">Object</span> <span class="n">o2</span> <span class="p">=</span> <span class="n">comp</span><span class="p">;</span> <span class="c1">// legal</span>
 </code></pre></div></div>
-<p><code class="language-plaintext highlighter-rouge">new</code>出来的<code class="language-plaintext highlighter-rouge">GameObject</code>是合法的，但不能<code class="language-plaintext highlighter-rouge">new</code> <code class="language-plaintext highlighter-rouge">Transform</code>或<code class="language-plaintext highlighter-rouge">Renderer</code>，必须用<code class="language-plaintext highlighter-rouge">AddComponent</code>等引擎API创建</p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Syntax" /><category term="Unity Class" /><summary type="html"><![CDATA[Object是Unity中所有内建物体的基类，实现在UnityEngine.CoreModule中，不同于C#中的System.Object，它是托管层（C#）和原生引擎层（C++）之间的桥梁，背后绑定着Unity C++引擎层的资源句柄]]></summary></entry><entry><title type="html">Native Layer to Script Layer</title><link href="http://localhost:4000/posts/2025-07-15-Native-Layer-to-Script-Layer/" rel="alternate" type="text/html" title="Native Layer to Script Layer" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Native-Layer-to-Script-Layer</id><content type="html" xml:base="http://localhost:4000/posts/2025-07-15-Native-Layer-to-Script-Layer/"><![CDATA[<h2 id="the-bridge-between-native-layer-and-script-layer">The Bridge between Native Layer and Script Layer</h2>
+<p><code class="language-plaintext highlighter-rouge">new</code>出来的<code class="language-plaintext highlighter-rouge">GameObject</code>是合法的，但不能<code class="language-plaintext highlighter-rouge">new</code> <code class="language-plaintext highlighter-rouge">Transform</code>或<code class="language-plaintext highlighter-rouge">Renderer</code>，必须用<code class="language-plaintext highlighter-rouge">AddComponent</code>等引擎API创建</p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Syntax" /><category term="Unity Class" /><summary type="html"><![CDATA[Object是Unity中所有内建物体的基类，实现在UnityEngine.CoreModule中，不同于C#中的System.Object，它是托管层（C#）和原生引擎层（C++）之间的桥梁，背后绑定着Unity C++引擎层的资源句柄]]></summary></entry><entry><title type="html">Loose Coupling</title><link href="http://localhost:4000/posts/2025-07-15-Loose-Coupling/" rel="alternate" type="text/html" title="Loose Coupling" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Loose-Coupling</id><content type="html" xml:base="http://localhost:4000/posts/2025-07-15-Loose-Coupling/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Architecture" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Native Layer to Script Layer</title><link href="http://localhost:4000/posts/2025-07-15-Native-Layer-to-Script-Layer/" rel="alternate" type="text/html" title="Native Layer to Script Layer" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Native-Layer-to-Script-Layer</id><content type="html" xml:base="http://localhost:4000/posts/2025-07-15-Native-Layer-to-Script-Layer/"><![CDATA[<h2 id="the-bridge-between-native-layer-and-script-layer">The Bridge between Native Layer and Script Layer</h2>
 <p>Unity引擎运行时，本质上是一个C++引擎内核 + C#脚本层的结构</p>
 
 <p>所写的<code class="language-plaintext highlighter-rouge">MonoBehaviour</code>只是在C#中的一个代理对象，真正控制游戏运行的逻辑、渲染、物理等是C++层在执行</p>
@@ -1189,103 +1340,7 @@ C#对象（UnityEngine.Object） ← GCHandle ← C++
   <li>引擎在适当时机调用<code class="language-plaintext highlighter-rouge">Awake() -&gt; Start() -&gt; Update()</code></li>
 </ol>
 
-<p>所以不能用<code class="language-plaintext highlighter-rouge">new MyScript()</code>创建MonoBehaviour，它不是纯托管类，是托管↔native绑定类</p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Underlying Principle" /><summary type="html"><![CDATA[The Bridge between Native Layer and Script Layer Unity引擎运行时，本质上是一个C++引擎内核 + C#脚本层的结构]]></summary></entry><entry><title type="html">Loose Coupling</title><link href="http://localhost:4000/posts/2025-07-15-Loose-Coupling/" rel="alternate" type="text/html" title="Loose Coupling" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Loose-Coupling</id><content type="html" xml:base="http://localhost:4000/posts/2025-07-15-Loose-Coupling/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Architecture" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Game Design Patterns</title><link href="http://localhost:4000/posts/2025-07-15-Game-Design-Patterns/" rel="alternate" type="text/html" title="Game Design Patterns" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Game-Design-Patterns</id><content type="html" xml:base="http://localhost:4000/posts/2025-07-15-Game-Design-Patterns/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Architecture" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Interface Oriented Design</title><link href="http://localhost:4000/posts/2025-07-15-Interface-Oriented-Design/" rel="alternate" type="text/html" title="Interface Oriented Design" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Interface-Oriented-Design</id><content type="html" xml:base="http://localhost:4000/posts/2025-07-15-Interface-Oriented-Design/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Architecture" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Game Architecture</title><link href="http://localhost:4000/posts/2025-07-15-Game-Architecture/" rel="alternate" type="text/html" title="Game Architecture" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Game-Architecture</id><content type="html" xml:base="http://localhost:4000/posts/2025-07-15-Game-Architecture/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Architecture" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Import Assets</title><link href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets.html" rel="alternate" type="text/html" title="Import Assets" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets</id><content type="html" xml:base="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets.html"><![CDATA[<p>Unity支持多种格式的资源文件，并能自动识别并进行初步处理</p>
-
-<h2 id="资源导入基本流程">资源导入基本流程</h2>
-<p><strong>1.将资源文件拖入<code class="language-plaintext highlighter-rouge">Assets</code>目录中（Unity会自动导入）</strong><br />
-<strong>2.在Inspector面板中查看导入设置</strong><br />
-<strong>3.配置相关参数，比如压缩方式、贴图类型、是否生成碰撞体等</strong><br />
-<strong>4.使用资源（拖到场景、作为材质贴图、挂到AudioSource等）</strong></p>
-
-<h2 id="模型">模型</h2>
-
-<h3 id="支持格式">支持格式</h3>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">.fbx</code>推荐</li>
-  <li><code class="language-plaintext highlighter-rouge">.obj</code></li>
-  <li><code class="language-plaintext highlighter-rouge">.dae</code>（Collada）</li>
-  <li><code class="language-plaintext highlighter-rouge">.blend</code>（需要Blender）</li>
-</ul>
-
-<h3 id="导入流程">导入流程</h3>
-<p>1.拖拽<code class="language-plaintext highlighter-rouge">.fbx</code>文件到<code class="language-plaintext highlighter-rouge">Assets</code>文件夹<br />
-2.选中模型文件，查看<code class="language-plaintext highlighter-rouge">Inspector</code>的导入设置</p>
-<ul>
-  <li>Scale Factor：缩放（一般保持默认）</li>
-  <li>Import Animations：是否导入动画</li>
-  <li>Import Materials：是否导入材质</li>
-  <li>Generate Colliders：是否自动生成碰撞体</li>
-</ul>
-
-<h3 id="导入后组成">导入后组成</h3>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">Model</code>: 3D网格</li>
-  <li><code class="language-plaintext highlighter-rouge">Rig</code>（如果有骨骼）：用于动画绑定</li>
-  <li><code class="language-plaintext highlighter-rouge">Animation</code>：包含的动画片段</li>
-  <li><code class="language-plaintext highlighter-rouge">Materials</code>：自动生成或关联的材质</li>
-</ul>
-
-<h2 id="贴图">贴图</h2>
-
-<h3 id="支持格式-1">支持格式</h3>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">.png</code>、<code class="language-plaintext highlighter-rouge">.jpg</code>、<code class="language-plaintext highlighter-rouge">.tga</code>、<code class="language-plaintext highlighter-rouge">.psd</code>（支持图层）等</li>
-</ul>
-
-<h3 id="导入流程-1">导入流程</h3>
-
-<p>1.拖入图片文件
-2.在Inspector中设置：</p>
-<ul>
-  <li>sRGB（Color Texture）：颜色贴图用，法线贴图需取消勾选</li>
-  <li>Alpha Is Transparency：如果使用透明通道</li>
-  <li>Wrap Mode：Repeat（平铺）或Clamp（拉伸）</li>
-  <li>Filter Mode：Bilinear、Trilinear、Point（像素风）</li>
-  <li>Compression：高压缩（小体积）还是高质量（清晰）</li>
-  <li>Texture Type:
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">Default</code>（通用）</li>
-      <li><code class="language-plaintext highlighter-rouge">Sprite</code>（用于UI）</li>
-      <li><code class="language-plaintext highlighter-rouge">Normal map</code>（法线贴图）</li>
-      <li><code class="language-plaintext highlighter-rouge">Lightmap</code>（光照图）</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="音频">音频</h2>
-
-<h3 id="支持格式-2">支持格式</h3>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">.mp3</code>（压缩）</li>
-  <li><code class="language-plaintext highlighter-rouge">.wav</code>（无损）</li>
-  <li><code class="language-plaintext highlighter-rouge">.ogg</code>（高效）</li>
-  <li><code class="language-plaintext highlighter-rouge">.aiff</code></li>
-</ul>
-
-<h2 id="导入流程-2">导入流程</h2>
-
-<p>1.拖入音频文件<br />
-2.在<code class="language-plaintext highlighter-rouge">Inspector</code>中设置：</p>
-<ul>
-  <li>Load Type：
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">Decompress On Load</code>（加载时解压，适合短音效）</li>
-      <li><code class="language-plaintext highlighter-rouge">Streaming</code>（边播放边加载，适合背景音乐）</li>
-    </ul>
-  </li>
-  <li>Compression Format:
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">Vorbis</code>、<code class="language-plaintext highlighter-rouge">ADPCM</code>、<code class="language-plaintext highlighter-rouge">PCM</code></li>
-    </ul>
-  </li>
-  <li>3D Sound：是否启用3D空间化</li>
-  <li>Loop：是否循环播放</li>
-</ul>
-
-<blockquote>
-  <p><strong>资源组织建议：</strong> 使用好的文件夹结构和命名习惯，可以极大提高开发效率</p>
-</blockquote>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><summary type="html"><![CDATA[Unity支持多种格式的资源文件，并能自动识别并进行初步处理]]></summary></entry><entry><title type="html">Layer</title><link href="http://localhost:4000/posts/2025-06-01-Layer/" rel="alternate" type="text/html" title="Layer" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Layer</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-01-Layer/"><![CDATA[<p>在Unity中，Layer是要给非常重要的系统<br />
+<p>所以不能用<code class="language-plaintext highlighter-rouge">new MyScript()</code>创建MonoBehaviour，它不是纯托管类，是托管↔native绑定类</p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Underlying Principle" /><summary type="html"><![CDATA[The Bridge between Native Layer and Script Layer Unity引擎运行时，本质上是一个C++引擎内核 + C#脚本层的结构]]></summary></entry><entry><title type="html">Interface Oriented Design</title><link href="http://localhost:4000/posts/2025-07-15-Interface-Oriented-Design/" rel="alternate" type="text/html" title="Interface Oriented Design" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Interface-Oriented-Design</id><content type="html" xml:base="http://localhost:4000/posts/2025-07-15-Interface-Oriented-Design/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Architecture" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Layer</title><link href="http://localhost:4000/posts/2025-06-01-Layer/" rel="alternate" type="text/html" title="Layer" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Layer</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-01-Layer/"><![CDATA[<p>在Unity中，Layer是要给非常重要的系统<br />
 它主要用于：</p>
 <ul>
   <li>控制物体的渲染与相机的可见性</li>
@@ -1462,4 +1517,287 @@ C#对象（UnityEngine.Object） ← GCHandle ← C++
 <p>示例：动态更改Layer：</p>
 <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gameObject</span><span class="p">.</span><span class="n">layer</span> <span class="p">=</span> <span class="n">LayerMask</span><span class="p">.</span><span class="nf">NameToLayer</span><span class="p">(</span><span class="s">"Invisible"</span><span class="p">);</span>
 </code></pre></div></div>
-<p>通过动态修改Layer，能够灵活控制物体的行为和渲染效果</p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[在Unity中，Layer是要给非常重要的系统 它主要用于： 控制物体的渲染与相机的可见性 控制物理碰撞（配合Layer Collision Matrix） 通过脚本进行物体分类和筛选]]></summary></entry></feed>
+<p>通过动态修改Layer，能够灵活控制物体的行为和渲染效果</p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[在Unity中，Layer是要给非常重要的系统 它主要用于： 控制物体的渲染与相机的可见性 控制物理碰撞（配合Layer Collision Matrix） 通过脚本进行物体分类和筛选]]></summary></entry><entry><title type="html">Tag</title><link href="http://localhost:4000/posts/2025-06-01-Tag/" rel="alternate" type="text/html" title="Tag" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Tag</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-01-Tag/"><![CDATA[<p>在Unity中，Tag是用来标记和分类GameObject的一种轻量级方法，主要用于在代码中查找和判断物体的类型或身份</p>
+
+<h2 id="tag的核心作用">Tag的核心作用</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>功能</th>
+      <th>示例</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>分类物体</td>
+      <td>Player、Enemy、Item、UI 等</td>
+    </tr>
+    <tr>
+      <td>逻辑判断</td>
+      <td>判断一个物体是不是玩家</td>
+    </tr>
+    <tr>
+      <td>查找特定对象</td>
+      <td><code class="language-plaintext highlighter-rouge">GameObject.FindWithTag()</code></td>
+    </tr>
+    <tr>
+      <td>触发器/碰撞器逻辑判断</td>
+      <td><code class="language-plaintext highlighter-rouge">if (other.CompareTag("Enemy"))</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="tag的使用方法">Tag的使用方法</h2>
+
+<h3 id="1设置tag">1.设置Tag</h3>
+<p>1.选中一个 GameObject
+2.Inspector 面板 → 上方的 “Tag” 下拉菜单
+3.如果没有想要的标签 → 点击 Add Tag… → 添加一个新的字符串
+4.回到物体，设置为刚才新建的 Tag</p>
+<blockquote>
+  <p><strong>注意：</strong> Tag是字符串类型，但Unity会为你管理列表，不用硬编码</p>
+</blockquote>
+
+<h3 id="2使用tag查找对象">2.使用Tag查找对象</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObject</span> <span class="n">player</span> <span class="p">=</span> <span class="n">GameObject</span><span class="p">.</span><span class="nf">FindWithTag</span><span class="p">(</span><span class="s">"Player"</span><span class="p">);</span>
+</code></pre></div></div>
+<p>或者查找多个对象：</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObject</span><span class="p">[]</span> <span class="n">enemies</span> <span class="p">=</span> <span class="n">GameObject</span><span class="p">.</span><span class="nf">FindGameObjectsWithTag</span><span class="p">(</span><span class="s">"Enemy"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="3在触发器或碰撞中判断tag">3.在触发器或碰撞中判断Tag</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">OnTriggerEnter</span><span class="p">(</span><span class="n">Collider</span> <span class="n">other</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="k">if</span> <span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="nf">CompareTag</span><span class="p">(</span><span class="s">"Enemy"</span><span class="p">))</span> <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"撞到敌人了！"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>推荐使用CompareTag()，而不是<code class="language-plaintext highlighter-rouge">other.tag == "Enemy"</code>，性能更好，也可避免拼写错误引发异常</p>
+</blockquote>
+
+<h2 id="示例">示例</h2>
+<h3 id="标记玩家">标记玩家</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="nf">CompareTag</span><span class="p">(</span><span class="s">"Player"</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="n">PlayerHealth</span> <span class="n">hp</span> <span class="p">=</span> <span class="n">other</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">PlayerHealth</span><span class="p">&gt;();</span>
+    <span class="n">hp</span><span class="p">.</span><span class="nf">TakeDamage</span><span class="p">(</span><span class="m">10</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h3 id="标记子弹敌人道具等">标记子弹、敌人、道具等</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">collision</span><span class="p">.</span><span class="nf">CompareTag</span><span class="p">(</span><span class="s">"Projectile"</span><span class="p">))</span> <span class="nf">Destroy</span><span class="p">(</span><span class="n">collision</span><span class="p">.</span><span class="n">gameObject</span><span class="p">);</span>
+</code></pre></div></div>
+<h3 id="用于全局查找对象比如ui控件">用于全局查找对象（比如UI控件）</h3>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObject</span> <span class="n">healthBar</span> <span class="p">=</span> <span class="n">GameObject</span><span class="p">.</span><span class="nf">FindWithTag</span><span class="p">(</span><span class="s">"HealthBar"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="建议">建议</h2>
+<ul>
+  <li>Tag符合逻辑判断</li>
+  <li>不适合控制物理、渲染行为，应交由Layer完成</li>
+  <li>避免硬编码字符串，建议自定义一个Tag常量类</li>
+</ul>
+
+<h2 id="tag-vs-layer">Tag vs Layer</h2>
+<h3 id="主要功能">主要功能</h3>
+<ul>
+  <li>
+    <p>Tag：
+用于标记和分类物体。Tag是要给字符串类型，主要用于逻辑上的分类，帮助在代码中识别不同的物体。它适用于标记物体的类型或身份</p>
+  </li>
+  <li>
+    <p>Layer：
+用于物理和渲染的分类。Layer用于将物体分配到不同的物理层或渲染层。它通常用于碰撞检测、摄像机的渲染、遮挡剔除等方面</p>
+  </li>
+</ul>
+
+<h3 id="应用场景">应用场景</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>功能</th>
+      <th>Tag</th>
+      <th>Layer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>逻辑分类</strong></td>
+      <td>逻辑上的分类（如<code class="language-plaintext highlighter-rouge">Player</code>、<code class="language-plaintext highlighter-rouge">Enemy</code>、<code class="language-plaintext highlighter-rouge">NPC</code>等）</td>
+      <td>不适合做逻辑分类</td>
+    </tr>
+    <tr>
+      <td><strong>物理交互</strong></td>
+      <td>无直接影响</td>
+      <td>控制物体与物理系统的交互（如碰撞、触发）</td>
+    </tr>
+    <tr>
+      <td><strong>渲染控制</strong></td>
+      <td>无直接影响</td>
+      <td>控制哪些物体由摄像机渲染，或者被物理引擎处理</td>
+    </tr>
+    <tr>
+      <td><strong>代码查找</strong></td>
+      <td>可以通过代码查找特定标签的物体（<code class="language-plaintext highlighter-rouge">FindWithTag()</code>）</td>
+      <td>不支持通过代码直接查找物体</td>
+    </tr>
+    <tr>
+      <td><strong>数量限制</strong></td>
+      <td>默认有7个内置标签，可自由添加自定义标签</td>
+      <td>内置5个层，支持最多32个层（Layer）</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="性能优化">性能优化</h2>
+<p><code class="language-plaintext highlighter-rouge">GameObject.FindWithTag()</code>和<code class="language-plaintext highlighter-rouge">GameObject.Find()</code>性能差异</p>
+
+<h3 id="1gameobjectfind">1.GameObject.Find()</h3>
+<p>`GameObject.Find()用于根据物体的名字查找游戏对象。它的工作原理时遍历当前场景中的所有游戏对象，并检查它们的名字是否与给定的字符串匹配。由于它们是基于字符串的比较来查找物体，查找过程中需要遍历所有场景中的物体，并逐一比较名字，性能相对较低，尤其是在场景中有大量物体时</p>
+
+<p>性能特点：</p>
+<ul>
+  <li>遍历所有物体：它会遍历场景中的每个物体并进行字符串比较，直到找到匹配的物体</li>
+  <li>性能消耗大：尤其在场景中物体数量较多时，<code class="language-plaintext highlighter-rouge">Find()</code>的性能较差。每次调用都会产生额外的性能开销</li>
+  <li>不建议在Update中频繁使用：如果你在<code class="language-plaintext highlighter-rouge">Update()</code>或其他频繁调用的函数中使用<code class="language-plaintext highlighter-rouge">Find()</code>，会导致帧率下降</li>
+</ul>
+
+<p>适用场景：<br />
+适用于场景中物体不多，或者物体名字是唯一且不需要频繁查找的场景</p>
+
+<h3 id="2gameobjectfindwithtag">2.GameObject.FindWithTag()</h3>
+<p><code class="language-plaintext highlighter-rouge">GameObject.FindWithTag()</code>是根据物体的Tag查找物体。Unity内部对标签进行了优化处理，标签通常是通过整数索引来管理，而不是字符串比较，因此比<code class="language-plaintext highlighter-rouge">Find()</code>更高效</p>
+
+<p>性能特点：</p>
+<ul>
+  <li>标签优化：Unity通过内部索引表来管理标签，查找时直接使用整数值进行对比，性能比<code class="language-plaintext highlighter-rouge">Find()</code>要好</li>
+  <li>只查找有特定标签的物体：<code class="language-plaintext highlighter-rouge">FindWithTag()</code>只会查找那些拥有特定标签的物体，这减少了查找范围，避免了遍历所有物体</li>
+  <li>更高效：相比<code class="language-plaintext highlighter-rouge">Find()</code>，<code class="language-plaintext highlighter-rouge">FindWithTag()</code>的性能开销要小得多，尤其在场景中有大量物体时，它仍能保持较好的性能</li>
+</ul>
+
+<p>适用场景：<br />
+适用于当你需要按类型查找物体时，比如查找所有敌人、玩家或道具等。尤其当场景中有大量物体时，<code class="language-plaintext highlighter-rouge">FindWithTag()</code>能显著提高查找效率</p>
+
+<h2 id="高级tag管理方法">高级Tag管理方法</h2>
+<p>在大型项目中，游戏对象的数量通常非常庞大，简单的Tag管理可能会导致代码混乱、性能瓶颈等问题。因此，合理的Tag管理变得尤为重要</p>
+
+<h3 id="避免硬编码tag字符串">避免硬编码Tag字符串</h3>
+<p>虽然Unity允许在<code class="language-plaintext highlighter-rouge">Inspector</code>中设置Tag，但使用字符串类型的Tag容易导致代码中出现硬编码，导致在后期修改时很不方便。</p>
+
+<p>硬编码（Hardcoding）是指在程序代码中直接使用固定值，而不是通过变量、常量、配置文件等灵活方式配置。这种做法会导致编码的可维护性差，一旦需要修改这些值，开发者就需要修改代码本身，甚至重新编译程序</p>
+
+<p>示例：</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">gameObject</span><span class="p">.</span><span class="nf">CompareTag</span><span class="p">(</span><span class="s">"Enemy"</span><span class="p">))</span> <span class="c1">// Enemry就是硬编码</span>
+<span class="p">{</span>
+    <span class="c1">// 做一些敌人的处理</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>为了解决这个问题，可以使用常量类来管理所有的Tag</p>
+
+<p>示例：</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">static</span> <span class="k">class</span> <span class="nc">Tags</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">const</span> <span class="kt">string</span> <span class="n">Player</span> <span class="p">=</span> <span class="s">"Player"</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">const</span> <span class="kt">string</span> <span class="n">Enemy</span> <span class="p">=</span> <span class="s">"Enemy"</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">const</span> <span class="kt">string</span> <span class="n">Item</span> <span class="p">=</span> <span class="s">"Item"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>使用常量类可以避免拼写错误，并使代码更具可维护性。例如：</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameObject</span> <span class="n">player</span> <span class="p">=</span> <span class="n">GameObject</span><span class="p">.</span><span class="nf">FindWithTag</span><span class="p">(</span><span class="n">Tags</span><span class="p">.</span><span class="n">Player</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="统一的tag命名规则">统一的Tag命名规则</h3>
+<p>在多人开发的项目中，多个开发者可能会使用不同的命名方式来为物体指定Tag，这容易造成命名冲突或不一致的情况。为了避免这种情况，可以提前指定一个统一的Tag命名规则。<br />
+例如，可以按照功能、类型等进行分类：</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Player</code>,<code class="language-plaintext highlighter-rouge">Enemy</code>等可以归类为“角色”</li>
+  <li><code class="language-plaintext highlighter-rouge">Projectile</code>,<code class="language-plaintext highlighter-rouge">Item</code>等可以归类为“道具”</li>
+  <li><code class="language-plaintext highlighter-rouge">UI</code>，<code class="language-plaintext highlighter-rouge">Background</code>等可以归类为“UI”或“场景”元素</li>
+</ul>
+
+<p>通过规范化命名，能够提高项目的可读性和协作效率</p>
+
+<h2 id="tag与其他unity功能的结合">Tag与其他Unity功能的结合</h2>
+<h3 id="tag与事件系统结合">Tag与事件系统结合</h3>
+<p>在游戏开发中，很多逻辑需要根据物体的类型来触发不同的事件。使用Tag可以帮助我们快速识别不同类型的物体，并在适当的时候触发事件</p>
+
+<p>示例：使用Tag触发事件</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">OnCollisionEnter</span><span class="p">(</span><span class="n">Collision</span> <span class="n">collision</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">collision</span><span class="p">.</span><span class="n">gameObject</span><span class="p">.</span><span class="nf">CompareTag</span><span class="p">(</span><span class="n">Tags</span><span class="p">.</span><span class="n">Player</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="c1">// 触发玩家碰撞事件</span>
+        <span class="n">EventManager</span><span class="p">.</span><span class="nf">TriggerEvent</span><span class="p">(</span><span class="s">"PlayerHit"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">collision</span><span class="p">.</span><span class="n">gameObject</span><span class="p">.</span><span class="nf">CompareTag</span><span class="p">(</span><span class="n">Tags</span><span class="p">.</span><span class="n">Enemy</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="c1">// 触发敌人碰撞事件</span>
+        <span class="n">EventManager</span><span class="p">.</span><span class="nf">TriggerEvent</span><span class="p">(</span><span class="s">"EnemyHit"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>这种方法不仅能提高代码的可读性，还能使事件管理更加灵活</p>
+
+<h3 id="tag与layer结合使用">Tag与Layer结合使用</h3>
+<p>有时，Unity中需要将物体分类以控制它们与物理引擎的交互，或者控制它们的渲染。通过将Tag和Layer结合使用，可以达到更精细的控制</p>
+
+<p>示例：使用Layer控制物理交互</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">OnCollisionEnter</span><span class="p">(</span><span class="n">Collision</span> <span class="n">collision</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// 如果碰撞对象是敌人，并且它属于特定的Layer</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">collision</span><span class="p">.</span><span class="n">gameObject</span><span class="p">.</span><span class="nf">CompareTag</span><span class="p">(</span><span class="n">Tags</span><span class="p">.</span><span class="n">Enemy</span><span class="p">)</span> <span class="p">&amp;&amp;</span> <span class="n">collision</span><span class="p">.</span><span class="n">gameObject</span><span class="p">.</span><span class="n">layer</span> <span class="p">==</span> <span class="n">LayerMask</span><span class="p">.</span><span class="nf">NameToLayer</span><span class="p">(</span><span class="s">"EnemyLayer"</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="c1">// 执行敌人的死亡逻辑</span>
+        <span class="nf">Destroy</span><span class="p">(</span><span class="n">collision</span><span class="p">.</span><span class="n">gameObject</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>通过这种方式，可以使用Layer来精确控制物体的碰撞检测和物理交互，而使用Tag来区分物体的身份和类型</p>
+
+<h2 id="tag的性能优化">Tag的性能优化</h2>
+<h3 id="避免频繁调用find和findwithtag">避免频繁调用Find()和FindWithTag()</h3>
+<p>在大型项目中，频繁调用<code class="language-plaintext highlighter-rouge">GameObject.Find()</code>和<code class="language-plaintext highlighter-rouge">GameObject.FindWithTag()</code>会对性能造成不小的影响。尤其是在<code class="language-plaintext highlighter-rouge">Update()</code>中反复调用这些方法时，可能会导致游戏的帧率大幅下降</p>
+
+<p>解决方案：缓存查找结果
+如果某个物体会被频繁访问，可以考虑将其引用存储在一个变量中，从而避免每次都进行查找</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="n">GameObejct</span> <span class="n">palyer</span><span class="p">;</span>
+
+<span class="k">void</span> <span class="nf">Start</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">palyer</span> <span class="p">=</span> <span class="n">GameObject</span><span class="p">.</span><span class="nf">FindWithTag</span><span class="p">(</span><span class="n">Tags</span><span class="p">.</span><span class="n">Player</span><span class="p">);</span> <span class="c1">// 缓存查找结果</span>
+
+<span class="k">void</span> <span class="nf">Update</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">player</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// 在这里使用缓存的player引用</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="使用对象池object-pooling优化查找性能">使用对象池（Object Pooling）优化查找性能</h3>
+<p>对于需要频繁查找的物体，使用对象池是要给不错的选择。对象池能够避免频繁地实例化和销毁对象，减少性能开销，同时提高代码的可复用性</p>
+
+<p>示例：对象池模式</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">EnemyPool</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">GameObject</span> <span class="n">enemyPrefab</span><span class="p">;</span>
+    <span class="k">private</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;</span> <span class="n">enemyPool</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;();</span>
+
+    <span class="k">public</span> <span class="n">GameObject</span> <span class="nf">GetEnemy</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">enemy</span> <span class="k">in</span> <span class="n">enemyPool</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(!</span><span class="n">enemy</span><span class="p">.</span><span class="n">activeInHierarchy</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">enemy</span><span class="p">.</span><span class="nf">SetActive</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+                <span class="k">return</span> <span class="n">enemy</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="kt">var</span> <span class="n">newEnemy</span> <span class="p">=</span> <span class="nf">Instantiate</span><span class="p">(</span><span class="n">enemyPrefab</span><span class="p">);</span>
+        <span class="n">enemyPool</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">newEnemy</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">newEnemy</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>对象池能够使得<code class="language-plaintext highlighter-rouge">FindWithTag()</code>等查找操作不再频繁发生，从而提升性能</p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><summary type="html"><![CDATA[在Unity中，Tag是用来标记和分类GameObject的一种轻量级方法，主要用于在代码中查找和判断物体的类型或身份]]></summary></entry></feed>

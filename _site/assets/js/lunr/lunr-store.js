@@ -71,12 +71,6 @@ var store = [{
         "url": "/%E7%AC%94%E8%AE%B0/2025/05/31/Material.html",
         "teaser": null
       },{
-        "title": "Import Assets",
-        "excerpt":"Unity支持多种格式的资源文件，并能自动识别并进行初步处理 资源导入基本流程 1.将资源文件拖入Assets目录中（Unity会自动导入） 2.在Inspector面板中查看导入设置 3.配置相关参数，比如压缩方式、贴图类型、是否生成碰撞体等 4.使用资源（拖到场景、作为材质贴图、挂到AudioSource等） 模型 支持格式 .fbx推荐 .obj .dae（Collada） .blend（需要Blender） 导入流程 1.拖拽.fbx文件到Assets文件夹 2.选中模型文件，查看Inspector的导入设置 Scale Factor：缩放（一般保持默认） Import Animations：是否导入动画 Import Materials：是否导入材质 Generate Colliders：是否自动生成碰撞体 导入后组成 Model: 3D网格 Rig（如果有骨骼）：用于动画绑定 Animation：包含的动画片段 Materials：自动生成或关联的材质 贴图 支持格式 .png、.jpg、.tga、.psd（支持图层）等 导入流程 1.拖入图片文件 2.在Inspector中设置： sRGB（Color Texture）：颜色贴图用，法线贴图需取消勾选 Alpha Is Transparency：如果使用透明通道 Wrap Mode：Repeat（平铺）或Clamp（拉伸） Filter Mode：Bilinear、Trilinear、Point（像素风） Compression：高压缩（小体积）还是高质量（清晰） Texture Type: Default（通用） Sprite（用于UI） Normal...","categories": ["笔记"],
-        "tags": ["Unity"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Import-Assets.html",
-        "teaser": null
-      },{
         "title": "Layer",
         "excerpt":"在Unity中，Layer是要给非常重要的系统 它主要用于： 控制物体的渲染与相机的可见性 控制物理碰撞（配合Layer Collision Matrix） 通过脚本进行物体分类和筛选 什么是Layer Layer是给GameObject打的“标签”，但它和Tag不一样，Layer是用于功能性控制的，特别在： 摄像机的Culling Mask 光照影响（Light Culling） 物理碰撞（Physics Layer） 射线检测（Raycast Layer） Layer的使用场景 1.摄像机视野控制（Culling Mask） 在Camera组件中，你可以设置 Culling Mask -&gt; 选择哪些Layer可以被该相机看到 用途： UI相机只看UI层 小地图相机只看敌人层 分屏镜头每个只看自己的部分 Layer不仅能控制每个物体是否被摄像机看到，还能与多个摄像机协作实现更加复杂的视图效果 例如，在多人游戏中，你可以为每个玩家设置独立的摄像机，每个摄像机通过不同的Culling Mask来渲染不同的场景部分 示例：多摄像头分屏控制 在分屏游戏中，可以设置多个摄像机，每个摄像机只渲染属于特定玩家的物体 camera1.cullingMask = 1 &lt;&lt; LayerMask.NameToLayer(\"Player1\"); camera2.cullingMask = 1 &lt;&lt; LaeryMask.NameToLayer(\"Player2\"); 通过这种方式，你能够在同一个场景中显示不同的物体，仅限于特定玩家的视野 2.物理碰撞控制（Layer Collision Matrix） 在菜单中： Edit...","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
@@ -111,12 +105,6 @@ var store = [{
         "excerpt":"Unity是如何驱动组件系统的 从运行架构、组件调度机制、底层实现三个方面来深度剖析 Unity的运行架构（经典GameObject-Component模型） Unity引擎的架构是 “组合优于继承” 的典范： GameObject：游戏世界中所有对象的容器 Component：挂在GameObject上的功能模块 MonoBehaviour：Unity脚本组件的基类，支持生命周期函数 //伪代码结构 class GameObject { List&lt;Component&gt; components; } class Component { GameObject gameObject; } Unity是如何调度组件的生命周期的 Unity在每一帧都会按以下顺序做一次组件调度遍历： For ever active GameObject: For every enable Component: If first frame: Call Awake() Call Start() Run physics: Call FixedUpdate() Handle rendering: Transform -&gt; Camera -&gt; Renderer...","categories": ["笔记"],
         "tags": ["Unity","Unity Engine"],
         "url": "/posts/2025-06-02-Unity-Architecture/",
-        "teaser": null
-      },{
-        "title": "Coroutine",
-        "excerpt":"Unity Coroutine是一种允许在多帧中分布执行代码的机制，它通常用于处理一些需要在多个帧之间等待的任务，比如延时操作、动画播放、资源加载等 协程本质上是通过一种特殊的方式执行代码，它可以在执行过程中“暂停”并在后续的帧继续执行 基本使用 启动协程 协程是通过StartCoroutine()来启动的。协程通常返回一个IEnumerator类型的方法 using UnityEngine; using System.Collections; public class CoroutineExample : MonoBehaviour { void Start() =&gt; StartCoroutine(MyCoroutine()); IEnumerator MyCoroutine() { //在这里执行某些操作 Debug.Log(\"协程开始\"); // Wait 2 seconds yield return new WaitForSeconds(2); // 等待结束后继续执行 Debug.Log(\"2秒后继续执行\"); // 继续执行其他操作 yield return null; // 等待下一帧 Debug.Log(\"协程执行完毕\"); } } 在这个例子中，MyCoroutine协程将在开始时打印“协程开始”，然后等待2秒后打印“2秒后继续执行”，最后在下一帧打印“协程执行完毕” 协程的暂停与恢复 协程可以通过yield return暂停执行，直到某个条件满足。常见的暂停类型有：...","categories": ["笔记"],
-        "tags": ["Unity","Unity Engine"],
-        "url": "/posts/2025-06-03-Coroutine/",
         "teaser": null
       },{
         "title": "Event and Callback in Unity",
@@ -155,8 +143,14 @@ var store = [{
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Thread.html",
         "teaser": null
       },{
+        "title": "Unity Asynchronous and Coroutine",
+        "excerpt":"在Unity中，异步编程主要应用于长时间运行的操作或I/O操作，例如加载场景、资源（如纹理、音频文件）、进行网络请求或其他非阻塞操作。Unity提供了几种常见的方式来实现异步操作，通常通过协程和异步编程API（如async/await）来实现 Asynchronous Unity 从 2017 版本开始支持 async/await 异步编程方式，它是 C# 的一部分，适用于处理 耗时的异步操作，如网络请求、文件操作等。通过 async 标记方法，并在需要等待的地方使用 await，可以简化代码并使其更加可读 示例：异步加载资源（UnityWebRequest） 假设你要从网络上下载文件，可以使用async/await来实现非阻塞的异步操作： using UnityEngine; using UnityEngine.Networking; using System.Threading.Task; public class AsyncExample : MonoBehaviour { async void Start() { string url = \"https://example.com/resource\"; string result = await DownloadDataAsync(url); Debug.Log(\"下载完成：\" + result); } // 异步下载数据 private async Task&lt;string&gt;...","categories": ["笔记"],
+        "tags": ["Unity","Unity Async"],
+        "url": "/posts/2025-06-03-Unity-Asynchronous-and-Coroutine/",
+        "teaser": null
+      },{
         "title": "Unity Build-in Types",
-        "excerpt":"Unity内建类型 常见Unity内建类型（按用途分） 1.空间/几何类型（Transform相关） 类型 说明 Vector2, Vector3, Vector4 表示二维/三维/四维向量 Quaternion 四元数，表示旋转 Matrix4x4 4×4 矩阵，常用于转换 Bounds 包围盒（中心+尺寸） Ray, RaycastHit 射线检测相关类型 Plane 表示一个无限平面 Rect 二维矩形区域 Color, Color32 表示颜色（线性空间和 sRGB） Vector2 &amp; Vector3 &amp; Vector4 它们是Unity提供的三个核心向量类型，广泛用于位置、方向、速度、缩放、颜色等各种场景 基本定义 向量类型 维度 作用 Vector2 2D 向量，包含 x, y 用于 2D 空间中的位置、速度等 Vector3 3D 向量，包含 x, y,...","categories": ["笔记"],
+        "excerpt":"Unity内建类型 1.空间/几何类型（Transform相关） 类型 说明 Vector2, Vector3, Vector4 表示二维/三维/四维向量 Quaternion 四元数，表示旋转 Matrix4x4 4×4 矩阵，常用于转换 Bounds 包围盒（中心+尺寸） Ray, RaycastHit 射线检测相关类型 Plane 表示一个无限平面 Rect 二维矩形区域 Color, Color32 表示颜色（线性空间和 sRGB） Vector Vector2、Vector3、Vector4 它们是Unity提供的三个核心向量类型，广泛用于位置、方向、速度、缩放、颜色等各种场景 向量类型 维度 作用 Vector2 2D 向量，包含 x, y 用于 2D 空间中的位置、速度等 Vector3 3D 向量，包含 x, y, z 用于 3D 空间中的大多数情况 Vector4...","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types.html",
         "teaser": null
@@ -167,22 +161,16 @@ var store = [{
         "url": "/posts/2025-06-04-Collider-and-Trigger/",
         "teaser": null
       },{
-        "title": "Addressables System",
+        "title": "Addressables",
         "excerpt":" ","categories": ["笔记"],
-        "tags": ["Unity","Unity System"],
-        "url": "/posts/2025-06-05-Addressables-System/",
+        "tags": ["Unity","Unity Package"],
+        "url": "/posts/2025-06-05-Addressables/",
         "teaser": null
       },{
         "title": "Object Pooling",
         "excerpt":"对象池是一种优化性能和内存分配的设计模式，尤其常用于游戏开发和高频率实例化的场景中 概念 对象池是一个事先创建好的一组可复用对象的容器，避免频繁地创建和销毁对象。在需要时，从池中取一个对象；使用完毕后，不销毁，而是回收进池中待复用 适用场景 需要频繁创建/销毁的对象（子弹、特效、敌人） 性能敏感场景（高帧率要求） GC带来的性能抖动要避免的场合 工作流程 1.初始化：创建一定量的对象并放入池中，默认设置为非激活状态 2.取出对象（Spawn/Get）： 如果池中有可用对象，返回它并激活 如果池为空，可选是否创建新对象 3.回收对象（Recycle/Release）： 使用完后，将对象设为非激活并放回池中 4.自动扩展或缩减池大小（可选） 简单实现 public class ObjectPool&lt;T&gt; where T : Component { private Queue&lt;T&gt; pool = new Queue&lt;T&gt;(); private T prefab; public ObjectPool(T prefab, int initialSize) { this.prefab = prefab; for (int i = 0; i &lt; initialSize;...","categories": ["笔记"],
         "tags": ["Unity","Design Pattern"],
         "url": "/posts/2025-06-06-Object-Pooling/",
-        "teaser": null
-      },{
-        "title": "Articulation Body",
-        "excerpt":" ","categories": ["笔记"],
-        "tags": ["Unity","Unity Component","Physics System"],
-        "url": "/posts/2025-06-07-Articulation-Body/",
         "teaser": null
       },{
         "title": "Character Controller",
@@ -195,6 +183,12 @@ var store = [{
         "excerpt":"Joint（关节）系统是物理系统的一部分，用于将两个Rigidbody通过某种方式连接起来，从而形成如机械臂、门铰链、车轮悬挂等复杂的物理结构 常见Joint组件（3D） Joint 类型 功能简介 应用场景 Fixed Joint 固定连接两个刚体（类似粘在一起） 粘接物体，如断裂木桥 Hinge Joint 限制物体绕一个轴旋转 门铰链、车轮 Spring Joint 使用弹簧连接两个物体 弹簧、吊绳 Character Joint 模拟生物骨骼的铰接关节 角色 ragdoll 系统 Configurable Joint 高级自定义关节，可设置自由度 自定义复杂机械结构 使用Joint基本原则 Joint总是连接两个Rigidbody：当前GameObject上的Rigidbody与Connected Body 如果Connected Body为空，则连接的是世界坐标系 添加Joint后，Unity会自动处理物理约束和力反馈 示例：Hinge Joint（门铰链） HingeJoint joint = gameObject.AddComponent&lt;HingeJoint&gt;(); joint.connectedBody = otherRigidbody; joint.useLimits = true; JointLimits limits = joint.limits;...","categories": ["笔记"],
         "tags": ["Unity","Unity Component","Physics System"],
         "url": "/posts/2025-06-07-Joint/",
+        "teaser": null
+      },{
+        "title": "Model",
+        "excerpt":"Articulation Body  ","categories": ["笔记"],
+        "tags": ["Unity","Unity Component","Physics System"],
+        "url": "/posts/2025-06-07-Model/",
         "teaser": null
       },{
         "title": "UI System",
@@ -441,6 +435,18 @@ var store = [{
         "excerpt":"               通信方式       类型       是否推荐       示例                       GetComponent&lt;T&gt;() 直接调用       显式调用       推荐       GetComponent&lt;Health&gt;().TakeDamage(10);                 UnityEvent       事件系统       推荐       在 Inspector 中绑定事件                 C# 委托/事件 (delegate, event)       原生 C#       推荐       public event Action OnDead;                 接口调用（如 IDamageable）       解耦方式       推荐       target.GetComponent&lt;IDamageable&gt;()?.TakeDamage()                 ScriptableObject 事件       高级数据驱动       推荐       Game-wide event bus                 SendMessage() / BroadcastMessage()       反射调用       不推荐       SendMessage(\"Explode\")          ","categories": ["笔记"],
         "tags": ["Unity","Syntax","Unity Class"],
         "url": "/posts/2025-07-15-Unity-Component-Communication/",
+        "teaser": null
+      },{
+        "title": "Assets Import and Load",
+        "excerpt":"如何将外部资源导入到Unity中并在运行时使用 资源导入 资源导入是指Unity将外部资源文件（如.fbx、.png、.mp3等）转换为引擎可以使用的内部格式。导入过程不仅包括将资源放入Unity项目中，还涉及到Unity如何优化、压缩、管理这些资源 资源导入的关键步骤 文件放置：在资源文件中放入Unity项目的Assets文件中。Unity会自动检测到这些文件，并开始导入流程 导入设置：在Inspector面板中，选中资源文件后，可以看到不同类型资源的导入设置（如Texture Type、Model Import Settings等）。不同的资源类型有不同的设置，影响最终的导入结果 对于纹理，可以设置纹理的类型（如2D或Sprite），以及压缩选项（如DXT1、DXT5等） 对于模型，可以设置模型的网格、骨骼、动画等导入选项 对于音频，可以设置压缩类型、采样率等 资源优化：Unity会根据导入设置自动处理资源，可能会进行压缩、网格简化、生成多种LOD等优化操作 Meta文件：Unity会为每个导入的资源创建一个.meta文件，用于保存资源的设置、ID等信息。这个文件对资源管理非常重要，尤其是在团队协作时，避免丢失资源链接 常见的资源类型导入 纹理（Texture）：Unity会自动识别常见的纹理文件类型，并提供压缩、过滤等选项 详见Texture 导入 模型（Models）：Unity支持多种3D模型格式，尤其是.fbx，并支持自动生成碰撞体、网格和骨骼动画 详见Model 音频（Audio）：音频文件支持不同的压缩格式，可以设置为单声道、立体声等 详见Audio System 动画（Animations）：可以通过Animator系统来管理和播放 详见Animation System 资源加载 在游戏运行时，如何高效地加载和管理这些已经导入的资源至关重要，尤其是在需要加载大量资源时。Unity提供了多种加载资源的方式，以便优化性能和内存使用 class Resources Resources类在Unity中提供了一种动态加载资产的方式，允许你访问存储在特定文件夹中的对象，如Texture，Prefab，Audio Clips等。这些文件必须存放在项目中名为“Resources”的文件夹内 存放资产到Resources文件夹 希望在运行时动态加载的所有资产必须存放在名为“Resources”的文件夹中。你可以在Assets目录下创建多个“Resources”文件夹 存放在这些文件夹中的资产不会通过Inspector自动引用，因此Unity无法对它们进行优化，直接包含在最终构建中 加载方式 Resources.Load()和Resources.FindObjectsOfTypeAll()函数可以用来加载和访问资产 Resouces.Load()：按路径加载单个资产 Resouces.FindObjectsOfTypeAll()：用于查找并访问场景中或Resources文件夹下的所有对象 使用路径加载资产时，所有存放在Resources文件夹中的资产会被纳入构建中，这可能导致构建大小增加 构建优化问题 通常，Unity 会通过 Inspector 曝露对资产的引用，这样在构建时它可以自动计算出哪些资产是实际使用的，从而避免不必要的资源被包含在最终构建中。但如果使用 Resources 文件夹，Unity 无法做到这一点，因此所有资产都会被包含在构建中，即使你没有使用它们 不推荐过度使用路径加载 使用路径名来加载资产会导致代码不那么可复用，因为脚本会硬编码依赖于资产存放的位置。这不如通过Inspector暴露的引用直观和易于维护...","categories": ["笔记"],
+        "tags": ["Unity","Asset"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Assets-Import-and-Load.html",
+        "teaser": null
+      },{
+        "title": "Unity Packaging and Building",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Build"],
+        "url": "/posts/2025-07-18-Unity-Packaging-and-Building/",
         "teaser": null
       },{
     "title": "About",

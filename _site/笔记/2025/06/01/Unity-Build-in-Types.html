@@ -170,8 +170,7 @@
         
         <p>Unity内建类型</p>
 
-<h2 id="常见unity内建类型按用途分">常见Unity内建类型（按用途分）</h2>
-<h3 id="1空间几何类型transform相关">1.空间/几何类型（Transform相关）</h3>
+<h2 id="1空间几何类型transform相关">1.空间/几何类型（Transform相关）</h2>
 
 <table>
   <thead>
@@ -216,10 +215,10 @@
   </tbody>
 </table>
 
-<h4 id="vector2--vector3--vector4"><strong>Vector2 &amp; Vector3 &amp; Vector4</strong></h4>
-<p>它们是Unity提供的三个核心向量类型，广泛用于位置、方向、速度、缩放、颜色等各种场景</p>
+<h3 id="vector">Vector</h3>
+<p><code class="language-plaintext highlighter-rouge">Vector2</code>、<code class="language-plaintext highlighter-rouge">Vector3</code>、<code class="language-plaintext highlighter-rouge">Vector4</code></p>
 
-<h5 id="基本定义">基本定义</h5>
+<p>它们是Unity提供的三个核心向量类型，广泛用于位置、方向、速度、缩放、颜色等各种场景</p>
 
 <table>
   <thead>
@@ -248,7 +247,7 @@
   </tbody>
 </table>
 
-<p><strong>Vector2（二维向量）</strong></p>
+<h4 id="vector2二维向量">Vector2（二维向量）</h4>
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector2</span> <span class="n">position</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector2</span><span class="p">(</span><span class="m">1.5f</span><span class="p">,</span> <span class="m">3.0f</span><span class="p">);</span>
 </code></pre></div></div>
 <p>常见用途：</p>
@@ -258,7 +257,7 @@
   <li>纹理坐标（UV mapping）</li>
 </ul>
 
-<p><strong>Vector3（三维向量）</strong></p>
+<h4 id="vector3三维向量">Vector3（三维向量）</h4>
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector3</span> <span class="n">direction</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0f</span><span class="p">,</span> <span class="m">1f</span><span class="p">,</span> <span class="m">0f</span><span class="p">);</span> <span class="c1">//向上</span>
 <span class="n">transform</span><span class="p">.</span><span class="n">position</span> <span class="p">+=</span> <span class="n">direction</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span><span class="p">;</span>
 </code></pre></div></div>
@@ -269,139 +268,308 @@
   <li>相机方向、光照方向</li>
 </ul>
 
-<p><strong>Vector3常用静态变量</strong></p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector3</span><span class="p">.</span><span class="n">zero</span>      <span class="c1">// (0, 0, 0)</span>
-<span class="n">Vector3</span><span class="p">.</span><span class="n">one</span>       <span class="c1">// (1, 1, 1)</span>
-<span class="n">Vector3</span><span class="p">.</span><span class="n">up</span>        <span class="c1">// (0, 1, 0)</span>
-<span class="n">Vector3</span><span class="p">.</span><span class="n">down</span>      <span class="c1">// (0, -1, 0)</span>
-<span class="n">Vector3</span><span class="p">.</span><span class="n">left</span>      <span class="c1">// (-1, 0, 0)</span>
-<span class="n">Vector3</span><span class="p">.</span><span class="n">right</span>     <span class="c1">// (1, 0, 0)</span>
-<span class="n">Vector3</span><span class="p">.</span><span class="n">forward</span>   <span class="c1">// (0, 0, 1)</span>
-<span class="n">Vector3</span><span class="p">.</span><span class="n">back</span>      <span class="c1">// (0, 0, -1)</span>
-</code></pre></div></div>
+<h5 id="api">API</h5>
+<p><strong>Static Properties</strong><br />
+这些属性是<code class="language-plaintext highlighter-rouge">Vector3</code>结构体的常用快捷方式，简化了常见的方向或特殊值的表示，使得代码更简洁易读</p>
 
-<p><strong>Vector3静态方法</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">back</code></td>
+      <td>等价于 <code class="language-plaintext highlighter-rouge">Vector3(0, 0, -1)</code>。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">down</code></td>
+      <td>等价于 <code class="language-plaintext highlighter-rouge">Vector3(0, -1, 0)</code>。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">forward</code></td>
+      <td>等价于 <code class="language-plaintext highlighter-rouge">Vector3(0, 0, 1)</code>。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">left</code></td>
+      <td>等价于 <code class="language-plaintext highlighter-rouge">Vector3(-1, 0, 0)</code>。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">negativeInfinity</code></td>
+      <td>等价于 <code class="language-plaintext highlighter-rouge">Vector3(float.NegativeInfinity, float.NegativeInfinity, float.NegativeInfinity)</code>，表示<code class="language-plaintext highlighter-rouge">-∞</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">one</code></td>
+      <td>等价于 <code class="language-plaintext highlighter-rouge">Vector3(1, 1, 1)</code>。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">positiveInfinity</code></td>
+      <td>等价于 <code class="language-plaintext highlighter-rouge">Vector3(float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity)</code>，表示<code class="language-plaintext highlighter-rouge">+∞</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">right</code></td>
+      <td>等价于 <code class="language-plaintext highlighter-rouge">Vector3(1, 0, 0)</code>。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">up</code></td>
+      <td>等价于 <code class="language-plaintext highlighter-rouge">Vector3(0, 1, 0)</code>。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">zero</code></td>
+      <td>等价于 <code class="language-plaintext highlighter-rouge">Vector3(0, 0, 0)</code>。</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">negativeInfinity</code>（负无穷）
+    <ul>
+      <li>定义：表示负无穷大的值</li>
+      <li>类型：<code class="language-plaintext highlighter-rouge">float.NegativeInfinity</code></li>
+      <li>常见用途
+        <ul>
+          <li>初始化最小值：可以用<code class="language-plaintext highlighter-rouge">negativeInfinity</code>来初始化一个变量，使其值总是比任何数值都小。例如，在计算最小值时，可以用它来确保首次比较时能正确地更新最小值</li>
+          <li>比较：用于处理在算法中可能遇到的负无穷大值，比如图形计算中的不可达距离</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">positiveInfinity</code>（正无穷）
+    <ul>
+      <li>定义：表示正无穷大的值</li>
+      <li>类型：<code class="language-plaintext highlighter-rouge">float.PositiveInfinity</code></li>
+      <li>常见用途：
+        <ul>
+          <li>初始化最大值：用 <code class="language-plaintext highlighter-rouge">positiveInfinity</code> 来初始化一个变量，使其值总是比任何数值都大。例如，在计算最大值时，可以用它来确保首次比较时能正确地更新最大值。</li>
+          <li>比较：用于处理可能出现的正无穷大值，例如在图形学中表示无法到达的最大距离或算法中的最大值。</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Properties</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">magnitude</code></td>
+      <td>返回此向量的长度（只读）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">normalized</code></td>
+      <td>返回基于当前向量的标准化向量。标准化后的向量长度为 1，并与当前向量方向相同。如果当前向量太小，返回零向量。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sqrMagnitude</code></td>
+      <td>返回此向量的平方长度（只读）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">this[int]</code></td>
+      <td>通过 <code class="language-plaintext highlighter-rouge">[0]</code>、<code class="language-plaintext highlighter-rouge">[1]</code>、<code class="language-plaintext highlighter-rouge">[2]</code> 分别访问向量的 x、y、z 分量。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">x</code></td>
+      <td>向量的 x 分量。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">y</code></td>
+      <td>向量的 y 分量。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">z</code></td>
+      <td>向量的 z 分量。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Constructors</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>COnstructor</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Vector3</code></td>
+      <td>创建一个三维向量或点</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Public Methods</strong></p>
 
 <table>
   <thead>
     <tr>
       <th>Method</th>
       <th>Description</th>
-      <th>Declaration</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Angel</td>
-      <td>求两向量夹角</td>
-      <td>public static float Angle(Vector3 from, Vector3 to);</td>
+      <td><code class="language-plaintext highlighter-rouge">Equals</code></td>
+      <td>如果给定的向量与当前向量完全相等，返回 <code class="language-plaintext highlighter-rouge">true</code>。</td>
     </tr>
     <tr>
-      <td>ClampMagnitude</td>
-      <td>限制一个向量的长度，防止它超过maxLength，如果vector的长度小于等于maxLength返回原向量，否则返回一个等于maxLength的同向向量</td>
-      <td>public static Vector3 ClampMagnitude(Vector3 vector, float maxLength);</td>
+      <td><code class="language-plaintext highlighter-rouge">Set</code></td>
+      <td>设置现有 <code class="language-plaintext highlighter-rouge">Vector3</code> 的 x、y 和 z 分量。</td>
     </tr>
     <tr>
-      <td>Cross</td>
-      <td>求叉积</td>
-      <td>public static Vector3 Cross(Vector3 lhs, Vector3 rhs);</td>
+      <td><code class="language-plaintext highlighter-rouge">ToString</code></td>
+      <td>返回该向量的格式化字符串表示。”(x, y, z)”</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Static Methods</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Angle</code></td>
+      <td>计算两个向量之间的夹角。</td>
     </tr>
     <tr>
-      <td>Distance</td>
-      <td>求三维空间中两点的距离</td>
-      <td>public static float Distance(Vector3 point1, Vector3 point2);</td>
+      <td><code class="language-plaintext highlighter-rouge">ClampMagnitude</code></td>
+      <td>返回一个新的向量，最大长度被限制为 <code class="language-plaintext highlighter-rouge">maxLength</code>。</td>
     </tr>
     <tr>
-      <td>Dot</td>
-      <td>求点乘</td>
-      <td>public static float Dot(Vector3 lhs, Vector3 rhs);</td>
+      <td><code class="language-plaintext highlighter-rouge">Cross</code></td>
+      <td>计算两个三维向量的叉积。</td>
     </tr>
     <tr>
-      <td>Lerp</td>
-      <td>求线插（不允许外推）,  t -&gt; [0, 1]</td>
-      <td>public static Vector3 Lerp(Vector3 a, Vector3 b, float t);</td>
+      <td><code class="language-plaintext highlighter-rouge">Distance</code></td>
+      <td>计算两个三维点之间的距离。</td>
     </tr>
     <tr>
-      <td>LerpUnclamped</td>
-      <td>求线插（允许外推，产生超调）</td>
-      <td>public static Vector3 LerpUnclamped(Vector3 a, Vector3 b, float t);</td>
+      <td><code class="language-plaintext highlighter-rouge">Dot</code></td>
+      <td>计算两个三维向量的点积，定义在相同坐标空间中。</td>
     </tr>
     <tr>
-      <td>Max</td>
-      <td>返回两个向量所能组成的最大向量</td>
-      <td>public static Vector3 Max(Vector3 lhs, Vector3 rhs);</td>
+      <td><code class="language-plaintext highlighter-rouge">Lerp</code></td>
+      <td>在两个点之间进行线性插值。</td>
     </tr>
     <tr>
-      <td>Min</td>
-      <td>返回最小</td>
-      <td>同上</td>
+      <td><code class="language-plaintext highlighter-rouge">LerpUnclamped</code></td>
+      <td>在两个向量之间进行线性插值，不限制插值范围。</td>
     </tr>
     <tr>
-      <td>MoveTowards</td>
-      <td>以恒定速度向目标位置靠近，直到到达</td>
-      <td>public static Vector3 MoveTowards(Vector3 current, Vector3 target, float maxDistanceDelta);</td>
+      <td><code class="language-plaintext highlighter-rouge">Max</code></td>
+      <td>返回一个由两个向量中最大分量组成的向量。</td>
     </tr>
     <tr>
-      <td>Normalize</td>
-      <td>归一化</td>
-      <td>public void Normalize();</td>
+      <td><code class="language-plaintext highlighter-rouge">Min</code></td>
+      <td>返回一个由两个向量中最小分量组成的向量。</td>
     </tr>
     <tr>
-      <td>OrthoNormalize</td>
-      <td>正交归一化</td>
-      <td>public static void OrthoNormalize(ref Vector3 normal, ref Vector3 tangent);  public static void OrthoNormalize(ref Vector3 normal, ref Vector3 tangent, ref Vector3 binormal);</td>
+      <td><code class="language-plaintext highlighter-rouge">MoveTowards</code></td>
+      <td>计算一个位置，当前位置到目标位置的最大移动距离不超过 <code class="language-plaintext highlighter-rouge">maxDistanceDelta</code>。</td>
     </tr>
     <tr>
-      <td>Project</td>
-      <td>投影到onNormal</td>
-      <td>public static Vector3 Project(Vector3 vector, Vector3 onNormal);</td>
+      <td><code class="language-plaintext highlighter-rouge">Normalize</code></td>
+      <td>将向量标准化，使其长度为 1。</td>
     </tr>
     <tr>
-      <td>ProjectOnPlane</td>
-      <td>投影到planeNormal</td>
-      <td>public static Vector3 ProjectOnPlane(Vector3 vector, Vector3 planeNormal);</td>
+      <td><code class="language-plaintext highlighter-rouge">OrthoNormalize</code></td>
+      <td>使两个向量都标准化并且相互正交。</td>
     </tr>
     <tr>
-      <td>Reflect</td>
-      <td>反射线，inNormal是法线</td>
-      <td>public static Vector3 Reflect(Vector3 inDirection, Vector3  inNormal);</td>
+      <td><code class="language-plaintext highlighter-rouge">Project</code></td>
+      <td>将一个向量投影到另一个向量上。</td>
     </tr>
     <tr>
-      <td>RotateTowards</td>
-      <td>逐步旋转一个方向向量朝向另一个方向向量，maxRadiansDelta是每次最大允许旋转的角度（弧度），maxMagnitudeDelta是每次允许变化的向量长度</td>
-      <td>public static Vector3 RotateTowards(Vector3 current, Vector3 target, float maxRadiansDelta, float maxMagnitudeDelta);</td>
+      <td><code class="language-plaintext highlighter-rouge">ProjectOnPlane</code></td>
+      <td>将一个向量投影到一个平面上。</td>
     </tr>
     <tr>
-      <td>Scale</td>
-      <td>两个向量分量相乘组成新向量</td>
-      <td>public static Vector3 Scale(Vector3 a, Vector3 b);</td>
+      <td><code class="language-plaintext highlighter-rouge">Reflect</code></td>
+      <td>将向量反射到由法线定义的平面上。</td>
     </tr>
     <tr>
-      <td>SignedAngle</td>
-      <td>求带符号夹角，axis是用于确定旋转方向的轴，正值是绕着axis左旋，负值是右旋</td>
-      <td>public static float SignedAngle(Vector3 from, Vector3 to, Vector3 axis);</td>
+      <td><code class="language-plaintext highlighter-rouge">RotateTowards</code></td>
+      <td>将一个向量 <code class="language-plaintext highlighter-rouge">current</code> 旋转到目标向量 <code class="language-plaintext highlighter-rouge">target</code>，并计算旋转。</td>
     </tr>
     <tr>
-      <td>Slerp</td>
-      <td>球面插值，球面为a，b点所在大圆所在的球的球面，插值在a，b点所在的圆上取</td>
-      <td>public static Vector3 Slerp(Vector3 a, Vector3 b, float t);</td>
+      <td><code class="language-plaintext highlighter-rouge">Scale</code></td>
+      <td>逐分量地将两个向量相乘。</td>
     </tr>
     <tr>
-      <td>SlerpUnclamped</td>
-      <td>球面插值（允许外推，产生超调）</td>
-      <td>public static Vector3 SlerpUnclamped(Vector3 a, Vector3 b, float t);</td>
+      <td><code class="language-plaintext highlighter-rouge">SignedAngle</code></td>
+      <td>计算两个向量之间相对于某一轴的带符号夹角。</td>
     </tr>
     <tr>
-      <td>SmoothDamp</td>
-      <td>平滑插值； ref currentVelocity当前速度向量；smoothTime到达目标值所需的预期时间，越小越快越敏感；maxSpeed最大速度（可选）；deltaTime每帧间隔时间（可选）</td>
-      <td>public static Vector3 SmoothDamp(Vector3 current, Vector3 target, ref Vector3 currentVelocity, float smoothTime, float maxSpeed = Mathf.Infinity, float deltaTime = Time.deltaTime);</td>
+      <td><code class="language-plaintext highlighter-rouge">Slerp</code></td>
+      <td>在两个三维向量之间进行球面线性插值。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SlerpUnclamped</code></td>
+      <td>在两个向量之间进行球面线性插值，不限制插值范围。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SmoothDamp</code></td>
+      <td>逐渐地将向量朝着目标位置变化，随着时间变化。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Operators</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Operator</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">operator -</code></td>
+      <td>将一个向量从另一个向量中减去。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">operator !=</code></td>
+      <td>如果两个向量不同，则返回 <code class="language-plaintext highlighter-rouge">true</code>。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">operator *</code></td>
+      <td>将一个向量与一个数值相乘（逐分量相乘）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">operator /</code></td>
+      <td>将一个向量与一个数值相除（逐分量相除）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">operator +</code></td>
+      <td>两个三维向量进行逐分量加法。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">operator ==</code></td>
+      <td>如果两个向量大致相等，则返回 <code class="language-plaintext highlighter-rouge">true</code>。</td>
     </tr>
   </tbody>
 </table>
 
 <p><a href="https://docs.unity3d.com/ScriptReference/Vector3.html">Unity官方文档（Vector3）</a></p>
 
-<p><strong>Vector4（四维向量）</strong></p>
+<h4 id="vector4四维向量">Vector4（四维向量）</h4>
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector4</span> <span class="n">v</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Vector4</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">);</span>
 </code></pre></div></div>
 <p>常见用途：</p>
@@ -411,10 +579,10 @@
   <li>shader开发中用于高级数学运算（如平面方程、切线空间等）</li>
 </ul>
 
-<h4 id="quaternion--euler-angles">Quaternion &amp; Euler Angles</h4>
+<h3 id="quaternion--euler-angles">Quaternion &amp; Euler Angles</h3>
 <p>在Unity中，Quaternion是用来表示旋转的核心数学结构，它避免了Euler Angles的万向节死锁问题，并且适用于平滑插值和复杂3D计算</p>
 
-<h5 id="quaternion">Quaternion</h5>
+<h4 id="quaternion">Quaternion</h4>
 <p>Quaternion表示绕某一条单位轴旋转一个角度的这个过程，简单来说：表示一个旋转</p>
 
 <p><strong>数学本质</strong>
@@ -536,7 +704,7 @@
 <p>使用欧拉角构建：</p>
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Quaternion</span> <span class="n">q</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="nf">Euler</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span> <span class="c1">//XYZ分别是绕X Y Z轴的角度</span>
 </code></pre></div></div>
-<h5 id="euler-angles">Euler Angles</h5>
+<h4 id="euler-angles">Euler Angles</h4>
 
 <p><strong>欧拉角的定义</strong><br />
 欧拉角是用三个角度来描述3D空间中的一个旋转变换，每个角度表示围绕一个坐标轴的旋转量。<br />
@@ -693,7 +861,294 @@ Ry不会也无法回头修改Rx的效果<br />
 1.万向节死锁，当某个周旋转到90°，两个轴重合，自由度减少，Unity为了保持“姿态”，可能会自动调整其他轴的值，此时Rotation的值再Inspector中跳变，但物体并没有跳<br />
 2.四元数存在加减号不唯一（180°对称）问题，一个方向可以由两个四元数表示：q和-q，它们作用在物体上是一样的，Unity在背后自动选择最短路径，所以视觉上依旧是连续旋转路径上的最短旋转</p>
 
-<h3 id="2游戏对象相关">2.游戏对象相关</h3>
+<h3 id="matrix44">Matrix4×4</h3>
+<p>在 Unity 中，Matrix4x4 是一个 4x4 的矩阵，通常用于表示和处理 3D 图形变换（例如：平移、旋转、缩放）以及投影变换。它是 Unity 中进行图形学计算时不可或缺的工具之一，特别是在操作坐标系变换和投影时，矩阵起到了重要作用。</p>
+
+<h4 id="结构和基本概念">结构和基本概念</h4>
+<p>一个 4x4 的矩阵包含 16 个元素，用来存储 3D 空间中的变换信息。矩阵通常表示为：</p>
+
+\[\begin{bmatrix}
+m_00 &amp; m_01 &amp; m_02 &amp; m_03\\
+m_10 &amp; m_11 &amp; m_12 &amp; m_13\\
+m_20 &amp; m_21 &amp; m_22 &amp; m_23\\
+m_30 &amp; m_31 &amp; m_32 &amp; m_33
+\end{bmatrix}\]
+
+<ul>
+  <li>前三列（前三个3D向量）：表示选择、缩放和剪切变换</li>
+  <li>最后一列：通常表示平移</li>
+  <li>最后一行：在Unity中一般被设置为<code class="language-plaintext highlighter-rouge">[0, 0, 0, 1]</code>，它不参与位置和方向的变换，但在某些情况下（如透视投影）可能会发生变化</li>
+</ul>
+
+<h4 id="matrix44的常见用途">Matrix4×4的常见用途</h4>
+<p>1) 变换（Transformations）
+在3D图形中，变换通常包含平移（Translation）、旋转（Rotation）和缩放（Scaling），这些都可以通过矩阵来表示。矩阵变换是通过矩阵与向量的乘法实现的</p>
+<ul>
+  <li>
+    <p>平移矩阵：
+通过矩阵中的第四列来实现物体的平移</p>
+
+    <p>$ Translation\;Matrix = \begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; tx\ 0 &amp; 1 &amp; 0 &amp; ty\ 0 &amp; 0 &amp; 1 &amp; tz\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix} $</p>
+
+    <p>其中，<code class="language-plaintext highlighter-rouge">tx</code>,<code class="language-plaintext highlighter-rouge">ty</code>,<code class="language-plaintext highlighter-rouge">tz</code>是在X,Y,Z轴上的平移距离</p>
+  </li>
+  <li>旋转矩阵：
+旋转矩阵用于旋转物体在不同轴上的旋转。旋转矩阵有不同的表示方式，常见的是绕X,Y,Z轴旋转的矩阵：
+    <ul>
+      <li>绕X轴旋转：
+        <pre><code class="language-math">Rotation\;Matrix(X)=\begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; cos(θ) &amp; -sin(θ) &amp; 0\\ 0 &amp; sin(θ) &amp; cos(θ) &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 1\end{bmatrix}
+</code></pre>
+      </li>
+      <li>绕Y轴旋转
+        <pre><code class="language-math">   Rotation\;Matrix(Y)=\begin{bmatrix} cos(θ) &amp; 0 &amp; sin(θ) &amp; 0\\ 0 &amp; 1 &amp; 0 &amp; 0\\ -sin(θ) &amp; 0 &amp; cos(θ) &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 1\end{bmatrix} 
+</code></pre>
+      </li>
+      <li>绕Z轴旋转：
+        <pre><code class="language-math">Rotation\;Matrix(Z)=\begin{bmatrix} cos(θ) &amp; 0 &amp; sin(θ) &amp; 0\\ 0 &amp; 1 &amp; 0 &amp; 0\\ -sin(θ) &amp; 0 &amp; cos(θ) &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 1\end{bmatrix} 
+</code></pre>
+        <p>其中<code class="language-plaintext highlighter-rouge">θ</code>代表旋转角度</p>
+      </li>
+    </ul>
+  </li>
+  <li>缩放矩阵：
+缩放矩阵控制物体在各个轴上的缩放：
+    <pre><code class="language-math">Scale\;Matrix=\begin{bmatrix} sx &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; sy &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; sz &amp; 0\\ 0 &amp; 0 &amp; 0 &amp; 1\end{bmatrix} 
+</code></pre>
+
+    <p>其中，<code class="language-plaintext highlighter-rouge">sx</code>,<code class="language-plaintext highlighter-rouge">sy</code>,<code class="language-plaintext highlighter-rouge">sz</code>代表X,Y,Z轴上的缩放因子</p>
+  </li>
+</ul>
+
+<p>2) 矩阵乘法
+多个变换（如平移、旋转、缩放）可以通过矩阵乘法结合起来。例如，将旋转和缩放变换合并到一个矩阵中，执行复合变换。</p>
+<ul>
+  <li>如果你有两个矩阵<code class="language-plaintext highlighter-rouge">M1</code>和<code class="language-plaintext highlighter-rouge">M2</code>，则复合变换矩阵是通过矩阵乘法得到的：<code class="language-plaintext highlighter-rouge">M = M1 * M2</code></li>
+  <li>在Unity中，矩阵乘法通过<code class="language-plaintext highlighter-rouge">Matrix4×4</code>的<code class="language-plaintext highlighter-rouge">*</code>操作符完成
+    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Matrix4x4</span> <span class="n">rotationMatrix</span> <span class="p">=</span> <span class="n">Matrix4x4</span><span class="p">.</span><span class="nf">Rotate</span><span class="p">(</span><span class="n">Quaternion</span><span class="p">.</span><span class="nf">Euler</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">45</span><span class="p">,</span> <span class="m">0</span><span class="p">));</span>
+<span class="n">Matrix4x4</span> <span class="n">scaleMatrix</span> <span class="p">=</span> <span class="n">Matrix4x4</span><span class="p">.</span><span class="nf">Scale</span><span class="p">(</span><span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">));</span>
+<span class="n">Matrix4x4</span> <span class="n">combinedMatrix</span> <span class="p">=</span> <span class="n">rotationMatrix</span> <span class="p">*</span> <span class="n">scaleMatrix</span><span class="p">;</span> <span class="c1">// 复合变换</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>3) 投影矩阵
+投影矩阵用于将 3D 场景投影到 2D 屏幕上。常见的投影有 正射投影 和 透视投影。</p>
+
+<ul>
+  <li>透视投影矩阵：
+透视投影矩阵会产生“透视效果”，即远处的物体看起来更小。透视矩阵的公式通常比较复杂，Unity 提供了 <code class="language-plaintext highlighter-rouge">Matrix4x4.Perspective</code> 方法来生成透视投影矩阵。
+    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Matrix4x4</span> <span class="n">perspectiveMatrix</span> <span class="p">=</span> <span class="n">Matrix4x4</span><span class="p">.</span><span class="nf">Perspective</span><span class="p">(</span><span class="m">60f</span><span class="p">,</span> <span class="m">16f</span><span class="p">/</span><span class="m">9f</span><span class="p">,</span> <span class="m">0.1f</span><span class="p">,</span> <span class="m">100f</span><span class="p">);</span>
+</code></pre></div>    </div>
+    <p>其中，<code class="language-plaintext highlighter-rouge">60f</code>是垂直视野角度，<code class="language-plaintext highlighter-rouge">16/9f</code>是宽高比，<code class="language-plaintext highlighter-rouge">0.1f</code>和<code class="language-plaintext highlighter-rouge">100f</code>是近平面和远平面的距离</p>
+  </li>
+  <li>正射投影矩阵
+正射投影没有透视效果，所有物体的大小都是相同的，不随远近变化。可以通过 Matrix4x4.Ortho 来创建
+    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Matrix4x4</span> <span class="n">orthoMatrix</span> <span class="p">=</span> <span class="n">Matrix4x4</span><span class="p">.</span><span class="nf">Ortho</span><span class="p">(-</span><span class="m">5f</span><span class="p">,</span> <span class="m">5f</span><span class="p">,</span> <span class="p">-</span><span class="m">5f</span><span class="p">,</span> <span class="m">5f</span><span class="p">,</span> <span class="m">0.1f</span><span class="p">,</span> <span class="m">100f</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>4) 视图矩阵（View Matrix）
+视图矩阵用于描述相机在场景中的位置和朝向。它把世界空间中的物体转换到相机的视图空间</p>
+<ul>
+  <li>Unity中可以通过<code class="language-plaintext highlighter-rouge">Camera.worldToCameraMatrix</code>获取视图矩阵</li>
+</ul>
+
+<h4 id="api-1">API</h4>
+<p><strong>Static Properties</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">identity</code></td>
+      <td>返回单位矩阵（只读）</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">zero</code></td>
+      <td>返回零矩阵（只读）</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Properties</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">decomposeProjection</code></td>
+      <td>该属性接受一个投影矩阵并返回定义投影视锥体的六个平面坐标。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">determinant</code></td>
+      <td>返回矩阵的行列式（只读）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">inverse</code></td>
+      <td>返回该矩阵的逆矩阵（只读）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">isIdentity</code></td>
+      <td>检查此矩阵是否为单位矩阵（只读）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">lossyScale</code></td>
+      <td>尝试从矩阵中获取一个缩放值（只读）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">rotation</code></td>
+      <td>尝试从矩阵中获取一个旋转四元数。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">this[int, int]</code></td>
+      <td>访问矩阵中的元素，使用 <code class="language-plaintext highlighter-rouge">[row, column]</code> 索引。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">transpose</code></td>
+      <td>返回矩阵的转置矩阵（只读）。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Public Methods</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetColumn</code></td>
+      <td>获取矩阵的某一列。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetPosition</code></td>
+      <td>从矩阵中获取位置向量。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GetRow</code></td>
+      <td>返回矩阵的某一行。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">MultiplyPoint</code></td>
+      <td>使用此矩阵对一个位置进行变换（通用）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">MultiplyPoint3x4</code></td>
+      <td>使用此矩阵对一个位置进行快速变换（适用于 3x4 矩阵）。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">MultiplyVector</code></td>
+      <td>使用此矩阵对一个方向进行变换。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SetColumn</code></td>
+      <td>设置矩阵的某一列。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SetRow</code></td>
+      <td>设置矩阵的某一行。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SetTRS</code></td>
+      <td>将此矩阵设置为一个平移、旋转和缩放矩阵。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ToString</code></td>
+      <td>返回此矩阵的格式化字符串表示。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">TransformPlane</code></td>
+      <td>返回一个在空间中经过变换的平面。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ValidTRS</code></td>
+      <td>检查此矩阵是否是一个有效的变换矩阵（平移、旋转、缩放组合矩阵）。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Static Methods</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Frustum</code></td>
+      <td>返回一个具有视景体（viewing frustum）的投影矩阵，近平面由传入的坐标定义。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Inverse3DAffine</code></td>
+      <td>计算一个 3D 仿射矩阵的逆矩阵。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LookAt</code></td>
+      <td>创建一个“Look At”矩阵，使物体朝向指定的目标点。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Ortho</code></td>
+      <td>创建一个正交投影矩阵。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Perspective</code></td>
+      <td>创建一个透视投影矩阵。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Rotate</code></td>
+      <td>创建一个旋转矩阵。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Scale</code></td>
+      <td>创建一个缩放矩阵。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Translate</code></td>
+      <td>创建一个平移矩阵。</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">TRS</code></td>
+      <td>创建一个平移、旋转和缩放的组合矩阵。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Operators</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Operator</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">operator*</code></td>
+      <td>两个矩阵相乘</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="2游戏对象相关">2.游戏对象相关</h2>
 
 <table>
   <thead>
@@ -730,7 +1185,7 @@ Ry不会也无法回头修改Rx的效果<br />
   </tbody>
 </table>
 
-<h3 id="3图形和渲染">3.图形和渲染</h3>
+<h2 id="3图形和渲染">3.图形和渲染</h2>
 
 <table>
   <thead>
@@ -767,7 +1222,7 @@ Ry不会也无法回头修改Rx的效果<br />
   </tbody>
 </table>
 
-<h3 id="4物理相关">4.物理相关</h3>
+<h2 id="4物理相关">4.物理相关</h2>
 
 <table>
   <thead>
@@ -800,7 +1255,7 @@ Ry不会也无法回头修改Rx的效果<br />
   </tbody>
 </table>
 
-<h3 id="5输入和事件">5.输入和事件</h3>
+<h2 id="5输入和事件">5.输入和事件</h2>
 
 <table>
   <thead>
@@ -829,7 +1284,7 @@ Ry不会也无法回头修改Rx的效果<br />
   </tbody>
 </table>
 
-<h3 id="6资源与序列化">6.资源与序列化</h3>
+<h2 id="6资源与序列化">6.资源与序列化</h2>
 
 <table>
   <thead>
@@ -854,7 +1309,7 @@ Ry不会也无法回头修改Rx的效果<br />
   </tbody>
 </table>
 
-<h3 id="7uiugui">7.UI（UGUI）</h3>
+<h2 id="7uiugui">7.UI（UGUI）</h2>
 
 <table>
   <thead>
@@ -883,7 +1338,7 @@ Ry不会也无法回头修改Rx的效果<br />
   </tbody>
 </table>
 
-<h3 id="8时间协程与生命周期">8.时间、协程与生命周期</h3>
+<h2 id="8时间协程与生命周期">8.时间、协程与生命周期</h2>
 
 <table>
   <thead>
@@ -927,7 +1382,7 @@ Ry不会也无法回头修改Rx的效果<br />
       
   <nav class="pagination">
     
-      <a href="/%E7%AC%94%E8%AE%B0/2025/06/01/Thread.html" class="pagination--pager" title="Thread">Previous</a>
+      <a href="/posts/2025-06-03-Unity-Asynchronous-and-Coroutine/" class="pagination--pager" title="Unity Asynchronous and Coroutine">Previous</a>
     
     
       <a href="/posts/2025-06-04-Collider-and-Trigger/" class="pagination--pager" title="Collider &amp; Trigger">Next</a>
