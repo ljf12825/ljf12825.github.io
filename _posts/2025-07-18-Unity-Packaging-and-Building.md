@@ -1,5 +1,5 @@
 ---
-title: "Unity Packagign and Building"
+title: "Unity Packaging and Building"
 layout: single
 date: 2025-06-01
 categories: [笔记]
