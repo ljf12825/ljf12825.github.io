@@ -149,7 +149,7 @@ transform.position += direction * Time.deltaTime;
 [Unity官方文档（Vector3）](https://docs.unity3d.com/ScriptReference/Vector3.html)
 
 
-**Vector4（四维向量）**
+#### Vector4（四维向量）
 ```csharp
 Vector4 v = new Vector4(1, 2, 3, 4);
 ```
@@ -228,7 +228,7 @@ Quaternion q = Quaternion.AngleAxis(90, Vector3.up); //绕Y轴旋转90°
 ```csharp
 Quaternion q = Quaternion.Euler(0, 90, 0); //XYZ分别是绕X Y Z轴的角度
 ```
-##### Euler Angles
+#### Euler Angles
 
 **欧拉角的定义**  
 欧拉角是用三个角度来描述3D空间中的一个旋转变换，每个角度表示围绕一个坐标轴的旋转量。  
@@ -361,6 +361,151 @@ Ry不会也无法回头修改Rx的效果
 **哪些地方是不连续的**  
 1.万向节死锁，当某个周旋转到90°，两个轴重合，自由度减少，Unity为了保持“姿态”，可能会自动调整其他轴的值，此时Rotation的值再Inspector中跳变，但物体并没有跳  
 2.四元数存在加减号不唯一（180°对称）问题，一个方向可以由两个四元数表示：q和-q，它们作用在物体上是一样的，Unity在背后自动选择最短路径，所以视觉上依旧是连续旋转路径上的最短旋转
+
+### Matrix4×4
+在 Unity 中，Matrix4x4 是一个 4x4 的矩阵，通常用于表示和处理 3D 图形变换（例如：平移、旋转、缩放）以及投影变换。它是 Unity 中进行图形学计算时不可或缺的工具之一，特别是在操作坐标系变换和投影时，矩阵起到了重要作用。
+
+#### 结构和基本概念
+一个 4x4 的矩阵包含 16 个元素，用来存储 3D 空间中的变换信息。矩阵通常表示为：
+
+$$
+\begin{bmatrix}
+m_00 & m_01 & m_02 & m_03\\
+m_10 & m_11 & m_12 & m_13\\
+m_20 & m_21 & m_22 & m_23\\
+m_30 & m_31 & m_32 & m_33
+\end{bmatrix}
+$$
+
+- 前三列（前三个3D向量）：表示选择、缩放和剪切变换
+- 最后一列：通常表示平移
+- 最后一行：在Unity中一般被设置为`[0, 0, 0, 1]`，它不参与位置和方向的变换，但在某些情况下（如透视投影）可能会发生变化
+
+#### Matrix4×4的常见用途
+1) 变换（Transformations）
+在3D图形中，变换通常包含平移（Translation）、旋转（Rotation）和缩放（Scaling），这些都可以通过矩阵来表示。矩阵变换是通过矩阵与向量的乘法实现的
+  - 平移矩阵：
+    通过矩阵中的第四列来实现物体的平移
+
+    $ Translation\;Matrix = \begin{bmatrix} 1 & 0 & 0 & tx\\ 0 & 1 & 0 & ty\\ 0 & 0 & 1 & tz\\ 0 & 0 & 0 & 1 \end{bmatrix} $
+
+    其中，`tx`,`ty`,`tz`是在X,Y,Z轴上的平移距离
+
+  - 旋转矩阵：
+    旋转矩阵用于旋转物体在不同轴上的旋转。旋转矩阵有不同的表示方式，常见的是绕X,Y,Z轴旋转的矩阵：
+      - 绕X轴旋转：
+        ```math
+        Rotation\;Matrix(X)=\begin{bmatrix} 1 & 0 & 0 & 0\\ 0 & cos(θ) & -sin(θ) & 0\\ 0 & sin(θ) & cos(θ) & 0\\ 0 & 0 & 0 & 1\end{bmatrix}
+        ```
+
+      - 绕Y轴旋转
+       ```math
+       Rotation\;Matrix(Y)=\begin{bmatrix} cos(θ) & 0 & sin(θ) & 0\\ 0 & 1 & 0 & 0\\ -sin(θ) & 0 & cos(θ) & 0\\ 0 & 0 & 0 & 1\end{bmatrix} 
+       ```
+       
+    
+      - 绕Z轴旋转：
+        ```math
+        Rotation\;Matrix(Z)=\begin{bmatrix} cos(θ) & 0 & sin(θ) & 0\\ 0 & 1 & 0 & 0\\ -sin(θ) & 0 & cos(θ) & 0\\ 0 & 0 & 0 & 1\end{bmatrix} 
+        ```
+    其中`θ`代表旋转角度
+
+  - 缩放矩阵：
+    缩放矩阵控制物体在各个轴上的缩放：
+     ```math
+    Scale\;Matrix=\begin{bmatrix} sx & 0 & 0 & 0\\ 0 & sy & 0 & 0\\ 0 & 0 & sz & 0\\ 0 & 0 & 0 & 1\end{bmatrix} 
+    ```
+
+    其中，`sx`,`sy`,`sz`代表X,Y,Z轴上的缩放因子
+
+2) 矩阵乘法
+多个变换（如平移、旋转、缩放）可以通过矩阵乘法结合起来。例如，将旋转和缩放变换合并到一个矩阵中，执行复合变换。
+- 如果你有两个矩阵`M1`和`M2`，则复合变换矩阵是通过矩阵乘法得到的：`M = M1 * M2`
+- 在Unity中，矩阵乘法通过`Matrix4×4`的`*`操作符完成
+```cs
+Matrix4x4 rotationMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
+Matrix4x4 scaleMatrix = Matrix4x4.Scale(new Vector3(2, 2, 2));
+Matrix4x4 combinedMatrix = rotationMatrix * scaleMatrix; // 复合变换
+```
+
+3) 投影矩阵
+投影矩阵用于将 3D 场景投影到 2D 屏幕上。常见的投影有 正射投影 和 透视投影。
+
+- 透视投影矩阵：
+  透视投影矩阵会产生“透视效果”，即远处的物体看起来更小。透视矩阵的公式通常比较复杂，Unity 提供了 `Matrix4x4.Perspective` 方法来生成透视投影矩阵。
+  ```cs
+  Matrix4x4 perspectiveMatrix = Matrix4x4.Perspective(60f, 16f/9f, 0.1f, 100f);
+  ```
+  其中，`60f`是垂直视野角度，`16/9f`是宽高比，`0.1f`和`100f`是近平面和远平面的距离
+- 正射投影矩阵
+  正射投影没有透视效果，所有物体的大小都是相同的，不随远近变化。可以通过 Matrix4x4.Ortho 来创建
+  ```cs
+  Matrix4x4 orthoMatrix = Matrix4x4.Ortho(-5f, 5f, -5f, 5f, 0.1f, 100f);
+  ```
+
+4) 视图矩阵（View Matrix）
+视图矩阵用于描述相机在场景中的位置和朝向。它把世界空间中的物体转换到相机的视图空间
+- Unity中可以通过`Camera.worldToCameraMatrix`获取视图矩阵
+
+#### API
+**Static Properties**
+
+| Property   | Description         |
+| ---------- | ------------------- |
+| `identity` | 返回单位矩阵（只读） |
+| `zero`     | 返回零矩阵（只读） |
+
+**Properties**
+
+| Property              | Description                     |
+| --------------------- | ------------------------------- |
+| `decomposeProjection` | 该属性接受一个投影矩阵并返回定义投影视锥体的六个平面坐标。   |
+| `determinant`         | 返回矩阵的行列式（只读）。                   |
+| `inverse`             | 返回该矩阵的逆矩阵（只读）。                  |
+| `isIdentity`          | 检查此矩阵是否为单位矩阵（只读）。               |
+| `lossyScale`          | 尝试从矩阵中获取一个缩放值（只读）。              |
+| `rotation`            | 尝试从矩阵中获取一个旋转四元数。                |
+| `this[int, int]`      | 访问矩阵中的元素，使用 `[row, column]` 索引。 |
+| `transpose`           | 返回矩阵的转置矩阵（只读）。                  |
+
+**Public Methods**
+
+| Method             | Description                      |
+| ------------------ | -------------------------------- |
+| `GetColumn`        | 获取矩阵的某一列。                        |
+| `GetPosition`      | 从矩阵中获取位置向量。                      |
+| `GetRow`           | 返回矩阵的某一行。                        |
+| `MultiplyPoint`    | 使用此矩阵对一个位置进行变换（通用）。              |
+| `MultiplyPoint3x4` | 使用此矩阵对一个位置进行快速变换（适用于 3x4 矩阵）。    |
+| `MultiplyVector`   | 使用此矩阵对一个方向进行变换。                  |
+| `SetColumn`        | 设置矩阵的某一列。                        |
+| `SetRow`           | 设置矩阵的某一行。                        |
+| `SetTRS`           | 将此矩阵设置为一个平移、旋转和缩放矩阵。             |
+| `ToString`         | 返回此矩阵的格式化字符串表示。                  |
+| `TransformPlane`   | 返回一个在空间中经过变换的平面。                 |
+| `ValidTRS`         | 检查此矩阵是否是一个有效的变换矩阵（平移、旋转、缩放组合矩阵）。 |
+
+**Static Methods**
+
+| Method            | Description                                  |
+| ----------------- | -------------------------------------------- |
+| `Frustum`         | 返回一个具有视景体（viewing frustum）的投影矩阵，近平面由传入的坐标定义。 |
+| `Inverse3DAffine` | 计算一个 3D 仿射矩阵的逆矩阵。                            |
+| `LookAt`          | 创建一个“Look At”矩阵，使物体朝向指定的目标点。                 |
+| `Ortho`           | 创建一个正交投影矩阵。                                  |
+| `Perspective`     | 创建一个透视投影矩阵。                                  |
+| `Rotate`          | 创建一个旋转矩阵。                                    |
+| `Scale`           | 创建一个缩放矩阵。                                    |
+| `Translate`       | 创建一个平移矩阵。                                    |
+| `TRS`             | 创建一个平移、旋转和缩放的组合矩阵。                           |
+
+**Operators**
+
+| Operator | Description |
+| - | - |
+| `operator*` | 两个矩阵相乘 |
+
+
 
 
 
