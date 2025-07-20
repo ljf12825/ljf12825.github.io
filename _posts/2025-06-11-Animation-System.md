@@ -143,8 +143,77 @@ animator.SetTrigger("Attack");
 animator.SetFloat("Speed", 5.0f);
 ```
 ### API
+`Animator` inherits from `Behaviour`
+
+[Unity Scripting Animator](https://docs.unity3d.com/ScriptReference/Animator.html)
 
 ## Animation Clips
+在 Unity 中，Animation Clips 是用于存储和播放动画的关键资源。它们包含了物体在一段时间内的各种 动画数据，如 位置、旋转、缩放 以及其他的动画属性（例如材质、颜色、透明度等）。`Animation Clip` 充当了动画的核心文件，控制物体的运动和变化。
+
+### 概述
+- Animation Clip本质上是一组关键帧（Keyframe）的集合，它定义了物体在某一时间点的状态，并通过这些关键帧进行平滑的过渡
+- 它可以定义不同类型的动画，例如角色动画、物体的平移动画、UI动画等
+- 动画片段（Clip）可以用Mecanim系统（通过Animator Controller）来播放，也可以用Legacy Animation系统来播放
+
+### 创建与使用
+**创建Animation Clip**
+
+![AnimationClipPanel](/assets/images/AnimationClipPanel.jpg)
+
+- 通过Animator Controller（Mecanim）：
+  1. 在Project视图中右键点击，选择`Create > Animation > Animation Clip`
+  2. 为新创建的Animation Clip取名
+  3. 然后可以通过Animator Controller来管理动画片段
+- 通过Timeline或Animation窗口（Mecanim）
+  1. 在Unity编辑器种选择一个物体
+  2. 打开Animation窗口，点击Create按钮来创建一个新的Animation Clip
+  3. 选择物体的动画属性（例如位置、旋转等），然后添加关键帧，定义动画
+- 通过Legacy Animation系统
+  1. 为物体添加一个Animation 组件
+  2. 在Animation组件中直接拖放或选择现有的Animation Clip
+
+**编辑Animation Clip**
+通过Animation窗口，可以编辑一个Animation Clip：
+1. 选择物体：选择你想要的动画化的物体
+2. 打开Animation窗口：点击Window > Animation > Animation 打开 Animation窗口
+3. 录制关键帧：点击录制按钮（Red Record）开始录制动画，设置物体的不同状态（位置、旋转、缩放等），Unity会自动为这些状态添加关键帧
+4. 手动添加关键帧：在Timeline中点击任意时间点插入关键帧（可以手动修改每个属性的值）
+
+### Animation Clip与关键帧
+一个Animation Clip的本质就是一系列关键帧的时间序列。这些关键帧代表某个时间点物体的状态
+
+**关键帧（Keyframe）**
+- 时间轴（Timeline）：关键帧被分配到时间轴上，每个关键帧代表某个时间点物体的状态
+- 属性：可以给多个属性（位置、旋转、缩放、材质颜色、音效等）添加关键帧，这样就可以动画化这些属性
+- 插值：关键帧之间的动画过渡是通过插值算法完成的。默认的插值方式是线性插值，但是也可以选择样条插值或其他自定义插值方式来控制动画的过渡效果
+
+**编辑关键帧**
+- 时间：每个关键帧都有一个时间戳，表示它在动画时间线中的位置
+- 插值方式：关键帧之间的过渡可以是线性、曲线等。可以在Curves窗口中调整曲线来细化动画效果
+- 曲线编辑：可以通过Curves编辑器来修改每个动画属性的变化曲线，控制动画的加速、减速等
+
+### 动画的播放与控制
+Animation Clip可以通过以下两种主要方式进行播放和控制
+1. Legacy Animation系统
+  - `Animation`组件：在Legacy系统中，`Animation`组件用来播放Animation Clip，可以在`Animation`组件中手动指定动画片段并控制播放
+  ```cs
+  Animation anim = GetComponent<Animation>();
+  anim.Play("Run");  // 播放名为 "Run" 的 Animation Clip
+  ```
+2. Macanim动画系统
+  - Animator Controller：在Mecanim系统中，`Animation Clip`是通过Animator Controller来管理的
+  ```cs
+  Animator animator = GetComponent<Animator>();
+  animator.SetTrigger("Jump");
+  ```
+
+### 动画片段的压缩与优化
+Unity 支持在 Animation Clip 上进行压缩，以减少游戏资源占用并提高性能。
+- 压缩设置：你可以通过在 Animation Clip 的 Inspector 中调整 压缩设置 来压缩动画数据，减少内存消耗。
+- 优化：尽量避免在大量不需要的帧之间存储关键帧。例如，对于循环动画，减少关键帧数量可以显著提升性能。
+
+### 动画片段的导入
+如果在外部软件（如 Maya、Blender 或 3ds Max）中创建了动画，导出时可以将 Animation Clip 直接导入到 Unity 中。Unity 会自动识别 骨骼动画 和 面部表情，并将它们作为 Animation Clip 导入
 
 ## Animator Component
 
