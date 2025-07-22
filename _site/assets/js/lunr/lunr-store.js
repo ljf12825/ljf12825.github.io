@@ -222,7 +222,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Animation System",
-        "excerpt":" ","categories": ["笔记"],
+        "excerpt":"Unity现存两套动画系统，较早的是Legacy Animation，现代的是Mecanim；它们的设计理念、功能和灵活性由很大的不同 Legacy Animation（传统动画系统） Legacy Animation是Unity最初的动画系统，主要用于较为简单的动画控制，依赖于直接在物体上设置Animation Clips和控制这些片段的播放 核心特性 基本动画控制：传统的Legacy Animation主要通过Animation Component来控制动画。直接把也给Animation Clip分配到Animation组件上，然后通过脚本控制动画的播放（Play()）或停止（Stop()） 关键帧动画：它依赖于关键帧（Keyframe），逐帧设置物体的状态变化，如位置、选择、缩放等。这个系统比较适合控制小范围、简单的动画（比如对象的旋转、位移） 动画重叠和层次控制较弱：Legacy Animation没有多层次控制的功能，所以不同动画之间的重叠（例如角色走路和挥剑）难以高效地管理 使用方式 直接绑定：将动画片段直接附加到Animation组件上，通常是按顺序播放 脚本控制：通过脚本控制动画的播放，例如： Animation anim = GetComponent&lt;Animation&gt;(); anim.Play(\"Run\"); 局限性： 不支持复杂的状态机：Legacy系统不支持复杂的动画状态机和动画切换。虽然可以控制动画的播放顺序，但没有明确的状态机来管理多个动画状态之间的切换 缺乏灵活性：对于需要多层次动画混合、状态管理或者需要处理复杂过渡的游戏项目，Legacy Animation显得过于简单，不能满足这些需求 适用场景： 适合简单的、无复杂逻辑的动画。比如： 小物件的动画（例如按钮点击时的缩放动画） 简单的角色动画（例如走路、跳跃） 短小的过渡动画 Mecanim（现代动画系统） Mecanim 是 Unity 后期引入的动画系统，极大地增强了动画的控制和灵活性。它提供了丰富的功能，特别是 动画状态机 和 层（Layer），适合处理复杂的动画逻辑，特别是对角色动画和多动画重叠有较高要求的项目 核心特性 动画状态机（Animator Controller）：Mecanim 引入了 Animator Controller，它是一个图形化的界面，允许开发者通过状态机（State Machine）管理多个动画片段之间的过渡。状态机允许动画状态之间按条件平滑过渡，支持更复杂的动画逻辑。 参数控制：Mecanim 引入了 Animator...","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
         "url": "/posts/2025-06-11-Animation-System/",
         "teaser": null
@@ -447,6 +447,18 @@ var store = [{
         "excerpt":" ","categories": ["笔记"],
         "tags": ["Unity","Build"],
         "url": "/posts/2025-07-18-Unity-Packaging-and-Building/",
+        "teaser": null
+      },{
+        "title": "Probability and Randomness in Games",
+        "excerpt":"概率和随机是紧密相关的概念，它们常用于决定事件的发生与结果；在大多数游戏中，概率和随机数的使用涉及到随机事件的模拟，例如： 伤害计算 随机事件发生 物品掉落 Rouge Like 抽牌，掷骰子 AI决策和行为树 Slots 装备合成或转化 Mystery Box Like 物理模拟和碰撞检测 它们的发生的概率是相等或不等的，数值是随机的或伪随机的 随机和概率在非强竞技场景下的应用非常广泛，或增加了游戏性、或提高了游戏性能、或旨在提升玩家游戏时长、或旨在增加游戏营收，由此产生的效益和收益无疑是巨大的 从游戏实现到数值设计，从具体实现到哲学抽象 概率与随机的定义 概率是一种数学概念，指的是某件事情发生的可能性，通常用0到1之间的数字表示 P = 0：事件不可能发生 P = 1：事件一定会发生 P = 0.5：事件发生和不发生的概率相同 随机是指一种无法确定的行为或过程，结果是不可预测的，但概率可以帮助对其结果进行量化和描述 具体实现 游戏中概率的实现方式通常取决于具体需求，以下是常见的几种实现 随机数生成器（Random Number Generator, RNG） 这是最常见的做法，通过随机数来模拟概率事件，可以用来生成各种各样的结果，如掉落物品、敌人AI行为、事件触发等 均匀分布（Uniform Distribution） 对于简单的概率，可以通过生成一个范围内的随机数，判断其是否满足概率条件 例如，假设在0~1之间生成一个随机数r，并且下那个要这个事件发生的概率为P，则 float r = Random.Range(0f, 1f); float P = 0.7f; if...","categories": ["Game Principle"],
+        "tags": ["Game","Random"],
+        "url": "/posts/2025-07-21-Probability-and-Randomness-in-Games/",
+        "teaser": null
+      },{
+        "title": "Unity Editor",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Editor","Tool"],
+        "url": "/posts/2025-07-22-Unity-Editor/",
         "teaser": null
       },{
     "title": "About",
