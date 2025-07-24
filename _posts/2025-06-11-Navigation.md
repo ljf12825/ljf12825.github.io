@@ -1,5 +1,5 @@
 ---
-title: "Navigation System"
+title: "Navigation"
 layout: single
 date: 2025-06-01
 categories: [笔记]
@@ -8,6 +8,8 @@ author: "ljf12825"
 permalink: /posts/2025-06-11-Navigation/
 ---
 constructing
+# Navigation in 3D
+Unity的默认NavMesh系统是为3D场景涉及的
 
 Unity中的Navigation主要涉及路径寻找（Pathfinding）和导航网格（NavMesh）两大核心内容，广泛应用于AI和角色移动的场景中，特别是用于控制NPC的行动
 
@@ -90,4 +92,6 @@ Unity的NavMesh不仅可以用于角色导航，还可以与AI逻辑结合，用
 - 巡逻：AI可以在NavMesh上设置多个巡逻点，自动选择路径并执行巡逻
 - 攻击行为：AI角色通过路径计算寻找到敌人并进行攻击
 - 逃跑行为：AI根据当前状况（如角色被攻击时）可以自动计算逃跑路径
+
+# Navigation in 2D
 
