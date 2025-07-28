@@ -1,0 +1,502 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.1 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Design Patterns in Game Development - ljf12825’s Blog</title>
+<meta name="description" content="游戏卡法中，设计模式时组织代码、提升可维护性、扩展性和复用性的基础工具。尤其是大型游戏项目或使用Unity、Unreal等引擎开发时，恰当使用设计模式能显著提高架构质量">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="ljf12825's Blog">
+<meta property="og:title" content="Design Patterns in Game Development">
+<meta property="og:url" content="http://localhost:4000/posts/2025-07-15-Design-Patterns-in-Game-Development/">
+
+
+  <meta property="og:description" content="游戏卡法中，设计模式时组织代码、提升可维护性、扩展性和复用性的基础工具。尤其是大型游戏项目或使用Unity、Unreal等引擎开发时，恰当使用设计模式能显著提高架构质量">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-06-01T00:00:00+08:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/posts/2025-07-15-Design-Patterns-in-Game-Development/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="ljf12825's Blog Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- favicon -->
+<link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          ljf12825's Blog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/"
+                
+                
+              >Home</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/categories/"
+                
+                
+              >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/tags/"
+                
+                
+              >Tags</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/about/"
+                
+                
+              >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Design Patterns in Game Development">
+    <meta itemprop="description" content="游戏卡法中，设计模式时组织代码、提升可维护性、扩展性和复用性的基础工具。尤其是大型游戏项目或使用Unity、Unreal等引擎开发时，恰当使用设计模式能显著提高架构质量">
+    <meta itemprop="datePublished" content="2025-06-01T00:00:00+08:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/posts/2025-07-15-Design-Patterns-in-Game-Development/" itemprop="url">Design Patterns in Game Development
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>游戏卡法中，设计模式时组织代码、提升可维护性、扩展性和复用性的基础工具。尤其是大型游戏项目或使用Unity、Unreal等引擎开发时，恰当使用设计模式能显著提高架构质量</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>分类</th>
+      <th>模式</th>
+      <th>用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>创建型</strong></td>
+      <td>Singleton（单例）</td>
+      <td>管理全局状态（如 GameManager、AudioManager）</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Factory Method（工厂方法）</td>
+      <td>创建敌人、道具、技能等实例</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Prototype（原型）</td>
+      <td>克隆预制体、生成技能副本等</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Object Pool（对象池）</td>
+      <td>管理大量频繁生成/销毁的对象（子弹、特效）</td>
+    </tr>
+    <tr>
+      <td><strong>结构型</strong></td>
+      <td>Component（组件）</td>
+      <td>Unity核心模式（基于组合而非继承）</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Decorator（装饰器）</td>
+      <td>给技能、Buff添加额外效果</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Flyweight（享元）</td>
+      <td>减少内存（如重复使用同一 Mesh、材质）</td>
+    </tr>
+    <tr>
+      <td><strong>行为型</strong></td>
+      <td>State（状态机）</td>
+      <td>角色状态切换（Idle、Run、Jump、Attack）</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Observer（观察者）</td>
+      <td>UI监听角色属性变化、事件派发系统</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Command（命令）</td>
+      <td>实现撤销/重做、输入缓存、动作序列</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Strategy（策略）</td>
+      <td>多种AI行为切换，技能释放策略等</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>EventBus（事件总线）</td>
+      <td>解耦不同系统的事件通信（如成就、音效）</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Mediator（中介者）</td>
+      <td>管理复杂交互系统（UI面板交互）</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>Visitor（访问者）</td>
+      <td>用于遍历不同 GameObject 执行操作（如保存、统计）</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="unity中常用的设计模式">Unity中常用的设计模式</h2>
+<h3 id="singleton-单例模式">Singleton 单例模式</h3>
+<p>用途：管理全局对象，如AudioManager、UIManager、GameManager</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GameManager</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="n">GameManager</span> <span class="n">Instance</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;}</span>
+
+    <span class="k">void</span> <span class="nf">Awake</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">Instance</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="n">Instance</span> <span class="p">=</span> <span class="k">this</span><span class="p">;</span>
+        <span class="k">else</span> <span class="nf">Destroy</span><span class="p">(</span><span class="n">gameObject</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>Unity要注意处理生命周期（场景切换）</p>
+
+<h3 id="objectpool-对象池">ObjectPool 对象池</h3>
+<p>用途：频繁生成/销毁对象如子弹、粒子效果，减少GC
+<a href="/posts/2025-06-06-Object-Pooling/">ObjectPooling</a></p>
+
+<h3 id="state-状态机模式">State 状态机模式</h3>
+<p>用途：角色状态管理</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">interface</span> <span class="nc">IState</span>
+<span class="p">{</span>
+    <span class="k">void</span> <span class="nf">Ender</span><span class="p">();</span>
+    <span class="k">void</span> <span class="nf">Execute</span><span class="p">();</span>
+    <span class="k">void</span> <span class="nf">Exit</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">IdleState</span> <span class="p">:</span> <span class="n">IState</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">RunState</span> <span class="p">:</span> <span class="n">IState</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">StateMechine</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="n">IState</span> <span class="n">currentState</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">ChangeState</span><span class="p">(</span><span class="n">IState</span> <span class="n">newState</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">currentState</span><span class="p">?.</span><span class="nf">Exit</span><span class="p">();</span>
+        <span class="n">currentState</span> <span class="p">=</span> <span class="n">newState</span><span class="p">;</span>
+        <span class="n">currentState</span><span class="p">.</span><span class="nf">Enter</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Update</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">currentState</span><span class="p">?.</span><span class="nf">Execute</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="observer-观察者模式">Observer 观察者模式</h3>
+<p>用途：事件通知系统、属性变化通知UI</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">Health</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">Action</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">OnHealtChanged</span><span class="p">;</span>
+    <span class="k">private</span> <span class="kt">int</span> <span class="n">hp</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">SetHP</span><span class="p">(</span><span class="kt">int</span> <span class="k">value</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">hp</span> <span class="p">=</span> <span class="k">value</span><span class="p">;</span>
+        <span class="n">OnHealthChanged</span><span class="p">?.</span><span class="nf">Invoke</span><span class="p">(</span><span class="n">hp</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="strategy-策略模式">Strategy 策略模式</h3>
+<p>用途：定义不同行为策略（如攻击方式、AI逻辑）</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">interface</span> <span class="nc">IAttackStrategy</span>
+<span class="p">{</span>
+    <span class="k">void</span> <span class="nf">Attack</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">MeleeAttack</span> <span class="p">:</span> <span class="n">IAttackStrategy</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">RangedAttack</span> <span class="p">:</span> <span class="n">IAttackStrategy</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Character</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">IAttackStrategy</span> <span class="n">attackStrategy</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">PerformAttack</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">attackStrategy</span><span class="p">.</span><span class="nf">Attack</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="command-命令模式">Command 命令模式</h3>
+<p>用途：实现撤销、按键映射、行为记录</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">interface</span> <span class="nc">ICommand</span>
+<span class="p">{</span>
+    <span class="k">void</span> <span class="nf">Execute</span><span class="p">();</span>
+    <span class="k">void</span> <span class="nf">Undo</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">MoveCommand</span> <span class="p">:</span> <span class="n">ICommand</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">InputHandler</span>
+<span class="p">{</span>
+    <span class="n">Stack</span><span class="p">&lt;</span><span class="n">ICommand</span><span class="p">&gt;</span> <span class="n">history</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="p">&lt;</span><span class="n">ICommand</span><span class="p">&gt;();</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">HandleInput</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">ICommand</span> <span class="n">cmd</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">MoveCommand</span><span class="p">();</span>
+        <span class="n">cmd</span><span class="p">.</span><span class="nf">Execute</span><span class="p">();</span>
+        <span class="n">history</span><span class="p">.</span><span class="nf">Push</span><span class="p">(</span><span class="n">cmd</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Undo</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">history</span><span class="p">.</span><span class="nf">Pop</span><span class="p">().</span><span class="nf">Undo</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="eventbus-事件总线">EventBus 事件总线</h3>
+<p>用途：各个系统之间通信解耦</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">static</span> <span class="k">class</span> <span class="nc">EventBus</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">event</span> <span class="n">Action</span> <span class="n">OnLevelComplete</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">LevelComplete</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">OnLevelComplete</span><span class="p">?.</span><span class="nf">Invoke</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="unity自带的设计模式">Unity自带的设计模式</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>系统</th>
+      <th>使用的设计模式</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>GameObject + Component</td>
+      <td>Component 模式</td>
+    </tr>
+    <tr>
+      <td>ScriptableObject</td>
+      <td>数据驱动、配置注入</td>
+    </tr>
+    <tr>
+      <td>Coroutine</td>
+      <td>类似状态机/命令模式</td>
+    </tr>
+    <tr>
+      <td>Animator Controller</td>
+      <td>状态机（FSM）</td>
+    </tr>
+    <tr>
+      <td>Input System</td>
+      <td>命令模式、策略模式</td>
+    </tr>
+    <tr>
+      <td>UI System（事件系统）</td>
+      <td>观察者模式、命令模式</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>推荐书籍：《游戏编程模式》 Game Programming Patterns</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-06-01T00:00:00+08:00">June 1, 2025</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/posts/2025-07-15-Data-Driven-Design/" class="pagination--pager" title="Data Driven Design">Previous</a>
+    
+    
+      <a href="/posts/2025-07-15-Game-Architecture/" class="pagination--pager" title="Game Architecture">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/ljf12825" rel="nofollow noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 <a href="http://localhost:4000">ljf12825's Blog</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

@@ -170,6 +170,101 @@
         
         <h2 id="articulation-body">Articulation Body</h2>
 
+<h2 id="mixamo">Mixamo</h2>
+<p>免费的Adobe平台，用于下载各种模型和动画</p>
+
+<h3 id="下载设置">下载设置</h3>
+<p><img src="/assets/images/mixamodownloadsetting.jpg" alt="mixamodownloadsetting" /></p>
+
+<ul>
+  <li>Animator Controller</li>
+  <li>Avatar：动画重定向使用</li>
+  <li>Apply Root Motion：角色的运动基于动画而不是脚本，当基于动画时，运动状态根据动画的播放进行；当基于脚本时，动画只是动画，运动状态由脚本决定</li>
+  <li>Update Mode
+    <ul>
+      <li>Normal：根据当前时间刻度改变角色动画的播放速度</li>
+      <li>Fixed：将动画逻辑转移到<code class="language-plaintext highlighter-rouge">FixUpdate()</code>中</li>
+      <li>Unscaled Time：动画器和动画独立运行于时间刻度</li>
+    </ul>
+  </li>
+  <li>Culling Mode
+    <ul>
+      <li>Always Animate：即使不在摄像机范围内也始终执行动画并进行计算</li>
+      <li>Cull Update Transforms：当不在摄像机范围内时，Unity会继续计算动画中的后续帧</li>
+      <li>Cull Completely：离开后暂停，返回后继续</li>
+    </ul>
+  </li>
+  <li>Format:</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>格式名称</th>
+      <th>扩展名</th>
+      <th>说明</th>
+      <th>是否推荐用于 Unity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>FBX Binary</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">.fbx</code></td>
+      <td>二进制格式，体积小，加载快，是主流标准格式</td>
+      <td>强烈推荐</td>
+    </tr>
+    <tr>
+      <td><strong>FBX ASCII</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">.fbx</code></td>
+      <td>文本格式，方便查看内容，但体积大、加载慢</td>
+      <td>不推荐</td>
+    </tr>
+    <tr>
+      <td><strong>FBX for Unity</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">.fbx</code></td>
+      <td>专门为 Unity 设置的导出选项，自动匹配 Unity 支持的版本及设置</td>
+      <td>推荐（最方便）</td>
+    </tr>
+    <tr>
+      <td><strong>FBX 7.4 (2014+)</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">.fbx</code></td>
+      <td>高版本 FBX（兼容性较好，支持动画、骨骼、材质等）</td>
+      <td>常用版本</td>
+    </tr>
+    <tr>
+      <td><strong>FBX 6.1 (2009)</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">.fbx</code></td>
+      <td>老版本 FBX，兼容旧引擎，但不推荐新项目使用</td>
+      <td>不推荐</td>
+    </tr>
+    <tr>
+      <td><strong>Collada (.DAE)</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">.dae</code></td>
+      <td>XML 格式，开源，结构清晰，兼容性较差，在 Unity 中常有问题</td>
+      <td>不推荐</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>
+    <p>FPS：不同帧率，帧率越高，文件体积越大</p>
+  </li>
+  <li>Keyframe Reduction：删除动画中与周围帧值差异不够大的帧，减少细节，Unity将用插值进行填补
+    <ul>
+      <li>none</li>
+      <li>uniform</li>
+      <li>non-uniform</li>
+    </ul>
+  </li>
+  <li>Skin：蒙皮
+    <ul>
+      <li>withSkin：包含蒙皮</li>
+      <li>withoutSkin：仅包含动画</li>
+    </ul>
+  </li>
+</ul>
+
         
       </section>
 

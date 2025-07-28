@@ -11,7 +11,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>ScriptedImporter - ljf12825’s Blog</title>
-<meta name="description" content="">
+<meta name="description" content="在Unity中，ScriptedImporter是一个非常强大的特性，它允许开发者自定义资源的导入流程。与默认的资源导入器（如图片、模型、音频等）不同，ScriptedImporter使开发者可以创建自己的资源类型，并通过代码控制它们在Unity中的导入方式">
 
 
 
@@ -22,7 +22,7 @@
 <meta property="og:url" content="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/ScriptedImporter.html">
 
 
-  <meta property="og:description" content="">
+  <meta property="og:description" content="在Unity中，ScriptedImporter是一个非常强大的特性，它允许开发者自定义资源的导入流程。与默认的资源导入器（如图片、模型、音频等）不同，ScriptedImporter使开发者可以创建自己的资源类型，并通过代码控制它们在Unity中的导入方式">
 
 
 
@@ -149,7 +149,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="ScriptedImporter">
-    <meta itemprop="description" content="">
+    <meta itemprop="description" content="在Unity中，ScriptedImporter是一个非常强大的特性，它允许开发者自定义资源的导入流程。与默认的资源导入器（如图片、模型、音频等）不同，ScriptedImporter使开发者可以创建自己的资源类型，并通过代码控制它们在Unity中的导入方式">
     <meta itemprop="datePublished" content="2025-06-01T00:00:00+08:00">
     
 
@@ -168,7 +168,129 @@
 
       <section class="page__content" itemprop="text">
         
-        
+        <p>在Unity中，<code class="language-plaintext highlighter-rouge">ScriptedImporter</code>是一个非常强大的特性，它允许开发者自定义资源的导入流程。与默认的资源导入器（如图片、模型、音频等）不同，<code class="language-plaintext highlighter-rouge">ScriptedImporter</code>使开发者可以创建自己的资源类型，并通过代码控制它们在Unity中的导入方式</p>
+
+<p>这个功能对于：</p>
+<ul>
+  <li>自定义数据格式（例如：JSON、YAML、XML、CSV、自定义二进制格式）</li>
+  <li>外部工具导出的数据（如Tiled、Spine、自定义关卡编辑器）</li>
+  <li>自定义配置文件（技能表、怪物表、剧情脚本等）</li>
+</ul>
+
+<p>非常有用</p>
+
+<h2 id="scriptedimporter概述">ScriptedImporter概述</h2>
+<p><code class="language-plaintext highlighter-rouge">ScriptedImporter</code>是Unity提供的一个可扩展导入器基类，可以通过继承它来实现一个支持自定义文件格式的资源导入器，所有继承自<code class="language-plaintext highlighter-rouge">ScriptedImporter</code>的类都能在Unity导入资源时自动调用对应的逻辑</p>
+
+<h2 id="使用方法">使用方法</h2>
+<ol>
+  <li>创建一个自定义类继承<code class="language-plaintext highlighter-rouge">ScriptedImporter</code></li>
+  <li>使用<code class="language-plaintext highlighter-rouge">[ScriptedImporter(version, extension)]</code>注册扩展名</li>
+  <li>重写<code class="language-plaintext highlighter-rouge">OnImportAsset</code>方法。处理文件内容</li>
+  <li>使用<code class="language-plaintext highlighter-rouge">AssetImporterContext</code>注册生成的对象（如ScriptableObject）</li>
+  <li>将<code class="language-plaintext highlighter-rouge">.youformat</code>文件放入Assets文件夹，Unity自动导入</li>
+</ol>
+
+<h2 id="实例导入myjson格式为scriptableobject">实例：导入<code class="language-plaintext highlighter-rouge">.myjson</code>格式为ScriptableObject</h2>
+<p>假设有一个JSON文件，路径<code class="language-plaintext highlighter-rouge">Assets/Data/monster.myjson</code></p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Goblin"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"hp"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"atk"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>创建数据容器类</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+
+<span class="p">[</span><span class="nf">CreateAssetMenu</span><span class="p">(</span><span class="n">fileName</span> <span class="p">=</span> <span class="s">"MonsterData"</span><span class="p">,</span> <span class="n">menuName</span> <span class="p">=</span> <span class="s">"MyGame/Monster"</span><span class="p">)]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">MonsterData</span> <span class="p">:</span> <span class="n">ScriptableObject</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">monsterName</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">hp</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">atk</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>创建Importer类</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">UnityEditor</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">UnityEditor.AssetImporters</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.IO</span><span class="p">;</span>
+
+<span class="p">[</span><span class="nf">ScriptedImporter</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="s">"myjson"</span><span class="p">)]</span> <span class="c1">// 绑定导入器与文件扩展名</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">MonsterImporter</span> <span class="p">:</span> <span class="n">ScriptableImporter</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnImporterAsset</span><span class="p">(</span><span class="n">AssetImportContext</span> <span class="n">ctx</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">File</span><span class="p">.</span><span class="nf">ReadAllText</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">assetPath</span><span class="p">);</span>
+        <span class="n">MonsterRawData</span> <span class="n">raw</span> <span class="p">=</span> <span class="n">JsonUtility</span><span class="p">.</span><span class="n">FromJson</span><span class="p">&lt;</span><span class="n">MonsterRawData</span><span class="p">&gt;(</span><span class="n">json</span><span class="p">);</span>
+
+        <span class="n">MonsterData</span> <span class="n">asset</span> <span class="p">=</span> <span class="n">ScriptableObject</span><span class="p">.</span><span class="n">CreateInstance</span><span class="p">&lt;</span><span class="n">MonsterData</span><span class="p">&gt;();</span>
+        <span class="n">asset</span><span class="p">.</span><span class="n">monsterName</span> <span class="p">=</span> <span class="n">raw</span><span class="p">.</span><span class="n">name</span><span class="p">;</span>
+        <span class="n">asset</span><span class="p">.</span><span class="n">hp</span> <span class="p">=</span> <span class="n">raw</span><span class="p">.</span><span class="n">hp</span><span class="p">;</span>
+        <span class="n">asset</span><span class="p">.</span><span class="n">atk</span> <span class="p">=</span> <span class="n">raw</span><span class="p">.</span><span class="n">atk</span><span class="p">;</span>
+
+        <span class="n">ctx</span><span class="p">.</span><span class="nf">AddObjectToAsset</span><span class="p">(</span><span class="s">"main"</span><span class="p">,</span> <span class="n">asset</span><span class="p">);</span> <span class="c1">// 向资源系统注册导入出的子对象</span>
+        <span class="n">ctx</span><span class="p">.</span><span class="nf">SetMainObject</span><span class="p">(</span><span class="n">asset</span><span class="p">);</span>  <span class="c1">// 设置主资源对象（Inspector中默认显示的对象）</span>
+    <span class="p">}</span>
+
+    <span class="p">[</span><span class="n">System</span><span class="p">.</span><span class="n">Serializable</span><span class="p">]</span>
+    <span class="k">class</span> <span class="nc">MonsterRawData</span>
+    <span class="p">{</span>
+        <span class="k">public</span> <span class="n">stirng</span> <span class="n">name</span><span class="p">;</span>
+        <span class="k">public</span> <span class="kt">int</span> <span class="n">hp</span><span class="p">;</span>
+        <span class="k">public</span> <span class="kt">int</span> <span class="n">atk</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>使用<br />
+将<code class="language-plaintext highlighter-rouge">monster.myjson</code>拖到<code class="language-plaintext highlighter-rouge">Assets/Data/</code>文件夹时，Unity会：</p>
+<ul>
+  <li>自动调用<code class="language-plaintext highlighter-rouge">MonsterImporter</code></li>
+  <li>解析JSON</li>
+  <li>创建一个<code class="language-plaintext highlighter-rouge">MonsterData</code>的ScriptableObject</li>
+  <li>自动将其加入资源系统，并显示在面板中</li>
+</ul>
+
+<h2 id="scriptedimporter的高级应用">ScriptedImporter的高级应用</h2>
+<ol>
+  <li>
+    <p>多文件合成一个资源
+将<code class="language-plaintext highlighter-rouge">.animdef</code>和多个<code class="language-plaintext highlighter-rouge">.frame.png</code>合成为一个动画资源</p>
+  </li>
+  <li>
+    <p>可视化工具生成文件 + 自定义Importer自动解析
+例如配合Excel -&gt; JSON -&gt; ScriptableObject -&gt; 自动进入Unity的流程</p>
+  </li>
+  <li>
+    <p>热更新资源标记</p>
+  </li>
+  <li>
+    <p>支持<code class="language-plaintext highlighter-rouge">.byte</code>, <code class="language-plaintext highlighter-rouge">.txt</code>, <code class="language-plaintext highlighter-rouge">.xml</code>, <code class="language-plaintext highlighter-rouge">.cvs</code>, <code class="language-plaintext highlighter-rouge">.bin</code>等任意格式</p>
+  </li>
+</ol>
+
+<h2 id="调试">调试</h2>
+<ul>
+  <li>导入失败时：
+    <ul>
+      <li>控制台中会显示<code class="language-plaintext highlighter-rouge">OnImportAsset</code>报错信息</li>
+      <li>确保<code class="language-plaintext highlighter-rouge">.yourformat</code>文件的格式正确</li>
+    </ul>
+  </li>
+  <li>强制重新导入资源：
+    <ul>
+      <li>右键 -&gt; Reimport</li>
+    </ul>
+  </li>
+  <li>更新文件后自动刷新
+    <ul>
+      <li>Unity会检测文件变动，自动重新导入</li>
+    </ul>
+  </li>
+</ul>
 
         
       </section>

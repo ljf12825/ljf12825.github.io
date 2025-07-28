@@ -171,6 +171,61 @@
         <p>图形开发中的常用数学</p>
 
 <h2 id="向量">向量</h2>
+<h3 id="定义">定义</h3>
+<p>向量有方向和大小，比如<code class="language-plaintext highlighter-rouge">(1, 2)</code>、<code class="language-plaintext highlighter-rouge">(3, 5, -1)</code>是二维和三维向量</p>
+
+<h3 id="基本操作">基本操作</h3>
+<h4 id="加减法">加减法</h4>
+<p>向量的加减法在图形学中非常常见，它们的“意义”主要体现在空间位置变换、方向差异、运动计算等方面</p>
+
+<p><strong>几何意义</strong><br />
+向量加法：位移的累加，从A点触发，走A向量，然后接着走B向量，到达的位置</p>
+
+<p>图形学应用：</p>
+<ul>
+  <li>连续移动（多帧叠加移动）</li>
+  <li>合成多个力、速度方向</li>
+  <li>路径规划（导航中）</li>
+</ul>
+
+<p>例如：</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector3</span> <span class="n">newPosition</span> <span class="p">=</span> <span class="n">transform</span><span class="p">.</span><span class="n">position</span> <span class="p">+</span> <span class="n">movementDirection</span> <span class="p">*</span> <span class="n">speed</span> <span class="p">*</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span><span class="p">;</span>
+</code></pre></div></div>
+<p>表示当前位置 + 方向 * 速度 -&gt; 下一帧位置</p>
+
+<p>向量减法：表示从一个点到另一个点的方向</p>
+
+<p>向量<code class="language-plaintext highlighter-rouge">A - B</code>就是从点B指向点A的向量</p>
+
+<p>图形学应用：</p>
+<ul>
+  <li>求物体之间的方向向量（例如：敌人朝玩家方向攻击）</li>
+  <li>摄像机朝向目标：<code class="language-plaintext highlighter-rouge">target.position - camera.position</code></li>
+  <li>计算法线、插值、射线方向等</li>
+</ul>
+
+<p>例如：</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vector3</span> <span class="n">dir</span> <span class="p">=</span> <span class="n">target</span><span class="p">.</span><span class="n">position</span> <span class="p">-</span> <span class="n">transform</span><span class="p">.</span><span class="n">position</span><span class="p">;</span>
+<span class="n">transform</span><span class="p">.</span><span class="n">forward</span> <span class="p">=</span> <span class="n">dir</span><span class="p">.</span><span class="n">normalized</span><span class="p">;</span> <span class="c1">// 朝向目标</span>
+</code></pre></div></div>
+
+<ul>
+  <li>数乘：向量整体缩放</li>
+  <li>点乘（Dot Product）
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">a · b = |a||b|cosθ</code>，可以用来计算夹角</li>
+      <li>应用：光照（Lambert光照模型）</li>
+      <li>意义：</li>
+    </ul>
+  </li>
+  <li>叉乘（Cross Product）
+    <ul>
+      <li>只适用于3D：<code class="language-plaintext highlighter-rouge">a x b</code>得到一个垂直于a和b的新向量</li>
+      <li>应用：求发现方向、旋转轴等</li>
+    </ul>
+  </li>
+  <li>归一化（Normalization）：将向量变为单位长度</li>
+</ul>
 
 <h2 id="三角函数">三角函数</h2>
 

@@ -186,7 +186,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Model",
-        "excerpt":"Articulation Body  ","categories": ["笔记"],
+        "excerpt":"Articulation Body Mixamo 免费的Adobe平台，用于下载各种模型和动画 下载设置 Animator Controller Avatar：动画重定向使用 Apply Root Motion：角色的运动基于动画而不是脚本，当基于动画时，运动状态根据动画的播放进行；当基于脚本时，动画只是动画，运动状态由脚本决定 Update Mode Normal：根据当前时间刻度改变角色动画的播放速度 Fixed：将动画逻辑转移到FixUpdate()中 Unscaled Time：动画器和动画独立运行于时间刻度 Culling Mode Always Animate：即使不在摄像机范围内也始终执行动画并进行计算 Cull Update Transforms：当不在摄像机范围内时，Unity会继续计算动画中的后续帧 Cull Completely：离开后暂停，返回后继续 Format: 格式名称 扩展名 说明 是否推荐用于 Unity FBX Binary .fbx 二进制格式，体积小，加载快，是主流标准格式 强烈推荐 FBX ASCII .fbx 文本格式，方便查看内容，但体积大、加载慢 不推荐 FBX for Unity .fbx 专门为 Unity 设置的导出选项，自动匹配 Unity...","categories": ["笔记"],
         "tags": ["Unity","Unity Component","Physics System"],
         "url": "/posts/2025-06-07-Model/",
         "teaser": null
@@ -245,8 +245,8 @@ var store = [{
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Mesh.html",
         "teaser": null
       },{
-        "title": "Navigation System",
-        "excerpt":" ","categories": ["笔记"],
+        "title": "Navigation",
+        "excerpt":"constructing Navigation in 3D Unity的默认NavMesh系统是为3D场景涉及的 Unity中的Navigation主要涉及路径寻找（Pathfinding）和导航网格（NavMesh）两大核心内容，广泛应用于AI和角色移动的场景中，特别是用于控制NPC的行动 NavMesh（导航网格） NavMesh是一个为AI角色提供导航支持的系统。在一个3D场景中，NavMesh是通过对地面等可行走区域的“网格化”，让AI角色能在场景中找到通行路径 NavMesh的基本概念 可行走区域：NavMesh会自动计算哪些地方是可供角色行走的，哪些地方是不可行走的。不可行走区域可以通过物理层（Layer）或直接标记为不可行走区域来实现 障碍物避让：NavMehs会避开障碍物，因此角色在移动时不会穿越墙壁、岩石等不可行走区域 NavMesh代理（NavMesh Agent）：用于控制角色在NavMesh上的运动，它会根据目标点、路径规划和障碍物自动调整角色的路径 NavMesh生成 在Unity中，我们通过以下几个步骤来创建NavMesh： 导航面（NavMesh Surface）：这是Unity中生成NavMesh的工具。通过在地面上添加一个NavMeshSurface组件来定义NavMesh的生成区域。 烘焙NavMesh：一旦设置好NavMeshSurface，就可以通过点击“Bake”按钮来生成NavMesh，这时可行走的区域会被标记出来，Unity会在该区域内生成一个路径网格。 设置不可行走区域：可以通过NavMesh Obstacle组件来定义障碍物，标记出不可走的区域，生成的NavMesh会自动避开这些区域。 NavMesh Surface NavMesh Agent（导航代理） NavMeshAgent 是挂载在角色上的组件，负责根据计算出的路径自动引导角色移动。它依赖于NavMesh来判断路径和避开障碍物。NavMeshAgent 会计算从当前位置到目标点的路径，并使角色沿路径移动 属性 Speed：设置角色的移动速度 Angular Speed：设置角色旋转的速度 Acceleration：角色的加速速度 Stopping Distance：目标点与角色之间的最小距离，当距离小于该值时，角色会停止移动 Auto-Breaking：是否在停止时自动刹车 Avoidance Priority：设置代理的优先级，用于多个角色避免碰撞 移动方法 可以通过代码控制角色的移动 NavMeshAgent agent = GetComponent&lt;NavMeshAgent&gt;(); agent.SetDestination(targetPosition); 这个方法会让角色自动计算到targetPosition的最短路径，并开始沿着路径移动 NavMesh Path（导航路径） NavMeshPath是一个可以通过代码访问的类，它保存了计算出的路径的所有信息，包括路径的各个节点（Waypoints），可以使用它来获取更详细的路径信息 NavMeshPath path...","categories": ["笔记"],
         "tags": ["Unity","Unity System","AI"],
         "url": "/posts/2025-06-11-Navigation/",
         "teaser": null
@@ -257,10 +257,10 @@ var store = [{
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Terrain.html",
         "teaser": null
       },{
-        "title": "TileMap",
-        "excerpt":" ","categories": ["笔记"],
-        "tags": ["Unity","Unity System","Unity Component"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/TileMap.html",
+        "title": "Tilemap",
+        "excerpt":"在Unity中，Tilemap是一个强大的工具，专为2D游戏开发中的网格地图（Tile-based maps）设计 它允许开发者通过将单独的图块（Tiles）布置在网格中，构建复杂的2D游戏世界，如平台游戏、回合制策略游戏等 Tilemap可以用于处理游戏世界的地形、背景、障碍物、关卡设计等 Tilemap的组成和工作原理 Tilemap的工作原理是基于网格（Grid）的，将单个的图块（Tile）放置在网格的各个单元格中，从而构建出复杂的2D地图。Unity提供了一个强大的Tilemap系统，使得开发者能够快速而高效地创建这些地图 组成部分 Grid：Grid是Tilemap的基础结构，它为所有Tile提供一个坐标系统，可以设置不同类型的Grid，如矩形网格、六边形网格等，以适应不同的地图需求 Tilemap：Tilemap组件是核心，负责管理Tiles在Grid上的位置和现实。每个Tilemap会有自己的Tile图层，用于绘制和管理不同的地形或装饰层 Tile：Tile是Tilemap的基本单位，通常是一个Sprite。每个Tile都代表地图上的一个单元格，可以是地面、障碍物、装饰物等。Unity允许开发者为Tile设置各种属性，如动画、规则等 Tilemap的创建与设置 Step1: 创建一个Tilemap 创建Grid 在Unity的场景中，通过GameObject -&gt; 2D Object -&gt; Tilemap -&gt; Rectangular来创建一个带有Grid的Tilemap，Grid会自动创建，Tilemap会作为Grid的子对象 也可以选择Hexagonal或Isometric等不同类型的网格，具体取决于游戏需求 创建Tilemap 在Unity中，Tilemap是由一个Tilemap组件和一个Tilemap Renderer组件组成的 Tilemap组件负责存储地图的Tile，而Tilemap Renderer负责绘制这些Tile Step2：创建Tile Palette Tile Palette是一个管理所有Tiles的工具，它允许将Tile组织在一个面板中，方便在Tilemap中绘制和修改 打开Tile Palette 在Unity菜单栏中，选择Window -&gt; 2D -&gt; Tile Palette，打开Tile Palette窗口 创建Tile Palette 在Tile Palette窗口中，点击“Create New Palette”创建一个新的Tile Palette。可以将其命名并选择合适的Tilemap图层（比如地面、背景等） 添加Tiles到Palette 将Sprites（或其他图像资源）拖到Tile...","categories": ["笔记"],
+        "tags": ["Unity","Unity System","Unity Package"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Tilemap.html",
         "teaser": null
       },{
         "title": "Unity NetWork",
@@ -324,7 +324,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Engineering Mathematics",
-        "excerpt":"图形开发中的常用数学   向量   三角函数   线性代数  向量空间  矩阵乘法  变换矩阵  正交  特征向量  线性变换本质   齐次坐标  4×4矩阵  w分量  透视投影   空间几何  点线面关系  空间夹角  包围盒  相交检测   物理数学  速度  加速度  抛物线公式   曲线曲面  Bézier  Catmull-Rom  样条曲线   概率统计  概率分布  采样  蒙特卡洛   微积分  导数  函数斜率  积分思想   ","categories": ["笔记"],
+        "excerpt":"图形开发中的常用数学 向量 定义 向量有方向和大小，比如(1, 2)、(3, 5, -1)是二维和三维向量 基本操作 加减法 向量的加减法在图形学中非常常见，它们的“意义”主要体现在空间位置变换、方向差异、运动计算等方面 几何意义 向量加法：位移的累加，从A点触发，走A向量，然后接着走B向量，到达的位置 图形学应用： 连续移动（多帧叠加移动） 合成多个力、速度方向 路径规划（导航中） 例如： Vector3 newPosition = transform.position + movementDirection * speed * Time.deltaTime; 表示当前位置 + 方向 * 速度 -&gt; 下一帧位置 向量减法：表示从一个点到另一个点的方向 向量A - B就是从点B指向点A的向量 图形学应用： 求物体之间的方向向量（例如：敌人朝玩家方向攻击） 摄像机朝向目标：target.position - camera.position 计算法线、插值、射线方向等 例如： Vector3 dir = target.position -...","categories": ["笔记"],
         "tags": ["Graphics","Mathematics"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Engineering-Mathematics.html",
         "teaser": null
@@ -360,13 +360,13 @@ var store = [{
         "teaser": null
       },{
         "title": "ScriptableObject",
-        "excerpt":" ","categories": ["笔记"],
+        "excerpt":"ScriptableObject 是 Unity 中的一种特殊类型的对象，它是用于存储数据的，类似于普通的 C# 类，但它不需要与游戏对象（GameObject）关联 ScriptableObject 主要用于节省内存、提高性能和简化数据的管理。它通常用来存储可重用的数据，如配置、设置、状态信息等 基本概念 ScriptableObject 是 Unity 提供的一种特殊对象类型，允许你将数据持久化到磁盘上，并能够在编辑器中方便地进行编辑和管理。这与普通的 MonoBehaviour 类（需要附加到 GameObject 上）不同，ScriptableObject 并不依赖于场景中的任何对象 主要特点 独立于GameObject：ScriptableObject并不需要绑定到一个GameObject上，因此它可以轻松地存储全局数据 可在编辑器中编辑：可以在Unity编辑器中查看、编辑和保存ScriptableObject实例 性能优化：ScriptableObject实例是共享的，因此多个对象可以引用同一个ScriptableObject实例，这有助于减少内存消耗 数据持久化：ScriptableObject支持数据持久化，可以将其作为资源保存在磁盘上，便于管理和编辑 创建和使用 创建ScriptableObject类 要创建 ScriptableObject，首先需要继承 ScriptableObject 基类，并为它定义一个静态方法来实例化对象 ```cs using UnityEngine; [CreateAssetMenu(fileName = “NewCharacterData”, menuName = “ScriptableObjects/CharacterData”)] public class CharacterData : ScriptableObject { public string characterName; public int health;...","categories": ["笔记"],
         "tags": ["Unity","Syntax"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/ScriptableObject.html",
         "teaser": null
       },{
         "title": "ScriptedImporter",
-        "excerpt":" ","categories": ["笔记"],
+        "excerpt":"在Unity中，ScriptedImporter是一个非常强大的特性，它允许开发者自定义资源的导入流程。与默认的资源导入器（如图片、模型、音频等）不同，ScriptedImporter使开发者可以创建自己的资源类型，并通过代码控制它们在Unity中的导入方式 这个功能对于： 自定义数据格式（例如：JSON、YAML、XML、CSV、自定义二进制格式） 外部工具导出的数据（如Tiled、Spine、自定义关卡编辑器） 自定义配置文件（技能表、怪物表、剧情脚本等） 非常有用 ScriptedImporter概述 ScriptedImporter是Unity提供的一个可扩展导入器基类，可以通过继承它来实现一个支持自定义文件格式的资源导入器，所有继承自ScriptedImporter的类都能在Unity导入资源时自动调用对应的逻辑 使用方法 创建一个自定义类继承ScriptedImporter 使用[ScriptedImporter(version, extension)]注册扩展名 重写OnImportAsset方法。处理文件内容 使用AssetImporterContext注册生成的对象（如ScriptableObject） 将.youformat文件放入Assets文件夹，Unity自动导入 实例：导入.myjson格式为ScriptableObject 假设有一个JSON文件，路径Assets/Data/monster.myjson { \"name\": \"Goblin\", \"hp\": 100, \"atk\": 25 } 创建数据容器类 using UnityEngine; [CreateAssetMenu(fileName = \"MonsterData\", menuName = \"MyGame/Monster\")] public class MonsterData : ScriptableObject { public string monsterName; public int hp; public int atk; }...","categories": ["笔记"],
         "tags": ["Unity","Syntax"],
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/ScriptedImporter.html",
         "teaser": null
@@ -390,21 +390,21 @@ var store = [{
         "teaser": null
       },{
         "title": "Data Driven Design",
-        "excerpt":" ","categories": ["笔记"],
+        "excerpt":"Data-Driven Design（数据驱动设计）在Unity和游戏开发中是一种将逻辑与数据分离的编程范式，它强调用数据来控制行为和流程，而不是把所有逻辑写死在代码中 尤其在Unity这样一个组件化的引擎中，数据驱动设计可以提高灵活性、可扩展性、可复用性、可配置性，广泛用于角色配置、关卡编辑、AI行为、技能系统、特效系统、任务系统等 核心思想 传统方式 void Attack() { if (type == \"Fire\") DoFireAttack(); else if (type == \"Ice\") DoIceAttack(); } 上面是硬编码方式，未来加新类型必须改代码 数据驱动方式 { \"attackType\": \"Fire\", \"damage\": 10, \"cooldown\": 2.5 } 在代码中只需要 AttackConfig config = LoadAttackConfig(\"Fire\"); Execute(config); 在Unity中的实践方式 层级 方法 描述 数据定义 ScriptableObject / JSON / XML / Excel / CSV...","categories": ["笔记"],
         "tags": ["Unity","Architecture"],
         "url": "/posts/2025-07-15-Data-Driven-Design/",
         "teaser": null
       },{
-        "title": "Game Architecture",
-        "excerpt":" ","categories": ["笔记"],
+        "title": "Design Patterns in Game Development",
+        "excerpt":"游戏卡法中，设计模式时组织代码、提升可维护性、扩展性和复用性的基础工具。尤其是大型游戏项目或使用Unity、Unreal等引擎开发时，恰当使用设计模式能显著提高架构质量 分类 模式 用途 创建型 Singleton（单例） 管理全局状态（如 GameManager、AudioManager）   Factory Method（工厂方法） 创建敌人、道具、技能等实例   Prototype（原型） 克隆预制体、生成技能副本等   Object Pool（对象池） 管理大量频繁生成/销毁的对象（子弹、特效） 结构型 Component（组件） Unity核心模式（基于组合而非继承）   Decorator（装饰器） 给技能、Buff添加额外效果   Flyweight（享元） 减少内存（如重复使用同一 Mesh、材质） 行为型 State（状态机） 角色状态切换（Idle、Run、Jump、Attack）   Observer（观察者） UI监听角色属性变化、事件派发系统   Command（命令） 实现撤销/重做、输入缓存、动作序列   Strategy（策略） 多种AI行为切换，技能释放策略等   EventBus（事件总线） 解耦不同系统的事件通信（如成就、音效）   Mediator（中介者） 管理复杂交互系统（UI面板交互）   Visitor（访问者） 用于遍历不同...","categories": ["笔记"],
         "tags": ["Unity","Architecture"],
-        "url": "/posts/2025-07-15-Game-Architecture/",
+        "url": "/posts/2025-07-15-Design-Patterns-in-Game-Development/",
         "teaser": null
       },{
-        "title": "Game Design Patterns",
-        "excerpt":" ","categories": ["笔记"],
+        "title": "Game Architecture",
+        "excerpt":"架构是一种系统级别的设计思想，决定了整个软件的结构、模块划分、通信机制、扩展性、可维护性等核心特性 架构不仅仅是技术的堆砌，更是游戏项目能否长期维护、扩展和协作的核心保障；掌握架构是从”写功能“进阶到”构建系统“的关键 为什么要关注架构： 明确模块职责：分清业务、逻辑、表现层，避免混乱代码 方便团队协作：多人开发时架构是协作的基石 提升可维护性与扩展性：功能复用、快速迭代、支持热更新 应对大型项目复杂度：系统复杂度一旦上升，架构是唯一出路 架构关注的是： 模块如何组织 模块之间怎么通信 如何扩展、复用、部署 常见游戏架构模式 MVC / MVVM / MVP 用于界面层逻辑分离 Clinet-Server 客户端与服务器通过网络通信 常用于联网对战、账号系统、排行榜等 通常配合协议层使用 EventBus 模块间解耦，低耦合通信方式 避免了直接依赖 如Unity的CSharpMessenger或自定义事件中心 ECS 数据驱动的架构模式 解耦GameObject行为逻辑 提高运行时性能，适合海量单位（如RTS游戏） 进阶架构方案 架构模式类 Layered Architecture UI层、逻辑层、数据层、网络层分离 每一层只与其相邻层通信，便于解耦 控制依赖方向，避免依赖反转 Hexagonal Architecture 核心业务逻辑与输入输出彻底解耦 适合构建高度可测试、可复用的系统（比如跨平台逻辑） Clean Architecture 将项目分为：Entities（核心）、UseCases（应用）、InterfaceAdapters（接口适配）、Framework &amp; Drivers 保持核心业务逻辑独立，UI、数据库、网络都是插件式的外围 在Unity中可以用Scriptable + 接口注入等方式实现...","categories": ["笔记"],
         "tags": ["Unity","Architecture"],
-        "url": "/posts/2025-07-15-Game-Design-Patterns/",
+        "url": "/posts/2025-07-15-Game-Architecture/",
         "teaser": null
       },{
         "title": "Interface Oriented Design",
