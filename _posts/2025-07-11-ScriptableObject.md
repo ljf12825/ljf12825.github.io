@@ -5,6 +5,7 @@ date: 2025-06-01
 categories: [笔记]
 tags: [Unity, Syntax]
 author: "ljf12825"
+permalink: /posts/2025-07-11-ScriptableObject/
 ---
 `ScriptableObject` 是 Unity 中的一种特殊类型的对象，它是用于存储数据的，类似于普通的 C# 类，但它不需要与游戏对象（`GameObject`）关联
 
