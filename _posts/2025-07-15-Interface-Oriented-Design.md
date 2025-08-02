@@ -67,6 +67,29 @@ public class PlayerController : MonoBehaviour
 ```
 这样就可以轻松替换不同输入源，而无需修改`PlayerController`的任何逻辑
 
+## 示例：子弹造成伤害
+```cs
+public interface IDamageable
+{
+    void TakeDamage(int amount);
+}
+
+public class Enemy : MonoBehaviour, IDamageable
+{
+    public void TakeDamage(int amount) => Debug.Log($"Enemy took {amount} damage.");
+}
+
+public class Bullet : MonoBehaviour
+{
+    void OnCollisionEnter(Collision collision)
+    {
+        var damageable = collision.gameObject.GetComponent<IDamageable>();
+        damageable?.TakeDamage(10);
+    }
+}
+```
+Bullet不关心对象是不是Enemy，只在乎能不能被“伤害”
+
 ## Unity中面向接口设计的典型架构模式
 
 | 模式                          | 与接口结合点                                                  |
