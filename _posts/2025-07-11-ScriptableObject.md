@@ -94,6 +94,10 @@ public abstract class State : ScriptableObject
 
 3. 对象池
 在对象池模式中，`ScriptableObject`可以用来存储池中对象的配置和初始化数据
+// TODO
+
+4. 作为配置和消息中介
+// TODO
 
 ## 注意事项
 - 生命周期管理：`ScriptableObject`不是MonoBehaviour，它并不绑定到游戏对象上，因此它的生命周期需要手动管理
