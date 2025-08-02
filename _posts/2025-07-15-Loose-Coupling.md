@@ -7,11 +7,17 @@ tags: [Unity, Architecture]
 author: "ljf12825"
 permalink: /posts/2025-07-15-Loose-Coupling/
 ---
-松耦合（Loose Coupling）是构建可维护、可扩展的关键原则之一，尤其在多人协作、项目复杂度搞、后期需要频繁迭代更新的场景中尤为重要
+松耦合（Loose Coupling）是构建可维护、可扩展的关键原则之一，尤其在多人协作、项目复杂度高、后期需要频繁迭代更新的场景中尤为重要
 
 定义\
 - 松耦合意味着模块/组件之间尽可能少的依赖关系，彼此互不知晓或只了解对方的接口或行为
 - 相对的，紧耦合指的是模块之间依赖彼此的具体实现或生命周期，改一个就可能影响其他多个
+
+常见术语\
+- 松耦合（Loose Coupling）：模块间依赖最小化，只通过接口/事件通信
+- 紧耦合（Tight Coupling）：模块间强依赖，变动风险高
+- 事件聚合器（Event Aggregator）：集中管理事件订阅/分发的工具
+- Service Locator：通过统一容器提供服务（注意与DI的区别）
 
 优势\
 
@@ -36,7 +42,7 @@ permalink: /posts/2025-07-15-Loose-Coupling/
 
 3. ScriptableObject作为配置 & 消息中介
 ```cs
-public class GameEvent : ScriptableObejct
+public class GameEvent : ScriptableObject
 {
     private event Action listeners;
 
@@ -54,7 +60,7 @@ public class GameEvent : ScriptableObejct
 ```cs
 public static class EventBus
 {
-    private static Dirctionary<Type, Delegate> events = new();
+    private static Dictionary<Type, Delegate> events = new();
 
     public static void Subscribe<T>(Action<T> callback)
     {
@@ -90,13 +96,22 @@ public static class ServiceLocator
 - 多个模块可能被复用或频繁改动
 - 多人协作，责任边界需要清晰
 - 希望支持热更或运行时配置替换
-- 可能扩展位插件式架构或可配置组件系统
+- 可能扩展为插件式架构或可配置组件系统
 
 注意事项
 - 滥用单例：会造成全局状态污染和耦合加剧
 - 事件泛滥：太多事件让系统变得难以追踪
 - ServiceLocator滥用：会模糊依赖关系，隐藏依赖路径
-- 模块间隐藏依赖：看似解耦，实则绕路依赖
+- 模块间隐藏依赖：看似解耦，实则绕路依赖（隐藏依赖路径导致维护困难）
+
+避免事件泛滥的建议\
+- 事件命名清晰、语义正确
+- 尽量使用局部事件系统（局部EventBus或Observer）
+- 增加注释，标注事件的发送者与接收者模块
+
+避免 ServiceLocator 滥用\
+- 配合接口使用，避免隐藏依赖
+- 在注册服务时记录调用栈或来源模块，便于调试
 
 组合模式
 - 事件系统 + 接口编程：解耦逻辑流程与具体执行逻辑
@@ -151,7 +166,7 @@ public class Coin : MonoBehaviour
 
 Player接收金币逻辑
 ```cs
-public interface IGolderReceiver => void AddGold(int amount);
+public interface IGoldReceiver => void AddGold(int amount);
 ```
 ```cs
 public class Player : MonoBehaviour, IGoldReceiver
@@ -227,7 +242,7 @@ public static void Unsubscribe<T>(Action<T> listener)
 {
     if (eventTable.TryGetValue(typeof(T), out var existingDelegate))
     {
-        var newDelegate = Delegate.Remove(exsitingDelegate, listener);
+        var newDelegate = Delegate.Remove(existingDelegate, listener);
 
         if (newDelegate == null) eventTable.Remove(typeof(T));
         else eventTable[typeof(T)] = newDelegate;
@@ -242,3 +257,254 @@ public static void Publish<T>(T eventData)
 
 public static void ClearAll() => eventTable.Clear();
 ```
+
+## 耦合陷阱（反例）
+1. God Object
+
+所有逻辑集中于单一类，模块之间强依赖
+
+所谓God Object是一个职责过多、控制过多模块的类，它知道系统中几乎所有其他对象的细节，承担太多功能、拥有过多依赖\
+它像“上帝”一样：
+- 拥有全局控制权
+- 知道每个模块的内部状态
+- 什么都要管，什么都要处理
+
+典型表现
+- 类文件巨大
+- 拥有大量字段和方法：涉及UI、逻辑、输入、网络、声音等多个模块
+- 依赖多：包含多个组件、管理大量GameObject
+- 经常与单例模式结合：通常是GameManager、MainController这种类
+- 系统变动时频繁修改它：其他模块功能增加或修改时经常影响这个类
+
+Gob Object存在的问题
+- 违背单一职责原则（SRP）：一个类处理太多功能，代码难以理解
+- 难以维护：修改一个逻辑可能影响多个功能，容易引入bug
+- 难以测试：不能隔离测试某一部分功能
+- 拓展性差：新增功能需要不断修改God Object
+- 强耦合：所有模块紧密依赖，模块无法独立更换
+
+举个例子：Unity中常见的God Object
+```cs
+public class GameManager : MonoBehaviour
+{
+    public Player player;
+    public EnemyManager enemyManager;
+    public UIManager uiManager;
+    public AudioSource audio;
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P)) PauseGame();
+        if (player.health <= 0) GameOver();
+
+        uiManager.UpdateHealthBar(player.health);
+        enemyManager.SpawnIfNeeded();
+        audio.Play();
+        SaveData();
+        LoadScene();
+        // ...管理一切
+    }
+
+    void PauseGame() { ... }
+    void GameOver() { ... }
+    void SaveData() { ... }
+    void LoadScene() { ... }
+}
+```
+
+如何避免或重构God Object
+- 拆分职责：将逻辑拆分成多个独立的组件或管理类
+- 使用接口：面向接口编程，避免过多细节暴露给主类
+- 使用事件系统：让模块之间通过事件通信而不是直接依赖
+- 使用状态机：将状态相关逻辑分离出去，例如FSM
+- 避免滥用单例：使用依赖注入、组件引用替代全局访问
+
+示例：拆分成多个专责管理器
+```cs
+public class GameManager : MonoBehaviour
+{
+    private IGameState state;
+    private IEventSystem events;
+    private IAudioService audio;
+    private IUIServicce ui;
+
+    void Start()
+    {
+        state = new GameplayState();
+        events.Subscribe<PlayerDeadEvent>(OnPlayerDead);
+    }
+
+    void OnPlayerDead(PlayerDeadEvent evt)
+    {
+        state = new GameOverState();
+        ui.ShowGameOver();
+    }
+}
+```
+God Object是一种看似方便，实则代价高昂的设计\
+虽然在项目初期它可能加快开发，但随着功能增长，它将变成维护地狱。好的架构应当遵循SRP、低耦合、高内聚原则，鼓励模块间解耦、职责明确
+
+---
+
+2. 静态工具类滥用
+
+静态工具类是指包含一系列静态方法、没有实例化的类。它们通常提供全局访问，且不依赖对象的状态。
+
+这种工具类通常用于提供一些全局的、独立于对象的功能，比如数学运算、字符串处理、文件操作等
+
+静态工具类滥用指的是将本应该封装在类内部的逻辑功能都放入静态类中，导致多个模块过度依赖静态类的实现细节，进而增加了系统的耦合度和维护难度
+
+静态工具类滥用的典型表现\
+- 全局可用的静态方法：方法是静态的，可以从任何地方调用
+- 无状态设计：静态类通常不需要实例化，任何地方都能直接调用
+- 过多的职责：静态类承担了系统中多个模块的功能，变得越来越庞大
+- 依赖过度：很多模块之间通过静态类共享状态或实现功能，导致紧耦合
+
+存在的问题
+- 增加耦合：静态工具类通常作为全局对象，系统中各模块直接依赖它，导致模块间依赖加剧
+- 难以测试：静态类的依赖难以模拟和替换，在单元测试中很难注入mock对象，导致测试变得困难
+- 可维护性差：静态类没有生命周期管理，无法轻松替换，修改静态类可能影响到系统的其他部分，增加了维护难度
+- 全局状态污染：静态类往往维护全局状态，可能在不同模块间发生意外的状态更改，导致意料之外的结果
+
+示例：静态工具类滥用
+```cs
+public static class GameUtils
+{
+    public static void SaveGameData(GameData data)
+    {
+        // save data
+    }
+
+    public static void LoadGameData(out GameData data)
+    {
+        // load data
+        data = new GameData();
+    }
+
+    public static void PlaySound(string soundName)
+    {
+        // play sfx
+    }
+
+    public static void ShowMessage(string message)
+    {
+        // show
+    }
+}
+```
+`GameUtils` 静态类包含了与游戏数据、音效和消息展示相关的多个功能。任何地方只需要调用 `GameUtils.SaveGameData()` 或 `GameUtils.PlaySound()` 就能执行这些操作，但是这种方式导致了以下问题：
+- 难以测试：无法为这些方法编写单元测试，因为它们不依赖于具体的对象
+- 系统耦合过高：任何模块都可以直接访问这些静态方法，导致模块间的紧耦合
+- 扩展困难：如果要添加新的功能（如新增一种保存方式或新的音效系统），需要修改`GameUtils`类，这回影响到所有依赖它的模块
+
+避免方式
+1. 封装功能于具体类
+
+避免将所有功能集中在一个静态类中，应该根据职责将功能分离到不同类中
+```cs
+public class GameDataManager
+{
+    public void Save(GameData data)
+    {
+        // 保存游戏数据
+    }
+
+    public GameData Load()
+    {
+        // 加载游戏数据
+        return new GameData();
+    }
+}
+
+public class AudioManager
+{
+    public void PlaySound(string soundName)
+    {
+        // 播放音效
+    }
+}
+
+public class MessageManager
+{
+    public void ShowMessage(string message)
+    {
+        // 显示消息
+    }
+}
+```
+
+2. 依赖注入
+
+通过DI，将类之间的依赖关系明确化，避免通过静态方法共享状态
+```cs
+public class GameController
+{
+    private readonly GameDataManager dataManager;
+    private readonly AudioManager audioManager;
+    private readonly MessageManager messageManager;
+
+    public GameController(GameDataManager dataManager, AudioManager audioManager, MessageManager messageManager)
+    {
+        this.dataManager = dataManager;
+        this.audioManager = audioManager;
+        this.messageManager = messageManager;
+    }
+
+    public void SaveGame(GameData data)
+    {
+        dataManager.Save(data);
+    }
+
+    public void PlayGameOverSound()
+    {
+        audioManager.PlaySound("GameOver");
+    }
+
+    public void ShowGameOverMessage()
+    {
+        messageManager.ShowMessage("Game Over");
+    }
+}
+```
+
+3. 使用单例模式
+
+如果某些功能确实需要全局唯一的实例来管理（如音效、UI管理），可以使用单例模式，但要避免滥用
+```cs
+public class AudioManager
+{
+    private static AudioManager instance;
+
+    private AudioManager() { }
+
+    public static AudioManager Instance => instance ??= new AudioManager();
+
+    public void PlaySound(string soundName)
+    {
+        // 播放音效
+    }
+}
+```
+
+4. 将状态和行为分离
+
+避免在工具类中维护全局状态。如果工具类必须有状态，应考虑将行为分离到独立类中
+
+---
+// TODO
+
+3. Find滥用
+使用`GameObject.Find`创建隐式耦合，维护困难
+
+4. 单例滥用
+全局访问引起模块间共享状态混乱，耦合加剧
+
+5. 事件滥用
+事件过多系统难以追踪、调试
+
+## 总结
+松耦合是一种重要的架构思想，在Unity开发中具有实际意义
+
+通过事件机制、接口抽象、ScriptableObject和事件聚合器等手段，可以构建出更加灵活、可维护、可扩展的系统
+
+**解耦不是目的，而是为应对复杂性而采取的策略**
