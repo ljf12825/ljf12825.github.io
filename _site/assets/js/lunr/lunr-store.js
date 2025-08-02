@@ -107,10 +107,10 @@ var store = [{
         "url": "/posts/2025-06-02-Unity-Architecture/",
         "teaser": null
       },{
-        "title": "Event and Callback in Unity",
-        "excerpt":"在Unity中，事件和回调时实现解耦和响应式编程的核心机制。它们能够在不同的组件之间传递消息或相应某些操作 事件（Event） 事件是一种特殊的委托类型，允许其他对象订阅并响应某个特定的行为或状态变化。通常用于对象之间的通信，避免了直接调用，使代码更具解耦性 基本使用 在Unity中，可以使用C#的event关键字来声明一个事件。事件的订阅和触发通常会在组件之间完成 // 定义事件的委托类型 public delegate void PlayerScored(int score); public class GameManager : MonoBehaviour { // 声明一个事件 public event PlayerScored OnPlayerScored; public void PlayerScore(int score) { // 触发事件 OnPlayerScored?.Invoke(score); } } public class UIManager : MonoBehaviour { public GameManager gameManager; private void OnEnable() { // 订阅事件 gameManager.OnPlayerScored...","categories": ["笔记"],
+        "title": "Event and Delegate",
+        "excerpt":"Unity中的事件和委托机制是基于C#的语言特性实现的，用于对象之间的解耦通信。它们是实现观察者模式的核心方式，常用于UI更新、角色状态变化、触发器反应等场景 委托（Delegate） 委托是对函数的引用，可以把方法当作变量一样传递，就是C++中的函数指针 public delegate void MyDelegate(string message); // 声明一个委托类型 public class Test { public static void PrintMessage(string msg) =&gt; Debug.Log(msg); public void UseDelegate() { MyDelegate del = PrintMessage; // 赋值 dle(\"Hello Delegate!\"); // 调用 } } 相当于 // 函数指针 void (*func)(string) = &amp;PrintMessage; 事件（Event） 事件基于委托，是一种特殊的委托类型，但添加了访问限制，只能在声明它的类内部调用，允许其他对象订阅并响应某个特定的行为或状态变化 通常用于对象之间的通信，避免了直接调用，使代码更具解耦性 基本使用 在Unity中，可以使用C#的event关键字来声明一个事件。事件的订阅和触发通常会在组件之间完成 //...","categories": ["笔记"],
         "tags": ["Unity","Unity Syntax"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Event-and-Callback-in-Unity.html",
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Event-and-Delegate.html",
         "teaser": null
       },{
         "title": "FSM",
@@ -362,7 +362,7 @@ var store = [{
         "title": "ScriptableObject",
         "excerpt":"ScriptableObject 是 Unity 中的一种特殊类型的对象，它是用于存储数据的，类似于普通的 C# 类，但它不需要与游戏对象（GameObject）关联 ScriptableObject 主要用于节省内存、提高性能和简化数据的管理。它通常用来存储可重用的数据，如配置、设置、状态信息等 基本概念 ScriptableObject 是 Unity 提供的一种特殊对象类型，允许你将数据持久化到磁盘上，并能够在编辑器中方便地进行编辑和管理。这与普通的 MonoBehaviour 类（需要附加到 GameObject 上）不同，ScriptableObject 并不依赖于场景中的任何对象 主要特点 独立于GameObject：ScriptableObject并不需要绑定到一个GameObject上，因此它可以轻松地存储全局数据 可在编辑器中编辑：可以在Unity编辑器中查看、编辑和保存ScriptableObject实例 性能优化：ScriptableObject实例是共享的，因此多个对象可以引用同一个ScriptableObject实例，这有助于减少内存消耗 数据持久化：ScriptableObject支持数据持久化，可以将其作为资源保存在磁盘上，便于管理和编辑 创建和使用 创建ScriptableObject类 要创建 ScriptableObject，首先需要继承 ScriptableObject 基类，并为它定义一个静态方法来实例化对象 ```cs using UnityEngine; [CreateAssetMenu(fileName = “NewCharacterData”, menuName = “ScriptableObjects/CharacterData”)] public class CharacterData : ScriptableObject { public string characterName; public int health;...","categories": ["笔记"],
         "tags": ["Unity","Syntax"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/ScriptableObject.html",
+        "url": "/posts/2025-07-11-ScriptableObject/",
         "teaser": null
       },{
         "title": "ScriptedImporter",
@@ -396,7 +396,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Design Patterns in Game Development",
-        "excerpt":"游戏卡法中，设计模式时组织代码、提升可维护性、扩展性和复用性的基础工具。尤其是大型游戏项目或使用Unity、Unreal等引擎开发时，恰当使用设计模式能显著提高架构质量 分类 模式 用途 创建型 Singleton（单例） 管理全局状态（如 GameManager、AudioManager）   Factory Method（工厂方法） 创建敌人、道具、技能等实例   Prototype（原型） 克隆预制体、生成技能副本等   Object Pool（对象池） 管理大量频繁生成/销毁的对象（子弹、特效） 结构型 Component（组件） Unity核心模式（基于组合而非继承）   Decorator（装饰器） 给技能、Buff添加额外效果   Flyweight（享元） 减少内存（如重复使用同一 Mesh、材质） 行为型 State（状态机） 角色状态切换（Idle、Run、Jump、Attack）   Observer（观察者） UI监听角色属性变化、事件派发系统   Command（命令） 实现撤销/重做、输入缓存、动作序列   Strategy（策略） 多种AI行为切换，技能释放策略等   EventBus（事件总线） 解耦不同系统的事件通信（如成就、音效）   Mediator（中介者） 管理复杂交互系统（UI面板交互）   Visitor（访问者） 用于遍历不同...","categories": ["笔记"],
+        "excerpt":"游戏开发中，设计模式是组织代码、提升可维护性、扩展性和复用性的基础工具。尤其是大型游戏项目或使用Unity、Unreal等引擎开发时，恰当使用设计模式能显著提高架构质量 基于Gof23种设计模式，常用于游戏开发的设计模式有以下几种： 分类 模式 用途 创建型 Singleton（单例） 管理全局状态（如 GameManager、AudioManager）   Factory Method（工厂方法） 创建敌人、道具、技能等实例   Prototype（原型） 克隆预制体、生成技能副本等   Object Pool（对象池） 管理大量频繁生成/销毁的对象（子弹、特效） 结构型 Component（组件） Unity核心模式（基于组合而非继承）   Decorator（装饰器） 给技能、Buff添加额外效果   Flyweight（享元） 减少内存（如重复使用同一 Mesh、材质） 行为型 State（状态机） 角色状态切换（Idle、Run、Jump、Attack）   Observer（观察者） UI监听角色属性变化、事件派发系统   Command（命令） 实现撤销/重做、输入缓存、动作序列   Strategy（策略） 多种AI行为切换，技能释放策略等   EventBus（事件总线） 解耦不同系统的事件通信（如成就、音效）   Mediator（中介者） 管理复杂交互系统（UI面板交互）   Visitor（访问者）...","categories": ["笔记"],
         "tags": ["Unity","Architecture"],
         "url": "/posts/2025-07-15-Design-Patterns-in-Game-Development/",
         "teaser": null
@@ -408,13 +408,13 @@ var store = [{
         "teaser": null
       },{
         "title": "Interface Oriented Design",
-        "excerpt":" ","categories": ["笔记"],
+        "excerpt":"“Interface Oriented Design”面向接口设计，是软件架构中的一种重要思想，它强调通过接口而非具体实现进行编程 在Unity中，面向接口设计不仅有助于降低耦合、增强可测试性，还在组件化开发、热更架构、解耦系统中发挥了非常关键的作用 定义行为接口，让对象只依赖接口而不是具体实现，从而实现解耦、扩展与测试的灵活性 Unity中的典型应用场景 控制系统分离：IInputHandler抽象输入，无论是键盘、手柄还是虚拟按钮都统一处理 热更系统对接：ILRuntime、HybridCLR下通过接口对热更代码调用，避免直接依赖反射 AI行为系统：IState、ITask、ICondition组合行为树模块 资源加载系统：IAssetLoader抽象出不同加载器(Resources、Addressables、AB) 游戏流程系统：IGameState,IFlowNode构建状态流、任务流 特效触发系统：ITrigger,IEffectReceiver解耦触发与响应 Interface的几个核心特性 明确定义“行为契约” 不依赖具体类，从而实现松耦合 便于单元测试（可用mock实现） 可实现多态性与模块化组合 更适合插件式、模块式开发 示例：输入控制器的面向接口设计 定义接口 public interface IInputHandler { Vector2 GetMoveInput(); bool IsJumpPressed(); } 两种实现方式 public class KeyboardInput : IInputHandler { public Vector2 GetMoveInput() =&gt; new Vector2(Input.GetAxis(\"Horizontal\"), Input.GetAxis(\"Vertical\")); public bool IsJumpPressed() =&gt; Input.GetKeyDown(KeyCode.Space); } public...","categories": ["笔记"],
         "tags": ["Unity","Architecture"],
         "url": "/posts/2025-07-15-Interface-Oriented-Design/",
         "teaser": null
       },{
         "title": "Loose Coupling",
-        "excerpt":" ","categories": ["笔记"],
+        "excerpt":"松耦合（Loose Coupling）是构建可维护、可扩展的关键原则之一，尤其在多人协作、项目复杂度高、后期需要频繁迭代更新的场景中尤为重要 定义\\ 松耦合意味着模块/组件之间尽可能少的依赖关系，彼此互不知晓或只了解对方的接口或行为 相对的，紧耦合指的是模块之间依赖彼此的具体实现或生命周期，改一个就可能影响其他多个 常见术语\\ 松耦合（Loose Coupling）：模块间依赖最小化，只通过接口/事件通信 紧耦合（Tight Coupling）：模块间强依赖，变动风险高 事件聚合器（Event Aggregator）：集中管理事件订阅/分发的工具 Service Locator：通过统一容器提供服务（注意与DI的区别） 优势\\ 优势 说明 可维护性高 修改一个模块时，不会影响其他模块 可测试性强 可以独立单元测试 可扩展性好 可以方便地添加、替换模块 降低耦合风险 避免“牵一发而动全身” Unity中常见的松耦合方式 事件/委托机制 让监听者注册感兴趣的事件，而不是让对象彼此直接调用 优点：发送者不知道接收者是谁，实现解耦 Event and Callback 接口与抽象 编程时面向接口，而不是具体类 Interface Oriented Design ScriptableObject作为配置 &amp; 消息中介 public class GameEvent : ScriptableObject { private event Action listeners;...","categories": ["笔记"],
         "tags": ["Unity","Architecture"],
         "url": "/posts/2025-07-15-Loose-Coupling/",
         "teaser": null
@@ -459,6 +459,60 @@ var store = [{
         "excerpt":" ","categories": ["笔记"],
         "tags": ["Unity","Editor","Tool"],
         "url": "/posts/2025-07-22-Unity-Editor/",
+        "teaser": null
+      },{
+        "title": "Burst Complier",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Complie","High Performance"],
+        "url": "/posts/2025-08-02-Burst-Complier/",
+        "teaser": null
+      },{
+        "title": "DOTS",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Technology Stack","High Performance"],
+        "url": "/posts/2025-08-02-DOTS/",
+        "teaser": null
+      },{
+        "title": "Dependency Injection",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Architecture"],
+        "url": "/posts/2025-08-02-Dependency-Injection/",
+        "teaser": null
+      },{
+        "title": "ECS",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Architecture"],
+        "url": "/posts/2025-08-02-ECS/",
+        "teaser": null
+      },{
+        "title": "Event Bus/Aggregator",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Architecture"],
+        "url": "/posts/2025-08-02-Event-Bus-Event-Aggregator/",
+        "teaser": null
+      },{
+        "title": "Hot Update",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Hot Update"],
+        "url": "/posts/2025-08-02-Hot-Update/",
+        "teaser": null
+      },{
+        "title": "Job System",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","MultiThreading","High Performance"],
+        "url": "/posts/2025-08-02-Mono-and-IL2CPP/",
+        "teaser": null
+      },{
+        "title": "Service Locator",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Complie"],
+        "url": "/posts/2025-08-02-Mono-and-IL2CPP/",
+        "teaser": null
+      },{
+        "title": "Service Locator",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Architecture"],
+        "url": "/posts/2025-08-02-Service-Locator/",
         "teaser": null
       },{
     "title": "About",

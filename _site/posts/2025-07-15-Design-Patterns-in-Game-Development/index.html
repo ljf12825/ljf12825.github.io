@@ -11,7 +11,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Design Patterns in Game Development - ljf12825’s Blog</title>
-<meta name="description" content="游戏卡法中，设计模式时组织代码、提升可维护性、扩展性和复用性的基础工具。尤其是大型游戏项目或使用Unity、Unreal等引擎开发时，恰当使用设计模式能显著提高架构质量">
+<meta name="description" content="游戏开发中，设计模式是组织代码、提升可维护性、扩展性和复用性的基础工具。尤其是大型游戏项目或使用Unity、Unreal等引擎开发时，恰当使用设计模式能显著提高架构质量">
 
 
 
@@ -22,7 +22,7 @@
 <meta property="og:url" content="http://localhost:4000/posts/2025-07-15-Design-Patterns-in-Game-Development/">
 
 
-  <meta property="og:description" content="游戏卡法中，设计模式时组织代码、提升可维护性、扩展性和复用性的基础工具。尤其是大型游戏项目或使用Unity、Unreal等引擎开发时，恰当使用设计模式能显著提高架构质量">
+  <meta property="og:description" content="游戏开发中，设计模式是组织代码、提升可维护性、扩展性和复用性的基础工具。尤其是大型游戏项目或使用Unity、Unreal等引擎开发时，恰当使用设计模式能显著提高架构质量">
 
 
 
@@ -149,7 +149,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Design Patterns in Game Development">
-    <meta itemprop="description" content="游戏卡法中，设计模式时组织代码、提升可维护性、扩展性和复用性的基础工具。尤其是大型游戏项目或使用Unity、Unreal等引擎开发时，恰当使用设计模式能显著提高架构质量">
+    <meta itemprop="description" content="游戏开发中，设计模式是组织代码、提升可维护性、扩展性和复用性的基础工具。尤其是大型游戏项目或使用Unity、Unreal等引擎开发时，恰当使用设计模式能显著提高架构质量">
     <meta itemprop="datePublished" content="2025-06-01T00:00:00+08:00">
     
 
@@ -168,7 +168,9 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>游戏卡法中，设计模式时组织代码、提升可维护性、扩展性和复用性的基础工具。尤其是大型游戏项目或使用Unity、Unreal等引擎开发时，恰当使用设计模式能显著提高架构质量</p>
+        <p>游戏开发中，设计模式是组织代码、提升可维护性、扩展性和复用性的基础工具。尤其是大型游戏项目或使用Unity、Unreal等引擎开发时，恰当使用设计模式能显著提高架构质量</p>
+
+<p>基于Gof23种设计模式，常用于游戏开发的设计模式有以下几种：</p>
 
 <table>
   <thead>
@@ -254,19 +256,160 @@
 
 <h2 id="unity中常用的设计模式">Unity中常用的设计模式</h2>
 <h3 id="singleton-单例模式">Singleton 单例模式</h3>
-<p>用途：管理全局对象，如AudioManager、UIManager、GameManager</p>
-<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GameManager</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
-<span class="p">{</span>
-    <span class="k">public</span> <span class="k">static</span> <span class="n">GameManager</span> <span class="n">Instance</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;}</span>
+<p>单例模式用于确保一个类只有一个实例，并提供一个全局访问点</p>
 
-    <span class="k">void</span> <span class="nf">Awake</span><span class="p">()</span>
+<p>用途：管理全局对象，如AudioManager、UIManager、GameManager</p>
+
+<p>单例模式的核心思想：确保一个类仅有一个实例，并提供一个访问它的全局方式\</p>
+<h4 id="典型结构">典型结构</h4>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GameManager</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">static</span> <span class="n">GameManager</span> <span class="n">_instance</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="n">GameManager</span> <span class="n">Instance</span>
     <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">Instance</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="n">Instance</span> <span class="p">=</span> <span class="k">this</span><span class="p">;</span>
-        <span class="k">else</span> <span class="nf">Destroy</span><span class="p">(</span><span class="n">gameObject</span><span class="p">);</span>
+        <span class="k">get</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">_instance</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+                <span class="n">_instance</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">GameManager</span><span class="p">();</span>
+            
+            <span class="k">return</span> <span class="n">_instance</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="nf">GameManager</span><span class="p">()</span> <span class="p">{}</span> <span class="c1">// 私有构造</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">StartGame</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// 游戏启动逻辑</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
-<p>Unity要注意处理生命周期（场景切换）</p>
+<h4 id="典型用途">典型用途</h4>
+<ol>
+  <li>游戏管理器（GameManager）
+控制游戏状态（开始、暂停、结束、重启等）
+    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GameManager</span><span class="p">.</span><span class="n">Instance</span><span class="p">.</span><span class="nf">StartGame</span><span class="p">();</span>
+</code></pre></div>    </div>
+  </li>
+  <li>音效管理器（AudioManager）
+    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">AudioManager</span><span class="p">.</span><span class="n">Instance</span><span class="p">.</span><span class="nf">PlaySound</span><span class="p">(</span><span class="s">"Explosion"</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+  <li>资源管理器（ResourceManager）
+加载资源（Prefab、音效、贴图等），避免重复加载
+    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">bullet</span> <span class="p">=</span> <span class="n">ResourceManager</span><span class="p">.</span><span class="n">Instance</span><span class="p">.</span><span class="nf">LoadPrefab</span><span class="p">(</span><span class="s">"Bullet"</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+  <li>UI管理器（UIManager）
+打开、关闭UI界面，维护UI栈
+    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">UIManager</span><span class="p">.</span><span class="n">Instance</span><span class="p">.</span><span class="nf">ShowPanel</span><span class="p">(</span><span class="s">"MainMenu"</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>输入管理器（InputManager）
+统一收集和管理玩家输入，避免在多个地方监听</p>
+  </li>
+  <li>配置表管理器（ConfigManager）
+统一读取CSV/JSON配置数据</li>
+</ol>
+
+<h4 id="unity中的单例实现">Unity中的单例实现</h4>
+<p>在Unity中，单例类一般继承自<code class="language-plaintext highlighter-rouge">MonoBehaviour</code>，并用<code class="language-plaintext highlighter-rouge">DontDestroyOnLoad</code>保持在多个场景中持久存在</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GameManager</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="n">GameManager</span> <span class="n">Instance</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">void</span> <span class="nf">Awake</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">Instance</span> <span class="p">!=</span> <span class="k">null</span> <span class="p">&amp;&amp;</span> <span class="n">Instance</span> <span class="p">!=</span> <span class="k">this</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="nf">Destroy</span><span class="p">(</span><span class="n">gameObject</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">Instance</span> <span class="p">=</span> <span class="k">this</span><span class="p">;</span>
+        <span class="nf">DontDestroyOnLoad</span><span class="p">(</span><span class="n">gameObject</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">StartGame</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>将其拖到场景中的一个空物体上就可以使用了</p>
+
+<p>如果不想拖脚本，可以实现自动创建</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GameManager</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">static</span> <span class="n">GameManager</span> <span class="n">_instance</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="n">GameManager</span> <span class="n">Instance</span><span class="p">;</span>
+    <span class="p">{</span>
+        <span class="k">get</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">_instance</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="c1">// 查找场景中是否存在</span>
+                <span class="n">_instance</span> <span class="p">=</span> <span class="n">FindObjectOfType</span><span class="p">&lt;</span><span class="n">GameManager</span><span class="p">&gt;();</span>
+
+                <span class="c1">// 如果没有，创建一个新的GameObject挂上它</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">_instance</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">GameObject</span> <span class="n">obj</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">GameObject</span><span class="p">(</span><span class="s">"GameManager"</span><span class="p">);</span>
+                    <span class="n">_instance</span> <span class="p">=</span> <span class="n">obj</span><span class="p">.</span><span class="n">AddComponent</span><span class="p">&lt;</span><span class="n">GameManager</span><span class="p">&gt;();</span>
+                    <span class="nf">DontDestroyOnLoad</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="n">_instance</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">void</span> <span class="nf">Awake</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// 防止重复</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">_instance</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">_instance</span> <span class="p">=</span> <span class="k">this</span><span class="p">;</span>
+            <span class="nf">DontDestroyOnLoad</span><span class="p">(</span><span class="n">gameObject</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">_instance</span> <span class="p">!=</span> <span class="k">this</span><span class="p">)</span> <span class="nf">Destroy</span><span class="p">(</span><span class="n">gameObject</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="单例模式的特点">单例模式的特点</h4>
+<p><strong>优点</strong></p>
+<ol>
+  <li>全局访问：任何脚本都能方便地访问</li>
+  <li>数据共享：多个系统共享同一份数据，如游戏状态、资源</li>
+  <li>节省资源：避免多次实例化相同管理器</li>
+  <li>逻辑集中：将一类功能集中处理，方便维护</li>
+</ol>
+
+<p><strong>缺点</strong></p>
+<ol>
+  <li>隐藏依赖：使用单例模式可能让类间依赖不明显，降低可读性</li>
+  <li>生命周期管理难：尤其在Unity中，切换场景可能出现多实例、空引用等问题</li>
+  <li>难以测试：单例可能使单元测试变得困难（不可隔离、难模拟）</li>
+  <li>违背面向对象原则：单例是全局状态，本质上是一种全局变量。过度依赖会让程序耦合严重</li>
+</ol>
+
+<p><strong>改进建议</strong></p>
+<ol>
+  <li>使用懒汉式 vs 饿汉式
+    <ul>
+      <li>懒汉式（Lazy）：只有第一次访问时才创建实例</li>
+      <li>饿汉式（Eager）：程序启动时立即创建</li>
+    </ul>
+  </li>
+  <li>使用接口隔离
+将单例隐藏在接口后面，便于替换和测试
+    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">interface</span> <span class="nc">IAudioManager</span>
+<span class="p">{</span>
+ <span class="k">void</span> <span class="nf">PlaySound</span><span class="p">(</span><span class="kt">string</span> <span class="n">name</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>使用依赖注入容器
+如Zenject、Extenject等</li>
+</ol>
 
 <h3 id="objectpool-对象池">ObjectPool 对象池</h3>
 <p>用途：频繁生成/销毁对象如子弹、粒子效果，减少GC

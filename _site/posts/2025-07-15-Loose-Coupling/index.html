@@ -11,7 +11,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Loose Coupling - ljf12825’s Blog</title>
-<meta name="description" content="">
+<meta name="description" content="松耦合（Loose Coupling）是构建可维护、可扩展的关键原则之一，尤其在多人协作、项目复杂度高、后期需要频繁迭代更新的场景中尤为重要">
 
 
 
@@ -22,7 +22,7 @@
 <meta property="og:url" content="http://localhost:4000/posts/2025-07-15-Loose-Coupling/">
 
 
-  <meta property="og:description" content="">
+  <meta property="og:description" content="松耦合（Loose Coupling）是构建可维护、可扩展的关键原则之一，尤其在多人协作、项目复杂度高、后期需要频繁迭代更新的场景中尤为重要">
 
 
 
@@ -149,7 +149,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Loose Coupling">
-    <meta itemprop="description" content="">
+    <meta itemprop="description" content="松耦合（Loose Coupling）是构建可维护、可扩展的关键原则之一，尤其在多人协作、项目复杂度高、后期需要频繁迭代更新的场景中尤为重要">
     <meta itemprop="datePublished" content="2025-06-01T00:00:00+08:00">
     
 
@@ -168,7 +168,572 @@
 
       <section class="page__content" itemprop="text">
         
-        
+        <p>松耦合（Loose Coupling）是构建可维护、可扩展的关键原则之一，尤其在多人协作、项目复杂度高、后期需要频繁迭代更新的场景中尤为重要</p>
+
+<p>定义\</p>
+<ul>
+  <li>松耦合意味着模块/组件之间尽可能少的依赖关系，彼此互不知晓或只了解对方的接口或行为</li>
+  <li>相对的，紧耦合指的是模块之间依赖彼此的具体实现或生命周期，改一个就可能影响其他多个</li>
+</ul>
+
+<p>常见术语\</p>
+<ul>
+  <li>松耦合（Loose Coupling）：模块间依赖最小化，只通过接口/事件通信</li>
+  <li>紧耦合（Tight Coupling）：模块间强依赖，变动风险高</li>
+  <li>事件聚合器（Event Aggregator）：集中管理事件订阅/分发的工具</li>
+  <li>Service Locator：通过统一容器提供服务（注意与DI的区别）</li>
+</ul>
+
+<p>优势\</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>优势</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>可维护性高</td>
+      <td>修改一个模块时，不会影响其他模块</td>
+    </tr>
+    <tr>
+      <td>可测试性强</td>
+      <td>可以独立单元测试</td>
+    </tr>
+    <tr>
+      <td>可扩展性好</td>
+      <td>可以方便地添加、替换模块</td>
+    </tr>
+    <tr>
+      <td>降低耦合风险</td>
+      <td>避免“牵一发而动全身”</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="unity中常见的松耦合方式">Unity中常见的松耦合方式</h2>
+<ol>
+  <li>事件/委托机制
+    <blockquote>
+      <p>让监听者注册感兴趣的事件，而不是让对象彼此直接调用</p>
+    </blockquote>
+  </li>
+</ol>
+
+<p>优点：发送者不知道接收者是谁，实现解耦</p>
+
+<p><a href="/posts/2025-06-03-Event-and-Delegate/">Event and Callback</a></p>
+
+<ol>
+  <li>
+    <p>接口与抽象
+编程时面向接口，而不是具体类
+<a href="/posts/2025-07-15-Interface-Oriented-Design/">Interface Oriented Design</a></p>
+  </li>
+  <li>ScriptableObject作为配置 &amp; 消息中介
+    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GameEvent</span> <span class="p">:</span> <span class="n">ScriptableObject</span>
+<span class="p">{</span>
+ <span class="k">private</span> <span class="k">event</span> <span class="n">Action</span> <span class="n">listeners</span><span class="p">;</span>
+
+ <span class="k">public</span> <span class="k">void</span> <span class="nf">Raise</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">listeners</span><span class="p">.</span><span class="nf">Invoke</span><span class="p">();</span>
+
+ <span class="k">public</span> <span class="k">void</span> <span class="nf">Register</span><span class="p">(</span><span class="n">Action</span> <span class="n">callback</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">listeners</span> <span class="p">+=</span> <span class="n">callback</span><span class="p">;</span>
+
+ <span class="k">public</span> <span class="k">void</span> <span class="nf">Unregister</span><span class="p">(</span><span class="n">Action</span> <span class="n">callback</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">listeners</span> <span class="p">-=</span> <span class="n">callback</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <p>中介层完全解耦了调用者与接收者，并且支持在Inspector中配置</p>
+  </li>
+  <li>事件聚合器（EventBus/EventAggregator）
+建立一个中心事件系统用于发布和订阅
+    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">static</span> <span class="k">class</span> <span class="nc">EventBus</span>
+<span class="p">{</span>
+ <span class="k">private</span> <span class="k">static</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">Delegate</span><span class="p">&gt;</span> <span class="n">events</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+
+ <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">Subscribe</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">Action</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">callback</span><span class="p">)</span>
+ <span class="p">{</span>
+     <span class="k">if</span> <span class="p">(</span><span class="n">events</span><span class="p">.</span><span class="nf">TryGetValue</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="k">out</span> <span class="kt">var</span> <span class="n">d</span><span class="p">))</span>
+         <span class="n">events</span><span class="p">[</span><span class="k">typeof</span><span class="p">(</span><span class="n">T</span><span class="p">)]</span> <span class="p">=</span> <span class="n">Delegate</span><span class="p">.</span><span class="nf">Combine</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">callback</span><span class="p">);</span>
+     <span class="k">else</span> <span class="n">events</span><span class="p">[</span><span class="k">typeof</span><span class="p">(</span><span class="n">T</span><span class="p">)]</span> <span class="p">=</span> <span class="n">callback</span><span class="p">;</span>
+ <span class="p">}</span>
+
+ <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">Publish</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">T</span> <span class="n">data</span><span class="p">)</span>
+ <span class="p">{</span>
+     <span class="k">if</span><span class="p">(</span><span class="n">events</span><span class="p">.</span><span class="nf">TryGetValue</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="k">out</span> <span class="kt">var</span> <span class="n">d</span><span class="p">))</span>
+         <span class="p">(</span><span class="n">d</span> <span class="k">as</span> <span class="n">Action</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;)?.</span><span class="nf">Invoke</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+ <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <p>各模块不直接通信，而是通过EventBus中转</p>
+  </li>
+  <li>Service Locator / 依赖注入（DI）
+控制依赖获取的方式，不直接new出对象
+    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">static</span> <span class="k">class</span> <span class="nc">ServiceLocator</span>
+<span class="p">{</span>
+ <span class="k">private</span> <span class="k">static</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="kt">object</span><span class="p">&gt;</span> <span class="n">services</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+
+ <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">Register</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">T</span> <span class="n">service</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">services</span><span class="p">[</span><span class="k">typeof</span><span class="p">(</span><span class="n">T</span><span class="p">)]</span> <span class="p">=</span> <span class="n">service</span><span class="p">;</span>
+ <span class="k">public</span> <span class="k">static</span> <span class="n">T</span> <span class="n">Get</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;()</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="n">services</span><span class="p">[</span><span class="k">typeof</span><span class="p">(</span><span class="n">T</span><span class="p">)];</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <p>通过容器获取依赖，模块间没有强依赖</p>
+  </li>
+</ol>
+
+<h2 id="设计建议">设计建议</h2>
+<p>松耦合的使用场景</p>
+<ul>
+  <li>多个模块可能被复用或频繁改动</li>
+  <li>多人协作，责任边界需要清晰</li>
+  <li>希望支持热更或运行时配置替换</li>
+  <li>可能扩展为插件式架构或可配置组件系统</li>
+</ul>
+
+<p>注意事项</p>
+<ul>
+  <li>滥用单例：会造成全局状态污染和耦合加剧</li>
+  <li>事件泛滥：太多事件让系统变得难以追踪</li>
+  <li>ServiceLocator滥用：会模糊依赖关系，隐藏依赖路径</li>
+  <li>模块间隐藏依赖：看似解耦，实则绕路依赖（隐藏依赖路径导致维护困难）</li>
+</ul>
+
+<p>避免事件泛滥的建议\</p>
+<ul>
+  <li>事件命名清晰、语义正确</li>
+  <li>尽量使用局部事件系统（局部EventBus或Observer）</li>
+  <li>增加注释，标注事件的发送者与接收者模块</li>
+</ul>
+
+<p>避免 ServiceLocator 滥用\</p>
+<ul>
+  <li>配合接口使用，避免隐藏依赖</li>
+  <li>在注册服务时记录调用栈或来源模块，便于调试</li>
+</ul>
+
+<p>组合模式</p>
+<ul>
+  <li>事件系统 + 接口编程：解耦逻辑流程与具体执行逻辑</li>
+  <li>ScriptableObject + 数据驱动：配置可视化、可热更、可重用</li>
+  <li>State Pattern + 接口：实现灵活的FSM</li>
+  <li>EventBus + 架构层拆分：构建大型系统（如战斗、任务）</li>
+</ul>
+
+<h2 id="场景示例">场景示例</h2>
+<p>通过一个“玩家捡金币”的例子来对比“高度耦合”和“解耦后的设计”</p>
+
+<p><strong>场景描述</strong><br />
+当玩家(<code class="language-plaintext highlighter-rouge">Player</code>)碰到金币(<code class="language-plaintext highlighter-rouge">Coin</code>)时：</p>
+<ol>
+  <li>金币消失</li>
+  <li>播放金币音效</li>
+  <li>更新UI显示当前金币数</li>
+</ol>
+
+<p><strong>高度耦合写法</strong></p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">Coin</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">void</span> <span class="nf">OnTriggerEnter</span><span class="p">(</span><span class="n">Collider</span> <span class="n">other</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="nf">CompareTag</span><span class="p">(</span><span class="s">"Player"</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="c1">// 增加金币</span>
+            <span class="n">other</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">Player</span><span class="p">&gt;().</span><span class="nf">AddGold</span><span class="p">(</span><span class="m">1</span><span class="p">);</span>
+
+            <span class="c1">// 更新UI（耦合 UIManager）</span>
+            <span class="n">FindObjectOfType</span><span class="p">&lt;</span><span class="n">UIManager</span><span class="p">&gt;().</span><span class="nf">UpdateGoldUI</span><span class="p">();</span>
+
+            <span class="c1">// 播放音效（耦合 AudioManager）</span>
+            <span class="n">FindObjectOfType</span><span class="p">&lt;</span><span class="n">AudioManager</span><span class="p">&gt;().</span><span class="nf">Play</span><span class="p">(</span><span class="s">"CoinSound"</span><span class="p">);</span>
+
+            <span class="c1">// 销毁自己</span>
+            <span class="nf">Destroy</span><span class="p">(</span><span class="n">gameObject</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>问题（紧耦合）：</p>
+<ul>
+  <li>依赖Player的具体实现：直接访问Player的方法和组件</li>
+  <li>依赖UIManager：Coin强依赖UIManager存在并可访问</li>
+  <li>依赖AudioManager：直接调用具体的音效播放逻辑</li>
+  <li>可测试性低：单元测试Coin时必须构建完整环境</li>
+  <li>拓展困难：若增加一个“金币上报服务器”逻辑，需要修改Coin代码，破坏封装性</li>
+</ul>
+
+<p><strong>解耦后的设计</strong><br />
+使用</p>
+<ul>
+  <li>接口（如<code class="language-plaintext highlighter-rouge">IGoldReceiver</code>）</li>
+  <li>事件机制（如<code class="language-plaintext highlighter-rouge">GoldCollecttedEvent</code>）</li>
+  <li>ScriptableObject（可选）</li>
+</ul>
+
+<p>Player接收金币逻辑</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">interface</span> <span class="nc">IGoldReceiver</span> <span class="p">=&gt;</span> <span class="k">void</span> <span class="nf">AddGold</span><span class="p">(</span><span class="kt">int</span> <span class="n">amount</span><span class="p">);</span>
+</code></pre></div></div>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">Player</span> <span class="p">:</span> <span class="n">MonoBehaviour</span><span class="p">,</span> <span class="n">IGoldReceiver</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="kt">int</span> <span class="n">gold</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">AddGold</span><span class="p">(</span><span class="kt">int</span> <span class="n">amount</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">gold</span> <span class="p">+=</span> <span class="n">amount</span><span class="p">;</span>
+        <span class="n">EventBus</span><span class="p">.</span><span class="nf">Publish</span><span class="p">(</span><span class="k">new</span> <span class="nf">GoldCollectedEvent</span><span class="p">(</span><span class="n">gold</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Coin逻辑解耦</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">Coin</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">void</span> <span class="nf">OnTriggerEnter</span><span class="p">(</span><span class="n">Collider</span> <span class="n">other</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">receiver</span> <span class="p">=</span> <span class="n">other</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">IGoldReceiver</span><span class="p">&gt;();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">receiver</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">receiver</span><span class="p">.</span><span class="nf">AddGold</span><span class="p">(</span><span class="m">1</span><span class="p">);</span>
+            <span class="nf">Destroy</span><span class="p">(</span><span class="n">gameObject</span><span class="p">)</span><span class="n">l</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>监听事件更新UI</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">UIManager</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">void</span> <span class="nf">OnEnable</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">EventBus</span><span class="p">.</span><span class="n">Subscribe</span><span class="p">&lt;</span><span class="n">GoldCollectedEvent</span><span class="p">&gt;(</span><span class="n">OnGoldUpdated</span><span class="p">);</span>
+
+    <span class="k">private</span> <span class="k">void</span> <span class="nf">OnDisable</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">EventBus</span><span class="p">.</span><span class="n">UnSubscribe</span><span class="p">&lt;</span><span class="n">GoldCollectedEvent</span><span class="p">&gt;(</span><span class="n">OnGoldUpdated</span><span class="p">);</span>
+
+    <span class="k">void</span> <span class="nf">OnGoldUpdated</span><span class="p">(</span><span class="n">GoldCollectedEvent</span> <span class="n">evt</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">goldText</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s">$"Gold: </span><span class="p">{</span><span class="n">evt</span><span class="p">.</span><span class="n">CurrentGold</span><span class="p">}</span><span class="s">"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>播放音效模块</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">CoinSoundPlayer</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">void</span> <span class="nf">OnEnable</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">EventBus</span><span class="p">.</span><span class="n">Subscribe</span><span class="p">&lt;</span><span class="n">GoldCollectedEvent</span><span class="p">&gt;(</span><span class="n">_</span> <span class="p">=&gt;</span> <span class="nf">PlayCoinSound</span><span class="p">());</span>
+
+    <span class="k">void</span> <span class="nf">PlayCoinSound</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">AudioSource</span><span class="p">&gt;().</span><span class="nf">Play</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>EventBus实现</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">static</span> <span class="k">class</span> <span class="nc">EventBus</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">Delegate</span><span class="p">&gt;</span> <span class="n">eventTable</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">Subscribe</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">Action</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">listener</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">eventTable</span><span class="p">.</span><span class="nf">TryGetValue</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="k">out</span> <span class="kt">var</span> <span class="n">existingDelegate</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="n">eventTable</span><span class="p">[</span><span class="k">typeof</span><span class="p">(</span><span class="n">T</span><span class="p">)]</span> <span class="p">=</span> <span class="n">Delegate</span><span class="p">.</span><span class="nf">Combine</span><span class="p">(</span><span class="n">existingDelegate</span><span class="p">,</span> <span class="n">listener</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="n">eventTable</span><span class="p">[</span><span class="k">typeof</span><span class="p">(</span><span class="n">T</span><span class="p">)]</span> <span class="p">=</span> <span class="n">listener</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">Unsubscribe</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">Action</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">listener</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">eventTable</span><span class="p">.</span><span class="nf">TryGetValue</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="k">out</span> <span class="kt">var</span> <span class="n">existingDelegate</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">newDelegate</span> <span class="p">=</span> <span class="n">Delegate</span><span class="p">.</span><span class="nf">Remove</span><span class="p">(</span><span class="n">existingDelegate</span><span class="p">,</span> <span class="n">listener</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">newDelegate</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="n">eventTable</span><span class="p">.</span><span class="nf">Remove</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">T</span><span class="p">));</span>
+        <span class="k">else</span> <span class="n">eventTable</span><span class="p">[</span><span class="k">typeof</span><span class="p">(</span><span class="n">T</span><span class="p">)]</span> <span class="p">=</span> <span class="n">newDelegate</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">Publish</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">T</span> <span class="n">eventData</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">eventTable</span><span class="p">.</span><span class="nf">TryGetValue</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="k">out</span> <span class="kt">var</span> <span class="n">d</span><span class="p">))</span>
+        <span class="p">(</span><span class="n">d</span> <span class="k">as</span> <span class="n">Action</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;)?.</span><span class="nf">Invoke</span><span class="p">(</span><span class="n">eventData</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">ClearAll</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">eventTable</span><span class="p">.</span><span class="nf">Clear</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h2 id="耦合陷阱反例">耦合陷阱（反例）</h2>
+<ol>
+  <li>God Object</li>
+</ol>
+
+<p>所有逻辑集中于单一类，模块之间强依赖</p>
+
+<p>所谓God Object是一个职责过多、控制过多模块的类，它知道系统中几乎所有其他对象的细节，承担太多功能、拥有过多依赖<br />
+它像“上帝”一样：</p>
+<ul>
+  <li>拥有全局控制权</li>
+  <li>知道每个模块的内部状态</li>
+  <li>什么都要管，什么都要处理</li>
+</ul>
+
+<p>典型表现</p>
+<ul>
+  <li>类文件巨大</li>
+  <li>拥有大量字段和方法：涉及UI、逻辑、输入、网络、声音等多个模块</li>
+  <li>依赖多：包含多个组件、管理大量GameObject</li>
+  <li>经常与单例模式结合：通常是GameManager、MainController这种类</li>
+  <li>系统变动时频繁修改它：其他模块功能增加或修改时经常影响这个类</li>
+</ul>
+
+<p>Gob Object存在的问题</p>
+<ul>
+  <li>违背单一职责原则（SRP）：一个类处理太多功能，代码难以理解</li>
+  <li>难以维护：修改一个逻辑可能影响多个功能，容易引入bug</li>
+  <li>难以测试：不能隔离测试某一部分功能</li>
+  <li>拓展性差：新增功能需要不断修改God Object</li>
+  <li>强耦合：所有模块紧密依赖，模块无法独立更换</li>
+</ul>
+
+<p>举个例子：Unity中常见的God Object</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GameManager</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">Player</span> <span class="n">player</span><span class="p">;</span>
+    <span class="k">public</span> <span class="n">EnemyManager</span> <span class="n">enemyManager</span><span class="p">;</span>
+    <span class="k">public</span> <span class="n">UIManager</span> <span class="n">uiManager</span><span class="p">;</span>
+    <span class="k">public</span> <span class="n">AudioSource</span> <span class="n">audio</span><span class="p">;</span>
+
+    <span class="k">void</span> <span class="nf">Update</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="nf">GetKeyDown</span><span class="p">(</span><span class="n">KeyCode</span><span class="p">.</span><span class="n">P</span><span class="p">))</span> <span class="nf">PauseGame</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="n">health</span> <span class="p">&lt;=</span> <span class="m">0</span><span class="p">)</span> <span class="nf">GameOver</span><span class="p">();</span>
+
+        <span class="n">uiManager</span><span class="p">.</span><span class="nf">UpdateHealthBar</span><span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="n">health</span><span class="p">);</span>
+        <span class="n">enemyManager</span><span class="p">.</span><span class="nf">SpawnIfNeeded</span><span class="p">();</span>
+        <span class="n">audio</span><span class="p">.</span><span class="nf">Play</span><span class="p">();</span>
+        <span class="nf">SaveData</span><span class="p">();</span>
+        <span class="nf">LoadScene</span><span class="p">();</span>
+        <span class="c1">// ...管理一切</span>
+    <span class="p">}</span>
+
+    <span class="k">void</span> <span class="nf">PauseGame</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+    <span class="k">void</span> <span class="nf">GameOver</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+    <span class="k">void</span> <span class="nf">SaveData</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+    <span class="k">void</span> <span class="nf">LoadScene</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>如何避免或重构God Object</p>
+<ul>
+  <li>拆分职责：将逻辑拆分成多个独立的组件或管理类</li>
+  <li>使用接口：面向接口编程，避免过多细节暴露给主类</li>
+  <li>使用事件系统：让模块之间通过事件通信而不是直接依赖</li>
+  <li>使用状态机：将状态相关逻辑分离出去，例如FSM</li>
+  <li>避免滥用单例：使用依赖注入、组件引用替代全局访问</li>
+</ul>
+
+<p>示例：拆分成多个专责管理器</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GameManager</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="n">IGameState</span> <span class="n">state</span><span class="p">;</span>
+    <span class="k">private</span> <span class="n">IEventSystem</span> <span class="n">events</span><span class="p">;</span>
+    <span class="k">private</span> <span class="n">IAudioService</span> <span class="n">audio</span><span class="p">;</span>
+    <span class="k">private</span> <span class="n">IUIServicce</span> <span class="n">ui</span><span class="p">;</span>
+
+    <span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">state</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">GameplayState</span><span class="p">();</span>
+        <span class="n">events</span><span class="p">.</span><span class="n">Subscribe</span><span class="p">&lt;</span><span class="n">PlayerDeadEvent</span><span class="p">&gt;(</span><span class="n">OnPlayerDead</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">void</span> <span class="nf">OnPlayerDead</span><span class="p">(</span><span class="n">PlayerDeadEvent</span> <span class="n">evt</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">state</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">GameOverState</span><span class="p">();</span>
+        <span class="n">ui</span><span class="p">.</span><span class="nf">ShowGameOver</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>God Object是一种看似方便，实则代价高昂的设计<br />
+虽然在项目初期它可能加快开发，但随着功能增长，它将变成维护地狱。好的架构应当遵循SRP、低耦合、高内聚原则，鼓励模块间解耦、职责明确</p>
+
+<hr />
+
+<ol>
+  <li>静态工具类滥用</li>
+</ol>
+
+<p>静态工具类是指包含一系列静态方法、没有实例化的类。它们通常提供全局访问，且不依赖对象的状态。</p>
+
+<p>这种工具类通常用于提供一些全局的、独立于对象的功能，比如数学运算、字符串处理、文件操作等</p>
+
+<p>静态工具类滥用指的是将本应该封装在类内部的逻辑功能都放入静态类中，导致多个模块过度依赖静态类的实现细节，进而增加了系统的耦合度和维护难度</p>
+
+<p>静态工具类滥用的典型表现\</p>
+<ul>
+  <li>全局可用的静态方法：方法是静态的，可以从任何地方调用</li>
+  <li>无状态设计：静态类通常不需要实例化，任何地方都能直接调用</li>
+  <li>过多的职责：静态类承担了系统中多个模块的功能，变得越来越庞大</li>
+  <li>依赖过度：很多模块之间通过静态类共享状态或实现功能，导致紧耦合</li>
+</ul>
+
+<p>存在的问题</p>
+<ul>
+  <li>增加耦合：静态工具类通常作为全局对象，系统中各模块直接依赖它，导致模块间依赖加剧</li>
+  <li>难以测试：静态类的依赖难以模拟和替换，在单元测试中很难注入mock对象，导致测试变得困难</li>
+  <li>可维护性差：静态类没有生命周期管理，无法轻松替换，修改静态类可能影响到系统的其他部分，增加了维护难度</li>
+  <li>全局状态污染：静态类往往维护全局状态，可能在不同模块间发生意外的状态更改，导致意料之外的结果</li>
+</ul>
+
+<p>示例：静态工具类滥用</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">static</span> <span class="k">class</span> <span class="nc">GameUtils</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">SaveGameData</span><span class="p">(</span><span class="n">GameData</span> <span class="n">data</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// save data</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">LoadGameData</span><span class="p">(</span><span class="k">out</span> <span class="n">GameData</span> <span class="n">data</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// load data</span>
+        <span class="n">data</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">GameData</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">PlaySound</span><span class="p">(</span><span class="kt">string</span> <span class="n">soundName</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// play sfx</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">ShowMessage</span><span class="p">(</span><span class="kt">string</span> <span class="n">message</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// show</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">GameUtils</code> 静态类包含了与游戏数据、音效和消息展示相关的多个功能。任何地方只需要调用 <code class="language-plaintext highlighter-rouge">GameUtils.SaveGameData()</code> 或 <code class="language-plaintext highlighter-rouge">GameUtils.PlaySound()</code> 就能执行这些操作，但是这种方式导致了以下问题：</p>
+<ul>
+  <li>难以测试：无法为这些方法编写单元测试，因为它们不依赖于具体的对象</li>
+  <li>系统耦合过高：任何模块都可以直接访问这些静态方法，导致模块间的紧耦合</li>
+  <li>扩展困难：如果要添加新的功能（如新增一种保存方式或新的音效系统），需要修改<code class="language-plaintext highlighter-rouge">GameUtils</code>类，这回影响到所有依赖它的模块</li>
+</ul>
+
+<p>避免方式</p>
+<ol>
+  <li>封装功能于具体类</li>
+</ol>
+
+<p>避免将所有功能集中在一个静态类中，应该根据职责将功能分离到不同类中</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GameDataManager</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Save</span><span class="p">(</span><span class="n">GameData</span> <span class="n">data</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// 保存游戏数据</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="n">GameData</span> <span class="nf">Load</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// 加载游戏数据</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">GameData</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">AudioManager</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">PlaySound</span><span class="p">(</span><span class="kt">string</span> <span class="n">soundName</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// 播放音效</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">MessageManager</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">ShowMessage</span><span class="p">(</span><span class="kt">string</span> <span class="n">message</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// 显示消息</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>依赖注入</li>
+</ol>
+
+<p>通过DI，将类之间的依赖关系明确化，避免通过静态方法共享状态</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GameController</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">GameDataManager</span> <span class="n">dataManager</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">AudioManager</span> <span class="n">audioManager</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">MessageManager</span> <span class="n">messageManager</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="nf">GameController</span><span class="p">(</span><span class="n">GameDataManager</span> <span class="n">dataManager</span><span class="p">,</span> <span class="n">AudioManager</span> <span class="n">audioManager</span><span class="p">,</span> <span class="n">MessageManager</span> <span class="n">messageManager</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">dataManager</span> <span class="p">=</span> <span class="n">dataManager</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">audioManager</span> <span class="p">=</span> <span class="n">audioManager</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">messageManager</span> <span class="p">=</span> <span class="n">messageManager</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">SaveGame</span><span class="p">(</span><span class="n">GameData</span> <span class="n">data</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">dataManager</span><span class="p">.</span><span class="nf">Save</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">PlayGameOverSound</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">audioManager</span><span class="p">.</span><span class="nf">PlaySound</span><span class="p">(</span><span class="s">"GameOver"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">ShowGameOverMessage</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">messageManager</span><span class="p">.</span><span class="nf">ShowMessage</span><span class="p">(</span><span class="s">"Game Over"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>使用单例模式</li>
+</ol>
+
+<p>如果某些功能确实需要全局唯一的实例来管理（如音效、UI管理），可以使用单例模式，但要避免滥用</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">AudioManager</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">static</span> <span class="n">AudioManager</span> <span class="n">instance</span><span class="p">;</span>
+
+    <span class="k">private</span> <span class="nf">AudioManager</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="n">AudioManager</span> <span class="n">Instance</span> <span class="p">=&gt;</span> <span class="n">instance</span> <span class="p">??=</span> <span class="k">new</span> <span class="nf">AudioManager</span><span class="p">();</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">PlaySound</span><span class="p">(</span><span class="kt">string</span> <span class="n">soundName</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// 播放音效</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>将状态和行为分离</li>
+</ol>
+
+<p>避免在工具类中维护全局状态。如果工具类必须有状态，应考虑将行为分离到独立类中</p>
+
+<hr />
+<p>// TODO</p>
+
+<ol>
+  <li>
+    <p>Find滥用
+使用<code class="language-plaintext highlighter-rouge">GameObject.Find</code>创建隐式耦合，维护困难</p>
+  </li>
+  <li>
+    <p>单例滥用
+全局访问引起模块间共享状态混乱，耦合加剧</p>
+  </li>
+  <li>
+    <p>事件滥用
+事件过多系统难以追踪、调试</p>
+  </li>
+</ol>
+
+<h2 id="总结">总结</h2>
+<p>松耦合是一种重要的架构思想，在Unity开发中具有实际意义</p>
+
+<p>通过事件机制、接口抽象、ScriptableObject和事件聚合器等手段，可以构建出更加灵活、可维护、可扩展的系统</p>
+
+<p><strong>解耦不是目的，而是为应对复杂性而采取的策略</strong></p>
 
         
       </section>
