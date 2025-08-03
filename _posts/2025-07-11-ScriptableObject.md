@@ -93,8 +93,88 @@ public abstract class State : ScriptableObject
 ```
 
 3. 对象池
-在对象池模式中，`ScriptableObject`可以用来存储池中对象的配置和初始化数据
-// TODO
+在对象池模式中，`ScriptableObject`可以用来存储池中对象的配置和初始化数据，尤其是当希望将对象池的某些配置（例如对象的预设、初始化数量等）于对象池的管理逻辑分离时，这样做可以提高代码的可重用性、灵活性和维护性
+
+通过将对象池的配置数据存储在`ScriptableObject`中，我们可以方便地管理和修改池的配置，且无需修改池的实现代码。这种方式将数据和逻辑分离，符合单一职责原则
+
+创建配置的ScriptableObject
+```cs
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "ObjectPoolConfig", menuName = "ScriptableObjects/ObjectPoolConfig", order = 1)]
+public class ObjectPoolConfig : ScriptableObject
+{
+    [Header("Pool Settings")]
+    [SerializeField] private GameObject prefab; // 池中对象的预制体
+    [SerializeField] private int initialSize = 10; // 初始池大小
+    [SerializeField] private int maxSize = 20; // 池的最大容量
+
+    public GameObject Prefab => prefab;
+    public int InitialSize => initialSize;
+    public int MaxSize => maxSize;
+}
+```
+这个`ScriptableObject`负责存储对象池的配置信息，包括池中的对象预设、初始大小和最大容量
+
+对象池实现
+```cs
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ObjectPool : MonoBehaviour
+{
+    [serializeField] private ObjectPoolConfig poolConfig; // 引用配置文件
+    private Queue<GameObject> pool = new Queue<GameObject>(); // 对象池
+
+    // 初始化对象池
+    public void Initialize()
+    {
+        for (int i = -; i < poolConfig.InitialSize; ++i)
+        {
+            GameObject obj = Instantiate(poolConfig.Prefab);
+            obj.SetActive(false); // 对象默认不可见
+            pool.Enqueue(obj);
+        }
+    }
+
+    // 获取一个对象
+    public GameObject GetObject()
+    {
+        if (pool.Count > 0)
+        {
+            GameObject obj = pool.Dequeue();
+            obj.SetActive(true); // 激活对象
+            return obj;
+        }
+        else if (pool.Count < poolConfig.MaxSize) // 超过池的最大容量时不再创建新对象
+        {
+            GameObject obj = Instantiate(poolConfig.Prefab);
+            obj.SetActive(true);
+            return obj;
+        }
+        else return null; // 如果池已满，返回null
+    }
+
+    // 回收对象
+    public void ReturnObject(GameObject obj)
+    {
+        obj.SetActive(false); // 禁用对象
+        pool.Enqueue(obj); // 放回池中
+    }
+}
+```
+这里，`ObjectPool`类引用了`ObjectPoolConfig`来获取对象池的配置信息，这样只需要通过编辑器调整`ObjectPoolConfig`的参数，就可以轻松控制对象池的行为
+
+在Unity编辑器中，右键点击`Assets`目录，选择`Create > ScriptableObjects > ObjectPoolConfig`来创建一个新的`ObjectPoolConfig`文件，然后配置其中的属性
+
+接着，将这个`ObjectPoolConfig`文件拖到`ObjectPool`脚本的`poolConfig`字段中，Unity就会在运行时使用这些配置来初始化对象池
+
+优点
+- 灵活配置：直接在Inspector中修改参数
+- 代码解耦：将配置和池逻辑分开，提高代码的可维护性，修改配置不用修改对象池的实现
+- 复用性：同一个配置可被多个对象池实例共享，不需要每个对象池都重复定义相同的配置
+- 可扩展性，可以通过`ScriptableObject`调整对象池的性能，初始化逻辑等
+
 
 4. 作为配置和消息中介
 // TODO
