@@ -1,5 +1,5 @@
 ---
-title: "Service Locator"
+title: "Mono and IL2CPP"
 layout: single
 date: 2025-06-01
 categories: [笔记]
