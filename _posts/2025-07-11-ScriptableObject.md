@@ -176,8 +176,68 @@ public class ObjectPool : MonoBehaviour
 - 可扩展性，可以通过`ScriptableObject`调整对象池的性能，初始化逻辑等
 
 
-4. 作为配置和消息中介
-// TODO
+4. 作为消息中介
+`ScriptableObject`可以用作消息中介，作为不同模块之间的通信桥梁。这种方式可以有效地解耦各个模块，使它们不直接依赖于彼此，提高系统灵活性和可维护性
+
+实现一个简单的游戏事件系统，允许不同的系统之间传递消息
+
+自定义消息中介ScriptableObject\
+```cs
+using UnityEngine;
+using UnityEngine.Events;
+
+[CreateAssetMenu(fileName = "GameEvent", menuName = "ScriptableObjects/GameEvent", order = 2)]
+public class GameEvent : ScriptableObject
+{
+    private readonly List<UnityAction> listeners = new List<UnityAction>();
+
+    // 注册监听器
+    public void RegisterListener(UnityAction listener) => listeners.Add(listener);
+
+    // 移除监听器
+    public void UnregisterListener(UnityAction listener) => listeners.Remove(listener);
+
+    // 触发事件
+    public void Raise() => foreach (var listener in listeners) listener.Invoke();
+}
+```
+`GameEvent`作为消息中介，维护一个监听器列表。当事件触发时，它会通知所有注册的监听器。监听器可以是任何方法，只要它们符合`UnityAction`委托的签名\
+自其他脚本中注册和触发事件
+```cs
+using UnityEngine;
+
+public class Player : MonoBehaviour
+{
+    [SerializeField] private GameEvent playerHurtEvent;
+
+    public void TakeDamage(int damage)
+    {
+        // 角色受伤
+        Debug.Log("Player took damage: " + damage);
+
+        // 触发受伤事件
+        playerHurtEvent.Raise();
+    }
+}
+
+public class UIManager : MonoBehaviour
+{
+    [SerializeField] private GameEvent playerHurtEvent;
+
+    void OnEnable() => playerHurtEvent.RegisterListener(OnPlayerHurt); // 注册监听事件
+
+    void OnDisable() => playerHurtEvent.UnregisterListener(OnPlayerHurt); // 移除事件监听
+
+    void OnPlayerHurt() => Debug.Log("Player hurt, update UI"); // 响应受伤事件
+}
+```
+在`Player`脚本中，角色受到伤害时触发`playerHurtEvent`事件，在`UIManager`中，注册了这个事件，并在事件触发时更新UI
+
+优点
+- 解耦：`ScriptableObject`充当事件的中介，避免系统之间的直接依赖关系，使得模块之间的通信变得松耦合
+- 灵活性：可以轻松添加或移除事件监听器，而不需要改变系统的其他部分
+- 易于扩展：可以通过多个`ScriptabelObject`实现不同的事件，从而扩展事件系统，支持多种类型的事件
+
 
 ## 注意事项
 - 生命周期管理：`ScriptableObject`不是MonoBehaviour，它并不绑定到游戏对象上，因此它的生命周期需要手动管理
