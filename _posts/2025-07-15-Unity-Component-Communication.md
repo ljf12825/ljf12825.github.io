@@ -119,6 +119,73 @@ void ApplyDamage(GameObject target)
 
 它提供了一种可视化、无代码的方式来绑定事件
 
+### 基本概念
+`UnityEvent`是一个泛型类，继承自`UnityEventBase`，允许开发者创建可以在运行时调用的事件。与传统的C#委托不同，`UnityEvent`的优点在于它可以在Inspector面板中绑定方法
+
+### 声明与使用
+声明\
+首先，可以在MonoBehaviour类中声明一个`UnityEvent`类型的成员变量，并且为它指定相应的泛型参数，表明事件需要传递哪些类型的参数
+```cs
+using UnityEngine;
+using UnityEngine.Events;
+
+public class EventExample : MonoBehaviour
+{
+    // 声明一个不带参数的UnityEvent
+    public UnityEvent onClick;
+
+    // 声明一个带整数参数的UnityEvent
+    public UnityEvent<int> onScoreUpdated;
+
+    void Start()
+    {
+        // 通过代码手动触发事件
+        if (onClick != null) onClick.Invoke();
+
+        // 触发带参数的事件
+        if (onScoreUpdated != null) onScoreUpdated.Invoke(100);
+    }
+}
+```
+
+绑定事件\
+在Unity编辑器中，`UnityEvent`会自动出现在Inspector面板中。可以直接拖拽对象、选择方法进行绑定，方法签名要与事件的参数类型一致
+
+### 事件类型
+`UnityEvent`可以有不同的类型，具体由传入的泛型来定义。常见的类型包括
+- 无参事件：`UnityEvent`
+- 带参数事件：`UnityEvent<int>`,`UnityEvent<float>`,`UnityEvent<string>`等
+- 多参数事件：`UnityEvent<int, string>`,`UnityEvent<Vector3, bool>等
+
+### 事件的调用与触发
+事件的调用可以通过`Invoke()`方法来触发，也可以在方法中根据具体逻辑判断是否触发事件
+
+例如，在物体碰撞时触发事件
+```cs
+void OnTriggerEnter(Collider other)
+{
+    // 只有在触发器碰到特定的物体时，才触发事件
+    if (other.CompareTag("Player"))
+    {
+        if (onClick != null) onClick.Invoke();
+    }
+}
+```
+
+### UnityEvent与C#委托的区别
+- 灵活性：`UnityEvent`可以通过Inspector绑定和设置，而C#委托需要在代码中显式地进行订阅和触发
+- 可视化支持：`UnityEvent`使得事件的订阅可以在编辑器中完成，不需要修改代码，而委托则需要写代码来添加和移除事件处理程序
+
+### UnityEvent性能
+虽然`UnityEvent`非常方便，但它相比于传统的C#委托来说，存在一些性能开销，尤其是在大量事件触发和监听的场景下。因此，在需要高性能的情况下，可能更适合使用C#委托
+
+### Unity与序列化
+`UnityEvent`是序列化的，因此它可以存储在ScriptableObject中，这使得可以在多个场景中重用事件逻辑，并且可以让事件的响应由数据驱动
+```cs
+[System.Serializable]
+public class MyGameEvent : UnityEvent<int, string> {}
+```
+
 优点
 - 易于设置和使用
 - 适用于编辑器，支持Inspector中的可视化部署
