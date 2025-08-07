@@ -264,6 +264,53 @@ C#原生的委托和事件是灵活且强大的通信方式，它提供了一种
 
 这种方式并不要求目标对象实现特定的接口或类，比较灵活，但它是通过反射实现的，因此性能较差
 
+### `SendMessage()`
+`SendMessage()`方法用于向对象上的所有组件发送消息，它会尝试调用指定名称的方法。消息通过字符串名称传递，因此在调用时不需要直接引用方法，允许动态调用方法。这种方式适用于不关心具体实现，只想告诉对象某个事件发生的情况
+```cs
+gameObject.SendMessage("MethodName", parameter)
+```
+- `MethodName`：目标方法的名称（字符串形式）
+- `parameter`：可选的参数，传递给目标方法。如果目标方法不需要参数，可以忽略
+
+**示例**\
+假设有一个`Player`类和一个`Enemy`类，希望通过`SendMessage()`让`Enemy`知道`Player`受到伤害\
+class `Player`
+```cs
+using UnityEngine;
+
+public class Palyer : MonoBehaviour
+{
+    public int health = 100;
+
+    // 用于调用SendMessage()方法
+    public void TakeDamage(int damage)
+    {
+        health -= damamge;
+        Debug.Log($"Player takes {damage} damage, current health: {health}");
+    }
+}
+```
+
+class `Enemy`
+```cs
+using UnityEngine;
+
+public class Enemy : MonoBehaviour
+{
+    void Start()
+    {
+        // 使用SendMessage()发送消息
+        GameObject player = GameObject.Find("Player");
+        player.SendMessage("TakeDamage", 10); // 向Player发送消息并传递伤害值
+    }
+}
+```
+在这个例子中，`Enemy`会在`Start()`方法中向`Player`发送`TakeDamage`消息，并传递一个伤害值。`Player`会在收到这个消息后执行相应逻辑
+
+注意：
+- 如果没有找到目标方法：`SendMessage()`会输出错误信息，因此在编写代码时需要确保目标方法的名称拼写正确
+- `SendMessage()`是基于反射的，调用过程相对较慢，所以不建议在高频次的地方更新方法（如`Update()`中使用）
+
 优点
 - 很灵活，可以动态调用
 - 不需要目标对象实现特定接口或类
