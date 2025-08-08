@@ -5,6 +5,7 @@ date: 2025-06-01
 categories: [笔记]
 tags: [Unity, Syntax]
 author: "ljf12825"
+permalink: /posts/2025-07-10-Attribute-in-Unity/
 ---
 Unity中的特性用于控制Unity编译器的行为，或者用于运行时特定的逻辑
 
