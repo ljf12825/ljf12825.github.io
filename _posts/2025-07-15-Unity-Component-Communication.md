@@ -311,6 +311,71 @@ public class Enemy : MonoBehaviour
 - 如果没有找到目标方法：`SendMessage()`会输出错误信息，因此在编写代码时需要确保目标方法的名称拼写正确
 - `SendMessage()`是基于反射的，调用过程相对较慢，所以不建议在高频次的地方更新方法（如`Update()`中使用）
 
+### `BroadcastMessage()`
+`BroadcastMessage()`方法类似于`SendMessage()`，但它会将消息发送到所有该对象上的组件，甚至包括所有子对象上的组件。这使得它特别适合在需要向一个对象的所有子组件广播事件时使用
+```cs
+gameObject.BroadcastMessage("MethodName", parameter);
+```
+- `MethodName`：目标方法的名称（字符串形式）
+- `parameter`：可选参数，传递给目标方法
+
+**示例**\
+假设有一个`Player`对象和多个子物体（比如装备、武器等），希望通知所有子物体执行某个行为。例如，当`Player`受到伤害时，所有子物体的特效和音效应该播放\
+class `Player`
+```cs
+using UnityEngine;
+
+public class Player : MonoBehaviour
+{
+    public int health = 100;
+
+    // 用于调用BroadcastMessage()的方法
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        Debug.Log($"Player takes {damage} damage, current health : {health}");
+
+        BroadcastMessage("OnPlayerDamaged", health);
+    }
+}
+```
+class `Weapon`（子对象）
+```cs
+using UnityEngine;
+
+public class Weapon : MonoBehaviour
+{
+    // 接收消息的方法
+    void OnPlayerDamage(int health) => Debug.Log($"Weapon reacting to damage, Player's current health: {health}");
+}
+```
+class `Shield`（子对象）
+```cs
+using UnityEngine;
+
+public class Shield : MonoBehaviour
+{
+    // 接收消息的方法
+    void OnPlayerDamage(int health) => Debug.Log($"Shield reacting to damage, Player's current health: {health}");
+}
+```
+场景中的GameObject\
+这个例子中，`Player`受到伤害时，会向它的所有子对象发送`OnPlayerDamaged`消息，并传递玩家当前生命值。所有子物体（例如`Weapon`和`Shield`）都可以根据这个信息作出反应
+
+注意：\
+- `BroadcastMessage()`会发送给所有子物体上的相同名称的方法，所以子物体必须实现该方法。如果某个子物体没有实现目标方法，它会收到一个错误信息
+- `BroadcastMessage()`也是基于反射的，因此性能开销大。需要避免在性能敏感的地方频繁调用
+
+### `SendMessage()` vs `BroadcastMessage()`
+
+| 特性         | `SendMessage()` | `BroadcastMessage()` |
+| ---------- | --------------- | -------------------- |
+| **目标对象**   | 只发送给目标对象本身      | 发送给目标对象及其所有子对象       |
+| **使用场景**   | 适用于单一对象的消息传递    | 适用于向所有子对象发送消息        |
+| **消息发送方式** | 发送给指定对象的指定方法    | 发送给对象及其所有子对象的相同方法    |
+| **性能开销**   | 相对较高，基于反射       | 性能开销更大，因为需要遍历所有子对象   |
+| **方法要求**   | 目标方法需要匹配名称和参数   | 子物体的所有方法都需要匹配名称和参数   |
+
 优点
 - 很灵活，可以动态调用
 - 不需要目标对象实现特定接口或类
@@ -322,12 +387,3 @@ public class Enemy : MonoBehaviour
 
 适用场景
 - 仅在特殊情况下，避免使用
-
-| 通信方式                                       | 类型     | 是否推荐   | 示例                                                 |
-| ------------------------------------------ | ------ | ------ | -------------------------------------------------- |
-| `GetComponent<T>()` 直接调用                   | 显式调用   |  推荐   | `GetComponent<Health>().TakeDamage(10);`           |
-| `UnityEvent`                               | 事件系统   |  推荐   | 在 Inspector 中绑定事件                                  |
-| C# 委托/事件 (`delegate`, `event`)             | 原生 C#  |  推荐   | `public event Action OnDead;`                      |
-| 接口调用（如 `IDamageable`）                      | 解耦方式   |  推荐   | `target.GetComponent<IDamageable>()?.TakeDamage()` |
-| `ScriptableObject` 事件                      | 高级数据驱动 |  推荐   | Game-wide event bus                                |
-| **`SendMessage()` / `BroadcastMessage()`** | 反射调用   |  不推荐 | `SendMessage("Explode")`                           |
