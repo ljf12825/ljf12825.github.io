@@ -253,6 +253,26 @@
 </code></pre></div></div>
 <p>Bullet不关心对象是不是Enemy，只在乎能不能被“伤害”</p>
 
+<p>优点：</p>
+<ol>
+  <li>
+    <p>松耦合
+接口使得组件之间的耦合性降到最低。<code class="language-plaintext highlighter-rouge">Bullet</code>类并不知道<code class="language-plaintext highlighter-rouge">Enemy</code>类的实现细节，它只关心<code class="language-plaintext highlighter-rouge">Enemy</code>是否实现了<code class="language-plaintext highlighter-rouge">IDamageable</code>接口。这使得组件之间可以灵活地进行替换和扩展</p>
+  </li>
+  <li>
+    <p>可扩展性
+如果以后需要增加新的可伤害对象，只需要让新的类实现<code class="language-plaintext highlighter-rouge">IDamageable</code>接口，而不需要修改已有的<code class="language-plaintext highlighter-rouge">Enemy</code>类</p>
+  </li>
+  <li>
+    <p>可维护性
+当项目需要调整某些行为时，接口提供了一个良好的抽象层。例如，如果要改变<code class="language-plaintext highlighter-rouge">Bullet</code>伤害计算方式，只需要修改<code class="language-plaintext highlighter-rouge">Bullet</code>类，而不需要影响到其他类的交互</p>
+  </li>
+  <li>
+    <p>灵活性
+接口可以被用作插件或模块化系统的基础。比如，游戏中有多个物品类型，它们都可能具有被攻击的行为。可以创建一个<code class="language-plaintext highlighter-rouge">IDamageable</code>接口，让这些物品实现不同的伤害逻辑，而不需要知道具体类型</p>
+  </li>
+</ol>
+
 <h2 id="unity中面向接口设计的典型架构模式">Unity中面向接口设计的典型架构模式</h2>
 
 <table>

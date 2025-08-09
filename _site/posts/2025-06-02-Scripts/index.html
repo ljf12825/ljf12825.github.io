@@ -216,188 +216,306 @@
   </tbody>
 </table>
 
-<h3 id="monobehaviour的派生类"><code class="language-plaintext highlighter-rouge">MonoBehaviour</code>的派生类</h3>
-<ul>
-  <li>必须挂载在场景中的GameObject上</li>
-  <li>用于控制逻辑、角色行为、输入响应等</li>
-  <li>有生命周期函数</li>
-</ul>
-
-<h3 id="scriptableobject是数据容器"><code class="language-plaintext highlighter-rouge">ScriptableObject</code>是数据容器</h3>
-<ul>
-  <li>轻量级对象，不需要挂载，常用于数据复用（如技能表、配置表）</li>
-  <li>支持序列化，可以做成asset文件</li>
-  <li>没有生命周期函数，但可以在<code class="language-plaintext highlighter-rouge">OnEnable()</code>做初始化</li>
-  <li>更节省内存，不依赖场景</li>
-</ul>
-
-<h3 id="纯c类">纯C#类</h3>
-<ul>
-  <li>用于封装工具、算法、模型等逻辑（如A*算法、存档系统）</li>
-  <li>不支持Unity生命周期和序列化</li>
-  <li>适合在<code class="language-plaintext highlighter-rouge">MonoBehaviour</code>或<code class="language-plaintext highlighter-rouge">ScriptableObject</code>中调用</li>
-</ul>
-
-<h2 id="脚本和inspector的关系">脚本和Inspector的关系</h2>
-<p>可以使用<code class="language-plaintext highlighter-rouge">[SerializeField]</code>、<code class="language-plaintext highlighter-rouge">public</code>来让字段在Inspector中显示</p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="kt">float</span> <span class="n">speed</span> <span class="p">=</span> <span class="m">5f</span><span class="p">;</span>
-
-<span class="p">[</span><span class="n">SerializeField</span><span class="p">]</span>
-<span class="k">private</span> <span class="n">GameObject</span> <span class="n">bulletPrefab</span><span class="p">;</span>
-</code></pre></div></div>
-<p>然后在Inspector中手动拖拽引用，或者编辑数值，来调整游戏行为</p>
-
-<h2 id="脚本间通信引用其他组件">脚本间通信（引用其他组件）</h2>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="n">Rigidbody</span> <span class="n">rb</span> <span class="p">=</span> <span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">Rigidbody</span><span class="p">&gt;();</span>
-    <span class="n">rb</span><span class="p">.</span><span class="n">velocity</span> <span class="p">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">up</span> <span class="p">*</span> <span class="m">10</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>也可以访问其他GameObject:</p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="n">GameObject</span> <span class="n">enemy</span><span class="p">;</span>
-
-<span class="k">void</span> <span class="nf">Update</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">enemy</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="nf">LookAt</span><span class="p">(</span><span class="n">transform</span><span class="p">);</span>
-</code></pre></div></div>
-
-<h2 id="基类-monobehaviour">基类: MonoBehaviour</h2>
-<p><a href="/posts/2025-07-11-MonoBehaviour/">MonoBehaviour</a></p>
-
-<h3 id="继承自monobehaviour类的工作原理">继承自MonoBehaviour类的工作原理</h3>
-<ul>
-  <li>Unity使用反射系统查找是否存在<code class="language-plaintext highlighter-rouge">Start()</code>、<code class="language-plaintext highlighter-rouge">Update()</code>等函数，并在对应阶段自动调用它们</li>
-  <li><code class="language-plaintext highlighter-rouge">MonoBehaviour</code>的生命周期与GameObject的启用状态强关联：
-    <ul>
-      <li>如果GameObject被禁用，生命周期函数不会运行</li>
-      <li>如果脚本本身被禁用，生命周期函数也不会被调用</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="c如何运行这些脚本">C#如何运行这些脚本</h3>
-<ul>
-  <li>将脚本挂载某个GameObject上</li>
-  <li>Unity引擎自动为这个类创建实例（托管对象）</li>
-  <li>Unity每帧调用该实例的生命周期函数</li>
-</ul>
-
-<p>完全由Unity托管</p>
-
-<h2 id="scriptableobject数据驱动">ScriptableObject（数据驱动）</h2>
-<p><code class="language-plaintext highlighter-rouge">ScriptableObject</code> 是 Unity 中的一个重要类，用于存储共享的、可序列化的数据，而无需将数据绑定到具体的场景或 GameObject 上。它是继承自 UnityEngine.Object 的一种轻量级的、可持久化的类，适合用于定义配置数据、全局变量、数据模板等。</p>
-
-<h3 id="scriptableobject的常见用途">ScriptableObject的常见用途</h3>
-<ul>
-  <li>配置文件（如技能、道具、怪物数据等）</li>
-  <li>全局设置（如游戏设置、控制配置）</li>
-  <li>数据资产（如对话文本、地图配置）</li>
-  <li>状态管理（如状态机状态定义）</li>
-</ul>
-
-<h3 id="示例创建一个技能数据的scriptableobject">示例：创建一个技能数据的ScriptableObject</h3>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
-<span class="p">[</span><span class="nf">CreateAssetMenu</span><span class="p">(</span><span class="n">fileName</span> <span class="p">=</span> <span class="s">"NewSkill"</span><span class="p">,</span> <span class="n">menuName</span> <span class="p">=</span> <span class="s">"RPG/Skill"</span><span class="p">)]</span>
-<span class="k">public</span> <span class="k">class</span> <span class="nc">Skill</span> <span class="p">:</span> <span class="n">ScriptableObject</span>
-<span class="p">{</span>
-    <span class="k">public</span> <span class="kt">string</span> <span class="n">skillName</span><span class="p">;</span>
-    <span class="k">public</span> <span class="kt">int</span> <span class="n">power</span><span class="p">;</span>
-    <span class="k">public</span> <span class="kt">float</span> <span class="n">cooldown</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<ul>
-  <li>[CreateAssetMenu]方便在编译器中通过菜单创建资源</li>
-  <li>定义你想要保存的数据字段
-使用步骤：<br />
-1.把上述脚本命名为<code class="language-plaintext highlighter-rouge">Skill.cs</code> <br />
-2.在Unity编辑器中，右键-&gt;Create-&gt;RPG-&gt;Skill，即可创建一个Skill数据文件<br />
-3.你可以创建多个Skill数据文件，并在多个对象中引用它们，节省内存和维护成本</li>
-</ul>
-
-<p>在代码中使用ScriptableObject</p>
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">SkillUser</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
-<span class="p">{</span>
-    <span class="k">public</span> <span class="n">Skill</span> <span class="n">skill</span><span class="p">;</span> <span class="c1">// 在Inspector中拖拽刚才创建的Skill资源</span>
-
-    <span class="k">void</span> <span class="nf">UseSkill</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">$"使用技能：</span><span class="p">{</span><span class="n">skill</span><span class="p">.</span><span class="n">skillName</span><span class="p">}</span><span class="s">, 伤害：</span><span class="p">{</span><span class="n">skill</span><span class="p">.</span><span class="n">power</span><span class="p">}</span><span class="s">"</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<h3 id="scriptableobject高级用法">ScriptableObject高级用法</h3>
 <ol>
-  <li>
-    <p>用它做游戏配置数据
-比如怪物属性、武器数据、UI 配置，都可以用 ScriptableObject 做成资产文件。</p>
-  </li>
-  <li>
-    <p>数据驱动设计（Data-Driven）
-通过 ScriptableObject 分离数据和逻辑，修改数据时不用改代码，方便调试和迭代。</p>
-  </li>
-  <li>
-    <p>状态机状态定义
-做 AI 或动画状态机时，每个状态可以是一个 ScriptableObject，对应一组数据和行为。</p>
-  </li>
-  <li>
-    <p>事件系统和观察者模式
-结合 UnityEvent 或自定义事件，ScriptableObject 能充当“事件资产”，实现跨对象通信。</p>
+  <li><code class="language-plaintext highlighter-rouge">MonoBehaviour</code>（行为脚本）
+    <ul>
+      <li>必须挂载在场景中的GameObject上</li>
+      <li>用于控制逻辑、角色行为、输入响应等</li>
+      <li>有生命周期函数</li>
+      <li>支持协程</li>
+    </ul>
   </li>
 </ol>
 
-<h3 id="scriptableobject的高级技巧">ScriptableObject的高级技巧</h3>
+<p><strong>适用场景</strong></p>
+<ol>
+  <li>角色控制器（移动、跳跃、攻击）</li>
+  <li>UI交互逻辑</li>
+  <li>游戏状态管理</li>
+  <li>物理交互处理</li>
+  <li>
+    <p>动画状态控制</p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">ScriptableObject</code>（数据容器）
+    <ul>
+      <li>轻量级对象，不需要挂载，常用于数据复用（如技能表、配置表）</li>
+      <li>支持序列化，可以做成asset文件</li>
+      <li>没有生命周期函数，但可以在<code class="language-plaintext highlighter-rouge">OnEnable()</code>做初始化</li>
+      <li>更节省内存，场景切换时不会被销毁</li>
+    </ul>
+  </li>
+</ol>
+
+<p><strong>核心优势</strong></p>
 <ul>
-  <li>避免重复加载资源：多个对象引用同一个ScriptableObject，可以减少重复实例化</li>
-  <li>与事件系统结合：搭配<code class="language-plaintext highlighter-rouge">UnityEvent</code>或观察者模式，可以做数据驱动的游戏逻辑</li>
-  <li>与Addressables结合：更好地支持热更新和资源管理</li>
+  <li>内存高效：不依赖场景、按需加载</li>
+  <li>数据复用：同一资源可被多个对象共享</li>
+  <li>热重载：运行时修改自动同步</li>
+  <li>版本友好：资源文件便于版本控制</li>
 </ul>
 
-<h2 id="unity-attribute">Unity Attribute</h2>
+<ol>
+  <li>纯C#类（工具类）
+    <ul>
+      <li>用于封装工具、算法、模型等逻辑（如A*算法、存档系统）</li>
+      <li>不支持Unity生命周期和序列化</li>
+      <li>由其他脚本调用，解耦业务逻辑</li>
+    </ul>
+  </li>
+</ol>
+
+<p><strong>适用场景</strong></p>
+<ol>
+  <li>实现复杂算法</li>
+  <li>数据模型定义</li>
+  <li>工具类库</li>
+  <li>设计模式实现</li>
+</ol>
+
+<p><strong>优化技巧</strong></p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// 使用partial类拆分大型工具类</span>
+  <span class="k">public</span> <span class="k">partial</span> <span class="k">class</span> <span class="nc">MathUtility</span>
+  <span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="n">Vector3</span> <span class="nf">CalculateBazierPoint</span><span class="p">(...){</span> <span class="p">...</span> <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">public</span> <span class="k">partial</span> <span class="k">class</span> <span class="nc">MathUtility</span>
+  <span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="n">Quaternion</span> <span class="nf">SmoothDampRoatation</span><span class="p">(...){</span> <span class="p">...</span> <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// 使用扩展方法增强现有功能</span>
+  <span class="k">public</span> <span class="n">staitc</span> <span class="k">class</span> <span class="nc">TransformExtensions</span>
+  <span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Reset</span><span class="p">(</span><span class="k">this</span> <span class="n">Transform</span> <span class="n">transform</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">transform</span><span class="p">.</span><span class="n">position</span> <span class="p">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">zero</span><span class="p">;</span>
+      <span class="n">transform</span><span class="p">.</span><span class="n">rotation</span> <span class="p">=</span> <span class="n">Quaternion</span><span class="p">.</span><span class="n">identity</span><span class="p">;</span>
+      <span class="n">transform</span><span class="p">.</span><span class="n">localScale</span> <span class="p">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">one</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="变量声明">变量声明</h2>
+<p>在Unity C#脚本中，变量声明是定义数据存储位置的基本方式。变量可以存储各种类型的数据，如数字、文本、布尔值、引用游戏对象等</p>
+
+<p><strong>基本语法</strong>\</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="err">访问修饰符</span><span class="p">]</span> <span class="p">[</span><span class="err">数据类型</span><span class="p">]</span> <span class="p">[</span><span class="err">变量名</span><span class="p">]</span> <span class="p">[=</span> <span class="err">初始值</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p><strong>访问修饰符</strong>\</p>
 
 <table>
   <thead>
     <tr>
-      <th>特性名称</th>
-      <th>用途说明</th>
-      <th>示例</th>
+      <th>修饰符</th>
+      <th>Inspector 可见</th>
+      <th>其他脚本可访问</th>
+      <th>用途</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">[SerializeField]</code></td>
-      <td>让私有字段在 Inspector 面板可见且可编辑</td>
-      <td><code class="language-plaintext highlighter-rouge">private int hp;</code> + <code class="language-plaintext highlighter-rouge">[SerializeField]</code></td>
+      <td><code class="language-plaintext highlighter-rouge">public</code></td>
+      <td>可见</td>
+      <td>可访问</td>
+      <td>对外公开变量（慎用）</td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">[HideInInspector]</code></td>
-      <td>隐藏公有字段或属性，不显示在 Inspector 面板</td>
-      <td><code class="language-plaintext highlighter-rouge">public float speed;</code> + <code class="language-plaintext highlighter-rouge">[HideInInspector]</code></td>
+      <td><code class="language-plaintext highlighter-rouge">private</code></td>
+      <td>不可见（默认）</td>
+      <td>不可访问</td>
+      <td>仅类内部使用</td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">[Range(min, max)]</code></td>
-      <td>在 Inspector 显示滑动条控制数值范围</td>
-      <td><code class="language-plaintext highlighter-rouge">[Range(0, 100)] public int volume;</code></td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">[Header("标题")]</code></td>
-      <td>给 Inspector 中的字段添加标题分组</td>
-      <td><code class="language-plaintext highlighter-rouge">[Header("Player Settings")] public int hp;</code></td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">[Tooltip("说明")]</code></td>
-      <td>鼠标悬停字段时显示提示文本</td>
-      <td><code class="language-plaintext highlighter-rouge">[Tooltip("Player health points")] public int hp;</code></td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">[ContextMenu("方法名")]</code></td>
-      <td>在 Inspector 的组件右上菜单调用方法</td>
-      <td><code class="language-plaintext highlighter-rouge">[ContextMenu("Reset Stats")] void Reset() { ... }</code></td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">[CreateAssetMenu]</code></td>
-      <td>在编辑器菜单创建 ScriptableObject 资产</td>
-      <td><code class="language-plaintext highlighter-rouge">[CreateAssetMenu(menuName="RPG/Skill")]</code></td>
+      <td><code class="language-plaintext highlighter-rouge">[SerializeField] private</code></td>
+      <td>可见</td>
+      <td>不可访问</td>
+      <td>私有但可在 Inspector 编辑</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="unity自带命名空间">Unity自带命名空间</h2>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="kt">int</span> <span class="n">score</span> <span class="p">=</span> <span class="m">9</span><span class="p">;</span> <span class="c1">// 可见且可访问</span>
+<span class="k">private</span> <span class="kt">float</span> <span class="n">health</span> <span class="p">=</span> <span class="m">100f</span><span class="p">;</span> <span class="c1">// 完全私有</span>
+<span class="p">[</span><span class="n">SerializeField</span><span class="p">]</span> <span class="k">private</span> <span class="kt">float</span> <span class="n">moveSpeed</span> <span class="p">=</span> <span class="m">5f</span><span class="p">;</span> <span class="c1">// Inspector可见但外部不可改</span>
+</code></pre></div></div>
+
+<p><strong>数据类型</strong>\</p>
+<ul>
+  <li>基本数据类型：<code class="language-plaintext highlighter-rouge">int</code>,<code class="language-plaintext highlighter-rouge">float</code>,<code class="language-plaintext highlighter-rouge">bool</code>,<code class="language-plaintext highlighter-rouge">string</code>等</li>
+  <li><a href="/posts/2025-06-03-Unity-Build-in-Types/">Unity Build in Types</a></li>
+</ul>
+
+<p><strong>变量特性</strong><br />
+<a href="/posts/2025-07-10-Attribute-in-Unity/">Attribute in Unity</a></p>
+
+<h2 id="脚本间通信引用其他组件">脚本间通信（引用其他组件）</h2>
+<p><a href="/posts/2025-07-15-Unity-Component-Communication/">Unity Component Communication</a></p>
+
+<h2 id="基类-monobehaviour">基类: MonoBehaviour</h2>
+<p><a href="/posts/2025-07-11-MonoBehaviour/">MonoBehaviour</a></p>
+
+<h2 id="scriptableobject数据驱动">ScriptableObject（数据驱动）</h2>
+<p><a href="/posts/2025-07-11-ScriptableObject/">ScriptableObject</a></p>
+
+<h2 id="变量管理策略">变量管理策略</h2>
+<h3 id="序列化控制">序列化控制</h3>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 条件序列化</span>
+<span class="p">[</span><span class="n">SerializeField</span><span class="p">]</span>
+<span class="k">private</span> <span class="kt">bool</span> <span class="n">useAdvancedSettings</span><span class="p">;</span>
+<span class="p">[</span><span class="n">SerializeField</span><span class="p">,</span> <span class="nf">ShowIf</span><span class="p">(</span><span class="s">"useAdvancedSettings"</span><span class="p">)]</span>
+<span class="k">private</span> <span class="kt">float</span> <span class="n">advancedParameter</span><span class="p">;</span>
+
+<span class="c1">// 多态序列化</span>
+<span class="p">[</span><span class="n">SerializeReference</span><span class="p">]</span>
+<span class="k">public</span> <span class="n">IWeapon</span> <span class="n">currentWeapon</span><span class="p">;</span> <span class="c1">// 可序列化接口</span>
+</code></pre></div></div>
+
+<h3 id="组织技巧">组织技巧</h3>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">System</span><span class="p">.</span><span class="n">Serializable</span><span class="p">]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">CharacterStats</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="kt">float</span> <span class="n">health</span><span class="p">;</span>
+  <span class="k">public</span> <span class="kt">float</span> <span class="n">stamina</span><span class="p">;</span>
+  <span class="k">public</span> <span class="kt">float</span> <span class="n">attackPower</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Player</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+  <span class="p">[</span><span class="nf">BoxGroup</span><span class="p">(</span><span class="s">"基础属性"</span><span class="p">)]</span>
+  <span class="k">public</span> <span class="n">CharacterStats</span> <span class="n">baseStats</span><span class="p">;</span>
+
+  <span class="p">[</span><span class="nf">BoxGroup</span><span class="p">(</span><span class="s">"成长属性"</span><span class="p">)]</span>
+  <span class="k">public</span> <span class="n">CharacterStats</span> <span class="n">growthStats</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="性能优化">性能优化</h2>
+<ol>
+  <li>缓存组件引用
+    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="n">Rigidbody</span> <span class="p">=</span> <span class="n">_rb</span><span class="p">;</span>
+<span class="k">void</span> <span class="nf">Awake</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">_rb</span> <span class="p">=</span> <span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">Rigidbody</span><span class="p">&gt;();</span>
+</code></pre></div>    </div>
+  </li>
+  <li>避免频繁GetComponent
+```cs
+// 错误做法：每帧调用
+void Update() =&gt; GetComponent<Rigidbody>().AddForce(...);</Rigidbody></li>
+</ol>
+
+<p>// 正确做法
+private Rigidbody _rb;
+void Awake() =&gt; _rb = GetComponent<Rigidbody>();
+void Update() =&gt; _rb.AddForce(...);</Rigidbody></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+3. 使用ObjectPool管理频繁创建/销毁的对象
+[Object Pooling](/posts/2025-06-06-Object-Pooling/)
+
+4. 合理使用Update方法
+```cs
+// 低频更新示例
+private float _nextUpdateTime;
+void Update()
+{
+  if (Time.time &lt; _nextUpdateTime) return;
+  _nextUpdateTime = Time.time + 0.5f;
+  // 每0.5秒执行一次的逻辑
+}
+</code></pre></div></div>
+
+<h2 id="架构设计建议">架构设计建议</h2>
+<ol>
+  <li>事件驱动架构
+```cs
+public static class GameEvents
+{
+  public static event Action OnPlayerDeath;
+  public static event Action<int> OnScoreChanged;</int></li>
+</ol>
+
+<p>public static void TriggerPlayerDeath() =&gt; OnPlayerDeath?.Invoke();
+}</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+2. 组件化设计
+```cs
+// 将功能拆分为独立组件
+[RequireComponent(typeof(HealthSystem))]
+public class Damageable : MonoBehaviour
+{
+  private HealthSystem _health;
+  void Awake() =&gt; _health = GetComponent&lt;HealthSystem&gt;();
+
+  public void TakeDamage(float amount) =&gt; _health.Reduce(amount);
+}
+</code></pre></div></div>
+
+<ol>
+  <li>状态模式应用
+```cs
+public interface IPlayerState
+{
+  void Enter(PlayerController player);
+  void Update();
+  void Exit();
+}</li>
+</ol>
+
+<p>public class JumpState : IPlayerState { … }
+public class AttackState : IPlayerState { … }</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+## 调试与测试
+1. 自定义调试工具
+```cs
+#if UNITY_EDITOR
+[Header{"Debug"}]
+[SerializaField] private bool _showDebugInfo;
+[SerializeField, ShowIf("_showDebugInfo")]
+private Color _debugColor = Color.red;
+
+void OnDrawGizmos()
+{
+  if(!_showDebugInfo) return;
+  Gizmos.color = _debugColor;
+  Gizmos.DrawWireSphere(transform.position, 2f);
+}
+#endif
+</code></pre></div></div>
+
+<ol>
+  <li>单元测试示例
+```cs
+#if UNITY_EDITOR
+using NUnit.Framework;</li>
+</ol>
+
+<p>public class MathTests
+{
+  [Test]
+  public void VectorAngleTest()
+  {
+    var v1 = new Vector2(1, 0);
+    var v2 = new Vector2(0, 1);
+    Assert.AreEqual(90, Vector2.Angle(v1, v2));
+  }
+}
+#endif</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+## 版本兼容性处理
+```cs
+// API版本检查
+#if UNITY_2020_1_OR_NEWER
+
+  // 使用新API
+  transform.hasChanged = false;
+
+#else
+
+  // 兼容旧版本的替代方法
+  StartCoroutine(CheckTransformChange());
+#endif
+</code></pre></div></div>
+
+<h2 id="unity命名空间">Unity命名空间</h2>
 <h3 id="1unityengine">1.<code class="language-plaintext highlighter-rouge">UnityEngine</code></h3>
 <ul>
   <li>功能：Unity核心功能的主命名空间</li>
@@ -526,6 +644,39 @@
 </ul>
 
 <p><a href="https://docs.unity3d.com/ScriptReference/">官方文档</a></p>
+
+<h2 id="unity脚本的最佳实践">Unity脚本的最佳实践</h2>
+<ol>
+  <li>变量封装
+    <ul>
+      <li>用<code class="language-plaintext highlighter-rouge">[SerializeField] private</code>替代<code class="language-plaintext highlighter-rouge">public</code>暴露数据</li>
+    </ul>
+  </li>
+  <li>合理命名
+    <ul>
+      <li>变量名应体现用途：<code class="language-plaintext highlighter-rouge">moveSpeed</code>比<code class="language-plaintext highlighter-rouge">ms</code>清晰</li>
+    </ul>
+  </li>
+  <li>Inspector优化
+    <ul>
+      <li>用<code class="language-plaintext highlighter-rouge">[Header]</code>分组变量</li>
+      <li>用<code class="language-plaintext highlighter-rouge">[Tooltip]</code>提示变量作用</li>
+    </ul>
+  </li>
+  <li>性能考虑
+    <ul>
+      <li>避免在<code class="language-plaintext highlighter-rouge">Update()</code>中频繁使用<code class="language-plaintext highlighter-rouge">Find</code>/<code class="language-plaintext highlighter-rouge">GetComponent</code></li>
+      <li>用缓存变量保存引用</li>
+    </ul>
+  </li>
+  <li>解耦逻辑
+    <ul>
+      <li>数据放ScriptableObject</li>
+      <li>行为放MonoBehaviour</li>
+      <li>公共算法放普通C#类</li>
+    </ul>
+  </li>
+</ol>
 
         
       </section>

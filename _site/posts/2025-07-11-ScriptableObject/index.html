@@ -262,14 +262,153 @@ public class Character : MonoBehaviour
 <span class="p">}</span>
 </code></pre></div>    </div>
   </li>
-  <li>
-    <p>对象池
-在对象池模式中，<code class="language-plaintext highlighter-rouge">ScriptableObject</code>可以用来存储池中对象的配置和初始化数据
-// TODO</p>
-  </li>
-  <li>作为配置和消息中介
-// TODO</li>
+  <li>对象池
+在对象池模式中，<code class="language-plaintext highlighter-rouge">ScriptableObject</code>可以用来存储池中对象的配置和初始化数据，尤其是当希望将对象池的某些配置（例如对象的预设、初始化数量等）于对象池的管理逻辑分离时，这样做可以提高代码的可重用性、灵活性和维护性</li>
 </ol>
+
+<p>通过将对象池的配置数据存储在<code class="language-plaintext highlighter-rouge">ScriptableObject</code>中，我们可以方便地管理和修改池的配置，且无需修改池的实现代码。这种方式将数据和逻辑分离，符合单一职责原则</p>
+
+<p>创建配置的ScriptableObject</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+
+<span class="p">[</span><span class="nf">CreateAssetMenu</span><span class="p">(</span><span class="n">fileName</span> <span class="p">=</span> <span class="s">"ObjectPoolConfig"</span><span class="p">,</span> <span class="n">menuName</span> <span class="p">=</span> <span class="s">"ScriptableObjects/ObjectPoolConfig"</span><span class="p">,</span> <span class="n">order</span> <span class="p">=</span> <span class="m">1</span><span class="p">)]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">ObjectPoolConfig</span> <span class="p">:</span> <span class="n">ScriptableObject</span>
+<span class="p">{</span>
+    <span class="p">[</span><span class="nf">Header</span><span class="p">(</span><span class="s">"Pool Settings"</span><span class="p">)]</span>
+    <span class="p">[</span><span class="n">SerializeField</span><span class="p">]</span> <span class="k">private</span> <span class="n">GameObject</span> <span class="n">prefab</span><span class="p">;</span> <span class="c1">// 池中对象的预制体</span>
+    <span class="p">[</span><span class="n">SerializeField</span><span class="p">]</span> <span class="k">private</span> <span class="kt">int</span> <span class="n">initialSize</span> <span class="p">=</span> <span class="m">10</span><span class="p">;</span> <span class="c1">// 初始池大小</span>
+    <span class="p">[</span><span class="n">SerializeField</span><span class="p">]</span> <span class="k">private</span> <span class="kt">int</span> <span class="n">maxSize</span> <span class="p">=</span> <span class="m">20</span><span class="p">;</span> <span class="c1">// 池的最大容量</span>
+
+    <span class="k">public</span> <span class="n">GameObject</span> <span class="n">Prefab</span> <span class="p">=&gt;</span> <span class="n">prefab</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">InitialSize</span> <span class="p">=&gt;</span> <span class="n">initialSize</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">MaxSize</span> <span class="p">=&gt;</span> <span class="n">maxSize</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>这个<code class="language-plaintext highlighter-rouge">ScriptableObject</code>负责存储对象池的配置信息，包括池中的对象预设、初始大小和最大容量</p>
+
+<p>对象池实现</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">ObjectPool</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="p">[</span><span class="n">serializeField</span><span class="p">]</span> <span class="k">private</span> <span class="n">ObjectPoolConfig</span> <span class="n">poolConfig</span><span class="p">;</span> <span class="c1">// 引用配置文件</span>
+    <span class="k">private</span> <span class="n">Queue</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;</span> <span class="n">pool</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Queue</span><span class="p">&lt;</span><span class="n">GameObject</span><span class="p">&gt;();</span> <span class="c1">// 对象池</span>
+
+    <span class="c1">// 初始化对象池</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Initialize</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="p">-;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">poolConfig</span><span class="p">.</span><span class="n">InitialSize</span><span class="p">;</span> <span class="p">++</span><span class="n">i</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">GameObject</span> <span class="n">obj</span> <span class="p">=</span> <span class="nf">Instantiate</span><span class="p">(</span><span class="n">poolConfig</span><span class="p">.</span><span class="n">Prefab</span><span class="p">);</span>
+            <span class="n">obj</span><span class="p">.</span><span class="nf">SetActive</span><span class="p">(</span><span class="k">false</span><span class="p">);</span> <span class="c1">// 对象默认不可见</span>
+            <span class="n">pool</span><span class="p">.</span><span class="nf">Enqueue</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 获取一个对象</span>
+    <span class="k">public</span> <span class="n">GameObject</span> <span class="nf">GetObject</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">pool</span><span class="p">.</span><span class="n">Count</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">GameObject</span> <span class="n">obj</span> <span class="p">=</span> <span class="n">pool</span><span class="p">.</span><span class="nf">Dequeue</span><span class="p">();</span>
+            <span class="n">obj</span><span class="p">.</span><span class="nf">SetActive</span><span class="p">(</span><span class="k">true</span><span class="p">);</span> <span class="c1">// 激活对象</span>
+            <span class="k">return</span> <span class="n">obj</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">pool</span><span class="p">.</span><span class="n">Count</span> <span class="p">&lt;</span> <span class="n">poolConfig</span><span class="p">.</span><span class="n">MaxSize</span><span class="p">)</span> <span class="c1">// 超过池的最大容量时不再创建新对象</span>
+        <span class="p">{</span>
+            <span class="n">GameObject</span> <span class="n">obj</span> <span class="p">=</span> <span class="nf">Instantiate</span><span class="p">(</span><span class="n">poolConfig</span><span class="p">.</span><span class="n">Prefab</span><span class="p">);</span>
+            <span class="n">obj</span><span class="p">.</span><span class="nf">SetActive</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+            <span class="k">return</span> <span class="n">obj</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">return</span> <span class="k">null</span><span class="p">;</span> <span class="c1">// 如果池已满，返回null</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 回收对象</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">ReturnObject</span><span class="p">(</span><span class="n">GameObject</span> <span class="n">obj</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">obj</span><span class="p">.</span><span class="nf">SetActive</span><span class="p">(</span><span class="k">false</span><span class="p">);</span> <span class="c1">// 禁用对象</span>
+        <span class="n">pool</span><span class="p">.</span><span class="nf">Enqueue</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span> <span class="c1">// 放回池中</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>这里，<code class="language-plaintext highlighter-rouge">ObjectPool</code>类引用了<code class="language-plaintext highlighter-rouge">ObjectPoolConfig</code>来获取对象池的配置信息，这样只需要通过编辑器调整<code class="language-plaintext highlighter-rouge">ObjectPoolConfig</code>的参数，就可以轻松控制对象池的行为</p>
+
+<p>在Unity编辑器中，右键点击<code class="language-plaintext highlighter-rouge">Assets</code>目录，选择<code class="language-plaintext highlighter-rouge">Create &gt; ScriptableObjects &gt; ObjectPoolConfig</code>来创建一个新的<code class="language-plaintext highlighter-rouge">ObjectPoolConfig</code>文件，然后配置其中的属性</p>
+
+<p>接着，将这个<code class="language-plaintext highlighter-rouge">ObjectPoolConfig</code>文件拖到<code class="language-plaintext highlighter-rouge">ObjectPool</code>脚本的<code class="language-plaintext highlighter-rouge">poolConfig</code>字段中，Unity就会在运行时使用这些配置来初始化对象池</p>
+
+<p>优点</p>
+<ul>
+  <li>灵活配置：直接在Inspector中修改参数</li>
+  <li>代码解耦：将配置和池逻辑分开，提高代码的可维护性，修改配置不用修改对象池的实现</li>
+  <li>复用性：同一个配置可被多个对象池实例共享，不需要每个对象池都重复定义相同的配置</li>
+  <li>可扩展性，可以通过<code class="language-plaintext highlighter-rouge">ScriptableObject</code>调整对象池的性能，初始化逻辑等</li>
+</ul>
+
+<ol>
+  <li>作为消息中介
+<code class="language-plaintext highlighter-rouge">ScriptableObject</code>可以用作消息中介，作为不同模块之间的通信桥梁。这种方式可以有效地解耦各个模块，使它们不直接依赖于彼此，提高系统灵活性和可维护性</li>
+</ol>
+
+<p>实现一个简单的游戏事件系统，允许不同的系统之间传递消息</p>
+
+<p>自定义消息中介ScriptableObject\</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">UnityEngine.Events</span><span class="p">;</span>
+
+<span class="p">[</span><span class="nf">CreateAssetMenu</span><span class="p">(</span><span class="n">fileName</span> <span class="p">=</span> <span class="s">"GameEvent"</span><span class="p">,</span> <span class="n">menuName</span> <span class="p">=</span> <span class="s">"ScriptableObjects/GameEvent"</span><span class="p">,</span> <span class="n">order</span> <span class="p">=</span> <span class="m">2</span><span class="p">)]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">GameEvent</span> <span class="p">:</span> <span class="n">ScriptableObject</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">UnityAction</span><span class="p">&gt;</span> <span class="n">listeners</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">UnityAction</span><span class="p">&gt;();</span>
+
+    <span class="c1">// 注册监听器</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">RegisterListener</span><span class="p">(</span><span class="n">UnityAction</span> <span class="n">listener</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">listeners</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">listener</span><span class="p">);</span>
+
+    <span class="c1">// 移除监听器</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">UnregisterListener</span><span class="p">(</span><span class="n">UnityAction</span> <span class="n">listener</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">listeners</span><span class="p">.</span><span class="nf">Remove</span><span class="p">(</span><span class="n">listener</span><span class="p">);</span>
+
+    <span class="c1">// 触发事件</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Raise</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">listener</span> <span class="k">in</span> <span class="n">listeners</span><span class="p">)</span> <span class="n">listener</span><span class="p">.</span><span class="nf">Invoke</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">GameEvent</code>作为消息中介，维护一个监听器列表。当事件触发时，它会通知所有注册的监听器。监听器可以是任何方法，只要它们符合<code class="language-plaintext highlighter-rouge">UnityAction</code>委托的签名<br />
+自其他脚本中注册和触发事件</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Player</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="p">[</span><span class="n">SerializeField</span><span class="p">]</span> <span class="k">private</span> <span class="n">GameEvent</span> <span class="n">playerHurtEvent</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">TakeDamage</span><span class="p">(</span><span class="kt">int</span> <span class="n">damage</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// 角色受伤</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"Player took damage: "</span> <span class="p">+</span> <span class="n">damage</span><span class="p">);</span>
+
+        <span class="c1">// 触发受伤事件</span>
+        <span class="n">playerHurtEvent</span><span class="p">.</span><span class="nf">Raise</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">UIManager</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="p">[</span><span class="n">SerializeField</span><span class="p">]</span> <span class="k">private</span> <span class="n">GameEvent</span> <span class="n">playerHurtEvent</span><span class="p">;</span>
+
+    <span class="k">void</span> <span class="nf">OnEnable</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">playerHurtEvent</span><span class="p">.</span><span class="nf">RegisterListener</span><span class="p">(</span><span class="n">OnPlayerHurt</span><span class="p">);</span> <span class="c1">// 注册监听事件</span>
+
+    <span class="k">void</span> <span class="nf">OnDisable</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">playerHurtEvent</span><span class="p">.</span><span class="nf">UnregisterListener</span><span class="p">(</span><span class="n">OnPlayerHurt</span><span class="p">);</span> <span class="c1">// 移除事件监听</span>
+
+    <span class="k">void</span> <span class="nf">OnPlayerHurt</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"Player hurt, update UI"</span><span class="p">);</span> <span class="c1">// 响应受伤事件</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>在<code class="language-plaintext highlighter-rouge">Player</code>脚本中，角色受到伤害时触发<code class="language-plaintext highlighter-rouge">playerHurtEvent</code>事件，在<code class="language-plaintext highlighter-rouge">UIManager</code>中，注册了这个事件，并在事件触发时更新UI</p>
+
+<p>优点</p>
+<ul>
+  <li>解耦：<code class="language-plaintext highlighter-rouge">ScriptableObject</code>充当事件的中介，避免系统之间的直接依赖关系，使得模块之间的通信变得松耦合</li>
+  <li>灵活性：可以轻松添加或移除事件监听器，而不需要改变系统的其他部分</li>
+  <li>易于扩展：可以通过多个<code class="language-plaintext highlighter-rouge">ScriptabelObject</code>实现不同的事件，从而扩展事件系统，支持多种类型的事件</li>
+</ul>
 
 <h2 id="注意事项">注意事项</h2>
 <ul>

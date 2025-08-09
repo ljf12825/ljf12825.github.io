@@ -96,7 +96,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Scripts",
-        "excerpt":"Unity脚本就是你编写的C#类，它控制游戏中物体的行为、交互、动画、输入、碰撞、UI等逻辑 脚本类型 Unity中的脚本根据其用途可以分为3类： 特性 MonoBehaviour ScriptableObject 纯 C# 类 是否可挂载 可以挂载到 GameObject 不行 不行 生命周期函数 有 Start、Update 等 没有 没有 是否能序列化 支持 支持 默认不支持 支持协程 StartCoroutine() 不支持 不支持 使用场景 行为脚本，控制对象 数据容器，可复用资源配置 工具类、算法类等逻辑单元 MonoBehaviour的派生类 必须挂载在场景中的GameObject上 用于控制逻辑、角色行为、输入响应等 有生命周期函数 ScriptableObject是数据容器 轻量级对象，不需要挂载，常用于数据复用（如技能表、配置表） 支持序列化，可以做成asset文件 没有生命周期函数，但可以在OnEnable()做初始化 更节省内存，不依赖场景 纯C#类 用于封装工具、算法、模型等逻辑（如A*算法、存档系统） 不支持Unity生命周期和序列化 适合在MonoBehaviour或ScriptableObject中调用 脚本和Inspector的关系 可以使用[SerializeField]、public来让字段在Inspector中显示 public float speed...","categories": ["笔记"],
+        "excerpt":"Unity脚本就是你编写的C#类，它控制游戏中物体的行为、交互、动画、输入、碰撞、UI等逻辑 脚本类型 Unity中的脚本根据其用途可以分为3类： 特性 MonoBehaviour ScriptableObject 纯 C# 类 是否可挂载 可以挂载到 GameObject 不行 不行 生命周期函数 有 Start、Update 等 没有 没有 是否能序列化 支持 支持 默认不支持 支持协程 StartCoroutine() 不支持 不支持 使用场景 行为脚本，控制对象 数据容器，可复用资源配置 工具类、算法类等逻辑单元 MonoBehaviour（行为脚本） 必须挂载在场景中的GameObject上 用于控制逻辑、角色行为、输入响应等 有生命周期函数 支持协程 适用场景 角色控制器（移动、跳跃、攻击） UI交互逻辑 游戏状态管理 物理交互处理 动画状态控制 ScriptableObject（数据容器） 轻量级对象，不需要挂载，常用于数据复用（如技能表、配置表） 支持序列化，可以做成asset文件 没有生命周期函数，但可以在OnEnable()做初始化 更节省内存，场景切换时不会被销毁 核心优势 内存高效：不依赖场景、按需加载...","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
         "url": "/posts/2025-06-02-Scripts/",
         "teaser": null
@@ -152,7 +152,7 @@ var store = [{
         "title": "Unity Build-in Types",
         "excerpt":"Unity内建类型 1.空间/几何类型（Transform相关） 类型 说明 Vector2, Vector3, Vector4 表示二维/三维/四维向量 Quaternion 四元数，表示旋转 Matrix4x4 4×4 矩阵，常用于转换 Bounds 包围盒（中心+尺寸） Ray, RaycastHit 射线检测相关类型 Plane 表示一个无限平面 Rect 二维矩形区域 Color, Color32 表示颜色（线性空间和 sRGB） Vector Vector2、Vector3、Vector4 它们是Unity提供的三个核心向量类型，广泛用于位置、方向、速度、缩放、颜色等各种场景 向量类型 维度 作用 Vector2 2D 向量，包含 x, y 用于 2D 空间中的位置、速度等 Vector3 3D 向量，包含 x, y, z 用于 3D 空间中的大多数情况 Vector4...","categories": ["笔记"],
         "tags": ["Unity","Unity System"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Unity-Build-in-Types.html",
+        "url": "/posts/2025-06-03-Unity-Build-in-Types/",
         "teaser": null
       },{
         "title": "Collider & Trigger",
@@ -350,7 +350,7 @@ var store = [{
         "title": "Attribute in Unity",
         "excerpt":"Unity中的特性用于控制Unity编译器的行为，或者用于运行时特定的逻辑 Unity中常见特性 Unity为许多常见的操作都提供了特性 SerializeField 作用：使私有字段在Unity的Inspector面板中可见。通常用于控制字段访问性，但仍希望它出现在Inspector中进行编辑 [SerializeField] private int playerHealth; HideInInspector 作用：标记字段不显示在Inspector中，但它仍然是类的成员，仍然可以在代码中使用 [HideInInspector] public int secretValur; Range 作用：为字段设置一个值的范围，通常用于浮动值或整数值。Range会在Inspector中为字段添加一个滑块 [Range(0, 100)] public int speed; Head 作用：在Inspector中为字段添加一个标题或标签，通常用于分组和提高可读性 [Header(\"Player Settings\")] public float speed; public int health; Tooltip 作用：在Inspector中为字段提供一个悬浮提示文本，鼠标悬停在字段上时显示该提示 [Tooltip(\"Player's health value\")] public float health; ExecuteInEditMode 作用：使脚本在编辑模式下运行，而不仅仅是在播放模式下运行。这对于需要在编辑模式下进行自定义操作的脚本（如编辑器扩展）非常有用 [ExecuteInEditMode] public class CustomEditorScript : MonoBehaviour { void...","categories": ["笔记"],
         "tags": ["Unity","Syntax"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Attribute-in-Unity.html",
+        "url": "/posts/2025-07-10-Attribute-in-Unity/",
         "teaser": null
       },{
         "title": "MonoBehaviour",
@@ -432,7 +432,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Unity Component Communication",
-        "excerpt":"               通信方式       类型       是否推荐       示例                       GetComponent&lt;T&gt;() 直接调用       显式调用       推荐       GetComponent&lt;Health&gt;().TakeDamage(10);                 UnityEvent       事件系统       推荐       在 Inspector 中绑定事件                 C# 委托/事件 (delegate, event)       原生 C#       推荐       public event Action OnDead;                 接口调用（如 IDamageable）       解耦方式       推荐       target.GetComponent&lt;IDamageable&gt;()?.TakeDamage()                 ScriptableObject 事件       高级数据驱动       推荐       Game-wide event bus                 SendMessage() / BroadcastMessage()       反射调用       不推荐       SendMessage(\"Explode\")          ","categories": ["笔记"],
+        "excerpt":"在Unity中，组件之间的通信是非常重要的，因为它决定了不同模块如何相互交互和协作 正确的组件通信方式可以帮助实现松耦合、易于维护和扩展的架构 GetComponent&lt;T&gt;()直接调用（显示调用） 这是Unity中最常见的方式之一，直接通过GetComponent&lt;T&gt;()获取组件实例，然后调用它的函数 它是显式的、直接的调用，没有任何抽象或间接层 由于它是强类型的，编译时可以检查类型错误，因此推荐使用 Health health = target.GetComponent&lt;Health&gt;(); if (health != null) health.TakeDamage(10); 这个例子中，GetComponent&lt;Health&gt;()获取到目标GameObject上的Health组件，并调用其TakeDamage()方法 使用方式 获取组件 GetComponent&lt;T&gt;()可以用于任何附加到GameObject上的组件。只要该组件存在，就可以通过该方法获取 var palyer = gameObject.GetComponet&lt;Player&gt;(); 调用方法 获取到组件后，直接调用该组件暴露的方法 player.TakeDamage(10); 示例 假设有一个Player组件和一个Enemy组件，Enemy需要让Player受到伤害 ```cs //在敌人脚本中 public class Enemy : MonoBehaviour { public void AttackPlayer(GameObject palyer) { // 获取Player组件 var palyerHealth = player.GetComponent(); if (pllayerHealth !=...","categories": ["笔记"],
         "tags": ["Unity","Syntax","Unity Class"],
         "url": "/posts/2025-07-15-Unity-Component-Communication/",
         "teaser": null
@@ -503,7 +503,7 @@ var store = [{
         "url": "/posts/2025-08-02-Mono-and-IL2CPP/",
         "teaser": null
       },{
-        "title": "Service Locator",
+        "title": "Mono and IL2CPP",
         "excerpt":" ","categories": ["笔记"],
         "tags": ["Unity","Complie"],
         "url": "/posts/2025-08-02-Mono-and-IL2CPP/",
@@ -513,6 +513,18 @@ var store = [{
         "excerpt":" ","categories": ["笔记"],
         "tags": ["Unity","Architecture"],
         "url": "/posts/2025-08-02-Service-Locator/",
+        "teaser": null
+      },{
+        "title": "Algorithms in Unity GameDevelopment",
+        "excerpt":"        寻路算法（Pathfinding Algorithms）            碰撞检测和物理算法            AI行为            图形学相关算法            动画算法            图像和纹理算法            排序与搜索算法            资源管理与优化            摄像机控制            多线程与异步处理      ","categories": ["笔记"],
+        "tags": ["Unity","GameDevelop","Algorithm"],
+        "url": "/posts/2025-08-03-Algorithms-in-Unity-Game-Dev/",
+        "teaser": null
+      },{
+        "title": "Event-Driven Architecture",
+        "excerpt":"事件驱动架构（Event-Driven Architecture，简称EDA）是一种以事件作为系统运行核心驱动力的软件架构模式   它的思路是：     当某个事件发生时，系统会通知对该事件感兴趣的组件，由它们决定如何响应   ","categories": ["笔记"],
+        "tags": ["Unity","Architecture"],
+        "url": "/posts/2025-08-08-Event-Driven-Architecture/",
         "teaser": null
       },{
     "title": "About",
