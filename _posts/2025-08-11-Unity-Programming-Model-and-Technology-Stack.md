@@ -29,13 +29,12 @@ Unity最核心的编程模型是组件化（Component-based）设计，它来源
 
 这些生命周期函数是Unity编程模型的核心，开发者通过重写这些函数来实现游戏对象的行为
 
-### 事件驱动编程
-[Unity Component Communicaiton]({{site.baseurl}}/posts/2025-07-15-Unity-Component-Communication/)
+### [事件驱动编程]({{site.baseurl}}/posts/2025-07-15-Unity-Component-Communication/)
 Unity传统编程中有大量事件驱动机制，尤其是在用户输入和UI交互方面
 - UI系统：Unity提供了自己的UI系统，最常见的是`UI.Button`和`UI.Slider`等UI组件，它们通过事件监听和回调处理用户输入
 - C#事件和委托：Unity的编程中也广泛使用C#的事件和委托来实现对象间的通信，例如当一个玩家触发某个动作时，其他对象可能需要响应这个事件。`Event`、`Action`和`UnityEvent`是最常用的方式
 
-### 协程（Coroutines）
+### [协程（Coroutines）](/posts/2025-06-03-Unity-Asynchronous-and-Coroutine/)
 Unity提供了协程来简化时间和异步操作的管理。协程可以在多个帧之间执行，允许开发者编写类似于阻塞的代码，但是不会阻塞主线程
 
 例如，等待一段时间再执行某个操作，或逐步改变某个属性
@@ -80,7 +79,7 @@ Unity的传统编程模型围绕着组件化、面向对象设计和事件驱动
 ## 现代Unity编程模型和技术栈
 与传统的Unity编程模型相比，现代Unity编程模型通常侧重于更加高效、可扩展的系统架构，特别是在处理大型项目时的性能和数据管理。近年来，Unity推出了ECS（Entity Component System）和DOTS（Data-Oriented Technology Stack），它们是为了解决传统组件化模型在性能、数据管理和多线程方面的限制
 
-### ECS（Entity Component System）
+### [ECS（Entity Component System）]({{site.baseurl}}/posts/2025-08-02-ECS/)
 ECS是Unity推出的全新编程模式，它强调数据导向设计（Data-Oriented Design），专注于如何高效地存储和处理游戏世界中的大规模数据。这与传统的面向对象编程（OOP）模型有很大区别
 
 **核心概念**
@@ -94,7 +93,7 @@ ECS模型不依赖于传统的`MonoBehaviour`类。相反，所有游戏逻辑�
 **性能优化**
 通过内存布局优化和批处理操作，ECS使得Unity能更好地利用硬件，特别是在多核处理器上。通过结构化的存储数据，ECS可以更高效地操作大量游戏对象和组件，这对大规模游戏和高性能需求的项目非常有帮助
 
-### DOTS
+### [DOTS]({{site.baseurl}}/posts/2025-08-02-DOTS/)
 DOTS是Unity推出的一个完整的数据驱动技术栈，它包括
 - ECS：提供数据驱动的编程模型
 - Job System：允许在多个线程上并行执行工作，优化性能
