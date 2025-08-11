@@ -5,6 +5,7 @@ date: 2025-06-01
 categories: [笔记]
 tags: [Unity, Asset]
 author: "ljf12825"
+permalink: /posts/2025-07-18-Assets-Import-and-Load/
 ---
 如何将外部资源导入到Unity中并在运行时使用
 
