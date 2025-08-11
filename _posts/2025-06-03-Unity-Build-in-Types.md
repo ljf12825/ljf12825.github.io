@@ -508,76 +508,90 @@ Matrix4x4 combinedMatrix = rotationMatrix * scaleMatrix; // 复合变换
 
 
 
+## Application
+`Application`是Unity提供的一个全局静态类，用来获取或控制应用程序的整体运行状态，比如游戏生命周期、平台信息、版本号、退出应用、持久化路径、事件系统等\
+可以理解为：`Application` = 游戏运行时的全局控制台
 
+### API
+**Static Properties**
 
-## 2.游戏对象相关
+| 分组          | 属性                          | 用途简述               |
+| ----------- | --------------------------- | ------------------ |
+| **应用信息**    | `productName`               | 应用产品名              |
+|             | `companyName`               | 公司名                |
+|             | `version`                   | 应用版本号              |
+|             | `unityVersion`              | Unity 运行时版本        |
+|             | `buildGUID`                 | 构建唯一标识             |
+|             | `cloudProjectId`            | 云项目 ID             |
+|             | `identifier`                | 包名 / Bundle ID     |
+|             | `installerName`             | 安装来源（商店）           |
+|             | `installMode`               | 安装模式               |
+|             | `sandboxType`               | 沙盒环境类型             |
+| **平台与运行环境** | `platform`                  | 当前运行平台             |
+|             | `isMobilePlatform`          | 是否移动平台             |
+|             | `isConsolePlatform`         | 是否主机平台             |
+|             | `isEditor`                  | 是否在编辑器运行           |
+|             | `isBatchMode`               | 是否批处理模式            |
+|             | `absoluteURL`               | 当前 URL / 深度链接      |
+|             | `systemLanguage`            | 系统语言               |
+|             | `internetReachability`      | 网络可达性              |
+| **数据路径**    | `dataPath`                  | 游戏数据路径（只读）         |
+|             | `persistentDataPath`        | 持久化数据路径（可写）        |
+|             | `streamingAssetsPath`       | StreamingAssets 路径 |
+|             | `temporaryCachePath`        | 临时缓存路径             |
+|             | `consoleLogPath`            | 日志文件路径             |
+| **运行状态**    | `isPlaying`                 | 是否正在运行             |
+|             | `isFocused`                 | 是否获得焦点             |
+|             | `runInBackground`           | 后台运行开关             |
+|             | `backgroundLoadingPriority` | 后台加载优先级            |
+|             | `targetFrameRate`           | 目标帧率               |
+|             | `exitCancellationToken`     | 退出时取消令牌            |
+| **安全与验证**   | `genuine`                   | 应用是否被篡改            |
+|             | `genuineCheckAvailable`     | 是否可用完整性检查          |
 
-| 类型                 | 说明                  |
-| ------------------ | ------------------- |
-| `GameObject`       | 场景中所有对象的基本单元        |
-| `Component`        | 所有组件的基类             |
-| `Transform`        | 表示物体的位置、旋转、缩放       |
-| `MonoBehaviour`    | 用户自定义脚本的基类          |
-| `ScriptableObject` | 可创建的资产类，用于数据管理      |
-| `Object`           | Unity 所有对象的基类（包括资源） |
+**Static Methods**
 
+| 分组          | 方法                                                                         | 描述                           | 典型用途                  |
+| ----------- | -------------------------------------------------------------------------- | ---------------------------- | --------------------- |
+| **场景与运行控制** | `CanStreamedLevelBeLoaded(string levelName)`                               | 检查指定场景是否可以加载（适用于流式加载）        | 场景预检测，避免加载不存在的场景      |
+|             | `Unload()`                                                                 | 卸载 Unity Player              | WebGL、嵌入式 Unity 内容的卸载 |
+| **日志与调试**   | `GetStackTraceLogType(LogType logType)`                                    | 获取指定日志类型的堆栈跟踪模式              | 日志调试策略                |
+|             | `SetStackTraceLogType(LogType logType, StackTraceLogType stackTraceType)`  | 设置指定日志类型的堆栈跟踪模式              | 减少无关堆栈信息，提高性能         |
+| **权限与授权**   | `HasUserAuthorization(UserAuthorization mode)`                             | 检查用户是否授权使用麦克风或摄像头（iOS/WebGL） | 设备访问控制                |
+|             | `RequestUserAuthorization(UserAuthorization mode)`                         | 请求用户授权麦克风/摄像头（iOS/WebGL）     | 首次访问硬件设备时使用           |
+| **许可证与广告**  | `HasProLicense()`                                                          | 检查当前 Unity 是否为 Pro 许可证       | 编辑器功能限制判断             |
+|             | `RequestAdvertisingIdentifierAsync(Action<string, bool, string> callback)` | 请求广告标识符（iOS/UWP）             | 广告分析、用户追踪（需遵守隐私法规）    |
+| **运行状态**    | `IsPlaying(Object obj)`                                                    | 检查对象是否在运行环境中（Play 模式或构建版本）   | 运行时逻辑分支判断             |
+| **系统交互**    | `OpenURL(string url)`                                                      | 打开外部链接或资源                    | 跳转到网页、商店、帮助文档         |
+|             | `Quit()`                                                                   | 退出应用程序                       | 游戏退出按钮                |
 
-## 3.图形和渲染
+注意事项
+1. `Quit()`在编辑器中无效，只在构建版本中退出
+2. 权限方法仅在特定平台有效（iOS、WebGL），Android需要用原生接口
+3. 广告ID受隐私政策限制（iOS 14+ 必须先获得用户同意）
+4. `Unload()`主要用于WebGL等嵌入环境，不适用于独立应用
+5. 日志堆栈设置可以优化性能，但会影响调试信息完整性
 
-| 类型                                      | 说明          |
-| --------------------------------------- | ----------- |
-| `Mesh`, `MeshRenderer`                  | 网格和其渲染组件    |
-| `Material`                              | 材质资源        |
-| `Shader`                                | 控制材质渲染效果的程序 |
-| `Texture`, `Texture2D`, `RenderTexture` | 贴图资源        |
-| `Camera`                                | 摄像机组件       |
-| `Light`                                 | 灯光组件        |
+**Events**
 
+| 事件名                            | 触发时机                                                       | 常见用途                                 | 注意事项                                 |
+| ------------------------------ | ---------------------------------------------------------- | ------------------------------------ | ------------------------------------ |
+| **deepLinkActivated**          | 当 App 通过 **Deep Link URL** 被激活时（Android / iOS / UWP）       | 处理外部 URL 跳转，例如从浏览器点击链接直接打开游戏并跳转到特定场景 | 仅在移动端/UWP生效，需要在系统设置好 Deep Link       |
+| **focusChanged**               | 当应用程序获得或失去焦点时                                              | 暂停/恢复游戏逻辑、音乐播放、计时器等                  | 与 `Application.runInBackground` 配合使用 |
+| **logMessageReceived**         | 在主线程收到 `Debug.Log`/`Debug.LogError`/`Debug.LogWarning` 时触发 | 收集运行时日志、保存到文件、上传服务器                  | 仅主线程调用，性能安全                          |
+| **logMessageReceivedThreaded** | 在**任意线程**收到日志信息时触发                                         | 捕获多线程环境下的日志（Job System、线程池等）         | 回调不在主线程，访问 Unity API 会报错             |
+| **lowMemory**                  | 当设备内存不足时触发                                                 | 释放不必要的资源、清理缓存                        | 常见于移动设备，尤其是低端机                       |
+| **memoryUsageChanged**         | 当内存使用量显著变化时触发                                              | 做内存优化监控，比如动态调节贴图分辨率                  | Unity 2021.2+ 新增功能                   |
+| **onBeforeRender**             | 在渲染前调用（尤其是 VR 输入更新）                                        | VR/AR 场景中，在渲染前同步姿态数据                 | 用途很小众，主要面向 XR                        |
+| **quitting**                   | 应用退出时触发                                                    | 保存存档、上传数据、关闭网络连接                     | 有时不一定能保证执行完，比如强杀进程                   |
+| **unloading**                  | Player 卸载时触发                                               | 卸载前释放资源（场景卸载、资源清理）                   | 常与 Addressables 资源卸载配合               |
+| **wantsToQuit**                | 应用**想要**退出时触发，可拦截                                          | 弹出“是否退出”确认框                          | 通过返回 `false` 阻止退出                    |
 
-## 4.物理相关
+**Delegates**
 
-| 类型                                             | 说明                   |
-| ---------------------------------------------- | -------------------- |
-| `Rigidbody`, `Rigidbody2D`                     | 刚体，驱动物体物理行为          |
-| `Collider`, `BoxCollider`, `SphereCollider`, 等 | 碰撞器                  |
-| `Physics`, `Physics2D`                         | 提供物理检测和操作的静态类        |
-| `Joint` 系列                                     | 链接两个刚体（如 HingeJoint） |
-| `ContactPoint`                                 | 碰撞点信息结构体             |
-
-
-## 5.输入和事件
-
-| 类型                    | 说明         |
-| --------------------- | ---------- |
-| `Input`               | 输入系统静态类    |
-| `KeyCode`             | 键盘按键枚举     |
-| `Touch`, `TouchPhase` | 触摸输入相关     |
-| `Event`, `EventType`  | GUI 系统事件类型 |
-
-
-## 6.资源与序列化
-
-| 类型                         | 说明                |
-| -------------------------- | ----------------- |
-| `Resources`, `AssetBundle` | 资源加载管理器           |
-| `TextAsset`                | 文本资源，如 JSON、配置文件等 |
-| `SerializableAttribute`    | 允许自定义类型序列化存储      |
-
-
-## 7.UI（UGUI）
-
-| 类型                                    | 说明                  |
-| ------------------------------------- | ------------------- |
-| `Canvas`, `CanvasRenderer`            | UI 根组件              |
-| `RectTransform`                       | 用于 UI 布局的 Transform |
-| `Image`, `Text`, `Button`, `Slider` 等 | 基础 UI 组件            |
-| `EventSystem`                         | 管理 UI 输入事件          |
-
-
-## 8.时间、协程与生命周期
-
-| 类型                            | 说明                          |
-| ----------------------------- | --------------------------- |
-| `Time`                        | 时间相关（如 deltaTime、timeScale） |
-| `WaitForSeconds`, `WaitUntil` | 协程等待辅助类                     |
-| `Coroutine`                   | 协程对象类型                      |
+| 委托                                | 作用                      | 常用场景         | 签名                                                               |
+| --------------------------------- | ----------------------- | ------------ | ---------------------------------------------------------------- |
+| **AdvertisingIdentifierCallback** | 获取设备广告 ID（Ad ID / IDFA） | 广告投放、用户追踪    | `void(string advertisingId, bool trackingEnabled, string error)` |
+| **LogCallback**                   | 自定义日志处理                 | 日志系统、异常上传    | `void(string condition, string stackTrace, LogType type)`        |
+| **LowMemoryCallback**             | 低内存回调                   | 清缓存、卸载贴图     | `void()`                                                         |
+| **MemoryUsageChangedCallback**    | 内存使用变化回调                | 实时内存监控、自适应性能 | `void(long memoryUsage)`                                         |
