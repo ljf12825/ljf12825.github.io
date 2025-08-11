@@ -392,6 +392,7 @@ JSON是一种结构化的数据格式，它使用键值对（K-V）和数组(Arr
 Unity中通过`JsonUtility`或`Newtonsoft.Json`来处理JSON
 
 1. `JsonUtility`（Unity自带，性能好，功能简单）
+适合简单的数据结构（基础类型、List、数组、自定义`[Serializable]`类）
 定义类
 ```cs
 [System.Serializable]
@@ -414,8 +415,75 @@ Debug.Log(monster.name); // Goblin
 string newJson = JsonUtility.ToJson(monster, true); // true表示格式化输出
 ```
 
+`JsonUtility` API
+
+**Static Methods**
+
+| Method | Description | AddOn |
+| - | - | - |
+| `FromJson<T>(string json)` | 从JSON反序列化成对象 | |
+| `FromJsonOverwrite(string json, object objectToOverwrite)` | 从JSON数据反序列化到现有对象 | 不会新创建对象 |
+| `ToJson(object obj ,bool prettyPrint = false)` | 将对象序列化为JSON字符串 | `prettyPrint`为是否美化输出，true会有换行和缩进 |
+
+**注意事项**
+- 必须标记`[Serializable]`才能序列化自定义类（MonoBehaviour/ScriptableObject派生类自动可序列化）
+- 只能序列化字段，`public`或`[SerializeField] private`
+- 不支持字典，需要用两个List代替
+- 不支持属性（`get/set`）
+- 数组/List必须再对象中作为字段存在，不能直接反序列化成List
+
+
+**示例**
+```cs
+using UnityEngine;
+using System.IO;
+
+[System.Serializable]
+public class PlayerData
+{
+    public string playername;
+    public int score;
+}
+
+public class SaverManager : MonoBehaviour
+{
+    privte string filePath;
+
+    void Awake()
+    {
+        // 持久化路径（跨平台安全）
+        filePath = Application.persistentDataPath + "playerData.json";
+    }
+
+    public void Save(PlayerData data)
+    {
+        // 1.序列化成JSON
+        string json = JsonUtility.ToJson(data, true); // true = 格式化输出
+
+        // 2.写文件
+        File.WriteAllText(filePath, json);
+        Debug.Log("保存成功： " + filePath);
+    }
+
+    public PlayerData Load()
+    {
+        if (File.Exists(filePath))
+        {
+            // 1. 读文件
+            string json = File.ReadAllText(filePath);
+
+            // 2. 反序列化
+            return JsonUtility.FromJson<PlayerData>(json);
+        }
+        return nulll;
+    }
+}
+```
+
 2. `Newtonsoft.Json`（功能强大，支持Dictionary、List、动态字段等）
-需要安装Json.NET for Unity
+需要安装Json.NET for Unity\
+优点：支持Dictionary、泛型、多态等
+缺点：外部库，序列化速度比Unity内置的略慢
 
 ```cs
 using Newtonsoft.Json;
@@ -427,6 +495,40 @@ Monster monster = JsonConvert.DeserializeObject<Monster>(json);
 对象->JSON
 ```cs
 string json = JsonConvert.SerializeObject(monster, Formatting.Indented);
+```
+
+**示例**
+```cs
+using UnityEngine;
+using Newtonsoft.Json;
+using System.IO;
+using System.Collections.Generic;
+
+public class SaveManagerNewton : MonoBehaviour
+{
+    private string filePath;
+
+    void Awake()
+    {
+        filePath = Application.persistentDataPath + "/playerData.json";
+    }
+
+    public void Save(Dictionary<string, int> scores)
+    {
+        string json = JsonConvert.SerializeObject(scores, Formatting.Indented);
+        File.WriteAllText(filePath, json);
+    }
+
+    public Dictionary<string, int> Load()
+    {
+        if (File.Exists(filePath))
+        {
+            string json = File.ReadAllText(filePath);
+            return JsonConvert.DeserializeObject<Dictionary<string, int>>(json);
+        }
+        return new Dictionary<string, int>();
+    }
+}
 ```
 
 #### XML
