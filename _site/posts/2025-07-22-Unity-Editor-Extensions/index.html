@@ -1,0 +1,397 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.1 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Unity Editor Extensions - ljf12825’s Blog</title>
+<meta name="description" content="Unity编辑器扩展就是用C#编写一些工具或界面，去增强Unity自带的编辑器功能，从而让开发流程更高效、更可控 它的本质是：利用UnityEditor API在编辑模式下定制Inspector、菜单、窗口、场景视图、资源导入等功能">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="ljf12825's Blog">
+<meta property="og:title" content="Unity Editor Extensions">
+<meta property="og:url" content="http://localhost:4000/posts/2025-07-22-Unity-Editor-Extensions/">
+
+
+  <meta property="og:description" content="Unity编辑器扩展就是用C#编写一些工具或界面，去增强Unity自带的编辑器功能，从而让开发流程更高效、更可控 它的本质是：利用UnityEditor API在编辑模式下定制Inspector、菜单、窗口、场景视图、资源导入等功能">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2025-06-01T00:00:00+08:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/posts/2025-07-22-Unity-Editor-Extensions/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="ljf12825's Blog Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- favicon -->
+<link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          ljf12825's Blog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/"
+                
+                
+              >Home</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/categories/"
+                
+                
+              >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/tags/"
+                
+                
+              >Tags</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/about/"
+                
+                
+              >About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Unity Editor Extensions">
+    <meta itemprop="description" content="Unity编辑器扩展就是用C#编写一些工具或界面，去增强Unity自带的编辑器功能，从而让开发流程更高效、更可控它的本质是：利用UnityEditor API在编辑模式下定制Inspector、菜单、窗口、场景视图、资源导入等功能">
+    <meta itemprop="datePublished" content="2025-06-01T00:00:00+08:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/posts/2025-07-22-Unity-Editor-Extensions/" itemprop="url">Unity Editor Extensions
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>Unity编辑器扩展就是用C#编写一些工具或界面，去增强Unity自带的编辑器功能，从而让开发流程更高效、更可控<br />
+它的本质是：利用UnityEditor API在编辑模式下定制Inspector、菜单、窗口、场景视图、资源导入等功能</p>
+
+<h2 id="基础概念">基础概念</h2>
+<ul>
+  <li>运行时脚本 vs 编辑器脚本
+    <ul>
+      <li>运行时脚本：放在普通文件夹，打包后在游戏里运行</li>
+      <li>编辑器脚本：放在<code class="language-plaintext highlighter-rouge">Editor</code>文件夹下，只在编辑器运行，不会打包进游戏</li>
+      <li>编辑器脚本需要引用<code class="language-plaintext highlighter-rouge">UnityEditor</code>命名空间（注意它在运行时不可用）</li>
+    </ul>
+  </li>
+  <li>目的
+    <ul>
+      <li>节省重复操作时间（比如批量设置材质、自动生成Prefab）</li>
+      <li>提供更直观的可视化编辑界面</li>
+      <li>增强调试能力（自定义日志、场景可视化）</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="常见扩展方式">常见扩展方式</h2>
+<ol>
+  <li>自定义Inspector
+让某个组件在Inspector面板中显示定制的界面
+```cs
+using UnityEditor;
+using UnityEngine;</li>
+</ol>
+
+<p>[CustomEditor(typeof(MyComponent))]
+public class MyComponentEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        var myComp = (MyComponent)target;</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    EditorGUILayout.LabelField("自定义字段");
+    myComp.health = EditorGUILayout.IntSlider("生命值", myComp.health, 0, 100);
+
+    if (GUILayout.Button("重置生命值")) myComp.health = 100;
+
+    // 如果值改变，标记为脏数据
+    if (GUI.changed) EditorUtility.SetDirty(myComp);
+} } ``` 优点： - 把复杂数据可视化 - 增加按钮、滑条等直接操作数据
+</code></pre></div></div>
+
+<ol>
+  <li>自定义窗口（EditorWindow）
+可以创建一个独立的工具窗口，比如批量修改工具、关卡生成器
+```cs
+using UnityEditor;
+using UnityEngine;</li>
+</ol>
+
+<p>public class MyToolWindow : EditorWindow
+{
+    string newName = “Object”;</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[MenuItem("Tools/批量改名工具")]
+public static void ShowWindow() =&gt; GetWindow&lt;MyToolWindow&gt;("批量改名");
+
+void OnGUI()
+{
+    GUILayout.Label("改名设置", EditorStyles.boldLabel);
+    newName = EditorGUILayout.TextField("新名字", newName);
+
+    if (GUILayout.Button("改名选中物体"))
+    {
+        foreach (var obj in Selection.objects) obj.name = newName;
+    }
+} } ```
+</code></pre></div></div>
+
+<ol>
+  <li>菜单扩展
+在Unity顶部菜单栏或右键菜单添加功能
+    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nf">MenuItem</span><span class="p">(</span><span class="s">"GameObject/重置位置"</span><span class="p">,</span> <span class="k">false</span><span class="p">,</span> <span class="m">0</span><span class="p">)]</span>
+<span class="k">static</span> <span class="k">void</span> <span class="nf">ResetPosition</span><span class="p">()</span>
+<span class="p">{</span>
+ <span class="k">if</span> <span class="p">(</span><span class="n">Selection</span><span class="p">.</span><span class="n">activeTransform</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+     <span class="n">Selection</span><span class="p">.</span><span class="n">activeTransform</span><span class="p">.</span><span class="n">position</span> <span class="p">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">zero</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>参数解释
+        <ul>
+          <li>路径<code class="language-plaintext highlighter-rouge">"GameObject/重置位置"</code>决定菜单位置</li>
+          <li>第二个参数是是否加到菜单最上面（true为优先）</li>
+          <li>第三个参数是排序优先级</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>SceneView扩展
+在场景视图中绘制自定义Gizmos或工具按钮
+```cs
+using UnityEditor;
+using UnityEngine;</li>
+</ol>
+
+<p>[CustomEditor(typeof(Transform))]
+public class TransformGizmo : Editor
+{
+    void OnSceneGUI()
+    {
+        Handles.Label(((Transform)target).position + Vector3.up * 2, “这是一个提示”);
+    }
+}</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>可以绘制线条、形状、文字等辅助开发
+
+5. 资源导入扩展（AssetPostprocessor）
+拦截模型、贴图、音频导入过程，自动修改导入设置
+```cs
+using UnityEditor;
+
+public class MyTextureImporter : AssetPostprocessor
+{
+    void OnPreprocessTexture()
+    {
+        var importer = (TextureImporter)assetImporter;
+        importer.textureType = TExtureImporterType.Sprite;
+        importer.mipmapEnabled = false;
+    }
+}
+</code></pre></div></div>
+<ul>
+  <li>适合团队统一资源规划（比如所有贴图都关掉mipmap）</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2025-06-01T00:00:00+08:00">June 1, 2025</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/posts/2025-07-21-Probability-and-Randomness-in-Games/" class="pagination--pager" title="Probability and Randomness in Games">Previous</a>
+    
+    
+      <a href="/posts/2025-08-02-Burst-Complier/" class="pagination--pager" title="Burst Complier">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/ljf12825" rel="nofollow noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 <a href="http://localhost:4000">ljf12825's Blog</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

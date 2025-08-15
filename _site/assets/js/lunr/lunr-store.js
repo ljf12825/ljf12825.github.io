@@ -107,10 +107,10 @@ var store = [{
         "url": "/posts/2025-06-02-Unity-Architecture/",
         "teaser": null
       },{
-        "title": "Event and Delegate",
-        "excerpt":"Unity中的事件和委托机制是基于C#的语言特性实现的，用于对象之间的解耦通信。它们是实现观察者模式的核心方式，常用于UI更新、角色状态变化、触发器反应等场景 委托（Delegate） 委托是对函数的引用，可以把方法当作变量一样传递，就是C++中的函数指针 public delegate void MyDelegate(string message); // 声明一个委托类型 public class Test { public static void PrintMessage(string msg) =&gt; Debug.Log(msg); public void UseDelegate() { MyDelegate del = PrintMessage; // 赋值 dle(\"Hello Delegate!\"); // 调用 } } 相当于 // 函数指针 void (*func)(string) = &amp;PrintMessage; 事件（Event） 事件基于委托，是一种特殊的委托类型，但添加了访问限制，只能在声明它的类内部调用，允许其他对象订阅并响应某个特定的行为或状态变化 通常用于对象之间的通信，避免了直接调用，使代码更具解耦性 基本使用 在Unity中，可以使用C#的event关键字来声明一个事件。事件的订阅和触发通常会在组件之间完成 //...","categories": ["笔记"],
-        "tags": ["Unity","Unity Syntax"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Event-and-Delegate.html",
+        "title": "Event-Driven Architecture",
+        "excerpt":"委托与事件 Unity中的事件和委托机制是基于C#的语言特性实现的，用于对象之间的解耦通信。它们是实现观察者模式的核心方式，常用于UI更新、角色状态变化、触发器反应等场景 委托（Delegate） 委托是对函数的引用，可以把方法当作变量一样传递，就是C++中的函数指针 public delegate void MyDelegate(string message); // 声明一个委托类型 public class Test { public static void PrintMessage(string msg) =&gt; Debug.Log(msg); public void UseDelegate() { MyDelegate del = PrintMessage; // 赋值 dle(\"Hello Delegate!\"); // 调用 } } 相当于 // 函数指针 void (*func)(string) = &amp;PrintMessage; 事件（Event） 事件基于委托，是一种特殊的委托类型，但添加了访问限制，只能在声明它的类内部调用，允许其他对象订阅并响应某个特定的行为或状态变化 通常用于对象之间的通信，避免了直接调用，使代码更具解耦性 基本使用 在Unity中，可以使用C#的event关键字来声明一个事件。事件的订阅和触发通常会在组件之间完成...","categories": ["笔记"],
+        "tags": ["Unity","Unity Syntax","Architecture"],
+        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Event-Driven-Architecture.html",
         "teaser": null
       },{
         "title": "FSM",
@@ -215,10 +215,10 @@ var store = [{
         "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Frame.html",
         "teaser": null
       },{
-        "title": "Resources, Serialization and Data Persistence",
-        "excerpt":"序列化（Serialization） 什么是序列化 简单来说，序列化就是把内存中的对象转换成可以存储或传输的格式的过程，比如转换成二进制、JSON、XML、或者Unity自己的资产格式 反过来，反序列化（Deserialization）就是把存储或传输的格式转换回程序内存分钟的对象 为什么要序列化 1.保存数据 游戏存档就是把游戏状态保存到磁盘上的过程，这个过程就是序列化 2.编辑器显示与修改数据 Unity Inspector面板显示脚本里字段的值，需要序列化这些字段才能让编辑器读写它们 3.网络传输 多人游戏中，玩家状态需要网络传输，也要序列化成网络能传输的格式 Unity里的序列化 Unity有自己的一套序列化规则，决定哪些数据会被序列化（保存、显示在Inspector）： public字段 默认被序列化 private字段 需要加[SerializeField]才会序列化 Unity只序列化支持的类型，比如基本类型、Unity内置类型、自定义继承自UnityEngine.Object的类，和标记为[Serializable]的自定义类 属性（Property）默认不序列化，必须用字段 示例 using UnityEngine; public class Player : MonoBehaviour { public int health = 100; // 会序列化并显示在 Inspector [SerializeField] private int mana = 50; // 虽然是private，但加了特性会序列化 private int secret = 999;...","categories": ["笔记"],
+        "title": "Serialization and Persistence",
+        "excerpt":"在Unity中，序列化和持久化在游戏数据存储中起到重要的作用 序列化（Serialization） 序列化就是把内存中的对象转换成可以存储或传输的格式的过程，比如转换成二进制、JSON、XML、或者Unity自己的资产格式\\ 反过来，反序列化（Deserialization）就是把存储或传输的格式转换回程序内存分钟的对象 序列化的意义 保存数据 游戏存档就是把游戏状态保存到磁盘上的过程，这个过程就是序列化 编辑器显示与修改数据 Unity Inspector面板显示脚本里字段的值，需要序列化这些字段才能让编辑器读写它们 网络传输 多人游戏中，玩家状态需要网络传输，也要序列化成网络能传输的格式 Unity的序列化系统 Unity有自己的一套序列化规则，决定哪些数据会被序列化（保存、显示在Inspector），核心要点如下： 字段必须是公有的或标记为[SeriializeField] 只有公有字段或被[SerializeField]标记的私有字段才能被Unity序列化和显示在Inspector中 支持的类型 Unity支持大部分基础类型的序列化：int,float,string,bool,Vector3,Color等，自定义类型也能被序列化但是要加上[System.Serializable]属性，以及UnityEngine.Object类型（如GameObject,Transform,ScriptableObject等） 不支持的类型 一些类型无法被序列化，比如Dictionary,delegate,event等 Unity的序列化是深度序列化 Unity会自动处理类的成员变量，递归序列化引用类型（如类的实例） 如何序列化 基本类型 默认情况下，Unity会序列化所有公有字段和标记为[SerializeField]的私有字段 public class MyComponent : MonoBehaviour { public int score; [SerializeField] private string playerName; } 上述代码中score和playerName会被Unity序列化，可以在Inspector中看到并修改 类的序列化 自定义类（结构体、对象等）也可以被序列化，前提是它们符合序列化条件 ```cs [System.Serializable] public class Player { public string...","categories": ["笔记"],
         "tags": ["Unity"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Resources-Serialization-and-Data-Persistance.html",
+        "url": "/2025-06-10-Serialization-and-Persistance/",
         "teaser": null
       },{
         "title": "Animation System",
@@ -248,7 +248,7 @@ var store = [{
         "title": "Navigation",
         "excerpt":"constructing Navigation in 3D Unity的默认NavMesh系统是为3D场景涉及的 Unity中的Navigation主要涉及路径寻找（Pathfinding）和导航网格（NavMesh）两大核心内容，广泛应用于AI和角色移动的场景中，特别是用于控制NPC的行动 NavMesh（导航网格） NavMesh是一个为AI角色提供导航支持的系统。在一个3D场景中，NavMesh是通过对地面等可行走区域的“网格化”，让AI角色能在场景中找到通行路径 NavMesh的基本概念 可行走区域：NavMesh会自动计算哪些地方是可供角色行走的，哪些地方是不可行走的。不可行走区域可以通过物理层（Layer）或直接标记为不可行走区域来实现 障碍物避让：NavMehs会避开障碍物，因此角色在移动时不会穿越墙壁、岩石等不可行走区域 NavMesh代理（NavMesh Agent）：用于控制角色在NavMesh上的运动，它会根据目标点、路径规划和障碍物自动调整角色的路径 NavMesh生成 在Unity中，我们通过以下几个步骤来创建NavMesh： 导航面（NavMesh Surface）：这是Unity中生成NavMesh的工具。通过在地面上添加一个NavMeshSurface组件来定义NavMesh的生成区域。 烘焙NavMesh：一旦设置好NavMeshSurface，就可以通过点击“Bake”按钮来生成NavMesh，这时可行走的区域会被标记出来，Unity会在该区域内生成一个路径网格。 设置不可行走区域：可以通过NavMesh Obstacle组件来定义障碍物，标记出不可走的区域，生成的NavMesh会自动避开这些区域。 NavMesh Surface NavMesh Agent（导航代理） NavMeshAgent 是挂载在角色上的组件，负责根据计算出的路径自动引导角色移动。它依赖于NavMesh来判断路径和避开障碍物。NavMeshAgent 会计算从当前位置到目标点的路径，并使角色沿路径移动 属性 Speed：设置角色的移动速度 Angular Speed：设置角色旋转的速度 Acceleration：角色的加速速度 Stopping Distance：目标点与角色之间的最小距离，当距离小于该值时，角色会停止移动 Auto-Breaking：是否在停止时自动刹车 Avoidance Priority：设置代理的优先级，用于多个角色避免碰撞 移动方法 可以通过代码控制角色的移动 NavMeshAgent agent = GetComponent&lt;NavMeshAgent&gt;(); agent.SetDestination(targetPosition); 这个方法会让角色自动计算到targetPosition的最短路径，并开始沿着路径移动 NavMesh Path（导航路径） NavMeshPath是一个可以通过代码访问的类，它保存了计算出的路径的所有信息，包括路径的各个节点（Waypoints），可以使用它来获取更详细的路径信息 NavMeshPath path...","categories": ["笔记"],
         "tags": ["Unity","Unity System","AI"],
-        "url": "/posts/2025-06-11-Navigation/",
+        "url": "/posts/2025-06-11-Animation-System/",
         "teaser": null
       },{
         "title": "Terrain",
@@ -282,9 +282,9 @@ var store = [{
         "teaser": null
       },{
         "title": "Behaviour Tree",
-        "excerpt":" ","categories": ["笔记"],
+        "excerpt":"Unity的行为树是一种常用于AI决策的结构，它在游戏开发中用于描述AI的行为和决策逻辑。它通过阻止一系列的节点来表示各种行为，树形结构的设计让它可以清晰地展示AI决策过程 基本概念 行为树的每个节点都有一个功能，它们通常分为以下几种类型 根节点（Root Node）：行为树的起始点 选择节点（Selector Node）：类似于“或”运算，选择一个成功的子节点。如果一个子节点失败，则选择下一个子节点，直到找到成功的节点或者没有子节点可选 序列节点（Sequence Node）：类似于“与”运算，执行所有子节点，直到一个子节点失败。如果任何一个子节点失败，序列节点就会失败 动作节点（Action Node）：表示具体的行为或操作，例如移动、攻击、闲逛等 条件节点（Condition Node）：检查是否满足某个条件，如果条件成立则返回成功，否则返回失败 行为树的执行过程 行为树的执行是从根节点开始，逐层向下执行。它通常会根据子节点的状态（成功、失败或运行中）来决定接下来的执行路径 成功：当某个节点成功完成时，它会返回“成功”状态，行为树会继续向下执行 失败：当某个节点失败时，行为树会返回“失败”状态，选择其他路径或回溯 运行中：有些节点会持续执行，并且需要多个帧来完成，比如“寻找敌人”或“等待某个事件发生” 行为树的优势 可扩展性：行为树非常适合处理复杂的AI逻辑，可以轻松地将新的行为和决策加入树中，而不需要修改现有代码 模块化和可维护性：由于行为树的结构类似于树形，它更容易进行维护和扩展。每个节点都是独立的，只有一个明确的职责 清晰的决策过程：行为树通过层级结构表达决策逻辑，使得复杂的AI决策变得清晰易懂 Unity中行为树的实现 Unity中没有内建的行为树系统，但是可以使用一些现有的库来实现行为树，例如： Unity ML-Agents：这个包包含了一些用于训练和开发AI代理的工具，但它的行为树实现较为基础 Behaviour Designer：这是一个非常流行的Unity插件，它提供了一个图形化界面，便于设计和实现行为树 NodeCanvas：另一个插件，支持行为树、状态机等多种AI决策系统，可以很方便地设计复杂的行为树 Unity Behavior：2024年底Unity发布的免费行为树包，可视化 Unity ML-Agents GitHub ML-Agents ML-Agents (Machine Learning Agents)是由Unity官方提供的一款工具包，旨在帮助开发者在Unity中实现和训练智能体（Agents）使用机器学习算法。它为游戏和仿真环境中的AI提供了一种灵活的方式，利用强化学习、监督学习等技术来训练代理学习从环境中获得经验并做出决策 ML-Agents提供了基于PyTorch的算法实现，可以方便地使用其提供的Python API，通过强化学习、模仿学习、神经进化或任何其他方法训练智能代理 核心组件 ML-Agents的工作主要依赖于以下几个核心组件 Agent：在Unity环境中，Agent是一个学习者，它与环境进行交互并根据所接收到的奖励（reward）和惩罚（penalty）来调整其行为策略。Agent可以是游戏中的一个角色或物体（如玩家、敌人、NPC等） Environment：环境是Agent交互的地方，包含了物理世界、场景中的其他对象等。它为Agent提供观测数据并接收来自Agent的动作。一个Unity场景通常包含多个对象，例如地面、障碍物、NPC、敌人等 Brain：Brain负责决策，它是机器学习模型的实现，可以是一个简单的规则引擎或一个复杂的神经网络。以前，Brain在Unity中是一个单独的组件，现在已经被改进为训练代理的策略。ML-Agents通过Python脚本和Unity连接，进行训练和推理 Academy：Academy是整个学习过程的核心管理者，它负责协调环境的重置、训练的初始化、代理的奖励以及多个Agent之间的同步 机器学习的训练过程 ML-Agents的训练过程包括以下几个主要步骤： 设置环境：需要在Unity中创建一个合适的场景，设置Agent，并为Agent提供可观测的信息（如位置、速度、目标位置等）以及奖励机制（如击中目标、避开障碍物等）...","categories": ["笔记"],
         "tags": ["Unity","Unity System","AI"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Behaviour-Tree.html",
+        "url": "/posts/2025-06-14-Behaviour-Tree/",
         "teaser": null
       },{
         "title": "Skybox",
@@ -440,7 +440,7 @@ var store = [{
         "title": "Assets Import and Load",
         "excerpt":"如何将外部资源导入到Unity中并在运行时使用 资源导入 资源导入是指Unity将外部资源文件（如.fbx、.png、.mp3等）转换为引擎可以使用的内部格式。导入过程不仅包括将资源放入Unity项目中，还涉及到Unity如何优化、压缩、管理这些资源 资源导入的关键步骤 文件放置：在资源文件中放入Unity项目的Assets文件中。Unity会自动检测到这些文件，并开始导入流程 导入设置：在Inspector面板中，选中资源文件后，可以看到不同类型资源的导入设置（如Texture Type、Model Import Settings等）。不同的资源类型有不同的设置，影响最终的导入结果 对于纹理，可以设置纹理的类型（如2D或Sprite），以及压缩选项（如DXT1、DXT5等） 对于模型，可以设置模型的网格、骨骼、动画等导入选项 对于音频，可以设置压缩类型、采样率等 资源优化：Unity会根据导入设置自动处理资源，可能会进行压缩、网格简化、生成多种LOD等优化操作 Meta文件：Unity会为每个导入的资源创建一个.meta文件，用于保存资源的设置、ID等信息。这个文件对资源管理非常重要，尤其是在团队协作时，避免丢失资源链接 常见的资源类型导入 纹理（Texture）：Unity会自动识别常见的纹理文件类型，并提供压缩、过滤等选项 详见Texture 导入 模型（Models）：Unity支持多种3D模型格式，尤其是.fbx，并支持自动生成碰撞体、网格和骨骼动画 详见Model 音频（Audio）：音频文件支持不同的压缩格式，可以设置为单声道、立体声等 详见Audio System 动画（Animations）：可以通过Animator系统来管理和播放 详见Animation System 资源加载 在游戏运行时，如何高效地加载和管理这些已经导入的资源至关重要，尤其是在需要加载大量资源时。Unity提供了多种加载资源的方式，以便优化性能和内存使用 class Resources Resources类在Unity中提供了一种动态加载资产的方式，允许你访问存储在特定文件夹中的对象，如Texture，Prefab，Audio Clips等。这些文件必须存放在项目中名为“Resources”的文件夹内 存放资产到Resources文件夹 希望在运行时动态加载的所有资产必须存放在名为“Resources”的文件夹中。你可以在Assets目录下创建多个“Resources”文件夹 存放在这些文件夹中的资产不会通过Inspector自动引用，因此Unity无法对它们进行优化，直接包含在最终构建中 加载方式 Resources.Load()和Resources.FindObjectsOfTypeAll()函数可以用来加载和访问资产 Resouces.Load()：按路径加载单个资产 Resouces.FindObjectsOfTypeAll()：用于查找并访问场景中或Resources文件夹下的所有对象 使用路径加载资产时，所有存放在Resources文件夹中的资产会被纳入构建中，这可能导致构建大小增加 构建优化问题 通常，Unity 会通过 Inspector 曝露对资产的引用，这样在构建时它可以自动计算出哪些资产是实际使用的，从而避免不必要的资源被包含在最终构建中。但如果使用 Resources 文件夹，Unity 无法做到这一点，因此所有资产都会被包含在构建中，即使你没有使用它们 不推荐过度使用路径加载 使用路径名来加载资产会导致代码不那么可复用，因为脚本会硬编码依赖于资产存放的位置。这不如通过Inspector暴露的引用直观和易于维护...","categories": ["笔记"],
         "tags": ["Unity","Asset"],
-        "url": "/%E7%AC%94%E8%AE%B0/2025/06/01/Assets-Import-and-Load.html",
+        "url": "/posts/2025-07-18-Assets-Import-and-Load/",
         "teaser": null
       },{
         "title": "Unity Packaging and Building",
@@ -455,10 +455,10 @@ var store = [{
         "url": "/posts/2025-07-21-Probability-and-Randomness-in-Games/",
         "teaser": null
       },{
-        "title": "Unity Editor",
-        "excerpt":" ","categories": ["笔记"],
+        "title": "Unity Editor Extensions",
+        "excerpt":"Unity编辑器扩展就是用C#编写一些工具或界面，去增强Unity自带的编辑器功能，从而让开发流程更高效、更可控 它的本质是：利用UnityEditor API在编辑模式下定制Inspector、菜单、窗口、场景视图、资源导入等功能 基础概念 运行时脚本 vs 编辑器脚本 运行时脚本：放在普通文件夹，打包后在游戏里运行 编辑器脚本：放在Editor文件夹下，只在编辑器运行，不会打包进游戏 编辑器脚本需要引用UnityEditor命名空间（注意它在运行时不可用） 目的 节省重复操作时间（比如批量设置材质、自动生成Prefab） 提供更直观的可视化编辑界面 增强调试能力（自定义日志、场景可视化） 常见扩展方式 自定义Inspector 让某个组件在Inspector面板中显示定制的界面 ```cs using UnityEditor; using UnityEngine; [CustomEditor(typeof(MyComponent))] public class MyComponentEditor : Editor { public override void OnInspectorGUI() { var myComp = (MyComponent)target; EditorGUILayout.LabelField(\"自定义字段\"); myComp.health = EditorGUILayout.IntSlider(\"生命值\", myComp.health, 0, 100); if (GUILayout.Button(\"重置生命值\")) myComp.health = 100;...","categories": ["笔记"],
         "tags": ["Unity","Editor","Tool"],
-        "url": "/posts/2025-07-22-Unity-Editor/",
+        "url": "/posts/2025-07-22-Unity-Editor-Extensions/",
         "teaser": null
       },{
         "title": "Burst Complier",
@@ -500,7 +500,7 @@ var store = [{
         "title": "Job System",
         "excerpt":" ","categories": ["笔记"],
         "tags": ["Unity","MultiThreading","High Performance"],
-        "url": "/posts/2025-08-02-Mono-and-IL2CPP/",
+        "url": "/posts/2025-08-02-Job-System/",
         "teaser": null
       },{
         "title": "Mono and IL2CPP",
@@ -521,10 +521,28 @@ var store = [{
         "url": "/posts/2025-08-03-Algorithms-in-Unity-Game-Dev/",
         "teaser": null
       },{
-        "title": "Event-Driven Architecture",
-        "excerpt":"事件驱动架构（Event-Driven Architecture，简称EDA）是一种以事件作为系统运行核心驱动力的软件架构模式   它的思路是：     当某个事件发生时，系统会通知对该事件感兴趣的组件，由它们决定如何响应   ","categories": ["笔记"],
-        "tags": ["Unity","Architecture"],
-        "url": "/posts/2025-08-08-Event-Driven-Architecture/",
+        "title": "Unity Programming Model and Technology Stack",
+        "excerpt":"传统编程模型和技术栈 Unity的传统编程模型和技术栈主要依赖于面向对象编程（OOP），并结合了事件驱动和组件化编程模型 组件化编程模型（Component-based Programming） Unity最核心的编程模型是组件化（Component-based）设计，它来源于“实体-组件-系统（ECS）”思想。Unity中的每个游戏对象（GameObject）是一个容器，能够附加多个组件（Component）。这些组件决定了该游戏对象的行为和属性 GameObject：是Unity中的基础对象，它通常代表场景中的一个物体或实体 Component：附加在GameObject上的功能块，通常负责管理物体的某一方面的行为，比如渲染、物理、输入处理等 这种设计模式强调解耦，每个功能都被划分为一个独立的组件，增加了代码的复用性和可维护性 MonoBehaviour 类 MonoBehaviour 在Unity中，所有游戏逻辑通常都是继承MonoBehaviour类来实现的。MonoBehaviour提供了一些生命周期函数，用于管理游戏对象的行为。这些函数包括 Start()：初始化，游戏对象激活时调用一次 Update()：每帧调用，用于执行逻辑更新 FixedUpdate()：每个物理模拟步长调用，适合用于物理计算 OnCollisionEnter()：物理碰撞使用 OnDestroy()：对象销毁时调用 这些生命周期函数是Unity编程模型的核心，开发者通过重写这些函数来实现游戏对象的行为 事件驱动编程 Unity传统编程中有大量事件驱动机制，尤其是在用户输入和UI交互方面 UI系统：Unity提供了自己的UI系统，最常见的是UI.Button和UI.Slider等UI组件，它们通过事件监听和回调处理用户输入 C#事件和委托：Unity的编程中也广泛使用C#的事件和委托来实现对象间的通信，例如当一个玩家触发某个动作时，其他对象可能需要响应这个事件。Event、Action和UnityEvent是最常用的方式 协程（Coroutines） Unity提供了协程来简化时间和异步操作的管理。协程可以在多个帧之间执行，允许开发者编写类似于阻塞的代码，但是不会阻塞主线程 例如，等待一段时间再执行某个操作，或逐步改变某个属性 IEnumerator ChangeColorOverTime() { float duration = 2f; float timeElapsed = 0f; Color startColor = myObjectRenderer.material.color; Color targetColor = Color.red; while (timeElapsed &lt; duration) { myObjectRenderer.material.color...","categories": ["笔记"],
+        "tags": ["Unity","GameDevelop","Algorithm"],
+        "url": "/posts/2025-08-11-Unity-Programming-Model-and-Technology-Stack/",
+        "teaser": null
+      },{
+        "title": "Behaviour Designer",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity Packages","AI"],
+        "url": "/posts/2025-08-12-Behaviour-Designer/",
+        "teaser": null
+      },{
+        "title": "ML Agents",
+        "excerpt":" ","categories": ["笔记"],
+        "tags": ["Unity","Unity Packages","AI"],
+        "url": "/posts/2025-08-12-ML-Agents/",
+        "teaser": null
+      },{
+        "title": "Unity Behavior",
+        "excerpt":"Manual Behavior  ","categories": ["笔记"],
+        "tags": ["Unity","Unity Packages","AI"],
+        "url": "/posts/2025-08-12-Unity-Behavior/",
         "teaser": null
       },{
     "title": "About",

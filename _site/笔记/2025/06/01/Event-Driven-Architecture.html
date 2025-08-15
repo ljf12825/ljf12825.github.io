@@ -10,19 +10,19 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Event and Delegate - ljf12825’s Blog</title>
-<meta name="description" content="Unity中的事件和委托机制是基于C#的语言特性实现的，用于对象之间的解耦通信。它们是实现观察者模式的核心方式，常用于UI更新、角色状态变化、触发器反应等场景">
+<!-- begin _includes/seo.html --><title>Event-Driven Architecture - ljf12825’s Blog</title>
+<meta name="description" content="委托与事件 Unity中的事件和委托机制是基于C#的语言特性实现的，用于对象之间的解耦通信。它们是实现观察者模式的核心方式，常用于UI更新、角色状态变化、触发器反应等场景">
 
 
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="ljf12825's Blog">
-<meta property="og:title" content="Event and Delegate">
-<meta property="og:url" content="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Event-and-Delegate.html">
+<meta property="og:title" content="Event-Driven Architecture">
+<meta property="og:url" content="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Event-Driven-Architecture.html">
 
 
-  <meta property="og:description" content="Unity中的事件和委托机制是基于C#的语言特性实现的，用于对象之间的解耦通信。它们是实现观察者模式的核心方式，常用于UI更新、角色状态变化、触发器反应等场景">
+  <meta property="og:description" content="委托与事件 Unity中的事件和委托机制是基于C#的语言特性实现的，用于对象之间的解耦通信。它们是实现观察者模式的核心方式，常用于UI更新、角色状态变化、触发器反应等场景">
 
 
 
@@ -37,7 +37,7 @@
 
 
 
-<link rel="canonical" href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Event-and-Delegate.html">
+<link rel="canonical" href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Event-Driven-Architecture.html">
 
 
 
@@ -148,8 +148,8 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Event and Delegate">
-    <meta itemprop="description" content="Unity中的事件和委托机制是基于C#的语言特性实现的，用于对象之间的解耦通信。它们是实现观察者模式的核心方式，常用于UI更新、角色状态变化、触发器反应等场景">
+    <meta itemprop="headline" content="Event-Driven Architecture">
+    <meta itemprop="description" content="委托与事件Unity中的事件和委托机制是基于C#的语言特性实现的，用于对象之间的解耦通信。它们是实现观察者模式的核心方式，常用于UI更新、角色状态变化、触发器反应等场景">
     <meta itemprop="datePublished" content="2025-06-01T00:00:00+08:00">
     
 
@@ -157,7 +157,7 @@
       
         <header>
           <h1 id="page-title" class="page__title" itemprop="headline">
-            <a href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Event-and-Delegate.html" itemprop="url">Event and Delegate
+            <a href="http://localhost:4000/%E7%AC%94%E8%AE%B0/2025/06/01/Event-Driven-Architecture.html" itemprop="url">Event-Driven Architecture
 </a>
           </h1>
           
@@ -168,7 +168,8 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>Unity中的事件和委托机制是基于C#的语言特性实现的，用于对象之间的解耦通信。它们是实现观察者模式的核心方式，常用于UI更新、角色状态变化、触发器反应等场景</p>
+        <h1 id="委托与事件">委托与事件</h1>
+<p>Unity中的事件和委托机制是基于C#的语言特性实现的，用于对象之间的解耦通信。它们是实现观察者模式的核心方式，常用于UI更新、角色状态变化、触发器反应等场景</p>
 
 <h2 id="委托delegate">委托（Delegate）</h2>
 <p>委托是对函数的引用，可以把方法当作变量一样传递，就是C++中的函数指针</p>
@@ -350,6 +351,153 @@ void Jump()
     </tr>
   </tbody>
 </table>
+
+<h1 id="事件驱动架构">事件驱动架构</h1>
+<p>事件驱动架构（Event-Driven Architecture，简称EDA）是一种以事件作为系统运行核心驱动力的软件架构模式<br />
+它的思路是：</p>
+<blockquote>
+  <p>当某个事件发生时，系统会通知对改事件感兴趣的组件，由它们决定如何响应
+这种模式的重点是“触发→通知→响应”，而不是“调用→返回”</p>
+</blockquote>
+
+<h2 id="核心概念">核心概念</h2>
+<ol>
+  <li>事件（Event）
+    <ul>
+      <li>事件是系统状态变化的记录</li>
+      <li>通常包含：
+        <ul>
+          <li>事件类型（例如<code class="language-plaintext highlighter-rouge">"PlayerDied</code>、<code class="language-plaintext highlighter-rouge">"OrderCreated"</code>）</li>
+          <li>事件数据（如死亡位置、订单详情）</li>
+        </ul>
+      </li>
+      <li>事件是“一次性的事实”，不会被修改</li>
+    </ul>
+  </li>
+</ol>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">PlayerDiedEvent</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">Vector3</span> <span class="n">deathPosition</span><span class="p">;</span>
+    <span class="k">public</span> <span class="nf">PlayerDiedEvent</span><span class="p">(</span><span class="n">Vector3</span> <span class="n">pos</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">deathPosition</span> <span class="p">=</span> <span class="n">pos</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>事件生产者（Event Producer）
+    <ul>
+      <li>负责检测某件事情发生，并发出事件</li>
+      <li>它只负责发出，不关心谁接收、怎么处理</li>
+    </ul>
+  </li>
+</ol>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">PlayerHealth</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">event</span> <span class="n">Action</span><span class="p">&lt;</span><span class="n">PlayerDiedEvent</span><span class="p">&gt;</span> <span class="n">OnPlayerDied</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">TakeDamage</span><span class="p">(</span><span class="kt">int</span> <span class="n">amount</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// 扣血逻辑</span>
+        <span class="k">if</span> <span class="p">(</span><span class="cm">/*死亡条件*/</span><span class="p">)</span> <span class="n">OnPlayerDied</span><span class="p">?.</span><span class="nf">Invoke</span><span class="p">(</span><span class="k">new</span> <span class="nf">PlayerDiedEvent</span><span class="p">(</span><span class="n">transform</span><span class="p">.</span><span class="n">position</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>事件消费者（Event Consumer）
+    <ul>
+      <li>订阅（Subscribe）某类事件，并在事件发生时响应</li>
+      <li>不直接调用生产者，而是等待事件通知</li>
+    </ul>
+  </li>
+</ol>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GameManager</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">PlayerHealth</span> <span class="n">playerHealth</span><span class="p">;</span>
+
+    <span class="k">void</span> <span class="nf">OnEnable</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">playerHealth</span><span class="p">.</span><span class="n">OnPlayerDied</span> <span class="p">+=</span> <span class="n">HandlePlayerDeath</span><span class="p">;</span>
+
+    <span class="k">void</span> <span class="nf">OnDisable</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">playerHealth</span><span class="p">.</span><span class="n">OnPlayerDied</span> <span class="p">-=</span> <span class="n">HandlePlayerDeath</span><span class="p">;</span>
+
+    <span class="k">void</span> <span class="nf">HandlePlayerDeath</span><span class="p">(</span><span class="n">PlayerDiedEvent</span> <span class="n">e</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">$"玩家死亡，位置：</span><span class="p">{</span><span class="n">e</span><span class="p">.</span><span class="n">deathPosition</span><span class="p">}</span><span class="s">"</span><span class="p">);</span>
+        <span class="c1">// 触发游戏结束逻辑</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="特点">特点</h2>
+<p>优点</p>
+<ol>
+  <li>解耦：生产者和消费者互不依赖，降低模块耦合度</li>
+  <li>可扩展性强：新增功能只需新建事件监听者，无需更改生产者</li>
+  <li>异步性：事件可以异步处理，提高系统吞吐量（特别是在分布式系统里）</li>
+  <li>灵活性：可以有多个监听者对同一事件做出不同反应</li>
+</ol>
+
+<p>缺点</p>
+<ol>
+  <li>调试困难：事件流是分散的，不能像函数调用链那样直观</li>
+  <li>事件风暴：事件过多或链式触发，可能引起性能问题</li>
+  <li>状态一致性：异步事件可能导致数据状态延迟更新</li>
+</ol>
+
+<h2 id="架构流程">架构流程</h2>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">事件源</span><span class="err">（</span><span class="n">Producer</span><span class="err">）</span> <span class="o">--</span><span class="n">发出事件</span><span class="o">-</span><span class="k">-&gt;</span> <span class="n">事件通道</span><span class="err">（</span><span class="n">Event</span> <span class="n">Bus</span><span class="err">）</span> <span class="o">--</span><span class="n">分发</span><span class="o">-</span><span class="k">-&gt;</span> <span class="n">事件监听者</span><span class="err">（</span><span class="n">Consumer</span><span class="err">）</span>
+</code></pre></div></div>
+<p>可以用两种方式实现：</p>
+<ol>
+  <li>直接回调（同进程、同步）：C#事件、委托</li>
+  <li>消息总线/事件总线（异步）：如<code class="language-plaintext highlighter-rouge">EventAggregator</code>、<code class="language-plaintext highlighter-rouge">MessageBus</code>、<code class="language-plaintext highlighter-rouge">RabbitMQ</code>、<code class="language-plaintext highlighter-rouge">Kafka</code></li>
+</ol>
+
+<p>在Unity中的应用场景</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>场景</th>
+      <th>示例事件</th>
+      <th>好处</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>UI 更新</td>
+      <td><code class="language-plaintext highlighter-rouge">"ScoreChanged"</code></td>
+      <td>UI 只关心分数变化，不管谁改的分数</td>
+    </tr>
+    <tr>
+      <td>游戏状态</td>
+      <td><code class="language-plaintext highlighter-rouge">"GameOver"</code></td>
+      <td>所有相关系统（UI、音乐、AI）都能收到结束事件</td>
+    </tr>
+    <tr>
+      <td>AI 行为</td>
+      <td><code class="language-plaintext highlighter-rouge">"EnemySpotted"</code></td>
+      <td>AI 角色感知敌人后触发反应</td>
+    </tr>
+    <tr>
+      <td>资源管理</td>
+      <td><code class="language-plaintext highlighter-rouge">"ItemPickedUp"</code></td>
+      <td>背包系统和音效系统都能响应</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>最佳实践</p>
+<ol>
+  <li>事件名用过去式（如<code class="language-plaintext highlighter-rouge">PlayerDied</code>而不是<code class="language-plaintext highlighter-rouge">PlayerDie</code>）表示它已经发生</li>
+  <li>数据封装到事件类中，避免传一堆参数</li>
+  <li>解订阅事件，防止内存泄露（<code class="language-plaintext highlighter-rouge">OnDisable</code>里取消监听）</li>
+  <li>避免事件滥用，过多事件会导致性能下降和可维护性变差</li>
+  <li>集中管理事件（如使用<code class="language-plaintext highlighter-rouge">EventManager</code>）或第三方事件总线库</li>
+</ol>
+
+<p>事件驱动架构的精髓是让变化“广播”出去，由感兴趣的模块去响应，而不是让变化方直接控制接下来发生的事</p>
 
         
       </section>

@@ -1,9 +1,587 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-08-09T22:04:06+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Event-Driven Architecture</title><link href="http://localhost:4000/posts/2025-08-08-Event-Driven-Architecture/" rel="alternate" type="text/html" title="Event-Driven Architecture" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Event-Driven-Architecture</id><content type="html" xml:base="http://localhost:4000/posts/2025-08-08-Event-Driven-Architecture/"><![CDATA[<p>事件驱动架构（Event-Driven Architecture，简称EDA）是一种以事件作为系统运行核心驱动力的软件架构模式</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-08-15T23:41:13+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ljf12825’s Blog</title><subtitle>Efficient &amp; Elegant</subtitle><author><name>Jeff Lee</name><email>2548278761@qq.com</email></author><entry><title type="html">Unity Behavior</title><link href="http://localhost:4000/posts/2025-08-12-Unity-Behavior/" rel="alternate" type="text/html" title="Unity Behavior" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Unity-Behavior</id><content type="html" xml:base="http://localhost:4000/posts/2025-08-12-Unity-Behavior/"><![CDATA[<p><a href="https://docs.unity3d.com/Packages/com.unity.behavior@1.0/manual/index.html">Manual Behavior</a></p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Packages" /><category term="AI" /><summary type="html"><![CDATA[Manual Behavior]]></summary></entry><entry><title type="html">Behaviour Tree</title><link href="http://localhost:4000/posts/2025-06-14-Behaviour-Tree/" rel="alternate" type="text/html" title="Behaviour Tree" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Behaviour-Tree</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-14-Behaviour-Tree/"><![CDATA[<p>Unity的行为树是一种常用于AI决策的结构，它在游戏开发中用于描述AI的行为和决策逻辑。它通过阻止一系列的节点来表示各种行为，树形结构的设计让它可以清晰地展示AI决策过程</p>
 
-<p>它的思路是：</p>
-<blockquote>
-  <p>当某个事件发生时，系统会通知对该事件感兴趣的组件，由它们决定如何响应</p>
-</blockquote>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Architecture" /><summary type="html"><![CDATA[事件驱动架构（Event-Driven Architecture，简称EDA）是一种以事件作为系统运行核心驱动力的软件架构模式]]></summary></entry><entry><title type="html">Unity Performance Tuning</title><link href="http://localhost:4000/posts/2025-06-13-Unity-Performance-Tuning/" rel="alternate" type="text/html" title="Unity Performance Tuning" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Unity-Performance-Tuning</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-13-Unity-Performance-Tuning/"><![CDATA[<h2 id="drawcall">DrawCall</h2>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><summary type="html"><![CDATA[DrawCall]]></summary></entry><entry><title type="html">Algorithms in Unity GameDevelopment</title><link href="http://localhost:4000/posts/2025-08-03-Algorithms-in-Unity-Game-Dev/" rel="alternate" type="text/html" title="Algorithms in Unity GameDevelopment" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Algorithms-in-Unity-Game-Dev</id><content type="html" xml:base="http://localhost:4000/posts/2025-08-03-Algorithms-in-Unity-Game-Dev/"><![CDATA[<ol>
+<h2 id="基本概念">基本概念</h2>
+<p>行为树的每个节点都有一个功能，它们通常分为以下几种类型</p>
+<ul>
+  <li>根节点（Root Node）：行为树的起始点</li>
+  <li>选择节点（Selector Node）：类似于“或”运算，选择一个成功的子节点。如果一个子节点失败，则选择下一个子节点，直到找到成功的节点或者没有子节点可选</li>
+  <li>序列节点（Sequence Node）：类似于“与”运算，执行所有子节点，直到一个子节点失败。如果任何一个子节点失败，序列节点就会失败</li>
+  <li>动作节点（Action Node）：表示具体的行为或操作，例如移动、攻击、闲逛等</li>
+  <li>条件节点（Condition Node）：检查是否满足某个条件，如果条件成立则返回成功，否则返回失败</li>
+</ul>
+
+<h2 id="行为树的执行过程">行为树的执行过程</h2>
+<p>行为树的执行是从根节点开始，逐层向下执行。它通常会根据子节点的状态（成功、失败或运行中）来决定接下来的执行路径</p>
+<ul>
+  <li>成功：当某个节点成功完成时，它会返回“成功”状态，行为树会继续向下执行</li>
+  <li>失败：当某个节点失败时，行为树会返回“失败”状态，选择其他路径或回溯</li>
+  <li>运行中：有些节点会持续执行，并且需要多个帧来完成，比如“寻找敌人”或“等待某个事件发生”</li>
+</ul>
+
+<h2 id="行为树的优势">行为树的优势</h2>
+<ul>
+  <li>可扩展性：行为树非常适合处理复杂的AI逻辑，可以轻松地将新的行为和决策加入树中，而不需要修改现有代码</li>
+  <li>模块化和可维护性：由于行为树的结构类似于树形，它更容易进行维护和扩展。每个节点都是独立的，只有一个明确的职责</li>
+  <li>清晰的决策过程：行为树通过层级结构表达决策逻辑，使得复杂的AI决策变得清晰易懂</li>
+</ul>
+
+<h2 id="unity中行为树的实现">Unity中行为树的实现</h2>
+<p>Unity中没有内建的行为树系统，但是可以使用一些现有的库来实现行为树，例如：</p>
+<ul>
+  <li>Unity ML-Agents：这个包包含了一些用于训练和开发AI代理的工具，但它的行为树实现较为基础</li>
+  <li>Behaviour Designer：这是一个非常流行的Unity插件，它提供了一个图形化界面，便于设计和实现行为树</li>
+  <li>NodeCanvas：另一个插件，支持行为树、状态机等多种AI决策系统，可以很方便地设计复杂的行为树</li>
+  <li>Unity Behavior：2024年底Unity发布的免费行为树包，可视化</li>
+</ul>
+
+<h2 id="unity-ml-agents"><a href="/posts/2025-08-12-ML-Agents/">Unity ML-Agents</a></h2>
+<p><a href="https://github.com/Unity-Technologies/ml-agents.git">GitHub ML-Agents</a></p>
+
+<p>ML-Agents (Machine Learning Agents)是由Unity官方提供的一款工具包，旨在帮助开发者在Unity中实现和训练智能体（Agents）使用机器学习算法。它为游戏和仿真环境中的AI提供了一种灵活的方式，利用强化学习、监督学习等技术来训练代理学习从环境中获得经验并做出决策</p>
+
+<p>ML-Agents提供了基于PyTorch的算法实现，可以方便地使用其提供的Python API，通过强化学习、模仿学习、神经进化或任何其他方法训练智能代理</p>
+
+<h3 id="核心组件">核心组件</h3>
+<p>ML-Agents的工作主要依赖于以下几个核心组件</p>
+<ul>
+  <li>
+    <p>Agent：在Unity环境中，Agent是一个学习者，它与环境进行交互并根据所接收到的奖励（reward）和惩罚（penalty）来调整其行为策略。Agent可以是游戏中的一个角色或物体（如玩家、敌人、NPC等）</p>
+  </li>
+  <li>
+    <p>Environment：环境是Agent交互的地方，包含了物理世界、场景中的其他对象等。它为Agent提供观测数据并接收来自Agent的动作。一个Unity场景通常包含多个对象，例如地面、障碍物、NPC、敌人等</p>
+  </li>
+  <li>
+    <p>Brain：Brain负责决策，它是机器学习模型的实现，可以是一个简单的规则引擎或一个复杂的神经网络。以前，Brain在Unity中是一个单独的组件，现在已经被改进为训练代理的策略。ML-Agents通过Python脚本和Unity连接，进行训练和推理</p>
+  </li>
+  <li>
+    <p>Academy：Academy是整个学习过程的核心管理者，它负责协调环境的重置、训练的初始化、代理的奖励以及多个Agent之间的同步</p>
+  </li>
+</ul>
+
+<h3 id="机器学习的训练过程">机器学习的训练过程</h3>
+<p>ML-Agents的训练过程包括以下几个主要步骤：</p>
+<ol>
+  <li>
+    <p>设置环境：需要在Unity中创建一个合适的场景，设置Agent，并为Agent提供可观测的信息（如位置、速度、目标位置等）以及奖励机制（如击中目标、避开障碍物等）</p>
+  </li>
+  <li>
+    <p>定义Agent的行为：需要为Agent编写C#脚本，告诉它如何根据环境的状态选择动作。通常这会涉及到对传入的观测数据进行处理，并输出动作（例如移动、跳跃等）</p>
+  </li>
+  <li>
+    <p>训练Agent：通过ML-Agents中的Python接口，利用强化学习算法（如PPO、A3C、DDPG等）训练Agent。训练过程中，代理通过与环境的交互，逐步调整策略以最大化累积的奖励</p>
+  </li>
+  <li>
+    <p>评估与优化：训练过程中，可以定期评估Agent的表现，查看它是否能成功完成任务，并根据结果调整训练策略或优化环境设计</p>
+  </li>
+</ol>
+
+<h3 id="ml-agents的主要特性">ML-Agents的主要特性</h3>
+<ul>
+  <li>强化学习：ML-Agents最常用于强化学习（Reinforcement Learning），代理通过与环境交互、执行动作并接受奖励来学习最优策略</li>
+  <li>模仿学习：ML-Agents也支持模仿学习（Imitation Learning），这是一种从专家演示中学习的方式。可以通过记录专家的行为，使用数据来训练Agent模仿这些行为</li>
+  <li>多智能体系统：ML-Agents支持多个Agent同时训练，它们可以共享一个环境进行协作或对抗训练</li>
+  <li>支持多种训练算法：目前，ML-Agent支持多个强化学习算法，如PPO、DDPG等。这些算法适应不同类型的问题，如连续动作空间或离散动作空间</li>
+</ul>
+
+<h3 id="ml-agent使用步骤">ML-Agent使用步骤</h3>
+<ol>
+  <li>安装ML-Agents
+ML-Agents需要安装Unity插件和Python库
+    <ul>
+      <li>在Unity中，通过Package Manager安装<code class="language-plaintext highlighter-rouge">ML-Agents</code></li>
+      <li>在Python环境中，使用以下命令安装ML-Agents
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  pip <span class="nb">install </span>mlagents
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>创建Agent
+可以为Unity中的角色创建一个代理。代理需要实现如下接口
+    <ul>
+      <li>OnEpisodeBegin：每当一个训练回合开始时调用，通常用来重置代理和环境</li>
+      <li>CollectObservation：每个步骤手机代理的环境状态，作为输入传递给机器学习模型</li>
+      <li>OnActionReceived：每当代理执行一个动作时调用，基于该动作与环境的互动更新代理的状态，并奖励或惩罚代理</li>
+    </ul>
+  </li>
+  <li>训练代理
+通过Python训练脚本，可以开始训练代理。ML-Agents提供了一个命令行工具（<code class="language-plaintext highlighter-rouge">mlagents-learn</code>），可以通过它来启动训练
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mlagents-learn config/trainer_config.yaml <span class="nt">--run-id</span><span class="o">=</span>first_run
+</code></pre></div>    </div>
+  </li>
+  <li>使用模型
+一旦训练完成，可以导出训练好的模型，并将其加载到Unity项目中，直接替换代理的行为逻辑</li>
+</ol>
+
+<h3 id="训练的算法与策略">训练的算法与策略</h3>
+<p>ML-Agents支持多种强化学习算法</p>
+<ul>
+  <li>PPO（Proximal Policy Optimization）：适用于大多数问题，是一种基于策略梯度的算法，能够较好地处理连续动作空间</li>
+  <li>DDPG（Deep Deterministic Policy Gradient）：用于连续动作空间的深度强化学习算法，适合处理高维、连续的动作问题</li>
+  <li>A3C（Asynchronous Advantage Actor-Critic）：适用于多智能体训练，利用多线程来提升训练效率</li>
+</ul>
+
+<h2 id="behavior-designer"><a href="/posts/2025-08-12-Behaviour-Designer/">Behavior Designer</a></h2>
+<p>Behaviour Designer是一款强大的Unity插件，用于创建和管理行为树，它让开发者可以通过图形化界面设计复杂的AI行为，而不需要手动编写复杂的代码。Behaviour Designer的主要优势在于它提供了一种直观的方式来构建和调试AI的决策系统，同时支持强化学习和传统的AI算法</p>
+
+<h3 id="behaviour-designer的核心功能">Behaviour Designer的核心功能</h3>
+<ul>
+  <li>图形化界面：Behaviour Designer提供了一个直观的拖拽式界面，使得设计和管理行为树变得非常容易。可以通过简单的拖动和连接节点来实现复杂的AI行为</li>
+  <li>节点类型丰富：Behaviour Designer提供了多种节点类型，包括：
+    <ul>
+      <li>Selector：选择器节点，依次检查子节点，如果由一个子节点成功则返回成功</li>
+      <li>Sequence：序列节点，依次执行子节点，直到有一个失败时返回失败</li>
+      <li>Condition：条件节点，检查某些条件是否满足，通常用于判断是否执行某个动作</li>
+      <li>Parallel：并行节点，允许多个子任务同时执行，直到所有任务完成或者有一个失败</li>
+      <li>Inverter：取反节点，用于改变子节点的状态（例如将成功转为失败，将失败转为成功）</li>
+    </ul>
+  </li>
+  <li>支持自定义节点：Behaviour Designer允许开发者编写自己的自定义行为节点，扩展它的功能。通过C#脚本，可以轻松地创建适应特定要求的节点</li>
+  <li>多智能体支持：可以在同一个场景中创建多个智能体，并使用Behaviour Designer为每个智能体设计不同的行为树，支持不同的AI模式</li>
+  <li>调试和监控：Behaviour Designer具有强大的调试功能，可以实时查看AI的状态、节点的执行情况以及执行的路径。这有助于快速诊断和优化AI的行为</li>
+  <li>黑板（Blackboard）：黑板是存储智能体数据的容器，AI可以通过它共享数据和状态。行为树的节点可以访问黑板上的变量（如智能体的位置、血量、目标等），并基于这些信息进行决策</li>
+</ul>
+
+<h3 id="behaviour-designer的使用">Behaviour Designer的使用</h3>
+<ol>
+  <li>
+    <p>安装Behaviour Designer
+通过Unity的Package Manager或Asset Store安装Behaviour Designer</p>
+  </li>
+  <li>创建Behaviour Tree
+创建一个新的行为树
+    <ul>
+      <li>在Unity中，右键点击项目窗口中的文件夹，选择Create &gt; Behavior Designer &gt; Behavior Tree</li>
+      <li>给行为树命名，双击打开Behavior Tree编辑器</li>
+    </ul>
+  </li>
+  <li>设计行为树
+在Behavior Tree编辑器中，将看到一个空白的画布，可以通过拖拽不同的节点来创建和连接行为树，例如：
+    <ul>
+      <li>使用Selector节点来检查敌人是否在视野内，如果在视野内则进行攻击</li>
+      <li>使用Sequence节点来执行巡逻和追击任务</li>
+      <li>使用Action节点来执行实际的行为，比如移动到目标、攻击敌人等</li>
+    </ul>
+  </li>
+</ol>
+
+<p>可以根据需要不断添加、调整和优化行为树</p>
+
+<ol>
+  <li>
+    <p>为Agent添加Behavior Tree
+将设计好的行为树应用到Unity中的智能体（例如玩家、敌人或NPC）。需要为智能体添加Behavior Tree组件，选择刚才创建的行为树文件作为它的行为树源</p>
+  </li>
+  <li>调试与优化
+    <ul>
+      <li>实时调试：可以在运行时查看行为树的执行状态，知道哪些节点正在执行，哪些节点失败或成功。可以通过<code class="language-plaintext highlighter-rouge">Behavior Designer</code>的调试窗口实时查看行为树的执行流程</li>
+      <li>性能优化：行为树本身非常高效，但在场景中有多个复杂的行为树时，仍然需要关注性能。通过将复杂的逻辑拆分为多个小任务，或使用Parallel和Inverter节点来优化执行路径，确保高效的计算</li>
+    </ul>
+  </li>
+  <li>动态修改行为
+可以在游戏运行时动态地修改AI的行为树或更改黑板上的数据。例如，敌人可能会根据当前的血量调整攻击策略，或者根据玩家的行为做出反应。Behavior Designer允许实时修改黑板数据和行为树</li>
+</ol>
+
+<h3 id="行为树的设计技巧">行为树的设计技巧</h3>
+<ul>
+  <li>分层设计：复杂的AI行为可以分解为多个子行为树。通过嵌套行为树或使用子树节点（Subtree Node），可以创建更为复杂和模块化的AI逻辑</li>
+  <li>使用黑板：合理利用黑板来存储AI的状态数据（如目标位置、血量等），可以让行为树更加灵活且易于维护</li>
+  <li>优化选择和序列节点的使用：选择器和序列节是行为树中的基础节点，使用时要确保其优先级设置合理，避免无意义的反复检查和执行</li>
+  <li>模拟现实的AI决策：通过增加条件判断、引入随机性和决策回调，可以模拟更加智能的决策过程，使得AI的行为更接近真实世界中的复杂决策</li>
+</ul>
+
+<h3 id="behavior-designer-高级功能">Behavior Designer 高级功能</h3>
+<ol>
+  <li>多线程执行
+Behavior Designer支持在多个线程中并行执行不同的任务，使得行为树的性能更高，尤其是当AI行为复杂且需要处理多个任务时（如多个敌人同时行动）</li>
+  <li>事件驱动行为
+可以设置一些事件（例如玩家进入攻击范围或触发特定的环境事件）来驱动AI行为树的切换，利用事件触发来灵活控制行为树的执行</li>
+  <li>条件与动作分离
+行为树中的节点通常包括条件判断和实际行为（动作），Behavior Designer允许清晰地将两者分开，便于调试和维护。例如，AI的巡逻i行为可以与判断敌人是否在视野内的逻辑分开</li>
+  <li>内建的AI任务和动作
+Behavior Designer包含了一些常用的AI任务和动作，如NavMesh移动、攻击、逃跑、等待等，可以大大简化开发过程</li>
+</ol>
+
+<h2 id="unity-behavior"><a href="/posts/2025-08-12-Unity-Behavior/">Unity Behavior</a></h2>
+<p><a href="https://docs.unity3d.com/Packages/com.unity.behavior@1.0/manual/index.html">Manual Behavior</a></p>
+
+<h2 id="自定义行为树实现">自定义行为树实现</h2>
+<p>自定义行为树的实现涉及到创建一套系统，用于描述和管理AI代理（Agent）和行为决策</p>
+
+<p>行为树的主要目的是通过一个树形结构来描述AI的决策过程，其中节点表示AI可能的行为或决策，根节点从树的顶端开始，逐层向下执行</p>
+<ol>
+  <li>设计行为树的基本结构
+行为树的核心概念包括以下几种节点类型
+    <ul>
+      <li>根节点：行为树的起始点，通常包含一个选择节点或序列节点</li>
+      <li>选择节点（Selector）：类似“或”逻辑，逐一尝试其子节点，直到一个子节点成功返回</li>
+      <li>序列节点（Sequence）：类似“与”逻辑，依次尝试执行子节点，直到一个失败返回</li>
+      <li>动作节点（Action）：具体的行为，如移动、攻击等</li>
+      <li>条件节点（Condition）：判断条件是否成立，如“敌人在视野内”</li>
+    </ul>
+  </li>
+  <li>定义行为树节点接口
+定义一个抽象的节点类<code class="language-plaintext highlighter-rouge">BTNode</code>，所有的行为树节点都将继承自这个类
+```cs
+using System;
+using System.Collections.Generic;
+using UnityEngine;</li>
+</ol>
+
+<p>public enum NodeState
+{
+    SUCCESS,
+    FAILURE,
+    RUNNING
+}</p>
+
+<p>// 定义行为树节点接口
+public abstract class BTNode
+{
+    public NodeState state;</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public abstract NodeState Execute(); } ```
+</code></pre></div></div>
+
+<ol>
+  <li>Selector实现
+选择节点的作用是依次检查每个子节点，只要有一个子节点成功，它就会返回成功。否则，返回失败
+    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">SelectorNode</span> <span class="p">:</span> <span class="n">BTNode</span>
+<span class="p">{</span>
+ <span class="k">private</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">BTNode</span><span class="p">&gt;</span> <span class="n">children</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">BTNode</span><span class="p">&gt;();</span>
+
+ <span class="k">public</span> <span class="k">void</span> <span class="nf">AddChild</span><span class="p">(</span><span class="n">BTNode</span> <span class="n">child</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">children</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">child</span><span class="p">);</span>
+
+ <span class="k">public</span> <span class="k">override</span> <span class="n">NodeState</span> <span class="nf">Execute</span><span class="p">()</span>
+ <span class="p">{</span>
+     <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">child</span> <span class="k">in</span> <span class="n">children</span><span class="p">)</span>
+     <span class="p">{</span>
+         <span class="n">state</span> <span class="p">=</span> <span class="n">child</span><span class="p">.</span><span class="nf">Execute</span><span class="p">();</span>
+         <span class="k">if</span> <span class="p">(</span><span class="n">state</span> <span class="p">==</span> <span class="n">NodeState</span><span class="p">.</span><span class="n">SUCCESS</span><span class="p">)</span>
+             <span class="k">return</span> <span class="n">NodeState</span><span class="p">.</span><span class="n">SUCCESS</span><span class="p">;</span>
+     <span class="p">}</span>
+     <span class="k">return</span> <span class="n">NodeState</span><span class="p">.</span><span class="n">FAILURE</span><span class="p">;</span>
+ <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Sequence实现
+序列节点是按顺序依次执行其子节点，直到一个子节点失败，或者所有子节点执行成功
+    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">SequenceNode</span> <span class="p">:</span> <span class="n">BTNode</span>
+<span class="p">{</span>
+ <span class="k">private</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">BTNode</span><span class="p">&gt;</span> <span class="n">children</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">BTNode</span><span class="p">&gt;();</span>
+
+ <span class="k">public</span> <span class="k">void</span> <span class="nf">AddChild</span><span class="p">(</span><span class="n">BTNode</span> <span class="n">child</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">children</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">child</span><span class="p">);</span>
+
+ <span class="k">public</span> <span class="k">override</span> <span class="n">NodeState</span> <span class="nf">Execute</span><span class="p">()</span>
+ <span class="p">{</span>
+     <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">child</span> <span class="k">in</span> <span class="n">children</span><span class="p">)</span>
+     <span class="p">{</span>
+         <span class="n">state</span> <span class="p">=</span> <span class="n">child</span><span class="p">.</span><span class="nf">Execute</span><span class="p">();</span>
+         <span class="k">if</span> <span class="p">(</span><span class="n">state</span> <span class="p">==</span> <span class="n">NodeState</span><span class="p">.</span><span class="n">FAILURE</span><span class="p">)</span>
+             <span class="k">return</span> <span class="n">NodeState</span><span class="p">.</span><span class="n">FAILURE</span><span class="p">;</span>
+     <span class="p">}</span>
+     <span class="k">return</span> <span class="n">NodeState</span><span class="p">.</span><span class="n">SUCCESS</span><span class="p">;</span>
+ <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Action实现
+动作节点是叶子节点，执行具体的行为（如移动、攻击等）
+    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">ActionNode</span> <span class="p">:</span> <span class="n">BTNode</span>
+<span class="p">{</span>
+ <span class="k">private</span> <span class="n">Func</span><span class="p">&lt;</span><span class="n">NodeState</span><span class="p">&gt;</span> <span class="n">action</span><span class="p">;</span>
+
+ <span class="k">public</span> <span class="nf">ActionNode</span><span class="p">(</span><span class="n">Func</span><span class="p">&lt;</span><span class="n">NodeState</span><span class="p">&gt;</span> <span class="n">action</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="n">action</span> <span class="p">=</span> <span class="n">action</span><span class="p">;</span>
+
+ <span class="k">public</span> <span class="k">override</span> <span class="n">NodeState</span> <span class="nf">Execute</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">action</span><span class="p">.</span><span class="nf">Invoke</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Condition实现
+条件节点用于判断某个条件是否成立。例如，检测敌人是否在视野内
+    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">ConditionNode</span> <span class="p">:</span> <span class="n">BTNode</span>
+<span class="p">{</span>
+ <span class="k">private</span> <span class="n">Func</span><span class="p">&lt;</span><span class="kt">bool</span><span class="p">&gt;</span> <span class="n">condition</span><span class="p">;</span>
+
+ <span class="k">public</span> <span class="nf">ConditionNode</span><span class="p">(</span><span class="n">Func</span><span class="p">&lt;</span><span class="kt">bool</span><span class="p">&gt;</span> <span class="n">condition</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="n">condition</span> <span class="p">=</span> <span class="n">condition</span><span class="p">;</span>
+
+ <span class="k">public</span> <span class="k">override</span> <span class="n">NodeState</span> <span class="nf">Execute</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">condition</span><span class="p">.</span><span class="nf">Invoke</span><span class="p">()</span> <span class="p">?</span> <span class="n">NodeState</span><span class="p">.</span><span class="n">SUCCESS</span> <span class="p">:</span> <span class="n">NodeState</span><span class="p">.</span><span class="n">FAILURE</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>构建行为树
+现在可以构建一个行为树，假设想要实现一个简单的敌人AI</li>
+  <li>如果敌人被发现，攻击敌人</li>
+  <li>如果敌人不在视野内，继续巡逻</li>
+</ol>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">EnemyAI</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="n">BTNode</span> <span class="n">behaviourTree</span><span class="p">;</span>
+
+    <span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// 创建行为树节点</span>
+        <span class="n">SelectorNode</span> <span class="n">root</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">SelectorNode</span><span class="p">();</span>
+
+        <span class="c1">// 创建条件节点：检查敌人是否在视野内</span>
+        <span class="n">ConditionNode</span> <span class="n">enemyInSight</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ConditionNode</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="nf">IsEnemyInSight</span><span class="p">());</span>
+
+        <span class="c1">// 创建动作节点：执行攻击</span>
+        <span class="n">ActionNode</span> <span class="n">attackEnemy</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ActionNode</span><span class="p">(()</span> <span class="p">=&gt;</span> 
+        <span class="p">{</span>
+            <span class="nf">Attack</span><span class="p">();</span>
+            <span class="k">return</span> <span class="n">NodeState</span><span class="p">.</span><span class="n">SUCCESS</span><span class="p">;</span>
+        <span class="p">});</span>
+
+        <span class="c1">// 创建序列节点：敌人被发现 -&gt; 攻击</span>
+        <span class="n">SequenceNode</span> <span class="n">sequence</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">SequenceNode</span><span class="p">();</span>
+        <span class="n">sequence</span><span class="p">.</span><span class="nf">AddChild</span><span class="p">(</span><span class="n">enemyInSight</span><span class="p">);</span>
+        <span class="n">sequence</span><span class="p">.</span><span class="nf">AddChild</span><span class="p">(</span><span class="n">attackEnemy</span><span class="p">);</span>
+
+        <span class="c1">// 将选择节点作为根节点</span>
+        <span class="n">root</span><span class="p">.</span><span class="nf">AddChild</span><span class="p">(</span><span class="n">sequence</span><span class="p">);</span>
+
+        <span class="c1">// 行为树</span>
+        <span class="n">behaviorTree</span> <span class="p">=</span> <span class="n">root</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">void</span> <span class="nf">Update</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// 执行行为树</span>
+        <span class="n">behaviorTree</span><span class="p">.</span><span class="nf">Execute</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="kt">bool</span> <span class="nf">IsEnemyInSight</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// 假设简单的视野检测，返回随机值</span>
+        <span class="k">return</span> <span class="n">UnityEngine</span><span class="p">.</span><span class="n">Random</span><span class="p">.</span><span class="k">value</span> <span class="p">&gt;</span> <span class="m">0.5f</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">void</span> <span class="nf">Attack</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"Attacking the enemy!"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>调试与优化</strong><br />
+在基本的行为树结构上，接下来可以</p>
+<ul>
+  <li>添加更多类型的节点（如黑板数据存储、任务节点等）</li>
+  <li>调整节点之间的关系，使其更加复杂和智能</li>
+  <li>在行为树中加入事件驱动机制，例如接收到伤害或其他外部条件时触发特定的行为</li>
+</ul>
+
+<p><strong>扩展与优化</strong>\</p>
+<ul>
+  <li>动态调整行为树：可以在游戏过程中动态修改行为树的结构或切换不同的行为树，例如根据敌人状态切换攻击模式</li>
+  <li>黑板（Blackboard）：行为树的节点可以通过黑板来共享状态数据，如敌人的位置、角色的血量等</li>
+  <li>多智能体支持：在大型游戏中，可能会有多个角色或敌人使用同一行为树。可以使用多线程或队列来管理多个智能体的行为执行</li>
+</ul>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity System" /><category term="AI" /><summary type="html"><![CDATA[Unity的行为树是一种常用于AI决策的结构，它在游戏开发中用于描述AI的行为和决策逻辑。它通过阻止一系列的节点来表示各种行为，树形结构的设计让它可以清晰地展示AI决策过程]]></summary></entry><entry><title type="html">ML Agents</title><link href="http://localhost:4000/posts/2025-08-12-ML-Agents/" rel="alternate" type="text/html" title="ML Agents" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/ML-Agents</id><content type="html" xml:base="http://localhost:4000/posts/2025-08-12-ML-Agents/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Packages" /><category term="AI" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Behaviour Designer</title><link href="http://localhost:4000/posts/2025-08-12-Behaviour-Designer/" rel="alternate" type="text/html" title="Behaviour Designer" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Behaviour-Designer</id><content type="html" xml:base="http://localhost:4000/posts/2025-08-12-Behaviour-Designer/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Unity Packages" /><category term="AI" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Unity Programming Model and Technology Stack</title><link href="http://localhost:4000/posts/2025-08-11-Unity-Programming-Model-and-Technology-Stack/" rel="alternate" type="text/html" title="Unity Programming Model and Technology Stack" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Unity-Programming-Model-and-Technology-Stack</id><content type="html" xml:base="http://localhost:4000/posts/2025-08-11-Unity-Programming-Model-and-Technology-Stack/"><![CDATA[<h2 id="传统编程模型和技术栈">传统编程模型和技术栈</h2>
+<p>Unity的传统编程模型和技术栈主要依赖于面向对象编程（OOP），并结合了事件驱动和组件化编程模型</p>
+
+<h3 id="组件化编程模型component-based-programming">组件化编程模型（Component-based Programming）</h3>
+<p>Unity最核心的编程模型是组件化（Component-based）设计，它来源于“实体-组件-系统（ECS）”思想。Unity中的每个游戏对象（GameObject）是一个容器，能够附加多个组件（Component）。这些组件决定了该游戏对象的行为和属性</p>
+<ul>
+  <li>GameObject：是Unity中的基础对象，它通常代表场景中的一个物体或实体</li>
+  <li>Component：附加在GameObject上的功能块，通常负责管理物体的某一方面的行为，比如渲染、物理、输入处理等</li>
+</ul>
+
+<p>这种设计模式强调解耦，每个功能都被划分为一个独立的组件，增加了代码的复用性和可维护性</p>
+
+<h3 id="monobehaviour-类">MonoBehaviour 类</h3>
+<p><a href="/posts/2025-07-11-MonoBehaviour/">MonoBehaviour</a></p>
+
+<p>在Unity中，所有游戏逻辑通常都是继承<code class="language-plaintext highlighter-rouge">MonoBehaviour</code>类来实现的。<code class="language-plaintext highlighter-rouge">MonoBehaviour</code>提供了一些生命周期函数，用于管理游戏对象的行为。这些函数包括</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Start()</code>：初始化，游戏对象激活时调用一次</li>
+  <li><code class="language-plaintext highlighter-rouge">Update()</code>：每帧调用，用于执行逻辑更新</li>
+  <li><code class="language-plaintext highlighter-rouge">FixedUpdate()</code>：每个物理模拟步长调用，适合用于物理计算</li>
+  <li><code class="language-plaintext highlighter-rouge">OnCollisionEnter()</code>：物理碰撞使用</li>
+  <li><code class="language-plaintext highlighter-rouge">OnDestroy()</code>：对象销毁时调用</li>
+</ul>
+
+<p>这些生命周期函数是Unity编程模型的核心，开发者通过重写这些函数来实现游戏对象的行为</p>
+
+<h3 id="事件驱动编程"><a href="/posts/2025-07-15-Unity-Component-Communication/">事件驱动编程</a></h3>
+<p>Unity传统编程中有大量事件驱动机制，尤其是在用户输入和UI交互方面</p>
+<ul>
+  <li>UI系统：Unity提供了自己的UI系统，最常见的是<code class="language-plaintext highlighter-rouge">UI.Button</code>和<code class="language-plaintext highlighter-rouge">UI.Slider</code>等UI组件，它们通过事件监听和回调处理用户输入</li>
+  <li>C#事件和委托：Unity的编程中也广泛使用C#的事件和委托来实现对象间的通信，例如当一个玩家触发某个动作时，其他对象可能需要响应这个事件。<code class="language-plaintext highlighter-rouge">Event</code>、<code class="language-plaintext highlighter-rouge">Action</code>和<code class="language-plaintext highlighter-rouge">UnityEvent</code>是最常用的方式</li>
+</ul>
+
+<h3 id="协程coroutines"><a href="/posts/2025-06-03-Unity-Asynchronous-and-Coroutine/">协程（Coroutines）</a></h3>
+<p>Unity提供了协程来简化时间和异步操作的管理。协程可以在多个帧之间执行，允许开发者编写类似于阻塞的代码，但是不会阻塞主线程</p>
+
+<p>例如，等待一段时间再执行某个操作，或逐步改变某个属性</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">IEnumerator</span> <span class="nf">ChangeColorOverTime</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">float</span> <span class="n">duration</span> <span class="p">=</span> <span class="m">2f</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">timeElapsed</span> <span class="p">=</span> <span class="m">0f</span><span class="p">;</span>
+    <span class="n">Color</span> <span class="n">startColor</span> <span class="p">=</span> <span class="n">myObjectRenderer</span><span class="p">.</span><span class="n">material</span><span class="p">.</span><span class="n">color</span><span class="p">;</span>
+    <span class="n">Color</span> <span class="n">targetColor</span> <span class="p">=</span> <span class="n">Color</span><span class="p">.</span><span class="n">red</span><span class="p">;</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">timeElapsed</span> <span class="p">&lt;</span> <span class="n">duration</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">myObjectRenderer</span><span class="p">.</span><span class="n">material</span><span class="p">.</span><span class="n">color</span> <span class="p">=</span> <span class="n">Color</span><span class="p">.</span><span class="nf">Lerp</span><span class="p">(</span><span class="n">startColor</span><span class="p">,</span> <span class="n">targetColor</span><span class="p">,</span> <span class="n">timeElapsed</span> <span class="p">/</span> <span class="n">duration</span><span class="p">);</span>
+        <span class="n">timeElapsed</span> <span class="p">+=</span> <span class="n">Time</span><span class="p">.</span><span class="n">deltaTime</span><span class="p">;</span>
+        <span class="k">yield</span> <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">myObjectRenderer</span><span class="p">.</span><span class="n">material</span><span class="p">.</span><span class="n">color</span> <span class="p">=</span> <span class="n">targetColor</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="传统技术栈">传统技术栈</h3>
+<p>在Unity中，通常使用以下技术栈来开发游戏</p>
+<ul>
+  <li><a href="/posts/2025-06-02-Scripts/">C#</a>：Unity的主编程语言。C#是一种面向对象语言，拥有强大的类型安全性和支持面向对象编程的功能</li>
+  <li><a href="/posts/2025-08-02-Mono-and-IL2CPP/">Mono</a>：Unity使用Mono作为其.NET实现，Mono是一个开源的.NET框架，可以让C#代码跨平台运行</li>
+  <li><a href="/posts/2025-06-03-Physics-System/">Physics</a>：Unity内置了<code class="language-plaintext highlighter-rouge">PhysX</code>引擎来处理物理模拟</li>
+  <li><a href="/posts/2025-06-11-Animation-System/">Animation</a>：Unity提供了<code class="language-plaintext highlighter-rouge">Animator</code>组件来处理动画，开发者可以通过状态机和过渡动画来控制物体的动画表现</li>
+  <li><a href="/posts/2025-06-11-Animation-System/">NavMesh</a>：用于路径寻找技术，可以通过<code class="language-plaintext highlighter-rouge">NavMeshAgent</code>让NPC在游戏世界中自动导航</li>
+</ul>
+
+<h3 id="资源管理与加载">资源管理与加载</h3>
+<p>在传统Unity开发中，资源的加载和管理也是非常重要的。Unity提供了以下几种方式来管理和加载资源</p>
+<ul>
+  <li><a href="/posts/2025-07-18-Assets-Import-and-Load/">Asset Bundles</a>：允许将资源打包成独立文件，方便按需加载</li>
+  <li><a href="/posts/2025-07-18-Assets-Import-and-Load/">Resources文件夹</a>：Unity提供一个<code class="language-plaintext highlighter-rouge">Resources</code>文件夹，可以通过<code class="language-plaintext highlighter-rouge">Resources.Load()</code>加载资源。但这种方式会带来一些性能问题，因此在较大的项目中逐渐不推荐使用</li>
+  <li><a href="/posts/2025-06-05-Addressables/">Addressable Assets</a>：Unity推出的资源管理系统，通过<code class="language-plaintext highlighter-rouge">Addressable Assets</code>管理大型项目中的资源，可以优化加载和内存管理</li>
+</ul>
+
+<h3 id="编辑器扩展和自定义工具">编辑器扩展和自定义工具</h3>
+<p>Unity允许开发者<a href="/posts/2025-07-22-Unity-Editor/">自定义编辑器界面</a>来提高工作效率。通过<code class="language-plaintext highlighter-rouge">Editor</code>或<code class="language-plaintext highlighter-rouge">EditorWindow</code>类，可以为游戏开发添加自定义的编辑工具，自动化繁琐的任务，或创建自定义的调试工具</p>
+
+<h3 id="总结">总结</h3>
+<p>Unity的传统编程模型围绕着组件化、面向对象设计和事件驱动机制展开。开发者通过<code class="language-plaintext highlighter-rouge">MonoBehaviour</code>来管理游戏对象的生命周期和行为，并利用协程和事件驱动实现复杂的异步和响应机制。技术栈方面，C#是主力语言，配合Mono和其他工具（如物理、动画、资源管理等）共同构建完整的游戏应用</p>
+
+<h2 id="现代unity编程模型和技术栈">现代Unity编程模型和技术栈</h2>
+<p>与传统的Unity编程模型相比，现代Unity编程模型通常侧重于更加高效、可扩展的系统架构，特别是在处理大型项目时的性能和数据管理。近年来，Unity推出了ECS（Entity Component System）和DOTS（Data-Oriented Technology Stack），它们是为了解决传统组件化模型在性能、数据管理和多线程方面的限制</p>
+
+<h3 id="ecsentity-component-system"><a href="/posts/2025-08-02-ECS/">ECS（Entity Component System）</a></h3>
+<p>ECS是Unity推出的全新编程模式，它强调数据导向设计（Data-Oriented Design），专注于如何高效地存储和处理游戏世界中的大规模数据。这与传统的面向对象编程（OOP）模型有很大区别</p>
+
+<p><strong>核心概念</strong></p>
+<ul>
+  <li>Entity（实体）：表示一个游戏对象，它只包含一个ID。实体本身不包含行为或属性，行为和属性由附加的组件定义</li>
+  <li>Component（组件）：包含数据，通常是一个简单的数据结构，不包含方法。组件通过对实体附加数据来定义实体的属性</li>
+  <li>System（系统）：定义操作组件数据的逻辑，系统的职责是操作符合条件的组件数据，并执行处理过程</li>
+</ul>
+
+<p><strong>数据驱动设计</strong>
+ECS模型不依赖于传统的<code class="language-plaintext highlighter-rouge">MonoBehaviour</code>类。相反，所有游戏逻辑和行为都是通过系统来驱动的。这种方法将逻辑分离到不同的系统中，直接作用于数据。这时与传统模型最大的不同，它避免了面向对象中数据和行为紧密耦合的问题</p>
+
+<p><strong>性能优化</strong>
+通过内存布局优化和批处理操作，ECS使得Unity能更好地利用硬件，特别是在多核处理器上。通过结构化的存储数据，ECS可以更高效地操作大量游戏对象和组件，这对大规模游戏和高性能需求的项目非常有帮助</p>
+
+<h3 id="dots"><a href="/posts/2025-08-02-DOTS/">DOTS</a></h3>
+<p>DOTS是Unity推出的一个完整的数据驱动技术栈，它包括</p>
+<ul>
+  <li>ECS：提供数据驱动的编程模型</li>
+  <li>Job System：允许在多个线程上并行执行工作，优化性能</li>
+  <li>Burst Compiler：提供高效的低级优化，通过编译器自动生成高效的机器码，进一步提升性能</li>
+</ul>
+
+<h3 id="技术栈与实现方式">技术栈与实现方式</h3>
+<p><strong>ECS核心库</strong></p>
+<ul>
+  <li>Unity.Entities：用于管理实体、组件和系统的核心库</li>
+  <li>Unity.Jobs：提供对多线程并行工作的支持，帮助将计算分发到多个CPU核心</li>
+  <li>Unity.Burst：通过高级优化编译器，生成更高效的机器码，减少运行时开销</li>
+  <li>Unity.Physics：结合ECS模式，用于进行高效的物理计算</li>
+</ul>
+
+<p><strong>性能优化与多线程</strong></p>
+<ul>
+  <li><a href="/posts/2025-08-02-Job-System/">JobSystem</a>：JobSystem使得开发者可以显式地将任务分配到不同的线程进行并行计算。这个系统使用了Unity的多线程模型，可以在多核处理器上有效地分配负载
+    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">JobHandle</span> <span class="n">jobHandle</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">MyJob</span><span class="p">().</span><span class="nf">Schedule</span><span class="p">();</span>
+<span class="n">jobHandle</span><span class="p">.</span><span class="nf">Complete</span><span class="p">();</span>
+</code></pre></div>    </div>
+  </li>
+  <li><a href="/posts/2025-08-02-Burst-Complier/">Burst Complier</a>：通过Burst编译器，Unity将代码编译成高度优化的机器码，进一步提升性能，尤其适用于CPU密集型任务
+    <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">BurstCompile</span><span class="p">]</span>
+<span class="k">public</span> <span class="k">struct</span> <span class="nc">MyJob</span> <span class="p">:</span> <span class="n">IJob</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Execute</span><span class="p">()</span>
+  <span class="p">{</span>
+      <span class="c1">// 在此执行高效计算</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong>性能优势</strong></p>
+<ul>
+  <li>内存布局优化：ECS通过结构化数据存储和按需处理的方式，使得内存访问更加高效。数据通常是按列存储（而不是按行存储），这有助于减少缓存未命中的问题，从而提高性能</li>
+  <li>并行化：通过Job System和Burst Compoler，ECS支持高度并行化的计算，大大提高了大规模场景下的性能表现</li>
+</ul>
+
+<h2 id="使用场景">使用场景</h2>
+<p>ECS和DOTS特别适用于以下场景</p>
+<ul>
+  <li>大规模的游戏世界：比如开放世界游戏、大规模敌人群体的模拟、需要处理大量NPC和对象的场景</li>
+  <li>性能要求高的游戏：例如需要高帧率或低延迟的游戏，特别是需要大量物理计算、路径寻路、AI计算等操作的游戏</li>
+  <li>并行处理任务：例如复杂的数学计算、粒子系统、大量对象的变换操作等</li>
+</ul>
+
+<h2 id="oop-vs-dots">OOP vs DOTS</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>特性</th>
+      <th>传统编程模型</th>
+      <th>ECS / DOTS 编程模型</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>编程模型</strong></td>
+      <td>面向对象（OOP）与组件化</td>
+      <td>数据导向设计（Data-Oriented Design, DOD）</td>
+    </tr>
+    <tr>
+      <td><strong>数据存储方式</strong></td>
+      <td>数据和行为紧密耦合，数据存储在组件中</td>
+      <td>数据是独立的，通过组件存储，行为由系统处理</td>
+    </tr>
+    <tr>
+      <td><strong>性能优化</strong></td>
+      <td>主要依靠手动优化和批处理，受限于垃圾回收和面向对象设计</td>
+      <td>内存布局优化、并行计算、低级编译优化</td>
+    </tr>
+    <tr>
+      <td><strong>并行处理</strong></td>
+      <td>单线程处理，通过协程和事件管理异步任务</td>
+      <td>多线程并行处理，使用 Job System 进行任务分配</td>
+    </tr>
+    <tr>
+      <td><strong>使用场景</strong></td>
+      <td>小型到中型项目，便于快速原型和开发</td>
+      <td>大型项目，尤其是需要处理大量实体和组件的场景</td>
+    </tr>
+    <tr>
+      <td><strong>学习曲线</strong></td>
+      <td>易于上手，适合初学者和快速开发</td>
+      <td>学习曲线较陡，要求对数据结构和并行计算有较深理解</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>技术转型</strong>
+虽然ECS和DOTS的强大性能使其成为未来游戏开发的方向，但它们也有一些挑战</p>
+<ul>
+  <li>开发难度：开发者需要更加关注数据的布局、内存管理和并行计算的细节，学习曲线陡峭</li>
+  <li>兼容性问题：目前传统的Unity编程模型和ECS并不完全兼容。开发者可能需要针对不同的项目选择合适的架构，或者逐步将现有的系统迁移到ECS上</li>
+  <li>工具和社区支持：ECS生态还在发展中，工具和社区支持相对较少，开发者需要更多的自定义和调试工作</li>
+</ul>
+
+<h2 id="总结-1">总结</h2>
+<p>传统编程模型 在小型或中型项目中表现得非常好，简单易用、灵活，适合快速开发。而 ECS/DOTS 代表了 Unity 对于大型游戏和高性能需求的未来，它通过数据导向设计、并行计算、内存优化等技术，使得游戏开发者能够应对更复杂的场景和更高的性能要求</p>
+
+<p>随着 Unity 向 ECS 转型，未来游戏开发的重心可能会向 数据驱动设计 发展，尤其是在大规模场景和高性能计算的场景下，ECS 和 DOTS 将成为主流开发模式</p>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="GameDevelop" /><category term="Algorithm" /><summary type="html"><![CDATA[传统编程模型和技术栈 Unity的传统编程模型和技术栈主要依赖于面向对象编程（OOP），并结合了事件驱动和组件化编程模型]]></summary></entry><entry><title type="html">Service Locator</title><link href="http://localhost:4000/posts/2025-08-02-Service-Locator/" rel="alternate" type="text/html" title="Service Locator" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Service-Locator</id><content type="html" xml:base="http://localhost:4000/posts/2025-08-02-Service-Locator/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Architecture" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Algorithms in Unity GameDevelopment</title><link href="http://localhost:4000/posts/2025-08-03-Algorithms-in-Unity-Game-Dev/" rel="alternate" type="text/html" title="Algorithms in Unity GameDevelopment" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Algorithms-in-Unity-Game-Dev</id><content type="html" xml:base="http://localhost:4000/posts/2025-08-03-Algorithms-in-Unity-Game-Dev/"><![CDATA[<ol>
   <li>
     <p>寻路算法（Pathfinding Algorithms）</p>
   </li>
@@ -34,7 +612,7 @@
   <li>
     <p>多线程与异步处理</p>
   </li>
-</ol>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="GameDevelop" /><category term="Algorithm" /><summary type="html"><![CDATA[寻路算法（Pathfinding Algorithms）]]></summary></entry><entry><title type="html">Service Locator</title><link href="http://localhost:4000/posts/2025-08-02-Service-Locator/" rel="alternate" type="text/html" title="Service Locator" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Service-Locator</id><content type="html" xml:base="http://localhost:4000/posts/2025-08-02-Service-Locator/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Architecture" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Mono and IL2CPP</title><link href="http://localhost:4000/posts/2025-08-02-Mono-and-IL2CPP/" rel="alternate" type="text/html" title="Mono and IL2CPP" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Mono-and-IL2CPP</id><content type="html" xml:base="http://localhost:4000/posts/2025-08-02-Mono-and-IL2CPP/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Complie" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Hot Update</title><link href="http://localhost:4000/posts/2025-08-02-Hot-Update/" rel="alternate" type="text/html" title="Hot Update" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Hot-Update</id><content type="html" xml:base="http://localhost:4000/posts/2025-08-02-Hot-Update/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Hot Update" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Job System</title><link href="http://localhost:4000/posts/2025-08-02-Mono-and-IL2CPP/" rel="alternate" type="text/html" title="Job System" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Job-System</id><content type="html" xml:base="http://localhost:4000/posts/2025-08-02-Mono-and-IL2CPP/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="MultiThreading" /><category term="High Performance" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Event Bus/Aggregator</title><link href="http://localhost:4000/posts/2025-08-02-Event-Bus-Event-Aggregator/" rel="alternate" type="text/html" title="Event Bus/Aggregator" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Event-Bus-Event-Aggregator</id><content type="html" xml:base="http://localhost:4000/posts/2025-08-02-Event-Bus-Event-Aggregator/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Architecture" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Layer</title><link href="http://localhost:4000/posts/2025-06-01-Layer/" rel="alternate" type="text/html" title="Layer" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Layer</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-01-Layer/"><![CDATA[<p>在Unity中，Layer是要给非常重要的系统<br />
+</ol>]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="GameDevelop" /><category term="Algorithm" /><summary type="html"><![CDATA[寻路算法（Pathfinding Algorithms）]]></summary></entry><entry><title type="html">Mono and IL2CPP</title><link href="http://localhost:4000/posts/2025-08-02-Mono-and-IL2CPP/" rel="alternate" type="text/html" title="Mono and IL2CPP" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Mono-and-IL2CPP</id><content type="html" xml:base="http://localhost:4000/posts/2025-08-02-Mono-and-IL2CPP/"><![CDATA[]]></content><author><name>ljf12825</name></author><category term="笔记" /><category term="Unity" /><category term="Complie" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Layer</title><link href="http://localhost:4000/posts/2025-06-01-Layer/" rel="alternate" type="text/html" title="Layer" /><published>2025-06-01T00:00:00+08:00</published><updated>2025-06-01T00:00:00+08:00</updated><id>http://localhost:4000/posts/Layer</id><content type="html" xml:base="http://localhost:4000/posts/2025-06-01-Layer/"><![CDATA[<p>在Unity中，Layer是要给非常重要的系统<br />
 它主要用于：</p>
 <ul>
   <li>控制物体的渲染与相机的可见性</li>

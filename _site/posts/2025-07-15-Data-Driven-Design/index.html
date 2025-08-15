@@ -845,6 +845,7 @@
 
 <ol>
   <li><code class="language-plaintext highlighter-rouge">JsonUtility</code>（Unity自带，性能好，功能简单）
+适合简单的数据结构（基础类型、List、数组、自定义<code class="language-plaintext highlighter-rouge">[Serializable]</code>类）
 定义类
     <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">System</span><span class="p">.</span><span class="n">Serializable</span><span class="p">]</span>
 <span class="k">public</span> <span class="k">class</span> <span class="nc">Monster</span>
@@ -864,8 +865,99 @@
     <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">string</span> <span class="n">newJson</span> <span class="p">=</span> <span class="n">JsonUtility</span><span class="p">.</span><span class="nf">ToJson</span><span class="p">(</span><span class="n">monster</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span> <span class="c1">// true表示格式化输出</span>
 </code></pre></div>    </div>
   </li>
+</ol>
+
+<p><code class="language-plaintext highlighter-rouge">JsonUtility</code> API</p>
+
+<p><strong>Static Methods</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Description</th>
+      <th>AddOn</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">FromJson&lt;T&gt;(string json)</code></td>
+      <td>从JSON反序列化成对象</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">FromJsonOverwrite(string json, object objectToOverwrite)</code></td>
+      <td>从JSON数据反序列化到现有对象</td>
+      <td>不会新创建对象</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ToJson(object obj ,bool prettyPrint = false)</code></td>
+      <td>将对象序列化为JSON字符串</td>
+      <td><code class="language-plaintext highlighter-rouge">prettyPrint</code>为是否美化输出，true会有换行和缩进</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>注意事项</strong></p>
+<ul>
+  <li>必须标记<code class="language-plaintext highlighter-rouge">[Serializable]</code>才能序列化自定义类（MonoBehaviour/ScriptableObject派生类自动可序列化）</li>
+  <li>只能序列化字段，<code class="language-plaintext highlighter-rouge">public</code>或<code class="language-plaintext highlighter-rouge">[SerializeField] private</code></li>
+  <li>不支持字典，需要用两个List代替</li>
+  <li>不支持属性（<code class="language-plaintext highlighter-rouge">get/set</code>）</li>
+  <li>数组/List必须再对象中作为字段存在，不能直接反序列化成List</li>
+</ul>
+
+<p><strong>示例</strong></p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.IO</span><span class="p">;</span>
+
+<span class="p">[</span><span class="n">System</span><span class="p">.</span><span class="n">Serializable</span><span class="p">]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">PlayerData</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">playername</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">score</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">SaverManager</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="n">privte</span> <span class="kt">string</span> <span class="n">filePath</span><span class="p">;</span>
+
+    <span class="k">void</span> <span class="nf">Awake</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// 持久化路径（跨平台安全）</span>
+        <span class="n">filePath</span> <span class="p">=</span> <span class="n">Application</span><span class="p">.</span><span class="n">persistentDataPath</span> <span class="p">+</span> <span class="s">"playerData.json"</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Save</span><span class="p">(</span><span class="n">PlayerData</span> <span class="n">data</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// 1.序列化成JSON</span>
+        <span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">JsonUtility</span><span class="p">.</span><span class="nf">ToJson</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span> <span class="c1">// true = 格式化输出</span>
+
+        <span class="c1">// 2.写文件</span>
+        <span class="n">File</span><span class="p">.</span><span class="nf">WriteAllText</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="n">json</span><span class="p">);</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">"保存成功： "</span> <span class="p">+</span> <span class="n">filePath</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="n">PlayerData</span> <span class="nf">Load</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">File</span><span class="p">.</span><span class="nf">Exists</span><span class="p">(</span><span class="n">filePath</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="c1">// 1. 读文件</span>
+            <span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">File</span><span class="p">.</span><span class="nf">ReadAllText</span><span class="p">(</span><span class="n">filePath</span><span class="p">);</span>
+
+            <span class="c1">// 2. 反序列化</span>
+            <span class="k">return</span> <span class="n">JsonUtility</span><span class="p">.</span><span class="n">FromJson</span><span class="p">&lt;</span><span class="n">PlayerData</span><span class="p">&gt;(</span><span class="n">json</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">nulll</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ol>
   <li><code class="language-plaintext highlighter-rouge">Newtonsoft.Json</code>（功能强大，支持Dictionary、List、动态字段等）
-需要安装Json.NET for Unity</li>
+需要安装Json.NET for Unity<br />
+优点：支持Dictionary、泛型、多态等
+缺点：外部库，序列化速度比Unity内置的略慢</li>
 </ol>
 
 <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">Newtonsoft.Json</span><span class="p">;</span>
@@ -875,6 +967,39 @@
 </code></pre></div></div>
 <p>对象-&gt;JSON</p>
 <div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">SerializeObject</span><span class="p">(</span><span class="n">monster</span><span class="p">,</span> <span class="n">Formatting</span><span class="p">.</span><span class="n">Indented</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>示例</strong></p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Newtonsoft.Json</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.IO</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">SaveManagerNewton</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="kt">string</span> <span class="n">filePath</span><span class="p">;</span>
+
+    <span class="k">void</span> <span class="nf">Awake</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">filePath</span> <span class="p">=</span> <span class="n">Application</span><span class="p">.</span><span class="n">persistentDataPath</span> <span class="p">+</span> <span class="s">"/playerData.json"</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Save</span><span class="p">(</span><span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">int</span><span class="p">&gt;</span> <span class="n">scores</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">SerializeObject</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">Formatting</span><span class="p">.</span><span class="n">Indented</span><span class="p">);</span>
+        <span class="n">File</span><span class="p">.</span><span class="nf">WriteAllText</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="n">json</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">int</span><span class="p">&gt;</span> <span class="nf">Load</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">File</span><span class="p">.</span><span class="nf">Exists</span><span class="p">(</span><span class="n">filePath</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="n">File</span><span class="p">.</span><span class="nf">ReadAllText</span><span class="p">(</span><span class="n">filePath</span><span class="p">);</span>
+            <span class="k">return</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">DeserializeObject</span><span class="p">&lt;</span><span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">int</span><span class="p">&gt;&gt;(</span><span class="n">json</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">int</span><span class="p">&gt;();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h4 id="xml">XML</h4>
