@@ -21,7 +21,7 @@ Unity编辑器扩展就是用C#编写一些工具或界面，去增强Unity自�
   - 增强调试能力（自定义日志、场景可视化）
 
 ## 常见扩展方式
-1. 自定义Inspector
+**自定义Inspector**\
 让某个组件在Inspector面板中显示定制的界面
 
 ```cs
@@ -50,7 +50,7 @@ public class MyComponentEditor : Editor
 - 把复杂数据可视化
 - 增加按钮、滑条等直接操作数据
 
-2. 自定义窗口（EditorWindow）
+**自定义窗口（EditorWindow）**\
 可以创建一个独立的工具窗口，比如批量修改工具、关卡生成器
 
 ```cs
@@ -77,7 +77,7 @@ public class MyToolWindow : EditorWindow
 }
 ```
 
-3. 菜单扩展
+**菜单扩展**
 在Unity顶部菜单栏或右键菜单添加功能
 
 ```cs
@@ -94,7 +94,7 @@ static void ResetPosition()
   - 第二个参数是是否加到菜单最上面（true为优先）
   - 第三个参数是排序优先级
 
-4. SceneView扩展
+**SceneView扩展**\
 在场景视图中绘制自定义Gizmos或工具按钮
 
 ```cs
@@ -113,7 +113,7 @@ public class TransformGizmo : Editor
 
 可以绘制线条、形状、文字等辅助开发
 
-5. 资源导入扩展（AssetPostprocessor）
+**资源导入扩展（AssetPostprocessor）**
 拦截模型、贴图、音频导入过程，自动修改导入设置
 
 ```cs
@@ -312,6 +312,7 @@ void OnGUI()
     - 自动生成字段UI（包括对象引用、枚举、数组等）
     - 自动处理类型（int, float, Vector3, Color, Object等）
   - 常用场景：自定义Inspector、自定义EditorWindow、Editor Tools
+  
 ```cs
 using UnityEngine;
 using UnityEditor;
