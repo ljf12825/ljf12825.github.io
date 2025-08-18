@@ -456,7 +456,7 @@ var store = [{
         "teaser": null
       },{
         "title": "Unity Editor Extensions",
-        "excerpt":"Unity编辑器扩展就是用C#编写一些工具或界面，去增强Unity自带的编辑器功能，从而让开发流程更高效、更可控 它的本质是：利用UnityEditor API在编辑模式下定制Inspector、菜单、窗口、场景视图、资源导入等功能 基础概念 运行时脚本 vs 编辑器脚本 运行时脚本：放在普通文件夹，打包后在游戏里运行 编辑器脚本：放在Editor文件夹下，只在编辑器运行，不会打包进游戏 编辑器脚本需要引用UnityEditor命名空间（注意它在运行时不可用） 目的 节省重复操作时间（比如批量设置材质、自动生成Prefab） 提供更直观的可视化编辑界面 增强调试能力（自定义日志、场景可视化） 常见扩展方式 自定义Inspector 让某个组件在Inspector面板中显示定制的界面 ```cs using UnityEditor; using UnityEngine; [CustomEditor(typeof(MyComponent))] public class MyComponentEditor : Editor { public override void OnInspectorGUI() { var myComp = (MyComponent)target; EditorGUILayout.LabelField(\"自定义字段\"); myComp.health = EditorGUILayout.IntSlider(\"生命值\", myComp.health, 0, 100); if (GUILayout.Button(\"重置生命值\")) myComp.health = 100;...","categories": ["笔记"],
+        "excerpt":"Unity编辑器扩展就是用C#编写一些工具或界面，去增强Unity自带的编辑器功能，从而让开发流程更高效、更可控 它的本质是：利用UnityEditor API在编辑模式下定制Inspector、菜单、窗口、场景视图、资源导入等功能 基础概念 运行时脚本 vs 编辑器脚本 运行时脚本：放在普通文件夹，打包后在游戏里运行 编辑器脚本：放在Editor文件夹下，只在编辑器运行，不会打包进游戏 编辑器脚本需要引用UnityEditor命名空间（注意它在运行时不可用） 目的 节省重复操作时间（比如批量设置材质、自动生成Prefab） 提供更直观的可视化编辑界面 增强调试能力（自定义日志、场景可视化） 常见扩展方式 自定义Inspector 让某个组件在Inspector面板中显示定制的界面 using UnityEditor; using UnityEngine; [CustomEditor(typeof(MyComponent))] public class MyComponentEditor : Editor { public override void OnInspectorGUI() { var myComp = (MyComponent)target; EditorGUILayout.LabelField(\"自定义字段\"); myComp.health = EditorGUILayout.IntSlider(\"生命值\", myComp.health, 0, 100); if (GUILayout.Button(\"重置生命值\")) myComp.health = 100; //...","categories": ["笔记"],
         "tags": ["Unity","Editor","Tool"],
         "url": "/posts/2025-07-22-Unity-Editor-Extensions/",
         "teaser": null
