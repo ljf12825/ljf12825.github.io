@@ -504,8 +504,8 @@ var store = [{
         "teaser": null
       },{
         "title": "Mono and IL2CPP",
-        "excerpt":" ","categories": ["笔记"],
-        "tags": ["Unity","Complie"],
+        "excerpt":"Mono和IL2CPP都是Unity的脚本运行后端（Scripting Backend），它们是两中IL语言的处理方式；Mono的处理方式类似C#程序的执行，而IL2CPP则是将其转化为C++代码，交由C++编译器处理 Mono Mono是一个跨平台的.NET运行时实现，最初由Xamarin公司开发，用来在非Windows平台上运行C#程序；Unity在早期就选择了Mono作为C#脚本运行环境 核心组件： Mono运行时：执行托管代码的核心引擎 即时编译器（JIT）：在运行时将IL代码编译为原生机器码 提前编译器（AOT）：可选功能，在运行前编译部分代码 类库：实现.NET基础类库 特点： 解释执行 + JIT 脚本代码（C#） -&gt; 编译成CIL（Common Intermediate Language，通用中间语言） Mono会在运行时JIT（即时编译）把CIL编译成机器码执行 跨平台性强：一次编译的C#程序可以在多个平台跑 反射支持强：很多第三方库依赖反射，Mono可以支持 灵活，但性能不如原生代码：因为JIT/解释执行比不上直接生成平台原生代码 局限性： 性能开销：JIT编译和GC可能引起卡顿 安全风险：IL代码较容易被反编译 平台限制：某些平台（如iOS）不允许JIT编译 IL2CPP IL2CPP是Unity自己研发的脚本后端，意为： IL -&gt; C++ -&gt; 平台原生代码（AOT编译） 工作流程： C#脚本 -&gt; 编译成IL（和Mono一样的中间语言） Unity的IL2CPP工具链把IL翻译成C++代码 使用C++编译器编译生成目标平台的机器码 最终得到一个完全原生的二进制可执行文件 特点： AOT（Ahead of Time编译）：运行前就已经编译成机器码，运行时无需JIT 性能更高：执行效率比Mono/JIT方案高，平均有1.2-2倍的性能提升 平台兼容性更好：特别是iOS上，苹果严格限制JIT，IL2CPP就成了唯一选择 更安全：因为代码已经转成C++，反编译难度更大（虽然还是能逆向，但比Mono的CIL难得多） 内存效率：更好的内存布局和缓存利用率 局限性： 构建时间延长：额外的转换和编译步骤...","categories": ["笔记"],
+        "tags": ["Unity","Complie","Cross-paltform"],
         "url": "/posts/2025-08-02-Mono-and-IL2CPP/",
         "teaser": null
       },{

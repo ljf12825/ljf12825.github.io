@@ -11,7 +11,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Mono and IL2CPP - ljf12825’s Blog</title>
-<meta name="description" content="">
+<meta name="description" content="Mono和IL2CPP都是Unity的脚本运行后端（Scripting Backend），它们是两中IL语言的处理方式；Mono的处理方式类似C#程序的执行，而IL2CPP则是将其转化为C++代码，交由C++编译器处理">
 
 
 
@@ -22,7 +22,7 @@
 <meta property="og:url" content="http://localhost:4000/posts/2025-08-02-Mono-and-IL2CPP/">
 
 
-  <meta property="og:description" content="">
+  <meta property="og:description" content="Mono和IL2CPP都是Unity的脚本运行后端（Scripting Backend），它们是两中IL语言的处理方式；Mono的处理方式类似C#程序的执行，而IL2CPP则是将其转化为C++代码，交由C++编译器处理">
 
 
 
@@ -149,7 +149,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Mono and IL2CPP">
-    <meta itemprop="description" content="">
+    <meta itemprop="description" content="Mono和IL2CPP都是Unity的脚本运行后端（Scripting Backend），它们是两中IL语言的处理方式；Mono的处理方式类似C#程序的执行，而IL2CPP则是将其转化为C++代码，交由C++编译器处理">
     <meta itemprop="datePublished" content="2025-06-01T00:00:00+08:00">
     
 
@@ -168,7 +168,246 @@
 
       <section class="page__content" itemprop="text">
         
-        
+        <p><code class="language-plaintext highlighter-rouge">Mono</code>和<code class="language-plaintext highlighter-rouge">IL2CPP</code>都是Unity的脚本运行后端（Scripting Backend），它们是两中IL语言的处理方式；Mono的处理方式类似C#程序的执行，而IL2CPP则是将其转化为C++代码，交由C++编译器处理</p>
+
+<h2 id="mono">Mono</h2>
+<p>Mono是一个跨平台的.NET运行时实现，最初由Xamarin公司开发，用来在非Windows平台上运行C#程序；Unity在早期就选择了Mono作为C#脚本运行环境</p>
+
+<p><strong>核心组件：</strong></p>
+<ul>
+  <li>Mono运行时：执行托管代码的核心引擎</li>
+  <li>即时编译器（JIT）：在运行时将IL代码编译为原生机器码</li>
+  <li>提前编译器（AOT）：可选功能，在运行前编译部分代码</li>
+  <li>类库：实现.NET基础类库</li>
+</ul>
+
+<p><strong>特点：</strong></p>
+<ul>
+  <li>解释执行 + JIT
+    <ul>
+      <li>脚本代码（C#） -&gt; 编译成CIL（Common Intermediate Language，通用中间语言）</li>
+      <li>Mono会在运行时JIT（即时编译）把CIL编译成机器码执行</li>
+    </ul>
+  </li>
+  <li>跨平台性强：一次编译的C#程序可以在多个平台跑</li>
+  <li>反射支持强：很多第三方库依赖反射，Mono可以支持</li>
+  <li>灵活，但性能不如原生代码：因为JIT/解释执行比不上直接生成平台原生代码</li>
+</ul>
+
+<p><strong>局限性：</strong></p>
+<ul>
+  <li>性能开销：JIT编译和GC可能引起卡顿</li>
+  <li>安全风险：IL代码较容易被反编译</li>
+  <li>平台限制：某些平台（如iOS）不允许JIT编译</li>
+</ul>
+
+<h2 id="il2cpp">IL2CPP</h2>
+<p>IL2CPP是Unity自己研发的脚本后端，意为：</p>
+<ul>
+  <li>IL -&gt; C++ -&gt; 平台原生代码（AOT编译）</li>
+</ul>
+
+<p><strong>工作流程：</strong></p>
+<ol>
+  <li>C#脚本 -&gt; 编译成IL（和Mono一样的中间语言）</li>
+  <li>Unity的IL2CPP工具链把IL翻译成C++代码</li>
+  <li>使用C++编译器编译生成目标平台的机器码</li>
+  <li>最终得到一个完全原生的二进制可执行文件</li>
+</ol>
+
+<p><strong>特点：</strong></p>
+<ul>
+  <li>AOT（Ahead of Time编译）：运行前就已经编译成机器码，运行时无需JIT</li>
+  <li>性能更高：执行效率比Mono/JIT方案高，平均有1.2-2倍的性能提升</li>
+  <li>平台兼容性更好：特别是iOS上，苹果严格限制JIT，IL2CPP就成了唯一选择</li>
+  <li>更安全：因为代码已经转成C++，反编译难度更大（虽然还是能逆向，但比Mono的CIL难得多）</li>
+  <li>内存效率：更好的内存布局和缓存利用率</li>
+</ul>
+
+<p><strong>局限性：</strong></p>
+<ul>
+  <li>构建时间延长：额外的转换和编译步骤</li>
+  <li>调试困难：生成的C++代码难以直接调试</li>
+  <li>灵活性降低：不支持运行时代码生成</li>
+  <li>体积增大：最终二进制文件通常更大</li>
+</ul>
+
+<h2 id="总体流程">总体流程</h2>
+<ol>
+  <li>从C#到IL（中间语言）
+无论是Mono还是IL2CPP，第一步都是一样的：
+    <ul>
+      <li>C#脚本（例如<code class="language-plaintext highlighter-rouge">Player.cs</code>）</li>
+      <li>Unity调用Roslyn编译器（csc.exe）把C#源码编译成IL（中间语言，Common Intermediate Language）</li>
+    </ul>
+    <ul>
+      <li>输出结果是一个或多个.dll程序集（如<code class="language-plaintext highlighter-rouge">Assembly-CSharp.dll</code>）</li>
+    </ul>
+  </li>
+</ol>
+
+<p>这一步和普通.NET程序是一样的</p>
+
+<ol>
+  <li>Mono路线（编辑器/Debug模式常用）
+Mono的工作流是：
+    <ul>
+      <li>加载程序集：Unity编辑器或游戏运行时，Mono加载你的<code class="language-plaintext highlighter-rouge">Assembly-Csharp.dll</code></li>
+      <li>JIT编译：Mono运行时逐个把IL转换成本地机器码，存在内存里</li>
+    </ul>
+    <ul>
+      <li>执行时翻译 -&gt; 所以叫JIT（Just-In-Time）
+      - 执行机器码：CPU直接执行</li>
+    </ul>
+  </li>
+</ol>
+
+<p>特点：</p>
+<ul>
+  <li>编译快：改一行代码 -&gt; 重新编译成dll -&gt; Mono直接跑</li>
+  <li>运行稍慢：因为每次方法第一次调用时，Mono都要现编译一下</li>
+  <li>调试友好：断点、反射、热重载都支持</li>
+</ul>
+
+<ol>
+  <li>IL2CPP路线（发布版本常用）
+IL2CPP的流程比Mono多几步
+    <ul>
+      <li>C#编译成IL(.dll)（和上一步一样）</li>
+      <li>IL2CPP工具链把.dll里的IL代码转换成C++源码</li>
+    </ul>
+    <ul>
+      <li>例如<code class="language-plaintext highlighter-rouge">Player.cs</code> -&gt; <code class="language-plaintext highlighter-rouge">Assembly-CSharp.dll</code> -&gt; <code class="language-plaintext highlighter-rouge">il2cpp</code> -&gt; <code class="language-plaintext highlighter-rouge">Assembly-CSharp.cpp</code>
+      - C++编译器（Clang/MSVC/GCC）把生成的C++源码编译成目标平台的原生机器码（.exe/.apk/.ipa/.so/.dll等）
+      - 运行时执行：游戏运行时直接执行已经编译好的机器码</li>
+    </ul>
+  </li>
+</ol>
+
+<p>特点</p>
+<ul>
+  <li>性能好：不需要JIT，运行时就是纯机器码，接近C++程序的速度</li>
+  <li>安全性高：反编译难度比Mono大很多</li>
+  <li>编译慢：因为每次都要跑C++编译器</li>
+</ul>
+
+<p><img src="/assets/images/MonoandIL2CPP.png" alt="流程图" /></p>
+
+<hr />
+
+<h2 id="mono-vs-il2cpp">Mono vs IL2CPP</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>特性</th>
+      <th>Mono</th>
+      <th>IL2CPP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>编译方式</td>
+      <td>JIT / 解释执行</td>
+      <td>AOT（IL → C++ → 原生机器码）</td>
+    </tr>
+    <tr>
+      <td>性能</td>
+      <td>中等，依赖 JIT 优化</td>
+      <td>高，接近 C++ 原生性能</td>
+    </tr>
+    <tr>
+      <td>平台支持</td>
+      <td>跨平台，但某些平台有限制（如 iOS 禁止 JIT）</td>
+      <td>全平台，尤其是移动端和主机端首选</td>
+    </tr>
+    <tr>
+      <td>反射</td>
+      <td>完整支持</td>
+      <td>部分受限，需要 <code class="language-plaintext highlighter-rouge">link.xml</code> 保留</td>
+    </tr>
+    <tr>
+      <td>编译时间</td>
+      <td>快，开发迭代效率高</td>
+      <td>慢，需要 C++ 编译整个工程</td>
+    </tr>
+    <tr>
+      <td>安全性</td>
+      <td>容易被反编译（ILSpy 直接看源码）</td>
+      <td>较难逆向（但不是绝对安全）</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<p><strong>使用场景：</strong><br />
+选择Mono的情况</p>
+<ul>
+  <li>开发阶段快速迭代</li>
+  <li>需要动态加载代码或使用反射</li>
+  <li>目标平台允许JIT执行</li>
+  <li>项目对性能要求不高</li>
+  <li>需要最小化构建体积</li>
+</ul>
+
+<p>选择IL2CPP的情况</p>
+<ul>
+  <li>发布到iOS平台</li>
+  <li>需要最大化运行时性能</li>
+  <li>项目对安全性要求高</li>
+  <li>目标设备内存有限</li>
+  <li>使用复杂泛型或值类型</li>
+</ul>
+
+<p><strong>Unity的选择</strong></p>
+<ul>
+  <li>编辑器模式/PC Debug模式 -&gt; Mono（调试快、编译快）</li>
+  <li>iOS/主机平台/大多数正式发布版本 -&gt; IL2CPP（性能、安全性）</li>
+  <li>Android -&gt; 可以选Mono或IL2CPP（推荐IL2CPP）</li>
+</ul>
+
+<p>Unity的策略其实是</p>
+<ul>
+  <li>开发时用Mono提高迭代效率</li>
+  <li>打包发布时用IL2CPP提高性能和安全</li>
+</ul>
+
+<hr />
+
+<p><strong>迁移注意事项：</strong>
+从Mono迁移到IL2CPP时需要注意：</p>
+<ul>
+  <li>反射限制：某些反射操作可能不再工作</li>
+  <li>序列化变化：二进制序列化可能有差异</li>
+  <li>平台特定代码：需要检查平台相关代码的兼容性</li>
+  <li>第三方库：确保所有插件支持IL2CPP</li>
+  <li>构建配置：可能需要调整链接器设置</li>
+</ul>
+
+<p><a href="/posts/2025-07-18-Unity-Packaging-and-Building/">Unity Packaging and Building</a></p>
+
+<h2 id="性能优化">性能优化</h2>
+<p><strong>IL2CPP特有优化：</strong></p>
+<ul>
+  <li>使用<code class="language-plaintext highlighter-rouge">[Preseve]</code>属性防止代码被裁剪</li>
+  <li>优化泛型使用，避免过多特化</li>
+  <li>减少反射操作，改用显式调用</li>
+  <li>使用<code class="language-plaintext highlighter-rouge">IL2CPP_EXTERN_C</code>与原生代码交互</li>
+</ul>
+
+<p><strong>通用优化：</strong></p>
+<ul>
+  <li>对象池减少GC压力</li>
+  <li>避免每帧分配内存</li>
+  <li>使用结构体替代类</li>
+  <li>缓存组件引用</li>
+</ul>
+
+<hr />
+
+<p><strong>未来发展趋势</strong><br />
+Unity正在持续改进IL2CPP，缩短构建时间、增强调试支持、改进泛型处理、更好的异常处理、增量构建支持等。随着Unity的发展，IL2CPP正成为更主流的选择，特别是在性能敏感和移动平台项目中</p>
 
         
       </section>
