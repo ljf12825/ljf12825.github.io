@@ -3,7 +3,7 @@ title: "Mono and IL2CPP"
 layout: single
 date: 2025-06-01
 categories: [笔记]
-tags: [Unity, Complie, Cross-paltform]
+tags: [Unity, Complie, Cross-paltform, Build Pipeline]
 author: "ljf12825"
 permalink: /posts/2025-08-02-Mono-and-IL2CPP/
 ---
