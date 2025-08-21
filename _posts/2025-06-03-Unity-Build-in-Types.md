@@ -595,3 +595,109 @@ Matrix4x4 combinedMatrix = rotationMatrix * scaleMatrix; // 复合变换
 | **LogCallback**                   | 自定义日志处理                 | 日志系统、异常上传    | `void(string condition, string stackTrace, LogType type)`        |
 | **LowMemoryCallback**             | 低内存回调                   | 清缓存、卸载贴图     | `void()`                                                         |
 | **MemoryUsageChangedCallback**    | 内存使用变化回调                | 实时内存监控、自适应性能 | `void(long memoryUsage)`                                         |
+
+## Color
+`Color`是UnityEngine命名空间下的一个非常核心的结构体，它的本质是RGBA颜色表示
+
+### 定义
+```cs
+public struct Color
+{
+  public float r; // 红色分量
+  public float g; // 绿色分量
+  public float b; // 蓝色分量
+  public float a; // 透明度
+}
+```
+- 范围：每个分量的值通常在`[0.0f, 1.0f]`之间
+  - 0表示没有该分量
+  - 1表示最大值
+- 如果超出范围，Unity仍然支持，但会根据材质/Shader的处理方式决定如何渲染（比如HDR时可以 > 1）
+- Unity内部用`float`存储颜色，而不是字节(`0~255`)，这样更方便在着色器和数学运算中直接处理
+
+### API
+1. Constructor
+```cs
+public Color(float r, float g, float b);
+public Color(float r, float g, float b, float a);
+```
+
+2. Static Properties
+各种颜色
+`Color.aliceBlue.ToString()` RGBA(0.9411765f, 0.9725491f, 1f, 1f)
+
+3. Properties
+
+| Property | Description |
+| `a` | Alpha component of color(0 is transparent, 1 is opaque) |
+| `b` | Blue component of color |
+| `g` | Green component of color |
+| `r` | Red component of color |
+| `gamma` | 返回应用Gamma矫正的颜色 |
+| `linear` | 返回从sRGB转换为Linear空间的颜色 |
+| `grayscale` | 返回灰度值 |
+| `maxColorComponent` | 返回`r, g, b`三个分量中的最大值 |
+| `this[int index]` | 索引访问器，允许用数组的方式访问颜色分量， `0, 1, 2, 3`对应`r, g, b, a` |
+
+// TODO: `gamma` and `linear` and `sRGB`
+- `gamma`：显示器上的颜色通常不是线性的，而是sRGB（标准颜色空间）（gamma 2.2左右）
+  - 在渲染时，一般在Linear空间计算光照，但最终显示时要转换为Gamma空间
+- `linear`：是`gamma`的相反操作
+
+- `grayscale`：Unity内部使用平均加权（符合人眼对亮度的敏感度）$Gray = 0.299 × r + 0.587 × g + 0.144 × b$
+
+
+
+4. Public Methods
+
+| Method | Description |
+| - | - |
+| `Equals` | rbga均相等 |
+| `GetHashCode` | 返回该颜色的哈希值 |
+| `ToString` | 返回颜色的标准字符串 |
+
+5. Static Methods
+
+| Method | Description |
+| - | - |
+| `HSVToRGB` | HSV转RGB （HSV是色相、饱和度、明度颜色模型）|
+| `RGBToHSV` | RGB转HSV |
+| `Lerp` | `public static Color Lerp(Color a, Color b, float t);` 从颜色a到颜色b的线差转换，速率为t |
+| `LerpUnclamped` | 非钳制插值，参数无范围限制 |
+
+### 使用
+1. 材质颜色
+```cs
+renderer.material.color = Color.red;
+```
+
+2. UI颜色
+```cs
+GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
+```
+
+3. Gizmos绘制
+```cs
+Gizmos.color = Color.yellow;
+Gizmos.DrawSphere(transform.position, 1f);
+```
+
+## Color32
+以32位格式表示RGBA颜色，每个颜色分量都是一个字节值，范围从0到255
+
+`Color`使用`float`，精度高，`Color32`使用`byte`，更适合和贴图、GPU数据交互
+```cs
+Color c = new Color(1f, 0f, 0f, 1f);
+Color32 c32 = new Color32(255, 0, 0, 255);
+```
+
+二者可以隐式转换
+```cs
+Color c = (Color) new Color32(128, 200, 255, 255);
+Color32 c32 = (Color32) Color.green;
+```
+
+`Color`和`Color32`可以和`Vector4`进行转化
+```cs
+Vector4 newV4 = new Color(0.3f, 0.4f, 0.6f);
+```
