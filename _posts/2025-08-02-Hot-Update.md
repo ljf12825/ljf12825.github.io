@@ -54,7 +54,7 @@ UnityC#脚本编译后会生成IL（中间语言），运行时通过Mono或IL2C
 特点：
   - 跨平台
   - 活跃社区，国内大厂常用（比如热更新游戏项目）
-  - 心梗你比原生IL差（解释执行）
+  - 性能比原生IL差（解释执行）
 
 3. HybridCLR（近几年兴起）
   - 思路是补全Unity剪掉的AOT元数据，让运行时能加载新的IL
@@ -212,3 +212,209 @@ public class Player : IPlayer
 开发者可以将测试版本的 DLL 通过热更新的方式推送给玩家，以进行 A/B 测试或者验证某些游戏逻辑的调整，而不需要强制用户重新安装更新包
 
 在实际应用中，反射和动态加载DLL方式常常与AssetBundle和配置文件热更新结合使用，形成一个完整的热更新解决方案
+
+### ILRuntime
+ILRuntime是一个开源的C#运行时，它可以在Unity或其他.NET环境中动态加载和执行C#代码，特别是运行时加载的DLL文件中的代码。它可以绕过一些Unity在编译时的限制，提供一种能够在IL2CPP环境下进行代码热更新的解决方案\
+ILRuntime允许将游戏逻辑代码编译为单独的DLL文件，并在游戏运行时动态加载这些DLL。这些DLL可以包含希望更新的功能或修复的bug。ILRuntime会在运行时将IL代码加载并解释执行\
+
+ILRuntime的核心功能：
+- 热更新支持：通过动态加载IL编译的DLL文件，实现代码热更新
+- 跨平台支持：ILRuntime可以在Unity的各种平台（包括iOS和Android）上允许，甚至支持IL2CPP
+- 性能优化：ILRuntime提供了接近本地代码的性能，尤其是在Unity使用IL2CPP编译时，比传统的反射和动态加载DLL性能更高
+- 支持跨线程执行：ILRuntime支持将热更新的逻辑运行在Unity的主线程以外，提升游戏的性能
+
+#### ILRuntime的实现原理
+**原理概述**
+ILRuntime基于解释执行原理工作，它并不像传统的JIT（即时编译）那样将IL代码即时转换为机器码，而是通过反射和解释器来执行IL代码
+- 加载DLL：ILRuntime会将外部的DLL加载到内存中，进行解析
+- 执行IL代码：ILRuntime会通过内部的解释器执行IL代码，而不是直接编译成机器代码。它可以通过将IL代码映射到原生代码的方式来执行动态代码
+- 托管代码调用：ILRuntime允许你调用托管代码中的方法、属性等，并且支持多态、委托、反射等常见的.NET特性
+
+**工作流程**
+1. 编译DLL：将游戏逻辑编译成一个独立的DLL文件
+2. 加载DLL：游戏运行时，ILRuntime会加载这个DLL文件
+3. 反射与调用：ILRuntime会通过反射等机制动态调用DLL中的类和方法，实现游戏的功能更新
+4. 更新DLL：每次修改代码时，只需编译成新的DLL，然后通过热更新流程替换旧的DLL，游戏会加载新的代码逻辑
+
+**核心组件**
+- CLR模拟：ILRuntime基本上是通过模拟.NET CLR的运行时环境来解释执行IL代码
+- 解释器：ILRuntime 提供了一套高效的解释器，可以解释执行 IL 代码，而不是通过 JIT 编译器生成机器码
+- 跨平台支持：ILRuntime 在 Unity 上的实现特别适用于 IL2CPP 环境，它绕过了 IL2CPP 不支持动态加载 DLL 的限制
+
+#### ILRuntime的特点
+##### 优势
+1. 性能较好
+相比于传统的反射和动态加载 DLL 的方法，ILRuntime 提供了较好的性能，尤其是在 IL2CPP 环境下。ILRuntime 使用的是解释执行，因此相对较慢，但它比传统的反射 要高效
+  - 对于需要高性能的游戏，它的性能优化已经足够接近原生代码
+
+2. 跨平台支持
+ILRuntime支持Unity所有主流平台，特别是IL2CPP（如iOS）\
+ILRuntime解决了Unity在IL2CPP环境下无法动态加载DLL的问题
+
+3. 简化开发
+开发者可以在不修改主项目的前提下，通过热更新修复或修改游戏逻辑
+  - 比如，修复bug、调整游戏参数、或者添加新功能，只需修改并替换DLL即可
+  - 这减少了开发和测试的周期，提高了效率
+
+4. 无缝集成到Unity中
+ILRuntime可以与Unity无缝集成，开发者无需对现有的Unity项目做太多改动
+  - 它提供了简单易用的API，可以在Unity中快速实现热更新
+
+5. 支持跨线程执行
+ILRuntime 支持将热更新代码的执行放在非主线程中，这对于有大量后台计算任务的游戏来说非常有用
+  - 可以避免主线程被阻塞，提高游戏的流畅度
+
+##### 缺点
+1. 性能开销
+尽管ILRuntime已经在性能上做了优化，但它仍然无法与原生编译的代码相媲美
+  - 解释执行的方式相对于JIT编译和AOT编译仍然较慢，尤其是在需要大量计算和频繁调用的逻辑中，性能可能受到影响
+
+2. 支持的特性有限
+ILRuntime是一个运行时解释器，它并不是一个完全的CLR实现，因此在某些特性上的支持有限
+  - 比如，ILRuntime可能不支持一些高级的.NET特性，这要求开发者在使用时要小心
+
+3. 调试困难
+由于热更新代码是通过 ILRuntime 在运行时动态加载的，因此调试热更新的代码比直接调试原生 C# 代码要困难一些
+  - 特别是在 IDE 中，无法直接对加载到运行时的 DLL 进行调试，开发者需要通过日志和其他手段来调试
+
+4. 内存管理问题
+ILRuntime 主要依赖于 垃圾回收机制 来管理内存，因此在使用大量对象和频繁加载 DLL 的场景中，内存管理可能成为一个问题
+  - 开发者需要特别注意内存泄漏和 卸载 DLL 时的资源释放
+
+#### 使用场景
+1. 游戏运营
+  - 大型在线游戏：MMO、MOBA 等类型的游戏，在运营过程中需要频繁修复 bug 或更新游戏内容。ILRuntime 能够支持游戏中的 代码热更新，从而减少重新发布 APK 或重新审核包的时间
+
+2. 灵活的插件系统
+  - 插件式结构：一些游戏会采用插件化的架构，例如任务系统、剧情脚本等模块。ILRuntime 允许你把这些模块以 DLL 形式封装，并通过热更新动态加载
+
+3. 快速迭代
+  - 在开发阶段，尤其是原型开发阶段，ILRuntime 让开发者能够 快速测试新功能和修复 bug。只需替换 DLL 文件，而不需要重新打包整个游戏
+
+4. 游戏调试和测试
+  - 在游戏发布后，ILRuntime 可以支持 游戏内调试和修改。开发者可以在不影响其他部分代码的情况下，独立调试并测试热更新的模块
+
+#### ILRuntime的使用
+##### 1. 准备工作
+安装并配置ILRuntime环境\
+步骤1：导入ILRuntime到Unity
+1. 下载ILRuntime，从GitHub或Unity Asset Stroe中
+2. 导入Unity项目：
+  - 打开Unity项目，在Assets目录下右键选择Import Package或者直接拖拽ILRuntime文件夹导入到项目中
+在导入时，需要确保将ILRuntime相关的DLL（比如`ILRuntime.dll`）和支持文件添加到项目中
+
+步骤2：配置ILRuntime
+- ILRuntime会依赖Unity项目中的CLR环境，并通过ILRuntime提供的API来加载和执行运行时代码
+- 配置完成后，确保`ILRuntime`目录和相关文件在Unity的Assets下正确存在
+
+##### 2. 编译和部署DLL
+ILRuntime热更新的关键在于将游戏逻辑代码单独编译为DLL，然后通过ILRuntime在运行时加载和执行\
+步骤1：创建独立的项目和代码
+1. 创建一个C#类库项目：在Visual Studio中创建一个新的Class Library项目，用于编写和编译热更新代码
+
+例如创建一个`HotUpdate`类库
+```cs
+namespace HotUpdate
+{
+    public class GameLogic
+    {
+        public void StartGame()
+        {
+            UnityEngine.Debug.Log("Game Started!");
+        }
+    }
+}
+```
+
+2. 引用ILRuntime
+  - 在C#项目的引用中加入ILRuntime的DLL
+  - 可以将ILRuntime的`ILRuntime.dll`拷贝到类库项目中，然后将其添加为引用
+
+3. 编译DLL：编译类库项目，生成一个HotUpdate.dll文件。可以将该DLL文件放到Unity项目的StreamingAssets文件夹下，或者直接放到`Assets`目录下的某个子文件中
+
+步骤2：编译其他需要的DLL
+除了主游戏项目的C#代码外，可能还需要编译一些辅助库（例如定义接口的库）作为独立的DLL文件
+
+##### 3. 在Unity中加载和运行DLL
+步骤1：加载DLL\
+在Unity中，需要编写一个脚本来加载并执行DLL中的代码。以下是加载和执行方法的基本步骤
+1. 加载DLL文件：
+ILRuntime提供了`ILRuntime.Runtime.Enviorment.AppDomain`来加载和管理动态加载的程序集
+```cs
+using ILRuntime.Runtime.Enviorment;
+using System.Reflection;
+
+public class HotUpdateManager : MonoBehaviour
+{
+  private AppDomain appDomain;
+
+  void  Start()
+  {
+    // 初始化 ILRuntime环境
+    appDomain = new AppDomain();
+
+    // 加载DLL
+    string dllPath = Applicaiton.streamingAssetsPath + "/HotUpdate.dll"; // 假设DLL在StreamingAssets下
+    appDomain.LoadAssembly(dllPath);
+  }
+}
+```
+在这个例子中，`LoadAssembly`方法会加载之前编译好的HotUpdate.dll
+
+步骤2：反射调用DLL中的类和方法
+加载DLL后，需要通过反射调用其中的类和方法。ILRuntime提供的丰富的反射API，可以在运行时获取类型并调用方法\
+例如：加载的DLL中包含一个`GameLogic`类和`StartGame`方法：
+```cs
+using ILRuntime.Runtime.Intereter;
+using System;
+
+public class HotUpdateManager : MonoBehaviour
+{
+  private AppDomain appDomain;
+
+  void Start()
+  {
+    // 初始化 ILRuntime环境
+    appDomain = new AppDomain();
+
+    // 加载DLL
+    string dllPath = Application.streamingAssetsPath + "/HotUpdate.dll";
+    appDomain.LoadAssembly(dllPath);
+
+    // 获取类型（反射）
+    Type gameLogicType = appDomain.LoadedTypes["HotUpdate.GameLogic"];
+
+    // 创建实例
+    var gameLogicInstance = Activator.CreateInstance(gameLogicType);
+
+    // 获取方法（反射）
+    var startGameMethod = gameLogicType.GetMethod("StartGame");
+
+    // 调用方法
+    startGameMethod.Invoke(gameLogicInstance, null);
+  }
+}
+```
+- `appDomain.LoadedTypes`用于获取DLL中所有加载的类型
+- `Activator.CreateInstance`用于动态创建类的实例
+- `GetMethod`和`Invoke`用于动态调用方法
+
+步骤3：处理参数和返回值
+ILRuntime支持传递参数并处理返回值。当调用方法时，可以通过反射传递参数给方法，并接收返回值。
+```cs
+var method = gameLogicType.GetMethod("SomeMethod");
+var result = method.Invoke(gameLogicInstance, new object[] { param1, param2 });
+```
+
+##### 4. 热更新流程
+步骤1：替换DLL
+热更新的关键就是替换DLL文件。内次修改并重新编译DLL，只需将新的DLL文件替换掉Unity项目中原有的DLL文件
+
+ILRuntime会在游戏运行时加载新的DLL，并执行其中的代码。Unity会自动通过`LoadAssembly`加载并运行新的DLL
+
+步骤2：动态切换逻辑
+如果需要动态切换热更新逻辑（比如用户登录后加载不同的功能模块），可以在运行时加载不同版本的DLL或者不同模块的DLL\
+例如，如果更新了某个DLL，可以通过以下方式重新加载并切换数据
+```cs
+appDomain.LoadAssembly(newDllpath); // 加载新的DLL
+```
