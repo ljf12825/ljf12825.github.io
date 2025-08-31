@@ -424,3 +424,133 @@ appDomain.LoadAssembly(newDllpath); // 加载新的DLL
 2. 接口和继承：需要确保热更新的DLL能与主程序共享接口和基类，避免类型冲突。可以将一些接口和抽象类保存在一个公共的程序集（DLL）中
 3. 性能考虑：ILRuntime会通过解释执行IL代码，这回带来一定的性能损失。虽然它已经做了优化，但对于高性能要求的游戏，仍需要注意性能瓶颈
 4. 调试支持：ILRuntime的调试比直接调试C#代码困难，建议使用日志工具和测试工具来调试热更新代码
+
+### HybridCLR
+HybridCLR是一种Unity热更新方案，它解决了传统热更新技术在IL2CPP平台上遇到的限制
+- 它允许你在IL2CPP环境下加载和执行C#热更新DLL
+- 本质上是原生IL与AOT代码的混合执行，因此叫Hybrid（混合）CLR
+
+特点：
+- 支持IL2CPP（iOS、主机平台）
+- 热更新性能接近原生C#
+- 可以调用原生C++生成的AOT代码
+- 支持泛型、委托、接口等完整C#特性
+
+ILRuntime适合快速迭代、小项目，HybridCLR更适合商业项目和高性能需求
+
+#### HybridCLR的原理
+HybridCLR的核心是 AOT 补充 + IL 执行
+1. AOT 预生成
+Unity IL2CPP会将C#转换成C++，编译成机器码。HybridCLR会生成一份补充AOT元数据（Method/Type信息），以支持运行时加载新的DLL
+
+2. DLL热更新
+把热更新逻辑编译成DLL（纯IL代码），运行时通过HybridCLR的加载机制调用
+
+3. 混合执行
+  - 对AOT已有的方法直接调用原生代码
+  - 对热更新DLL中的方法，HybridCLR会利用AOT元数据和IL来执行
+  - 支持接口、泛型、委托、虚方法等特性
+
+4. 优势
+  - 不用解释执行，性能接近原生
+  - 可以热更新几乎完整的C#逻辑
+  - 支持IL2CPP平台
+
+#### 使用场景
+1. 商业游戏热更新
+  - MMOG、MOBA、卡牌等长期运营游戏
+  - 需要频繁修复逻辑bug或添加新功能
+
+2. 性能敏感场景
+  - 游戏核心逻辑、AI计算、战斗逻辑
+  - 使用ILRuntime可能会有性能瓶颈，HybridCLR更适合
+
+3. 跨平台热更新
+  - Android/ iOS/ 主机/PC
+  - HybridCLR支持所有IL2CPP平台
+
+#### 使用
+##### 步骤1：导入HybridCLR
+1. 在Unity中导入HybridCLR包（从GitHub或 Unity Package Manager）
+2. 配置HybridCLR插件：
+  - 打开`HybridCLR/Settings`
+  - 设置热更新DLL存放路径
+  - 配置需要生成AOT补充的类型
+
+##### 步骤2：编写热更新DLL
+1. 创建一个独立的C# Class Library
+2. 写希望热更新的逻辑，例如：
+```cs
+namespace HotUpdate
+{
+  public class Player
+  {
+    public void Move()
+    {
+      UnityEngine.Debug.Log("Player move!");
+    }
+  }
+}
+```
+3. 编译DLL（确保使用.NET Framework 或 .NET Standard 与 Unity兼容）
+4. 将DLL放到Unity项目的热更新目录（通常是`Assets/HotUpdate`或StreamingAssets）
+
+##### 步骤3：生成AOT补充
+HybridCLR需要生成AOT元数据补充文件
+```bash
+# HybridCLR提供了 Editor 工具来生成
+HybridCLR/GenerateAOTMetadata
+```
+- 生成的文件会让 IL2CPP可以调用热更新DLL中的泛型、接口、虚方法等
+- 这是HybridCLR核心所在，否则热更新DLL在IL2CPP上无法正常运行
+
+##### 步骤4：加载和调用DLL
+Unity热更新代码示例：
+```cs
+using HybridCLR;
+using System;
+using UnityEngine;
+
+public class HotUpdateManager : MonoBehaviour
+{
+  void Start()
+  {
+    // 初始化 HybridCLR
+    var dllPath = Application.streamingAssetsPath + "/HotUpdate.dll";
+    var dllBytes = System.IO.File.ReadAllBytes[dllPath];
+
+    HybridCLR.RuntimeApi.LoadMetadataForAOTAssembly(dllBytes); // 加载 AOT 补充
+
+    // 调用热更新 DLL 中的逻辑
+    var assembly = System.Reflection.Assembly.Load(dllBytes);
+    var type = assembly.GetType("HotUpdate.Player");
+    var instance = Activator.CreateInstance(type);
+    var method = type.GetMethod("Move");
+    method.Invoke(instance, null);
+  }
+}
+```
+- LodaMetadataForAOTAssembly是HybridCLR核心API，用于让IL2CPP可以调用热更新DLL
+- 之后可以用反射或直接调用热更新逻辑
+
+##### 步骤5：热更新流程
+1. 修改热更新代码 -> 编译成新的DLL
+2. 上传到服务器或替换 StreamingAssets下的DLL
+3. 游戏运行时通过HybridCLR加载新的DLL -> 热更新生效
+
+> 重点：因为HybridCLR使用AOT补充，几乎可以热更新所有C#逻辑，包括泛型、委托、接口和虚方法
+
+#### 特点
+##### 优点
+1. 性能接近原生：几乎没有解释开销
+2. 完整的C#支持：泛型、接口、委托、虚方法都可以热更新
+3. 跨平台：IL2CPP平台也能热更新
+4. 商业可用
+
+##### 缺点
+1. 配置复杂：
+  - 需要生成AOT补充
+  - DLL编译和路径管理需要规范
+
+2. 调试比普通C#难：热更新逻运行在HybridCLR上，需要日志和测试工具
+3. DLL更新流程稍复杂：热更新DLL + AOT补充同步发布
