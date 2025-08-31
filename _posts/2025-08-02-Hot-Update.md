@@ -109,64 +109,64 @@ C#提供了`Assembly.Load`方法，可以在运行时加载外部的DLL文件，
 #### 实现
 1. 将逻辑封装为DLL
 
-将业务逻辑代码编译成一个独立的DLL文件
-  - 将这部分代码从Unity主项目中分离，独立编译成DLL
-  - DLL中的功能可以是游戏中的各种逻辑模块，比如角色行为、敌人AI任务系统等
+  将业务逻辑代码编译成一个独立的DLL文件
+    - 将这部分代码从Unity主项目中分离，独立编译成DLL
+    - DLL中的功能可以是游戏中的各种逻辑模块，比如角色行为、敌人AI任务系统等
 
 2. 在运行时动态加载DLL
 
-使用`Assembly.Load`来加载DLL文件。加载时，可以通过文件路径、资源流等方式加载DLL文件
+  使用`Assembly.Load`来加载DLL文件。加载时，可以通过文件路径、资源流等方式加载DLL文件
 
-```cs
-using System.Reflecion;
+  ```cs
+  using System.Reflecion;
 
-// 动态加载DLL
-string dllPath = "Assets/HotUpdate/HotUpdate.dll";
-Assembly hotUpdateAssembly = Assembly.LoadFrom(dllPath);
-```
+  // 动态加载DLL
+  string dllPath = "Assets/HotUpdate/HotUpdate.dll";
+  Assembly hotUpdateAssembly = Assembly.LoadFrom(dllPath);
+  ```
 
 3. 通过反射调用DLL中的类和方法
 
-加载完DLL后，可以通过反射来创建DLL中的对象并调用它们的方法\
-例如，假设有一个`Player`类，并且它有一个`Move`方法
-```cs
-// 获取类型
-Type playerType = hotUpdateAssembly.GetType("HotUpdate.Player");
+  加载完DLL后，可以通过反射来创建DLL中的对象并调用它们的方法\
+  例如，假设有一个`Player`类，并且它有一个`Move`方法
+  ```cs
+  // 获取类型
+  Type playerType = hotUpdateAssembly.GetType("HotUpdate.Player");
 
-// 创建实例
-object playerInstance = Activator.CreateInstance(playerType);
+  // 创建实例
+  object playerInstance = Activator.CreateInstance(playerType);
 
-// 获取方法并调用
-MethodInfo moveMethod = playerType.GetMethod("Move");
-moveMethod.Invoke(playerInstance, null); // 这里传入的参数可以根据需要传入
-```
+  // 获取方法并调用
+  MethodInfo moveMethod = playerType.GetMethod("Move");
+  moveMethod.Invoke(playerInstance, null); // 这里传入的参数可以根据需要传入
+  ```
 
 4. 处理依赖和接口
 
-如果想把某些接口保留给DLL使用，可以通过接口实现来避免代码耦合\
-在反射中，通常会使用接口来确保DLL中的代码能访问到需要的功能\
-例如，定义一个公共接口
-```cs
-public interface IPlayer
-{
-  void Move();
-  void Attack();
-}
-```
-然后在DLL中实现这个接口
-```cs
-public class Player : IPlayer
-{
-  public void Move() { /* 运动逻辑 */ }
-  public void Attack() { /* 攻击逻辑 */ }
-}
-```
-主程序运行时加载DLL后，可以通过反射获取到接口和实现类，避免直接引用DLL中的实现类，从而减少耦合
+  如果想把某些接口保留给DLL使用，可以通过接口实现来避免代码耦合\
+  在反射中，通常会使用接口来确保DLL中的代码能访问到需要的功能\
+  例如，定义一个公共接口
+  ```cs
+  public interface IPlayer
+  {
+    void Move();
+    void Attack();
+  }
+  ```
+  然后在DLL中实现这个接口
+  ```cs
+  public class Player : IPlayer
+  {
+    public void Move() { /* 运动逻辑 */ }
+    public void Attack() { /* 攻击逻辑 */ }
+  }
+  ```
+  主程序运行时加载DLL后，可以通过反射获取到接口和实现类，避免直接引用DLL中的实现类，从而减少耦合
 
 5. 更新和卸载DLL
 
-每当想更新代码时，只需要替换DLL文件，游戏运行时会加载新的DLL\
-可以实现代码的卸载和重新加载（但这在.NET环境下并不完全支持，尤其是在IL2CPP环境下），可以通过使用AppDomain来卸载和重新加载DLL
+  每当想更新代码时，只需要替换DLL文件，游戏运行时会加载新的DLL\
+  可以实现代码的卸载和重新加载（但这在.NET环境下并不完全支持，尤其是在IL2CPP环境下），可以通过使用AppDomain来卸载和重新加载DLL
 
 #### 特点
 **优点**
