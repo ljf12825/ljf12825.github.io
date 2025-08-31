@@ -554,3 +554,88 @@ public class HotUpdateManager : MonoBehaviour
 
 2. 调试比普通C#难：热更新逻运行在HybridCLR上，需要日志和测试工具
 3. DLL更新流程稍复杂：热更新DLL + AOT补充同步发布
+
+### Lua/JS脚本热更
+#### 存在原因
+1. C# 在 iOS 上不能JIT，早期Unity开发者为了热更，常用Lua/JS解释器来绕过限制
+2. 脚本语言灵活：代码写好后直接存文本（.lua或.js），无需重新编译Unity工程
+3. 资源热更配合：逻辑脚本放AssetBundle或远程下载，运行时动态加载
+
+#### 原理
+1. Unity中嵌入一个Lua/JS虚拟机（解释器）
+  - Lua常用xLua、sLua
+  - JS常用Puerts，底层基于V8引擎
+
+2. Unity启动时
+  - 先加载解释器（一个MonoBehaviour挂在场景里）
+  - 把本地或服务器下载的`.lua/.js`文件读到内存，交给解释器执行
+
+3. 脚本中调用Unity API
+  - 通过绑定/桥接代码（C# <->Lua/JS）访问GameObject、Transform、UI等
+  - 常见方式：代码生成器 + 反射注册
+
+4. 逻辑更新时：新版本只需要下发Lua/JS脚本文件，Unity客户端无需重新打包
+
+#### Lua热更示例（xLua为例）
+**特点**
+- 性能好，Lua解释器很轻量
+- 对Unity API绑定比较成熟
+
+**使用步骤**
+1. 导入xLua插件
+2. 初始化LuaEnv
+```cs
+LuaEnv luaenv = new LuaEnv();
+luaenv.DoString("print('Hello Lua!')");
+```
+
+3. 从外部加载Lua脚本
+```cs
+string script = File.ReadAllText("path/to/script.lua");
+luaenv.DoString(script);
+```
+
+4. C# 与 Lua互调
+  - 在Lua注册一个函数 -> C#调用
+  - 在C#注册一个delegate -> Lua调用
+
+**热更方式**
+- 脚本放到AssetBundle或StreamingAssets
+- 启动时加载Lua文件，替换旧逻辑即可
+
+#### JS热更示例（Puerts为例）
+**特点**
+- 绑定 TypeScript，支持静态检查、编辑器智能提示
+- 可以使用npm包生态
+- 对复杂项目开发体验更好，但性能略逊于Lua
+
+**使用步骤**
+1. 导入Puerts插件（内置V8引擎）
+2. 初始化JsEnv：
+```cs
+JsEnv jsEnv = new JsEnv();
+jsEnv.Eval("console.log('Hello Lua!')");
+```
+3. 调用Unity API
+```js
+const UnityEngine = require("csharp").UnityEngine;
+UnityEngine.Debug.Log("Hello from JS");
+```
+
+4. 热更同理：加载`.js/.ts`文件，替换逻辑即可
+
+#### 特点
+##### 优点
+- 真正的热更新，直接替换脚本，无需重新打包
+- 脚本语言灵活，开发效率高
+- 行业已验证可行性
+
+##### 缺点
+- 性能不如C#直接执行（解释执行/绑定开销）
+- 与Unity API交互需要生成绑定代码，工作量大
+- 逻辑写在Lua/JS中，IDE支持不如C#原生
+
+#### 适用场景
+- 移动端大项目：需要频繁修Bug或活动更新 -> Lua/JS热更更稳妥
+- 原型开发：快速试错 -> JS/TS有利于迭代
+- 不适合超高性能/计算密集，推荐ILRuntime/HybridCLR
