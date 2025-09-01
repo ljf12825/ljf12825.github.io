@@ -1,9 +1,0 @@
----
-title: "Post-processing"
-layout: single
-date: 2025-06-01
-categories: [笔记]
-tags: [Unity, Graphic, Render]
-author: "ljf12825"
-permalink: /posts/2025-08-21-Post-processing/
----
