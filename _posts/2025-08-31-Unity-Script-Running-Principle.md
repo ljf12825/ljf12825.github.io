@@ -6,7 +6,6 @@ categories: [Note]
 tags: [Unity, Script]
 author: "ljf12825"
 permalink: /posts/2025-08-31-Unity-Script-Running-Principle/
-summary: "Script Running Principle"
 ---
 ## Mono vs IL2CPP
 ### JIT与AOT

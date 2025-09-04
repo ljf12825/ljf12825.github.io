@@ -6,7 +6,6 @@ categories: [Note]
 tags: [Unity, Memory]
 author: "ljf12825"
 permalink: /posts/2025-08-31-Unity-Underlying-Architecture/
-summary: "Underlying Architecture"
 ---
 ## 引擎整体架构
 ### Unity Player(C++引擎内核)

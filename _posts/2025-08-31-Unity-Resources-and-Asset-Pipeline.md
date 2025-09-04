@@ -6,7 +6,6 @@ categories: [Note]
 tags: [Unity, Rendering]
 author: "ljf12825"
 permalink: /posts/2025-08-31-Unity-Resources-and-Asset-Pipeline/
-summary: "Resources and Asset Pipeline"
 ---
 ## Asset导入与序列化
 ### ScriptableObject

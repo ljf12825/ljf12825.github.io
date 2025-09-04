@@ -6,7 +6,6 @@ categories: [Note]
 tags: [Unity, Rendering]
 author: "ljf12825"
 permalink: /posts/2025-08-31-Unity-Rendering-System/
-summary: "Rendering"
 ---
 ## 传统渲染管线
 ### Unity内置 Forward/Deferred渲染

@@ -6,7 +6,6 @@ categories: [Note]
 tags: [Unity, Physical System]
 author: "ljf12825"
 permalink: /posts/2025-08-31-Unity-Physical-System/
-summary: "Physical System"
 ---
 ## Physx
 
