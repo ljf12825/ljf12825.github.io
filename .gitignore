@@ -1,0 +1,15 @@
+# Hugo 构建输出
+/public/
+
+# Hugo 缓存和中间文件
+/resources/
+/.hugo_build.lock
+
+# 系统或编辑器产生的文件
+.DS_Store
+Thumbs.db
+*.log
+
+# Node/npm（如果主题用到前端工具链）
+node_modules/
+package-lock.json

@@ -1,0 +1,129 @@
+html, body {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: Verdana, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  background: white;
+  color: black;
+  line-height: 1.0;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;       
+  box-sizing: border-box;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  background: darkblue;
+  color: white;
+  height: 90px;
+  width: calc(100% - 4em);
+  max-width: 1756px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+header .banner {
+  width: 191px;
+  height: 90px;
+  object-fit:contain;
+}
+
+.topnav {
+  position: sticky;
+  top: 90px;
+  background: white;
+  border: 1px solid darkblue;
+  width: calc(100% - 4em);
+  max-width: 1754px;
+  margin: 0 auto;
+}
+
+.topnav > .container > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.topnav li {
+  position: relative;
+}
+
+.topnav a {
+  display: block;
+  padding: 0.75em 1em;
+  color: darkblue;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.topnav a:hover {
+  text-decoration: underline;
+}
+
+.topnav a.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.content {
+  padding: 0;
+  margin-left: 3em;
+  margin-right: 3em;
+}
+
+.content h1,
+.content h2 {
+  color: darkblue;
+  font-family: 'Lucida Sans', Verdana, sans-serif;
+}
+
+.content h2 {
+  border-bottom: 1px solid darkblue;
+  padding-bottom: 0.3em;
+  margin-top: 1.5em;
+}
+
+
+pre code {
+  font-family: "Fira Code", Consolas, monospace;
+  font-size: 0.95em;
+  background: #f5f5f5;
+  padding: 0.75em;
+  border-radius: 4px;
+  display: block;
+  overflow-x: auto;
+}
+
+.MathJax, .mermaid {
+  display: block;
+  text-align: center;
+  margin: 1.5em 0;
+}
+
+footer {
+  background: white;
+  border: 1px solid darkblue;
+  width: calc(100% - 4em);
+  max-width: 1756px;
+  margin: 0 auto;
+}

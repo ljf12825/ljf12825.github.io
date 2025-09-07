@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ .Title }}</title>
+  <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+
+  {{ block "head_extra" . }}{{ end }}
+</head>
+<body>
+
+  <!-- 页眉 -->
+   {{ partial "header.html" . }}
+
+  <!-- 顶部导航 -->
+   {{ partial "nav.html" . }}
+
+  <!-- 主体内容 -->
+   {{ block "main" . }}MAIN{{ end }}
+
+  <!-- 页脚 -->
+   {{ partial "footer.html" . }}
+
+</body>
+</html>

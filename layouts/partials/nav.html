@@ -1,0 +1,14 @@
+<nav class="topnav">
+    <div class="container">
+        <ul>
+            {{ $current := .RelPermalink }}
+            <li><a href="{{ "/" | relURL }}" class="{{ if eq $current "/" }}active{{ end }}">Home</a></li>
+            <li><a href="{{ "/articles/" | relURL }}" class="{{ if eq $current "/articles/" }}active{{ end }}">Articles</a></li>
+            <li><a href="{{ "/blog/" | relURL }}" class="{{ if eq $current "/blog/" }}active{{ end }}">Blog</a></li>
+            <li><a href="{{ "/projects/" | relURL }}" class="{{ if eq $current "/projects/" }}active{{ end }}">Projects</a></li>
+            <li><a href="{{ "/tools/" | relURL }}" class="{{ if eq $current "/tools/" }}active{{ end }}">Tool & Resource</a></li>
+            <li><a href="{{ "/references/" | relURL }}" class="{{ if eq $current "/references/" }}active{{ end }}">References</a></li>
+            <li><a href="{{ "/about/" | relURL }}" class="{{ if eq $current "/about/" }}active{{ end }}">About</a></li>
+        </ul>
+    </div>
+</nav>
