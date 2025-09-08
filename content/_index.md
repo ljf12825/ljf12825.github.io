@@ -5,7 +5,7 @@
 - I pursue first principles, original documents and unprocessed sources of knowledge, pure, solid, independent and thoughtful just like espresso!
 - If what I recorded is helpful to you, it's My Pleasure!
 - If there are any errors, please contact with me.
-- If one day my blog is no longer updated, please check the latest push in Recent Posts</p>
+- If one day my blog is no longer updated, please check the latest push in Recent Posts
 
 ## Engine and Basics
 - Unity

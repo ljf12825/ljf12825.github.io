@@ -88,8 +88,7 @@ header .banner {
 
 .content {
   padding: 0;
-  margin-left: 3em;
-  margin-right: 3em;
+  margin: 0 2.5em;
 }
 
 .content h1,
@@ -110,4 +109,89 @@ footer {
   width: calc(100% - 4em);
   max-width: 1756px;
   margin: 0 auto;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+  display: block;
+  overflow-x: auto;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 0.5em 1em;
+  text-align: center;
+}
+
+th {
+  background-color: darkblue;
+  color: white;
+}
+
+code {
+  background-color: darkblue;
+  color: white;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.highlight {
+    background-color: darkblue;
+    overflow-x: auto;
+    margin: 20px 0;
+    word-break: normal;
+    display: block;
+    white-space: pre;
+}
+
+.highlight pre, pre code {
+  background-color: darkblue !important;
+  display: block;
+  margin: 0;
+}
+
+.highlight code {
+    font-family:"Fira Code", "JetBrains Mono", "Cascadia Code";
+    color: #ffffff;
+    line-height: 20px;
+    background-color: darkblue;
+    font-size: 0.95rem;
+}
+
+.highlight .k { color: #00FFFF; } /* 关键字 */
+
+.highlight .nc { color: #FFD700; font-weight: bold; } /* 类/类型名 */
+
+.highlight .nf { color: #7cfc00; font-weight: bold;} /* 函数名 */
+
+.highlight .s  { color: #ffa500; } /* 字符串 */
+
+.highlight .c  { color: #B0C4DE; font-style: italic; } /* 注释 */
+
+.highlight .m { color: #ff69b4; } /* 数字 */
+
+.highlight .o { color: #ffffff;} /* 操作符 */
+
+.highlight .p { color: #d3d3d3;} /* 标点 */
+
+.katex { 
+  font-size: 1.2rem; 
+  color: #222; 
+}
+
+.katex-display { 
+  margin: 1em 0; 
+  text-align: left !important;
+}
+
+.katex-display > .katex {
+  display: inline-block;
+  text-align: left !important;
+}
+
+p .katex { 
+  margin-left: 0.2em; 
+  margin-right: 0.2em; 
 }
