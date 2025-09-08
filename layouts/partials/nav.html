@@ -3,7 +3,7 @@
         <ul>
             {{ $current := .RelPermalink }}
             <li><a href="{{ "/" | relURL }}" class="{{ if eq $current "/" }}active{{ end }}">Home</a></li>
-            <li><a href="{{ "/articles/" | relURL }}" class="{{ if eq $current "/articles/" }}active{{ end }}">Articles</a></li>
+            <li><a href="{{ "/articles/" | relURL }}" class="{{ if eq $current "/article/" }}active{{ end }}">Article</a></li>
             <li><a href="{{ "/blog/" | relURL }}" class="{{ if eq $current "/blog/" }}active{{ end }}">Blog</a></li>
             <li><a href="{{ "/projects/" | relURL }}" class="{{ if eq $current "/projects/" }}active{{ end }}">Projects</a></li>
             <li><a href="{{ "/tools/" | relURL }}" class="{{ if eq $current "/tools/" }}active{{ end }}">Tool & Resource</a></li>
