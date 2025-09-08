@@ -1,3 +1,14 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
+baseURL = "https://example.org/"
+languageCode = "en-us"
+title = "My New Hugo Site"
+
+[markup]
+  [markup.highlight]
+    style = "monokai"
+    lineNos = false
+    noClasses = true
+    guessSyntax = true
+
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
