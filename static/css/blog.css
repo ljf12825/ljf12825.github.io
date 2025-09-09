@@ -1,7 +1,7 @@
 :root{
   --page-max-width: 1750px;
   --gap: 1rem;
-  --card-radius: 10px;
+  --card-radius: 20px;
   --card-shadow: 0 6px 18px rgba(17,24,39, 1);
   --card-shadow-hover: 0 10px 30px rgba(17,24,39,0.10);
   --accent: white;
@@ -42,7 +42,7 @@
 /* 卡片网格 */
 .blog-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 280px));
   gap: var(--gap);
   align-items: start;
 }
@@ -168,6 +168,13 @@
   transition: background 0.2s;
 }
 .tags-box a:hover { color: red; }
+
+/* tag 选中态 */
+.tag-link.active {
+  color: red;
+  border-radius: 6px;
+  padding: 0.18rem 0.5rem;
+}
 
 /* 响应式 */
 @media (max-width: 1024px) {

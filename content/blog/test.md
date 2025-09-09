@@ -1,6 +1,6 @@
 ---
 title: "test"
-creator: "ljf12825" 
+author: "ljf12825" 
 tags: ["Unity", "Game"]
 draft: false
 featured_image: "/images/gamelife.jpg"

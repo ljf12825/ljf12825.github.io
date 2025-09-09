@@ -13,11 +13,11 @@
 
     <div class="blog-grid">
       {{ range where .Site.RegularPages "Section" "blog" }}
-        <a href="{{ .RelPermalink }}" class="blog-card">
+        <a href="{{ .RelPermalink }}" class="blog-card" data-tags="{{ with .Params.tags }}{{ delimit . "|"}}{{ end }}">
           {{ with .Params.featured_image }}
             <img src="{{ . | relURL }}" alt="{{ $.Title }}" class="blog-thumb">
           {{ else }}
-            <img src="{{ "images/placeholder.jpg" | relURL }}" alt="{{ $.Title }}" class="blog-thumb">
+            <img src="{{ "images/gamelife.jpg" | relURL }}" alt="{{ $.Title }}" class="blog-thumb">
           {{ end }}
 
           <div class="blog-content">
@@ -25,7 +25,7 @@
 
             <div class="blog-meta">
               <span class="date"><b>lastmodify:</b> {{ .Date.Format "2006-01-02" }}</span>
-              {{ with .Params.creator }}  <span class="author"><b>creator: </b>{{ . }}</span>{{ end }}
+              {{ with .Params.author }}  <span class="author"><b>creator: </b>{{ . }}</span>{{ end }}
               {{ with .Params.tags }}
                  <span class="tags">#{{ delimit . " #" }}</span>
               {{ end }}
@@ -46,7 +46,7 @@
   <aside class="sidebar-right">
     <!-- 搜索框 -->
     <div class="search-box">
-      <input type="text" id="searchInput" placeholder="搜索文章…">
+      <input type="text" id="searchInput" placeholder="Search by title and summary…">
     </div>
 
     <!-- 标签集合 -->
@@ -63,34 +63,174 @@
 
 </div>
 
-<!-- JS: 搜索 & 标签筛选 -->
 <script>
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function () {
   const searchInput = document.getElementById('searchInput');
-  const tagLinks = document.querySelectorAll('.tag-link');
-  const cards = document.querySelectorAll('.blog-card');
+  const tagLinks = Array.from(document.querySelectorAll('.tag-link'));
+  const cards = Array.from(document.querySelectorAll('.blog-card'));
+  const clearBtn = document.getElementById('clearTags');
 
-  // 搜索功能
-  searchInput.addEventListener('input', function(){
-    const keyword = this.value.toLowerCase();
-    cards.forEach(card => {
-      const title = card.querySelector('.blog-title').innerText.toLowerCase();
-      const summary = card.querySelector('.blog-summary').innerText.toLowerCase();
-      card.style.display = (title.includes(keyword) || summary.includes(keyword)) ? '' : 'none';
-    });
+  // --- 模式切换 (AND / OR) ---
+  let filterMode = "AND"; // 默认 AND
+  const modeToggle = document.createElement('button');
+  modeToggle.textContent = "Mode: AND";
+  modeToggle.id = "modeToggle";
+
+  // 样式美化（紧凑按钮）
+  modeToggle.style.cursor = "pointer";
+  modeToggle.style.padding = "0.2rem 0.6rem";
+  modeToggle.style.border = "0px solid #999";
+  modeToggle.style.background = "transparent";
+  modeToggle.style.color = "white";
+  modeToggle.style.fontSize = "0.8rem";
+  modeToggle.style.marginLeft = "0.5rem"; // 跟“标签”之间留点间距
+  modeToggle.addEventListener("mouseenter", () => {
+    modeToggle.style.color = "#fff";
+  });
+  modeToggle.addEventListener("mouseleave", () => {
+    modeToggle.style.background = "transparent";
+    modeToggle.style.color = "white";
   });
 
-  // Tag 筛选
+  // 插到「标签」h3后面
+  const h3 = document.querySelector('.tags-box h3');
+  if (h3) {
+    h3.style.display = "flex";
+    h3.style.alignItems = "center";
+    h3.appendChild(modeToggle);
+  }
+
+  modeToggle.addEventListener('click', () => {
+    filterMode = (filterMode === "AND") ? "OR" : "AND";
+    modeToggle.textContent = "Mode: " + filterMode;
+    filterCards();
+  });
+
+  // --- 辅助函数 ----------------------------------------------------------------
+  const parseUrlTags = () => {
+    const params = new URLSearchParams(window.location.search);
+    const raw = params.get('tags');
+    if (!raw) return [];
+    return raw.split(',').map(s => decodeURIComponent(s || '').trim().toLowerCase()).filter(Boolean);
+  };
+  const pushUrlTags = (tagsArr) => {
+    const params = new URLSearchParams(window.location.search);
+    if (tagsArr.length) {
+      params.set('tags', tagsArr.map(encodeURIComponent).join(','));
+    } else {
+      params.delete('tags');
+    }
+    const newUrl = window.location.pathname + (params.toString() ? ('?' + params.toString()) : '');
+    history.replaceState(null, '', newUrl);
+    try { localStorage.setItem('selectedTags', JSON.stringify(tagsArr)); } catch (e) { /* ignore */ }
+  };
+
+  // 把每个 card 的 data-tags 解析成 Set 存在 card._tags 上（小写）
+  cards.forEach(card => {
+    const raw = card.dataset.tags || '';
+    const arr = raw.split('|').map(s => s.trim()).filter(Boolean).map(s => s.toLowerCase());
+    card._tags = new Set(arr);
+  });
+
+  // 初始化 selectedTags：优先 URL，其次 localStorage
+  const stored = (() => {
+    const urlTags = parseUrlTags();
+    if (urlTags.length) return urlTags;
+    try {
+      const ls = JSON.parse(localStorage.getItem('selectedTags') || '[]');
+      if (Array.isArray(ls) && ls.length) return ls.map(s => (''+s).toLowerCase());
+    } catch (e) {}
+    return [];
+  })();
+  const selectedTags = new Set(stored);
+
+  // 更新 tag-link 的视觉状态
+  const refreshTagUI = () => {
+    tagLinks.forEach(link => {
+      const t = (link.dataset.tag || '').toLowerCase();
+      if (selectedTags.has(t)) {
+        link.classList.add('active');
+        link.setAttribute('aria-pressed', 'true');
+      } else {
+        link.classList.remove('active');
+        link.setAttribute('aria-pressed', 'false');
+      }
+    });
+  };
+
+  // 过滤逻辑：search + tags(AND/OR)
+  const filterCards = (() => {
+    let timer = null;
+    return function doFilter() {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        const keyword = (searchInput.value || '').trim().toLowerCase();
+        const tagsArray = Array.from(selectedTags);
+
+        cards.forEach(card => {
+          // 搜索匹配：title 或 summary 包含关键字
+          const title = (card.querySelector('.blog-title')?.innerText || '').toLowerCase();
+          const summary = (card.querySelector('.blog-summary')?.innerText || '').toLowerCase();
+          const matchesSearch = !keyword || title.includes(keyword) || summary.includes(keyword);
+
+          // 标签匹配
+          let matchesTags = true;
+          if (tagsArray.length > 0) {
+            if (filterMode === "AND") {
+              matchesTags = tagsArray.every(t => card._tags.has(t));
+            } else {
+              matchesTags = tagsArray.some(t => card._tags.has(t));
+            }
+          }
+
+          card.style.display = (matchesSearch && matchesTags) ? '' : 'none';
+        });
+      }, 80); // debounce
+    };
+  })();
+
+  // 小 helper：安全取 tag 文本
+  const thisTag = (el) => (el && el.dataset && el.dataset.tag) ? el.dataset.tag.trim() : '';
+
+  // 将 tag-links 的 href 更新为当前 URL（可分享）
+  const updateTagLinksHref = () => {
+    const params = new URLSearchParams(window.location.search);
+    const currentTags = Array.from(selectedTags);
+    tagLinks.forEach(link => {
+      const t = (link.dataset.tag || '').trim();
+      const newTags = new Set(currentTags.map(x=>x));
+      const lower = (t || '').toLowerCase();
+      if (newTags.has(lower)) newTags.delete(lower); else newTags.add(lower);
+      const arr = Array.from(newTags);
+      const newParams = new URLSearchParams(window.location.search);
+      if (arr.length) newParams.set('tags', arr.map(encodeURIComponent).join(','));
+      else newParams.delete('tags');
+      link.href = window.location.pathname + (newParams.toString() ? ('?' + newParams.toString()) : '');
+    });
+  };
+
+  // 绑定 tag 点击
   tagLinks.forEach(link => {
-    link.addEventListener('click', function(e){
+    link.addEventListener('click', function (e) {
       e.preventDefault();
-      const tag = this.dataset.tag;
-      cards.forEach(card => {
-        const tags = card.querySelector('.tags')?.innerText || '';
-        card.style.display = tags.includes(tag) ? '' : 'none';
-      });
+      const t = thisTag(this).toLowerCase();
+      if (!t) return;
+      if (selectedTags.has(t)) selectedTags.delete(t);
+      else selectedTags.add(t);
+      pushUrlTags(Array.from(selectedTags));
+      refreshTagUI();
+      filterCards();
+      updateTagLinksHref();
     });
   });
+
+  // 搜索绑定
+  searchInput.addEventListener('input', filterCards);
+
+  // 初始化
+  refreshTagUI();
+  updateTagLinksHref();
+  filterCards();
 });
 </script>
 

@@ -1,0 +1,37 @@
+{{ define "head_extra" }}
+  {{ if eq .Kind "page" }}
+  <link rel="stylesheet" href="{{ "css/blogsingle.css" | relURL }}">
+  {{ end }}
+{{ end }}
+
+{{ define "header" }}
+  {{ partial "header-single.html" }}
+{{ end }}
+
+
+{{ define "main" }}
+<article class="single_article">
+  <div class="title">
+    {{ .Title }}
+    <div class="meta">
+      PublishDate: {{ .Date.Format "2006-01-02" }}
+      {{ with .Params.author }} · Author：{{ . }}{{ end }}
+    </div>
+    </div>
+
+    <div class="content">
+      {{ .Content }}
+    </div>
+
+    <nav class="post-nav">
+      {{ with .PrevInSection }}
+      <a href="{{ .RelPermalink }}" class="hover:underline">pre: {{ .Title }}</a>
+      {{ end }}
+      {{ with .NextInSection }}
+      <a href="{{ .RelPermalink }}" class="hover:underline">next: {{ .Title }}</a>
+      {{ end }}
+  </nav>
+</article>
+
+
+{{ end }}
