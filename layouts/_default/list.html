@@ -1,34 +1,33 @@
 {{ define "head_extra" }}
-  {{ if eq .Section "articles" }}
-  <link rel="stylesheet" href="{{ "css/articles.css" | relURL }}">
+  {{ if eq .Section "article" }}
+    <link rel="stylesheet" href="{{ "css/article.css" | relURL }}">
   {{ end }}
 {{ end }}
 
 {{ define "main" }}
-<div class="articles_list">
-    <h1>{{ .Title }}</h1>
-</div>
+<h1 class="article_page_title">{{ .Title }}</h1>
 
-<ul>
-    {{ range .Pages }}
-    <div class="articles_list">
-        <h2>
-            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-            <br>
-            <div class="author">
-                Author: {{ .Params.author | default "N/A"}}
-            </div>
-            <div class="time">
-                PublishDate: {{ .PublishDate.Format "2006-01-02" | default "N/A" }} |
-                CreateDate: {{ .Date.Format "2006-01-02" | default "N/A" }} |
-                LastModify: {{ .Lastmod.Format "2006-01-02" | default "N/A" }}
-            </div>
-                
-            <div class="articles_summary">{{  .Params.summary }}</div>
-        </h2>    
-    </div>
-      
-    {{ end }}
-</ul>
+<div class="article_grid">
+  {{ range .Pages }}
+  <div class="article_item">
+      <h2>
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      </h2>
+      <div class="author">Author: {{ .Params.author | default "N/A"}}</div>
+      <div class="time">
+          PublishDate: {{ .PublishDate.Format "2006-01-02" | default "N/A" }} |
+          CreateDate: {{ .Date.Format "2006-01-02" | default "N/A" }} |
+          LastModify: {{ .Lastmod.Format "2006-01-02" | default "N/A" }}
+      </div>
+      {{ with .Params.tags }}
+      <div class="article_tags">Keywords: {{ delimit . ", " }}</div>
+      {{ end }}
+      {{ with .Params.summary }}
+      <div class="article_summary">{{ . }}</div>
+      {{ else }}
+      <div class="article_summary">{{ .Summary }}</div>
+      {{ end }}
+  </div>
+  {{ end }}
+</div>
 {{ end }}
-      

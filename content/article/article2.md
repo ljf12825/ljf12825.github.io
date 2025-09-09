@@ -5,6 +5,7 @@ publishDate: "2025-09-08"
 lastmod: "2025-09-08"
 author: "Jeff Lee(ljf12825)"
 draft: false
+tags: ["tag1", "tag2"]
 summary: "this is article2"
 ---
 Change detected, rebuilding site (#10).
