@@ -14,8 +14,8 @@
   <div class="title">
     {{ .Title }}
     <div class="meta">
-      PublishDate: {{ .Date.Format "2006-01-02" }}
-      {{ with .Params.author }} · Author：{{ . }}{{ end }}
+      LastModify: {{ .Date.Format "2006-01-02" }}
+      {{ with .Params.author }} · Creator：{{ . }}{{ end }}
     </div>
     </div>
 
