@@ -1,8 +1,4 @@
----
-title: "About"
-author: "ljf12825"
-date: 2025-09-09
----
+# About
 `👨‍💻知  & 💡识`
 
 `The brain has a similar LRU mechanism, so some knowledge needs to find an "extra environment" to store.`
