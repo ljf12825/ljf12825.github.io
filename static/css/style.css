@@ -14,6 +14,22 @@ body {
   color: black;
   line-height: 1.0;
   flex-direction: column;
+  line-height: 1.5em;
+}
+
+body a{
+  text-decoration: none;
+  color: darkblue;
+}
+
+body a:hover{
+  color: red;
+}
+
+body hr {
+  height: 0.5px;
+  background-color: darkblue;
+
 }
 
 main {
@@ -92,7 +108,11 @@ header .banner {
 }
 
 .content h1,
-.content h2 {
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
   color: darkblue;
   font-family: 'Lucida Sans', Verdana, sans-serif;
 }
@@ -133,8 +153,8 @@ th {
 code {
   background-color: darkblue;
   color: white;
-  padding: 2px 4px;
-  border-radius: 4px;
+  padding: 1px 3px;
+  border-radius: 5px;
 }
 
 .highlight {

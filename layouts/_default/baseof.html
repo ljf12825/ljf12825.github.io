@@ -47,6 +47,15 @@
     mermaid.initialize({ startOnLoad: true });
   </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('a[href^="http"]').forEach(a => {
+    a.setAttribute('target', '_blank');
+  });
+});
+</script>
+
+
 </body>
 
   

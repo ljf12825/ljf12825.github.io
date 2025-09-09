@@ -136,7 +136,6 @@
   transition: background-color 140ms ease, color 140ms ease;
 }
 .read-more:hover {
-  background: rgba(255, 255, 255, 0.08);
   color: red;
   text-decoration: none;
 }
