@@ -1,0 +1,236 @@
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: Verdana, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  background: white;
+  color: black;
+  line-height: 1.0;
+  flex-direction: column;
+  line-height: 1.5em;
+}
+
+body a{
+  text-decoration: none;
+  color: darkblue;
+}
+
+body a:hover{
+  color: red;
+}
+
+body hr {
+  height: 0.5px;
+  background-color: darkblue;
+
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;   
+  padding: 0 7px;    
+  box-sizing: border-box;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  background: darkblue;
+  color: white;
+  height: 90px;
+  width: min(100% - 4em, 1756px);
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+header .banner {
+  width: 190px;
+  height: 90px;
+  object-fit:contain;
+  margin-left: -7px;
+  margin-top: 5px;
+}
+
+.topnav {
+  position: sticky;
+  top: 90px;
+  background: white;
+  border: 1px solid darkblue;
+  width: min(100% - 60px, 1754px);
+  margin: 0 auto;
+}
+
+.topnav > .container > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.topnav li {
+  position: relative;
+}
+
+.topnav a {
+  display: block;
+  padding: 0.75em 1em;
+  color: darkblue;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.topnav a:hover {
+  text-decoration: underline;
+}
+
+.topnav a.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.content {
+  padding: 0;
+  margin: 0 3em;
+}
+
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+  color: darkblue;
+  font-family: 'Lucida Sans', Verdana, sans-serif;
+}
+
+.content h2 {
+  border-bottom: 1px solid darkblue;
+  padding-bottom: 0.3em;
+  margin-top: 1.5em;
+}
+
+footer {
+  background: white;
+  border: 1px solid darkblue;
+  width: calc(100% - 4em);
+  max-width: 1756px;
+  margin: 0 auto;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+  display: block;
+  overflow-x: auto;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 0.5em 1em;
+  text-align: center;
+}
+
+th {
+  background-color: darkblue;
+  color: white;
+}
+
+code {
+  background-color: darkblue;
+  color: white;
+  padding: 1px 3px;
+  border-radius: 5px;
+}
+
+.highlight {
+    background-color: darkblue;
+    overflow-x: auto;
+    margin: 20px 0;
+    word-break: normal;
+    display: block;
+    white-space: pre;
+}
+
+.highlight pre, pre code {
+  background-color: darkblue !important;
+  display: block;
+  margin: 0;
+}
+
+.highlight code {
+    font-family:"Fira Code", "JetBrains Mono", "Cascadia Code";
+    color: #ffffff;
+    line-height: 20px;
+    background-color: darkblue;
+    font-size: 0.95rem;
+}
+
+.highlight .k { color: #00FFFF; } /* 关键字 */
+
+.highlight .nc { color: #FFD700; font-weight: bold; } /* 类/类型名 */
+
+.highlight .nf { color: #7cfc00; font-weight: bold;} /* 函数名 */
+
+.highlight .s  { color: #ffa500; } /* 字符串 */
+
+.highlight .c  { color: #B0C4DE; font-style: italic; } /* 注释 */
+
+.highlight .m { color: #ff69b4; } /* 数字 */
+
+.highlight .o { color: #ffffff;} /* 操作符 */
+
+.highlight .p { color: #d3d3d3;} /* 标点 */
+
+.katex { 
+  font-size: 1.2rem; 
+  color: #222; 
+}
+
+.katex-display { 
+  margin: 1em 0; 
+  text-align: left !important;
+}
+
+.katex-display > .katex {
+  display: inline-block;
+  text-align: left !important;
+}
+
+p .katex { 
+  margin-left: 0.2em; 
+  margin-right: 0.2em; 
+}
+
+blockquote {
+  border-left: 4px solid black;
+  padding: 1px 20px;
+  margin: 1rem 0;
+  background-color: darkblue;
+  color: white;
+  font-style: bold;
+  position: relative;  
+}
+
+blockquote p {
+  margin-top: 0.3rem !important;
+  margin-bottom: 0.3rem;
+}
+
+blockquote::before {
+  content: ">";
+  position:absolute;
+  left: 5px;
+  top: 0.4rem;
+  color: white;
+}

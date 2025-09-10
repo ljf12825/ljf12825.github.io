@@ -1,0 +1,55 @@
+/* 页面标题 */
+.article_page_title {
+  color: darkblue;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  margin: 20px 50px;
+}
+
+/* 双列列表布局 */
+.article_grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 两列 */
+  gap: 20px 40px; /* 行间距 20px，列间距 40px */
+  padding: 0 50px;
+}
+
+/* 每条文章 */
+.article_item h2 a {
+  text-decoration: underline;
+  color: darkblue;
+  font-size: larger;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.article_item h2 a:hover {
+  color: red;
+}
+
+.article_item {
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.article_item .author,
+.article_item .time,
+.article_item .article_tags,
+.article_item .article_summary {
+  font-family: 'Times New Roman', Times, serif;
+  color: #000;
+  margin: 2px 0;
+  font-size: medium;
+}
+
+footer {
+    margin-top: 20px;
+}
+
+/* 响应式：屏幕小于 768px 时变为一列 */
+@media (max-width: 768px) {
+  .article_grid {
+    grid-template-columns: 1fr;
+    gap: 15px 0;
+    padding: 0 20px;
+  }
+}
