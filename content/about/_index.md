@@ -1,4 +1,18 @@
 # About
+The main purpose of this website is to be my second brain and to record my exploration of this "open world". This website is for personal study only. The content only represents my personal opinions.
+
+The following is an introduction to the website modules:
+- **Home**: The overall picture and navigation of game development is the bus of the entire website
+- **Article**: Contains serious and standardized articles, similar to papers. The content is obtained through repeated verification and experiments. Please indicate the source if reprinting or quoting
+- **Blog**:  A collection of scattered knowledge, including everything encountered in game development (concepts, tool usage, API, theory, data, experiments, verification, debugging, etc.). It is the prototype of **Article**, more loose and free.
+- **Project**: Contains my open source projects, experimental data and version logs. Please follow the license for use.
+- **Tool & Resource**: Tools and resources used in development
+- **Reference**: Quick navigation of programming languages, frameworks, tools, libraries, and papers
+- **About**: Website description, license information and personal information
+
+---
+>This is a paragraph I once wrote on the homepage of my old blog
+
 `👨‍💻知  & 💡识`
 
 `The brain has a similar LRU mechanism, so some knowledge needs to find an "extra environment" to store.`
