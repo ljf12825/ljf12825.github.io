@@ -1,13 +1,83 @@
+.single_layout {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+/* 正文 */
 .single_article {
+  flex: 1;
+  max-width: 1590px; /* 限制文章宽度，避免和 TOC 太挤 */
   font-family: 'Times New Roman', Times, serif;
   color: black;
 }
 
+/* 右侧目录 */
+.toc {
+  flex: 0 0 250px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: fixed;
+  width: 210px;
+  top: 134px;
+  left: 97rem;
+  font-size: 0.95rem;
+  padding: 1rem;
+  border-left: 3px solid darkblue;
+  border-right: 1px solid darkblue;
+  border-bottom: 1px solid darkblue;
+  background: white;
+}
+
+/* 标题 */
+.toc h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+  color: darkblue;
+  border-bottom: 1px solid darkblue;
+}
+
+/* 目录缩进 */
+.toc ul {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+  margin-top: 0;
+}
+
+.toc li {
+  margin: 0.3rem 0;
+}
+
+.toc ul ul { margin-left: 1rem; }
+.toc ul ul ul { margin-left: 1.5rem; }
+.toc ul ul ul ul { margin-left: 2rem; }
+
+/* 链接 */
+.toc a {
+  text-decoration: none;
+  color: darkblue;
+  transition: color 0.2s ease;
+}
+
+.toc a:hover {
+  color: red;
+}
+
+.toc a.active {
+  font-weight: bold;
+  color: red;
+  border-left: 3px solid red;
+  padding-left: 5px;
+}
+
+
 .single_article .title {
-    padding: 35px;
-    margin-left: 7px;
-    font-size: 3em;
-    font-weight: bold;
+  padding: 35px;
+  margin-left: 7px;
+  font-size: 3em;
+  font-weight: bold;
 }
 
 .single_article h1, 
@@ -16,12 +86,12 @@
 .single_article h4, 
 .single_article h5, 
 .single_article h6 {
-    color: black;
-    border-bottom: none;
-    margin-top: 0em;
-    margin-bottom: 0em;
-    font-family: 'Times New Roman', Times, serif;
-    font-weight: bold;
+  color: black;
+  border-bottom: none;
+  margin-top: 0em;
+  margin-bottom: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
 }
 
 .single_article h1 { font-size: 2.5em; }
@@ -30,7 +100,6 @@
 .single_article h4 { font-size: 1.5em; }
 .single_article h5 { font-size: 1.25em; }
 .single_article h6 { font-size: 1.1em; }
-
 
 .single_article p {
   margin-top: 0px;
@@ -79,5 +148,5 @@
 }
 
 .single_article nav a:hover{
-    color: red;
+  color: red;
 }

@@ -12,3 +12,8 @@ title = "My New Hugo Site"
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+      
+  [markup.tableOfContents]
+    startLevel = 1   # 从 h1 开始
+    endLevel = 6     # 一直包含到 h6
+    ordered = false  # 是否用有序列表

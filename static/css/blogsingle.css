@@ -4,6 +4,7 @@
   padding: 0 15px;
   margin: 0;
   font-size: medium;
+  margin-right: 270px;
 }
 
 .single_article .title {
@@ -82,4 +83,63 @@
 
 .single_article nav a:hover{
     color: red;
+}
+
+/* 右侧目录 */
+.toc {
+  position: fixed;
+  top: 134px;
+  right: 42px;
+  width: 250px;
+  max-height: 90vh;
+  overflow-y: auto;
+  font-size: 0.95rem;
+  padding: 1rem;
+  border-left: 3px solid darkblue;
+  border-right: 1px solid darkblue;
+  border-bottom: 1px solid darkblue;
+  background: white;
+}
+
+/* 标题 */
+.toc h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+  color: darkblue;
+  border-bottom: 1px solid darkblue;
+}
+
+/* 目录缩进 */
+.toc ul {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+  margin-top: 0;
+}
+
+.toc li {
+  margin: 0.3rem 0;
+}
+
+.toc ul ul { margin-left: 1rem; }
+.toc ul ul ul { margin-left: 1.5rem; }
+.toc ul ul ul ul { margin-left: 2rem; }
+
+/* 链接 */
+.toc a {
+  text-decoration: none;
+  color: darkblue;
+  transition: color 0.2s ease;
+}
+
+.toc a:hover {
+  color: red;
+}
+
+.toc a.active {
+  font-weight: bold;
+  color: red;
+  border-left: 3px solid red;
+  padding-left: 5px;
 }

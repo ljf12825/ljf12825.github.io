@@ -10,13 +10,15 @@
 
 
 {{ define "main" }}
-<article class="single_article">
-  <div class="title">
-    {{ .Title }}
-    <div class="meta">
-      PublishDate: {{ .Date.Format "2006-01-02" }}
-      {{ with .Params.author }} · Author：{{ . }}{{ end }}
-    </div>
+<div class="single_layout">
+  <!-- 主文章内容 -->
+  <article class="single_article">
+    <div class="title">
+      {{ .Title }}
+      <div class="meta">
+        PublishDate: {{ .Date.Format "2006-01-02" }}
+        {{ with .Params.author }} · Author：{{ . }}{{ end }}
+      </div>
     </div>
 
     <div class="content">
@@ -30,8 +32,58 @@
       {{ with .NextInSection }}
       <a href="{{ .RelPermalink }}" class="hover:underline">next: {{ .Title }}</a>
       {{ end }}
-  </nav>
-</article>
+    </nav>
+  </article>
 
+  <!-- 侧边栏：大纲导航 -->
+  <aside class="toc">
+    <h3>TOC</h3>
+    {{ .TableOfContents }}
+  </aside>
+</div>
+
+<!-- ScrollSpy JS -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const headings = document.querySelectorAll(
+    ".single_article h1, .single_article h2, .single_article h3, .single_article h4, .single_article h5, .single_article h6"
+  );
+  const tocLinks = document.querySelectorAll(".toc a");
+
+  let manualActive = false; // 标记：是否处于点击跳转状态
+
+  // 点击目录时强制高亮
+  tocLinks.forEach(link => {
+    link.addEventListener("click", e => {
+      tocLinks.forEach(l => l.classList.remove("active"));
+      link.classList.add("active");
+      manualActive = true;
+      // 一段时间后再交还给 ScrollSpy
+      setTimeout(() => { manualActive = false }, 800);
+    });
+  });
+
+  // ScrollSpy
+  const observer = new IntersectionObserver(
+    entries => {
+      if (manualActive) return; // 点击中不更新
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          let id = entry.target.getAttribute("id");
+          tocLinks.forEach(link => {
+            link.classList.toggle("active", link.getAttribute("href") === "#" + id);
+          });
+        }
+      });
+    },
+    {
+      rootMargin: "-20% 0px -70% 0px", // 顶部往下留20%，底部留70%
+      threshold: 0
+    }
+  );
+
+  headings.forEach(h => observer.observe(h));
+});
+</script>
 
 {{ end }}
