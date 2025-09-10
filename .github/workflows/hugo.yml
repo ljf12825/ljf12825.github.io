@@ -8,7 +8,7 @@ on:
 
 # 设置构建权限，允许GITHUB_TOKEN读写仓库内容（用于部署到gh-pages）
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
