@@ -53,12 +53,19 @@
     <div class="tags-box">
       <h3>标签</h3>
       <ul id="tagList">
-        {{ $allTags := .Site.Taxonomies.tags }}
-        {{ range $tag, $pages := $allTags }}
-          <li><a href="#" class="tag-link" data-tag="{{ $tag }}">#{{ $tag }}</a></li>
+        {{ $blogPages := where .Site.RegularPages "Section" "blog" }}
+        {{ $tags := slice }}
+        {{ range $blogPages }}
+          {{ range .Params.tags }}
+            {{ $tags = $tags | append . }}
+          {{ end }}
+        {{ end }}
+        {{ range (uniq $tags | sort) }}
+          <li><a href="#" class="tag-link" data-tag="{{ . }}">#{{ . }}</a></li>
         {{ end }}
       </ul>
     </div>
+
   </aside>
 
 </div>

@@ -1,11 +1,14 @@
 .single_article {
   font-family: Arial, Helvetica, sans-serif;
   color: black;
+  padding: 0 15px;
+  margin: 0;
+  font-size: medium;
 }
 
 .single_article .title {
     padding: 35px;
-    font-size: 2em;
+    font-size: 3em;
     font-weight: bold;
 }
 
@@ -18,8 +21,7 @@
     color: black;
     border-bottom: none;
     margin-top: 0em;
-    margin-bottom: 0em;
-    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 1em;
     font-weight: bold;
 }
 
@@ -37,9 +39,10 @@
 }
 
 .single_article .meta {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: #666;
   font-weight: lighter;
+  padding: 20px
 }
 
 .single_article .content {

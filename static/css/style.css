@@ -1,8 +1,3 @@
-html, body {
-  height: 100%;
-  overflow-y: scroll;
-}
-
 body {
   margin: 0;
   display: flex;
@@ -39,7 +34,8 @@ main {
 
 .container {
   width: 100%;
-  margin: 0 auto;       
+  margin: 0 auto;   
+  padding: 0 7px;    
   box-sizing: border-box;
 }
 
@@ -49,8 +45,7 @@ header {
   background: darkblue;
   color: white;
   height: 90px;
-  width: calc(100% - 4em);
-  max-width: 1756px;
+  width: min(100% - 4em, 1756px);
   margin: 0 auto;
   box-sizing: border-box;
   display: flex;
@@ -58,9 +53,11 @@ header {
 }
 
 header .banner {
-  width: 191px;
+  width: 190px;
   height: 90px;
   object-fit:contain;
+  margin-left: -7px;
+  margin-top: 5px;
 }
 
 .topnav {
@@ -68,8 +65,7 @@ header .banner {
   top: 90px;
   background: white;
   border: 1px solid darkblue;
-  width: calc(100% - 4em);
-  max-width: 1754px;
+  width: min(100% - 60px, 1754px);
   margin: 0 auto;
 }
 
@@ -104,7 +100,7 @@ header .banner {
 
 .content {
   padding: 0;
-  margin: 0 2.5em;
+  margin: 0 3em;
 }
 
 .content h1,

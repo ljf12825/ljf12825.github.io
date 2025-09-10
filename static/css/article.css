@@ -2,7 +2,7 @@
 .article_page_title {
   color: darkblue;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  margin: 20px 40px;
+  margin: 20px 50px;
 }
 
 /* 双列列表布局 */
@@ -10,7 +10,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 两列 */
   gap: 20px 40px; /* 行间距 20px，列间距 40px */
-  padding: 0 40px;
+  padding: 0 50px;
 }
 
 /* 每条文章 */

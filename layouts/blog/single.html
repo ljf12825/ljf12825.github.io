@@ -1,11 +1,5 @@
 {{ define "head_extra" }}
-  {{ if eq .Kind "page" }}
   <link rel="stylesheet" href="{{ "css/blogsingle.css" | relURL }}">
-  {{ end }}
-{{ end }}
-
-{{ define "header" }}
-  {{ partial "header-single.html" }}
 {{ end }}
 
 
@@ -14,8 +8,10 @@
   <div class="title">
     {{ .Title }}
     <div class="meta">
-      LastModify: {{ .Date.Format "2006-01-02" }}
-      {{ with .Params.author }} · Creator：{{ . }}{{ end }}
+      PublishDate: {{ .PublishDate.Format "2006-01-02" | default "N/A" }} |
+      CreateDate: {{ .Date.Format "2006-01-02" | default "N/A" }} |
+      LastModify: {{ .Lastmod.Format "2006-01-02" | default "N/A" }}
+      {{ with .Params.author }} | Creator：{{ . }}{{ end }}
     </div>
     </div>
 
