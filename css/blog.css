@@ -109,6 +109,7 @@
 }
 .blog-meta .date { white-space: nowrap; }
 .blog-meta .author { font-weight: 500; color: white; }
+.blog-meta .categories { font-weight: 500; color: white}
 .blog-meta .tags { color: white; font-size: 0.82rem; }
 
 /* 摘要 */
@@ -159,7 +160,7 @@
 .tags-box ul { list-style: none; padding: 0; margin: 0.5rem 0 0 0; }
 .tags-box li { display: inline-block; margin: 0.25rem; }
 .tags-box a {
-  text-decoration: underline;
+  text-decoration: none;
   color: var(--accent);
   font-size: 0.85rem;
   padding: 0.2rem 0.5rem;
@@ -171,8 +172,22 @@
 /* tag 选中态 */
 .tag-link.active {
   color: red;
-  border-radius: 6px;
-  padding: 0.18rem 0.5rem;
+}
+
+.categories-box ul { list-style: none; padding: 0; margin: 0.5rem 0 0 0;}
+.categories-box li { display: inline-block; margin: 0.25rem; }
+.categories-box a {
+  text-decoration: none;
+  color: var(--accent);
+  font-size: 0.85rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+.categories-box a:hover { color: red; }
+
+.category-link.active {
+  color: red;
 }
 
 /* 响应式 */
