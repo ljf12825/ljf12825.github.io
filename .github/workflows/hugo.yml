@@ -1,0 +1,56 @@
+name: Deploy Hugo Site to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # 当向 main 分支推送时触发
+  workflow_dispatch: # 允许在 GitHub Actions 页面手动触发
+
+# 设置构建权限，允许GITHUB_TOKEN读写仓库内容（用于部署到gh-pages）
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 允许一个并发部署，取消正在进行的旧部署
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 拉取代码
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive # 重要！如果主题是git子模块，必须递归拉取
+          fetch-depth: 0        # 拉取所有历史，便于Hugo计算最近文章等
+
+      # 2. 安装 Hugo (使用 extended 版本，支持 Sass/SCSS)
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+          extended: true # 必须使用 extended 版本！
+
+      # 3. 构建静态网站 (文件将生成在 ./public 目录)
+      - name: Build with Hugo
+        run: hugo --minify
+
+      # 4. 检查构建产物
+      - name: List public files
+        run: ls -la public/
+
+      # 5. 部署到 gh-pages 分支
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          # GITHUB_TOKEN 是GitHub自动创建的密钥，无需自己配置
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # 构建输出目录，Hugo默认是 'public'
+          publish_dir: ./public
+          # 可选：自定义提交信息，注意 [skip ci] 防止循环触发
+          commit_message: ${{ github.event.head_commit.message }} - Built by Hugo [skip ci]
