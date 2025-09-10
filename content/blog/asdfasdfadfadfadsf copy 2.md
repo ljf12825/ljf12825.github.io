@@ -1,6 +1,7 @@
 ---
 title: "The Usage and concept of Addressables"
 author: "ljf12825" 
+categories: ["note", "haha"]
 tags: ["Unity"]
 draft: false
 featured_image: "/images/gamelife.jpg"
