@@ -96,3 +96,17 @@ markdown --> newLines
 | ---------------- | ----------------- |
 | `translationKey` | 标识同一篇文章的不同语言版本    |
 | `aliases`        | 可以给不同语言的 URL 设置跳转 |
+
+### 正在使用Front Matter 格式
+```text
+---
+title: "test"
+author: "ljf12825" 
+tags: [Game, English]
+categories: [haha, note, bingo]
+draft: false
+featured_image: "/images/gamelife.jpg"
+summary: "test summary"
+date: 2025-09-08
+---
+```

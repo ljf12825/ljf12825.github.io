@@ -1,0 +1,133 @@
+﻿---
+title: "Layer"
+date: 2025-06-01
+categories: [笔记]
+tags: [Unity, Unity System]
+author: "ljf12825"
+summary: Introductiond the concept and use of Layer
+---
+在Unity中，Layer是要给非常重要的系统  
+它主要用于：
+- 控制物体的渲染与相机的可见性
+- 控制物理碰撞（配合Layer Collision Matrix）
+- 通过脚本进行物体分类和筛选
+
+## 什么是Layer
+
+Layer是给GameObject打的“标签”，但它和`Tag`不一样，Layer是用于功能性控制的，特别在：
+- 摄像机的Culling Mask
+- 光照影响（Light Culling）
+- 物理碰撞（Physics Layer）
+- 射线检测（Raycast Layer）
+
+## Layer的使用场景
+### 1.摄像机视野控制（Culling Mask）
+在Camera组件中，你可以设置
+
+```text
+Culling Mask -> 选择哪些Layer可以被该相机看到
+```
+
+**用途：**
+- UI相机只看UI层
+- 小地图相机只看敌人层
+- 分屏镜头每个只看自己的部分
+
+Layer不仅能控制每个物体是否被摄像机看到，还能与多个摄像机协作实现更加复杂的视图效果
+
+例如，在多人游戏中，你可以为每个玩家设置独立的摄像机，每个摄像机通过不同的Culling Mask来渲染不同的场景部分
+
+示例：多摄像头分屏控制
+
+在分屏游戏中，可以设置多个摄像机，每个摄像机只渲染属于特定玩家的物体
+```cs
+camera1.cullingMask = 1 << LayerMask.NameToLayer("Player1");
+camera2.cullingMask = 1 << LaeryMask.NameToLayer("Player2");
+```
+通过这种方式，你能够在同一个场景中显示不同的物体，仅限于特定玩家的视野
+
+
+
+### 2.物理碰撞控制（Layer Collision Matrix）
+在菜单中：
+
+```nginx
+Edit -> Project Settings -> Physics
+```
+
+你可以看到Layer Collision Matrix，它控制哪些Layer和哪些Layer能发生物理碰撞
+
+如果在游戏中有多个物体不需要彼此发生碰撞，可以通过Layer来减少不必要的碰撞检测，提高性能
+
+**用途：**
+- 玩家层与敌人层可以碰撞，但不和自身碰撞
+- 子弹不撞自己
+- 角色不被UI的Collider打断
+
+### 3.射线检测
+可以通过Layer来控制射线是否命中某个对象
+
+```csharp
+int layerMask = 1 << LayerMask.NameToLayer("Enemy");
+if (Physics.Raycast(ray, out hit, 100f, layerMask)) Debug.Log("Hit enemy");
+```
+
+也可以多层合并：
+```csharp
+int mask = (1 << LayerMask.NameToLayer("Enemy")) | (1 << LayerMask.NameToLayer("NPC"));
+```
+## 内置与自定义Layer
+
+### 内置Layer（Unity默认的）
+
+| 编号 | 名称      | 说明    |
+| -- | ------- | ----- |
+| 0  | Default | 默认层   |
+| 4  | Water   | 水体特效  |
+| 5  | UI      | UI 专用 |
+
+
+### 自定义Layer
+Unity允许你最多使用32个Layer（编号 0~31），其中前几个是保留的  
+自定义方式：  
+```sql
+选中 GameObject -> Inspector -> Layer -> Add Layer...
+```
+添加后可为GameObject设置：
+```nginx
+Layer -> 你刚添加的层名
+```
+## Layer与Tag的区别
+
+| 特性     | Layer            | Tag               |
+| ------ | ---------------- | ----------------- |
+| 数量限制   | 最多 32 个          | 无限制               |
+| 用于渲染控制 |    是             | 否                 |
+| 用于物理控制 | 是                | 否                 |
+| 用于分类查找 | 有限制（用 LayerMask） | 可以（用 CompareTag 等） |
+| 性能优化   | 优化（用于剔除、射线过滤）     | 无优化                 |
+
+### 建议
+- 给每种功能的对象分配专属Layer
+- 摄像机、光源、UI、Trigger检测都应依赖Layer控制逻辑
+
+## Layer性能优化与管理
+### Layer管理的最佳实践
+- 避免过多的Layer：虽然Unity最多允许32个Layer，但不建议频繁使用大量的Layer。过多的Layer会增加管理和维护的难度，且可能会影响性能。建议将层次结构设计得尽量简洁，避免无谓的冗余
+- 分层管理：根据物体的功能将其分配到不同的Layer中，例如：
+  - 游戏角色：`Player`,`Enemy`
+  - UI界面：`UI`,`Menu`
+  - 特效：`PerticleEffects`
+  - 背景：`Background`
+
+通过合理的分层，既能提高渲染效率，也便于后期维护
+
+### 动态控制Layer
+在一些场景中，可能需要根据物体的状态动态改变其Layer。比如，当玩家接触到某个特殊的物体时，可以改变其Layer，使其在某些摄像机的视野中不可见或不可碰撞
+
+示例：动态更改Layer：
+```cs
+gameObject.layer = LayerMask.NameToLayer("Invisible");
+```
+通过动态修改Layer，能够灵活控制物体的行为和渲染效果
+
