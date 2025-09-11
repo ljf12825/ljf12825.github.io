@@ -1,7 +1,7 @@
 ﻿---
 title: "Rigidbody"
 date: 2025-06-01
-categories: [笔记]
+categories: [Note]
 tags: [Unity, Unity Component, Physics System]
 author: "ljf12825"
 summary: Introduction and API of Rigidbody component in Unity

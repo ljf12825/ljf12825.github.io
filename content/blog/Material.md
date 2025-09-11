@@ -1,7 +1,7 @@
 ﻿---
 title: "Material"
 date: 2025-05-31
-categories: [笔记]
+categories: [Note]
 tags: [Unity, Material, Graphic]
 author: "ljf12825"
 summary: Material in Unity. Creating, Setting and Usage

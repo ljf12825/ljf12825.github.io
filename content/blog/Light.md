@@ -1,7 +1,7 @@
 ﻿---
 title: "Light"
 date: 2025-05-29
-categories: [笔记]
+categories: [Note]
 tags: [Unity, Unity Component, Light, Render, Graphics]
 author: "ljf12825"
 summary: Introduction Light' usage and implement in Unity

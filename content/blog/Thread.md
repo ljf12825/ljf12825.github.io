@@ -1,7 +1,7 @@
 ﻿---
 title: "Thread"
 date: 2025-06-01
-categories: [笔记]
+categories: [Note]
 tags: [Unity, Unity System]
 author: "ljf12825"
 summary: Thread in Unity(Overview of Unity's Threading Model, Unity API and Thread Limitations, Thread/Task/JobSystem/DOTS, How to Reture to the Main Thread)

@@ -1,7 +1,7 @@
 ﻿---
 title: "Shader"
 date: 2025-06-01
-categories: [笔记]
+categories: [Note]
 tags: [Unity, Render, Graphics]
 author: "ljf12825"
 summary: Shader and Shader in Unity

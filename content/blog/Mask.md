@@ -1,7 +1,7 @@
 ﻿---
 title: "Mask"
 date: 2025-06-01
-categories: [笔记]
+categories: [Note]
 tags: [Unity, Unity Component, Render, Graphics, UGUI]
 author: "ljf12825"
 summary: Introduction mask principle and usage in Unity

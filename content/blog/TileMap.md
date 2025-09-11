@@ -1,7 +1,7 @@
 ﻿---
 title: "Tilemap"
 date: 2025-06-01
-categories: [笔记]
+categories: [Note]
 tags: [Unity, Unity System, Unity Package]
 author: "ljf12825"
 summary: TileMap in Unity

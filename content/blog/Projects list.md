@@ -1,7 +1,7 @@
 ﻿---
 title: "Projects list"
 date: 2025-06-01
-categories: [list]
+categories: [List]
 tags: [Unity, Project]
 author: "ljf12825"
 summary: Record project

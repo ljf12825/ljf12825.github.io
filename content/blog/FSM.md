@@ -1,7 +1,7 @@
 ﻿---
 title: "FSM"
 date: 2025-06-01
-categories: [笔记]
+categories: [Note]
 tags: [Unity, Unity System, AI]
 author: "ljf12825"
 summary: Introduction and implement of FSM

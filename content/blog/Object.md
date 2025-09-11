@@ -1,7 +1,7 @@
 ﻿---
 title: "Object"
 date: 2025-06-01
-categories: [笔记]
+categories: [Note]
 tags: [Unity, Syntax, Unity Class]
 author: "ljf12825"
 summary: Unity's class Object

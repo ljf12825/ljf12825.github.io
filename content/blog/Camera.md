@@ -1,7 +1,7 @@
 ﻿---
 title: "Camera"
 date: 2025-05-28
-categories: [笔记]
+categories: [Note]
 tags: [Unity, Unity Component]
 author: "ljf12825"
 summary: Usage and document of camera in Unity

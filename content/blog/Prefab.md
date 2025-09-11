@@ -1,7 +1,7 @@
 ﻿---
 title: "Prefab System"
 date: 2025-05-31
-categories: [笔记]
+categories: [Note]
 tags: [Unity, Unity System]
 author: "ljf12825"
 summary: Prefab's introduction and using in Unity

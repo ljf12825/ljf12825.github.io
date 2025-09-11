@@ -1,7 +1,7 @@
 ﻿---
 title: "Navigation"
 date: 2025-06-01
-categories: [笔记]
+categories: [Note]
 tags: [Unity, Unity System, AI]
 author: "ljf12825"
 summary: Navigation System in Unity. Introduction, usage and document。

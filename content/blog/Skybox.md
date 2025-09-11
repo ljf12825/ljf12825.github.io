@@ -1,7 +1,7 @@
 ﻿---
 title: "Skybox"
 date: 2025-06-01
-categories: [笔记]
+categories: [Note]
 tags: [Unity, Unity Component, Light, Render, Graphics]
 author: "ljf12825"
 summary: Introduction and Usage of Skybox in Unity

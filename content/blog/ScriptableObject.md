@@ -1,7 +1,7 @@
 ﻿---
 title: "ScriptableObject"
 date: 2025-06-01
-categories: [笔记]
+categories: [Note]
 tags: [Unity, Syntax]
 author: "ljf12825"
 summary: Introduction and Usage Examples of ScriptableObject

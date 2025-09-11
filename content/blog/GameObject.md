@@ -1,7 +1,7 @@
 ﻿---
 title: "GameObject"
 date: 2025-05-28
-categories: [笔记]
+categories: [Note]
 tags: [Unity, GameObject]
 author: "ljf12825"
 summary: GameObject introduction, usage and API
