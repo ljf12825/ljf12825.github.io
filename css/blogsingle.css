@@ -1,16 +1,15 @@
 .single_article {
   font-family: Arial, Helvetica, sans-serif;
   color: black;
-  padding: 0 15px;
-  margin: 0;
   font-size: medium;
-  margin-right: 270px;
+  margin-right: 230px;
 }
 
 .single_article .title {
-    padding: 35px;
+    padding: 35px 40px;
     font-size: 3em;
-    font-weight: bold;
+    color: darkblue;
+    line-height: normal;
 }
 
 .single_article h1, 
@@ -19,10 +18,10 @@
 .single_article h4, 
 .single_article h5, 
 .single_article h6 {
-    color: black;
+    color: darkblue;
     border-bottom: none;
-    margin-top: 0em;
-    margin-bottom: 1em;
+    margin-top: 1em;
+    margin-bottom: 10px;
     font-weight: bold;
 }
 
@@ -36,19 +35,20 @@
 
 .single_article p {
   margin-top: 0px;
-  font-size: 1em;
+  font-size: large;
+  line-height: normal;
 }
 
 .single_article .meta {
   font-size: 1rem;
   color: #666;
   font-weight: lighter;
-  padding: 20px
+  padding: 10px 5px;
 }
 
 .single_article .content {
   max-width: 100%;
-  
+  margin-top: -1em;
 }
 
 .single_article .content img {
@@ -90,14 +90,15 @@
   position: fixed;
   top: 134px;
   right: 42px;
-  width: 250px;
-  max-height: 90vh;
+  width: 200px;
+  max-height: 78vh;
   overflow-y: auto;
-  font-size: 0.95rem;
+  font-size: small;
   padding: 1rem;
   border-left: 3px solid darkblue;
   border-right: 1px solid darkblue;
   border-bottom: 1px solid darkblue;
+  border-top: 1px solid darkblue;
   background: white;
 }
 
@@ -114,7 +115,7 @@
 .toc ul {
   list-style: none;
   padding-left: 0;
-  margin-left: 0;
+  margin-left: -10;
   margin-top: 0;
 }
 
@@ -123,8 +124,8 @@
 }
 
 .toc ul ul { margin-left: 1rem; }
-.toc ul ul ul { margin-left: 1.5rem; }
-.toc ul ul ul ul { margin-left: 2rem; }
+.toc ul ul ul { margin-left: 1.3rem; }
+.toc ul ul ul ul { margin-left: 1.6rem; }
 
 /* 链接 */
 .toc a {
