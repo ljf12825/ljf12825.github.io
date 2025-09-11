@@ -5,7 +5,7 @@ LastModify: 2025-06-01
 球形碰撞体，适合球形或圆形物体</li><li>CapsuleCollider
 胶囊碰撞体，适合人物、柱子等</li><li>MeshCollider
 使用自定义网格模型做碰撞体，适合复杂形状，性能较差，且通常用于静态物体</li><li>WheelCollider
-专门用于车辆轮胎的碰撞和物理模拟</li></ul><h2 id=collider和rigidbody的关系>Collider和Rigidbody的关系</h2><ul><li>Collider只负责检测碰撞，不会自定产生物理运动</li><li>Rigidbody组件负责物理运动和动力学</li><li>一个没有Rigidbody的物体的Collider会被当作“静态碰撞体”使用（静态障碍物），不会移动也不响应物理力</li><li>一个有Rigidbody的物体可以在物理引擎驱动下移动，Collider会随物体运动</li></ul><h2 id=collider-panel>Collider Panel</h2><h3 id=box-collider>Box Collider</h3><p><img src=/assets/images/BoxColliderPanel.jpg alt=BoxColliderPanel></p><ul><li>IsTrigger
+专门用于车辆轮胎的碰撞和物理模拟</li></ul><h2 id=collider和rigidbody的关系>Collider和Rigidbody的关系</h2><ul><li>Collider只负责检测碰撞，不会自定产生物理运动</li><li>Rigidbody组件负责物理运动和动力学</li><li>一个没有Rigidbody的物体的Collider会被当作“静态碰撞体”使用（静态障碍物），不会移动也不响应物理力</li><li>一个有Rigidbody的物体可以在物理引擎驱动下移动，Collider会随物体运动</li></ul><h2 id=collider-panel>Collider Panel</h2><h3 id=box-collider>Box Collider</h3><p><img src=/images/Blog/BoxColliderPanel.jpg alt=BoxColliderPanel></p><ul><li>IsTrigger
 默认false，此时Collider是实体碰撞体，会阻挡其他物体，发生物理碰撞和反弹<br>勾选时，Collider变成Trigger，不会阻挡其他物体，但会检测进入、离开和停留事件，可以用来做区域检测、事件触发等</li><li>Provides Contacts
 用于物理引擎的碰撞检测和接触点信息提供<br>默认false，Collider可能只报告碰撞发生，但不提供详细的接触点信息，这样可以节省一些计算资源<br>勾选后，Collider会提供详细的碰撞接触点信息，这样物理引擎在碰撞时，可以把碰撞的具体接触点信息暴露出来，供脚本或物理系统使用<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#66d9ef>using</span> UnityEngine;
 </span></span><span style=display:flex><span>
@@ -29,14 +29,14 @@ LastModify: 2025-06-01
 常用属性<ul><li>Dynamic Friction 动摩擦力</li><li>Static Friction 静摩擦力</li><li>Bounciness 弹力（0到1之间，1表示完全反弹）</li><li>Friction Combine 摩擦组合方式（与另一个碰撞体交互时如何合成摩擦）</li><li>Bounce Combine 弹性组合方式（与另一个碰撞体交互时如何合成弹性）</li></ul></li><li>Center<ul><li>指的是碰撞体在物体局部坐标系中的中心点位置</li><li>类型是Vector3</li><li>不会移动GameObject本身，只会改变碰撞体的位置</li></ul></li><li>Size<ul><li>指碰撞体的尺寸</li><li>类型是Vector3</li><li>控制这个碰撞盒子的大小</li></ul></li><li>Layer Overrides<ul><li>Layer Override Priority
 用于控制多个Collider在同一物体或子物体上时，哪个Collider的物理层优先生效<br>如果一个物体上有多个Collider，并且它们分别设置了不同的Layer，Unity需要一个优先级来判断最终物体的碰撞行为应该归属哪个Layer<br>When 2 Colliders have conflicting overrides, the settings of the collider with the higher priority are taken</li><li>Include Layers
 Layers to include when producing collisions</li><li>Exclude Layers
-Layers to exclude when producing collisions</li></ul></li></ul><h3 id=capsulecollider>CapsuleCollider</h3><p><img src=/assets/images/CapsuleColliderPanel.jpg alt=CapsuleColliderPanel></p><ul><li>Edit Collider
+Layers to exclude when producing collisions</li></ul></li></ul><h3 id=capsulecollider>CapsuleCollider</h3><p><img src=/images/Blog/CapsuleColliderPanel.jpg alt=CapsuleColliderPanel></p><ul><li>Edit Collider
 显示Collider边界<br>Hold Alt after clicking control handle to pin center in place（中心缩放）
 Hold Shift after clicking control handle to scale uniformly（等比缩放）</li><li>Direction
-The axis of the capsule&rsquo;s lengthwise orientation in the GameObject&rsquo;s local space</li></ul><h3 id=meshcollider>MeshCollider</h3><p><img src=/assets/images/MeshColliderPanel.jpg alt=MeshColliderPanel>
+The axis of the capsule&rsquo;s lengthwise orientation in the GameObject&rsquo;s local space</li></ul><h3 id=meshcollider>MeshCollider</h3><p><img src=/images/Blog/MeshColliderPanel.jpg alt=MeshColliderPanel>
 <code>MeshCollider</code>是Unity提供的一个基于Mesh的碰撞体组件，它允许你使用一个Mesh的集合外形作为碰撞体检测的形状<br>它可以让你的碰撞体检测看起来和你的物体一样精细</p><ul><li><p>Convex
 是否把Mesh处理为凸包<br>如果勾选了：</p><ul><li>可以用于动态刚体</li><li>可以用作Trigger</li><li>不能太复杂（最多255个三角形）</li></ul><p>如果不勾选：</p><ul><li>可精确表示复杂网格，但只能用于静态物体</li><li>不支持Trigger和Rigidbody</li></ul></li></ul><p><strong>MeshCollider Convex使用注意事项</strong></p><table><thead><tr><th>场景</th><th>是否适合用 MeshCollider</th></tr></thead><tbody><tr><td>地形、建筑（静态）</td><td>非 Convex MeshCollider</td></tr><tr><td>可交互物体 + Rigidbody</td><td>Convex MeshCollider</td></tr><tr><td>复杂模型 + Trigger</td><td>Convex MeshCollider（前提是够简单）</td></tr><tr><td>移动物体 + 非 Convex</td><td>不支持，会报错</td></tr><tr><td>高性能要求的游戏</td><td>尽量少用 MeshCollider，建议用简化碰撞体代替</td></tr></tbody></table><ul><li>Cooking Options
 用于控制在碰撞体生成（或烘焙）过程中如何处理网格数据，以提高碰撞效率或调试准确性<br>Unity在运行时将网格数据转换为物理引擎能使用的碰撞形式格式，这个过程叫做Mesh Cooking</li></ul><h3 id=terrian-collider>Terrian Collider</h3><ul><li>Enable Tree Colliders
-When selected, Tree Colliders will be enabled</li></ul><h3 id=wheel-collider>Wheel Collider</h3><p><img src=/assets/images/WheelColliderPanel.jpg alt=WheelColliderPanel></p><ul><li>Wheel Damping Rate
+When selected, Tree Colliders will be enabled</li></ul><h3 id=wheel-collider>Wheel Collider</h3><p><img src=/images/Blog/WheelColliderPanel.jpg alt=WheelColliderPanel></p><ul><li>Wheel Damping Rate
 轮阻，轮子滚动时的摩擦衰减速度</li><li>Suspension Distance
 悬挂行程，表示悬挂系统允许轮子从默认位置向下延伸的最大距离，单位是米</li><li>Force App Point Distance
 力施加点距离，控制Unity向车体施加力的位置，距离轮子中心的垂直距离，单位是米；可以理解为手推玩具车的高度</li><li>Suspension Spring
