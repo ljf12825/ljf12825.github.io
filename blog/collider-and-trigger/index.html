@@ -1,0 +1,91 @@
+<!doctype html><html lang=en><head><meta charset=UTF-8><title>Collider & Trigger</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-text.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=/css/blogsingle.css></head><body><header><title>How to Develop a Game</title><div class=container><img src=/images/gamelife.jpg alt="Collider & Trigger" class=banner></div></header><nav class=topnav><div class=container><ul><li><a href=/>Home</a></li><li><a href=/article/>Article</a></li><li><a href=/blog/>Blog</a></li><li><a href=/projects/>Projects</a></li><li><a href=/tool/>Tool & Resource</a></li><li><a href=/reference/>Reference</a></li><li><a href=/about/>About</a></li></ul></div></nav><article class=single_article><div class=title>Collider & Trigger<div class=meta>PublishDate: 2025-06-01 |
+CreateDate: 2025-06-01 |
+LastModify: 2025-06-01
+| Creator：ljf12825</div></div><div class=content><p>Unity中的碰撞体是物理系统的重要组成部分，负责定义游戏对象的形状以进行碰撞检测。简单来说，Collider是一个无形的边界，用于检测物体是否接触或重叠，从而触发碰撞事件和物理响应</p><h2 id=什么是collider>什么是Collider</h2><p>Collider是附加在游戏对象上的组件，用于告诉物理引擎这个对象的碰撞范围。Collider本身不会渲染形状，只是一个隐形的物理边界</p><h2 id=常见的collider类型>常见的Collider类型</h2><ul><li>BoxCollider<br>立方体形状的碰撞体，适合方形或长方体物体</li><li>SphereCollider
+球形碰撞体，适合球形或圆形物体</li><li>CapsuleCollider
+胶囊碰撞体，适合人物、柱子等</li><li>MeshCollider
+使用自定义网格模型做碰撞体，适合复杂形状，性能较差，且通常用于静态物体</li><li>WheelCollider
+专门用于车辆轮胎的碰撞和物理模拟</li></ul><h2 id=collider和rigidbody的关系>Collider和Rigidbody的关系</h2><ul><li>Collider只负责检测碰撞，不会自定产生物理运动</li><li>Rigidbody组件负责物理运动和动力学</li><li>一个没有Rigidbody的物体的Collider会被当作“静态碰撞体”使用（静态障碍物），不会移动也不响应物理力</li><li>一个有Rigidbody的物体可以在物理引擎驱动下移动，Collider会随物体运动</li></ul><h2 id=collider-panel>Collider Panel</h2><h3 id=box-collider>Box Collider</h3><p><img src=/assets/images/BoxColliderPanel.jpg alt=BoxColliderPanel></p><ul><li>IsTrigger
+默认false，此时Collider是实体碰撞体，会阻挡其他物体，发生物理碰撞和反弹<br>勾选时，Collider变成Trigger，不会阻挡其他物体，但会检测进入、离开和停留事件，可以用来做区域检测、事件触发等</li><li>Provides Contacts
+用于物理引擎的碰撞检测和接触点信息提供<br>默认false，Collider可能只报告碰撞发生，但不提供详细的接触点信息，这样可以节省一些计算资源<br>勾选后，Collider会提供详细的碰撞接触点信息，这样物理引擎在碰撞时，可以把碰撞的具体接触点信息暴露出来，供脚本或物理系统使用<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#66d9ef>using</span> UnityEngine;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CollisionPointExample</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>void</span> OnCollisionEnter(Collision collision)
+</span></span><span style=display:flex><span>  {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>foreach</span> (ContactPoint contact <span style=color:#66d9ef>in</span> collision.contacts)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>      <span style=color:#75715e>//接触点位置</span>
+</span></span><span style=display:flex><span>      Vector3 contactPoint = contact.point;
+</span></span><span style=display:flex><span>      <span style=color:#75715e>//接触点法线方向</span>
+</span></span><span style=display:flex><span>      Vector3 contactNormal = contact.normal;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      Debug.Log(<span style=color:#e6db74>$&#34;{contactPoint}, {contactNormal}&#34;</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div>如果时触发碰撞，IsTrigger勾选情况下，用的是OnTriggerEnter(Collider other)，这个回调中没有接触点信息，只能检测触发</li><li>Material
+指的是Physics Material，用于控制物理行为的材质<br>Create -> Physics Material，编辑后拖入使用<br>作用：Physics Material用于定义物体在碰撞时的物理特性，比如摩擦力（Friction）、弹性（Bounciness）
+常用属性<ul><li>Dynamic Friction 动摩擦力</li><li>Static Friction 静摩擦力</li><li>Bounciness 弹力（0到1之间，1表示完全反弹）</li><li>Friction Combine 摩擦组合方式（与另一个碰撞体交互时如何合成摩擦）</li><li>Bounce Combine 弹性组合方式（与另一个碰撞体交互时如何合成弹性）</li></ul></li><li>Center<ul><li>指的是碰撞体在物体局部坐标系中的中心点位置</li><li>类型是Vector3</li><li>不会移动GameObject本身，只会改变碰撞体的位置</li></ul></li><li>Size<ul><li>指碰撞体的尺寸</li><li>类型是Vector3</li><li>控制这个碰撞盒子的大小</li></ul></li><li>Layer Overrides<ul><li>Layer Override Priority
+用于控制多个Collider在同一物体或子物体上时，哪个Collider的物理层优先生效<br>如果一个物体上有多个Collider，并且它们分别设置了不同的Layer，Unity需要一个优先级来判断最终物体的碰撞行为应该归属哪个Layer<br>When 2 Colliders have conflicting overrides, the settings of the collider with the higher priority are taken</li><li>Include Layers
+Layers to include when producing collisions</li><li>Exclude Layers
+Layers to exclude when producing collisions</li></ul></li></ul><h3 id=capsulecollider>CapsuleCollider</h3><p><img src=/assets/images/CapsuleColliderPanel.jpg alt=CapsuleColliderPanel></p><ul><li>Edit Collider
+显示Collider边界<br>Hold Alt after clicking control handle to pin center in place（中心缩放）
+Hold Shift after clicking control handle to scale uniformly（等比缩放）</li><li>Direction
+The axis of the capsule&rsquo;s lengthwise orientation in the GameObject&rsquo;s local space</li></ul><h3 id=meshcollider>MeshCollider</h3><p><img src=/assets/images/MeshColliderPanel.jpg alt=MeshColliderPanel>
+<code>MeshCollider</code>是Unity提供的一个基于Mesh的碰撞体组件，它允许你使用一个Mesh的集合外形作为碰撞体检测的形状<br>它可以让你的碰撞体检测看起来和你的物体一样精细</p><ul><li><p>Convex
+是否把Mesh处理为凸包<br>如果勾选了：</p><ul><li>可以用于动态刚体</li><li>可以用作Trigger</li><li>不能太复杂（最多255个三角形）</li></ul><p>如果不勾选：</p><ul><li>可精确表示复杂网格，但只能用于静态物体</li><li>不支持Trigger和Rigidbody</li></ul></li></ul><p><strong>MeshCollider Convex使用注意事项</strong></p><table><thead><tr><th>场景</th><th>是否适合用 MeshCollider</th></tr></thead><tbody><tr><td>地形、建筑（静态）</td><td>非 Convex MeshCollider</td></tr><tr><td>可交互物体 + Rigidbody</td><td>Convex MeshCollider</td></tr><tr><td>复杂模型 + Trigger</td><td>Convex MeshCollider（前提是够简单）</td></tr><tr><td>移动物体 + 非 Convex</td><td>不支持，会报错</td></tr><tr><td>高性能要求的游戏</td><td>尽量少用 MeshCollider，建议用简化碰撞体代替</td></tr></tbody></table><ul><li>Cooking Options
+用于控制在碰撞体生成（或烘焙）过程中如何处理网格数据，以提高碰撞效率或调试准确性<br>Unity在运行时将网格数据转换为物理引擎能使用的碰撞形式格式，这个过程叫做Mesh Cooking</li></ul><h3 id=terrian-collider>Terrian Collider</h3><ul><li>Enable Tree Colliders
+When selected, Tree Colliders will be enabled</li></ul><h3 id=wheel-collider>Wheel Collider</h3><p><img src=/assets/images/WheelColliderPanel.jpg alt=WheelColliderPanel></p><ul><li>Wheel Damping Rate
+轮阻，轮子滚动时的摩擦衰减速度</li><li>Suspension Distance
+悬挂行程，表示悬挂系统允许轮子从默认位置向下延伸的最大距离，单位是米</li><li>Force App Point Distance
+力施加点距离，控制Unity向车体施加力的位置，距离轮子中心的垂直距离，单位是米；可以理解为手推玩具车的高度</li><li>Suspension Spring
+用于模拟汽车的避震器（弹簧 + 阻尼）<ul><li>Spring
+弹簧刚度，越大越硬</li><li>Damper
+阻尼，阻止弹簧震荡的速度，越大越稳定</li><li>Target Position
+悬挂初始压缩程度，0表示全伸展，1表示全压缩</li></ul></li><li>Forward Friction & Sideways Friction
+控制轮子在前进方向/侧向的摩擦行为
+<code>Forward Friction</code>：控制加速、刹车的打滑程度
+<code>Sideways Friction</code>：控制漂移、转弯时的打滑程度<ul><li>Extremum Slip
+轮胎开始打滑时的滑动值阈值</li><li>Extremum Value
+极限摩擦力值（未打滑前）</li><li>Asymptote Slip
+完全失控打滑时的滑动值阈值</li><li>Asymptote Value
+极限打滑摩擦力值</li><li>Stiffness
+总体摩擦刚度系数（0-1）。调节摩擦强度的“乘法器”
+<strong>Wheel Collider API</strong></li></ul></li><li>Motor Torque
+通过代码向轮子添加驱动力（加速）</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=display:flex><span>wheelCollider.motorTorque = <span style=color:#ae81ff>200f</span>;
+</span></span></code></pre></div><ul><li>Brake Torque
+刹车力</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=display:flex><span>wheelCollider.brakeTorque = <span style=color:#ae81ff>500f</span>;
+</span></span></code></pre></div><ul><li>Steer Angle
+控制论在（尤其是前轮）的转向角度</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=display:flex><span>wheelCollider.steerAngle = <span style=color:#ae81ff>30f</span>;
+</span></span></code></pre></div><p><strong>使用WheelCollider</strong></p><p>在车体下放置空 GameObject，添加 <code>WheelCollider</code>。</p><p>设置合适的 <code>Radius</code> 和 <code>Suspension</code>。</p><p>使用一个轮胎模型作为视觉轮子（但它自己不加 Collider）。</p><p>每帧用代码同步 <code>WheelCollider.GetWorldPose()</code> 更新轮胎模型位置旋转。</p><p>用 <code>motorTorque</code>、<code>brakeTorque</code>、<code>steerAngle</code> 控制车轮。</p><p><strong>示例：同步轮子模型</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#66d9ef>public</span> WheelCollider wheelCollider;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> Transform wheelModel;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> Update()
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  Vector3 pos;
+</span></span><span style=display:flex><span>  Quaternion rot;
+</span></span><span style=display:flex><span>  wheelCollider.GetWorldPose(<span style=color:#66d9ef>out</span> pos, <span style=color:#66d9ef>out</span> rot);
+</span></span><span style=display:flex><span>  wheelModel.position = pos;
+</span></span><span style=display:flex><span>  wheelModel.rotation = rot;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=对齐collider和gameobject>对齐Collider和GameObject</h2><p>要保证Collider与GameObject完全重合，要让Collider的Center对准模型的中心，并让他的Size或Radius匹配模型的尺寸</p><h3 id=方法一使用mesh-renderer的bounds手动对齐>方法一：使用Mesh Renderer的Bounds手动对齐</h3><p>1.选中GameObject<br>2.查看Inspector面板中的Mesh Renderer或Mesh Filter：</p><ul><li>记下它的Bounds和Center</li></ul><p>3.在Collider中手动设置</p><h3 id=方法二使用unity自动对齐>方法二：使用Unity自动对齐</h3><p>在Inspector面板中，点击组件右上角的菜单-><code>Reset</code><br>或删除后重新添加Box Collider，Unity会自动用Mesh尺寸初始化</p><blockquote><p>注意：自动添加只对Unity支持的标志Mesh效果好，对导入模型FBX有时不准确</p></blockquote><h3 id=方法三通过脚本自动匹配mesh-bounds>方法三：通过脚本自动匹配Mesh Bounds</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=display:flex><span><span style=color:#66d9ef>using</span> UnityEngine;
+</span></span><span style=display:flex><span><span style=color:#a6e22e>
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e>[RequireComponent(typeof(BoxCollider))]</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FitColliderToMesh</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>void</span> Start()
+</span></span><span style=display:flex><span>  {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> mesh = GetComponent&lt;MeshFilter&gt;().sharedMesh;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> bounds = mesh.bounds;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> collider = GetComponent&lt;BoxCollider&gt;();
+</span></span><span style=display:flex><span>    collider.center = bounds.center;
+</span></span><span style=display:flex><span>    collider.size = bounds.size;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>注意：<code>mesh.bounds</code>是局部坐标系下的范围<br>如果模型被缩放，需要做缩放修正</p><h3 id=检查是否重合的方法>检查是否重合的方法</h3><p>1.Gizmo显示：Scene视图中选中物体，勾选Gizmo，可以看到Collider的框是否保住模型<br>2.调试代码验证接触：你可以在运行是打印<code>Collider.contacts[0].point</code>看碰撞点位置是否符合预期<br>3.把Mesh设成透明或关闭渲染，观察Collider是否贴合</p><h3 id=collider基类-api>Collider基类 API</h3><p><strong>常用属性</strong></p><table><thead><tr><th>属性名</th><th>说明</th></tr></thead><tbody><tr><td><code>enabled</code></td><td>是否启用该碰撞体，禁用后不参与碰撞检测。</td></tr><tr><td><code>isTrigger</code></td><td>是否作为触发器（Trigger），开启后不阻挡，只触发事件。</td></tr><tr><td><code>attachedRigidbody</code></td><td>关联的 Rigidbody 组件（如果有的话）。</td></tr><tr><td><code>bounds</code></td><td>碰撞体的世界轴对齐包围盒（<code>Bounds</code> 类型）。</td></tr><tr><td><code>sharedMaterial</code></td><td>物理材质，控制摩擦力和弹力。</td></tr><tr><td><code>material</code></td><td>碰撞体当前使用的物理材质实例。</td></tr><tr><td><code>contactOffset</code></td><td>碰撞体接触判定的偏移距离，影响物理碰撞的灵敏度。</td></tr></tbody></table><p><strong>常用方法</strong></p><table><thead><tr><th>方法名</th><th>说明</th></tr></thead><tbody><tr><td><code>ClosestPoint(Vector3 position)</code></td><td>返回碰撞体表面上距离指定点最近的点。</td></tr><tr><td><code>Raycast(Ray ray, out RaycastHit hitInfo, float maxDistance)</code></td><td>以射线检测碰撞体是否被击中，返回击中信息。</td></tr><tr><td><code>GetComponent&lt;T>()</code></td><td>获取挂载在同一GameObject上的组件（Collider继承自Component，所以可用此方法）。</td></tr><tr><td><code>OnCollisionEnter/OnTriggerEnter</code></td><td>物理事件回调，不是Collider自带的方法，但Collider触发时会调用对应脚本方法。</td></tr></tbody></table><p><strong>事件相关</strong><br>Collider本身没有事件接口，但它的物理交互会调用以下MonoBehaviour的回调方法</p><table><thead><tr><th>事件名</th><th>触发条件</th></tr></thead><tbody><tr><td><code>OnCollisionEnter(Collision collision)</code></td><td>碰撞开始</td></tr><tr><td><code>OnCollisionStay(Collision collision)</code></td><td>碰撞持续</td></tr><tr><td><code>OnCollisionExit(Collision collision)</code></td><td>碰撞结束</td></tr><tr><td><code>OnTriggerEnter(Collider other)</code></td><td>触发器进入</td></tr><tr><td><code>OnTriggerStay(Collider other)</code></td><td>触发器持续</td></tr><tr><td><code>OnTriggerExit(Collider other)</code></td><td>触发器离开</td></tr></tbody></table><h2 id=什么是trigger>什么是Trigger</h2><p>Trigger是Collider组件的一个特殊状态，用来检测物体的进入、停留和离开事件，但不会产生物理碰撞和响应<br>Trigger是Collider的感应区域模式</p><h3 id=trigger应用场景>Trigger应用场景</h3><ul><li>检测角色进入某个区域（陷阱、传送门、对话触发区）</li><li>收集物品（进入物品碰撞区域后触发拾取）</li><li>触发游戏事件（比如开门、启动机关）</li><li>检测敌人视野范围</li></ul><h3 id=注意事项>注意事项</h3><ul><li>触发器本身不会组织物体移动，物体可以自由穿过</li><li>要保证触发事件能被调用，涉及的GameObject至少一个带有Collider（且其中至少一个是Trigger）和Rigidbody组件，一般建议被检测的物体带Rigidbody</li><li>如果两个物体都没有Rigidbody，触发事件不会发生</li></ul><p><strong>本模块仅讲Collider作为组件的使用，详细物理系统请参照：</strong><br><a href=%7B%7Bsite.baseurl%7D%7D/posts/2025-06-03-Physics-System/>Physics System</a></p></div><nav class=post-nav><a href=/blog/component/ class=hover:underline>pre: Component</a>
+<a href=/blog/character-controller/ class=hover:underline>next: Character Controller</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#什么是collider>什么是Collider</a></li><li><a href=#常见的collider类型>常见的Collider类型</a></li><li><a href=#collider和rigidbody的关系>Collider和Rigidbody的关系</a></li><li><a href=#collider-panel>Collider Panel</a><ul><li><a href=#box-collider>Box Collider</a></li><li><a href=#capsulecollider>CapsuleCollider</a></li><li><a href=#meshcollider>MeshCollider</a></li><li><a href=#terrian-collider>Terrian Collider</a></li><li><a href=#wheel-collider>Wheel Collider</a></li></ul></li><li><a href=#对齐collider和gameobject>对齐Collider和GameObject</a><ul><li><a href=#方法一使用mesh-renderer的bounds手动对齐>方法一：使用Mesh Renderer的Bounds手动对齐</a></li><li><a href=#方法二使用unity自动对齐>方法二：使用Unity自动对齐</a></li><li><a href=#方法三通过脚本自动匹配mesh-bounds>方法三：通过脚本自动匹配Mesh Bounds</a></li><li><a href=#检查是否重合的方法>检查是否重合的方法</a></li><li><a href=#collider基类-api>Collider基类 API</a></li></ul></li><li><a href=#什么是trigger>什么是Trigger</a><ul><li><a href=#trigger应用场景>Trigger应用场景</a></li><li><a href=#注意事项>注意事项</a></li></ul></li></ul></li></ul></nav></aside><script>document.addEventListener("DOMContentLoaded",()=>{const n=document.querySelectorAll(".single_article h1, .single_article h2, .single_article h3, .single_article h4, .single_article h5, .single_article h6"),e=document.querySelectorAll(".toc a");let t=!1;e.forEach(n=>{n.addEventListener("click",s=>{e.forEach(e=>e.classList.remove("active")),n.classList.add("active"),t=!0,setTimeout(()=>{t=!1},800)})});const s=new IntersectionObserver(n=>{if(t)return;n.forEach(t=>{if(t.isIntersecting){let n=t.target.getAttribute("id");e.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")==="#"+n)})}})},{rootMargin:"-20% 0px -70% 0px",threshold:0});n.forEach(e=>s.observe(e))})</script><footer><div class=container><p>© 2025 Jeff Lee(ljf12825). All rights reserved</p></div></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script type=module>
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script><script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll('a[href^="http"]').forEach(e=>{e.setAttribute("target","_blank")})})</script></body></html>

@@ -1,0 +1,85 @@
+<!doctype html><html lang=en><head><meta charset=UTF-8><title>FSM</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-text.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=/css/blogsingle.css></head><body><header><title>How to Develop a Game</title><div class=container><img src=/images/gamelife.jpg alt=FSM class=banner></div></header><nav class=topnav><div class=container><ul><li><a href=/>Home</a></li><li><a href=/article/>Article</a></li><li><a href=/blog/>Blog</a></li><li><a href=/projects/>Projects</a></li><li><a href=/tool/>Tool & Resource</a></li><li><a href=/reference/>Reference</a></li><li><a href=/about/>About</a></li></ul></div></nav><article class=single_article><div class=title>FSM<div class=meta>PublishDate: 2025-06-01 |
+CreateDate: 2025-06-01 |
+LastModify: 2025-06-01
+| Creator：ljf12825</div></div><div class=content><p>FSM(Finite State Machine，有限状态机)是一种常用的编程模型，广泛应用于游戏开发中，尤其是在行为控制、游戏角色AI、UI系统、动画控制方面</p><p>它的核心就是在一组有限的状态中进行切换，且每次状态转移都遵循一定的规则</p><h2 id=基本概念>基本概念</h2><p>FSM由以下几个基本元素构成：</p><ul><li>状态（State）：系统当前的状态，表示系统的一种具体行为或情境</li><li>状态转移（Transition）：从一个状态到另一个状态的路径，通常基于某种条件或事件触发</li><li>事件（Event）：触发状态转移的条件或输入，通常由外部世界的变化或内部系统的某些操作引起</li><li>动作（Action）：状态进入、退出或在某个状态时发生的具体行为</li></ul><h2 id=fsm的组成部分>FSM的组成部分</h2><ul><li>状态：状态机的每个状态都表示某一特定的系统情境。每个状态可能有自己的内部逻辑和行为。</li><li>状态转移：从一个状态到另一个状态的过渡。转移通常由条件（如事件、输入、计时等）触发，状态机的核心就是处理这些条件，并做出相应的状态转换。</li><li>事件与触发器：状态转移的条件。通常是由外部输入（如玩家输入、定时器超时、游戏中的其他事件）来触发。</li><li>动作：当状态转移时会执行某些动作。比如，进入某个状态时播放动画，退出某个状态时停止某个动作等。</li></ul><h2 id=fsm的工作流程>FSM的工作流程</h2><p>FSM的工作过程可以概括为：每个时刻系统处于某个状态，系统等待某个事件的发生，一旦事件发生，就会根据事件的定义从当前状态转移到下一个状态，并可能触发某些动作。这个过程是循环的，状态机一直在不断地检查事件、进行状态转移。</p><h2 id=fsm示例ai行为>FSM示例：AI行为</h2><p>假设开发一个游戏中的敌人AI，敌人的行为可以通过FSM来管理，比如敌人有以下几个行为状态：</p><ul><li>巡逻（Patrolling）：敌人沿着一个固定路径来回走</li><li>追击（Chasing）：敌人发现玩家并开始追逐</li><li>攻击（Attacking）：敌人接近玩家并进行攻击</li><li>待机（Idle）：敌人没有做任何事情，处于等待状态</li></ul><p>状态转移图：</p><ul><li>如果敌人没有发现玩家，状态保持在巡逻</li><li>如果敌人发现玩家并进入追击状态，当玩家进入攻击范围时，切换到攻击状态</li><li>如果玩家离开视野，回到巡逻状态</li><li>如果敌人不再追击或攻击，返回待机状态</li></ul><p>每当敌人状态发生变化时，会有相应的动作，比如进入追击时播放追击动画，攻击时播放攻击动画</p><h2 id=fsm在unity中的实现>FSM在Unity中的实现</h2><p>在Unity中，FSM通常通过脚本来实现。可以使用<code>enum</code>来定义状态，<code>if</code>条件判断或<code>switch</code>语句来管理状态转移，甚至用状态机设计模式来封装整个逻辑</p><p>一个简单FSM实现</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>enum</span> EnemyState
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    Patrolling,
+</span></span><span style=display:flex><span>    Chasing,
+</span></span><span style=display:flex><span>    Attacking,
+</span></span><span style=display:flex><span>    Idle
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>EnemyAI</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> EnemyState currentState;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Transform player;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>float</span> attackRange = <span style=color:#ae81ff>1.5f</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>float</span> chaseRange = <span style=color:#ae81ff>10f</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> Update()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>switch</span> (currentState)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>case</span> EnemyState.Patrolling:
+</span></span><span style=display:flex><span>                Patrolling();
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>case</span> EnemyState.Chasing:
+</span></span><span style=display:flex><span>                Chasing();
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>case</span> EnemyState.Attacking:
+</span></span><span style=display:flex><span>                Attacking();
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>case</span> EnemyState.Idle:
+</span></span><span style=display:flex><span>                Idle();
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Patrolling()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 巡逻逻辑</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (Vector3.Distance(transform.position, player.position) &lt; chaseRange)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            currentState = EnemyState.Chasing;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Chasing()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 追击逻辑</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (Vector3.Distance (transform.position, player.position) &lt; attackRange)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            currentState = EnemyState.Attacking;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (Vector3.Distance (transform.position, player.position) &gt; chaseRange)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            currentState = EnemyState.Patrolling;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Attacking()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 攻击逻辑</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (Vector3.Distance(transform.position - player.position, player.position) &gt;= attackRange)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            currentState = EnemyState.Attacking;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Idle()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 待机逻辑</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (Vector3.Distance(transform.position, player.position) &lt; chaseRange)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            currentState = EnemyState.Chasing;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>解释：</p><ul><li>使用<code>enum</code>定义敌人的不同状态</li><li><code>switch</code>语句用于根据当前状态执行不同的行为</li><li>每个状态的方法中包含了触发状态转移的条件，例如距离检查、时间条件等</li></ul><h2 id=fsm的优缺点>FSM的优缺点</h2><p>优点：</p><ul><li>简单直观：FSM很容易理解，适合用于简单的状态管理</li><li>易于维护：状态转移逻辑清晰，容易跟踪和调试</li><li>灵活性高：可以轻松增加或修改状态，适应不同的需求</li></ul><p>缺点：</p><ul><li>状态保证：随着系统复杂度增加，状态和状态转移数量可能迅速增加，导致代码变得难以管理</li><li>不适用于复杂逻辑：对于非常复杂的系统，FSM可能会变得笨重，维护困难</li></ul><h2 id=优化与扩展>优化与扩展</h2><ul><li>层次状态机（Hierarchical FSM）：可以在不同的状态中嵌套子状态机，使得系统结构更加清晰，适合复杂的AI行为</li><li>事件驱动：通过事件驱动状态转移，可以避免大量的条件判断，提升代码的可维护性</li><li>状态设计模式：可以将每个状态封装成独立的类，实现更为面向对象的设计，增加灵活性</li></ul><h2 id=应用场景>应用场景</h2><p>FSM不仅在游戏AI中有广泛应用，还可以在其他许多领域发挥作用，例如：</p><ul><li>UI管理：不同的UI界面可以看作不同的状态，每个状态对应不同的UI布局和交互</li><li>动画控制：可以根据角色的状态切换不同的动画，如走路、跑步、跳跃等</li><li>玩家控制：玩家可以有不同的状态（走、跑、跳、攻击等），每个状态有不同的输入和动作</li></ul></div><nav class=post-nav><a href=/blog/game-architecture/ class=hover:underline>pre: Game Architecture</a>
+<a href=/blog/frame/ class=hover:underline>next: Frame</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#基本概念>基本概念</a></li><li><a href=#fsm的组成部分>FSM的组成部分</a></li><li><a href=#fsm的工作流程>FSM的工作流程</a></li><li><a href=#fsm示例ai行为>FSM示例：AI行为</a></li><li><a href=#fsm在unity中的实现>FSM在Unity中的实现</a></li><li><a href=#fsm的优缺点>FSM的优缺点</a></li><li><a href=#优化与扩展>优化与扩展</a></li><li><a href=#应用场景>应用场景</a></li></ul></li></ul></nav></aside><script>document.addEventListener("DOMContentLoaded",()=>{const n=document.querySelectorAll(".single_article h1, .single_article h2, .single_article h3, .single_article h4, .single_article h5, .single_article h6"),e=document.querySelectorAll(".toc a");let t=!1;e.forEach(n=>{n.addEventListener("click",s=>{e.forEach(e=>e.classList.remove("active")),n.classList.add("active"),t=!0,setTimeout(()=>{t=!1},800)})});const s=new IntersectionObserver(n=>{if(t)return;n.forEach(t=>{if(t.isIntersecting){let n=t.target.getAttribute("id");e.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")==="#"+n)})}})},{rootMargin:"-20% 0px -70% 0px",threshold:0});n.forEach(e=>s.observe(e))})</script><footer><div class=container><p>© 2025 Jeff Lee(ljf12825). All rights reserved</p></div></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script type=module>
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script><script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll('a[href^="http"]').forEach(e=>{e.setAttribute("target","_blank")})})</script></body></html>
