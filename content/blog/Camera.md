@@ -19,15 +19,15 @@ summary: Usage and document of camera in Unity
 2. 摄像机类型
   - 透视摄像机（Perspective）：像人眼一样
     - 透视摄像机FOV = 60
-    ![透视摄像机FOV=60](/assets/images/PerspectiveCameraFOV=60.jpg)
+    ![透视摄像机FOV=60](/images/Blog/PerspectiveCameraFOV=60.jpg)
     - 透视摄像机FOV = 20
-    ![透视摄像机FOV=20](/assets/images/PerspectiveCameraFOV=20.jpg)
+    ![透视摄像机FOV=20](/images/Blog/PerspectiveCameraFOV=20.jpg)
     - 透视摄像机FOV = 80
-    ![透视摄像机FOV=80](/assets/images/PerspectiveCameraFOV=80.jpg)
+    ![透视摄像机FOV=80](/images/Blog/PerspectiveCameraFOV=80.jpg)
 
   - 正交摄像机（Orthographic）：精确而非真实
     - 正交摄像机
-    ![正交摄像机](/assets/images/OrthographicCamera.jpg)
+    ![正交摄像机](/images/Blog/OrthographicCamera.jpg)
 
     - 消除透视畸变
       - 正交摄像机的最大特点是不考虑透视，即：

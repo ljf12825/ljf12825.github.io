@@ -390,7 +390,7 @@ Unity的底层实现并没有公开`DontDestroyOnLoad`的具体源码，但我�
 
 构建设置窗口列出了所有可用的场景、平台选项、打包模式、构建设置等。你可以通过它来管理场景、选择构建平台、设置构建选项
 
-![Build Settings](/assets/images/BuildSettings.jpg)
+![Build Settings](/images/Blog/BuildSettings.jpg)
 
 ##### 场景的添加与移除
 在构建设置中，所有需要包含在游戏构建中的场景都必须被添加到场景列表中

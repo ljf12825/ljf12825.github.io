@@ -13,7 +13,7 @@ summary: Introduction Model and Model in Unity
 免费的Adobe平台，用于下载各种模型和动画
 
 ### 下载设置
-![mixamodownloadsetting](/assets/images/mixamodownloadsetting.jpg)
+![mixamodownloadsetting](/images/Blog/mixamodownloadsetting.jpg)
 
 - Animator Controller
 - Avatar：动画重定向使用

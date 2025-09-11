@@ -27,7 +27,7 @@ Unity UI系统是Unity引擎内置的用于构建用户界面的工具集。它�
 NGUI是在Unity官方UI系统还不成熟时的“事实标准”，很多Unity3.x和4.x的项目大量使用  
 UGUI时Unity官方退出的新UI系统，功能更强大，易于扩展，且原生支持多平台和工具链   
 
-![CreateUI](/assets/images/CreateUI.jpg)
+![CreateUI](/images/Blog/CreateUI.jpg)
 
 [UnityUI2.0.0](https://docs.unity3d.com/Packages/com.unity.ugui@2.0/manual/index.html)
 
@@ -35,7 +35,7 @@ UGUI时Unity官方退出的新UI系统，功能更强大，易于扩展，且原
 Canvas是Unity中所有UI元素的容器，所有UI控件都必须是Canvas的子对象，否则它们不会被渲染成UI
 
 
-![CanvasInspector](/assets/images/CanvasInspector.jpg)
+![CanvasInspector](/images/Blog/CanvasInspector.jpg)
 
 ### Canvas的渲染模式
 Canvas有三种渲染模式，不同模式影响UI的显示方式、渲染顺序以及与摄像机的关系
@@ -64,7 +64,7 @@ Canvas有三种渲染模式，不同模式影响UI的显示方式、渲染顺序
 
 ### Canvas组件的重要属性
 #### Screen Space - Overlay
-![CanvasScreenSpace-Overlay](/assets/images/Canvas-ScreenSpace-Overlay.jpg)
+![CanvasScreenSpace-Overlay](/images/Blog/Canvas-ScreenSpace-Overlay.jpg)
 
 默认模式  
 
@@ -87,14 +87,14 @@ Canvas有三种渲染模式，不同模式影响UI的显示方式、渲染顺序
 - Vertex Color Always In Gamma Color Space：控制UI顶点颜色是否始终使用Gamma空间进行处理，无论当前项目是否使用Linear或Gamma颜色空间
 
 #### Screen Space - Camera
-![CanvasScreenSpace-Camera](/assets/images/Canvas-ScreenSpace-Camera.jpg)
+![CanvasScreenSpace-Camera](/images/Blog/Canvas-ScreenSpace-Camera.jpg)
 
 - Render Camera：The Camera whitch will render the canvas. This is also the camera used to send events
 A Screen Space Canvas with no specified camera acts like an Overlay Canvas
 
 
 #### World Space
-![CanvasWorldSpace](/assets/images/Canvas-WorldSpace.jpg)
+![CanvasWorldSpace](/images/Blog/Canvas-WorldSpace.jpg)
 
 - Event Camera：用于处理射线点击UI的相机（通常是主摄像机），必须设置，否则点击无效
 
@@ -105,7 +105,7 @@ Canvas通常会搭配CanvasScaler使用，控制UI的缩放和适配，CanvasSca
 #### 三种缩放模式
 1.Constant Pixel Size（固定像素大小）
 
-![Constant Pixel Size](/assets/images/CanvasScaler-ConstantPixelSize.jpg)
+![Constant Pixel Size](/images/Blog/CanvasScaler-ConstantPixelSize.jpg)
 
 - UI元素大小固定为设计时的像素值，不会随屏幕尺寸变化缩放
 - 适合UI对像素精度要求高，不想变形的场景
@@ -117,7 +117,7 @@ Canvas通常会搭配CanvasScaler使用，控制UI的缩放和适配，CanvasSca
 
 2.Scale With Screen Size（随屏幕尺寸缩放）
 
-![Scale With Screen Size](/assets/images/CanvasScaler-ScaleWithScreenSize.jpg)
+![Scale With Screen Size](/images/Blog/CanvasScaler-ScaleWithScreenSize.jpg)
 
 - 根据屏幕分辨率，按比例缩放UI，使得UI在不同分辨率下保持视觉一致
 - 通过`Reference Resolution`设置参考设计分辨率
@@ -129,7 +129,7 @@ Canvas通常会搭配CanvasScaler使用，控制UI的缩放和适配，CanvasSca
 
 3.Constant Physical Size（固定物理大小）
 
-![Constant Physical Size](/assets/images/CanvasScaler-ConstantPhysicalSize.jpg)
+![Constant Physical Size](/images/Blog/CanvasScaler-ConstantPhysicalSize.jpg)
 
 - UI元素在物理尺寸上保持不变（以英寸、毫米为单位），无论屏幕分辨率如何变化
 - 依赖设备DPI（屏幕像素密度），适用于对物理尺寸有要求的UI
@@ -174,7 +174,7 @@ Canvas通常会搭配CanvasScaler使用，控制UI的缩放和适配，CanvasSca
 
 ### Canvas Group
 
-![CanvasGroupPanel](/assets/images/CanvasGroupPanel.jpg)
+![CanvasGroupPanel](/images/Blog/CanvasGroupPanel.jpg)
 
 控制一组UI元素的整体透明度、交互性和射线响应  
 用它可以实现：
@@ -292,7 +292,7 @@ Canvas.preWillRederCanvases -> Canvas.willRenderCanvases -> Canvas 渲染
 
 ## UI Componenet
 ### 通用组件
-![UICommonComponent](/assets/images/UI-CommonComponent.jpg)
+![UICommonComponent](/images/Blog/UI-CommonComponent.jpg)
 #### Rect Transform
 `RectTransform`继承自`Transform`，专门用于2D UI布局。  
 所有UI元素都依赖`RectTransform`来定位和缩放
@@ -375,7 +375,7 @@ rt.sizeDelta = new Vector2(200, 100);
 ```
 这个公式说明了设置的位置不是直接坐标，而是围绕锚点和pivot共同计算的结果
 
-![AnchorPreSets](/assets/images/AnchorPresets.jpg)
+![AnchorPreSets](/images/Blog/AnchorPresets.jpg)
 
 - 按住Alt + Shift拖动可以同时设置pivot和anchor
 - Unity提供Anchor Preset快速布局
@@ -631,7 +631,7 @@ Image组件见上
 ### Raw Image
 Raw Image = RectTransform + Canvas Renderer + Raw Image
 
-![RawImagePanel](/assets/images/RawImagePanel.jpg)
+![RawImagePanel](/images/Blog/RawImagePanel.jpg)
 
 `Raw Image`是Unity UI中用于直接显示`Texture`的组件，区别于`Image`显示`Sprite`，`RawImage`更灵活，适合直接显示非Sprite类型的纹理
 
@@ -652,7 +652,7 @@ Raw Image = RectTransform + Canvas Renderer + Raw Image
 ### Text(Legacy)
 UGUI中最早期的文本显示方式之一，Legacy代表它已经被新的系统所取代，但它依然存在于Unity中，作为一种兼容性方案
 
-![TextPanel](/assets/images/TextPanel.jpg)
+![TextPanel](/images/Blog/TextPanel.jpg)
 
 `Text`是Unity UGUI系统（UnityEngine.UI.Text）中的标准UI组件，用来在Canvas上显示简单的2D文本
 
@@ -755,14 +755,14 @@ Unity早期标准控件（UnityEngine.UI.Button）
 Button(Legacy) = `Rect Transform` + `Canvas Renderer` + `Image` + `Button`
   |__ Text(Legacy)
 ```
-![ButtonCantAddTextComponent](/assets/images/ButtonCantAddTextComponent.jpg)
+![ButtonCantAddTextComponent](/images/Blog/ButtonCantAddTextComponent.jpg)
 
 Button组件只能绑定一个`Graphic`来做交互反馈，比如颜色变化、高亮、禁用状态  
 这个`Graphic`是通过`Button.targetGraphic`这个字段指定的，通常是绑定在同一个GameObject上的`Image`或`RawImage`  
 Unity的默认交互逻辑只能作用于一个
 
 
-![Button(Legacy)Panel](/assets/images/Button(Legacy)Panel.jpg)
+![Button(Legacy)Panel](/images/Blog/Button(Legacy)Panel.jpg)
 
 #### Panel Properties
 
@@ -917,7 +917,7 @@ Dropdown = RectTransform + Canvas Renderer + Image + Dropdown
 
 #### Dropdown Panel
 
-![DropdownPanel](/assets/images/DropdownPanel.jpg)
+![DropdownPanel](/images/Blog/DropdownPanel.jpg)
 
 | 属性名                | 说明                             |
 | ------------------ | ------------------------------ |
@@ -936,7 +936,7 @@ Dropdown = RectTransform + Canvas Renderer + Image + Dropdown
 #### Scroll Rect Panel
 Dropdown上的Scroll Rect是专用于Dropdown的，区别于通用的Scroll Rect
 
-![ScrollRectPanelofDropdown](/assets/images/ScrollRectPanelofDropdown.jpg)
+![ScrollRectPanelofDropdown](/images/Blog/ScrollRectPanelofDropdown.jpg)
 
 | 组件/属性                   | 说明                                       |
 | ----------------------- | ---------------------------------------- |
@@ -1054,7 +1054,7 @@ InputField
 
 #### Input Field Panel
 
-![InputFieldPanel](/assets/images/InputFieldPanel.jpg)
+![InputFieldPanel](/images/Blog/InputFieldPanel.jpg)
 
 | 属性               | 描述                       |
 | ---------------- | ------------------------ |
@@ -1170,7 +1170,7 @@ TextMeshPro是Unity提供的高级文本渲染系统，相比传统的`UI.Text`�
 
 #### TMP Importer
 
-![TMP Importer](/assets/images/TMPImporter.jpg)
+![TMP Importer](/images/Blog/TMPImporter.jpg)
 
 TMP Importer是Unity第一次导入TextMeshPro包时自动弹出的一个向导窗口，也可以手动从菜单中打开  
 它的作用是：
@@ -1212,8 +1212,8 @@ TMP使用SDF来实现高质量的文本缩放和效果（描边、投影）
 
 #### Text（TMP）
 
-![TMPTextPanel_1](/assets/images/TMPTextPanel_1.jpg)
-![TMPTextPanel_2](/assets/images/TMPTextPanel_2.jpg)
+![TMPTextPanel_1](/images/Blog/TMPTextPanel_1.jpg)
+![TMPTextPanel_2](/images/Blog/TMPTextPanel_2.jpg)
 
 ##### 基础设置区
 - Text Input：文字内容输入框（直接修改会改变显示内容）
@@ -1272,7 +1272,7 @@ Toggle = Rect Transform + Toggle
 ```
 
 #### Toggle Panel
-![TogglePanel](/assets/images/TogglePanel.jpg)
+![TogglePanel](/images/Blog/TogglePanel.jpg)
 
 | 属性名              | 类型                 | 说明                    |
 | ---------------- | ------------------ | --------------------- |
@@ -1361,7 +1361,7 @@ Slider = Rect Transform + Slider
 ```
 
 #### Slider Panel
-![SliderPanel](/assets/images/SliderPanel.jpg)
+![SliderPanel](/images/Blog/SliderPanel.jpg)
 
 - Whole Numbers：是否只允许整数
 
@@ -1433,7 +1433,7 @@ Scrollbar = Rect Transform + Canvas Renderer + Image + Scrollbar
 ```
 
 #### Scrollbar Panel
-![ScrollbarPanel](/assets/images/ScrollbarPanel.jpg)
+![ScrollbarPanel](/images/Blog/ScrollbarPanel.jpg)
 
 - Size：滑块所占比率，值越小，滑块越短，内容和视口的比例的反映，由ScrollRect进行调节
 - numberOfSteps：可选值个数，如果设置 > 1，滑块将分段跳动
@@ -1516,7 +1516,7 @@ Scroll View = Rect Transform + Canvas Renderer + Image + Scroll Rect
 ```
 
 #### Scroll Rect Panel
-![ScrollRectPanel](/assets/images/ScrollRectPanel.jpg)
+![ScrollRectPanel](/images/Blog/ScrollRectPanel.jpg)
 
 | 属性                                | 说明                                                                            |
 | --------------------------------- | ----------------------------------------------------------------------------- |
@@ -1711,7 +1711,7 @@ scrollRect.verticalNormalizedPosition = 0f;
 
 ## Effects
 
-![UIEffectsPanel](/assets/images/UIEffectsPanel.jpg)
+![UIEffectsPanel](/images/Blog/UIEffectsPanel.jpg)
 
 ### Outline
 `Outline`是UI元素（特别是Text或Image）边缘的描边效果，常用于：
@@ -1945,9 +1945,3 @@ Unity中做UI动画，有以下几种常见方式
 
 ### Timeline与UI动画
 - Unity Timeline也支持控制UI动画，适合需要同步多动画的场景
-
-
-
-
-
-

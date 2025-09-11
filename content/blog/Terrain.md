@@ -107,7 +107,7 @@ void GenerateTerrain()
 - Terrain Settings（参数设置）
 
 ### Create Neighbor Terrains
-![CreateNeighborTerrains](/assets/images/CreateNeighborTerrains.jpg)
+![CreateNeighborTerrains](/images/Blog/CreateNeighborTerrains.jpg)
 
 #### 这是什么
 Unity的每一个Terrain是一个地形快（chunk），当你需要构建更大的世界地图时：
@@ -119,7 +119,7 @@ Unity的每一个Terrain是一个地形快（chunk），当你需要构建更大
 - 与当前的Terrain无缝拼接（边界贴合）
 - 自动设置每个地形的Neighbor引用（主要用于LOD过渡等）
 
-![TerrainsNeighbor](/assets/images/TerrainNeighbor.jpg)
+![TerrainsNeighbor](/images/Blog/TerrainNeighbor.jpg)
 
 #### 创建后的Terrain有哪些特征
 - 分辨率与当前Terrain一致
@@ -145,7 +145,7 @@ Unity Terrain在运行时做：
 可以使用插件如MicroSplat/Gaia等进行多地形管理
 
 ### PaintTerrain
-![PaintTerrain](/assets/images/PaintTerrain.jpg)
+![PaintTerrain](/images/Blog/PaintTerrain.jpg)
 
 这是Unity Terrain系统用于手动“绘制”地形的工具，类似PS中的笔刷，但是用于三维地形，可以用它来：
 - 提升/降低地形
@@ -204,7 +204,7 @@ Unity Terrain在运行时做：
 默认不可通过地形下看见，需要你手动铺地板或连接其他网格模型
 
 ### Paint Trees
-![PaintTrees](/assets/images/PaintTrees.jpg)
+![PaintTrees](/images/Blog/PaintTrees.jpg)
 
 `Paint Trees`是Unity Terrain中用于批量种植树木的工具，它支持使用不同树模型的自动随机分布、缩放、选择、LOD显示等，是创建森林、山地植被的关键工具  
 #### 添加树模型
@@ -266,7 +266,7 @@ Unity的Terrain树有专门的渲染优化方案
 | **Terrain 树**    | 专为大量地形种树优化，性能最佳但不支持动画/刚体     |
 
 ### Paint Details
-![PaintDetails](/assets/images/PaintDetails.jpg)
+![PaintDetails](/images/Blog/PaintDetails.jpg)
 
 `Paint Details`是Unity Terrain系统中用于在地形上批量绘制“小型自然细节”的工具，它与`Paint Trees`类似，但用于体积更小、密度更高的细节对象，是构建自然场景的关键补充
 
@@ -335,8 +335,8 @@ Unity提供两种添加方式
 - 使用`GPU Instancing + Compute Shader`自制草系统
 
 ### Terrain Settings
-![TerrainSetting_1](/assets/images/TerrainSetting_1.jpg)
-![TerrainSetting_2](/assets/images/TerrainSetting_2.jpg)
+![TerrainSetting_1](/images/Blog/TerrainSetting_1.jpg)
+![TerrainSetting_2](/images/Blog/TerrainSetting_2.jpg)
 
 #### Basic Terrain
 

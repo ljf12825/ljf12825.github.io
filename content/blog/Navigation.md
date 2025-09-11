@@ -27,14 +27,14 @@ NavMesh是一个为AI角色提供导航支持的系统。在一个3D场景中，
 3. 设置不可行走区域：可以通过NavMesh Obstacle组件来定义障碍物，标记出不可走的区域，生成的NavMesh会自动避开这些区域。
 
 ## NavMesh Surface
-![NavMeshSurfacePanel](/assets/images/NavMeshSurfacePanel.jpg)
+![NavMeshSurfacePanel](/images/Blog/NavMeshSurfacePanel.jpg)
 
 
 
 ## NavMesh Agent（导航代理）
 `NavMeshAgent` 是挂载在角色上的组件，负责根据计算出的路径自动引导角色移动。它依赖于NavMesh来判断路径和避开障碍物。NavMeshAgent 会计算从当前位置到目标点的路径，并使角色沿路径移动
 
-![NavMeshAgentPanel](/assets/images/NavMeshAgentPanel.jpg)
+![NavMeshAgentPanel](/images/Blog/NavMeshAgentPanel.jpg)
 
 属性
 - Speed：设置角色的移动速度

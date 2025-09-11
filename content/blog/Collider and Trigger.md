@@ -31,7 +31,7 @@ Collider是附加在游戏对象上的组件，用于告诉物理引擎这个对
 
 ## Collider Panel
 ### Box Collider
-![BoxColliderPanel](/assets/images/BoxColliderPanel.jpg)
+![BoxColliderPanel](/images/Blog/BoxColliderPanel.jpg)
 - IsTrigger
   默认false，此时Collider是实体碰撞体，会阻挡其他物体，发生物理碰撞和反弹  
   勾选时，Collider变成Trigger，不会阻挡其他物体，但会检测进入、离开和停留事件，可以用来做区域检测、事件触发等
@@ -88,7 +88,7 @@ Collider是附加在游戏对象上的组件，用于告诉物理引擎这个对
     Layers to exclude when producing collisions
 
 ### CapsuleCollider
-![CapsuleColliderPanel](/assets/images/CapsuleColliderPanel.jpg)
+![CapsuleColliderPanel](/images/Blog/CapsuleColliderPanel.jpg)
 - Edit Collider
   显示Collider边界  
   Hold Alt after clicking control handle to pin center in place（中心缩放） 
@@ -97,7 +97,7 @@ Collider是附加在游戏对象上的组件，用于告诉物理引擎这个对
   The axis of the capsule's lengthwise orientation in the GameObject's local space
 
 ### MeshCollider
-![MeshColliderPanel](/assets/images/MeshColliderPanel.jpg)
+![MeshColliderPanel](/images/Blog/MeshColliderPanel.jpg)
 `MeshCollider`是Unity提供的一个基于Mesh的碰撞体组件，它允许你使用一个Mesh的集合外形作为碰撞体检测的形状  
 它可以让你的碰撞体检测看起来和你的物体一样精细  
 
@@ -131,7 +131,7 @@ Collider是附加在游戏对象上的组件，用于告诉物理引擎这个对
   When selected, Tree Colliders will be enabled
 
 ### Wheel Collider
-![WheelColliderPanel](/assets/images/WheelColliderPanel.jpg)
+![WheelColliderPanel](/images/Blog/WheelColliderPanel.jpg)
 - Wheel Damping Rate
   轮阻，轮子滚动时的摩擦衰减速度
 - Suspension Distance

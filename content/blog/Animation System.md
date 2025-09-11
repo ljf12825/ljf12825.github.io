@@ -157,7 +157,7 @@ animator.SetFloat("Speed", 5.0f);
 ### 创建与使用
 **创建Animation Clip**
 
-![AnimationClipPanel](/assets/images/AnimationClipPanel.jpg)
+![AnimationClipPanel](/images/Blog/AnimationClipPanel.jpg)
 
 - 通过Animator Controller（Mecanim）：
   1. 在Project视图中右键点击，选择`Create > Animation > Animation Clip`
@@ -215,7 +215,7 @@ Unity 支持在 Animation Clip 上进行压缩，以减少游戏资源占用并�
 如果在外部软件（如 Maya、Blender 或 3ds Max）中创建了动画，导出时可以将 Animation Clip 直接导入到 Unity 中。Unity 会自动识别 骨骼动画 和 面部表情，并将它们作为 Animation Clip 导入
 
 ## Animator Component
-![AnimatorPanel](/assets/images/AnimatorPanel.jpg)
+![AnimatorPanel](/images/Blog/AnimatorPanel.jpg)
 
 ## Animation Event
 

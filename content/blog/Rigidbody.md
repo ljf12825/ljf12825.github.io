@@ -20,7 +20,7 @@ summary: Introduction and API of Rigidbody component in Unity
 
 ### RigidbodyPanel
 
-![RigidbodyPanel](/assets/images/RigidbodyPanel.jpg)
+![RigidbodyPanel](/images/Blog/RigidbodyPanel.jpg)
 
 **基础物理参数**
 

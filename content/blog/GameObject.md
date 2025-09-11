@@ -15,7 +15,7 @@ GameObject继承自Object，是所有可以存在于场景中的物体的基类
 - 没有组件的GameObject是一个空物体
 - 所有可见（如角色、道具、地形）或不可见（如相机、灯光、空容器）的对象，都是GameObject或其派生
 
-![GameObjectinInspector](/assets/images/GameObjectinInspector.jpg)
+![GameObjectinInspector](/images/Blog/GameObjectinInspector.jpg)
 
 ### Active status
 默认是激活状态，可以手动设置为非激活状态，在非激活状态下，GameObject会变得不可见，不会接收任何的回调或事件

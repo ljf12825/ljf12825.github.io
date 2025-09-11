@@ -8,7 +8,7 @@ summary: Introduction mask principle and usage in Unity
 ---
 遮罩，用于实现遮挡效果，控制子物体的显示区域
 
-![MaskPanel](/assets/images/MaskPanel.jpg)
+![MaskPanel](/images/Blog/MaskPanel.jpg)
 
 ## Mask
 `Mask`用于裁剪UI子元素的显示区域，通常搭配图片、Scroll View、头像裁剪等使用

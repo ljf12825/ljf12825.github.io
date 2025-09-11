@@ -12,7 +12,7 @@ Character Controller是专为角色移动设计的物理组件，适合用于第
 ## Character Controller组件概览
 它本质是一个内置Capsule Collider + 内部碰撞处理器，支持走地、上坡、碰撞、阻挡等功能  
 
-![CharacterControllerPanel](/assets/images/CharacterControllerPanel.jpg)
+![CharacterControllerPanel](/images/Blog/CharacterControllerPanel.jpg)
 
 **主要属性**
 

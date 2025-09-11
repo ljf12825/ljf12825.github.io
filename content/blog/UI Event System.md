@@ -10,7 +10,7 @@ summary: Unity UI Event System, Raycaster, Event Trigger, Focus, Navigation
 
 Unity的Event System是一个处理用户输入事件的系统，用于发送“点击了谁”“选中了谁”之类的事件，属于UnityEngine.EventSystems命名空间
 
-![EventSystemPanel](/assets/images/EventSystemPanel.jpg)
+![EventSystemPanel](/images/Blog/EventSystemPanel.jpg)
 
 | 组件                                | 用途                                                    |
 | --------------------------------- | ----------------------------------------------------- |
