@@ -241,3 +241,9 @@ ul, ol {
   padding-top: 0;
   margin-left: -20px;
 }
+
+.hugo-logo {
+  max-width: 100px;
+  height: auto;
+  display: flex;
+}
