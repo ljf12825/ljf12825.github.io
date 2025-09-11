@@ -31,9 +31,9 @@ The following is an introduction to the website modules:
 ```txt
 © 2025 Jeff Lee (ljf12825). All rights reserved.
 
-All content on this blog, including articles, images, and project materials, 
+All content on this website, including articles, images, website build sourcecode and project materials 
 is the intellectual property of ljf12825. Unauthorized reproduction, distribution, 
-or use of this content without prior permission is strictly prohibited.
+or use of this content for business without prior permission is strictly prohibited.
 
 Source code may be used according to the included LICENSE file. 
 For code not accompanied by a LICENSE, all rights are reserved.
