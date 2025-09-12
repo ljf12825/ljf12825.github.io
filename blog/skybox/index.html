@@ -1,9 +1,189 @@
 <!doctype html><html lang=en><head><meta charset=UTF-8><title>Skybox</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-text.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=/css/blogsingle.css></head><body><header><title>How to Develop a Game</title><div class=container><img src=/images/gamelife.jpg alt=Skybox class=banner></div></header><nav class=topnav><div class=container><ul><li><a href=/>Home</a></li><li><a href=/article/>Article</a></li><li><a href=/blog/>Blog</a></li><li><a href=/projects/>Projects</a></li><li><a href=/tool/>Tool & Resource</a></li><li><a href=/reference/>Reference</a></li><li><a href=/about/>About</a></li></ul></div></nav><article class=single_article><div class=title>Skybox<div class=meta>PublishDate: 2025-06-01 |
 CreateDate: 2025-06-01 |
 LastModify: 2025-06-01
-| Creator：ljf12825</div></div><div class=content><p>Skybox是一种渲染技术，用于在3D场景中创建远景背景，例如天空、宇宙、城市天际线等<br>它本质上是一种把纹理图贴在一个立方体（或球体）内侧的技巧，玩家看不到边界，只能看到包裹在四周的“天空”</p><h2 id=skybox的类型>Skybox的类型</h2><p>Unity中支持几种常见类型的Skybox材质（Shader）：</p><table><thead><tr><th>Shader 类型</th><th>描述</th></tr></thead><tbody><tr><td><strong>6 Sided</strong></td><td>使用六张图片分别贴在立方体六个面上（一般来自 HDRI 贴图拆分）</td></tr><tr><td><strong>Cubemap</strong></td><td>使用一个立方体贴图（.cubemap）进行渲染</td></tr><tr><td><strong>Procedural</strong></td><td>程序化天空（可设置太阳、云层、颜色渐变）</td></tr><tr><td><strong>HDRI Skybox (PBR)</strong></td><td>用于高清真实感环境的 HDR 渲染，常用于 Unity HDRP</td></tr></tbody></table><h2 id=设置skybox的方法>设置Skybox的方法</h2><h3 id=1通过lighting设置全局skybox>1.通过Lighting设置全局Skybox</h3><p>1.创建一个Skybox材质：</p><ul><li><code>Assets</code>->右键-><code>Create > Material</code></li><li>Shader选择为<code>Skybox/6 Sided</code>或<code>Skybox/Cubemap</code>或<code>Skybox/Procedural</code></li></ul><p>2.在材质中设置贴图（textures）或参数</p><p>3.打开<code>Window > Rendering > Lighting</code>面板</p><p>4.在<code>Environment > Skybox Material</code>中拖入刚刚的材质</p><p>这会将该Skybox应用于整个场景</p><h3 id=2通过摄像机设置局部skybox高级>2.通过摄像机设置局部Skybox（高级）</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cs data-lang=cs><span style=display:flex><span>RenderSettings.skybox = mySkyboxMaterial;
-</span></span></code></pre></div><p>或为相机设置<code>Skybox</code>组件并赋值</p><h3 id=skybox与lighting的关系>Skybox与Lighting的关系</h3><p>Skybox不只是视觉上的背景，它还影响了：</p><ul><li>Ambient Lighting（环境光）</li><li>Reflection Probe（反射探针）</li><li>全局光照（GI）计算</li></ul><p>所以换Skybox后记得：</p><ul><li>在Lighting界面点击“Generate Lighting”</li><li>使用Reflection Probe重新采样环境反射</li></ul></div><nav class=post-nav><a href=/blog/shader/ class=hover:underline>pre: Shader</a>
-<a href=/blog/tag/ class=hover:underline>next: Tag</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#skybox的类型>Skybox的类型</a></li><li><a href=#设置skybox的方法>设置Skybox的方法</a><ul><li><a href=#1通过lighting设置全局skybox>1.通过Lighting设置全局Skybox</a></li><li><a href=#2通过摄像机设置局部skybox高级>2.通过摄像机设置局部Skybox（高级）</a></li><li><a href=#skybox与lighting的关系>Skybox与Lighting的关系</a></li></ul></li></ul></li></ul></nav></aside><script>document.addEventListener("DOMContentLoaded",()=>{const n=document.querySelectorAll(".single_article h1, .single_article h2, .single_article h3, .single_article h4, .single_article h5, .single_article h6"),e=document.querySelectorAll(".toc a");let t=!1;e.forEach(n=>{n.addEventListener("click",s=>{e.forEach(e=>e.classList.remove("active")),n.classList.add("active"),t=!0,setTimeout(()=>{t=!1},800)})});const s=new IntersectionObserver(n=>{if(t)return;n.forEach(t=>{if(t.isIntersecting){let n=t.target.getAttribute("id");e.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")==="#"+n)})}})},{rootMargin:"-20% 0px -70% 0px",threshold:0});n.forEach(e=>s.observe(e))})</script><footer><div class=container><p>© 2025 Jeff Lee(ljf12825). All rights reserved |
+| Creator：ljf12825</div></div><div class=content><p>Skybox是一种渲染技术，用于在3D场景中创建远景背景，例如天空、宇宙、城市天际线等<br>它本质上是一种把纹理图贴在一个立方体（或球体）内侧的技巧，玩家看不到边界，只能看到包裹在四周的“天空”</p><p>关键特性：</p><ul><li>无限远：无论玩家如何移动，天空和总是保持固定的距离，永远不会被靠近（天空盒会跟随相机移动）从而创造出“无限远”的错觉</li><li>环境光源：天空盒不仅是视觉背景，其颜色和亮度还会为场景中的物体提供环境光（Ambient Light）和反射光（Reflection），这是实现场景光照统一和真实感的关键</li></ul><h2 id=创建skybox>创建Skybox</h2><h3 id=1-使用现成材质>1. 使用现成材质</h3><p>菜单栏 -> Window -> Rendering -> Lighting<br><img src=/images/Blog/SkyboxMaterial.jpg alt=SkyboxMaterial></p><h3 id=2-使用6张图片自定义创建立方体天空盒>2. 使用6张图片自定义创建立方体天空盒</h3><ol><li>准备图片：需要6张正方形图片，分别对应立方体的六个面（<code>+X, -X, +Y, -Y, +Z, -Z</code>）。通常命名为<code>right</code>, <code>left</code>, <code>top</code>, <code>bottom</code>, <code>front</code>, <code>back</code>或<code>px</code>, <code>nx</code>, <code>py</code>, <code>ny</code>, <code>pz</code>, <code>nz</code></li></ol><ul><li>确保图片的Wrap Mode设置为Clamp，防止边缘接缝处出现拉伸</li></ul><ol start=2><li>创建材质</li></ol><ul><li>在Project视图中右键->Create->Material</li><li>将新建的材质命名为<code>MySkybox</code></li><li>在材质的Inspector面板中，点击Shader下拉菜单，选择Skybox -> Cubemap</li></ul><ol start=3><li>配置Cubemap</li></ol><ul><li>创建Cubemap资源：Project下右键 -> Create -> Rendering -> LegacyCubemap，将六张图拖入Cubemap资源，然后将这个Cubemap资源拖到天空材质球的<code>Cubemap</code>槽位</li></ul><ol start=4><li>应用材质球：同<code>1. 使用现成材质</code></li></ol><h3 id=3-使用proceduralskybox>3. 使用ProceduralSkybox</h3><h4 id=创建shader文件>创建Shader文件</h4><ol><li>Project右键 -> Create -> Shader -> Unlit Shader</li><li>将其命名为<code>ProceduralSkybox</code></li><li>删除所有代码，替换为</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-glsl data-lang=glsl><span style=display:flex><span>Shader <span style=color:#960050;background-color:#1e0010>&#34;</span>Skybox<span style=color:#f92672>/</span>Procedural Skybox<span style=color:#960050;background-color:#1e0010>&#34;</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    Properties
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 顶部颜色（天顶）</span>
+</span></span><span style=display:flex><span>        _SkyColor (<span style=color:#960050;background-color:#1e0010>&#34;</span>Sky Color<span style=color:#960050;background-color:#1e0010>&#34;</span>, Color) <span style=color:#f92672>=</span> (<span style=color:#ae81ff>0.37</span>, <span style=color:#ae81ff>0.52</span>, <span style=color:#ae81ff>0.73</span>, <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 地平线颜色</span>
+</span></span><span style=display:flex><span>        _HorizonColor (<span style=color:#960050;background-color:#1e0010>&#34;</span>Horizon Color<span style=color:#960050;background-color:#1e0010>&#34;</span>, Color) <span style=color:#f92672>=</span> (<span style=color:#ae81ff>0.89</span>, <span style=color:#ae81ff>0.89</span>, <span style=color:#ae81ff>0.89</span>, <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 地面颜色（地平线以下）</span>
+</span></span><span style=display:flex><span>        _GroundColor (<span style=color:#960050;background-color:#1e0010>&#34;</span>Ground Color<span style=color:#960050;background-color:#1e0010>&#34;</span>, Color) <span style=color:#f92672>=</span> (<span style=color:#ae81ff>0.33</span>, <span style=color:#ae81ff>0.27</span>, <span style=color:#ae81ff>0.21</span>, <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 太阳颜色</span>
+</span></span><span style=display:flex><span>        _SunColor (<span style=color:#960050;background-color:#1e0010>&#34;</span>Sun Color<span style=color:#960050;background-color:#1e0010>&#34;</span>, Color) <span style=color:#f92672>=</span> (<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0.8</span>, <span style=color:#ae81ff>0.6</span>, <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 太阳大小（半径）</span>
+</span></span><span style=display:flex><span>        _SunSize (<span style=color:#960050;background-color:#1e0010>&#34;</span>Sun Size<span style=color:#960050;background-color:#1e0010>&#34;</span>, Range(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>)) <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.04</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 太阳晕影大小（光晕扩散）</span>
+</span></span><span style=display:flex><span>        _SunGlow (<span style=color:#960050;background-color:#1e0010>&#34;</span>Sun Glow<span style=color:#960050;background-color:#1e0010>&#34;</span>, Range(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>10</span>)) <span style=color:#f92672>=</span> <span style=color:#ae81ff>2.5</span>
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 太阳在天空中的方向（通常由脚本绑定方向光的方向来控制）</span>
+</span></span><span style=display:flex><span>        _SunDirection (<span style=color:#960050;background-color:#1e0010>&#34;</span>Sun Direction<span style=color:#960050;background-color:#1e0010>&#34;</span>, Vector) <span style=color:#f92672>=</span> (<span style=color:#ae81ff>0.3</span>, <span style=color:#ae81ff>0.8</span>, <span style=color:#ae81ff>0.5</span>, <span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 天空颜色的幂次，控制颜色过渡的陡峭程度</span>
+</span></span><span style=display:flex><span>        _SkyExponent (<span style=color:#960050;background-color:#1e0010>&#34;</span>Sky Exponent<span style=color:#960050;background-color:#1e0010>&#34;</span>, Range(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>10</span>)) <span style=color:#f92672>=</span> <span style=color:#ae81ff>1.5</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 地平线的大气厚度效果</span>
+</span></span><span style=display:flex><span>        _AtmosphereThickness (<span style=color:#960050;background-color:#1e0010>&#34;</span>Atmosphere Thickness<span style=color:#960050;background-color:#1e0010>&#34;</span>, Range(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>10</span>)) <span style=color:#f92672>=</span> <span style=color:#ae81ff>1.0</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    SubShader
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        Tags
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#960050;background-color:#1e0010>&#34;</span>Queue<span style=color:#960050;background-color:#1e0010>&#34;</span><span style=color:#f92672>=</span><span style=color:#960050;background-color:#1e0010>&#34;</span>Background<span style=color:#960050;background-color:#1e0010>&#34;</span>
+</span></span><span style=display:flex><span>            <span style=color:#960050;background-color:#1e0010>&#34;</span>RenderType<span style=color:#960050;background-color:#1e0010>&#34;</span><span style=color:#f92672>=</span><span style=color:#960050;background-color:#1e0010>&#34;</span>Background<span style=color:#960050;background-color:#1e0010>&#34;</span>
+</span></span><span style=display:flex><span>            <span style=color:#960050;background-color:#1e0010>&#34;</span>PreviewType<span style=color:#960050;background-color:#1e0010>&#34;</span><span style=color:#f92672>=</span><span style=color:#960050;background-color:#1e0010>&#34;</span>Skybox<span style=color:#960050;background-color:#1e0010>&#34;</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        Cull Off <span style=color:#75715e>// 关闭剔除，因为要从内部渲染</span>
+</span></span><span style=display:flex><span>        ZWrite Off <span style=color:#75715e>// 关闭深度写入，天空盒永远在最远处</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        Pass
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            CGPROGRAM
+</span></span><span style=display:flex><span>            <span style=color:#960050;background-color:#1e0010>#</span>pragma vertex vert
+</span></span><span style=display:flex><span>            <span style=color:#960050;background-color:#1e0010>#</span>pragma fragment frag
+</span></span><span style=display:flex><span>            <span style=color:#960050;background-color:#1e0010>#</span>include <span style=color:#960050;background-color:#1e0010>&#34;</span>UnityCG.cginc<span style=color:#960050;background-color:#1e0010>&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>struct</span> appdata
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                float4 vertex <span style=color:#f92672>:</span> POSITION;
+</span></span><span style=display:flex><span>                float3 uv <span style=color:#f92672>:</span> TEXCOORD0; <span style=color:#75715e>// 使用三维UV来采样天空球</span>
+</span></span><span style=display:flex><span>            };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>struct</span> v2f
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                float4 vertex <span style=color:#f92672>:</span> SV_POSITION;
+</span></span><span style=display:flex><span>                float3 viewDir <span style=color:#f92672>:</span> TEXCOORD0; <span style=color:#75715e>// 将视图方向传递给片元着色器</span>
+</span></span><span style=display:flex><span>            };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 将属性变量连接到CG代码</span>
+</span></span><span style=display:flex><span>            fixed4 _SkyColor;
+</span></span><span style=display:flex><span>            fixed4 _HorizonColor;
+</span></span><span style=display:flex><span>            fixed4 _GroundColor;
+</span></span><span style=display:flex><span>            fixed4 _SunColor;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>half</span> _SunSize;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>half</span> _SunGlow;
+</span></span><span style=display:flex><span>            half4 _SunDirection;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>half</span> _SkyExponent;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>half</span> _AtmosphereThickness;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            v2f vert (appdata v)
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                v2f o;
+</span></span><span style=display:flex><span>                o.vertex <span style=color:#f92672>=</span> UnityObjectToClipPos(v.vertex);
+</span></span><span style=display:flex><span>                
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// 获取世界空间下的视图方向（顶点位置）</span>
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// 对于天空盒，顶点位置就是视图方向</span>
+</span></span><span style=display:flex><span>                o.viewDir <span style=color:#f92672>=</span> mul((float3x3)unity_ObjectToWorld, v.vertex.xyz);
+</span></span><span style=display:flex><span>                
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> o;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            fixed4 frag (v2f i) <span style=color:#f92672>:</span> SV_Target
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// 标准化视图方向</span>
+</span></span><span style=display:flex><span>                float3 viewDir <span style=color:#f92672>=</span> normalize(i.viewDir);
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// 标准化太阳方向（确保是单位向量）</span>
+</span></span><span style=display:flex><span>                float3 sunDir <span style=color:#f92672>=</span> normalize(_SunDirection.xyz);
+</span></span><span style=display:flex><span>                
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// 1. 计算基础天空颜色（基于视角的垂直分量y）</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>float</span> horizon <span style=color:#f92672>=</span> dot(viewDir, float3(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0</span>)); <span style=color:#75715e>// 计算与垂直方向的点积</span>
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// 将horizon从[-1, 1] 映射到 [0, 1] 并应用幂次控制过渡</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>float</span> skyGradient <span style=color:#f92672>=</span> saturate(horizon <span style=color:#f92672>*</span> <span style=color:#ae81ff>0.5</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>0.5</span>);
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// 应用指数控制过渡的平滑度</span>
+</span></span><span style=display:flex><span>                skyGradient <span style=color:#f92672>=</span> pow(skyGradient, _SkyExponent);
+</span></span><span style=display:flex><span>                
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// 混合天空和地平线颜色</span>
+</span></span><span style=display:flex><span>                fixed4 skyFinal <span style=color:#f92672>=</span> lerp(_HorizonColor, _SkyColor, skyGradient);
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// 混合地平线和地面颜色（对于地平线以下的部分）</span>
+</span></span><span style=display:flex><span>                skyFinal <span style=color:#f92672>=</span> lerp(_GroundColor, skyFinal, saturate(horizon <span style=color:#f92672>*</span> _AtmosphereThickness));
+</span></span><span style=display:flex><span>                
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// 2. 计算太阳</span>
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// 计算视线方向与太阳方向的夹角</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>float</span> sunDot <span style=color:#f92672>=</span> dot(viewDir, sunDir);
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// 平滑步进函数，在sunDot接近1（即视角指向太阳中心）时产生一个圆盘</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>float</span> sunDisk <span style=color:#f92672>=</span> smoothstep(<span style=color:#ae81ff>1.0</span> <span style=color:#f92672>-</span> _SunSize, <span style=color:#ae81ff>1.0</span>, sunDot);
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// 计算太阳光晕，一个更宽更柔和的过渡</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>float</span> sunGlow <span style=color:#f92672>=</span> pow(saturate(sunDot), _SunGlow);
+</span></span><span style=display:flex><span>                
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// 结合太阳圆盘和光晕</span>
+</span></span><span style=display:flex><span>                fixed4 sunFinal <span style=color:#f92672>=</span> (_SunColor <span style=color:#f92672>*</span> (sunDisk <span style=color:#f92672>+</span> sunGlow));
+</span></span><span style=display:flex><span>                
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// 3. 将太阳效果叠加到天空背景上（使用加法混合，因为光是叠加的）</span>
+</span></span><span style=display:flex><span>                fixed4 col <span style=color:#f92672>=</span> skyFinal <span style=color:#f92672>+</span> sunFinal;
+</span></span><span style=display:flex><span>                
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> col;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            ENDCG
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 防止回退到其他Shader</span>
+</span></span><span style=display:flex><span>    Fallback Off
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h4 id=创建并使用材质>创建并使用材质</h4><p>创建一个材质名为<code>Mat_ProceduralSky</code>，在材质Inspector窗口中点击Shader下拉菜单，选择Skybox -/> ProceduralSkybox（Shader第一行创建）；调整材质属性，使用该材质作为天空盒材质</p><h4 id=与场景光联动>与场景光联动</h4><p>为了让太阳的位置与场景中的主方向光（模拟太阳）同步，需要创建一个简单的脚本
+<code>SyncSunDirection.cs</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>using</span> UnityEngine;
+</span></span><span style=display:flex><span><span style=color:#a6e22e>
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e>[ExecuteAlways]</span> <span style=color:#75715e>// execute always include editor mode</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SyncSunDirection</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span><span style=color:#a6e22e>    [SerializeField]</span> <span style=color:#66d9ef>private</span> Light _sunLight; <span style=color:#75715e>// directional light</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>    [SerializeField]</span> <span style=color:#66d9ef>private</span> Material _skyboxMaterial; <span style=color:#75715e>// proceduralskybox</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 在材质中定义的_SunDirection属性的标识符</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>readonly</span> <span style=color:#66d9ef>int</span> SunDirectionID = Shader.PropertyToID(<span style=color:#e6db74>&#34;_SunDirection&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Update()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (_sunLight != <span style=color:#66d9ef>null</span> &amp;&amp; _skyboxMaterial != <span style=color:#66d9ef>null</span>)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 将光源的forward方向（光照方向的反方向）传递给材质</span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 因为光源.transform.forward指向光照照射的方向（太阳到物体）</span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 而天空盒需要的是太阳在天空中的位置方向（物体到太阳），所以取反</span>
+</span></span><span style=display:flex><span>            Vector3 sunDirectionInSky = -_sunLight.transform.forward;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 设置材质的向量属性</span>
+</span></span><span style=display:flex><span>            _skyboxMaterial.SetVector(SunDirectionID, <span style=color:#66d9ef>new</span> Vector4(
+</span></span><span style=display:flex><span>                sunDirectionInSky.x,
+</span></span><span style=display:flex><span>                sunDirectionInSky.y,
+</span></span><span style=display:flex><span>                sunDirectionInSky.z,
+</span></span><span style=display:flex><span>                <span style=color:#ae81ff>0f</span> <span style=color:#75715e>// 第四个分量通常不用</span>
+</span></span><span style=display:flex><span>            ));
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>将该脚本挂在场景中任何物体上，拖入字段<br>在编辑器中旋转directional light，天空盒中的太阳位置也会实时更新</p><p><img src=/images/Blog/Sundirection1.jpg alt=SunDirection1>
+<img src=/images/Blog/Sundirection2.jpg alt=SunDirection2></p><h2 id=skybox的类型与属性>Skybox的类型与属性</h2><p>Unity提供了几种不同类型的天空盒Shader，适用于不同的需求和资源类型</p><ol><li>6Sided(Cubemap)
+使用6张独立的纹理。最经典和兼容新最好的方式</li></ol><ul><li>Tint Color：对每个面的纹理进行颜色染色</li><li>Exposure：调整天空盒的整体亮度。这个值会直接影响环境光的强度</li><li>Rotation：围绕Y轴旋转整个天空盒，可以调整太阳/云层的位置</li></ul><ol start=2><li>Cubemap
+使用一个单独的Cubemap资源（<code>.cubemap</code>文件），而不是六张分散的图片。Cube资源可以被引擎优化，性能通常稍好</li></ol><ul><li>可以从六张图片生成Cubemap资源，见上所述</li></ul><ol start=3><li>Panoramic(LatLong/360°)
+使用一张等距柱状投影(Equirectangular)的360°全景图（2:1宽高比）。这是360°相机拍摄的图片格式</li></ol><ul><li>优点：只需处理一张纹理，非常方便</li><li>Mapping：选择投影方式:<code>6 Frames Layout(类正方体)</code>和<code>Latitude Longitude Layout（类地球）</code>，<code>Automatic</code>通常即可正确识别</li></ul><ol start=4><li>Procedural（程序化）
+通过Shader算法实时生成天空，无需任何纹理</li></ol><ul><li>Sun：需要指定一个Directional Light作为太阳。天空盒会根据这个光的方向是是改变天空的颜色、太阳大小、晕影等</li><li>控制参数丰富<ul><li><code>Atmosphere Thickness</code>：大气厚度，影响天空的蓝色程度</li><li><code>Ground Color</code>：地平线处的颜色</li><li><code>Sun Size</code> / <code>Sun Size Convergence</code>：控制太阳的大小和模糊程度</li></ul></li><li>优点：动态，可以随着游戏时间变化（通过代码控制Directional Light的旋转）</li><li>缺点：风格化较强，不如基于图像的天空盒真实</li></ul><h2 id=深入原理与高级应用>深入原理与高级应用</h2><h3 id=1-天空盒环境光与光照烘焙gi>1. 天空盒、环境光与光照烘焙（GI）</h3><p>这是天空盒最核心的高级功能之一</p><ul><li>环境光（Ambient Light）：在Lighting窗口的Environment标签中，<code>Source</code>如果设置为<code>Skybox</code>，那么场景的环境颜色和强度将完全由当前设置的天空盒决定。Unity会通过对天空盒进行采样来计算出平均的环境光颜色。调整<code>Intensity Multiplier</code>可以控制环境光强度</li><li>光照烘焙（Baked GI）<ul><li>当使用Baked Global Illumination时，天空盒是作为一个重要的环境光源被烘焙到光照贴图（Lightmaps）中的</li><li>它的颜色和强度会直接影响场景中间接光照的结果</li><li>在Lighting窗口中，可以设置Environment Lighting的相关参数，如<code>Intensity</code>和<code>Ambient Occlusion</code>，来控制天空盒在烘焙时的影响</li></ul></li></ul><h3 id=2-反射探针reflection-probes>2. 反射探针（Reflection Probes）</h3><p>天空盒的另一个核心作用是提供默认的反射源</p><ul><li>场景中具有光滑材质的物体（如金属、水面），其反射内容如果没有配置局部Reflection Probes，物体默认使用天空盒作为其反射源</li><li>可以创建Refelction Probes，并将其<code>Source</code>设置为<code>Skybox</code>，这样它就会捕获当前场景的天空盒（或自定义的天空盒）生成一个立方体贴图，供周围的物体使用。这对于让动态物体也能融入环境光至关重要</li></ul><h3 id=3-动态切换天空盒>3. 动态切换天空盒</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>using</span> UnityEngine;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SkyboxChanger</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Material[] skyboxMaterials;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> ReflectionProbe reflectionProbe; <span style=color:#75715e>// 可选，如果需要更新反射探针</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> ChangeSkybox(<span style=color:#66d9ef>int</span> index)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (index &lt; <span style=color:#ae81ff>0</span> || index &gt;= skyboxMatterials.Length)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            Debug.LogError(<span style=color:#e6db74>&#34;Index out of range!&#34;</span>);
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 设置渲染设置中的天空盒</span>
+</span></span><span style=display:flex><span>        RenderSettings.skybox = syboxMaterials[index];
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 立即强制过呢更新环境光照和反射</span>
+</span></span><span style=display:flex><span>        DynamicGI.UpdateEnvironment();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 重置反射探针</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (refflectionProbe != <span style=color:#66d9ef>null</span>) reflectionProbe.RenderProbe();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=4-性能优化与最佳实践>4. 性能优化与最佳实践</h3><ul><li><p>纹理压缩：天空盒纹理通常很大，需要使用合适的压缩格式</p><ul><li>PC/主机平台：通常使用<code>BCn/HDR</code>压缩（如RGB Crunched DXT5）</li><li>Android：通常使用<code>ETC2</code>（支持Alpha）或<code>ASTC</code>（更优的压缩比和质量）</li><li>iOS：通常使用<code>PVRTC</code>或<code>ASTC</code></li><li>HDR：如果天空盒是高动态范围的（非常亮，如太阳），确保导入设置中勾选<code>Generate Mip Maps</code>并设置合适的压缩格式（如BC6H用于HDR Cubemap）</li></ul></li><li><p>Mip Map：通常建议开启，尤其是在有雾效或需要景深效果的场景中，可以改善远处的外观和性能。但对于永远在“无限远”处的天空盒，有时关闭它节省内存也是可行的，但需要测试</p></li><li><p>分辨率：不要使用过高的分辨率。2048x2048或1024x1024每面对于大多数项目来说已经足够。过高的分辨率会显著增加内存占用和加载时间</p></li><li><p>HDR vs LDR：使用HDR（高动态范围）天空盒可以带来更真实的光照效果，尤其是在配置Post-Processing Stack后处理堆栈中的Tonemapping是，效果惊人。但需要确保项目设置中Color Space为Linear</p></li></ul><h3 id=5-常见问题排查>5. 常见问题排查</h3><ul><li>接缝（Seams）：确保6张图片的Wrap Mode设置为Clamp，而不是Repeat</li><li>天空盒不显式/变紫：检查材质Shader是否正确，纹理是否丢失</li><li>光照不正确：更改天空盒后，如果使用了烘焙光照，必须重新烘焙才能更新光照贴图。动态GI则需要调用</li><li>移动端性能差：检查纹理压缩格式和分辨率。Panoramic天空盒在部分低端移动设备上可能比6 Sided的更耗性能，因为需要实时进行坐标转换</li></ul></div><nav class=post-nav><a href=/blog/shader/ class=hover:underline>pre: Shader</a>
+<a href=/blog/tag/ class=hover:underline>next: Tag</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#创建skybox>创建Skybox</a><ul><li><a href=#1-使用现成材质>1. 使用现成材质</a></li><li><a href=#2-使用6张图片自定义创建立方体天空盒>2. 使用6张图片自定义创建立方体天空盒</a></li><li><a href=#3-使用proceduralskybox>3. 使用ProceduralSkybox</a><ul><li><a href=#创建shader文件>创建Shader文件</a></li><li><a href=#创建并使用材质>创建并使用材质</a></li><li><a href=#与场景光联动>与场景光联动</a></li></ul></li></ul></li><li><a href=#skybox的类型与属性>Skybox的类型与属性</a></li><li><a href=#深入原理与高级应用>深入原理与高级应用</a><ul><li><a href=#1-天空盒环境光与光照烘焙gi>1. 天空盒、环境光与光照烘焙（GI）</a></li><li><a href=#2-反射探针reflection-probes>2. 反射探针（Reflection Probes）</a></li><li><a href=#3-动态切换天空盒>3. 动态切换天空盒</a></li><li><a href=#4-性能优化与最佳实践>4. 性能优化与最佳实践</a></li><li><a href=#5-常见问题排查>5. 常见问题排查</a></li></ul></li></ul></li></ul></nav></aside><script>document.addEventListener("DOMContentLoaded",()=>{const n=document.querySelectorAll(".single_article h1, .single_article h2, .single_article h3, .single_article h4, .single_article h5, .single_article h6"),e=document.querySelectorAll(".toc a");let t=!1;e.forEach(n=>{n.addEventListener("click",s=>{e.forEach(e=>e.classList.remove("active")),n.classList.add("active"),t=!0,setTimeout(()=>{t=!1},800)})});const s=new IntersectionObserver(n=>{if(t)return;n.forEach(t=>{if(t.isIntersecting){let n=t.target.getAttribute("id");e.forEach(e=>{e.classList.toggle("active",e.getAttribute("href")==="#"+n)})}})},{rootMargin:"-20% 0px -70% 0px",threshold:0});n.forEach(e=>s.observe(e))})</script><footer><div class=container><p>© 2025 Jeff Lee(ljf12825). All rights reserved |
 <a href=https://creativecommons.org/licenses/by-nc-sa/4.0/>Article: CC BY-NC-SA 4.0</a> |
 <a href=https://creativecommons.org/licenses/by-sa/4.0/>Content: CC BY-SA 4.0</a> |
 <a href=https://opensource.org/licenses/MIT>Code: MIT License</a> |
