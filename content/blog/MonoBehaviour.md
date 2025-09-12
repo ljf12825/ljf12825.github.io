@@ -2,7 +2,7 @@
 title: "MonoBehaviour"
 date: 2025-06-01
 categories: [Note]
-tags: [Unity, Syntax, Unity Class]
+tags: [Unity, Syntax, Class]
 author: "ljf12825"
 summary: Unity buildin class MonoBehaviour
 ---
@@ -63,7 +63,7 @@ public class GameController : MonoBehaviour
     void ResumeGame()
     {
         // 启用玩家脚本，恢复玩家控制
-        player.GetComponenet<PlayerController>().enabled = true;
+        player.GetComponent<PlayerController>().enabled = true;
     }
 }
 ```
@@ -252,7 +252,7 @@ Time.fixedDeltaTime = 0.02f(每秒调用50次)
 ```csharp
 Rigidbody rb;
 
-void Start() => rb = GetComponenet<Rigidbody>();
+void Start() => rb = GetComponent<Rigidbody>();
 
 void FixedUpdate() => rb.MovePosition(rb.position + Vector3.forward * 5f * Time.fixedDeltaTime);
 ```

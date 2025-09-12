@@ -2,7 +2,7 @@
 title: "Unity Debug"
 date: 2025-06-01
 categories: [Note]
-tags: [Unity, UnityTool]
+tags: [Unity, Unity Tool]
 author: "ljf12825"
 summary: classDebug, Breaking Debugging, Profiler, UnityTest
 ---

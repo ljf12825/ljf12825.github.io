@@ -1,8 +1,8 @@
 ﻿---
-title: "Unity Componenet-Driven Architecture"
+title: "Unity Component-Driven Architecture"
 date: 2025-06-01
 categories: [Note]
-tags: [Unity, Unity Engine]
+tags: [Unity, Engine]
 author: "ljf12825"
 summary: Unity Components in native layer
 ---
@@ -96,7 +96,7 @@ Scene
 ```cpp
 class GameObject
 {
-    std::vector<Componenet*> components;
+    std::vector<Component*> components;
     Transform* transform;
     ...
 };

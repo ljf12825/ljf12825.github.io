@@ -2,7 +2,7 @@
 title: "Transform"
 date: 2025-05-28
 categories: [Note]
-tags: [Unity, Unity Component]
+tags: [Unity, Component]
 author: "ljf12825"
 summary: Unity's class and component Transform
 ---

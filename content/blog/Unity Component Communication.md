@@ -2,7 +2,7 @@
 title: "Unity Component Communication"
 date: 2025-06-01
 categories: [Note]
-tags: [Unity, Syntax, Unity Class]
+tags: [Unity, Syntax, Class]
 author: "ljf12825"
 summary: GetComponent<T>(), Unity Event, C# Delegate and Event, Interface call, ScriptableObject Event, SendMessage()/BroadcastMessage()
 ---

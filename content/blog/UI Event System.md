@@ -2,7 +2,7 @@
 title: "UI Event System"
 date: 2025-06-01
 categories: [Note]
-tags: [Unity, Unity Component, UGUI]
+tags: [Unity, Component, UGUI]
 author: "ljf12825"
 summary: Unity UI Event System, Raycaster, Event Trigger, Focus, Navigation
 ---

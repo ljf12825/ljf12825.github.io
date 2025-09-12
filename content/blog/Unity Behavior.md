@@ -2,7 +2,7 @@
 title: "Unity Behavior"
 date: 2025-06-01
 categories: [Note]
-tags: [Unity, Unity Packages, AI]
+tags: [Unity, Unity Package, AI]
 author: "ljf12825"
 summary: introduce and usage of Unity behaviour tree implement
 ---

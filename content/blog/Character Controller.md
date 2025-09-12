@@ -2,7 +2,7 @@
 title: "Character Controller"
 date: 2025-06-01
 categories: [Note]
-tags: [Unity, Unity Component, Physics System]
+tags: [Unity, Component, Physics System]
 author: "ljf12825"
 summary: Introduction of Character Controller in Unity. Usage of Character Controller. Implement of Character Controller.
 ---

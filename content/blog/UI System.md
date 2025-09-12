@@ -2,7 +2,7 @@
 title: "UI System"
 date: 2025-06-01
 categories: [Note]
-tags: [Unity, Unity System, Render]
+tags: [Unity, Unity System, Rendering, UGUI]
 author: "ljf12825"
 summary: UGUI, NGUI, UI Tookit
 ---
@@ -290,7 +290,7 @@ Canvas.preWillRederCanvases -> Canvas.willRenderCanvases -> Canvas 渲染
 [UnityScripting Canvas](https://docs.unity3d.com/ScriptReference/Canvas.html)
 
 
-## UI Componenet
+## UI Component
 ### 通用组件
 ![UICommonComponent](/images/Blog/UI-CommonComponent.jpg)
 #### Rect Transform

@@ -2,7 +2,7 @@
 title: "Mesh"
 date: 2025-06-01
 categories: [Note]
-tags: [Unity, Renderer, Graphic]
+tags: [Unity, Rendering, Graphics]
 author: "ljf12825"
 summary: Introduction Mesh，Mesh in Unity
 ---
@@ -68,7 +68,7 @@ GetComponent<MeshFilter>().mesh = mesh;
 
 可以通过以下方式获取或赋值Mesh
 ```cs
-MeshFilter mf = GetComponenet<MeshFilter>();
+MeshFilter mf = GetComponent<MeshFilter>();
 Mesh mesh = mf.mesh; // 当前使用的实例化mesh
 mf.mesh = someOtherMesh; // 替换为新的Mesh
 ```

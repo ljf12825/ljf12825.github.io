@@ -2,7 +2,7 @@
 title: "Behaviour Designer"
 date: 2025-06-01
 categories: [Note]
-tags: [Unity, Unity Packages, AI]
+tags: [Unity, Unity Package, AI]
 author: "ljf12825"
 summary: The usage and simple of Behaviour Designer plugin.
 ---

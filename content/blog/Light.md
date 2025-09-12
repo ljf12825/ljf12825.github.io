@@ -2,7 +2,7 @@
 title: "Light"
 date: 2025-05-29
 categories: [Note]
-tags: [Unity, Unity Component, Light, Render, Graphics]
+tags: [Unity, Component, Light, Rendering, Graphics]
 author: "ljf12825"
 summary: Introduction Light' usage and implement in Unity
 ---
@@ -36,7 +36,7 @@ Unity光源有三种模式，关系到实时性和性能：
 Light light = GetComponent<Light>();
 ```
 namespace:``UnityEngine``  
-``Behaviour -> Componenet -> Object``
+``Behaviour -> Component -> Object``
 
 **常用字段与属性**
 
@@ -64,7 +64,7 @@ namespace:``UnityEngine``
 ```csharp
 void ToggleLight()
 {
-    Light light = GetComponenet<Light>();
+    Light light = GetComponent<Light>();
     light.enabled = !light.enabled;
 }
 ```
@@ -114,7 +114,7 @@ LightRenderMode.ForceVertex
 ## 动态创建光源
 ```csharp
 GameObject lightObj = new GameObject("My Light");
-Light light = lightObj.AddComponenet<Light>();
+Light light = lightObj.AddComponent<Light>();
 light.type = LightType.Point;
 light.color = Color.yellow;
 light.range = 10;

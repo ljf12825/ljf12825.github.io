@@ -1,8 +1,8 @@
 ﻿---
-title: "Unity Physical System"
+title: "Unity Physics System"
 date: 2025-06-01
 categories: [Note]
-tags: [Unity, Physical System]
+tags: [Unity, Physics System]
 author: "ljf12825"
 summary: Introduction of physical system in Unity
 ---

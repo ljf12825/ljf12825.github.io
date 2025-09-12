@@ -2,7 +2,7 @@
 title: "Frame"
 date: 2025-06-01
 categories: [Note]
-tags: [Unity, Renderer, Graphic]
+tags: [Unity, Rendering, Graphics]
 author: "ljf12825"
 summary: Frame and GameLoop
 ---

@@ -55,9 +55,9 @@ class Component继承自Object，在UnityEngine.CoreModule中实现
 
 ```csharp
 //获取组件
-Rigidbody rb = GetComponenet<Rigidbody>();
+Rigidbody rb = GetComponent<Rigidbody>();
 //添加组件
-gameObject.AddComponenet<AudioSource>();
+gameObject.AddComponent<AudioSource>();
 ```
 在Unity中，组件之所以能起作用，是因为Unity引擎在运行时会自动调度和执行组件的逻辑，这个背后是Unity引擎的核心“组件驱动”架构
 

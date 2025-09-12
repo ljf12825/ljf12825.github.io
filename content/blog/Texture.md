@@ -2,7 +2,7 @@
 title: "Texture"
 date: 2025-06-01
 categories: [Note]
-tags: [Unity, Unity Component, Render, Graphics]
+tags: [Unity, Component, Rendering, Graphics]
 author: "ljf12825"
 summary: Texture and Texture in Unity
 ---

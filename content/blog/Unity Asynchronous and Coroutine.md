@@ -2,7 +2,7 @@
 title: "Unity Asynchronous and Coroutine"
 date: 2025-06-01
 categories: [Note]
-tags: [Unity, Unity Async]
+tags: [Unity, Asynchrony, Coroutine]
 author: "ljf12825"
 summary: Principles and examples of asynchronous and coroutine usage
 ---

@@ -2,7 +2,7 @@
 title: "Mask"
 date: 2025-06-01
 categories: [Note]
-tags: [Unity, Unity Component, Render, Graphics, UGUI]
+tags: [Unity, Component, Rendering, Graphics, UGUI]
 author: "ljf12825"
 summary: Introduction mask principle and usage in Unity
 ---
