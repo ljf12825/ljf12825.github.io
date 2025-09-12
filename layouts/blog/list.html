@@ -14,7 +14,7 @@
     <div class="blog-grid">
       {{ range where .Site.RegularPages "Section" "blog" }}
         <a href="{{ .RelPermalink }}" class="blog-card" data-tags="{{ with .Params.tags }}{{ delimit . "|"}}{{ end }}">
-          {{ with .Params.featured_image }}
+          {{ with .Params.image }}
             <img src="{{ . | relURL }}" alt="{{ $.Title }}" class="blog-thumb">
           {{ else }}
             <img src="{{ "images/gamelife.jpg" | relURL }}" alt="{{ $.Title }}" class="blog-thumb">
