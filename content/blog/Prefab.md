@@ -153,7 +153,7 @@ Instantiate(prefab, pos, roa);
 **动态加载无法自动释放内存，建议手动`Resources.UnloadUnusedAssets()`**  
 
 ### Addressables
-如果项目大，Prefab多，建议使用Unity的[Addressables System]({{site.baseurl}}/posts/2025-06-05-Addressables-System/)，支持：  
+如果项目大，Prefab多，建议使用Unity的[Addressables System](blog/Addressables-System/)，支持：  
 - 异步加载
 - 更灵活的资源管理
 - 内存更易控制
@@ -170,7 +170,7 @@ Instantiate(prefab, pos, roa);
 4.每次需要物体时，从池中取出并启用  
 5.用完后，返回池中而不是销毁  
 
-详见：[Object Pooling]({{site.baseurl}}/posts/2025-06-06-Object-Pooling/)
+详见：[Object Pooling](blog/Object-Pooling/)
 ## Prefab实战用法
 
 | 场景    | Prefab 应用                         |

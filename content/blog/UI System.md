@@ -1707,7 +1707,7 @@ scrollRect.verticalNormalizedPosition = 0f;
 ```
 
 ## UI Event System
-[UI Event System]({{site.baseurl}}/posts/2025-06-29-UI-Event-System/)
+[UI Event System](blog/UI-Event-System/)
 
 ## Effects
 
@@ -1745,10 +1745,10 @@ scrollRect.verticalNormalizedPosition = 0f;
 实现方式和Outline类似，也常用顶点偏移 + 颜色叠加实现；通常只需1此偏移绘制，不像Outline要多个方向
 
 ## Layout System
-详见[Layout]({{site.baseurl}}/posts/2025-06-11-Layout/)
+详见[Layout](blog/Layout/)
 
 ## Mask
-详见[Mask]({{site.baseurl}}/posts/2025-06-29-Mask/)
+详见[Mask](blog/Mask/)
 
 ## UGUI渲染流程
 UGUI的渲染是基于Canvas来驱动和管理的，Canvas是UGUI的核心渲染单元

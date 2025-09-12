@@ -201,7 +201,7 @@ public class MyGameEvent : UnityEvent<int, string> {}
 C#原生的委托和事件是灵活且强大的通信方式，它提供了一种灵活、松耦合的方式来实现不同组件间的消息传递和响应\
 使用委托和事件可以避免组件间的直接引用，减少耦合性，增强系统的可扩展性和可维护性
 
-[Event Driven Architecture]({{site.baseurl}}/posts/2025-06-03-Event-Driven-Architecture/)
+[Event Driven Architecture](blog/Event-Driven-Architecture/)
 
 优点
 - 类型安全
@@ -223,7 +223,7 @@ C#原生的委托和事件是灵活且强大的通信方式，它提供了一种
 2. 插件式结构：实现可插拔的功能系统，接口定义通用行为，插件通过实现接口提供特定功能
 3. 系统解耦：比如处理物理、音效、UI等模块时，每个接口通过接口进行交互，不需要依赖其他模块的具体实现
 
-[Interface Oriented Design]({{site.baseurl}}/posts/2025-07-15-Interface-Oriented-Design/)
+[Interface Oriented Design](blog/Interface-Oriented-Design/)
 
 优点：
 - 强烈建议用于解耦
@@ -244,7 +244,7 @@ C#原生的委托和事件是灵活且强大的通信方式，它提供了一种
 
 它不仅限于事件处理，还可以存储游戏数据，降低了系统的耦合度
 
-[ScriptableObject]({{site.baseurl}}/posts/2025-07-11-ScriptableObject/)
+[ScriptableObject](blog/ScriptableObject/)
 
 优点
 - 非常适合跨场景或跨对象的数据共享

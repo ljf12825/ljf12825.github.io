@@ -33,11 +33,11 @@ summary: Introductions the idea of loose coupling and serveral common loose coup
 
 优点：发送者不知道接收者是谁，实现解耦
 
-[Event and Callback]({{site.baseurl}}/posts/2025-06-03-Event-and-Delegate/)
+[Event and Callback](blog/Event-Driven-Architecture/)
 
 2. 接口与抽象
 编程时面向接口，而不是具体类
-[Interface Oriented Design]({{site.baseurl}}/posts/2025-07-15-Interface-Oriented-Design/)
+[Interface Oriented Design](blog/Interface-Oriented-Design/)
 
 3. ScriptableObject作为配置 & 消息中介
 ```cs

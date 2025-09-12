@@ -664,7 +664,7 @@ Unity Terrain会自动处理LOD，但如果没有设置邻居关系或高度差�
 
 
 ## 结合导航烘焙（NavMesh + Terrain）
-[Navigation]({{site.baseurl}}/posts/2025-06-11-Navigation/)
+[Navigation](blog/Navigation/)
 
 ## Runtime地形修改（Voxel、地形破坏）
 

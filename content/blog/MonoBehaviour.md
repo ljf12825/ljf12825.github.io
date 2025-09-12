@@ -284,7 +284,7 @@ void FixedUpdate() => rb.MovePosition(rb.position + Vector3.forward * 5f * Time.
 | `OnTriggerStay(Collider col)`     | 触发器内持续 |
 | `OnTriggerExit(Collider col)`     | 触发器离开  |
 
-[Unity物理系统]({{site.baseurl}}/posts/2025-06-03-Physics-System/)
+[Unity物理系统](blog/Physics-System/)
 
 #### 渲染阶段
 
@@ -329,13 +329,13 @@ void Awake()
 
 ### 2.协程（Coroutine）
 `MonoBehaviour`提供了对协程的支持，协程允许你在多个帧之间暂停执行某些代码，而不会阻塞主线程。使用协程，你可以轻松实现延迟、定时任务、动画过渡等功能
-[Coroutine]({{site.baseurl}}/posts/2025-06-03-Coroutine/)
+[Coroutine](blog/Unity-Asynchronous-and-Coroutine/)
 
 ### 3.输入处理
-[Input-System]({{site.baseurl}}/posts/2025-06-03-Input-System/)
+[Input-System](blog/Input-System/)
 
 ### 4.物理与碰撞
-[Physics-System]({{site.baseurl}}/posts/2025-06-03-Physics-System/)
+[Physics-System](blog/Physics-System/)
 
 ### 5.组件管理
 可以使用`GetComponent`和`AddComponent`等方法来访问和控制其他组件。例如，获取物体的Rigidbody`组件或添加新的组件
@@ -354,5 +354,5 @@ gameObject.AddComponent<BoxCollider>();
 - 生命周期管理：提供了许多生命周期方法，如`Awake`、 `Start`、`Update`，以及与物理和碰撞相关的方法
 
 ### 7.其他功能
-- 场景管理:[Scene-System]({{site.baseurl}}/posts/2025-06-08-Scene-System/)
-- 日志输出：[Debug]({{site.baseurl}}/posts/2025-07-12-Debug/)
+- 场景管理:[Scene-System](blog/Scene-System/)
+- 日志输出：[Debug](blog/Debug/)

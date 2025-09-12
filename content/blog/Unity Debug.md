@@ -62,10 +62,10 @@ Unity默认支持与Visual Studio的集成，在Visual Studio中可以使用许�
 - 本地变量（Locals）：查看当前函数的局部变量，检查它们的状态是否符合预期
 
 ## Profiler（性能分析器）
-[Unity Profiler]({{site.baseurl}}/posts/2025-06-11-Unity-Profiler/)
+[Unity Profiler](blog/Unity-Profiler/)
 
 ## Memory Profiler （内存分析器）
-[Unity Memory Profiler]({{site.baseurl}}/posts/2025-07-12-Unity-Memory-Profiler/)
+[Unity Memory Profiler](blog/Unity-Memory-Profiler/)
 
 ## Unity Console
 Unity的控制台时查看日志的主要地方
@@ -78,4 +78,4 @@ Unity的控制台时查看日志的主要地方
 如果你要调试控制器或输入相关的代码，Unity提供了输入模拟工具。你可以使用Unity编辑器内的`Input`工具进行模拟和测试。例如，测试不同设备的控制器输入，模拟键盘、鼠标或触摸事件
 
 ## Test Runner（单元测试）
-[Unity Test Runner]({{site.baseurl}}/posts/2025-07-12-Unity-Test-Runner/)
+[Unity Test Runner](blog/Unity-Test-Runner/)

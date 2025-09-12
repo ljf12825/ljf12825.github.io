@@ -128,7 +128,7 @@ public class SerializableDict
 - 这些方式不依赖Unity的序列化规则，因此能传几乎所有C#对象
 
 ### 序列化到文件
-[Data Driven Design]({{site.baseurl}}/posts/2025-07-15-Data-Driven-Design/)
+[Data Driven Design](blog/Data-Driven-Design/)
 
 ### 常见问题和注意事项
 - 引用类型的序列化
@@ -299,7 +299,7 @@ public class PlayerPrefsJsonExample : MonoBehaviour
 #### 文件持久化
 可以使用`System.IO`命名空间通过序列化对象的方式将数据保存为文件，常用的格式有JSON、XML和二进制，[见上文](#序列化到文件)
 
-#### [ScriptableObject]({{site.baseurl}}/posts/2025-07-11-ScriptableObject/)
+#### [ScriptableObject](blog/ScriptableObject/)
 `ScriptableObject`是Unity的一种数据容器，特别适合用于保存游戏配置、关卡数据等。它本质上是一个Unity对象，因此可以被序列化，并且可以保存在项目文件夹中，便于管理
 
 #### 云存储

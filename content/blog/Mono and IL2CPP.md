@@ -140,7 +140,7 @@ Unity的策略其实是
 - 第三方库：确保所有插件支持IL2CPP
 - 构建配置：可能需要调整链接器设置
 
-[Unity Packaging and Building]({{site.baseurl}}/posts/2025-07-18-Unity-Packaging-and-Building/)
+[Unity Packaging and Building](blog/Unity-Packaging-and-Building/)
 
 在Unity中构建时，无法直接修改Mono或IL2CPP的底层C/C++代码，因为它们是与Unity引擎核心打包在一起的编译好的二进制库\
 但是，Mono和IL2CPP的选择并非一个简单的构建选项切换，\

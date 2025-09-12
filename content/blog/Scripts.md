@@ -103,19 +103,19 @@ private float health = 100f; // 完全私有
 
 **数据类型**\
 - 基本数据类型：`int`,`float`,`bool`,`string`等
-- [Unity Build in Types]({{site.baseurl}}/posts/2025-06-03-Unity-Build-in-Types/)
+- [Unity Build in Types](blog/Unity-Build-in-Types/)
 
 **变量特性**\
-[Attribute in Unity]({{site.baseurl}}/posts/2025-07-10-Attribute-in-Unity/)
+[Attribute in Unity](blog/Attribute-in-Unity/)
 
 ## 脚本间通信（引用其他组件）
-[Unity Component Communication]({{site.baseurl}}/posts/2025-07-15-Unity-Component-Communication/)
+[Unity Component Communication](blog/Unity-Component-Communication/)
 
 ## 基类: MonoBehaviour
-[MonoBehaviour]({{site.baseurl}}/posts/2025-07-11-MonoBehaviour/)
+[MonoBehaviour](blog/MonoBehaviour/)
 
 ## ScriptableObject（数据驱动）
-[ScriptableObject]({{site.baseurl}}/posts/2025-07-11-ScriptableObject/)
+[ScriptableObject](blog/ScriptableObject/)
 
 ## 变量管理策略
 ### 序列化控制
@@ -170,7 +170,7 @@ void Update() => _rb.AddForce(...);
 ```
 
 3. 使用ObjectPool管理频繁创建/销毁的对象
-[Object Pooling]({{site.baseurl}}/posts/2025-06-06-Object-Pooling/)
+[Object Pooling](blog/Object-Pooling/)
 
 4. 合理使用Update方法
 ```cs

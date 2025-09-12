@@ -66,7 +66,7 @@ gameObject.AddComponent<AudioSource>();
 **2.组件发挥功能**
 **3.Unity引擎每一帧都会遍历所有激活的GameObject，调度它们的组件做该做的事**
 
-[Unity组件驱动架构]({{site.baseurl}}/posts/2025-06-02-Unity-Architecture/)
+[Unity组件驱动架构](blog/Unity-Component-Driven-Architecture/)
 
 ## Unity组件
 

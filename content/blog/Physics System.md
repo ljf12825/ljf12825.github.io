@@ -31,7 +31,7 @@ Unity的物理系统用于模拟真实世界中的力、运动、碰撞和约束
 物理系统每个一段固定时间（FixedUpdate）执行一次物理模拟帧（Physics Step），并根据场景中所有Rigidbody、Collider、Joint计算它们的运动和相互作用  
 
 ## 核心组件
-### [Rigidbody]({{site.baseurl}}/posts/2025-06-02-Rigidbody/) / Rigidbody2D
+### [Rigidbody](blog/Rigidbody/) / Rigidbody2D
 - 使GameObject受物理规则控制（重力、力、加速度等）
 - 你不能只加Collider而不用Rigidbody，否则不会触发物理反应
 - 属性：
@@ -44,13 +44,13 @@ Unity的物理系统用于模拟真实世界中的力、运动、碰撞和约束
 rb.AddForce(Vector3.forward * 10);
 ```
 
-### [Collider]({{site.baseurl}}/posts/2025-06-04-Collider-and-Trigger) / Collider2D
+### [Collider](blog/Collider-and-Trigger) / Collider2D
 - 物体的物理形状，用于碰撞检测
 
 ### Physics Material / PhysicsMaterial2D
 - 用于设置摩擦力、弹力等物理特性  
 
-### [Joint]({{site.baseurl}}/posts/2025-06-07-Joint) / Joint2D
+### [Joint](blog/Joint) / Joint2D
 - 连接两个Rigidbody，形成复杂的物理结构
 
 ## 物理系统的执行流程
@@ -69,7 +69,7 @@ Unity提供了碰撞层和遮罩机制来控制哪些物体会发生碰撞：
 - 不要用`transform.position`移动物体（绕过物理系统），应使用`Rigidbody.MovePosition()`或`AddForce()`
 - 所有施加力的操作应在`FixedUpdate()`中完成
 - 为每个具有Collider的对象添加Rigidbody，否则不会碰撞检测
-- 控制器角色不见时使用物理控制，推荐使用[CharacterController]({{site.baseurl}}/posts/2025-06-07-Character-Controller/)
+- 控制器角色不见时使用物理控制，推荐使用[CharacterController](blog/Character-Controller/)
 
 ## 碰撞机制（Collision）
 PhysX下的碰撞系统  

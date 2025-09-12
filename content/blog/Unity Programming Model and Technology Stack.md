@@ -17,7 +17,7 @@ Unity最核心的编程模型是组件化（Component-based）设计，它来源
 这种设计模式强调解耦，每个功能都被划分为一个独立的组件，增加了代码的复用性和可维护性
 
 ### MonoBehaviour 类
-[MonoBehaviour]({{site.baseurl}}/posts/2025-07-11-MonoBehaviour/)
+[MonoBehaviour](blog/MonoBehaviour/)
 
 在Unity中，所有游戏逻辑通常都是继承`MonoBehaviour`类来实现的。`MonoBehaviour`提供了一些生命周期函数，用于管理游戏对象的行为。这些函数包括
 - `Start()`：初始化，游戏对象激活时调用一次
@@ -28,12 +28,12 @@ Unity最核心的编程模型是组件化（Component-based）设计，它来源
 
 这些生命周期函数是Unity编程模型的核心，开发者通过重写这些函数来实现游戏对象的行为
 
-### [事件驱动编程]({{site.baseurl}}/posts/2025-07-15-Unity-Component-Communication/)
+### [事件驱动编程](blog/Unity-Component-Communication/)
 Unity传统编程中有大量事件驱动机制，尤其是在用户输入和UI交互方面
 - UI系统：Unity提供了自己的UI系统，最常见的是`UI.Button`和`UI.Slider`等UI组件，它们通过事件监听和回调处理用户输入
 - C#事件和委托：Unity的编程中也广泛使用C#的事件和委托来实现对象间的通信，例如当一个玩家触发某个动作时，其他对象可能需要响应这个事件。`Event`、`Action`和`UnityEvent`是最常用的方式
 
-### [协程（Coroutines）](/posts/2025-06-03-Unity-Asynchronous-and-Coroutine/)
+### [协程（Coroutines）](/blog/Unity-Asynchronous-and-Coroutine/)
 Unity提供了协程来简化时间和异步操作的管理。协程可以在多个帧之间执行，允许开发者编写类似于阻塞的代码，但是不会阻塞主线程
 
 例如，等待一段时间再执行某个操作，或逐步改变某个属性
@@ -57,20 +57,20 @@ IEnumerator ChangeColorOverTime()
 
 ### 传统技术栈
 在Unity中，通常使用以下技术栈来开发游戏
-- [C#]({{site.baseurl}}/posts/2025-06-02-Scripts/)：Unity的主编程语言。C#是一种面向对象语言，拥有强大的类型安全性和支持面向对象编程的功能
-- [Mono]({{site.baseurl}}/posts/2025-08-02-Mono-and-IL2CPP/)：Unity使用Mono作为其.NET实现，Mono是一个开源的.NET框架，可以让C#代码跨平台运行
-- [Physics]({{site.baseurl}}/posts/2025-06-03-Physics-System/)：Unity内置了`PhysX`引擎来处理物理模拟
-- [Animation]({{site.baseurl}}/posts/2025-06-11-Animation-System/)：Unity提供了`Animator`组件来处理动画，开发者可以通过状态机和过渡动画来控制物体的动画表现
-- [NavMesh]({{site.baseurl}}/posts/2025-06-11-Animation-System/)：用于路径寻找技术，可以通过`NavMeshAgent`让NPC在游戏世界中自动导航
+- [C#](blog/Scripts/)：Unity的主编程语言。C#是一种面向对象语言，拥有强大的类型安全性和支持面向对象编程的功能
+- [Mono](blog/Mono-and-IL2CPP/)：Unity使用Mono作为其.NET实现，Mono是一个开源的.NET框架，可以让C#代码跨平台运行
+- [Physics](blog/Physics-System/)：Unity内置了`PhysX`引擎来处理物理模拟
+- [Animation](blog/Animation-System/)：Unity提供了`Animator`组件来处理动画，开发者可以通过状态机和过渡动画来控制物体的动画表现
+- [NavMesh](blog/Navigation/)：用于路径寻找技术，可以通过`NavMeshAgent`让NPC在游戏世界中自动导航
 
 ### 资源管理与加载
 在传统Unity开发中，资源的加载和管理也是非常重要的。Unity提供了以下几种方式来管理和加载资源
-- [Asset Bundles]({{site.baseurl}}/posts/2025-07-18-Assets-Import-and-Load/)：允许将资源打包成独立文件，方便按需加载
-- [Resources文件夹]({{site.baseurl}}/posts/2025-07-18-Assets-Import-and-Load/)：Unity提供一个`Resources`文件夹，可以通过`Resources.Load()`加载资源。但这种方式会带来一些性能问题，因此在较大的项目中逐渐不推荐使用
-- [Addressable Assets]({{site.baseurl}}/posts/2025-06-05-Addressables/)：Unity推出的资源管理系统，通过`Addressable Assets`管理大型项目中的资源，可以优化加载和内存管理
+- [Asset Bundles](/blog/Assets-Import-and-Load/)：允许将资源打包成独立文件，方便按需加载
+- [Resources文件夹](blog/Assets-Import-and-Load/)：Unity提供一个`Resources`文件夹，可以通过`Resources.Load()`加载资源。但这种方式会带来一些性能问题，因此在较大的项目中逐渐不推荐使用
+- [Addressable Assets](blog/Addressables/)：Unity推出的资源管理系统，通过`Addressable Assets`管理大型项目中的资源，可以优化加载和内存管理
 
 ### 编辑器扩展和自定义工具
-Unity允许开发者[自定义编辑器界面]({{site.baseurl}}/posts/2025-07-22-Unity-Editor/)来提高工作效率。通过`Editor`或`EditorWindow`类，可以为游戏开发添加自定义的编辑工具，自动化繁琐的任务，或创建自定义的调试工具
+Unity允许开发者[自定义编辑器界面](blog/Unity-Editor/)来提高工作效率。通过`Editor`或`EditorWindow`类，可以为游戏开发添加自定义的编辑工具，自动化繁琐的任务，或创建自定义的调试工具
 
 ### 总结
 Unity的传统编程模型围绕着组件化、面向对象设计和事件驱动机制展开。开发者通过`MonoBehaviour`来管理游戏对象的生命周期和行为，并利用协程和事件驱动实现复杂的异步和响应机制。技术栈方面，C#是主力语言，配合Mono和其他工具（如物理、动画、资源管理等）共同构建完整的游戏应用
@@ -78,7 +78,7 @@ Unity的传统编程模型围绕着组件化、面向对象设计和事件驱动
 ## 现代Unity编程模型和技术栈
 与传统的Unity编程模型相比，现代Unity编程模型通常侧重于更加高效、可扩展的系统架构，特别是在处理大型项目时的性能和数据管理。近年来，Unity推出了ECS（Entity Component System）和DOTS（Data-Oriented Technology Stack），它们是为了解决传统组件化模型在性能、数据管理和多线程方面的限制
 
-### [ECS（Entity Component System）]({{site.baseurl}}/posts/2025-08-02-ECS/)
+### [ECS（Entity Component System）](blog/ECS/)
 ECS是Unity推出的全新编程模式，它强调数据导向设计（Data-Oriented Design），专注于如何高效地存储和处理游戏世界中的大规模数据。这与传统的面向对象编程（OOP）模型有很大区别
 
 **核心概念**
@@ -92,7 +92,7 @@ ECS模型不依赖于传统的`MonoBehaviour`类。相反，所有游戏逻辑�
 **性能优化**
 通过内存布局优化和批处理操作，ECS使得Unity能更好地利用硬件，特别是在多核处理器上。通过结构化的存储数据，ECS可以更高效地操作大量游戏对象和组件，这对大规模游戏和高性能需求的项目非常有帮助
 
-### [DOTS]({{site.baseurl}}/posts/2025-08-02-DOTS/)
+### [DOTS](blog/DOTS/)
 DOTS是Unity推出的一个完整的数据驱动技术栈，它包括
 - ECS：提供数据驱动的编程模型
 - Job System：允许在多个线程上并行执行工作，优化性能
@@ -106,13 +106,13 @@ DOTS是Unity推出的一个完整的数据驱动技术栈，它包括
 - Unity.Physics：结合ECS模式，用于进行高效的物理计算
 
 **性能优化与多线程**
-- [JobSystem]({{site.baseurl}}/posts/2025-08-02-Job-System/)：JobSystem使得开发者可以显式地将任务分配到不同的线程进行并行计算。这个系统使用了Unity的多线程模型，可以在多核处理器上有效地分配负载
+- [JobSystem](blog/Job-System/)：JobSystem使得开发者可以显式地将任务分配到不同的线程进行并行计算。这个系统使用了Unity的多线程模型，可以在多核处理器上有效地分配负载
 ```cs
 JobHandle jobHandle = new MyJob().Schedule();
 jobHandle.Complete();
 ```
 
-- [Burst Complier]({{site.baseurl}}/posts/2025-08-02-Burst-Complier/)：通过Burst编译器，Unity将代码编译成高度优化的机器码，进一步提升性能，尤其适用于CPU密集型任务
+- [Burst Complier](blog/Burst-Complier/)：通过Burst编译器，Unity将代码编译成高度优化的机器码，进一步提升性能，尤其适用于CPU密集型任务
 ```cs
 [BurstCompile]
 public struct MyJob : IJob

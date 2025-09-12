@@ -76,7 +76,7 @@ Unity默认生成
 
 ### `Input System UI Input Module`（新系统）
 
-详见[Input System]({{site.baseurl}}/posts/2025-06-03-Input-System/)
+详见[Input System](blog/Input-System/)
 
 适合：新版Unity Input System（使用`Input Actions`的）
 

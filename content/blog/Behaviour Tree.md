@@ -34,7 +34,7 @@ Unity中没有内建的行为树系统，但是可以使用一些现有的库来
 - NodeCanvas：另一个插件，支持行为树、状态机等多种AI决策系统，可以很方便地设计复杂的行为树
 - Unity Behavior：2024年底Unity发布的免费行为树包，可视化
 
-## [Unity ML-Agents]({{site.baseurl}}/posts/2025-08-12-ML-Agents/)
+## [Unity ML-Agents]({{/blog/ML-Agents/)
 [GitHub ML-Agents](https://github.com/Unity-Technologies/ml-agents.git)
 
 ML-Agents (Machine Learning Agents)是由Unity官方提供的一款工具包，旨在帮助开发者在Unity中实现和训练智能体（Agents）使用机器学习算法。它为游戏和仿真环境中的AI提供了一种灵活的方式，利用强化学习、监督学习等技术来训练代理学习从环境中获得经验并做出决策
@@ -97,7 +97,7 @@ ML-Agents支持多种强化学习算法
   - DDPG（Deep Deterministic Policy Gradient）：用于连续动作空间的深度强化学习算法，适合处理高维、连续的动作问题
   - A3C（Asynchronous Advantage Actor-Critic）：适用于多智能体训练，利用多线程来提升训练效率
 
-## [Behavior Designer]({{site.baseurl}}/posts/2025-08-12-Behaviour-Designer/)
+## [Behavior Designer](blog/Behaviour-Designer/)
 Behaviour Designer是一款强大的Unity插件，用于创建和管理行为树，它让开发者可以通过图形化界面设计复杂的AI行为，而不需要手动编写复杂的代码。Behaviour Designer的主要优势在于它提供了一种直观的方式来构建和调试AI的决策系统，同时支持强化学习和传统的AI算法
 
 ### Behaviour Designer的核心功能
@@ -157,7 +157,7 @@ Behavior Designer支持在多个线程中并行执行不同的任务，使得行
 4. 内建的AI任务和动作
 Behavior Designer包含了一些常用的AI任务和动作，如NavMesh移动、攻击、逃跑、等待等，可以大大简化开发过程
 
-## [Unity Behavior]({{site.baseurl}}/posts/2025-08-12-Unity-Behavior/)
+## [Unity Behavior](blog/Unity-Behavior/)
 [Manual Behavior](https://docs.unity3d.com/Packages/com.unity.behavior@1.0/manual/index.html)
 
 ## 自定义行为树实现

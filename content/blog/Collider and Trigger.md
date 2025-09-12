@@ -298,4 +298,4 @@ Trigger是Collider的感应区域模式
 - 如果两个物体都没有Rigidbody，触发事件不会发生
 
 **本模块仅讲Collider作为组件的使用，详细物理系统请参照：**  
-[Physics System]({{site.baseurl}}/posts/2025-06-03-Physics-System/)
+[Physics System](blog/Physics-System/)

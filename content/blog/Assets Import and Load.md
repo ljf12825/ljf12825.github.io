@@ -22,16 +22,16 @@ summary: Unity assets and resources management system(Resources folder, Asset Bu
 
 ### 常见的资源类型导入
 - 纹理（Texture）：Unity会自动识别常见的纹理文件类型，并提供压缩、过滤等选项
-  详见[Texture 导入]({{site.baseurl}}/posts/2025-06-29-Texture/)
+  详见[Texture 导入](/blog/Texture)
 
 - 模型（Models）：Unity支持多种3D模型格式，尤其是`.fbx`，并支持自动生成碰撞体、网格和骨骼动画
-  详见[Model]({{site.baseurl}}/posts/2025-06-07-Model/)
+  详见[Model](/blog/Model/)
 
 - 音频（Audio）：音频文件支持不同的压缩格式，可以设置为单声道、立体声等
-  详见[Audio System]({{site.baseurl}}/posts/2025-06-11-Audio-System/)
+  详见[Audio System](/blog/Audio-System)
 
 - 动画（Animations）：可以通过`Animator`系统来管理和播放
-  详见[Animation System]({{site.baseurl}}/posts/2025-06-11-Animation-System/)
+  详见[Animation System](/blog/Animation-System)
 
 
 ## 资源加载
@@ -277,7 +277,7 @@ Addressable Asset System允许开发者通过地址使用资产，一旦一个�
 
 Addressables使用异步加载技术，支持从任意位置加载任意依赖项集合。无论是使用直接引用、传统Asset Bundle还是Resources文件夹，Addressables都可以提供一种更简便的方法
 
-[Addressables]({{site.baserul}}/posts/2025-06-05-Addressables/)
+[Addressables](/blog/Addressables/)
 
 ## 资源卸载
 资源加载后，不及时释放也可能导致内存泄露

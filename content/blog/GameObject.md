@@ -26,9 +26,9 @@ GameObject继承自Object，是所有可以存在于场景中的物体的基类
 Unity的某些系统（例如全局照明、遮挡、批处理、导航和反射探针）依赖于GameObject的静态状态，可以使用`GameObjectUtility.SetStaticEditorFlags`来控制Unity的哪些系统将GameObject视为静态的
 
 ### Tag and Layer
-[Tag]({{site.baseurl}}/posts/2025-06-01-Tag/)
+[Tag](blog/Tag/)
 
-[Layer]({{site.baseurl}}/posts/2025-06-01-Layer)
+[Layer](blog/Layer)
 
 ## 二、GameObject的结构与组成
 一个GameObject至少包含一个组件：Transform

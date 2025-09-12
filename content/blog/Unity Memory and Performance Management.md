@@ -20,7 +20,7 @@ summary: "Memory and Performance"
 ### 显存管理
 
 ## 性能优化
-### [Profile]({{site.baseurl}}/posts/2025-06-11-Unity-Profiler/)
+### [Profile](blog/Unity-Profiler/)
 
 ### CPU Bound vs GPU Bound
 

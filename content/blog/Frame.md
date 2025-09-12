@@ -18,7 +18,7 @@ summary: Frame and GameLoop
 ```css
 [Input] -> [Physics] -> [Update] -> [AI/Animator] -> [LateUpdate] -> [Rendering] -> [Present]
 ```
-详见[Scripts]({{site.baseurl}}/posts/2025-06-02-Scripts/)
+详见[Scripts](blog/Scripts/)
 
 ## 不同帧的分类
 
@@ -149,7 +149,7 @@ Unity中一帧的总耗时通常来自这几个方面：
 | 不断产生临时对象                                   | 对象池、避免 foreach/ToList/Lambda |
 | 大量 UI 弹窗频繁创建销毁                             | UI 预加载 + 缓存 + 对象池化管理         |
 
-**详见 [Unity Performance Tuning]({{site.baseurl}}/posts/2025-06-13-Unity-Performance-Tuning/)**
+**详见 [Unity Performance Tuning](blog/Unity-Performance-Tuning/)**
 
 ## 帧的底层原理
 从底层角度说： 
