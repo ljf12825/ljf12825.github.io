@@ -66,6 +66,5 @@
 
 [Git](https://git-scm.com/) include [Git About](https://git-scm.com/about/branching-and-merging), [Git Documentation](https://git-scm.com/doc), [Git Community](https://git-scm.com/community) and DownLoad.
 
-[mixamo](https://www.mixamo.com/) : A very popular and powerful online service under Adobe, which mainly provides functions related to 3D character animation.
 
 
