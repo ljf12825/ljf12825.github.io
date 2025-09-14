@@ -7,3 +7,5 @@
 [SharpLab](https://sharplab.io/) : An online lab for .NET/C# developers. Enter your source code(.NET Framework) and it will immediately tell you the various intermediate products of this code after compilation. Including IL(Intermediate Language), JIT（ASM）， Syntax Tree and Optimization effect.
 
 [Godbolt(Compiler Explorer)](https://godbolt.org/) : An online compiler experiment tool. Enter a code(C++、Rust、Go、Python、Haskell...) and it will be displayed immediately: 1. Compiled assembly code (you can choose different compilers: GCC, Clang, MSVC...) 2. Compiler optimization process(Compoler optimization process(`-O0`,`-O2`,`-O3`,`-Ofast`...)) 3. Intermediate representation (IR) output by the compiler (e.g. LLVM IR) 4. Differences between different compilers.
+
+[Choosse an open source license](https://choosealicense.com/) : Maintained by GitHub, this website helps you choose the most suitable open source license.
