@@ -45,7 +45,7 @@ header {
   background: darkblue;
   color: white;
   height: 90px;
-  width: min(100% - 4em, 1756px);
+  width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
   display: flex;
@@ -66,7 +66,7 @@ header .banner {
   top: 90px;
   background: white;
   border: 1px solid darkblue;
-  width: min(100% - 60px, 1754px);
+  width: 100%;
   margin: 0 auto;
   z-index: 9999;
 }
@@ -124,7 +124,7 @@ header .banner {
 footer {
   background: white;
   border: 1px solid darkblue;
-  width: calc(100% - 4em);
+  width: 100%;
   max-width: 1756px;
   margin: 0 auto;
 }
