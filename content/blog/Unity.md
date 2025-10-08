@@ -1,10 +1,10 @@
 ﻿---
-title: "Unity Underlying Architecture"
+title: "Unity"
 date: 2025-06-01
 categories: [Note]
-tags: [Unity, Memory]
+tags: [Unity]
 author: "ljf12825"
-summary: Overview of Unity Underlying and Structure
+summary: Overview of Unity overall architecture
 ---
 ## 引擎整体架构
 ### Unity Player(C++引擎内核)
