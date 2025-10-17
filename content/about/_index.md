@@ -13,7 +13,7 @@ The following is an introduction to the website modules:
 ---
 >This is a paragraph I once wrote on the homepage of my old blog
 
-`👨‍💻知  & 💡识`
+`知 & 识`
 
 `The brain has a similar LRU mechanism, so some knowledge needs to find an "extra environment" to store.`
 
