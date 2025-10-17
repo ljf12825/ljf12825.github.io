@@ -1,13 +1,14 @@
 .single_article {
   font-family: Arial, Helvetica, sans-serif;
   color: black;
-  font-size: medium;
+  font-size: 18px;
   margin-right: 230px;
 }
 
 .single_article .title {
     padding: 35px 40px;
-    font-size: 3em;
+    font-size: 38px;
+    font-weight: bold;
     color: darkblue;
     line-height: normal;
 }
@@ -20,22 +21,21 @@
 .single_article h6 {
     color: darkblue;
     border-bottom: none;
-    margin-top: 1em;
-    margin-bottom: 10px;
-    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: -5px;
 }
 
-.single_article h1 { font-size: 2.5em; }
-.single_article h2 { font-size: 2.0em; }
-.single_article h3 { font-size: 1.75em; }
-.single_article h4 { font-size: 1.5em; }
-.single_article h5 { font-size: 1.25em; }
-.single_article h6 { font-size: 1.1em; }
+.single_article h1 { font-size: 33px; }
+.single_article h2 { font-size: 30px; }
+.single_article h3 { font-size: 27px; }
+.single_article h4 { font-size: 24px; }
+.single_article h5 { font-size: 21px; }
+.single_article h6 { font-size: 18px; font-weight: bold;}
 
 
 .single_article p {
   margin-top: 0px;
-  font-size: large;
+  font-size: 18px;
   line-height: normal;
 }
 
@@ -44,11 +44,13 @@
   color: #666;
   font-weight: lighter;
   padding: 10px 5px;
+  border-bottom: 1px solid darkblue;
 }
 
 .single_article .content {
   max-width: 100%;
   margin-top: -1em;
+  margin-left: 45px;
 }
 
 .single_article .content img {
@@ -114,13 +116,12 @@
 /* 目录缩进 */
 .toc ul {
   list-style: none;
-  padding-left: 0;
-  margin-left: -10;
-  margin-top: 0;
+  padding-left: 0px;
+  margin-left: 0px;
 }
 
 .toc li {
-  margin: 0.3rem 0;
+  margin: 0.3rem 0px;
 }
 
 .toc ul ul { margin-left: 1rem; }
