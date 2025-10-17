@@ -7,8 +7,8 @@ body {
   font-size: 14px;
   background: white;
   color: black;
-  line-height: 15px;
   flex-direction: column;
+  width: 100%;
 }
 
 body a{
@@ -43,28 +43,27 @@ header {
   top: 0;
   background: darkblue;
   color: white;
-  height: 90px;
+  height: 60px;
   width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  z-index: 9999;
 }
 
 header .banner {
   width: 190px;
-  height: 90px;
+  height: 60px;
   object-fit:contain;
-  margin-left: -7px;
-  margin-top: 5px;
+  margin-left: -40px;
+  margin-top: 3px;
 }
 
 .topnav {
   position: sticky;
-  top: 90px;
+  top: 60px;
   background: white;
-  border: 1px solid darkblue;
+  border-bottom: 1px solid darkblue;
   width: 100%;
   margin: 0 auto;
   z-index: 9999;
@@ -122,7 +121,7 @@ header .banner {
 
 footer {
   background: white;
-  border: 1px solid darkblue;
+  border-top: 1px solid darkblue;
   width: 100%;
   margin: 0 auto;
 }
