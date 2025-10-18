@@ -1,5 +1,5 @@
 ﻿---
-title: "Native Layer to Script Layer"
+title: "Script Layer to Native Layer"
 date: 2025-06-01
 categories: [Note]
 tags: [Unity, Underlying Principle]
