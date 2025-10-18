@@ -61,7 +61,7 @@ Scripting Runtime负责
 - Mono（传统的.NET运行时）
 - IL2CPP（把IL代码转成C++再编译为机器码）
 
-### [Mono&IL2CPP](/content/blog/Mono%20and%20IL2CPP.md)
+### [Mono&IL2CPP](/content/blog/Mono&IL2CPP.md)
 
 ### 托管内存与GC机制
 无论是Mono还是IL2CPP，脚本层都运行在托管内存环境
@@ -83,7 +83,7 @@ Unity自2019起采用了增量式GC（Incremental GC），缓解了帧冻结问�
   - P/Invoke（Platform Invocation）
   - Generated Bindings（新系统，自动生成高效桥接代码）
 
-[NativeLayer to ScriptLayer](/content/blog/Native%20Layer%20to%20Script%20Layer.md)
+[NativeLayer to ScriptLayer](/content/blog/ScriptLayer2NativeLayer.md)
 
 脚本中`transform.position = new Vector3(1, 0, 0)`\
 实际上是：C#对象 -> IL2CPP桥接 -> C++原生Transform -> 改变底层数据
