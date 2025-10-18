@@ -40,6 +40,10 @@
   line-height: normal;
 }
 
+.single_article a {
+  text-decoration: underline;
+}
+
 .single_article .meta {
   font-size: 1rem;
   color: #666;
