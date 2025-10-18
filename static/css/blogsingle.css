@@ -23,6 +23,7 @@
     border-bottom: none;
     margin-top: 0;
     margin-bottom: -5px;
+    scroll-margin: 100px;
 }
 
 .single_article h1 { font-size: 33px; }
@@ -37,6 +38,10 @@
   margin-top: 0px;
   font-size: 18px;
   line-height: normal;
+}
+
+.single_article a {
+  text-decoration: underline;
 }
 
 .single_article .meta {
