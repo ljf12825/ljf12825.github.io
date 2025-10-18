@@ -23,6 +23,7 @@
     border-bottom: none;
     margin-top: 0;
     margin-bottom: -5px;
+    scroll-margin: 100px;
 }
 
 .single_article h1 { font-size: 33px; }
