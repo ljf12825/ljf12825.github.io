@@ -54,3 +54,5 @@ jobs:
           publish_dir: ./public
           # 可选：自定义提交信息，注意 [skip ci] 防止循环触发
           commit_message: ${{ github.event.head_commit.message }} - Built by Hugo [skip ci]
+          user_name: github-actions[bot]
+          user_email: 41898282+github-actions[bot]@users.noreply.github.com
