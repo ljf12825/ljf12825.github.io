@@ -7,6 +7,7 @@ author: "ljf12825"
 summary: Overview of Unity overall architecture
 ---
 # 引擎整体架构
+引擎中有什么，系统如何被设计出来（静态结构），系统模块关系、职责划分、调用层级
 ## Unity Player(C++引擎内核)
 Unity Player是Unity的心脏，它是引擎的底层C++实现，是多个底层模块的统称，负责把游戏逻辑变成实际在不同平台上运行的程序
 ### 定位与作用
@@ -98,6 +99,14 @@ Unity自2019起采用了增量式GC（Incremental GC），缓解了帧冻结问�
 [底层系统：渲染 / 物理 / 音频 / 输入 ...]
 ```
 
+### C#与C++之间的调用成本（Interop Overhead）
+这是Unity性能优化的一个“隐形税收点”\
+当C#调用C++时会产生上下文切换和封送（marshalling）开销，比如：
+- 结构体、字符串、数组再托管与原生之间需要拷贝
+- 每次调用都要执行安全检查与栈切换
+
+Unity为此推出了Generated Bindings系统，让IL2CPP能自动生成“零封送”接口，大幅减少了调用开销。这也是Unity越来越接近原生引擎性能的关键
+
 ## 平台抽象层（Platform Abstraction Layer, PAL）
 决定了跨平台能力和性能底线的部分
 ### 定位与作用
@@ -177,6 +186,10 @@ Unity编译时通过宏开关（如`UNITY_ANDROID`, `UNITY_WIN`, `UNITY_IOS`）�
 - 性能优化边界：理解PAL能让你知道为什么不同平台表现差异
 - 原生插件开发：写Native Plugin时必须遵循PAL的约定，否则Unity Player无法安全调用
 - 自定义渲染管线/底层扩展：需要理解PAL如何连接系统GPU
+
+> Unity的核心结构是一种“三明治模型”：
+> C#托管逻辑（上层）<-> C++引擎内核（中层）<-> 系统平台接口（底层）
+这种设计的关键价值是可移植性与扩展性。C++层保持跨平台的引擎逻辑一致性，而PAL层“翻译”系统调用。这样Unity能再不同设备上跑同一逻辑，而脚本开发者甚至无需关心平台差异
 
 ## 渲染管线（Build-in / URP / HDRP）
 渲染管线负责把场景数据（模型、光照、材质、相机）转换成图像像素的整个过程
@@ -289,6 +302,11 @@ RenderPass / RenderFeature //扩展模块
 - 完全控制渲染顺序和命令
 
 SRP的出现让Unity从“游戏引擎”进化成“渲染框架”
+
+可拔插渲染框架思想（RenderGraph + GPU Driven Rendering）的趋势：
+> Unity正在逐渐把SRP向RenderGraph体系演化，用命令图（Command Graph）组织GPU Pass，未来会更接近Unreal的RDG或自研引擎的GPU-driven架构
+
+渲染正在从“指令式”走向“数据驱动 + 并行调度”
 
 ## 物理与动画子系统
 ### 物理子系统（Physics）
@@ -458,8 +476,126 @@ public class MyWindow : EditorWindow
 > Editor扩展层是“可编程编辑器 + 工具接口”，是Unity生产力和自动化的核心
 
 # 运行时结构
+运行时结构指的是————程序在运行过程中各个模块之间的组织方式、生命周期、以及数据和控制流的关系\
+它回答了三个问题：
+- 程序运行时，系统里“有哪些东西”
+- 这些东西是“怎么互相作用”的
+- 整个系统是“怎么从启动到退出”保持运作的（动态行为）
+
+Unity在游戏启动后会维持一个完整的“虚拟世界”的组织体系\
+当游戏从可执行文件启动时，Unity会依次初始化引擎模块、加载场景、实例化对象、执行脚本、维护帧循环，再到最终退出。
+
 ## GameObject & Component系统
+Unity的运行时世界由GameObject和Component构成
+- GameObject：场景中的“实体”，仅仅是容器，不包含逻辑
+- Component：组件，决定物体的行为和外观。Transform、Renderer、Collider、Script都是组件
+
+在C++层，每个GameObject对应一个`GameObject`结构体实例，内部维护组件列表（C#层表现为`GetComponent`、`AddComponent`接口）\
+脚本层的组件（MonoBehaviour）只是托管包装，实际行为逻辑通过绑定机制连接C++对象
+> Unity世界 = 对象树（Transform Hierarchy）+ 组件系统（Behavior Modules）
+
 ## Scene & Asset管理
+场景（Scene）是对象的集合
+- 当运行时加载场景时，Unity会
+    1. 解析序列化文件（.unity/.scene）
+    2. 实例化GameObject与Component
+    3. 加载依赖的Asset（纹理、Mesh、材质、音频等）
+    4. 建立引用关系（GUID到对象映射）
+
+资源加载有三种主要路径：
+- 内嵌资源（Build-in Asset）：打包时直接编入
+- AssetBundle/Addressable：运行时按需加载
+- Resources.Load()：动态从Resources文件夹中读入
+
+> Scene系统本质是“对象状态的快照”，运行时通过反序列化重建整个世界
+
 ## 生命周期管理
+Unity的运行时生命周期可以分为三个层面：\
+**引擎启动层面**\
+`RuntimeInitialize` -> 初始化Player -> 初始化模块（渲染、物理、音频、输入等） -> 加载第一个场景
+
+**对象层面**\
+每个MonoBehaviour实例会经历：\
+`Awake()` -> `OnEnable()` -> `Start()` -> `Update()`/`FixedUpdate()`/`LateUpdate()` -> `OnDisable()` -> `OnDestroy()` \
+C++对象（Transform、Renderer等）在销毁时会触发托管对象解绑（GCHandle释放）
+
+**帧循环层面**\
+每一帧：
+1. 处理输入（InputSystem）
+2. 执行物理更新（FixedUpdate）
+3. 调用脚本逻辑（Update/LateUpdate）
+4. 执行动画系统
+5. 渲染提交（Camera.Render）
+6. 提交GPU命令 -> 显示输出
+
+> 生命周期系统维持了Unity世界的“持续运作”，是时间与逻辑的主线
+
 ## 脚本绑定与执行机制
+Unity脚本运行在托管层（Mono/IL2CPP），核心机制是托管对象 <-> 原生对象绑定（Binding）
+
+运行时流程：
+1. C#编译为IL字节码
+2. Mono或IL2CPP执行
+3. 脚本调用C# API，如`transform.position`
+4. 通过绑定接口（InternalCall或Generated Bindings）访问C++对象
+5. 修改底层引擎数据
+
+`Transform`、`Rigidbody`、`Renderer`等对象其实是C#包装 + C++实体\
+脚本层操作的是“代理”，数据变更最终反映在C++引擎核心中
+> 脚本驱动引擎，而引擎执行结果再反馈回脚本世界
+
 ## 内存模型与GC管理
+Unity的运行时有双层内存体系
+
+| 层级 | 语言 | 管理方式 | 内容 |
+| 托管层 | C#(Mono/IL2CPP) | GC | 脚本对象、数据逻辑 |
+| 原生层 | C++(Unity Player) | 手动分配/释放 | 渲染资源、物理数据、引擎核心 |
+
+C#层对象通过`GCHandle`或`NativeArray`等结构与原生内存交互\
+GC采用增量式GC（Incremental GC），分帧执行，降低卡顿
+
+高性能开发要点：
+- 避免频繁分配（尤其在Update中）
+- 使用对象池（Object Pool）
+- 利用`struct`与`NativeController`（如Burst + JobSystem）绕过GC压力
+> GC是Unity运行时世界的“代谢系统”，要控制频率、减少毒素
+
+## 系统协作与调度（System Collaboration & Scheduling）
+系统协作与调度决定了每个子系统何时启动、如何交互、谁先谁后、怎样同步
+
+### 核心理念：PlayerLoop驱动的分层世界
+Unity运行时的根本调度机制就是一个多层嵌套的循环体系：PlayerLoop\
+它是整个运行时的“心跳”
+
+```scss
+while (ApplicationRunning)
+{
+    EarlyUpdate();   // 输入、时间、任务调度
+    FixedUpdate();   // 物理系统（定时器驱动）
+    Update();        // 脚本与AI逻辑
+    LateUpdate();    // 动画、摄像机、后处理
+    RenderFrame();   // 渲染提交与同步
+}
+```
+这是真实存在于Unity C++层的PlayerLoopSystem结构
+```cs
+PlayerLoopSystem
+{
+  type;
+  subSystemList[];
+  updateDelegate;
+}
+```
+每一帧中，Unity会遍历这些系统树，依序调用每个系统注册的更新函数\
+这样，不同模块可以通过注册`PlayerLoopSystem`来参与调度，而不需要硬编码耦合\
+这就是Unity架构的关键哲学：可重组的帧调度系统
+
+# 数据流动
+Unity的本质是“数据驱动的引擎”，数据流贯穿编辑器与运行时
+
+# 设计哲学与扩展性
+Unity的设计哲学是“抽象一切复杂性，暴露最小接口”\
+
+# 总结
+Unity的Runtime世界，本质是一个“以GameObject为节点、以Component为行为单元、以Scene为组织载体”的实体系统。\
+这其实与现代ECS（Entity-Component-System）框架思想一脉相承，只是Unity传统架构的耦合度更高。Unity DOTS就是在重构这个部分，让引擎从对象导向进化到数据导向
