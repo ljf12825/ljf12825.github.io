@@ -367,7 +367,7 @@ rb.AddForce(Vector3.up * 10f);
     - Inverse Kinematics（逆向运动学）
     - 让角色手、脚自然接触地面或环境
 
-#### 脚本曾交互
+#### 脚本层交互
 ```cs
 Animator anim = GetComponent<Animator>();
 anim.SetFloat("Speed", 1.0f);
@@ -590,8 +590,113 @@ PlayerLoopSystem
 这样，不同模块可以通过注册`PlayerLoopSystem`来参与调度，而不需要硬编码耦合\
 这就是Unity架构的关键哲学：可重组的帧调度系统
 
+### [时间维度的分层协作(MonoBehaviour生命周期)](/home/ljf12825linux/ljf12825.github.io/content/blog/MonoBehaviour.md)
+
+### 系统之间的协作链
+以一次典型帧为例，系统之间的数据与依赖链如下
+```scss 
+InputSystem
+  ↓
+ScriptSystem (MonoBehaviour.Update)
+  ↓
+PhysicsSystem (FixedUpdate)
+  ↓
+AnimationSystem
+  ↓
+TransformSystem (同步位置)
+  ↓
+CameraSystem (确定视角矩阵)
+  ↓
+RenderSystem (生成渲染命令)
+  ↓
+GPU (执行渲染)
+```
+这条链并非严格线性，而是通过 **任务系统（Job System）和依赖图（Dependency Graph）**并行调度；例如：动画计算，粒子模拟，骨骼蒙皮都可以异步执行，只要它们不依赖同一份数据
+
+### 数据同步与Job调度
+Unity的Job System是运行时的多线程调度核心\
+它的工作原理大致是：
+- 每个系统提交若干条任务（Job）
+- Job之间通过依赖关系（Dependency）控制执行顺序
+- 调度器动态分配任务到多个线程执行
+- 最后在主线程同步结果（Sync Point）
+
+```nginx 
+TransformJob
+ ├─依赖-> AnimationJob
+ └─依赖-> PhysicsJob
+ ```
+ 这意味着：在执行`TransformSystem`之前，动画与物理系统必须先完成它们的计算。这种模型的优势是高并行性和低耦合，但也要求架构层具备明确的数据所有权与生命周期管理
+
+### 渲染与主循环的协同
+渲染系统是调度中的特殊角色\
+Unity在渲染时会：
+1. 收集场景数据（Cilling）
+2. 生成Draw Call队列（CommandBuffer）
+3. 提交给渲染线程（Graphics Jobs）
+4. GPU异步执行（Command Buffer）
+
+这部分采用“双缓冲帧同步”
+```text 
+CPU: Frame N+1 在准备中
+GPU: Frame N 在渲染中
+```
+这种机制确保GPU和CPU并行工作，不互相阻塞\
+Unity通过Fence同步点控制帧节奏，使物理、脚本、渲染三者稳定配合
+
+### PlayerLoop的可扩展性
+开发者可以通过`PlayerLoop.SetPlayerLoop()`修改Unity的帧调度表\
+例如插入自定义系统
+```cs 
+var loop = playerLoop.GetCurrentPlayerLoop();
+InsertSystemAfter(ref loop, typeof(UnityEngine.PlayerLoop.Update), typeof(MyCustomSystem));
+PlayerLoop.SetPlayerLoop(loop);
+```
+这意味着：Unity的调度系统是开放的\
+这也是DOTS、Entity Component System、以及SRP（Scriptable Render Pipeline）能独立运作的根本原因
+
 # 数据流动
-Unity的本质是“数据驱动的引擎”，数据流贯穿编辑器与运行时
+数据流动是Unity引擎中的核心机制，Unity的本质是“数据驱动的引擎”，数据流贯穿编辑器与运行时\
+在Unity中，数据流动是指游戏或应用在运行时，从输入到输出的数据如何在不同系统和模块之间传递。每一帧的数据流动涉及了多个层级，从外部输入、逻辑计算，到最终的渲染输出
+
+## 输入到处理
+### 1. 输入数据流
+首先，游戏的输入来源通常包括键盘、鼠标、触摸屏、手柄等设备。输入系统是最早处理数据的系统
+
+**数据流动：**
+- 用户输入：例如玩家按下了一个按键或移动了鼠标
+- 输入系统：Unity中的`InputSystem`会处理这些事件，封装成可用的输入数据
+  - 新的`Input System`通常会以事件驱动的方式处理输入（例如键盘事件、鼠标点击、触摸滑动等），而旧的`Input`系统则是轮询输入状态
+  - 这时的输入数据通常是基于设备状态（如是否按下、按下的时长、触摸的坐标等）
+
+```cs 
+// 示例：新Input System获取按键输入
+if (Keyboard.current.spaceKey.isPressed)
+{
+  // 做相应处理
+}
+```
+
+### 2. 脚本逻辑处理
+在接收到输入数据后，游戏的脚本逻辑（通常是C#脚本中的`Update()`函数）会对这些输入做出反应，并根据输入更新游戏的状态
+
+**数据流动：**
+- 输入系统将输入数据传递到脚本
+- 脚本根据输入修改GameObject的属性、动画状态、物理状态等
+  - 例如，当玩家按下键盘的某个键时，`Updaate()`函数会更新玩家角色的位置，改变它的速度或状态
+```cs 
+void Update()
+{
+  if (Keyboard.current.spaceKey.wasPressedThisFrame)
+  {
+      // 执行跳跃
+      character.Jump();
+  }
+}
+```
+
+## 从脚本到物理引擎
+
 
 # 设计哲学与扩展性
 Unity的设计哲学是“抽象一切复杂性，暴露最小接口”\
