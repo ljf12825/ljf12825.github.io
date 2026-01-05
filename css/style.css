@@ -49,6 +49,7 @@ header {
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  z-index: 9998;
 }
 
 header .banner {
@@ -212,12 +213,12 @@ p .katex {
 }
 
 blockquote {
-  border-left: 4px solid black;
+  border-left: 4px solid blue;
   padding: 1px 20px;
   margin: 1rem 0;
   background-color: darkblue;
   color: white;
-  font-style: bold;
+  font-weight: bold;
   position: relative;  
 }
 
@@ -230,7 +231,7 @@ blockquote::before {
   content: ">";
   position: absolute;
   left: 5px;
-  top: 0.4rem;
+  top: 0.3rem;
   color: white;
 }
 
