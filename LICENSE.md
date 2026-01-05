@@ -1,4 +1,4 @@
-Copyright © 2025 Jeff Lee (ljf12825). All rights reserved.
+Copyright © 2026 Jeff Lee (ljf12825). All rights reserved.
 
 This repository contains different types of content, each licensed separately:
 
@@ -24,5 +24,6 @@ This repository contains different types of content, each licensed separately:
 ---
 
 Notes:
-- If a file or directory contains its own LICENSE file, that license takes precedence.  
+
+- If a file or directory contains its own LICENSE file, that license takes precedence.
 - If no license is specified, all rights are reserved.
