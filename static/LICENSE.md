@@ -1,4 +1,4 @@
-Copyright © 2025 Jeff Lee (ljf12825). All rights reserved.
+Copyright © 2026 Jeff Lee (ljf12825). All rights reserved.
 
 This repository contains different types of content, each licensed separately:
 
