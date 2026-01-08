@@ -1,6 +1,5 @@
-/* 页面标题 */
 .article_page_title {
-  color: darkblue;
+  color: #000080;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   margin: 20px 50px;
 }
@@ -16,7 +15,7 @@
 /* 每条文章 */
 .article_item h2 a {
   text-decoration: underline;
-  color: darkblue;
+  color: #000080;
   font-size: larger;
   font-family: 'Times New Roman', Times, serif;
 }

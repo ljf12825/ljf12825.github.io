@@ -23,9 +23,9 @@
   left: 97rem;
   font-size: 0.95rem;
   padding: 1rem;
-  border-left: 3px solid darkblue;
-  border-right: 1px solid darkblue;
-  border-bottom: 1px solid darkblue;
+  border-left: 3px solid #000080;
+  border-right: 1px solid #000080;
+  border-bottom: 1px solid #000080;
   background: white;
 }
 
@@ -34,8 +34,8 @@
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
   margin-top: 0;
-  color: darkblue;
-  border-bottom: 1px solid darkblue;
+  color: #000080;
+  border-bottom: 1px solid #000080;
 }
 
 /* 目录缩进 */
@@ -57,7 +57,7 @@
 /* 链接 */
 .toc a {
   text-decoration: none;
-  color: darkblue;
+  color: #000080;
   transition: color 0.2s ease;
 }
 
@@ -142,7 +142,7 @@
 }
 
 .single_article nav a {
-  color: darkblue;
+  color: #000080;
   font-size: 1rem;
   transition: color 0.2s ease;
 }

@@ -9,7 +9,7 @@
     padding: 35px 40px;
     font-size: 38px;
     font-weight: bold;
-    color: darkblue;
+    color: #000080;
     line-height: normal;
 }
 
@@ -19,7 +19,7 @@
 .single_article h4, 
 .single_article h5, 
 .single_article h6 {
-    color: darkblue;
+    color: #000080;
     border-bottom: none;
     margin-top: 0;
     margin-bottom: -5px;
@@ -49,7 +49,7 @@
   color: #666;
   font-weight: lighter;
   padding: 10px 5px;
-  border-bottom: 1px solid darkblue;
+  border-bottom: 1px solid #000080;
 }
 
 .single_article .content {
@@ -83,7 +83,7 @@
 }
 
 .single_article nav a {
-  color: darkblue;
+  color: #000080;
   font-size: 1rem;
   transition: color 0.2s ease;
 }
@@ -102,10 +102,10 @@
   overflow-y: auto;
   font-size: small;
   padding: 1rem;
-  border-left: 3px solid darkblue;
-  border-right: 1px solid darkblue;
-  border-bottom: 1px solid darkblue;
-  border-top: 1px solid darkblue;
+  border-left: 3px solid #000080;
+  border-right: 1px solid #000080;
+  border-bottom: 1px solid #000080;
+  border-top: 1px solid #000080;
   background: white;
 }
 
@@ -114,8 +114,8 @@
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
   margin-top: 0;
-  color: darkblue;
-  border-bottom: 1px solid darkblue;
+  color: #000080;
+  border-bottom: 1px solid #000080;
 }
 
 /* 目录缩进 */
@@ -136,7 +136,7 @@
 /* 链接 */
 .toc a {
   text-decoration: none;
-  color: darkblue;
+  color: #000080;
   transition: color 0.2s ease;
 }
 
