@@ -13,7 +13,7 @@ body {
 
 body a{
   text-decoration: none;
-  color: darkblue;
+  color: #000080;
 }
 
 body a:hover{
@@ -22,7 +22,7 @@ body a:hover{
 
 body hr {
   height: 0.5px;
-  background-color: darkblue;
+  background-color: #000080;
 
 }
 
@@ -41,7 +41,7 @@ main {
 header {
   position: sticky;
   top: 0;
-  background: darkblue;
+  background: #000080;
   color: white;
   height: 60px;
   width: 100%;
@@ -64,7 +64,7 @@ header .banner {
   position: sticky;
   top: 60px;
   background: white;
-  border-bottom: 1px solid darkblue;
+  border-bottom: 1px solid #000080;
   width: 100%;
   margin: 0 auto;
   z-index: 9999;
@@ -85,7 +85,7 @@ header .banner {
 .topnav a {
   display: block;
   padding: 0.75em 1em;
-  color: darkblue;
+  color: #000080;
   text-decoration: none;
   cursor: pointer;
 }
@@ -110,19 +110,19 @@ header .banner {
 .content h4,
 .content h5,
 .content h6 {
-  color: darkblue;
+  color: #000080;
   font-family: 'Lucida Sans', Verdana, sans-serif;
 }
 
 .content h2 {
-  border-bottom: 1px solid darkblue;
+  border-bottom: 1px solid #000080;
   padding-bottom: 0.3em;
   margin-top: 1.5em;
 }
 
 footer {
   background: white;
-  border-top: 1px solid darkblue;
+  border-top: 1px solid #000080;
   width: 100%;
   margin: 0 auto;
 }
@@ -142,19 +142,19 @@ th, td {
 }
 
 th {
-  background-color: darkblue;
+  background-color: #000080;
   color: white;
 }
 
 code {
-  background-color: darkblue;
+  background-color: #000080;
   color: white;
   padding: 1px 3px;
   border-radius: 5px;
 }
 
 .highlight {
-    background-color: darkblue;
+    background-color: #000080;
     overflow-x: auto;
     margin: 20px 0;
     word-break: normal;
@@ -163,7 +163,7 @@ code {
 }
 
 .highlight pre, pre code {
-  background-color: darkblue !important;
+  background-color: #000080 !important;
   display: block;
   margin: 0;
 }
@@ -172,7 +172,7 @@ code {
     font-family:"Fira Code", "JetBrains Mono", "Cascadia Code";
     color: #ffffff;
     line-height: 20px;
-    background-color: darkblue;
+    background-color: #000080;
     font-size: 0.95rem;
 }
 
@@ -213,18 +213,18 @@ p .katex {
 }
 
 blockquote {
-  border-left: 4px solid blue;
+  border-left: 4px solid #c0c0c0;
   padding: 1px 20px;
   margin: 1rem 0;
-  background-color: darkblue;
+  background-color: #000080;
   color: white;
-  font-weight: bold;
   position: relative;  
 }
 
 blockquote p {
   margin-top: 0.3rem !important;
   margin-bottom: 0.3rem;
+  color: #c0c0c0
 }
 
 blockquote::before {

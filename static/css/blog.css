@@ -1,68 +1,75 @@
+
 :root{
   --page-max-width: 1750px;
   --gap: 1rem;
   --card-radius: 20px;
-  --card-shadow: 0 6px 18px rgba(17,24,39, 1);
-  --card-shadow-hover: 0 10px 30px rgba(17,24,39,0.10);
+  --card-shadow: 0 6px 18px rgba(17,24,39, 0.15);
+  --card-shadow-hover: 0 10px 30px rgba(17,24,39,0.25);
   --accent: white;
-  --muted: white;
+  --muted: #d1d5db;
   --text: white;
+  --sidebar-width: 270px;
 }
 
 /* 全局盒模型 */
 *,
 *::before,
-*::after { box-sizing: border-box; }
-
-/* 容器布局：中间内容 + 右侧 sidebar */
-.blog-container {
-  display: grid;
-  grid-template-columns: 1486px 250px; /* 中间 + 右侧 */
-  gap: 1rem;
-  max-width: var(--page-max-width);
-  margin: 0px auto;
+*::after {
+  box-sizing: border-box;
 }
 
-/* 中间内容 */
+/* =======================
+   主容器
+======================= */
+.blog-container {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding-right: calc(var(--sidebar-width) + 1rem); /* 给 fixed sidebar 让位 */
+}
+
+/* =======================
+   中间内容
+======================= */
 .blog-main {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding-left: 0;
-  padding-top: 0;
 }
 
 /* 页标题 */
 .page-title {
   text-align: left;
-  color: darkblue;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: #000080;
+  font-family: 'Lucida Sans', Geneva, Verdana, sans-serif;
 }
 
-/* 卡片网格 */
+/* =======================
+   卡片网格
+======================= */
 .blog-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 280px));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: var(--gap);
   align-items: start;
 }
 
-/* 卡片样式 */
+/* =======================
+   卡片样式
+======================= */
 .blog-card {
   display: flex;
   flex-direction: column;
-  background: darkblue;
+  background: #000080;
   border-radius: var(--card-radius);
   overflow: hidden;
   box-shadow: var(--card-shadow);
   text-decoration: none;
   color: inherit;
-  transition: transform 180ms ease, box-shadow 180ms ease;
-  height: auto;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .blog-card:hover {
-  transform: translateY(-4px) scale(1.01);
+  transform: translateY(-4px);
   box-shadow: var(--card-shadow-hover);
 }
 
@@ -72,7 +79,6 @@
   height: 140px;
   object-fit: cover;
   display: block;
-  background: linear-gradient(180deg, #f3f4f6, #e5e7eb);
 }
 
 /* 卡片内容 */
@@ -81,20 +87,16 @@
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
-  flex: 1 1 auto;
-  justify-content: space-between;
+  flex: 1;
 }
 
 /* 标题 */
 .blog-title {
   margin: 0;
   font-size: 1.05rem;
-  line-height: 1.2;
   font-weight: bold;
+  line-height: 1.2;
   color: var(--text);
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 /* 元信息 */
@@ -102,15 +104,15 @@
   font-size: 0.82rem;
   color: var(--muted);
   display: flex;
-  gap: 0.35rem;
   flex-direction: column;
-  align-items: start;
-  flex-wrap: wrap;
+  gap: 0.25rem;
 }
-.blog-meta .date { white-space: nowrap; }
-.blog-meta .author { font-weight: 500; color: white; }
-.blog-meta .categories { font-weight: 500; color: white}
-.blog-meta .tags { color: white; font-size: 0.82rem; }
+
+.blog-meta .author,
+.blog-meta .categories,
+.blog-meta .tags {
+  color: white;
+}
 
 /* 摘要 */
 .blog-summary {
@@ -118,95 +120,109 @@
   color: white;
   font-size: 0.92rem;
   line-height: 1.35;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 /* 阅读更多 */
 .read-more {
-  display: inline-block;
-  text-align: right;
-  margin-top: 0.4rem;
+  margin-top: auto;
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--accent);
-  text-decoration: none;
-  padding: 0;
-  border-radius: 6px;
-  transition: background-color 140ms ease, color 140ms ease;
-}
-.read-more:hover {
-  color: red;
+  text-align: right;
   text-decoration: none;
 }
 
-/* 右侧 sidebar */
+.read-more:hover {
+  color: red;
+}
+
+/* =======================
+   右侧 Sidebar（fixed）
+======================= */
 .sidebar-right {
-  background: #f9f9f9;
-  padding: 1rem;
-  background-color: darkblue;
   position: fixed;
   top: 100px;
+  right: 0;
   bottom: 50px;
-  right: 0px;
-  width: 270px;
+  width: var(--sidebar-width);
+  padding: 1rem;
+  background-color: #000080;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: white darkblue;
+  scrollbar-color: white #000080;
 }
+
 .sidebar-right h3 {
-  margin-top: 50px; 
+  margin-top: 2rem;
   color: white;
   border-bottom: 1px solid white;
 }
+
+/* 搜索框 */
 .search-box input {
   width: 100%;
   padding: 0.5rem;
   border: 1px solid #ccc;
 }
-.tags-box ul { list-style: none; padding: 0; margin: 0.5rem 0 0 0; }
-.tags-box li { display: inline-block; margin: 0.25rem; }
-.tags-box a {
-  text-decoration: none;
-  color: var(--accent);
-  font-size: 0.85rem;
-  padding: 0;
-}
-.tags-box a:hover { color: red; }
 
-/* tag 选中态 */
-.tag-link.active {
-  color: red;
-  font-weight: bold;
+/* tags */
+.tags-box ul,
+.categories-box ul {
+  list-style: none;
+  padding-left: 10px;
+  margin-top: 0.5rem;
 }
 
-.categories-box ul { list-style: none; padding: 0; margin: 0.5rem 0 0 0;}
-.categories-box li { display: inline-block; margin: 0.25rem; }
+.tags-box li,
+.categories-box li {
+  display: inline-block;
+  margin: 0.25rem;
+}
+
+.tags-box a,
 .categories-box a {
   text-decoration: none;
-  color: var(--accent);
+  color: white;
   font-size: 0.85rem;
-  padding: 0;
-  border-radius: 5px;
-  transition: background 0.2s;
 }
-.categories-box a:hover { color: red; }
 
+.tags-box a:hover,
+.categories-box a:hover {
+  color: red;
+}
+
+.tag-link.active,
 .category-link.active {
   color: red;
   font-weight: bold;
 }
 
-/* 响应式 */
+/* =======================
+   响应式
+======================= */
 @media (max-width: 1024px) {
-  .blog-container { grid-template-columns: 2fr 1fr; }
-  .sidebar-right { display: block; }
+  .blog-container {
+    padding-right: 0;
+  }
+
+  .sidebar-right {
+    position: static;
+    width: 100%;
+    margin-top: 2rem;
+  }
 }
+
 @media (max-width: 640px) {
-  .blog-container { grid-template-columns: 1fr; max-width: 100%; }
-  .blog-grid { grid-template-columns: 1fr 1fr; padding: 0.75rem; gap: 0.75rem; width: 100%; }
-  .sidebar-right { display: none; }
-  .blog-thumb { height: 160px; }
-  .page-title { font-size: 1.4rem; margin-bottom: 1rem; }
+  .blog-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .blog-thumb {
+    height: 160px;
+  }
+
+  .page-title {
+    font-size: 1.4rem;
+  }
 }
