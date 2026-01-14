@@ -1,107 +1,130 @@
 body {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  font-family: Verdana, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  background: white;
-  color: black;
-  flex-direction: column;
-  width: 100%;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	font-family: Verdana, Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	background: white;
+	color: black;
+	flex-direction: column;
+	width: 100%;
 }
 
-body a{
-  text-decoration: none;
-  color: #000080;
+body a {
+	text-decoration: none;
+	color: #000080;
 }
 
-body a:hover{
-  color: red;
+body a:hover {
+	color: red;
 }
 
 body hr {
-  height: 0.5px;
-  background-color: #000080;
+	height: 0.5px;
+	background-color: #000080;
 
 }
 
 main {
-  flex: 1;
-  padding: 20px;
+	flex: 1;
+	padding: 20px;
 }
 
 .container {
-  width: 100%;
-  margin: 0 auto;   
-  padding: 0 7px;    
-  box-sizing: border-box;
+	width: 100%;
+	margin: 0 auto;
+	padding: 0 7px;
+	box-sizing: border-box;
 }
 
 header {
-  position: sticky;
-  top: 0;
-  background: #000080;
-  color: white;
-  height: 60px;
-  width: 100%;
-  margin: 0 auto;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  z-index: 9998;
+	position: sticky;
+	top: 0;
+	background: #000080;
+	color: white;
+	height: 60px;
+	width: 100%;
+	margin: 0 auto;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	z-index: 999;
 }
 
 header .banner {
-  width: 190px;
-  height: 60px;
-  object-fit:contain;
-  margin-left: -40px;
-  margin-top: 3px;
+	width: 190px;
+	height: 60px;
+	object-fit: contain;
+	margin-left: -40px;
+	margin-top: 3px;
 }
 
 .topnav {
-  position: sticky;
-  top: 60px;
-  background: white;
-  border-bottom: 1px solid #000080;
-  width: 100%;
-  margin: 0 auto;
-  z-index: 9999;
+	position: sticky;
+	top: 60px;
+	background: white;
+	border-bottom: 1px solid #000080;
+	width: 100%;
+	margin: 0 auto;
+	z-index: 9999;
 }
 
-.topnav > .container > ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
+.topnav>.container>ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .topnav li {
-  position: relative;
+	position: relative;
 }
 
 .topnav a {
-  display: block;
-  padding: 0.75em 1em;
-  color: #000080;
-  text-decoration: none;
-  cursor: pointer;
+	display: block;
+	padding: 0.75em 1em;
+	color: #000080;
+	text-decoration: none;
+	cursor: pointer;
 }
 
 .topnav a:hover {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 
 .topnav a.active {
-  font-weight: bold;
-  text-decoration: underline;
+	font-weight: bold;
+	text-decoration: underline;
 }
 
+.terminal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    font-family: monospace;
+    font-size: 14px;
+    padding: 20px 16px;
+    background: rgba(0, 0, 0, 0);
+    color: #C0C0C0;
+    z-index: 9999;
+}
+
+.cursor {
+    margin-left: 2px;
+    animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
 .content {
-  padding: 0;
-  margin: 0 3em;
+	padding: 0;
+	margin: 0 3em;
 }
 
 .content h1,
@@ -110,138 +133,176 @@ header .banner {
 .content h4,
 .content h5,
 .content h6 {
-  color: #000080;
-  font-family: 'Lucida Sans', Verdana, sans-serif;
+	color: #000080;
+	font-family: 'Lucida Sans', Verdana, sans-serif;
 }
 
 .content h2 {
-  border-bottom: 1px solid #000080;
-  padding-bottom: 0.3em;
-  margin-top: 1.5em;
+	border-bottom: 1px solid #000080;
+	padding-bottom: 0.3em;
+	margin-top: 1.5em;
 }
 
 footer {
-  background: white;
-  border-top: 1px solid #000080;
-  width: 100%;
-  margin: 0 auto;
+	background: white;
+	border-top: 1px solid #000080;
+	width: 100%;
+	margin: 0 auto;
 }
 
 table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: 1em 0;
-  display: block;
-  overflow-x: auto;
+	border-collapse: collapse;
+	width: 100%;
+	margin: 1em 0;
+	display: block;
+	overflow-x: auto;
 }
 
-th, td {
-  border: 1px solid black;
-  padding: 0.5em 1em;
-  text-align: center;
+th,
+td {
+	border: 1px solid black;
+	padding: 0.5em 1em;
+	text-align: center;
 }
 
 th {
-  background-color: #000080;
-  color: white;
+	background-color: #000080;
+	color: white;
 }
 
 code {
-  background-color: #000080;
-  color: white;
-  padding: 1px 3px;
-  border-radius: 5px;
+	background-color: #000080;
+	color: white;
+	padding: 1px 3px;
+	border-radius: 5px;
 }
 
 .highlight {
-    background-color: #000080;
-    overflow-x: auto;
-    margin: 20px 0;
-    word-break: normal;
-    display: block;
-    white-space: pre;
+	background-color: #000080;
+	overflow-x: auto;
+	margin: 20px 0;
+	word-break: normal;
+	display: block;
+	white-space: pre;
 }
 
-.highlight pre, pre code {
-  background-color: #000080 !important;
-  display: block;
-  margin: 0;
+.highlight pre,
+pre code {
+	background-color: #000080 !important;
+	display: block;
+	margin: 0;
 }
 
 .highlight code {
-    font-family:"Fira Code", "JetBrains Mono", "Cascadia Code";
-    color: #ffffff;
-    line-height: 20px;
-    background-color: #000080;
-    font-size: 0.95rem;
+	font-family: "Fira Code", "JetBrains Mono", "Cascadia Code";
+	color: #ffffff;
+	line-height: 20px;
+	background-color: #000080;
+	font-size: 0.95rem;
 }
 
-.highlight .k { color: #00FFFF; } /* 关键字 */
-
-.highlight .nc { color: #FFD700; font-weight: bold; } /* 类/类型名 */
-
-.highlight .nf { color: #7cfc00; font-weight: bold;} /* 函数名 */
-
-.highlight .s  { color: #ffa500; } /* 字符串 */
-
-.highlight .c  { color: #B0C4DE; font-style: italic; } /* 注释 */
-
-.highlight .m { color: #ff69b4; } /* 数字 */
-
-.highlight .o { color: #ffffff;} /* 操作符 */
-
-.highlight .p { color: #d3d3d3;} /* 标点 */
-
-.katex { 
-  font-size: 1.2rem; 
-  color: #222; 
+.highlight .k {
+	color: #00FFFF;
 }
 
-.katex-display { 
-  margin: 1em 0; 
-  text-align: left !important;
+/* 关键字 */
+
+.highlight .nc {
+	color: #FFD700;
+	font-weight: bold;
 }
 
-.katex-display > .katex {
-  display: inline-block;
-  text-align: left !important;
+/* 类/类型名 */
+
+.highlight .nf {
+	color: #7cfc00;
+	font-weight: bold;
 }
 
-p .katex { 
-  margin-left: 0.2em; 
-  margin-right: 0.2em; 
+/* 函数名 */
+
+.highlight .s {
+	color: #ffa500;
+}
+
+/* 字符串 */
+
+.highlight .c {
+	color: #B0C4DE;
+	font-style: italic;
+}
+
+/* 注释 */
+
+.highlight .m {
+	color: #ff69b4;
+}
+
+/* 数字 */
+
+.highlight .o {
+	color: #ffffff;
+}
+
+/* 操作符 */
+
+.highlight .p {
+	color: #d3d3d3;
+}
+
+/* 标点 */
+
+.katex {
+	font-size: 1.2rem;
+	color: #222;
+}
+
+.katex-display {
+	margin: 1em 0;
+	text-align: left !important;
+}
+
+.katex-display>.katex {
+	display: inline-block;
+	text-align: left !important;
+}
+
+p .katex {
+	margin-left: 0.2em;
+	margin-right: 0.2em;
 }
 
 blockquote {
-  border-left: 4px solid #c0c0c0;
-  padding: 1px 20px;
-  margin: 1rem 0;
-  background-color: #000080;
-  color: white;
-  position: relative;  
+	border-left: 4px solid #c0c0c0;
+	padding: 1px 20px;
+	margin: 1rem 0;
+	background-color: #000080;
+	color: white;
+	position: relative;
 }
 
 blockquote p {
-  margin-top: 0.3rem !important;
-  margin-bottom: 0.3rem;
-  color: #c0c0c0
+	margin-top: 0.3rem !important;
+	margin-bottom: 0.3rem;
+	color: #c0c0c0
 }
 
 blockquote::before {
-  content: ">";
-  position: absolute;
-  left: 5px;
-  top: 0.3rem;
-  color: white;
+	content: ">";
+	position: absolute;
+	left: 5px;
+	top: 0.3rem;
+	color: white;
 }
 
-ul, ol {
-  padding-top: 0;
-  margin-left: -20px;
+ul,
+ol {
+	padding-top: 0;
+	margin-left: -20px;
 }
 
 .hugo-logo {
-  max-width: 100px;
-  height: auto;
-  display: flex;
+	max-width: 100px;
+	height: auto;
+	display: flex;
 }
