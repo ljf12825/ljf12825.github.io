@@ -25,26 +25,7 @@
 </pre>
 <div class="side">
 
-<pre class="ascii">
-
-                                                                                                                                                     ,---,  
-                                                                                                                                                  ,`--.' |  
-                                 ___                                ,--,                      .---.                     ,--,                      |   :  :  
-       ,---.  ,--,             ,--.'|_                            ,--.'|                     /. ./|                   ,--.'|         ,---,        '   '  ;  
-      /__./|,--.'|    __  ,-.  |  | :,'          ,--,             |  | :                 .--'.  ' ;   ,---.    __  ,-.|  | :       ,---.'|        |   |  |  
- ,---.;  ; ||  |,   ,' ,'/ /|  :  : ' :        ,'_ /|             :  : '                /__./ \ : |  '   ,'\ ,' ,'/ /|:  : '       |   | :        '   :  ;  
-/___/ \  | |`--'_   '  | |' |.;__,'  /    .--. |  | :    ,--.--.  |  ' |            .--'.  '   \' . /   /   |'  | |' ||  ' |       |   | |        |   |  '  
-\   ;  \ ' |,' ,'|  |  |   ,'|  |   |   ,'_ /| :  . |   /       \ '  | |           /___/ \ |    ' '.   ; ,. :|  |   ,''  | |     ,--.__| |        '   :  |  
- \   \  \: |'  | |  '  :  /  :__,'| :   |  ' | |  . .  .--.  .-. ||  | :           ;   \  \;      :'   | |: :'  :  /  |  | :    /   ,'   |        ;   |  ;  
-  ;   \  ' .|  | :  |  | '     '  : |__ |  | ' |  | |   \__\/: . .'  : |__          \   ;  `      |'   | .; :|  | '   '  : |__ .   '  /  |        `---'. |  
-   \   \   ''  : |__;  : |     |  | '.'|:  | : ;  ; |   ," .--.; ||  | '.'|          .   \    .\  ;|   :    |;  : |   |  | '.'|'   ; |:  |         `--..`;  
-    \   `  ;|  | '.'|  , ;     ;  :    ;'  :  `--'   \ /  /  ,.  |;  :    ;           \   \   ' \ | \   \  / |  , ;   ;  :    ;|   | '/  '        .--,_     
-     :   \ |;  :    ;---'      |  ,   / :  ,      .-./;  :   .'   \  ,   /             :   '  |--"   `----'   ---'    |  ,   / |   :    :|        |    |`.  
-      '---" |  ,   /            ---`-'   `--`----'    |  ,     .-./---`-'               \   \ ;                        ---`-'   \   \  /          `-- -`, ; 
-             ---`-'                                    `--`---'                          '---"                                   `----'             '---`"  
-                                                                                                                                                            
-
-</pre>
+<pre class="ascii", id="alive"></pre>
 
 </div>
 </div>
@@ -66,6 +47,30 @@
   padding-left: 32px;
 }
 </style>
+
+<script>
+
+const pre = document.getElementById('alive');
+
+async function loadAscii(path) {
+  const res = await fetch(path);
+  return res.text();
+}
+
+async function updatePreContent() {
+  const path =
+    window.innerWidth <= 1080
+      ? '/ascii/alive-narrow.txt'
+      : '/ascii/alive-wide.txt';
+
+  pre.textContent = await loadAscii(path);
+}
+
+updatePreContent();
+window.addEventListener('resize', updatePreContent);
+
+</script>
+
 ---
 
 > This is a paragraph once wrote on the homepage of my old blog
