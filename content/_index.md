@@ -1,8 +1,8 @@
 # Crossroads
 
-> The only thing I want to do is game.
-
-<pre>
+> The only thing I want to do is for
+<div class="layout">
+<pre class="ascii">
 +--------------------------------------------------------------+
 |                        <a href="https://rightbrain.com">RightBrain</a>                            |
 |                             |                                |
@@ -23,7 +23,49 @@
 |                         <a href="https://g.com">CSBasic</a>                         <a href="https://ai.com">AI</a>   |
 +--------------------------------------------------------------+
 </pre>
+<div class="side">
 
+<pre class="ascii">
+
+                                                                                                                                                     ,---,  
+                                                                                                                                                  ,`--.' |  
+                                 ___                                ,--,                      .---.                     ,--,                      |   :  :  
+       ,---.  ,--,             ,--.'|_                            ,--.'|                     /. ./|                   ,--.'|         ,---,        '   '  ;  
+      /__./|,--.'|    __  ,-.  |  | :,'          ,--,             |  | :                 .--'.  ' ;   ,---.    __  ,-.|  | :       ,---.'|        |   |  |  
+ ,---.;  ; ||  |,   ,' ,'/ /|  :  : ' :        ,'_ /|             :  : '                /__./ \ : |  '   ,'\ ,' ,'/ /|:  : '       |   | :        '   :  ;  
+/___/ \  | |`--'_   '  | |' |.;__,'  /    .--. |  | :    ,--.--.  |  ' |            .--'.  '   \' . /   /   |'  | |' ||  ' |       |   | |        |   |  '  
+\   ;  \ ' |,' ,'|  |  |   ,'|  |   |   ,'_ /| :  . |   /       \ '  | |           /___/ \ |    ' '.   ; ,. :|  |   ,''  | |     ,--.__| |        '   :  |  
+ \   \  \: |'  | |  '  :  /  :__,'| :   |  ' | |  . .  .--.  .-. ||  | :           ;   \  \;      :'   | |: :'  :  /  |  | :    /   ,'   |        ;   |  ;  
+  ;   \  ' .|  | :  |  | '     '  : |__ |  | ' |  | |   \__\/: . .'  : |__          \   ;  `      |'   | .; :|  | '   '  : |__ .   '  /  |        `---'. |  
+   \   \   ''  : |__;  : |     |  | '.'|:  | : ;  ; |   ," .--.; ||  | '.'|          .   \    .\  ;|   :    |;  : |   |  | '.'|'   ; |:  |         `--..`;  
+    \   `  ;|  | '.'|  , ;     ;  :    ;'  :  `--'   \ /  /  ,.  |;  :    ;           \   \   ' \ | \   \  / |  , ;   ;  :    ;|   | '/  '        .--,_     
+     :   \ |;  :    ;---'      |  ,   / :  ,      .-./;  :   .'   \  ,   /             :   '  |--"   `----'   ---'    |  ,   / |   :    :|        |    |`.  
+      '---" |  ,   /            ---`-'   `--`----'    |  ,     .-./---`-'               \   \ ;                        ---`-'   \   \  /          `-- -`, ; 
+             ---`-'                                    `--`---'                          '---"                                   `----'             '---`"  
+                                                                                                                                                            
+
+</pre>
+
+</div>
+</div>
+<style>
+.layout {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+
+.ascii {
+  font-family: monospace;
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+.side {
+  flex: 1;
+  padding-left: 32px;
+}
+</style>
 ---
 
 > This is a paragraph once wrote on the homepage of my old blog
@@ -70,8 +112,8 @@ This repository contains different types of content, each licensed separately:
 Notes:
 - If a file or directory contains its own LICENSE file, that license takes precedence.  
 - If no license is specified, all rights are reserved.
-
 ```
+
 ---
 
 >Me: Jeff Lee(ljf12825)
@@ -86,9 +128,6 @@ Notes:
   <span><img src="/images/imgi_2_hugo-logo-wide.svg" alt="HugoLogo" width="150" height="40" class="hugo-logo"></span>
 </div>
 
-
-
 <!-- <a href="https://github.com/ljf12825">GitHub</a> <p align="right">Build with <a href="https://gohugo.io/">Hugo</a></p> 
 
 E-mail: <a href="mailto:ljf12825@graingen.com">ljf12825@graingen.com</a> <p align="right"><img src="/images/imgi_2_hugo-logo-wide.svg" alt="HogoLogo"></p> -->
-
