@@ -10,7 +10,6 @@ body {
 	padding-top: 90px;
 	margin: 0;
 	display: flex;
-	height: calc(100vh - 90px);
 	font-family: Verdana, Helvetica, Arial, sans-serif;
 	font-size: 14px;
 	background: white;
