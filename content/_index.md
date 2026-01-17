@@ -1,4 +1,4 @@
-# Crossroads
+# navigation
 
 > The only thing I want to do is for
 <div class="layout">
@@ -81,7 +81,7 @@ Everything and understanding of them is constantly changing, so everything is co
 I pursue first principles, original documents and unprocessed sources of knowledge, pure, solid, independent and thoughtful just like espresso!
 If what I recorded is helpful to you, it's my pleasure!
 If there are any errors, please contact with me.
-If one day my site is no longer updated, please check the latest push in Recent Posts
+If one day my site is no longer updated, please check the latest push.
 ```
 
 ---
@@ -124,7 +124,7 @@ Notes:
 >Me: Jeff Lee(ljf12825)
 
 <div style="display: flex; justify-content: space-between; align-items: center;">
-  <a href="https://github.com/ljf12825">GitHub</a>
+  <span>GitHub: <a href="https://github.com/ljf12825">Jeff Lee(ljf12825)</a></span>
   <span>Build with <a href="https://gohugo.io/">Hugo</a></span>
 </div>
 

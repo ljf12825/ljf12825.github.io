@@ -10,17 +10,18 @@ body {
 	padding-top: 90px;
 	margin: 0;
 	display: flex;
-	min-height: 100vh;
+	height: calc(100vh - 90px);
 	font-family: Verdana, Helvetica, Arial, sans-serif;
 	font-size: 14px;
 	background: white;
-	color: black;
+	color: #000000;
 	flex-direction: column;
 }
 
 body a {
 	text-decoration: none;
 	color: #000080;
+	text-decoration: underline;
 }
 
 body a:hover {
@@ -186,8 +187,8 @@ th {
 }
 
 code {
-	background-color: #000080;
-	color: white;
+	background-color: #FFFF00;
+	color: #000000;
 	padding: 1px 3px;
 	border-radius: 5px;
 }
@@ -274,7 +275,7 @@ pre code {
 
 .katex {
 	font-size: 1.2rem;
-	color: #222;
+	color: #222222;
 }
 
 .katex-display {
