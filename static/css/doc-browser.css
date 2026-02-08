@@ -1,0 +1,677 @@
+/* GitHub风格文档浏览器样式 */
+.github-style {
+  --border-color: #d0d7de;
+  --border-radius: 6px;
+  --bg-color: #ffffff;
+  --hover-bg: #f6f8fa;
+  --text-color: #1f2328;
+  --text-secondary: #656d76;
+  --accent-color: #0969da;
+  --accent-hover: #0858c7;
+}
+
+.file-explorer {
+  margin-top: 2rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background: var(--bg-color);
+  overflow: hidden;
+}
+
+/* 面包屑导航 */
+.breadcrumb {
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--hover-bg);
+}
+
+.breadcrumb-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 4px;
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.breadcrumb-separator {
+  color: var(--text-secondary);
+}
+
+.breadcrumb-link {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-size: 14px;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.breadcrumb-link:hover {
+  background: var(--hover-bg);
+  text-decoration: underline;
+}
+
+.breadcrumb-link.current {
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+/* 文件浏览器主体布局 */
+.file-explorer-main {
+  display: flex;
+  min-height: 600px;
+}
+
+/* 左侧文件树 */
+.file-tree-container {
+  width: 280px;
+  border-right: 1px solid var(--border-color);
+  background: var(--bg-color);
+  position: relative;
+  transition: width 0.3s ease;
+}
+
+.file-tree-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--hover-bg);
+}
+
+.file-tree-header h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.tree-toggle {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tree-toggle:hover {
+  background: var(--border-color);
+  color: var(--text-color);
+}
+
+.tree-toggle.collapsed svg {
+  transform: rotate(-90deg);
+}
+
+/* 文件树样式 */
+.file-tree {
+  padding: 8px 0;
+  overflow-y: auto;
+  max-height: calc(600px - 48px);
+}
+
+.tree-root {
+  font-size: 14px;
+}
+
+.tree-item {
+  position: relative;
+  user-select: none;
+}
+
+.tree-item-content {
+  display: flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 16px;
+}
+
+.tree-item:hover {
+  background: var(--hover-bg);
+}
+
+.tree-item.active {
+  background: var(--accent-color);
+}
+
+.tree-item.active .tree-link {
+  color: white;
+}
+
+.tree-item.active .octicon {
+  color: white;
+}
+
+.tree-toggle {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 4px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.tree-toggle:hover {
+  background: var(--border-color);
+}
+
+.tree-toggle.hidden {
+  visibility: hidden;
+}
+
+.tree-toggle.collapsed svg {
+  transform: rotate(-90deg);
+  transition: transform 0.2s ease;
+}
+
+.tree-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  text-decoration: none;
+  color: var(--text-color);
+  border-radius: 4px;
+  flex: 1;
+  font-size: 13px;
+  min-height: 24px;
+}
+
+.tree-link:hover {
+  background: var(--hover-bg);
+  text-decoration: none;
+}
+
+.tree-link.folder {
+  font-weight: 600;
+}
+
+.tree-link.file {
+  font-weight: 400;
+}
+
+.octicon {
+  flex-shrink: 0;
+  color: var(--text-secondary);
+}
+
+.tree-children {
+  padding-left: 20px;
+  border-left: 1px dashed var(--border-color);
+  margin-left: 10px;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.tree-children.collapsed {
+  max-height: 0 !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 右侧文件列表 */
+.file-list-container {
+  flex: 1;
+  background: var(--bg-color);
+}
+
+.file-list-header {
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-color);
+}
+
+.file-list-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.file-count {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* 文件列表 */
+.list-container {
+  padding: 0;
+}
+
+.file-list-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: var(--text-color);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.2s ease;
+}
+
+.file-list-item:hover {
+  background: var(--hover-bg);
+  text-decoration: none;
+}
+
+.file-icon {
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  color: var(--text-secondary);
+}
+
+.file-name {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.file-meta {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* README预览 */
+.readme-preview {
+  margin: 16px;
+  padding: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background: var(--bg-color);
+}
+
+.readme-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.readme-content {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+.readme-link {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--accent-color);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.readme-link:hover {
+  text-decoration: underline;
+}
+
+/* 文档内容查看器 */
+.doc-content-viewer {
+  padding: 32px;
+}
+
+.doc-header {
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.doc-header h1 {
+  margin: 0 0 12px 0;
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.doc-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.doc-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.doc-body {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-color);
+}
+
+.doc-body h2 {
+  margin-top: 32px;
+  margin-bottom: 16px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.doc-body h3 {
+  margin-top: 24px;
+  margin-bottom: 12px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.doc-footer {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-color);
+}
+
+.doc-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  padding: 4px 8px;
+  background: var(--hover-bg);
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* 空文件夹状态 */
+.empty-folder {
+  padding: 48px 16px;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.empty-folder svg {
+  margin-bottom: 16px;
+  color: var(--border-color);
+}
+
+.empty-folder p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .file-explorer-main {
+    flex-direction: column;
+  }
+  
+  .file-tree-container {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    max-height: 300px;
+    overflow: hidden;
+  }
+  
+  .file-tree-container.collapsed {
+    max-height: 48px;
+  }
+  
+  .file-tree {
+    max-height: 252px;
+  }
+  
+  .doc-content-viewer {
+    padding: 16px;
+  }
+  
+  .doc-header h1 {
+    font-size: 24px;
+  }
+  
+  .breadcrumb {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  .breadcrumb-list {
+    display: inline-flex;
+  }
+}
+
+/* 暗色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .github-style {
+    --border-color: #30363d;
+    --bg-color: #0d1117;
+    --hover-bg: #161b22;
+    --text-color: #c9d1d9;
+    --text-secondary: #8b949e;
+    --accent-color: #58a6ff;
+    --accent-hover: #388bfd;
+  }
+}
+
+/* 增强的路径导航样式 */
+.path-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px 24px;
+  background: var(--bg-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.repo-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.repo-name {
+  color: var(--accent-color);
+}
+
+.repo-slash {
+  color: var(--text-secondary);
+  margin-left: 4px;
+}
+
+/* 路径面包屑导航 */
+.path-breadcrumb {
+  flex: 1;
+  min-width: 0;
+}
+
+.path-breadcrumb-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.path-breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.path-breadcrumb-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  font-size: 14px;
+  color: var(--accent-color);
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.path-breadcrumb-link:hover {
+  background: var(--hover-bg);
+  text-decoration: underline;
+}
+
+.path-breadcrumb-link.current {
+  color: var(--text-color);
+  font-weight: 600;
+  background: none;
+  cursor: default;
+}
+
+.path-breadcrumb-link.current:hover {
+  text-decoration: none;
+  background: none;
+}
+
+.breadcrumb-separator {
+  color: var(--text-secondary);
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+/* 头部操作区域 */
+.header-actions {
+  margin-top: 12px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+}
+
+.current-path-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.path-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  background: var(--hover-bg);
+  border-radius: 4px;
+}
+
+.item-count {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+/* 文件夹和文件列表增强 */
+.section-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--hover-bg);
+  margin-top: 16px;
+}
+
+.section-header:first-child {
+  margin-top: 0;
+}
+
+.section-header h4 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* 文件夹项特殊样式 */
+.folder-item {
+  background: linear-gradient(135deg, var(--bg-color) 0%, rgba(9, 105, 218, 0.02) 100%);
+  border-left: 3px solid var(--accent-color);
+}
+
+.folder-item:hover {
+  background: linear-gradient(135deg, var(--hover-bg) 0%, rgba(9, 105, 218, 0.05) 100%);
+}
+
+.folder-item .file-name {
+  font-weight: 600;
+}
+
+.file-slash {
+  color: var(--text-secondary);
+  margin-left: 2px;
+}
+
+.folder-stats {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  background: var(--hover-bg);
+  border-radius: 4px;
+  font-size: 11px;
+}
+
+/* 文件项样式 */
+.file-item {
+  border-left: 3px solid transparent;
+}
+
+.file-date {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .path-header {
+    padding: 12px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .path-breadcrumb {
+    width: 100%;
+  }
+  
+  .path-breadcrumb-link {
+    max-width: 120px;
+  }
+  
+  .header-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .current-path-info {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
