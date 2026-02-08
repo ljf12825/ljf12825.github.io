@@ -312,11 +312,12 @@ blockquote p {
 }
 
 blockquote::before {
-	content: ">";
+	content: "//";
 	position: absolute;
 	left: 5px;
-	top: 0.3rem;
-	color: white;
+	top: 5px;
+	font-weight: initial;
+	color: #c0c0c0;
 }
 
 ul,

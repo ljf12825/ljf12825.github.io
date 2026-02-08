@@ -1,6 +1,6 @@
 # navigation
 
-> The only thing I want to do is for
+> There is only one goal
 <div class="layout">
 <pre class="ascii">
 +--------------------------------------------------------------+
@@ -73,7 +73,7 @@ window.addEventListener('resize', updatePreContent);
 
 ---
 
-> This is a paragraph once wrote on the homepage of my old blog
+> Something write down here
 
 ```text
 The brain has a similar LRU mechanism, so some knowledge needs to find an "extra environment" to store.
@@ -82,6 +82,7 @@ I pursue first principles, original documents and unprocessed sources of knowled
 If what I recorded is helpful to you, it's my pleasure!
 If there are any errors, please contact with me.
 If one day my site is no longer updated, please check the latest push.
+为无为，事无事，味无味。大小多少，抱怨以德。图难于其易，为大于其细。天下难事，必作于易；天下大事，必作于细。是以圣人终不为大，故能成其大。夫轻诺必寡信，多易必多难。是以圣人犹难之，故终无难矣。
 ```
 
 ---
