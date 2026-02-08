@@ -9,14 +9,14 @@
 	<!-- Prism 样式 -->
 	<link href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css" rel="stylesheet" />
 	<!-- Prism 核心 -->
-	<script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.js"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.js"></script>
 	<!-- 常见语言支持（根据需要添加，比如 C#, C++, JSON 等） -->
-	<script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
 
 	{{ block "head_extra" . }}{{ end }}
 </head>
@@ -56,17 +56,39 @@
 	</script>
 
 	<script>
-		const text = "ls | xargs cat";
+		document.addEventListener("DOMContentLoaded", function () {
+		const el = document.getElementById("typed-line");
+		if (!el) {
+			console.warn("typed-line not found");
+			return;
+		}
+
+		const user = "ljf12825";
+		const host = "ljf12825.github.io";
+		const path = window.location.pathname === "/" ? "~"
+					: "~" + window.location.pathname.replace(/\/$/, "");
+
+		const cmd = "ls | xargs cat";
+		const text = `${user}@${host}:${path}$ ${cmd}`;
+
 		let i = 0;
-		const el = document.getElementById("typed-command");
+		el.textContent = "";
 
 		function type() {
 			if (i < text.length) {
-				el.textContent += text[i++];
-				setTimeout(type, 80);
+			el.textContent += text.charAt(i++);
+			setTimeout(type, 40);
+			} else {
+				setTimeout(() => {
+					const cursor = document.querySelector(".cursor");
+					if (cursor) cursor.classList.add("hide");
+				}, 5000);
 			}
 		}
+
 		type();
+		});
 	</script>
+
 </body>
 </html>
