@@ -1,4 +1,26 @@
-<!doctype html><html lang=en><head><meta charset=UTF-8><title>Tag</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=/css/blogsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/>~</a></li><li><a href=/article/>Article</a></li><li><a href=/blog/>Lib</a></li><li><a href=/projects/>Projects</a></li><li><a href=/files/>Files</a></li><li><a href=/resource/>Resource</a></li><li><a href=/reference/>Reference</a></li><li><a href=/about/>About</a></li></ul></div></nav><article class=single_article><div class=title>Tag<div class=meta>PublishDate: 2025-06-01 |
+<!doctype html><html lang=en><head><meta charset=UTF-8><title>Tag</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=/css/blogsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/>~</a></li><li><a href=/article/>Article</a></li><li><a href=/blog/>Lib</a></li><li><a href=/projects/>Repos</a></li><li><a href=/files/>Files</a></li><li><a href=/resource/>Resource</a></li><li><a href=/reference/>Ref</a></li><li><a href=/about/>About</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><pre class=ascii>
++——————————————————————————————————————————————————————————————+
+|                        <a href=/rightbrain/>RightBrain</a>                            |
+|                             |                                |
+|                             |     <a href=/dotnetandwindows/>.NET-Winodws</a>               |
+|                             |    /                           |
+|                             |   /                            |
+|                             |  /                             |
+|                             | /                              |
+|                             |/                               |
+|      <a href=/graphic/>Graphic</a> ———————————— <a href=/>Home*</a> ———————————— <a href=/system/>System</a>          |
+|                            /|                                |
+|                           / |                                |
+|                          /  |                                |
+|                         /   |                                |
+|                        /    |                                |
+|                       /     |                                |
+|               <a href=/unixlike/>Unix-like</a>     |                <a href=/project/>Project</a>         |
+|                             |                <a href=/miscellaneous/>MisCellaneous</a>   |
+|                         <a href=/csbasic/>CSBasic</a>              <a href=/ai/>AI</a>              |
++——————————————————————————————————————————————————————————————+
+    </pre></nav><script src=/js/star-nav.js></script><article class=single_article><div class=title>Tag<div class=meta>PublishDate: 2025-06-01 |
 CreateDate: 2025-06-01 |
 LastModify: 2025-06-01
 | Creator：ljf12825</div></div><div class=content><p>在Unity中，Tag是用来标记和分类GameObject的一种轻量级方法，主要用于在代码中查找和判断物体的类型或身份</p><h2 id=tag的核心作用>Tag的核心作用</h2><table><thead><tr><th>功能</th><th>示例</th></tr></thead><tbody><tr><td>分类物体</td><td>Player、Enemy、Item、UI 等</td></tr><tr><td>逻辑判断</td><td>判断一个物体是不是玩家</td></tr><tr><td>查找特定对象</td><td><code>GameObject.FindWithTag()</code></td></tr><tr><td>触发器/碰撞器逻辑判断</td><td><code>if (other.CompareTag("Enemy"))</code></td></tr></tbody></table><h2 id=tag的使用方法>Tag的使用方法</h2><h3 id=1设置tag>1.设置Tag</h3><p>1.选中一个 GameObject
