@@ -1,20 +1,21 @@
 .filelist {
   width: 100%;
   font-family: monospace;
+  padding-bottom: 20px;
 }
 
 h1 {
   color: #000080;
   font-size: small;
   padding-left: 8px;
-  padding-top: 4px;
+  padding-top: 9px;
 }
 
 .file_row {
   display: grid;
   grid-template-columns: 2fr 1fr 1.5fr 4fr;
   padding: 5px 10px;
-  border-bottom: 1px dashed #C0C0C0;
+  border-bottom: 1px dashed #000000;
 }
 
 .file_row.header {
@@ -33,15 +34,15 @@ h1 {
 }
 
 .file_type {
-  color: #C0C0C0;
+  color: #000000;
 }
 
 .file_date {
-  color: #C0C0C0;
+  color: #000000;
 }
 
 .file_extra {
-  color: #C0C0C0;
+  color: #000000;
 }
 
 .folder .file_name { color: #000080; }

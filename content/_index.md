@@ -1,26 +1,27 @@
 # home
 
-> There is only one goal
+> NAVIGATION
 <div class="layout">
 <pre class="ascii">
 +--------------------------------------------------------------+
 |                        <a href="https://rightbrain.com">RightBrain</a>                            |
 |                             |                                |
-|             <a href="https://a.com">GCC&Linux</a>       |       <a href="https://b.com">.NET&Windows</a>             |
-|                      \      |      /                         |
-|                       \     |     /                          |
-|                        \    |    /                           |
-|                         \   |   /                            |
-|                          \  |  /                             |
-|      <a href="https://c.com">Graphic</a> ------------ <a href="https://base.com">home*</a> ------------ <a href="https://d.com">System</a>          |
-|                          /  |  \                             |
-|                         /   |   \                            |
-|                        /    |    \                           |
-|                       /     |     \                          |
-|                      /      |      \                         |
-|               <a href="https://e.com">Project</a>       |       <a href="https://f.com">Miscellaneous</a>            |
-|                             |                                |
-|                         <a href="https://g.com">CSBasic</a>                         <a href="https://ai.com">AI</a>   |
+|                             |     <a href="https://b.com">.NET-Windows</a>               |
+|                             |    /                           |
+|                             |   /                            |
+|                             |  /                             |
+|                             | /                              |
+|                             |/                               |
+|      <a href="https://c.com">Graphic</a> ———————————— <a href="https://base.com">home*</a> ———————————— <a href="https://d.com">System</a>          |
+|                            /|                                |
+|                           / |                                |
+|                          /  |                                |
+|                         /   |                                |
+|                        /    |                                |
+|                       /     |                                |
+|               <a href="https://a.com">GNU-Linux</a>     |                <a href="https://e.com">Project</a>         |
+|                             |                <a href="https://f.com">Miscellaneous</a>   |
+|                         <a href="https://g.com">CSBasic</a>              <a href="https://ai.com">AI</a>              |
 +--------------------------------------------------------------+
 </pre>
 <div class="side">
@@ -35,16 +36,15 @@
   align-items: flex-start;
   flex-wrap: nowrap;
 }
-
 .ascii {
   font-family: monospace;
   flex: 0 0 auto;
   margin: 0;
 }
-
 .side {
   flex: 1;
   padding-left: 32px;
+  color: #000080
 }
 </style>
 
@@ -82,7 +82,6 @@ I pursue first principles, original documents and unprocessed sources of knowled
 If what I recorded is helpful to you, it's my pleasure!
 If there are any errors, please contact with me.
 If one day my site is no longer updated, please check the latest push.
-为无为，事无事，味无味。大小多少，抱怨以德。图难于其易，为大于其细。天下难事，必作于易；天下大事，必作于细。是以圣人终不为大，故能成其大。夫轻诺必寡信，多易必多难。是以圣人犹难之，故终无难矣。
 ```
 
 ---

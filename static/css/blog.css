@@ -150,6 +150,10 @@
 	overflow-y: auto;
 	scrollbar-width: thin;
 	scrollbar-color: white #000080;
+	border-top: 2px solid #ffffff;
+	border-left: 2px solid #ffffff;
+	border-right: 2px solid #000080;
+	border-bottom: 2px solid #000080;
 }
 
 .sidebar-right h3 {

@@ -63,10 +63,10 @@
 
 .single_article .meta {
 	font-size: 1rem;
-	color: #c0c0c0;
+	color: black;
 	font-weight: normal;
 	padding-left: 0px;
-	border-bottom: 1px solid #000080;
+	border-bottom: 2px solid black;
 }
 
 .single_article .content {
@@ -119,11 +119,10 @@
 	overflow-y: auto;
 	font-size: small;
 	padding: 1rem;
-	border-left: 3px solid #000080;
-	border-right: 1px solid #000080;
-	border-bottom: 1px solid #000080;
-	border-top: 1px solid #000080;
-	background: white;
+	border-top: 2px solid #ffffff;
+	border-left: 2px solid #ffffff;
+	border-bottom: 3px solid #000080;
+	background: #c0c0c0;
 }
 
 /* 标题 */
