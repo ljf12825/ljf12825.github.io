@@ -1,4 +1,4 @@
-# navigation
+# home
 
 > There is only one goal
 <div class="layout">
