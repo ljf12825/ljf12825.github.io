@@ -1,27 +1,27 @@
 # home
 
-> NAVIGATION
+> GUIDE
 <div class="layout">
 <pre class="ascii">
 +--------------------------------------------------------------+
-|                        <a href="https://rightbrain.com">RightBrain</a>                            |
+|                        <span class="tip">RightBrain<span class="tooltip">右脑</span></span>                            |
 |                             |                                |
-|                             |     <a href="https://b.com">.NET-Windows</a>               |
+|                             |     <span class="tip">.NET-Windows<span class="tooltip">Windows</span></span>               |
 |                             |    /                           |
 |                             |   /                            |
 |                             |  /                             |
 |                             | /                              |
 |                             |/                               |
-|      <a href="https://c.com">Graphic</a> ———————————— <a href="https://base.com">home*</a> ———————————— <a href="https://d.com">System</a>          |
+|      <span class="tip">Graphic<span class="tooltip">图形学</span></span> ———————————— <span class="tip">Home*<span class="tooltip">橱窗</span></span> ———————————— <span class="tip">System<span class="tooltip">系统</span></span>          |
 |                            /|                                |
 |                           / |                                |
 |                          /  |                                |
 |                         /   |                                |
 |                        /    |                                |
 |                       /     |                                |
-|               <a href="https://a.com">GNU-Linux</a>     |                <a href="https://e.com">Project</a>         |
-|                             |                <a href="https://f.com">Miscellaneous</a>   |
-|                         <a href="https://g.com">CSBasic</a>              <a href="https://ai.com">AI</a>              |
+|              <span class="tip">Unix-like<span class="tooltip">类Unix</span></span>      |                <span class="tip">Project<span class="tooltip">项目架构与设计模式</span></span>         |
+|                             |                <span class="tip">Miscellaneous<span class="tooltip">沧海遗珠</span></span>   |
+|                         <span class="tip">CSBasic<span class="tooltip">计算机基础原理</span></span>              <span class="tip">AI<span class="tooltip">人工智能</span></span>              |
 +--------------------------------------------------------------+
 </pre>
 <div class="side">
@@ -30,23 +30,6 @@
 
 </div>
 </div>
-<style>
-.layout {
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: nowrap;
-}
-.ascii {
-  font-family: monospace;
-  flex: 0 0 auto;
-  margin: 0;
-}
-.side {
-  flex: 1;
-  padding-left: 32px;
-  color: #000080
-}
-</style>
 
 <script>
 
