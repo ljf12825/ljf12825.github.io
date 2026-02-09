@@ -1,0 +1,47 @@
+.filelist {
+  width: 100%;
+  font-family: monospace;
+}
+
+h1 {
+  color: #000080;
+  font-size: small;
+  padding-left: 8px;
+  padding-top: 4px;
+}
+
+.file_row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr 4fr;
+  padding: 5px 10px;
+  border-bottom: 1px dashed #C0C0C0;
+}
+
+.file_row.header {
+  border-top: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  color: #000080;
+}
+
+.file_row.header span {
+  cursor: default;
+}
+
+.file_name a {
+  text-decoration: none;
+  color: #000080;
+}
+
+.file_type {
+  color: #C0C0C0;
+}
+
+.file_date {
+  color: #C0C0C0;
+}
+
+.file_extra {
+  color: #C0C0C0;
+}
+
+.folder .file_name { color: #000080; }
