@@ -28,6 +28,11 @@
 	<!-- 顶部导航 -->
 	{{ partial "nav.html" . }}
 
+	<!-- star导航 -->
+	{{ partial "star-nav.html" . }}
+
+	<script src="/js/star-nav.js"></script>
+
 	<!-- 主体内容 -->
 	{{ block "main" . }}MAIN{{ end }}
 
@@ -89,6 +94,8 @@
 		type();
 		});
 	</script>
+
+	
 
 </body>
 </html>
