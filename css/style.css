@@ -318,6 +318,7 @@ blockquote {
 blockquote p {
 	margin-top: 0.3rem !important;
 	margin-bottom: 0.3rem;
+	margin-left: 0.3rem;
 	color: #c0c0c0
 }
 
@@ -402,3 +403,46 @@ ol {
 
 #star-nav:not(.collapse) .title.open { display: inline; }
 #star-nav.collapse .title.closed { display: inline; }
+
+.tip {
+  position: relative;
+  cursor: help;
+}
+
+.tooltip {
+  display: none;
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #c0c0c0;
+  color: #000080;
+  padding: 3px 6px;
+  font-size: 12px;
+  border-top: 2px solid #fff;
+  border-left: 2px solid #fff;
+  border-right: 2px solid #000080;
+  border-bottom: 2px solid #000080;
+  white-space: nowrap;
+  z-index: 9999;
+}
+
+.tip:hover .tooltip {
+  display: block;
+}
+
+.layout {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+.ascii {
+  font-family: monospace;
+  flex: 0 0 auto;
+  margin: 0;
+}
+.side {
+  flex: 1;
+  padding-left: 32px;
+  color: #000080
+}
