@@ -72,7 +72,7 @@
 .single_article .content {
 	max-width: 100%;
 	margin-top: -1em;
-	margin-left: 45px;
+	margin-left: 40px;
 }
 
 .single_article .content img {
@@ -109,7 +109,10 @@
 	color: red;
 }
 
-/* 右侧目录 */
+.single_article li {
+	font-size: large;
+}
+
 .toc {
 	position: fixed;
 	top: 100px;
@@ -123,18 +126,35 @@
 	border-left: 2px solid #ffffff;
 	border-bottom: 3px solid #000080;
 	background: #c0c0c0;
+	  
+	box-shadow:
+    2px 2px 0 #ffffff,
+    4px 4px 0 #000080;
 }
 
-/* 标题 */
+.toc::-webkit-scrollbar {
+  width: 10px;
+}
+
+.toc::-webkit-scrollbar-track {
+  background: #000080;
+}
+
+.toc::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border: 2px solid #000080;
+}
+
 .toc h3 {
-	font-size: 1.2rem;
+	font-size: 1rem;
+	text-align: center;
 	margin-bottom: 0.5rem;
 	margin-top: 0;
-	color: #000080;
-	border-bottom: 1px solid #000080;
+	color: #ffffff;
+	background: #000080;
+	border: 2px solid #ffffff;
 }
 
-/* 目录缩进 */
 .toc ul {
 	list-style: none;
 	padding-left: 0px;
@@ -157,7 +177,6 @@
 	margin-left: 1.6rem;
 }
 
-/* 链接 */
 .toc a {
 	text-decoration: none;
 	color: #000080;

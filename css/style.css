@@ -84,6 +84,10 @@ header .banner {
 	border-top: 2px solid #ffffff;
 	border-left: 2px solid #ffffff;
 	border-bottom: 3px solid #000080;
+
+	box-shadow:
+    2px 2px 0 #ffffff,
+    4px 4px 0 #000080;
 }
 
 .topnav>.container>ul {
@@ -147,7 +151,6 @@ header .banner {
 	margin: 0 auto;
 	max-width: 100%;
 	min-width: 0;
-	padding: 0 1rem;
 	box-sizing: border-box;
 }
 
@@ -172,8 +175,13 @@ footer {
 	border-top: 2px solid white;
 	border-left: 2px solid white;
 	border-bottom: 3px solid #000080;
+	border-right: 3px solid #000080;
 	width: 100%;
 	margin: 0 auto;
+
+	box-shadow:
+    2px 2px 0 #ffffff,
+    4px 4px 0 #000080;
 }
 
 table {
@@ -198,10 +206,13 @@ th {
 }
 
 code {
-	background-color: #000080;
-	color: #ffffff;
-	padding: 2px 2px;
-	border-radius: 5px;
+  background-color: #000080;
+  color: #c0c0c0;
+  padding: 0px 2px;
+  border-radius: 3px;
+  font-family: "Fira Code", "JetBrains Mono", Consolas, monospace;
+  font-size: 0.95em;
+  letter-spacing: 0.5px;
 }
 
 .highlight {
@@ -445,4 +456,26 @@ ol {
   flex: 1;
   padding-left: 32px;
   color: #000080
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: #000080;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border: 2px solid #000080;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+  background: #e0e0e0;
 }
