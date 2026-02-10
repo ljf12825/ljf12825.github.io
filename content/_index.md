@@ -31,32 +31,9 @@
 </div>
 </div>
 
-<script>
-
-const pre = document.getElementById('alive');
-
-async function loadAscii(path) {
-  const res = await fetch(path);
-  return res.text();
-}
-
-async function updatePreContent() {
-  const path =
-    window.innerWidth <= 1080
-      ? '/ascii/alive-narrow.txt'
-      : '/ascii/alive-wide.txt';
-
-  pre.textContent = await loadAscii(path);
-}
-
-updatePreContent();
-window.addEventListener('resize', updatePreContent);
-
-</script>
-
 ---
 
-> Something write down here
+> Code for myself
 
 ```text
 The brain has a similar LRU mechanism, so some knowledge needs to find an "extra environment" to store.

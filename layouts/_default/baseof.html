@@ -25,13 +25,19 @@
 	<!-- 页眉 -->
 	{{ partial "header.html" . }}
 
-	<!-- 顶部导航 -->
+	<!-- 副导航 -->
 	{{ partial "nav.html" . }}
 
-	<!-- star导航 -->
+	<!-- 主导航 -->
 	{{ partial "star-nav.html" . }}
 
 	<script src="/js/star-nav.js"></script>
+	<script src="/js/site.js" defer></script>
+
+	{{ if .IsHome }}
+  	<script defer src="{{ "js/home-alive.js" | relURL }}"></script>
+	{{ end }}
+
 
 	<!-- 主体内容 -->
 	{{ block "main" . }}MAIN{{ end }}
@@ -51,51 +57,6 @@
 		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
 		mermaid.initialize({startOnLoad: true});
 	</script>
-
-	<script>
-		document.addEventListener('DOMContentLoaded', function () {
-			document.querySelectorAll('a[href^="http"]').forEach(a => {
-				a.setAttribute('target', '_blank');
-			});
-		});
-	</script>
-
-	<script>
-		document.addEventListener("DOMContentLoaded", function () {
-		const el = document.getElementById("typed-line");
-		if (!el) {
-			console.warn("typed-line not found");
-			return;
-		}
-
-		const user = "ljf12825";
-		const host = "ljf12825.github.io";
-		const path = window.location.pathname === "/" ? "~"
-					: "~" + window.location.pathname.replace(/\/$/, "");
-
-		const cmd = "ls | xargs cat";
-		const text = `${user}@${host}:${path}$ ${cmd}`;
-
-		let i = 0;
-		el.textContent = "";
-
-		function type() {
-			if (i < text.length) {
-			el.textContent += text.charAt(i++);
-			setTimeout(type, 40);
-			} else {
-				setTimeout(() => {
-					const cursor = document.querySelector(".cursor");
-					if (cursor) cursor.classList.add("hide");
-				}, 5000);
-			}
-		}
-
-		type();
-		});
-	</script>
-
-	
 
 </body>
 </html>
