@@ -1,26 +1,26 @@
 <!doctype html><html lang=en><head><meta charset=UTF-8><title>Tilemap</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=/css/blogsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/>~</a></li><li><a href=/article/>Article</a></li><li><a href=/blog/>Lib</a></li><li><a href=/projects/>Repos</a></li><li><a href=/files/>Files</a></li><li><a href=/resource/>Resource</a></li><li><a href=/reference/>Ref</a></li><li><a href=/about/>About</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
 <span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><pre class=ascii>
 +——————————————————————————————————————————————————————————————+
-|                        <a href=/rightbrain/>RightBrain</a>                            |
+|                        <a class=nav-item data-path=/rightbrain/ href=/rightbrain/>RightBrain</a>                            |
 |                             |                                |
-|                             |     <a href=/dotnetandwindows/>.NET-Winodws</a>               |
+|                             |     <a class=nav-item data-path=/dotnetandwindows/ href=/dotnetandwindows/>.NET-Winodws</a>               |
 |                             |    /                           |
 |                             |   /                            |
 |                             |  /                             |
 |                             | /                              |
 |                             |/                               |
-|      <a href=/graphic/>Graphic</a> ———————————— <a href=/>Home*</a> ———————————— <a href=/system/>System</a>          |
+|      <a class=nav-item data-path=/graphic/ href=/graphic/>Graphic</a> ———————————— <a class=nav-item data-path=/ href=/>Home</a> ————————————— <a class=nav-item data-path=/system/ href=/system/>System</a>          |
 |                            /|                                |
 |                           / |                                |
 |                          /  |                                |
 |                         /   |                                |
 |                        /    |                                |
 |                       /     |                                |
-|              <a href=/unixlike/>Unix-like</a>      |                <a href=/project/>Project</a>         |
-|                             |                <a href=/miscellaneous/>MisCellaneous</a>   |
-|                         <a href=/csbasic/>CSBasic</a>              <a href=/ai/>AI</a>              |
+|              <a class=nav-item data-path=/unixlike/ href=/unixlike/>Unix-like</a>      |                <a class=nav-item data-path=/project/ href=/project/>Project</a>         |
+|                             |                <a class=nav-item data-path=/miscellaneous/ href=/miscellaneous/>MisCellaneous</a>   |
+|                          <a class=nav-item data-path=/csbasic/ href=/csbasic/>CSBasic</a>             <a class=nav-item data-path=/ai/ href=/ai/>AI</a>              |
 +——————————————————————————————————————————————————————————————+
-    </pre></nav><script src=/js/star-nav.js></script><script src=/js/site.js defer></script><article class=single_article><div class=title>Tilemap<div class=meta>Update: 2025-06-01
+    </pre></nav><script src=/js/star-nav.js></script><script src=/js/site.js defer></script><script src=/js/star-active.js></script><article class=single_article><div class=title>Tilemap<div class=meta>Update: 2025-06-01
 >> Creator：ljf12825</div></div><div class=content><p>在Unity中，Tilemap是一个强大的工具，专为2D游戏开发中的网格地图（Tile-based maps）设计</p><p>它允许开发者通过将单独的图块（Tiles）布置在网格中，构建复杂的2D游戏世界，如平台游戏、回合制策略游戏等</p><p>Tilemap可以用于处理游戏世界的地形、背景、障碍物、关卡设计等</p><h2 id=tilemap的组成和工作原理>Tilemap的组成和工作原理</h2><p>Tilemap的工作原理是基于网格（Grid）的，将单个的图块（Tile）放置在网格的各个单元格中，从而构建出复杂的2D地图。Unity提供了一个强大的Tilemap系统，使得开发者能够快速而高效地创建这些地图</p><p><strong>组成部分</strong></p><ul><li>Grid：Grid是Tilemap的基础结构，它为所有Tile提供一个坐标系统，可以设置不同类型的Grid，如矩形网格、六边形网格等，以适应不同的地图需求</li><li>Tilemap：Tilemap组件是核心，负责管理Tiles在Grid上的位置和现实。每个Tilemap会有自己的Tile图层，用于绘制和管理不同的地形或装饰层</li><li>Tile：Tile是Tilemap的基本单位，通常是一个Sprite。每个Tile都代表地图上的一个单元格，可以是地面、障碍物、装饰物等。Unity允许开发者为Tile设置各种属性，如动画、规则等</li></ul><h2 id=tilemap的创建与设置>Tilemap的创建与设置</h2><p>Step1: 创建一个Tilemap</p><ol><li>创建Grid</li></ol><ul><li>在Unity的场景中，通过<code>GameObject -> 2D Object -> Tilemap -> Rectangular</code>来创建一个带有Grid的Tilemap，Grid会自动创建，Tilemap会作为Grid的子对象</li><li>也可以选择<code>Hexagonal</code>或<code>Isometric</code>等不同类型的网格，具体取决于游戏需求</li></ul><ol start=2><li>创建Tilemap</li></ol><ul><li>在Unity中，Tilemap是由一个<code>Tilemap</code>组件和一个<code>Tilemap Renderer</code>组件组成的</li><li><code>Tilemap</code>组件负责存储地图的Tile，而<code>Tilemap Renderer</code>负责绘制这些Tile</li></ul><p>Step2：创建Tile Palette
 Tile Palette是一个管理所有Tiles的工具，它允许将Tile组织在一个面板中，方便在Tilemap中绘制和修改</p><ol><li>打开Tile Palette</li></ol><ul><li>在Unity菜单栏中，选择<code>Window -> 2D -> Tile Palette</code>，打开Tile Palette窗口</li></ul><ol start=2><li>创建Tile Palette</li></ol><ul><li>在Tile Palette窗口中，点击“Create New Palette”创建一个新的Tile Palette。可以将其命名并选择合适的Tilemap图层（比如地面、背景等）</li></ul><ol start=3><li>添加Tiles到Palette</li></ol><ul><li>将Sprites（或其他图像资源）拖到Tile Palette中，Unity会自动将它们转换为Tile</li></ul><p>Step3：绘制Tilemap
 在Tile Palette中选择一个Tile，然后回到Scene视图，开始在Tilemap上绘制，可以像使用画笔一样将Tile放置到网格中</p><ul><li>刷子工具：Tile Palette提供了多种绘制工具，如单一Tile、区域充填、随机充填等，来快速创建Tilemap</li><li>删除Tile：选择删除工具后，可以擦除已经绘制的Tile</li></ul><h2 id=tile的类型与特性>Tile的类型与特性</h2><p>Unity支持多种类型的Tile，每种Tile可以为Tilemap提供不同的功能</p><ol><li><p>Sprite Tile

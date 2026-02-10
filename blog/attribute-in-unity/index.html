@@ -1,26 +1,26 @@
 <!doctype html><html lang=en><head><meta charset=UTF-8><title>Attribute in Unity</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=/css/blogsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/>~</a></li><li><a href=/article/>Article</a></li><li><a href=/blog/>Lib</a></li><li><a href=/projects/>Repos</a></li><li><a href=/files/>Files</a></li><li><a href=/resource/>Resource</a></li><li><a href=/reference/>Ref</a></li><li><a href=/about/>About</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
 <span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><pre class=ascii>
 +——————————————————————————————————————————————————————————————+
-|                        <a href=/rightbrain/>RightBrain</a>                            |
+|                        <a class=nav-item data-path=/rightbrain/ href=/rightbrain/>RightBrain</a>                            |
 |                             |                                |
-|                             |     <a href=/dotnetandwindows/>.NET-Winodws</a>               |
+|                             |     <a class=nav-item data-path=/dotnetandwindows/ href=/dotnetandwindows/>.NET-Winodws</a>               |
 |                             |    /                           |
 |                             |   /                            |
 |                             |  /                             |
 |                             | /                              |
 |                             |/                               |
-|      <a href=/graphic/>Graphic</a> ———————————— <a href=/>Home*</a> ———————————— <a href=/system/>System</a>          |
+|      <a class=nav-item data-path=/graphic/ href=/graphic/>Graphic</a> ———————————— <a class=nav-item data-path=/ href=/>Home</a> ————————————— <a class=nav-item data-path=/system/ href=/system/>System</a>          |
 |                            /|                                |
 |                           / |                                |
 |                          /  |                                |
 |                         /   |                                |
 |                        /    |                                |
 |                       /     |                                |
-|              <a href=/unixlike/>Unix-like</a>      |                <a href=/project/>Project</a>         |
-|                             |                <a href=/miscellaneous/>MisCellaneous</a>   |
-|                         <a href=/csbasic/>CSBasic</a>              <a href=/ai/>AI</a>              |
+|              <a class=nav-item data-path=/unixlike/ href=/unixlike/>Unix-like</a>      |                <a class=nav-item data-path=/project/ href=/project/>Project</a>         |
+|                             |                <a class=nav-item data-path=/miscellaneous/ href=/miscellaneous/>MisCellaneous</a>   |
+|                          <a class=nav-item data-path=/csbasic/ href=/csbasic/>CSBasic</a>             <a class=nav-item data-path=/ai/ href=/ai/>AI</a>              |
 +——————————————————————————————————————————————————————————————+
-    </pre></nav><script src=/js/star-nav.js></script><script src=/js/site.js defer></script><article class=single_article><div class=title>Attribute in Unity<div class=meta>Update: 2025-06-01
+    </pre></nav><script src=/js/star-nav.js></script><script src=/js/site.js defer></script><script src=/js/star-active.js></script><article class=single_article><div class=title>Attribute in Unity<div class=meta>Update: 2025-06-01
 >> Creator：ljf12825</div></div><div class=content><p>Unity中的特性用于控制Unity编译器的行为，或者用于运行时特定的逻辑</p><h2 id=unity中常见特性>Unity中常见特性</h2><p>Unity为许多常见的操作都提供了特性</p><ol><li><code>SerializeField</code></li></ol><ul><li>作用：使私有字段在Unity的Inspector面板中可见。通常用于控制字段访问性，但仍希望它出现在Inspector中进行编辑</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#a6e22e>[SerializeField]</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> playerHealth;
 </span></span></code></pre></div><ol start=2><li><code>HideInInspector</code></li></ol><ul><li>作用：标记字段不显示在Inspector中，但它仍然是类的成员，仍然可以在代码中使用</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#a6e22e>[HideInInspector]</span>

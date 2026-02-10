@@ -1,26 +1,26 @@
 <!doctype html><html lang=en><head><meta charset=UTF-8><title>Transform</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=/css/blogsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/>~</a></li><li><a href=/article/>Article</a></li><li><a href=/blog/>Lib</a></li><li><a href=/projects/>Repos</a></li><li><a href=/files/>Files</a></li><li><a href=/resource/>Resource</a></li><li><a href=/reference/>Ref</a></li><li><a href=/about/>About</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
 <span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><pre class=ascii>
 +——————————————————————————————————————————————————————————————+
-|                        <a href=/rightbrain/>RightBrain</a>                            |
+|                        <a class=nav-item data-path=/rightbrain/ href=/rightbrain/>RightBrain</a>                            |
 |                             |                                |
-|                             |     <a href=/dotnetandwindows/>.NET-Winodws</a>               |
+|                             |     <a class=nav-item data-path=/dotnetandwindows/ href=/dotnetandwindows/>.NET-Winodws</a>               |
 |                             |    /                           |
 |                             |   /                            |
 |                             |  /                             |
 |                             | /                              |
 |                             |/                               |
-|      <a href=/graphic/>Graphic</a> ———————————— <a href=/>Home*</a> ———————————— <a href=/system/>System</a>          |
+|      <a class=nav-item data-path=/graphic/ href=/graphic/>Graphic</a> ———————————— <a class=nav-item data-path=/ href=/>Home</a> ————————————— <a class=nav-item data-path=/system/ href=/system/>System</a>          |
 |                            /|                                |
 |                           / |                                |
 |                          /  |                                |
 |                         /   |                                |
 |                        /    |                                |
 |                       /     |                                |
-|              <a href=/unixlike/>Unix-like</a>      |                <a href=/project/>Project</a>         |
-|                             |                <a href=/miscellaneous/>MisCellaneous</a>   |
-|                         <a href=/csbasic/>CSBasic</a>              <a href=/ai/>AI</a>              |
+|              <a class=nav-item data-path=/unixlike/ href=/unixlike/>Unix-like</a>      |                <a class=nav-item data-path=/project/ href=/project/>Project</a>         |
+|                             |                <a class=nav-item data-path=/miscellaneous/ href=/miscellaneous/>MisCellaneous</a>   |
+|                          <a class=nav-item data-path=/csbasic/ href=/csbasic/>CSBasic</a>             <a class=nav-item data-path=/ai/ href=/ai/>AI</a>              |
 +——————————————————————————————————————————————————————————————+
-    </pre></nav><script src=/js/star-nav.js></script><script src=/js/site.js defer></script><article class=single_article><div class=title>Transform<div class=meta>Update: 2025-05-28
+    </pre></nav><script src=/js/star-nav.js></script><script src=/js/site.js defer></script><script src=/js/star-active.js></script><article class=single_article><div class=title>Transform<div class=meta>Update: 2025-05-28
 >> Creator：ljf12825</div></div><div class=content><p>Transform是Unity中控制物体位置、旋转、缩放和父子层级关系的核心组件</p><h2 id=一什么是transform>一、什么是Transform</h2><p><code>Transfrom</code>是每个<code>GameObject</code>都自带的核心组件，主要负责：</p><ul><li>位置（Position）</li><li>旋转（Rotation）</li><li>缩放（Scale）</li><li>父子关系（Hierarchy）</li></ul><p>可以理解为每个物体在三维世界中的“坐标轴和局部空间信息”。</p><h2 id=二transform的重要属性和区别>二、Transform的重要属性和区别</h2><p>**1.<code>position</code>和<code>localPosition</code></p><table><thead><tr><th>属性名</th><th>含义</th><th>示例用途</th></tr></thead><tbody><tr><td><code>position</code></td><td>世界坐标（绝对位置）</td><td>物体在整个场景中的位置</td></tr><tr><td><code>localPosition</code></td><td>本地坐标（相对于父物体的位置）</td><td>子物体相对于父物体的偏移</td></tr></tbody></table><p>**2.<code>rotation</code>和<code>localRotation</code></p><table><thead><tr><th>属性名</th><th>含义</th><th>类型</th></tr></thead><tbody><tr><td><code>rotation</code></td><td>世界旋转</td><td>Quaternion</td></tr><tr><td><code>localRotation</code></td><td>相对父物体的旋转</td><td>Quaternion</td></tr></tbody></table><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span>transform.rotation = Quaternion.Euler(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>90</span>, <span style=color:#ae81ff>0</span>); <span style=color:#75715e>//世界旋转</span>
 </span></span><span style=display:flex><span>transform.localRotation = Quaternion.idetity; <span style=color:#75715e>//本地旋转重置</span>
 </span></span></code></pre></div><p><strong>3.localScale</strong></p><ul><li>表示对象自身的缩放</li><li>注意：缩放不会自动传递到<code>position</code>，但会影响渲染尺寸和碰撞盒</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-csharp data-lang=csharp><span style=display:flex><span>transform.localScale = <span style=color:#66d9ef>new</span> Vector3(<span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>2</span>); <span style=color:#75715e>//放大两倍</span>

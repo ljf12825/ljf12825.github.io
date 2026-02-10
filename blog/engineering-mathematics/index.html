@@ -1,26 +1,26 @@
 <!doctype html><html lang=en><head><meta charset=UTF-8><title>Engineering Mathematics</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=/css/blogsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/>~</a></li><li><a href=/article/>Article</a></li><li><a href=/blog/>Lib</a></li><li><a href=/projects/>Repos</a></li><li><a href=/files/>Files</a></li><li><a href=/resource/>Resource</a></li><li><a href=/reference/>Ref</a></li><li><a href=/about/>About</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
 <span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><pre class=ascii>
 +——————————————————————————————————————————————————————————————+
-|                        <a href=/rightbrain/>RightBrain</a>                            |
+|                        <a class=nav-item data-path=/rightbrain/ href=/rightbrain/>RightBrain</a>                            |
 |                             |                                |
-|                             |     <a href=/dotnetandwindows/>.NET-Winodws</a>               |
+|                             |     <a class=nav-item data-path=/dotnetandwindows/ href=/dotnetandwindows/>.NET-Winodws</a>               |
 |                             |    /                           |
 |                             |   /                            |
 |                             |  /                             |
 |                             | /                              |
 |                             |/                               |
-|      <a href=/graphic/>Graphic</a> ———————————— <a href=/>Home*</a> ———————————— <a href=/system/>System</a>          |
+|      <a class=nav-item data-path=/graphic/ href=/graphic/>Graphic</a> ———————————— <a class=nav-item data-path=/ href=/>Home</a> ————————————— <a class=nav-item data-path=/system/ href=/system/>System</a>          |
 |                            /|                                |
 |                           / |                                |
 |                          /  |                                |
 |                         /   |                                |
 |                        /    |                                |
 |                       /     |                                |
-|              <a href=/unixlike/>Unix-like</a>      |                <a href=/project/>Project</a>         |
-|                             |                <a href=/miscellaneous/>MisCellaneous</a>   |
-|                         <a href=/csbasic/>CSBasic</a>              <a href=/ai/>AI</a>              |
+|              <a class=nav-item data-path=/unixlike/ href=/unixlike/>Unix-like</a>      |                <a class=nav-item data-path=/project/ href=/project/>Project</a>         |
+|                             |                <a class=nav-item data-path=/miscellaneous/ href=/miscellaneous/>MisCellaneous</a>   |
+|                          <a class=nav-item data-path=/csbasic/ href=/csbasic/>CSBasic</a>             <a class=nav-item data-path=/ai/ href=/ai/>AI</a>              |
 +——————————————————————————————————————————————————————————————+
-    </pre></nav><script src=/js/star-nav.js></script><script src=/js/site.js defer></script><article class=single_article><div class=title>Engineering Mathematics<div class=meta>Update: 2025-06-01
+    </pre></nav><script src=/js/star-nav.js></script><script src=/js/site.js defer></script><script src=/js/star-active.js></script><article class=single_article><div class=title>Engineering Mathematics<div class=meta>Update: 2025-06-01
 >> Creator：ljf12825</div></div><div class=content><p>图形开发中的常用数学</p><h2 id=向量>向量</h2><h3 id=定义>定义</h3><p>向量有方向和大小，比如<code>(1, 2)</code>、<code>(3, 5, -1)</code>是二维和三维向量</p><h3 id=基本操作>基本操作</h3><h4 id=加减法>加减法</h4><p>向量的加减法在图形学中非常常见，它们的“意义”主要体现在空间位置变换、方向差异、运动计算等方面</p><p><strong>几何意义</strong><br>向量加法：位移的累加，从A点触发，走A向量，然后接着走B向量，到达的位置</p><p>图形学应用：</p><ul><li>连续移动（多帧叠加移动）</li><li>合成多个力、速度方向</li><li>路径规划（导航中）</li></ul><p>例如：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Vector3 newPosition = transform.position + movementDirection * speed * Time.deltaTime;
 </span></span></code></pre></div><p>表示当前位置 + 方向 * 速度 -> 下一帧位置</p><p>向量减法：表示从一个点到另一个点的方向</p><p>向量<code>A - B</code>就是从点B指向点A的向量</p><p>图形学应用：</p><ul><li>求物体之间的方向向量（例如：敌人朝玩家方向攻击）</li><li>摄像机朝向目标：<code>target.position - camera.position</code></li><li>计算法线、插值、射线方向等</li></ul><p>例如：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Vector3 dir = target.position - transform.position;
 </span></span><span style=display:flex><span>transform.forward = dir.normalized; <span style=color:#75715e>// 朝向目标</span>

@@ -1,26 +1,26 @@
 <!doctype html><html lang=en><head><meta charset=UTF-8><title>Scripts</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=/css/blogsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/>~</a></li><li><a href=/article/>Article</a></li><li><a href=/blog/>Lib</a></li><li><a href=/projects/>Repos</a></li><li><a href=/files/>Files</a></li><li><a href=/resource/>Resource</a></li><li><a href=/reference/>Ref</a></li><li><a href=/about/>About</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
 <span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><pre class=ascii>
 +——————————————————————————————————————————————————————————————+
-|                        <a href=/rightbrain/>RightBrain</a>                            |
+|                        <a class=nav-item data-path=/rightbrain/ href=/rightbrain/>RightBrain</a>                            |
 |                             |                                |
-|                             |     <a href=/dotnetandwindows/>.NET-Winodws</a>               |
+|                             |     <a class=nav-item data-path=/dotnetandwindows/ href=/dotnetandwindows/>.NET-Winodws</a>               |
 |                             |    /                           |
 |                             |   /                            |
 |                             |  /                             |
 |                             | /                              |
 |                             |/                               |
-|      <a href=/graphic/>Graphic</a> ———————————— <a href=/>Home*</a> ———————————— <a href=/system/>System</a>          |
+|      <a class=nav-item data-path=/graphic/ href=/graphic/>Graphic</a> ———————————— <a class=nav-item data-path=/ href=/>Home</a> ————————————— <a class=nav-item data-path=/system/ href=/system/>System</a>          |
 |                            /|                                |
 |                           / |                                |
 |                          /  |                                |
 |                         /   |                                |
 |                        /    |                                |
 |                       /     |                                |
-|              <a href=/unixlike/>Unix-like</a>      |                <a href=/project/>Project</a>         |
-|                             |                <a href=/miscellaneous/>MisCellaneous</a>   |
-|                         <a href=/csbasic/>CSBasic</a>              <a href=/ai/>AI</a>              |
+|              <a class=nav-item data-path=/unixlike/ href=/unixlike/>Unix-like</a>      |                <a class=nav-item data-path=/project/ href=/project/>Project</a>         |
+|                             |                <a class=nav-item data-path=/miscellaneous/ href=/miscellaneous/>MisCellaneous</a>   |
+|                          <a class=nav-item data-path=/csbasic/ href=/csbasic/>CSBasic</a>             <a class=nav-item data-path=/ai/ href=/ai/>AI</a>              |
 +——————————————————————————————————————————————————————————————+
-    </pre></nav><script src=/js/star-nav.js></script><script src=/js/site.js defer></script><article class=single_article><div class=title>Scripts<div class=meta>Update: 2025-06-01
+    </pre></nav><script src=/js/star-nav.js></script><script src=/js/site.js defer></script><script src=/js/star-active.js></script><article class=single_article><div class=title>Scripts<div class=meta>Update: 2025-06-01
 >> Creator：ljf12825</div></div><div class=content><p>Unity脚本就是你编写的C#类，它控制游戏中物体的行为、交互、动画、输入、碰撞、UI等逻辑</p><h2 id=脚本类型>脚本类型</h2><p>Unity中的脚本根据其用途可以分为3类：</p><table><thead><tr><th>特性</th><th><code>MonoBehaviour</code></th><th><code>ScriptableObject</code></th><th>纯 C# 类</th></tr></thead><tbody><tr><td>是否可挂载</td><td>可以挂载到 GameObject</td><td>不行</td><td>不行</td></tr><tr><td>生命周期函数</td><td>有 <code>Start</code>、<code>Update</code> 等</td><td>没有</td><td>没有</td></tr><tr><td>是否能序列化</td><td>支持</td><td>支持</td><td>默认不支持</td></tr><tr><td>支持协程</td><td><code>StartCoroutine()</code></td><td>不支持</td><td>不支持</td></tr><tr><td>使用场景</td><td>行为脚本，控制对象</td><td>数据容器，可复用资源配置</td><td>工具类、算法类等逻辑单元</td></tr></tbody></table><ol><li><code>MonoBehaviour</code>（行为脚本）</li></ol><ul><li>必须挂载在场景中的GameObject上</li><li>用于控制逻辑、角色行为、输入响应等</li><li>有生命周期函数</li><li>支持协程</li></ul><p><strong>适用场景</strong></p><ol><li><p>角色控制器（移动、跳跃、攻击）</p></li><li><p>UI交互逻辑</p></li><li><p>游戏状态管理</p></li><li><p>物理交互处理</p></li><li><p>动画状态控制</p></li><li><p><code>ScriptableObject</code>（数据容器）</p></li></ol><ul><li>轻量级对象，不需要挂载，常用于数据复用（如技能表、配置表）</li><li>支持序列化，可以做成asset文件</li><li>没有生命周期函数，但可以在<code>OnEnable()</code>做初始化</li><li>更节省内存，场景切换时不会被销毁</li></ul><p><strong>核心优势</strong></p><ul><li>内存高效：不依赖场景、按需加载</li><li>数据复用：同一资源可被多个对象共享</li><li>热重载：运行时修改自动同步</li><li>版本友好：资源文件便于版本控制</li></ul><ol start=3><li>纯C#类（工具类）</li></ol><ul><li>用于封装工具、算法、模型等逻辑（如A*算法、存档系统）</li><li>不支持Unity生命周期和序列化</li><li>由其他脚本调用，解耦业务逻辑</li></ul><p><strong>适用场景</strong></p><ol><li>实现复杂算法</li><li>数据模型定义</li><li>工具类库</li><li>设计模式实现</li></ol><p><strong>优化技巧</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 使用partial类拆分大型工具类</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>partial</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MathUtility</span>
 </span></span><span style=display:flex><span>{
