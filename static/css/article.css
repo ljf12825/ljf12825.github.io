@@ -4,15 +4,13 @@
   margin: 20px 50px;
 }
 
-/* 双列列表布局 */
 .article_grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 两列 */
-  gap: 20px 40px; /* 行间距 20px，列间距 40px */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 40px;
   padding: 0 50px;
 }
 
-/* 每条文章 */
 .article_item h2 a {
   text-decoration: underline;
   color: #000080;
@@ -44,7 +42,6 @@ footer {
     margin-top: 20px;
 }
 
-/* 响应式：屏幕小于 768px 时变为一列 */
 @media (max-width: 768px) {
   .article_grid {
     grid-template-columns: 1fr;
