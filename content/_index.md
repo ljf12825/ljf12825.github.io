@@ -21,7 +21,7 @@
 |                       /     |                                |
 |              <span class="tip">Unix-like<span class="tooltip">类Unix</span></span>      |                <span class="tip">Project<span class="tooltip">项目架构与设计模式</span></span>         |
 |                             |                <span class="tip">Miscellaneous<span class="tooltip">沧海遗珠</span></span>   |
-|                         <span class="tip">CSBasic<span class="tooltip">计算机基础原理</span></span>              <span class="tip">AI<span class="tooltip">人工智能</span></span>              |
+|                          <span class="tip">CSBasic<span class="tooltip">计算机基础原理</span></span>             <span class="tip">AI<span class="tooltip">人工智能</span></span>              |
 +--------------------------------------------------------------+
 </pre>
 <div class="side">

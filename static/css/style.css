@@ -229,8 +229,6 @@ code {
 .highlight code {
   background-color: #000080 !important;
   display: block;
-  margin: 0;
-  padding: 10px 12px;
   white-space: pre;
   overflow-x: auto;
   word-break: normal;
@@ -402,6 +400,12 @@ ol {
   display: none;
 }
 
+#start-nav .nav-item.active {
+    color: #ff0000;
+    font-weight: bold;
+    text-shadow: 0 0 2px #ff0000;
+}
+
 .win-panel {
   background: #c0c0c0;
   border-top: 2px solid #ffffff;
@@ -478,4 +482,30 @@ body::-webkit-scrollbar-thumb {
 html::-webkit-scrollbar-thumb:hover,
 body::-webkit-scrollbar-thumb:hover {
   background: #e0e0e0;
+}
+
+.highlight::-webkit-scrollbar,
+.highlight pre::-webkit-scrollbar,
+.highlight code::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.highlight::-webkit-scrollbar-track,
+.highlight pre::-webkit-scrollbar-track,
+.highlight code::-webkit-scrollbar-track {
+  background: #000080;
+}
+
+.highlight::-webkit-scrollbar-thumb,
+.highlight pre::-webkit-scrollbar-thumb,
+.highlight code::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border: 2px solid #000080;
+}
+
+.highlight::-webkit-scrollbar-thumb:hover,
+.highlight pre::-webkit-scrollbar-thumb:hover,
+.highlight code::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
 }
