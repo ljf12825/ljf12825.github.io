@@ -396,22 +396,24 @@ ol {
 	white-space: pre;
 }
 
+#star-nav.collapse {
+  padding: 0;
+  width: fit-content;
+  height: auto;
+}
+
 #star-nav.collapse pre {
   display: none;
+}
+
+#star-nav.collapse #star-header {
+  margin: 0;
 }
 
 #start-nav .nav-item.active {
     color: #ff0000;
     font-weight: bold;
     text-shadow: 0 0 2px #ff0000;
-}
-
-.win-panel {
-  background: #c0c0c0;
-  border-top: 2px solid #ffffff;
-  border-left: 2px solid #ffffff;
-  border-right: 2px solid #000080;
-  border-bottom: 2px solid #000080;
 }
 
 #star-header .title { display: none; }
@@ -509,3 +511,86 @@ body::-webkit-scrollbar-thumb:hover {
 .highlight code::-webkit-scrollbar-thumb:hover {
   background: #ffffff;
 }
+
+#ref-window {
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+  width: 520px;
+  max-height: 70vh;
+
+  background: #c0c0c0;
+  color: #000080;
+  font-family: "Fira Code", Consolas, monospace;
+
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #000080;
+  border-bottom: 2px solid #000080;
+
+  box-shadow:
+    2px 2px 0 #ffffff,
+    4px 4px 0 #000080;
+
+  z-index: 9999;
+
+  transition: box-shadow .15s ease, transform .15s ease;
+}
+
+#ref-window .float-header {
+  background: #000080;
+  color: #ffffff;
+  cursor: move;
+  user-select: none;
+  text-align: center;
+  font-weight: bold;
+
+  border-bottom: 2px solid #ffffff;
+}
+
+#ref-window .float-body {
+  padding: 8px 10px;
+  overflow-y: auto;
+  max-height: calc(70vh - 30px);
+  background: #c0c0c0;
+  color: #000080;
+}
+
+#ref-window .float-body::-webkit-scrollbar {
+  width: 10px;
+}
+#ref-window .float-body::-webkit-scrollbar-track {
+  background: #000080;
+}
+#ref-window .float-body::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border: 2px solid #000080;
+}
+
+#ref-window.closed {
+  height: auto;
+  max-height: none;
+  width: fit-content;
+
+  background: #c0c0c0;
+
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #000080;
+  border-bottom: 2px solid #000080;
+
+  box-shadow:
+    2px 2px 0 #ffffff,
+    4px 4px 0 #000080;
+
+  transform: translateY(1px);
+}
+
+#ref-window.closed .float-body {
+  display: none;
+}
+
+#ref-window .title { display: none; }
+#ref-window:not(.closed) .title.open { display: inline; }
+#ref-window.closed .title.closed { display: inline; }
+
