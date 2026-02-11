@@ -1,0 +1,35 @@
+{{ $sec := .Section }}
+
+{{ if eq $sec "graphic" }}
+  {{ partial "topnav/graphic.html" . }}
+
+{{ else if eq $sec "system" }}
+  {{ partial "topnav/system.html" . }}
+
+{{ else if eq $sec "unixlike" }}
+  {{ partial "topnav/unixlike.html" . }}
+
+{{ else if eq $sec "csbasic" }}
+  {{ partial "topnav/csbasic.html" . }}
+
+{{ else if eq $sec "ai" }}
+  {{ partial "topnav/ai.html" . }}
+
+{{ else if eq $sec "dotnetwindows" }}
+  {{ partial "topnav/dotnetandwindows.html" . }}
+
+{{ else if eq $sec "miscellaneous" }}
+  {{ partial "topnav/miscellaneous.html" . }}
+
+{{ else if eq $sec "project" }}
+  {{ partial "topnav/project.html" . }}
+
+{{ else if eq $sec "rightbrain" }}
+  {{ partial "topnav/rightbrain.html" . }}
+
+{{ else if eq $sec "home" }}
+  {{ partial "topnav/home.html" . }}
+
+{{ else }}
+  {{ partial "topnav/root.html" . }}
+{{ end }}

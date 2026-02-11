@@ -36,12 +36,22 @@
 > Code for myself
 
 ```text
-The brain has a similar LRU mechanism, so some knowledge needs to find an "extra environment" to store.
-Everything and understanding of them is constantly changing, so everything is constantly changing also!
-I pursue first principles, original documents and unprocessed sources of knowledge, pure, solid, independent and thoughtful just like espresso!
-If what I recorded is helpful to you, it's my pleasure!
-If there are any errors, please contact with me.
-If one day my site is no longer updated, please check the latest push.
+The brain works much like an LRU cache,
+so some knowledge needs an external environment to be stored.
+
+Everything—and our understanding of it—is constantly changing.
+Therefore, everything must keep evolving.
+
+I pursue first principles, original documents, and unprocessed sources of knowledge:
+pure, solid, independent, and thoughtful—like a shot of espresso.
+
+If what I record here is helpful to you, it is my pleasure.
+If you find any errors, please feel free to contact me.
+
+If one day this site is no longer updated,
+please check the latest commit for the most recent changes.
+
+Status: ALIVE
 ```
 
 ---
