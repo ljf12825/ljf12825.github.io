@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Architecture]
 author: "ljf12825"
+type: blog
 summary: Common Architecture in game development
 ---
 架构是一种系统级别的设计思想，决定了整个软件的结构、模块划分、通信机制、扩展性、可维护性等核心特性

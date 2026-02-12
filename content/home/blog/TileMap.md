@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Unity System, Unity Package]
 author: "ljf12825"
+type: blog
 summary: TileMap in Unity
 ---
 在Unity中，Tilemap是一个强大的工具，专为2D游戏开发中的网格地图（Tile-based maps）设计

@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Unity System]
 author: "ljf12825"
+type: blog
 summary: The concept, use and construction of scenes in Unity
 ---
 Unity Scene System是Unity中用于组织和管理游戏世界的基础结构，Unity支持多个Scene的加载与卸载，允许构建出大型、分块化的世界

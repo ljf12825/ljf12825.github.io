@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity]
 author: "ljf12825"
+type: blog
 summary: Overview of Unity overall architecture
 ---
 # 引擎整体架构

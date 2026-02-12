@@ -4,6 +4,7 @@ date: 2025-05-28
 categories: [Note]
 tags: [Unity, GameObject]
 author: "ljf12825"
+type: blog
 summary: GameObject introduction, usage and API
 ---
 GameObject继承自Object，是所有可以存在于场景中的物体的基类

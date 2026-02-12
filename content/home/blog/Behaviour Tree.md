@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Unity System, AI]
 author: "ljf12825"
+type: blog
 summary: The Introduction of behaviour tree in unity. Explanation and implementation examples of behavior tree structure
 ---
 Unity的行为树是一种常用于AI决策的结构，它在游戏开发中用于描述AI的行为和决策逻辑。它通过阻止一系列的节点来表示各种行为，树形结构的设计让它可以清晰地展示AI决策过程

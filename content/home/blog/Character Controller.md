@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Component, Physics System]
 author: "ljf12825"
+type: blog
 summary: Introduction of Character Controller in Unity. Usage of Character Controller. Implement of Character Controller.
 ---
 Character Controller是专为角色移动设计的物理组件，适合用于第一人称、第三人称角色控制，尤其适合需要“脚贴地”“走坡不滑”的场景  

@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Unity System, UGUI]
 author: "ljf12825"
+type: blog
 summary: Introduction Layout Component
 ---
 

@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Fundamental]
 author: "ljf12825"
+type: blog
 summary: Abstraction and system layered design in game developmnet
 ---
 数学的核心是形式化，工程的核心是权衡，计算机科学的核心就是抽象\

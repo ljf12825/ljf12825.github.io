@@ -1,5 +1,5 @@
 {{ define "head_extra" }}
-  {{ if eq .Section "article" }}
+  {{ if eq .Type "article" }}
     <link rel="stylesheet" href="{{ "css/article.css" | relURL }}">
   {{ end }}
 {{ end }}

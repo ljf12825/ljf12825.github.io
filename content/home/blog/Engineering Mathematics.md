@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Graphics, Mathematics]
 author: "ljf12825"
+type: blog
 summary: Mathematical Foundations of Graphics
 ---
 图形开发中的常用数学

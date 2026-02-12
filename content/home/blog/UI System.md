@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Unity System, Rendering, UGUI]
 author: "ljf12825"
+type: blog
 summary: UGUI, NGUI, UI Tookit
 ---
 Unity UI系统是Unity引擎内置的用于构建用户界面的工具集。它基于Canvas（画布）架构，支持制作按钮、文本、图片、滑动条、输入框等各种交互元素

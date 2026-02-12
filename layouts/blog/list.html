@@ -1,5 +1,5 @@
 {{ define "head_extra" }}
-  {{ if eq .Section "blog" }}
+  {{ if eq .Type "blog" }}
     <link rel="stylesheet" href="{{ "css/blog.css" | relURL }}">
   {{ end }}
 {{ end }}
@@ -11,7 +11,7 @@
     <h1 class="page-title">{{ .Title }}</h1>
 
     <div class="blog-grid">
-      {{ range where .Site.RegularPages "Section" "blog" }}
+      {{ range where .Site.RegularPages "Type" "blog" }}
         <a href="{{ .RelPermalink }}" class="blog-card" data-tags="{{ with .Params.tags }}{{ delimit . "|"}}{{ end }}">
           {{ with .Params.image }}
             <img src="{{ . | relURL }}" alt="{{ $.Title }}" class="blog-thumb">
@@ -51,7 +51,7 @@
     <div class="tags-box">
       <h3>Tags</h3>
       <ul id="tagList">
-        {{ $blogPages := where .Site.RegularPages "Section" "blog" }}
+        {{ $blogPages := where .Site.RegularPages "Type" "blog" }}
         {{ $tags := slice }}
         {{ range $blogPages }}
           {{ range .Params.tags }}
@@ -67,7 +67,7 @@
     <div class="categories-box">
       <h3>Categories</h3>
       <ul id="categoryList">
-        {{ $blogPages := where .Site.RegularPages "Section" "blog" }}
+        {{ $blogPages := where .Site.RegularPages "Type" "blog" }}
         {{ $categories := slice }}
         {{ range $blogPages }}
           {{ range .Params.categories }}

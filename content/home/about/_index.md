@@ -1,3 +1,8 @@
+---
+title: "About"
+layout: "/layout/home/about/"
+---
+
 # About
 
 This is a paragraph once wrote on the homepage of my old blog

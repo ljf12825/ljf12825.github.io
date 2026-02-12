@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Component, Physics System]
 author: "ljf12825"
+type: blog
 summary: Introduction and API of Rigidbody component in Unity
 ---
 在Unity中，`Rigidbody`是一个用于实现物理行为的组件，它允许你的游戏对象受力、重力、碰撞等真实世界的物理规则影响

@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Unity System]
 author: "ljf12825"
+type: blog
 summary: Thread in Unity(Overview of Unity's Threading Model, Unity API and Thread Limitations, Thread/Task/JobSystem/DOTS, How to Reture to the Main Thread)
 ---
 Unity中的线程机制和使用方式，包括：

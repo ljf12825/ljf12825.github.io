@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity]
 author: "ljf12825"
+type: blog
 summary: Data serialization and persistence in Unity, introduction and practice
 ---
 在Unity中，序列化和持久化在游戏数据存储中起到重要的作用

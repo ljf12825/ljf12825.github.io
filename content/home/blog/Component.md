@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Unity System]
 author: "ljf12825"
+type: blog
 summary: All builldin Component in Unity
 ---
 Component是附加在GameObject上的功能模块，每个组件都提供了某种行为或属性，组成了游戏对象的功能

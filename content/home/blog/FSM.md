@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Unity System, AI]
 author: "ljf12825"
+type: blog
 summary: Introduction and implement of FSM
 ---
 FSM(Finite State Machine，有限状态机)是一种常用的编程模型，广泛应用于游戏开发中，尤其是在行为控制、游戏角色AI、UI系统、动画控制方面

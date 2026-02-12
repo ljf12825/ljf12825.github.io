@@ -4,6 +4,7 @@ date: 2025-05-28
 categories: [Note]
 tags: [Unity, Component]
 author: "ljf12825"
+type: blog
 summary: Usage and document of camera in Unity
 ---
 在Unity中，`Camera`是游戏中视角呈现的核心组件，它决定了玩家从哪里、以什么方式看到游戏世界。

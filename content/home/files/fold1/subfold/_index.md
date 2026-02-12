@@ -1,3 +1,4 @@
 ---
 title: "subfold"
+type: files
 ---

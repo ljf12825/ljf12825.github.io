@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Architecture]
 author: "ljf12825"
+type: blog
 summary: Introduction the thinking of Interface Oriented 
 ---
 "Interface Oriented Design"面向接口设计，是软件架构中的一种重要思想，它强调通过接口而非具体实现进行编程

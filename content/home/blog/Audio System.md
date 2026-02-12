@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Unity System]
 author: "ljf12825"
+type: blog
 summary: The usage, document and principle of Audio System. Include every Audio components and params in Unity.
 ---
 Audio System 是 Unity中处理游戏所有声音播放、管理和混音的核心模块

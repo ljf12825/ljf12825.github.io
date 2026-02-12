@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Physics System]
 author: "ljf12825"
+type: blog
 summary: Introduction of physical system in Unity
 ---
 ## Physx

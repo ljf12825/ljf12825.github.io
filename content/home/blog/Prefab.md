@@ -4,6 +4,7 @@ date: 2025-05-31
 categories: [Note]
 tags: [Unity, Unity System]
 author: "ljf12825"
+type: blog
 summary: Prefab's introduction and using in Unity
 ---
 Unity提供Prefab这种非常强大的机制，用来复用游戏对象，让开发更高效、项目更模块化  

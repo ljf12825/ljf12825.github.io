@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Game Principle]
 tags: [Game, Random]
 author: "ljf12825"
+type: blog
 summary: Probability in games, concepts, calculations and applications
 ---
 概率和随机是紧密相关的概念，它们常用于决定事件的发生与结果；在大多数游戏中，概率和随机数的使用涉及到随机事件的模拟，例如：

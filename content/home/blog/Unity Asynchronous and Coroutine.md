@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Asynchrony, Coroutine]
 author: "ljf12825"
+type: blog
 summary: Principles and examples of asynchronous and coroutine usage
 ---
 在Unity中，异步编程主要应用于长时间运行的操作或I/O操作，例如加载场景、资源（如纹理、音频文件）、进行网络请求或其他非阻塞操作。Unity提供了几种常见的方式来实现异步操作，通常通过协程和异步编程API（如`async/await`）来实现

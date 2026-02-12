@@ -4,6 +4,7 @@ date: 2025-05-31
 categories: [Note]
 tags: [Unity, Material, Graphics]
 author: "ljf12825"
+type: blog
 summary: Material in Unity. Creating, Setting and Usage
 ---
 Unity中的Material是用来定义一个物体外观的核心组件，它将Shader与各种Texture和属性值绑定到一起，决定了一个对象在场景中如何表现

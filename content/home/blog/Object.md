@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Syntax, Class]
 author: "ljf12825"
+type: blog
 summary: Unity's class Object
 ---
 Object是Unity中所有内建物体的基类，实现在UnityEngine.CoreModule中，不同于C#中的`System.Object`，它是托管层（C#）和原生引擎层（C++）之间的桥梁，背后绑定着Unity C++引擎层的资源句柄

@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Unity System, AI]
 author: "ljf12825"
+type: blog
 summary: Navigation System in Unity. Introduction, usage and document。
 ---
 constructing

@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Debug]
 tags: [Unity, Debug Log]
 author: "ljf12825"
+type: blog
 summary: Common game development uncommon pitfalls
 ---
 Unity实际开发中，有很多“看起来正常、实则容易出错”的**奇怪问题**（或称为**隐形陷阱**）

@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Architecture]
 author: "ljf12825"
+type: blog
 summary: Application of Data Driven Design(DDD) in the article. Practice methods and application scenarios.
 ---
 Data-Driven Design（数据驱动设计）在Unity和游戏开发中是一种将逻辑与数据分离的编程范式，它强调用数据来控制行为和流程，而不是把所有逻辑写死在代码中

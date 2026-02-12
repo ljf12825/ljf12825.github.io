@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Design Pattern]
 author: "ljf12825"
+type: blog
 summary: Idea of Object Pooling in Unity and implement
 ---
 对象池是一种优化性能和内存分配的设计模式，尤其常用于游戏开发和高频率实例化的场景中

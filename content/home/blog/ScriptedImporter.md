@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Syntax]
 author: "ljf12825"
+type: blog
 summary: Introduction and Usage of ScriptedImporter
 ---
 在Unity中，`ScriptedImporter`是一个非常强大的特性，它允许开发者自定义资源的导入流程。与默认的资源导入器（如图片、模型、音频等）不同，`ScriptedImporter`使开发者可以创建自己的资源类型，并通过代码控制它们在Unity中的导入方式

@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, GameDevelop, Algorithm]
 author: "ljf12825"
+type: blog
 summary: Comparing Unity's traditional object-oriented development techniques with DOTS
 ---
 ## 传统编程模型和技术栈

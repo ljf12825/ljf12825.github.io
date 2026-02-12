@@ -38,13 +38,13 @@
 	{{ partial "ref.html" . }}
 	<script src="{{ "/js/ref-window.js" | relURL }}"></script>
 
-	{{ if .IsHome }}
-  	<script defer src="{{ "js/homealive.js" | relURL }}"></script>
+	{{ if eq .Type "home" }}
+  	<script defer src="{{ "/js/homealive.js" | relURL }}"></script>
 	{{ end }}
 
 
 	<!-- 主体内容 -->
-	{{ block "main" . }}MAIN{{ end }}
+	{{ block "main" . }}{{ end }}
 
 	<!-- 页脚 -->
 	{{ partial "footer.html" . }}

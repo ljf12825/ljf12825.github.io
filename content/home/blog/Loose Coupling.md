@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Architecture]
 author: "ljf12825"
+type: blog
 summary: Introductions the idea of loose coupling and serveral common loose coupling practice(Delegate/Event, Interface and Abstract, ScriptabbleObject, EventBus, DI/Service Locate), as well as example of anti-patterns
 ---
 松耦合（Loose Coupling）是构建可维护、可扩展的关键原则之一，尤其在多人协作、项目复杂度高、后期需要频繁迭代更新的场景中尤为重要

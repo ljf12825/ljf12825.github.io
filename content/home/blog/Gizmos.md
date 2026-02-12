@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Unity System]
 author: "ljf12825"
+type: blog
 summary: Introduction and usage examples of Gizmos
 ---
 Gizmos是一种用于在Scene视图中可视化调试信息的工具，常用于开发阶段来辅助设计和调试，但不会在游戏运行时显示在Game视图中

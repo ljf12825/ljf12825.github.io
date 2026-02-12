@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Render, Graphics]
 author: "ljf12825"
+type: blog
 summary: Shader and Shader in Unity
 ---
 ## 理解渲染管线

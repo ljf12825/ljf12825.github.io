@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Rendering, Graphics]
 author: "ljf12825"
+type: blog
 summary: Frame and GameLoop
 ---
 在Unity中，Frame（帧）是游戏运行的基本时间单位

@@ -4,6 +4,7 @@ date: 2025-05-28
 categories: [Note]
 tags: [Unity, Component]
 author: "ljf12825"
+type: blog
 summary: Unity's class and component Transform
 ---
 Transform是Unity中控制物体位置、旋转、缩放和父子层级关系的核心组件

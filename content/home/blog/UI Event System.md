@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Component, UGUI]
 author: "ljf12825"
+type: blog
 summary: Unity UI Event System, Raycaster, Event Trigger, Focus, Navigation
 ---
 `Event System`是Unity UI System中的核心交互管理器，掌控了所有鼠标点击、键盘输入、触摸事件、UI导航的逻辑

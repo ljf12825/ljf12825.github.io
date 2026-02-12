@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Complie, Cross-paltform, Build Pipeline]
 author: "ljf12825"
+type: blog
 summary: Comparison of Mono and IL2CPP modes
 ---
 `Mono`和`IL2CPP`都是Unity的脚本运行后端（Scripting Backend），它们是两中IL语言的处理方式；Mono的处理方式类似C#程序的执行，而IL2CPP则是将其转化为C++代码，交由C++编译器处理

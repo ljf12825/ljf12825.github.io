@@ -1,3 +1,7 @@
+---
+type: home
+---
+
 # home
 
 > GUIDE
@@ -26,7 +30,7 @@
 </pre>
 <div class="side">
 
-<pre class="ascii", id="alive"></pre>
+<pre class="ascii" id="alive"></pre>
 
 </div>
 </div>
@@ -102,7 +106,3 @@ Notes:
   <span>E-mail: <a href="mailto:ljf12825@graingen.com">ljf12825@graingen.com</a></span>
   <span><img src="/images/imgi_2_hugo-logo-wide.svg" alt="HugoLogo" width="150" height="40" class="hugo-logo"></span>
 </div>
-
-<!-- <a href="https://github.com/ljf12825">GitHub</a> <p align="right">Build with <a href="https://gohugo.io/">Hugo</a></p> 
-
-E-mail: <a href="mailto:ljf12825@graingen.com">ljf12825@graingen.com</a> <p align="right"><img src="/images/imgi_2_hugo-logo-wide.svg" alt="HogoLogo"></p> -->

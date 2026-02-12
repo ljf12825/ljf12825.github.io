@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Syntax]
 author: "ljf12825"
+type: blog
 summary: The usage and principles of common Attributes in Unity and C#
 ---
 Unity中的特性用于控制Unity编译器的行为，或者用于运行时特定的逻辑

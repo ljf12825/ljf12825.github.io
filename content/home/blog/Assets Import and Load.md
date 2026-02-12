@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Asset]
 author: "ljf12825"
+type: blog
 summary: Unity assets and resources management system(Resources folder, Asset Bundles and Addressables)
 ---
 如何将外部资源导入到Unity中并在运行时使用

@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Editor, Tool]
 author: "ljf12825"
+type: blog
 summary: class Editor, examples of editor script.
 ---
 Unity编辑器扩展就是用C#编写一些工具或界面，去增强Unity自带的编辑器功能，从而让开发流程更高效、更可控\

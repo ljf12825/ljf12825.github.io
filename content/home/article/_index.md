@@ -1,1 +1,4 @@
-# Article
+---
+title: Article
+type: article
+---

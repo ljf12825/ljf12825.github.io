@@ -1,3 +1,4 @@
 ---
 title: library
+type: blog
 ---

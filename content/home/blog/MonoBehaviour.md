@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Syntax, Class]
 author: "ljf12825"
+type: blog
 summary: Unity buildin class MonoBehaviour
 ---
 `MonoBehaviour`是Unity中最重要的基类之一，它是所有挂载到GameObject上的脚本的基础。每当在Unity编译器中创建也给C#脚本，并将其附加到一个GameObject时，这个脚本默认会继承`MonoBehaviour`

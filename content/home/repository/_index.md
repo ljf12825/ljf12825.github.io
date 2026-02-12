@@ -1,3 +1,4 @@
 ---
 title: "repositories"
+type: repository
 ---

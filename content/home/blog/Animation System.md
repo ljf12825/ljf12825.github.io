@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Unity System]
 author: "ljf12825"
+type: blog
 summary: The usage, document and principle of Animation System. Include every Animation components and params in Unity.
 ---
 Unity现存两套动画系统，较早的是Legacy Animation，现代的是Mecanim；它们的设计理念、功能和灵活性由很大的不同

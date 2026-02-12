@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Unity System]
 author: "ljf12825"
+type: blog
 summary: Introduction and usage of older and new input system
 ---
 Unity目前存在新旧两个输入系统，旧输入系统（Input类）和新输入系统（Input System包）

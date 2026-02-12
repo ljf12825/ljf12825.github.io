@@ -4,6 +4,7 @@ date: 2025-06-01
 categories: [Note]
 tags: [Unity, Component, Physics System]
 author: "ljf12825"
+type: blog
 summary: Introduction Joint(Components, Example and API)
 ---
 Joint（关节）系统是物理系统的一部分，用于将两个Rigidbody通过某种方式连接起来，从而形成如机械臂、门铰链、车轮悬挂等复杂的物理结构  
