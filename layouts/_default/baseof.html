@@ -31,13 +31,12 @@
 	<!-- 主导航 -->
 	{{ partial "star-nav.html" . }}
 
-	<script defer src="/js/star-nav.js"></script>
-	<script defer src="/js/site.js"></script>
-	<script defer src="/js/star-active.js"></script>
+	<script defer src="{{ "/js/star-nav.js" | relURL }}"></script>
+	<script defer src="{{ "/js/site.js" | relURL }}"></script>
+	<script defer src="{{ "/js/star-active.js" | relURL }}"></script>
 
 	{{ partial "ref.html" . }}
-
-	<script src="/js/ref-window.js"></script>
+	<script src="{{ "/js/ref-window.js" | relURL }}"></script>
 
 	{{ if .IsHome }}
   	<script defer src="{{ "js/homealive.js" | relURL }}"></script>
