@@ -26,26 +26,25 @@
 	{{ partial "header.html" . }}
 
 	<!-- 副导航 -->
-	{{ partial "nav.html" . }}
+	{{ partial "topnav.html" . }}
 
 	<!-- 主导航 -->
 	{{ partial "star-nav.html" . }}
 
-	<script src="/js/star-nav.js"></script>
-	<script src="/js/site.js" defer></script>
-	<script src="/js/star-active.js"></script>
+	<script defer src="{{ "/js/star-nav.js" | relURL }}"></script>
+	<script defer src="{{ "/js/site.js" | relURL }}"></script>
+	<script defer src="{{ "/js/star-active.js" | relURL }}"></script>
 
-	{{ partial "ref.html . "}}
+	{{ partial "ref.html" . }}
+	<script src="{{ "/js/ref-window.js" | relURL }}"></script>
 
-	<script src="/js/ref-window.js"></script>
-
-	{{ if .IsHome }}
-  	<script defer src="{{ "js/homealive.js" | relURL }}"></script>
+	{{ if eq .Type "home" }}
+  	<script defer src="{{ "/js/homealive.js" | relURL }}"></script>
 	{{ end }}
 
 
 	<!-- 主体内容 -->
-	{{ block "main" . }}MAIN{{ end }}
+	{{ block "main" . }}{{ end }}
 
 	<!-- 页脚 -->
 	{{ partial "footer.html" . }}

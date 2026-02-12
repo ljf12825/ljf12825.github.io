@@ -170,6 +170,11 @@ header .banner {
 	margin-top: 1.5em;
 }
 
+.home-page {
+	max-width: none !important;
+	margin: 0 !important;
+}
+
 footer {
 	background: #c0c0c0;
 	border-top: 2px solid white;

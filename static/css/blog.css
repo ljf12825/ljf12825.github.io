@@ -57,7 +57,7 @@
 
   box-shadow:
     2px 2px 0 #ffffff,
-    4px 4px 0 #000080;
+    2px 2px 0 #000080;
 
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }

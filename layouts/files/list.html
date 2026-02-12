@@ -1,5 +1,5 @@
 {{ define "head_extra" }}
-  {{ if eq .Section "files" }}
+  {{ if eq .Type "files" }}
     <link rel="stylesheet" href="{{ "css/filelist.css" | relURL }}">
   {{ end }}
 {{ end }}
