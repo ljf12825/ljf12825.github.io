@@ -5,13 +5,14 @@
 {{ end }}
 
 {{ define "main" }}
+{{ $sec := .Section }}
 <div class="blog-container">
 
   <main class="blog-main">
     <h1 class="page-title">{{ .Title }}</h1>
 
     <div class="blog-grid">
-      {{ range where .Site.RegularPages "Type" "blog" }}
+      {{ range where (where .Site.RegularPages "Type" "blog") "Section" $sec }}
         <a href="{{ .RelPermalink }}" class="blog-card" data-tags="{{ with .Params.tags }}{{ delimit . "|"}}{{ end }}">
           {{ with .Params.image }}
             <img src="{{ . | relURL }}" alt="{{ $.Title }}" class="blog-thumb">
@@ -51,7 +52,7 @@
     <div class="tags-box">
       <h3>Tags</h3>
       <ul id="tagList">
-        {{ $blogPages := where .Site.RegularPages "Type" "blog" }}
+        {{ $blogPages := where (where .Site.RegularPages "Type" "blog") "Section" $sec }}
         {{ $tags := slice }}
         {{ range $blogPages }}
           {{ range .Params.tags }}
@@ -67,7 +68,7 @@
     <div class="categories-box">
       <h3>Categories</h3>
       <ul id="categoryList">
-        {{ $blogPages := where .Site.RegularPages "Type" "blog" }}
+        {{ $blogPages := where (where .Site.RegularPages "Type" "blog") "Section" $sec }}
         {{ $categories := slice }}
         {{ range $blogPages }}
           {{ range .Params.categories }}

@@ -7,26 +7,26 @@ type: home
 > GUIDE
 <div class="layout">
 <pre class="ascii">
-+--------------------------------------------------------------+
-|                        <span class="tip">RightBrain<span class="tooltip">右脑</span></span>                            |
-|                             |                                |
-|                             |     <span class="tip">.NET-Windows<span class="tooltip">Windows</span></span>               |
-|                             |    /                           |
-|                             |   /                            |
-|                             |  /                             |
-|                             | /                              |
-|                             |/                               |
-|      <span class="tip">Graphic<span class="tooltip">图形学</span></span> ———————————— <span class="tip">Home*<span class="tooltip">橱窗</span></span> ———————————— <span class="tip">System<span class="tooltip">系统</span></span>          |
-|                            /|                                |
-|                           / |                                |
-|                          /  |                                |
-|                         /   |                                |
-|                        /    |                                |
-|                       /     |                                |
-|              <span class="tip">Unix-like<span class="tooltip">类Unix</span></span>      |                <span class="tip">Project<span class="tooltip">项目架构与设计模式</span></span>         |
-|                             |                <span class="tip">Miscellaneous<span class="tooltip">沧海遗珠</span></span>   |
-|                          <span class="tip">CSBasic<span class="tooltip">计算机基础原理</span></span>             <span class="tip">AI<span class="tooltip">人工智能</span></span>              |
-+--------------------------------------------------------------+
++------------------------------------------------------------+
+|                      <span class="tip">RightBrain<span class="tooltip">右脑</span></span>                            |
+|                           |                                |
+|                           |     <span class="tip">.NET-Windows<span class="tooltip">Windows</span></span>               |
+|                           |    /                           |
+|                           |   /                            |
+|                           |  /                             |
+|                           | /                              |
+|                           |/                               |
+|    <span class="tip">Graphic<span class="tooltip">图形学</span></span> ———————————— <span class="tip">Home*<span class="tooltip">橱窗</span></span> ———————————— <span class="tip">System<span class="tooltip">系统</span></span>          |
+|                          /|                                |
+|                         / |                                |
+|                        /  |                                |
+|                       /   |                                |
+|                      /    |                                |
+|                     /     |                                |
+|            <span class="tip">Unix-like<span class="tooltip">类Unix</span></span>      |                <span class="tip">Project<span class="tooltip">项目架构与设计模式</span></span>         |
+|                           |                <span class="tip">Miscellaneous<span class="tooltip">沧海遗珠</span></span>   |
+|                        <span class="tip">CSBasic<span class="tooltip">计算机基础原理</span></span>             <span class="tip">AI<span class="tooltip">人工智能</span></span>              |
++------------------------------------------------------------+
 </pre>
 <div class="side">
 

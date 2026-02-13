@@ -1,10 +1,10 @@
 <nav class="topnav">
-  <div class="container">
-    <ul>
-      <li><a href="/graphic/opengl/">OpenGL</a></li>
-      <li><a href="/graphic/vulkan/">Vulkan</a></li>
-      <li><a href="/graphic/shader/">Shader</a></li>
-      <li><a href="/graphic/math/">Math</a></li>
-    </ul>
-  </div>
+    <div class="container">
+        <ul>
+            {{ $current := .RelPermalink }}
+            <li><a href="{{ "/graphic/" | relURL }}" class="{{ if eq $current "/graphic/" }}active{{ end }}">★</a></li>
+            <li><a href="{{ "/graphic/lab/" | relURL }}" class="{{ if eq $current "/graphic/lab/" }}active{{ end }}">Lab</a></li>
+            <li><a href="{{ "/graphic/lib/" | relURL }}" class="{{ if eq $current "/graphic/lib/" }}active{{ end }}">Lib</a></li>
+        </ul>
+    </div>
 </nav>
