@@ -1,3 +1,5 @@
 ---
-title: "graphic"
+type: graphic
 ---
+
+# graphic

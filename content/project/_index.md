@@ -1,3 +1,5 @@
 ---
-title: "project"
+type: project
 ---
+
+# project

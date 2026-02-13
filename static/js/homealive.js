@@ -13,7 +13,18 @@ document.addEventListener("DOMContentLoaded", () => {
         ? "/ascii/alive-narrow.txt"
         : "/ascii/alive-wide.txt";
 
-    pre.textContent = await loadAscii(path);
+    const text = await loadAscii(path);
+    const lines = text.split("\n");
+    pre.textContent = "";
+
+    for (let i = 0; i < lines.length; i++) {
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          pre.textContent += lines[i] + "\n";
+          resolve();
+        }, 150);
+      });
+    }
   }
 
   updatePreContent();
