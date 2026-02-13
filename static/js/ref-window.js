@@ -18,6 +18,11 @@
     win.style.top  = pos.y + "px";
     win.style.right = "auto";
     win.style.bottom = "auto";
+  } else {
+    win.style.top = "auto";
+    win.style.right = "auto";
+    win.style.left = "20px";
+    win.style.bottom = "20px";
   }
 
   if (localStorage.getItem("ref-collapse") === "1") {
