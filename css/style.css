@@ -463,10 +463,17 @@ ol {
   flex: 0 0 auto;
   margin: 0;
 }
+
+@keyframes neonFlicker {
+  0%   { text-shadow: 0 0 4px #0ff, 0 0 12px #0ff, 0 0 32px #09f; }
+  50%  { text-shadow: 0 0 8px #0ff, 0 0 24px #0ff, 0 0 64px #09f; }
+  100% { text-shadow: 0 0 4px #0ff, 0 0 12px #0ff, 0 0 32px #09f; }
+}
+
 .side {
   flex: 1;
-  padding-left: 32px;
-  color: #000080
+  font-weight: bold;
+  color: #000080;
 }
 
 html::-webkit-scrollbar,
@@ -598,4 +605,3 @@ body::-webkit-scrollbar-thumb:hover {
 #ref-window .title { display: none; }
 #ref-window:not(.closed) .title.open { display: inline; }
 #ref-window.closed .title.closed { display: inline; }
-
