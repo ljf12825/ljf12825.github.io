@@ -2,7 +2,7 @@
 type: home
 ---
 
-# home
+# $HOME
 
 > GUIDE
 <div class="layout">
