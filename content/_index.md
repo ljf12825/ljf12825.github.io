@@ -4,13 +4,9 @@ type: home
 
 # ljf12825\@ljf12825.github.io:/$
 
-build info\
-Engine: {{ site.Data.build.engine }}\
-Build Time: {{ site.Data.build.build_time }}\
-Commit: {{ site.Data.build.commit | truncate 7 "" }}\
-Branch: {{ site.Data.build.branch }}\
-Host(Build): {{ site.Data.build.build_host }}\
-Host(Runtime): <span id="runtime-host"></span>
+build info
+
+{{< buidinfo >}}
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
