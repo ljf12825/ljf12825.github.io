@@ -3,6 +3,8 @@ Engine: {{ site.Data.build.engine }}
 Build Time: {{ site.Data.build.build_time }}
 Commit: {{ site.Data.build.commit | truncate 7 "" }}
 Branch: {{ site.Data.build.branch }}
+Actor: {{ site.Data.build.actor }}
+Runner OS: {{ site.Data.build.runner_os }}
 Host(Build): {{ site.Data.build.build_host }}
 Host(Runtime): <span id="runtime-host"></span>
 </pre>

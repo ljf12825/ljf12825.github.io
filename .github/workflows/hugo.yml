@@ -41,10 +41,12 @@ jobs:
         run: |
           mkdir -p data
           echo "build_host: ljf12825.github.io" >> data/build.yaml
-          echo "engine: Hugo" >> data/build.yaml
+          echo "engine: $(hugo version)" >> data/build.yaml
           echo "build_time: $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> data/build.yaml
           echo "commit: $GITHUB_SHA" >> data/build.yaml
           echo "branch: $GITHUB_REF_NAME" >> data/build.yaml
+          echo "actor: $GITHUB_ACTOR" >> data/build.yaml
+          echo "runner_os: $RUNNER_OS" >> data/build.yaml
 
       # 3. 构建静态网站 (文件将生成在 ./public 目录)
       - name: Build with Hugo

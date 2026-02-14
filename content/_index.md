@@ -4,7 +4,7 @@ type: home
 
 # ljf12825\@ljf12825.github.io:/$
 
-build info
+## BUILD INFO
 
 {{< buildinfo >}}
 
