@@ -33,37 +33,26 @@
 <a href=https://www.khronos.org/opengl/wiki/ target=_blank>OpenGL Wiki</a></p><p><a href=https://learn.microsoft.com/en-us/windows/win32/directx target=_blank>DirectX</a></p><p><a href=https://www.realtimerendering.com/ target=_blank>Real-Time Rendering</a></p><p><a href=https://www.pbr-book.org/ target=_blank>Physically Based Rendering</a></p><p><a href=https://www.scratchapixel.com/ target=_blank>Scratchapixel</a></p><p><a href=https://learnopengl.com/ target=_blank>LearnOpenGL</a></p><p><a href=https://raytracing.github.io/ target=_blank>Ray Tracing in One Weekend</a></p><p><a href=https://www.shadertoy.com/ target=_blank>Shadertoy</a></p><p><a href=https://arxiv.org/list/cs.GR/recent target=_blank>arXiv Graphics</a></p><p><a href=https://www.siggraph.org/ target=_blank>SIGGRAPH</a> |
 <a href=https://dl.acm.org/conference/siggraph target=_blank>SIGGRAPH Digital Library</a></p><p><a href=https://git-scm.com/ target=_blank>Git</a> |
 <a href=https://git-scm.com/doc target=_blank>Docs</a> |
-<a href=https://git-scm.com/community target=_blank>Community</a></p></div></div></div><script src=/js/ref-window.js></script><script defer src=/js/homealive.js></script><div class="content home-page"><div class=container><h1 id=root>root</h1><div class=mermaid>flowchart LR
-subgraph Build["🛠 构建期（Hugo）"]
-D1[data/skills.yaml]
-D2[data/projects.yaml]
-M1[content/*.md]
-T1[layouts/*.html]
-D1 --> HUGO
-D2 --> HUGO
-M1 --> HUGO
-T1 --> HUGO
-end
-HUGO[Hugo Static Generator]
-subgraph Output["📦 输出物"]
-H1[HTML 页面]
-J1[内嵌 JSON 数据]
-C1[CSS]
-S1[JS]
-end
-HUGO --> H1
-HUGO --> J1
-HUGO --> C1
-HUGO --> S1
-subgraph Runtime["🧠 运行期（浏览器）"]
-U1[用户点击 / 选择]
-JS[前端 JS 逻辑]
-UI[动态更新 UI]
-end
-H1 --> JS
-J1 --> JS
-U1 --> JS
-JS --> UI</div><h1 id=1>1</h1><h1 id=1-1>1</h1><h1 id=1-2>1</h1><h1 id=1-3>1</h1><h1 id=1-4>1</h1><h1 id=1-5>1</h1><h1 id=1-6>1</h1><h1 id=1-7>1</h1><h1 id=1-8>1</h1><h1 id=1-9>1</h1></div></div><script type=module>
+<a href=https://git-scm.com/community target=_blank>Community</a></p></div></div></div><script src=/js/ref-window.js></script><script defer src=/js/homealive.js></script><div class="content home-page"><div class=container><h1 id=ljf12825ljf12825githubio>ljf12825@ljf12825.github.io:/$</h1><h2 id=info>INFO</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>build info\
+</span></span><span style=display:flex><span>Engine: {{ site.Data.build.engine }}\
+</span></span><span style=display:flex><span>Build Time: {{ site.Data.build.build_time }}\
+</span></span><span style=display:flex><span>Commit: {{ site.Data.build.commit | truncate 7 &#34;&#34; }}\
+</span></span><span style=display:flex><span>Branch: {{ site.Data.build.branch }}\
+</span></span><span style=display:flex><span>Host(Build): {{ site.Data.build.build_host }}\
+</span></span><span style=display:flex><span>Host(Runtime): &lt;span id=&#34;runtime-host&#34;&gt;&lt;/span&gt;
+</span></span></code></pre></div><script>document.addEventListener("DOMContentLoaded",()=>{const e=document.getElementById("runtime-host");e&&(e.textContent=window.location.host)})</script><h2 id=structure>STRUCTURE</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>/
+</span></span><span style=display:flex><span>|__~/
+</span></span><span style=display:flex><span>|   |__homepage
+</span></span><span style=display:flex><span>|__system/
+</span></span><span style=display:flex><span>|__unix-like/
+</span></span><span style=display:flex><span>|__dotnetandwindows/
+</span></span><span style=display:flex><span>|__rightbrain/
+</span></span><span style=display:flex><span>|__graphic/
+</span></span><span style=display:flex><span>|__csbasic/
+</span></span><span style=display:flex><span>|__project/
+</span></span><span style=display:flex><span>|__miscellaneous/
+</span></span><span style=display:flex><span>|__ai/
+</span></span></code></pre></div><h2 id=manual>MANUAL</h2><h3 id=navigation>Navigation</h3><p>Navigation will be permanently displayed on all pages of this site.<br>This site has two Navigation options: <code>Mainnavigation</code> and <code>Subnavigation</code><br>As shown in the STRUCTURE, this site uses the root page(<code>/</code>, i.e. this page) as the root node for all pages<br><code>Mainnavigation</code> is responsible for navigating between different subsites/modules/second-level directories<br><code>Subnavigation</code> is responsible for navigation within the same subsite&rsquo;s third-level directory; different subsites have different <code>Subnavigation</code></p><h4 id=mainnavigation>Mainnavigation</h4><p>If this is your first time opening this website or you have cleared the website&rsquo;s data, the Mainnavigation will be expanded by default and displayed in the lower right corner of the webpage<br>Dragging the title bar moves the <code>Mainnavigation</code> position, and double-clicking the title bar minimizes it. The website will remember the position and expanded state, and retain the state on the next visit</p><p><img src=/images/navigation.png alt=navigation><br>Expanded</p><p><img src=/images/nav.png alt=nav><br>Folded</p><p>The meaning and content of each node in Mainnavigation are explained in detail in <code>~/$HOME</code></p><p><img src=/images/guide.png alt=guide></p><h4 id=subnavigation>Subnavigation</h4><p>Subnavigation is always displayed under Prompt; it is not present on the root page</p><p><img src=/images/subnav.png alt=subnav></p><h3 id=reference>Reference</h3><p>Similar to Mainnavigation, Reference is also a separate window displayed across the entire site, facilitating convenient external link navigation<br>It defaults to an expanded state and appears in the lower left corner of the page<br>Detailed information about Reference can be found in <code>~/references</code></p><p><img src=/images/reference.png alt=reference><br>Expanded</p><p><img src=/images/ref.png alt=ref><br>Folded</p><h3 id=prompt-command>Prompt Command</h3><p>The Prompt Command displays the current page&rsquo;s path<br>It is permanently displayed at the top of the page</p><p><img src=/images/prompt.png alt=prompt></p></div></div><script type=module>
   import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
   mermaid.initialize({ 
     startOnLoad: true, theme: "default" });
