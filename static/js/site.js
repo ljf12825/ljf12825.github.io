@@ -8,14 +8,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const user = "ljf12825";
   const host = "ljf12825.github.io";
-  const path = window.location.pathname === "/" ? "~"
-              : "~" + window.location.pathname.replace(/\/$/, "");
+  const path = virtualPath();
 
   const cmd = "ls | xargs cat";
   const text = `${user}@${host}:${path}$ ${cmd}`;
 
   let i = 0;
   el.textContent = "";
+
+  function virtualPath() {
+    let p = window.location.pathname.replace(/\/$/, "");
+
+    if (p === "" || p === "/") return "/";
+
+    if (p === "/home") return "~";
+
+    if (p.startsWith("/home/")) {
+      return "~" + p.replace("/home", "");
+    }
+
+    return p;
+  }
 
   function type() {
     if (i < text.length) {
