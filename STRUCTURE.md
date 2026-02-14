@@ -5,11 +5,9 @@
   - repos
 
 - Graphic
-  - Graphic Math
-  - OpenGL
-  - Vulkan
-  - DirectX
-  - GPU
+  - homepage
+  - lab
+  - lib
 
 - System
   - Unity

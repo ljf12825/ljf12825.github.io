@@ -1,3 +1,5 @@
 ---
-title: "unix-like"
+type: unixlike
 ---
+
+# unix-like

@@ -42,7 +42,6 @@ flowchart LR
     J1 --> JS
     U1 --> JS
     JS --> UI
-
 ```
 
 # 1

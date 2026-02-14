@@ -1,3 +1,5 @@
 ---
-title: "rightbrain"
+type: rightbrain
 ---
+
+# rightbrain
