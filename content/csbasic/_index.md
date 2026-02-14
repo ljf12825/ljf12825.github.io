@@ -1,3 +1,5 @@
 ---
-title: "csbasic"
+type: csbasic
 ---
+
+# csbasic

@@ -1,3 +1,5 @@
 ---
-title: "system"
+type: "system"
 ---
+
+# system

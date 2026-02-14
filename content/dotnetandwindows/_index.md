@@ -1,3 +1,5 @@
 ---
-title: ".NET & Windows"
+type: dotnetandwindows
 ---
+
+# dotnetandwindows

@@ -1,3 +1,5 @@
 ---
-title: "miscellaneous"
+type: miscellaneous
 ---
+
+# miscellaneous
