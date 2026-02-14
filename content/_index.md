@@ -6,7 +6,7 @@ type: home
 
 build info
 
-{{< buidinfo >}}
+{{< buildinfo >}}
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
