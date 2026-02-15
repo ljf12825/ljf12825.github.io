@@ -1,4 +1,4 @@
-![CI](https://github.com/ljf12825/ljf12825.github.io/actions/workflows/deploy.yml/badge.svg)
+![CI](https://github.com/ljf12825/ljf12825.github.io/actions/workflows/hugo.yml/badge.svg)
 ![Pages](https://img.shields.io/badge/GitHub%20Pages-live-brightgreen)
 ![Last Commit](https://img.shields.io/github/last-commit/ljf12825/ljf12825.github.io)
 ![Status](https://img.shields.io/website?url=https://ljf12825.github.io)
