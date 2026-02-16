@@ -1,4 +1,3 @@
 ---
-title: Lib
 type: blog
 ---
