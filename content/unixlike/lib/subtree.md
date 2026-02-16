@@ -2,7 +2,7 @@
 title: Subtree
 date: 2025-12-31
 categories: [Git]
-tags: [Mechanism, Command. Porcelain]
+tags: [Mechanism, Command, Porcelain]
 author: "ljf12825"
 type: blog
 summary: Git Subtree

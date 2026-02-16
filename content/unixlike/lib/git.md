@@ -13,11 +13,11 @@ Git和其他版本控制系统的主要区别在于Git对待数据的方法。�
 
 这类系统（CVS、Subversion、Perforce、Bazaar等）将它们保存的信息看作是一组基本文件和每个文件随时间逐步积累的差异
 
-![another](/images/anotherstream.drawio.svg)
+![another](/images/Blog/anotherstream.drawio.svg)
 
 Git不按照以上方式对待或保存数据。反之，Git更像是吧数据看作是对小型文件系统的一组快照。每次你提交更新，或在Git中保存项目状态时，它主要对当时的全部文件制作一个快照并保存这个快照的索引。为了高效，如果文件没有修改，Git不再重新存储该文件，而是只保留一个链接指向之前存储的文件。Git对待数据更像是一个快照流
 
-![git](/images/git.drawio.svg)
+![git](/images/Blog/git.drawio.svg)
 
 这是Git与几乎所有其他版本控制系统的重要区别。因此Git重新考虑了以前每一代版本控制系统的诸多方面。Git更像是一个小型的文件系统，提供了许多以此为基础构建的工具
 
@@ -40,7 +40,7 @@ Git有三种状态，你的文件可能处于其中之一：已提交(Committed)
 
 由此引入Git项目的三个工作区概念：Git仓库、工作目录以及暂存区域
 
-![gitworkspace](/images/gitworkspace.svg)
+![gitworkspace](/images/Blog/gitworkspace.svg)
 
 - Git仓库目录是Git用来保存项目的元数据和对象数据库的地方。这是Git中最重要的部分，从其他计算机克隆仓库时，拷贝的就是这里的数据
 
