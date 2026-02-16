@@ -1,0 +1,156 @@
+<!doctype html><html lang=en><head><meta charset=UTF-8><title>Make and Makefile</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/blogsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/unixlike/>★</a></li><li><a href=/unixlike/lab/>Lab</a></li><li><a href=/unixlike/lib/>Lib</a></li><li><a href=/unixlike/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><pre class=ascii>
++——————————————————————————————————————————————————————————————+
+|                        <a class=nav-item data-path=/rightbrain/ href=/rightbrain/>RightBrain</a>                            |
+|                             |                                |
+|                             |     <a class=nav-item data-path=/dotnetandwindows/ href=/dotnetandwindows/>.NET-Windows</a>               |
+|                             |    /                           |
+|                             |   /                            |
+|                             |  /                             |
+|                             | /                              |
+|                             |/                               |
+|      <a class=nav-item data-path=/graphic/ href=/graphic/>Graphic</a> ———————————— <a class=nav-item data-path=/home/ href=/home/>Home</a> ————————————— <a class=nav-item data-path=/system/ href=/system/>System</a>          |
+|                            /|                                |
+|                           / |                                |
+|                          /  |                                |
+|                         /   |                                |
+|                        /    |                                |
+|                       /     |                                |
+|              <a class=nav-item data-path=/unixlike/ href=/unixlike/>Unix-like</a>      |                <a class=nav-item data-path=/project/ href=/project/>Project</a>         |
+|                             |                <a class=nav-item data-path=/miscellaneous/ href=/miscellaneous/>Miscellaneous</a>   |
+|                          <a class=nav-item data-path=/csbasic/ href=/csbasic/>CSBasic</a>             <a class=nav-item data-path=/ai/ href=/ai/>AI</a>              |
++——————————————————————————————————————————————————————————————+
+    </pre></nav><script defer src=/js/star-nav.js></script><script defer src=/js/site.js></script><script defer src=/js/star-active.js></script><div id=ref-window class="float-window open"><div class=float-header><span class="title open">>> >> >> Reference &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Ref>>>>>></span></div><div class=float-body><div class=ref-list><a href=https://www.mixamo.com/ target=_blank>Mixamo</a> |
+<a href=https://opengameart.org/ target=_blank>OpenGameArt</a><p><a href=https://sharplab.io/ target=_blank>SharpLab</a> |
+<a href=https://godbolt.org/ target=_blank>Compiler Explorer</a></p><p><a href="https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type+Something+&x=none&v=4&h=4&w=80&we=false" target=_blank>ASCII Graph Generator</a></p><p><a href=https://mermaid.js.org/ target=_blank>Mermaid</a></p><a href=https://www.vim.org/ target=_blank>Vim</a> | <a href=https://vimdoc.sourceforge.net/ target=_blank>Vim Manual Source</a> |
+<a href=https://vimcdoc.sourceforge.net/ target=_blank>Vimcdoc</a> | <a href=https://vimcdoc.sourceforge.net/doc/help.html target=_blank>Vimdoc read online</a><p><a href=https://shields.io/ target=_blank>Shields.io</a></p><p><a href=https://emojidb.org/ target=_blank>EmojiDB</a></p><p><a href=https://cppreference.com/ target=_blank>cppreference</a></p><p><a href=https://gcc.gnu.org/onlinedocs/ target=_blank>GCC Docs</a></p><p><a href=https://clang.llvm.org/docs/ target=_blank>Clang Docs</a></p><p><a href=https://www.boost.org/libraries/ target=_blank>Boost Library Docs</a></p><p><a href=https://learn.microsoft.com/en-us/dotnet/csharp/ target=_blank>Microsoft Learn</a><p><a href=https://www.lua.org/manual/5.4/ target=_blank>Lua 5.4 Reference Manual</a><p><a href=https://docs.unity3d.com/Manual/index.html target=_blank>Unity Manual</a> |
+<a href=https://docs.unity3d.com/ScriptReference/index.html target=_blank>Unity API</a></p><p><a href=https://docs.unrealengine.com/ target=_blank>Unreal Engine Docs</a></p><p><a href=https://godotengine.org target=_blank>Godot</a> |
+<a href=https://docs.godotengine.org/en/stable/ target=_blank>Godot Docs</a></p><p><a href=https://z-library.sk/ target=_blank>Z-Library</a> : eBook Library</p><p><a href=https://docs.kernel.org/ target=_blank>Linux Kernel Docs</a></p><p><a href=https://www.gnu.org/ target=_blank>GNU</a> : manuals, philosophy, FAQ</p><a href=https://archlinux.org/ target=_blank>ArchLinux</a><p><a href=https://help.ubuntu.com/ target=_blank>Ubuntu Doc</a> |
+<a href=https://ubuntu.com/server/docs target=_blank>Ubuntu Server Guide</a></p><p><a href=https://www.vulkan.org/ target=_blank>Vulkan</a> |
+<a href=https://docs.vulkan.org/ target=_blank>Vulkan Docs</a></p><p><a href=https://www.opengl.org/ target=_blank>OpenGL</a> |
+<a href=https://registry.khronos.org/OpenGL target=_blank>OpenGL API</a> |
+<a href=https://www.khronos.org/opengl/wiki/ target=_blank>OpenGL Wiki</a></p><p><a href=https://learn.microsoft.com/en-us/windows/win32/directx target=_blank>DirectX</a></p><p><a href=https://www.realtimerendering.com/ target=_blank>Real-Time Rendering</a></p><p><a href=https://www.pbr-book.org/ target=_blank>Physically Based Rendering</a></p><p><a href=https://www.scratchapixel.com/ target=_blank>Scratchapixel</a></p><p><a href=https://learnopengl.com/ target=_blank>LearnOpenGL</a></p><p><a href=https://raytracing.github.io/ target=_blank>Ray Tracing in One Weekend</a></p><p><a href=https://www.shadertoy.com/ target=_blank>Shadertoy</a></p><p><a href=https://arxiv.org/list/cs.GR/recent target=_blank>arXiv Graphics</a></p><p><a href=https://www.siggraph.org/ target=_blank>SIGGRAPH</a> |
+<a href=https://dl.acm.org/conference/siggraph target=_blank>SIGGRAPH Digital Library</a></p><p><a href=https://git-scm.com/ target=_blank>Git</a> |
+<a href=https://git-scm.com/doc target=_blank>Docs</a> |
+<a href=https://git-scm.com/community target=_blank>Community</a></p></div></div></div><script src=/js/ref-window.js></script><article class=single_article><div class=title>Make and Makefile<div class=meta>Update: 2025-12-31
+>> Creator：ljf12825</div></div><div class=content><ol><li><code>make</code>：是一个命令行工具它根据一个名为<code>Makefile</code>的脚本文件中的指令，自动地构建和管理项目</li><li><code>Makefile</code>：是一个文本文件，它定义了源文件之间的依赖关系以及构建这些文件的命令</li></ol><p>Make是一个构建工具（build tool），最早在Unix上诞生，用来自动化编译和构建项目<br>它的核心思想是：</p><ul><li>目标（target）：想要创建的东西（比如<code>main.o</code>或者<code>app.exe</code>或者一个自定义动作如<code>clean</code>）</li><li>依赖（dependencies）：生成目标需要依赖哪些文件（比如源文件<code>.c</code>、头文件<code>.h</code>）。如果任何一个依赖文件比目标文件新，<code>make</code>就知道目标过期了，需要重新构建</li><li>规则（rule）：告诉Make如何从依赖生成目标（通常是编译命令）</li></ul><p>Make根据文件的修改时间，自动决定需要重新编译哪些文件，从而避免全量编译</p><h2 id=存在意义>存在意义</h2><p>想象一个由多个文件组成的C++项目：</p><ul><li><code>main.cpp</code></li><li><code>utils.cpp</code></li><li><code>helper.cpp</code></li><li><code>myapp</code>（最终的可执行文件）</li></ul><p>没有<code>make</code>，每次修改后都需要手动输入一长串命令来编译</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>g++ -c main.cpp -o main.o
+</span></span><span style=display:flex><span>g++ -c utils.cpp -o utils.o
+</span></span><span style=display:flex><span>g++ -c helper.cpp -o helper.o
+</span></span><span style=display:flex><span>g++ main.o utils.o helper.o -o myapp
+</span></span></code></pre></div><p>繁琐且低效。如果只修改了<code>helper.cpp</code>，重新编译所有文件会浪费大量时间<br>有了<code>Makefile</code>，只需要输入<code>make</code>，<code>make</code>工具就会：</p><ol><li>读取<code>Makefile</code></li><li>检查依赖关系和时间戳</li><li>只重新编译哪些被修改的文件以及依赖于这些文件的目标</li><li>最后链接可执行文件</li></ol><p>这极大地提高了开发效率，实现了增量编译<br>在C/C++项目中，头文件依赖是最大的麻烦：修改了一个头文件，所有包含它的<code>.c</code>都要重新编译<br>常见的做法是让编译器生成依赖</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>g++ -MM main.cpp
+</span></span></code></pre></div><p>这会输出类似：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-makefile data-lang=makefile><span style=display:flex><span><span style=color:#a6e22e>main.o</span><span style=color:#f92672>:</span> main.cpp helper.h utils.h
+</span></span></code></pre></div><p>通常会配合<code>Makefile</code>里的<code>-include</code>来自动引入依赖文件（如<code>.d</code>文件），保证依赖关系正确，而不用手写</p><h2 id=make的核心机制与哲学>Make的核心机制与哲学</h2><ul><li>依赖检查：Make会比较目标文件和依赖文件的时间戳<ul><li>如果目标比依赖新 -> 不需要重新生成</li><li>如果依赖比目标新 -> 需要重新执行命令</li></ul></li><li>声明式：在Makefile中，你声明目标和依赖，至于如何决定是否执行，由<code>make</code>根据时间戳和规则自动推导。这和命令式脚本不同，后者是需要一步一步写明要做什么</li><li>递归构建：Make会递归地检查依赖关系</li><li>最小重建：只编译修改过的部分（增量编译），节省时间</li><li>自动化 + 增量化：它的核心价值不在于“能编译”，而在于“避免重复劳动”，只编译需要更新的部分</li></ul><h2 id=makefile语法><code>Makefile</code>语法</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-makefile data-lang=makefile><span style=display:flex><span><span style=color:#a6e22e>target</span><span style=color:#f92672>:</span> dependencies
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>&lt;TAB&gt;</span> <span style=color:#960050;background-color:#1e0010>command</span>
+</span></span></code></pre></div><ul><li><code>target</code>：目标文件，最终要生成的东西</li><li><code>dependencies</code>：依赖文件，如果依赖比目标新，Make就会执行规则</li><li><code>command</code>：生成目标的命令，一行或多行shell命令（注意必须以Tab开头，不能用空格代替，这是<code>make</code>的历史遗留语法，但必须遵守）</li></ul><p><strong>示例</strong>
+假设有一个项目：<code>main.c</code>和<code>helper.c</code>，最终形成可执行文件<code>hello</code><br>Makefile如下</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-makefile data-lang=makefile><span style=display:flex><span><span style=color:#75715e># 最终目标：生成可执行文件 hello
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e>hello</span><span style=color:#f92672>:</span> main.o helper.o
+</span></span><span style=display:flex><span>    gcc main.o helper.o -o hello
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 目标文件 main.o 依赖于源文件 main.c和头文件 helper.h
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e>main.o</span><span style=color:#f92672>:</span> main.c helper.h
+</span></span><span style=display:flex><span>    gcc -c main.c -o main.o
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 目标文件 helper.o 依赖于源文件 helper.c和头文件 helper.h
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e>helper.o</span><span style=color:#f92672>:</span> helper.c helper.h
+</span></span><span style=display:flex><span>    gcc -c helper.c -o helper.o
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 自定义目标：清理编译生成的文件
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e>clean</span><span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>    rm -f *.o hello
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 告诉 make: &#39;clean&#39; 不是一个文件，而是一个动作名称
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e>.PHONY</span><span style=color:#f92672>:</span> clean
+</span></span></code></pre></div><ul><li>当运行<code>make</code>（不加参数）时，<code>make</code>会默认执行<code>Makefile</code>中的第一个目标（这里是<code>hello</code>）</li><li>为了构建<code>hello</code>，它需要<code>main.o</code>和<code>helper.o</code>。如果这些<code>.o</code>文件不存在或比<code>hello</code>新，<code>make</code>会先去执行生成它们的规则</li><li>在生成<code>main.o</code>时，它会检查<code>main.c</code>和<code>helper.h</code>是否比<code>main.o</code>新。如果只修改了<code>helper.h</code>，那么<code>main.o</code>和<code>helper.o</code>（因为它们都依赖<code>helper.h</code>）都会被重新编译，最重新链接<code>hello</code>。这就是依赖关系的强大之处</li><li><code>clean</code>目标没有依赖。它用于删除所有编译生成的文件。可以通过<code>make clean</code>来执行</li><li><code>.PHONY: clean</code>告诉<code>make</code>，<code>clean</code>是一个“伪目标”，并不是要生成一个名为<code>clean</code>的文件。这是一个好习惯，可以避免如果当前目录下恰好有一个叫<code>clean</code>的文件时，<code>make clean</code>命令失效的问题</li></ul><p><strong>伪目标（phony targets）</strong>
+<code>.PHONY</code>不只是<code>clean</code>，可以用它组织构建过程</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-makefile data-lang=makefile><span style=display:flex><span><span style=color:#a6e22e>.PHONY</span><span style=color:#f92672>:</span> all debug release
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>all</span><span style=color:#f92672>:</span> debug
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>debug</span><span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>$(</span>MAKE<span style=color:#66d9ef>)</span> CFLAGS<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;-g -Wall&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>release</span><span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>$(</span>MAKE<span style=color:#66d9ef>)</span> CFLAGS<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;-O2 -DNDEBUG&#34;</span>
+</span></span></code></pre></div><p>这体现了Make还能作为一个任务调度器，不只是编译器的前端</p><p><strong>条件语句</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-makefile data-lang=makefile><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>ifeq</span> <span style=color:#960050;background-color:#1e0010>(</span><span style=color:#66d9ef>$(</span>DEBUG<span style=color:#66d9ef>)</span><span style=color:#960050;background-color:#1e0010>,1)</span>
+</span></span><span style=display:flex><span>    CFLAGS <span style=color:#f92672>+=</span> -g
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>else</span>
+</span></span><span style=display:flex><span>    CFLAGS <span style=color:#f92672>+=</span> -O2
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>endif</span>
+</span></span></code></pre></div><p>这样就可以<code>make DEBUG=1</code>控制编译模式</p><p><strong>递归Make</strong><br>在大型项目里，通常每个子目录都有自己的<code>Makefile</code>，顶层<code>Makefile</code>统一调度</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-makefile data-lang=makefile><span style=display:flex><span>SUBDIRS <span style=color:#f92672>=</span> src utils tests
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>all</span><span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> dir in <span style=color:#66d9ef>$(</span>SUBDIRS<span style=color:#66d9ef>)</span>; <span style=color:#66d9ef>do</span> <span style=color:#66d9ef>$(</span>MAKE<span style=color:#66d9ef>)</span> -C $$dir; <span style=color:#66d9ef>done</span>
+</span></span></code></pre></div><h2 id=变量和隐含规则>变量和隐含规则</h2><p><strong>变量</strong><br>可以定义变量来保存编译器名称、编译选项等</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-makefile data-lang=makefile><span style=display:flex><span><span style=color:#75715e># 定义变量
+</span></span></span><span style=display:flex><span>CC <span style=color:#f92672>=</span> gcc
+</span></span><span style=display:flex><span>CFLAGS <span style=color:#f92672>=</span> -Wall -g
+</span></span><span style=display:flex><span>TARGET <span style=color:#f92672>=</span> hello
+</span></span><span style=display:flex><span>OBJS <span style=color:#f92672>=</span> main.o helper.o
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 使用变量 $(VAR_NAME)
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e>$(TARGET)</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>$(</span>OBJS<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>$(</span>CC<span style=color:#66d9ef>)</span> <span style=color:#66d9ef>$(</span>OBJS<span style=color:#66d9ef>)</span> -o <span style=color:#66d9ef>$(</span>TARGET<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>main.o</span><span style=color:#f92672>:</span> main.c helper.h
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>$(</span>CC<span style=color:#66d9ef>)</span> <span style=color:#66d9ef>$(</span>CFLAGS<span style=color:#66d9ef>)</span> -c main.c
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>helper.o</span><span style=color:#f92672>:</span> helper.c helper.h
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>$(</span>CC<span style=color:#66d9ef>)</span> <span style=color:#66d9ef>$(</span>CFLAGS<span style=color:#66d9ef>)</span> -c helper.c
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>clean</span><span style=color:#f92672>:</span> 
+</span></span><span style=display:flex><span>    rm -f <span style=color:#66d9ef>$(</span>OBJS<span style=color:#66d9ef>)</span> <span style=color:#66d9ef>$(</span>TARGET<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>.PHONY</span><span style=color:#f92672>:</span> clean
+</span></span></code></pre></div><p><strong>自动变量</strong><br><code>make</code>提供了一些特殊的“自动变量”，在规则的命令中非常有用</p><ul><li><code>$@</code>：当前规则中的目标文件名</li><li><code>$&lt;</code>：第一个依赖项的文件名</li><li><code>$^</code>：所有依赖项的文件列表</li></ul><p>使用自动变量可以进一步简化</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-makefile data-lang=makefile><span style=display:flex><span>CC <span style=color:#f92672>=</span> gcc
+</span></span><span style=display:flex><span>CFLAGS <span style=color:#f92672>=</span> -Wall -g
+</span></span><span style=display:flex><span>TARGET <span style=color:#f92672>=</span> hello
+</span></span><span style=display:flex><span>OBJS <span style=color:#f92672>=</span> main.o helper.o
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>$(TARGET)</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>$(</span>OBJS<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>$(</span>CC<span style=color:#66d9ef>)</span> $^ -o $@
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 使用模式规则：如何从 .c 文件构建 .o 文件
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>%.o：</span> <span style=color:#960050;background-color:#1e0010>%.c</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>$(</span>CC<span style=color:#66d9ef>)</span> <span style=color:#66d9ef>$(</span>CFLAGS<span style=color:#66d9ef>)</span> <span style=color:#960050;background-color:#1e0010>-c</span> <span style=color:#66d9ef>$&lt;</span> <span style=color:#960050;background-color:#1e0010>-o</span> <span style=color:#66d9ef>$@</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>clean</span><span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>    rm -f <span style=color:#66d9ef>$(</span>OBJS<span style=color:#66d9ef>)</span> <span style=color:#66d9ef>$(</span>TARGET<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>.PHONY</span><span style=color:#f92672>:</span> clean
+</span></span></code></pre></div><p>这里的<code>%.o: %.c</code>是一个模式规则，它告诉<code>make</code>：任何<code>.o</code>文件都依赖于同名的<code>.c</code>文件，并使用下面的命令来构建。这使得<code>Makefile</code>非常简洁，无需为每个<code>.o</code>文件写重复的规则<br>GNU Make内建了大量的默认规则，比如</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-makefile data-lang=makefile><span style=display:flex><span><span style=color:#a6e22e>%.o </span><span style=color:#f92672>:</span> %.c
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>$(</span>CC<span style=color:#66d9ef>)</span> -c <span style=color:#66d9ef>$(</span>CFLAGS<span style=color:#66d9ef>)</span> $&lt; -o $@
+</span></span></code></pre></div><p>很多时候，甚至不用写<code>.o</code>的生成规则，Make会自动推导出来。这就是为什么很多简单的Makefile看起来“缺失了一些规则，但依旧能工作</p><h2 id=make的使用><code>make</code>的使用</h2><p>在终端中，进入包含<code>Makefile</code>的目录</p><ol><li>最基本的用法
+在项目目录下直接运行</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>make
+</span></span></code></pre></div><p>默认会执行Makefile中的第一个目标<br>如果第一个目标是<code>all</code>，那就会先编译所有程序</p><ol start=2><li>指定目标</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>make target_name
+</span></span></code></pre></div><p>例如</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>make main
+</span></span><span style=display:flex><span>make clean
+</span></span></code></pre></div><p>那就会执行<code>main</code>或<code>clean</code>目标对应的命令</p><ol start=3><li>指定Makefile文件
+默认情况下，<code>make</code>会去找</li></ol><ul><li><code>GNUmakefile</code></li><li><code>makefile</code></li><li><code>Makefile</code>
+如果文件名不是这些，可以手动指定</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>make -f MyMakefile
+</span></span></code></pre></div><ol start=4><li>多线程编译（加速）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>make -j
+</span></span></code></pre></div><ul><li><code>-j</code>：让<code>make</code>并行执行任务（依赖允许的情况下）</li><li>可以指定线程数</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>make -j4 <span style=color:#75715e># 开 4 个线程</span>
+</span></span><span style=display:flex><span>make -j8 <span style=color:#75715e># 开 8 个线程</span>
+</span></span></code></pre></div><p>对大型C++项目编译速度提升非常大</p><ol start=5><li>查看执行的命令
+有时候想知道<code>make</code>实际执行了哪些命令，可以加</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>make VERBOSE<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>make -n <span style=color:#75715e># 只打印命令，不执行</span>
+</span></span></code></pre></div><ol start=6><li>强制重新编译
+有时候源文件没变，但想强制重新执行</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>make -B
+</span></span></code></pre></div><p>忽略时间戳，强制执行所有命令</p><ol start=7><li>清理构建
+一般<code>Makefile</code>里会有</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-makefile data-lang=makefile><span style=display:flex><span><span style=color:#a6e22e>.PHONY</span><span style=color:#f92672>:</span> clean
+</span></span><span style=display:flex><span><span style=color:#a6e22e>clean</span><span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>    rm -f *.o main
+</span></span></code></pre></div><p>使用：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>make clean
+</span></span></code></pre></div><p>删除中间文件，保证下次编译干净</p><ol start=8><li>指定变量
+在命令行传递变量覆盖Makefile内定义的</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>make CC<span style=color:#f92672>=</span>gcc
+</span></span><span style=display:flex><span>make CFLAGS<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;-02 -Wall&#34;</span>
+</span></span></code></pre></div><p>非常适合调试或切换编译器</p><ol start=9><li>只执行某一步
+有时候只想编译某个<code>.o</code>文件</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>make main.o
+</span></span></code></pre></div><p>它会自动执行生成<code>main.o</code>的规则，不会编译整个项目</p></div><nav class=post-nav><a href=/unixlike/lib/gdb/ class=hover:underline>pre: GDB</a>
+<a href=/unixlike/lib/memory/ class=hover:underline>next: Memory Layout</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#存在意义>存在意义</a></li><li><a href=#make的核心机制与哲学>Make的核心机制与哲学</a></li><li><a href=#makefile语法><code>Makefile</code>语法</a></li><li><a href=#变量和隐含规则>变量和隐含规则</a></li><li><a href=#make的使用><code>make</code>的使用</a></li></ul></li></ul></nav></aside><script src=/js/scrollspy.js defer></script><script type=module>
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ 
+    startOnLoad: true, theme: "default" });
+</script><footer><div class=container><p>© 2026 Jeff Lee(ljf12825). All rights reserved |
+<a href=https://creativecommons.org/licenses/by-nc-sa/4.0/>Article: CC BY-NC-SA 4.0</a> |
+<a href=https://creativecommons.org/licenses/by-sa/4.0/>Content: CC BY-SA 4.0</a> |
+<a href=https://opensource.org/licenses/MIT>Code: MIT License</a> |
+<a href=/LICENSES.md>Full License</a></p></div></footer></body></html>
