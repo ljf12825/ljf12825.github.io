@@ -8,8 +8,6 @@ type: blog
 summary: C Language ABI
 ---
 
-# C ABI 
-
 ## ABI是什么
 
 ABI(Application Binary Interface, 应用程序二进制接口)定义了在二进制层面程序组件之间如何交互的规范。与API（源代码接口）不同，ABI关注的是

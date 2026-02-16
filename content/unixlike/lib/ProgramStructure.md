@@ -8,7 +8,6 @@ type: blog
 summary: C Program Structure, Command Line Argument
 ---
 
-# C程序结构
 ## 一个最小的C程序结构
 Hello World实例
 ```c

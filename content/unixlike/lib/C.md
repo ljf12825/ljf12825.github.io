@@ -8,8 +8,6 @@ type: blog
 summary: The history and evolution of the C programming language
 ---
 
-# C
-
 C语言是Dennis Ritchie于1970s创建的一门通用编程语言；至今仍被广泛使用并具有深远影响\
 C语言的设计理念是让程序员能够相对直接地访问典型CPU架构的特性，并针对目标指令集进行定制\
 它一直都被广泛用于实现操作系统（尤其是内核）、设备驱动程序和协议栈，但少用于应用软件开发，且比例持续下降\

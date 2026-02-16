@@ -1,9 +1,14 @@
 ---
 title: objdump
-date: 2026-01-01
-summary: usage of objdump
+date: 2025-12-31
+categories: [GNU]
+tags: [coreutils]
+author: "ljf12825"
+type: blog
 draft: false
+summary: usage of gnu objdump
 ---
+
 
 # objdump
 

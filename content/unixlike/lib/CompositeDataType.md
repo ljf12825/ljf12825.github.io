@@ -8,8 +8,6 @@ type: blog
 summary: usage and memory layout of sturct, union and enum
 ---
 
-# 符合数据类型
-
 ## struct
 
 ## union

@@ -8,8 +8,6 @@ type: blog
 summary: bit field
 ---
 
-# Bit & LowLevel
-
 ## 位字段
 
 ## 寄存器模拟操作

@@ -8,8 +8,6 @@ type: blog
 summary: Operator associativity, precedence, syntax tree
 ---
 
-# 操作符
-
 算术操作符
 
 - `+` 加法，一元正号

@@ -7,5 +7,3 @@ author: "ljf12825"
 type: blog
 summary: C Preprocessor
 ---
-
-# Preprocessor

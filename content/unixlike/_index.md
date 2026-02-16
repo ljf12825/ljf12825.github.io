@@ -18,7 +18,7 @@ type: unixlike
 
 ```text
 unixlike/
-|__Lab: experimental, radical， a fleeting moment
-|__Lib: tools, language, continuous evolution
-|__File: standards, contracts, concepts, cornerstones
+|__Lab/  # experimental, radical， a fleeting moment
+|__Lib/  # tools, language, continuous evolution
+|__File/ # standards, contracts, concepts, cornerstones
 ```

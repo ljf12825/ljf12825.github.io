@@ -8,7 +8,6 @@ type: blog
 summary: usage of array and ram structure, string, array with pointer
 ---
 
-# Array
 数组是一段连续的、元素类型完全相同的内存区域，并且他是一个”非一等公民“
 
 ## 连续内存（Contiguous Memory）

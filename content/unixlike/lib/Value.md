@@ -8,8 +8,6 @@ type: blog
 summary: Definition of value in C language
 ---
 
-# Value
-
 ## Variable
 
 > 定义：

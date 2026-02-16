@@ -8,7 +8,6 @@ type: blog
 summary: Memory Layout, Memory Management, Stack, Heap
 ---
 
-# MemoryLayout 
 每个C程序都由几个不同的内存区域组成，它们分别负责不同类型的数据存储
 
 ## 内存布局

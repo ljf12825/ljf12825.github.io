@@ -8,8 +8,6 @@ type: blog
 summary: file r/w, file pointer
 ---
 
-# File Operator
-
 ## 文本文件与二进制文件读写
 
 ## 文件指针操作
