@@ -144,7 +144,7 @@
 </span></span><span style=display:flex><span>make CFLAGS<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;-02 -Wall&#34;</span>
 </span></span></code></pre></div><p>非常适合调试或切换编译器</p><ol start=9><li>只执行某一步
 有时候只想编译某个<code>.o</code>文件</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>make main.o
-</span></span></code></pre></div><p>它会自动执行生成<code>main.o</code>的规则，不会编译整个项目</p></div><nav class=post-nav><a href=/unixlike/lib/gdb/ class=hover:underline>pre: GDB</a>
+</span></span></code></pre></div><p>它会自动执行生成<code>main.o</code>的规则，不会编译整个项目</p></div><nav class=post-nav><a href=/unixlike/lib/ls-tree/ class=hover:underline>pre: ls-tree</a>
 <a href=/unixlike/lib/memory/ class=hover:underline>next: Memory Layout</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#存在意义>存在意义</a></li><li><a href=#make的核心机制与哲学>Make的核心机制与哲学</a></li><li><a href=#makefile语法><code>Makefile</code>语法</a></li><li><a href=#变量和隐含规则>变量和隐含规则</a></li><li><a href=#make的使用><code>make</code>的使用</a></li></ul></li></ul></nav></aside><script src=/js/scrollspy.js defer></script><script type=module>
   import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
   mermaid.initialize({ 
