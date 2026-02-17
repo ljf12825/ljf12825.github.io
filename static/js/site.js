@@ -4,10 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const host = location.host;
 
-  fetch("https://ipapi.co/json/")
-    .then(r => r.json())
-    .then(d => start(d.ip || "guest"))
-    .catch(() => start("guest"));
+  getIP().then(ip => start(ip));
 
   function start(user) {
     const { path, cmd } = resolve();
@@ -60,4 +57,29 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     })();
   }
+
+  async function getIP() {
+  const cached = localStorage.getItem("client-ip");
+  if (cached) return cached;
+
+  const apis = [
+    async () => (await fetch("https://ip.sb/jsonip")).json().then(d => d.ip),
+    async () => (await fetch("https://api.ipify.org?format=json")).json().then(d => d.ip),
+    async () => (await fetch("https://myip.ipip.net")).text()
+      .then(t => t.match(/\d+\.\d+\.\d+\.\d+/)?.[0])
+  ];
+
+  for (const api of apis) {
+    try {
+      const ip = await api();
+      if (ip) {
+        localStorage.setItem("client-ip", ip);
+        return ip;
+      }
+    } catch {}
+  }
+
+  return "guest";
+}
+
 });
