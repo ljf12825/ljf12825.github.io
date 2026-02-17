@@ -1,0 +1,108 @@
+<!doctype html><html lang=en><head><meta charset=UTF-8><title>Architecture</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/blogsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/project/>★</a></li><li><a href=/project/lab/>Lab</a></li><li><a href=/project/lib/>Lib</a></li><li><a href=/project/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><pre class=ascii>
++——————————————————————————————————————————————————————————————+
+|                        <a class=nav-item data-path=/rightbrain/ href=/rightbrain/>RightBrain</a>                            |
+|                             |                                |
+|                             |     <a class=nav-item data-path=/dotnetandwindows/ href=/dotnetandwindows/>.NET-Windows</a>               |
+|                             |    /                           |
+|                             |   /                            |
+|                             |  /                             |
+|                             | /                              |
+|                             |/                               |
+|      <a class=nav-item data-path=/graphic/ href=/graphic/>Graphic</a> ———————————— <a class=nav-item data-path=/home/ href=/home/>Home</a> ————————————— <a class=nav-item data-path=/system/ href=/system/>System</a>          |
+|                            /|                                |
+|                           / |                                |
+|                          /  |                                |
+|                         /   |                                |
+|                        /    |                                |
+|                       /     |                                |
+|              <a class=nav-item data-path=/unixlike/ href=/unixlike/>Unix-like</a>      |                <a class=nav-item data-path=/project/ href=/project/>Project</a>         |
+|                             |                <a class=nav-item data-path=/miscellaneous/ href=/miscellaneous/>Miscellaneous</a>   |
+|                          <a class=nav-item data-path=/csbasic/ href=/csbasic/>CSBasic</a>             <a class=nav-item data-path=/ai/ href=/ai/>AI</a>              |
++——————————————————————————————————————————————————————————————+
+    </pre></nav><script defer src=/js/star-nav.js></script><script defer src=/js/site.js></script><script defer src=/js/star-active.js></script><div id=ref-window class="float-window open"><div class=float-header><span class="title open">>> >> >> Reference &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Ref>>>>>></span></div><div class=float-body><div class=ref-list><a href=https://www.mixamo.com/ target=_blank>Mixamo</a> |
+<a href=https://opengameart.org/ target=_blank>OpenGameArt</a><p><a href=https://sharplab.io/ target=_blank>SharpLab</a> |
+<a href=https://godbolt.org/ target=_blank>Compiler Explorer</a></p><p><a href="https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type+Something+&x=none&v=4&h=4&w=80&we=false" target=_blank>ASCII Graph Generator</a></p><p><a href=https://mermaid.js.org/ target=_blank>Mermaid</a></p><a href=https://www.vim.org/ target=_blank>Vim</a> | <a href=https://vimdoc.sourceforge.net/ target=_blank>Vim Manual Source</a> |
+<a href=https://vimcdoc.sourceforge.net/ target=_blank>Vimcdoc</a> | <a href=https://vimcdoc.sourceforge.net/doc/help.html target=_blank>Vimdoc read online</a><p><a href=https://shields.io/ target=_blank>Shields.io</a></p><p><a href=https://emojidb.org/ target=_blank>EmojiDB</a></p><p><a href=https://cppreference.com/ target=_blank>cppreference</a></p><p><a href=https://gcc.gnu.org/onlinedocs/ target=_blank>GCC Docs</a></p><p><a href=https://clang.llvm.org/docs/ target=_blank>Clang Docs</a></p><p><a href=https://www.boost.org/libraries/ target=_blank>Boost Library Docs</a></p><p><a href=https://learn.microsoft.com/en-us/dotnet/csharp/ target=_blank>Microsoft Learn</a><p><a href=https://www.lua.org/manual/5.4/ target=_blank>Lua 5.4 Reference Manual</a><p><a href=https://docs.unity3d.com/Manual/index.html target=_blank>Unity Manual</a> |
+<a href=https://docs.unity3d.com/ScriptReference/index.html target=_blank>Unity API</a></p><p><a href=https://docs.unrealengine.com/ target=_blank>Unreal Engine Docs</a></p><p><a href=https://godotengine.org target=_blank>Godot</a> |
+<a href=https://docs.godotengine.org/en/stable/ target=_blank>Godot Docs</a></p><p><a href=https://z-library.sk/ target=_blank>Z-Library</a> : eBook Library</p><p><a href=https://docs.kernel.org/ target=_blank>Linux Kernel Docs</a></p><p><a href=https://www.gnu.org/ target=_blank>GNU</a> : manuals, philosophy, FAQ</p><a href=https://archlinux.org/ target=_blank>ArchLinux</a><p><a href=https://help.ubuntu.com/ target=_blank>Ubuntu Doc</a> |
+<a href=https://ubuntu.com/server/docs target=_blank>Ubuntu Server Guide</a></p><p><a href=https://www.vulkan.org/ target=_blank>Vulkan</a> |
+<a href=https://docs.vulkan.org/ target=_blank>Vulkan Docs</a></p><p><a href=https://www.opengl.org/ target=_blank>OpenGL</a> |
+<a href=https://registry.khronos.org/OpenGL target=_blank>OpenGL API</a> |
+<a href=https://www.khronos.org/opengl/wiki/ target=_blank>OpenGL Wiki</a></p><p><a href=https://learn.microsoft.com/en-us/windows/win32/directx target=_blank>DirectX</a></p><p><a href=https://www.realtimerendering.com/ target=_blank>Real-Time Rendering</a></p><p><a href=https://www.pbr-book.org/ target=_blank>Physically Based Rendering</a></p><p><a href=https://www.scratchapixel.com/ target=_blank>Scratchapixel</a></p><p><a href=https://learnopengl.com/ target=_blank>LearnOpenGL</a></p><p><a href=https://raytracing.github.io/ target=_blank>Ray Tracing in One Weekend</a></p><p><a href=https://www.shadertoy.com/ target=_blank>Shadertoy</a></p><p><a href=https://arxiv.org/list/cs.GR/recent target=_blank>arXiv Graphics</a></p><p><a href=https://www.siggraph.org/ target=_blank>SIGGRAPH</a> |
+<a href=https://dl.acm.org/conference/siggraph target=_blank>SIGGRAPH Digital Library</a></p><p><a href=https://git-scm.com/ target=_blank>Git</a> |
+<a href=https://git-scm.com/doc target=_blank>Docs</a> |
+<a href=https://git-scm.com/community target=_blank>Community</a></p></div></div></div><script src=/js/ref-window.js></script><article class=single_article><div class=title>Architecture<div class=meta>Modified: 2025-12-31
+| Author：ljf12825</div></div><div class=content><p>架构(Architecture)是系统的高层结构设计，它定义了</p><ul><li>组件是什么(What)</li><li>组件如何组织(How)</li><li>组件直接按如何通信和协作(Relationships)</li><li>指导原则和约束条件(Constraints)</li></ul><p>架构是系统的“骨架”和“蓝图”</p><p>一个软件里可能有多层级、多维度架构同时存在，同时叠加</p><h2 id=软件架构的四个核心视角>软件架构的四个核心视角</h2><ol><li>结构视角（静态）</li></ol><p>系统由哪些部分组成，例如</p><ul><li>前端、后端、数据库</li><li>用户服务、订单服务、支付服务（微服务）</li><li>控制器、服务层、数据访问层（分层架构）</li></ul><ol start=2><li>行为视角（动态）</li></ol><p>各部分如何协作完成任务</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>用户下单 &gt; 订单服务 &gt; 库存服务 &gt; 支付服务 &gt; 通知服务
+</span></span><span style=display:flex><span>    v         v          v          v          v
+</span></span><span style=display:flex><span>HTTP请求   创建订单   扣减库存   调用支付   发送邮件
+</span></span></code></pre></div><ol start=3><li>技术视角（实现）</li></ol><p>使用什么技术实现</p><ol start=4><li>决策视角（权衡）</li></ol><p>为什么这样设计，权衡了什么</p><p>例如</p><ul><li>使用微服务而不是单体：为了独立部署，但接受了分布式复杂度</li><li>使用缓存：提高性能，但要处理数据一致性问题</li></ul><h2 id=架构要解决的根本问题>架构要解决的根本问题</h2><p>五大核心关切</p><ol><li>如何管理复杂度<ul><li>分解：分而治之</li><li>抽象：隐藏细节</li><li>分层：关注点分离</li></ul></li><li>如何应对变化<ul><li>高内聚：相关功能放在一起</li><li>低耦合：减少组件间依赖</li><li>扩展点：预留演进空间</li></ul></li><li>如何保证质量属性<ul><li>可靠性：系统不出错或少出错</li><li>可扩展性：能否应对增长</li><li>可维护性：是否容易修改和调试</li><li>性能：响应时间和吞吐量</li><li>安全性：抵御攻击的能力</li><li>可用性：系统正常运行时间</li></ul></li><li>如何协调团队协作<ul><li>模块边界 = 团队职责边界</li><li>接口契约 = 团队协作协议</li></ul></li><li>如何控制成本<ul><li>技术选型成本</li><li>开发维护成本</li><li>运维部署成本</li></ul></li></ol><h3 id=认识架构的三个阶段>认识架构的三个阶段</h3><ol><li>看山是山：架构 = 技术框架选型</li><li>看山不是山：架构 = 质量属性权衡（性能 vs 可维护性）</li><li>看山还是山：架构 = 用合适技术解决业务问题</li></ol><ul><li>从问题出发：先理解业务要解决什么问题</li><li>从决策思考：如果让你设计，你会怎么做？为什么？</li><li>从演变学习：看知名系统如何从简单到复杂演进</li><li>从实践体会：亲自感受糟糕架构带来的痛苦</li></ul><h2 id=示例>示例</h2><p>一个完整架构描述</p><p>设计一个用户管理系统</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span># 1. 架构风格：清洁架构 + CQRS
+</span></span><span style=display:flex><span>风格: 
+</span></span><span style=display:flex><span>  - 六边形架构（端口适配器）
+</span></span><span style=display:flex><span>  - CQRS（命令查询职责分离）
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># 2. 组件划分
+</span></span><span style=display:flex><span>组件:
+</span></span><span style=display:flex><span>  - 用户命令服务（处理创建、更新）
+</span></span><span style=display:flex><span>  - 用户查询服务（处理查询）
+</span></span><span style=display:flex><span>  - 认证服务
+</span></span><span style=display:flex><span>  - API网关
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># 3. 通信方式
+</span></span><span style=display:flex><span>通信:
+</span></span><span style=display:flex><span>  - 命令侧：同步HTTP + 领域事件
+</span></span><span style=display:flex><span>  - 查询侧：从读库直接查询
+</span></span><span style=display:flex><span>  - 事件：Kafka消息队列
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># 4. 关键技术决策
+</span></span><span style=display:flex><span>技术栈:
+</span></span><span style=display:flex><span>  - 语言: Java + Spring Boot
+</span></span><span style=display:flex><span>  - 数据库: PostgreSQL（写库） + Elasticsearch（读库）
+</span></span><span style=display:flex><span>  - 缓存: Redis
+</span></span><span style=display:flex><span>  - 部署: Docker + Kubernetes
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># 5. 质量属性优先级
+</span></span><span style=display:flex><span>质量属性:
+</span></span><span style=display:flex><span>  - 1. 安全性（用户数据敏感）
+</span></span><span style=display:flex><span>  - 2. 可用性（99.9% SLA）
+</span></span><span style=display:flex><span>  - 3. 可扩展性（支持千万用户）
+</span></span><span style=display:flex><span>  - 4. 性能（查询响应&lt;100ms）
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># 6. 关键约束
+</span></span><span style=display:flex><span>约束:
+</span></span><span style=display:flex><span>  - 必须符合GDPR数据隐私要求
+</span></span><span style=display:flex><span>  - 现有团队熟悉Java生态
+</span></span><span style=display:flex><span>  - 三个月内上线MVP版本
+</span></span></code></pre></div><h2 id=系统架构>系统架构</h2><p>决定：系统怎么拆、怎么部署、怎么通信</p><table><thead><tr><th>关注点</th><th>例子</th></tr></thead><tbody><tr><td>服务拆分</td><td>单体/微服务</td></tr><tr><td>模块边界</td><td>微内核/插件</td></tr><tr><td>进程模型</td><td>主从/Actor</td></tr><tr><td>部署形态</td><td>Serverless</td></tr></tbody></table><h2 id=应用架构>应用架构</h2><p>决定：业务逻辑如何组织</p><table><thead><tr><th>关注点</th><th>例子</th></tr></thead><tbody><tr><td>依赖方向</td><td>Clean/洋葱</td></tr><tr><td>分层方式</td><td>分层/六边形</td></tr><tr><td>用例组织</td><td>DDD</td></tr></tbody></table><h2 id=ui架构>UI架构</h2><p>决定：界面逻辑怎么解耦</p><table><thead><tr><th>关注点</th><th>例子</th></tr></thead><tbody><tr><td>UI解耦</td><td>MVC/MVVM/MVP</td></tr><tr><td>数据绑定</td><td>响应式架构</td></tr><tr><td>状态管理</td><td>Redux/Flux</td></tr></tbody></table><h2 id=领域架构>领域架构</h2><p>决定：业务模型怎么建</p><table><thead><tr><th>关注点</th><th>例子</th></tr></thead><tbody><tr><td>领域拆分</td><td>DDD分界上下文</td></tr><tr><td>规则表达</td><td>领域模型/充血模型</td></tr><tr><td>聚合根</td><td>实体/值对象</td></tr></tbody></table><h2 id=并发与调度架构>并发与调度架构</h2><p>决定：系统如何跑</p><table><thead><tr><th>关注点</th><th>例子</th></tr></thead><tbody><tr><td>并发模型</td><td>Actor/事件循环</td></tr><tr><td>任务调度</td><td>Job System</td></tr><tr><td>实时系统</td><td>帧驱动/Tick</td></tr></tbody></table><h2 id=数据架构>数据架构</h2><p>决定：数据怎么存、怎么流</p><table><thead><tr><th>关注点</th><th>例子</th></tr></thead><tbody><tr><td>存储模式</td><td>ORM/Repository</td></tr><tr><td>数据流</td><td>CQRS/Event Sourcing</td></tr><tr><td>一致性</td><td>最终一致</td></tr></tbody></table><h2 id=插件扩展架构>插件&扩展架构</h2><p>决定：系统是否可扩展</p><table><thead><tr><th>关注点</th><th>例子</th></tr></thead><tbody><tr><td>模块化</td><td>微内核</td></tr><tr><td>插件加载</td><td>动态模块</td></tr><tr><td>ABI边界</td><td>C API/DLL</td></tr></tbody></table><h2 id=软件风格架构architectural-styles>软件风格架构（Architectural Styles）</h2><h3 id=分层架构layered-architecture>分层架构（Layered Architecture）</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>┌─────────────────┐
+</span></span><span style=display:flex><span>│  表现层/UI层    │ &lt; 用户交互
+</span></span><span style=display:flex><span>├─────────────────┤
+</span></span><span style=display:flex><span>│  业务逻辑层     │ &lt; 核心业务规则
+</span></span><span style=display:flex><span>├─────────────────┤
+</span></span><span style=display:flex><span>│  数据访问层     │ &lt; 数据持久化
+</span></span><span style=display:flex><span>├─────────────────┤
+</span></span><span style=display:flex><span>│  基础设施层     │ &lt; 技术实现细节
+</span></span><span style=display:flex><span>└─────────────────┘
+</span></span></code></pre></div><ul><li>优点：关注点分离、易于理解</li><li>缺点：层间耦合、性能开销</li><li>适用：传统企业应用、CRUD应用</li></ul><h3 id=六边形架构hexagonalports--adapters>六边形架构（Hexagonal/Ports & Adapters）</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>          ┌─────────────────┐
+</span></span><span style=display:flex><span>          │     应用核心    │
+</span></span><span style=display:flex><span>          │   ┌─────────┐   │
+</span></span><span style=display:flex><span>          │   │ 领域模型│   │
+</span></span><span style=display:flex><span>          │   └─────────┘   │
+</span></span><span style=display:flex><span>          └────────┬────────┘
+</span></span><span style=display:flex><span>   左侧适配器&lt;端口&gt;│&lt;端口&gt;右侧适配器
+</span></span><span style=display:flex><span>   （输入）        │        （输出）
+</span></span><span style=display:flex><span>   ┌──────┴──────┐ │ ┌──────┴──────┐
+</span></span><span style=display:flex><span>   │ HTTP API    │ │ │ 数据库驱动  │
+</span></span><span style=display:flex><span>   │ 消息队列监听│ │ │ 外部API调用 │
+</span></span><span style=display:flex><span>   │ CLI命令     │ │ │ 文件写入器  │
+</span></span><span style=display:flex><span>   └─────────────┘ │ └─────────────┘
+</span></span><span style=display:flex><span>         用户      │    基础设施
+</span></span></code></pre></div><ul><li>核心思想：应用不依赖外部，外部通过适配器接入</li><li>适用：DDD应用、测试驱动开发</li></ul></div><nav class=post-nav><a href=/project/file/architecture/monolithic/ class=hover:underline>next: Monolithic</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#软件架构的四个核心视角>软件架构的四个核心视角</a></li><li><a href=#架构要解决的根本问题>架构要解决的根本问题</a><ul><li><a href=#认识架构的三个阶段>认识架构的三个阶段</a></li></ul></li><li><a href=#示例>示例</a></li><li><a href=#系统架构>系统架构</a></li><li><a href=#应用架构>应用架构</a></li><li><a href=#ui架构>UI架构</a></li><li><a href=#领域架构>领域架构</a></li><li><a href=#并发与调度架构>并发与调度架构</a></li><li><a href=#数据架构>数据架构</a></li><li><a href=#插件扩展架构>插件&扩展架构</a></li><li><a href=#软件风格架构architectural-styles>软件风格架构（Architectural Styles）</a><ul><li><a href=#分层架构layered-architecture>分层架构（Layered Architecture）</a></li><li><a href=#六边形架构hexagonalports--adapters>六边形架构（Hexagonal/Ports & Adapters）</a></li></ul></li></ul></li></ul></nav></aside><script defer src=/js/scrollspy.js></script><script type=module>
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ 
+    startOnLoad: true, theme: "default" });
+</script><footer><div class=container><p>© 2026 Jeff Lee(ljf12825). All rights reserved |
+<a href=https://creativecommons.org/licenses/by-nc-sa/4.0/>Article: CC BY-NC-SA 4.0</a> |
+<a href=https://creativecommons.org/licenses/by-sa/4.0/>Content: CC BY-SA 4.0</a> |
+<a href=https://opensource.org/licenses/MIT>Code: MIT License</a> |
+<a href=/LICENSES.md>Full License</a></p></div></footer></body></html>
