@@ -1,46 +1,63 @@
-document.addEventListener('DOMContentLoaded', function () {
-  document.querySelectorAll('a[href^="http"]').forEach(a => {
-    a.setAttribute('target', '_blank');
-  });
-
+document.addEventListener("DOMContentLoaded", () => {
   const el = document.getElementById("typed-line");
   if (!el) return;
 
-  const user = "ljf12825";
-  const host = "ljf12825.github.io";
-  const path = virtualPath();
+  const host = location.host;
 
-  const cmd = "ls | xargs cat";
-  const text = `${user}@${host}:${path}$ ${cmd}`;
+  fetch("https://ipapi.co/json/")
+    .then(r => r.json())
+    .then(d => start(d.ip || "guest"))
+    .catch(() => start("guest"));
 
-  let i = 0;
-  el.textContent = "";
+  function start(user) {
+    const { path, cmd } = resolve();
+    type(`${user}@${host}:${path}$ ${cmd}`);
+  }
 
-  function virtualPath() {
-    let p = window.location.pathname.replace(/\/$/, "");
+  function resolve() {
+  const raw = window.location.pathname.replace(/\/$/, "");
+  const parts = raw.split("/").filter(Boolean);
 
-    if (p === "" || p === "/") return "/";
+  const kind = document.querySelector(
+    "meta[name='page-kind']"
+  )?.content;
 
+  if (kind === "page" && parts.length > 0) {
+    const file = parts.pop();
+    const dir = "/" + parts.join("/");
+
+    return {
+      path: virtualPath(dir || "/"),
+      cmd: `less ${file}`
+    };
+  }
+
+  return {
+    path: virtualPath("/" + parts.join("/")),
+    cmd: "ls | xargs cat"
+  };
+}
+
+  function virtualPath(p) {
+    if (p === "/") return "/";
     if (p === "/home") return "~";
-
-    if (p.startsWith("/home/")) {
-      return "~" + p.replace("/home", "");
-    }
-
+    if (p.startsWith("/home/")) return "~" + p.slice(5);
     return p;
   }
 
-  function type() {
-    if (i < text.length) {
-      el.textContent += text.charAt(i++);
-      setTimeout(type, 40);
-    } else {
-      setTimeout(() => {
-        const cursor = document.querySelector(".cursor");
-        if (cursor) cursor.classList.add("hide");
-      }, 5000);
-    }
+  function type(text) {
+    let i = 0;
+    el.textContent = "";
+    (function t() {
+      if (i < text.length) {
+        el.textContent += text[i++];
+        setTimeout(t, 10);
+      } else {
+        setTimeout(() => {
+          const c = document.querySelector(".cursor");
+          if (c) c.classList.add("stop");
+        }, 2500);
+      }
+    })();
   }
-
-  type();
 });
