@@ -8,8 +8,8 @@
   <div class="title">
     {{ .Title }}
     <div class="meta">
-      Update: {{ .Lastmod.Format "2006-01-02" | default "N/A" }}
-      {{ with .Params.author }} >> Creator：{{ . }}{{ end }}
+      Modified: {{ .Lastmod.Format "2006-01-02" | default "N/A" }}
+      {{ with .Params.author }} | Author：{{ . }}{{ end }}
     </div>
     </div>
 

@@ -8,10 +8,8 @@
   <div class="title">
     {{ .Title }}
     <div class="meta">
-      PublishDate: {{ .PublishDate.Format "2006-01-02" | default "N/A" }} |
-      CreateDate: {{ .Date.Format "2006-01-02" | default "N/A" }} |
-      LastModify: {{ .Lastmod.Format "2006-01-02" | default "N/A" }}
-      {{ with .Params.author }} | Creator：{{ . }}{{ end }}
+      Modified: {{ .Lastmod.Format "2006-01-02" | default "N/A" }}
+      {{ with .Params.author }} | Author：{{ . }}{{ end }}
     </div>
     </div>
 
