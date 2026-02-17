@@ -13,6 +13,7 @@ type: unixlike
 - POSIX
 - Shell
 - Core Utils
+- Toolchains
 
 ## Structure
 
