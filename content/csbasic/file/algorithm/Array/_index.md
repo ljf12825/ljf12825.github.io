@@ -1,4 +1,4 @@
 ---
-title: Algorithm
+title: Array
 type: files
 ---

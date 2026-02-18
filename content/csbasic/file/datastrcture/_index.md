@@ -1,4 +1,4 @@
 ---
-title: data structure
+title: Data Structure
 type: files
 ---

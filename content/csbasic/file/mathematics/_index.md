@@ -1,4 +1,4 @@
 ---
-title: Algorithm
+title: Mathematics
 type: files
 ---
