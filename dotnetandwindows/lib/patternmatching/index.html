@@ -1,0 +1,252 @@
+<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>Pattern Matching</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/blogsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/dotnetandwindows/>★</a></li><li><a href=/dotnetandwindows/lab/>Lab</a></li><li><a href=/dotnetandwindows/lib/>Lib</a></li><li><a href=/dotnetandwindows/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><pre class=ascii>
++——————————————————————————————————————————————————————————————+
+|                        <a class=nav-item data-path=/rightbrain/ href=/rightbrain/>RightBrain</a>                            |
+|                             |                                |
+|                             |     <a class=nav-item data-path=/dotnetandwindows/ href=/dotnetandwindows/>.NET-Windows</a>               |
+|                             |    /                           |
+|                             |   /                            |
+|                             |  /                             |
+|                             | /                              |
+|                             |/                               |
+|      <a class=nav-item data-path=/graphic/ href=/graphic/>Graphic</a> ———————————— <a class=nav-item data-path=/home/ href=/home/>Home</a> ————————————— <a class=nav-item data-path=/system/ href=/system/>System</a>          |
+|                            /|                                |
+|                           / |                                |
+|                          /  |                                |
+|                         /   |                                |
+|                        /    |                                |
+|                       /     |                                |
+|              <a class=nav-item data-path=/unixlike/ href=/unixlike/>Unix-like</a>      |                <a class=nav-item data-path=/project/ href=/project/>Project</a>         |
+|                             |                <a class=nav-item data-path=/miscellaneous/ href=/miscellaneous/>Miscellaneous</a>   |
+|                          <a class=nav-item data-path=/csbasic/ href=/csbasic/>CSBasic</a>             <a class=nav-item data-path=/ai/ href=/ai/>AI</a>              |
++——————————————————————————————————————————————————————————————+
+    </pre></nav><script defer src=/js/star-nav.js></script><script defer src=/js/site.js></script><script defer src=/js/star-active.js></script><div id=ref-window class="float-window open"><div class=float-header><span class="title open">>> >> >> Reference &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Ref>>>>>></span></div><div class=float-body><div class=ref-list><a href=https://www.mixamo.com/ target=_blank>Mixamo</a> |
+<a href=https://opengameart.org/ target=_blank>OpenGameArt</a><p><a href=https://sharplab.io/ target=_blank>SharpLab</a> |
+<a href=https://godbolt.org/ target=_blank>Compiler Explorer</a></p><p><a href="https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type+Something+&x=none&v=4&h=4&w=80&we=false" target=_blank>ASCII Graph Generator</a></p><p><a href=https://mermaid.js.org/ target=_blank>Mermaid</a></p><a href=https://www.vim.org/ target=_blank>Vim</a> | <a href=https://vimdoc.sourceforge.net/ target=_blank>Vim Manual Source</a> |
+<a href=https://vimcdoc.sourceforge.net/ target=_blank>Vimcdoc</a> | <a href=https://vimcdoc.sourceforge.net/doc/help.html target=_blank>Vimdoc read online</a><p><a href=https://shields.io/ target=_blank>Shields.io</a></p><p><a href=https://emojidb.org/ target=_blank>EmojiDB</a></p><p><a href=https://cppreference.com/ target=_blank>cppreference</a></p><p><a href=https://gcc.gnu.org/onlinedocs/ target=_blank>GCC Docs</a></p><p><a href=https://clang.llvm.org/docs/ target=_blank>Clang Docs</a></p><p><a href=https://www.boost.org/libraries/ target=_blank>Boost Library Docs</a></p><p><a href=https://learn.microsoft.com/en-us/dotnet/csharp/ target=_blank>Microsoft Learn</a><p><a href=https://www.lua.org/manual/5.4/ target=_blank>Lua 5.4 Reference Manual</a><p><a href=https://docs.unity3d.com/Manual/index.html target=_blank>Unity Manual</a> |
+<a href=https://docs.unity3d.com/ScriptReference/index.html target=_blank>Unity API</a></p><p><a href=https://docs.unrealengine.com/ target=_blank>Unreal Engine Docs</a></p><p><a href=https://godotengine.org target=_blank>Godot</a> |
+<a href=https://docs.godotengine.org/en/stable/ target=_blank>Godot Docs</a></p><p><a href=https://z-library.sk/ target=_blank>Z-Library</a> : eBook Library</p><p><a href=https://docs.kernel.org/ target=_blank>Linux Kernel Docs</a></p><p><a href=https://www.gnu.org/ target=_blank>GNU</a> : manuals, philosophy, FAQ</p><a href=https://archlinux.org/ target=_blank>ArchLinux</a><p><a href=https://help.ubuntu.com/ target=_blank>Ubuntu Doc</a> |
+<a href=https://ubuntu.com/server/docs target=_blank>Ubuntu Server Guide</a></p><p><a href=https://www.vulkan.org/ target=_blank>Vulkan</a> |
+<a href=https://docs.vulkan.org/ target=_blank>Vulkan Docs</a></p><p><a href=https://www.opengl.org/ target=_blank>OpenGL</a> |
+<a href=https://registry.khronos.org/OpenGL target=_blank>OpenGL API</a> |
+<a href=https://www.khronos.org/opengl/wiki/ target=_blank>OpenGL Wiki</a></p><p><a href=https://learn.microsoft.com/en-us/windows/win32/directx target=_blank>DirectX</a></p><p><a href=https://www.realtimerendering.com/ target=_blank>Real-Time Rendering</a></p><p><a href=https://www.pbr-book.org/ target=_blank>Physically Based Rendering</a></p><p><a href=https://www.scratchapixel.com/ target=_blank>Scratchapixel</a></p><p><a href=https://learnopengl.com/ target=_blank>LearnOpenGL</a></p><p><a href=https://raytracing.github.io/ target=_blank>Ray Tracing in One Weekend</a></p><p><a href=https://www.shadertoy.com/ target=_blank>Shadertoy</a></p><p><a href=https://arxiv.org/list/cs.GR/recent target=_blank>arXiv Graphics</a></p><p><a href=https://www.siggraph.org/ target=_blank>SIGGRAPH</a> |
+<a href=https://dl.acm.org/conference/siggraph target=_blank>SIGGRAPH Digital Library</a></p><p><a href=https://git-scm.com/ target=_blank>Git</a> |
+<a href=https://git-scm.com/doc target=_blank>Docs</a> |
+<a href=https://git-scm.com/community target=_blank>Community</a></p></div></div></div><script src=/js/ref-window.js></script><article class=single_article><div class=title>Pattern Matching<div class=meta>Modified: 2025-06-01
+| Author：ljf12825</div></div><div class=content><h2 id=模式>模式</h2><p>模式就是一种匹配规则，用来判断对象的结构、类型或值，并可绑定变量<br>核心思想：</p><ol><li>匹配类型（is it s string? int? Person?）</li><li>匹配值或条件（大于0? 小于0? 某属性为true？）</li><li>绑定变量（匹配成功后把值赋给变量）</li><li>可组合（and/or/not）</li></ol><p>可以把模式理解为C#对象解构 + 条件判断 + 绑定语法糖的集合</p><h3 id=模式的几大类别>模式的几大类别</h3><p>C#从7.0到12逐步扩展了模式类型，主要有以下几种</p><table><thead><tr><th>模式类型</th><th>语法示例</th><th>作用</th></tr></thead><tbody><tr><td>类型模式（Type Pattern）</td><td><code>x is int n</code></td><td>判断类型，并绑定变量</td></tr><tr><td>常量模式（Constant Pattern）</td><td><code>x is 0</code></td><td>判断值等于某常量</td></tr><tr><td>关系模式（Relational Pattern）</td><td><code>x is > 0</code></td><td>大小比较</td></tr><tr><td>逻辑模式（Logical Pattern）</td><td><code>x is > 0 and &lt; 10</code></td><td>组合多个模式（and/or/not）</td></tr><tr><td>否定模式（Negation Pattern）</td><td><code>x is not null</code></td><td>对模式取反</td></tr><tr><td>属性模式（Property Pattern）</td><td><code>p is { X: 0, Y: 0 }</code></td><td>匹配对象的属性结构</td></tr><tr><td>位置模式（Positional Pattern）</td><td><code>Point(var x, var y)</code></td><td>对对象或record解构</td></tr><tr><td>递归模式</td><td><code>p is { Name: "Alice", Age: > 0 }</code></td><td>可以嵌套匹配对象内部结构</td></tr></tbody></table><h2 id=模式匹配>模式匹配</h2><p>模式匹配是对对象结构和类型的“解构+判断+绑定”操作<br>简单来说，它让<code>if</code>、<code>switch</code>、<code>is</code>不再只是“类型判断”，而是能直接在匹配时提取数据、判断条件</p><h3 id=解决的痛点>解决的痛点</h3><h2 id=is类型模式><code>is</code>类型模式</h2><p>C#7.0之后可以这样写</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>object</span> obj = <span style=color:#ae81ff>123</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> (obj <span style=color:#66d9ef>is</span> <span style=color:#66d9ef>int</span> n) Console.WriteLine(<span style=color:#e6db74>$&#34;是整数，值为{n}&#34;</span>);
+</span></span></code></pre></div><p>这相当于</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>if</span> (obj <span style=color:#66d9ef>is</span> <span style=color:#66d9ef>int</span>)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> n = (<span style=color:#66d9ef>int</span>)obj;
+</span></span><span style=display:flex><span>    Console.WriteLine(n);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>区别：</p><ul><li>新写法里<code>is</code>直接完成类型检查 + 类型转换 + 变量绑定</li><li><code>n</code>只在<code>if</code>的真分支内可见</li></ul><h2 id=类型模式--守卫条件when>类型模式 + 守卫条件（<code>when</code>）</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>object</span> obj = <span style=color:#ae81ff>42</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> (obj <span style=color:#66d9ef>is</span> <span style=color:#66d9ef>int</span> n &amp;&amp; n &gt; <span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>    Console.WriteLine(<span style=color:#e6db74>&#34;正整数&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 或者在swtich里写</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>switch</span> (obj)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>case</span> <span style=color:#66d9ef>int</span> n when n &gt; <span style=color:#ae81ff>0</span>:
+</span></span><span style=display:flex><span>        Console.WriteLine(<span style=color:#e6db74>&#34;正数&#34;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>case</span> <span style=color:#66d9ef>int</span> n:
+</span></span><span style=display:flex><span>        Console.WriteLine(<span style=color:#e6db74>&#34;非正数&#34;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=常见模式类型>常见模式类型</h2><p>C#模式匹配的核心在于这些“模式类型”</p><h3 id=类型模式type-pattern>类型模式（Type Pattern）</h3><p><code>x is int n</code> 作用：判断类型并绑定变量</p><h3 id=常量模式constant-pattern>常量模式（Constant Pattern）</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>if</span> (x <span style=color:#66d9ef>is</span> <span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>    Console.WriteLine(<span style=color:#e6db74>&#34;零&#34;</span>);
+</span></span></code></pre></div><p>判断对象是否等于某个常量</p><h3 id=关系模式relational-pattern>关系模式（Relational Pattern）</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>if</span> (x <span style=color:#66d9ef>is</span> &gt; <span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>    Console.WriteLine(<span style=color:#e6db74>&#34;正数&#34;</span>);
+</span></span><span style=display:flex><span><span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (x <span style=color:#66d9ef>is</span> &lt; <span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>    Console.WriteLine(<span style=color:#e6db74>&#34;负数&#34;</span>);
+</span></span></code></pre></div><p>在C#9.0引入，用<code>&lt;, >, &lt;=, >=</code>做比较</p><h3 id=逻辑模式logical-pattern>逻辑模式（Logical Pattern）</h3><p>可以组合多个模式</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>if</span> (x <span style=color:#66d9ef>is</span> &gt;= <span style=color:#ae81ff>0</span> and &lt;= <span style=color:#ae81ff>100</span>)
+</span></span><span style=display:flex><span>    Console.WriteLine(<span style=color:#e6db74>&#34;在 0~100之间&#34;</span>);
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> (x <span style=color:#66d9ef>is</span> &lt; <span style=color:#ae81ff>0</span> or &gt; <span style=color:#ae81ff>100</span>)
+</span></span><span style=display:flex><span>    Console.WriteLine(<span style=color:#e6db74>&#34;超出范围&#34;</span>);
+</span></span></code></pre></div><h3 id=否定模式negation-pattern>否定模式（Negation Pattern）</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>if</span> (obj <span style=color:#66d9ef>is</span> not <span style=color:#66d9ef>null</span>)
+</span></span><span style=display:flex><span>    Console.WriteLine(<span style=color:#e6db74>&#34;不是 null&#34;</span>);
+</span></span></code></pre></div><h3 id=位置模式positional-pattern>位置模式（Positional Pattern）</h3><p>假设有一个结构体</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>record</span> <span style=color:#a6e22e>Point</span>(<span style=color:#66d9ef>int</span> X, <span style=color:#66d9ef>int</span> Y);
+</span></span></code></pre></div><p>可以直接匹配并结构它</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Point p = <span style=color:#66d9ef>new</span>(<span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>4</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> (p <span style=color:#66d9ef>is</span> Point(<span style=color:#66d9ef>var</span> x, <span style=color:#66d9ef>var</span> y))
+</span></span><span style=display:flex><span>    Console.WriteLine(<span style=color:#e6db74>$&#34;x={x}, y={y}&#34;</span>);
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> (p <span style=color:#66d9ef>is</span> Point(<span style=color:#ae81ff>0</span>, _))
+</span></span><span style=display:flex><span>    Console.WriteLine(<span style=color:#e6db74>&#34;在Y轴上&#34;</span>);
+</span></span></code></pre></div><h3 id=属性模式property-pattern>属性模式（Property Pattern）</h3><p>可以直接匹配对象的属性结构</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>if</span> (p <span style=color:#66d9ef>is</span> { X: <span style=color:#ae81ff>0</span>, Y: <span style=color:#ae81ff>0</span> })
+</span></span><span style=display:flex><span>    Console.WriteLine(<span style=color:#e6db74>&#34;原点&#34;</span>);
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> (p <span style=color:#66d9ef>is</span> { X: &gt; <span style=color:#ae81ff>0</span>, Y: &gt; <span style=color:#ae81ff>0</span>})
+</span></span><span style=display:flex><span>    Console.WriteLine(<span style=color:#e6db74>&#34;第一象限&#34;</span>);
+</span></span></code></pre></div><h3 id=组合使用>组合使用</h3><p>所有模式都可以嵌套组合</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>if</span> (p <span style=color:#66d9ef>is</span> { X: &gt; <span style=color:#ae81ff>0</span> and &lt; <span style=color:#ae81ff>10</span>, Y: &gt; <span style=color:#ae81ff>0</span>})
+</span></span><span style=display:flex><span>    Console.WriteLine(<span style=color:#e6db74>&#34;右上角小区域&#34;</span>);
+</span></span></code></pre></div><h2 id=switch表达式c-8><code>switch</code>表达式（C# 8+）</h2><p>现代C#最强的模式匹配表达式</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>string</span> Describe(Point p) =&gt; p <span style=color:#66d9ef>switch</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    { X: <span style=color:#ae81ff>0</span>, Y: <span style=color:#ae81ff>0</span> } =&gt; <span style=color:#e6db74>&#34;原点&#34;</span>,
+</span></span><span style=display:flex><span>    { X: &gt; <span style=color:#ae81ff>0</span>, Y: &gt; <span style=color:#ae81ff>0</span> } =&gt; <span style=color:#e6db74>&#34;第一象限&#34;</span>,
+</span></span><span style=display:flex><span>    { X: &lt; <span style=color:#ae81ff>0</span>, Y: &gt; <span style=color:#ae81ff>0</span> } =&gt; <span style=color:#e6db74>&#34;第二象限&#34;</span>,
+</span></span><span style=display:flex><span>    _ =&gt; <span style=color:#e6db74>&#34;其他位置&#34;</span>
+</span></span><span style=display:flex><span>};
+</span></span></code></pre></div><p>特点：</p><ul><li><code>switch</code>可以直接作为表达式返回值</li><li>不需要写<code>break</code></li><li>匹配顺序自上而下</li><li><code>_</code>表示默认模式</li></ul><h2 id=底层原理>底层原理</h2><p>模式匹配的本质：语法糖 + 编译器静态分析 + IL分支重写<br>C#的模式匹配——无论是<code>is</code>, <code>switch</code>，还是各种property/tuple/relational pattern——底层都不是运行时魔法，而是：<br>编译器再编译期，把高层模式匹配语法“翻译”成if/else、类型检查、结构调用、常量比较、IL分支指令等基础结构<br>所有模式匹配在运行时没有额外runtime支撑，它只靠CLR原有能力：类型检查、常量比较、虚方法调用、IL分支；是纯语法层能力</p><h3 id=基础原理>基础原理</h3><p>编译器生成的IL做了以下几个步骤</p><ol><li>类型模式（type pattern）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>if</span> (obj <span style=color:#66d9ef>is</span> <span style=color:#66d9ef>string</span> s) {}
+</span></span></code></pre></div><p>编译成IL的核心是</p><ul><li><code>isinst</code>指令：把对象尝试cast成某类型</li><li><code>brtrue.s</code>/<code>brfalse.s</code>：是否null判断</li></ul><p>IL大概类似</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>ldloc obj
+</span></span><span style=display:flex><span>isinst [System.String]
+</span></span><span style=display:flex><span>stloc s
+</span></span><span style=display:flex><span>ldloc s
+</span></span><span style=display:flex><span>brtrue label_matched 
+</span></span></code></pre></div><p>也就是说：编译器帮你做类型检查和赋值，没有任何runtime pattern 引擎</p><ol start=2><li>常量模式（constant pattern）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>if</span> (x <span style=color:#66d9ef>is</span> <span style=color:#ae81ff>3</span>) {}
+</span></span></code></pre></div><p>编译成</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>ldloc x
+</span></span><span style=display:flex><span>ldc.i4 3
+</span></span><span style=display:flex><span>beq label_matched 
+</span></span></code></pre></div><p>本质就是一个整数比较，没有额外开销</p><ol start=3><li>Relational Pattern （关系模式：<code>&lt; > &lt;= >=</code>）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>if</span> (x <span style=color:#66d9ef>is</span> &gt; <span style=color:#ae81ff>10</span>)
+</span></span></code></pre></div><p>编译器会把它拆成</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>ldloc x
+</span></span><span style=display:flex><span>ldc.i4 10
+</span></span><span style=display:flex><span>cat (or clt)
+</span></span><span style=display:flex><span>brtrue ...
+</span></span></code></pre></div><p>本质就是比较指令</p><ol start=4><li>属性模式（Property Pattern）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>if</span> (p <span style=color:#66d9ef>is</span> { X: &gt; <span style=color:#ae81ff>10</span>, Y: <span style=color:#ae81ff>3</span>})
+</span></span></code></pre></div><p>编译器做的事情是</p><ul><li>先检查类型（如果是引用类型就implicit做isinst）</li><li>调用属性getter：<code>callvirt get_X</code>, <code>callvirt get_Y</code></li><li>用上面哪些pattern(constant, relational)继续判断</li></ul><p>没有额外消耗，本质是</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>if</span> (p != <span style=color:#66d9ef>null</span> &amp;&amp; p.X &gt; <span style=color:#ae81ff>10</span> &amp;&amp; p.Y == <span style=color:#ae81ff>3</span>)
+</span></span></code></pre></div><p>这是完全等价的</p><ol start=5><li>元组模式（Tuple Pattern）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>if</span> ((x, y) <span style=color:#66d9ef>is</span> (&gt;<span style=color:#ae81ff>0</span>, &lt;<span style=color:#ae81ff>0</span>))
+</span></span></code></pre></div><p>编译器展开成</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>if</span> (x &gt; <span style=color:#ae81ff>0</span> &amp;&amp; y &lt; <span style=color:#ae81ff>0</span>)
+</span></span></code></pre></div><p>IL只是多个比较与逻辑与的组合</p><h3 id=switch模式匹配底层决策树优化decision-dag><code>switch</code>模式匹配底层：决策树优化（Decision DAG）</h3><p>这是模式匹配最核心的底层部分，C#编译器针对<code>switch</code>语句创建了一套优化决策树，让匹配尽可能少走分支</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>switch</span> (shape)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>case</span> Circle { Radius: &gt; <span style=color:#ae81ff>10</span> }: ...
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>case</span> Circle { Radius: &lt;= <span style=color:#ae81ff>10</span> }: ...
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>case</span> Rectangle { Width: &gt; <span style=color:#ae81ff>0</span>, Height: &gt; <span style=color:#ae81ff>0</span> }: ...
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>编译器不会按上面写的顺序逐行if/else，而是</p><ol><li>先分析shape的动态类型</li><li>同类型的case合并</li><li>进行属性访问排序</li><li>用DGA优化重复条件</li></ol><p>最终生成一套最短路径的IL分支逻辑（落到<code>isinst</code>/getter/比较指令上）</p><p>这提升性能，没有运行时消耗，也不是解析式，而是编译期优化成“最佳分支路径”<br>微软Roslyn团队的论文称之为：Decision DAG（决策有向无环图）</p><p>可以理解为：编译期把你的模式匹配表达式转换成一个智能的、最优的、最短路径的if-else树</p><h3 id=总结>总结</h3><p>模式匹配不会产生运行时反射、不会有动态dispatch，所有复杂的逻辑都在编译期完成</p><ul><li>分析类型层次</li><li>分析常量</li><li>分析pattern结构</li><li>生成决策树</li><li>重写IL</li></ul><p>运行时就是执行普通代码</p><p>CLR层面没有 pattern matching opcode，没有类似<code>match</code>, <code>pattern</code>，<code>case_pattern</code>的IL指令；所有模式匹配最终落在这几个IL指令上</p><ul><li><code>isinst</code>（类型判断）</li><li><code>brtrue/brfalse</code>（条件分支）</li><li><code>beq/bge/blt</code>（数值比较）</li><li><code>callvirt</code>（属性访问）</li><li><code>ldc.i4</code>（加载常量）</li><li><code>ldobj</code>（加载字段）</li></ul><p>模式匹配的复杂性都在C#编译器，而非.NET runtime或IL层</p><h2 id=示例>示例</h2><ol><li>基本类型模式匹配</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// is 表达式模式</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> CheckType(<span style=color:#66d9ef>object</span> obj)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (obj <span style=color:#66d9ef>is</span> <span style=color:#66d9ef>int</span> number)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        Console.WriteLine(<span style=color:#e6db74>$&#34;这是一个整数: {number}&#34;</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (obj <span style=color:#66d9ef>is</span> <span style=color:#66d9ef>string</span> text)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        Console.WriteLine(<span style=color:#e6db74>$&#34;这是一个字符串: {text}&#34;</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (obj <span style=color:#66d9ef>is</span> <span style=color:#66d9ef>null</span>)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        Console.WriteLine(<span style=color:#e6db74>&#34;这是空值&#34;</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// switch 表达式</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>string</span> GetTypeDescription(<span style=color:#66d9ef>object</span> obj) =&gt; obj <span style=color:#66d9ef>switch</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> i =&gt; <span style=color:#e6db74>$&#34;整数: {i}&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>string</span> s =&gt; <span style=color:#e6db74>$&#34;字符串: {s}&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>double</span> d =&gt; <span style=color:#e6db74>$&#34;双精度浮点数: {d}&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>null</span> =&gt; <span style=color:#e6db74>&#34;空值&#34;</span>,
+</span></span><span style=display:flex><span>    _ =&gt; <span style=color:#e6db74>&#34;未知类型&#34;</span>
+</span></span><span style=display:flex><span>};
+</span></span></code></pre></div><ol start=2><li>属性模式匹配</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Person</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>string</span> Name { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>set</span>; }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> Age { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>set</span>; }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>string</span> City { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>set</span>; }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>string</span> GetPersonCategory(Person person) =&gt; person <span style=color:#66d9ef>switch</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    { Age: &lt; <span style=color:#ae81ff>18</span> } =&gt; <span style=color:#e6db74>&#34;未成年人&#34;</span>,
+</span></span><span style=display:flex><span>    { Age: &gt;= <span style=color:#ae81ff>18</span> and &lt; <span style=color:#ae81ff>65</span> } =&gt; <span style=color:#e6db74>&#34;成年人&#34;</span>,
+</span></span><span style=display:flex><span>    { Age: &gt;= <span style=color:#ae81ff>65</span> } =&gt; <span style=color:#e6db74>&#34;老年人&#34;</span>,
+</span></span><span style=display:flex><span>    _ =&gt; <span style=color:#e6db74>&#34;未知&#34;</span>
+</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 多个属性组合匹配</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>string</span> GetPersonInfo(Person person) =&gt; person <span style=color:#66d9ef>switch</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    { Age: &gt;= <span style=color:#ae81ff>18</span>, City: <span style=color:#e6db74>&#34;北京&#34;</span> } =&gt; <span style=color:#e6db74>&#34;北京成年人&#34;</span>,
+</span></span><span style=display:flex><span>    { Age: &lt; <span style=color:#ae81ff>18</span>, City: <span style=color:#e6db74>&#34;上海&#34;</span> } =&gt; <span style=color:#e6db74>&#34;上海未成年人&#34;</span>,
+</span></span><span style=display:flex><span>    { Name: <span style=color:#66d9ef>var</span> name, Age: &gt; <span style=color:#ae81ff>60</span> } =&gt; <span style=color:#e6db74>$&#34;{name}是老年人&#34;</span>,
+</span></span><span style=display:flex><span>    _ =&gt; <span style=color:#e6db74>&#34;其他&#34;</span>
+</span></span><span style=display:flex><span>};
+</span></span></code></pre></div><ol start=3><li>元组模式</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>string</span> RockPaperScissors(<span style=color:#66d9ef>string</span> first, <span style=color:#66d9ef>string</span> second) 
+</span></span><span style=display:flex><span>    =&gt; (first, second) <span style=color:#66d9ef>switch</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        (<span style=color:#e6db74>&#34;rock&#34;</span>, <span style=color:#e6db74>&#34;scissors&#34;</span>) =&gt; <span style=color:#e6db74>&#34;rock 赢了&#34;</span>,
+</span></span><span style=display:flex><span>        (<span style=color:#e6db74>&#34;rock&#34;</span>, <span style=color:#e6db74>&#34;paper&#34;</span>) =&gt; <span style=color:#e6db74>&#34;paper 赢了&#34;</span>,
+</span></span><span style=display:flex><span>        (<span style=color:#e6db74>&#34;paper&#34;</span>, <span style=color:#e6db74>&#34;rock&#34;</span>) =&gt; <span style=color:#e6db74>&#34;paper 赢了&#34;</span>,
+</span></span><span style=display:flex><span>        (<span style=color:#e6db74>&#34;paper&#34;</span>, <span style=color:#e6db74>&#34;scissors&#34;</span>) =&gt; <span style=color:#e6db74>&#34;scissors 赢了&#34;</span>,
+</span></span><span style=display:flex><span>        (<span style=color:#e6db74>&#34;scissors&#34;</span>, <span style=color:#e6db74>&#34;rock&#34;</span>) =&gt; <span style=color:#e6db74>&#34;rock 赢了&#34;</span>,
+</span></span><span style=display:flex><span>        (<span style=color:#e6db74>&#34;scissors&#34;</span>, <span style=color:#e6db74>&#34;paper&#34;</span>) =&gt; <span style=color:#e6db74>&#34;scissors 赢了&#34;</span>,
+</span></span><span style=display:flex><span>        (_, _) when first == second =&gt; <span style=color:#e6db74>&#34;平局&#34;</span>,
+</span></span><span style=display:flex><span>        _ =&gt; <span style=color:#e6db74>&#34;输入无效&#34;</span>
+</span></span><span style=display:flex><span>    };
+</span></span></code></pre></div><ol start=4><li>位置模式匹配（解构模式）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>readonly</span> <span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>Point</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> X { <span style=color:#66d9ef>get</span>; }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> Y { <span style=color:#66d9ef>get</span>; }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Point(<span style=color:#66d9ef>int</span> x, <span style=color:#66d9ef>int</span> y) =&gt; (X, Y) = (x, y);
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> Deconstruct(<span style=color:#66d9ef>out</span> <span style=color:#66d9ef>int</span> x, <span style=color:#66d9ef>out</span> <span style=color:#66d9ef>int</span> y) =&gt; (x, y) = (X, Y);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>string</span> GetQuadrant(Point point) =&gt; point <span style=color:#66d9ef>switch</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    (<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>) =&gt; <span style=color:#e6db74>&#34;原点&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> (x, y) when x &gt; <span style=color:#ae81ff>0</span> &amp;&amp; y &gt; <span style=color:#ae81ff>0</span> =&gt; <span style=color:#e6db74>&#34;第一象限&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> (x, y) when x &lt; <span style=color:#ae81ff>0</span> &amp;&amp; y &gt; <span style=color:#ae81ff>0</span> =&gt; <span style=color:#e6db74>&#34;第二象限&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> (x, y) when x &lt; <span style=color:#ae81ff>0</span> &amp;&amp; y &lt; <span style=color:#ae81ff>0</span> =&gt; <span style=color:#e6db74>&#34;第三象限&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> (x, y) when x &gt; <span style=color:#ae81ff>0</span> &amp;&amp; y &lt; <span style=color:#ae81ff>0</span> =&gt; <span style=color:#e6db74>&#34;第四象限&#34;</span>,
+</span></span><span style=display:flex><span>    _ =&gt; <span style=color:#e6db74>&#34;在坐标轴上&#34;</span>
+</span></span><span style=display:flex><span>};
+</span></span></code></pre></div><ol start=5><li>递归模式匹配</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Shape</span> { }
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Circle</span> : Shape { <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>double</span> Radius { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>set</span>; } }
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Rectangle</span> : Shape { <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>double</span> Width { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>set</span>; } <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>double</span> Height { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>set</span>; } }
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Triangle</span> : Shape { <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>double</span> Base { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>set</span>; } <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>double</span> Height { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>set</span>; } }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>double</span> CalculateArea(Shape shape) =&gt; shape <span style=color:#66d9ef>switch</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    Circle { Radius: <span style=color:#66d9ef>var</span> r } =&gt; Math.PI * r * r,
+</span></span><span style=display:flex><span>    Rectangle { Width: <span style=color:#66d9ef>var</span> w, Height: <span style=color:#66d9ef>var</span> h } =&gt; w * h,
+</span></span><span style=display:flex><span>    Triangle { Base: <span style=color:#66d9ef>var</span> b, Height: <span style=color:#66d9ef>var</span> h } =&gt; <span style=color:#ae81ff>0.5</span> * b * h,
+</span></span><span style=display:flex><span>    _ =&gt; <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> ArgumentException(<span style=color:#e6db74>&#34;未知形状&#34;</span>)
+</span></span><span style=display:flex><span>};
+</span></span></code></pre></div><ol start=6><li>列表模式匹配（C# 11+）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>string</span> CheckList(<span style=color:#66d9ef>int</span>[] numbers) =&gt; numbers <span style=color:#66d9ef>switch</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span><span style=color:#a6e22e>    []</span> =&gt; <span style=color:#e6db74>&#34;空数组&#34;</span>,
+</span></span><span style=display:flex><span><span style=color:#a6e22e>    [1]</span> =&gt; <span style=color:#e6db74>&#34;只有一个元素1&#34;</span>,
+</span></span><span style=display:flex><span><span style=color:#a6e22e>    [1, 2]</span> =&gt; <span style=color:#e6db74>&#34;包含1和2&#34;</span>,
+</span></span><span style=display:flex><span><span style=color:#a6e22e>    [1, 2, .. var rest]</span> =&gt; <span style=color:#e6db74>$&#34;以1,2开头，剩余{rest.Length}个元素&#34;</span>,
+</span></span><span style=display:flex><span><span style=color:#a6e22e>    [var first, .., var last]</span> =&gt; <span style=color:#e6db74>$&#34;第一个元素是{first}，最后一个元素是{last}&#34;</span>,
+</span></span><span style=display:flex><span>    _ =&gt; <span style=color:#e6db74>&#34;其他数组&#34;</span>
+</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 使用示例</span>
+</span></span><span style=display:flex><span>Console.WriteLine(CheckList(<span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span>[] { }));           <span style=color:#75715e>// 空数组</span>
+</span></span><span style=display:flex><span>Console.WriteLine(CheckList(<span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span>[] { <span style=color:#ae81ff>1</span> }));         <span style=color:#75715e>// 只有一个元素1</span>
+</span></span><span style=display:flex><span>Console.WriteLine(CheckList(<span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span>[] { <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>2</span> }));      <span style=color:#75715e>// 包含1和2</span>
+</span></span><span style=display:flex><span>Console.WriteLine(CheckList(<span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span>[] { <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>4</span> }));<span style=color:#75715e>// 以1,2开头，剩余2个元素</span>
+</span></span></code></pre></div><ol start=7><li>关系模式匹配</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>string</span> GetTemperatureDescription(<span style=color:#66d9ef>double</span> temp) =&gt; temp <span style=color:#66d9ef>switch</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    &lt; -<span style=color:#ae81ff>10</span> =&gt; <span style=color:#e6db74>&#34;极寒&#34;</span>,
+</span></span><span style=display:flex><span>    &gt;= -<span style=color:#ae81ff>10</span> and &lt; <span style=color:#ae81ff>0</span> =&gt; <span style=color:#e6db74>&#34;寒冷&#34;</span>,
+</span></span><span style=display:flex><span>    &gt;= <span style=color:#ae81ff>0</span> and &lt; <span style=color:#ae81ff>15</span> =&gt; <span style=color:#e6db74>&#34;凉爽&#34;</span>,
+</span></span><span style=display:flex><span>    &gt;= <span style=color:#ae81ff>15</span> and &lt; <span style=color:#ae81ff>25</span> =&gt; <span style=color:#e6db74>&#34;舒适&#34;</span>,
+</span></span><span style=display:flex><span>    &gt;= <span style=color:#ae81ff>25</span> and &lt; <span style=color:#ae81ff>35</span> =&gt; <span style=color:#e6db74>&#34;温暖&#34;</span>,
+</span></span><span style=display:flex><span>    &gt;= <span style=color:#ae81ff>35</span> =&gt; <span style=color:#e6db74>&#34;炎热&#34;</span>
+</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>string</span> GetGrade(<span style=color:#66d9ef>int</span> score) =&gt; score <span style=color:#66d9ef>switch</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    &gt;= <span style=color:#ae81ff>90</span> and &lt;= <span style=color:#ae81ff>100</span> =&gt; <span style=color:#e6db74>&#34;优秀&#34;</span>,
+</span></span><span style=display:flex><span>    &gt;= <span style=color:#ae81ff>80</span> and &lt; <span style=color:#ae81ff>90</span> =&gt; <span style=color:#e6db74>&#34;良好&#34;</span>,
+</span></span><span style=display:flex><span>    &gt;= <span style=color:#ae81ff>70</span> and &lt; <span style=color:#ae81ff>80</span> =&gt; <span style=color:#e6db74>&#34;中等&#34;</span>,
+</span></span><span style=display:flex><span>    &gt;= <span style=color:#ae81ff>60</span> and &lt; <span style=color:#ae81ff>70</span> =&gt; <span style=color:#e6db74>&#34;及格&#34;</span>,
+</span></span><span style=display:flex><span>    &gt;= <span style=color:#ae81ff>0</span> and &lt; <span style=color:#ae81ff>60</span> =&gt; <span style=color:#e6db74>&#34;不及格&#34;</span>,
+</span></span><span style=display:flex><span>    _ =&gt; <span style=color:#e6db74>&#34;无效分数&#34;</span>
+</span></span><span style=display:flex><span>};
+</span></span></code></pre></div></div><nav class=post-nav><a href=/dotnetandwindows/lib/platforminvocation/ class=hover:underline>pre: P/Invoke</a>
+<a href=/dotnetandwindows/lib/property/ class=hover:underline>next: Property</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#模式>模式</a><ul><li><a href=#模式的几大类别>模式的几大类别</a></li></ul></li><li><a href=#模式匹配>模式匹配</a><ul><li><a href=#解决的痛点>解决的痛点</a></li></ul></li><li><a href=#is类型模式><code>is</code>类型模式</a></li><li><a href=#类型模式--守卫条件when>类型模式 + 守卫条件（<code>when</code>）</a></li><li><a href=#常见模式类型>常见模式类型</a><ul><li><a href=#类型模式type-pattern>类型模式（Type Pattern）</a></li><li><a href=#常量模式constant-pattern>常量模式（Constant Pattern）</a></li><li><a href=#关系模式relational-pattern>关系模式（Relational Pattern）</a></li><li><a href=#逻辑模式logical-pattern>逻辑模式（Logical Pattern）</a></li><li><a href=#否定模式negation-pattern>否定模式（Negation Pattern）</a></li><li><a href=#位置模式positional-pattern>位置模式（Positional Pattern）</a></li><li><a href=#属性模式property-pattern>属性模式（Property Pattern）</a></li><li><a href=#组合使用>组合使用</a></li></ul></li><li><a href=#switch表达式c-8><code>switch</code>表达式（C# 8+）</a></li><li><a href=#底层原理>底层原理</a><ul><li><a href=#基础原理>基础原理</a></li><li><a href=#switch模式匹配底层决策树优化decision-dag><code>switch</code>模式匹配底层：决策树优化（Decision DAG）</a></li><li><a href=#总结>总结</a></li></ul></li><li><a href=#示例>示例</a></li></ul></li></ul></nav></aside><script src=/js/scrollspy.js defer></script><script type=module>
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ 
+    startOnLoad: true, theme: "default" });
+</script><footer><div class=container><p>© 2026 Jeff Lee(ljf12825). All rights reserved |
+<a href=https://creativecommons.org/licenses/by-nc-sa/4.0/>Article: CC BY-NC-SA 4.0</a> |
+<a href=https://creativecommons.org/licenses/by-sa/4.0/>Content: CC BY-SA 4.0</a> |
+<a href=https://opensource.org/licenses/MIT>Code: MIT License</a> |
+<a href=/LICENSES.md>Full License</a></p></div></footer></body></html>

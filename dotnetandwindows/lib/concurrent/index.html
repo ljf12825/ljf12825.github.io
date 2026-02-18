@@ -1,0 +1,799 @@
+<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>C# Concurrent</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/blogsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/dotnetandwindows/>★</a></li><li><a href=/dotnetandwindows/lab/>Lab</a></li><li><a href=/dotnetandwindows/lib/>Lib</a></li><li><a href=/dotnetandwindows/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><pre class=ascii>
++——————————————————————————————————————————————————————————————+
+|                        <a class=nav-item data-path=/rightbrain/ href=/rightbrain/>RightBrain</a>                            |
+|                             |                                |
+|                             |     <a class=nav-item data-path=/dotnetandwindows/ href=/dotnetandwindows/>.NET-Windows</a>               |
+|                             |    /                           |
+|                             |   /                            |
+|                             |  /                             |
+|                             | /                              |
+|                             |/                               |
+|      <a class=nav-item data-path=/graphic/ href=/graphic/>Graphic</a> ———————————— <a class=nav-item data-path=/home/ href=/home/>Home</a> ————————————— <a class=nav-item data-path=/system/ href=/system/>System</a>          |
+|                            /|                                |
+|                           / |                                |
+|                          /  |                                |
+|                         /   |                                |
+|                        /    |                                |
+|                       /     |                                |
+|              <a class=nav-item data-path=/unixlike/ href=/unixlike/>Unix-like</a>      |                <a class=nav-item data-path=/project/ href=/project/>Project</a>         |
+|                             |                <a class=nav-item data-path=/miscellaneous/ href=/miscellaneous/>Miscellaneous</a>   |
+|                          <a class=nav-item data-path=/csbasic/ href=/csbasic/>CSBasic</a>             <a class=nav-item data-path=/ai/ href=/ai/>AI</a>              |
++——————————————————————————————————————————————————————————————+
+    </pre></nav><script defer src=/js/star-nav.js></script><script defer src=/js/site.js></script><script defer src=/js/star-active.js></script><div id=ref-window class="float-window open"><div class=float-header><span class="title open">>> >> >> Reference &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Ref>>>>>></span></div><div class=float-body><div class=ref-list><a href=https://www.mixamo.com/ target=_blank>Mixamo</a> |
+<a href=https://opengameart.org/ target=_blank>OpenGameArt</a><p><a href=https://sharplab.io/ target=_blank>SharpLab</a> |
+<a href=https://godbolt.org/ target=_blank>Compiler Explorer</a></p><p><a href="https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type+Something+&x=none&v=4&h=4&w=80&we=false" target=_blank>ASCII Graph Generator</a></p><p><a href=https://mermaid.js.org/ target=_blank>Mermaid</a></p><a href=https://www.vim.org/ target=_blank>Vim</a> | <a href=https://vimdoc.sourceforge.net/ target=_blank>Vim Manual Source</a> |
+<a href=https://vimcdoc.sourceforge.net/ target=_blank>Vimcdoc</a> | <a href=https://vimcdoc.sourceforge.net/doc/help.html target=_blank>Vimdoc read online</a><p><a href=https://shields.io/ target=_blank>Shields.io</a></p><p><a href=https://emojidb.org/ target=_blank>EmojiDB</a></p><p><a href=https://cppreference.com/ target=_blank>cppreference</a></p><p><a href=https://gcc.gnu.org/onlinedocs/ target=_blank>GCC Docs</a></p><p><a href=https://clang.llvm.org/docs/ target=_blank>Clang Docs</a></p><p><a href=https://www.boost.org/libraries/ target=_blank>Boost Library Docs</a></p><p><a href=https://learn.microsoft.com/en-us/dotnet/csharp/ target=_blank>Microsoft Learn</a><p><a href=https://www.lua.org/manual/5.4/ target=_blank>Lua 5.4 Reference Manual</a><p><a href=https://docs.unity3d.com/Manual/index.html target=_blank>Unity Manual</a> |
+<a href=https://docs.unity3d.com/ScriptReference/index.html target=_blank>Unity API</a></p><p><a href=https://docs.unrealengine.com/ target=_blank>Unreal Engine Docs</a></p><p><a href=https://godotengine.org target=_blank>Godot</a> |
+<a href=https://docs.godotengine.org/en/stable/ target=_blank>Godot Docs</a></p><p><a href=https://z-library.sk/ target=_blank>Z-Library</a> : eBook Library</p><p><a href=https://docs.kernel.org/ target=_blank>Linux Kernel Docs</a></p><p><a href=https://www.gnu.org/ target=_blank>GNU</a> : manuals, philosophy, FAQ</p><a href=https://archlinux.org/ target=_blank>ArchLinux</a><p><a href=https://help.ubuntu.com/ target=_blank>Ubuntu Doc</a> |
+<a href=https://ubuntu.com/server/docs target=_blank>Ubuntu Server Guide</a></p><p><a href=https://www.vulkan.org/ target=_blank>Vulkan</a> |
+<a href=https://docs.vulkan.org/ target=_blank>Vulkan Docs</a></p><p><a href=https://www.opengl.org/ target=_blank>OpenGL</a> |
+<a href=https://registry.khronos.org/OpenGL target=_blank>OpenGL API</a> |
+<a href=https://www.khronos.org/opengl/wiki/ target=_blank>OpenGL Wiki</a></p><p><a href=https://learn.microsoft.com/en-us/windows/win32/directx target=_blank>DirectX</a></p><p><a href=https://www.realtimerendering.com/ target=_blank>Real-Time Rendering</a></p><p><a href=https://www.pbr-book.org/ target=_blank>Physically Based Rendering</a></p><p><a href=https://www.scratchapixel.com/ target=_blank>Scratchapixel</a></p><p><a href=https://learnopengl.com/ target=_blank>LearnOpenGL</a></p><p><a href=https://raytracing.github.io/ target=_blank>Ray Tracing in One Weekend</a></p><p><a href=https://www.shadertoy.com/ target=_blank>Shadertoy</a></p><p><a href=https://arxiv.org/list/cs.GR/recent target=_blank>arXiv Graphics</a></p><p><a href=https://www.siggraph.org/ target=_blank>SIGGRAPH</a> |
+<a href=https://dl.acm.org/conference/siggraph target=_blank>SIGGRAPH Digital Library</a></p><p><a href=https://git-scm.com/ target=_blank>Git</a> |
+<a href=https://git-scm.com/doc target=_blank>Docs</a> |
+<a href=https://git-scm.com/community target=_blank>Community</a></p></div></div></div><script src=/js/ref-window.js></script><article class=single_article><div class=title>C# Concurrent<div class=meta>Modified: 2025-06-01
+| Author：ljf12825</div></div><div class=content><p>并发是真正能把程序“撑大”的武器，它出现的场景几乎都指向一个目标：把等待变成生产力，把CPU的空转变成有效工作</p><ol><li>I/O等待
+只要程序遇到以下情况<ul><li>等网络</li><li>等磁盘</li><li>等数据库</li><li>等文件</li><li>等用户输入</li></ul></li></ol><p>线程就闲着；并发的作用就是：当A线程在等IO，CPU去处理B、C、D的任务<br>例如：游戏里加载角色模型时，同时加载动画数据、贴图、音频，当然不想按顺序来等它们</p><ol start=2><li>有大量独立任务的场景
+比如：<ul><li>上万条日志要解析</li><li>上千张图片要压缩</li><li>大规模数据格式转换</li><li>游戏里AI代理（多NPC逻辑）</li></ul></li></ol><p>在这里，并发是为了把任务分给多个执行单元，让整体吞吐量大幅提升。本质是“流水线拆分”</p><ol start=3><li>需要提高响应速度的场景
+即便是单个请求，也可能需要并发<br>比如游戏服务器收到一次战斗结算请求，它可能内部要：查数据库，算奖励，发消息到其他模块，写日志，推送给消息队列</li></ol><p>这些步骤之间可能并行，这样整个请求响应更快；并发让系统更“灵动”，而不是“流水线式排队”</p><ol start=4><li><p>实时性要求高的系统
+比如：游戏主线程负责渲染，后台线程负责加载资源，另一个线程负责音频，另一个线程跑AI，再开几个线程做物理模拟<br>没有并发，游戏就只能一帧做一件事</p></li><li><p>分布式和服务端
+服务端一天到晚都是并发：一个API接口，1秒中来了1万个请求，不可能同步一个个处理，必须让线程池、协程、事件循环把它们同时调度起来</p></li><li><p>需要同时处理多个外部设备或数据源
+典型场景</p><ul><li>多摄像头数据流</li><li>实时传感器</li><li>多网络客户端</li><li>同时从多个第三方API拉数据</li></ul></li></ol><h2 id=并发的意义>并发的意义</h2><p>解决CPU空闲问题<br>解决等待造成的浪费<br>解决吞吐量不足的问题<br>解决响应不够及时的问题<br>解决系统结构不够灵活的问题\</p><p>只要发现程序经常“等”，那就是该上并发的地方</p><hr><ul><li>进程 vs 线程：可以把一个进程理解为一个独立的应用程序（比如一个打开的Word文档）。而线程则是进程内部的一个独立执行流。一个进程可以包含多个线程，这些线程共享进程的内存和资源（如静态变量、文件句柄等），但各自拥有独立的执行栈和寄存器</li><li>为什么要多线程<ul><li>保持UI响应：在桌面应用中，将耗时操作（如文件读写、网络请求）放在后台线程，可以防止用户界面“卡死”</li><li>高效利用CPU：在多核CPU上，可以将工作分解到多个线程并行执行，充分利用计算资源，提高吞吐量</li><li>异步操作：处理多个I/O密集型任务时，可以在一个线程等待时，让另一个线程继续工作</li></ul></li></ul><p>线程的唯一作用就是用来处理函数<br>从操作系统角度来看：</p><ul><li>线程 = 调度单位（获得CPU时间片）</li><li>函数 = 要执行的指令序列</li><li>执行函数 = 在时间片内运行这些指令</li></ul><p>底层共识：绝大多数情况下，一个程序在启动时只会有一个主线程（Main Thread），除非主动创建其他线程，或者使用async/await让运行时调度线程池参与执行</p><ol><li><p>用户默认程序只有一个主线程
+这意味着</p><ul><li>你写的<code>Main()</code>只会在这个线程里跑</li><li>普通同步代码都在这个线程执行</li><li>没有显式创建线程，也没有人帮你创建线程</li><li>程序的生命周期由这个线程的执行决定</li></ul><p>这是纯净、简单的单线程世界</p></li><li><p>async/await本身不会创建线程
+async/await是状态机，不是线程<br>只有当await任务涉及线程池时，才会“顺带”用到其他线程</p></li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>await</span> Task.Run(() =&gt; { ... });
+</span></span></code></pre></div><p>这个才会跑到线程池（获取新线程）</p><p>但如果写</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>await</span> Task.Delay(<span style=color:#ae81ff>1000</span>);
+</span></span></code></pre></div><p>这只是设置一个计时器，主线程不被占用，但也没有新线程在跑代码</p><ol start=3><li><p>系统内部可能偷偷创建线程，但与你写的逻辑无关
+比如：</p><ul><li>GC在后台跑自己的线程</li><li>Finalizer线程负责清理对象</li><li>CLR/JIT有自己的辅助线程</li><li>某些库可能创建IO线程</li><li>UI框架（WPF/WinForms/Unity）内部有自己的线程模型</li></ul><p>但这些线程不是你的业务线程，也不会执行你的代码</p></li><li><p>只有显式声明了，才会出现并发
+以下情况会出现新线程或并发</p><ul><li><code>new Thread(...)</code></li><li><code>Task.Run(...)</code></li><li><code>.ContinueWith(...)</code></li><li><code>Parallel.For</code></li><li><code>async</code>配合一些IO/ThreadPool操作</li><li>定时器（Timer）触发的回调</li><li>后台服务（Host, Kestrel）启动时的线程池调度</li><li>游戏引擎内部的worker thread</li></ul><p>但没有这些，你写的程序永远只有主线程在跑你的代码</p></li><li><p>主线程退出 = 程序结束
+这是大多数系统的默认行为</p><p>常规 Console App中</p><ul><li>主线程结束</li><li>除非创建的是后台线程，否则程序直接退出</li></ul><p>如果创建后台线程（IsBackground = true），主线程结束时它直接被强制杀掉</p><p>这也是为什么async Main可行<br>编译器会为async Main生成一个等待逻辑，使得主线程在async完成前不会退出</p></li></ol><h2 id=c中的线程生命周期>C#中的线程生命周期</h2><p>C#的线程生命周期其实和操作系统底层的线程模型密切相关，只不过被.NET封装的更易用</p><h3 id=主要状态>主要状态</h3><p>C#中线程对象（<code>System.Threading.Thread</code>）大致经历以下几个状态</p><ol><li>Unstarted（未启动）<ul><li>线程被创建了，但还没开始执行</li><li>例如</li></ul></li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Thread t = <span style=color:#66d9ef>new</span> Thread(SomeMethod);
+</span></span><span style=display:flex><span><span style=color:#75715e>// 此时 t 处于 Unstarted 状态</span>
+</span></span></code></pre></div><p>直到调用<code>t.Start()</code>，它才会被交给操作系统调度</p><ol start=2><li><p>Running（运行中）</p><ul><li>调用<code>Start()</code>后，线程进入可调度状态，被操作系统安排执行</li><li>此时线程在CPU上运行，执行传入的委托（<code>SomeMethod</code>）</li></ul></li><li><p>WaitSleepJoin（等待/阻塞）</p><ul><li>当线程主动或被动地进入等待状态时，比如<ul><li>调用了<code>Thread.Sleep(ms)</code></li><li>调用了<code>Thread.Join()</code>等待另一个线程</li><li>或者等待锁（<code>Monitor.Enter()</code>/<code>lock</code>）被释放</li></ul></li><li>在这期间它不会消耗CPU时间</li></ul></li><li><p>Suspended（已挂起）现在已被弃用</p><ul><li>早期.NET支持<code>Suspend()</code>/<code>Resume()</code>，但后来被弃用，因为会导致死锁或状态不一致</li><li>现代.NET不建议用这个状态，而是用信号量、事件或同步原语来控制执行</li></ul></li><li><p>Stopped（已终止）</p><ul><li>线程执行完入口方法（或抛出未捕获异常）后，会进入此状态</li><li>线程一旦终止，就无法重新启动。再次调用<code>Start()</code>会抛<code>ThreadStateException</code></li></ul></li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-ini data-lang=ini><span style=display:flex><span>        <span style=color:#a6e22e>┌────────────┐</span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>│  Unstarted │</span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>└──────┬─────┘</span>
+</span></span><span style=display:flex><span>               <span style=color:#a6e22e>│ Start()</span>
+</span></span><span style=display:flex><span>               <span style=color:#a6e22e>▼</span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>┌────────────┐</span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>│   Running  │</span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>└──┬────┬────┘</span>
+</span></span><span style=display:flex><span>           <span style=color:#a6e22e>│    │</span>
+</span></span><span style=display:flex><span>           <span style=color:#a6e22e>│    │Sleep()/Wait()/Join()</span>
+</span></span><span style=display:flex><span>           <span style=color:#a6e22e>│    ▼</span>
+</span></span><span style=display:flex><span>           <span style=color:#a6e22e>│  ┌────────────┐</span>
+</span></span><span style=display:flex><span>           <span style=color:#a6e22e>│  │WaitSleepJoin│</span>
+</span></span><span style=display:flex><span>           <span style=color:#a6e22e>│  └──────┬─────┘</span>
+</span></span><span style=display:flex><span>           <span style=color:#a6e22e>│         │(被唤醒)</span>
+</span></span><span style=display:flex><span>           <span style=color:#a6e22e>└─────────┘</span>
+</span></span><span style=display:flex><span>               <span style=color:#a6e22e>│</span>
+</span></span><span style=display:flex><span>               <span style=color:#a6e22e>▼</span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>┌────────────┐</span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>│   Stopped  │</span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>└────────────┘</span>
+</span></span></code></pre></div><h2 id=传统线程的使用systemthreading>传统线程的使用（<code>System.Threading</code>）</h2><p><code>System.Threading</code>是.NET中的多线程与并发控制的核心命名空间，几乎所有的线程、锁、信号量、定时器、任务调度器都从这里生长出来。可以把它看作是“多线程操作系统的缩影”</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-md data-lang=md><span style=display:flex><span><span style=color:#75715e>## 核心：线程与线程池
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>1.</span> <span style=color:#e6db74>`Thread`</span>
+</span></span><span style=display:flex><span>传统线程类，直接映射操作系统线程
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> 启动/终止/挂起/唤醒线程
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> 设置优先级、名字、后台/前台状态
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> 控制线程生命周期
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>这是整个命名空间的核心
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>2.</span> <span style=color:#e6db74>`ThreadPool`</span>
+</span></span><span style=display:flex><span>线程复用机制。避免频繁创建和销毁OS线程，适用于短时任务\
+</span></span><span style=display:flex><span>CLR会自动管理线程数量和调度策略\
+</span></span><span style=display:flex><span>现代<span style=color:#e6db74>`Task`</span>（<span style=color:#e6db74>`System.Threading.Tasks.Task`</span>）内部几乎都运行在线程池上
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## 同步与锁机制
+</span></span></span><span style=display:flex><span>线程间通信的关键部分，确保共享资源安全
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>| 类 | 作用 |
+</span></span><span style=display:flex><span>| - | - |
+</span></span><span style=display:flex><span>| <span style=color:#e6db74>`Monitor`</span> | 最基础的同步锁（<span style=color:#e6db74>`lock`</span>语法糖的底层实现）|
+</span></span><span style=display:flex><span>| <span style=color:#e6db74>`Mutex`</span> | 系统级互斥锁，可以跨进程使用 |
+</span></span><span style=display:flex><span>| <span style=color:#e6db74>`Semaphore`</span>/<span style=color:#e6db74>`SemaphoreSlim`</span> | 控制并发访问数量的锁，比如限制同时执行的线程数 |
+</span></span><span style=display:flex><span>| <span style=color:#e6db74>`SpinLock`</span> | 自旋锁，用于短时间锁定的高性能场景（避免线程切换开销）|
+</span></span><span style=display:flex><span>| <span style=color:#e6db74>`ReaderWriterlockSlim`</span> | 允许多个读者、单个写者的锁（多读写少场景）|
+</span></span><span style=display:flex><span>| <span style=color:#e6db74>`Interlocked`</span> | 原子操作（加减、交换、比较交换等），CPU级别原语 |
+</span></span><span style=display:flex><span>| <span style=color:#e6db74>`Volatile`</span> | 保证读写不会被编译器/CPU重排序 |
+</span></span><span style=display:flex><span>| <span style=color:#e6db74>`Barrier`</span> | 多线程同步点，所有线程都到达后才能继续执行 |
+</span></span><span style=display:flex><span>| <span style=color:#e6db74>`CountdownEvent`</span> | 线程等待多个事件完成的同步点（类似倒计时锁）|
+</span></span><span style=display:flex><span>| <span style=color:#e6db74>`ManualResetEvent`</span>/<span style=color:#e6db74>`AutoResetEvent`</span> | 信号机制，用于线程间通知 |
+</span></span><span style=display:flex><span>| <span style=color:#e6db74>`EventWaitHandle`</span> | 信号量的通用基类，可以手动/自动复位 |
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## 并发工具与调度
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>| 类 | 说明 |
+</span></span><span style=display:flex><span>| - | - |
+</span></span><span style=display:flex><span>| <span style=color:#e6db74>`Timer`</span> | 定时器，在后台线程上周期性执行回调 |
+</span></span><span style=display:flex><span>| <span style=color:#e6db74>`ThreadLocal&lt;T&gt;`</span> | 线程本地存储，每个线程有独立的变量副本 |
+</span></span><span style=display:flex><span>| <span style=color:#e6db74>`LocalDataStoreSlot`</span> | 较旧的线程局部存储API（<span style=color:#e6db74>`ThreadLocal&lt;T&gt;`</span>的前身）|
+</span></span><span style=display:flex><span>| <span style=color:#e6db74>`ExecutionContext`</span>/<span style=color:#e6db74>`SynchronizationContext`</span> | 控制上下文流动（比如异步方法中保持当前线程环境）|
+</span></span><span style=display:flex><span>| <span style=color:#e6db74>`LazyInitializer`</span> | 延迟初始化工具类，线程安全地延迟构造对象 |
+</span></span><span style=display:flex><span>| <span style=color:#e6db74>`SpinWait`</span> | 主动自旋等待（比Thread.Sleep更轻量）|
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## 线程安全与并发基础结构
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> <span style=color:#e6db74>`ThreadPriority`</span>：线程优先级枚举
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> <span style=color:#e6db74>`ThreadState`</span>：线程状态枚举（Unstarted、Running、Stopped...）
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> <span style=color:#e6db74>`ThreadAbortException`</span>, <span style=color:#e6db74>`ThreadInterruptedException`</span>：线程控制相关异常
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> <span style=color:#e6db74>`ThreadStaticAttribute`</span>：让静态变量在不同线程中拥有独立副本
+</span></span></code></pre></div><h3 id=thread><code>Thread</code></h3><p><code>System.Threading.Thread</code>是对操作系统原生线程（Windows下是Win32 thread, Linux下是pthread）的封装<br>它允许你显式地控制线程的创建、启动、休眠、优先级、后台运行等细节</p><p>在现代C#中，一般用<code>Task</code>和<code>async/await</code>，但理解<code>Thread</code>才能真正明白底层是怎么运转的</p><h3 id=创建与启动线程>创建与启动线程</h3><p>最基础的创建方式是传入一个委托（<code>ThreadStart</code>或<code>ParameterizedThreadStart</code>）</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>using</span> System;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> System.Threading;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Program</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Main()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        Thread t = <span style=color:#66d9ef>new</span> Thread(PrintNumbers);
+</span></span><span style=display:flex><span>        t.Start(); <span style=color:#75715e>// 启动线程</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 主线程继续执行</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i = <span style=color:#ae81ff>0</span>; i &lt; <span style=color:#ae81ff>5</span>; i++)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            Console.WriteLine(<span style=color:#e6db74>$&#34;Main: {i}&#34;</span>);
+</span></span><span style=display:flex><span>            Thread.Sleep(<span style=color:#ae81ff>200</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> PrintNumbers()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i = <span style=color:#ae81ff>0</span>; i &lt; <span style=color:#ae81ff>5</span>; i++)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            Console.WriteLine(<span style=color:#e6db74>$&#34;Worker: {i}&#34;</span>);
+</span></span><span style=display:flex><span>            Thread.Sleep(<span style=color:#ae81ff>300</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>执行后可以看到主线程与子线程交错输出，说明它们在并发运行</p><h3 id=带参数的线程>带参数的线程</h3><p>传统线程不能像<code>Task</code>那样轻易传参，只能通过<code>ParameterizedThreadStart</code>或Lambda</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Thread t = <span style=color:#66d9ef>new</span> Thread(obj =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>string</span> name = (<span style=color:#66d9ef>string</span>)obj;
+</span></span><span style=display:flex><span>    Console.WriteLine(<span style=color:#e6db74>$&#34;Hello, {name}!&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>});
+</span></span><span style=display:flex><span>t.Start(<span style=color:#e6db74>&#34;ljf12825&#34;</span>);
+</span></span></code></pre></div><p>或者直接捕获外部变量</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>string</span> name = <span style=color:#e6db74>&#34;ljf12825&#34;</span>;
+</span></span><span style=display:flex><span>Thread t = <span style=color:#66d9ef>new</span> Thread(() =&gt; Console.WriteLine(<span style=color:#e6db74>$&#34;Hello, {name}!&#34;</span>));
+</span></span><span style=display:flex><span>t.Start();
+</span></span></code></pre></div><h3 id=前台线程-vs-后台线程>前台线程 vs 后台线程</h3><ul><li>前台线程：默认创建的线程是前台线程。只要有一个前台线程在运行，进程就不会结束</li><li>后台线程：将<code>IsBackground</code>属性设置为<code>true</code>。当所有前台线程结束时，后台线程会被CLR强制终止，无论它是否执行完毕。适合做后台服务、监控等不关键的任务</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Thread bgThread = <span style=color:#66d9ef>new</span> Thread(DoWork);
+</span></span><span style=display:flex><span>bgThread.IsBackground = <span style=color:#66d9ef>true</span>; <span style=color:#75715e>// 设置为后台线程</span>
+</span></span><span style=display:flex><span>bgThread.Start();
+</span></span></code></pre></div><h3 id=线程控制操作>线程控制操作</h3><p><code>Thread</code>提供一套基础的控制API</p><table><thead><tr><th>方法</th><th>作用</th></tr></thead><tbody><tr><td><code>Start()</code></td><td>启动线程</td></tr><tr><td><code>Join()</code></td><td>等待线程结束</td></tr><tr><td><code>Sleep(ms)</code></td><td>让当前线程暂停指定毫秒数</td></tr><tr><td><code>Abort()</code></td><td>强制终止线程（已废弃）</td></tr><tr><td><code>Interrupt()</code></td><td>中断处于阻塞状态的线程</td></tr><tr><td><code>isAlive</code></td><td>判断线程是否仍在运行</td></tr><tr><td><code>ThreadState</code></td><td>获取当前状态（如Running、Stopped等）</td></tr></tbody></table><h3 id=线程优先级与命名>线程优先级与命名</h3><p>每个线程都有优先级（Priority）和名字（Name）属性，方便调试和调度</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Thread t = <span style=color:#66d9ef>new</span> Thread(SomeWork)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    Name = <span style=color:#e6db74>&#34;WorkerThread&#34;</span>,
+</span></span><span style=display:flex><span>    Priority = ThreadPriority.AboveNormal
+</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>t.Start();
+</span></span></code></pre></div><p>优先级只是调度建议，操作系统可以无视它。真正的性能调度仍由内核决定</p><h3 id=线程同步与安全>线程同步与安全</h3><p>多个线程访问共享资源时，可能会发生竞态条件，导致数据不一致<br>传统线程编程的最棘手的就是同步问题<br>主要的同步原语包括</p><ul><li><code>lock</code>（语法糖，底层是<code>Monitor</code>）</li><li><code>Monitor.Enter/Exit/Wait/Pulse</code></li><li><code>Mutex</code></li><li><code>Semaphore</code></li><li><code>AutoResetEvent</code>/<code>ManualResetEvent</code></li></ul><p>示例：使用<code>lock</code>关键字（Monitor语法糖）</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>BankAccount</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>readonly</span> <span style=color:#66d9ef>object</span> _balanceLock = <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>object</span>(); <span style=color:#75715e>// 专用的锁对象</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>decimal</span> _balance = <span style=color:#ae81ff>1000</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> Withdraw(<span style=color:#66d9ef>decimal</span> amount)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 使用 lock 确保同一时间只有一个线程能进入此代码块</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>lock</span> (_balanceLock)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (_balance &gt;= amount)
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                Console.WriteLine(<span style=color:#e6db74>$&#34;Balance before withdrawal: {_balance}&#34;</span>);
+</span></span><span style=display:flex><span>                _balance -= amount;
+</span></span><span style=display:flex><span>                Console.WriteLine(<span style=color:#e6db74>$&#34;Balance after withdrawal: {_balance}&#34;</span>);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>注意：</p><ul><li>锁对象通常使用<code>private readonly object</code></li><li>避免锁定<code>this</code>, <code>Type</code>对象或字符串，因为这可能导致意外的死锁</li></ul><h3 id=thread中的异常>Thread中的异常</h3><p>在C#中，线程内抛出的异常默认情况下不会自动传递到创建该线程的父线程，如果不进行专门的处理，这些异常可能会导致线程静默失败</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>using</span> System;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> System.Threading;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Program</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Main()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        Console.WriteLine(<span style=color:#e6db74>&#34;主线程开始&#34;</span>);
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span>
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 创建并启动新线程</span>
+</span></span><span style=display:flex><span>            Thread thread = <span style=color:#66d9ef>new</span> Thread(Worker);
+</span></span><span style=display:flex><span>            thread.Start();
+</span></span><span style=display:flex><span>            
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 主线程继续执行</span>
+</span></span><span style=display:flex><span>            Thread.Sleep(<span style=color:#ae81ff>2000</span>);
+</span></span><span style=display:flex><span>            Console.WriteLine(<span style=color:#e6db74>&#34;主线程结束&#34;</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>catch</span> (Exception ex)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 这里不会捕获到工作线程的异常！</span>
+</span></span><span style=display:flex><span>            Console.WriteLine(<span style=color:#e6db74>$&#34;主线程捕获到异常: {ex.Message}&#34;</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        Console.ReadLine();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Worker()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        Console.WriteLine(<span style=color:#e6db74>&#34;工作线程开始&#34;</span>);
+</span></span><span style=display:flex><span>        Thread.Sleep(<span style=color:#ae81ff>1000</span>);
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 在工作线程中抛出异常</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> InvalidOperationException(<span style=color:#e6db74>&#34;工作线程发生错误！&#34;</span>);
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 这行代码不会执行</span>
+</span></span><span style=display:flex><span>        Console.WriteLine(<span style=color:#e6db74>&#34;工作线程结束&#34;</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>解决方案</p><ol><li>在线程方法内部捕获异常</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> SafeWorker()
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>try</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        Console.WriteLine(<span style=color:#e6db74>&#34;安全的工作线程开始&#34;</span>);
+</span></span><span style=display:flex><span>        Thread.Sleep(<span style=color:#ae81ff>1000</span>);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> InvalidOperationException(<span style=color:#e6db74>&#34;工作线程发生错误！&#34;</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>catch</span> (Exception ex)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        Console.WriteLine(<span style=color:#e6db74>$&#34;工作线程内部捕获异常: {ex.Message}&#34;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 可以记录日志、通知主线程等</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ol start=2><li>使用自定义异常处理机制</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>using</span> System;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> System.Threading;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Program</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Main()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        Console.WriteLine(<span style=color:#e6db74>&#34;主线程开始&#34;</span>);
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        Exception workerException = <span style=color:#66d9ef>null</span>;
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        Thread thread = <span style=color:#66d9ef>new</span> Thread(() =&gt;
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span>
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                Worker();
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>catch</span> (Exception ex)
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                workerException = ex;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        });
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        thread.Start();
+</span></span><span style=display:flex><span>        thread.Join(); <span style=color:#75715e>// 等待线程完成</span>
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (workerException != <span style=color:#66d9ef>null</span>)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            Console.WriteLine(<span style=color:#e6db74>$&#34;捕获到工作线程异常: {workerException.Message}&#34;</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            Console.WriteLine(<span style=color:#e6db74>&#34;工作线程正常完成&#34;</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        Console.WriteLine(<span style=color:#e6db74>&#34;主线程结束&#34;</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Worker()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        Console.WriteLine(<span style=color:#e6db74>&#34;工作线程开始&#34;</span>);
+</span></span><span style=display:flex><span>        Thread.Sleep(<span style=color:#ae81ff>1000</span>);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> InvalidOperationException(<span style=color:#e6db74>&#34;工作线程发生错误！&#34;</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ol start=3><li>使用Task和async/await</li><li>使用Task异常处理</li></ol><h3 id=传统线程的代价>传统线程的代价</h3><p>优点是完全控制、无抽象损耗；
+缺点是繁琐、难以管理、容易死锁、线程数量有限</p><p>每个线程都占用独立的栈（默认1MB左右），频繁创建销毁非常昂贵<br>因此后来引入了线程池（<code>ThreadPool</code>）和任务系统（Task）来复用线程</p><p>可以这样看待层级关系</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-txt data-lang=txt><span style=display:flex><span>Thread -&gt; 最底层封装（控制粒度最大）
+</span></span><span style=display:flex><span>ThreadPool -&gt; 自动管理线程生命周期
+</span></span><span style=display:flex><span>Task -&gt; 基于线程池的逻辑任务抽象
+</span></span><span style=display:flex><span>async/await -&gt; 语法层面的异步封装
+</span></span></code></pre></div><p>掌握<code>Thread</code>是理解并发体系的“地基”<br>上层封装虽然方便，但它们都在依赖底层<code>System.Threading</code>的线程模型</p><h2 id=现代c的并发编程推荐方式>现代C#的并发编程（推荐方式）</h2><p>虽然<code>Thread</code>类很基础，但直接管理线程非常繁琐。现代C#推荐使用更高级的抽象</p><h3 id=线程池threadpool>线程池（<code>ThreadPool</code>）</h3><p>线程池（<code>ThreadPool</code>）是C#并发体系从“手动并发”走向“自动调度”的分水岭\</p><h4 id=是什么>是什么</h4><p>线程池（Thread Pool）是.NET CLR内置的线程管理器，它维护一组可复用的工作线程（worker threads），用来执行短小、频繁的任务，而不是为每个任务都创建新的<code>Thread</code>对象<br>它更像是一个基础设施，而不是直接给业务层用的工具<br>它会出现以下问题：</p><ul><li>无法感知异常：如果任务里抛异常，主线程完全不止</li><li>无法等待任务完成（除非用同步手段自己实现）</li><li>无法组合任务（不能像Task那样ContinueWith或await）</li><li>不支持取消或超时控制</li><li>不能获取返回值</li><li>调试和跟踪困难</li></ul><p>普通业务逻辑几乎永远不该直接用ThreadPool，只有极少数情况下才直接用它，比如：</p><ul><li>写自定义的异步/并行库</li><li>控制线程池的配置（<code>SetMinThreads</code>, <code>SetMaxThreads</code>）</li><li>手动调度一批轻量短任务，而不需要结果或同步</li><li>写性能测试、底层框架</li></ul><p>但它是Task的底层依赖，所以需要研究它</p><h4 id=存在意义>存在意义</h4><p>创建一个线程的代价相当高昂</p><ul><li>需要分配独立的栈内存（默认1MB）</li><li>注册到操作系统的调度器</li><li>上下文切换（CPU的寄存器、缓存状态保存/恢复）</li><li>销毁时还要回收资源</li></ul><p>如果每个任务都创建线程，系统开销会爆炸<br>线程池的解决方式是——预创建 + 循环复用</p><h4 id=用法>用法</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>using</span> System;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> System.Threading;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Program</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Main()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        ThreadPool.QueueUserWorkItem(Work, <span style=color:#e6db74>&#34;Task1&#34;</span>);
+</span></span><span style=display:flex><span>        ThreadPool.QueueUserWorkItem(Work, <span style=color:#e6db74>&#34;Task2&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        Console.WriteLine();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Work(<span style=color:#66d9ef>object</span> state)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        Console.WriteLine(<span style=color:#e6db74>$&#34;Thread {Thread.CurrentThread.ManagedThreadId} handling {state}&#34;</span>);
+</span></span><span style=display:flex><span>        Thread.Sleep(<span style=color:#ae81ff>500</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>输出示例</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>Thread 4 handling Task1
+</span></span><span style=display:flex><span>Thread 5 handling Task2
+</span></span></code></pre></div><h4 id=线程池的特性>线程池的特性</h4><ol><li>自动调度
+CLR会根据负载动态调整线程数</li></ol><ul><li>当任务积压时，线程数增加</li><li>当系统空闲时，线程会回收或休眠</li></ul><ol start=2><li><p>线程复用
+线程执行完任务后会返回池中等待下一个任务</p></li><li><p>限制最大数量
+默认线程池的最大线程数受系统资源限制，可通过</p></li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>ThreadPool.GetMaxThreads(<span style=color:#66d9ef>out</span> <span style=color:#66d9ef>int</span> worker, <span style=color:#66d9ef>out</span> <span style=color:#66d9ef>int</span> io);
+</span></span></code></pre></div><p>获取</p><ol start=4><li><p>分为两类线程</p><ul><li>Worker Threads：普通任务</li><li>I/O Completion Threads：异步I/O回调使用（如网络、文件操作）</li></ul></li><li><p>后台线程
+池中的线程都是后台线程（<code>IsBackground = true</code>）<br>所以主程序退出时，它们不会阻止线程结束</p></li></ol><h4 id=线程池的生命周期>线程池的生命周期</h4><p>简单来说，它经历</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>初始化 -&gt; 分配任务 -&gt; 运行 -&gt; 归还 -&gt; 空闲等待（或销毁）
+</span></span></code></pre></div><p>线程池管理器（ThreadPoolMgr）负责</p><ul><li>追踪队列中的任务数</li><li>动态分配新线程</li><li>平衡CPU利用率与响应速度</li></ul><p>CLR内部有一个hill climbing algorithm（爬山算法）来决定最优线程数：
+它会定期评估吞吐量变化，调整线程数量</p><h5 id=hill-climbing-algorithm>hill climbing algorithm</h5><p>CLR线程池的核心目标是：自动维持一个最优线程数，使CPU利用率最高、任务延迟低<br>何为“最优线程数”</p><ul><li>线程太少 -> CPU闲置，吞吐量低</li><li>线程太多 -> 上下文切换频繁，CPU反而浪费时间在调度上</li></ul><p>线程池必须在两者之间动态平衡，这就是hill climbing algorithm的职责</p><h6 id=直觉理解>直觉理解</h6><p>将线程数视为X轴，吞吐量视为Y轴</p><ul><li>当线程数量太少时，增加线程数会提高吞吐量</li><li>但到达某个临界点后，增加线程数反而会降低吞吐量（因为调度负担太重）</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>吞吐量 ^
+</span></span><span style=display:flex><span>       |            /\  
+</span></span><span style=display:flex><span>       |           /  \
+</span></span><span style=display:flex><span>       |          /    \
+</span></span><span style=display:flex><span>       |_________/______\_______&gt; 线程数
+</span></span><span style=display:flex><span>                     ↑
+</span></span><span style=display:flex><span>                 最优点
+</span></span></code></pre></div><p>CLR线程池做的事就是：动态调整线程数，沿着“山坡”寻找最高点</p><h6 id=算法核心思想>算法核心思想</h6><p>Hill Climbing是一种启发式搜索算法<br>.NET版本大致遵循以下过程：</p><ol><li>初始化阶段<ul><li>程序启动时，线程池有一个最小线程数（例如每核1~2个）</li><li>然后进入采样阶段</li></ul></li><li>周期性采样<ul><li>CLR每隔一段时间测量一次“吞吐量”（即单位时间内完成的工作项数）</li><li>它会记录：<ul><li>当前线程数</li><li>最近完成的任务数</li><li>平均延迟、排队长度</li></ul></li></ul></li><li>调整方向<ul><li>如果吞吐量增加，说明上坡 -> 再多开几个线程</li><li>如果吞吐量下降，说明越界 -> 少开几个线程</li><li>这就像盲人登山：一步步试探坡度方向</li></ul></li><li>调整步幅<ul><li>初期步幅较大（探测快）</li><li>越接近峰值步幅越小（避免来回震荡）</li></ul></li><li>平滑机制<ul><li>使用低通滤波（Exponential Moving Average）平滑采样波动</li><li>避免短期噪声导致线程数频繁抖动</li></ul></li></ol><h6 id=伪代码>伪代码</h6><p>实际的实现要复杂很多，但逻辑类似</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>while</span> (<span style=color:#66d9ef>true</span>)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    MeasureThroughput();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (throughput &gt; lastThroughput)
+</span></span><span style=display:flex><span>        threadCount += step; <span style=color:#75715e>// 上坡：增加线程</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>        threadCount -= step; <span style=color:#75715e>// 下坡：减少线程</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    step *= <span style=color:#ae81ff>0.9</span>; <span style=color:#75715e>// 越来越小</span>
+</span></span><span style=display:flex><span>    lastThroughput = throughput;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    Sleep(sampleInterval);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>源码在<a href=https://github.com/dotnet/runtime/blob/main/src/libraries/System.Private.CoreLib/src/System/Threading/PortableThreadPool.HillClimbing.cs>runtime/src/libraries/System.Private.CoreLib/scr/System/Threading/PortableThreadPool.HillClimbing.cs</a><br>微软的完整实现，里面有积分控制、采样窗口、噪声抑制等高精度逻辑</p><h4 id=与task的关系>与Task的关系</h4><p>现代C#的<code>Task</code>（<code>System.Threading.Tasks.Task</code>）实际上就是运行在线程池上的任务抽象</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Task.Run(() =&gt; DoWork());
+</span></span><span style=display:flex><span><span style=color:#75715e>// 本质上等价于 ThreadPool.QueueUserWorkItem()</span>
+</span></span></code></pre></div><p>区别在于</p><ul><li><code>ThreadPool</code>只接受无返回值的回调</li><li><code>Task</code>能返回结果、链式调度、支持异常传播和取消</li></ul><h4 id=线程池-vs-普通线程>线程池 vs 普通线程</h4><table><thead><tr><th>特性</th><th>Thread</th><th>ThreadPool</th></tr></thead><tbody><tr><td>创建方式</td><td>手动<code>new Thread()</code></td><td>自动复用</td></tr><tr><td>是否后台线程</td><td>可前台</td><td>全后台</td></tr><tr><td>生命周期</td><td>明确控制</td><td>自动管理</td></tr><tr><td>适合场景</td><td>长时间运行的任务</td><td>短小频繁的任务</td></tr><tr><td>可控性</td><td>高（能设置优先级等）</td><td>低（由CLR管理）</td></tr></tbody></table><p>游戏主循环、实时数据采集等长生命周期任务，用<code>Thread</code><br>日志写入、网络请求、AI计算这种短任务，用线程池</p><h4 id=threadpool的配置与监控><code>ThreadPool</code>的配置与监控</h4><p>可通过以下方法调整</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>ThreadPool.GetMinThreads(<span style=color:#66d9ef>out</span> <span style=color:#66d9ef>int</span> workerMin, <span style=color:#66d9ef>out</span> <span style=color:#66d9ef>int</span> ioMin);
+</span></span><span style=display:flex><span>ThreadPool.GetMaxThreads(<span style=color:#66d9ef>out</span> <span style=color:#66d9ef>int</span> workerMax, <span style=color:#66d9ef>out</span> <span style=color:#66d9ef>int</span> ioMax);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>ThreadPool.SetMinThreads(<span style=color:#ae81ff>8</span>, <span style=color:#ae81ff>8</span>); <span style=color:#75715e>// 保证最低并发线程数</span>
+</span></span></code></pre></div><h6 id=任务饥饿与长任务>任务饥饿与长任务</h6><p>线程池适合短、快、频繁的任务<br>如果在池中执行长时间阻塞任务，会导致“任务饥饿”：长任务霸占线程，其他任务排队，调度器无法及时响应<br>解决方案</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Task.Factory.StartNew(LongTask, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default)
+</span></span></code></pre></div><p>加上<code>LongRunning</code>提示调度器为它创建独立线程，避免堵塞池内线程</p><h3 id=task任务并行库tpl-task-parallel-library-现代首选>Task任务并行库（TPL, Task Parallel Library）-现代首选</h3><p>TPL是.NET Framework 4 引入的一个核心并发组件，用于简化多线程与并行编程<br>TPL本质是一个高层封装：在传统的<code>Thread</code>, <code>ThreadPool</code>, <code>BackgroundWorker</code>基础上，提供了更现代、更易控制的并行模型</p><h4 id=核心概念task>核心概念：<code>Task</code></h4><p><code>Task</code>是TPL的基本单位，表示一个异步操作或任务<br>它可以在未来某个时刻完成（或失败、或被取消）
+相比旧式的<code>Thread</code>, <code>Task</code>更轻量，能自动调度执行（通常在线程池中），并且支持</p><ul><li>返回结果（通过<code>Task&lt;TResult></code>）</li><li>异常传播</li><li>任务取消（<code>CancellationToken</code>）</li><li>任务组合（<code>ContinueWith</code>, <code>WhenAll</code>, <code>WhenAny</code>）</li></ul><p>从底层看，Task是一个由线程池驱动的轻量线程单元，但它不是线程</p><ul><li>线程：执行的实际载体（Thread）</li><li>任务：逻辑上的工作单元（Task）</li></ul><h5 id=task的生命周期>Task的生命周期</h5><p>任务的状态变化大致如下</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-txt data-lang=txt><span style=display:flex><span>Created -&gt; WaitingToRun -&gt; Running -&gt; RanToCompletion / Faulteed / Canceled
+</span></span></code></pre></div><ul><li>Created：创建但未启动</li><li>WaitingToRun：等待调度执行</li><li>Running：正在执行</li><li>RanToCompletion：正常完成</li><li>Faulted：执行中抛出异常</li><li>Canceled：任务被取消</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Task t = <span style=color:#66d9ef>new</span> Task(() =&gt; Console.WriteLine(<span style=color:#e6db74>&#34;执行任务&#34;</span>));
+</span></span><span style=display:flex><span>Console.WriteLine(t.Status); <span style=color:#75715e>// Created</span>
+</span></span><span style=display:flex><span>t.Start();
+</span></span><span style=display:flex><span>t.Wait();
+</span></span><span style=display:flex><span>Console.WriteLine(t.Status); <span style=color:#75715e>// RanToCompletion</span>
+</span></span></code></pre></div><p>在实际开发中，几乎不用<code>new Task()</code> + <code>Start()</code>，而是用更简洁的</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Task.Run(() =&gt; Console.WriteLine(<span style=color:#e6db74>&#34;执行任务&#34;</span>))<span style=color:#960050;background-color:#1e0010>；</span>
+</span></span></code></pre></div><h5 id=带返回值的任务tasktresult>带返回值的任务<code>Task&lt;TResult></code></h5><p>有返回值时使用泛型版本<code>Task&lt;TResult></code>，它在完成后会返回结果</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Task&lt;<span style=color:#66d9ef>int</span>&gt; t = Task.Run(() =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> sum = <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i = <span style=color:#ae81ff>0</span>; i &lt; <span style=color:#ae81ff>100</span>; i++) sum += i;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> sum;
+</span></span><span style=display:flex><span>});
+</span></span><span style=display:flex><span>Console.WriteLine(t.Result);
+</span></span></code></pre></div><p><code>Result</code>会阻塞直到结果可用，相当于<code>t.Wait()</code>之后取值<br>如果在异步方法里，可以直接用<code>await</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>int</span> result = <span style=color:#66d9ef>await</span> Task.Run(() =&gt; Compute());
+</span></span></code></pre></div><h5 id=异常处理>异常处理</h5><p>Task的异常不会直接抛出，而是被包装成<code>AggregateException</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>    Task t = Task.Run(() =&gt; <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> InvalidOperationException(<span style=color:#e6db74>&#34;出错了&#34;</span>));
+</span></span><span style=display:flex><span>    t.Wait();
+</span></span><span style=display:flex><span>} <span style=color:#66d9ef>catch</span> (AggregateException e) {
+</span></span><span style=display:flex><span>    Console.WriteLine(e.InnerException.Message); <span style=color:#75715e>// 出错了</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>异步方法中用<code>await</code>时，异常会自动解包，不需要显式处理<code>AggregateException</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> Task.Run(() =&gt; <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> InvalidOperationException(<span style=color:#e6db74>&#34;出错了&#34;</span>));
+</span></span><span style=display:flex><span>} <span style=color:#66d9ef>catch</span> (Exception e) {
+</span></span><span style=display:flex><span>    Console.WriteLine(e.Message);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h5 id=取消任务>取消任务</h5><p>Task与<code>CancellationToken</code>搭配可实现任务取消机制</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>var</span> cts = <span style=color:#66d9ef>new</span> CancellationTokenSource();
+</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> token = cts.Token;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Task t = Task.Run(() =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i = <span style=color:#ae81ff>0</span>; i &lt; <span style=color:#ae81ff>10</span>; i++)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        token.ThrowIfCancellationRequested();
+</span></span><span style=display:flex><span>        Console.WriteLine(i);
+</span></span><span style=display:flex><span>        Thread.Sleep(<span style=color:#ae81ff>500</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}, token);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 请求取消</span>
+</span></span><span style=display:flex><span>cts.Cancel();
+</span></span></code></pre></div><p><code>ThrowIfCancellationRequested()</code>会抛出<code>OperationCanceledException</code>，让任务进入<code>Canceled</code>状态而不是<code>Faulted</code></p><h5 id=等待与继续waitcontinuewith>等待与继续（Wait/ContinueWith）</h5><p>可以在任务完成后继续执行另一个任务</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Task t1 = Task.Run(() =&gt; Console.WriteLine(<span style=color:#e6db74>&#34;任务1&#34;</span>))<span style=color:#960050;background-color:#1e0010>；</span>
+</span></span><span style=display:flex><span>Task t2 = t1.ContinueWith(prev =&gt; Console.WriteLine(<span style=color:#e6db74>&#34;任务2在任务1之后执行&#34;</span>));
+</span></span></code></pre></div><p>或者等待任务完成</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Task t = Task.Run(() =&gt; DoWork());
+</span></span><span style=display:flex><span>t.Wait(); <span style=color:#75715e>// 阻塞等待</span>
+</span></span></code></pre></div><p><code>ContinueWith</code>更灵活，适合串联任务或构造任务依赖图</p><h5 id=task的执行上下文调度器>Task的执行上下文（调度器）</h5><p><code>Task</code>并不是总在新线程执行<br>默认情况下，它使用<code>ThreadPoolTaskScheduler</code>调度，意味着：</p><ul><li>可能在线程池的任意线程执行</li><li>系统会自动管理并发量</li><li>对于<code>async/await</code>，会自动在适合的同步上下文（如UI线程）恢复执行</li></ul><p>简单示例</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Task t = Task.Run(() =&gt; {
+</span></span><span style=display:flex><span>    Console.WriteLine(<span style=color:#e6db74>&#34;任务在线程池中执行&#34;</span>);
+</span></span><span style=display:flex><span>});
+</span></span><span style=display:flex><span>t.Wait(); <span style=color:#75715e>// 阻塞直到任务完成</span>
+</span></span></code></pre></div><p>带返回值的版本</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Task&lt;<span style=color:#66d9ef>int</span>&gt; t2 = Task.Run(() =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> Enumerable.Range(<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>100</span>).Sum();
+</span></span><span style=display:flex><span>});
+</span></span><span style=display:flex><span>Console.WriteLine(<span style=color:#e6db74>$&#34;结果：{t2.Result}&#34;</span>);
+</span></span></code></pre></div><h5 id=task与threadpool>Task与ThreadPool</h5><p><code>Task.Run()</code>和<code>TaskFactory.StartNew()</code>实际上都是往线程池中提交一个任务项（work item）<br>它不会立刻建立新线程，而是交给线程池的调度器去决定</p><ul><li>当前是否有空闲线程</li><li>线程池中任务队列的负载情况</li><li>是否需要扩展线程数</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>Task.Run() 
+</span></span><span style=display:flex><span>   ↓
+</span></span><span style=display:flex><span>TaskScheduler（默认 ThreadPoolTaskScheduler）
+</span></span><span style=display:flex><span>   ↓
+</span></span><span style=display:flex><span>ThreadPool（工作线程队列）
+</span></span><span style=display:flex><span>   ↓
+</span></span><span style=display:flex><span>执行任务
+</span></span></code></pre></div><p>底层结构示意</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-txt data-lang=txt><span style=display:flex><span>┌──────────┐       ┌────────────────┐       ┌───────────────┐
+</span></span><span style=display:flex><span>│  逻辑层  | ---&gt; │ 调度器(TaskScheduler) │ ---&gt; │ 执行层(ThreadPool) │
+</span></span><span style=display:flex><span>└──────────┘       └────────────────┘       └───────────────┘
+</span></span><span style=display:flex><span>    Task                   调度策略                   线程资源
+</span></span></code></pre></div><ul><li>Task：定义任务做什么</li><li>Scheduler：决定任务何时、在哪执行</li><li>ThreadPool：实际执行代码的物理线程群</li></ul><h6 id=taskscheduler><code>TaskScheduler</code></h6><p><code>TaskScheduler</code>是调度策略层</p><ul><li>默认调度器是<code>ThreadPoolTaskScheduler</code>，直接用线程池</li><li>也可以自定义调度器，比如限制并发数、绑定到特定线程等</li></ul><h6 id=task的执行路径简化流程>Task的执行路径（简化流程）</h6><p>以<code>Task.Run()</code>为例</p><ol><li>创建一个<code>Task</code>对象</li><li>调用默认的<code>TaskScheduler</code></li><li>调度器将任务封装成<code>ThreadPoolWorkItem</code></li><li>把它丢进线程池的全局任务队列</li><li>线程池中的某个空闲线程取出任务执行</li><li>执行完毕后，线程回到池中等待下一次任务</li></ol><h6 id=线程池的调度策略>线程池的调度策略</h6><p>.NET的线程池调度算法相当复杂，但可以简化理解为</p><ul><li>最小线程数：初始线程数（通常是CPU核数）</li><li>最大线程数：默认32767</li><li>动态扩容：如果任务太多、线程都在忙，线程池会延迟性地添加新线程</li><li>任务偷取（work stealing）：每个线程有资金及的本地队列，如果自己空了，会“偷”别的线程的任务以保持负载均衡</li></ul><h4 id=tpl的调度机制>TPL的调度机制</h4><h5 id=taskscheduler-1>TaskScheduler</h5><p>TaskScheduler是Task的任务分配中心；当调用</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Task.Run(() =&gt; Work());
+</span></span></code></pre></div><p>或者</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>new</span> Task(() =&gt; Work()).Start();
+</span></span></code></pre></div><p>其实底层都调用了</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>TaskScheduler.Current.QueueTask(task);
+</span></span></code></pre></div><p>也就是说，TaskScheduler决定了</p><ul><li>这个任务在哪个线程上执行</li><li>什么时候执行</li><li>是否排队、并行或串行执行</li></ul><h5 id=默认调度器线程池调度器>默认调度器：线程池调度器</h5><p>绝大多数情况下，TPL使用的是</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>TaskScheduler.Default
+</span></span></code></pre></div><p>这个默认调度器使用.NET ThreadPool（线程池）执行任务<br>这也是为什么Task是轻量级的原因——它们共享线程池中的线程</p><p>默认行为特征：</p><ul><li>会利用CPU的核心数（基于工作窃取算法）</li><li>并行任务由多个线程池线程执行</li><li>线程是后台线程（不会阻止进程退出）</li><li>当CPU忙碌时，线程池会延迟创建新线程</li></ul><h5 id=工作窃取算法>工作窃取算法</h5><p>这是TPL调度效率的关键<br>每个线程池维护一个本地任务队列</p><ul><li>当线程自己创建了新任务（比如在<code>Parallel.For</code>或递归任务中），会把任务放进自己的队列</li><li>如果本地队列空了，就从其他线程的队列“偷取”任务执行</li></ul><p>这种策略有两个巨大的好处</p><ul><li>减少竞争锁：线程大多操作自己队列，互不干扰</li><li>负载均衡：空闲线程会主动偷任务，防止部分线程闲置</li></ul><p>这让TPL能高效地在多核CPU上分配任务负载</p><h5 id=任务调度的上下文current-vs-default>任务调度的上下文：Current vs Default</h5><table><thead><tr><th>Scheduler</th><th>含义</th></tr></thead><tbody><tr><td><code>TaskScheduler.Default</code></td><td>全局默认调度器（线程池）</td></tr><tr><td><code>TaskScheduler.Current</code></td><td>当前上下文的调度器</td></tr></tbody></table><p>示例</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Task t = Task.Factory.StartNew(() =&gt; {
+</span></span><span style=display:flex><span>    Console.WriteLine(TaskScheduler.Current);
+</span></span><span style=display:flex><span>});
+</span></span></code></pre></div><p>如果在普通控制台程序中执行：-> <code>TaskScheduler.Current</code> == <code>TaskScheduler.Default</code><br>如果在UI程序（如WPF、WinForms）或ASP.NET中执行：-> <code>TaskScheduler.Current</code>会绑定到UI或请求上下文</p><p>这就意味着：</p><ul><li>在UI中<code>await</code>会恢复到主线程</li><li>而<code>Task.Run</code>则强制调度到线程池线程</li></ul><p>这种机制保证了</p><ul><li>异步后台逻辑不阻塞UI</li><li>UI更新在正确的线程执行</li></ul><h5 id=自定义调度器>自定义调度器</h5><p>TPL允许完全接管调度器逻辑——创建自己的TaskScheduler</p><p>比如：一个顺序执行调度器（所有任务都在同一线程顺序执行）</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SingleThreadTaskScheduler</span> : TaskScheduler
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>readonly</span> BlockingColleciton&lt;Task&gt; _task = <span style=color:#66d9ef>new</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> SingleThreadTaskScheduler()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>var</span> thread = <span style=color:#66d9ef>new</span> Thread(<span style=color:#66d9ef>new</span> ThreadStart(Execute));
+</span></span><span style=display:flex><span>        thread.IsBackground = <span style=color:#66d9ef>true</span>;
+</span></span><span style=display:flex><span>        thread.Start();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> Execute()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>foreach</span> (<span style=color:#66d9ef>var</span> task <span style=color:#66d9ef>in</span> _tasks.GetConsumingEnumerable())
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            TryExecuteTask(task);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>override</span> IEnumerable&lt;Task&gt; GetScheduledTasks() =&gt; _tasks;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>void</span> QueueTask(Task task) =&gt; _tasks.Add(task);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>bool</span> TryExecuteTaskInline(Task task, <span style=color:#66d9ef>bool</span> taskWasPreviouslyQueued)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 禁止内联执行，强制排队</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>使用</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>var</span> scheduler = <span style=color:#66d9ef>new</span> SingleThreadTaskScheduler();
+</span></span><span style=display:flex><span>Task.Factory.StartNew(() =&gt; DoSomething(), CancellationToken.None, TaskCreationOptions.None, shceduler);
+</span></span></code></pre></div><p>这个任务会在调度器专属线程上执行</p><p>这种自定义调度器可以用于：</p><ul><li>游戏逻辑主线程（Unity就常用类似机制）</li><li>串行执行（避免锁竞争）</li><li>限制并发数量</li><li>调试或性能分析</li></ul><h5 id=任务的内联执行inlining>任务的内联执行（Inlining）</h5><p>有时任务会被“内联”执行（即直接在当前线程运行）</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>t.ContinueWith(..., TaskContinuationOptions.ExecuteSynchronously);
+</span></span></code></pre></div><p>如果设置了<code>ExecuteSynchronously</code>，调度器可能直接在当前线程调用<code>TryExecuteTask</code>，省去了线程切换开销</p><p>这在频繁小任务中能显著减少上下文切换成本</p><h5 id=任务调度的可控选项>任务调度的可控选项</h5><p>可以通过<code>TaskCreationOptions</code>或<code>TaskContinuationOptions</code>影响调度：</p><ul><li><code>LongRunning</code>：提示调度器单独开线程（绕过线程池）</li><li><code>PreferFairness</code>：尽量按提交顺序调度</li><li><code>HideScheduler</code>：子任务不继承父调度器</li><li><code>AttachedToParent</code>：让子任务附属父任务的生命周期</li><li><code>ExecuteSynchronously</code>：尽量内联执行</li></ul><h4 id=并行化apiparallel类>并行化API：Parallel类</h4><p><code>Parallel</code>是TPL的另一部分，用于在CPU密集型任务中自动并行化循环</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Parallel.For(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>10</span>, i =&gt; {
+</span></span><span style=display:flex><span>    Console.WriteLine(<span style=color:#e6db74>$&#34;任务 {i} 在线程 {Thread.CurrentThread.ManagedThreadId}&#34;</span>);
+</span></span><span style=display:flex><span>});
+</span></span></code></pre></div><p>或者并行遍历集合</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Parallel.ForEach(Enumerable.Range(<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>10</span>), i =&gt; {
+</span></span><span style=display:flex><span>    Console.WriteLine(<span style=color:#e6db74>$&#34;处理 {i}&#34;</span>);
+</span></span><span style=display:flex><span>});
+</span></span></code></pre></div><p><code>Parallel</code>会自动分配线程并负载均衡，也可以通过选项控制</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>var</span> options = <span style=color:#66d9ef>new</span> ParallelOptions { MaxDegreeOfParallelism = <span style=color:#ae81ff>4</span> };
+</span></span><span style=display:flex><span>Parallel.ForEach(data, options, ProcessItem);
+</span></span></code></pre></div><h4 id=任务控制组合依赖取消和异常>任务控制、组合、依赖、取消和异常</h4><p>单个任务只是“异步函数”，当能控制、组合、取消和捕获错误时，它才成为一种可编排的异步系统</p><h5 id=任务控制>任务控制</h5><p>任务控制就是掌握任务的生命周期和执行行为</p><ol><li>启动与等待
+Task默认会在创建时自动启动（<code>Task.Run</code>就是如此）<br>但也可以显式控制它</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Task t = <span style=color:#66d9ef>new</span> Task(() =&gt; Console.WriteLine(<span style=color:#e6db74>&#34;手动启动任务&#34;</span>));
+</span></span><span style=display:flex><span>t.Start(); <span style=color:#75715e>// 启动</span>
+</span></span><span style=display:flex><span>t.Wait(); <span style=color:#75715e>// 等待任务结束</span>
+</span></span></code></pre></div><p><code>Wait()</code>会阻塞当前线程，直到任务完成</p><ol start=2><li>检查状态
+任务的状态可以通过<code>t.Status</code>获取</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Console.WriteLine(t.Status); <span style=color:#75715e>// Created, Running, RanToCompletion, Faulted, Canceled</span>
+</span></span></code></pre></div><p>还有两个方便的布尔属性</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>t.IsCompleted;
+</span></span><span style=display:flex><span>t.IsFaulted;
+</span></span><span style=display:flex><span>t.IsCanceled;
+</span></span></code></pre></div><ol start=3><li>控制选项
+通过<code>TaskCreationOptions</code>可以定制任务行为，例如</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Task.Factory.StartNew(Action, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+</span></span></code></pre></div><ul><li><code>LongRunning</code>：提示调度器单独开线程（不占用线程池）</li><li><code>PreferFairness</code>：尽量按提交顺序执行</li><li><code>AttachedToParent</code>：让子任务附属于父任务（父任务等待所有子任务完成）</li></ul><h5 id=任务组合>任务组合</h5><p>这是TPL的强项：任务可以组成成更大的逻辑单元</p><ol><li>ContinueWith链式执行</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Task.Run(() =&gt; <span style=color:#ae81ff>42</span>)
+</span></span><span style=display:flex><span>    .ContinueWith(prev =&gt; prev.Result * <span style=color:#ae81ff>2</span>)
+</span></span><span style=display:flex><span>    .ContinueWith(prev =&gt; Console.WriteLine(prev.Result));
+</span></span></code></pre></div><p>这相当于手动写了一个“任务管道”<br>但是<code>ContinueWith</code>不会自动在UI线程恢复，也不会传播异常<br>因此现代C#用<code>await</code>替代它</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>int</span> r = <span style=color:#66d9ef>await</span> Task.Run(() =&gt; <span style=color:#ae81ff>42</span>);
+</span></span><span style=display:flex><span>r *= <span style=color:#ae81ff>2</span>;
+</span></span><span style=display:flex><span>Console.WriteLine(r);
+</span></span></code></pre></div><ol start=2><li>组合多个任务
+可以把多个任务组合在一起等待或竞争</li></ol><ul><li><code>Task.WhenAll</code>：等待所有任务完成</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>var</span> tasks = <span style=color:#66d9ef>new</span>[] {
+</span></span><span style=display:flex><span>    Task.Run(() =&gt; DoA()),
+</span></span><span style=display:flex><span>    Task.Run(() =&gt; DoB())
+</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span><span style=color:#66d9ef>await</span> Task.WhenAll(tasks);
+</span></span><span style=display:flex><span>Console.WriteLine(<span style=color:#e6db74>&#34;所有任务都完成&#34;</span>)<span style=color:#960050;background-color:#1e0010>；</span>
+</span></span></code></pre></div><ul><li><code>Task.WhenAny</code>：等待第一个完成的任务</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>var</span> t1 = Task.Run(() =&gt; SlowWork());
+</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> t2 = Task.Run(() =&gt; FastWork());
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Task finished = <span style=color:#66d9ef>await</span> Task.WhenAny(t1, t2);
+</span></span><span style=display:flex><span>Console.WriteLine(<span style=color:#e6db74>$&#34;先完成的是 {finished.Id}&#34;</span>);
+</span></span></code></pre></div><ol start=3><li>组合返回值
+<code>WhenAll</code>返回所有任务的结果</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Task&lt;<span style=color:#66d9ef>int</span>&gt;[] tasks = {
+</span></span><span style=display:flex><span>    Task.Run(() =&gt; <span style=color:#ae81ff>1</span>).
+</span></span><span style=display:flex><span>    Task.Run(() =&gt; <span style=color:#ae81ff>2</span>),
+</span></span><span style=display:flex><span>    Task.Run(() =&gt; <span style=color:#ae81ff>3</span>)
+</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span>[] results = <span style=color:#66d9ef>await</span> Task.WhenAll(tasks);
+</span></span><span style=display:flex><span>Console.WriteLine(results.Sum()); <span style=color:#75715e>// 6</span>
+</span></span></code></pre></div><h5 id=任务依赖>任务依赖</h5><p>任务依赖表示一个任务需要等待另一个任务完成后才能执行；TPL允许显式表达这种关系</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Task&lt;<span style=color:#66d9ef>int</span>&gt; t1 = Task.Run(() =&gt; <span style=color:#ae81ff>5</span>);
+</span></span><span style=display:flex><span>Task&lt;<span style=color:#66d9ef>int</span>&gt; t2 = t1.ContinueWith(prev =&gt; prev.Result * <span style=color:#ae81ff>2</span>);
+</span></span><span style=display:flex><span>Task&lt;<span style=color:#66d9ef>int</span>&gt; t3 = t2.ContinueWith(prev =&gt; prev.Result + <span style=color:#ae81ff>3</span>);
+</span></span><span style=display:flex><span>Console.WriteLine(t3.Result); <span style=color:#75715e>// 13</span>
+</span></span></code></pre></div><p>但在现代写法中，推荐</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>int</span> result = <span style=color:#66d9ef>await</span> Task.Run(() =&gt; <span style=color:#ae81ff>5</span>);
+</span></span><span style=display:flex><span>result = result * <span style=color:#ae81ff>2</span>;
+</span></span><span style=display:flex><span>result = result + <span style=color:#ae81ff>3</span>;
+</span></span></code></pre></div><p>编译器在背后把这转成状态机，会自动维护这些依赖关系</p><h5 id=任务取消>任务取消</h5><p>TPL的取消机制是协作式的；任务自己检查是否被取消，而不是强制终止</p><ol><li>基本结构</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>var</span> cts = <span style=color:#66d9ef>new</span> CancellationTokenSource();
+</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> token = cts.Token;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Task t = Task.Run(() =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i = <span style=color:#ae81ff>0</span>; i &lt; <span style=color:#ae81ff>10</span>; i++) {
+</span></span><span style=display:flex><span>        token.ThrowIfCancellationRequested();
+</span></span><span style=display:flex><span>        Console.WriteLine(i);
+</span></span><span style=display:flex><span>        Thread.Sleep(<span style=color:#ae81ff>500</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}, token);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 取消任务</span>
+</span></span><span style=display:flex><span>cts.Cancel();
+</span></span></code></pre></div><p>当<code>ThrowIfCancellationRequested()</code>被调用时，任务会抛出<code>OperationCanceledException</code>，状态变为<code>Canceled</code></p><ol start=2><li>任务主动响应取消</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Task t = Task.Run(<span style=color:#66d9ef>async</span> () =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> (!token.IsCancellationRequested) {
+</span></span><span style=display:flex><span>        Console.WriteLine(<span style=color:#e6db74>&#34;Running...&#34;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>await</span> Task.Delay(<span style=color:#ae81ff>500</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>});
+</span></span></code></pre></div><p>如果不检查<code>token</code>，任务是不会自动停的</p><ol start=3><li>组合取消
+多个任务可以共享一个<code>CancellationToken</code>，统一控制</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>CancellationTokenSource cts = <span style=color:#66d9ef>new</span>();
+</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> token = cts.Token;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Task t1 = Task.Run(() =&gt; Work1(token));
+</span></span><span style=display:flex><span>Task t2 = Task.Run(() =&gt; Work2(token));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 一次取消全部</span>
+</span></span><span style=display:flex><span>cts.Cancel();
+</span></span></code></pre></div><h5 id=任务异常>任务异常</h5><p>Task的异常管理非常系统化</p><ol><li>同步等待
+如果用<code>Wait()</code>或访问<code>Result</code>，异常会被包装在<code>AggregateException</code>里</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>    Task t = Task.Run(() =&gt; <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> InvalidOperationException(<span style=color:#e6db74>&#34;出错了&#34;</span>));
+</span></span><span style=display:flex><span>    t.Wait();
+</span></span><span style=display:flex><span>} <span style=color:#66d9ef>catch</span> (AggregateException e) {
+</span></span><span style=display:flex><span>    Console.WriteLine(e.InnerException.Message);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ol start=2><li>异步等待
+使用<code>await</code>时，C#编译器会自动拆包，直接抛出原始异常类型</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> Task.Run(() =&gt; <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> InvalidOperationException(<span style=color:#e6db74>&#34;出错了&#34;</span>));
+</span></span><span style=display:flex><span>} <span style=color:#66d9ef>catch</span> (Exception e) {
+</span></span><span style=display:flex><span>    Console.WriteLine(e. GetType()); <span style=color:#75715e>// InvalidOperationException</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ol start=3><li>多个异常
+如果多个任务都出错（比如<code>WhenAll</code>），异常会聚合</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>vaar tasks = <span style=color:#66d9ef>new</span>[] {
+</span></span><span style=display:flex><span>    Task.Run(() =&gt; <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> Exception(<span style=color:#e6db74>&#34;A&#34;</span>)),
+</span></span><span style=display:flex><span>    Task.Run(() =&gt; <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> Exception(<span style=color:#e6db74>&#34;B&#34;</span>))
+</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> Task.WhenAll(tasks);
+</span></span><span style=display:flex><span>} <span style=color:#66d9ef>catch</span> (Exception e) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>foreach</span> (<span style=color:#66d9ef>var</span> ex <span style=color:#66d9ef>in</span> ((AggregateException)e).InnerExceptions)
+</span></span><span style=display:flex><span>        Console.WriteLine(ex.Message);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h5 id=tpl与asyncawait>TPL与async/await</h5><p>TPL是<code>async/await</code>的基础<br><code>async/await</code>把TPL的回调结构（<code>ContinueWith</code>）变成了更优雅的语法糖</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>async</span> Task&lt;<span style=color:#66d9ef>int</span>&gt; ComputeAsync()
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> Task.Delay(<span style=color:#ae81ff>1000</span>);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>42</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>编译器会自动把这个转换成<code>Task.ContinueWith</code>链式调用</p><h4 id=cancellationtoken><code>CancellationToken</code></h4><p>它的作用是优雅停止异步操作的信号源<br>它允许一个操作（比如一个长时间运行的任务）被另一个操作（比如用户点击“取消”按钮）安全地取消<br>它是一个“取消信号”，一个线程（或异步任务）会时不时地检查这个信号，如果它发现信号被触发（即收到了取消请求），它就会优雅地停止当前的工作</p><h5 id=存在意义-1>存在意义</h5><p>在没有<code>CancellationToken</code>的时代，停止一个线程通常需要使用像<code>Thread.Abort()</code>这样的方法，这种方法是强制性的和不安全的，因为它会立即中断线程，可能导致资源未释放、数据处于不一致状态等严重问题<br><code>CancellationToken</code>提供了一种协作式的机制：</p><ul><li>请求方：发出取消请求</li><li>执行方：负责在<strong>方便且安全</strong>的时候检查取消请求，并做出响应</li><li>这确保了程序状态的稳定性和数据的一致性</li></ul><p>异步任务可能</p><ul><li>正在等待IO</li><li>正在下载资源</li><li>正在跑无限循环</li><li>正在执行流式逻辑（如IAsyncEnumerable）</li><li>正在队列里排队没开始执行</li></ul><p>不可能随手暴力把它杀掉，否则</p><ul><li>文件句柄泄露</li><li>套接字没关闭</li><li>不一致状态</li><li>死锁</li><li>Unity/游戏服务器直接炸掉</li></ul><p><code>CancellationToken</code>是避免这些灾难的现代解法</p><h5 id=关键组成部分>关键组成部分</h5><p><code>CancellationToken</code>通常与<code>CancellationTokenSource</code>一起使用</p><ol><li><code>CancellationTokenSource</code><ul><li>这是取消信号的“创建者和控制器”</li><li>它负责生成<code>CancellationToken</code>并通过调用<code>.Cancel()</code>方法来触发取消</li></ul></li><li><code>CancellationToken</code><ul><li>这是传递给需要被取消的操作的“信号本身”</li><li>执行中的代码通过检查这个Token来感知是否收到了取消请求</li></ul></li></ol><h5 id=运作机制>运作机制</h5><p>各个任务（Task, async, IAsyncEnumerable）持续监听广播（取消令牌, CancellationToken），取消源（CancellationTokenSource）一旦发出取消信号，各个任务就会执行一套关闭流程（清理资源并停止）<br>异步操作一般有三个地方响应取消</p><ol><li>显式检查</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>token.ThrowIfCancellationRequested();
+</span></span></code></pre></div><ol start=2><li>传入异步方法，让内部自己检查</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>await</span> Task.Delay(<span style=color:#ae81ff>1000</span>, token);
+</span></span></code></pre></div><ol start=3><li>在异步流自然响应取消
+<code>await foreach</code>会把token注入给enumerator，让MoveNextAsync在内部检查</li></ol><p>所有这些机制最终做的事情是一样的：发现token被取消 -> 抛出 OperationCanceledException -> 异步逻辑马上停止</p><p>这就是“协作式取消”</p><h5 id=本质>本质</h5><p>一个结构体，内部记录了“是否取消”的状态，供任务读取</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>var</span> cts = <span style=color:#66d9ef>new</span> CancellationTokenSource();
+</span></span><span style=display:flex><span>CancellationToken token = cts.Token;
+</span></span></code></pre></div><ul><li><code>CancellationTokenSource</code>（源）能发出取消信号</li><li><code>CancellationToken</code>（令牌）是read-only，他把它传给所有可能“要停”的地方</li></ul><p>当</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>cts.Cancel()
+</span></span></code></pre></div><p>token的内部状态会从</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>IsCancellationRequested = <span style=color:#66d9ef>false</span>
+</span></span></code></pre></div><p>变成</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>IsCancellationRequested = <span style=color:#66d9ef>true</span>
+</span></span></code></pre></div><p>然后任务就会基于这个状态自己停下来</p><h5 id=使用示例>使用示例</h5><ol><li>同步操作中的取消</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>using</span> System;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> System.Threading;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Program</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Main()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 1. 创建信号控制器</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>var</span> cancellationTokenSource = <span style=color:#66d9ef>new</span> CancellationTokenSource();
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 2. 获取信号令牌</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>var</span> token = cancellationTokenSource.Token;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 3. 启动一个长时间运行的任务，并传递 token</span>
+</span></span><span style=display:flex><span>        Task longRunningTask = Task.Run(() =&gt;
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i = <span style=color:#ae81ff>0</span>; i &lt; <span style=color:#ae81ff>1000</span>; i++)
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// 4. 在循环中定期检查取消请求</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> (token.IsCancellationRequested)
+</span></span><span style=display:flex><span>                {
+</span></span><span style=display:flex><span>                    <span style=color:#75715e>// 执行清理工作（如果需要）</span>
+</span></span><span style=display:flex><span>                    Console.WriteLine(<span style=color:#e6db74>&#34;任务被取消了！&#34;</span>);
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>return</span>; <span style=color:#75715e>// 优雅地退出任务</span>
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// 模拟工作</span>
+</span></span><span style=display:flex><span>                Thread.Sleep(<span style=color:#ae81ff>500</span>);
+</span></span><span style=display:flex><span>                Console.WriteLine(<span style=color:#e6db74>$&#34;工作进度： {i}&#34;</span>);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }, token); <span style=color:#75715e>// 注意：Token 也在这里传递给 Task.Run，以便任务在开始前就能被取消。</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        Console.WriteLine(<span style=color:#e6db74>&#34;按 ‘c’ 键来取消操作...&#34;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (Console.ReadKey(<span style=color:#66d9ef>true</span>).KeyChar == <span style=color:#e6db74>&#39;c&#39;</span>)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 5. 用户按下 ‘c’，触发取消</span>
+</span></span><span style=display:flex><span>            Console.WriteLine(<span style=color:#e6db74>&#34;\n正在请求取消...&#34;</span>);
+</span></span><span style=display:flex><span>            cancellationTokenSource.Cancel();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 等待任务完成（无论是正常完成还是因取消而完成）</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span>
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            longRunningTask.Wait();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>catch</span> (AggregateException ae)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 如果任务因为取消而抛出 OperationCanceledException，它会在这里被捕获</span>
+</span></span><span style=display:flex><span>            ae.Handle(e =&gt; e <span style=color:#66d9ef>is</span> OperationCanceledException);
+</span></span><span style=display:flex><span>            Console.WriteLine(<span style=color:#e6db74>&#34;任务已确认取消。&#34;</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        Console.WriteLine(<span style=color:#e6db74>&#34;主线程结束。&#34;</span>);
+</span></span><span style=display:flex><span>        cancellationTokenSource.Dispose(); <span style=color:#75715e>// 好的实践：释放资源</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ol start=2><li>异步操作中的取消</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>using</span> System;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> System.Threading;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> System.Threading.Tasks;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Program</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>async</span> Task Main()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 1. 创建信号控制器</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>using</span> var cts = <span style=color:#66d9ef>new</span> CancellationTokenSource();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>var</span> token = cts.Token;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 2. 设置一个超时取消（5秒后自动取消）</span>
+</span></span><span style=display:flex><span>        cts.CancelAfter(<span style=color:#ae81ff>5000</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span>
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 3. 调用一个支持取消的异步方法</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>await</span> DoLongRunningWorkAsync(token);
+</span></span><span style=display:flex><span>            Console.WriteLine(<span style=color:#e6db74>&#34;工作成功完成！&#34;</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>catch</span> (OperationCanceledException) <span style=color:#75715e>// 专门捕获取消异常</span>
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            Console.WriteLine(<span style=color:#e6db74>&#34;工作被取消或超时了！&#34;</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>async</span> Task DoLongRunningWorkAsync(CancellationToken cancellationToken = <span style=color:#66d9ef>default</span>)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i = <span style=color:#ae81ff>0</span>; i &lt; <span style=color:#ae81ff>10</span>; i++)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 4. 最推荐的方式：直接抛出异常来终止操作</span>
+</span></span><span style=display:flex><span>            cancellationToken.ThrowIfCancellationRequested();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 或者，你也可以手动检查并处理</span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// if (cancellationToken.IsCancellationRequested)</span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// {</span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>//     // 进行一些清理...</span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>//     throw new OperationCanceledException(&#34;Operation was cancelled.&#34;, cancellationToken);</span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// }</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 模拟异步工作</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>await</span> Task.Delay(<span style=color:#ae81ff>1000</span>, cancellationToken); <span style=color:#75715e>// 注意：Task.Delay 也接受 Token！</span>
+</span></span><span style=display:flex><span>            Console.WriteLine(<span style=color:#e6db74>$&#34;完成了第 {i + 1} 项工作。&#34;</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>在这个异步示例中，5秒后<code>cts</code>会自动触发取消，<code>Task.Delay</code>和<code>DoLongRunningWorkAsync</code>中的<code>ThrowIfCancellationResquested()</code>会抛出<code>OperationCanceledException</code>，从而跳出循环，在<code>Main</code>方法的<code>catch</code>块中捕获</p><h5 id=主要特性和方法>主要特性和方法</h5><ul><li><code>IsCancellationRequested</code>：一个布尔属性，如果取消被请求，则返回<code>true</code>。用于手动检查</li><li><code>ThrowIfCancellationRequested()</code>：如果取消被请求，这个方法会立即抛出一个<code>OperationCanceledException</code>。这是在异步和并行任务中最常用的方式</li><li><code>WaitHandle</code>：提供了一个可以用来等待取消信号被触发的等待句柄（主要用于旧的同步代码）</li><li><code>Register(Action callback)</code>：允许注册一个回调方法，当取消被触发时，这个方法会被执行。适用于需要资源清理的场景</li></ul><h3 id=asyncawait><code>async</code>/<code>await</code></h3><h4 id=异步的出发点非阻塞的任务执行>异步的出发点：非阻塞的任务执行</h4><p>同步调用时，线程会一直等待任务完成</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>var</span> data = Download(); <span style=color:#75715e>// 阻塞直到返回</span>
+</span></span><span style=display:flex><span>Console.WriteLine(data);
+</span></span></code></pre></div><p>异步的目标是：当等待的工作还没完成时，让当前线程去干别的事</p><p>传统方式是用回调</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>DownloadAsync(url, result =&gt; {
+</span></span><span style=display:flex><span>    Console.WriteLine(result);
+</span></span><span style=display:flex><span>});
+</span></span></code></pre></div><p>但回调地狱太混乱，于是C#发明了一个魔法：用同步的写法描述异步逻辑</p><h4 id=asyncawait是什么><code>async</code>/<code>await</code>是什么</h4><p><code>async</code>修饰方法，让它能使用<code>await</code>并自动返回一个<code>Task</code>（声明这个方法中可能会出现异步操作）<br><code>await</code>修饰“可能产生延迟（返回Task）的操作”，告诉编译器这里是异步等待点（标记在这里暂停，把后续代码拆出来，等这个任务完成后再继续）</p><p>这两个关键字配合Task，让异步代码像同步代码一样清晰</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>async</span> Task&lt;<span style=color:#66d9ef>int</span>&gt; GetDataAsync()
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> data = <span style=color:#66d9ef>await</span> DownloadAsync(); <span style=color:#75715e>// 暂停点</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> data.Length;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>这段代码的真实运行过程，其实是：</p><ol><li>执行到<code>await</code></li><li>把后续代码打包成“回调”</li><li>当前方法返回一个未完成的Task</li><li>当DownloadAsync完成后，自动恢复执行后面的逻辑</li></ol><h4 id=编译器行为>编译器行为</h4><p>编译器看到<code>async</code>/<code>await</code>后，会</p><ol><li>生成一个隐藏的“状态机类”（类似协程的结构体）</li><li>把你的方法体拆成若干个状态块（case语句）</li><li>用字段记录当前状态、返回值、异常等</li><li>当Task完成后，调度器会触发状态机的“下一步执行”</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>async</span> Task&lt;<span style=color:#66d9ef>int</span>&gt; FooAsync()
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> Task.Delay(<span style=color:#ae81ff>1000</span>);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>42</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>编译器会把它变成（简化版伪代码）</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>FooAsyncStateMachine</span> : IAsyncStateMachine
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> _state;                        <span style=color:#75715e>// 当前状态</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> AsyncTaskMethodBuilder&lt;<span style=color:#66d9ef>int</span>&gt; _builder;  <span style=color:#75715e>// 异步任务构建器</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> TaskAwaiter _awaiter;             <span style=color:#75715e>// await 对象</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> IAsyncStateMachine.MoveNext()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> result;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span>
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (_state == -<span style=color:#ae81ff>1</span>)  <span style=color:#75715e>// 初始状态</span>
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                _awaiter = Task.Delay(<span style=color:#ae81ff>1000</span>).GetAwaiter();
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> (!_awaiter.IsCompleted)
+</span></span><span style=display:flex><span>                {
+</span></span><span style=display:flex><span>                    _state = <span style=color:#ae81ff>0</span>;  <span style=color:#75715e>// 设置下一个状态</span>
+</span></span><span style=display:flex><span>                    _awaiter.OnCompleted(MoveNext);  <span style=color:#75715e>// 注册回调</span>
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>return</span>;       <span style=color:#75715e>// 返回控制权</span>
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (_state == <span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                _awaiter.GetResult();  <span style=color:#75715e>// 等待结果</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            result = <span style=color:#ae81ff>42</span>;
+</span></span><span style=display:flex><span>            _builder.SetResult(result);  <span style=color:#75715e>// 通知任务完成</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>catch</span> (Exception e)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            _builder.SetException(e);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> IAsyncStateMachine.SetStateMachine(IAsyncStateMachine stateMachine) { }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>然后，原始方法<code>FooAsync()</code>会变成</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Task&lt;<span style=color:#66d9ef>int</span>&gt; FooAsync()
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> stateMachine = <span style=color:#66d9ef>new</span> FooAsyncStateMachine();
+</span></span><span style=display:flex><span>    stateMachine._builder = AsyncTaskMethodBuilder&lt;<span style=color:#66d9ef>int</span>&gt;.Create();
+</span></span><span style=display:flex><span>    stateMachine._state = -<span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>    stateMachine._builder.Start(<span style=color:#66d9ef>ref</span> stateMachine);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> stateMachine._builder.Task;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>也就是说：</p><ul><li><code>AsyncTaskMethodBuilder&lt;T></code>是真正创建和管理<code>Task&lt;T></code>的对象</li><li>状态机只是封装控制流</li><li><code>MoveNext()</code>控制执行的进度</li><li>每个<code>await</code>都可能导致状态暂停与恢复</li></ul><h5 id=asynctaskmethodbuilder><code>AsyncTaskMethodBuilder</code></h5><p>这个类型是async/await与TPL之间的关键连接点<br>它的职责包括</p><ol><li>创建一个<code>Task</code></li><li>持有结果或异常</li><li>驱动状态机（调用<code>MoveNext()</code>）</li><li>协调同步上下文</li></ol><p>简化理解</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>AsyncTaskMethodBuilder</span>&lt;T&gt;
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> TaskCompletionSource&lt;T&gt; _tcs;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> AsyncTaskMethodBuilder&lt;T&gt; Create() =&gt; <span style=color:#66d9ef>new</span> AsyncTaskMethodBuilder&lt;T&gt;();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Task&lt;T&gt; Task =&gt; _tcs.Task;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> SetResult(T result) =&gt; _tcs.SetResult(result);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> SetException(Exception e) =&gt; _tcs.SetException(e);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> Start&lt;TStateMachine&gt;(<span style=color:#66d9ef>ref</span> TStateMachine sm) <span style=color:#66d9ef>where</span> TStateMachine : IAsyncStateMachine =&gt; sm.MoveNext();
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>真实实现要复杂的多（比如优化内存分配、支持同步上下文切换），但原理是一致的</p><h5 id=awaiter与oncompleted><code>Awaiter</code>与<code>OnCompleted</code></h5><p>每个可以被<code>await</code>的类型都必须实现<code>GetAwaiter()</code>，返回一个awaiter对象，它实现以下接口</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>INotifyCompletion</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> OnCompleted(Action continuation);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>常见的<code>awaiter</code>类型</p><ul><li><code>TaskAwaiter</code></li><li><code>ConfiguredTaskAwaitable.ConfiguredTaskAwaiter</code></li></ul><p>当<code>await</code>遇到未完成的任务：</p><ol><li>编译器会调用<code>GetAwaiter()</code></li><li>如果<code>awaiter.IsCompleted == false</code>:<ul><li>保存当前状态</li><li>注册<code>awaiter.OnCompleted(MoveNext)</code></li><li>返回</li></ul></li><li>当任务完成后，<code>await</code>调用<code>MoveNext()</code>恢复执行</li></ol><h5 id=与taskschedulersynchronizationcontext的协作>与<code>TaskScheduler</code>/<code>SynchronizationContext</code>的协作</h5><p>当异步任务恢复执行时，系统需要决定在哪个线程上继续执行</p><p>这里有两种策略</p><ol><li>如果当前存在<code>SynchronizationContext</code>（例如WPF/WinForms UI线程），则使用它</li><li>否则，回到默认调度器（即线程池TaskScheduler）</li></ol><p>这就是为什么</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>await</span> Task.Delay(<span style=color:#ae81ff>1000</span>); <span style=color:#75715e>// UI线程不会卡死</span>
+</span></span><span style=display:flex><span>label.Text = <span style=color:#e6db74>&#34;Done&#34;</span>; <span style=color:#75715e>// await后自动回到UI线程</span>
+</span></span></code></pre></div><p>在内部<code>awaiter.OnCompleted</code>会这样调用</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>SynchronizationContext.Current.Post(_ =&gt; MoveNext(), <span style=color:#66d9ef>null</span>);
+</span></span></code></pre></div><p>而如果写了</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>await</span> Task.Delay(<span style=color:#ae81ff>1000</span>).ConfigureAwait(<span style=color:#66d9ef>false</span>);
+</span></span></code></pre></div><p>那么它会跳过同步上下文，直接在<code>ThreadPool</code>上继续执行</p><h5 id=异常取消与传播及支付>异常取消与传播及支付</h5><ul><li>在状态机的<code>MoveNext()</code>内部，所有异常都会被<code>catch</code>到</li><li>然后交给<code>_builder.SetException(e)</code></li><li>这样，外层的Task就会进入Faulted状态</li><li>当<code>await</code>它时，编译器会自动解包异常，重新<code>throw</code>出来</li></ul><p>同理，取消机制通过<code>CancellationToken</code>协调，当检测到取消请求时，<code>TaskCanceledException</code>会被抛出并封装</p><h5 id=与tpl的关系>与TPL的关系</h5><p>Task是运行单位，async/await是语法糖<br><code>async</code>/<code>await</code>本质上是基于TPL的异步状态机</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-txt data-lang=txt><span style=display:flex><span>Task = 任务抽象（执行单位）
+</span></span><span style=display:flex><span>TPL = 任务调度与依赖框架
+</span></span><span style=display:flex><span>async/await = 状态机语法层（让异步更像同步）
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>Thread -&gt; ThreadPool -&gt; Task -&gt; async/await
+</span></span></code></pre></div><p>每一层都往更高层抽象和自动化</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-txt data-lang=txt><span style=display:flex><span>async 方法调用
+</span></span><span style=display:flex><span>    ↓
+</span></span><span style=display:flex><span>编译器生成状态机（IAsyncStateMachine）
+</span></span><span style=display:flex><span>    ↓
+</span></span><span style=display:flex><span>AsyncTaskMethodBuilder 创建 Task
+</span></span><span style=display:flex><span>    ↓
+</span></span><span style=display:flex><span>遇到 await：
+</span></span><span style=display:flex><span>       ├─&gt; 任务未完成 → 注册 OnCompleted 回调 → 返回控制权
+</span></span><span style=display:flex><span>       └─&gt; 任务已完成 → 直接执行下一步
+</span></span><span style=display:flex><span>    ↓
+</span></span><span style=display:flex><span>任务完成时回调 MoveNext()
+</span></span><span style=display:flex><span>    ↓
+</span></span><span style=display:flex><span>恢复状态 → 执行下一部分逻辑
+</span></span><span style=display:flex><span>    ↓
+</span></span><span style=display:flex><span>最终调用 SetResult() / SetException()
+</span></span><span style=display:flex><span>    ↓
+</span></span><span style=display:flex><span>外部 await 任务，获取结果或捕获异常
+</span></span></code></pre></div><h4 id=async方法的返回类型>async方法的返回类型</h4><table><thead><tr><th>返回类型</th><th>含义</th></tr></thead><tbody><tr><td><code>Task</code></td><td>无返回值异步方法</td></tr><tr><td><code>Task&lt;T></code></td><td>有返回值异步方法</td></tr><tr><td><code>void</code></td><td>特殊用法（通常只用于事件处理）</td></tr></tbody></table><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>async</span> Task&lt;<span style=color:#66d9ef>int</span>&gt; ComputeAsync() { ... }
+</span></span></code></pre></div><p>返回的是一个<code>Task&lt;int></code>对象<br><code>await ComputeAsync()</code>实际上等价于</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>var</span> t = ComputeAsync();
+</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> result = t.Result; <span style=color:#75715e>// 只是 await 不会阻塞</span>
+</span></span></code></pre></div><h4 id=await的工作机制>await的工作机制</h4><p><code>await</code>并不会“阻塞”线程<br>它做的事情是</p><ul><li>检查Task是否完成</li><li>如果完成了，直接取结果继续执行</li><li>如果没完成，则注册一个回调（在Task完成后调用），然后退出方法</li></ul><p>这时，方法已经返回一个未完成的Task，外层可以<code>await</code>它<br>整个调用链因此形成异步的“任务接力”<br>也就是说，线程不是被卡住了，而是被释放取干别的任务；程序的执行暂停了，但线程没闲着</p><p><code>await</code>就像Unity的<code>yield return</code>，但更强：它有类型安全、异常传播、同步上下文等特性</p><h5 id=什么时候会像是阻塞>什么时候会“像是”阻塞</h5><ol><li>如果在主线程（UI线程或控制台主函数）里调用</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>SomeAsyncMethod().Wait();
+</span></span></code></pre></div><p>或</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>var</span> result = SomeAsyncMethod().Result;
+</span></span></code></pre></div><p>那就会真的阻塞线程，因为<code>.Wait()</code>是同步等待，不释放线程</p><ol start=2><li>或者当异步任务内部出现死循环、未真正异步的操作，那就算加了<code>await</code>，也会卡死线程</li></ol><h4 id=同步上下文synchronizationcontext>同步上下文（SynchronizationContext）</h4><p>这是<code>await</code>的一个隐藏特性<br>当在UI线程（如WPF、WinForms）里执行<code>await</code>时</p><ul><li><code>await</code>之后的代码会自动回到原线程（UI线程）执行</li><li>这是通过<code>SynchronizationContext</code>记录上下文完成的</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>async</span> <span style=color:#66d9ef>void</span> Button_Click(...)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> Task.Delay(<span style=color:#ae81ff>1000</span>);
+</span></span><span style=display:flex><span>    label.Text = <span style=color:#e6db74>&#34;Done&#34;</span>; <span style=color:#75715e>// 回到 UI 线程安全地修改控件</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>但如果在控制台或服务器环境（无UI上下文），await后续的代码通常会在线程池线程执行</p><p>在库代码或高性能场景下，通常不希望回到原上下文</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>await</span> SomeIOAsync().ConfigureAwait(<span style=color:#66d9ef>false</span>);
+</span></span></code></pre></div><p>这会告诉编译器：恢复执行时不必切回原线程，直接在线程池上继续执行<br>这是避免UI同步上下文死锁的关键手段</p><h4 id=异常传播>异常传播</h4><p>如果异步方法内部抛出了异常，编译器会自动将其封装到Task内部</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>try</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> FailingAsync();
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>catch</span> (Exception ex)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    Console.WriteLine(ex.Message);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>区别在于：<code>await</code>自动帮你解包异常，不用手动访问<code>AggregateException</code></p><h3 id=现代c开发指南>现代C#开发指南</h3><ol><li>默认选择<code>async/await</code>：对于I/O密集型操作（文件、网络、数据库）</li><li>使用<code>Task.Run</code>：对于需要卸载到后台的CPU密集型操作</li><li>尽量避免直接使用<code>Thread</code>：除非有非常特殊的、需要精细控制的场景</li><li>永远不要使用<code>Thread.Abort()</code>：它会引发<code>ThreadAbortException</code>，可能导致资源无法正确释放和状态不一致，非常危险</li></ol></div><nav class=post-nav><a href=/dotnetandwindows/lib/c%23codingformat/ class=hover:underline>pre: C# Coding Format</a>
+<a href=/dotnetandwindows/lib/datetime/ class=hover:underline>next: C# Date Time System</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#并发的意义>并发的意义</a></li><li><a href=#c中的线程生命周期>C#中的线程生命周期</a><ul><li><a href=#主要状态>主要状态</a></li></ul></li><li><a href=#传统线程的使用systemthreading>传统线程的使用（<code>System.Threading</code>）</a><ul><li><a href=#thread><code>Thread</code></a></li><li><a href=#创建与启动线程>创建与启动线程</a></li><li><a href=#带参数的线程>带参数的线程</a></li><li><a href=#前台线程-vs-后台线程>前台线程 vs 后台线程</a></li><li><a href=#线程控制操作>线程控制操作</a></li><li><a href=#线程优先级与命名>线程优先级与命名</a></li><li><a href=#线程同步与安全>线程同步与安全</a></li><li><a href=#thread中的异常>Thread中的异常</a></li><li><a href=#传统线程的代价>传统线程的代价</a></li></ul></li><li><a href=#现代c的并发编程推荐方式>现代C#的并发编程（推荐方式）</a><ul><li><a href=#线程池threadpool>线程池（<code>ThreadPool</code>）</a><ul><li><a href=#是什么>是什么</a></li><li><a href=#存在意义>存在意义</a></li><li><a href=#用法>用法</a></li><li><a href=#线程池的特性>线程池的特性</a></li><li><a href=#线程池的生命周期>线程池的生命周期</a><ul><li><a href=#hill-climbing-algorithm>hill climbing algorithm</a><ul><li><a href=#直觉理解>直觉理解</a></li><li><a href=#算法核心思想>算法核心思想</a></li><li><a href=#伪代码>伪代码</a></li></ul></li></ul></li><li><a href=#与task的关系>与Task的关系</a></li><li><a href=#线程池-vs-普通线程>线程池 vs 普通线程</a></li><li><a href=#threadpool的配置与监控><code>ThreadPool</code>的配置与监控</a><ul><li><ul><li><a href=#任务饥饿与长任务>任务饥饿与长任务</a></li></ul></li></ul></li></ul></li><li><a href=#task任务并行库tpl-task-parallel-library-现代首选>Task任务并行库（TPL, Task Parallel Library）-现代首选</a><ul><li><a href=#核心概念task>核心概念：<code>Task</code></a><ul><li><a href=#task的生命周期>Task的生命周期</a></li><li><a href=#带返回值的任务tasktresult>带返回值的任务<code>Task&lt;TResult></code></a></li><li><a href=#异常处理>异常处理</a></li><li><a href=#取消任务>取消任务</a></li><li><a href=#等待与继续waitcontinuewith>等待与继续（Wait/ContinueWith）</a></li><li><a href=#task的执行上下文调度器>Task的执行上下文（调度器）</a></li><li><a href=#task与threadpool>Task与ThreadPool</a><ul><li><a href=#taskscheduler><code>TaskScheduler</code></a></li><li><a href=#task的执行路径简化流程>Task的执行路径（简化流程）</a></li><li><a href=#线程池的调度策略>线程池的调度策略</a></li></ul></li></ul></li><li><a href=#tpl的调度机制>TPL的调度机制</a><ul><li><a href=#taskscheduler-1>TaskScheduler</a></li><li><a href=#默认调度器线程池调度器>默认调度器：线程池调度器</a></li><li><a href=#工作窃取算法>工作窃取算法</a></li><li><a href=#任务调度的上下文current-vs-default>任务调度的上下文：Current vs Default</a></li><li><a href=#自定义调度器>自定义调度器</a></li><li><a href=#任务的内联执行inlining>任务的内联执行（Inlining）</a></li><li><a href=#任务调度的可控选项>任务调度的可控选项</a></li></ul></li><li><a href=#并行化apiparallel类>并行化API：Parallel类</a></li><li><a href=#任务控制组合依赖取消和异常>任务控制、组合、依赖、取消和异常</a><ul><li><a href=#任务控制>任务控制</a></li><li><a href=#任务组合>任务组合</a></li><li><a href=#任务依赖>任务依赖</a></li><li><a href=#任务取消>任务取消</a></li><li><a href=#任务异常>任务异常</a></li><li><a href=#tpl与asyncawait>TPL与async/await</a></li></ul></li><li><a href=#cancellationtoken><code>CancellationToken</code></a><ul><li><a href=#存在意义-1>存在意义</a></li><li><a href=#关键组成部分>关键组成部分</a></li><li><a href=#运作机制>运作机制</a></li><li><a href=#本质>本质</a></li><li><a href=#使用示例>使用示例</a></li><li><a href=#主要特性和方法>主要特性和方法</a></li></ul></li></ul></li><li><a href=#asyncawait><code>async</code>/<code>await</code></a><ul><li><a href=#异步的出发点非阻塞的任务执行>异步的出发点：非阻塞的任务执行</a></li><li><a href=#asyncawait是什么><code>async</code>/<code>await</code>是什么</a></li><li><a href=#编译器行为>编译器行为</a><ul><li><a href=#asynctaskmethodbuilder><code>AsyncTaskMethodBuilder</code></a></li><li><a href=#awaiter与oncompleted><code>Awaiter</code>与<code>OnCompleted</code></a></li><li><a href=#与taskschedulersynchronizationcontext的协作>与<code>TaskScheduler</code>/<code>SynchronizationContext</code>的协作</a></li><li><a href=#异常取消与传播及支付>异常取消与传播及支付</a></li><li><a href=#与tpl的关系>与TPL的关系</a></li></ul></li><li><a href=#async方法的返回类型>async方法的返回类型</a></li><li><a href=#await的工作机制>await的工作机制</a><ul><li><a href=#什么时候会像是阻塞>什么时候会“像是”阻塞</a></li></ul></li><li><a href=#同步上下文synchronizationcontext>同步上下文（SynchronizationContext）</a></li><li><a href=#异常传播>异常传播</a></li></ul></li><li><a href=#现代c开发指南>现代C#开发指南</a></li></ul></li></ul></li></ul></nav></aside><script src=/js/scrollspy.js defer></script><script type=module>
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ 
+    startOnLoad: true, theme: "default" });
+</script><footer><div class=container><p>© 2026 Jeff Lee(ljf12825). All rights reserved |
+<a href=https://creativecommons.org/licenses/by-nc-sa/4.0/>Article: CC BY-NC-SA 4.0</a> |
+<a href=https://creativecommons.org/licenses/by-sa/4.0/>Content: CC BY-SA 4.0</a> |
+<a href=https://opensource.org/licenses/MIT>Code: MIT License</a> |
+<a href=/LICENSES.md>Full License</a></p></div></footer></body></html>
