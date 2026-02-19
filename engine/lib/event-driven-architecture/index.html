@@ -1,0 +1,179 @@
+<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>Event-Driven Architecture</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/blogsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/engine/>★</a></li><li><a href=/engine/lab/>Lab</a></li><li><a href=/engine/lib/>Lib</a></li><li><a href=/engine/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><pre class=ascii>
++——————————————————————————————————————————————————————————————+
+|                        <a class=nav-item data-path=/rightbrain/ href=/rightbrain/>RightBrain</a>                            |
+|                             |                                |
+|                             |     <a class=nav-item data-path=/dotnetandwindows/ href=/dotnetandwindows/>.NET-Windows</a>               |
+|                             |    /                           |
+|                             |   /             <a class=nav-item data-path=/engine/ href=/engine/>Engine</a>         |
+|                             |  /                 |           |
+|                             | /                  |           |
+|                             |/                   |           |
+|      <a class=nav-item data-path=/graphic/ href=/graphic/>Graphic</a> ———————————— <a class=nav-item data-path=/home/ href=/home/>Home</a> ————————————— <a class=nav-item data-path=/framework/ href=/framework/>Framework</a>       |
+|                            /|                                |
+|                           / |                                |
+|                          /  |                                |
+|                         /   |       <a class=nav-item data-path=/language/ href=/language/>Language</a>                 |
+|                        /    |      /                         |
+|                       /     |     /                          |
+|              <a class=nav-item data-path=/unixlike/ href=/unixlike/>Unix-like</a>      |    /           <a class=nav-item data-path=/project/ href=/project/>Project</a>         |
+|                             |   /            <a class=nav-item data-path=/miscellaneous/ href=/miscellaneous/>Miscellaneous</a>   |
+|                        <a class=nav-item data-path=/leftbrain/ href=/leftbrain/>LeftBrain</a>             <a class=nav-item data-path=/ai/ href=/ai/>AI</a>              |
++——————————————————————————————————————————————————————————————+
+    </pre></nav><script defer src=/js/star-nav.js></script><script defer src=/js/site.js></script><script defer src=/js/star-active.js></script><div id=ref-window class="float-window open"><div class=float-header><span class="title open">>> >> >> Reference &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Ref>>>>>></span></div><div class=float-body><div class=ref-list><a href=https://www.mixamo.com/ target=_blank>Mixamo</a> |
+<a href=https://opengameart.org/ target=_blank>OpenGameArt</a><p><a href=https://sharplab.io/ target=_blank>SharpLab</a> |
+<a href=https://godbolt.org/ target=_blank>Compiler Explorer</a></p><p><a href="https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type+Something+&x=none&v=4&h=4&w=80&we=false" target=_blank>ASCII Graph Generator</a></p><p><a href=https://mermaid.js.org/ target=_blank>Mermaid</a></p><a href=https://www.vim.org/ target=_blank>Vim</a> | <a href=https://vimdoc.sourceforge.net/ target=_blank>Vim Manual Source</a> |
+<a href=https://vimcdoc.sourceforge.net/ target=_blank>Vimcdoc</a> | <a href=https://vimcdoc.sourceforge.net/doc/help.html target=_blank>Vimdoc read online</a><p><a href=https://shields.io/ target=_blank>Shields.io</a></p><p><a href=https://emojidb.org/ target=_blank>EmojiDB</a></p><p><a href=https://cppreference.com/ target=_blank>cppreference</a></p><p><a href=https://gcc.gnu.org/onlinedocs/ target=_blank>GCC Docs</a></p><p><a href=https://clang.llvm.org/docs/ target=_blank>Clang Docs</a></p><p><a href=https://www.boost.org/libraries/ target=_blank>Boost Library Docs</a></p><p><a href=https://learn.microsoft.com/en-us/dotnet/csharp/ target=_blank>Microsoft Learn</a><p><a href=https://www.lua.org/manual/5.4/ target=_blank>Lua 5.4 Reference Manual</a><p><a href=https://docs.unity3d.com/Manual/index.html target=_blank>Unity Manual</a> |
+<a href=https://docs.unity3d.com/ScriptReference/index.html target=_blank>Unity API</a></p><p><a href=https://docs.unrealengine.com/ target=_blank>Unreal Engine Docs</a></p><p><a href=https://godotengine.org target=_blank>Godot</a> |
+<a href=https://docs.godotengine.org/en/stable/ target=_blank>Godot Docs</a></p><p><a href=https://z-library.sk/ target=_blank>Z-Library</a> : eBook Library</p><p><a href=https://docs.kernel.org/ target=_blank>Linux Kernel Docs</a></p><p><a href=https://www.gnu.org/ target=_blank>GNU</a> : manuals, philosophy, FAQ</p><a href=https://archlinux.org/ target=_blank>ArchLinux</a><p><a href=https://help.ubuntu.com/ target=_blank>Ubuntu Doc</a> |
+<a href=https://ubuntu.com/server/docs target=_blank>Ubuntu Server Guide</a></p><p><a href=https://www.vulkan.org/ target=_blank>Vulkan</a> |
+<a href=https://docs.vulkan.org/ target=_blank>Vulkan Docs</a></p><p><a href=https://www.opengl.org/ target=_blank>OpenGL</a> |
+<a href=https://registry.khronos.org/OpenGL target=_blank>OpenGL API</a> |
+<a href=https://www.khronos.org/opengl/wiki/ target=_blank>OpenGL Wiki</a></p><p><a href=https://learn.microsoft.com/en-us/windows/win32/directx target=_blank>DirectX</a></p><p><a href=https://www.realtimerendering.com/ target=_blank>Real-Time Rendering</a></p><p><a href=https://www.pbr-book.org/ target=_blank>Physically Based Rendering</a></p><p><a href=https://www.scratchapixel.com/ target=_blank>Scratchapixel</a></p><p><a href=https://learnopengl.com/ target=_blank>LearnOpenGL</a></p><p><a href=https://raytracing.github.io/ target=_blank>Ray Tracing in One Weekend</a></p><p><a href=https://www.shadertoy.com/ target=_blank>Shadertoy</a></p><p><a href=https://arxiv.org/list/cs.GR/recent target=_blank>arXiv Graphics</a></p><p><a href=https://www.siggraph.org/ target=_blank>SIGGRAPH</a> |
+<a href=https://dl.acm.org/conference/siggraph target=_blank>SIGGRAPH Digital Library</a></p><p><a href=https://git-scm.com/ target=_blank>Git</a> |
+<a href=https://git-scm.com/doc target=_blank>Docs</a> |
+<a href=https://git-scm.com/community target=_blank>Community</a></p></div></div></div><script src=/js/ref-window.js></script><article class=single_article><div class=title>Event-Driven Architecture<div class=meta>Modified: 2025-06-01
+| Author：ljf12825</div></div><div class=content><h1 id=委托与事件>委托与事件</h1><p>Unity中的事件和委托机制是基于C#的语言特性实现的，用于对象之间的解耦通信。它们是实现观察者模式的核心方式，常用于UI更新、角色状态变化、触发器反应等场景</p><h2 id=委托delegate>委托（Delegate）</h2><p>委托是对函数的引用，可以把方法当作变量一样传递，就是C++中的函数指针</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>delegate</span> <span style=color:#66d9ef>void</span> MyDelegate(<span style=color:#66d9ef>string</span> message); <span style=color:#75715e>// 声明一个委托类型</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Test</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> PrintMessage(<span style=color:#66d9ef>string</span> msg) =&gt; Debug.Log(msg);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> UseDelegate()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        MyDelegate del = PrintMessage; <span style=color:#75715e>// 赋值</span>
+</span></span><span style=display:flex><span>        dle(<span style=color:#e6db74>&#34;Hello Delegate!&#34;</span>); <span style=color:#75715e>// 调用</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>相当于</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#75715e>// 函数指针
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> (<span style=color:#f92672>*</span>func)(string) <span style=color:#f92672>=</span> <span style=color:#f92672>&amp;</span>PrintMessage;
+</span></span></code></pre></div><h2 id=事件event>事件（Event）</h2><p>事件基于委托，是一种特殊的委托类型，但添加了访问限制，只能在声明它的类内部调用，允许其他对象订阅并响应某个特定的行为或状态变化</p><p>通常用于对象之间的通信，避免了直接调用，使代码更具解耦性</p><h3 id=基本使用>基本使用</h3><p>在Unity中，可以使用C#的<code>event</code>关键字来声明一个事件。事件的订阅和触发通常会在组件之间完成</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 定义事件的委托类型</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>delegate</span> <span style=color:#66d9ef>void</span> PlayerScored(<span style=color:#66d9ef>int</span> score);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GameManager</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 声明一个事件</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>event</span> PlayerScored OnPlayerScored;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> PlayerScore(<span style=color:#66d9ef>int</span> score)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 触发事件</span>
+</span></span><span style=display:flex><span>        OnPlayerScored?.Invoke(score);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>UIManager</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> GameManager gameManager;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> OnEnable()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 订阅事件</span>
+</span></span><span style=display:flex><span>        gameManager.OnPlayerScored += UpdateScoreDisplay;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> OnDisable()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 取消订阅</span>
+</span></span><span style=display:flex><span>        gameManager.OnPlayerScored -= UpdateScoreDisplay;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> UpdateScoreDisplay(<span style=color:#66d9ef>int</span> score)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 更新UI</span>
+</span></span><span style=display:flex><span>        Debug.Log(<span style=color:#e6db74>&#34;Player scored: &#34;</span> + score);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>事件的特点：</p><ul><li>解耦：<code>GameManager</code>不需要知道<code>UIManager</code>的存在，UIManager可以独立地响应得分变化</li><li>多播：一个事件可以有多个订阅者，也可以通过<code>+=</code>和<code>-=</code>来添加或移除订阅者</li><li>安全：通过<code>?.Invoke()</code>确保事件只在有订阅者时触发，避免空引用异常</li></ul><h3 id=unity中常见用法>Unity中常见用法</h3><ol><li>自定义事件传递数据</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Palyer</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>delegate</span> <span style=color:#66d9ef>void</span> HealthChanged(<span style=color:#66d9ef>int</span> newHp);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>event</span> HealthChanged OnHealthChanged;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> hp = <span style=color:#ae81ff>100</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> TakeDamage(<span style=color:#66d9ef>int</span> damage)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        hp -= damage;
+</span></span><span style=display:flex><span>        OnHealthChanged?.Invoke(hp);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ol start=2><li>使用Action/Func/EventHandler简化写法（推荐）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Player</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>event</span> Action&lt;<span style=color:#66d9ef>int</span>&gt; OnHealthChanged;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> TakeDamage(<span style=color:#66d9ef>int</span> damage) =&gt; OnHealthChanged?.Invoke(<span style=color:#ae81ff>100</span> - damamge);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=示例>示例</h3><ol><li>UI更新</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>HealthUI</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Player player;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Start() =&gt; player.OnHealthChanged += UpdateHealthBar;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> UpdateHealthBar(<span style=color:#66d9ef>int</span> hp)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 更新血条UI</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ol start=2><li>输入控制器通知角色行为</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>InputManager</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>event</span> Action OnJump;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Update()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (Input.GetKeyDown(KeyCode.Space)) OnJump?.Invoke();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>PlayerController</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> OnEnable() =&gt; InputManager.OnJump += Jump;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> OnDisable() =&gt; InputManager.OnJump -= Jump;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Jump()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 执行跳跃</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=c委托事件的优点>C#委托事件的优点</h3><ul><li>松耦合：组件A不需要直接引用组件B，只需要暴露事件接口，B只需要订阅即可。这减少了组件间的耦合，使得系统更加灵活</li><li>可扩展性：可以很容易地添加新的实践订阅者，无需更改已有的代码。例如，多个UI元素或音效系统可以同时监听相同的事件</li><li>响应灵活：委托和事件允许你在运行时动态地绑定方法。例如，UI按钮的带年纪事件可以通过委托绑定不同的处理方法，甚至可以从外部脚本动态添加和移除事件处理方法</li><li>避免重复执行：事件和委托可以确保方法只被执行一次，避免了多个事件处理方法同时执行同一操作的问题</li></ul><h3 id=注意事项>注意事项</h3><table><thead><tr><th>问题</th><th>描述</th></tr></thead><tbody><tr><td>内存泄漏</td><td>如果事件订阅者未取消订阅，引用会一直存在，GC 无法释放</td></tr><tr><td>空检查</td><td><code>event?.Invoke()</code> 避免空引用异常</td></tr><tr><td>多次订阅</td><td>注意避免重复注册：可能会导致方法被执行多次</td></tr><tr><td>性能问题</td><td>事件系统比直接调用略慢，但利于解耦</td></tr></tbody></table><h1 id=事件驱动架构>事件驱动架构</h1><p>事件驱动架构（Event-Driven Architecture，简称EDA）是一种以事件作为系统运行核心驱动力的软件架构模式<br>它的思路是：</p><blockquote><p>当某个事件发生时，系统会通知对改事件感兴趣的组件，由它们决定如何响应
+这种模式的重点是“触发→通知→响应”，而不是“调用→返回”</p></blockquote><h2 id=核心概念>核心概念</h2><ol><li>事件（Event）</li></ol><ul><li>事件是系统状态变化的记录</li><li>通常包含：<ul><li>事件类型（例如<code>"PlayerDied</code>、<code>"OrderCreated"</code>）</li><li>事件数据（如死亡位置、订单详情）</li></ul></li><li>事件是“一次性的事实”，不会被修改</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>PlayerDiedEvent</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Vector3 deathPosition;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> PlayerDiedEvent(Vector3 pos) =&gt; deathPosition = pos;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ol start=2><li>事件生产者（Event Producer）</li></ol><ul><li>负责检测某件事情发生，并发出事件</li><li>它只负责发出，不关心谁接收、怎么处理</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>PlayerHealth</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>event</span> Action&lt;PlayerDiedEvent&gt; OnPlayerDied;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> TakeDamage(<span style=color:#66d9ef>int</span> amount)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 扣血逻辑</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (<span style=color:#75715e>/*死亡条件*/</span>) OnPlayerDied?.Invoke(<span style=color:#66d9ef>new</span> PlayerDiedEvent(transform.position));
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ol start=3><li>事件消费者（Event Consumer）</li></ol><ul><li>订阅（Subscribe）某类事件，并在事件发生时响应</li><li>不直接调用生产者，而是等待事件通知</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GameManager</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> PlayerHealth playerHealth;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> OnEnable() =&gt; playerHealth.OnPlayerDied += HandlePlayerDeath;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> OnDisable() =&gt; playerHealth.OnPlayerDied -= HandlePlayerDeath;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> HandlePlayerDeath(PlayerDiedEvent e)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        Debug.Log(<span style=color:#e6db74>$&#34;玩家死亡，位置：{e.deathPosition}&#34;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 触发游戏结束逻辑</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=特点>特点</h2><p>优点</p><ol><li>解耦：生产者和消费者互不依赖，降低模块耦合度</li><li>可扩展性强：新增功能只需新建事件监听者，无需更改生产者</li><li>异步性：事件可以异步处理，提高系统吞吐量（特别是在分布式系统里）</li><li>灵活性：可以有多个监听者对同一事件做出不同反应</li></ol><p>缺点</p><ol><li>调试困难：事件流是分散的，不能像函数调用链那样直观</li><li>事件风暴：事件过多或链式触发，可能引起性能问题</li><li>状态一致性：异步事件可能导致数据状态延迟更新</li></ol><h2 id=架构流程>架构流程</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>事件源（</span>Producer<span style=color:#960050;background-color:#1e0010>）</span> <span style=color:#f92672>--</span><span style=color:#960050;background-color:#1e0010>发出事件</span><span style=color:#f92672>-</span>-&gt; <span style=color:#960050;background-color:#1e0010>事件通道（</span>Event Bus<span style=color:#960050;background-color:#1e0010>）</span> <span style=color:#f92672>--</span><span style=color:#960050;background-color:#1e0010>分发</span><span style=color:#f92672>-</span>-&gt; <span style=color:#960050;background-color:#1e0010>事件监听者（</span>Consumer<span style=color:#960050;background-color:#1e0010>）</span>
+</span></span></code></pre></div><p>可以用两种方式实现：</p><ol><li>直接回调（同进程、同步）：C#事件、委托</li><li>消息总线/事件总线（异步）：如<code>EventAggregator</code>、<code>MessageBus</code>、<code>RabbitMQ</code>、<code>Kafka</code></li></ol><p>在Unity中的应用场景</p><table><thead><tr><th>场景</th><th>示例事件</th><th>好处</th></tr></thead><tbody><tr><td>UI 更新</td><td><code>"ScoreChanged"</code></td><td>UI 只关心分数变化，不管谁改的分数</td></tr><tr><td>游戏状态</td><td><code>"GameOver"</code></td><td>所有相关系统（UI、音乐、AI）都能收到结束事件</td></tr><tr><td>AI 行为</td><td><code>"EnemySpotted"</code></td><td>AI 角色感知敌人后触发反应</td></tr><tr><td>资源管理</td><td><code>"ItemPickedUp"</code></td><td>背包系统和音效系统都能响应</td></tr></tbody></table><p>最佳实践</p><ol><li>事件名用过去式（如<code>PlayerDied</code>而不是<code>PlayerDie</code>）表示它已经发生</li><li>数据封装到事件类中，避免传一堆参数</li><li>解订阅事件，防止内存泄露（<code>OnDisable</code>里取消监听）</li><li>避免事件滥用，过多事件会导致性能下降和可维护性变差</li><li>集中管理事件（如使用<code>EventManager</code>）或第三方事件总线库</li></ol><p>事件驱动架构的精髓是让变化“广播”出去，由感兴趣的模块去响应，而不是让变化方直接控制接下来发生的事</p></div><nav class=post-nav><a href=/engine/lib/event-bus-event-aggregator/ class=hover:underline>pre: Event Bus/Aggregator</a>
+<a href=/engine/lib/frame/ class=hover:underline>next: Frame</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><a href=#委托与事件>委托与事件</a><ul><li><a href=#委托delegate>委托（Delegate）</a></li><li><a href=#事件event>事件（Event）</a><ul><li><a href=#基本使用>基本使用</a></li><li><a href=#unity中常见用法>Unity中常见用法</a></li><li><a href=#示例>示例</a></li><li><a href=#c委托事件的优点>C#委托事件的优点</a></li><li><a href=#注意事项>注意事项</a></li></ul></li></ul></li><li><a href=#事件驱动架构>事件驱动架构</a><ul><li><a href=#核心概念>核心概念</a></li><li><a href=#特点>特点</a></li><li><a href=#架构流程>架构流程</a></li></ul></li></ul></nav></aside><script src=/js/scrollspy.js defer></script><script type=module>
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ 
+    startOnLoad: true, theme: "default" });
+</script><footer><div class=container><p>© 2026 Jeff Lee(ljf12825). All rights reserved |
+<a href=https://creativecommons.org/licenses/by-nc-sa/4.0/>Article: CC BY-NC-SA 4.0</a> |
+<a href=https://creativecommons.org/licenses/by-sa/4.0/>Content: CC BY-SA 4.0</a> |
+<a href=https://opensource.org/licenses/MIT>Code: MIT License</a> |
+<a href=/LICENSES.md>Full License</a></p></div></footer></body></html>

@@ -1,0 +1,482 @@
+<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>Loose Coupling</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/blogsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/engine/>★</a></li><li><a href=/engine/lab/>Lab</a></li><li><a href=/engine/lib/>Lib</a></li><li><a href=/engine/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><pre class=ascii>
++——————————————————————————————————————————————————————————————+
+|                        <a class=nav-item data-path=/rightbrain/ href=/rightbrain/>RightBrain</a>                            |
+|                             |                                |
+|                             |     <a class=nav-item data-path=/dotnetandwindows/ href=/dotnetandwindows/>.NET-Windows</a>               |
+|                             |    /                           |
+|                             |   /             <a class=nav-item data-path=/engine/ href=/engine/>Engine</a>         |
+|                             |  /                 |           |
+|                             | /                  |           |
+|                             |/                   |           |
+|      <a class=nav-item data-path=/graphic/ href=/graphic/>Graphic</a> ———————————— <a class=nav-item data-path=/home/ href=/home/>Home</a> ————————————— <a class=nav-item data-path=/framework/ href=/framework/>Framework</a>       |
+|                            /|                                |
+|                           / |                                |
+|                          /  |                                |
+|                         /   |       <a class=nav-item data-path=/language/ href=/language/>Language</a>                 |
+|                        /    |      /                         |
+|                       /     |     /                          |
+|              <a class=nav-item data-path=/unixlike/ href=/unixlike/>Unix-like</a>      |    /           <a class=nav-item data-path=/project/ href=/project/>Project</a>         |
+|                             |   /            <a class=nav-item data-path=/miscellaneous/ href=/miscellaneous/>Miscellaneous</a>   |
+|                        <a class=nav-item data-path=/leftbrain/ href=/leftbrain/>LeftBrain</a>             <a class=nav-item data-path=/ai/ href=/ai/>AI</a>              |
++——————————————————————————————————————————————————————————————+
+    </pre></nav><script defer src=/js/star-nav.js></script><script defer src=/js/site.js></script><script defer src=/js/star-active.js></script><div id=ref-window class="float-window open"><div class=float-header><span class="title open">>> >> >> Reference &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Ref>>>>>></span></div><div class=float-body><div class=ref-list><a href=https://www.mixamo.com/ target=_blank>Mixamo</a> |
+<a href=https://opengameart.org/ target=_blank>OpenGameArt</a><p><a href=https://sharplab.io/ target=_blank>SharpLab</a> |
+<a href=https://godbolt.org/ target=_blank>Compiler Explorer</a></p><p><a href="https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type+Something+&x=none&v=4&h=4&w=80&we=false" target=_blank>ASCII Graph Generator</a></p><p><a href=https://mermaid.js.org/ target=_blank>Mermaid</a></p><a href=https://www.vim.org/ target=_blank>Vim</a> | <a href=https://vimdoc.sourceforge.net/ target=_blank>Vim Manual Source</a> |
+<a href=https://vimcdoc.sourceforge.net/ target=_blank>Vimcdoc</a> | <a href=https://vimcdoc.sourceforge.net/doc/help.html target=_blank>Vimdoc read online</a><p><a href=https://shields.io/ target=_blank>Shields.io</a></p><p><a href=https://emojidb.org/ target=_blank>EmojiDB</a></p><p><a href=https://cppreference.com/ target=_blank>cppreference</a></p><p><a href=https://gcc.gnu.org/onlinedocs/ target=_blank>GCC Docs</a></p><p><a href=https://clang.llvm.org/docs/ target=_blank>Clang Docs</a></p><p><a href=https://www.boost.org/libraries/ target=_blank>Boost Library Docs</a></p><p><a href=https://learn.microsoft.com/en-us/dotnet/csharp/ target=_blank>Microsoft Learn</a><p><a href=https://www.lua.org/manual/5.4/ target=_blank>Lua 5.4 Reference Manual</a><p><a href=https://docs.unity3d.com/Manual/index.html target=_blank>Unity Manual</a> |
+<a href=https://docs.unity3d.com/ScriptReference/index.html target=_blank>Unity API</a></p><p><a href=https://docs.unrealengine.com/ target=_blank>Unreal Engine Docs</a></p><p><a href=https://godotengine.org target=_blank>Godot</a> |
+<a href=https://docs.godotengine.org/en/stable/ target=_blank>Godot Docs</a></p><p><a href=https://z-library.sk/ target=_blank>Z-Library</a> : eBook Library</p><p><a href=https://docs.kernel.org/ target=_blank>Linux Kernel Docs</a></p><p><a href=https://www.gnu.org/ target=_blank>GNU</a> : manuals, philosophy, FAQ</p><a href=https://archlinux.org/ target=_blank>ArchLinux</a><p><a href=https://help.ubuntu.com/ target=_blank>Ubuntu Doc</a> |
+<a href=https://ubuntu.com/server/docs target=_blank>Ubuntu Server Guide</a></p><p><a href=https://www.vulkan.org/ target=_blank>Vulkan</a> |
+<a href=https://docs.vulkan.org/ target=_blank>Vulkan Docs</a></p><p><a href=https://www.opengl.org/ target=_blank>OpenGL</a> |
+<a href=https://registry.khronos.org/OpenGL target=_blank>OpenGL API</a> |
+<a href=https://www.khronos.org/opengl/wiki/ target=_blank>OpenGL Wiki</a></p><p><a href=https://learn.microsoft.com/en-us/windows/win32/directx target=_blank>DirectX</a></p><p><a href=https://www.realtimerendering.com/ target=_blank>Real-Time Rendering</a></p><p><a href=https://www.pbr-book.org/ target=_blank>Physically Based Rendering</a></p><p><a href=https://www.scratchapixel.com/ target=_blank>Scratchapixel</a></p><p><a href=https://learnopengl.com/ target=_blank>LearnOpenGL</a></p><p><a href=https://raytracing.github.io/ target=_blank>Ray Tracing in One Weekend</a></p><p><a href=https://www.shadertoy.com/ target=_blank>Shadertoy</a></p><p><a href=https://arxiv.org/list/cs.GR/recent target=_blank>arXiv Graphics</a></p><p><a href=https://www.siggraph.org/ target=_blank>SIGGRAPH</a> |
+<a href=https://dl.acm.org/conference/siggraph target=_blank>SIGGRAPH Digital Library</a></p><p><a href=https://git-scm.com/ target=_blank>Git</a> |
+<a href=https://git-scm.com/doc target=_blank>Docs</a> |
+<a href=https://git-scm.com/community target=_blank>Community</a></p></div></div></div><script src=/js/ref-window.js></script><article class=single_article><div class=title>Loose Coupling<div class=meta>Modified: 2025-06-01
+| Author：ljf12825</div></div><div class=content><p>松耦合（Loose Coupling）是构建可维护、可扩展的关键原则之一，尤其在多人协作、项目复杂度高、后期需要频繁迭代更新的场景中尤为重要</p><p>定义\</p><ul><li>松耦合意味着模块/组件之间尽可能少的依赖关系，彼此互不知晓或只了解对方的接口或行为</li><li>相对的，紧耦合指的是模块之间依赖彼此的具体实现或生命周期，改一个就可能影响其他多个</li></ul><p>常见术语\</p><ul><li>松耦合（Loose Coupling）：模块间依赖最小化，只通过接口/事件通信</li><li>紧耦合（Tight Coupling）：模块间强依赖，变动风险高</li><li>事件聚合器（Event Aggregator）：集中管理事件订阅/分发的工具</li><li>Service Locator：通过统一容器提供服务（注意与DI的区别）</li></ul><p>优势\</p><table><thead><tr><th>优势</th><th>说明</th></tr></thead><tbody><tr><td>可维护性高</td><td>修改一个模块时，不会影响其他模块</td></tr><tr><td>可测试性强</td><td>可以独立单元测试</td></tr><tr><td>可扩展性好</td><td>可以方便地添加、替换模块</td></tr><tr><td>降低耦合风险</td><td>避免“牵一发而动全身”</td></tr></tbody></table><h2 id=unity中常见的松耦合方式>Unity中常见的松耦合方式</h2><ol><li>事件/委托机制</li></ol><blockquote><p>让监听者注册感兴趣的事件，而不是让对象彼此直接调用</p></blockquote><p>优点：发送者不知道接收者是谁，实现解耦</p><p><a href=blog/Event-Driven-Architecture/>Event and Callback</a></p><ol start=2><li><p>接口与抽象
+编程时面向接口，而不是具体类
+<a href=blog/Interface-Oriented-Design/>Interface Oriented Design</a></p></li><li><p>ScriptableObject作为配置 & 消息中介</p></li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GameEvent</span> : ScriptableObject
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>event</span> Action listeners;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> Raise() =&gt; listeners.Invoke();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> Register(Action callback) =&gt; listeners += callback;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> Unregister(Action callback) =&gt; listeners -= callback;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>中介层完全解耦了调用者与接收者，并且支持在Inspector中配置</p><ol start=4><li>事件聚合器（EventBus/EventAggregator）
+建立一个中心事件系统用于发布和订阅</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>EventBus</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> Dictionary&lt;Type, Delegate&gt; events = <span style=color:#66d9ef>new</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Subscribe&lt;T&gt;(Action&lt;T&gt; callback)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (events.TryGetValue(<span style=color:#66d9ef>typeof</span>(T), <span style=color:#66d9ef>out</span> <span style=color:#66d9ef>var</span> d))
+</span></span><span style=display:flex><span>            events[<span style=color:#66d9ef>typeof</span>(T)] = Delegate.Combine(d, callback);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span> events[<span style=color:#66d9ef>typeof</span>(T)] = callback;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Publish&lt;T&gt;(T data)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(events.TryGetValue(<span style=color:#66d9ef>typeof</span>(T), <span style=color:#66d9ef>out</span> <span style=color:#66d9ef>var</span> d))
+</span></span><span style=display:flex><span>            (d <span style=color:#66d9ef>as</span> Action&lt;T&gt;)?.Invoke(data);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>各模块不直接通信，而是通过EventBus中转</p><ol start=5><li>Service Locator / 依赖注入（DI）
+控制依赖获取的方式，不直接new出对象</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ServiceLocator</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> Dictionary&lt;Type, <span style=color:#66d9ef>object</span>&gt; services = <span style=color:#66d9ef>new</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Register&lt;T&gt;(T service) =&gt; services[<span style=color:#66d9ef>typeof</span>(T)] = service;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> T Get&lt;T&gt;() =&gt; (T)services[<span style=color:#66d9ef>typeof</span>(T)];
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>通过容器获取依赖，模块间没有强依赖</p><h2 id=设计建议>设计建议</h2><p>松耦合的使用场景</p><ul><li>多个模块可能被复用或频繁改动</li><li>多人协作，责任边界需要清晰</li><li>希望支持热更或运行时配置替换</li><li>可能扩展为插件式架构或可配置组件系统</li></ul><p>注意事项</p><ul><li>滥用单例：会造成全局状态污染和耦合加剧</li><li>事件泛滥：太多事件让系统变得难以追踪</li><li>ServiceLocator滥用：会模糊依赖关系，隐藏依赖路径</li><li>模块间隐藏依赖：看似解耦，实则绕路依赖（隐藏依赖路径导致维护困难）</li></ul><p>避免事件泛滥的建议\</p><ul><li>事件命名清晰、语义正确</li><li>尽量使用局部事件系统（局部EventBus或Observer）</li><li>增加注释，标注事件的发送者与接收者模块</li></ul><p>避免 ServiceLocator 滥用\</p><ul><li>配合接口使用，避免隐藏依赖</li><li>在注册服务时记录调用栈或来源模块，便于调试</li></ul><p>组合模式</p><ul><li>事件系统 + 接口编程：解耦逻辑流程与具体执行逻辑</li><li>ScriptableObject + 数据驱动：配置可视化、可热更、可重用</li><li>State Pattern + 接口：实现灵活的FSM</li><li>EventBus + 架构层拆分：构建大型系统（如战斗、任务）</li></ul><h2 id=场景示例>场景示例</h2><p>通过一个“玩家捡金币”的例子来对比“高度耦合”和“解耦后的设计”</p><p><strong>场景描述</strong><br>当玩家(<code>Player</code>)碰到金币(<code>Coin</code>)时：</p><ol><li>金币消失</li><li>播放金币音效</li><li>更新UI显示当前金币数</li></ol><p><strong>高度耦合写法</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Coin</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> OnTriggerEnter(Collider other)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (other.CompareTag(<span style=color:#e6db74>&#34;Player&#34;</span>))
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 增加金币</span>
+</span></span><span style=display:flex><span>            other.GetComponent&lt;Player&gt;().AddGold(<span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 更新UI（耦合 UIManager）</span>
+</span></span><span style=display:flex><span>            FindObjectOfType&lt;UIManager&gt;().UpdateGoldUI();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 播放音效（耦合 AudioManager）</span>
+</span></span><span style=display:flex><span>            FindObjectOfType&lt;AudioManager&gt;().Play(<span style=color:#e6db74>&#34;CoinSound&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 销毁自己</span>
+</span></span><span style=display:flex><span>            Destroy(gameObject);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>问题（紧耦合）：</p><ul><li>依赖Player的具体实现：直接访问Player的方法和组件</li><li>依赖UIManager：Coin强依赖UIManager存在并可访问</li><li>依赖AudioManager：直接调用具体的音效播放逻辑</li><li>可测试性低：单元测试Coin时必须构建完整环境</li><li>拓展困难：若增加一个“金币上报服务器”逻辑，需要修改Coin代码，破坏封装性</li></ul><p><strong>解耦后的设计</strong><br>使用</p><ul><li>接口（如<code>IGoldReceiver</code>）</li><li>事件机制（如<code>GoldCollecttedEvent</code>）</li><li>ScriptableObject（可选）</li></ul><p>Player接收金币逻辑</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>IGoldReceiver</span> =&gt; <span style=color:#66d9ef>void</span> AddGold(<span style=color:#66d9ef>int</span> amount);
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Player</span> : MonoBehaviour, IGoldReceiver
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> gold = <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> AddGold(<span style=color:#66d9ef>int</span> amount)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        gold += amount;
+</span></span><span style=display:flex><span>        EventBus.Publish(<span style=color:#66d9ef>new</span> GoldCollectedEvent(gold));
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Coin逻辑解耦</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Coin</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> OnTriggerEnter(Collider other)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>var</span> receiver = other.GetComponent&lt;IGoldReceiver&gt;();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (receiver != <span style=color:#66d9ef>null</span>)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            receiver.AddGold(<span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>            Destroy(gameObject)l
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>监听事件更新UI</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>UIManager</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> OnEnable() =&gt; EventBus.Subscribe&lt;GoldCollectedEvent&gt;(OnGoldUpdated);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> OnDisable() =&gt; EventBus.UnSubscribe&lt;GoldCollectedEvent&gt;(OnGoldUpdated);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> OnGoldUpdated(GoldCollectedEvent evt) =&gt; goldText.text = <span style=color:#e6db74>$&#34;Gold: {evt.CurrentGold}&#34;</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>播放音效模块</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CoinSoundPlayer</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> OnEnable() =&gt; EventBus.Subscribe&lt;GoldCollectedEvent&gt;(_ =&gt; PlayCoinSound());
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> PlayCoinSound() =&gt; GetComponent&lt;AudioSource&gt;().Play();
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>EventBus实现</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>EventBus</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>readonly</span> Dictionary&lt;Type, Delegate&gt; eventTable = <span style=color:#66d9ef>new</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Subscribe&lt;T&gt;(Action&lt;T&gt; listener)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (eventTable.TryGetValue(<span style=color:#66d9ef>typeof</span>(T), <span style=color:#66d9ef>out</span> <span style=color:#66d9ef>var</span> existingDelegate))
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            eventTable[<span style=color:#66d9ef>typeof</span>(T)] = Delegate.Combine(existingDelegate, listener);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            eventTable[<span style=color:#66d9ef>typeof</span>(T)] = listener;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Unsubscribe&lt;T&gt;(Action&lt;T&gt; listener)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (eventTable.TryGetValue(<span style=color:#66d9ef>typeof</span>(T), <span style=color:#66d9ef>out</span> <span style=color:#66d9ef>var</span> existingDelegate))
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>var</span> newDelegate = Delegate.Remove(existingDelegate, listener);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (newDelegate == <span style=color:#66d9ef>null</span>) eventTable.Remove(<span style=color:#66d9ef>typeof</span>(T));
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span> eventTable[<span style=color:#66d9ef>typeof</span>(T)] = newDelegate;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Publish&lt;T&gt;(T eventData)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (eventTable.TryGetValue(<span style=color:#66d9ef>typeof</span>(T), <span style=color:#66d9ef>out</span> <span style=color:#66d9ef>var</span> d))
+</span></span><span style=display:flex><span>        (d <span style=color:#66d9ef>as</span> Action&lt;T&gt;)?.Invoke(eventData);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> ClearAll() =&gt; eventTable.Clear();
+</span></span></code></pre></div><h2 id=耦合陷阱反例>耦合陷阱（反例）</h2><h3 id=一god-object>一、God Object</h3><p>所有逻辑集中于单一类，模块之间强依赖</p><p>所谓God Object是一个职责过多、控制过多模块的类，它知道系统中几乎所有其他对象的细节，承担太多功能、拥有过多依赖<br>它像“上帝”一样：</p><ul><li>拥有全局控制权</li><li>知道每个模块的内部状态</li><li>什么都要管，什么都要处理</li></ul><p><strong>典型表现</strong></p><ul><li>类文件巨大</li><li>拥有大量字段和方法：涉及UI、逻辑、输入、网络、声音等多个模块</li><li>依赖多：包含多个组件、管理大量GameObject</li><li>经常与单例模式结合：通常是GameManager、MainController这种类</li><li>系统变动时频繁修改它：其他模块功能增加或修改时经常影响这个类</li></ul><p><strong>Gob Object存在的问题</strong></p><ul><li>违背单一职责原则（SRP）：一个类处理太多功能，代码难以理解</li><li>难以维护：修改一个逻辑可能影响多个功能，容易引入bug</li><li>难以测试：不能隔离测试某一部分功能</li><li>拓展性差：新增功能需要不断修改God Object</li><li>强耦合：所有模块紧密依赖，模块无法独立更换</li></ul><p>举个例子：Unity中常见的God Object</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GameManager</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Player player;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> EnemyManager enemyManager;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> UIManager uiManager;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> AudioSource audio;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Update()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (Input.GetKeyDown(KeyCode.P)) PauseGame();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (player.health &lt;= <span style=color:#ae81ff>0</span>) GameOver();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        uiManager.UpdateHealthBar(player.health);
+</span></span><span style=display:flex><span>        enemyManager.SpawnIfNeeded();
+</span></span><span style=display:flex><span>        audio.Play();
+</span></span><span style=display:flex><span>        SaveData();
+</span></span><span style=display:flex><span>        LoadScene();
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// ...管理一切</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> PauseGame() { ... }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> GameOver() { ... }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> SaveData() { ... }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> LoadScene() { ... }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><strong>如何避免或重构God Object</strong></p><ul><li>拆分职责：将逻辑拆分成多个独立的组件或管理类</li><li>使用接口：面向接口编程，避免过多细节暴露给主类</li><li>使用事件系统：让模块之间通过事件通信而不是直接依赖</li><li>使用状态机：将状态相关逻辑分离出去，例如FSM</li><li>避免滥用单例：使用依赖注入、组件引用替代全局访问</li></ul><p>示例：拆分成多个专责管理器</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GameManager</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> IGameState state;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> IEventSystem events;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> IAudioService audio;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> IUIServicce ui;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Start()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        state = <span style=color:#66d9ef>new</span> GameplayState();
+</span></span><span style=display:flex><span>        events.Subscribe&lt;PlayerDeadEvent&gt;(OnPlayerDead);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> OnPlayerDead(PlayerDeadEvent evt)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        state = <span style=color:#66d9ef>new</span> GameOverState();
+</span></span><span style=display:flex><span>        ui.ShowGameOver();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>God Object是一种看似方便，实则代价高昂的设计<br>虽然在项目初期它可能加快开发，但随着功能增长，它将变成维护地狱。好的架构应当遵循SRP、低耦合、高内聚原则，鼓励模块间解耦、职责明确</p><hr><h3 id=二静态工具类滥用>二、静态工具类滥用</h3><p>静态工具类是指包含一系列静态方法、没有实例化的类。它们通常提供全局访问，且不依赖对象的状态。</p><p>这种工具类通常用于提供一些全局的、独立于对象的功能，比如数学运算、字符串处理、文件操作等</p><p>静态工具类滥用指的是将本应该封装在类内部的逻辑功能都放入静态类中，导致多个模块过度依赖静态类的实现细节，进而增加了系统的耦合度和维护难度</p><p><strong>静态工具类滥用的典型表现</strong></p><ul><li>全局可用的静态方法：方法是静态的，可以从任何地方调用</li><li>无状态设计：静态类通常不需要实例化，任何地方都能直接调用</li><li>过多的职责：静态类承担了系统中多个模块的功能，变得越来越庞大</li><li>依赖过度：很多模块之间通过静态类共享状态或实现功能，导致紧耦合</li></ul><p><strong>存在的问题</strong></p><ul><li>增加耦合：静态工具类通常作为全局对象，系统中各模块直接依赖它，导致模块间依赖加剧</li><li>难以测试：静态类的依赖难以模拟和替换，在单元测试中很难注入mock对象，导致测试变得困难</li><li>可维护性差：静态类没有生命周期管理，无法轻松替换，修改静态类可能影响到系统的其他部分，增加了维护难度</li><li>全局状态污染：静态类往往维护全局状态，可能在不同模块间发生意外的状态更改，导致意料之外的结果</li></ul><p>示例：静态工具类滥用</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GameUtils</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> SaveGameData(GameData data)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// save data</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> LoadGameData(<span style=color:#66d9ef>out</span> GameData data)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// load data</span>
+</span></span><span style=display:flex><span>        data = <span style=color:#66d9ef>new</span> GameData();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> PlaySound(<span style=color:#66d9ef>string</span> soundName)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// play sfx</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> ShowMessage(<span style=color:#66d9ef>string</span> message)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// show</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><code>GameUtils</code> 静态类包含了与游戏数据、音效和消息展示相关的多个功能。任何地方只需要调用 <code>GameUtils.SaveGameData()</code> 或 <code>GameUtils.PlaySound()</code> 就能执行这些操作，但是这种方式导致了以下问题：</p><ul><li>难以测试：无法为这些方法编写单元测试，因为它们不依赖于具体的对象</li><li>系统耦合过高：任何模块都可以直接访问这些静态方法，导致模块间的紧耦合</li><li>扩展困难：如果要添加新的功能（如新增一种保存方式或新的音效系统），需要修改<code>GameUtils</code>类，这回影响到所有依赖它的模块</li></ul><p><strong>避免方式</strong></p><ul><li>封装功能于具体类</li></ul><p>避免将所有功能集中在一个静态类中，应该根据职责将功能分离到不同类中</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GameDataManager</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> Save(GameData data)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 保存游戏数据</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> GameData Load()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 加载游戏数据</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> GameData();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>AudioManager</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> PlaySound(<span style=color:#66d9ef>string</span> soundName)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 播放音效</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MessageManager</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> ShowMessage(<span style=color:#66d9ef>string</span> message)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 显示消息</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ul><li>依赖注入</li></ul><p>通过DI，将类之间的依赖关系明确化，避免通过静态方法共享状态</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GameController</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>readonly</span> GameDataManager dataManager;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>readonly</span> AudioManager audioManager;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>readonly</span> MessageManager messageManager;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> GameController(GameDataManager dataManager, AudioManager audioManager, MessageManager messageManager)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.dataManager = dataManager;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.audioManager = audioManager;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.messageManager = messageManager;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> SaveGame(GameData data)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        dataManager.Save(data);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> PlayGameOverSound()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        audioManager.PlaySound(<span style=color:#e6db74>&#34;GameOver&#34;</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> ShowGameOverMessage()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        messageManager.ShowMessage(<span style=color:#e6db74>&#34;Game Over&#34;</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ul><li>使用单例模式</li></ul><p>如果某些功能确实需要全局唯一的实例来管理（如音效、UI管理），可以使用单例模式，但要避免滥用</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>AudioManager</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> AudioManager instance;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> AudioManager() { }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> AudioManager Instance =&gt; instance ??= <span style=color:#66d9ef>new</span> AudioManager();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> PlaySound(<span style=color:#66d9ef>string</span> soundName)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 播放音效</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ul><li>将状态和行为分离</li></ul><p>避免在工具类中维护全局状态。如果工具类必须有状态，应考虑将行为分离到独立类中</p><hr><h3 id=三find滥用>三、Find滥用</h3><p>在Unity项目中过度使用<code>GameObject.Find</code>，<code>GameObject.FindWithTag</code>等函数进行对象查找，虽然这些方法在开发初期方便使用，但过度使用<code>Find</code>会导致性能问题、模块间耦合和维护困难，特别是在大型项目和动态场景中</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>GameObject palyer = GameObject.Find(<span style=color:#e6db74>&#34;Player&#34;</span>);
+</span></span></code></pre></div><p>这种做法意味着不需要直接引用对象，可以在任何地方调用<code>Find</code>来查找目标对象。然而，这种方式带来了一些潜在的问题，特别是当使用不当时</p><p><strong>Find滥用导致的问题</strong></p><ol><li><code>GameObject.Find</code>和<code>FindWithTag</code>会在每次调用时遍历场景中的所有对象，特别是在大型场景中，每次调用都会造成性能开销。这种操作是O(n)，意味着当场景中的对象数量增加时，查找时间也会增加<br>例如，如果在<code>Update</code>方法中每帧都调用<code>Find</code>，系统的帧率就会下降，尤其是在包含大量游戏对象时</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>void</span> Update()
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    GameObject player = GameObject.Find(<span style=color:#e6db74>&#34;Player&#34;</span>); <span style=color:#75715e>// 每帧调用Find</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (player != <span style=color:#66d9ef>null</span>)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// do something</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>这种做法显然会带来性能瓶颈，尤其在大型场景或性能较差的设备上更为明显
+2. 缺乏明确的依赖关系
+<code>GameObject.Find</code>查找对象的方式是通过名字或标签进行的，这使得代码中的依赖关系变得不清晰。调用<code>Find</code>时，代码没有明确显示出依赖的对象或组件，这降低了代码的可读性和可维护性<br>例如，通过<code>GameObejct.Find("Player")</code>查找玩家对象时，调用者并不明确知道<code>player</code>是如何创建和管理的。这种隐式依赖使得模块之间的关系不明确，增加了后续修改时的难度
+3. 难以管理动态场景中的对象
+在动态场景中，游戏对象可能会频繁地被创建或销毁。使用<code>Find</code>查找的对象通常是基于名字或标签来定位的，这会带来问题
+- 如果在对象销毁后调用<code>Find</code>，可能会导致空引用错误
+- 如果场景中的对象在运行时被创建或销毁，<code>Find</code>的返回结果可能会出现不一致，导致错误
+4. 难以测试和模拟
+由于<code>Find</code>使得模块之间没有显式的依赖，导致在单元测试时很难模拟或替换被查找的对象。测试需要创建环境、准备测试数据，而不能轻松地注入mock或替代对象
+5. 难以进行重构
+<code>Find</code>使用字符串或标签进行查找，当场景发生变化时，所有依赖这些名字或标签的代码都会受到影响。这使得重构或修改场景时，系统中的多个地方可能需要修改，增加了维护的难度</p><p><strong>如何避免Find滥用</strong></p><ol><li>使用直接引用
+避免通过<code>Find</code>查找对象，而是通过将对象引用赋给变量。这样可以减少查找时的性能开销，并且使依赖关系更加明确</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GameController</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> GameObject player;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Update()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (player != <span style=color:#66d9ef>null</span>)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// do something</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>通过这种方式，<code>GameController</code>直接引用<code>player</code>对象，避免了每帧查找的性能问题，并且<code>player</code>的依赖关系更加清晰
+2. 使用单例模式（如果适用）
+对于全局唯一的对象（例如音频管理器、UI管理器），可以使用单例模式。这些对象只需在项目中实例化一次，可以避免每次使用时都调用<code>Find</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Player</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> Player instance;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> Player Instance =&gt; instance ??= FindObjectOfType&lt;Player&gt;();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Awake()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (instance != <span style=color:#66d9ef>null</span> &amp;&amp; instance != <span style=color:#66d9ef>this</span>) Destroy(gameObject);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span> instance = <span style=color:#66d9ef>this</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>通过单例模式，其他类可以通过<code>Player.Instance</code>获取<code>Player</code>对象，而不是通过<code>Find</code>来查找
+3. 使用事件和消息机制
+在一些情况下，使用事件和消息机制可以替代<code>Find</code>的需求。模块之间可以通过发布-订阅模式进行通信，而不需要直接引用对方的对象<br>例如，可以使用<code>ScriptableObject</code>作为事件总线，发布和订阅消息</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ScoreManager</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> EventBus eventBus;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> OnEnable() =&gt; eventBus.Subscribe&lt;ScoreUpdateEvent&gt;(OnScoreUpdated);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> OnDisable() =&gt; eventBus.UnSubscribe&lt;ScoreUpdateEvent&gt;(OnScoreUpdated);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> OnScoreUpdated(ScoreUpdatedEvnet e) =&gt; Debug.Log(<span style=color:#e6db74>&#34;New Score: &#34;</span> + e.score);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>这样，<code>ScoreManager</code>不需要直接查找其他对象，而是通过事件来获取更新
+4. 缓存查找结果
+如果必须使用<code>Find</code>，避免频繁查找，可以在对象首次查找时将结果缓存，这样后续就不需要每次都进行查找</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GameController</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> GameObject player;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Start() =&gt; player = GameObject.Find(<span style=color:#e6db74>&#34;Player&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Update()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (player != <span style=color:#66d9ef>null</span>)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// do something</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>通过这种方式，只在<code>Start</code>或<code>Awake</code>中调用<code>Find</code>，避免每帧都调用
+5. 对象池（Object Pool）
+如果需要频繁创建和销毁对象（例如敌人或子弹），考虑使用对象池来管理这些对象。通过对象池管理，可以避免频繁使用<code>Find</code>查找对象</p><hr><h3 id=四单例滥用>四、单例滥用</h3><p>在开发过程中，过度或不当使用单例模式，导致系统中的多个模块或对象都依赖于全局唯一的实例，进而导致系统高度耦合、不可测试性和维护困难等问题。单例模式本身是一种常用的设计模式，但如果使用不当，它会成为一个反模式</p><p><strong>单例滥用出现的问题</strong></p><ol><li>系统耦合度过高
+单例模式同全局共享实例使得多个类之间的依赖关系变得隐式。当多个模块都依赖同一个单例时，这些模块之间的关系并不清晰，很难理解、调试和维护。例如，假如每个模块都访问<code>GameMnanger</code>，但它们并没有显式声明对<code>GameManager</code>的依赖，这使得代码变得更加难以理解<br>示例：多个系统共享一个单例，难以看出它们时如何协作的</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>AudioManager</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> PlaySound(<span style=color:#66d9ef>string</span> soundName) =&gt; GameManager.Instance.PlaySound(soundName); <span style=color:#75715e>// 隐式依赖，难以追踪</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>UIManager</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> UpdateUI() =&gt; GameManager.Instance.UpdateUI(); <span style=color:#75715e>// 隐式依赖</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ol start=2><li>违反单一职责原则（SRP）
+单例类往往承担着过多的职责。通常，为了满足各种需求，单例类被设计得非常庞大，涵盖多个功能，从而导致类得职责不单一<br>示例：<code>GameManager</code>既负责游戏逻辑，又负责管理音频、UI和配置，这违反了单一职责原则</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GameManager</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> StartGame() { <span style=color:#75715e>/* 启动游戏逻辑 */</span> }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> PlaySound(<span style=color:#66d9ef>string</span> soundName) { <span style=color:#75715e>/* 播放音效 */</span> }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> UpdateUI() { <span style=color:#75715e>/* 更新UI */</span> }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> LoadConfiguration() { <span style=color:#75715e>/* 加载配置 */</span> }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>这样得设计使得类变得庞大且难以维护，添加新功能时，往往需要修改单例类，增加了修改的复杂性<br>3. 减低可测试性
+由于单例模式会在整个应用中共享一个实例，它使得依赖于单例的类变得紧耦合且难以进行单元测试。测试时很难替换单例实例，从而导致测试变得复杂和不灵活<br>假如，假设需要测试<code>UIManager</code>，它直接依赖<code>GameManger</code>的单例，但无法在测试中轻松地替换<code>GameManger</code>，或者模拟它的行为
+4. 隐藏依赖关系
+单例模式使得类之间的依赖关系变得隐式。其他类直接通过单例访问共享资源，没有显式声明对它的依赖，这导致了系统中的隐式依赖链，这些依赖关系难以追踪和修改<br>例如，<code>Player</code>和<code>GameManager</code>之间的依赖关系可能看不出来，但它们都依赖于<code>GameManager</code>单例。修改单例时可能影响到多个模块</p><ol start=5><li>全局状态污染
+单例类通常维护全局状态，且这个状态对所有模块共享。当多个模块都修改单例的状态时，可能导致全局状态的不一致，在多线程或多场景的情况下尤为显著。全局状态带来了不可预期的副作用，尤其在大型项目中，管理全局状态变得非常复杂<br>例如，如果<code>GameManager</code>维护了玩家的分数和进度，多个场景的模块都可能修改这些数据，导致数据冲突或覆盖</li></ol><p><strong>如何避免单例滥用</strong></p><ol><li><p>仅在需要时使用单例模式
+单例模式应该仅用于全局唯一且需要共享的资源。例如，音频管理器、配置管理器、日志记录器等时典型的单例应用场景。如果一个类有多个实例或者能通过依赖注入获取到合适的对象，就不应该使用单例模式</p></li><li><p>避免单例类承担过多的责任
+单例类应该有明确且单一的职责。如果一个单例类涉及过多领域，考虑将其拆分成多个单例，或将其拆分为多个类，通过依赖注入来管理它们之间的关系<br>例如，<code>GameManager</code>不应该同时负责音频、UI和游戏逻辑。应该考虑将音频管理和UI更新拆分为不同的管理类，避免单一类承担过多责任</p></li><li><p>使用依赖注入（DI）
+如果模块需要共享某些资源，可以考虑使用依赖注入（DI）来显式声明类的依赖关系，而不是使用单例。通过DI，可以显式地管理依赖，避免隐式共享实例，从而减少系统的耦合度</p></li></ol><p>例如，使用<code>Zenject</code>或其他DI框架，确保类的依赖通过构造函数传入，而不是直接从实例中获取</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GameController</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>readonly</span> IAudioManager audioManager;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> GameController(IAudioManager audioManager)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.audioManager = audioManager;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ol start=4><li>使用事件和消息机制
+当多个模块需要共享状态时，考虑使用事件和消息机制来进行解耦。通过事件总线（如<code>ScriptableObject</code>或<code>EventBus</code>），模块可以发布和订阅消息，而不需要通过单例直接访问全局</li><li>为单例提供生命周期管理
+当使用单例时，确保管理其生命周期。如果一个单例涉及较为复杂的操作或状态时，考虑使用延迟初始化或生命周期控制，避免单例在不需要时长时间占用资源</li></ol><hr><h3 id=五事件滥用>五、事件滥用</h3><p>事件滥用是指在系统中过度或不恰当地使用事件机制，导致代码变得复杂、难以调试和维护。事件机制本身是一个强大的解耦工具，可以让对象之间进行异步通信，而无需直接引用对方。然而，如果过度使用或不合理涉及事件系统，会带来一些严重的反模式问题</p><p>会导致以下问题：</p><ol><li>过度解耦导致逻辑分散
+事件的一个重要优点是解耦，它能减少模块之间的直接依赖。但如果系统中使用过多的事件来处理逻辑，逻辑会变得分散，模块之间的执行流程不再直观。过多的事件使代码的控制流变得不明确，导致系统的行为变得难以追踪和调试</li></ol><p>示例：系统的多个地方都通过事件通知其他模块，导致事件触发的流程复杂且难以调试。事件从哪里发布、在哪里订阅、如何触发，变得非常难以理解</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Player</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>event</span> Action OnPlayerDied;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Die() =&gt; OnPlayerDied?.Invoke();
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>多个模块订阅<code>OnPlayerDied</code>，但没有明确知道死因或响应的具体流程<br>2. 事件泛滥导致维护困难
+事件滥用的一个常见问题是系统中有大量的事件。每个事件都可能由多个订阅者监听，而每个订阅者可能对事件做出不同的响应。随着项目的发展，事件的数量和复杂性也会增加，难以管理和维护</p><p>示例：项目中有大量的事件来处理各种细节，比如UI更新、敌人死亡、玩家得分、音效播放等。事件增多后，系统难以追踪哪些模块订阅了哪些事件，以及它们的执行顺序</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>UIManager</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> OnEnable()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        EventManager.Subscribe&lt;PlayerDiedEvent&gt;(OnPlayerDied);
+</span></span><span style=display:flex><span>        EventManager.Subscribe&lt;ScoreUpdatedEvent&gt;(OnScoreUpdated);
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 事件过多，管理变得复杂</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> OnDisable()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        EventManager.Unsubscribe&lt;PlayerDiedEvent&gt;(OnPlayerDied);
+</span></span><span style=display:flex><span>        EventManager.Unsubscribe&lt;ScoreUpdatedEvent&gt;(OnScoreUpdated);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ol start=3><li>性能问题
+当系统中有大量事件发生时，尤其是事件需要频繁触发时，性能会受影响。每次事件触发时，都需要遍历所有的订阅者并调用它们的处理函数，这可能导致额外的开销。如果事件过于频繁地触发，特别是在帧更新中，会导致显著的性能下降
+示例：每帧触发的事件会让系统的响应时间增加，导致游戏卡顿或帧率下降</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Enemy</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Update()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 每帧都触发，可能导致性能问题</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (isDead)
+</span></span><span style=display:flex><span>            OnEnemyDeath?.Invoke();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ol start=4><li>难以追踪和调试
+事件是异步的，并且通常是解耦的，这使得它们很难追踪。在出现问题时，事件的触发和响应往往分布在不同的模块中，导致调试时难以找到问题的根源</li></ol><p>示例：当一个游戏中的角色死亡时，多个事件订阅者可能会执行各自的任务，如播放音效、更新UI、保存状态等。出问题时，无法清晰地看到这些操作的执行顺序和相互关系</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>AudioManageer</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> PlaySound(<span style=color:#66d9ef>string</span> soundName)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 播放音效</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>UIManager</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> UpdateScore(<span style=color:#66d9ef>int</span> score)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 更新UI</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>当玩家死亡时，多个事件会被触发，而调试时很难看到这些事件之间的相互关系
+5. 订阅和取消订阅的复杂性
+在事件系统中，订阅和取消订阅需要手动管理。订阅者忘记取消订阅或重复订阅相同事件会导致内存泄露或逻辑错误。尤其是在复杂的项目中，忘记取消订阅的情况可能会导致订阅者接收到不再需要的事件，进而产生不必要的副作用</p><p><strong>如何避免</strong></p><ol><li>限制事件的数量
+应根据项目的需求合理设计事件。避免事件泛滥，应避免为了每个小变化或每个模块之间的微小交互都引入事件。将事件仅限于哪些真正需要解耦的场景或行为，比如跨系统的消息传递、系统状态变化等<br>例如只为游戏的核心事件（如玩家死亡、场景加载等）创建事件，而不是每次UI元素更新、物体状态改变等都发布事件</li><li>事件命名清晰，职责明确
+确保每个事件的命名和用途都非常清晰。在定义事件时，保持事件的语义明确，并确保它们仅用于特定的场景或业务逻辑。避免使用模糊不清的事件名称，使得订阅者能够清楚知道何时该响应<br>例如<code>OnPlayerDeath</code>比<code>OnStateChanged</code>更加明确，后者可能意味着多种状态的改变，而前者明确指明了时玩家死亡事件</li><li>避免频繁触发事件
+避免在每帧或过于频繁的情况下触发事件。尤其是在性能敏感的地方（如<code>Update</code>方法中），事件触发的频率要控制好，避免产生额外的性能负担<br>确保只有在真正需要的时候触发事件，而不是每帧都触发</li><li>事件处理应该简洁
+事件订阅者的响应函数应该保持简洁，不要在事件响应中执行复杂或耗时的操作。可以通过将复杂的逻辑分离成独立的模块来避免事件处理函数过于臃肿<br>将音效播放、UI更新、游戏进度保存等操作分离成独立的模块，而不是在事件响应函数中直接处理所有逻辑</li><li>使用事件总线</li><li>清理不再需要的事件订阅
+确保在适当的时候取消事件的订阅。比如在场景切换或对象销毁时，及时取消订阅事件，避免事件响应函数仍然被触发，从而造成内存泄露或逻辑错误</li></ol><h2 id=总结>总结</h2><p>松耦合是一种重要的架构思想，在Unity开发中具有实际意义</p><p>通过事件机制、接口抽象、ScriptableObject和事件聚合器等手段，可以构建出更加灵活、可维护、可扩展的系统</p><p><strong>解耦不是目的，而是为应对复杂性而采取的策略</strong></p></div><nav class=post-nav><a href=/engine/lib/layout/ class=hover:underline>pre: Layout</a>
+<a href=/engine/lib/mask/ class=hover:underline>next: Mask</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#unity中常见的松耦合方式>Unity中常见的松耦合方式</a></li><li><a href=#设计建议>设计建议</a></li><li><a href=#场景示例>场景示例</a></li><li><a href=#耦合陷阱反例>耦合陷阱（反例）</a><ul><li><a href=#一god-object>一、God Object</a></li><li><a href=#二静态工具类滥用>二、静态工具类滥用</a></li><li><a href=#三find滥用>三、Find滥用</a></li><li><a href=#四单例滥用>四、单例滥用</a></li><li><a href=#五事件滥用>五、事件滥用</a></li></ul></li><li><a href=#总结>总结</a></li></ul></li></ul></nav></aside><script src=/js/scrollspy.js defer></script><script type=module>
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ 
+    startOnLoad: true, theme: "default" });
+</script><footer><div class=container><p>© 2026 Jeff Lee(ljf12825). All rights reserved |
+<a href=https://creativecommons.org/licenses/by-nc-sa/4.0/>Article: CC BY-NC-SA 4.0</a> |
+<a href=https://creativecommons.org/licenses/by-sa/4.0/>Content: CC BY-SA 4.0</a> |
+<a href=https://opensource.org/licenses/MIT>Code: MIT License</a> |
+<a href=/LICENSES.md>Full License</a></p></div></footer></body></html>
