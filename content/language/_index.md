@@ -4,9 +4,11 @@ type: language
 
 # language
 
+## INCLUDE
+
 - C++
 - Rust
-- programming language
-- foreign language
+- Lua
+- programming language development
 
 ---
