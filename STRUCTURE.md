@@ -44,7 +44,6 @@
 - .NET-Windows
   - .NET
   - C#
-  - Windows API
   - VS
   - VSCode
   - PowerShell

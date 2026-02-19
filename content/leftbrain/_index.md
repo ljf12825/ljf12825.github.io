@@ -1,10 +1,8 @@
 ---
-type: csbasic
+type: leftbrain
 ---
 
-# csbasic
-
-Computer Science Basics
+# leftbrain
 
 ## INCLUDE
 
