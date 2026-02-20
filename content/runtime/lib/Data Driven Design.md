@@ -1,7 +1,7 @@
 ﻿---
 title: "Data Driven Design(DDD)"
 date: 2025-06-01
-categories: [Note]
+categories: [Project]
 tags: [Unity, Architecture]
 author: "ljf12825"
 type: blog

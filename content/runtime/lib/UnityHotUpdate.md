@@ -1,8 +1,8 @@
 ﻿---
-title: "Hot Update"
+title: Unity Hot Update
 date: 2025-06-01
-categories: [Note]
-tags: [Unity, Hot Update]
+categories: [Engine]
+tags: [Unity, Hot Update, Lua]
 author: "ljf12825"
 type: blog
 summary: Introduction to hot update ideas and several commonly used hot update methods

@@ -1,7 +1,7 @@
 ﻿---
 title: "Material"
 date: 2025-05-31
-categories: [Note]
+categories: [Engine]
 tags: [Unity, Material, Graphics]
 author: "ljf12825"
 type: blog

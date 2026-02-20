@@ -1,7 +1,7 @@
 ﻿---
 title: "Unity Invisible Trap"
 date: 2025-06-01
-categories: [Debug]
+categories: [Engine]
 tags: [Unity, Debug Log]
 author: "ljf12825"
 type: blog

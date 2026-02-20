@@ -1,7 +1,7 @@
 ﻿---
 title: "Prefab System"
 date: 2025-05-31
-categories: [Note]
+categories: [Engine]
 tags: [Unity, Unity System]
 author: "ljf12825"
 type: blog

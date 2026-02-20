@@ -1,7 +1,7 @@
 ﻿---
 title: "Terrain"
 date: 2025-06-01
-categories: [Note]
+categories: [Engine]
 tags: [Unity, Rendering, Unity System, Component]
 author: "ljf12825"
 type: blog

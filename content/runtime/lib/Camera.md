@@ -1,7 +1,7 @@
 ﻿---
 title: "Camera"
 date: 2025-05-28
-categories: [Note]
+categories: [Engine]
 tags: [Unity, Component]
 author: "ljf12825"
 type: blog

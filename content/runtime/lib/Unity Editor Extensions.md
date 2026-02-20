@@ -1,7 +1,7 @@
 ﻿---
 title: "Unity Editor Extensions"
 date: 2025-06-01
-categories: [Note]
+categories: [Engine]
 tags: [Unity, Editor, Tool]
 author: "ljf12825"
 type: blog

@@ -1,7 +1,7 @@
 ﻿---
 title: "Light"
 date: 2025-05-29
-categories: [Note]
+categories: [Engine]
 tags: [Unity, Component, Light, Rendering, Graphics]
 author: "ljf12825"
 type: blog

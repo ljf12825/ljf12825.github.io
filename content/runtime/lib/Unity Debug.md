@@ -1,7 +1,7 @@
 ﻿---
 title: "Unity Debug"
 date: 2025-06-01
-categories: [Note]
+categories: [Engine]
 tags: [Unity, Unity Tool]
 author: "ljf12825"
 type: blog

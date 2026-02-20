@@ -1,7 +1,7 @@
 ﻿---
 title: "Assets Import and Load"
 date: 2025-06-01
-categories: [Note]
+categories: [Engine]
 tags: [Unity, Asset]
 author: "ljf12825"
 type: blog

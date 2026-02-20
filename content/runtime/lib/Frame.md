@@ -1,7 +1,7 @@
 ﻿---
 title: "Frame"
 date: 2025-06-01
-categories: [Note]
+categories: [Engine]
 tags: [Unity, Rendering, Graphics]
 author: "ljf12825"
 type: blog

@@ -1,8 +1,8 @@
 ﻿---
 title: "Unity Build-in Types"
 date: 2025-06-01
-categories: [Note]
-tags: [Unity, Unity System]
+categories: [Engine]
+tags: [Unity, Unity System, Syntax, Class]
 author: "ljf12825"
 type: blog
 summary: Unity build-in types

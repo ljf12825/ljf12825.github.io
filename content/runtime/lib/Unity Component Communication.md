@@ -1,7 +1,7 @@
 ﻿---
 title: "Unity Component Communication"
 date: 2025-06-01
-categories: [Note]
+categories: [Engine]
 tags: [Unity, Syntax, Class]
 author: "ljf12825"
 type: blog

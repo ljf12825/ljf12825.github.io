@@ -1,11 +1,11 @@
 ﻿---
-title: "Model"
+title: Mixamo Model
 date: 2025-06-01
-categories: [Note]
-tags: [Unity, Component, Physics System]
+categories: [Toolchains]
+tags: [Model]
 author: "ljf12825"
 type: blog
-summary: Introduction Model and Model in Unity
+summary: Generate model by Mixamo
 ---
 
 ## Articulation Body

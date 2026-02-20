@@ -1,8 +1,8 @@
 ﻿---
 title: "Transform"
 date: 2025-05-28
-categories: [Note]
-tags: [Unity, Component]
+categories: [Engine]
+tags: [Unity, Component, Class]
 author: "ljf12825"
 type: blog
 summary: Unity's class and component Transform

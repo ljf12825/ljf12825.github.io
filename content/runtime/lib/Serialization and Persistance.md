@@ -1,7 +1,7 @@
 ﻿---
 title: "Serialization and Persistence"
 date: 2025-06-01
-categories: [Note]
+categories: [Engine]
 tags: [Unity]
 author: "ljf12825"
 type: blog

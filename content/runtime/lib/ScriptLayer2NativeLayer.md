@@ -1,7 +1,7 @@
 ﻿---
 title: "Script Layer to Native Layer"
 date: 2025-06-01
-categories: [Note]
+categories: [Engine]
 tags: [Unity, Underlying Principle]
 author: "ljf12825"
 type: blog

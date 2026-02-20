@@ -1,7 +1,7 @@
 ---
 title: "C# in Unity"
 date: 2025-06-01
-categories: [Note]
+categories: [Engine]
 tags: [Unity, C#]
 author: "ljf12825"
 type: blog

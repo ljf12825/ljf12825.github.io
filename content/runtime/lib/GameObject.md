@@ -1,7 +1,7 @@
 ﻿---
 title: "GameObject"
 date: 2025-05-28
-categories: [Note]
+categories: [Engine]
 tags: [Unity, GameObject]
 author: "ljf12825"
 type: blog
