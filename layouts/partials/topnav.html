@@ -3,8 +3,8 @@
 {{ if eq $sec "graphic" }}
   {{ partial "topnav/graphic.html" . }}
 
-{{ else if eq $sec "framework" }}
-  {{ partial "topnav/framework.html" . }}
+{{ else if eq $sec "runtime" }}
+  {{ partial "topnav/runtime.html" . }}
 
 {{ else if eq $sec "unixlike" }}
   {{ partial "topnav/unixlike.html" . }}
@@ -29,9 +29,6 @@
 
 {{ else if eq $sec "home" }}
   {{ partial "topnav/home.html" . }}
-
-{{ else if eq $sec "engine" }}
-  {{ partial "topnav/engine.html" . }}
 
 {{ else if eq $sec "language" }}
   {{ partial "topnav/language.html" . }}
