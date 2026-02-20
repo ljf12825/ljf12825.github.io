@@ -1,0 +1,207 @@
+<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>Design Patterns in Game Development</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/blogsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/runtime/>★</a></li><li><a href=/runtime/lab/>Lab</a></li><li><a href=/runtime/lib/>Lib</a></li><li><a href=/runtime/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><pre class=ascii>
++——————————————————————————————————————————————————————————————+
+|                        <a class=nav-item data-path=/rightbrain/ href=/rightbrain/>RightBrain</a>                            |
+|                             |                                |
+|                             |     <a class=nav-item data-path=/dotnetandwindows/ href=/dotnetandwindows/>.NET-Windows</a>               |
+|                             |    /                           |
+|                             |   /                            |
+|                             |  /                             |
+|                             | /                              |
+|                             |/                               |
+|      <a class=nav-item data-path=/graphic/ href=/graphic/>Graphic</a> ———————————— <a class=nav-item data-path=/home/ href=/home/>Home</a> ————————————— <a class=nav-item data-path=/runtime/ href=/runtime/>Runtime</a>         |
+|                            /|                                |
+|                           / |                                |
+|                          /  |                                |
+|                         /   |       <a class=nav-item data-path=/language/ href=/language/>Language</a>                 |
+|                        /    |      /                         |
+|                       /     |     /                          |
+|              <a class=nav-item data-path=/unixlike/ href=/unixlike/>Unix-like</a>      |    /           <a class=nav-item data-path=/project/ href=/project/>Project</a>         |
+|                             |   /            <a class=nav-item data-path=/miscellaneous/ href=/miscellaneous/>Miscellaneous</a>   |
+|                        <a class=nav-item data-path=/leftbrain/ href=/leftbrain/>LeftBrain</a>             <a class=nav-item data-path=/ai/ href=/ai/>AI</a>              |
++——————————————————————————————————————————————————————————————+
+    </pre></nav><script defer src=/js/star-nav.js></script><script defer src=/js/site.js></script><script defer src=/js/star-active.js></script><div id=ref-window class="float-window open"><div class=float-header><span class="title open">>> >> >> Reference &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Ref>>>>>></span></div><div class=float-body><div class=ref-list><a href=https://www.mixamo.com/ target=_blank>Mixamo</a> |
+<a href=https://opengameart.org/ target=_blank>OpenGameArt</a><p><a href=https://sharplab.io/ target=_blank>SharpLab</a> |
+<a href=https://godbolt.org/ target=_blank>Compiler Explorer</a></p><p><a href="https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type+Something+&x=none&v=4&h=4&w=80&we=false" target=_blank>ASCII Graph Generator</a></p><p><a href=https://mermaid.js.org/ target=_blank>Mermaid</a></p><a href=https://www.vim.org/ target=_blank>Vim</a> | <a href=https://vimdoc.sourceforge.net/ target=_blank>Vim Manual Source</a> |
+<a href=https://vimcdoc.sourceforge.net/ target=_blank>Vimcdoc</a> | <a href=https://vimcdoc.sourceforge.net/doc/help.html target=_blank>Vimdoc read online</a><p><a href=https://shields.io/ target=_blank>Shields.io</a></p><p><a href=https://emojidb.org/ target=_blank>EmojiDB</a></p><p><a href=https://cppreference.com/ target=_blank>cppreference</a></p><p><a href=https://gcc.gnu.org/onlinedocs/ target=_blank>GCC Docs</a></p><p><a href=https://clang.llvm.org/docs/ target=_blank>Clang Docs</a></p><p><a href=https://www.boost.org/libraries/ target=_blank>Boost Library Docs</a></p><p><a href=https://learn.microsoft.com/en-us/dotnet/csharp/ target=_blank>Microsoft Learn</a><p><a href=https://www.lua.org/manual/5.4/ target=_blank>Lua 5.4 Reference Manual</a><p><a href=https://docs.unity3d.com/Manual/index.html target=_blank>Unity Manual</a> |
+<a href=https://docs.unity3d.com/ScriptReference/index.html target=_blank>Unity API</a></p><p><a href=https://docs.unrealengine.com/ target=_blank>Unreal Engine Docs</a></p><p><a href=https://godotengine.org target=_blank>Godot</a> |
+<a href=https://docs.godotengine.org/en/stable/ target=_blank>Godot Docs</a></p><p><a href=https://z-library.sk/ target=_blank>Z-Library</a> : eBook Library</p><p><a href=https://docs.kernel.org/ target=_blank>Linux Kernel Docs</a></p><p><a href=https://www.gnu.org/ target=_blank>GNU</a> : manuals, philosophy, FAQ</p><a href=https://archlinux.org/ target=_blank>ArchLinux</a><p><a href=https://help.ubuntu.com/ target=_blank>Ubuntu Doc</a> |
+<a href=https://ubuntu.com/server/docs target=_blank>Ubuntu Server Guide</a></p><p><a href=https://www.vulkan.org/ target=_blank>Vulkan</a> |
+<a href=https://docs.vulkan.org/ target=_blank>Vulkan Docs</a></p><p><a href=https://www.opengl.org/ target=_blank>OpenGL</a> |
+<a href=https://registry.khronos.org/OpenGL target=_blank>OpenGL API</a> |
+<a href=https://www.khronos.org/opengl/wiki/ target=_blank>OpenGL Wiki</a></p><p><a href=https://learn.microsoft.com/en-us/windows/win32/directx target=_blank>DirectX</a></p><p><a href=https://www.realtimerendering.com/ target=_blank>Real-Time Rendering</a></p><p><a href=https://www.pbr-book.org/ target=_blank>Physically Based Rendering</a></p><p><a href=https://www.scratchapixel.com/ target=_blank>Scratchapixel</a></p><p><a href=https://learnopengl.com/ target=_blank>LearnOpenGL</a></p><p><a href=https://raytracing.github.io/ target=_blank>Ray Tracing in One Weekend</a></p><p><a href=https://www.shadertoy.com/ target=_blank>Shadertoy</a></p><p><a href=https://arxiv.org/list/cs.GR/recent target=_blank>arXiv Graphics</a></p><p><a href=https://www.siggraph.org/ target=_blank>SIGGRAPH</a> |
+<a href=https://dl.acm.org/conference/siggraph target=_blank>SIGGRAPH Digital Library</a></p><p><a href=https://git-scm.com/ target=_blank>Git</a> |
+<a href=https://git-scm.com/doc target=_blank>Docs</a> |
+<a href=https://git-scm.com/community target=_blank>Community</a></p></div></div></div><script src=/js/ref-window.js></script><article class=single_article><div class=title>Design Patterns in Game Development<div class=meta>Update: 2025-06-01
+>> Creator：ljf12825</div></div><div class=content><p>游戏开发中，设计模式是组织代码、提升可维护性、扩展性和复用性的基础工具。尤其是大型游戏项目或使用Unity、Unreal等引擎开发时，恰当使用设计模式能显著提高架构质量</p><p>基于Gof23种设计模式，常用于游戏开发的设计模式有以下几种：</p><table><thead><tr><th>分类</th><th>模式</th><th>用途</th></tr></thead><tbody><tr><td><strong>创建型</strong></td><td>Singleton（单例）</td><td>管理全局状态（如 GameManager、AudioManager）</td></tr><tr><td></td><td>Factory Method（工厂方法）</td><td>创建敌人、道具、技能等实例</td></tr><tr><td></td><td>Prototype（原型）</td><td>克隆预制体、生成技能副本等</td></tr><tr><td></td><td>Object Pool（对象池）</td><td>管理大量频繁生成/销毁的对象（子弹、特效）</td></tr><tr><td><strong>结构型</strong></td><td>Component（组件）</td><td>Unity核心模式（基于组合而非继承）</td></tr><tr><td></td><td>Decorator（装饰器）</td><td>给技能、Buff添加额外效果</td></tr><tr><td></td><td>Flyweight（享元）</td><td>减少内存（如重复使用同一 Mesh、材质）</td></tr><tr><td><strong>行为型</strong></td><td>State（状态机）</td><td>角色状态切换（Idle、Run、Jump、Attack）</td></tr><tr><td></td><td>Observer（观察者）</td><td>UI监听角色属性变化、事件派发系统</td></tr><tr><td></td><td>Command（命令）</td><td>实现撤销/重做、输入缓存、动作序列</td></tr><tr><td></td><td>Strategy（策略）</td><td>多种AI行为切换，技能释放策略等</td></tr><tr><td></td><td>EventBus（事件总线）</td><td>解耦不同系统的事件通信（如成就、音效）</td></tr><tr><td></td><td>Mediator（中介者）</td><td>管理复杂交互系统（UI面板交互）</td></tr><tr><td></td><td>Visitor（访问者）</td><td>用于遍历不同 GameObject 执行操作（如保存、统计）</td></tr></tbody></table><h2 id=unity中常用的设计模式>Unity中常用的设计模式</h2><h3 id=singleton-单例模式>Singleton 单例模式</h3><p>单例模式用于确保一个类只有一个实例，并提供一个全局访问点</p><p>用途：管理全局对象，如AudioManager、UIManager、GameManager</p><p>单例模式的核心思想：确保一个类仅有一个实例，并提供一个访问它的全局方式\</p><h4 id=典型结构>典型结构</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GameManager</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> GameManager _instance;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> GameManager Instance
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>get</span>
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (_instance == <span style=color:#66d9ef>null</span>)
+</span></span><span style=display:flex><span>                _instance = <span style=color:#66d9ef>new</span> GameManager();
+</span></span><span style=display:flex><span>            
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> _instance;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> GameManager() {} <span style=color:#75715e>// 私有构造</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> StartGame()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 游戏启动逻辑</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h4 id=典型用途>典型用途</h4><ol><li>游戏管理器（GameManager）
+控制游戏状态（开始、暂停、结束、重启等）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>GameManager.Instance.StartGame();
+</span></span></code></pre></div><ol start=2><li>音效管理器（AudioManager）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>AudioManager.Instance.PlaySound(<span style=color:#e6db74>&#34;Explosion&#34;</span>);
+</span></span></code></pre></div><ol start=3><li>资源管理器（ResourceManager）
+加载资源（Prefab、音效、贴图等），避免重复加载</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>var</span> bullet = ResourceManager.Instance.LoadPrefab(<span style=color:#e6db74>&#34;Bullet&#34;</span>);
+</span></span></code></pre></div><ol start=4><li>UI管理器（UIManager）
+打开、关闭UI界面，维护UI栈</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>UIManager.Instance.ShowPanel(<span style=color:#e6db74>&#34;MainMenu&#34;</span>);
+</span></span></code></pre></div><ol start=5><li><p>输入管理器（InputManager）
+统一收集和管理玩家输入，避免在多个地方监听</p></li><li><p>配置表管理器（ConfigManager）
+统一读取CSV/JSON配置数据</p></li></ol><h4 id=unity中的单例实现>Unity中的单例实现</h4><p>在Unity中，单例类一般继承自<code>MonoBehaviour</code>，并用<code>DontDestroyOnLoad</code>保持在多个场景中持久存在</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GameManager</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> GameManager Instance { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>set</span>; }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> Awake()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (Instance != <span style=color:#66d9ef>null</span> &amp;&amp; Instance != <span style=color:#66d9ef>this</span>)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            Destroy(gameObject);
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        Instance = <span style=color:#66d9ef>this</span>;
+</span></span><span style=display:flex><span>        DontDestroyOnLoad(gameObject);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> StartGame() { ... }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>将其拖到场景中的一个空物体上就可以使用了</p><p>如果不想拖脚本，可以实现自动创建</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GameManager</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> GameManager _instance;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> GameManager Instance;
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>get</span>
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (_instance == <span style=color:#66d9ef>null</span>)
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// 查找场景中是否存在</span>
+</span></span><span style=display:flex><span>                _instance = FindObjectOfType&lt;GameManager&gt;();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// 如果没有，创建一个新的GameObject挂上它</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> (_instance == <span style=color:#66d9ef>null</span>)
+</span></span><span style=display:flex><span>                {
+</span></span><span style=display:flex><span>                    GameObject obj = <span style=color:#66d9ef>new</span> GameObject(<span style=color:#e6db74>&#34;GameManager&#34;</span>);
+</span></span><span style=display:flex><span>                    _instance = obj.AddComponent&lt;GameManager&gt;();
+</span></span><span style=display:flex><span>                    DontDestroyOnLoad(obj);
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> _instance;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> Awake()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 防止重复</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (_instance == <span style=color:#66d9ef>null</span>)
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            _instance = <span style=color:#66d9ef>this</span>;
+</span></span><span style=display:flex><span>            DontDestroyOnLoad(gameObject);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (_instance != <span style=color:#66d9ef>this</span>) Destroy(gameObject);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h4 id=单例模式的特点>单例模式的特点</h4><p><strong>优点</strong></p><ol><li>全局访问：任何脚本都能方便地访问</li><li>数据共享：多个系统共享同一份数据，如游戏状态、资源</li><li>节省资源：避免多次实例化相同管理器</li><li>逻辑集中：将一类功能集中处理，方便维护</li></ol><p><strong>缺点</strong></p><ol><li>隐藏依赖：使用单例模式可能让类间依赖不明显，降低可读性</li><li>生命周期管理难：尤其在Unity中，切换场景可能出现多实例、空引用等问题</li><li>难以测试：单例可能使单元测试变得困难（不可隔离、难模拟）</li><li>违背面向对象原则：单例是全局状态，本质上是一种全局变量。过度依赖会让程序耦合严重</li></ol><p><strong>改进建议</strong></p><ol><li>使用懒汉式 vs 饿汉式</li></ol><ul><li>懒汉式（Lazy）：只有第一次访问时才创建实例</li><li>饿汉式（Eager）：程序启动时立即创建</li></ul><ol start=2><li>使用接口隔离
+将单例隐藏在接口后面，便于替换和测试</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>IAudioManager</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> PlaySound(<span style=color:#66d9ef>string</span> name);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ol start=3><li>使用依赖注入容器
+如Zenject、Extenject等</li></ol><h3 id=objectpool-对象池>ObjectPool 对象池</h3><p>用途：频繁生成/销毁对象如子弹、粒子效果，减少GC
+<a href=blog/Object-Pooling/>ObjectPooling</a></p><h3 id=state-状态机模式>State 状态机模式</h3><p>用途：角色状态管理</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>IState</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Ender();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Execute();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Exit();
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>IdleState</span> : IState { ... }
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>RunState</span> : IState { ... }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>StateMechine</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> IState currentState;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> ChangeState(IState newState)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        currentState?.Exit();
+</span></span><span style=display:flex><span>        currentState = newState;
+</span></span><span style=display:flex><span>        currentState.Enter();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> Update() =&gt; currentState?.Execute();
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=observer-观察者模式>Observer 观察者模式</h3><p>用途：事件通知系统、属性变化通知UI</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Health</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Action&lt;<span style=color:#66d9ef>int</span>&gt; OnHealtChanged;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> hp;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> SetHP(<span style=color:#66d9ef>int</span> <span style=color:#66d9ef>value</span>)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        hp = <span style=color:#66d9ef>value</span>;
+</span></span><span style=display:flex><span>        OnHealthChanged?.Invoke(hp);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=strategy-策略模式>Strategy 策略模式</h3><p>用途：定义不同行为策略（如攻击方式、AI逻辑）</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>IAttackStrategy</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Attack();
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MeleeAttack</span> : IAttackStrategy { ... }
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>RangedAttack</span> : IAttackStrategy { ... }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Character</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> IAttackStrategy attackStrategy;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> PerformAttack() =&gt; attackStrategy.Attack();
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=command-命令模式>Command 命令模式</h3><p>用途：实现撤销、按键映射、行为记录</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>ICommand</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Execute();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Undo();
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MoveCommand</span> : ICommand { ... }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>InputHandler</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    Stack&lt;ICommand&gt; history = <span style=color:#66d9ef>new</span> Stack&lt;ICommand&gt;();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> HandleInput()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        ICommand cmd = <span style=color:#66d9ef>new</span> MoveCommand();
+</span></span><span style=display:flex><span>        cmd.Execute();
+</span></span><span style=display:flex><span>        history.Push(cmd);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> Undo() =&gt; history.Pop().Undo();
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=eventbus-事件总线>EventBus 事件总线</h3><p>用途：各个系统之间通信解耦</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>EventBus</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>event</span> Action OnLevelComplete;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> LevelComplete() =&gt; OnLevelComplete?.Invoke();
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=unity自带的设计模式>Unity自带的设计模式</h2><table><thead><tr><th>系统</th><th>使用的设计模式</th></tr></thead><tbody><tr><td>GameObject + Component</td><td>Component 模式</td></tr><tr><td>ScriptableObject</td><td>数据驱动、配置注入</td></tr><tr><td>Coroutine</td><td>类似状态机/命令模式</td></tr><tr><td>Animator Controller</td><td>状态机（FSM）</td></tr><tr><td>Input System</td><td>命令模式、策略模式</td></tr><tr><td>UI System（事件系统）</td><td>观察者模式、命令模式</td></tr></tbody></table><p>推荐书籍：《游戏编程模式》 Game Programming Patterns</p></div><nav class=post-nav><a href=/runtime/lab/dependency-injection/ class=hover:underline>pre: (DI)Dependency Injection</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#unity中常用的设计模式>Unity中常用的设计模式</a><ul><li><a href=#singleton-单例模式>Singleton 单例模式</a><ul><li><a href=#典型结构>典型结构</a></li><li><a href=#典型用途>典型用途</a></li><li><a href=#unity中的单例实现>Unity中的单例实现</a></li><li><a href=#单例模式的特点>单例模式的特点</a></li></ul></li><li><a href=#objectpool-对象池>ObjectPool 对象池</a></li><li><a href=#state-状态机模式>State 状态机模式</a></li><li><a href=#observer-观察者模式>Observer 观察者模式</a></li><li><a href=#strategy-策略模式>Strategy 策略模式</a></li><li><a href=#command-命令模式>Command 命令模式</a></li><li><a href=#eventbus-事件总线>EventBus 事件总线</a></li></ul></li><li><a href=#unity自带的设计模式>Unity自带的设计模式</a></li></ul></li></ul></nav></aside><script src=/js/scrollspy.js defer></script><script type=module>
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ 
+    startOnLoad: true, theme: "default" });
+</script><footer><div class=container><p>© 2026 Jeff Lee(ljf12825). All rights reserved |
+<a href=https://creativecommons.org/licenses/by-nc-sa/4.0/>Article: CC BY-NC-SA 4.0</a> |
+<a href=https://creativecommons.org/licenses/by-sa/4.0/>Content: CC BY-SA 4.0</a> |
+<a href=https://opensource.org/licenses/MIT>Code: MIT License</a> |
+<a href=/LICENSES.md>Full License</a></p></div></footer></body></html>
