@@ -1,10 +1,6 @@
 ﻿---
 title: Design Patterns in Game Development
-date: 2025-06-01
-category: Implement
 status: active # active/archived/dead/unstable
-tags: [Unity, Architecture]
-author: "ljf12825"
 type: lab
 summary: Implement gof23 in unity
 ---

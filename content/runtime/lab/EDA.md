@@ -2,10 +2,6 @@
 title: EDA(Event Driven Architecture)
 type: lab
 status: active # active/archived/dead/unstable
-tec: C#， Unity
-tags: [Unity, Architecture]
-category: Implement
-date: 2026-01-01
 summary: Implement EDA in Unity
 ---
 

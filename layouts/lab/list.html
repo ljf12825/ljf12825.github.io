@@ -14,21 +14,14 @@
   <div class="lab-table">
     <div class="lab-row lab-head">
       <span class="col name">NAME</span>
-      <span class="col lang">STAT</span>
-      <span class="col category">CATE</span>
-      <span class="col date">DATE</span>
-      <span class="col status">TEC</span>
-      <span class="col tags">TAG</span>
+      <span class="col status">STAT</span>
       <span class="col summary">SUM</span>
     </div>
 
     {{ range .Pages.ByDate.Reverse }}
     <div class="lab-row"
          data-title="{{ .Title | lower }}"
-         data-lang="{{ .Params.lang | lower }}"
          data-status="{{ .Params.status | lower }}"
-         data-tags="{{ delimit .Params.tags " " | lower }}"
-         data-category="{{ .Params.category | lower }}"
          data-summary="{{ .Params.summary | default "" | lower }}"
          onclick="location.href='{{ .RelPermalink }}'">
       
@@ -38,15 +31,7 @@
       <span class="col status {{ .Params.status }}">
         {{ .Params.status }}
       </span>
-      <span class="col category">{{ .Params.category }}</span>
-      <span class="col date">{{ .Date.Format "2006-01-02" }}</span>
-      <span class="col lang">{{ .Params.tec }}</span>
 
-      <span class="col tags">
-        {{ range .Params.tags }}
-          <span class="tag">#{{ . }}</span>
-        {{ end }}
-      </span>
       <span class="col summary">{{ with .Params.summary }}{{ . }}{{ end }}</span>
     </div>
     {{ end }}
