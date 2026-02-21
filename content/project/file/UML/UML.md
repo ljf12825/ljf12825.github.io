@@ -3,7 +3,7 @@ title: UML
 date: 2025-12-31
 author: "ljf12825"
 summary: Overview of UML
-type: files
+type: file
 ---
 
 UML(Unified Modeling Language，统一建模语言)是用来描述软件系统结构、行为和交互的标准化图形语言\

@@ -3,7 +3,7 @@ title: Algorithm of array
 date: 2025-12-31
 author: ljf12825
 summary: algorithm of array
-type: files
+type: file
 ---
 
 # 数组相关算法

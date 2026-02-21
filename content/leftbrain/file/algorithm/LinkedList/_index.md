@@ -1,4 +1,4 @@
 ---
 title: Linked List
-type: files
+type: file
 ---

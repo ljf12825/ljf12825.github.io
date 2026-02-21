@@ -3,7 +3,7 @@ title: Recursive Complexity Analysis
 date: 2025-12-31
 author: ljf12825
 summary: recursive complexity analysis
-type: files
+type: file
 ---
 
 递归复杂度分析主要是通过递归关系式来推导\

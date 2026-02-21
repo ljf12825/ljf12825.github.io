@@ -1,4 +1,4 @@
 ---
 title: Computer Network
-type: files
+type: file
 ---

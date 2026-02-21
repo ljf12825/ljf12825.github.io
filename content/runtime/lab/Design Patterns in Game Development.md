@@ -182,7 +182,7 @@ public interface IAudioManager
 
 ### ObjectPool 对象池
 用途：频繁生成/销毁对象如子弹、粒子效果，减少GC
-[ObjectPooling](blog/Object-Pooling/)
+[ObjectPooling](log/Object-Pooling/)
 
 
 ### State 状态机模式

@@ -3,7 +3,7 @@ title: Memory Management
 date: 2025-12-31
 author: ljf12825
 summary: memory management
-type: files
+type: file
 ---
 
 # 内存管理

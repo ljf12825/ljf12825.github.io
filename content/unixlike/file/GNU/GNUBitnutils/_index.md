@@ -1,4 +1,4 @@
 ---
 title: GNUBitnutils
-type: files
+type: file
 ---

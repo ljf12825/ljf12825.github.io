@@ -1,4 +1,4 @@
 ---
 title: POSIX
-type: files
+type: file
 ---

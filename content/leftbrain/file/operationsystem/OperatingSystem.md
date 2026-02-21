@@ -3,7 +3,7 @@ title: Operating System
 date: 2025-12-31
 author: ljf12825
 summary: overview of operating system
-type: files
+type: file
 ---
 
 # Operating System

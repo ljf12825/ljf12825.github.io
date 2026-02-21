@@ -3,7 +3,7 @@ title: Logic Circuits and Digital System
 date: 2025-12-31
 author: ljf12825
 summary: logic circuits and digital system
-type: files
+type: file
 ---
 
 逻辑电路与数字系统是计算机硬件和电子学的基础，涉及信号的处理、存储和运算等基本操作\

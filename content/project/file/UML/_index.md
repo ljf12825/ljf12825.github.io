@@ -1,5 +1,5 @@
 ---
 title: UML
 summary: Unified Modeling Language
-type: files
+type: file
 ---

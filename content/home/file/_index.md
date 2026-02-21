@@ -1,4 +1,4 @@
 ---
 title: file
-type: files
+type: file
 ---

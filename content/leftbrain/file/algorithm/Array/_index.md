@@ -1,4 +1,4 @@
 ---
 title: Array
-type: files
+type: file
 ---

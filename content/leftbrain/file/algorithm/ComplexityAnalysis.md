@@ -3,7 +3,7 @@ title: Complexity Analysis
 date: 2025-12-31
 author: ljf12825
 summary: complexity analysis
-type: files
+type: file
 ---
 
 复杂度是计算机科学中非常核心的一个概念，用于衡量一个算法的“好坏”\

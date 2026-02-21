@@ -1,4 +1,4 @@
 ---
 title: GNU
-type: files
+type: file
 ---

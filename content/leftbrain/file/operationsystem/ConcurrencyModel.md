@@ -3,7 +3,7 @@ title: Concurrency & Parallelism
 date: 2025-12-31
 author: ljf12825
 summary: Process, Thread and Concurrency
-type: files
+type: file
 ---
 
 # 并发(Concurrency)与并行(Parallelism)

@@ -1,4 +1,4 @@
 ---
 title: "fold1"
-type: files
+type: file
 ---

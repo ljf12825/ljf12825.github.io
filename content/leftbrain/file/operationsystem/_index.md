@@ -1,4 +1,4 @@
 ---
 title: Operating System
-type: files
+type: file
 ---

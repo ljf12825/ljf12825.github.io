@@ -3,7 +3,7 @@ title: Class Diagram
 date: 2025-12-31
 author: "ljf12825"
 summary: How draw Class diagram
-type: files
+type: file
 ---
 
 类图是系统的结构蓝图，它描述的是

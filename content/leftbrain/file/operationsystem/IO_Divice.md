@@ -3,7 +3,7 @@ title: IO Device
 date: 2025-12-31
 author: ljf12825
 summary: io device
-type: files
+type: file
 ---
 
 # 设备管理

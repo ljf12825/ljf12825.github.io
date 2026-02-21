@@ -3,7 +3,7 @@ title: Data Link Layer
 date: 2025-12-31
 author: ljf12825
 summary: data link layer
-type: files
+type: file
 ---
 
 数据链路层处于OSI模型的第2层，负责在相邻节点之间可靠地传输数据帧（Frame），并进行差错检测、帧定界、流量控制等工作

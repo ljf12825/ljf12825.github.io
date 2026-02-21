@@ -3,7 +3,7 @@ title: File System
 date: 2025-12-31
 author: ljf12825
 summary: file system
-type: files
+type: file
 ---
 
 # 文件系统

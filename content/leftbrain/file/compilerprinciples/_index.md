@@ -1,4 +1,4 @@
 ---
 title: Compiler Principles
-type: files
+type: file
 ---

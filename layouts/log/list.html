@@ -1,0 +1,91 @@
+{{ define "head_extra" }}
+  {{ if eq .Type "log" }}
+    <link rel="stylesheet" href="{{ "css/log.css" | relURL }}">
+  {{ end }}
+{{ end }}
+
+{{ define "main" }}
+{{ $sec := .Section }}
+<div class="log-container">
+
+  <main class="log-main">
+    <h1 class="page-title">{{ .Title }}</h1>
+
+    <div class="log-grid">
+      {{ range where (where .Site.RegularPages "Type" "log") "Section" $sec }}
+        <a href="{{ .RelPermalink }}" class="log-card" data-tags="{{ with .Params.tags }}{{ delimit . "|"}}{{ end }}">
+          {{ with .Params.image }}
+            <img src="{{ . | relURL }}" alt="{{ $.Title }}" class="log-thumb">
+          {{ else }}
+            <img src="{{ "images/gamelife.jpg" | relURL }}" alt="{{ $.Title }}" class="log-thumb">
+          {{ end }}
+
+          <div class="log-content">
+            <h2 class="log-title">{{ .Title }}</h2>
+
+            <div class="log-meta">
+              <span class="date"><b>lastmodify:</b> {{ .Date.Format "2006-01-02" }}</span>
+              {{ with .Params.author }}<span class="author"><b>creator:</b> {{ . }}</span>{{ end }}
+              <span class="meta-line">
+                {{ with .Params.categories }}{{ range $i, $cat := . }}[{{ $cat }}]{{ if lt (add $i 1) (len .) }} {{ end }}{{ end }}{{ end }}
+                {{ with .Params.tags }}#{{ delimit . " #" }}{{ end }}
+              </span>
+            </div>
+
+
+            <p class="log-summary">
+              {{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary }}{{ end }}
+            </p>
+
+            <span class="read-more">ReadMore</span>
+          </div>
+        </a>
+      {{ end }}
+    </div>
+  </main>
+
+  <aside class="sidebar-right">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="search title & summary…">
+    </div>
+
+    <div class="tags-box">
+      <h3>Tags</h3>
+      <ul id="tagList">
+        {{ $logPages := where (where .Site.RegularPages "Type" "log") "Section" $sec }}
+        {{ $tags := slice }}
+        {{ range $logPages }}
+          {{ range .Params.tags }}
+            {{ $tags = $tags | append . }}
+          {{ end }}
+        {{ end }}
+        {{ range (uniq $tags | sort) }}
+          <li><a href="#" class="tag-link" data-tag="{{ . }}">#{{ . }}</a></li>
+        {{ end }}
+      </ul>
+    </div>
+
+    <div class="categories-box">
+      <h3>Categories</h3>
+      <ul id="categoryList">
+        {{ $logPages := where (where .Site.RegularPages "Type" "log") "Section" $sec }}
+        {{ $categories := slice }}
+        {{ range $logPages }}
+          {{ range .Params.categories }}
+            {{ $categories = $categories | append . }}
+          {{ end }}
+        {{ end }}
+        {{ range (uniq $categories | sort) }}
+          <li><a href="#" class="category-link" data-category="{{ . }}">[{{ . }}]</a></li>
+        {{ end }}
+      </ul>
+    </div>
+
+
+  </aside>
+
+</div>
+
+<script defer src="{{ "js/logfilter.js" | relURL }}"></script>
+
+{{ end }}

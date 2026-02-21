@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (nodes[i] === bestMatch && i < nodes.length - 1) {
         const next = nodes[i + 1];
 
-        // 如果后一个节点是文本，并且以空格开头，就吃掉一个空格
         if (next.nodeType === 3) {
           next.textContent = next.textContent.replace(/^ /, "");
         }

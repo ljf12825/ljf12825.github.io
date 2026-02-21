@@ -1,4 +1,4 @@
 ---
 title: Mathematics
-type: files
+type: file
 ---

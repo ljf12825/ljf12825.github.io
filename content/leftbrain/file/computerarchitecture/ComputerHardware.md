@@ -3,7 +3,7 @@ title: Computer Hardware
 date: 2025-12-31
 author: ljf12825
 summary: computer hardware
-type: files
+type: file
 ---
 
 依据冯·诺依曼体系结构，主要包含五大基本单元

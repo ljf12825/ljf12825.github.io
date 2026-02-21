@@ -71,9 +71,9 @@ This repository contains different types of content, each licensed separately.
 
 ---
 
-## 1. Website & Blog Content
+## 1. Website & log Content
 
-Unless otherwise noted, blog posts and general website content are licensed under:
+Unless otherwise noted, log posts and general website content are licensed under:
 
 **Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)**  
 https://creativecommons.org/licenses/by-sa/4.0/

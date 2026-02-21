@@ -3,7 +3,7 @@ title: Computer Network
 date: 2025-12-31
 author: ljf12825
 summary: computer network overview
-type: files
+type: file
 ---
 
 以此架构进行学习和展开

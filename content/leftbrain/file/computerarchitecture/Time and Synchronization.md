@@ -3,7 +3,7 @@ title: Time and Synchronization
 date: 2025-12-31
 author: ljf12825
 summary: time ans synchronization
-type: files
+type: file
 ---
 
 # 时间与同步

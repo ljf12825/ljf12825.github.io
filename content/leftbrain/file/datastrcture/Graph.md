@@ -3,7 +3,7 @@ title: Graph
 date: 2025-12-31
 author: ljf12825
 summary: graph structure
-type: files
+type: file
 ---
 
 # Graph

@@ -3,7 +3,7 @@ title: Micro Architecture
 date: 2025-12-31
 author: ljf12825
 summary: micro architecture
-type: files
+type: file
 ---
 
 # 微架构

@@ -3,7 +3,7 @@ title: Parallelism and Multi-core Architecture
 date: 2025-12-31
 author: ljf12825
 summary: parallelism and multi-core architecture
-type: files
+type: file
 ---
 
 # 并行性与多核架构

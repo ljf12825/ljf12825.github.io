@@ -4,7 +4,7 @@
             {{ $current := .RelPermalink }}
             <li><a href="{{ "/project/" | relURL }}" class="{{ if eq $current "/project/" }}active{{ end }}">★</a></li>
             <li><a href="{{ "/project/lab/" | relURL }}" class="{{ if eq $current "/project/lab/" }}active{{ end }}">Lab</a></li>
-            <li><a href="{{ "/project/lib/" | relURL }}" class="{{ if eq $current "/project/lib/" }}active{{ end }}">Lib</a></li>
+            <li><a href="{{ "/project/log/" | relURL }}" class="{{ if eq $current "/project/log/" }}active{{ end }}">Log</a></li>
             <li><a href="{{ "/project/file/" | relURL }}" class="{{ if eq $current "/project/file/" }}active{{ end }}">File</a></li>
         </ul>
     </div>

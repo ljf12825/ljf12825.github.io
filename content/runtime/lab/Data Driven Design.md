@@ -619,7 +619,7 @@ public class MonsterXmlLoader : MonoBehaviour
 ```
 
 #### ScriptableObject
-[ScriptableObject]({{blog/ScriptableObject/)
+[ScriptableObject]({{log/ScriptableObject/)
 
 #### 二进制
 在Unity游戏开发中，二进制格式配置表是一种高效的配置数据存储加载方式，常用于：

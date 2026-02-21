@@ -3,7 +3,7 @@ title: Number System
 date: 2025-12-31
 author: ljf12825
 summary: number and number system
-type: files
+type: file
 ---
 
 ## 进位计数制
@@ -24,7 +24,7 @@ type: files
 - 十六进制在计算机中用于表示较长的二进制数，因为它更简洁，且每个十六进制位可以直接对应四个二进制位
 
 ## 进制的转换
-![进制转换](/images/Blog/baseconversion.drawio.svg)
+![进制转换](/images/log/baseconversion.drawio.svg)
 
 - Binary -> Decimal
 

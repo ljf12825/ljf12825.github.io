@@ -3,7 +3,7 @@ title: Architecture
 date: 2025-12-31
 author: "ljf12825"
 summary: Architecture overview
-type: files
+type: file
 ---
 
 架构(Architecture)是系统的高层结构设计，它定义了

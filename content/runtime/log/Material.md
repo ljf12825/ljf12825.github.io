@@ -1,0 +1,80 @@
+﻿---
+title: "Material"
+date: 2025-05-31
+categories: [Engine]
+tags: [Unity, Material, Graphics]
+author: "ljf12825"
+type: log
+summary: Material in Unity. Creating, Setting and Usage
+---
+Unity中的Material是用来定义一个物体外观的核心组件，它将Shader与各种Texture和属性值绑定到一起，决定了一个对象在场景中如何表现
+
+## Material的基本构成
+Material包括：  
+**1.Shader**  
+- 决定了材质的渲染方式和它所支持的属性
+- 常用Shader有：
+  - `Standard`：支持金属、粗糙度工作流
+  - `URP/Lit`(Universal Render Pipeline)专用
+  - `HDRP/Lit`(High Definition Render Pipeline)专用
+  - `Unlit`：不受光照影响，用于UI、特效等
+  - 自定义Shader
+
+**2.Texture**  
+- 常见类型：
+  - Albedo（基础颜色贴图）
+  - Normal Map（法线贴图，增加表面细节）
+  - Metallic Map / Roughness Map（金属度/粗糙度贴图）
+  - Emission Map（自发光贴图）
+  - Occlusion Map（遮蔽贴图）
+
+**3.属性值**  
+- 颜色、金属度、粗糙度、透明度
+
+## 创建和使用Material
+
+### 创建材质
+
+```bash
+右键 -> Create -> Material
+```
+
+然后可以给材质命名，设置颜色、贴图等属性
+
+### 应用材质
+- 方式1：拖动到物体上
+- 方式2：通过代码赋值
+```csharp
+Renderer renderer = GetComponent<Renderer>();
+renderer.material = myMaterial;
+```
+
+## 材质在不同渲染管线中的区别
+
+| 渲染管线     | 使用的着色器          | 特点           |
+| -------- | --------------- | ------------ |
+| Built-in | Standard Shader | 默认渲染管线       |
+| URP      | URP/Lit Shader  | 性能优化，适合中低端设备 |
+| HDRP     | HDRP/Lit Shader | 高质量视觉，适合高端项目 |
+
+
+## 材质的进阶使用
+
+### 1.多材质
+一个物体的每个sub-mesh都可以使用不同的材质
+
+```csharp
+Renderer renderer = GetComponent<Renderer>();
+renderer.materials[0] = mat1;
+renderer.materials[1] = mat2;
+```
+
+### 2.材质属性通过代码修改
+
+```csharp
+Material mat = renderer.material;
+mat.SetColor("_Color", Color.red);
+mat.SetFloat("_Glossiness", 0.3f);
+```
+
+**如果你修改的是`material`而不是`sharedMaterial`，Unity会在运行时创建该材质的副本（实例化材质）**

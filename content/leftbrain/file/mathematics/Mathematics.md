@@ -3,7 +3,7 @@ title: Mathematics
 date: 2025-12-31
 author: ljf12825
 summary: Mathematics basics
-type: files
+type: file
 ---
 
 - 离散数学

@@ -1,4 +1,4 @@
 ---
 title: Computer Architecture
-type: files
+type: file
 ---

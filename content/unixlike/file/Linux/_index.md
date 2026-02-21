@@ -1,5 +1,5 @@
 ---
 title: Linux
-type: files
+type: file
 summary: linux from usage to kenel
 ---

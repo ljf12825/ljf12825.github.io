@@ -3,7 +3,7 @@ title: Algorithm
 date: 2025-12-31
 author: ljf12825
 summary: algorithm overview
-type: files
+type: file
 ---
 
 # Algorithm

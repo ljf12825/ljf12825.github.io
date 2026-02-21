@@ -3,7 +3,7 @@ title: Sort
 date: 2025-12-31
 author: ljf12825
 summary: common sort algorithm
-type: files
+type: file
 ---
 
 ## Bubble Sort

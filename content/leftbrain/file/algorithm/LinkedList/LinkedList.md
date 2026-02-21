@@ -3,7 +3,7 @@ title: Linked List
 date: 2025-12-31
 author: ljf12825
 summary: Algorithm of Linked List
-type: files
+type: file
 ---
 
 关于Linked List的算法，它们的核心可以归纳成几个关键思想

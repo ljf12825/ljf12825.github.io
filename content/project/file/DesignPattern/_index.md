@@ -1,4 +1,4 @@
 ---
 title: DesignPattern
-type: files
+type: file
 ---

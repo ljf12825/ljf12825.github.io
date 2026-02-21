@@ -1,0 +1,38 @@
+{{ define "head_extra" }}
+  <link rel="stylesheet" href="{{ "css/logsingle.css" | relURL }}">
+{{ end }}
+
+
+{{ define "main" }}
+<article class="single_article">
+  <div class="title">
+    {{ .Title }}
+    <div class="meta">
+      Modified: {{ .Lastmod.Format "2006-01-02" | default "N/A" }}
+      {{ with .Params.author }} | Author：{{ . }}{{ end }}
+    </div>
+    </div>
+
+    <div class="content">
+      {{ .Content }}
+    </div>
+
+    <nav class="post-nav">
+      {{ with .NextInSection }}
+      <a href="{{ .RelPermalink }}" class="hover:underline">pre: {{ .Title }}</a>
+      {{ end }}
+      {{ with .PrevInSection }}
+      <a href="{{ .RelPermalink }}" class="hover:underline">next: {{ .Title }}</a>
+      {{ end }}
+  </nav>
+</article>
+
+<aside class = "toc">
+  <h3>TOC</h3>
+  {{ .TableOfContents }}
+</aside>
+
+<script defer src="{{ "js/scrollspy.js" | relURL }}"></script>
+
+
+{{ end }}

@@ -3,7 +3,7 @@ title: Linked List
 date: 2025-12-31
 author: ljf12825
 summary: linked list structure
-type: files
+type: file
 ---
 
 链表是一种线性数据结构，其中的元素（节点）不是通过物理顺序存储，而是通过指针（或引用）连接在一起

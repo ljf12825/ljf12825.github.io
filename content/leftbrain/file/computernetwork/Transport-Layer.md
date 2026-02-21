@@ -3,7 +3,7 @@ title: Transport Layer
 date: 2025-12-31
 author: ljf12825
 summary: transport layer
-type: files
+type: file
 ---
 
 传输层处于OSI七层模型的第4层，TCP/IP模型的第4层

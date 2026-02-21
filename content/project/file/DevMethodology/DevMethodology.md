@@ -3,7 +3,7 @@ title: Software Development Methodology
 date: 2025-12-31
 author: "ljf12825"
 summary: Software development methodology overview
-type: files
+type: file
 ---
 
 如何在不确定的现实中，把一个想法，可靠地变成可用的软件

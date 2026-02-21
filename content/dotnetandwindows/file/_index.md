@@ -1,3 +1,3 @@
 ---
-type: files
+type: file
 ---

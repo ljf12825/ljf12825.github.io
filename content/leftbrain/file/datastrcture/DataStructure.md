@@ -3,7 +3,7 @@ title: Data Structure
 date: 2025-12-31
 author: ljf12825
 summary: overview of data structure
-type: files
+type: file
 ---
 
 # Data Structure
