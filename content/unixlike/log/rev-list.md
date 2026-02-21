@@ -33,62 +33,79 @@ git rev-list <commit-hash>
 ## 常见选项和场景
 `rev-list`的强大之处在于其丰富的选项，它们可以组合出非常复杂的查询
 
-1. 指定范围
-    这是`rev-list`最核心的功能之一，用于比较两个分支或提交
-    - 双点语法`..`：查看在分支B上但不在分支A上的提交
+### 指定范围
+这是`rev-list`最核心的功能之一，用于比较两个分支或提交
+
+- 双点语法`..`：查看在分支B上但不在分支A上的提交
+
 ```bash 
 # 查看在 feature 分支上但不在 main 分支上的提交
 git rev-list main..feature 
 ```
 这在`git push`或`git log`时非常有用。`git push origin main..feature`就是推送这些提交
 
-    - 三点语法`...`：查看在分支A上或分支B上，但不同时在两个分支上的提交（即对称差集）
+- 三点语法`...`：查看在分支A上或分支B上，但不同时在两个分支上的提交（即对称差集）
+
 ```bash 
 # 查看 feature 和 main 分支独有的提交（排除它们的共同祖先）
 git rev-list main...feature 
 ```
 
-2. 限制输出数量
-    - `-n <number>`, `--max-count=<number>`：限制输出的提交数量
+### 限制输出数量
+
+- `-n <number>`, `--max-count=<number>`：限制输出的提交数量
+
 ```bash 
 # 获取最近的5个提交
 git rev-list main -5
 ```
 
-3. 过滤和筛选
-    - `--since`, `--until`：按时间过滤
+### 过滤和筛选
+
+- `--since`, `--until`：按时间过滤
+
 ```bash 
 # 列出过去一周内在 main 分支上的提交
 git rev-list main --since="1 week age"
 ```
-    - `--grep=<pattern>`：在提交信息中搜索
+
+- `--grep=<pattern>`：在提交信息中搜索
+
 ```bash 
 # 查找提交信息中包含 "bugfix" 的提交
 git rev-list main --grep="bugfix"
 ```
-    - `--author=<pattern>`：按作者过滤
-    - `--merge`/`--no-merges`：只显示/不显示合并提交
 
-4. 输出格式化
+- `--author=<pattern>`：按作者过滤
+- `--merge`/`--no-merges`：只显示/不显示合并提交
+
+### 输出格式化
 虽然主要输出SHA-1,但它也提供了一些基本格式
-    - `--pretty=<format>`：可以以其他格式（如`online`, `format:`）输出
+
+- `--pretty=<format>`：可以以其他格式（如`online`, `format:`）输出
+
 ```bash 
 # 像 git log --oneline 一样输出
 git rev-list main --pretty=online 
 ```
 
-5. 高级和内部使用
-    - `objects`：列出所有相关的Git对象，而不仅仅是提交。这包括提交对象、树对象和文件对象。这是`git pack-objects`命令的基础，用于生成打包文件
+## 高级和内部使用
+
+- `objects`：列出所有相关的Git对象，而不仅仅是提交。这包括提交对象、树对象和文件对象。这是`git pack-objects`命令的基础，用于生成打包文件
+
 ```bash 
 # 列出分支main引用的所有对象
 git rev-list --objects main 
 ```
-    - `--count`：不显示SHA-1，只显示符合条件的提交数量
+
+- `--count`：不显示SHA-1，只显示符合条件的提交数量
+
 ```bash 
 git rev-list --count main..feature 
 ```
-    - `--reverse`：反转输出顺序（例如，从最旧的提交开始输出）
-    - `--first-parent`：一个非常重要的选项。它只跟随合并提交的第一个父提交，这让你看到项目的主线发展，而忽略掉特性分支内部的具体合并历史
+- `--reverse`：反转输出顺序（例如，从最旧的提交开始输出）
+- `--first-parent`：一个非常重要的选项。它只跟随合并提交的第一个父提交，这让你看到项目的主线发展，而忽略掉特性分支内部的具体合并历史
+
 ```bash 
 # 查看 main 分支的主线历史
 git rev-list --first-parent main 
