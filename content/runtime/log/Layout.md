@@ -9,7 +9,7 @@ summary: Introduction Layout Component
 ---
 
 ## Layout System
-![LayoutSystem](/images/log/LayoutSystem.jpg)
+![LayoutSystem](/images/content/LayoutSystem.jpg)
 
 ### Layout Group
 `Layout Group`是Unity UI自动布局系统的核心组件之一，用于在UI Canvas下自动排列其他子物体。它极大地简化了UI元素的排列和适配逻辑，让UI开发变得更结构化、响应式、更易维护

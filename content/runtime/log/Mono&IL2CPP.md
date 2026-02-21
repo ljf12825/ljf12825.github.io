@@ -89,7 +89,7 @@ IL2CPP的流程比Mono多几步
 - 安全性高：反编译难度比Mono大很多
 - 编译慢：因为每次都要跑C++编译器
 
-![流程图](/images/log/MonoandIL2CPP.png)
+![流程图](/images/content/MonoandIL2CPP.png)
 
 ---
 

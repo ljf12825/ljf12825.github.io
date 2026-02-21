@@ -1,3 +1,13 @@
+---
+title: reset and revert
+date: 2025-12-31
+categories: [Git]
+tags: [Command, Porcelain]
+author: "ljf12825"
+type: log
+summary: git reset and revert
+---
+
 # Reset
 `git reset`用来回退到某个历史提交，它可以修改Git仓库中的提交记录和工作目录，常用于撤销更改或在错误的提交后进行修复
 

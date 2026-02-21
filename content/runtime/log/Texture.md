@@ -28,7 +28,7 @@ summary: Texture and Texture in Unity
 ## 导入
 在Unity中，图片导入后会成为Texture，可以通过Inspector查看其属性
 
-![TextureInspector](/images/log/TextureInspector.jpg)
+![TextureInspector](/images/content/TextureInspector.jpg)
 
 1.Texture Type（纹理类型）
 - `Default`：普通模型贴图

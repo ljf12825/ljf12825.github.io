@@ -1,3 +1,13 @@
+---
+title: rev-parse
+date: 2025-12-31
+categories: [Git]
+tags: [Command, Plumbing]
+author: "ljf12825"
+type: log
+summary: git rev-parse
+---
+
 # `rev-parse`
 `git rev-parse`是一个底层辅助命令，它的核心工作是将各种“引用”解析成唯一的、不可变的SHA-1哈希值（或简称“对象名”）
 

@@ -1,3 +1,13 @@
+---
+title: restore
+date: 2025-12-31
+categories: [Git]
+tags: [Command, Porcelain]
+author: "ljf12825"
+type: log
+summary: git restore
+---
+
 # `git restore`
 Git2.23(2019)新增命令，它的目标是简化之前易混淆的`git checkout`用法，专门用于恢复文件
 

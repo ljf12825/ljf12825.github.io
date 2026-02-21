@@ -6,7 +6,7 @@ tags: [Unity, C#]
 author: "ljf12825"
 type: log
 summary: The Range of C# in Unity Game Development
-image: "/images/log/ScriptingIntroPic.jpg"
+image: "/images/content/ScriptingIntroPic.jpg"
 ---
 C#作为Unity开发的首选脚本语言，熟练掌握C#和C.NET Framework对项目架构，可维护性和性能优化的理解能够更加深入\
 C#不同于C++，它的核心是它庞大的框架和生态系统\

@@ -1,3 +1,13 @@
+---
+title: rev-list
+date: 2025-12-31
+categories: [Git]
+tags: [Command, Plumbing]
+author: "ljf12825"
+type: log
+summary: git rev-list
+---
+
 # `rev-list`
 `git rev-list`是Git中最核心、最底层的对象遍历命令之一。它的名字可以理解为“revision list”（版本列表），其主要功能就是按照给定的顺序和规则，列出一系列提交的SHA-1哈希值
 

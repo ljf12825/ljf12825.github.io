@@ -19,7 +19,7 @@ public class AudioCilp : Object
 - 通常通过将音频文件（如`.wav`、`.mp3`、`.ogg`）导入到Unity项目中生成AudioClip
 - 可用来播放背景音乐（BGM）、音效（SFX）、语音（VO）等
 
-![AudioClipExample](/images/log/AudioClipExample.jpg)
+![AudioClipExample](/images/content/AudioClipExample.jpg)
 
 ### AudioClip的常见使用方式
 1.在Inspector中拖入音频文件
@@ -84,7 +84,7 @@ myClip.SetData(floatArray, 0);
 ### Audio Source
 `AudioSource`是Unity中用于播放声音的核心组件，负责控制音频的播放、暂停、停止、3D效果、音量等
 
-![AudioSourcePanel](/images/log/AudioSourcePanel.jpg)
+![AudioSourcePanel](/images/content/AudioSourcePanel.jpg)
 
 #### 面板字段
 

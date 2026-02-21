@@ -13,7 +13,7 @@ type: file
 Von 在1945年的一份报告中提出了一个革命性的思想：将程序指令和数据一起存储在计算机内存中\
 这意味着计算机不需要物理上的重新布线来执行新任务，只需加载不同的程序即可。这使得计算机成为了真正的通用机器
 
-![Von Neumann Architecture](/images/log/Von_Neumann_Architecture.svg)
+![Von Neumann Architecture](/images/content/Von_Neumann_Architecture.svg)
 
 ## 组成核心
 冯氏架构将计算机划分为五个核心部件，它们通过“数据/指令总线”互相连接：
@@ -42,7 +42,7 @@ Von 在1945年的一份报告中提出了一个革命性的思想：将程序指
   - 例子：显示器、打印机、音响等
   - 类比：人的嘴巴、手（用于书写和动作）
 
-![Von Neumann Architecture Flow Chart](/images/log/VonNeumannArchitectureFlowChart.svg)
+![Von Neumann Architecture Flow Chart](/images/content/VonNeumannArchitectureFlowChart.svg)
 
 ## 特点
 1. 以运算单元为中心

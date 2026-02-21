@@ -6,8 +6,9 @@ tags: [Unity, Component, Light, Rendering, Graphics]
 author: "ljf12825"
 type: log
 summary: Introduction, example and usage of Skybox in Unity
-image: "/images/log/Skybox.jpg"
+image: "/images/content/Skybox.jpg"
 ---
+
 Skybox是一种渲染技术，用于在3D场景中创建远景背景，例如天空、宇宙、城市天际线等  
 它本质上是一种把纹理图贴在一个立方体（或球体）内侧的技巧，玩家看不到边界，只能看到包裹在四周的“天空”
 
@@ -18,7 +19,7 @@ Skybox是一种渲染技术，用于在3D场景中创建远景背景，例如天
 ## 创建Skybox
 ### 1. 使用现成材质
 菜单栏 -> Window -> Rendering -> Lighting\
-![SkyboxMaterial](/images/log/SkyboxMaterial.jpg)
+![SkyboxMaterial](/images/content/SkyboxMaterial.jpg)
 
 ### 2. 使用6张图片自定义创建立方体天空盒
 1. 准备图片：需要6张正方形图片，分别对应立方体的六个面（`+X, -X, +Y, -Y, +Z, -Z`）。通常命名为`right`, `left`, `top`, `bottom`, `front`, `back`或`px`, `nx`, `py`, `ny`, `pz`, `nz`
@@ -200,8 +201,8 @@ public class SyncSunDirection : MonoBehaviour
 将该脚本挂在场景中任何物体上，拖入字段\
 在编辑器中旋转directional light，天空盒中的太阳位置也会实时更新
 
-![SunDirection1](/images/log/Sundirection1.jpg)
-![SunDirection2](/images/log/Sundirection2.jpg)
+![SunDirection1](/images/content/Sundirection1.jpg)
+![SunDirection2](/images/content/Sundirection2.jpg)
 
 ## Skybox的类型与属性
 

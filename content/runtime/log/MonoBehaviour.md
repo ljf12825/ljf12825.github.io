@@ -84,7 +84,7 @@ public class GameController : MonoBehaviour
 ### 1.生命周期方法
 `MonoBehaviour`提供了多个生命周期方法，让你能够在合适的时机执行代码。这些方法涵盖了Unity引擎中的许多重要事件，包括初始化、更新、碰撞检测等
 
-[生命周期函数示意图](/images/log/monobehaviour_flowchart.svg)
+[生命周期函数示意图](/images/content/monobehaviour_flowchart.svg)
 
 #### 初始化阶段（只执行一次）
 

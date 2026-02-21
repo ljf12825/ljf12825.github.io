@@ -61,7 +61,7 @@ GetComponent<MeshFilter>().mesh = mesh;
 - `MeshFilter`：提供集合形状（顶点、三角形等）
 - `MeshRenderer`：将形状渲染到屏幕上（使用材质、光照等）
 
-![MeshFilterandMeshRenderer](/images/log/MeshFilterandMeshRenderer.jpg);
+![MeshFilterandMeshRenderer](/images/content/MeshFilterandMeshRenderer.jpg);
 
 ### MeshFilter：提供模型数据
 - MeshFilter包含一个Mesh对象，这是3D模型的几何体，比如立方体、球体、角色模型等

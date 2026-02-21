@@ -24,7 +24,7 @@ type: file
 - 十六进制在计算机中用于表示较长的二进制数，因为它更简洁，且每个十六进制位可以直接对应四个二进制位
 
 ## 进制的转换
-![进制转换](/images/log/baseconversion.drawio.svg)
+![进制转换](/images/content/baseconversion.drawio.svg)
 
 - Binary -> Decimal
 
