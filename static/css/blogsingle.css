@@ -6,8 +6,8 @@
 
 .single_article .title {
 	font-family: Arial, Helvetica, sans-serif;
-	padding: 35px 40px;
-	font-size: 30px;
+	padding: 40px 40px 25px 40px;
+	font-size: 40px;
 	font-weight: bold;
 	color: #000080;
 }
@@ -23,38 +23,43 @@
 	margin-top: 0;
 	margin-bottom: 5px;
 	scroll-margin: 100px;
-	font-weight: bold;
 }
 
 .single_article h1 {
-	font-size: 27px;
+	font-size: 36px;
+	font-weight: 700;
 }
 
 .single_article h2 {
-	font-size: 24px;
+	font-size: 28px;
+	font-weight: 700;
 }
 
 .single_article h3 {
-	font-size: 21px;
+	font-size: 22px;
+	font-weight: 600;
 }
 
 .single_article h4 {
 	font-size: 18px;
+	font-weight: 600;
 }
 
 .single_article h5 {
-	font-size: 15px;
+	font-size: 16px;
+	font-weight: bold;
 }
 
 .single_article h6 {
-	font-size: 12px;
+	font-size: 14px;
+	font-weight: bold;
 }
 
 
 .single_article p {
-	margin-top: 0px;
 	font-size: 18px;
-	line-height: normal;
+	line-height: 1.7;
+	margin-bottom: 1rem;
 }
 
 .single_article a {
@@ -62,7 +67,7 @@
 }
 
 .single_article .meta {
-	font-size: 1rem;
+	font-size: 0.9rem;
 	color: black;
 	font-weight: normal;
 	padding-left: 0px;
@@ -70,8 +75,7 @@
 }
 
 .single_article .content {
-	max-width: 100%;
-	margin-top: -1em;
+	max-width: 720px;
 	margin-left: 40px;
 }
 
@@ -166,15 +170,15 @@
 }
 
 .toc ul ul {
-	margin-left: 1rem;
+	margin-left: 0rem;
 }
 
 .toc ul ul ul {
-	margin-left: 1.3rem;
+	margin-left: 1rem;
 }
 
 .toc ul ul ul ul {
-	margin-left: 1.6rem;
+	margin-left: 1rem;
 }
 
 .toc a {
@@ -188,7 +192,6 @@
 }
 
 .toc a.active {
-	font-weight: bold;
 	color: red;
 	border-left: 3px solid red;
 	padding-left: 5px;
