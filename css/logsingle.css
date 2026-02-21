@@ -1,0 +1,197 @@
+.single_article {
+	font-family: Arial, Helvetica, sans-serif;
+	color: black;
+	margin-right: 230px;
+}
+
+.single_article .title {
+	font-family: Arial, Helvetica, sans-serif;
+	padding: 40px 40px 25px 40px;
+	font-size: 40px;
+	font-weight: bold;
+	color: #000080;
+}
+
+.single_article h1,
+.single_article h2,
+.single_article h3,
+.single_article h4,
+.single_article h5,
+.single_article h6 {
+	color: #000080;
+	border-bottom: none;
+	margin-top: 0;
+	margin-bottom: 5px;
+	scroll-margin: 100px;
+}
+
+.single_article h1 {
+	font-size: 36px;
+	font-weight: 700;
+}
+
+.single_article h2 {
+	font-size: 30px;
+	font-weight: 700;
+}
+
+.single_article h3 {
+	font-size: 26px;
+	font-weight: 600;
+}
+
+.single_article h4 {
+	font-size: 22px;
+	font-weight: 600;
+}
+
+.single_article h5 {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.single_article h6 {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+
+.single_article p {
+	font-size: 18px;
+	line-height: 1.7;
+	margin-bottom: 1rem;
+}
+
+.single_article a {
+	text-decoration: underline;
+}
+
+.single_article .meta {
+	font-size: 0.9rem;
+	color: black;
+	font-weight: normal;
+	padding-left: 0px;
+	border-bottom: 2px solid black;
+}
+
+.single_article .content {
+	margin-left: 40px;
+}
+
+.single_article .content img {
+	width: 300px;
+	height: auto;
+	object-fit: contain;
+}
+
+.single_article pre {
+	background: #2d2d2d;
+	color: #f8f8f2;
+	padding: 1rem;
+	border-radius: 6px;
+	overflow-x: auto;
+	font-family: "Fira Code", monospace;
+	font-size: 0.9rem;
+}
+
+.single_article nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem 35px;
+	flex-wrap: wrap;
+}
+
+.single_article nav a {
+	color: #000080;
+	font-size: 1rem;
+	transition: color 0.2s ease;
+}
+
+.single_article nav a:hover {
+	color: red;
+}
+
+.single_article li {
+	font-size: large;
+}
+
+.toc {
+	position: fixed;
+	top: 100px;
+	right: 0px;
+	width: 195px;
+	max-height: 78vh;
+	overflow-y: auto;
+	font-size: small;
+	padding: 1rem;
+	border-top: 2px solid #ffffff;
+	border-left: 2px solid #ffffff;
+	border-bottom: 3px solid #000080;
+	background: #c0c0c0;
+	  
+	box-shadow:
+    2px 2px 0 #ffffff,
+    4px 4px 0 #000080;
+}
+
+.toc::-webkit-scrollbar {
+  width: 10px;
+}
+
+.toc::-webkit-scrollbar-track {
+  background: #000080;
+}
+
+.toc::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border: 2px solid #000080;
+}
+
+.toc h3 {
+	font-size: 1rem;
+	text-align: center;
+	margin-bottom: 0.5rem;
+	margin-top: 0;
+	color: #ffffff;
+	background: #000080;
+	border: 2px solid #ffffff;
+}
+
+.toc ul {
+	list-style: none;
+	padding-left: 0px;
+	margin-left: 0px;
+}
+
+.toc li {
+	margin: 0.3rem 0px;
+}
+
+.toc ul ul {
+	margin-left: 0rem;
+}
+
+.toc ul ul ul {
+	margin-left: 1rem;
+}
+
+.toc ul ul ul ul {
+	margin-left: 1rem;
+}
+
+.toc a {
+	text-decoration: none;
+	color: #000080;
+	transition: color 0.2s ease;
+}
+
+.toc a:hover {
+	color: red;
+}
+
+.toc a.active {
+	color: red;
+	border-left: 3px solid red;
+	padding-left: 5px;
+}

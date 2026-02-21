@@ -1,0 +1,383 @@
+<!doctype html><html lang=en><head><meta name=page-kind content="section"><meta charset=UTF-8><title></title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/log.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/unixlike/>★</a></li><li><a href=/unixlike/lab/>Lab</a></li><li><a href=/unixlike/log/ class=active>Log</a></li><li><a href=/unixlike/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><pre class=ascii>
++——————————————————————————————————————————————————————————————+
+|                        <a class=nav-item data-path=/rightbrain/ href=/rightbrain/>RightBrain</a>                            |
+|                             |                                |
+|                             |     <a class=nav-item data-path=/dotnetandwindows/ href=/dotnetandwindows/>.NET-Windows</a>               |
+|                             |    /                           |
+|                             |   /                            |
+|                             |  /                             |
+|                             | /                              |
+|                             |/                               |
+|      <a class=nav-item data-path=/graphic/ href=/graphic/>Graphic</a> ———————————— <a class=nav-item data-path=/home/ href=/home/>Home</a> ————————————— <a class=nav-item data-path=/runtime/ href=/runtime/>Runtime</a>         |
+|                            /|                                |
+|                           / |                                |
+|                          /  |                                |
+|                         /   |       <a class=nav-item data-path=/language/ href=/language/>Language</a>                 |
+|                        /    |      /                         |
+|                       /     |     /                          |
+|              <a class=nav-item data-path=/unixlike/ href=/unixlike/>Unix-like</a>      |    /           <a class=nav-item data-path=/project/ href=/project/>Project</a>         |
+|                             |   /            <a class=nav-item data-path=/miscellaneous/ href=/miscellaneous/>Miscellaneous</a>   |
+|                        <a class=nav-item data-path=/leftbrain/ href=/leftbrain/>LeftBrain</a>             <a class=nav-item data-path=/ai/ href=/ai/>AI</a>              |
++——————————————————————————————————————————————————————————————+
+    </pre></nav><script defer src=/js/star-nav.js></script><script defer src=/js/site.js></script><script defer src=/js/star-active.js></script><div id=ref-window class="float-window open"><div class=float-header><span class="title open">>> >> >> Reference &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Ref>>>>>></span></div><div class=float-body><div class=ref-list><a href=https://www.mixamo.com/ target=_blank>Mixamo</a> |
+<a href=https://opengameart.org/ target=_blank>OpenGameArt</a><p><a href=https://sharplab.io/ target=_blank>SharpLab</a> |
+<a href=https://godbolt.org/ target=_blank>Compiler Explorer</a></p><p><a href="https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type+Something+&x=none&v=4&h=4&w=80&we=false" target=_blank>ASCII Graph Generator</a></p><p><a href=https://mermaid.js.org/ target=_blank>Mermaid</a></p><a href=https://www.vim.org/ target=_blank>Vim</a> | <a href=https://vimdoc.sourceforge.net/ target=_blank>Vim Manual Source</a> |
+<a href=https://vimcdoc.sourceforge.net/ target=_blank>Vimcdoc</a> | <a href=https://vimcdoc.sourceforge.net/doc/help.html target=_blank>Vimdoc read online</a><p><a href=https://shields.io/ target=_blank>Shields.io</a></p><p><a href=https://emojidb.org/ target=_blank>EmojiDB</a></p><p><a href=https://cppreference.com/ target=_blank>cppreference</a></p><p><a href=https://gcc.gnu.org/onlinedocs/ target=_blank>GCC Docs</a></p><p><a href=https://clang.llvm.org/docs/ target=_blank>Clang Docs</a></p><p><a href=https://www.boost.org/libraries/ target=_blank>Boost Library Docs</a></p><p><a href=https://learn.microsoft.com/en-us/dotnet/csharp/ target=_blank>Microsoft Learn</a><p><a href=https://www.lua.org/manual/5.4/ target=_blank>Lua 5.4 Reference Manual</a><p><a href=https://docs.unity3d.com/Manual/index.html target=_blank>Unity Manual</a> |
+<a href=https://docs.unity3d.com/ScriptReference/index.html target=_blank>Unity API</a></p><p><a href=https://docs.unrealengine.com/ target=_blank>Unreal Engine Docs</a></p><p><a href=https://godotengine.org target=_blank>Godot</a> |
+<a href=https://docs.godotengine.org/en/stable/ target=_blank>Godot Docs</a></p><p><a href=https://z-library.sk/ target=_blank>Z-Library</a> : eBook Library</p><p><a href=https://docs.kernel.org/ target=_blank>Linux Kernel Docs</a></p><p><a href=https://www.gnu.org/ target=_blank>GNU</a> : manuals, philosophy, FAQ</p><a href=https://archlinux.org/ target=_blank>ArchLinux</a><p><a href=https://help.ubuntu.com/ target=_blank>Ubuntu Doc</a> |
+<a href=https://ubuntu.com/server/docs target=_blank>Ubuntu Server Guide</a></p><p><a href=https://www.vulkan.org/ target=_blank>Vulkan</a> |
+<a href=https://docs.vulkan.org/ target=_blank>Vulkan Docs</a></p><p><a href=https://www.opengl.org/ target=_blank>OpenGL</a> |
+<a href=https://registry.khronos.org/OpenGL target=_blank>OpenGL API</a> |
+<a href=https://www.khronos.org/opengl/wiki/ target=_blank>OpenGL Wiki</a></p><p><a href=https://learn.microsoft.com/en-us/windows/win32/directx target=_blank>DirectX</a></p><p><a href=https://www.realtimerendering.com/ target=_blank>Real-Time Rendering</a></p><p><a href=https://www.pbr-book.org/ target=_blank>Physically Based Rendering</a></p><p><a href=https://www.scratchapixel.com/ target=_blank>Scratchapixel</a></p><p><a href=https://learnopengl.com/ target=_blank>LearnOpenGL</a></p><p><a href=https://raytracing.github.io/ target=_blank>Ray Tracing in One Weekend</a></p><p><a href=https://www.shadertoy.com/ target=_blank>Shadertoy</a></p><p><a href=https://arxiv.org/list/cs.GR/recent target=_blank>arXiv Graphics</a></p><p><a href=https://www.siggraph.org/ target=_blank>SIGGRAPH</a> |
+<a href=https://dl.acm.org/conference/siggraph target=_blank>SIGGRAPH Digital Library</a></p><p><a href=https://git-scm.com/ target=_blank>Git</a> |
+<a href=https://git-scm.com/doc target=_blank>Docs</a> |
+<a href=https://git-scm.com/community target=_blank>Community</a></p></div></div></div><script src=/js/ref-window.js></script><div class=log-container><main class=log-main><h1 class=page-title></h1><div class=log-grid><a href=/unixlike/log/gitlocalrepo/ class=log-card data-tags=local><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>.git/</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git] [Linux]
+#local</span></div><p class=log-summary>git local structure</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/add/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>add</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git add</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/archive/ class=log-card data-tags=Command|Porcelain-like><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>archive</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain-like</span></div><p class=log-summary>usage of git archive</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/array/ class=log-card data-tags=Array><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Array</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[C]
+#Array</span></div><p class=log-summary>usage of array and ram structure, string, array with pointer</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/binutils/ class=log-card data-tags=coreutils><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Binutils</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[GNU]
+#coreutils</span></div><p class=log-summary>usage of Binutils</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/bisect/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>bisect</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>usage of git bisect</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/bitandlowlevel/ class=log-card data-tags=Bit><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>bit and low level</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[C]
+#Bit</span></div><p class=log-summary>bit field</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/blame/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>blame</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>usage of git blame</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/branch/ class=log-card data-tags=Command|Porcelain|Mechanism><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Branch</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain #Mechanism</span></div><p class=log-summary>git branch and commmand</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/bugreport/ class=log-card data-tags=Command|Porcelain-like><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>bugreport</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain-like</span></div><p class=log-summary>git bugreport</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/bundle/ class=log-card data-tags=Command|Porcelain-like><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>bundle</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain-like</span></div><p class=log-summary>git bundle</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/abi/ class=log-card data-tags=ABI><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>C ABI</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[C]
+#ABI</span></div><p class=log-summary>C Language ABI</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/programstructure/ class=log-card data-tags=Program|Main><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>C Program Structure</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[C]
+#Program #Main</span></div><p class=log-summary>C Program Structure, Command Line Argument</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/c/ class=log-card data-tags=history|evolution><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>C Programming Language</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[C]
+#history #evolution</span></div><p class=log-summary>The history and evolution of the C programming language</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/callingconvention/ class=log-card data-tags="calling convention"><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Calling Convention</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[C]
+#calling convention</span></div><p class=log-summary>C Calling Convention</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/cat-file/ class=log-card data-tags=Plumbing><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>cat-file</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Plumbing</span></div><p class=log-summary>git cat-file</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/checkout/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>checkout</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git checkout</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/checkout-index/ class=log-card data-tags=Plumbing><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>checkout-index</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Plumbing</span></div><p class=log-summary>git checkout-index</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/cherry-pick/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>cherry-pick</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git cherry-pick</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/clangconfiguration/ class=log-card data-tags=Toolchains|Compiler|Clang><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Clang and Configuration</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Linux]
+#Toolchains #Compiler #Clang</span></div><p class=log-summary>Clang and Clang configuration</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/clean/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>clean</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git gitclean</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/clone/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>clone</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git clone</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/cmake/ class=log-card data-tags=Toolchains|Build><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>CMake</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Linux]
+#Toolchains #Build</span></div><p class=log-summary>Concept, usage of CMake</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/commit/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>commit</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git commit</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/commit-tree/ class=log-card data-tags=Plumbing><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>commit-tree</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Plumbing</span></div><p class=log-summary>git commit-tree</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/compilationprocess/ class=log-card data-tags=Compile><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Compilation Process</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[C]
+#Compile</span></div><p class=log-summary>C Compilation</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/compositedatatype/ class=log-card data-tags=struct|union|enum><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Composite Datatype</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[C]
+#struct #union #enum</span></div><p class=log-summary>usage and memory layout of sturct, union and enum</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/config/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>config</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git config</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/count-objects/ class=log-card data-tags=Command|Plumbing><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>count-object</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Plumbing</span></div><p class=log-summary>git count-object</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/daemon/ class=log-card data-tags=Daemon|Network><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>daemon</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Daemon #Network</span></div><p class=log-summary>git daemon</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/describe/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>describe</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git describe</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/diff/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>diff</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git diff</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/diff-index/ class=log-card data-tags=Command|Plumbing><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>diff-index</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Plumbing</span></div><p class=log-summary>git diff-index</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/email/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Email</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git Email interaction</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/fast-import/ class=log-card data-tags=Extension|Command|Plumbing><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>fast-import</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Extension #Command #Plumbing</span></div><p class=log-summary>git fast-import</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/fetch/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>fetch</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git fetch</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/fileoperator/ class=log-card data-tags=File><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>File Operator</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[C]
+#File</span></div><p class=log-summary>file r/w, file pointer</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/filemode/ class=log-card data-tags=Command|Porcelain|Mechanism><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Filemode</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git] [Linux]
+#Command #Porcelain #Mechanism</span></div><p class=log-summary>Linux filemode in Git</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/filter/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Filter</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>filter-branch and filter-repo</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/filter-branch/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>filter-branch</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git filter-branch</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/for-each-ref/ class=log-card data-tags=Command|Plumbing><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>for-each-ref</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Plumbing</span></div><p class=log-summary>git for-each-ref</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/fsck/ class=log-card data-tags=Command|Plumbing><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>fsck</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Plumbing</span></div><p class=log-summary>git fsck</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/function/ class=log-card data-tags=Function><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Function</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[C]
+#Function</span></div><p class=log-summary>C function</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/gc/ class=log-card data-tags=Command|Semi-porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>gc</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Semi-porcelain</span></div><p class=log-summary>git gc</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/gcc/ class=log-card data-tags=coreutils><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>GCC</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[GNU]
+#coreutils</span></div><p class=log-summary>introduction of gcc</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/gdb/ class=log-card data-tags=coreutils><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>GDB</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[GNU]
+#coreutils</span></div><p class=log-summary>introduction of gdb</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/git/ class=log-card data-tags=Toolchains><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>git</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git] [Linux]
+#Toolchains</span></div><p class=log-summary>the git self</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/aliases/ class=log-card data-tags=Mechanism><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Git aliases</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Mechanism</span></div><p class=log-summary>usage of git aliases machanism</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/gitforwindows/ class=log-card data-tags=Toolchains><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Git for Windows</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git] [Windows]
+#Toolchains</span></div><p class=log-summary>Git for Windows</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/remote/ class=log-card data-tags=Network|Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Git Remote</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Network #Command #Porcelain</span></div><p class=log-summary>git remote</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/hash-object/ class=log-card data-tags=Command|Plumbing><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>hash-object</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Plumbing</span></div><p class=log-summary>git hash-object</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/help/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>help</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git help</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/hooks/ class=log-card data-tags=Mechanism><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Hooks</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Mechanism</span></div><p class=log-summary>usage of git hooks</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/init/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>init</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git init</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/instaweb/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>instaweb</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git instaweb</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/lfs/ class=log-card data-tags=Extension><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>LFS</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Extension</span></div><p class=log-summary>git LFS</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/logstatus/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>log vs status</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git log and git status</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/ls-files/ class=log-card data-tags=Command|Plumbing><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>ls-files</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Plumbing</span></div><p class=log-summary>git ls-files</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/ls-tree/ class=log-card data-tags=Command|Plumbing><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>ls-tree</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Plumbing</span></div><p class=log-summary>git ls-tree</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/makemakefile/ class=log-card data-tags=Toolchains><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Make and Makefile</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Linux]
+#Toolchains</span></div><p class=log-summary>Usage of Make and Makefile</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/memory/ class=log-card data-tags=Stack|Heap|Memory><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Memory Layout</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[C]
+#Stack #Heap #Memory</span></div><p class=log-summary>Memory Layout, Memory Management, Stack, Heap</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/merge/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>merge</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git merge</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/merge-base/ class=log-card data-tags=Command|Plumbing><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>merge-base</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Plumbing</span></div><p class=log-summary>git merge-base</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/mergetool/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>mergetool</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git mergetool</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/mingw/ class=log-card data-tags=Toolchains><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>MinGW</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Windows]
+#Toolchains</span></div><p class=log-summary>MinGW principle</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/modular/ class=log-card data-tags=header|source><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Modular</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[C]
+#header #source</span></div><p class=log-summary>Separation of header and source files， static library and dynamic library</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/nano/ class=log-card data-tags=Editor><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Nano</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Linux]
+#Editor</span></div><p class=log-summary>usage of nano</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/ninja/ class=log-card data-tags=Toolchains><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Ninja</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Linux]
+#Toolchains</span></div><p class=log-summary>Usage of Ninja</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/nm/ class=log-card data-tags=coreutils><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>nm</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[GNU]
+#coreutils</span></div><p class=log-summary>usage of gnu nm</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/notes/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>notes</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git notes</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/objdump/ class=log-card data-tags=coreutils><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>objdump</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[GNU]
+#coreutils</span></div><p class=log-summary>usage of gnu objdump</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/objectmodel/ class=log-card data-tags=Object|UB><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Object Model</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[C]
+#Object #UB</span></div><p class=log-summary>C Object Model, UB</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/operator/ class=log-card data-tags=Operator><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Operator</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[C]
+#Operator</span></div><p class=log-summary>Operator associativity, precedence, syntax tree</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/proprocessor/ class=log-card data-tags=Preprocess|Macro><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Preprocessor</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[C]
+#Preprocess #Macro</span></div><p class=log-summary>C Preprocessor</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/pull/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>pull</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git pull</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/push/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>push</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git push</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/range-diff/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>range-diff</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git range-diff</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/read-tree/ class=log-card data-tags=Command|Plumbing><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>read-tree</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Plumbing</span></div><p class=log-summary>git read-tree</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/rebase/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>rebase</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git rebase</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/reflog/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>reflog</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git reflog</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/resetrevert/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>reset and revert</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git reset and revert</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/restore/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>restore</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git restore</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/rev-list/ class=log-card data-tags=Command|Plumbing><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>rev-list</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Plumbing</span></div><p class=log-summary>git rev-list</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/rev-parse/ class=log-card data-tags=Command|Plumbing><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>rev-parse</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Plumbing</span></div><p class=log-summary>git rev-parse</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/revert/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>revert</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git revert</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/rm/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>rm</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git rm</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/shortlog/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>shortlog</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git shotlog</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/show/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>show</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git show</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/show-ref/ class=log-card data-tags=Command|Plumbing><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>show-ref</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Plumbing</span></div><p class=log-summary>git show-ref</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/size/ class=log-card data-tags=coreutils><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>size</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[GNU]
+#coreutils</span></div><p class=log-summary>usage of gnu size</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/ssh/ class=log-card data-tags=Net><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>SSH</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Linux]
+#Net</span></div><p class=log-summary>Linux SSH</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/stash/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>stash</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git stash</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/status/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>status</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git status</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/strict-aliasing/ class=log-card data-tags=rule><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>strict-aliasing</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[C]
+#rule</span></div><p class=log-summary>rule of strict-aliasing</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/submodule/ class=log-card data-tags=Mechanism|Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Submodule</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Mechanism #Command #Porcelain</span></div><p class=log-summary>Git Submodule</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/subtree/ class=log-card data-tags=Mechanism|Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Subtree</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Mechanism #Command #Porcelain</span></div><p class=log-summary>Git Subtree</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/svn/ class=log-card data-tags=Extension|Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>svn</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Extension #Command #Porcelain</span></div><p class=log-summary>git svn</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/switch/ class=log-card data-tags=Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>switch</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Porcelain</span></div><p class=log-summary>git switch</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/symbolic-ref/ class=log-card data-tags=Command|Plumbing><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>symbolic-ref</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Plumbing</span></div><p class=log-summary>git symbolic-ref</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/tag/ class=log-card data-tags=Mechanism|Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Tag</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Mechanism #Command #Porcelain</span></div><p class=log-summary>Git Tag</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/threelocalarea/ class=log-card data-tags=Note><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Three Local Area</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Note</span></div><p class=log-summary>Git 3 local areas and 4 objects</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/tmux/ class=log-card data-tags=terminal><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Tmux</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Linux]
+#terminal</span></div><p class=log-summary>usage of tmux</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/typesystem/ class=log-card data-tags=Type><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Type System</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[C]
+#Type</span></div><p class=log-summary>C types</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/undefinedbehaviour/ class=log-card data-tags=UB><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Undefined Behaviours</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[C]
+#UB</span></div><p class=log-summary>C with UB</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/update-index/ class=log-card data-tags=Command|Plumbing><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>update-index</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Plumbing</span></div><p class=log-summary>git update-index</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/update-ref/ class=log-card data-tags=Command|Plumbing><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>update-ref</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Plumbing</span></div><p class=log-summary>git update-ref</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/update-server-info/ class=log-card data-tags=Command|Plumbing><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>update-server-info</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Plumbing</span></div><p class=log-summary>The most primitive "HTTP server simulator"</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/valgrind/ class=log-card data-tags=Toolchains><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Valgrind</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Linux]
+#Toolchains</span></div><p class=log-summary>usage of Valgrind</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/value/ class=log-card data-tags=Value><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Value</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[C]
+#Value</span></div><p class=log-summary>Definition of value in C language</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/verify-pack/ class=log-card data-tags=Command|Plumbing><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>verify-pack</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Plumbing</span></div><p class=log-summary>git verify-pack</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/vim/ class=log-card data-tags=Editor><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Vim</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Linux]
+#Editor</span></div><p class=log-summary>usage of vim</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/worktree/ class=log-card data-tags=Mechanism|Command|Porcelain><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>Worktree</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Mechanism #Command #Porcelain</span></div><p class=log-summary>Git Worktree</p><span class=read-more>ReadMore</span></div></a><a href=/unixlike/log/write-tree/ class=log-card data-tags=Command|Plumbing><img src=/images/gamelife.jpg alt class=log-thumb><div class=log-content><h2 class=log-title>write-tree</h2><div class=log-meta><span class=date><b>lastmodify:</b> 2025-12-31</span>
+<span class=author><b>creator:</b> ljf12825</span>
+<span class=meta-line>[Git]
+#Command #Plumbing</span></div><p class=log-summary>git write-tree</p><span class=read-more>ReadMore</span></div></a></div></main><aside class=sidebar-right><div class=search-box><input type=text id=searchInput placeholder="search title & summary…"></div><div class=tags-box><h3>Tags</h3><ul id=tagList><li><a href=# class=tag-link data-tag=ABI>#ABI</a></li><li><a href=# class=tag-link data-tag=Array>#Array</a></li><li><a href=# class=tag-link data-tag=Bit>#Bit</a></li><li><a href=# class=tag-link data-tag=Build>#Build</a></li><li><a href=# class=tag-link data-tag="calling convention">#calling convention</a></li><li><a href=# class=tag-link data-tag=Clang>#Clang</a></li><li><a href=# class=tag-link data-tag=Command>#Command</a></li><li><a href=# class=tag-link data-tag=Compile>#Compile</a></li><li><a href=# class=tag-link data-tag=Compiler>#Compiler</a></li><li><a href=# class=tag-link data-tag=coreutils>#coreutils</a></li><li><a href=# class=tag-link data-tag=Daemon>#Daemon</a></li><li><a href=# class=tag-link data-tag=Editor>#Editor</a></li><li><a href=# class=tag-link data-tag=enum>#enum</a></li><li><a href=# class=tag-link data-tag=evolution>#evolution</a></li><li><a href=# class=tag-link data-tag=Extension>#Extension</a></li><li><a href=# class=tag-link data-tag=File>#File</a></li><li><a href=# class=tag-link data-tag=Function>#Function</a></li><li><a href=# class=tag-link data-tag=header>#header</a></li><li><a href=# class=tag-link data-tag=Heap>#Heap</a></li><li><a href=# class=tag-link data-tag=history>#history</a></li><li><a href=# class=tag-link data-tag=local>#local</a></li><li><a href=# class=tag-link data-tag=Macro>#Macro</a></li><li><a href=# class=tag-link data-tag=Main>#Main</a></li><li><a href=# class=tag-link data-tag=Mechanism>#Mechanism</a></li><li><a href=# class=tag-link data-tag=Memory>#Memory</a></li><li><a href=# class=tag-link data-tag=Net>#Net</a></li><li><a href=# class=tag-link data-tag=Network>#Network</a></li><li><a href=# class=tag-link data-tag=Note>#Note</a></li><li><a href=# class=tag-link data-tag=Object>#Object</a></li><li><a href=# class=tag-link data-tag=Operator>#Operator</a></li><li><a href=# class=tag-link data-tag=Plumbing>#Plumbing</a></li><li><a href=# class=tag-link data-tag=Porcelain>#Porcelain</a></li><li><a href=# class=tag-link data-tag=Porcelain-like>#Porcelain-like</a></li><li><a href=# class=tag-link data-tag=Preprocess>#Preprocess</a></li><li><a href=# class=tag-link data-tag=Program>#Program</a></li><li><a href=# class=tag-link data-tag=rule>#rule</a></li><li><a href=# class=tag-link data-tag=Semi-porcelain>#Semi-porcelain</a></li><li><a href=# class=tag-link data-tag=source>#source</a></li><li><a href=# class=tag-link data-tag=Stack>#Stack</a></li><li><a href=# class=tag-link data-tag=struct>#struct</a></li><li><a href=# class=tag-link data-tag=terminal>#terminal</a></li><li><a href=# class=tag-link data-tag=Toolchains>#Toolchains</a></li><li><a href=# class=tag-link data-tag=Type>#Type</a></li><li><a href=# class=tag-link data-tag=UB>#UB</a></li><li><a href=# class=tag-link data-tag=union>#union</a></li><li><a href=# class=tag-link data-tag=Value>#Value</a></li></ul></div><div class=categories-box><h3>Categories</h3><ul id=categoryList><li><a href=# class=category-link data-category=C>[C]</a></li><li><a href=# class=category-link data-category=Git>[Git]</a></li><li><a href=# class=category-link data-category=GNU>[GNU]</a></li><li><a href=# class=category-link data-category=Linux>[Linux]</a></li><li><a href=# class=category-link data-category=Windows>[Windows]</a></li></ul></div></aside></div><script defer src=/js/logfilter.js></script><script type=module>
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ 
+    startOnLoad: true, theme: "default" });
+</script><footer><div class=container><p>© 2026 Jeff Lee(ljf12825). All rights reserved |
+<a href=https://creativecommons.org/licenses/by-nc-sa/4.0/>Article: CC BY-NC-SA 4.0</a> |
+<a href=https://creativecommons.org/licenses/by-sa/4.0/>Content: CC BY-SA 4.0</a> |
+<a href=https://opensource.org/licenses/MIT>Code: MIT License</a> |
+<a href=/LICENSES.md>Full License</a></p></div></footer></body></html>

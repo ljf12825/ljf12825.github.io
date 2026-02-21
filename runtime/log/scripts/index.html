@@ -1,0 +1,176 @@
+<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>Scripts</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/logsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/runtime/>★</a></li><li><a href=/runtime/lab/>Lab</a></li><li><a href=/runtime/log/>Log</a></li><li><a href=/runtime/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><pre class=ascii>
++——————————————————————————————————————————————————————————————+
+|                        <a class=nav-item data-path=/rightbrain/ href=/rightbrain/>RightBrain</a>                            |
+|                             |                                |
+|                             |     <a class=nav-item data-path=/dotnetandwindows/ href=/dotnetandwindows/>.NET-Windows</a>               |
+|                             |    /                           |
+|                             |   /                            |
+|                             |  /                             |
+|                             | /                              |
+|                             |/                               |
+|      <a class=nav-item data-path=/graphic/ href=/graphic/>Graphic</a> ———————————— <a class=nav-item data-path=/home/ href=/home/>Home</a> ————————————— <a class=nav-item data-path=/runtime/ href=/runtime/>Runtime</a>         |
+|                            /|                                |
+|                           / |                                |
+|                          /  |                                |
+|                         /   |       <a class=nav-item data-path=/language/ href=/language/>Language</a>                 |
+|                        /    |      /                         |
+|                       /     |     /                          |
+|              <a class=nav-item data-path=/unixlike/ href=/unixlike/>Unix-like</a>      |    /           <a class=nav-item data-path=/project/ href=/project/>Project</a>         |
+|                             |   /            <a class=nav-item data-path=/miscellaneous/ href=/miscellaneous/>Miscellaneous</a>   |
+|                        <a class=nav-item data-path=/leftbrain/ href=/leftbrain/>LeftBrain</a>             <a class=nav-item data-path=/ai/ href=/ai/>AI</a>              |
++——————————————————————————————————————————————————————————————+
+    </pre></nav><script defer src=/js/star-nav.js></script><script defer src=/js/site.js></script><script defer src=/js/star-active.js></script><div id=ref-window class="float-window open"><div class=float-header><span class="title open">>> >> >> Reference &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Ref>>>>>></span></div><div class=float-body><div class=ref-list><a href=https://www.mixamo.com/ target=_blank>Mixamo</a> |
+<a href=https://opengameart.org/ target=_blank>OpenGameArt</a><p><a href=https://sharplab.io/ target=_blank>SharpLab</a> |
+<a href=https://godbolt.org/ target=_blank>Compiler Explorer</a></p><p><a href="https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type+Something+&x=none&v=4&h=4&w=80&we=false" target=_blank>ASCII Graph Generator</a></p><p><a href=https://mermaid.js.org/ target=_blank>Mermaid</a></p><a href=https://www.vim.org/ target=_blank>Vim</a> | <a href=https://vimdoc.sourceforge.net/ target=_blank>Vim Manual Source</a> |
+<a href=https://vimcdoc.sourceforge.net/ target=_blank>Vimcdoc</a> | <a href=https://vimcdoc.sourceforge.net/doc/help.html target=_blank>Vimdoc read online</a><p><a href=https://shields.io/ target=_blank>Shields.io</a></p><p><a href=https://emojidb.org/ target=_blank>EmojiDB</a></p><p><a href=https://cppreference.com/ target=_blank>cppreference</a></p><p><a href=https://gcc.gnu.org/onlinedocs/ target=_blank>GCC Docs</a></p><p><a href=https://clang.llvm.org/docs/ target=_blank>Clang Docs</a></p><p><a href=https://www.boost.org/libraries/ target=_blank>Boost Library Docs</a></p><p><a href=https://learn.microsoft.com/en-us/dotnet/csharp/ target=_blank>Microsoft Learn</a><p><a href=https://www.lua.org/manual/5.4/ target=_blank>Lua 5.4 Reference Manual</a><p><a href=https://docs.unity3d.com/Manual/index.html target=_blank>Unity Manual</a> |
+<a href=https://docs.unity3d.com/ScriptReference/index.html target=_blank>Unity API</a></p><p><a href=https://docs.unrealengine.com/ target=_blank>Unreal Engine Docs</a></p><p><a href=https://godotengine.org target=_blank>Godot</a> |
+<a href=https://docs.godotengine.org/en/stable/ target=_blank>Godot Docs</a></p><p><a href=https://z-library.sk/ target=_blank>Z-Library</a> : eBook Library</p><p><a href=https://docs.kernel.org/ target=_blank>Linux Kernel Docs</a></p><p><a href=https://www.gnu.org/ target=_blank>GNU</a> : manuals, philosophy, FAQ</p><a href=https://archlinux.org/ target=_blank>ArchLinux</a><p><a href=https://help.ubuntu.com/ target=_blank>Ubuntu Doc</a> |
+<a href=https://ubuntu.com/server/docs target=_blank>Ubuntu Server Guide</a></p><p><a href=https://www.vulkan.org/ target=_blank>Vulkan</a> |
+<a href=https://docs.vulkan.org/ target=_blank>Vulkan Docs</a></p><p><a href=https://www.opengl.org/ target=_blank>OpenGL</a> |
+<a href=https://registry.khronos.org/OpenGL target=_blank>OpenGL API</a> |
+<a href=https://www.khronos.org/opengl/wiki/ target=_blank>OpenGL Wiki</a></p><p><a href=https://learn.microsoft.com/en-us/windows/win32/directx target=_blank>DirectX</a></p><p><a href=https://www.realtimerendering.com/ target=_blank>Real-Time Rendering</a></p><p><a href=https://www.pbr-book.org/ target=_blank>Physically Based Rendering</a></p><p><a href=https://www.scratchapixel.com/ target=_blank>Scratchapixel</a></p><p><a href=https://learnopengl.com/ target=_blank>LearnOpenGL</a></p><p><a href=https://raytracing.github.io/ target=_blank>Ray Tracing in One Weekend</a></p><p><a href=https://www.shadertoy.com/ target=_blank>Shadertoy</a></p><p><a href=https://arxiv.org/list/cs.GR/recent target=_blank>arXiv Graphics</a></p><p><a href=https://www.siggraph.org/ target=_blank>SIGGRAPH</a> |
+<a href=https://dl.acm.org/conference/siggraph target=_blank>SIGGRAPH Digital Library</a></p><p><a href=https://git-scm.com/ target=_blank>Git</a> |
+<a href=https://git-scm.com/doc target=_blank>Docs</a> |
+<a href=https://git-scm.com/community target=_blank>Community</a></p></div></div></div><script src=/js/ref-window.js></script><article class=single_article><div class=title>Scripts<div class=meta>Modified: 2025-06-01
+| Author：ljf12825</div></div><div class=content><p>Unity脚本就是你编写的C#类，它控制游戏中物体的行为、交互、动画、输入、碰撞、UI等逻辑</p><h2 id=脚本类型>脚本类型</h2><p>Unity中的脚本根据其用途可以分为3类：</p><table><thead><tr><th>特性</th><th><code>MonoBehaviour</code></th><th><code>ScriptableObject</code></th><th>纯 C# 类</th></tr></thead><tbody><tr><td>是否可挂载</td><td>可以挂载到 GameObject</td><td>不行</td><td>不行</td></tr><tr><td>生命周期函数</td><td>有 <code>Start</code>、<code>Update</code> 等</td><td>没有</td><td>没有</td></tr><tr><td>是否能序列化</td><td>支持</td><td>支持</td><td>默认不支持</td></tr><tr><td>支持协程</td><td><code>StartCoroutine()</code></td><td>不支持</td><td>不支持</td></tr><tr><td>使用场景</td><td>行为脚本，控制对象</td><td>数据容器，可复用资源配置</td><td>工具类、算法类等逻辑单元</td></tr></tbody></table><ol><li><code>MonoBehaviour</code>（行为脚本）</li></ol><ul><li>必须挂载在场景中的GameObject上</li><li>用于控制逻辑、角色行为、输入响应等</li><li>有生命周期函数</li><li>支持协程</li></ul><p><strong>适用场景</strong></p><ol><li><p>角色控制器（移动、跳跃、攻击）</p></li><li><p>UI交互逻辑</p></li><li><p>游戏状态管理</p></li><li><p>物理交互处理</p></li><li><p>动画状态控制</p></li><li><p><code>ScriptableObject</code>（数据容器）</p></li></ol><ul><li>轻量级对象，不需要挂载，常用于数据复用（如技能表、配置表）</li><li>支持序列化，可以做成asset文件</li><li>没有生命周期函数，但可以在<code>OnEnable()</code>做初始化</li><li>更节省内存，场景切换时不会被销毁</li></ul><p><strong>核心优势</strong></p><ul><li>内存高效：不依赖场景、按需加载</li><li>数据复用：同一资源可被多个对象共享</li><li>热重载：运行时修改自动同步</li><li>版本友好：资源文件便于版本控制</li></ul><ol start=3><li>纯C#类（工具类）</li></ol><ul><li>用于封装工具、算法、模型等逻辑（如A*算法、存档系统）</li><li>不支持Unity生命周期和序列化</li><li>由其他脚本调用，解耦业务逻辑</li></ul><p><strong>适用场景</strong></p><ol><li>实现复杂算法</li><li>数据模型定义</li><li>工具类库</li><li>设计模式实现</li></ol><p><strong>优化技巧</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 使用partial类拆分大型工具类</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>partial</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MathUtility</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> Vector3 CalculateBazierPoint(...){ ... }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>partial</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MathUtility</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> Quaternion SmoothDampRoatation(...){ ... }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 使用扩展方法增强现有功能</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> staitc <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TransformExtensions</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Reset(<span style=color:#66d9ef>this</span> Transform transform)
+</span></span><span style=display:flex><span>  {
+</span></span><span style=display:flex><span>    transform.position = Vector3.zero;
+</span></span><span style=display:flex><span>    transform.rotation = Quaternion.identity;
+</span></span><span style=display:flex><span>    transform.localScale = Vector3.one;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=变量声明>变量声明</h2><p>在Unity C#脚本中，变量声明是定义数据存储位置的基本方式。变量可以存储各种类型的数据，如数字、文本、布尔值、引用游戏对象等</p><p><strong>基本语法</strong>\</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#a6e22e>[访问修饰符]</span> [<span style=color:#960050;background-color:#1e0010>数据类型</span>] [<span style=color:#960050;background-color:#1e0010>变量名</span>] [= <span style=color:#960050;background-color:#1e0010>初始值</span>]
+</span></span></code></pre></div><p><strong>访问修饰符</strong>\</p><table><thead><tr><th>修饰符</th><th>Inspector 可见</th><th>其他脚本可访问</th><th>用途</th></tr></thead><tbody><tr><td><code>public</code></td><td>可见</td><td>可访问</td><td>对外公开变量（慎用）</td></tr><tr><td><code>private</code></td><td>不可见（默认）</td><td>不可访问</td><td>仅类内部使用</td></tr><tr><td><code>[SerializeField] private</code></td><td>可见</td><td>不可访问</td><td>私有但可在 Inspector 编辑</td></tr></tbody></table><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> score = <span style=color:#ae81ff>9</span>; <span style=color:#75715e>// 可见且可访问</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>float</span> health = <span style=color:#ae81ff>100f</span>; <span style=color:#75715e>// 完全私有</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>[SerializeField]</span> <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>float</span> moveSpeed = <span style=color:#ae81ff>5f</span>; <span style=color:#75715e>// Inspector可见但外部不可改</span>
+</span></span></code></pre></div><p><strong>数据类型</strong>\</p><ul><li>基本数据类型：<code>int</code>,<code>float</code>,<code>bool</code>,<code>string</code>等</li><li><a href=log/Unity-Build-in-Types/>Unity Build in Types</a></li></ul><p><strong>变量特性</strong><br><a href=log/Attribute-in-Unity/>Attribute in Unity</a></p><h2 id=脚本间通信引用其他组件>脚本间通信（引用其他组件）</h2><p><a href=log/Unity-Component-Communication/>Unity Component Communication</a></p><h2 id=基类-monobehaviour>基类: MonoBehaviour</h2><p><a href=log/MonoBehaviour/>MonoBehaviour</a></p><h2 id=scriptableobject数据驱动>ScriptableObject（数据驱动）</h2><p><a href=log/ScriptableObject/>ScriptableObject</a></p><h2 id=变量管理策略>变量管理策略</h2><h3 id=序列化控制>序列化控制</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 条件序列化</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>[SerializeField]</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>bool</span> useAdvancedSettings;
+</span></span><span style=display:flex><span><span style=color:#a6e22e>[SerializeField, ShowIf(&#34;useAdvancedSettings&#34;)]</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>float</span> advancedParameter;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 多态序列化</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>[SerializeReference]</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> IWeapon currentWeapon; <span style=color:#75715e>// 可序列化接口</span>
+</span></span></code></pre></div><h3 id=组织技巧>组织技巧</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#a6e22e>[System.Serializable]</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CharacterStats</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>float</span> health;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>float</span> stamina;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>float</span> attackPower;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Player</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span><span style=color:#a6e22e>  [BoxGroup(&#34;基础属性&#34;)]</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>public</span> CharacterStats baseStats;
+</span></span><span style=display:flex><span><span style=color:#a6e22e>
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e>  [BoxGroup(&#34;成长属性&#34;)]</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>public</span> CharacterStats growthStats;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=性能优化>性能优化</h2><ol><li>缓存组件引用</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>private</span> Rigidbody = _rb;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> Awake() =&gt; _rb = GetComponent&lt;Rigidbody&gt;();
+</span></span></code></pre></div><ol start=2><li>避免频繁GetComponent</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 错误做法：每帧调用</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> Update() =&gt; GetComponent&lt;Rigidbody&gt;().AddForce(...);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 正确做法</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>private</span> Rigidbody _rb;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> Awake() =&gt; _rb = GetComponent&lt;Rigidbody&gt;();
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> Update() =&gt; _rb.AddForce(...);
+</span></span></code></pre></div><ol start=3><li><p>使用ObjectPool管理频繁创建/销毁的对象
+<a href=log/Object-Pooling/>Object Pooling</a></p></li><li><p>合理使用Update方法</p></li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 低频更新示例</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>float</span> _nextUpdateTime;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> Update()
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> (Time.time &lt; _nextUpdateTime) <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>  _nextUpdateTime = Time.time + <span style=color:#ae81ff>0.5f</span>;
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// 每0.5秒执行一次的逻辑</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=架构设计建议>架构设计建议</h2><ol><li>事件驱动架构</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GameEvents</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>event</span> Action OnPlayerDeath;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>event</span> Action&lt;<span style=color:#66d9ef>int</span>&gt; OnScoreChanged;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> TriggerPlayerDeath() =&gt; OnPlayerDeath?.Invoke();
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ol start=2><li>组件化设计</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 将功能拆分为独立组件</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>[RequireComponent(typeof(HealthSystem))]</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Damageable</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>private</span> HealthSystem _health;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>void</span> Awake() =&gt; _health = GetComponent&lt;HealthSystem&gt;();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> TakeDamage(<span style=color:#66d9ef>float</span> amount) =&gt; _health.Reduce(amount);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ol start=3><li>状态模式应用</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>IPlayerState</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>void</span> Enter(PlayerController player);
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>void</span> Update();
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>void</span> Exit();
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>JumpState</span> : IPlayerState { ... }
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>AttackState</span> : IPlayerState { ... }
+</span></span></code></pre></div><h2 id=调试与测试>调试与测试</h2><ol><li>自定义调试工具</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>#if</span> UNITY_EDITOR
+</span></span><span style=display:flex><span><span style=color:#a6e22e>[Header{&#34;Debug&#34;}]</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>[SerializaField]</span> <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>bool</span> _showDebugInfo;
+</span></span><span style=display:flex><span><span style=color:#a6e22e>[SerializeField, ShowIf(&#34;_showDebugInfo&#34;)]</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>private</span> Color _debugColor = Color.red;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> OnDrawGizmos()
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span>(!_showDebugInfo) <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>  Gizmos.color = _debugColor;
+</span></span><span style=display:flex><span>  Gizmos.DrawWireSphere(transform.position, <span style=color:#ae81ff>2f</span>);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>#endif</span>
+</span></span></code></pre></div><ol start=2><li>单元测试示例</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>#if</span> UNITY_EDITOR
+</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> NUnit.Framework;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MathTests</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span><span style=color:#a6e22e>  [Test]</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> VectorAngleTest()
+</span></span><span style=display:flex><span>  {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> v1 = <span style=color:#66d9ef>new</span> Vector2(<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0</span>);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> v2 = <span style=color:#66d9ef>new</span> Vector2(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>    Assert.AreEqual(<span style=color:#ae81ff>90</span>, Vector2.Angle(v1, v2));
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>#endif</span>
+</span></span></code></pre></div><h2 id=版本兼容性处理>版本兼容性处理</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// API版本检查</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#if</span> UNITY_2020_1_OR_NEWER
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// 使用新API</span>
+</span></span><span style=display:flex><span>  transform.hasChanged = <span style=color:#66d9ef>false</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#else</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// 兼容旧版本的替代方法</span>
+</span></span><span style=display:flex><span>  StartCoroutine(CheckTransformChange());
+</span></span><span style=display:flex><span><span style=color:#75715e>#endif</span>
+</span></span></code></pre></div><h2 id=unity命名空间>Unity命名空间</h2><h3 id=1unityengine>1.<code>UnityEngine</code></h3><ul><li>功能：Unity核心功能的主命名空间</li><li>内容：<ul><li>游戏对象相关类：<code>GameObject</code>,<code>Transform</code>,<code>Component</code></li><li>数学类型：<code>Vector2</code>, <code>Vector3</code>, <code>Quaternion</code>, <code>Matrix4x4</code></li><li>渲染相关：<code>Material</code>, <code>Shader</code>, <code>Camera</code>, <code>Light</code></li><li>物理系统：<code>Rigidbody</code>, <code>Collider</code>, <code>Physics</code></li><li>输入系统：<code>Input</code></li><li>时间系统：<code>Time</code></li><li>资源管理：<code>Resources</code></li></ul><blockquote><p>几乎所有 Unity 游戏代码都依赖这个命名空间。</p></blockquote></li></ul><h3 id=2unityengineui>2.<code>UnityEngine.UI</code></h3><ul><li>功能：Unity 的传统 UI 系统。</li><li>内容：<ul><li>UI 控件类：<code>Button</code>, <code>Text</code>, <code>Image</code>, <code>Slider</code>, <code>Canvas</code></li><li>事件系统相关：<code>EventSystem</code>, <code>PointerEventData</code></li></ul></li></ul><blockquote><p>用于构建游戏界面，处理用户交互。</p></blockquote><h3 id=3unityenginescenemanagement>3.<code>UnityEngine.SceneManagement</code></h3><ul><li>功能：管理场景加载和卸载。</li><li>内容：<ul><li>场景管理类：<code>SceneManager</code></li><li>场景信息类：<code>Scene</code></li></ul></li><li>典型用法：<ul><li><code>SceneManager.LoadScene("SceneName")</code> 加载场景</li><li><code>SceneManager.GetActiveScene()</code> 获取当前场景</li></ul></li></ul><h3 id=4unityengineaudio>4.<code>UnityEngine.Audio</code></h3><ul><li>功能：音频系统相关类。</li><li>内容：<ul><li>AudioSource, AudioClip, AudioListener</li><li>混音器类：AudioMixer</li></ul></li></ul><blockquote><p>处理声音播放和混音控制。</p></blockquote><h3 id=5unityengineeventsystem>5.<code>UnityEngine.EventSystem</code></h3><ul><li>功能：底层事件系统，支持 UI 和输入事件。</li><li>内容：<ul><li>事件接口：IPointerClickHandler, IDragHandler 等</li><li>事件数据类：PointerEventData, BaseEventData</li></ul></li></ul><blockquote><p>UI 交互和自定义输入处理常用。</p></blockquote><h3 id=6unityengineanimation>6.<code>UnityEngine.Animation</code></h3><ul><li>功能：动画系统相关。</li><li>内容：<ul><li>动画控制器：Animator</li><li>动画事件和状态机相关类</li></ul></li></ul><blockquote><p>用于角色动画控制和状态机管理。</p></blockquote><h3 id=7unityeditor仅编辑器>7.<code>UnityEditor</code>（仅编辑器）</h3><ul><li>功能：编辑器扩展相关</li><li>内容：<ul><li>自定义Inspector、编辑器窗口、菜单项等</li></ul></li></ul><blockquote><p>只能在编辑器环境使用，构建后不包含</p></blockquote><h3 id=8unitycollections--unityjobs--unityburst>8.<code>Unity.Collections</code> / <code>Unity.Jobs</code> / <code>Unity.Burst</code></h3><ul><li>功能：高性能计算和多线程相关。</li><li>内容：<ul><li>NativeArray, NativeList</li><li>作业系统：IJob, JobHandle</li><li>Burst 编译器加速</li></ul></li></ul><blockquote><p>DOTS（Data-Oriented Technology Stack）架构核心。</p></blockquote><p><a href=https://docs.unity3d.com/ScriptReference/>官方文档</a></p><h2 id=unity脚本的最佳实践>Unity脚本的最佳实践</h2><ol><li>变量封装</li></ol><ul><li>用<code>[SerializeField] private</code>替代<code>public</code>暴露数据</li></ul><ol start=2><li>合理命名</li></ol><ul><li>变量名应体现用途：<code>moveSpeed</code>比<code>ms</code>清晰</li></ul><ol start=3><li>Inspector优化</li></ol><ul><li>用<code>[Header]</code>分组变量</li><li>用<code>[Tooltip]</code>提示变量作用</li></ul><ol start=4><li>性能考虑</li></ol><ul><li>避免在<code>Update()</code>中频繁使用<code>Find</code>/<code>GetComponent</code></li><li>用缓存变量保存引用</li></ul><ol start=5><li>解耦逻辑</li></ol><ul><li>数据放ScriptableObject</li><li>行为放MonoBehaviour</li><li>公共算法放普通C#类</li></ul></div><nav class=post-nav><a href=/runtime/log/scriptedimporter/ class=hover:underline>pre: ScriptedImporter</a>
+<a href=/runtime/log/serialization-and-persistance/ class=hover:underline>next: Serialization and Persistence</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#脚本类型>脚本类型</a></li><li><a href=#变量声明>变量声明</a></li><li><a href=#脚本间通信引用其他组件>脚本间通信（引用其他组件）</a></li><li><a href=#基类-monobehaviour>基类: MonoBehaviour</a></li><li><a href=#scriptableobject数据驱动>ScriptableObject（数据驱动）</a></li><li><a href=#变量管理策略>变量管理策略</a><ul><li><a href=#序列化控制>序列化控制</a></li><li><a href=#组织技巧>组织技巧</a></li></ul></li><li><a href=#性能优化>性能优化</a></li><li><a href=#架构设计建议>架构设计建议</a></li><li><a href=#调试与测试>调试与测试</a></li><li><a href=#版本兼容性处理>版本兼容性处理</a></li><li><a href=#unity命名空间>Unity命名空间</a><ul><li><a href=#1unityengine>1.<code>UnityEngine</code></a></li><li><a href=#2unityengineui>2.<code>UnityEngine.UI</code></a></li><li><a href=#3unityenginescenemanagement>3.<code>UnityEngine.SceneManagement</code></a></li><li><a href=#4unityengineaudio>4.<code>UnityEngine.Audio</code></a></li><li><a href=#5unityengineeventsystem>5.<code>UnityEngine.EventSystem</code></a></li><li><a href=#6unityengineanimation>6.<code>UnityEngine.Animation</code></a></li><li><a href=#7unityeditor仅编辑器>7.<code>UnityEditor</code>（仅编辑器）</a></li><li><a href=#8unitycollections--unityjobs--unityburst>8.<code>Unity.Collections</code> / <code>Unity.Jobs</code> / <code>Unity.Burst</code></a></li></ul></li><li><a href=#unity脚本的最佳实践>Unity脚本的最佳实践</a></li></ul></li></ul></nav></aside><script src=/js/scrollspy.js defer></script><script type=module>
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ 
+    startOnLoad: true, theme: "default" });
+</script><footer><div class=container><p>© 2026 Jeff Lee(ljf12825). All rights reserved |
+<a href=https://creativecommons.org/licenses/by-nc-sa/4.0/>Article: CC BY-NC-SA 4.0</a> |
+<a href=https://creativecommons.org/licenses/by-sa/4.0/>Content: CC BY-SA 4.0</a> |
+<a href=https://opensource.org/licenses/MIT>Code: MIT License</a> |
+<a href=/LICENSES.md>Full License</a></p></div></footer></body></html>
