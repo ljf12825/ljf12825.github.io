@@ -6,8 +6,8 @@
 
 .single_article .title {
 	font-family: Arial, Helvetica, sans-serif;
-	padding: 40px 40px 25px 40px;
-	font-size: 40px;
+	padding: 20px 10px 0px 40px;
+	font-size: 35px;
 	font-weight: bold;
 	color: #000080;
 }
@@ -26,28 +26,28 @@
 }
 
 .single_article h1 {
-	font-size: 36px;
-	font-weight: 700;
+	font-size: 35px;
+	font-weight: normal;
 }
 
 .single_article h2 {
 	font-size: 30px;
-	font-weight: 700;
+	font-weight: normal;
 }
 
 .single_article h3 {
 	font-size: 26px;
-	font-weight: 600;
+	font-weight: normal;
 }
 
 .single_article h4 {
 	font-size: 22px;
-	font-weight: 600;
+	font-weight: normal;
 }
 
 .single_article h5 {
 	font-size: 20px;
-	font-weight: bold;
+	font-weight: normal;
 }
 
 .single_article h6 {
@@ -59,7 +59,7 @@
 .single_article p {
 	font-size: 18px;
 	line-height: 1.7;
-	margin-bottom: 1rem;
+	margin-bottom: 10px;
 }
 
 .single_article a {

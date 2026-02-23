@@ -6,8 +6,6 @@ summary: array structure
 type: file
 ---
 
-# Array
-
 数组是一种线性结构，由连续内存空间存储相同类型元素的集合
 
 Array = 一段连续内存 + 固定步长 + 常数时间寻址
