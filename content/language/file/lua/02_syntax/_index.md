@@ -1,4 +1,4 @@
 ---
-title: Lua
+title: Syntax
 type: file
 ---
