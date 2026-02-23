@@ -36,9 +36,11 @@
 ## C#
 [Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/csharp/) : This is Microsoft's unified official documentation platform, replacing the legacy MSDN documentation. It's the preferred and definitive reference for all .NET and C# developers. It includes documentation for the .NET platform, the C# language, all Base Class Libraries (BCLs), ASP.NET Core, EF Core, and more. You can easily switch between documentation for different .NET versions (such as .NET 8, .NET 6, and the .NET Framework) to avoid issues caused by API differences. It includes "concept" articles (tutorials and guides), automatically generated API references, code samples, and quickstarts. Many pages have built-in "Run" buttons, allowing you to edit and run code samples directly in your browser (based on .NET Jupyter Notebooks).
 
-## Lua
+[lua.org](https://lua.org/) : This is the definitive, core Lua reference document, written and maintained by the Lua team (PUC-Rio). All other reference resources build on it. It fully defines the syntax, semantics, standard library, and C API of the Lua language (currently the latest version is 5.4). The document style is highly technical, with no redundant explanations and straightforward to the point. Sections provide detailed coverage of basic concepts, the language, the standard library (`strings`, `tables`, `io`, `operating systems`, `math`, `debugging`, etc.), and how to embed and extend Lua. For all Lua developers.
 
-[Lua5.4 Reference Manual](https://www.lua.org/manual/5.4/) : This is the definitive, core Lua reference document, written and maintained by the Lua team (PUC-Rio). All other reference resources build on it. It fully defines the syntax, semantics, standard library, and C API of the Lua language (currently the latest version is 5.4). The document style is highly technical, with no redundant explanations and straightforward to the point. Sections provide detailed coverage of basic concepts, the language, the standard library (`strings`, `tables`, `io`, `operating systems`, `math`, `debugging`, etc.), and how to embed and extend Lua. For all Lua developers.
+[luarocks.org](https://luarocks.org): luarocks homepage
+
+[luajit.org](https://luajit.org): luajit homepage
 
 ## Game Engine
 [UnityManual](https://docs.unity3d.com/Manual/index.html) and [UnityScripting API](https://docs.unity3d.com/ScriptReference/index.html) : Unity's documentation system is very complete. The Unity Manual is an introduction to concepts and workflows, suitable for systematic learning and understanding of concepts. The Unity Scripting API is used to query code, including detailed descriptions of each class, method, property, function, parameters, return values, and code examples.
