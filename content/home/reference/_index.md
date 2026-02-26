@@ -20,8 +20,12 @@
 
 [EmojiDB](emojidb.org) : emoji database
 
+[Z-library](https://z-library.sk/) eBook Library. Read, download freely.
+
 ## C++
 [ISO/IEC 14882:xxxx](https://www.iso.org/) : The official C++ standard document, serving as a legal and technical specification rather than a learning guide. Developed by the International Standardization Organization (ISO). It strictly defines C++ syntax, semantics, standard library behavior, and the principles that all implementations (compilers) must adhere to. These standards documents are paid for and must be purchased from ISO or a national standards organization. `xxxx` means publish year.
+
+[isocpp.org](https://isocpp.org/): isocpp homepage
 
 [cppreference](https://cppreference.com/) : The preferred reference site for all C++ developers, recognized as the most accurate and comprehensive online resource. The content is extremely detailed, including detailed descriptions of all language features, standard library header files, functions, classes, and algorithms. The format is standardized, and each page includes syntax, parameters, return values, exceptions, complexity, sample code, related links, etc. The standard version is marked, clearly indicating which C++ standard the feature was Introductiond in. Most sample code can be edited and run on the page
 
@@ -29,7 +33,7 @@
 
 [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines) : This project, maintained by Bjarne Stroustrup, the father of C++, and numerous experts, aims to guide developers in using modern C++ correctly, efficiently, and safely. It's not a syntax reference, but rather a collection of best practices. It includes hundreds of rules, each with rationale and examples.
 
-[WG21 Papers](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/) : If you want to understand the future direction of the language and the latest discussions, you can follow the work of the standards committee, which stores technical documents (called Papers) that propose and design new features.
+[open-std.org](https://https://open-std.org/)
 
 [Boost Library Docs](https://www.boost.org/libraries/) : It is a very important and high quality C++ third libraries collection. Known as the quasi-standard library of C++, many of its components later entered the standard library of new versions of C++ and later. But it is very large, and some of the features it implements are obscure and difficult to understand. Don't delve into them, if it's not necessary.
 
@@ -48,8 +52,6 @@
 [UnRealEngine Docs]( https://docs.unrealengine.com/) : A huge system that integrates manuals, API references, blueprint references, and tutorials.
 
 [GoDot](godotengine.org) : GoDot Engine official. [GoDot Doc](https://docs.godotengine.org/en/stable/)
-
-[Z-library](https://z-library.sk/) eBook Library. Read, download freely.
 
 ## Linux
 [Linux Kernel Docs](https://docs.kernel.org/) : The official Linux kernel documentation is the core and most official Linux documentation, primarily for developers, driver writers, and system-level researchers. This is the official webpage version of the documentation in the kernel source tree (located in the `/Documentation` directory). It includes the following: Development Guide, which explains how to compile the kernel and submit patches; Driver documentation, which explains how to write and configure various hardware drivers; Subsystem documentation, which explains detailed descriptions of file systems, networking, memory management, etc.; API documentation, which explains the interfaces provided by the kernel to modules.
