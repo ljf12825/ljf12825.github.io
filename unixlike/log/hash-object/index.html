@@ -1,4 +1,4 @@
-<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>hash-object</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/logsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/unixlike/>★</a></li><li><a href=/unixlike/lab/>Lab</a></li><li><a href=/unixlike/log/>Log</a></li><li><a href=/unixlike/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>hash-object</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-lua.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-rust.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/logsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/unixlike/>★</a></li><li><a href=/unixlike/lab/>Lab</a></li><li><a href=/unixlike/log/>Log</a></li><li><a href=/unixlike/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
 <span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><pre class=ascii>
 +——————————————————————————————————————————————————————————————+
 |                        <a class=nav-item data-path=/rightbrain/ href=/rightbrain/>RightBrain</a>                            |
@@ -37,53 +37,53 @@
 <a href=https://git-scm.com/doc target=_blank>Docs</a> |
 <a href=https://git-scm.com/community target=_blank>Community</a></p></div></div></div><script src=/js/ref-window.js></script><article class=single_article><div class=title>hash-object<div class=meta>Modified: 2025-12-31
 | Author：ljf12825</div></div><div class=content><p><code>git hash-object</code>是一个将数据内容转换为Git对象，并返回其唯一SHA-1哈希值的底层命令</p><h2 id=存在意义>存在意义</h2><p>要理解<code>hash-object</code>，必须先理解Git的核心思想：Git是一个内容寻址文件系统</p><ol><li>存储的是内容，不是文件差异：与某些版本控制系统不同，Git不存储文件的前后差异。它存储的是文件在某个时刻的完整内容快照</li><li>通过内容生成密钥：Git会对文件的内容（外加一个小的头信息）计算一个SHA-1校验和。这个校验和就是一个40位的十六进制字符串（如<code>d670460b4b4aece5915caf5c68d12f560a9fe3e4</code>）</li><li>用密钥来寻址：这个SHA-1哈希值就是该内容在Git数据库中的唯一身份证。Git通过这个“身份证”来找到并取出对应内容</li></ol><p><code>git hash-object</code>就是执行2和3的工具</p><h2 id=基本用法与参数>基本用法与参数</h2><ol><li>计算内容的哈希值（不保存）
-最基本的用法是计算一段内容的哈希值，但不将其真正存入Git数据库</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>$ echo <span style=color:#e6db74>&#39;hello world&#39;</span> | git hash-object --stdin
+最基本的用法是计算一段内容的哈希值，但不将其真正存入Git数据库</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>$ <span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#f1fa8c>&#39;hello world&#39;</span> | git hash-object --stdin
 </span></span><span style=display:flex><span>d670460b4b4aece5915caf5c68d12f560a9fe3e4
 </span></span></code></pre></div><ul><li><code>--stdin</code>：告诉命令从标准输入读取内容，而不是从文件。这里通过管道<code>|</code>将<code>echo</code>的输出传给了它</li><li>这个命令只是计算了一下，并没有存入<code>.git/objects</code>目录下</li></ul><ol start=2><li>计算并保存为Git对象（<code>-w</code>）
-这是更常见的用法，不仅计算哈希值，还将内容作为一个Blob对象写入Git的数据库（<code>.git/objects</code>）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>$ echo <span style=color:#e6db74>&#39;hello world&#39;</span> | git hash-object --stdin
+这是更常见的用法，不仅计算哈希值，还将内容作为一个Blob对象写入Git的数据库（<code>.git/objects</code>）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>$ <span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#f1fa8c>&#39;hello world&#39;</span> | git hash-object --stdin
 </span></span><span style=display:flex><span>d670460b4b4aece5915caf5c68d12f560a9fe3e4
 </span></span></code></pre></div><ul><li><code>-w</code>（wirte）：关键选项。表示将对象写入数据库</li><li>执行后，Git会在<code>.git/objects</code>下创建一个文件：
 <code>objects/d6/70460b4b4aece5915caf5c68d12f560a9fe3e4</code> Git为了效率，用哈希值的前两位创建了一个子目录</li></ul><ol start=3><li>对文件进行操作
-更直接的方式是直接指定一个文件</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 1. 创建一个新文件</span>
-</span></span><span style=display:flex><span>$ echo <span style=color:#e6db74>&#39;This is my file content.&#39;</span> &gt; myfile.txt
+更直接的方式是直接指定一个文件</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 1. 创建一个新文件</span>
+</span></span><span style=display:flex><span>$ <span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#f1fa8c>&#39;This is my file content.&#39;</span> &gt; myfile.txt
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 2. 将该文件的内容存入Git数据库</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 2. 将该文件的内容存入Git数据库</span>
 </span></span><span style=display:flex><span>$ git hash-object -w myfile.txt 
 </span></span><span style=display:flex><span>5e1c309dae7f45e0f39a1ddcacc1ecb7cf211e83
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 3. 验证对象已存在</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 3. 验证对象已存在</span>
 </span></span><span style=display:flex><span>$ git cat-file -p 5e1c309 
 </span></span><span style=display:flex><span>This is my file content.
-</span></span></code></pre></div><h3 id=示例>示例</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 1. 在一个新目录初始化Git仓库</span>
-</span></span><span style=display:flex><span>$ mkdir my-test-repo <span style=color:#f92672>&amp;&amp;</span> cd my-test-repo
+</span></span></code></pre></div><h3 id=示例>示例</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 1. 在一个新目录初始化Git仓库</span>
+</span></span><span style=display:flex><span>$ mkdir my-test-repo <span style=color:#ff79c6>&amp;&amp;</span> <span style=color:#8be9fd;font-style:italic>cd</span> my-test-repo
 </span></span><span style=display:flex><span>$ git init
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 2. 创建一个文件</span>
-</span></span><span style=display:flex><span>$ echo ‘Version <span style=color:#ae81ff>1</span> of my content’ &gt; demo.txt
+</span></span><span style=display:flex><span><span style=color:#6272a4># 2. 创建一个文件</span>
+</span></span><span style=display:flex><span>$ <span style=color:#8be9fd;font-style:italic>echo</span> ‘Version <span style=color:#bd93f9>1</span> of my content’ &gt; demo.txt
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 3. 手动将这个文件的内容存入Git数据库（注意：此时demo.txt还在工作区，未被git add）</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 3. 手动将这个文件的内容存入Git数据库（注意：此时demo.txt还在工作区，未被git add）</span>
 </span></span><span style=display:flex><span>$ git hash-object -w demo.txt
 </span></span><span style=display:flex><span>c89fb7b6a1d409d5b4f78c6a4b0c9c82a7c80d8f
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 4. 去看看Git把东西存到哪里了</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 4. 去看看Git把东西存到哪里了</span>
 </span></span><span style=display:flex><span>$ find .git/objects -type f
 </span></span><span style=display:flex><span>.git/objects/c8/9fb7b6a1d409d5b4f78c6a4b0c9c82a7c80d8f
-</span></span><span style=display:flex><span><span style=color:#75715e># 对象已经创建了。文件名就是其内容的哈希值。</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 对象已经创建了。文件名就是其内容的哈希值。</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 5. 用cat-file查看这个对象的内容和类型</span>
-</span></span><span style=display:flex><span>$ git cat-file -t c89fb7 <span style=color:#75715e># 查看类型</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 5. 用cat-file查看这个对象的内容和类型</span>
+</span></span><span style=display:flex><span>$ git cat-file -t c89fb7 <span style=color:#6272a4># 查看类型</span>
 </span></span><span style=display:flex><span>blob
-</span></span><span style=display:flex><span>$ git cat-file -p c89fb7 <span style=color:#75715e># 查看内容</span>
-</span></span><span style=display:flex><span>Version <span style=color:#ae81ff>1</span> of my content
+</span></span><span style=display:flex><span>$ git cat-file -p c89fb7 <span style=color:#6272a4># 查看内容</span>
+</span></span><span style=display:flex><span>Version <span style=color:#bd93f9>1</span> of my content
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 6. 现在修改文件内容</span>
-</span></span><span style=display:flex><span>$ echo ‘Version <span style=color:#ae81ff>2</span> of my content’ &gt; demo.txt
+</span></span><span style=display:flex><span><span style=color:#6272a4># 6. 现在修改文件内容</span>
+</span></span><span style=display:flex><span>$ <span style=color:#8be9fd;font-style:italic>echo</span> ‘Version <span style=color:#bd93f9>2</span> of my content’ &gt; demo.txt
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 7. 再次将新内容存入Git数据库</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 7. 再次将新内容存入Git数据库</span>
 </span></span><span style=display:flex><span>$ git hash-object -w demo.txt
 </span></span><span style=display:flex><span>1a8a0f674c9b8c8a3e4e4d6b2e7d8b9f0a1b2c3d4
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 8. 再次查看Git对象库，现在有两个对象了！</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 8. 再次查看Git对象库，现在有两个对象了！</span>
 </span></span><span style=display:flex><span>$ find .git/objects -type f
 </span></span><span style=display:flex><span>.git/objects/c8/9fb7b6a1d409d5b4f78c6a4b0c9c82a7c80d8f
 </span></span><span style=display:flex><span>.git/objects/1a/8a0f674c9b8c8a3e4e4d6b2e7d8b9f0a1b2c3d4

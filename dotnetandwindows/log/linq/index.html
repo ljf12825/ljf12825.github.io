@@ -1,4 +1,4 @@
-<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>LINQ</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/logsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/dotnetandwindows/>★</a></li><li><a href=/dotnetandwindows/lab/>Lab</a></li><li><a href=/dotnetandwindows/log/>Log</a></li><li><a href=/dotnetandwindows/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>LINQ</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-lua.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-rust.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/logsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/dotnetandwindows/>★</a></li><li><a href=/dotnetandwindows/lab/>Lab</a></li><li><a href=/dotnetandwindows/log/>Log</a></li><li><a href=/dotnetandwindows/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
 <span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><pre class=ascii>
 +——————————————————————————————————————————————————————————————+
 |                        <a class=nav-item data-path=/rightbrain/ href=/rightbrain/>RightBrain</a>                            |
@@ -36,324 +36,324 @@
 <a href=https://dl.acm.org/conference/siggraph target=_blank>SIGGRAPH Digital Library</a></p><p><a href=https://git-scm.com/ target=_blank>Git</a> |
 <a href=https://git-scm.com/doc target=_blank>Docs</a> |
 <a href=https://git-scm.com/community target=_blank>Community</a></p></div></div></div><script src=/js/ref-window.js></script><article class=single_article><div class=title>LINQ<div class=meta>Modified: 2025-06-01
-| Author：ljf12825</div></div><div class=content><p>LINQ的全称是“Language-Integrated Query”，即语言继承查询<br>可以把它理解成C#（或 VB.NET）语言的一部分，它允许你使用类似SQL的语法，直接在代码中对各种数据源进行查询和操作</p><p>核心思想：用一种统一的方式来查询任何类型的数据，无论数据是存在于</p><ul><li>内存中的集合（如List, Array, Dictionary）</li><li>数据库（通过Entity Framework等）</li><li>XML文档</li><li>JSON数据</li><li>甚至 Web Service等</li></ul><h2 id=linq存在的意义>LINQ存在的意义</h2><p>在没有LINQ的时代，开发者面临一些问题</p><ul><li>语言不统一：查询内存集合用<code>for/foreach</code>循环，查询数据库用SQL字符串，查询XML用DOM或XPath。每种数据源都有自己的一套查询方法，学习成本高，代码风格不一致</li><li>编译时无法检查：SQL查询通常以字符串形式嵌入代码，编译器无法检查其语法正确性，只能在运行时发现问题</li><li>缺乏智能感知：由于是字符串，IDE无法提供表名、列名的智能感知提示，容易写错</li></ul><p>LINQ解决了这些问题</p><ul><li>统一语法：用同一种语法风格处理所有数据</li><li>强类型检查：LINQ查询是强类型的，编译器可以检查语法和类型，减少运行时错误</li><li>智能感知：得益于强类型，Visual Studio可以提供强大的智能感知</li></ul><h2 id=语法>语法</h2><p>LINQ提供了两种等价的语法：查询语法和方法语法</p><h3 id=查询语法>查询语法</h3><p>这种语法看起来很想SQL，关键在包括<code>from</code>, <code>where</code>, <code>select</code>, <code>orderby</code>, <code>group by</code>, <code>join</code>等。它可读性更强，尤其是对于熟悉SQL的人<br>示例：从一个数字列表中筛选出大于10的数字，并排序</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>List&lt;<span style=color:#66d9ef>int</span>&gt; numbers = <span style=color:#66d9ef>new</span> List&lt;<span style=color:#66d9ef>int</span>&gt; { <span style=color:#ae81ff>5</span>, <span style=color:#ae81ff>12</span>, <span style=color:#ae81ff>8</span>, <span style=color:#ae81ff>20</span>, <span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>18</span> };
+| Author：ljf12825</div></div><div class=content><p>LINQ的全称是“Language-Integrated Query”，即语言继承查询<br>可以把它理解成C#（或 VB.NET）语言的一部分，它允许你使用类似SQL的语法，直接在代码中对各种数据源进行查询和操作</p><p>核心思想：用一种统一的方式来查询任何类型的数据，无论数据是存在于</p><ul><li>内存中的集合（如List, Array, Dictionary）</li><li>数据库（通过Entity Framework等）</li><li>XML文档</li><li>JSON数据</li><li>甚至 Web Service等</li></ul><h2 id=linq存在的意义>LINQ存在的意义</h2><p>在没有LINQ的时代，开发者面临一些问题</p><ul><li>语言不统一：查询内存集合用<code>for/foreach</code>循环，查询数据库用SQL字符串，查询XML用DOM或XPath。每种数据源都有自己的一套查询方法，学习成本高，代码风格不一致</li><li>编译时无法检查：SQL查询通常以字符串形式嵌入代码，编译器无法检查其语法正确性，只能在运行时发现问题</li><li>缺乏智能感知：由于是字符串，IDE无法提供表名、列名的智能感知提示，容易写错</li></ul><p>LINQ解决了这些问题</p><ul><li>统一语法：用同一种语法风格处理所有数据</li><li>强类型检查：LINQ查询是强类型的，编译器可以检查语法和类型，减少运行时错误</li><li>智能感知：得益于强类型，Visual Studio可以提供强大的智能感知</li></ul><h2 id=语法>语法</h2><p>LINQ提供了两种等价的语法：查询语法和方法语法</p><h3 id=查询语法>查询语法</h3><p>这种语法看起来很想SQL，关键在包括<code>from</code>, <code>where</code>, <code>select</code>, <code>orderby</code>, <code>group by</code>, <code>join</code>等。它可读性更强，尤其是对于熟悉SQL的人<br>示例：从一个数字列表中筛选出大于10的数字，并排序</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>List&lt;<span style=color:#8be9fd>int</span>&gt; numbers = <span style=color:#ff79c6>new</span> List&lt;<span style=color:#8be9fd>int</span>&gt; { <span style=color:#bd93f9>5</span>, <span style=color:#bd93f9>12</span>, <span style=color:#bd93f9>8</span>, <span style=color:#bd93f9>20</span>, <span style=color:#bd93f9>3</span>, <span style=color:#bd93f9>18</span> };
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 查询语法</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> query = <span style=color:#66d9ef>from</span> num <span style=color:#66d9ef>in</span> numbers
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>where</span> num &gt; <span style=color:#ae81ff>10</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>orderby</span> num <span style=color:#66d9ef>descending</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>select</span> num;
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 查询语法</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> query = <span style=color:#ff79c6>from</span> num <span style=color:#ff79c6>in</span> numbers
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>where</span> num &gt; <span style=color:#bd93f9>10</span>
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>orderby</span> num <span style=color:#ff79c6>descending</span>
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>select</span> num;
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>foreach</span> (<span style=color:#66d9ef>var</span> num <span style=color:#66d9ef>in</span> query)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>foreach</span> (<span style=color:#8be9fd>var</span> num <span style=color:#ff79c6>in</span> query)
 </span></span><span style=display:flex><span>{
 </span></span><span style=display:flex><span>    Console.WriteLine(num);
 </span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span><span style=color:#75715e>// 输出：20， 18， 12</span>
-</span></span></code></pre></div><h3 id=方法语法基于扩展方法>方法语法（基于扩展方法）</h3><p>这种语法依赖于扩展方法和Lambda表达式。它在<code>System.Linq</code>命名空间下定义了一系列扩展方法（如<code>Where</code>, <code>Select</code>, <code>OrderBy</code>等），可以直接在集合上调用</p><p>示例：同上</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>List&lt;<span style=color:#66d9ef>int</span>&gt; numbers = <span style=color:#66d9ef>new</span> List&lt;<span style=color:#66d9ef>int</span>&gt; { <span style=color:#ae81ff>5</span>, <span style=color:#ae81ff>12</span>, <span style=color:#ae81ff>8</span>, <span style=color:#ae81ff>20</span>, <span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>18</span> };
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 输出：20， 18， 12</span>
+</span></span></code></pre></div><h3 id=方法语法基于扩展方法>方法语法（基于扩展方法）</h3><p>这种语法依赖于扩展方法和Lambda表达式。它在<code>System.Linq</code>命名空间下定义了一系列扩展方法（如<code>Where</code>, <code>Select</code>, <code>OrderBy</code>等），可以直接在集合上调用</p><p>示例：同上</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>List&lt;<span style=color:#8be9fd>int</span>&gt; numbers = <span style=color:#ff79c6>new</span> List&lt;<span style=color:#8be9fd>int</span>&gt; { <span style=color:#bd93f9>5</span>, <span style=color:#bd93f9>12</span>, <span style=color:#bd93f9>8</span>, <span style=color:#bd93f9>20</span>, <span style=color:#bd93f9>3</span>, <span style=color:#bd93f9>18</span> };
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 方法语法</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> query = numbers
-</span></span><span style=display:flex><span>            .Where(num =&gt; num &gt; <span style=color:#ae81ff>10</span>)
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 方法语法</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> query = numbers
+</span></span><span style=display:flex><span>            .Where(num =&gt; num &gt; <span style=color:#bd93f9>10</span>)
 </span></span><span style=display:flex><span>            .OrderByDescending(num =&gt; num)
-</span></span><span style=display:flex><span>            .Select(num =&gt; num); <span style=color:#75715e>// 这里的 Select 可以省略，因为就是选择自己</span>
+</span></span><span style=display:flex><span>            .Select(num =&gt; num); <span style=color:#6272a4>// 这里的 Select 可以省略，因为就是选择自己</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>foreach</span> (<span style=color:#66d9ef>var</span> num <span style=color:#66d9ef>in</span> query)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>foreach</span> (<span style=color:#8be9fd>var</span> num <span style=color:#ff79c6>in</span> query)
 </span></span><span style=display:flex><span>{
 </span></span><span style=display:flex><span>    Console.WriteLine(num);
 </span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span><span style=color:#75715e>// 输出： 20, 18, 12</span>
-</span></span></code></pre></div><p>两种风格的关系</p><ul><li>编译器最终会将查询语句翻译成方法语法</li><li>方法语法更强大，有些操作（如<code>First()</code>, <code>Count()</code>）只有方法语法</li><li>在实际开发中，两种风格经常混合使用，选择哪种主要看个人喜好和场景的可读性</li></ul><h3 id=核心概念与操作符>核心概念与操作符</h3><p>LINQ操作符可以分为两大类</p><ul><li>延迟执行：查询被定义，但不会立即执行。只有当你真正遍历结果（如使用<code>foreach</code>）时，查询才会执行。<code>Where</code>, <code>OrderBy</code>, <code>Select</code>等都属于此类</li><li>立即执行：查询会立即执行，并返回一个具体的结果（如单个值或新的集合）。<code>Count()</code>, <code>ToList()</code>, <code>First()</code>, <code>Max()</code>等都属于此类</li></ul><h4 id=示例>示例</h4><p>假设有一个<code>Student</code>类</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Student</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 输出： 20, 18, 12</span>
+</span></span></code></pre></div><p>两种风格的关系</p><ul><li>编译器最终会将查询语句翻译成方法语法</li><li>方法语法更强大，有些操作（如<code>First()</code>, <code>Count()</code>）只有方法语法</li><li>在实际开发中，两种风格经常混合使用，选择哪种主要看个人喜好和场景的可读性</li></ul><h3 id=核心概念与操作符>核心概念与操作符</h3><p>LINQ操作符可以分为两大类</p><ul><li>延迟执行：查询被定义，但不会立即执行。只有当你真正遍历结果（如使用<code>foreach</code>）时，查询才会执行。<code>Where</code>, <code>OrderBy</code>, <code>Select</code>等都属于此类</li><li>立即执行：查询会立即执行，并返回一个具体的结果（如单个值或新的集合）。<code>Count()</code>, <code>ToList()</code>, <code>First()</code>, <code>Max()</code>等都属于此类</li></ul><h4 id=示例>示例</h4><p>假设有一个<code>Student</code>类</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>class</span> <span style=color:#50fa7b>Student</span>
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>string</span> Name { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>set</span>; }
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> Age { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>set</span>; }
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> Score { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>set</span>; }
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>string</span> Name { <span style=color:#ff79c6>get</span>; <span style=color:#ff79c6>set</span>; }
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>int</span> Age { <span style=color:#ff79c6>get</span>; <span style=color:#ff79c6>set</span>; }
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>int</span> Score { <span style=color:#ff79c6>get</span>; <span style=color:#ff79c6>set</span>; }
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>和一组数据</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>List&lt;Student&gt; student = <span style=color:#66d9ef>new</span> List&lt;Stuednt&gt; {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>new</span> Student { Name = <span style=color:#e6db74>&#34;Alice&#34;</span>, Age = <span style=color:#ae81ff>20</span>, Score = <span style=color:#ae81ff>85</span> },
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>new</span> Student { Name = <span style=color:#e6db74>&#34;Bob&#34;</span>, Age = <span style=color:#ae81ff>22</span>, Score = <span style=color:#ae81ff>90</span> },
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>new</span> Student { Name = <span style=color:#e6db74>&#34;Charlie&#34;</span>, Age = <span style=color:#ae81ff>19</span>, Score = <span style=color:#ae81ff>78</span> },
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>new</span> Student { Name = <span style=color:#e6db74>&#34;Diana&#34;</span>, Age = <span style=color:#ae81ff>21</span>, Score = <span style=color:#ae81ff>92</span> }
+</span></span></code></pre></div><p>和一组数据</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>List&lt;Student&gt; student = <span style=color:#ff79c6>new</span> List&lt;Stuednt&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>new</span> Student { Name = <span style=color:#f1fa8c>&#34;Alice&#34;</span>, Age = <span style=color:#bd93f9>20</span>, Score = <span style=color:#bd93f9>85</span> },
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>new</span> Student { Name = <span style=color:#f1fa8c>&#34;Bob&#34;</span>, Age = <span style=color:#bd93f9>22</span>, Score = <span style=color:#bd93f9>90</span> },
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>new</span> Student { Name = <span style=color:#f1fa8c>&#34;Charlie&#34;</span>, Age = <span style=color:#bd93f9>19</span>, Score = <span style=color:#bd93f9>78</span> },
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>new</span> Student { Name = <span style=color:#f1fa8c>&#34;Diana&#34;</span>, Age = <span style=color:#bd93f9>21</span>, Score = <span style=color:#bd93f9>92</span> }
 </span></span><span style=display:flex><span>};
-</span></span></code></pre></div><ul><li>过滤-<code>Where</code></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 找到所有年龄大于20的学生</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> result = students.Where(s =&gt; s.Age &gt; <span style=color:#ae81ff>20</span>);
-</span></span></code></pre></div><ul><li>投影-<code>Select</code></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 只获取学生的名字列表</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> names = students.Select(s =&gt; s.Name);
-</span></span><span style=display:flex><span><span style=color:#75715e>// 创建一个匿名类型</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> info = students.Select(s =&gt; <span style=color:#66d9ef>new</span> { s.Name, s.Score });
-</span></span></code></pre></div><ul><li>分组-<code>GroupBy</code></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 按年龄分组</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> groups = students.GroupBy(s =&gt; s.Age);
-</span></span><span style=display:flex><span><span style=color:#66d9ef>foreach</span> (<span style=color:#66d9ef>var</span> <span style=color:#66d9ef>group</span> <span style=color:#66d9ef>in</span> groups)
+</span></span></code></pre></div><ul><li>过滤-<code>Where</code></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// 找到所有年龄大于20的学生</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> result = students.Where(s =&gt; s.Age &gt; <span style=color:#bd93f9>20</span>);
+</span></span></code></pre></div><ul><li>投影-<code>Select</code></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// 只获取学生的名字列表</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> names = students.Select(s =&gt; s.Name);
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 创建一个匿名类型</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> info = students.Select(s =&gt; <span style=color:#ff79c6>new</span> { s.Name, s.Score });
+</span></span></code></pre></div><ul><li>分组-<code>GroupBy</code></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// 按年龄分组</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> groups = students.GroupBy(s =&gt; s.Age);
+</span></span><span style=display:flex><span><span style=color:#ff79c6>foreach</span> (<span style=color:#8be9fd>var</span> <span style=color:#ff79c6>group</span> <span style=color:#ff79c6>in</span> groups)
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    Console.WriteLine(<span style=color:#e6db74>$&#34;Age: {group.Key}&#34;</span>);
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>foreach</span> (<span style=color:#66d9ef>var</span> student <span style=color:#66d9ef>in</span> <span style=color:#66d9ef>group</span>)
+</span></span><span style=display:flex><span>    Console.WriteLine(<span style=color:#f1fa8c>$&#34;Age: {group.Key}&#34;</span>);
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>foreach</span> (<span style=color:#8be9fd>var</span> student <span style=color:#ff79c6>in</span> <span style=color:#ff79c6>group</span>)
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        Console.WriteLine(<span style=color:#e6db74>$&#34; - {student.Name}&#34;</span>);
+</span></span><span style=display:flex><span>        Console.WriteLine(<span style=color:#f1fa8c>$&#34; - {student.Name}&#34;</span>);
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><ul><li>聚合-<code>Count</code>, <code>Max</code>, <code>Min</code>, <code>Average</code>, <code>Sum</code></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>int</span> count = students.Count(); <span style=color:#75715e>// 学生总数</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>double</span> avgScore = students.Average(s =&gt; s.Score); <span style=color:#75715e>// 平均分</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> maxScore = students.Max(s =&gt; s.Score); <span style=color:#75715e>// 最高分</span>
-</span></span></code></pre></div><ul><li>元素操作-<code>First</code>/<code>FirstOrDefault</code>, <code>Single</code>/<code>SingleOrDefault</code></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 获取一个分数大于80的学生（如果没有，First会抛出异常，FirstOrDefault返回null）</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> first = students.FirstOrDefault(s =&gt; s.Score &gt; <span style=color:#ae81ff>80</span>);
-</span></span><span style=display:flex><span><span style=color:#75715e>// 获取唯一一个叫“Bob”的学生（如果没有或超过一个，Single会抛异常）</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> single = students.Single(s =&gt; s.Name == <span style=color:#e6db74>&#34;Bob&#34;</span>);
-</span></span></code></pre></div><h2 id=linq提供程序>LINQ提供程序</h2><p>LINQ的强大之处在于它的可扩展性。不同的数据源有不同的LINQ提供程序，它们负责将LINQ查询翻译成该数据源的原生查询语言</p><ul><li>LINQ to Object：用于查询内存中的集合（如List, Array）</li><li>LINQ to Entity(EF Core)：用于查询关系型数据库。LINQ查询会被转换成SQL语句发送给数据库</li><li>LINQ to XML：用于查询和操作XML文档</li><li>LINQ to JSON（如Newtonsoft.Json.Linq）：用于查询JSON数据</li></ul><h2 id=底层>底层</h2><p>LINQ的底层主要建立在三大核心技术之上</p><ul><li>扩展方法</li><li>委托和Lambda表达式</li><li>表达式树和IQueryable<t>接口</li></ul><h4 id=扩展方法---语法的基础>扩展方法 - 语法的基础</h4><p>LINQ的方法语法完全依赖于扩展方法。这些方法定义在<code>System.Linq</code>命名空间中，它们扩展了<code>IEnumerable&lt;T></code>接口<br>示例：实现一个简单的<code>Where</code>方法来查看本质</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// LINQ Where 操作符简化版</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyLinqExtensions</span>
+</span></span></code></pre></div><ul><li>聚合-<code>Count</code>, <code>Max</code>, <code>Min</code>, <code>Average</code>, <code>Sum</code></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#8be9fd>int</span> count = students.Count(); <span style=color:#6272a4>// 学生总数</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>double</span> avgScore = students.Average(s =&gt; s.Score); <span style=color:#6272a4>// 平均分</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> maxScore = students.Max(s =&gt; s.Score); <span style=color:#6272a4>// 最高分</span>
+</span></span></code></pre></div><ul><li>元素操作-<code>First</code>/<code>FirstOrDefault</code>, <code>Single</code>/<code>SingleOrDefault</code></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// 获取一个分数大于80的学生（如果没有，First会抛出异常，FirstOrDefault返回null）</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> first = students.FirstOrDefault(s =&gt; s.Score &gt; <span style=color:#bd93f9>80</span>);
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 获取唯一一个叫“Bob”的学生（如果没有或超过一个，Single会抛异常）</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> single = students.Single(s =&gt; s.Name == <span style=color:#f1fa8c>&#34;Bob&#34;</span>);
+</span></span></code></pre></div><h2 id=linq提供程序>LINQ提供程序</h2><p>LINQ的强大之处在于它的可扩展性。不同的数据源有不同的LINQ提供程序，它们负责将LINQ查询翻译成该数据源的原生查询语言</p><ul><li>LINQ to Object：用于查询内存中的集合（如List, Array）</li><li>LINQ to Entity(EF Core)：用于查询关系型数据库。LINQ查询会被转换成SQL语句发送给数据库</li><li>LINQ to XML：用于查询和操作XML文档</li><li>LINQ to JSON（如Newtonsoft.Json.Linq）：用于查询JSON数据</li></ul><h2 id=底层>底层</h2><p>LINQ的底层主要建立在三大核心技术之上</p><ul><li>扩展方法</li><li>委托和Lambda表达式</li><li>表达式树和IQueryable<t>接口</li></ul><h4 id=扩展方法---语法的基础>扩展方法 - 语法的基础</h4><p>LINQ的方法语法完全依赖于扩展方法。这些方法定义在<code>System.Linq</code>命名空间中，它们扩展了<code>IEnumerable&lt;T></code>接口<br>示例：实现一个简单的<code>Where</code>方法来查看本质</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// LINQ Where 操作符简化版</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd;font-style:italic>static</span> <span style=color:#ff79c6>class</span> <span style=color:#50fa7b>MyLinqExtensions</span>
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// 这是一个扩展方法</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> IEnumerable&lt;T&gt; Where&lt;T&gt;(
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span> IEnumerable&lt;T&gt; source,
-</span></span><span style=display:flex><span>        Func&lt;T, <span style=color:#66d9ef>bool</span>&gt; predicate <span style=color:#75715e>// 关键：接受一个委托</span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 这是一个扩展方法</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd;font-style:italic>static</span> IEnumerable&lt;T&gt; Where&lt;T&gt;(
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>this</span> IEnumerable&lt;T&gt; source,
+</span></span><span style=display:flex><span>        Func&lt;T, <span style=color:#8be9fd>bool</span>&gt; predicate <span style=color:#6272a4>// 关键：接受一个委托</span>
 </span></span><span style=display:flex><span>    ) 
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// 验证参数</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (source == <span style=color:#66d9ef>null</span>) <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> ArgumentNullException(nameof(source));
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (predicate == <span style=color:#66d9ef>null</span>) <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> ArgumentNullException(nameof(predicate));
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// 验证参数</span>
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>if</span> (source == <span style=color:#ff79c6>null</span>) <span style=color:#ff79c6>throw</span> <span style=color:#ff79c6>new</span> ArgumentNullException(nameof(source));
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>if</span> (predicate == <span style=color:#ff79c6>null</span>) <span style=color:#ff79c6>throw</span> <span style=color:#ff79c6>new</span> ArgumentNullException(nameof(predicate));
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// 核心逻辑</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>foreach</span> (T item <span style=color:#66d9ef>in</span> source)
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// 核心逻辑</span>
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>foreach</span> (T item <span style=color:#ff79c6>in</span> source)
 </span></span><span style=display:flex><span>        {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (predicate(item)) <span style=color:#75715e>// 对每个元素应用过滤条件</span>
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>if</span> (predicate(item)) <span style=color:#6272a4>// 对每个元素应用过滤条件</span>
 </span></span><span style=display:flex><span>            {
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>yield</span> <span style=color:#66d9ef>return</span> item; <span style=color:#75715e>// 使用 yield return 实现迭代器</span>
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>yield</span> <span style=color:#ff79c6>return</span> item; <span style=color:#6272a4>// 使用 yield return 实现迭代器</span>
 </span></span><span style=display:flex><span>            }
 </span></span><span style=display:flex><span>        }
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>总结：接受一个数据源和委托，对这个数据源中的所有数据调用委托方法，对符合条件的数据使用yield return形成迭代器<br>关键点：</p><ul><li>扩展方法让我们可以像调用实例方法一样调用静态方法</li><li>核心逻辑就是简单的循环和条件判断</li><li>使用<code>yield return</code>实现延迟执行</li></ul><h3 id=委托和lambda表达式---行为参数化>委托和Lambda表达式 - 行为参数化</h3><p>LINQ操作符的核心是能够接收”行为“作为参数，这是通过委托实现的<br>委托的演进</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 传统委托（LINQ出现前的方式）</span>
-</span></span><span style=display:flex><span>Func&lt;<span style=color:#66d9ef>int</span>, <span style=color:#66d9ef>bool</span>&gt; predicate1 = <span style=color:#66d9ef>new</span> Func&lt;<span style=color:#66d9ef>int</span>, <span style=color:#66d9ef>bool</span>&gt;(IsGreaterThanTen);
+</span></span></code></pre></div><p>总结：接受一个数据源和委托，对这个数据源中的所有数据调用委托方法，对符合条件的数据使用yield return形成迭代器<br>关键点：</p><ul><li>扩展方法让我们可以像调用实例方法一样调用静态方法</li><li>核心逻辑就是简单的循环和条件判断</li><li>使用<code>yield return</code>实现延迟执行</li></ul><h3 id=委托和lambda表达式---行为参数化>委托和Lambda表达式 - 行为参数化</h3><p>LINQ操作符的核心是能够接收”行为“作为参数，这是通过委托实现的<br>委托的演进</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// 传统委托（LINQ出现前的方式）</span>
+</span></span><span style=display:flex><span>Func&lt;<span style=color:#8be9fd>int</span>, <span style=color:#8be9fd>bool</span>&gt; predicate1 = <span style=color:#ff79c6>new</span> Func&lt;<span style=color:#8be9fd>int</span>, <span style=color:#8be9fd>bool</span>&gt;(IsGreaterThanTen);
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 匿名方法（C# 2.0）</span>
-</span></span><span style=display:flex><span>Func&lt;<span style=color:#66d9ef>int</span>, <span style=color:#66d9ef>bool</span>&gt; predicate2 = <span style=color:#66d9ef>delegate</span>(<span style=color:#66d9ef>int</span> x) { <span style=color:#66d9ef>return</span> x &gt; <span style=color:#ae81ff>10</span>; };
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 匿名方法（C# 2.0）</span>
+</span></span><span style=display:flex><span>Func&lt;<span style=color:#8be9fd>int</span>, <span style=color:#8be9fd>bool</span>&gt; predicate2 = <span style=color:#ff79c6>delegate</span>(<span style=color:#8be9fd>int</span> x) { <span style=color:#ff79c6>return</span> x &gt; <span style=color:#bd93f9>10</span>; };
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// Lambda表达式（C# 3.0, LINQ的伴侣）</span>
-</span></span><span style=display:flex><span>Func&lt;<span style=color:#66d9ef>int</span>, <span style=color:#66d9ef>bool</span>&gt; predicate3 = x =&gt; x &gt; <span style=color:#ae81ff>10</span>;
+</span></span><span style=display:flex><span><span style=color:#6272a4>// Lambda表达式（C# 3.0, LINQ的伴侣）</span>
+</span></span><span style=display:flex><span>Func&lt;<span style=color:#8be9fd>int</span>, <span style=color:#8be9fd>bool</span>&gt; predicate3 = x =&gt; x &gt; <span style=color:#bd93f9>10</span>;
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>static</span> <span style=color:#66d9ef>bool</span> IsGreaterThanTen(<span style=color:#66d9ef>int</span> x) { <span style=color:#66d9ef>return</span> x &gt; <span style=color:#ae81ff>10</span>; }
-</span></span></code></pre></div><p>在LINQ中的实际应用</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>var</span> result = numbers.Where(x =&gt; x &gt; <span style=color:#ae81ff>10</span>);
-</span></span><span style=display:flex><span><span style=color:#75715e>// 编译器会将 x =&gt; x &gt; 10 编译成：</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// Func&lt;int, bool&gt; redicate = x =&gt; x &gt; 10;</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// numbers.Where(predicate);</span>
-</span></span></code></pre></div><h3 id=延迟执行deferred-execution>延迟执行（Deferred Execution）</h3><p>这是LINQ的最重要的特性之一，也是最容易产生困惑的地方</p><p>查询在定义时不会立即执行，只有在真正需要结果时（如遍历、调用<code>ToList()</code>等）才会执行</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>var</span> numbers = <span style=color:#66d9ef>new</span> List&lt;<span style=color:#66d9ef>int</span>&gt; { <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>4</span>, <span style=color:#ae81ff>5</span> };
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>static</span> <span style=color:#8be9fd>bool</span> IsGreaterThanTen(<span style=color:#8be9fd>int</span> x) { <span style=color:#ff79c6>return</span> x &gt; <span style=color:#bd93f9>10</span>; }
+</span></span></code></pre></div><p>在LINQ中的实际应用</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#8be9fd>var</span> result = numbers.Where(x =&gt; x &gt; <span style=color:#bd93f9>10</span>);
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 编译器会将 x =&gt; x &gt; 10 编译成：</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// Func&lt;int, bool&gt; redicate = x =&gt; x &gt; 10;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// numbers.Where(predicate);</span>
+</span></span></code></pre></div><h3 id=延迟执行deferred-execution>延迟执行（Deferred Execution）</h3><p>这是LINQ的最重要的特性之一，也是最容易产生困惑的地方</p><p>查询在定义时不会立即执行，只有在真正需要结果时（如遍历、调用<code>ToList()</code>等）才会执行</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#8be9fd>var</span> numbers = <span style=color:#ff79c6>new</span> List&lt;<span style=color:#8be9fd>int</span>&gt; { <span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>2</span>, <span style=color:#bd93f9>3</span>, <span style=color:#bd93f9>4</span>, <span style=color:#bd93f9>5</span> };
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 这只是定义查询，不会执行</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> query = numbers.Where(x =&gt; {
-</span></span><span style=display:flex><span>    Console.WriteLine(<span style=color:#e6db74>$&#34;检查：{x}&#34;</span>); <span style=color:#75715e>// 这行不会立即输出</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> x &gt; <span style=color:#ae81ff>2</span>;
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 这只是定义查询，不会执行</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> query = numbers.Where(x =&gt; {
+</span></span><span style=display:flex><span>    Console.WriteLine(<span style=color:#f1fa8c>$&#34;检查：{x}&#34;</span>); <span style=color:#6272a4>// 这行不会立即输出</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> x &gt; <span style=color:#bd93f9>2</span>;
 </span></span><span style=display:flex><span>});
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>Console.WriteLine(<span style=color:#e6db74>&#34;查询已定义&#34;</span>);
+</span></span><span style=display:flex><span>Console.WriteLine(<span style=color:#f1fa8c>&#34;查询已定义&#34;</span>);
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 现在才开始真正执行</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>foreach</span> (<span style=color:#66d9ef>var</span> num <span style=color:#66d9ef>in</span> query) <span style=color:#75715e>// 这里才会输出 ”检查：1“， ”检查：2“等</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 现在才开始真正执行</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>foreach</span> (<span style=color:#8be9fd>var</span> num <span style=color:#ff79c6>in</span> query) <span style=color:#6272a4>// 这里才会输出 ”检查：1“， ”检查：2“等</span>
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    Console.WriteLine(<span style=color:#e6db74>$&#34;结果：{num}&#34;</span>);
+</span></span><span style=display:flex><span>    Console.WriteLine(<span style=color:#f1fa8c>$&#34;结果：{num}&#34;</span>);
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><ul><li>通过迭代器块和<code>yield return</code>关键字</li><li>每次调用<code>MoveNext()</code>时，才执行到下一个<code>yield reutrn</code></li></ul><h3 id=立即执行方法>立即执行方法</h3><p>与延迟执行对应，有些方法会强制查询立即执行</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 这些方法会立即执行查询</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> list = query.ToList();      <span style=color:#75715e>// 转换为 List</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> array = query.ToArray();    <span style=color:#75715e>// 转换为 Array</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> count = query.Count();      <span style=color:#75715e>// 获取数量</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> first = query.First();      <span style=color:#75715e>// 获取第一个元素</span>
-</span></span></code></pre></div><h3 id=表达式树和iqueryable---linq-to-sql的魔法>表达式树和IQueryable<t> - LINQ to SQL的魔法</h3><p>这是LINQ最精妙的部分，也是区分<code>IEnumerable&lt;T></code>和<code>IQueryable&lt;T></code>的关键</p><ul><li>IEnumerable<t>的局限</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 假设有一个数据库上下文</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> dbContext = <span style=color:#66d9ef>new</span> MyDbContext();
+</span></span></code></pre></div><ul><li>通过迭代器块和<code>yield return</code>关键字</li><li>每次调用<code>MoveNext()</code>时，才执行到下一个<code>yield reutrn</code></li></ul><h3 id=立即执行方法>立即执行方法</h3><p>与延迟执行对应，有些方法会强制查询立即执行</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// 这些方法会立即执行查询</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> list = query.ToList();      <span style=color:#6272a4>// 转换为 List</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> array = query.ToArray();    <span style=color:#6272a4>// 转换为 Array</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> count = query.Count();      <span style=color:#6272a4>// 获取数量</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> first = query.First();      <span style=color:#6272a4>// 获取第一个元素</span>
+</span></span></code></pre></div><h3 id=表达式树和iqueryable---linq-to-sql的魔法>表达式树和IQueryable<t> - LINQ to SQL的魔法</h3><p>这是LINQ最精妙的部分，也是区分<code>IEnumerable&lt;T></code>和<code>IQueryable&lt;T></code>的关键</p><ul><li>IEnumerable<t>的局限</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// 假设有一个数据库上下文</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> dbContext = <span style=color:#ff79c6>new</span> MyDbContext();
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 这样写有问题</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> badQuery = dbContext.Customers
-</span></span><span style=display:flex><span>                        .AsEnumerable() <span style=color:#75715e>// 转换为 IEnumerable</span>
-</span></span><span style=display:flex><span>                        .Where(c =&gt; c.City == <span style=color:#e6db74>&#34;London&#34;</span>);
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 这样写有问题</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> badQuery = dbContext.Customers
+</span></span><span style=display:flex><span>                        .AsEnumerable() <span style=color:#6272a4>// 转换为 IEnumerable</span>
+</span></span><span style=display:flex><span>                        .Where(c =&gt; c.City == <span style=color:#f1fa8c>&#34;London&#34;</span>);
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 实际执行过程：</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 1. SELECT * FROM Customers -&gt; 把所有数据拉到内存中</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 2. 在内存中执行 .Where(c =&gt; c.City == &#34;London&#34;)</span>
-</span></span></code></pre></div><p><code>IQueryable&lt;T></code>的解决方案</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 正确的写法</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> goodQuery = dbContext.Customers
-</span></span><span style=display:flex><span>                        .AsQueryable() <span style=color:#75715e>// 实际上是IQueryable（通常默认就是）</span>
-</span></span><span style=display:flex><span>                        .Where(c =&gt; c.City == <span style=color:#e6db74>&#34;London&#34;</span>);
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 实际执行过程：</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 1. SELECT * FROM Customers -&gt; 把所有数据拉到内存中</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 2. 在内存中执行 .Where(c =&gt; c.City == &#34;London&#34;)</span>
+</span></span></code></pre></div><p><code>IQueryable&lt;T></code>的解决方案</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// 正确的写法</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> goodQuery = dbContext.Customers
+</span></span><span style=display:flex><span>                        .AsQueryable() <span style=color:#6272a4>// 实际上是IQueryable（通常默认就是）</span>
+</span></span><span style=display:flex><span>                        .Where(c =&gt; c.City == <span style=color:#f1fa8c>&#34;London&#34;</span>);
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 实际执行过程</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 1. 构建表达式树</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 2. 最终执行：SELECT * FROM Customers WHERE City = &#39;London&#39;</span>
-</span></span></code></pre></div><p>表达式树的本质</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// Lambda 表达式给 IEnumerable：编译成委托</span>
-</span></span><span style=display:flex><span>Func&lt;Customer, <span style=color:#66d9ef>bool</span>&gt; predicate = c =&gt; c.City == <span style=color:#e6db74>&#34;London&#34;</span>;
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 实际执行过程</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 1. 构建表达式树</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 2. 最终执行：SELECT * FROM Customers WHERE City = &#39;London&#39;</span>
+</span></span></code></pre></div><p>表达式树的本质</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// Lambda 表达式给 IEnumerable：编译成委托</span>
+</span></span><span style=display:flex><span>Func&lt;Customer, <span style=color:#8be9fd>bool</span>&gt; predicate = c =&gt; c.City == <span style=color:#f1fa8c>&#34;London&#34;</span>;
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// Lambda 表达式给 IQueryable：编译成表达式树</span>
-</span></span><span style=display:flex><span>Expression&lt;Func&lt;Customer, <span style=color:#66d9ef>bool</span>&gt;&gt; expression = c =&gt; c.City == <span style=color:#e6db74>&#34;London&#34;</span>;
+</span></span><span style=display:flex><span><span style=color:#6272a4>// Lambda 表达式给 IQueryable：编译成表达式树</span>
+</span></span><span style=display:flex><span>Expression&lt;Func&lt;Customer, <span style=color:#8be9fd>bool</span>&gt;&gt; expression = c =&gt; c.City == <span style=color:#f1fa8c>&#34;London&#34;</span>;
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 表达式树是一个数据结构，可以分析、分解、翻译</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// LINQ Provider （如 EF Core）会分析这个表达式树，生成对应的SQL</span>
-</span></span></code></pre></div><p>表达式树的简单分析</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Expression&lt;Func&lt;Customer, <span style=color:#66d9ef>bool</span>&gt;&gt; expression = c =&gt; c.City == <span style=color:#e6db74>&#34;London&#34;</span>;
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 表达式树是一个数据结构，可以分析、分解、翻译</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// LINQ Provider （如 EF Core）会分析这个表达式树，生成对应的SQL</span>
+</span></span></code></pre></div><p>表达式树的简单分析</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>Expression&lt;Func&lt;Customer, <span style=color:#8be9fd>bool</span>&gt;&gt; expression = c =&gt; c.City == <span style=color:#f1fa8c>&#34;London&#34;</span>;
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 可以分析表达式树的结构</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> body = expression.Body <span style=color:#66d9ef>as</span> BinaryExpression; <span style=color:#75715e>// 这是一个二元表达式</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> left = body.Left <span style=color:#66d9ef>as</span> MemberExpression; <span style=color:#75715e>// 左边：c.City</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> right = body.Right <span style=color:#66d9ef>as</span> ConstantExpression; <span style=color:#75715e>// 右边：&#34;London&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 可以分析表达式树的结构</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> body = expression.Body <span style=color:#ff79c6>as</span> BinaryExpression; <span style=color:#6272a4>// 这是一个二元表达式</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> left = body.Left <span style=color:#ff79c6>as</span> MemberExpression; <span style=color:#6272a4>// 左边：c.City</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> right = body.Right <span style=color:#ff79c6>as</span> ConstantExpression; <span style=color:#6272a4>// 右边：&#34;London&#34;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>Console.WriteLine(<span style=color:#e6db74>$&#34;左边: {left.Member.Name}&#34;</span>);    <span style=color:#75715e>// 输出: City</span>
-</span></span><span style=display:flex><span>Console.WriteLine(<span style=color:#e6db74>$&#34;操作: {body.NodeType}&#34;</span>);       <span style=color:#75715e>// 输出: Equal</span>
-</span></span><span style=display:flex><span>Console.WriteLine(<span style=color:#e6db74>$&#34;右边: {right.Value}&#34;</span>);          <span style=color:#75715e>// 输出: London</span>
-</span></span></code></pre></div><h4 id=ienumerablet与iqueryablet><code>IEnumerable&lt;T></code>与<code>IQueryable&lt;T></code></h4><p>核心区别：执行位置</p><ul><li><code>IEnumerable&lt;T></code>：在内存中（客户端）执行查询操作</li><li><code>IQueryable&lt;T></code>：在数据源端（如数据库）执行查询操作</li></ul><h5 id=ienumerablet-客户端查询><code>IEnumerable&lt;T></code>-客户端查询</h5><h6 id=特点>特点</h6><ul><li>命名空间：<code>System.Collections.Generic</code></li><li>执行位置：在应用程序的内存中执行</li><li>数据源：主要针对内存集合（List, Array, Dictionary等）</li><li>查询能力：使用委托和Lambda表达式</li></ul><h6 id=工作原理>工作原理</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>List&lt;Student&gt; students = GetStudentsFromMemory();
+</span></span><span style=display:flex><span>Console.WriteLine(<span style=color:#f1fa8c>$&#34;左边: {left.Member.Name}&#34;</span>);    <span style=color:#6272a4>// 输出: City</span>
+</span></span><span style=display:flex><span>Console.WriteLine(<span style=color:#f1fa8c>$&#34;操作: {body.NodeType}&#34;</span>);       <span style=color:#6272a4>// 输出: Equal</span>
+</span></span><span style=display:flex><span>Console.WriteLine(<span style=color:#f1fa8c>$&#34;右边: {right.Value}&#34;</span>);          <span style=color:#6272a4>// 输出: London</span>
+</span></span></code></pre></div><h4 id=ienumerablet与iqueryablet><code>IEnumerable&lt;T></code>与<code>IQueryable&lt;T></code></h4><p>核心区别：执行位置</p><ul><li><code>IEnumerable&lt;T></code>：在内存中（客户端）执行查询操作</li><li><code>IQueryable&lt;T></code>：在数据源端（如数据库）执行查询操作</li></ul><h5 id=ienumerablet-客户端查询><code>IEnumerable&lt;T></code>-客户端查询</h5><h6 id=特点>特点</h6><ul><li>命名空间：<code>System.Collections.Generic</code></li><li>执行位置：在应用程序的内存中执行</li><li>数据源：主要针对内存集合（List, Array, Dictionary等）</li><li>查询能力：使用委托和Lambda表达式</li></ul><h6 id=工作原理>工作原理</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>List&lt;Student&gt; students = GetStudentsFromMemory();
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// IEnumerable - 客户端执行</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// IEnumerable - 客户端执行</span>
 </span></span><span style=display:flex><span>IEnumerable&lt;Student&gt; query = students
-</span></span><span style=display:flex><span>    .Where(s =&gt; s.Age &gt; <span style=color:#ae81ff>20</span>) <span style=color:#75715e>// 在内存中过滤</span>
-</span></span><span style=display:flex><span>    .OrderBy(s =&gt; s.Name) <span style=color:#75715e>// 在内存中排序</span>
-</span></span><span style=display:flex><span>    .Select(s =&gt; <span style=color:#66d9ef>new</span> { s.Name, s.Age }); <span style=color:#75715e>// 在内存中投影</span>
+</span></span><span style=display:flex><span>    .Where(s =&gt; s.Age &gt; <span style=color:#bd93f9>20</span>) <span style=color:#6272a4>// 在内存中过滤</span>
+</span></span><span style=display:flex><span>    .OrderBy(s =&gt; s.Name) <span style=color:#6272a4>// 在内存中排序</span>
+</span></span><span style=display:flex><span>    .Select(s =&gt; <span style=color:#ff79c6>new</span> { s.Name, s.Age }); <span style=color:#6272a4>// 在内存中投影</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 执行过程：</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 1. 从数据源获取所有数据</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 2. 在应用程序内存中执行所有查询操作</span>
-</span></span></code></pre></div><h6 id=底层机制>底层机制</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// IEnumerable 的 Where 方法大致实现</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> IEnumerable&lt;T&gt; Where&lt;T&gt;(<span style=color:#66d9ef>this</span> IEnumerable&lt;T&gt; source, Func&lt;T, <span style=color:#66d9ef>bool</span>&gt; predicate)
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 执行过程：</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 1. 从数据源获取所有数据</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 2. 在应用程序内存中执行所有查询操作</span>
+</span></span></code></pre></div><h6 id=底层机制>底层机制</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// IEnumerable 的 Where 方法大致实现</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd;font-style:italic>static</span> IEnumerable&lt;T&gt; Where&lt;T&gt;(<span style=color:#ff79c6>this</span> IEnumerable&lt;T&gt; source, Func&lt;T, <span style=color:#8be9fd>bool</span>&gt; predicate)
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>foreach</span> (T item <span style=color:#66d9ef>in</span> source) <span style=color:#75715e>// 在客户端循环</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>foreach</span> (T item <span style=color:#ff79c6>in</span> source) <span style=color:#6272a4>// 在客户端循环</span>
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (predicate(item)) <span style=color:#75715e>// 在客户端执行过滤逻辑</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>yield</span> <span style=color:#66d9ef>return</span> item;
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>if</span> (predicate(item)) <span style=color:#6272a4>// 在客户端执行过滤逻辑</span>
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>yield</span> <span style=color:#ff79c6>return</span> item;
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><h5 id=iqueryablet-数据源查询><code>IQueryable&lt;T></code>-数据源查询</h5><h6 id=特点-1>特点</h6><ul><li>命名空间：<code>System.Linq</code></li><li>执行位置：在数据源（数据库、服务等）执行</li><li>数据源：主要针对外部数据源（SQL数据库、Web服务等）</li><li>查询能力：使用表达式树</li></ul><h6 id=工作原理-1>工作原理</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>IQueryable&lt;Student&gt; students = dbContext.Students; <span style=color:#75715e>// 来自数据库</span>
+</span></span></code></pre></div><h5 id=iqueryablet-数据源查询><code>IQueryable&lt;T></code>-数据源查询</h5><h6 id=特点-1>特点</h6><ul><li>命名空间：<code>System.Linq</code></li><li>执行位置：在数据源（数据库、服务等）执行</li><li>数据源：主要针对外部数据源（SQL数据库、Web服务等）</li><li>查询能力：使用表达式树</li></ul><h6 id=工作原理-1>工作原理</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>IQueryable&lt;Student&gt; students = dbContext.Students; <span style=color:#6272a4>// 来自数据库</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// IQueryable - 数据源端执行</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// IQueryable - 数据源端执行</span>
 </span></span><span style=display:flex><span>IQueryable&lt;Student&gt; query = students
-</span></span><span style=display:flex><span>    .Where(s =&gt; s.Age &gt; <span style=color:#ae81ff>20</span>)        <span style=color:#75715e>// 生成 SQL WHERE 子句</span>
-</span></span><span style=display:flex><span>    .OrderBy(s =&gt; s.Name)          <span style=color:#75715e>// 生成 SQL ORDER BY 子句</span>
-</span></span><span style=display:flex><span>    .Select(s =&gt; <span style=color:#66d9ef>new</span> { s.Name, s.Age }); <span style=color:#75715e>// 生成 SQL SELECT 子句</span>
+</span></span><span style=display:flex><span>    .Where(s =&gt; s.Age &gt; <span style=color:#bd93f9>20</span>)        <span style=color:#6272a4>// 生成 SQL WHERE 子句</span>
+</span></span><span style=display:flex><span>    .OrderBy(s =&gt; s.Name)          <span style=color:#6272a4>// 生成 SQL ORDER BY 子句</span>
+</span></span><span style=display:flex><span>    .Select(s =&gt; <span style=color:#ff79c6>new</span> { s.Name, s.Age }); <span style=color:#6272a4>// 生成 SQL SELECT 子句</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 执行过程：</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 1. 构建表达式树</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 2. 将表达式树翻译成数据源原生查询语言（如SQL）</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 3. 在数据源端执行查询</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 4. 只返回最终结果到客户端</span>
-</span></span></code></pre></div><h6 id=底层机制-1>底层机制</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// IQueryable 使用表达式树</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 执行过程：</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 1. 构建表达式树</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 2. 将表达式树翻译成数据源原生查询语言（如SQL）</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 3. 在数据源端执行查询</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 4. 只返回最终结果到客户端</span>
+</span></span></code></pre></div><h6 id=底层机制-1>底层机制</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// IQueryable 使用表达式树</span>
 </span></span><span style=display:flex><span>IQueryable&lt;Student&gt; query = students
-</span></span><span style=display:flex><span>    .Where(s =&gt; s.Age &gt; <span style=color:#ae81ff>20</span>); <span style=color:#75715e>// 这里 s =&gt; s.Age &gt; 20 是表达式树，不是委托</span>
+</span></span><span style=display:flex><span>    .Where(s =&gt; s.Age &gt; <span style=color:#bd93f9>20</span>); <span style=color:#6272a4>// 这里 s =&gt; s.Age &gt; 20 是表达式树，不是委托</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 实际类型是：</span>
-</span></span><span style=display:flex><span>Expression&lt;Func&lt;Student, <span style=color:#66d9ef>bool</span>&gt;&gt; expression = s =&gt; s.Age &gt; <span style=color:#ae81ff>20</span>;
-</span></span></code></pre></div><h3 id=linq-provider-的工作流程>LINQ Provider 的工作流程</h3><p>以 Entity Framework 为例</p><ol><li>构建表达式树：你的LINQ查询被转换成表达式树</li><li>分析表达式树：LINQ Provider 遍历表达式树，理解你的查询意图</li><li>生成SQL：根据表达式树生曾最优的SQL语句</li><li>执行查询：在数据库上执行SQL</li><li>物化结果：将数据库返回的数据转换成.NET对象</li></ol><h2 id=性能>性能</h2><p>LINQ的性能表现不能一概而论，它既可能非常高效，也可能成为性能瓶颈，完全取决于如何使用</p><ul><li>LINQ to Objects（内存集合）：有轻微开销，但大多数场景下可以接收。性能关键在于避免低效用法</li><li>LINQ to Entities（数据库查询）：性能翻译非常好（甚至优于手动SQL），也可能非常差，完全取决于是否生成高效的SQL</li></ul><h3 id=linq-to-objects>LINQ to Objects</h3><p>开销来源</p><ol><li>委托调用开销</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>var</span> result = list.Where(x =&gt; x &gt; <span style=color:#ae81ff>10</span>);
-</span></span><span style=display:flex><span><span style=color:#75715e>// 每个元素都需要通过委托调用Lambda表达式</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 这比直接for循环有额外开销</span>
-</span></span></code></pre></div><ol start=2><li>迭代器模式开销</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// LINQ 使用 yield return, 每次 MoveNext()都有状态机开销</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> IEnumerable&lt;T&gt; Where&lt;T&gt;(<span style=color:#66d9ef>this</span> IEnumerable&lt;T&gt; source, Func&lt;T, <span style=color:#66d9ef>bool</span>&gt; predicate)
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 实际类型是：</span>
+</span></span><span style=display:flex><span>Expression&lt;Func&lt;Student, <span style=color:#8be9fd>bool</span>&gt;&gt; expression = s =&gt; s.Age &gt; <span style=color:#bd93f9>20</span>;
+</span></span></code></pre></div><h3 id=linq-provider-的工作流程>LINQ Provider 的工作流程</h3><p>以 Entity Framework 为例</p><ol><li>构建表达式树：你的LINQ查询被转换成表达式树</li><li>分析表达式树：LINQ Provider 遍历表达式树，理解你的查询意图</li><li>生成SQL：根据表达式树生曾最优的SQL语句</li><li>执行查询：在数据库上执行SQL</li><li>物化结果：将数据库返回的数据转换成.NET对象</li></ol><h2 id=性能>性能</h2><p>LINQ的性能表现不能一概而论，它既可能非常高效，也可能成为性能瓶颈，完全取决于如何使用</p><ul><li>LINQ to Objects（内存集合）：有轻微开销，但大多数场景下可以接收。性能关键在于避免低效用法</li><li>LINQ to Entities（数据库查询）：性能翻译非常好（甚至优于手动SQL），也可能非常差，完全取决于是否生成高效的SQL</li></ul><h3 id=linq-to-objects>LINQ to Objects</h3><p>开销来源</p><ol><li>委托调用开销</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#8be9fd>var</span> result = list.Where(x =&gt; x &gt; <span style=color:#bd93f9>10</span>);
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 每个元素都需要通过委托调用Lambda表达式</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 这比直接for循环有额外开销</span>
+</span></span></code></pre></div><ol start=2><li>迭代器模式开销</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// LINQ 使用 yield return, 每次 MoveNext()都有状态机开销</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd;font-style:italic>static</span> IEnumerable&lt;T&gt; Where&lt;T&gt;(<span style=color:#ff79c6>this</span> IEnumerable&lt;T&gt; source, Func&lt;T, <span style=color:#8be9fd>bool</span>&gt; predicate)
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>foreach</span> (T item <span style=color:#66d9ef>in</span> source) <span style=color:#75715e>// 迭代器状态机</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>foreach</span> (T item <span style=color:#ff79c6>in</span> source) <span style=color:#6272a4>// 迭代器状态机</span>
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (predicate(item))
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>yield</span> <span style=color:#66d9ef>return</span> item; <span style=color:#75715e>// 状态保持和恢复</span>
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>if</span> (predicate(item))
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>yield</span> <span style=color:#ff79c6>return</span> item; <span style=color:#6272a4>// 状态保持和恢复</span>
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><h4 id=linq-to-objects-性能最佳实践>LINQ to Objects 性能最佳实践</h4><p>好的做法</p><ol><li>合理使用立即执行方法</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 如果需要多次遍历，先物化</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> frequentList = expensiveQuery.ToList();
+</span></span></code></pre></div><h4 id=linq-to-objects-性能最佳实践>LINQ to Objects 性能最佳实践</h4><p>好的做法</p><ol><li>合理使用立即执行方法</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// 如果需要多次遍历，先物化</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> frequentList = expensiveQuery.ToList();
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 多次使用</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> count = frequentList.Count;
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> first = frequentList.First();
-</span></span></code></pre></div><ol start=2><li>选择合适的数据结构</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// List 适合遍历，HashSet适合查找</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> hashSet = <span style=color:#66d9ef>new</span> HashSet&lt;<span style=color:#66d9ef>int</span>&gt;(numbers);
-</span></span><span style=display:flex><span><span style=color:#66d9ef>bool</span> exists = hashSet.Contains(<span style=color:#ae81ff>123</span>); <span style=color:#75715e>// O(1)</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 多次使用</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> count = frequentList.Count;
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> first = frequentList.First();
+</span></span></code></pre></div><ol start=2><li>选择合适的数据结构</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// List 适合遍历，HashSet适合查找</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> hashSet = <span style=color:#ff79c6>new</span> HashSet&lt;<span style=color:#8be9fd>int</span>&gt;(numbers);
+</span></span><span style=display:flex><span><span style=color:#8be9fd>bool</span> exists = hashSet.Contains(<span style=color:#bd93f9>123</span>); <span style=color:#6272a4>// O(1)</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 比下面这个快得多</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>bool</span> existsSlow = numbers.Any(x =&gt; x == <span style=color:#ae81ff>123</span>); <span style=color:#75715e>// O(n)</span>
-</span></span></code></pre></div><ol start=3><li>使用索引优化</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 对于 List，可以混合使用</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> list = numbers.ToList();
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i = <span style=color:#ae81ff>0</span>; i &lt; list.Count; i++)
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 比下面这个快得多</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>bool</span> existsSlow = numbers.Any(x =&gt; x == <span style=color:#bd93f9>123</span>); <span style=color:#6272a4>// O(n)</span>
+</span></span></code></pre></div><ol start=3><li>使用索引优化</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// 对于 List，可以混合使用</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> list = numbers.ToList();
+</span></span><span style=display:flex><span><span style=color:#ff79c6>for</span> (<span style=color:#8be9fd>int</span> i = <span style=color:#bd93f9>0</span>; i &lt; list.Count; i++)
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (someCondition(list[i]))
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> (someCondition(list[i]))
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// 使用索引操作</span>
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// 使用索引操作</span>
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>性能陷阱</p><ol><li>重复计算</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 不好：重复执行相同查询</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> (users.Any(u =&gt; u.Age &gt; <span style=color:#ae81ff>65</span>))
+</span></span></code></pre></div><p>性能陷阱</p><ol><li>重复计算</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// 不好：重复执行相同查询</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>if</span> (users.Any(u =&gt; u.Age &gt; <span style=color:#bd93f9>65</span>))
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> seniors = users.Where(u =&gt; u.Age &gt; <span style=color:#ae81ff>65</span>); <span style=color:#75715e>// 重新执行！</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>var</span> seniors = users.Where(u =&gt; u.Age &gt; <span style=color:#bd93f9>65</span>); <span style=color:#6272a4>// 重新执行！</span>
 </span></span><span style=display:flex><span>    Process(seniors);
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 好的做法</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> seniors = users.Where(u =&gt; u.Age &gt; <span style=color:#ae81ff>65</span>).ToList();
-</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> (seniors.Any())
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 好的做法</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> seniors = users.Where(u =&gt; u.Age &gt; <span style=color:#bd93f9>65</span>).ToList();
+</span></span><span style=display:flex><span><span style=color:#ff79c6>if</span> (seniors.Any())
 </span></span><span style=display:flex><span>{
 </span></span><span style=display:flex><span>    Process(seniors);
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><ol start=2><li>在循环中使用LINQ</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 性能灾难：O(n^2)复杂度</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>foreach</span> (<span style=color:#66d9ef>var</span> category <span style=color:#66d9ef>in</span> categories)
+</span></span></code></pre></div><ol start=2><li>在循环中使用LINQ</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// 性能灾难：O(n^2)复杂度</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>foreach</span> (<span style=color:#8be9fd>var</span> category <span style=color:#ff79c6>in</span> categories)
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> products = allProducts.Where(p =&gt; p.CategoryId == category.Id); <span style=color:#75715e>// 每次都要扫描</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>var</span> products = allProducts.Where(p =&gt; p.CategoryId == category.Id); <span style=color:#6272a4>// 每次都要扫描</span>
 </span></span><span style=display:flex><span>    Process(products);
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 优化：使用 Lookup 或 GroupBy</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> productsByCategory = allProducts.ToLookup(p =&gt; p.CategoryId);
-</span></span><span style=display:flex><span><span style=color:#66d9ef>foreach</span> (<span style=color:#66d9ef>var</span> category <span style=color:#66d9ef>in</span> categories)
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 优化：使用 Lookup 或 GroupBy</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> productsByCategory = allProducts.ToLookup(p =&gt; p.CategoryId);
+</span></span><span style=display:flex><span><span style=color:#ff79c6>foreach</span> (<span style=color:#8be9fd>var</span> category <span style=color:#ff79c6>in</span> categories)
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> products = productsByCategory[category.Id]; <span style=color:#75715e>// O(1) 查找</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>var</span> products = productsByCategory[category.Id]; <span style=color:#6272a4>// O(1) 查找</span>
 </span></span><span style=display:flex><span>    Process(products);
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><ol start=3><li>不必要的排序</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 不好：只需要第一个，却排序了整个集合</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> oldest = users.OrderByDescending(u =&gt; u.Age).First();
+</span></span></code></pre></div><ol start=3><li>不必要的排序</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// 不好：只需要第一个，却排序了整个集合</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> oldest = users.OrderByDescending(u =&gt; u.Age).First();
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 好的做法：O(n) vs O(n log n)</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> oldest = users.MaxBy(u =&gt; u.Age); <span style=color:#75715e>// .NET 6+</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 或者</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> oldest = users.Aggregate((max, next) =&gt; next.Age &gt; max.Age ? next : max);
-</span></span></code></pre></div><h4 id=linq-to-entities数据库linq性能分析>LINQ to Entities（数据库LINQ）性能分析</h4><p>性能可以很好的情况<br>当LINQ Provider能生成高效的SQL时</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 好的 LINQ - 生成高效的 SQL</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> result = dbContext.Orders
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 好的做法：O(n) vs O(n log n)</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> oldest = users.MaxBy(u =&gt; u.Age); <span style=color:#6272a4>// .NET 6+</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 或者</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> oldest = users.Aggregate((max, next) =&gt; next.Age &gt; max.Age ? next : max);
+</span></span></code></pre></div><h4 id=linq-to-entities数据库linq性能分析>LINQ to Entities（数据库LINQ）性能分析</h4><p>性能可以很好的情况<br>当LINQ Provider能生成高效的SQL时</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// 好的 LINQ - 生成高效的 SQL</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> result = dbContext.Orders
 </span></span><span style=display:flex><span>    .Where(o =&gt; o.OrderDate &gt;= startDate &amp;&amp; o.OrderDate &lt;= endDate)
-</span></span><span style=display:flex><span>    .Where(o =&gt; o.Status == <span style=color:#e6db74>&#34;Completed&#34;</span>)
-</span></span><span style=display:flex><span>    .Select(o =&gt; <span style=color:#66d9ef>new</span> { o.Id, o.TotalAmount })
+</span></span><span style=display:flex><span>    .Where(o =&gt; o.Status == <span style=color:#f1fa8c>&#34;Completed&#34;</span>)
+</span></span><span style=display:flex><span>    .Select(o =&gt; <span style=color:#ff79c6>new</span> { o.Id, o.TotalAmount })
 </span></span><span style=display:flex><span>    .ToList();
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 生成的 SQL 可能是：</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// SELECT Id, TotalAmount FROM Orders </span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// WHERE OrderDate BETWEEN @startDate AND @endDate AND Status = &#39;Completed&#39;</span>
-</span></span></code></pre></div><p>性能灾难情况</p><ol><li>N+1查询问题（最常见）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 性能灾难：N+1 查询</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> orders = dbContext.Orders.Take(<span style=color:#ae81ff>100</span>).ToList();
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 生成的 SQL 可能是：</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// SELECT Id, TotalAmount FROM Orders </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// WHERE OrderDate BETWEEN @startDate AND @endDate AND Status = &#39;Completed&#39;</span>
+</span></span></code></pre></div><p>性能灾难情况</p><ol><li>N+1查询问题（最常见）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// 性能灾难：N+1 查询</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> orders = dbContext.Orders.Take(<span style=color:#bd93f9>100</span>).ToList();
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>foreach</span> (<span style=color:#66d9ef>var</span> order <span style=color:#66d9ef>in</span> orders)  <span style=color:#75715e>// 循环 100 次</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>foreach</span> (<span style=color:#8be9fd>var</span> order <span style=color:#ff79c6>in</span> orders)  <span style=color:#6272a4>// 循环 100 次</span>
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// 每次循环都执行一次数据库查询！</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> customer = dbContext.Customers.Find(order.CustomerId);
-</span></span><span style=display:flex><span>    Console.WriteLine(<span style=color:#e6db74>$&#34;{order.Id} - {customer.Name}&#34;</span>);
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 每次循环都执行一次数据库查询！</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>var</span> customer = dbContext.Customers.Find(order.CustomerId);
+</span></span><span style=display:flex><span>    Console.WriteLine(<span style=color:#f1fa8c>$&#34;{order.Id} - {customer.Name}&#34;</span>);
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 总共执行：1 (取orders) + 100 (循环查询) = 101 次数据库往返</span>
-</span></span></code></pre></div><p>解决方案：使用<code>Include</code>或投影</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 方案1: 预先加载 (Eager Loading)</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> orders = dbContext.Orders
-</span></span><span style=display:flex><span>    .Include(o =&gt; o.Customer)  <span style=color:#75715e>// 一次性 JOIN 查询</span>
-</span></span><span style=display:flex><span>    .Take(<span style=color:#ae81ff>100</span>)
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 总共执行：1 (取orders) + 100 (循环查询) = 101 次数据库往返</span>
+</span></span></code></pre></div><p>解决方案：使用<code>Include</code>或投影</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// 方案1: 预先加载 (Eager Loading)</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> orders = dbContext.Orders
+</span></span><span style=display:flex><span>    .Include(o =&gt; o.Customer)  <span style=color:#6272a4>// 一次性 JOIN 查询</span>
+</span></span><span style=display:flex><span>    .Take(<span style=color:#bd93f9>100</span>)
 </span></span><span style=display:flex><span>    .ToList();
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 方案2: 投影 (Projection)</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> orders = dbContext.Orders
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 方案2: 投影 (Projection)</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> orders = dbContext.Orders
 </span></span><span style=display:flex><span>    .Join(dbContext.Customers,
 </span></span><span style=display:flex><span>          o =&gt; o.CustomerId,
 </span></span><span style=display:flex><span>          c =&gt; c.Id,
-</span></span><span style=display:flex><span>          (o, c) =&gt; <span style=color:#66d9ef>new</span> { Order = o, CustomerName = c.Name })
-</span></span><span style=display:flex><span>    .Take(<span style=color:#ae81ff>100</span>)
+</span></span><span style=display:flex><span>          (o, c) =&gt; <span style=color:#ff79c6>new</span> { Order = o, CustomerName = c.Name })
+</span></span><span style=display:flex><span>    .Take(<span style=color:#bd93f9>100</span>)
 </span></span><span style=display:flex><span>    .ToList();
-</span></span></code></pre></div><ol start=2><li>在客户端进行筛选</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 不好：把所有数据拉到内存中筛选</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> users = dbContext.Users
-</span></span><span style=display:flex><span>    .AsEnumerable()  <span style=color:#75715e>// 切换到客户端处理！危险！</span>
-</span></span><span style=display:flex><span>    .Where(u =&gt; u.Age &gt; <span style=color:#ae81ff>18</span>)
+</span></span></code></pre></div><ol start=2><li>在客户端进行筛选</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// 不好：把所有数据拉到内存中筛选</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> users = dbContext.Users
+</span></span><span style=display:flex><span>    .AsEnumerable()  <span style=color:#6272a4>// 切换到客户端处理！危险！</span>
+</span></span><span style=display:flex><span>    .Where(u =&gt; u.Age &gt; <span style=color:#bd93f9>18</span>)
 </span></span><span style=display:flex><span>    .ToList();
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 执行过程：</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 1. SELECT * FROM Users (可能返回百万行)</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 2. 在内存中执行 .Where(u =&gt; u.Age &gt; 18)</span>
-</span></span></code></pre></div><p>正确做法：保持<code>IQueryable</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 好：在数据库端筛选</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> users = dbContext.Users
-</span></span><span style=display:flex><span>    .Where(u =&gt; u.Age &gt; <span style=color:#ae81ff>18</span>)  <span style=color:#75715e>// 生成 WHERE 子句</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 执行过程：</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 1. SELECT * FROM Users (可能返回百万行)</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 2. 在内存中执行 .Where(u =&gt; u.Age &gt; 18)</span>
+</span></span></code></pre></div><p>正确做法：保持<code>IQueryable</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// 好：在数据库端筛选</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> users = dbContext.Users
+</span></span><span style=display:flex><span>    .Where(u =&gt; u.Age &gt; <span style=color:#bd93f9>18</span>)  <span style=color:#6272a4>// 生成 WHERE 子句</span>
 </span></span><span style=display:flex><span>    .ToList();
-</span></span></code></pre></div><ol start=3><li>选择过多列</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// 不好：选择不需要的列</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> names = dbContext.Users
-</span></span><span style=display:flex><span>    .Select(u =&gt; u)  <span style=color:#75715e>// SELECT * FROM Users</span>
+</span></span></code></pre></div><ol start=3><li>选择过多列</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// 不好：选择不需要的列</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> names = dbContext.Users
+</span></span><span style=display:flex><span>    .Select(u =&gt; u)  <span style=color:#6272a4>// SELECT * FROM Users</span>
 </span></span><span style=display:flex><span>    .ToList()
-</span></span><span style=display:flex><span>    .Select(u =&gt; u.Name);  <span style=color:#75715e>// 在内存中提取 Name</span>
+</span></span><span style=display:flex><span>    .Select(u =&gt; u.Name);  <span style=color:#6272a4>// 在内存中提取 Name</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 好：只选择需要的列</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> names = dbContext.Users
-</span></span><span style=display:flex><span>    .Select(u =&gt; u.Name)  <span style=color:#75715e>// SELECT Name FROM Users</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 好：只选择需要的列</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> names = dbContext.Users
+</span></span><span style=display:flex><span>    .Select(u =&gt; u.Name)  <span style=color:#6272a4>// SELECT Name FROM Users</span>
 </span></span><span style=display:flex><span>    .ToList();
 </span></span></code></pre></div><h3 id=性能总结>性能总结</h3><table><thead><tr><th>场景</th><th>性能表现</th><th>建议</th></tr></thead><tbody><tr><td>简单内存操作</td><td>轻微开销，通常可接受</td><td>优先考虑代码可读性</td></tr><tr><td>复杂内存操作</td><td>可能有显著开销</td><td>考虑传统循环或优化算法</td></tr><tr><td>数据库查询（正确使用）</td><td>非常好，接近手动SQL</td><td>保持 IQueryable，避免 N+1</td></tr><tr><td>数据库查询（错误使用）</td><td>可能极差</td><td>监控生成的 SQL，理解延迟加载</td></tr><tr><td>性能关键算法</td><td>不适合</td><td>使用传统循环和数组</td></tr></tbody></table><p>最终建议</p><ul><li>不要过早优化：在大多数业务代码中，LINQ的性能是可接受的</li><li>测量，不要猜测：使用性能分析工具是被真正的瓶颈</li><li>数据库LINQ要格外小心：N+1问题是真正的性能杀手</li><li>在关键路径上保持谨慎：了解替代方案的成本</li></ul></div><nav class=post-nav><a href=/dotnetandwindows/log/lambda/ class=hover:underline>pre: Lambda</a>
 <a href=/dotnetandwindows/log/miscellaneous/ class=hover:underline>next: Miscellaneous</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#linq存在的意义>LINQ存在的意义</a></li><li><a href=#语法>语法</a><ul><li><a href=#查询语法>查询语法</a></li><li><a href=#方法语法基于扩展方法>方法语法（基于扩展方法）</a></li><li><a href=#核心概念与操作符>核心概念与操作符</a><ul><li><a href=#示例>示例</a></li></ul></li></ul></li><li><a href=#linq提供程序>LINQ提供程序</a></li><li><a href=#底层>底层</a><ul><li><ul><li><a href=#扩展方法---语法的基础>扩展方法 - 语法的基础</a></li></ul></li><li><a href=#委托和lambda表达式---行为参数化>委托和Lambda表达式 - 行为参数化</a></li><li><a href=#延迟执行deferred-execution>延迟执行（Deferred Execution）</a></li><li><a href=#立即执行方法>立即执行方法</a></li><li><a href=#表达式树和iqueryable---linq-to-sql的魔法>表达式树和IQueryable - LINQ to SQL的魔法</a><ul><li><a href=#ienumerablet与iqueryablet><code>IEnumerable&lt;T></code>与<code>IQueryable&lt;T></code></a><ul><li><a href=#ienumerablet-客户端查询><code>IEnumerable&lt;T></code>-客户端查询</a><ul><li><a href=#特点>特点</a></li><li><a href=#工作原理>工作原理</a></li><li><a href=#底层机制>底层机制</a></li></ul></li><li><a href=#iqueryablet-数据源查询><code>IQueryable&lt;T></code>-数据源查询</a><ul><li><a href=#特点-1>特点</a></li><li><a href=#工作原理-1>工作原理</a></li><li><a href=#底层机制-1>底层机制</a></li></ul></li></ul></li></ul></li><li><a href=#linq-provider-的工作流程>LINQ Provider 的工作流程</a></li></ul></li><li><a href=#性能>性能</a><ul><li><a href=#linq-to-objects>LINQ to Objects</a><ul><li><a href=#linq-to-objects-性能最佳实践>LINQ to Objects 性能最佳实践</a></li><li><a href=#linq-to-entities数据库linq性能分析>LINQ to Entities（数据库LINQ）性能分析</a></li></ul></li><li><a href=#性能总结>性能总结</a></li></ul></li></ul></li></ul></nav></aside><script src=/js/scrollspy.js defer></script><script type=module>

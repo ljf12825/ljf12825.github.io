@@ -1,4 +1,4 @@
-<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>Serialization and Persistence</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/logsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/runtime/>★</a></li><li><a href=/runtime/lab/>Lab</a></li><li><a href=/runtime/log/>Log</a></li><li><a href=/runtime/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>Serialization and Persistence</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-lua.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-rust.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/logsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/runtime/>★</a></li><li><a href=/runtime/lab/>Lab</a></li><li><a href=/runtime/log/>Log</a></li><li><a href=/runtime/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
 <span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><pre class=ascii>
 +——————————————————————————————————————————————————————————————+
 |                        <a class=nav-item data-path=/rightbrain/ href=/rightbrain/>RightBrain</a>                            |
@@ -41,147 +41,147 @@
 Unity支持大部分基础类型的序列化：<code>int</code>,<code>float</code>,<code>string</code>,<code>bool</code>,<code>Vector3</code>,<code>Color</code>等，自定义类型也能被序列化但是要加上<code>[System.Serializable]</code>属性，以及<code>UnityEngine.Object</code>类型（如<code>GameObject</code>,<code>Transform</code>,<code>ScriptableObject</code>等）</li><li>不支持的类型
 一些类型无法被序列化，比如<code>Dictionary</code>,<code>delegate</code>,<code>event</code>等</li><li>Unity的序列化是深度序列化
 Unity会自动处理类的成员变量，递归序列化引用类型（如类的实例）</li></ul><h3 id=如何序列化>如何序列化</h3><ul><li>基本类型
-默认情况下，Unity会序列化所有公有字段和标记为<code>[SerializeField]</code>的私有字段</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyComponent</span> : MonoBehaviour
+默认情况下，Unity会序列化所有公有字段和标记为<code>[SerializeField]</code>的私有字段</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>class</span> <span style=color:#50fa7b>MyComponent</span> : MonoBehaviour
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> score;
-</span></span><span style=display:flex><span><span style=color:#a6e22e>    [SerializeField]</span> <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>string</span> playerName;
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>int</span> score;
+</span></span><span style=display:flex><span><span style=color:#50fa7b>    [SerializeField]</span> <span style=color:#8be9fd;font-style:italic>private</span> <span style=color:#8be9fd>string</span> playerName;
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>上述代码中<code>score</code>和<code>playerName</code>会被Unity序列化，可以在Inspector中看到并修改</p><ul><li>类的序列化
-自定义类（结构体、对象等）也可以被序列化，前提是它们符合序列化条件</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#a6e22e>[System.Serializable]</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Player</span>
+自定义类（结构体、对象等）也可以被序列化，前提是它们符合序列化条件</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#50fa7b>[System.Serializable]</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>class</span> <span style=color:#50fa7b>Player</span>
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>string</span> name;
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> health;
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>string</span> name;
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>int</span> health;
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GameController</span> : MonoBehaviour
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>class</span> <span style=color:#50fa7b>GameController</span> : MonoBehaviour
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Player player;
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> Player player;
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>在这种情况下，<code>Player</code>类被标记为<code>[System.Serializable]</code>，Unity会序列化<code>GameController</code>中的<code>player</code>字段</p><p>在Unity自带的序列化系统中，不能被Unity序列化的字段无法自动保存到Unity的资源文件或场景文件里，在场景保存、Prefab保存、ScriptableObject保存时会被直接忽略，也就是说，下次重新打开场景时，这些字段的值会丢失，但是可以自己保存和传输</p><ol><li>手动转换为可序列化格式</li></ol><ul><li>可以自己把Dictionary、复杂对象转成JSON、XML、二进制等可保存的格式</li><li>常用工具<ul><li><code>JsonUtility</code>（Unity内置，速度快，但功能简单）</li><li><code>Newtonsoft.Json</code>（功能强大，支持Dictionary等）</li><li>二进制序列化（<code>BinaryFormatter</code>/<code>System.IO</code>）</li></ul></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>using</span> Newtonsoft.Json;
-</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> System.Collection.Generic;
-</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> UnityEngine;
+</span></span></code></pre></div><p>在这种情况下，<code>Player</code>类被标记为<code>[System.Serializable]</code>，Unity会序列化<code>GameController</code>中的<code>player</code>字段</p><p>在Unity自带的序列化系统中，不能被Unity序列化的字段无法自动保存到Unity的资源文件或场景文件里，在场景保存、Prefab保存、ScriptableObject保存时会被直接忽略，也就是说，下次重新打开场景时，这些字段的值会丢失，但是可以自己保存和传输</p><ol><li>手动转换为可序列化格式</li></ol><ul><li>可以自己把Dictionary、复杂对象转成JSON、XML、二进制等可保存的格式</li><li>常用工具<ul><li><code>JsonUtility</code>（Unity内置，速度快，但功能简单）</li><li><code>Newtonsoft.Json</code>（功能强大，支持Dictionary等）</li><li>二进制序列化（<code>BinaryFormatter</code>/<code>System.IO</code>）</li></ul></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#ff79c6>using</span> Newtonsoft.Json;
+</span></span><span style=display:flex><span><span style=color:#ff79c6>using</span> System.Collection.Generic;
+</span></span><span style=display:flex><span><span style=color:#ff79c6>using</span> UnityEngine;
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SaveDataExample</span> : MonoBehaviour
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>class</span> <span style=color:#50fa7b>SaveDataExample</span> : MonoBehaviour
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Dictionary&lt;<span style=color:#66d9ef>string</span>, <span style=color:#66d9ef>int</span>&gt; score = <span style=color:#66d9ef>new</span> Dictionary&lt;<span style=color:#66d9ef>string</span>, <span style=color:#66d9ef>int</span>&gt;();
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> Dictionary&lt;<span style=color:#8be9fd>string</span>, <span style=color:#8be9fd>int</span>&gt; score = <span style=color:#ff79c6>new</span> Dictionary&lt;<span style=color:#8be9fd>string</span>, <span style=color:#8be9fd>int</span>&gt;();
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        { <span style=color:#e6db74>&#34;Alice&#34;</span>, <span style=color:#ae81ff>100</span> },
-</span></span><span style=display:flex><span>        { <span style=color:#e6db74>&#34;Bob&#34;</span>, <span style=color:#ae81ff>80</span> }
+</span></span><span style=display:flex><span>        { <span style=color:#f1fa8c>&#34;Alice&#34;</span>, <span style=color:#bd93f9>100</span> },
+</span></span><span style=display:flex><span>        { <span style=color:#f1fa8c>&#34;Bob&#34;</span>, <span style=color:#bd93f9>80</span> }
 </span></span><span style=display:flex><span>    };
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Save()
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>void</span> Save()
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>string</span> json = JsonConvert.SerializeObject(scores);
-</span></span><span style=display:flex><span>        System.IO.File.WriteAllText(Application.persistentDataPath + <span style=color:#e6db74>&#34;/scores.json&#34;</span>, json);
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd>string</span> json = JsonConvert.SerializeObject(scores);
+</span></span><span style=display:flex><span>        System.IO.File.WriteAllText(Application.persistentDataPath + <span style=color:#f1fa8c>&#34;/scores.json&#34;</span>, json);
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Load()
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>void</span> Load()
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>string</span> json = System.IO.File.ReadAllText(Application.persistentDataPath + <span style=color:#e6db74>&#34;/scores.json&#34;</span>);
-</span></span><span style=display:flex><span>        scores = JsonConvert.DeserializeObject&lt;Dictionary&lt;<span style=color:#66d9ef>string</span>, <span style=color:#66d9ef>int</span>&gt;&gt;(json);
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd>string</span> json = System.IO.File.ReadAllText(Application.persistentDataPath + <span style=color:#f1fa8c>&#34;/scores.json&#34;</span>);
+</span></span><span style=display:flex><span>        scores = JsonConvert.DeserializeObject&lt;Dictionary&lt;<span style=color:#8be9fd>string</span>, <span style=color:#8be9fd>int</span>&gt;&gt;(json);
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>这样，即使Dictionary在Unity内置序列化中不支持，也能保存和恢复</p><ol start=2><li>用可序列化的中间结构代替
-比如把<code>Dictionary&lt;string, int></code>转成两个List</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#a6e22e>[System.Serializable]</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SerializableDict</span>
+比如把<code>Dictionary&lt;string, int></code>转成两个List</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#50fa7b>[System.Serializable]</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>class</span> <span style=color:#50fa7b>SerializableDict</span>
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> List&lt;<span style=color:#66d9ef>string</span>&gt; keys;
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> List&lt;<span style=color:#66d9ef>int</span>&gt; values;
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> List&lt;<span style=color:#8be9fd>string</span>&gt; keys;
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> List&lt;<span style=color:#8be9fd>int</span>&gt; values;
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> SerializableDict(Dictionary&lt;<span style=color:#66d9ef>string</span>, <span style=color:#66d9ef>int</span>&gt; dict)
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> SerializableDict(Dictionary&lt;<span style=color:#8be9fd>string</span>, <span style=color:#8be9fd>int</span>&gt; dict)
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        keys = <span style=color:#66d9ef>new</span> List&lt;<span style=color:#66d9ef>string</span>&gt;(dict.Keys);
-</span></span><span style=display:flex><span>        values = <span style=color:#66d9ef>new</span> List&lt;<span style=color:#66d9ef>int</span>&gt;(dict.Values);
+</span></span><span style=display:flex><span>        keys = <span style=color:#ff79c6>new</span> List&lt;<span style=color:#8be9fd>string</span>&gt;(dict.Keys);
+</span></span><span style=display:flex><span>        values = <span style=color:#ff79c6>new</span> List&lt;<span style=color:#8be9fd>int</span>&gt;(dict.Values);
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Dictionary&lt;<span style=color:#66d9ef>string</span>, <span style=color:#66d9ef>int</span>&gt; ToDictionary()
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> Dictionary&lt;<span style=color:#8be9fd>string</span>, <span style=color:#8be9fd>int</span>&gt; ToDictionary()
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>var</span> dict = <span style=color:#66d9ef>new</span> Dictionary&lt;<span style=color:#66d9ef>string</span>, <span style=color:#66d9ef>int</span>&gt;();
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i = <span style=color:#ae81ff>0</span>; i &lt; keys.Count; ++i)
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd>var</span> dict = <span style=color:#ff79c6>new</span> Dictionary&lt;<span style=color:#8be9fd>string</span>, <span style=color:#8be9fd>int</span>&gt;();
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>for</span> (<span style=color:#8be9fd>int</span> i = <span style=color:#bd93f9>0</span>; i &lt; keys.Count; ++i)
 </span></span><span style=display:flex><span>            dict[keys[i]] = values[i];
 </span></span><span style=display:flex><span>        
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> dict;
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>return</span> dict;
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>这样Unity就能正常序列化这个<code>SerializableDict</code>，保存到场景或Prefab中</p><ol start=3><li>网络传输</li></ol><ul><li>如果是网络同步（如多人游戏），完全可以跳过Unity序列化系统，直接把数据用JSON、Protobuf、MessagePack等格式打包，发到另一台机器</li><li>这些方式不依赖Unity的序列化规则，因此能传几乎所有C#对象</li></ul><h3 id=序列化到文件>序列化到文件</h3><p><a href=log/Data-Driven-Design/>Data Driven Design</a></p><h3 id=常见问题和注意事项>常见问题和注意事项</h3><ul><li>引用类型的序列化
-如果将一个引用类型（如类实例）赋值给一个字段，Unity会序列化这个引用，而不是值本身。这意味着可以在多个对象中看到相同的实例。如果希望每个实例独立，需要确保它们不共享同一个引用；就是说指针指向同一块内存，要主要意外联动和数据共享</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> MyComponent : MonoBehaviour
+如果将一个引用类型（如类实例）赋值给一个字段，Unity会序列化这个引用，而不是值本身。这意味着可以在多个对象中看到相同的实例。如果希望每个实例独立，需要确保它们不共享同一个引用；就是说指针指向同一块内存，要主要意外联动和数据共享</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> MyComponent : MonoBehaviour
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> GameObject prefab; <span style=color:#75715e>// 引用类型</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> GameObject prefab; <span style=color:#6272a4>// 引用类型</span>
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><ul><li><code>[NonSerialized]</code>属性
-有时可能不想让某个字段被序列化，这时可以使用<code>[NonSerialized]</code>属性。这会阻止字段在Inspector中显示并被序列化</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#a6e22e>[System.NonSerialized]</span> <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> runtimeOnlyValue;
+有时可能不想让某个字段被序列化，这时可以使用<code>[NonSerialized]</code>属性。这会阻止字段在Inspector中显示并被序列化</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#50fa7b>[System.NonSerialized]</span> <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>int</span> runtimeOnlyValue;
 </span></span></code></pre></div><ul><li><code>[HidenInInspector]</code>属性
-如果字段被序列化但不希望再Inspector中显示，可以使用<code>[HideInInspector]</code></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#a6e22e>[HideInInspector]</span> <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> hiddenValue;
+如果字段被序列化但不希望再Inspector中显示，可以使用<code>[HideInInspector]</code></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#50fa7b>[HideInInspector]</span> <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>int</span> hiddenValue;
 </span></span></code></pre></div><h3 id=自定义序列化>自定义序列化</h3><ul><li><code>ISerializationCallbackReceiver</code>接口
-Unity提供了<code>ISerializationCallbackReceiver</code>接口，允许再对象序列化和反序列化时进行自定义操作。这个接口有两个方法：<code>OnBeforeSerialize()</code>和<code>OnAfterDeserialize()</code>，可以在这些方法中编写序列化之前和之后的逻辑</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MySerializableClass</span> : ISerializationCallbackReceiver
+Unity提供了<code>ISerializationCallbackReceiver</code>接口，允许再对象序列化和反序列化时进行自定义操作。这个接口有两个方法：<code>OnBeforeSerialize()</code>和<code>OnAfterDeserialize()</code>，可以在这些方法中编写序列化之前和之后的逻辑</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>class</span> <span style=color:#50fa7b>MySerializableClass</span> : ISerializationCallbackReceiver
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#66d9ef>value</span>;
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>string</span> valueString;
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>int</span> <span style=color:#ff79c6>value</span>;
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>private</span> <span style=color:#8be9fd>string</span> valueString;
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> OnBeforeSerialize() { }
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>void</span> OnBeforeSerialize() { }
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> OnAfterDeserialize() =&gt; valueString = <span style=color:#66d9ef>value</span>.ToString();
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>void</span> OnAfterDeserialize() =&gt; valueString = <span style=color:#ff79c6>value</span>.ToString();
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><ul><li>自定义PropertyDrawer
-如果希望为自定义类创建一个定制化的Inspector界面，可以使用<code>PropertyDrawer</code>类来自定义序列化数据的显示</li></ul><h3 id=序列化与性能>序列化与性能</h3><p>Unity的序列化系统在加载和保存数据时会比较高效，但是有时深度序列化和复杂的数据结构（尤其是包含大量嵌套的引用类型的结构）可能会影响性能。最好限制序列化的数据量，并在必要时进行优化</p><p>能被序列化只是代表Unity知道如何保存/恢复它的格式，是否自动保存取决于它是否在场景、Prefab、ScriptableObject这类持久资源里，运行时数据不会自动保存，而需要手动做持久化</p><h2 id=持久化persistence>持久化（Persistence）</h2><p>持久化是指将游戏或应用中的数据保存在外部存储设备（如硬盘、云存档中），以便在应用关闭或重新启动时恢复。持久化的目标是使数据在不同的会话之间持久存在</p><p><strong>持久化的目的</strong></p><ul><li>保存游戏进度：允许玩家保存当前游戏状态在以后恢复</li><li>配置存储：保存玩家设置、游戏配置等数据</li><li>数据共享：在不同设备间共享和恢复游戏数据</li></ul><h3 id=持久化常见方法>持久化常见方法</h3><h4 id=playerprefs>PlayerPrefs</h4><p><code>PlayerPrefs</code>是Unity内置的一个简单持久化存储工具，主要用于保存玩家的偏好设置、游戏进度等轻量级数据（如音量、分数、关卡解锁状态等）。它的特点是键值对存储，数据会保存到磁盘中，即使退出游戏也会保留</p><h5 id=基本原理>基本原理</h5><p><code>PlayerPrefs</code>本质上是Unity封装的一个跨平台存储接口</p><ul><li>Windows：数据存储在注册表<code>HKEY_CURRENT_USER\Software\[CompanyName]\[ProductName]</code></li><li>macOS：使用<code>~/Library/Preferences/[CompanyName].[ProductName].plist</code></li><li>Android/iOS：使用设备平台提供的<code>SharedPreferences</code>/<code>NSUserDefaults</code></li></ul><blockquote><p>注意：它不是加密存储，任何人都能轻松修改数据，所以不能用来保存敏感信息（例如账号密码、付费信息等）</p></blockquote><h5 id=api>API</h5><table><thead><tr><th>方法</th><th>作用</th></tr></thead><tbody><tr><td><code>SetInt(string key, int value)</code></td><td>保存一个整数</td></tr><tr><td><code>SetFloat(string key, float value)</code></td><td>保存一个浮点数</td></tr><tr><td><code>SetString(string key, string value)</code></td><td>保存一个字符串</td></tr><tr><td><code>GetInt(string key, int defaultValue = 0)</code></td><td>获取整数，支持默认值</td></tr><tr><td><code>GetFloat(string key, float defaultValue = 0f)</code></td><td>获取浮点数，支持默认值</td></tr><tr><td><code>GetString(string key, string defaultValue = "")</code></td><td>获取字符串，支持默认值</td></tr><tr><td><code>HasKey(string key)</code></td><td>检查是否存在指定键</td></tr><tr><td><code>DeleteKey(string key)</code></td><td>删除指定键值</td></tr><tr><td><code>DeleteAll()</code></td><td>删除所有存储数据</td></tr><tr><td><code>Save()</code></td><td>手动保存数据到磁盘（通常 Unity 会自动保存，但在退出前调用更安全）</td></tr></tbody></table><h5 id=示例>示例</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>using</span> UnityEngine;
+如果希望为自定义类创建一个定制化的Inspector界面，可以使用<code>PropertyDrawer</code>类来自定义序列化数据的显示</li></ul><h3 id=序列化与性能>序列化与性能</h3><p>Unity的序列化系统在加载和保存数据时会比较高效，但是有时深度序列化和复杂的数据结构（尤其是包含大量嵌套的引用类型的结构）可能会影响性能。最好限制序列化的数据量，并在必要时进行优化</p><p>能被序列化只是代表Unity知道如何保存/恢复它的格式，是否自动保存取决于它是否在场景、Prefab、ScriptableObject这类持久资源里，运行时数据不会自动保存，而需要手动做持久化</p><h2 id=持久化persistence>持久化（Persistence）</h2><p>持久化是指将游戏或应用中的数据保存在外部存储设备（如硬盘、云存档中），以便在应用关闭或重新启动时恢复。持久化的目标是使数据在不同的会话之间持久存在</p><p><strong>持久化的目的</strong></p><ul><li>保存游戏进度：允许玩家保存当前游戏状态在以后恢复</li><li>配置存储：保存玩家设置、游戏配置等数据</li><li>数据共享：在不同设备间共享和恢复游戏数据</li></ul><h3 id=持久化常见方法>持久化常见方法</h3><h4 id=playerprefs>PlayerPrefs</h4><p><code>PlayerPrefs</code>是Unity内置的一个简单持久化存储工具，主要用于保存玩家的偏好设置、游戏进度等轻量级数据（如音量、分数、关卡解锁状态等）。它的特点是键值对存储，数据会保存到磁盘中，即使退出游戏也会保留</p><h5 id=基本原理>基本原理</h5><p><code>PlayerPrefs</code>本质上是Unity封装的一个跨平台存储接口</p><ul><li>Windows：数据存储在注册表<code>HKEY_CURRENT_USER\Software\[CompanyName]\[ProductName]</code></li><li>macOS：使用<code>~/Library/Preferences/[CompanyName].[ProductName].plist</code></li><li>Android/iOS：使用设备平台提供的<code>SharedPreferences</code>/<code>NSUserDefaults</code></li></ul><blockquote><p>注意：它不是加密存储，任何人都能轻松修改数据，所以不能用来保存敏感信息（例如账号密码、付费信息等）</p></blockquote><h5 id=api>API</h5><table><thead><tr><th>方法</th><th>作用</th></tr></thead><tbody><tr><td><code>SetInt(string key, int value)</code></td><td>保存一个整数</td></tr><tr><td><code>SetFloat(string key, float value)</code></td><td>保存一个浮点数</td></tr><tr><td><code>SetString(string key, string value)</code></td><td>保存一个字符串</td></tr><tr><td><code>GetInt(string key, int defaultValue = 0)</code></td><td>获取整数，支持默认值</td></tr><tr><td><code>GetFloat(string key, float defaultValue = 0f)</code></td><td>获取浮点数，支持默认值</td></tr><tr><td><code>GetString(string key, string defaultValue = "")</code></td><td>获取字符串，支持默认值</td></tr><tr><td><code>HasKey(string key)</code></td><td>检查是否存在指定键</td></tr><tr><td><code>DeleteKey(string key)</code></td><td>删除指定键值</td></tr><tr><td><code>DeleteAll()</code></td><td>删除所有存储数据</td></tr><tr><td><code>Save()</code></td><td>手动保存数据到磁盘（通常 Unity 会自动保存，但在退出前调用更安全）</td></tr></tbody></table><h5 id=示例>示例</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#ff79c6>using</span> UnityEngine;
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>PlayerPrefsExample</span> : MonoBehaviour
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>class</span> <span style=color:#50fa7b>PlayerPrefsExample</span> : MonoBehaviour
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> Start()
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>void</span> Start()
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// 存储数据</span>
-</span></span><span style=display:flex><span>        PlayerPrefs.SetInt(<span style=color:#e6db74>&#34;HighScore&#34;</span>, <span style=color:#ae81ff>100</span>);
-</span></span><span style=display:flex><span>        PlayerPrefs.SetFloat(<span style=color:#e6db74>&#34;Volume&#34;</span>, <span style=color:#ae81ff>0.8f</span>);
-</span></span><span style=display:flex><span>        PlayerPrefs.SetString(<span style=color:#e6db74>&#34;PlayerName&#34;</span>, <span style=color:#e6db74>&#34;Jeff&#34;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// 存储数据</span>
+</span></span><span style=display:flex><span>        PlayerPrefs.SetInt(<span style=color:#f1fa8c>&#34;HighScore&#34;</span>, <span style=color:#bd93f9>100</span>);
+</span></span><span style=display:flex><span>        PlayerPrefs.SetFloat(<span style=color:#f1fa8c>&#34;Volume&#34;</span>, <span style=color:#bd93f9>0.8f</span>);
+</span></span><span style=display:flex><span>        PlayerPrefs.SetString(<span style=color:#f1fa8c>&#34;PlayerName&#34;</span>, <span style=color:#f1fa8c>&#34;Jeff&#34;</span>);
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// 手动保存（建议重要数据存储后调用一次）</span>
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// 手动保存（建议重要数据存储后调用一次）</span>
 </span></span><span style=display:flex><span>        PlayerPrefs.Save();
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// 读取数据</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> score = PlayerPrefs.GetInt(<span style=color:#e6db74>&#34;HighSocre&#34;</span>, <span style=color:#ae81ff>0</span>);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>float</span> volume = PlayerPrefs.GetFloat(<span style=color:#e6db74>&#34;Volume&#34;</span>, <span style=color:#ae81ff>1f</span>);
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>string</span> name = PlayerPrefs.GetString(<span style=color:#e6db74>&#34;PlayerName&#34;</span>, <span style=color:#e6db74>&#34;Unknown&#34;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// 读取数据</span>
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd>int</span> score = PlayerPrefs.GetInt(<span style=color:#f1fa8c>&#34;HighSocre&#34;</span>, <span style=color:#bd93f9>0</span>);
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd>float</span> volume = PlayerPrefs.GetFloat(<span style=color:#f1fa8c>&#34;Volume&#34;</span>, <span style=color:#bd93f9>1f</span>);
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd>string</span> name = PlayerPrefs.GetString(<span style=color:#f1fa8c>&#34;PlayerName&#34;</span>, <span style=color:#f1fa8c>&#34;Unknown&#34;</span>);
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        Debug.Log(<span style=color:#e6db74>$&#34;Score: {score}, Volume: {volume}, Name: {name}&#34;</span>);
+</span></span><span style=display:flex><span>        Debug.Log(<span style=color:#f1fa8c>$&#34;Score: {score}, Volume: {volume}, Name: {name}&#34;</span>);
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// 检查和删除</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (PlayerPrefs.HasKey(<span style=color:#e6db74>&#34;HighScore&#34;</span>))
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// 检查和删除</span>
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>if</span> (PlayerPrefs.HasKey(<span style=color:#f1fa8c>&#34;HighScore&#34;</span>))
 </span></span><span style=display:flex><span>        {
-</span></span><span style=display:flex><span>            PlayerPrefs.DeleteKey(<span style=color:#e6db74>&#34;HighScore&#34;</span>);
+</span></span><span style=display:flex><span>            PlayerPrefs.DeleteKey(<span style=color:#f1fa8c>&#34;HighScore&#34;</span>);
 </span></span><span style=display:flex><span>        }
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><h5 id=使用建议>使用建议</h5><p>适用场景</p><ul><li>玩家设置（音量、分辨率、按键映射等）</li><li>简单进度数据（关卡解锁、最高分）</li><li>启动次数、首次运行标记</li></ul><p>不适用场景</p><ul><li>大量数据（效率低）</li><li>复杂结构数据（只支持<code>int</code>/<code>float</code>/<code>string</code>）</li><li>敏感信息（无加密，易被修改）</li><li>实时高频写入（可能影响性能）</li></ul><h5 id=存储结构拓展>存储结构拓展</h5><p>如果想用<code>PlayerPrefs</code>存储更复杂的数据（如数组、对象），可以先序列化成JSON</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#a6e22e>[System.Serializable]</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>PlayerData</span>
+</span></span></code></pre></div><h5 id=使用建议>使用建议</h5><p>适用场景</p><ul><li>玩家设置（音量、分辨率、按键映射等）</li><li>简单进度数据（关卡解锁、最高分）</li><li>启动次数、首次运行标记</li></ul><p>不适用场景</p><ul><li>大量数据（效率低）</li><li>复杂结构数据（只支持<code>int</code>/<code>float</code>/<code>string</code>）</li><li>敏感信息（无加密，易被修改）</li><li>实时高频写入（可能影响性能）</li></ul><h5 id=存储结构拓展>存储结构拓展</h5><p>如果想用<code>PlayerPrefs</code>存储更复杂的数据（如数组、对象），可以先序列化成JSON</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#50fa7b>[System.Serializable]</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>class</span> <span style=color:#50fa7b>PlayerData</span>
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>string</span> name;
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> level;
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>float</span> health;
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>string</span> name;
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>int</span> level;
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>float</span> health;
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>PlayerPrefsJsonExample</span> : MonoBehaviour
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>class</span> <span style=color:#50fa7b>PlayerPrefsJsonExample</span> : MonoBehaviour
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> SaveData()
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>void</span> SaveData()
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        PlayerData data = <span style=color:#66d9ef>new</span> PlayerData
+</span></span><span style=display:flex><span>        PlayerData data = <span style=color:#ff79c6>new</span> PlayerData
 </span></span><span style=display:flex><span>        {
-</span></span><span style=display:flex><span>            name = <span style=color:#e6db74>&#34;Jeff&#34;</span>,
-</span></span><span style=display:flex><span>            level = <span style=color:#ae81ff>10</span>,
-</span></span><span style=display:flex><span>            health = <span style=color:#ae81ff>75.5f</span>
+</span></span><span style=display:flex><span>            name = <span style=color:#f1fa8c>&#34;Jeff&#34;</span>,
+</span></span><span style=display:flex><span>            level = <span style=color:#bd93f9>10</span>,
+</span></span><span style=display:flex><span>            health = <span style=color:#bd93f9>75.5f</span>
 </span></span><span style=display:flex><span>        };
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>string</span> json = JsonUtility.ToJson(data);
-</span></span><span style=display:flex><span>        PlayerPrefs.SetString(<span style=color:#e6db74>&#34;PlayerData&#34;</span>, json);
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd>string</span> json = JsonUtility.ToJson(data);
+</span></span><span style=display:flex><span>        PlayerPrefs.SetString(<span style=color:#f1fa8c>&#34;PlayerData&#34;</span>, json);
 </span></span><span style=display:flex><span>        PlayerPrefs.Save();
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> LoadData()
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>void</span> LoadData()
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (PlayerPrefs.HasKey(<span style=color:#e6db74>&#34;PlayerData&#34;</span>))
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>if</span> (PlayerPrefs.HasKey(<span style=color:#f1fa8c>&#34;PlayerData&#34;</span>))
 </span></span><span style=display:flex><span>        {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>string</span> json = PlayerPrefs.GetString(<span style=color:#e6db74>&#34;PlayerData&#34;</span>);
+</span></span><span style=display:flex><span>            <span style=color:#8be9fd>string</span> json = PlayerPrefs.GetString(<span style=color:#f1fa8c>&#34;PlayerData&#34;</span>);
 </span></span><span style=display:flex><span>            PlayerData data = JsonUtility.FromJson&lt;PlayerData&gt;(json);
-</span></span><span style=display:flex><span>            Debug.Log(<span style=color:#e6db74>$&#34;Name: {data.name}, Level: {data.level}, HP: {data.health}&#34;</span>);
+</span></span><span style=display:flex><span>            Debug.Log(<span style=color:#f1fa8c>$&#34;Name: {data.name}, Level: {data.level}, HP: {data.health}&#34;</span>);
 </span></span><span style=display:flex><span>        }
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}

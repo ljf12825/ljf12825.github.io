@@ -1,4 +1,4 @@
-<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>add</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/logsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/unixlike/>★</a></li><li><a href=/unixlike/lab/>Lab</a></li><li><a href=/unixlike/log/>Log</a></li><li><a href=/unixlike/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>add</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-lua.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-rust.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/logsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/unixlike/>★</a></li><li><a href=/unixlike/lab/>Lab</a></li><li><a href=/unixlike/log/>Log</a></li><li><a href=/unixlike/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
 <span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><pre class=ascii>
 +——————————————————————————————————————————————————————————————+
 |                        <a class=nav-item data-path=/rightbrain/ href=/rightbrain/>RightBrain</a>                            |
@@ -36,18 +36,18 @@
 <a href=https://dl.acm.org/conference/siggraph target=_blank>SIGGRAPH Digital Library</a></p><p><a href=https://git-scm.com/ target=_blank>Git</a> |
 <a href=https://git-scm.com/doc target=_blank>Docs</a> |
 <a href=https://git-scm.com/community target=_blank>Community</a></p></div></div></div><script src=/js/ref-window.js></script><article class=single_article><div class=title>add<div class=meta>Modified: 2025-12-31
-| Author：ljf12825</div></div><div class=content><p><code>git add</code>的作用是将新增或已更改文件的内容添加到index中，作为下次<code>commit</code>的内容<br>在一次<code>commit</code>之前，可以执行多次<code>add</code>，一次<code>add</code>就是一次拍照，内容是当前的新增或更改内容，如果后续对内容进行修改且希望提交，需要再次<code>add</code><br>默认情况下，<code>add</code>不会添加忽略文件，使用<code>--force</code>可强制添加。如果不使用<code>--force</code>，命令会失败并返回忽略的文件列表</p><h2 id=语义及设计理念>语义及设计理念</h2><p><code>git add</code>的作用不是“添加文件”，而是把工作区中的文件内容，写入Git对象数据库，并更新index中对应路径指向的对象</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>Working Tree（工作区）
+| Author：ljf12825</div></div><div class=content><p><code>git add</code>的作用是将新增或已更改文件的内容添加到index中，作为下次<code>commit</code>的内容<br>在一次<code>commit</code>之前，可以执行多次<code>add</code>，一次<code>add</code>就是一次拍照，内容是当前的新增或更改内容，如果后续对内容进行修改且希望提交，需要再次<code>add</code><br>默认情况下，<code>add</code>不会添加忽略文件，使用<code>--force</code>可强制添加。如果不使用<code>--force</code>，命令会失败并返回忽略的文件列表</p><h2 id=语义及设计理念>语义及设计理念</h2><p><code>git add</code>的作用不是“添加文件”，而是把工作区中的文件内容，写入Git对象数据库，并更新index中对应路径指向的对象</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>Working Tree（工作区）
 </span></span><span style=display:flex><span>        ↓ git add
 </span></span><span style=display:flex><span>Index / Staging Area（暂存区）
 </span></span><span style=display:flex><span>        ↓ git commit
 </span></span><span style=display:flex><span>Repository（对象库 + 提交历史）
-</span></span></code></pre></div><p><code>git add</code>只负责从工作区读取文件内容，生成（或复用）blob对象，更新index，它不产生commit，也不更改HEAD</p><h3 id=底层行为>底层行为</h3><h4 id=git不关心文件只关心内容>Git不关心文件，只关心内容</h4><p>当执行</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>git add a.txt 
-</span></span></code></pre></div><p>Git做的事情是</p><ul><li>读取a.txt内容</li><li>对内容计算SHA-1/SHA-256（新仓库）</li><li>生成一个<code>blob</code>对象（如果这个内容以前不存在）</li><li>把这个blob的hash写进index</li><li>index中记录</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>路径名 -&gt; blob hash + 文件模式
-</span></span></code></pre></div><p>如果文件内容没变，<code>git add</code>不会生成新对象，这就是Git去重能力极强的根本原因</p><h4 id=index>index</h4><p>index存储下一次commit的完整快照草稿，index中的每一条记录包含</p><ul><li>文件路径</li><li>文件权限（100644/100755等）</li><li>blob对象hash</li></ul><h3 id=设计哲学>设计哲学</h3><p><code>git add</code>是Git的核心设计之一</p><h4 id=支持部分提交>支持部分提交</h4><p>假设改了一个文件</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#75715e>// main.c 
-</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>修了</span> bug 
-</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>加了日志</span>
-</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>写了一半新功能（未完成）</span>
-</span></span></code></pre></div><p>可以</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>git add -p main.c 
+</span></span></code></pre></div><p><code>git add</code>只负责从工作区读取文件内容，生成（或复用）blob对象，更新index，它不产生commit，也不更改HEAD</p><h3 id=底层行为>底层行为</h3><h4 id=git不关心文件只关心内容>Git不关心文件，只关心内容</h4><p>当执行</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>git add a.txt 
+</span></span></code></pre></div><p>Git做的事情是</p><ul><li>读取a.txt内容</li><li>对内容计算SHA-1/SHA-256（新仓库）</li><li>生成一个<code>blob</code>对象（如果这个内容以前不存在）</li><li>把这个blob的hash写进index</li><li>index中记录</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>路径名 -&gt; blob hash + 文件模式
+</span></span></code></pre></div><p>如果文件内容没变，<code>git add</code>不会生成新对象，这就是Git去重能力极强的根本原因</p><h4 id=index>index</h4><p>index存储下一次commit的完整快照草稿，index中的每一条记录包含</p><ul><li>文件路径</li><li>文件权限（100644/100755等）</li><li>blob对象hash</li></ul><h3 id=设计哲学>设计哲学</h3><p><code>git add</code>是Git的核心设计之一</p><h4 id=支持部分提交>支持部分提交</h4><p>假设改了一个文件</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#6272a4>// main.c 
+</span></span></span><span style=display:flex><span>修了 bug 
+</span></span><span style=display:flex><span>加了日志
+</span></span><span style=display:flex><span>写了一半新功能（未完成）
+</span></span></code></pre></div><p>可以</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>git add -p main.c 
 </span></span></code></pre></div><p>只把bug修复，日志加入index,而把未完成的新功能留在工作区<br>Git的单位不是文件，是”内容块（hunk）“</p><h4 id=index的设计>index的设计</h4><p>index是缓冲层，如果没有<code>git add</code>，每次commit只能提交工作区的全部状态，无法构建干净、可回溯的历史</p><h2 id=options>OPTIONS</h2><ul><li><p><code>&lt;pathspec></code>
 要添加的文件内容<br>可以使用文件通配符（例如，<code>*.c</code>）来添加所有匹配的文件<br>也可以指定一个前导目录名（例如<code>dir/</code>来添加<code>dir/</code>下所有文件）<br><code>.</code>也是<code>&lt;pathspec></code>，是指从当前目录开始，递归匹配所有路径，<code>git add .</code>，在不同Git版本/配置下，会add新文件，会add修改文件，可能不会stage删除
 <code>&lt;pathspec></code>是一个匹配规则系统，支持：目录，glob,排除，魔法前缀</p></li><li><p><code>-n</code>/<code>--dry-run</code>
@@ -71,15 +71,15 @@
 对所有已跟踪文件，重新执行官clean过滤器，然后重新写入index. 典型clean行为：CRLF->LF, text属性生效。触发场景：修改了<code>core.autocrlf</code>,<code>.gitattributes</code>的<code>text</code>/<code>eol</code>、历史index中内容脏了。该命令只会影响index,不修改工作区文件，隐含<code>-u</code></p></li><li><p><code>--chmod=(+|-)x</code>
 只修改index中的可执行位，不修改磁盘文件，只改Git记录</p></li><li><p><code>--pathspec-from-file</code>/<code>--pathspec-file-nul</code>
 pathspec不从命令行传，而是从文件/stdin读。适用于路径太多，路径包含空格、换行、特殊字符、自动化工具生成路径列表。<code>--pathspec-file-nul</code>用<code>\0</code>分隔，所有字符字面量处理，最安全的批量路径方式</p></li><li><p><code>--</code>
-选项终止符，明确告诉Git：后面全是路径，不是选项</p></li></ul><h2 id=交互式add>交互式<code>add</code></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 启动交互式暂存界面</span>
+选项终止符，明确告诉Git：后面全是路径，不是选项</p></li></ul><h2 id=交互式add>交互式<code>add</code></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 启动交互式暂存界面</span>
 </span></span><span style=display:flex><span>git add -i
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 或使用完整命令</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 或使用完整命令</span>
 </span></span><span style=display:flex><span>git add --interactive
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 简写模式（更新版本）</span>
-</span></span><span style=display:flex><span>git add -p <span style=color:#75715e># 补丁模式，最常用</span>
-</span></span></code></pre></div><p>启动后显示菜单</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>           staged     unstaged path
+</span></span><span style=display:flex><span><span style=color:#6272a4># 简写模式（更新版本）</span>
+</span></span><span style=display:flex><span>git add -p <span style=color:#6272a4># 补丁模式，最常用</span>
+</span></span></code></pre></div><p>启动后显示菜单</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>           staged     unstaged path
 </span></span><span style=display:flex><span>  1:    unchanged       +12/-0 README.md
 </span></span><span style=display:flex><span>  2:    unchanged       +20/-4 src/main.py
 </span></span><span style=display:flex><span>  3:    unchanged        +3/-0 newfile.txt
@@ -88,65 +88,65 @@ pathspec不从命令行传，而是从文件/stdin读。适用于路径太多，
 </span></span><span style=display:flex><span>  1: status       2: update       3: revert       4: add untracked
 </span></span><span style=display:flex><span>  5: patch        6: diff         7: quit         8: help
 </span></span><span style=display:flex><span>What now&gt;
-</span></span></code></pre></div><ol><li>status（状态）</li></ol><p>显示当前更改的摘要信息</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>What now&gt; <span style=color:#ae81ff>1</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 显示哪些文件已暂存、未暂存</span>
-</span></span></code></pre></div><ol start=2><li>update（更新）</li></ol><p>将整个文件的更改添加到暂存区</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>What now&gt; <span style=color:#ae81ff>2</span>
+</span></span></code></pre></div><ol><li>status（状态）</li></ol><p>显示当前更改的摘要信息</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>What now&gt; <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 显示哪些文件已暂存、未暂存</span>
+</span></span></code></pre></div><ol start=2><li>update（更新）</li></ol><p>将整个文件的更改添加到暂存区</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>What now&gt; <span style=color:#bd93f9>2</span>
 </span></span><span style=display:flex><span>           staged     unstaged path
 </span></span><span style=display:flex><span>  1:    unchanged       +12/-0 README.md
 </span></span><span style=display:flex><span>  2:    unchanged       +20/-4 src/main.py
 </span></span><span style=display:flex><span>Update&gt;&gt;
-</span></span><span style=display:flex><span><span style=color:#75715e># 输入文件编号（如 1,2 或 1-3）</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 输入文件编号（如 1,2 或 1-3）</span>
 </span></span><span style=display:flex><span>Update&gt;&gt; 1,2
-</span></span><span style=display:flex><span><span style=color:#75715e># 暂存选中文件的全部更改</span>
-</span></span></code></pre></div><ol start=3><li>revert（恢复）</li></ol><p>从暂存区移除已暂存的文件</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>What now&gt; <span style=color:#ae81ff>3</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 暂存选中文件的全部更改</span>
+</span></span></code></pre></div><ol start=3><li>revert（恢复）</li></ol><p>从暂存区移除已暂存的文件</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>What now&gt; <span style=color:#bd93f9>3</span>
 </span></span><span style=display:flex><span>           staged     unstaged path
 </span></span><span style=display:flex><span>  1:        +12/-0    unchanged README.md
 </span></span><span style=display:flex><span>Revert&gt;&gt;
-</span></span><span style=display:flex><span><span style=color:#75715e># 输入要取消暂存的文件编号</span>
-</span></span></code></pre></div><ol start=4><li>add untracked（添加未跟踪文件）</li></ol><p>添加新文件到暂存区</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>What now&gt; <span style=color:#ae81ff>4</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 输入要取消暂存的文件编号</span>
+</span></span></code></pre></div><ol start=4><li>add untracked（添加未跟踪文件）</li></ol><p>添加新文件到暂存区</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>What now&gt; <span style=color:#bd93f9>4</span>
 </span></span><span style=display:flex><span>           staged     unstaged path
 </span></span><span style=display:flex><span>  1:    unchanged        +3/-0 newfile.txt
 </span></span><span style=display:flex><span>Add untracked&gt;&gt;
-</span></span></code></pre></div><ol start=5><li>patch（补丁模式）</li></ol><p>逐块暂存更改-这是交互式add的核心功能</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>What now&gt; <span style=color:#ae81ff>5</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 或直接使用补丁模式</span>
+</span></span></code></pre></div><ol start=5><li>patch（补丁模式）</li></ol><p>逐块暂存更改-这是交互式add的核心功能</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>What now&gt; <span style=color:#bd93f9>5</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 或直接使用补丁模式</span>
 </span></span><span style=display:flex><span>git add -p
 </span></span><span style=display:flex><span>git add --patch
-</span></span></code></pre></div><ol start=6><li>diff（查看差异）</li></ol><p>显示暂存区与工作区的差异</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>What now&gt; <span style=color:#ae81ff>6</span>
+</span></span></code></pre></div><ol start=6><li>diff（查看差异）</li></ol><p>显示暂存区与工作区的差异</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>What now&gt; <span style=color:#bd93f9>6</span>
 </span></span><span style=display:flex><span>           staged     unstaged path
 </span></span><span style=display:flex><span>  1:        +12/-0     +4/-2 README.md
 </span></span><span style=display:flex><span>Diff&gt;&gt;
-</span></span><span style=display:flex><span><span style=color:#75715e># 输入文件编号查看具体差异</span>
-</span></span></code></pre></div><ol start=7><li>quit（退出）</li></ol><p>退出交互式界面</p><ol start=8><li>help（帮助）</li></ol><p>显示命令帮助信息</p><h2 id=补丁模式>补丁模式</h2><p>启动补丁模式</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 对特定文件使用补丁模式</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 输入文件编号查看具体差异</span>
+</span></span></code></pre></div><ol start=7><li>quit（退出）</li></ol><p>退出交互式界面</p><ol start=8><li>help（帮助）</li></ol><p>显示命令帮助信息</p><h2 id=补丁模式>补丁模式</h2><p>启动补丁模式</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 对特定文件使用补丁模式</span>
 </span></span><span style=display:flex><span>git add -p filename.py
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 对所有更改文件使用</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 对所有更改文件使用</span>
 </span></span><span style=display:flex><span>git add -p
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 等价于</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 等价于</span>
 </span></span><span style=display:flex><span>git add --patch
-</span></span></code></pre></div><p>补丁模式的工作流程</p><ol><li>Git逐块显示更改</li><li>每个块前显示选项提示</li><li>用户选择如何操作该块</li><li>继续处理下一个块</li></ol><h3 id=选项>选项</h3><p>当Git显示一个代码块时，会提示</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]?
-</span></span></code></pre></div><p>常用选项</p><ul><li>y(yes)：暂存此块</li><li>n(no)：不暂存此块</li><li>q(quit)：退出，不暂存当前块及后续所有块</li><li>a(all)：暂存当前文件的所有块</li><li>d(done)：不暂存当前文件的所有块</li><li>j(jump)：跳过当前块，暂不决定</li><li>J(Join)：跳到下一个块，但把当前块合并到下一个</li><li>g(goto)：选择特定块处理</li><li>/(search)：用正则表达式搜索块</li><li>s(split)：将当前大块分割成更小的块</li><li>e(edit)：手动编辑当前块</li><li>?(help)：显示帮助</li></ul><h4 id=ssplit-分割大块>s(split) 分割大块</h4><p>当Git显示的块太大，包含多个逻辑更改时</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-diff data-lang=diff><span style=display:flex><span><span style=color:#75715e>@@ -10,7 +10,10 @@ def calculate_total(items)
+</span></span></code></pre></div><p>补丁模式的工作流程</p><ol><li>Git逐块显示更改</li><li>每个块前显示选项提示</li><li>用户选择如何操作该块</li><li>继续处理下一个块</li></ol><h3 id=选项>选项</h3><p>当Git显示一个代码块时，会提示</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>Stage this hunk [y,n,q,a,d,j,J,g,/,s,e,?]?
+</span></span></code></pre></div><p>常用选项</p><ul><li>y(yes)：暂存此块</li><li>n(no)：不暂存此块</li><li>q(quit)：退出，不暂存当前块及后续所有块</li><li>a(all)：暂存当前文件的所有块</li><li>d(done)：不暂存当前文件的所有块</li><li>j(jump)：跳过当前块，暂不决定</li><li>J(Join)：跳到下一个块，但把当前块合并到下一个</li><li>g(goto)：选择特定块处理</li><li>/(search)：用正则表达式搜索块</li><li>s(split)：将当前大块分割成更小的块</li><li>e(edit)：手动编辑当前块</li><li>?(help)：显示帮助</li></ul><h4 id=ssplit-分割大块>s(split) 分割大块</h4><p>当Git显示的块太大，包含多个逻辑更改时</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-diff data-lang=diff><span style=display:flex><span><span style=font-weight:700>@@ -10,7 +10,10 @@ def calculate_total(items)
 </span></span></span><span style=display:flex><span>    total = 0
 </span></span><span style=display:flex><span>    for item in items:
 </span></span><span style=display:flex><span>        total += item.price
-</span></span><span style=display:flex><span><span style=color:#f92672>-   return total
-</span></span></span><span style=display:flex><span><span style=color:#a6e22e>+
-</span></span></span><span style=display:flex><span><span style=color:#a6e22e>+   # 添加折扣计算
-</span></span></span><span style=display:flex><span><span style=color:#a6e22e>+   # discount = total * 0.1
-</span></span></span><span style=display:flex><span><span style=color:#a6e22e>+   return total - discount
+</span></span><span style=display:flex><span><span style=color:#f55>-   return total
+</span></span></span><span style=display:flex><span><span style=color:#50fa7b;font-weight:700>+
+</span></span></span><span style=display:flex><span><span style=color:#50fa7b;font-weight:700>+   # 添加折扣计算
+</span></span></span><span style=display:flex><span><span style=color:#50fa7b;font-weight:700>+   # discount = total * 0.1
+</span></span></span><span style=display:flex><span><span style=color:#50fa7b;font-weight:700>+   return total - discount
 </span></span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span># 另一个不相关的函数
 </span></span><span style=display:flex><span>def validate_input(data):
-</span></span></code></pre></div><p>输入<code>s</code>后，Git会尝试将大块分割成更小的逻辑块</p><h4 id=eedit-手动编辑>e(edit) 手动编辑</h4><ul><li>选择特定暂存行</li><li>修改要暂存的内容</li><li>完全自定义暂存内容</li></ul><p>输入<code>e</code>后进入编辑界面</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-diff data-lang=diff><span style=display:flex><span># Manual hunk edit mode -- see bottom for a quick guide.
-</span></span><span style=display:flex><span><span style=color:#75715e>@@ -10,7 +10,10 @@ def calculate_total(items):
+</span></span></code></pre></div><p>输入<code>s</code>后，Git会尝试将大块分割成更小的逻辑块</p><h4 id=eedit-手动编辑>e(edit) 手动编辑</h4><ul><li>选择特定暂存行</li><li>修改要暂存的内容</li><li>完全自定义暂存内容</li></ul><p>输入<code>e</code>后进入编辑界面</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-diff data-lang=diff><span style=display:flex><span># Manual hunk edit mode -- see bottom for a quick guide.
+</span></span><span style=display:flex><span><span style=font-weight:700>@@ -10,7 +10,10 @@ def calculate_total(items):
 </span></span></span><span style=display:flex><span>     total = 0
 </span></span><span style=display:flex><span>     for item in items:
 </span></span><span style=display:flex><span>         total += item.price
-</span></span><span style=display:flex><span><span style=color:#f92672>-    return total
-</span></span></span><span style=display:flex><span><span style=color:#a6e22e>+    
-</span></span></span><span style=display:flex><span><span style=color:#a6e22e>+    # 添加折扣计算
-</span></span></span><span style=display:flex><span><span style=color:#a6e22e>+    discount = total * 0.1
-</span></span></span><span style=display:flex><span><span style=color:#a6e22e>+    return total - discount
+</span></span><span style=display:flex><span><span style=color:#f55>-    return total
+</span></span></span><span style=display:flex><span><span style=color:#50fa7b;font-weight:700>+    
+</span></span></span><span style=display:flex><span><span style=color:#50fa7b;font-weight:700>+    # 添加折扣计算
+</span></span></span><span style=display:flex><span><span style=color:#50fa7b;font-weight:700>+    discount = total * 0.1
+</span></span></span><span style=display:flex><span><span style=color:#50fa7b;font-weight:700>+    return total - discount
 </span></span></span><span style=display:flex><span> 
 </span></span><span style=display:flex><span># ---
 </span></span><span style=display:flex><span># To remove &#39;-&#39; lines, make them &#39; &#39; lines (context).

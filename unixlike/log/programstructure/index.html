@@ -1,4 +1,4 @@
-<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>C Program Structure</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/logsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/unixlike/>★</a></li><li><a href=/unixlike/lab/>Lab</a></li><li><a href=/unixlike/log/>Log</a></li><li><a href=/unixlike/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>C Program Structure</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-lua.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-rust.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/logsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/unixlike/>★</a></li><li><a href=/unixlike/lab/>Lab</a></li><li><a href=/unixlike/log/>Log</a></li><li><a href=/unixlike/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
 <span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><pre class=ascii>
 +——————————————————————————————————————————————————————————————+
 |                        <a class=nav-item data-path=/rightbrain/ href=/rightbrain/>RightBrain</a>                            |
@@ -36,75 +36,75 @@
 <a href=https://dl.acm.org/conference/siggraph target=_blank>SIGGRAPH Digital Library</a></p><p><a href=https://git-scm.com/ target=_blank>Git</a> |
 <a href=https://git-scm.com/doc target=_blank>Docs</a> |
 <a href=https://git-scm.com/community target=_blank>Community</a></p></div></div></div><script src=/js/ref-window.js></script><article class=single_article><div class=title>C Program Structure<div class=meta>Modified: 2025-12-31
-| Author：ljf12825</div></div><div class=content><h2 id=一个最小的c程序结构>一个最小的C程序结构</h2><p>Hello World实例</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#75715e>// hello.c 
-</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;stdio.h&gt;</span><span style=color:#75715e>
+| Author：ljf12825</div></div><div class=content><h2 id=一个最小的c程序结构>一个最小的C程序结构</h2><p>Hello World实例</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#6272a4>// hello.c 
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdio.h&gt;</span><span style=color:#ff79c6>
 </span></span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>()
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>()
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#75715e>/*my first C program */</span>
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;Hello, World! </span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>);
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>/*my first C program */</span>
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;Hello, World! </span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>);
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><ul><li>预处理指令：<code>#include &lt;stdio.h></code>，告诉C编译器在实际编译之前要包含的stdio.h文件</li><li>主函数：<code>int main()</code>，程序从这里开始执行</li><li>注释：<code>/*...*/</code>，注释中的内容会被编译器忽略</li><li>函数：<code>printf(...)</code>，C中的一个可用函数</li><li>返回：<code>return 0</code>，终止main()函数，并返回值0</li></ul><h3 id=命令行参数>命令行参数</h3><p>执行程序时，可以从命令行传值给C程序，它让程序在启动时就能获得配置信息。这些值被成为命令行参数，它们对程序很重要，特别是当想从外部控制程序，而不是在代码内进行硬编码时，显得尤为重要，是编写命令行工具的基础</p><h4 id=是什么>是什么</h4><p>当这样运行程序时</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>./myprogram -v --output<span style=color:#f92672>=</span>result.txt input1.dat input2.dat 
-</span></span></code></pre></div><p><code>-v</code>, <code>--output=result.txt</code>, <code>input1.dat</code>, <code>input2.dat</code>就是命令行参数。它们通过操作系统传递给程序的<code>main</code>函数</p><h4 id=为什么main能有参数>为什么main能有参数</h4><p>程序启动是程序加载器(loader)调用——在Linux是<code>ld-linux-x86-64</code>，它把命令行参数从栈上传给main</p><h4 id=main函数的标准形式>main函数的标准形式</h4><p>C程序的<code>main</code>函数有多种标准形式来接收参数</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#75715e>// 形式一：双参数（C标准形式）
-</span></span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(<span style=color:#66d9ef>int</span> argc, <span style=color:#66d9ef>char</span> <span style=color:#f92672>*</span>argv[]) {
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// argc：参数计数(argument count)
-</span></span></span><span style=display:flex><span>    <span style=color:#75715e>// argv：参数向量/值(argument vector)
-</span></span></span><span style=display:flex><span>    <span style=color:#75715e>// 返回值：通常0表示成功，非0表示错误
+</span></span></code></pre></div><ul><li>预处理指令：<code>#include &lt;stdio.h></code>，告诉C编译器在实际编译之前要包含的stdio.h文件</li><li>主函数：<code>int main()</code>，程序从这里开始执行</li><li>注释：<code>/*...*/</code>，注释中的内容会被编译器忽略</li><li>函数：<code>printf(...)</code>，C中的一个可用函数</li><li>返回：<code>return 0</code>，终止main()函数，并返回值0</li></ul><h3 id=命令行参数>命令行参数</h3><p>执行程序时，可以从命令行传值给C程序，它让程序在启动时就能获得配置信息。这些值被成为命令行参数，它们对程序很重要，特别是当想从外部控制程序，而不是在代码内进行硬编码时，显得尤为重要，是编写命令行工具的基础</p><h4 id=是什么>是什么</h4><p>当这样运行程序时</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>./myprogram -v --output<span style=color:#ff79c6>=</span>result.txt input1.dat input2.dat 
+</span></span></code></pre></div><p><code>-v</code>, <code>--output=result.txt</code>, <code>input1.dat</code>, <code>input2.dat</code>就是命令行参数。它们通过操作系统传递给程序的<code>main</code>函数</p><h4 id=为什么main能有参数>为什么main能有参数</h4><p>程序启动是程序加载器(loader)调用——在Linux是<code>ld-linux-x86-64</code>，它把命令行参数从栈上传给main</p><h4 id=main函数的标准形式>main函数的标准形式</h4><p>C程序的<code>main</code>函数有多种标准形式来接收参数</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#6272a4>// 形式一：双参数（C标准形式）
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>(<span style=color:#8be9fd>int</span> argc, <span style=color:#8be9fd>char</span> <span style=color:#ff79c6>*</span>argv[]) {
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// argc：参数计数(argument count)
+</span></span></span><span style=display:flex><span>    <span style=color:#6272a4>// argv：参数向量/值(argument vector)
+</span></span></span><span style=display:flex><span>    <span style=color:#6272a4>// 返回值：通常0表示成功，非0表示错误
 </span></span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 形式二：简略版（C标准形式，不关心参数）
-</span></span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(<span style=color:#66d9ef>void</span>) {
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// 不接受任何命令行参数
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 形式二：简略版（C标准形式，不关心参数）
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>(<span style=color:#8be9fd>void</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 不接受任何命令行参数
 </span></span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 形式三：三参数（POSIX标准）
-</span></span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(<span style=color:#66d9ef>int</span> argc, <span style=color:#66d9ef>char</span> <span style=color:#f92672>*</span>argv[], <span style=color:#66d9ef>char</span> <span style=color:#f92672>*</span>envp[]) {
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// envp：表示环境变量列表(environment pointer) 
-</span></span></span><span style=display:flex><span>    <span style=color:#75715e>// 这在POSIX, GNU/Linux, 系统编程中是合法且使用广泛的，只是它不是C标准指定的形式
-</span></span></span><span style=display:flex><span>    <span style=color:#75715e>// 但C标准也允许实现定义（implementation-defined）的额外参数，而Linux就扩展允许环境变量指针
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 形式三：三参数（POSIX标准）
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>(<span style=color:#8be9fd>int</span> argc, <span style=color:#8be9fd>char</span> <span style=color:#ff79c6>*</span>argv[], <span style=color:#8be9fd>char</span> <span style=color:#ff79c6>*</span>envp[]) {
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// envp：表示环境变量列表(environment pointer) 
+</span></span></span><span style=display:flex><span>    <span style=color:#6272a4>// 这在POSIX, GNU/Linux, 系统编程中是合法且使用广泛的，只是它不是C标准指定的形式
+</span></span></span><span style=display:flex><span>    <span style=color:#6272a4>// 但C标准也允许实现定义（implementation-defined）的额外参数，而Linux就扩展允许环境变量指针
 </span></span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 形式四：二级指针版（本质同形式一）
-</span></span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(<span style=color:#66d9ef>int</span> argc, <span style=color:#66d9ef>char</span> <span style=color:#f92672>**</span>argv, <span style=color:#66d9ef>char</span> <span style=color:#f92672>**</span>envp) {
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// char **argv和char *argv[]本质完全一样，只是语法不同
-</span></span></span><span style=display:flex><span>    <span style=color:#75715e>// 系统编程中用char **argv更多，因为它强调指向指针的指针，更贴合内存模型
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 形式四：二级指针版（本质同形式一）
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>(<span style=color:#8be9fd>int</span> argc, <span style=color:#8be9fd>char</span> <span style=color:#ff79c6>**</span>argv, <span style=color:#8be9fd>char</span> <span style=color:#ff79c6>**</span>envp) {
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// char **argv和char *argv[]本质完全一样，只是语法不同
+</span></span></span><span style=display:flex><span>    <span style=color:#6272a4>// 系统编程中用char **argv更多，因为它强调指向指针的指针，更贴合内存模型
 </span></span></span><span style=display:flex><span>}
-</span></span></code></pre></div><h4 id=参数详解与访问>参数详解与访问</h4><ol><li><code>argc</code>和<code>argv</code>的含义</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;stdio.h&gt; </span><span style=color:#75715e>
+</span></span></code></pre></div><h4 id=参数详解与访问>参数详解与访问</h4><ol><li><code>argc</code>和<code>argv</code>的含义</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdio.h&gt; </span><span style=color:#ff79c6>
 </span></span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(<span style=color:#66d9ef>int</span> argc, <span style=color:#66d9ef>char</span> <span style=color:#f92672>*</span>argv[]) {
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;程序名：%s</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, argv[<span style=color:#ae81ff>0</span>]); <span style=color:#75715e>// argv[0]总是程序自己的名字
-</span></span></span><span style=display:flex><span>    <span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;参数总数（含程序名）：%d</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, argc);
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>(<span style=color:#8be9fd>int</span> argc, <span style=color:#8be9fd>char</span> <span style=color:#ff79c6>*</span>argv[]) {
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;程序名：%s</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, argv[<span style=color:#bd93f9>0</span>]); <span style=color:#6272a4>// argv[0]总是程序自己的名字
+</span></span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;参数总数（含程序名）：%d</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, argc);
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// 遍历所有参数
-</span></span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> argc; i<span style=color:#f92672>++</span>) {
-</span></span><span style=display:flex><span>         <span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;argv[%d] = %s</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, i, argv[i]);
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 遍历所有参数
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> (<span style=color:#8be9fd>int</span> i <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>; i <span style=color:#ff79c6>&lt;</span> argc; i<span style=color:#ff79c6>++</span>) {
+</span></span><span style=display:flex><span>         <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;argv[%d] = %s</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, i, argv[i]);
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>编译后运行</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>$ ./example hello world <span style=color:#ae81ff>123</span>
+</span></span></code></pre></div><p>编译后运行</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>$ ./example hello world <span style=color:#bd93f9>123</span>
 </span></span><span style=display:flex><span>程序名: ./example
-</span></span><span style=display:flex><span>参数总数 <span style=color:#f92672>(</span>含程序名<span style=color:#f92672>)</span>: <span style=color:#ae81ff>4</span>
-</span></span><span style=display:flex><span>argv<span style=color:#f92672>[</span>0<span style=color:#f92672>]</span> <span style=color:#f92672>=</span> ./example  <span style=color:#75715e># 第0个参数总是程序路径</span>
-</span></span><span style=display:flex><span>argv<span style=color:#f92672>[</span>1<span style=color:#f92672>]</span> <span style=color:#f92672>=</span> hello       <span style=color:#75715e># 第一个实际参数</span>
-</span></span><span style=display:flex><span>argv<span style=color:#f92672>[</span>2<span style=color:#f92672>]</span> <span style=color:#f92672>=</span> world
-</span></span><span style=display:flex><span>argv<span style=color:#f92672>[</span>3<span style=color:#f92672>]</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>123</span>
+</span></span><span style=display:flex><span>参数总数 <span style=color:#ff79c6>(</span>含程序名<span style=color:#ff79c6>)</span>: <span style=color:#bd93f9>4</span>
+</span></span><span style=display:flex><span>argv<span style=color:#ff79c6>[</span>0<span style=color:#ff79c6>]</span> <span style=color:#ff79c6>=</span> ./example  <span style=color:#6272a4># 第0个参数总是程序路径</span>
+</span></span><span style=display:flex><span>argv<span style=color:#ff79c6>[</span>1<span style=color:#ff79c6>]</span> <span style=color:#ff79c6>=</span> hello       <span style=color:#6272a4># 第一个实际参数</span>
+</span></span><span style=display:flex><span>argv<span style=color:#ff79c6>[</span>2<span style=color:#ff79c6>]</span> <span style=color:#ff79c6>=</span> world
+</span></span><span style=display:flex><span>argv<span style=color:#ff79c6>[</span>3<span style=color:#ff79c6>]</span> <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>123</span>
 </span></span></code></pre></div><ol start=2><li><code>argv</code>的内存布局
-抽象来说，<code>argv</code>实际上是一个字符串指针数组，最后一个元素是<code>NULL</code></li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#75715e>// argv 的实际结构
-</span></span></span><span style=display:flex><span><span style=color:#66d9ef>char</span> <span style=color:#f92672>*</span>argv[] <span style=color:#f92672>=</span> {
-</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;./example&#34;</span>, <span style=color:#75715e>// argv[0]
-</span></span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;hello&#34;</span>, <span style=color:#75715e>// argv[1]
-</span></span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;world&#34;</span>, <span style=color:#75715e>// argv[2]
-</span></span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;123&#34;</span>, <span style=color:#75715e>//argv[3]
-</span></span></span><span style=display:flex><span>    NULL <span style=color:#75715e>// argv[argc] 总是NULL
+抽象来说，<code>argv</code>实际上是一个字符串指针数组，最后一个元素是<code>NULL</code></li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#6272a4>// argv 的实际结构
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>char</span> <span style=color:#ff79c6>*</span>argv[] <span style=color:#ff79c6>=</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;./example&#34;</span>, <span style=color:#6272a4>// argv[0]
+</span></span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;hello&#34;</span>, <span style=color:#6272a4>// argv[1]
+</span></span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;world&#34;</span>, <span style=color:#6272a4>// argv[2]
+</span></span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;123&#34;</span>, <span style=color:#6272a4>//argv[3]
+</span></span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>NULL</span> <span style=color:#6272a4>// argv[argc] 总是NULL
 </span></span></span><span style=display:flex><span>};
-</span></span></code></pre></div><p>这意味着可以这样遍历</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#75715e>// 另一种遍历方式（利用 argv[argc] == NULL 的特性
-</span></span></span><span style=display:flex><span><span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; argv[i] <span style=color:#f92672>!=</span> NULL; i<span style=color:#f92672>++</span>) {
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;参数 %d: %s</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, i, argv[i]);
+</span></span></code></pre></div><p>这意味着可以这样遍历</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#6272a4>// 另一种遍历方式（利用 argv[argc] == NULL 的特性
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>for</span>(<span style=color:#8be9fd>int</span> i <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>; argv[i] <span style=color:#ff79c6>!=</span> <span style=color:#8be9fd;font-style:italic>NULL</span>; i<span style=color:#ff79c6>++</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;参数 %d: %s</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, i, argv[i]);
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>但实际上Linux的内存布局大概是</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>argc 
+</span></span></code></pre></div><p>但实际上Linux的内存布局大概是</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>argc 
 </span></span><span style=display:flex><span>argv[0]
 </span></span><span style=display:flex><span>argv[1]
 </span></span><span style=display:flex><span>...
@@ -117,81 +117,81 @@
 </span></span><span style=display:flex><span>auxv # 辅助向量，ABI视角的额外参数
 </span></span><span style=display:flex><span>...
 </span></span></code></pre></div><p>命令行参数和环境变量是紧挨着的</p><ol start=3><li>envp的结构
-与argv类似，envp是一个以NULL结束的字符串数组</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span>envp[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;PATH=/usr/bin&#34;</span>
-</span></span><span style=display:flex><span>envp[<span style=color:#ae81ff>1</span>] <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;HOME=/home/user&#34;</span>
+与argv类似，envp是一个以NULL结束的字符串数组</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span>envp[<span style=color:#bd93f9>0</span>] <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;PATH=/usr/bin&#34;</span>
+</span></span><span style=display:flex><span>envp[<span style=color:#bd93f9>1</span>] <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;HOME=/home/user&#34;</span>
 </span></span><span style=display:flex><span>...
-</span></span><span style=display:flex><span>envp[n] <span style=color:#f92672>=</span> NULL
-</span></span></code></pre></div><p>访问示例</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;stdio.h&gt; </span><span style=color:#75715e>
+</span></span><span style=display:flex><span>envp[n] <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>NULL</span>
+</span></span></code></pre></div><p>访问示例</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdio.h&gt; </span><span style=color:#ff79c6>
 </span></span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(<span style=color:#66d9ef>int</span> argc, <span style=color:#66d9ef>char</span> <span style=color:#f92672>*</span>argv[], <span style=color:#66d9ef>char</span> <span style=color:#f92672>*</span>envp[])
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>(<span style=color:#8be9fd>int</span> argc, <span style=color:#8be9fd>char</span> <span style=color:#ff79c6>*</span>argv[], <span style=color:#8be9fd>char</span> <span style=color:#ff79c6>*</span>envp[])
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>char</span> <span style=color:#f92672>**</span>p <span style=color:#f92672>=</span> envp; <span style=color:#f92672>*</span>p <span style=color:#f92672>!=</span> NULL; p<span style=color:#f92672>++</span>) {
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;%s</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, <span style=color:#f92672>*</span>p);
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> (<span style=color:#8be9fd>char</span> <span style=color:#ff79c6>**</span>p <span style=color:#ff79c6>=</span> envp; <span style=color:#ff79c6>*</span>p <span style=color:#ff79c6>!=</span> <span style=color:#8be9fd;font-style:italic>NULL</span>; p<span style=color:#ff79c6>++</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;%s</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, <span style=color:#ff79c6>*</span>p);
 </span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p><code>envp</code>很少被提及，因为C标准库已经提供了更规范的接口</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;stdlib.h&gt; </span><span style=color:#75715e>
-</span></span></span><span style=display:flex><span><span style=color:#66d9ef>char</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>getenv</span>(<span style=color:#66d9ef>const</span> <span style=color:#66d9ef>char</span> <span style=color:#f92672>*</span>name);
+</span></span></code></pre></div><p><code>envp</code>很少被提及，因为C标准库已经提供了更规范的接口</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdlib.h&gt; </span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>char</span> <span style=color:#ff79c6>*</span><span style=color:#50fa7b>getenv</span>(<span style=color:#ff79c6>const</span> <span style=color:#8be9fd>char</span> <span style=color:#ff79c6>*</span>name);
 </span></span></code></pre></div><p>不同系统对<code>envp</code>的支持不完全一致，为了可移植性，通常只说前两个参数，但在Linux下，<code>envp</code>完全合法</p><ol start=4><li>实际ABI中的main通常是四个参数
-Linux程序入口不是main, 而是<code>_start</code></li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>_start -&gt; __libc_start_main -&gt; main 
-</span></span></code></pre></div><p><code>__libc_start_main</code>实际调用main的原型是（glibc中定义）</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(<span style=color:#66d9ef>int</span> argc, <span style=color:#66d9ef>char</span> <span style=color:#f92672>**</span>argv, <span style=color:#66d9ef>char</span> <span style=color:#f92672>**</span>envp);
-</span></span></code></pre></div><p>但此外，加载器还会传递</p><ul><li><code>auxv</code>（辅助向量）</li><li>程序堆栈布局信息</li><li>ELF header信息</li></ul><p>只是这些不是传给main, 而是留在用户栈顶由glibc解析</p><p><code>auxv</code>的定义（来自<code>&lt;elf.h></code>）</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#66d9ef>typedef</span> <span style=color:#66d9ef>struct</span> {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>uint32_t</span> a_type;
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>uint64_t</span> a_un;
+Linux程序入口不是main, 而是<code>_start</code></li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>_start -&gt; __libc_start_main -&gt; main 
+</span></span></code></pre></div><p><code>__libc_start_main</code>实际调用main的原型是（glibc中定义）</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>(<span style=color:#8be9fd>int</span> argc, <span style=color:#8be9fd>char</span> <span style=color:#ff79c6>**</span>argv, <span style=color:#8be9fd>char</span> <span style=color:#ff79c6>**</span>envp);
+</span></span></code></pre></div><p>但此外，加载器还会传递</p><ul><li><code>auxv</code>（辅助向量）</li><li>程序堆栈布局信息</li><li>ELF header信息</li></ul><p>只是这些不是传给main, 而是留在用户栈顶由glibc解析</p><p><code>auxv</code>的定义（来自<code>&lt;elf.h></code>）</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>typedef</span> <span style=color:#ff79c6>struct</span> {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>uint32_t</span> a_type;
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>uint64_t</span> a_un;
 </span></span><span style=display:flex><span>} Elf64_auxv_t
 </span></span></code></pre></div><p>它包含系统级关键信息</p><ul><li>程序入口地址（AT_ENTRY）</li><li>页大小（AT_PAGESZ）</li><li>运行时动态链接器地址（AT_BASE）</li><li>程序头表位置（AT_PHDR）</li><li>随机数（AT_RANDOM）</li><li>CPU特性（AT_HWCAP）</li></ul><h2 id=编译和执行>编译和执行</h2><p>将上述代码保存为<code>hello.c</code>，在<code>hello.c</code>所在目录下执行：</p><ul><li><code>gcc hello.c</code>进行编译
 如果代码没有错误，命令提示符会跳到下一行，并生成<code>a.out</code>可执行文件</li><li><code>./a.out</code>执行程序
-输出<code>Hello, World!</code></li></ul><h3 id=gcc的基本用法>GCC的基本用法</h3><p>假设有源文件<code>hello.c</code></p><ul><li><code>gcc hello.c</code>：编译生成可执行文件a.out（默认名）</li><li><code>gcc hello.c -o hello</code>：编译并指定输出文件名hello</li></ul><h4 id=gcc链路的五个阶段>GCC链路的五个阶段</h4><p>实际上，GCC的链路分为五个阶段，编译占前四个阶段</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 1. 预处理：展开头文件和宏</span>
+输出<code>Hello, World!</code></li></ul><h3 id=gcc的基本用法>GCC的基本用法</h3><p>假设有源文件<code>hello.c</code></p><ul><li><code>gcc hello.c</code>：编译生成可执行文件a.out（默认名）</li><li><code>gcc hello.c -o hello</code>：编译并指定输出文件名hello</li></ul><h4 id=gcc链路的五个阶段>GCC链路的五个阶段</h4><p>实际上，GCC的链路分为五个阶段，编译占前四个阶段</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 1. 预处理：展开头文件和宏</span>
 </span></span><span style=display:flex><span>gcc -E hello.c -o hello.i 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 2. 编译：将预处理后的代码编译为汇编代码</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 2. 编译：将预处理后的代码编译为汇编代码</span>
 </span></span><span style=display:flex><span>gcc -S hello.i -o hello.s 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 3. 汇编：将汇编代码转换为机器码（目标文件）</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 3. 汇编：将汇编代码转换为机器码（目标文件）</span>
 </span></span><span style=display:flex><span>gcc -c hello.s -o hello.o 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 4. 链接：将目标文件和库文件链接为可执行文件</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 4. 链接：将目标文件和库文件链接为可执行文件</span>
 </span></span><span style=display:flex><span>gcc hello.o -o hello 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 5. 加载：Loader运行时工作，加载不属于编译阶段，但实际执行前一定会发生</span>
-</span></span></code></pre></div><h4 id=cc与gcc><code>cc</code>与<code>gcc</code></h4><p>有时，可以看到这样的命令</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>$ cc main.c
-</span></span></code></pre></div><ol><li><code>cc</code>是系统默认C编译器的抽象层<ul><li>在绝大多数类Unix系统中，<code>cc</code>不是具体编译器，而是一个符号连接或统一入口</li><li>执行<code>cc</code>，系统会根据发行版、环境、安装情况，将它指向某个真正的编译器</li></ul></li></ol><p><code>cc</code>是接口，不是实现，保持兼容性，让Makefile等构建工具可以使用通用的<code>cc</code>命令</p><ol start=2><li><code>gcc</code>是GNU Compiler Collection 中的C编译器前端<ul><li><code>gcc</code>明确是GNU编译器</li><li>功能更全，选项更多，版本特性更固定、可控</li></ul></li></ol><p><code>gcc</code>是一个具体的武器</p><h4 id=多文件项目编译>多文件项目编译</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 直接编译多个源文件</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 5. 加载：Loader运行时工作，加载不属于编译阶段，但实际执行前一定会发生</span>
+</span></span></code></pre></div><h4 id=cc与gcc><code>cc</code>与<code>gcc</code></h4><p>有时，可以看到这样的命令</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>$ cc main.c
+</span></span></code></pre></div><ol><li><code>cc</code>是系统默认C编译器的抽象层<ul><li>在绝大多数类Unix系统中，<code>cc</code>不是具体编译器，而是一个符号连接或统一入口</li><li>执行<code>cc</code>，系统会根据发行版、环境、安装情况，将它指向某个真正的编译器</li></ul></li></ol><p><code>cc</code>是接口，不是实现，保持兼容性，让Makefile等构建工具可以使用通用的<code>cc</code>命令</p><ol start=2><li><code>gcc</code>是GNU Compiler Collection 中的C编译器前端<ul><li><code>gcc</code>明确是GNU编译器</li><li>功能更全，选项更多，版本特性更固定、可控</li></ul></li></ol><p><code>gcc</code>是一个具体的武器</p><h4 id=多文件项目编译>多文件项目编译</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 直接编译多个源文件</span>
 </span></span><span style=display:flex><span>gcc main.c utils.c helper.c -o myapp
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 或者先分别编译，再链接（适合大型项目）</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 或者先分别编译，再链接（适合大型项目）</span>
 </span></span><span style=display:flex><span>gcc -c main.c 
 </span></span><span style=display:flex><span>gcc -c utils.c 
 </span></span><span style=display:flex><span>gcc -c helper.c 
 </span></span><span style=display:flex><span>gcc main.o utils.o helper.o -o myapp 
-</span></span></code></pre></div><p>单纯<code>gcc main.c utils.c -o app</code>没问题，但构建性能差，每次都是全量编译<br>专业做法</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>main.c -&gt; main.o （只编译改过的文件）
+</span></span></code></pre></div><p>单纯<code>gcc main.c utils.c -o app</code>没问题，但构建性能差，每次都是全量编译<br>专业做法</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>main.c -&gt; main.o （只编译改过的文件）
 </span></span><span style=display:flex><span>utils.c -&gt; util.o 
 </span></span><span style=display:flex><span>helper.c -&gt; helper.o 
-</span></span></code></pre></div><p>然后</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>gcc main.o utils.o helper.o -o app 
-</span></span></code></pre></div><p>这就是增量构建的原理，提高效率</p><h4 id=使用外部库>使用外部库</h4><p>比如，源码用到了<code>&lt;math.h></code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#75715e>// math_example.c 
-</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;stdio.h&gt; </span><span style=color:#75715e>
-</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;math.h&gt; </span><span style=color:#75715e>
+</span></span></code></pre></div><p>然后</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>gcc main.o utils.o helper.o -o app 
+</span></span></code></pre></div><p>这就是增量构建的原理，提高效率</p><h4 id=使用外部库>使用外部库</h4><p>比如，源码用到了<code>&lt;math.h></code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#6272a4>// math_example.c 
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdio.h&gt; </span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;math.h&gt; </span><span style=color:#ff79c6>
 </span></span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>()
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>()
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>double</span> x <span style=color:#f92672>=</span> <span style=color:#ae81ff>4.0</span>;
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;sqrt(%f) = %f</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, x, <span style=color:#a6e22e>sqrt</span>(x));
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>double</span> x <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>4.0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;sqrt(%f) = %f</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, x, <span style=color:#50fa7b>sqrt</span>(x));
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>编译时需要链接数学库</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>gcc math_example.c -o math_example -lm
-</span></span></code></pre></div><h4 id=包含自定义头文件>包含自定义头文件</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 项目结构</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># myproject/</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#   ├── src/main.c</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#   ├── src/utils.c</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#   ├── include/utils.h</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#   └── lib/</span>
+</span></span></code></pre></div><p>编译时需要链接数学库</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>gcc math_example.c -o math_example -lm
+</span></span></code></pre></div><h4 id=包含自定义头文件>包含自定义头文件</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 项目结构</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># myproject/</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>#   ├── src/main.c</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>#   ├── src/utils.c</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>#   ├── include/utils.h</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>#   └── lib/</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 编译时指定头文件路径</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 编译时指定头文件路径</span>
 </span></span><span style=display:flex><span>gcc src/main.c src/utils.c -I./include -o myapp
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 如果使用了动态库</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 如果使用了动态库</span>
 </span></span><span style=display:flex><span>gcc src/main.c src/utils.c -I./include -L./lib -lmylib -o myapp
 </span></span></code></pre></div><h5 id=c文件本质结构>C文件本质结构</h5><p>C文件天然分成三类</p><ol><li>声明（头文件）<ul><li>函数声明</li><li>结构体声明</li><li>常量定义</li><li>宏</li></ul></li><li>实现（源文件）<ul><li>函数定义</li><li>局部变量</li><li>静态内部实现（static）</li></ul></li><li>接口（API）
-对外暴露的可链接符，链接器最终会根据符号表决定是否能成功链接</li></ol><h3 id=完整项目结构示例>完整项目结构示例</h3><p>创建项目目录结构</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>myproject/
+对外暴露的可链接符，链接器最终会根据符号表决定是否能成功链接</li></ol><h3 id=完整项目结构示例>完整项目结构示例</h3><p>创建项目目录结构</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>myproject/
 </span></span><span style=display:flex><span>├── src/
 </span></span><span style=display:flex><span>│   ├── main.c
 </span></span><span style=display:flex><span>│   ├── math_utils.c
@@ -201,16 +201,16 @@ Linux程序入口不是main, 而是<code>_start</code></li></ol><div class=highl
 </span></span><span style=display:flex><span>│   └── io_utils.h
 </span></span><span style=display:flex><span>├── build/
 </span></span><span style=display:flex><span>└── Makefile
-</span></span></code></pre></div><p>编译运行</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 进入项目目录</span>
-</span></span><span style=display:flex><span>cd myproject
+</span></span></code></pre></div><p>编译运行</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 进入项目目录</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>cd</span> myproject
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 创建build目录</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 创建build目录</span>
 </span></span><span style=display:flex><span>mkdir -p build 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 编译</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 编译</span>
 </span></span><span style=display:flex><span>gcc src/*.c -I./include -o build/myapp 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 运行</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 运行</span>
 </span></span><span style=display:flex><span>./build/myapp 
 </span></span></code></pre></div></div><nav class=post-nav><a href=/unixlike/log/abi/ class=hover:underline>pre: C ABI</a>
 <a href=/unixlike/log/c/ class=hover:underline>next: C Programming Language</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#一个最小的c程序结构>一个最小的C程序结构</a><ul><li><a href=#命令行参数>命令行参数</a><ul><li><a href=#是什么>是什么</a></li><li><a href=#为什么main能有参数>为什么main能有参数</a></li><li><a href=#main函数的标准形式>main函数的标准形式</a></li><li><a href=#参数详解与访问>参数详解与访问</a></li></ul></li></ul></li><li><a href=#编译和执行>编译和执行</a><ul><li><a href=#gcc的基本用法>GCC的基本用法</a><ul><li><a href=#gcc链路的五个阶段>GCC链路的五个阶段</a></li><li><a href=#cc与gcc><code>cc</code>与<code>gcc</code></a></li><li><a href=#多文件项目编译>多文件项目编译</a></li><li><a href=#使用外部库>使用外部库</a></li><li><a href=#包含自定义头文件>包含自定义头文件</a><ul><li><a href=#c文件本质结构>C文件本质结构</a></li></ul></li></ul></li><li><a href=#完整项目结构示例>完整项目结构示例</a></li></ul></li></ul></li></ul></nav></aside><script src=/js/scrollspy.js defer></script><script type=module>

@@ -1,4 +1,4 @@
-<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>system conventions</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/logsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/unixlike/>★</a></li><li><a href=/unixlike/lab/>Lab</a></li><li><a href=/unixlike/log/>Log</a></li><li><a href=/unixlike/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>system conventions</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-lua.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-rust.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/logsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/unixlike/>★</a></li><li><a href=/unixlike/lab/>Lab</a></li><li><a href=/unixlike/log/>Log</a></li><li><a href=/unixlike/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
 <span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><pre class=ascii>
 +——————————————————————————————————————————————————————————————+
 |                        <a class=nav-item data-path=/rightbrain/ href=/rightbrain/>RightBrain</a>                            |
@@ -35,55 +35,55 @@
 <a href=https://www.khronos.org/opengl/wiki/ target=_blank>OpenGL Wiki</a></p><p><a href=https://learn.microsoft.com/en-us/windows/win32/directx target=_blank>DirectX</a></p><p><a href=https://www.realtimerendering.com/ target=_blank>Real-Time Rendering</a></p><p><a href=https://www.pbr-book.org/ target=_blank>Physically Based Rendering</a></p><p><a href=https://www.scratchapixel.com/ target=_blank>Scratchapixel</a></p><p><a href=https://learnopengl.com/ target=_blank>LearnOpenGL</a></p><p><a href=https://raytracing.github.io/ target=_blank>Ray Tracing in One Weekend</a></p><p><a href=https://www.shadertoy.com/ target=_blank>Shadertoy</a></p><p><a href=https://arxiv.org/list/cs.GR/recent target=_blank>arXiv Graphics</a></p><p><a href=https://www.siggraph.org/ target=_blank>SIGGRAPH</a> |
 <a href=https://dl.acm.org/conference/siggraph target=_blank>SIGGRAPH Digital Library</a></p><p><a href=https://git-scm.com/ target=_blank>Git</a> |
 <a href=https://git-scm.com/doc target=_blank>Docs</a> |
-<a href=https://git-scm.com/community target=_blank>Community</a></p></div></div></div><script src=/js/ref-window.js></script><article class=single_article><div class=title>system conventions<div class=meta>Update: 2026-01-14</div></div><div class=content><h1 id=systemconventions>SystemConventions</h1><h2 id=环境变量environment-variables>环境变量(Environment Variables)</h2><ul><li>定义：环境变量是存储在操作系统中的动态值，可以呗运行在系统上的程序访问。它们用于配置程序的行为，存储系统路径、用户偏好、临时数据等</li><li>特性<ul><li>继承性：子进程继承父进程的环境变量</li><li>键值对结构：<code>KEY=value</code>格式</li><li>字符串类型：所有值都以字符串形式存储</li><li>进程级作用域：每个进程有自己的环境变量副本</li></ul></li></ul><h3 id=重要环境变量>重要环境变量</h3><ol><li>常用核心环境变量<ul><li><code>PATH</code>：可执行文件的搜索路径</li><li><code>HOME</code>：当前用户的主目录</li><li><code>USER</code>：当前用户名</li><li><code>SHELL</code>：当前shell的路径</li><li><code>PWD</code>：当前工作目录</li><li><code>OLDPWD</code>：上一次的工作目录</li><li><code>LANG</code>：语言和字符编码设置</li><li><code>TERM</code>：终端类型</li></ul></li><li>系统信息变量<ul><li><code>HOSTNAME</code>：系统主机名</li><li><code>HOSTTYPE</code>：主机架构（x86_64等）</li><li><code>OSTYPE</code>：操作系统类型</li></ul></li><li>历史与提示相关<ul><li><code>HISTSIZE</code>：历史命令保存数量</li><li><code>PS1</code>：主提示符格式</li><li><code>PS2</code>：次提示符格式（多行命令时）</li></ul></li></ol><h3 id=相关命令>相关命令</h3><h4 id=查看环境变量>查看环境变量</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 查看所有环境变量</span>
+<a href=https://git-scm.com/community target=_blank>Community</a></p></div></div></div><script src=/js/ref-window.js></script><article class=single_article><div class=title>system conventions<div class=meta>Update: 2026-01-14</div></div><div class=content><h1 id=systemconventions>SystemConventions</h1><h2 id=环境变量environment-variables>环境变量(Environment Variables)</h2><ul><li>定义：环境变量是存储在操作系统中的动态值，可以呗运行在系统上的程序访问。它们用于配置程序的行为，存储系统路径、用户偏好、临时数据等</li><li>特性<ul><li>继承性：子进程继承父进程的环境变量</li><li>键值对结构：<code>KEY=value</code>格式</li><li>字符串类型：所有值都以字符串形式存储</li><li>进程级作用域：每个进程有自己的环境变量副本</li></ul></li></ul><h3 id=重要环境变量>重要环境变量</h3><ol><li>常用核心环境变量<ul><li><code>PATH</code>：可执行文件的搜索路径</li><li><code>HOME</code>：当前用户的主目录</li><li><code>USER</code>：当前用户名</li><li><code>SHELL</code>：当前shell的路径</li><li><code>PWD</code>：当前工作目录</li><li><code>OLDPWD</code>：上一次的工作目录</li><li><code>LANG</code>：语言和字符编码设置</li><li><code>TERM</code>：终端类型</li></ul></li><li>系统信息变量<ul><li><code>HOSTNAME</code>：系统主机名</li><li><code>HOSTTYPE</code>：主机架构（x86_64等）</li><li><code>OSTYPE</code>：操作系统类型</li></ul></li><li>历史与提示相关<ul><li><code>HISTSIZE</code>：历史命令保存数量</li><li><code>PS1</code>：主提示符格式</li><li><code>PS2</code>：次提示符格式（多行命令时）</li></ul></li></ol><h3 id=相关命令>相关命令</h3><h4 id=查看环境变量>查看环境变量</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 查看所有环境变量</span>
 </span></span><span style=display:flex><span>$ printenv 
 </span></span><span style=display:flex><span>$ env 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 查看特定变量</span>
-</span></span><span style=display:flex><span>$ echo $PATH
+</span></span><span style=display:flex><span><span style=color:#6272a4># 查看特定变量</span>
+</span></span><span style=display:flex><span>$ <span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#8be9fd;font-style:italic>$PATH</span>
 </span></span><span style=display:flex><span>$ printenv HOME 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 显示变量的定义方式</span>
-</span></span><span style=display:flex><span>$ declare -x <span style=color:#75715e># 显示所有导出变量</span>
-</span></span><span style=display:flex><span>$ set <span style=color:#75715e># 显示所有变量（包括环境变量和shell变量）</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 显示变量的定义方式</span>
+</span></span><span style=display:flex><span>$ <span style=color:#8be9fd;font-style:italic>declare</span> -x <span style=color:#6272a4># 显示所有导出变量</span>
+</span></span><span style=display:flex><span>$ <span style=color:#8be9fd;font-style:italic>set</span> <span style=color:#6272a4># 显示所有变量（包括环境变量和shell变量）</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 比较进程间的环境差异</span>
-</span></span><span style=display:flex><span>$ cat /proc/$$/environ | tr <span style=color:#e6db74>&#39;\0&#39;</span> <span style=color:#e6db74>&#39;\n&#39;</span> <span style=color:#75715e># 当前shell的环境</span>
-</span></span><span style=display:flex><span>$ cat /proc/1/environ | tr <span style=color:#e6db74>&#39;\0&#39;</span> <span style=color:#e6db74>&#39;\n&#39;</span> <span style=color:#75715e># init 进程的环境</span>
-</span></span></code></pre></div><h4 id=数据类型和限制>数据类型和限制</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 键的命名规则（通常）</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># - 大写字母、数字、下划线</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># - 区分大小写</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 比较进程间的环境差异</span>
+</span></span><span style=display:flex><span>$ cat /proc/<span style=color:#8be9fd;font-style:italic>$$</span>/environ | tr <span style=color:#f1fa8c>&#39;\0&#39;</span> <span style=color:#f1fa8c>&#39;\n&#39;</span> <span style=color:#6272a4># 当前shell的环境</span>
+</span></span><span style=display:flex><span>$ cat /proc/1/environ | tr <span style=color:#f1fa8c>&#39;\0&#39;</span> <span style=color:#f1fa8c>&#39;\n&#39;</span> <span style=color:#6272a4># init 进程的环境</span>
+</span></span></code></pre></div><h4 id=数据类型和限制>数据类型和限制</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 键的命名规则（通常）</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># - 大写字母、数字、下划线</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># - 区分大小写</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 值的限制</span>
-</span></span><span style=display:flex><span>$ export MYVAR<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;value with spaces&#34;</span> <span style=color:#75715e># 需要引号</span>
-</span></span><span style=display:flex><span>$ export MYVAR<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>pwd<span style=color:#66d9ef>)</span> <span style=color:#75715e># 命令替换</span>
-</span></span><span style=display:flex><span>$ export MYVAR<span style=color:#f92672>=</span>$HOME:$PATH 
+</span></span><span style=display:flex><span><span style=color:#6272a4># 值的限制</span>
+</span></span><span style=display:flex><span>$ <span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>MYVAR</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;value with spaces&#34;</span> <span style=color:#6272a4># 需要引号</span>
+</span></span><span style=display:flex><span>$ <span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>MYVAR</span><span style=color:#ff79c6>=</span><span style=color:#ff79c6>$(</span><span style=color:#8be9fd;font-style:italic>pwd</span><span style=color:#ff79c6>)</span> <span style=color:#6272a4># 命令替换</span>
+</span></span><span style=display:flex><span>$ <span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>MYVAR</span><span style=color:#ff79c6>=</span><span style=color:#8be9fd;font-style:italic>$HOME</span>:<span style=color:#8be9fd;font-style:italic>$PATH</span> 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 长度限制</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 在Linux中，单个环境变量值+名称的最大长度</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># - getconf ARG_MAX 查看最大值（通常2MB+）</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 长度限制</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 在Linux中，单个环境变量值+名称的最大长度</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># - getconf ARG_MAX 查看最大值（通常2MB+）</span>
 </span></span><span style=display:flex><span>$ getconf ARG_MAX
-</span></span><span style=display:flex><span><span style=color:#ae81ff>2097152</span> 
+</span></span><span style=display:flex><span><span style=color:#bd93f9>2097152</span> 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 整个环境块的总大小限制</span>
-</span></span><span style=display:flex><span>$ xargs --show-limits 2&gt;&amp;<span style=color:#ae81ff>1</span> | grep <span style=color:#e6db74>&#34;environment&#34;</span> 
-</span></span><span style=display:flex><span>Maximum length of command we could actually use: <span style=color:#ae81ff>208804</span>
-</span></span></code></pre></div><h4 id=设置环境变量>设置环境变量</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 临时设置（仅当前shell会话有效）</span>
-</span></span><span style=display:flex><span>export MY_VAR<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;value&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 整个环境块的总大小限制</span>
+</span></span><span style=display:flex><span>$ xargs --show-limits 2&gt;&amp;<span style=color:#bd93f9>1</span> | grep <span style=color:#f1fa8c>&#34;environment&#34;</span> 
+</span></span><span style=display:flex><span>Maximum length of <span style=color:#8be9fd;font-style:italic>command</span> we could actually use: <span style=color:#bd93f9>208804</span>
+</span></span></code></pre></div><h4 id=设置环境变量>设置环境变量</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 临时设置（仅当前shell会话有效）</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>MY_VAR</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;value&#34;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 设置并立即生效（bash）</span>
-</span></span><span style=display:flex><span>MY_VAR<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;value&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 设置并立即生效（bash）</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>MY_VAR</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;value&#34;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 永久设置 - 添加到配置文件</span>
-</span></span></code></pre></div><h4 id=删除环境变量>删除环境变量</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>unset MY_VAR
-</span></span></code></pre></div><h4 id=测试变量是否存在>测试变量是否存在</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 检查变量是否设置</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> -z <span style=color:#e6db74>&#34;</span>$MY_VAR<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span> 
-</span></span><span style=display:flex><span>    echo <span style=color:#e6db74>&#39;变量未设置&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>fi</span> 
+</span></span><span style=display:flex><span><span style=color:#6272a4># 永久设置 - 添加到配置文件</span>
+</span></span></code></pre></div><h4 id=删除环境变量>删除环境变量</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>unset</span> MY_VAR
+</span></span></code></pre></div><h4 id=测试变量是否存在>测试变量是否存在</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 检查变量是否设置</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>if</span> <span style=color:#ff79c6>[</span> -z <span style=color:#f1fa8c>&#34;</span><span style=color:#8be9fd;font-style:italic>$MY_VAR</span><span style=color:#f1fa8c>&#34;</span> <span style=color:#ff79c6>]</span>; <span style=color:#ff79c6>then</span> 
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#f1fa8c>&#39;变量未设置&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>fi</span> 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 使用默认值</span>
-</span></span><span style=display:flex><span>echo <span style=color:#e6db74>${</span>MY_VAR<span style=color:#66d9ef>:-</span><span style=color:#e6db74>&#34;默认值&#34;</span><span style=color:#e6db74>}</span>
-</span></span></code></pre></div><h3 id=环境变量的配置文件加载顺序>环境变量的配置文件加载顺序</h3><p>登录Shell的加载顺序</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>/etc/profile 
+</span></span><span style=display:flex><span><span style=color:#6272a4># 使用默认值</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#f1fa8c>${</span><span style=color:#8be9fd;font-style:italic>MY_VAR</span><span style=color:#ff79c6>:-</span><span style=color:#f1fa8c>&#34;默认值&#34;</span><span style=color:#f1fa8c>}</span>
+</span></span></code></pre></div><h3 id=环境变量的配置文件加载顺序>环境变量的配置文件加载顺序</h3><p>登录Shell的加载顺序</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>/etc/profile 
 </span></span><span style=display:flex><span>v 
 </span></span><span style=display:flex><span>~/.bash_profile 
 </span></span><span style=display:flex><span>~/.bash_login 
@@ -92,10 +92,10 @@
 </span></span><span style=display:flex><span>~/.bashrc 
 </span></span><span style=display:flex><span>v 
 </span></span><span style=display:flex><span>/etc/bash.bashrc
-</span></span></code></pre></div><p>非登录Shell</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>~/bashrc 
+</span></span></code></pre></div><p>非登录Shell</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>~/bashrc 
 </span></span><span style=display:flex><span>v 
 </span></span><span style=display:flex><span>/etc/bash.bashrc
-</span></span></code></pre></div><h3 id=环境变量的生命周期和作用域>环境变量的生命周期和作用域</h3><h4 id=作用域层次>作用域层次</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>系统级作用域（所有用户）
+</span></span></code></pre></div><h3 id=环境变量的生命周期和作用域>环境变量的生命周期和作用域</h3><h4 id=作用域层次>作用域层次</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>系统级作用域（所有用户）
 </span></span><span style=display:flex><span>|__ /etc/environment 
 </span></span><span style=display:flex><span>|__ /etc/profile
 </span></span><span style=display:flex><span>|__ /etc/profile.d/*.sh 
@@ -112,324 +112,324 @@
 </span></span><span style=display:flex><span>|
 </span></span><span style=display:flex><span>进程级作用域
 </span></span><span style=display:flex><span>|__ 进程启动时继承+可修改
-</span></span></code></pre></div><h4 id=继承机制>继承机制</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 演示环境变量继承</span>
-</span></span><span style=display:flex><span>$ export PARENT_VAR<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;parent_value&#34;</span>
+</span></span></code></pre></div><h4 id=继承机制>继承机制</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 演示环境变量继承</span>
+</span></span><span style=display:flex><span>$ <span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>PARENT_VAR</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;parent_value&#34;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 方式1：直接执行（继承环境）</span>
-</span></span><span style=display:flex><span>$ bash -c <span style=color:#e6db74>&#39;echo Child sees: $PARENT_VAR&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 方式1：直接执行（继承环境）</span>
+</span></span><span style=display:flex><span>$ bash -c <span style=color:#f1fa8c>&#39;echo Child sees: $PARENT_VAR&#39;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 方式2：env命令（可以修改继承的环境）</span>
-</span></span><span style=display:flex><span>$ env PARENT_VAR<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;changed&#34;</span> bash -c <span style=color:#e6db74>&#39;echo Child sees: $PARENT_VAR&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 方式2：env命令（可以修改继承的环境）</span>
+</span></span><span style=display:flex><span>$ env <span style=color:#8be9fd;font-style:italic>PARENT_VAR</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;changed&#34;</span> bash -c <span style=color:#f1fa8c>&#39;echo Child sees: $PARENT_VAR&#39;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 方式3：清空环境后执行</span>
-</span></span><span style=display:flex><span>$ env -i bash -c <span style=color:#e6db74>&#39;echo Child sees: $PARENT_VAR; echo Total vars: $(env | wc -l)&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 方式3：清空环境后执行</span>
+</span></span><span style=display:flex><span>$ env -i bash -c <span style=color:#f1fa8c>&#39;echo Child sees: $PARENT_VAR; echo Total vars: $(env | wc -l)&#39;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 查看进程环境树</span>
-</span></span><span style=display:flex><span>$ pstree -p $$
-</span></span><span style=display:flex><span>$ cat /proc/&lt;PID&gt;/environ | tr <span style=color:#e6db74>&#39;\0&#39;</span> <span style=color:#e6db74>&#39;\n&#39;</span>
-</span></span></code></pre></div><h3 id=环境变量的作用>环境变量的作用</h3><p>环境变量在Linux系统中起着至关重要的作用，它们就像系统的"记忆"和"配置中心"，影响和控制系统及应用程序的行为。以下是环境变量的主要作用：</p><h4 id=系统配置与行为控制>系统配置与行为控制</h4><p><strong>程序路径查找</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># PATH变量决定系统在哪里查找可执行文件</span>
-</span></span><span style=display:flex><span>echo $PATH
-</span></span><span style=display:flex><span><span style=color:#75715e># 输出示例：/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 查看进程环境树</span>
+</span></span><span style=display:flex><span>$ pstree -p <span style=color:#8be9fd;font-style:italic>$$</span>
+</span></span><span style=display:flex><span>$ cat /proc/&lt;PID&gt;/environ | tr <span style=color:#f1fa8c>&#39;\0&#39;</span> <span style=color:#f1fa8c>&#39;\n&#39;</span>
+</span></span></code></pre></div><h3 id=环境变量的作用>环境变量的作用</h3><p>环境变量在Linux系统中起着至关重要的作用，它们就像系统的"记忆"和"配置中心"，影响和控制系统及应用程序的行为。以下是环境变量的主要作用：</p><h4 id=系统配置与行为控制>系统配置与行为控制</h4><p><strong>程序路径查找</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># PATH变量决定系统在哪里查找可执行文件</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#8be9fd;font-style:italic>$PATH</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 输出示例：/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 当输入命令时，系统按PATH顺序查找</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 当输入命令时，系统按PATH顺序查找</span>
 </span></span><span style=display:flex><span>ls  → 系统依次查找：
 </span></span><span style=display:flex><span>    1. /usr/local/sbin/ls
 </span></span><span style=display:flex><span>    2. /usr/local/bin/ls
 </span></span><span style=display:flex><span>    3. /usr/sbin/ls
 </span></span><span style=display:flex><span>    4. /usr/bin/ls（找到！）
-</span></span></code></pre></div><p><strong>用户环境配置</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># HOME - 确定用户主目录</span>
-</span></span><span style=display:flex><span>echo $HOME  <span style=color:#75715e># /home/username</span>
+</span></span></code></pre></div><p><strong>用户环境配置</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># HOME - 确定用户主目录</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#8be9fd;font-style:italic>$HOME</span>  <span style=color:#6272a4># /home/username</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># SHELL - 指定默认shell</span>
-</span></span><span style=display:flex><span>echo $SHELL <span style=color:#75715e># /bin/bash</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># SHELL - 指定默认shell</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#8be9fd;font-style:italic>$SHELL</span> <span style=color:#6272a4># /bin/bash</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># EDITOR - 设置默认文本编辑器</span>
-</span></span><span style=display:flex><span>export EDITOR<span style=color:#f92672>=</span>vim  <span style=color:#75715e># 许多程序会使用此编辑器</span>
-</span></span></code></pre></div><p><strong>语言和区域设置</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 控制程序显示语言</span>
-</span></span><span style=display:flex><span>export LANG<span style=color:#f92672>=</span>en_US.UTF-8
-</span></span><span style=display:flex><span>export LC_ALL<span style=color:#f92672>=</span>en_US.UTF-8
+</span></span><span style=display:flex><span><span style=color:#6272a4># EDITOR - 设置默认文本编辑器</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>EDITOR</span><span style=color:#ff79c6>=</span>vim  <span style=color:#6272a4># 许多程序会使用此编辑器</span>
+</span></span></code></pre></div><p><strong>语言和区域设置</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 控制程序显示语言</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>LANG</span><span style=color:#ff79c6>=</span>en_US.UTF-8
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>LC_ALL</span><span style=color:#ff79c6>=</span>en_US.UTF-8
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 时区设置</span>
-</span></span><span style=display:flex><span>export TZ<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Asia/Shanghai&#34;</span>
-</span></span></code></pre></div><h4 id=程序运行与交互控制>程序运行与交互控制</h4><p><strong>程序行为定制</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 控制程序输出详细程度</span>
-</span></span><span style=display:flex><span>export DEBUG<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>
-</span></span><span style=display:flex><span>export VERBOSE<span style=color:#f92672>=</span>true
+</span></span><span style=display:flex><span><span style=color:#6272a4># 时区设置</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>TZ</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;Asia/Shanghai&#34;</span>
+</span></span></code></pre></div><h4 id=程序运行与交互控制>程序运行与交互控制</h4><p><strong>程序行为定制</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 控制程序输出详细程度</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>DEBUG</span><span style=color:#ff79c6>=</span><span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>VERBOSE</span><span style=color:#ff79c6>=</span><span style=color:#8be9fd;font-style:italic>true</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 设置程序配置路径</span>
-</span></span><span style=display:flex><span>export MYAPP_CONFIG<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/etc/myapp/config.yaml&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 设置程序配置路径</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>MYAPP_CONFIG</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;/etc/myapp/config.yaml&#34;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 控制颜色显示</span>
-</span></span><span style=display:flex><span>export CLICOLOR<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>  <span style=color:#75715e># macOS/Linux颜色支持</span>
-</span></span><span style=display:flex><span>export LS_COLORS<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;di=1;36:ln=35:so=32:pi=33&#34;</span>
-</span></span></code></pre></div><p><strong>开发与编译环境</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># C/C++开发</span>
-</span></span><span style=display:flex><span>export CC<span style=color:#f92672>=</span>gcc
-</span></span><span style=display:flex><span>export CXX<span style=color:#f92672>=</span>g++
-</span></span><span style=display:flex><span>export CFLAGS<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;-O2 -Wall&#34;</span>
-</span></span><span style=display:flex><span>export LD_LIBRARY_PATH<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/usr/local/lib:</span>$LD_LIBRARY_PATH<span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 控制颜色显示</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>CLICOLOR</span><span style=color:#ff79c6>=</span><span style=color:#bd93f9>1</span>  <span style=color:#6272a4># macOS/Linux颜色支持</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>LS_COLORS</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;di=1;36:ln=35:so=32:pi=33&#34;</span>
+</span></span></code></pre></div><p><strong>开发与编译环境</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># C/C++开发</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>CC</span><span style=color:#ff79c6>=</span>gcc
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>CXX</span><span style=color:#ff79c6>=</span>g++
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>CFLAGS</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;-O2 -Wall&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>LD_LIBRARY_PATH</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;/usr/local/lib:</span><span style=color:#8be9fd;font-style:italic>$LD_LIBRARY_PATH</span><span style=color:#f1fa8c>&#34;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Python开发</span>
-</span></span><span style=display:flex><span>export PYTHONPATH<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/my/project:</span>$PYTHONPATH<span style=color:#e6db74>&#34;</span>
-</span></span><span style=display:flex><span>export PYTHONUNBUFFERED<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>  <span style=color:#75715e># 实时输出，不缓冲</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># Python开发</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>PYTHONPATH</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;/my/project:</span><span style=color:#8be9fd;font-style:italic>$PYTHONPATH</span><span style=color:#f1fa8c>&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>PYTHONUNBUFFERED</span><span style=color:#ff79c6>=</span><span style=color:#bd93f9>1</span>  <span style=color:#6272a4># 实时输出，不缓冲</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Java开发</span>
-</span></span><span style=display:flex><span>export JAVA_HOME<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/usr/lib/jvm/java-11-openjdk&#34;</span>
-</span></span><span style=display:flex><span>export CLASSPATH<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;.:</span>$JAVA_HOME<span style=color:#e6db74>/lib&#34;</span>
-</span></span></code></pre></div><p><strong>网络与代理配置</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># HTTP代理设置</span>
-</span></span><span style=display:flex><span>export http_proxy<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;http://proxy.company.com:8080&#34;</span>
-</span></span><span style=display:flex><span>export https_proxy<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;http://proxy.company.com:8080&#34;</span>
-</span></span><span style=display:flex><span>export no_proxy<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;localhost,127.0.0.1,.internal&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># Java开发</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>JAVA_HOME</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;/usr/lib/jvm/java-11-openjdk&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>CLASSPATH</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;.:</span><span style=color:#8be9fd;font-style:italic>$JAVA_HOME</span><span style=color:#f1fa8c>/lib&#34;</span>
+</span></span></code></pre></div><p><strong>网络与代理配置</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># HTTP代理设置</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>http_proxy</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;http://proxy.company.com:8080&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>https_proxy</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;http://proxy.company.com:8080&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>no_proxy</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;localhost,127.0.0.1,.internal&#34;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 网络超时设置</span>
-</span></span><span style=display:flex><span>export FTP_TIMEOUT<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>
-</span></span><span style=display:flex><span>export CURL_TIMEOUT<span style=color:#f92672>=</span><span style=color:#ae81ff>30</span>
-</span></span></code></pre></div><h4 id=系统管理与监控>系统管理与监控</h4><p><strong>Shell行为控制</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 历史命令设置</span>
-</span></span><span style=display:flex><span>export HISTSIZE<span style=color:#f92672>=</span><span style=color:#ae81ff>10000</span>      <span style=color:#75715e># 内存中保存的历史数量</span>
-</span></span><span style=display:flex><span>export HISTFILESIZE<span style=color:#f92672>=</span><span style=color:#ae81ff>20000</span>  <span style=color:#75715e># 历史文件中的命令数量</span>
-</span></span><span style=display:flex><span>export HISTCONTROL<span style=color:#f92672>=</span>ignoreboth  <span style=color:#75715e># 忽略重复命令和空格开头的命令</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 网络超时设置</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>FTP_TIMEOUT</span><span style=color:#ff79c6>=</span><span style=color:#bd93f9>60</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>CURL_TIMEOUT</span><span style=color:#ff79c6>=</span><span style=color:#bd93f9>30</span>
+</span></span></code></pre></div><h4 id=系统管理与监控>系统管理与监控</h4><p><strong>Shell行为控制</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 历史命令设置</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>HISTSIZE</span><span style=color:#ff79c6>=</span><span style=color:#bd93f9>10000</span>      <span style=color:#6272a4># 内存中保存的历史数量</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>HISTFILESIZE</span><span style=color:#ff79c6>=</span><span style=color:#bd93f9>20000</span>  <span style=color:#6272a4># 历史文件中的命令数量</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>HISTCONTROL</span><span style=color:#ff79c6>=</span>ignoreboth  <span style=color:#6272a4># 忽略重复命令和空格开头的命令</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 提示符定制</span>
-</span></span><span style=display:flex><span>export PS1<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;\[\e[1;32m\]\u@\h\[\e[0m\]:\[\e[1;34m\]\w\[\e[0m\]\$ &#39;</span>
-</span></span></code></pre></div><p><strong>系统资源管理</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 控制文件描述符限制</span>
-</span></span><span style=display:flex><span>ulimit -n  <span style=color:#75715e># 查看限制</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 可通过环境变量设置某些程序的资源限制</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 提示符定制</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>PS1</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;\[\e[1;32m\]\u@\h\[\e[0m\]:\[\e[1;34m\]\w\[\e[0m\]\$ &#39;</span>
+</span></span></code></pre></div><p><strong>系统资源管理</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 控制文件描述符限制</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>ulimit</span> -n  <span style=color:#6272a4># 查看限制</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 可通过环境变量设置某些程序的资源限制</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 内存分配控制</span>
-</span></span><span style=display:flex><span>export MALLOC_ARENA_MAX<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>  <span style=color:#75715e># 限制glibc内存分配</span>
-</span></span></code></pre></div><h4 id=安全与权限>安全与权限</h4><p><strong>安全相关配置</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># SSH配置</span>
-</span></span><span style=display:flex><span>export SSH_AUTH_SOCK<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span>$XDG_RUNTIME_DIR<span style=color:#e6db74>/ssh-agent.socket&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 内存分配控制</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>MALLOC_ARENA_MAX</span><span style=color:#ff79c6>=</span><span style=color:#bd93f9>2</span>  <span style=color:#6272a4># 限制glibc内存分配</span>
+</span></span></code></pre></div><h4 id=安全与权限>安全与权限</h4><p><strong>安全相关配置</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># SSH配置</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>SSH_AUTH_SOCK</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;</span><span style=color:#8be9fd;font-style:italic>$XDG_RUNTIME_DIR</span><span style=color:#f1fa8c>/ssh-agent.socket&#34;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 密码安全</span>
-</span></span><span style=display:flex><span>export PASSWORD_STORE_DIR<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span>$HOME<span style=color:#e6db74>/.password-store&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 密码安全</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>PASSWORD_STORE_DIR</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;</span><span style=color:#8be9fd;font-style:italic>$HOME</span><span style=color:#f1fa8c>/.password-store&#34;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 避免敏感信息泄露</span>
-</span></span><span style=display:flex><span>export HISTIGNORE<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;*password*:*secret*&#34;</span>  <span style=color:#75715e># 不记录包含密码的命令</span>
-</span></span></code></pre></div><p><strong>用户身份与权限</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 用户和组信息</span>
-</span></span><span style=display:flex><span>echo $USER    <span style=color:#75715e># 当前用户名</span>
-</span></span><span style=display:flex><span>echo $UID     <span style=color:#75715e># 用户ID</span>
-</span></span><span style=display:flex><span>echo $GROUPS  <span style=color:#75715e># 用户所属组</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 避免敏感信息泄露</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>HISTIGNORE</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;*password*:*secret*&#34;</span>  <span style=color:#6272a4># 不记录包含密码的命令</span>
+</span></span></code></pre></div><p><strong>用户身份与权限</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 用户和组信息</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#8be9fd;font-style:italic>$USER</span>    <span style=color:#6272a4># 当前用户名</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#8be9fd;font-style:italic>$UID</span>     <span style=color:#6272a4># 用户ID</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#8be9fd;font-style:italic>$GROUPS</span>  <span style=color:#6272a4># 用户所属组</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Sudo相关</span>
-</span></span><span style=display:flex><span>export SUDO_EDITOR<span style=color:#f92672>=</span>vim  <span style=color:#75715e># sudoedit使用的编辑器</span>
-</span></span></code></pre></div><h4 id=软件开发与构建>软件开发与构建</h4><p><strong>构建系统控制</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Make构建控制</span>
-</span></span><span style=display:flex><span>export MAKEFLAGS<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;-j4&#34;</span>  <span style=color:#75715e># 并行编译，使用4个核心</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># Sudo相关</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>SUDO_EDITOR</span><span style=color:#ff79c6>=</span>vim  <span style=color:#6272a4># sudoedit使用的编辑器</span>
+</span></span></code></pre></div><h4 id=软件开发与构建>软件开发与构建</h4><p><strong>构建系统控制</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># Make构建控制</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>MAKEFLAGS</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;-j4&#34;</span>  <span style=color:#6272a4># 并行编译，使用4个核心</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># CMake配置</span>
-</span></span><span style=display:flex><span>export CMAKE_BUILD_TYPE<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Release&#34;</span>
-</span></span><span style=display:flex><span>export CMAKE_PREFIX_PATH<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/opt/custom/libs&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># CMake配置</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>CMAKE_BUILD_TYPE</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;Release&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>CMAKE_PREFIX_PATH</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;/opt/custom/libs&#34;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Docker构建</span>
-</span></span><span style=display:flex><span>export DOCKER_BUILDKIT<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>  <span style=color:#75715e># 启用BuildKit</span>
-</span></span></code></pre></div><p><strong>版本控制</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Git配置</span>
-</span></span><span style=display:flex><span>export GIT_AUTHOR_NAME<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Your Name&#34;</span>
-</span></span><span style=display:flex><span>export GIT_AUTHOR_EMAIL<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;your@email.com&#34;</span>
-</span></span><span style=display:flex><span>export GIT_EDITOR<span style=color:#f92672>=</span>vim
+</span></span><span style=display:flex><span><span style=color:#6272a4># Docker构建</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>DOCKER_BUILDKIT</span><span style=color:#ff79c6>=</span><span style=color:#bd93f9>1</span>  <span style=color:#6272a4># 启用BuildKit</span>
+</span></span></code></pre></div><p><strong>版本控制</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># Git配置</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>GIT_AUTHOR_NAME</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;Your Name&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>GIT_AUTHOR_EMAIL</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;your@email.com&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>GIT_EDITOR</span><span style=color:#ff79c6>=</span>vim
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 代码仓库位置</span>
-</span></span><span style=display:flex><span>export REPO_BASE<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span>$HOME<span style=color:#e6db74>/repositories&#34;</span>
-</span></span></code></pre></div><h4 id=应用程序特定配置>应用程序特定配置</h4><p><strong>数据库连接</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># PostgreSQL</span>
-</span></span><span style=display:flex><span>export PGHOST<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;localhost&#34;</span>
-</span></span><span style=display:flex><span>export PGPORT<span style=color:#f92672>=</span><span style=color:#ae81ff>5432</span>
-</span></span><span style=display:flex><span>export PGDATABASE<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;mydb&#34;</span>
-</span></span><span style=display:flex><span>export PGUSER<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;myuser&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 代码仓库位置</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>REPO_BASE</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;</span><span style=color:#8be9fd;font-style:italic>$HOME</span><span style=color:#f1fa8c>/repositories&#34;</span>
+</span></span></code></pre></div><h4 id=应用程序特定配置>应用程序特定配置</h4><p><strong>数据库连接</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># PostgreSQL</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>PGHOST</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;localhost&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>PGPORT</span><span style=color:#ff79c6>=</span><span style=color:#bd93f9>5432</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>PGDATABASE</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;mydb&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>PGUSER</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;myuser&#34;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># MySQL</span>
-</span></span><span style=display:flex><span>export MYSQL_HOST<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;localhost&#34;</span>
-</span></span><span style=display:flex><span>export MYSQL_PWD<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;password&#34;</span>  <span style=color:#75715e># 注意安全！</span>
-</span></span></code></pre></div><p><strong>Web开发</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Node.js开发</span>
-</span></span><span style=display:flex><span>export NODE_ENV<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;development&#34;</span>
-</span></span><span style=display:flex><span>export NODE_PATH<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/usr/lib/node_modules&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># MySQL</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>MYSQL_HOST</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;localhost&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>MYSQL_PWD</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;password&#34;</span>  <span style=color:#6272a4># 注意安全！</span>
+</span></span></code></pre></div><p><strong>Web开发</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># Node.js开发</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>NODE_ENV</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;development&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>NODE_PATH</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;/usr/lib/node_modules&#34;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Ruby on Rails</span>
-</span></span><span style=display:flex><span>export RAILS_ENV<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;production&#34;</span>
-</span></span><span style=display:flex><span>export SECRET_KEY_BASE<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;your-secret-key&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># Ruby on Rails</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>RAILS_ENV</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;production&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>SECRET_KEY_BASE</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;your-secret-key&#34;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Django</span>
-</span></span><span style=display:flex><span>export DJANGO_SETTINGS_MODULE<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;myproject.settings&#34;</span>
-</span></span></code></pre></div><h4 id=系统信息传递>系统信息传递</h4><p><strong>进程间通信</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 父进程 → 子进程传递信息</span>
-</span></span><span style=display:flex><span>export TASK_ID<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;12345&#34;</span>
-</span></span><span style=display:flex><span>export JOB_NAME<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;daily_backup&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># Django</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>DJANGO_SETTINGS_MODULE</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;myproject.settings&#34;</span>
+</span></span></code></pre></div><h4 id=系统信息传递>系统信息传递</h4><p><strong>进程间通信</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 父进程 → 子进程传递信息</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>TASK_ID</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;12345&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>JOB_NAME</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;daily_backup&#34;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 脚本执行时传递参数</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 脚本执行时传递参数</span>
 </span></span><span style=display:flex><span>./script.sh
-</span></span><span style=display:flex><span><span style=color:#75715e># 在script.sh中可以通过环境变量获取配置</span>
-</span></span></code></pre></div><p><strong>容器化环境</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Docker容器内部</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 传递配置到容器</span>
-</span></span><span style=display:flex><span>docker run -e <span style=color:#e6db74>&#34;DATABASE_URL=postgres://...&#34;</span> myapp
+</span></span><span style=display:flex><span><span style=color:#6272a4># 在script.sh中可以通过环境变量获取配置</span>
+</span></span></code></pre></div><p><strong>容器化环境</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># Docker容器内部</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 传递配置到容器</span>
+</span></span><span style=display:flex><span>docker run -e <span style=color:#f1fa8c>&#34;DATABASE_URL=postgres://...&#34;</span> myapp
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Kubernetes Pod环境变量</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 在Deployment中定义</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># env:</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># - name: DATABASE_HOST</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#   value: &#34;postgres-service&#34;</span>
-</span></span></code></pre></div><h4 id=调试与故障排除>调试与故障排除</h4><p><strong>调试信息输出</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 启用详细日志</span>
-</span></span><span style=display:flex><span>export DEBUG<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;app:*&#34;</span>  <span style=color:#75715e># 特定模块的debug</span>
-</span></span><span style=display:flex><span>export NODE_DEBUG<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;http,net&#34;</span>  <span style=color:#75715e># Node.js调试</span>
-</span></span><span style=display:flex><span>export PYTHONDEBUG<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>  <span style=color:#75715e># Python调试</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># Kubernetes Pod环境变量</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 在Deployment中定义</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># env:</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># - name: DATABASE_HOST</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>#   value: &#34;postgres-service&#34;</span>
+</span></span></code></pre></div><h4 id=调试与故障排除>调试与故障排除</h4><p><strong>调试信息输出</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 启用详细日志</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>DEBUG</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;app:*&#34;</span>  <span style=color:#6272a4># 特定模块的debug</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>NODE_DEBUG</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;http,net&#34;</span>  <span style=color:#6272a4># Node.js调试</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>PYTHONDEBUG</span><span style=color:#ff79c6>=</span><span style=color:#bd93f9>1</span>  <span style=color:#6272a4># Python调试</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 性能分析</span>
-</span></span><span style=display:flex><span>export LD_DEBUG<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;libs&#34;</span>  <span style=color:#75715e># 动态链接器调试</span>
-</span></span><span style=display:flex><span>export MALLOC_CHECK_<span style=color:#f92672>=</span><span style=color:#ae81ff>3</span>  <span style=color:#75715e># 内存分配检查</span>
-</span></span></code></pre></div><p><strong>兼容性设置</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 向后兼容</span>
-</span></span><span style=display:flex><span>export GNUTLS_CPUID_OVERRIDE<span style=color:#f92672>=</span>0x1  <span style=color:#75715e># 特定加密库设置</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 性能分析</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>LD_DEBUG</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;libs&#34;</span>  <span style=color:#6272a4># 动态链接器调试</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>MALLOC_CHECK_</span><span style=color:#ff79c6>=</span><span style=color:#bd93f9>3</span>  <span style=color:#6272a4># 内存分配检查</span>
+</span></span></code></pre></div><p><strong>兼容性设置</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 向后兼容</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>GNUTLS_CPUID_OVERRIDE</span><span style=color:#ff79c6>=</span>0x1  <span style=color:#6272a4># 特定加密库设置</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 特定程序兼容</span>
-</span></span><span style=display:flex><span>export GTK_IM_MODULE<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;ibus&#34;</span>  <span style=color:#75715e># 输入法框架</span>
-</span></span><span style=display:flex><span>export QT_IM_MODULE<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;ibus&#34;</span>
-</span></span></code></pre></div><h5 id=实际应用场景示例>实际应用场景示例</h5><ol><li>开发环境设置</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 在~/.bashrc中设置开发环境</span>
-</span></span><span style=display:flex><span>export DEV_HOME<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span>$HOME<span style=color:#e6db74>/development&#34;</span>
-</span></span><span style=display:flex><span>export PATH<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span>$DEV_HOME<span style=color:#e6db74>/bin:</span>$PATH<span style=color:#e6db74>&#34;</span>
-</span></span><span style=display:flex><span>export GOPATH<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span>$DEV_HOME<span style=color:#e6db74>/go&#34;</span>
-</span></span><span style=display:flex><span>export PYTHONPATH<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span>$DEV_HOME<span style=color:#e6db74>/python:</span>$PYTHONPATH<span style=color:#e6db74>&#34;</span>
-</span></span><span style=display:flex><span>export NODE_PATH<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span>$DEV_HOME<span style=color:#e6db74>/node_modules&#34;</span>
-</span></span><span style=display:flex><span>alias devenv<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;cd </span>$DEV_HOME<span style=color:#e6db74> &amp;&amp; source venv/bin/activate&#34;</span>
-</span></span></code></pre></div><ol start=2><li>多版本管理</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 切换Python版本</span>
-</span></span><span style=display:flex><span>export PYENV_ROOT<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span>$HOME<span style=color:#e6db74>/.pyenv&#34;</span>
-</span></span><span style=display:flex><span>export PATH<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span>$PYENV_ROOT<span style=color:#e6db74>/bin:</span>$PATH<span style=color:#e6db74>&#34;</span>
-</span></span><span style=display:flex><span>eval <span style=color:#e6db74>&#34;</span><span style=color:#66d9ef>$(</span>pyenv init -<span style=color:#66d9ef>)</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 特定程序兼容</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>GTK_IM_MODULE</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;ibus&#34;</span>  <span style=color:#6272a4># 输入法框架</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>QT_IM_MODULE</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;ibus&#34;</span>
+</span></span></code></pre></div><h5 id=实际应用场景示例>实际应用场景示例</h5><ol><li>开发环境设置</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 在~/.bashrc中设置开发环境</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>DEV_HOME</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;</span><span style=color:#8be9fd;font-style:italic>$HOME</span><span style=color:#f1fa8c>/development&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>PATH</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;</span><span style=color:#8be9fd;font-style:italic>$DEV_HOME</span><span style=color:#f1fa8c>/bin:</span><span style=color:#8be9fd;font-style:italic>$PATH</span><span style=color:#f1fa8c>&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>GOPATH</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;</span><span style=color:#8be9fd;font-style:italic>$DEV_HOME</span><span style=color:#f1fa8c>/go&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>PYTHONPATH</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;</span><span style=color:#8be9fd;font-style:italic>$DEV_HOME</span><span style=color:#f1fa8c>/python:</span><span style=color:#8be9fd;font-style:italic>$PYTHONPATH</span><span style=color:#f1fa8c>&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>NODE_PATH</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;</span><span style=color:#8be9fd;font-style:italic>$DEV_HOME</span><span style=color:#f1fa8c>/node_modules&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>alias</span> <span style=color:#8be9fd;font-style:italic>devenv</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;cd </span><span style=color:#8be9fd;font-style:italic>$DEV_HOME</span><span style=color:#f1fa8c> &amp;&amp; source venv/bin/activate&#34;</span>
+</span></span></code></pre></div><ol start=2><li>多版本管理</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 切换Python版本</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>PYENV_ROOT</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;</span><span style=color:#8be9fd;font-style:italic>$HOME</span><span style=color:#f1fa8c>/.pyenv&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>PATH</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;</span><span style=color:#8be9fd;font-style:italic>$PYENV_ROOT</span><span style=color:#f1fa8c>/bin:</span><span style=color:#8be9fd;font-style:italic>$PATH</span><span style=color:#f1fa8c>&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>eval</span> <span style=color:#f1fa8c>&#34;</span><span style=color:#ff79c6>$(</span>pyenv init -<span style=color:#ff79c6>)</span><span style=color:#f1fa8c>&#34;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 使用特定版本</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 使用特定版本</span>
 </span></span><span style=display:flex><span>pyenv global 3.9.1
-</span></span></code></pre></div><ol start=3><li>项目特定配置</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 项目启动脚本 project_env.sh</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#!/bin/bash</span>
-</span></span><span style=display:flex><span>export PROJECT_NAME<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;myproject&#34;</span>
-</span></span><span style=display:flex><span>export DATABASE_URL<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;postgresql://localhost/</span>$PROJECT_NAME<span style=color:#e6db74>&#34;</span>
-</span></span><span style=display:flex><span>export LOG_LEVEL<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;INFO&#34;</span>
-</span></span><span style=display:flex><span>export SECRET_KEY<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span><span style=color:#66d9ef>$(</span>openssl rand -hex 32<span style=color:#66d9ef>)</span><span style=color:#e6db74>&#34;</span>
-</span></span><span style=display:flex><span>export DEBUG<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;false&#34;</span>
+</span></span></code></pre></div><ol start=3><li>项目特定配置</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 项目启动脚本 project_env.sh</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>#!/bin/bash</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>PROJECT_NAME</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;myproject&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>DATABASE_URL</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;postgresql://localhost/</span><span style=color:#8be9fd;font-style:italic>$PROJECT_NAME</span><span style=color:#f1fa8c>&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>LOG_LEVEL</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;INFO&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>SECRET_KEY</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;</span><span style=color:#ff79c6>$(</span>openssl rand -hex 32<span style=color:#ff79c6>)</span><span style=color:#f1fa8c>&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>DEBUG</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;false&#34;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 激活项目环境</span>
-</span></span><span style=display:flex><span>source project_env.sh
-</span></span></code></pre></div><h3 id=环境变量的核心价值总结>环境变量的核心价值总结</h3><ol><li><strong>灵活性</strong> - 无需修改代码即可改变程序行为</li><li><strong>隔离性</strong> - 不同环境使用不同配置，互不干扰</li><li><strong>可移植性</strong> - 配置与代码分离，便于迁移</li><li><strong>安全性</strong> - 敏感信息（如密码）可以环境变量形式传递，不写入代码</li><li><strong>动态性</strong> - 运行时可以动态修改，立即生效</li><li><strong>层次性</strong> - 系统级、用户级、会话级、进程级的多层配置</li></ol><p>环境变量是Linux生态系统的重要组成部分，它们提供了一种简单而强大的方式来配置和控制系统的各个方面，从最简单的命令行工具到复杂的分布式系统都离不开环境变量的支持。</p><h2 id=alternatives>Alternatives</h2><p>Alternatives是Linux系统中用于管理多个软件版本或实现的工具。它允许系统存在同一个命令的多个版本（如python2和python3），并通过符号链接动态切换默认版本</p><h3 id=核心概念>核心概念</h3><ol><li>主要组件</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 管理命令</span>
-</span></span><span style=display:flex><span>update-alternatives <span style=color:#75715e>#Debian/Ubuntu/RHEL 8+ </span>
-</span></span><span style=display:flex><span>alternatives <span style=color:#75715e># RHEL/CentOS 7 及更早版本</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 激活项目环境</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>source</span> project_env.sh
+</span></span></code></pre></div><h3 id=环境变量的核心价值总结>环境变量的核心价值总结</h3><ol><li><strong>灵活性</strong> - 无需修改代码即可改变程序行为</li><li><strong>隔离性</strong> - 不同环境使用不同配置，互不干扰</li><li><strong>可移植性</strong> - 配置与代码分离，便于迁移</li><li><strong>安全性</strong> - 敏感信息（如密码）可以环境变量形式传递，不写入代码</li><li><strong>动态性</strong> - 运行时可以动态修改，立即生效</li><li><strong>层次性</strong> - 系统级、用户级、会话级、进程级的多层配置</li></ol><p>环境变量是Linux生态系统的重要组成部分，它们提供了一种简单而强大的方式来配置和控制系统的各个方面，从最简单的命令行工具到复杂的分布式系统都离不开环境变量的支持。</p><h2 id=alternatives>Alternatives</h2><p>Alternatives是Linux系统中用于管理多个软件版本或实现的工具。它允许系统存在同一个命令的多个版本（如python2和python3），并通过符号链接动态切换默认版本</p><h3 id=核心概念>核心概念</h3><ol><li>主要组件</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 管理命令</span>
+</span></span><span style=display:flex><span>update-alternatives <span style=color:#6272a4>#Debian/Ubuntu/RHEL 8+ </span>
+</span></span><span style=display:flex><span>alternatives <span style=color:#6272a4># RHEL/CentOS 7 及更早版本</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 管理目录</span>
-</span></span><span style=display:flex><span>/etc/alternatives <span style=color:#75715e># 所有 alternatives的符号链接</span>
-</span></span><span style=display:flex><span>/var/lib/dpkg/alternatives <span style=color:#75715e># Debian 系配置数据库</span>
-</span></span><span style=display:flex><span>/var/lib/alternatives <span style=color:#75715e># RHEL 系配置数据库</span>
-</span></span></code></pre></div><ol start=2><li>工作原理</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>实际程序路径：/usr/bin/python3.12
+</span></span><span style=display:flex><span><span style=color:#6272a4># 管理目录</span>
+</span></span><span style=display:flex><span>/etc/alternatives <span style=color:#6272a4># 所有 alternatives的符号链接</span>
+</span></span><span style=display:flex><span>/var/lib/dpkg/alternatives <span style=color:#6272a4># Debian 系配置数据库</span>
+</span></span><span style=display:flex><span>/var/lib/alternatives <span style=color:#6272a4># RHEL 系配置数据库</span>
+</span></span></code></pre></div><ol start=2><li>工作原理</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>实际程序路径：/usr/bin/python3.12
 </span></span><span style=display:flex><span>                /usr/bin/python3.10 
 </span></span><span style=display:flex><span>                /usr/bin/python2.7
 </span></span><span style=display:flex><span>                v 
 </span></span><span style=display:flex><span>Alternatives 链接: /etc/alternatives/python 
 </span></span><span style=display:flex><span>                v 
 </span></span><span style=display:flex><span>系统命令路径：/usr/bin/python
-</span></span></code></pre></div><h3 id=基本使用命令>基本使用命令</h3><ol><li>查看已注册的alternatives</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 查看所有</span>
+</span></span></code></pre></div><h3 id=基本使用命令>基本使用命令</h3><ol><li>查看已注册的alternatives</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 查看所有</span>
 </span></span><span style=display:flex><span>update-alternatives --get-selections 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 查看特定命令</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 查看特定命令</span>
 </span></span><span style=display:flex><span>update-alternatives --list python
 </span></span><span style=display:flex><span>update-alternatives --display python 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 查看当前选择</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 查看当前选择</span>
 </span></span><span style=display:flex><span>ls -l /usr/bin/python 
 </span></span><span style=display:flex><span>ls -l /etc/alternatives/python 
-</span></span></code></pre></div><ol start=2><li>注册新alternative</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 语法：--install &lt;链接&gt; &lt;名称&gt; &lt;路径&gt; &lt;优先级&gt; </span>
-</span></span><span style=display:flex><span>update-alternatives --install /usr/bin/python python /usr/bin/python3.9 <span style=color:#ae81ff>100</span> 
+</span></span></code></pre></div><ol start=2><li>注册新alternative</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 语法：--install &lt;链接&gt; &lt;名称&gt; &lt;路径&gt; &lt;优先级&gt; </span>
+</span></span><span style=display:flex><span>update-alternatives --install /usr/bin/python python /usr/bin/python3.9 <span style=color:#bd93f9>100</span> 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 详细示例</span>
-</span></span><span style=display:flex><span>update-alternatives --install <span style=color:#ae81ff>\
-</span></span></span><span style=display:flex><span>    /usr/bin/python <span style=color:#ae81ff>\ </span><span style=color:#75715e># 系统命令路径</span>
-</span></span><span style=display:flex><span>    python <span style=color:#ae81ff>\ </span><span style=color:#75715e># alternatives名称</span>
-</span></span><span style=display:flex><span>    /usr/bin/python3.9 <span style=color:#ae81ff>\ </span><span style=color:#75715e># 实际程序路径</span>
-</span></span><span style=display:flex><span>    <span style=color:#ae81ff>100</span> <span style=color:#ae81ff>\ </span><span style=color:#75715e># 优先级</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 详细示例</span>
+</span></span><span style=display:flex><span>update-alternatives --install <span style=color:#f1fa8c>\
+</span></span></span><span style=display:flex><span>    /usr/bin/python <span style=color:#f1fa8c>\ </span><span style=color:#6272a4># 系统命令路径</span>
+</span></span><span style=display:flex><span>    python <span style=color:#f1fa8c>\ </span><span style=color:#6272a4># alternatives名称</span>
+</span></span><span style=display:flex><span>    /usr/bin/python3.9 <span style=color:#f1fa8c>\ </span><span style=color:#6272a4># 实际程序路径</span>
+</span></span><span style=display:flex><span>    <span style=color:#bd93f9>100</span> <span style=color:#f1fa8c>\ </span><span style=color:#6272a4># 优先级</span>
 </span></span><span style=display:flex><span>    --slave /usr/share/man/man1/python.1.gz python-man /usr/share/man/man1/python3.9.1.gz 
-</span></span></code></pre></div><ol start=3><li>切换版本</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 交互式选择</span>
+</span></span></code></pre></div><ol start=3><li>切换版本</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 交互式选择</span>
 </span></span><span style=display:flex><span>update-alternatives --config python
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 输出示例：</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># There are 2 choices for the alternative python (providing /usr/bin/python).</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># </span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#   Selection    Path                Priority   Status</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># ------------------------------------------------------------</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># * 0            /usr/bin/python3.9   100       auto mode</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#   1            /usr/bin/python2.7   50        manual mode</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#   2            /usr/bin/python3.9   100       manual mode</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># </span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Press &lt;enter&gt; to keep the current choice[*], or type selection number: 2</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 输出示例：</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># There are 2 choices for the alternative python (providing /usr/bin/python).</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>#   Selection    Path                Priority   Status</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># ------------------------------------------------------------</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># * 0            /usr/bin/python3.9   100       auto mode</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>#   1            /usr/bin/python2.7   50        manual mode</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>#   2            /usr/bin/python3.9   100       manual mode</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># Press &lt;enter&gt; to keep the current choice[*], or type selection number: 2</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 自动选择最高优先级</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 自动选择最高优先级</span>
 </span></span><span style=display:flex><span>update-alternatives --auto python
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 手动设置特定版本</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 手动设置特定版本</span>
 </span></span><span style=display:flex><span>update-alternatives --set python /usr/bin/python2.7
-</span></span></code></pre></div><ol start=4><li>删除alternative</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 移除一个选项</span>
+</span></span></code></pre></div><ol start=4><li>删除alternative</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 移除一个选项</span>
 </span></span><span style=display:flex><span>update-alternatives --remove python /usr/bin/python2.7 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 完全移除所有配置</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 完全移除所有配置</span>
 </span></span><span style=display:flex><span>update-alternatives --remove-all python 
-</span></span></code></pre></div><h3 id=使用示例>使用示例</h3><h4 id=管理python版本>管理Python版本</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 1. 安装多个 Python 版本</span>
+</span></span></code></pre></div><h3 id=使用示例>使用示例</h3><h4 id=管理python版本>管理Python版本</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 1. 安装多个 Python 版本</span>
 </span></span><span style=display:flex><span>sudo apt install python2.7 python3.9 python3.10
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 2. 注册所有版本到 alternatives</span>
-</span></span><span style=display:flex><span>sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 <span style=color:#ae81ff>50</span>
-</span></span><span style=display:flex><span>sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.9 <span style=color:#ae81ff>100</span>
-</span></span><span style=display:flex><span>sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.10 <span style=color:#ae81ff>110</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 2. 注册所有版本到 alternatives</span>
+</span></span><span style=display:flex><span>sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 <span style=color:#bd93f9>50</span>
+</span></span><span style=display:flex><span>sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.9 <span style=color:#bd93f9>100</span>
+</span></span><span style=display:flex><span>sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.10 <span style=color:#bd93f9>110</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 3. 配置关联的 man page（从属链接）</span>
-</span></span><span style=display:flex><span>sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.9 <span style=color:#ae81ff>100</span> <span style=color:#ae81ff>\
+</span></span><span style=display:flex><span><span style=color:#6272a4># 3. 配置关联的 man page（从属链接）</span>
+</span></span><span style=display:flex><span>sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.9 <span style=color:#bd93f9>100</span> <span style=color:#f1fa8c>\
 </span></span></span><span style=display:flex><span>  --slave /usr/share/man/man1/python.1.gz python-man /usr/share/man/man1/python3.9.1.gz
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 4. 查看当前配置</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 4. 查看当前配置</span>
 </span></span><span style=display:flex><span>update-alternatives --query python
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 5. 切换版本</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 5. 切换版本</span>
 </span></span><span style=display:flex><span>sudo update-alternatives --config python
-</span></span></code></pre></div><h4 id=管理编辑器>管理编辑器</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 注册多个编辑器</span>
-</span></span><span style=display:flex><span>sudo update-alternatives --install /usr/bin/editor editor /usr/bin/vim <span style=color:#ae81ff>100</span> 
-</span></span><span style=display:flex><span>sudo update-alternatives --install /usr/bin/editor editor /ur/bin/nano <span style=color:#ae81ff>50</span> 
-</span></span><span style=display:flex><span>sudo update-alternatives --install /usr/bin/editor editor /usr/bin/emacs <span style=color:#ae81ff>25</span> 
+</span></span></code></pre></div><h4 id=管理编辑器>管理编辑器</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 注册多个编辑器</span>
+</span></span><span style=display:flex><span>sudo update-alternatives --install /usr/bin/editor editor /usr/bin/vim <span style=color:#bd93f9>100</span> 
+</span></span><span style=display:flex><span>sudo update-alternatives --install /usr/bin/editor editor /ur/bin/nano <span style=color:#bd93f9>50</span> 
+</span></span><span style=display:flex><span>sudo update-alternatives --install /usr/bin/editor editor /usr/bin/emacs <span style=color:#bd93f9>25</span> 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 设置默认编辑器</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 设置默认编辑器</span>
 </span></span><span style=display:flex><span>sudo update-alternatives --set editor /usr/bin/vim 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 在其他程序中使用（如visudo 会使用 editor 变量）</span>
-</span></span><span style=display:flex><span>export EDITOR<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>which editor<span style=color:#66d9ef>)</span>
-</span></span></code></pre></div><h3 id=高级用法>高级用法</h3><h4 id=从属链接slave-links>从属链接（Slave Links）</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 为主命令配置相关的从属命令</span>
-</span></span><span style=display:flex><span>update-alternatives --install /usr/bin/python python /usr/bin/python3.9 <span style=color:#ae81ff>100</span> <span style=color:#ae81ff>\
-</span></span></span><span style=display:flex><span>  --slave /usr/bin/python-config python-config /usr/bin/python3.9-config <span style=color:#ae81ff>\
-</span></span></span><span style=display:flex><span>  --slave /usr/bin/pip pip /usr/bin/pip3.9 <span style=color:#ae81ff>\
+</span></span><span style=display:flex><span><span style=color:#6272a4># 在其他程序中使用（如visudo 会使用 editor 变量）</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>EDITOR</span><span style=color:#ff79c6>=</span><span style=color:#ff79c6>$(</span>which editor<span style=color:#ff79c6>)</span>
+</span></span></code></pre></div><h3 id=高级用法>高级用法</h3><h4 id=从属链接slave-links>从属链接（Slave Links）</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 为主命令配置相关的从属命令</span>
+</span></span><span style=display:flex><span>update-alternatives --install /usr/bin/python python /usr/bin/python3.9 <span style=color:#bd93f9>100</span> <span style=color:#f1fa8c>\
+</span></span></span><span style=display:flex><span>  --slave /usr/bin/python-config python-config /usr/bin/python3.9-config <span style=color:#f1fa8c>\
+</span></span></span><span style=display:flex><span>  --slave /usr/bin/pip pip /usr/bin/pip3.9 <span style=color:#f1fa8c>\
 </span></span></span><span style=display:flex><span>  --slave /usr/share/man/man1/python.1.gz python-man /usr/share/man/man1/python3.9.1.gz
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 这样切换 python 时，python-config、pip 和 man page 会自动切换</span>
-</span></span></code></pre></div><h4 id=优先级系统>优先级系统</h4><p>优先级决定自动模式下的选择，数字越大优先级越高，auto模式会选择最高优先级的版本<br>设置优先级策略</p><ul><li>稳定版：1000</li><li>测试版：500</li><li>旧版本：100</li><li>开发版：50</li></ul><h4 id=手动模式-vs-自动模式>手动模式 vs 自动模式</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 查看模式</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 这样切换 python 时，python-config、pip 和 man page 会自动切换</span>
+</span></span></code></pre></div><h4 id=优先级系统>优先级系统</h4><p>优先级决定自动模式下的选择，数字越大优先级越高，auto模式会选择最高优先级的版本<br>设置优先级策略</p><ul><li>稳定版：1000</li><li>测试版：500</li><li>旧版本：100</li><li>开发版：50</li></ul><h4 id=手动模式-vs-自动模式>手动模式 vs 自动模式</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 查看模式</span>
 </span></span><span style=display:flex><span>update-alternatives --display python | grep mode 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 手动模式：用户明确选择了版本</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 自动模式：系统使用最高优先级的版本</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 手动模式：用户明确选择了版本</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 自动模式：系统使用最高优先级的版本</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 切换回自动模式</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 切换回自动模式</span>
 </span></span><span style=display:flex><span>update-alternatives --auto python
-</span></span></code></pre></div><h4 id=使用groups组管理>使用groups（组管理）</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 创建组（某些系统支持）</span>
+</span></span></code></pre></div><h4 id=使用groups组管理>使用groups（组管理）</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 创建组（某些系统支持）</span>
 </span></span><span style=display:flex><span>update-alternatives --install-group java-group
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 将相关命令加入组</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 将相关命令加入组</span>
 </span></span><span style=display:flex><span>update-alternatives --add-to-group java java-group
 </span></span><span style=display:flex><span>update-alternatives --add-to-group javac-group 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 一次性切换组内所有命令</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 一次性切换组内所有命令</span>
 </span></span><span style=display:flex><span>update-alternatives --set-group java-group /usr/lib/jvm/java-17-openjdk/
-</span></span></code></pre></div><h3 id=配置文件和数据库>配置文件和数据库</h3><ol><li>Debian系（/var/lib/dpkg/alternatives)</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 查看 python 的配置</span>
+</span></span></code></pre></div><h3 id=配置文件和数据库>配置文件和数据库</h3><ol><li>Debian系（/var/lib/dpkg/alternatives)</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 查看 python 的配置</span>
 </span></span><span style=display:flex><span>cat /var/lib/dpkg/alternatives/python
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 示例内容：</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># auto</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># /usr/bin/python3.9</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># </span>
-</span></span><span style=display:flex><span><span style=color:#75715e># /usr/bin/python</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># python.1.gz</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># </span>
-</span></span><span style=display:flex><span><span style=color:#75715e># /usr/bin/python2.7</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># </span>
-</span></span><span style=display:flex><span><span style=color:#75715e># /usr/bin/python3.9</span>
-</span></span></code></pre></div><ol start=2><li>RHEL系（/var/lib/alternatives）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 二进制格式存储，使用 alternatives 命令查看</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 示例内容：</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># auto</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># /usr/bin/python3.9</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># /usr/bin/python</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># python.1.gz</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># /usr/bin/python2.7</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># /usr/bin/python3.9</span>
+</span></span></code></pre></div><ol start=2><li>RHEL系（/var/lib/alternatives）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 二进制格式存储，使用 alternatives 命令查看</span>
 </span></span><span style=display:flex><span>alternatives --display python
-</span></span></code></pre></div><h3 id=注意事项>注意事项</h3><p>不要随意把<code>python</code>/<code>gcc</code>/<code>ld</code>切到非发行默认版本，可能破坏系统工具，这是由Linux发行版的工程假设决定的<br>发行版不是“一堆独立软件”，而是一个强耦合系统<br>以Ubuntu/Debian为例，发行版在构建时隐含了大量硬性假设</p><ul><li><code>/usr/bin/python</code>：是某一个确定语义的Python</li><li><code>/usr/bin/gcc</code>：是某一代ABI兼容的GCC</li><li><code>/usr/bin/ld</code>：是与glibc/binutils完全匹配的linker</li></ul><p>这些不是“推荐版本”，而是系统工具链的组成部分。通过<code>update-alternatives</code>改的不是“你自己的工具”，而是：整个系统赖以运行的公共基础设施入口</p><p><code>python</code>，系统工具直接依赖<code>/usr/bin/python</code>，大量系统组件写死了shebang</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/usr/bin/python 
+</span></span></code></pre></div><h3 id=注意事项>注意事项</h3><p>不要随意把<code>python</code>/<code>gcc</code>/<code>ld</code>切到非发行默认版本，可能破坏系统工具，这是由Linux发行版的工程假设决定的<br>发行版不是“一堆独立软件”，而是一个强耦合系统<br>以Ubuntu/Debian为例，发行版在构建时隐含了大量硬性假设</p><ul><li><code>/usr/bin/python</code>：是某一个确定语义的Python</li><li><code>/usr/bin/gcc</code>：是某一代ABI兼容的GCC</li><li><code>/usr/bin/ld</code>：是与glibc/binutils完全匹配的linker</li></ul><p>这些不是“推荐版本”，而是系统工具链的组成部分。通过<code>update-alternatives</code>改的不是“你自己的工具”，而是：整个系统赖以运行的公共基础设施入口</p><p><code>python</code>，系统工具直接依赖<code>/usr/bin/python</code>，大量系统组件写死了shebang</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#ff79c6>#!/usr/bin/python 
 </span></span></span></code></pre></div><p>典型的例子</p><ul><li><code>apt</code></li><li><code>add-apt-repository</code></li><li><code>update-alternatives</code></li><li><code>lsb_release</code></li><li><code>software-properties-*</code></li></ul><p>这些脚本不是普通应用，而是</p><ul><li>在安装阶段运行</li><li>在系统修复阶段运行</li><li>在无GUI/最小环境下运行</li></ul><p>Python版本 != 语法兼容，一旦把<code>/usr/bin/python -> python3.12</code>而系统脚本仍假设<code>python == Python 3.x with distro patches</code>，结果只有一个：脚本在关键路径直接崩溃<br>这是不可恢复的，最危险的一点：崩溃的正是用来修系统的工具本身，例如<code>apt</code>启动失败，<code>update-alternatives</code>本身报错，无法再用包管理器恢复</p><p><code>gcc</code>/<code>ld</code>更危险，但更隐蔽<br><code>gcc</code>不是一个编译器，而是ABI决策者<br>发行版构件时固定了</p><ul><li>GCC主版本</li><li>默认<code>libstdc++</code>ABI</li><li>默认<code>libgcc_s</code></li><li>默认<code>crt*.o</code></li></ul><p>系统中几乎所有C/C++程序都假设：用系统GCC编译 == 与系统glibc / libstdc++ ABI匹配\</p><p><code>ld</code>（或<code>ld.gold</code>/<code>ld.lld</code>）直接决定</p><ul><li>ELF重定位方式</li><li>动态链接器交互</li><li>TLS/RELRO/PIE行为</li></ul><p>发行版的glibc是按特定binutils版本测试的</p><p><code>update-alternatives</code>的设计目标不是“开发者玩具”，它的原始用途是</p><ul><li><code>vi</code>/<code>vim</code></li><li><code>editor</code></li><li><code>pager</code></li><li><code>java</code></li></ul><p>这些命令的共同点，系统本身不依赖其具体语义，只是用户工具</p><p>但<code>python/gcc/ld</code>不满足这个前提<br>它们是构建期依赖，启动期依赖，系统维护期依赖<br>换句话说，alternatives假设“切换不会影响系统稳定性”，而python/gcc/ld恰恰违反了这个假设</p><h4 id=正确做法>正确做法</h4><ol><li>Python：永远不要用alternatives
-正确方式：</li></ol><ul><li><code>/usr/bin/python3</code>：系统Python</li><li><code>python3.12</code>：显式版本</li><li><code>pyenv/venv/poetry</code>：用户空间隔离</li></ul><ol start=2><li>GCC/Clang：只在PATH层面控制</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>export PATH<span style=color:#f92672>=</span>/opt/gcc-14/bin:$PATH
-</span></span></code></pre></div><p>或</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>CC<span style=color:#f92672>=</span>gcc-14 CXX<span style=color:#f92672>=</span>g++-14 cmake ..
+正确方式：</li></ol><ul><li><code>/usr/bin/python3</code>：系统Python</li><li><code>python3.12</code>：显式版本</li><li><code>pyenv/venv/poetry</code>：用户空间隔离</li></ul><ol start=2><li>GCC/Clang：只在PATH层面控制</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>PATH</span><span style=color:#ff79c6>=</span>/opt/gcc-14/bin:<span style=color:#8be9fd;font-style:italic>$PATH</span>
+</span></span></code></pre></div><p>或</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>CC</span><span style=color:#ff79c6>=</span>gcc-14 <span style=color:#8be9fd;font-style:italic>CXX</span><span style=color:#ff79c6>=</span>g++-14 cmake ..
 </span></span></code></pre></div><p>绝不动<code>/usr/bin/gcc</code></p><ol start=3><li>只有这些适合alternatives
-安全区</li></ol><ul><li>editor</li><li>pager</li><li>x-www-browser</li><li>java（仍需谨慎）</li><li>vi</li></ul><p>危险区</p><ul><li>python</li><li>gcc</li><li>ld</li><li>make</li><li>cmake</li><li>sh</li></ul><h2 id=posixsus>POSIX/SUS</h2><p>在Linux系统中，那些几乎理所当然被假设存在的基础工具和运行环境，叫做POSIX或SUS. 它们是使用者工作的基石，很多脚本和软件都会默认依赖它们</p><h3 id=concept>Concept</h3><table><thead><tr><th>名词</th><th>层次</th><th>含义</th><th>示例</th></tr></thead><tbody><tr><td>POSIX / SUS</td><td>标准与规范</td><td>官方定义了什么工具和接口必须存在及如何行为</td><td>sh, vi, awk, grep 的标准行为</td></tr><tr><td>GNU Coreutils</td><td>具体实现</td><td>Linux上最常见的POSIX工具集的具体实现包</td><td>/bin/ls, /bin/cp (通常来自GNU coreutils包)</td></tr><tr><td>Base System</td><td>发行版定义</td><td>一个特定Linux发行版能启动并运行的最小软件包集合</td><td>Debian的base、essential包优先级</td></tr><tr><td>Unix Philosophy</td><td>设计哲学</td><td>指导这些工具设计的思想原则</td><td>工具“小而专”，通过管道组合</td></tr><tr><td>Userland</td><td>系统架构</td><td>内核之外的所有程序，包括shell和所有您假设的工具</td><td>与Linux内核相对的概念</td></tr><tr><td>BusyBox</td><td>嵌入式实现</td><td>为资源受限环境提供的多合一替代实现</td><td>路由器、Android Recovery中的工具</td></tr><tr><td>Build-Essential</td><td>开发环境</td><td>用于编译软件所假设存在的一套工具</td><td>gcc, make, ld, libc-dev</td></tr></tbody></table><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>[ 用户自行安装的工具 ]
+安全区</li></ol><ul><li>editor</li><li>pager</li><li>x-www-browser</li><li>java（仍需谨慎）</li><li>vi</li></ul><p>危险区</p><ul><li>python</li><li>gcc</li><li>ld</li><li>make</li><li>cmake</li><li>sh</li></ul><h2 id=posixsus>POSIX/SUS</h2><p>在Linux系统中，那些几乎理所当然被假设存在的基础工具和运行环境，叫做POSIX或SUS. 它们是使用者工作的基石，很多脚本和软件都会默认依赖它们</p><h3 id=concept>Concept</h3><table><thead><tr><th>名词</th><th>层次</th><th>含义</th><th>示例</th></tr></thead><tbody><tr><td>POSIX / SUS</td><td>标准与规范</td><td>官方定义了什么工具和接口必须存在及如何行为</td><td>sh, vi, awk, grep 的标准行为</td></tr><tr><td>GNU Coreutils</td><td>具体实现</td><td>Linux上最常见的POSIX工具集的具体实现包</td><td>/bin/ls, /bin/cp (通常来自GNU coreutils包)</td></tr><tr><td>Base System</td><td>发行版定义</td><td>一个特定Linux发行版能启动并运行的最小软件包集合</td><td>Debian的base、essential包优先级</td></tr><tr><td>Unix Philosophy</td><td>设计哲学</td><td>指导这些工具设计的思想原则</td><td>工具“小而专”，通过管道组合</td></tr><tr><td>Userland</td><td>系统架构</td><td>内核之外的所有程序，包括shell和所有您假设的工具</td><td>与Linux内核相对的概念</td></tr><tr><td>BusyBox</td><td>嵌入式实现</td><td>为资源受限环境提供的多合一替代实现</td><td>路由器、Android Recovery中的工具</td></tr><tr><td>Build-Essential</td><td>开发环境</td><td>用于编译软件所假设存在的一套工具</td><td>gcc, make, ld, libc-dev</td></tr></tbody></table><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>[ 用户自行安装的工具 ]
 </span></span><span style=display:flex><span>[ 发行版工具 ]
 </span></span><span style=display:flex><span>--------------------------
 </span></span><span style=display:flex><span>[ 系统约定接口 ]

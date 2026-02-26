@@ -1,4 +1,4 @@
-<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>Filemode</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/logsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/unixlike/>★</a></li><li><a href=/unixlike/lab/>Lab</a></li><li><a href=/unixlike/log/>Log</a></li><li><a href=/unixlike/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>Filemode</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-lua.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-rust.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/logsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/unixlike/>★</a></li><li><a href=/unixlike/lab/>Lab</a></li><li><a href=/unixlike/log/>Log</a></li><li><a href=/unixlike/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
 <span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><pre class=ascii>
 +——————————————————————————————————————————————————————————————+
 |                        <a class=nav-item data-path=/rightbrain/ href=/rightbrain/>RightBrain</a>                            |
@@ -38,7 +38,7 @@
 <a href=https://git-scm.com/community target=_blank>Community</a></p></div></div></div><script src=/js/ref-window.js></script><article class=single_article><div class=title>Filemode<div class=meta>Modified: 2025-12-31
 | Author：ljf12825</div></div><div class=content><p>Filemode是Git中用于跟踪和存储文件权限（Unix/Linux文件权限）的机制。它决定来Git如何处理文件的执行权限位</p><h2 id=核心概念>核心概念</h2><ol><li><p>Filemode
 Filemode是Git的一个配置选项，控制是否跟踪文件的执行权限（executable bit）。它影响<code>chmod +x</code>这样的权限更改是否会被Git记录</p></li><li><p>三种权限状态
-在Unix/Linux中，每个文件有三种权限位</p></li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>rwx rwx rwx
+在Unix/Linux中，每个文件有三种权限位</p></li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>rwx rwx rwx
 </span></span><span style=display:flex><span>│││ │││ │|│ 其他用户执行
 </span></span><span style=display:flex><span>│││ │││ │└─ 其他用户写权限
 </span></span><span style=display:flex><span>│││ │││ └── 其他用户读权限  
@@ -48,49 +48,49 @@ Filemode是Git的一个配置选项，控制是否跟踪文件的执行权限（
 </span></span><span style=display:flex><span>││└──────── 所有者执行权限
 </span></span><span style=display:flex><span>│└───────── 所有者写权限
 </span></span><span style=display:flex><span>└────────── 所有者读权限
-</span></span></code></pre></div><p>Git主要关心执行权限（x位），因为</p><ul><li>读/写权限通常由umask控制</li><li>执行权限对脚本和程序至关重要</li></ul><h2 id=filemode配置>Filemode配置</h2><h3 id=查看当前配置>查看当前配置</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 查看全局配置</span>
+</span></span></code></pre></div><p>Git主要关心执行权限（x位），因为</p><ul><li>读/写权限通常由umask控制</li><li>执行权限对脚本和程序至关重要</li></ul><h2 id=filemode配置>Filemode配置</h2><h3 id=查看当前配置>查看当前配置</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 查看全局配置</span>
 </span></span><span style=display:flex><span>git config --global core.filemode
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 查看本地仓库配置</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 查看本地仓库配置</span>
 </span></span><span style=display:flex><span>git config core.filemode
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 查看所有相关配置</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 查看所有相关配置</span>
 </span></span><span style=display:flex><span>git config --list | grep filemode 
-</span></span></code></pre></div><h3 id=设置filemode>设置Filemode</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 启动（默认在Linux/Mac 上通常是启用的）</span>
-</span></span><span style=display:flex><span>git config core.filemode true 
+</span></span></code></pre></div><h3 id=设置filemode>设置Filemode</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 启动（默认在Linux/Mac 上通常是启用的）</span>
+</span></span><span style=display:flex><span>git config core.filemode <span style=color:#8be9fd;font-style:italic>true</span> 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 禁用（Windows 上通常禁用）</span>
-</span></span><span style=display:flex><span>git config core.filemode false
+</span></span><span style=display:flex><span><span style=color:#6272a4># 禁用（Windows 上通常禁用）</span>
+</span></span><span style=display:flex><span>git config core.filemode <span style=color:#8be9fd;font-style:italic>false</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 全局设置</span>
-</span></span><span style=display:flex><span>git config --global core.filemode true 
-</span></span></code></pre></div><h3 id=检测系统默认>检测系统默认</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Git会检测文件系统是否支持权限</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Linux/Unix：通常为true </span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Windows(NTFS)：通常为false </span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Windows(WSL)：通常为true </span>
-</span></span><span style=display:flex><span><span style=color:#75715e># macOS(APFS/HFS+)：通常为true </span>
-</span></span></code></pre></div><h2 id=filemode的实际影响>Filemode的实际影响</h2><p>启用时(core.filemode = true)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 创建一个脚本</span>
-</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#39;#!/bin/bash&#39;</span> &gt; script.sh 
-</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#39;echo &#34;Hello&#34;&#39;</span> &gt;&gt; script.sh 
+</span></span><span style=display:flex><span><span style=color:#6272a4># 全局设置</span>
+</span></span><span style=display:flex><span>git config --global core.filemode <span style=color:#8be9fd;font-style:italic>true</span> 
+</span></span></code></pre></div><h3 id=检测系统默认>检测系统默认</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># Git会检测文件系统是否支持权限</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># Linux/Unix：通常为true </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># Windows(NTFS)：通常为false </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># Windows(WSL)：通常为true </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># macOS(APFS/HFS+)：通常为true </span>
+</span></span></code></pre></div><h2 id=filemode的实际影响>Filemode的实际影响</h2><p>启用时(core.filemode = true)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 创建一个脚本</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#f1fa8c>&#39;#!/bin/bash&#39;</span> &gt; script.sh 
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>echo</span> <span style=color:#f1fa8c>&#39;echo &#34;Hello&#34;&#39;</span> &gt;&gt; script.sh 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 添加执行权限</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 添加执行权限</span>
 </span></span><span style=display:flex><span>chmod +x script.sh 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Git能检测到权限变化</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># Git能检测到权限变化</span>
 </span></span><span style=display:flex><span>git status
-</span></span><span style=display:flex><span><span style=color:#75715e># 输出：modified: script.sh </span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Git看到文件模式从 100644 变为 100755 </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 输出：modified: script.sh </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># Git看到文件模式从 100644 变为 100755 </span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>git diff 
-</span></span><span style=display:flex><span><span style=color:#75715e># 显示：old mode 100644 </span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#       new mode 100755 </span>
-</span></span></code></pre></div><p>禁用时（core.filemode = false)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 即使修改了权限，Git也忽略</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 显示：old mode 100644 </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>#       new mode 100755 </span>
+</span></span></code></pre></div><p>禁用时（core.filemode = false)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 即使修改了权限，Git也忽略</span>
 </span></span><span style=display:flex><span>chmod +x script.sh 
 </span></span><span style=display:flex><span>git status
-</span></span><span style=display:flex><span><span style=color:#75715e># 输出：nothing to commit （如果文件内容未变）</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 输出：nothing to commit （如果文件内容未变）</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Git只关心文件内容，不关心权限</span>
-</span></span></code></pre></div><h2 id=git对象中的filemode>Git对象中的Filemode</h2><h3 id=文件模式值>文件模式值</h3><p>Git使用八进制值表示文件模式</p><h4 id=基本结构六位八进制>基本结构：六位八进制</h4><p>Git的文件模式由6个八进制数字组成</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>1   0   0   6   4   4
+</span></span><span style=display:flex><span><span style=color:#6272a4># Git只关心文件内容，不关心权限</span>
+</span></span></code></pre></div><h2 id=git对象中的filemode>Git对象中的Filemode</h2><h3 id=文件模式值>文件模式值</h3><p>Git使用八进制值表示文件模式</p><h4 id=基本结构六位八进制>基本结构：六位八进制</h4><p>Git的文件模式由6个八进制数字组成</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>1   0   0   6   4   4
 </span></span><span style=display:flex><span>│   │   │   │   │   │
 </span></span><span style=display:flex><span>│   │   │   │   │   └── 其他用户权限 (4 = r--)
 </span></span><span style=display:flex><span>│   │   │   │   └────── 组用户权限 (4 = r--)
@@ -99,42 +99,42 @@ Filemode是Git的一个配置选项，控制是否跟踪文件的执行权限（
 </span></span><span style=display:flex><span>│   │   └────────────── 特殊位（setuid/setgid/sticky）
 </span></span><span style=display:flex><span>│   └────────────────── 文件类型高位
 </span></span><span style=display:flex><span>└────────────────────── 文件类型低位
-</span></span></code></pre></div><h4 id=文件类型部分前两位>文件类型部分（前两位）</h4><p>前两个数字（0-3位）表示文件类型</p><table><thead><tr><th>八进制值</th><th>二进制</th><th>文件类型</th><th>说明</th></tr></thead><tbody><tr><td>04</td><td><code>000100</code></td><td>目录</td><td><code>040000</code></td></tr><tr><td>10</td><td><code>001000</code></td><td>普通文件</td><td><code>100644</code></td></tr><tr><td>12</td><td><code>001010</code></td><td>符号链接</td><td><code>120000</code></td></tr><tr><td>16</td><td><code>001110</code></td><td>Git子模块</td><td><code>160000</code></td></tr></tbody></table><h4 id=权限部分后四位>权限部分（后四位）</h4><p>后四个数字是标准的Unix权限八进制表示</p><table><thead><tr><th>八进制</th><th>二进制</th><th>权限</th></tr></thead><tbody><tr><td>0</td><td>000</td><td><code>---</code></td></tr><tr><td>1</td><td>001</td><td><code>--x</code></td></tr><tr><td>2</td><td>010</td><td><code>-w-</code></td></tr><tr><td>3</td><td>011</td><td><code>-wx</code></td></tr><tr><td>4</td><td>100</td><td><code>r--</code></td></tr><tr><td>5</td><td>101</td><td><code>r-x</code></td></tr><tr><td>6</td><td>110</td><td><code>rw-</code></td></tr><tr><td>7</td><td>111</td><td><code>rwx</code></td></tr></tbody></table><h4 id=完整表示>完整表示</h4><table><thead><tr><th>模式值</th><th>权限</th><th>文件类型</th><th>示例</th></tr></thead><tbody><tr><td>100644</td><td><code>rw-r--r--</code></td><td>普通文件</td><td><code>.txt</code>, <code>.js</code>, <code>.py</code>（非可执行）</td></tr><tr><td>100755</td><td><code>rwxr-xr-x</code></td><td>可执行文件</td><td>脚本、二进制文件</td></tr><tr><td>120000</td><td>特殊</td><td>符号链接</td><td><code>ln -s target linkname</code></td></tr><tr><td>040000</td><td>特殊</td><td>目录</td><td><code>drwxr-xr-x</code></td></tr><tr><td>160000</td><td>特殊</td><td>Git子模块</td><td><code>git submodule</code></td></tr></tbody></table><h3 id=查看文件模式>查看文件模式</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 查看工作区文件模式</span>
+</span></span></code></pre></div><h4 id=文件类型部分前两位>文件类型部分（前两位）</h4><p>前两个数字（0-3位）表示文件类型</p><table><thead><tr><th>八进制值</th><th>二进制</th><th>文件类型</th><th>说明</th></tr></thead><tbody><tr><td>04</td><td><code>000100</code></td><td>目录</td><td><code>040000</code></td></tr><tr><td>10</td><td><code>001000</code></td><td>普通文件</td><td><code>100644</code></td></tr><tr><td>12</td><td><code>001010</code></td><td>符号链接</td><td><code>120000</code></td></tr><tr><td>16</td><td><code>001110</code></td><td>Git子模块</td><td><code>160000</code></td></tr></tbody></table><h4 id=权限部分后四位>权限部分（后四位）</h4><p>后四个数字是标准的Unix权限八进制表示</p><table><thead><tr><th>八进制</th><th>二进制</th><th>权限</th></tr></thead><tbody><tr><td>0</td><td>000</td><td><code>---</code></td></tr><tr><td>1</td><td>001</td><td><code>--x</code></td></tr><tr><td>2</td><td>010</td><td><code>-w-</code></td></tr><tr><td>3</td><td>011</td><td><code>-wx</code></td></tr><tr><td>4</td><td>100</td><td><code>r--</code></td></tr><tr><td>5</td><td>101</td><td><code>r-x</code></td></tr><tr><td>6</td><td>110</td><td><code>rw-</code></td></tr><tr><td>7</td><td>111</td><td><code>rwx</code></td></tr></tbody></table><h4 id=完整表示>完整表示</h4><table><thead><tr><th>模式值</th><th>权限</th><th>文件类型</th><th>示例</th></tr></thead><tbody><tr><td>100644</td><td><code>rw-r--r--</code></td><td>普通文件</td><td><code>.txt</code>, <code>.js</code>, <code>.py</code>（非可执行）</td></tr><tr><td>100755</td><td><code>rwxr-xr-x</code></td><td>可执行文件</td><td>脚本、二进制文件</td></tr><tr><td>120000</td><td>特殊</td><td>符号链接</td><td><code>ln -s target linkname</code></td></tr><tr><td>040000</td><td>特殊</td><td>目录</td><td><code>drwxr-xr-x</code></td></tr><tr><td>160000</td><td>特殊</td><td>Git子模块</td><td><code>git submodule</code></td></tr></tbody></table><h3 id=查看文件模式>查看文件模式</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 查看工作区文件模式</span>
 </span></span><span style=display:flex><span>ls -l file.txt 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 查看Git索引中的文件模式</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 查看Git索引中的文件模式</span>
 </span></span><span style=display:flex><span>git ls-files --stage 
-</span></span><span style=display:flex><span><span style=color:#75715e># 100644 e69de29... 0 file.txt </span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 100755 7b8b4a9... 0 script.sh </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 100644 e69de29... 0 file.txt </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 100755 7b8b4a9... 0 script.sh </span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 查看提交中的文件模式</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 查看提交中的文件模式</span>
 </span></span><span style=display:flex><span>git ls-tree HEAD 
-</span></span><span style=display:flex><span><span style=color:#75715e># 100644 blob e69de29... file.txt </span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 100755 blob 7b8b4a9... script.sh </span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 040000 tree 1f8a3e5... src </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 100644 blob e69de29... file.txt </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 100755 blob 7b8b4a9... script.sh </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 040000 tree 1f8a3e5... src </span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 详细查看</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 详细查看</span>
 </span></span><span style=display:flex><span>git show --raw HEAD 
-</span></span></code></pre></div><h2 id=跨平台问题与解决方案>跨平台问题与解决方案</h2><h3 id=windows上的挑战>Windows上的挑战</h3><p>Windows没有Unix权限管理，导致问题</p><ol><li>权限丢失：从Linux仓库克隆到Windows后，执行权限丢失</li><li>虚假变化：在Windows上修改文件可能导致Git误认为权限变化</li></ol><h3 id=解决方案>解决方案</h3><ol><li>统一禁用（推荐用于跨平台团队）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 所有开发者全局禁用</span>
-</span></span><span style=display:flex><span>git config --global core.filemode false 
+</span></span></code></pre></div><h2 id=跨平台问题与解决方案>跨平台问题与解决方案</h2><h3 id=windows上的挑战>Windows上的挑战</h3><p>Windows没有Unix权限管理，导致问题</p><ol><li>权限丢失：从Linux仓库克隆到Windows后，执行权限丢失</li><li>虚假变化：在Windows上修改文件可能导致Git误认为权限变化</li></ol><h3 id=解决方案>解决方案</h3><ol><li>统一禁用（推荐用于跨平台团队）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 所有开发者全局禁用</span>
+</span></span><span style=display:flex><span>git config --global core.filemode <span style=color:#8be9fd;font-style:italic>false</span> 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 仓库也禁用</span>
-</span></span><span style=display:flex><span>git config core.filemode false 
+</span></span><span style=display:flex><span><span style=color:#6272a4># 仓库也禁用</span>
+</span></span><span style=display:flex><span>git config core.filemode <span style=color:#8be9fd;font-style:italic>false</span> 
 </span></span></code></pre></div><ol start=2><li>使用<code>.gitattributes</code>
-在仓库根目录创建<code>.gitattributes</code>文件</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span># 为特定文件设置权限
+在仓库根目录创建<code>.gitattributes</code>文件</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span># 为特定文件设置权限
 </span></span><span style=display:flex><span>*.sh text eol-llf # Shell 脚本
 </span></span><span style=display:flex><span>*.py text eol-lf # Python 脚本
 </span></span><span style=display:flex><span>*.exe .text binary # 二进制文件
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span># 手动设置执行权限
 </span></span><span style=display:flex><span>script.sh text eol=lf executable
-</span></span></code></pre></div><ol start=3><li>使用update-index</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 手动设置文件的执行位</span>
-</span></span><span style=display:flex><span>git update-index --chmod<span style=color:#f92672>=</span>+x script.sh 
+</span></span></code></pre></div><ol start=3><li>使用update-index</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 手动设置文件的执行位</span>
+</span></span><span style=display:flex><span>git update-index --chmod<span style=color:#ff79c6>=</span>+x script.sh 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 移除执行位</span>
-</span></span><span style=display:flex><span>git update-index --chmod<span style=color:#f92672>=</span>-x file.txt 
+</span></span><span style=display:flex><span><span style=color:#6272a4># 移除执行位</span>
+</span></span><span style=display:flex><span>git update-index --chmod<span style=color:#ff79c6>=</span>-x file.txt 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 查看索引中的权限</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 查看索引中的权限</span>
 </span></span><span style=display:flex><span>git ls-files --stage script.sh 
 </span></span></code></pre></div></div><nav class=post-nav><a href=/unixlike/log/fileoperator/ class=hover:underline>pre: File Operator</a>
 <a href=/unixlike/log/filter/ class=hover:underline>next: Filter</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#核心概念>核心概念</a></li><li><a href=#filemode配置>Filemode配置</a><ul><li><a href=#查看当前配置>查看当前配置</a></li><li><a href=#设置filemode>设置Filemode</a></li><li><a href=#检测系统默认>检测系统默认</a></li></ul></li><li><a href=#filemode的实际影响>Filemode的实际影响</a></li><li><a href=#git对象中的filemode>Git对象中的Filemode</a><ul><li><a href=#文件模式值>文件模式值</a><ul><li><a href=#基本结构六位八进制>基本结构：六位八进制</a></li><li><a href=#文件类型部分前两位>文件类型部分（前两位）</a></li><li><a href=#权限部分后四位>权限部分（后四位）</a></li><li><a href=#完整表示>完整表示</a></li></ul></li><li><a href=#查看文件模式>查看文件模式</a></li></ul></li><li><a href=#跨平台问题与解决方案>跨平台问题与解决方案</a><ul><li><a href=#windows上的挑战>Windows上的挑战</a></li><li><a href=#解决方案>解决方案</a></li></ul></li></ul></li></ul></nav></aside><script src=/js/scrollspy.js defer></script><script type=module>

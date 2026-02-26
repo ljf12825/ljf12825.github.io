@@ -1,4 +1,4 @@
-<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>Indexer</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/logsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/dotnetandwindows/>★</a></li><li><a href=/dotnetandwindows/lab/>Lab</a></li><li><a href=/dotnetandwindows/log/>Log</a></li><li><a href=/dotnetandwindows/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>Indexer</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-lua.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-rust.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/logsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/dotnetandwindows/>★</a></li><li><a href=/dotnetandwindows/lab/>Lab</a></li><li><a href=/dotnetandwindows/log/>Log</a></li><li><a href=/dotnetandwindows/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
 <span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><pre class=ascii>
 +——————————————————————————————————————————————————————————————+
 |                        <a class=nav-item data-path=/rightbrain/ href=/rightbrain/>RightBrain</a>                            |
@@ -36,125 +36,125 @@
 <a href=https://dl.acm.org/conference/siggraph target=_blank>SIGGRAPH Digital Library</a></p><p><a href=https://git-scm.com/ target=_blank>Git</a> |
 <a href=https://git-scm.com/doc target=_blank>Docs</a> |
 <a href=https://git-scm.com/community target=_blank>Community</a></p></div></div></div><script src=/js/ref-window.js></script><article class=single_article><div class=title>Indexer<div class=meta>Modified: 2025-06-01
-| Author：ljf12825</div></div><div class=content><p>在C#中，索引器(Indexer)允许对象像数组一样用下标<code>[]</code>访问内部数据<br><strong>它提供一种更直观、更简洁的方式来访问类或结构体内部封装的数据元素，尤其是包含集合或数组的类</strong><br>它本质上是类结构体定义的一个特殊属性（property），通过下标访问成员</p><blockquote><p>核心思想：让对象具备“array-like”的行为</p></blockquote><h3 id=基本语法>基本语法</h3><p>索引器的声明类似于属性，但它使用<code>this</code>关键字，并且在方括号中指定参数</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>access_modifier return_type <span style=color:#66d9ef>this</span>[parameter_type parameter, ...]
+| Author：ljf12825</div></div><div class=content><p>在C#中，索引器(Indexer)允许对象像数组一样用下标<code>[]</code>访问内部数据<br><strong>它提供一种更直观、更简洁的方式来访问类或结构体内部封装的数据元素，尤其是包含集合或数组的类</strong><br>它本质上是类结构体定义的一个特殊属性（property），通过下标访问成员</p><blockquote><p>核心思想：让对象具备“array-like”的行为</p></blockquote><h3 id=基本语法>基本语法</h3><p>索引器的声明类似于属性，但它使用<code>this</code>关键字，并且在方括号中指定参数</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>access_modifier return_type <span style=color:#ff79c6>this</span>[parameter_type parameter, ...]
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>get</span> 
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>get</span> 
 </span></span><span style=display:flex><span>    { 
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// 返回与提供参数对应的值</span>
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// 返回与提供参数对应的值</span>
 </span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>set</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>set</span>
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// 设置于提供参数对应的值</span>
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// 设置于提供参数对应的值</span>
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><ul><li><code>access_modifier</code>：访问修饰符</li><li><code>return_type</code>：索引器返回值的类型</li><li><code>this</code>：关键字，指代当前类的实例</li><li><code>parameter_type parameter</code>：索引参数，可以是任何类型。最常见的是<code>int</code>（像数组下标）或<code>string</code>（像字典的键）。可以有多个参数，实现多维索引</li><li><code>get</code>访问器：当读取对象<code>obj[index]</code>时被调用，必须返回<code>return_type</code>类型的值</li><li><code>set</code>访问器：当向对象<code>obj[index] = value</code>写入时被调用。它有一个隐式的参数<code>value</code>，其类型为<code>return_type</code></li></ul><h3 id=示例>示例</h3><p>封装一个数组</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DataBox</span>
+</span></span></code></pre></div><ul><li><code>access_modifier</code>：访问修饰符</li><li><code>return_type</code>：索引器返回值的类型</li><li><code>this</code>：关键字，指代当前类的实例</li><li><code>parameter_type parameter</code>：索引参数，可以是任何类型。最常见的是<code>int</code>（像数组下标）或<code>string</code>（像字典的键）。可以有多个参数，实现多维索引</li><li><code>get</code>访问器：当读取对象<code>obj[index]</code>时被调用，必须返回<code>return_type</code>类型的值</li><li><code>set</code>访问器：当向对象<code>obj[index] = value</code>写入时被调用。它有一个隐式的参数<code>value</code>，其类型为<code>return_type</code></li></ul><h3 id=示例>示例</h3><p>封装一个数组</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>class</span> <span style=color:#50fa7b>DataBox</span>
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span>[] _data = <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span>[<span style=color:#ae81ff>10</span>]; <span style=color:#75715e>// 内部私有数组</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>private</span> <span style=color:#8be9fd>int</span>[] _data = <span style=color:#ff79c6>new</span> <span style=color:#8be9fd>int</span>[<span style=color:#bd93f9>10</span>]; <span style=color:#6272a4>// 内部私有数组</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// 索引器：使用 int 作为索引</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#66d9ef>this</span>[<span style=color:#66d9ef>int</span> index]
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 索引器：使用 int 作为索引</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>int</span> <span style=color:#ff79c6>this</span>[<span style=color:#8be9fd>int</span> index]
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>get</span>
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>get</span>
 </span></span><span style=display:flex><span>        {
-</span></span><span style=display:flex><span>            <span style=color:#75715e>// 可以进行边界检查，这是封装的一大优势</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (index &lt; <span style=color:#ae81ff>0</span> || index &gt;= _data.Length)
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IndexOutOfRangeException(<span style=color:#e6db74>&#34;Index is out of range&#34;</span>);
+</span></span><span style=display:flex><span>            <span style=color:#6272a4>// 可以进行边界检查，这是封装的一大优势</span>
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>if</span> (index &lt; <span style=color:#bd93f9>0</span> || index &gt;= _data.Length)
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>throw</span> <span style=color:#ff79c6>new</span> IndexOutOfRangeException(<span style=color:#f1fa8c>&#34;Index is out of range&#34;</span>);
 </span></span><span style=display:flex><span>            
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> _data[index];
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>return</span> _data[index];
 </span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>set</span>
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>set</span>
 </span></span><span style=display:flex><span>        {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (index &lt; <span style=color:#ae81ff>0</span> || index &gt;= _data.Length)
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IndexOutOfRangeException(<span style=color:#e6db74>&#34;Index is out of range&#34;</span>);
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>if</span> (index &lt; <span style=color:#bd93f9>0</span> || index &gt;= _data.Length)
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>throw</span> <span style=color:#ff79c6>new</span> IndexOutOfRangeException(<span style=color:#f1fa8c>&#34;Index is out of range&#34;</span>);
 </span></span><span style=display:flex><span>            
-</span></span><span style=display:flex><span>            _data[index] = <span style=color:#66d9ef>value</span>;
+</span></span><span style=display:flex><span>            _data[index] = <span style=color:#ff79c6>value</span>;
 </span></span><span style=display:flex><span>        }
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// 一个返回内部数组长度的方法</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> Length =&gt; _data.Length;
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 一个返回内部数组长度的方法</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>int</span> Length =&gt; _data.Length;
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Program</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>class</span> <span style=color:#50fa7b>Program</span>
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Main(<span style=color:#66d9ef>string</span>[] args)
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>static</span> <span style=color:#ff79c6>void</span> Main(<span style=color:#8be9fd>string</span>[] args)
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        DataBox box = <span style=color:#66d9ef>new</span> DataBox();
+</span></span><span style=display:flex><span>        DataBox box = <span style=color:#ff79c6>new</span> DataBox();
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// 使用索引器设置值 (调用 set 访问器)</span>
-</span></span><span style=display:flex><span>        box[<span style=color:#ae81ff>0</span>] = <span style=color:#ae81ff>42</span>;
-</span></span><span style=display:flex><span>        box[<span style=color:#ae81ff>1</span>] = <span style=color:#ae81ff>100</span>;
-</span></span><span style=display:flex><span>        box[<span style=color:#ae81ff>2</span>] = <span style=color:#ae81ff>15</span>;
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// 使用索引器设置值 (调用 set 访问器)</span>
+</span></span><span style=display:flex><span>        box[<span style=color:#bd93f9>0</span>] = <span style=color:#bd93f9>42</span>;
+</span></span><span style=display:flex><span>        box[<span style=color:#bd93f9>1</span>] = <span style=color:#bd93f9>100</span>;
+</span></span><span style=display:flex><span>        box[<span style=color:#bd93f9>2</span>] = <span style=color:#bd93f9>15</span>;
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// 使用索引器获取值 (调用 get 访问器)</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i = <span style=color:#ae81ff>0</span>; i &lt; <span style=color:#ae81ff>3</span>; i++)
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// 使用索引器获取值 (调用 get 访问器)</span>
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>for</span> (<span style=color:#8be9fd>int</span> i = <span style=color:#bd93f9>0</span>; i &lt; <span style=color:#bd93f9>3</span>; i++)
 </span></span><span style=display:flex><span>        {
-</span></span><span style=display:flex><span>            Console.WriteLine(<span style=color:#e6db74>$&#34;box[{i}] = {box[i]}&#34;</span>);
+</span></span><span style=display:flex><span>            Console.WriteLine(<span style=color:#f1fa8c>$&#34;box[{i}] = {box[i]}&#34;</span>);
 </span></span><span style=display:flex><span>        }
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// 输出：</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// box[0] = 42</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// box[1] = 100</span>
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// box[2] = 15</span>
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// 输出：</span>
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// box[0] = 42</span>
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// box[1] = 100</span>
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// box[2] = 15</span>
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>优势：在<code>get</code>和<code>set</code>访问器中添加了边界检查，这是直接暴露公共数组无法轻易做到的</p><h3 id=特性>特性</h3><ol><li>索引器的参数类型不限于整数
-示例：以字符串作为索引，模拟字典的行为</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>StringKeyCollection</span>
+示例：以字符串作为索引，模拟字典的行为</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>class</span> <span style=color:#50fa7b>StringKeyCollection</span>
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> Dictionary&lt;<span style=color:#66d9ef>string</span>, <span style=color:#66d9ef>string</span>&gt; _dictionary = <span style=color:#66d9ef>new</span> Dictionary&lt;<span style=color:#66d9ef>string</span>, <span style=color:#66d9ef>string</span>&gt;();
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>private</span> Dictionary&lt;<span style=color:#8be9fd>string</span>, <span style=color:#8be9fd>string</span>&gt; _dictionary = <span style=color:#ff79c6>new</span> Dictionary&lt;<span style=color:#8be9fd>string</span>, <span style=color:#8be9fd>string</span>&gt;();
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// 索引器：使用 string 作为键</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>string</span> <span style=color:#66d9ef>this</span>[<span style=color:#66d9ef>string</span> key]
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 索引器：使用 string 作为键</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>string</span> <span style=color:#ff79c6>this</span>[<span style=color:#8be9fd>string</span> key]
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>get</span>
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>get</span>
 </span></span><span style=display:flex><span>        {
-</span></span><span style=display:flex><span>            <span style=color:#75715e>// 如果键不存在，返回一个默认值，而不是抛出异常</span>
-</span></span><span style=display:flex><span>            _dictionary.TryGetValue(key, <span style=color:#66d9ef>out</span> <span style=color:#66d9ef>string</span> <span style=color:#66d9ef>value</span>);
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>value</span>;
+</span></span><span style=display:flex><span>            <span style=color:#6272a4>// 如果键不存在，返回一个默认值，而不是抛出异常</span>
+</span></span><span style=display:flex><span>            _dictionary.TryGetValue(key, <span style=color:#ff79c6>out</span> <span style=color:#8be9fd>string</span> <span style=color:#ff79c6>value</span>);
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>return</span> <span style=color:#ff79c6>value</span>;
 </span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>set</span>
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>set</span>
 </span></span><span style=display:flex><span>        {
-</span></span><span style=display:flex><span>            _dictionary[key] = <span style=color:#66d9ef>value</span>;
+</span></span><span style=display:flex><span>            _dictionary[key] = <span style=color:#ff79c6>value</span>;
 </span></span><span style=display:flex><span>        }
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Program</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>class</span> <span style=color:#50fa7b>Program</span>
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Main(<span style=color:#66d9ef>string</span>[] args)
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>static</span> <span style=color:#ff79c6>void</span> Main(<span style=color:#8be9fd>string</span>[] args)
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        StringKeyCollection collection = <span style=color:#66d9ef>new</span> StringKeyCollection();
+</span></span><span style=display:flex><span>        StringKeyCollection collection = <span style=color:#ff79c6>new</span> StringKeyCollection();
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        collection[<span style=color:#e6db74>&#34;name&#34;</span>] = <span style=color:#e6db74>&#34;Alice&#34;</span>;
-</span></span><span style=display:flex><span>        collection[<span style=color:#e6db74>&#34;name&#34;</span>] = <span style=color:#e6db74>&#34;C#&#34;</span>;
+</span></span><span style=display:flex><span>        collection[<span style=color:#f1fa8c>&#34;name&#34;</span>] = <span style=color:#f1fa8c>&#34;Alice&#34;</span>;
+</span></span><span style=display:flex><span>        collection[<span style=color:#f1fa8c>&#34;name&#34;</span>] = <span style=color:#f1fa8c>&#34;C#&#34;</span>;
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        Console.WriteLine(collection[<span style=color:#e6db74>&#34;name&#34;</span>]); <span style=color:#75715e>// Alice</span>
-</span></span><span style=display:flex><span>        Console.WriteLine(collection[<span style=color:#e6db74>&#34;language&#34;</span>]); <span style=color:#75715e>// C# </span>
-</span></span><span style=display:flex><span>        Console.WriteLine(collection[<span style=color:#e6db74>&#34;age&#34;</span>]); <span style=color:#75715e>// 空字符串</span>
+</span></span><span style=display:flex><span>        Console.WriteLine(collection[<span style=color:#f1fa8c>&#34;name&#34;</span>]); <span style=color:#6272a4>// Alice</span>
+</span></span><span style=display:flex><span>        Console.WriteLine(collection[<span style=color:#f1fa8c>&#34;language&#34;</span>]); <span style=color:#6272a4>// C# </span>
+</span></span><span style=display:flex><span>        Console.WriteLine(collection[<span style=color:#f1fa8c>&#34;age&#34;</span>]); <span style=color:#6272a4>// 空字符串</span>
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><ol start=2><li>多维索引器
-通过提供多个参数，可以实现多维索引器</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Matrix</span>
+通过提供多个参数，可以实现多维索引器</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>class</span> <span style=color:#50fa7b>Matrix</span>
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span>[,] _matrix = <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span>[<span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>3</span>];
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>private</span> <span style=color:#8be9fd>int</span>[,] _matrix = <span style=color:#ff79c6>new</span> <span style=color:#8be9fd>int</span>[<span style=color:#bd93f9>3</span>, <span style=color:#bd93f9>3</span>];
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// 多维索引器</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#66d9ef>this</span>[<span style=color:#66d9ef>int</span> row, <span style=color:#66d9ef>int</span> col]
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 多维索引器</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>int</span> <span style=color:#ff79c6>this</span>[<span style=color:#8be9fd>int</span> row, <span style=color:#8be9fd>int</span> col]
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>get</span> {  <span style=color:#66d9ef>return</span> _matrix[row, col]; } 
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>set</span> { _matrix[row, col] = <span style=color:#66d9ef>value</span>; }
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>get</span> {  <span style=color:#ff79c6>return</span> _matrix[row, col]; } 
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>set</span> { _matrix[row, col] = <span style=color:#ff79c6>value</span>; }
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Program</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>class</span> <span style=color:#50fa7b>Program</span>
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Main(<span style=color:#66d9ef>string</span>[] args)
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>static</span> <span style=color:#ff79c6>void</span> Main(<span style=color:#8be9fd>string</span>[] args)
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>var</span> matrix = <span style=color:#66d9ef>new</span> Matrix();
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd>var</span> matrix = <span style=color:#ff79c6>new</span> Matrix();
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i = <span style=color:#ae81ff>0</span>; i &lt; <span style=color:#ae81ff>3</span>; i++)
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>for</span> (<span style=color:#8be9fd>int</span> i = <span style=color:#bd93f9>0</span>; i &lt; <span style=color:#bd93f9>3</span>; i++)
 </span></span><span style=display:flex><span>        {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> j = <span style=color:#ae81ff>0</span>; j &lt; <span style=color:#ae81ff>3</span>; j++)
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>for</span> (<span style=color:#8be9fd>int</span> j = <span style=color:#bd93f9>0</span>; j &lt; <span style=color:#bd93f9>3</span>; j++)
 </span></span><span style=display:flex><span>            {
 </span></span><span style=display:flex><span>                matrix[i, j] = i + j;
 </span></span><span style=display:flex><span>                Console.WriteLine(matrix[i, j]);
@@ -163,90 +163,90 @@
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><ol start=3><li>索引器重载
-和普通方法一样，索引器也可以被重载。只要参数列表（参数的类型或数量）不同即可</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>OverloadedIndexer</span>
+和普通方法一样，索引器也可以被重载。只要参数列表（参数的类型或数量）不同即可</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>class</span> <span style=color:#50fa7b>OverloadedIndexer</span>
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span>[] _intData = <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span>[<span style=color:#ae81ff>10</span>];
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>string</span>[] _stringData = <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>string</span>[<span style=color:#ae81ff>10</span>];
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>private</span> <span style=color:#8be9fd>int</span>[] _intData = <span style=color:#ff79c6>new</span> <span style=color:#8be9fd>int</span>[<span style=color:#bd93f9>10</span>];
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>private</span> <span style=color:#8be9fd>string</span>[] _stringData = <span style=color:#ff79c6>new</span> <span style=color:#8be9fd>string</span>[<span style=color:#bd93f9>10</span>];
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// 通过 int 索引访问 int 数据</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#66d9ef>this</span>[<span style=color:#66d9ef>int</span> index]
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 通过 int 索引访问 int 数据</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>int</span> <span style=color:#ff79c6>this</span>[<span style=color:#8be9fd>int</span> index]
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>get</span> =&gt; _intData[index];
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>set</span> =&gt; _intData[index] = <span style=color:#66d9ef>value</span>;
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>get</span> =&gt; _intData[index];
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>set</span> =&gt; _intData[index] = <span style=color:#ff79c6>value</span>;
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// 通过 int 索引访问 string 数据 (重载)</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>string</span> <span style=color:#66d9ef>this</span>[<span style=color:#66d9ef>int</span> index]
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 通过 int 索引访问 string 数据 (重载)</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>string</span> <span style=color:#ff79c6>this</span>[<span style=color:#8be9fd>int</span> index]
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>get</span> =&gt; _stringData[index];
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>set</span> =&gt; _stringData[index] = <span style=color:#66d9ef>value</span>;
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>get</span> =&gt; _stringData[index];
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>set</span> =&gt; _stringData[index] = <span style=color:#ff79c6>value</span>;
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// 通过 string 索引访问 string 数据 (另一个重载)</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>string</span> <span style=color:#66d9ef>this</span>[<span style=color:#66d9ef>string</span> name]
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 通过 string 索引访问 string 数据 (另一个重载)</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>string</span> <span style=color:#ff79c6>this</span>[<span style=color:#8be9fd>string</span> name]
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>get</span> { <span style=color:#75715e>/* ... */</span> <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;&#34;</span>; }
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>set</span> { <span style=color:#75715e>/* ... */</span> }
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>get</span> { <span style=color:#6272a4>/* ... */</span> <span style=color:#ff79c6>return</span> <span style=color:#f1fa8c>&#34;&#34;</span>; }
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>set</span> { <span style=color:#6272a4>/* ... */</span> }
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><h3 id=常见用途>常见用途</h3><ul><li>封装集合：让自定义类像数组/集合一样使用</li><li>提供便捷访问：比如<code>Dictionary</code>、<code>List</code>、<code>DataTable</code>都依赖索引器</li><li>模拟多维数组：通过自定义索引器实现</li></ul><p>示例：索引器与LINQ结合</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>LinqIndexer</span>
+</span></span></code></pre></div><h3 id=常见用途>常见用途</h3><ul><li>封装集合：让自定义类像数组/集合一样使用</li><li>提供便捷访问：比如<code>Dictionary</code>、<code>List</code>、<code>DataTable</code>都依赖索引器</li><li>模拟多维数组：通过自定义索引器实现</li></ul><p>示例：索引器与LINQ结合</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>class</span> <span style=color:#50fa7b>LinqIndexer</span>
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> List&lt;Person&gt; people = <span style=color:#66d9ef>new</span> List&lt;Person&gt;();
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>private</span> List&lt;Person&gt; people = <span style=color:#ff79c6>new</span> List&lt;Person&gt;();
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// 通过ID索引</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Person <span style=color:#66d9ef>this</span>[<span style=color:#66d9ef>int</span> id] =&gt; people.FirstOrDefault(p =&gt; p.Id = id);
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 通过ID索引</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> Person <span style=color:#ff79c6>this</span>[<span style=color:#8be9fd>int</span> id] =&gt; people.FirstOrDefault(p =&gt; p.Id = id);
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// 通过姓名索引</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> IEnumerable&lt;Person&gt; <span style=color:#66d9ef>this</span>[<span style=color:#66d9ef>string</span> name] =&gt; people.Where(p =&gt; p.Name = name);
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 通过姓名索引</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> IEnumerable&lt;Person&gt; <span style=color:#ff79c6>this</span>[<span style=color:#8be9fd>string</span> name] =&gt; people.Where(p =&gt; p.Name = name);
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// 通过条件索引</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> IEnumerable&lt;Person&gt; <span style=color:#66d9ef>this</span>[Func&lt;Person, <span style=color:#66d9ef>bool</span>&gt; predicate] =&gt; people.Where(predicate);
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 通过条件索引</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> IEnumerable&lt;Person&gt; <span style=color:#ff79c6>this</span>[Func&lt;Person, <span style=color:#8be9fd>bool</span>&gt; predicate] =&gt; people.Where(predicate);
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> Add(Person person) =&gt; people.Add(person);
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>void</span> Add(Person person) =&gt; people.Add(person);
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Person</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>class</span> <span style=color:#50fa7b>Person</span>
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> Id { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>set</span>; }
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>string</span> Name { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>set</span>; }
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> Age( <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>set</span>; )
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>int</span> Id { <span style=color:#ff79c6>get</span>; <span style=color:#ff79c6>set</span>; }
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>string</span> Name { <span style=color:#ff79c6>get</span>; <span style=color:#ff79c6>set</span>; }
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>int</span> Age( <span style=color:#ff79c6>get</span>; <span style=color:#ff79c6>set</span>; )
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 使用</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> collection = <span style=color:#66d9ef>new</span> LinqIndexer();
-</span></span><span style=display:flex><span>collection.Add(<span style=color:#66d9ef>new</span> Person { Id = <span style=color:#ae81ff>1</span>, Name = <span style=color:#e6db74>&#34;Alice&#34;</span>, Age = <span style=color:#ae81ff>25</span>});
-</span></span><span style=display:flex><span>collection.Add(<span style=color:#66d9ef>new</span> Person { Id = <span style=color:#ae81ff>2</span>, Name = <span style=color:#e6db74>&#34;Bob&#34;</span>, Age = <span style=color:#ae81ff>30</span>});
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 使用</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> collection = <span style=color:#ff79c6>new</span> LinqIndexer();
+</span></span><span style=display:flex><span>collection.Add(<span style=color:#ff79c6>new</span> Person { Id = <span style=color:#bd93f9>1</span>, Name = <span style=color:#f1fa8c>&#34;Alice&#34;</span>, Age = <span style=color:#bd93f9>25</span>});
+</span></span><span style=display:flex><span>collection.Add(<span style=color:#ff79c6>new</span> Person { Id = <span style=color:#bd93f9>2</span>, Name = <span style=color:#f1fa8c>&#34;Bob&#34;</span>, Age = <span style=color:#bd93f9>30</span>});
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> person = collection[<span style=color:#ae81ff>1</span>]; <span style=color:#75715e>// 通过ID获取</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> adults = collection[p =&gt; p.Age &gt;= <span style=color:#ae81ff>18</span>]; <span style=color:#75715e>// 通过条件索引获取</span>
-</span></span></code></pre></div><h3 id=底层与性能>底层与性能</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#75715e>// Source Code</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyCollection</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> person = collection[<span style=color:#bd93f9>1</span>]; <span style=color:#6272a4>// 通过ID获取</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>var</span> adults = collection[p =&gt; p.Age &gt;= <span style=color:#bd93f9>18</span>]; <span style=color:#6272a4>// 通过条件索引获取</span>
+</span></span></code></pre></div><h3 id=底层与性能>底层与性能</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// Source Code</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>class</span> <span style=color:#50fa7b>MyCollection</span>
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>string</span>[] _data = <span style=color:#66d9ef>new</span> stirng[<span style=color:#ae81ff>10</span>];
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>private</span> <span style=color:#8be9fd>string</span>[] _data = <span style=color:#ff79c6>new</span> stirng[<span style=color:#bd93f9>10</span>];
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>string</span> <span style=color:#66d9ef>this</span>[<span style=color:#66d9ef>int</span> index]
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>string</span> <span style=color:#ff79c6>this</span>[<span style=color:#8be9fd>int</span> index]
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>get</span> { <span style=color:#66d9ef>return</span> _data[index]; }
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>set</span> { _data[index] = <span style=color:#66d9ef>value</span>; }
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>get</span> { <span style=color:#ff79c6>return</span> _data[index]; }
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>set</span> { _data[index] = <span style=color:#ff79c6>value</span>; }
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>编译后相当于</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyCollection</span>
+</span></span></code></pre></div><p>编译后相当于</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>class</span> <span style=color:#50fa7b>MyCollection</span>
 </span></span><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>string</span>[] _data = <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>string</span>[<span style=color:#ae81ff>10</span>];
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>private</span> <span style=color:#8be9fd>string</span>[] _data = <span style=color:#ff79c6>new</span> <span style=color:#8be9fd>string</span>[<span style=color:#bd93f9>10</span>];
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// get 访问器变成 get_Item方法</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>string</span> get_Item(<span style=color:#66d9ef>int</span> index)
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// get 访问器变成 get_Item方法</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>string</span> get_Item(<span style=color:#8be9fd>int</span> index)
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> _data[index];
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>return</span> _data[index];
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// set 访问器变成 set_Item方法</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> set_Item(<span style=color:#66d9ef>int</span> index, <span style=color:#66d9ef>string</span> <span style=color:#66d9ef>value</span>)
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// set 访问器变成 set_Item方法</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>void</span> set_Item(<span style=color:#8be9fd>int</span> index, <span style=color:#8be9fd>string</span> <span style=color:#ff79c6>value</span>)
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        _data[index] = <span style=color:#66d9ef>value</span>;
+</span></span><span style=display:flex><span>        _data[index] = <span style=color:#ff79c6>value</span>;
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>IL代码层面</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>// get 访问器
+</span></span></code></pre></div><p>IL代码层面</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>// get 访问器
 </span></span><span style=display:flex><span>.method public hidebysig specialname instance string get_Item(int32 index) cil managed
 </span></span><span style=display:flex><span>// set 访问器  
 </span></span><span style=display:flex><span>.method public hidebysig specialname instance void set_Item(int32 index, string value) cil managed

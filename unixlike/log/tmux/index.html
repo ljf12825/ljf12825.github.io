@@ -1,4 +1,4 @@
-<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>Tmux</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/logsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/unixlike/>★</a></li><li><a href=/unixlike/lab/>Lab</a></li><li><a href=/unixlike/log/>Log</a></li><li><a href=/unixlike/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>Tmux</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-lua.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-rust.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/logsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/unixlike/>★</a></li><li><a href=/unixlike/lab/>Lab</a></li><li><a href=/unixlike/log/>Log</a></li><li><a href=/unixlike/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
 <span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><pre class=ascii>
 +——————————————————————————————————————————————————————————————+
 |                        <a class=nav-item data-path=/rightbrain/ href=/rightbrain/>RightBrain</a>                            |
@@ -36,14 +36,14 @@
 <a href=https://dl.acm.org/conference/siggraph target=_blank>SIGGRAPH Digital Library</a></p><p><a href=https://git-scm.com/ target=_blank>Git</a> |
 <a href=https://git-scm.com/doc target=_blank>Docs</a> |
 <a href=https://git-scm.com/community target=_blank>Community</a></p></div></div></div><script src=/js/ref-window.js></script><article class=single_article><div class=title>Tmux<div class=meta>Modified: 2025-12-31
-| Author：ljf12825</div></div><div class=content><p>tmux(Terminal Multiplexer)是一个终端复用器，允许在单个终端窗口中同时访问多个终端会话，并在它们之前切换</p><h2 id=基本概念>基本概念</h2><ul><li>会话(Session)：包含多个窗口的容器，负责“工作上下文”</li><li>窗口(Window)：占据整个屏幕的区域，包含多个窗格，负责“任务分组”</li><li>窗格(Pane)：窗口中的分割区域，负责“并行执行单元”</li></ul><h3 id=session会话>Session（会话）</h3><h4 id=定义>定义</h4><p>Session是tmux中最高级的运行实体，它代表一组长期存在的终端工作状态</p><ul><li>session由tmux server 管理</li><li>session不依附于某个终端窗口</li><li>可以被attach/detach</li><li>SSH断开 != session 消失</li></ul><h4 id=本质>本质</h4><p>Session = 一个完整的工作现场<br>它定义的是：</p><ul><li>你在干什么事</li><li>有哪些窗口</li><li>每个窗口里有哪些pane</li><li>所有进程是否继续跑</li></ul><blockquote><p>tmux中的Session就像是操作系统中的一个登录用户</p></blockquote><h4 id=典型用法>典型用法</h4><ul><li><code>session dev</code>：长期开发环境</li><li><code>session build</code>：重编译/实验</li><li><code>session remote</code>：某台服务器</li></ul><blockquote><p>一个session = 一个“主题明确的长期任务”</p></blockquote><h3 id=window窗口>Window（窗口）</h3><h4 id=定义-1>定义</h4><p>Window是session 内的一级容器，表示一组相关任务</p><ul><li>每个window全屏占据terminal</li><li>window之间互相隔离</li><li>window下包含若干pane</li></ul><h4 id=本质-1>本质</h4><p>Window = 任务分类</p><p>不是并行，不是并发，是逻辑分组</p><blockquote><p>window就像浏览器中的一个Tab</p></blockquote><h4 id=使用方式>使用方式</h4><p>不要把window当“分屏”</p><p>window是“切换思维焦点”的单位</p><ul><li>window0：编辑代码</li><li>window1：编译/运行</li><li>window2：文档/笔记</li></ul><h3 id=pane面板>Pane（面板）</h3><h4 id=定义-2>定义</h4><p>Pane是window内的最小执行单元</p><ul><li>一个pane对应一个shell/进程组</li><li>pane可以横向/纵向切分</li><li>pane是并行存在的</li></ul><h4 id=本质-2>本质</h4><p>Pane = 同时盯着的几个东西</p><blockquote><p>Pane就像操作系统的一个终端实例</p></blockquote><p>pane是并行观察与控制</p><h4 id=使用原则>使用原则</h4><p>pane不能多，2-3个是上限，超过就是认知噪音</p><h3 id=tmux解决的问题>tmux解决的问题</h3><p>不使用tmux时</p><ul><li>一个终端 = 一个会话</li><li>SSH断了 = 全部进程死</li><li>一个屏幕只能干一件事</li><li>开几个终端窗口 -> 上下文碎裂</li></ul><p>使用tmux后</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>[ tmux server ]
+| Author：ljf12825</div></div><div class=content><p>tmux(Terminal Multiplexer)是一个终端复用器，允许在单个终端窗口中同时访问多个终端会话，并在它们之前切换</p><h2 id=基本概念>基本概念</h2><ul><li>会话(Session)：包含多个窗口的容器，负责“工作上下文”</li><li>窗口(Window)：占据整个屏幕的区域，包含多个窗格，负责“任务分组”</li><li>窗格(Pane)：窗口中的分割区域，负责“并行执行单元”</li></ul><h3 id=session会话>Session（会话）</h3><h4 id=定义>定义</h4><p>Session是tmux中最高级的运行实体，它代表一组长期存在的终端工作状态</p><ul><li>session由tmux server 管理</li><li>session不依附于某个终端窗口</li><li>可以被attach/detach</li><li>SSH断开 != session 消失</li></ul><h4 id=本质>本质</h4><p>Session = 一个完整的工作现场<br>它定义的是：</p><ul><li>你在干什么事</li><li>有哪些窗口</li><li>每个窗口里有哪些pane</li><li>所有进程是否继续跑</li></ul><blockquote><p>tmux中的Session就像是操作系统中的一个登录用户</p></blockquote><h4 id=典型用法>典型用法</h4><ul><li><code>session dev</code>：长期开发环境</li><li><code>session build</code>：重编译/实验</li><li><code>session remote</code>：某台服务器</li></ul><blockquote><p>一个session = 一个“主题明确的长期任务”</p></blockquote><h3 id=window窗口>Window（窗口）</h3><h4 id=定义-1>定义</h4><p>Window是session 内的一级容器，表示一组相关任务</p><ul><li>每个window全屏占据terminal</li><li>window之间互相隔离</li><li>window下包含若干pane</li></ul><h4 id=本质-1>本质</h4><p>Window = 任务分类</p><p>不是并行，不是并发，是逻辑分组</p><blockquote><p>window就像浏览器中的一个Tab</p></blockquote><h4 id=使用方式>使用方式</h4><p>不要把window当“分屏”</p><p>window是“切换思维焦点”的单位</p><ul><li>window0：编辑代码</li><li>window1：编译/运行</li><li>window2：文档/笔记</li></ul><h3 id=pane面板>Pane（面板）</h3><h4 id=定义-2>定义</h4><p>Pane是window内的最小执行单元</p><ul><li>一个pane对应一个shell/进程组</li><li>pane可以横向/纵向切分</li><li>pane是并行存在的</li></ul><h4 id=本质-2>本质</h4><p>Pane = 同时盯着的几个东西</p><blockquote><p>Pane就像操作系统的一个终端实例</p></blockquote><p>pane是并行观察与控制</p><h4 id=使用原则>使用原则</h4><p>pane不能多，2-3个是上限，超过就是认知噪音</p><h3 id=tmux解决的问题>tmux解决的问题</h3><p>不使用tmux时</p><ul><li>一个终端 = 一个会话</li><li>SSH断了 = 全部进程死</li><li>一个屏幕只能干一件事</li><li>开几个终端窗口 -> 上下文碎裂</li></ul><p>使用tmux后</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>[ tmux server ]
 </span></span><span style=display:flex><span>   ├─ session A
 </span></span><span style=display:flex><span>   │    ├─ window 1
 </span></span><span style=display:flex><span>   │    │    ├─ pane
 </span></span><span style=display:flex><span>   │    │    └─ pane
 </span></span><span style=display:flex><span>   │    └─ window 2
 </span></span><span style=display:flex><span>   └─ session B
-</span></span></code></pre></div><p>断线不死/窗口管理/pane切分/工作区隔离</p><ul><li>pane不能跨window</li><li>window不能跨session</li><li>session可以attach多个终端</li></ul><h3 id=session-window-pane的正确使用方式>Session, Window, Pane的正确使用方式</h3><p>tmux的三层结构不是随意的技术设计，而是精心设计的认知管理工具</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>认知层次：
+</span></span></code></pre></div><p>断线不死/窗口管理/pane切分/工作区隔离</p><ul><li>pane不能跨window</li><li>window不能跨session</li><li>session可以attach多个终端</li></ul><h3 id=session-window-pane的正确使用方式>Session, Window, Pane的正确使用方式</h3><p>tmux的三层结构不是随意的技术设计，而是精心设计的认知管理工具</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>认知层次：
 </span></span><span style=display:flex><span>┌─────────────────────────────┐
 </span></span><span style=display:flex><span>│   Session：我在做什么事      │  ← 战略层
 </span></span><span style=display:flex><span>├─────────────────────────────┤
@@ -51,27 +51,27 @@
 </span></span><span style=display:flex><span>├─────────────────────────────┤
 </span></span><span style=display:flex><span>│   Pane：我需要同时看到什么   │  ← 操作层
 </span></span><span style=display:flex><span>└─────────────────────────────┘
-</span></span></code></pre></div><h4 id=session战略层面的工作容器>Session：战略层面的工作容器</h4><h5 id=核心职责>核心职责</h5><p>定义工作上下文和工作模式，Session回答的问题是”我当前的主任务是什么“</p><h5 id=正确理解>正确理解</h5><ol><li>不是终端标签，而是项目/环境容器</li><li>不是临时工作区，而是长期存在的上下文</li><li>不是按技术划分，而是按目标划分</li></ol><h5 id=正确使用方式>正确使用方式</h5><p>应该按这样创建Session</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 按项目划分</span>
-</span></span><span style=display:flex><span>tmux new -s project-alpha <span style=color:#75715e># Alpha项目</span>
-</span></span><span style=display:flex><span>tmux new -s project-beta <span style=color:#75715e># Beta项目</span>
+</span></span></code></pre></div><h4 id=session战略层面的工作容器>Session：战略层面的工作容器</h4><h5 id=核心职责>核心职责</h5><p>定义工作上下文和工作模式，Session回答的问题是”我当前的主任务是什么“</p><h5 id=正确理解>正确理解</h5><ol><li>不是终端标签，而是项目/环境容器</li><li>不是临时工作区，而是长期存在的上下文</li><li>不是按技术划分，而是按目标划分</li></ol><h5 id=正确使用方式>正确使用方式</h5><p>应该按这样创建Session</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 按项目划分</span>
+</span></span><span style=display:flex><span>tmux new -s project-alpha <span style=color:#6272a4># Alpha项目</span>
+</span></span><span style=display:flex><span>tmux new -s project-beta <span style=color:#6272a4># Beta项目</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 按环境划分</span>
-</span></span><span style=display:flex><span>tmux new -s production <span style=color:#75715e># 生产环境操作</span>
-</span></span><span style=display:flex><span>tmux new -s staging <span style=color:#75715e># 预发布环境</span>
-</span></span><span style=display:flex><span>tmux new -s local-dev <span style=color:#75715e># 本地开发</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 按环境划分</span>
+</span></span><span style=display:flex><span>tmux new -s production <span style=color:#6272a4># 生产环境操作</span>
+</span></span><span style=display:flex><span>tmux new -s staging <span style=color:#6272a4># 预发布环境</span>
+</span></span><span style=display:flex><span>tmux new -s local-dev <span style=color:#6272a4># 本地开发</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 按角色/任务划分</span>
-</span></span><span style=display:flex><span>tmux new -s code-review <span style=color:#75715e># 代码审查专用</span>
-</span></span><span style=display:flex><span>tmux new -s incident-202401 <span style=color:#75715e># 故障处理会话</span>
-</span></span><span style=display:flex><span>tmux new -s learning-go <span style=color:#75715e># Go语言学习</span>
-</span></span></code></pre></div><h5 id=错误使用方式>错误使用方式</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 错误：按技术栈划分（这应该是Window的职责）</span>
-</span></span><span style=display:flex><span>tmux new -s docker <span style=color:#75715e># 这是技术，不是目标</span>
-</span></span><span style=display:flex><span>tmux new -s python <span style=color:#75715e># 这是工具，不是项目</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 按角色/任务划分</span>
+</span></span><span style=display:flex><span>tmux new -s code-review <span style=color:#6272a4># 代码审查专用</span>
+</span></span><span style=display:flex><span>tmux new -s incident-202401 <span style=color:#6272a4># 故障处理会话</span>
+</span></span><span style=display:flex><span>tmux new -s learning-go <span style=color:#6272a4># Go语言学习</span>
+</span></span></code></pre></div><h5 id=错误使用方式>错误使用方式</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 错误：按技术栈划分（这应该是Window的职责）</span>
+</span></span><span style=display:flex><span>tmux new -s docker <span style=color:#6272a4># 这是技术，不是目标</span>
+</span></span><span style=display:flex><span>tmux new -s python <span style=color:#6272a4># 这是工具，不是项目</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 错误：按时间划分</span>
-</span></span><span style=display:flex><span>tmux new -s morning-work <span style=color:#75715e># 时间不是工作上下文</span>
-</span></span></code></pre></div><h5 id=session生命周期管理>Session生命周期管理</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>典型的Session生命周期：创建 -&gt; 长期使用 -&gt; 可能暂停（detach）-&gt; 继续 -&gt; 完成 -&gt; 归档/删除
-</span></span></code></pre></div><p>黄金法则：一个Session应该存在数天到数周，甚至数月</p><h4 id=window窗口战术层面的注意力管理器>Window（窗口）：战术层面的注意力管理器</h4><h5 id=核心职责-1>核心职责</h5><p>管理当前注意力的焦点，Window回答的问题是：我现在要关注什么任务</p><h5 id=正确理解-1>正确理解</h5><ol><li>不是并行执行工具（这是Pane的职责）</li><li>不是持久化存储（Session才是持久的）</li><li>是当前工作焦点的容器</li></ol><h5 id=正确使用方式-1>正确使用方式</h5><p>应该这样使用Window</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>在一个&#34;web-dev&#34; Session中：
+</span></span><span style=display:flex><span><span style=color:#6272a4># 错误：按时间划分</span>
+</span></span><span style=display:flex><span>tmux new -s morning-work <span style=color:#6272a4># 时间不是工作上下文</span>
+</span></span></code></pre></div><h5 id=session生命周期管理>Session生命周期管理</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>典型的Session生命周期：创建 -&gt; 长期使用 -&gt; 可能暂停（detach）-&gt; 继续 -&gt; 完成 -&gt; 归档/删除
+</span></span></code></pre></div><p>黄金法则：一个Session应该存在数天到数周，甚至数月</p><h4 id=window窗口战术层面的注意力管理器>Window（窗口）：战术层面的注意力管理器</h4><h5 id=核心职责-1>核心职责</h5><p>管理当前注意力的焦点，Window回答的问题是：我现在要关注什么任务</p><h5 id=正确理解-1>正确理解</h5><ol><li>不是并行执行工具（这是Pane的职责）</li><li>不是持久化存储（Session才是持久的）</li><li>是当前工作焦点的容器</li></ol><h5 id=正确使用方式-1>正确使用方式</h5><p>应该这样使用Window</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>在一个&#34;web-dev&#34; Session中：
 </span></span><span style=display:flex><span>├── window-1：前端开发（注意力：React组件）
 </span></span><span style=display:flex><span>│   ├── pane1：代码编辑器
 </span></span><span style=display:flex><span>│   └── pane2：浏览器预览
@@ -84,34 +84,34 @@
 </span></span><span style=display:flex><span>└── window-4：部署监控（注意力：系统状态）
 </span></span><span style=display:flex><span>    ├── pane1：日志跟踪
 </span></span><span style=display:flex><span>    └── pane2：性能监控
-</span></span></code></pre></div><h5 id=window的命名反映注意力焦点>Window的命名反映注意力焦点</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 好的命名（反映当前任务）</span>
-</span></span><span style=display:flex><span>1:editor <span style=color:#75715e># 清晰表明这是编辑器窗口</span>
-</span></span><span style=display:flex><span>2:test-run <span style=color:#75715e># 测试运行窗口</span>
-</span></span><span style=display:flex><span>3:db-console <span style=color:#75715e># 数据库控制台</span>
-</span></span><span style=display:flex><span>4:logs-tail <span style=color:#75715e># 日志跟踪窗口</span>
+</span></span></code></pre></div><h5 id=window的命名反映注意力焦点>Window的命名反映注意力焦点</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 好的命名（反映当前任务）</span>
+</span></span><span style=display:flex><span>1:editor <span style=color:#6272a4># 清晰表明这是编辑器窗口</span>
+</span></span><span style=display:flex><span>2:test-run <span style=color:#6272a4># 测试运行窗口</span>
+</span></span><span style=display:flex><span>3:db-console <span style=color:#6272a4># 数据库控制台</span>
+</span></span><span style=display:flex><span>4:logs-tail <span style=color:#6272a4># 日志跟踪窗口</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 更好的命名（使用emoji直观表达）</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 更好的命名（使用emoji直观表达）</span>
 </span></span><span style=display:flex><span>1:📝-editor
 </span></span><span style=display:flex><span>2:⚡-test
 </span></span><span style=display:flex><span>3:🗄️-db
 </span></span><span style=display:flex><span>4:📊-monitor
-</span></span></code></pre></div><h5 id=错误使用方式-1>错误使用方式</h5><p>不要这样使用Window</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 错误：用作文件管理器</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># （一个Window里开10个pane，每个pane一个目录）</span>
+</span></span></code></pre></div><h5 id=错误使用方式-1>错误使用方式</h5><p>不要这样使用Window</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 错误：用作文件管理器</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># （一个Window里开10个pane，每个pane一个目录）</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 错误：作为命令历史记录</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># （每执行一个长期命令就开新Window）</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 错误：作为命令历史记录</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># （每执行一个长期命令就开新Window）</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 错误：按服务划分（如果它们需要同时查看）</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># window1：nginx日志</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># window2：应用日志  </span>
-</span></span><span style=display:flex><span><span style=color:#75715e># window3：数据库日志</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># （这些应该在一个Window的多个Pane中同时查看！）</span>
-</span></span></code></pre></div><h5 id=window切换的心理模型>Window切换的心理模型</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>开发者思维：
+</span></span><span style=display:flex><span><span style=color:#6272a4># 错误：按服务划分（如果它们需要同时查看）</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># window1：nginx日志</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># window2：应用日志  </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># window3：数据库日志</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># （这些应该在一个Window的多个Pane中同时查看！）</span>
+</span></span></code></pre></div><h5 id=window切换的心理模型>Window切换的心理模型</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>开发者思维：
 </span></span><span style=display:flex><span>“我现在要写代码” -&gt; 切换到 coding window 
 </span></span><span style=display:flex><span>“我需要测试一下” -&gt; 切换到 testing window 
 </span></span><span style=display:flex><span>“查看部署状态” -&gt; 切换到 deploy window 
 </span></span><span style=display:flex><span>“处理用户反馈” -&gt; 切换到 feedback window
-</span></span></code></pre></div><p>黄金法则：当你的思维上下文需切换时，切换Window</p><h4 id=pane窗格操作层面的并行视图>Pane（窗格）：操作层面的并行视图</h4><h5 id=核心职责-2>核心职责</h5><p>提供同时观察和操作的能力，Pane回答的问题是：为了完成当前任务，我需要同时看到什么“</p><h5 id=正确理解-2>正确理解</h5><ol><li>不是多任务并行执行（虽然可以，但这不是主要目的）</li><li>不是长期运行进程的存放处（进程在Pane中运行，但Pane不是为存放而设计的）</li><li>是相关视图的并排放置</li></ol><h5 id=认知心理学基础72法则>认知心理学基础：7±2法则</h5><p>人类的短期记忆只能处理5-9个信息块，因此：<br>黄金法则：一个Window中的Pane数量不应超过4个，理想是2-3个</p><h5 id=正确使用方式-2>正确使用方式</h5><p>应该这样使用Pane</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>Window &#34;前端开发&#34; 中的Pane布局：
+</span></span></code></pre></div><p>黄金法则：当你的思维上下文需切换时，切换Window</p><h4 id=pane窗格操作层面的并行视图>Pane（窗格）：操作层面的并行视图</h4><h5 id=核心职责-2>核心职责</h5><p>提供同时观察和操作的能力，Pane回答的问题是：为了完成当前任务，我需要同时看到什么“</p><h5 id=正确理解-2>正确理解</h5><ol><li>不是多任务并行执行（虽然可以，但这不是主要目的）</li><li>不是长期运行进程的存放处（进程在Pane中运行，但Pane不是为存放而设计的）</li><li>是相关视图的并排放置</li></ol><h5 id=认知心理学基础72法则>认知心理学基础：7±2法则</h5><p>人类的短期记忆只能处理5-9个信息块，因此：<br>黄金法则：一个Window中的Pane数量不应超过4个，理想是2-3个</p><h5 id=正确使用方式-2>正确使用方式</h5><p>应该这样使用Pane</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>Window &#34;前端开发&#34; 中的Pane布局：
 </span></span><span style=display:flex><span>┌────────────────┬────────────────┐
 </span></span><span style=display:flex><span>│                │                │
 </span></span><span style=display:flex><span>│  代码编辑器    │  浏览器实时预览 │
@@ -125,34 +125,34 @@
 </span></span><span style=display:flex><span>└────────────────┴────────────────┘
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>每个Pane都与中心任务相关，可以同时观察交互结果。
-</span></span></code></pre></div><h5 id=优秀的pane组合模式>优秀的Pane组合模式</h5><ol><li>编辑器 + 预览模式（最常见）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>┌──────────────┬──────────────┐
+</span></span></code></pre></div><h5 id=优秀的pane组合模式>优秀的Pane组合模式</h5><ol><li>编辑器 + 预览模式（最常见）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>┌──────────────┬──────────────┐
 </span></span><span style=display:flex><span>│   编辑       │    预览       │
 </span></span><span style=display:flex><span>│   vim        │   browser    │
 </span></span><span style=display:flex><span>└──────────────┴──────────────┘
-</span></span></code></pre></div><ol start=2><li>代码 + 测试输出（TDD工作流）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>┌──────────────┬──────────────┐
+</span></span></code></pre></div><ol start=2><li>代码 + 测试输出（TDD工作流）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>┌──────────────┬──────────────┐
 </span></span><span style=display:flex><span>│   写测试      │  运行测试     │
 </span></span><span style=display:flex><span>│   test.js    │   jest       │
 </span></span><span style=display:flex><span>└──────────────┴──────────────┘
-</span></span></code></pre></div><ol start=3><li>主程序 + 日志监控（服务器开发）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>┌──────────────┬──────────────┐
+</span></span></code></pre></div><ol start=3><li>主程序 + 日志监控（服务器开发）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>┌──────────────┬──────────────┐
 </span></span><span style=display:flex><span>│   运行服务    │  查看日志     │
 </span></span><span style=display:flex><span>│   server.go  │   tail -f    │
 </span></span><span style=display:flex><span>└──────────────┴──────────────┘
-</span></span></code></pre></div><ol start=4><li>三窗格全能模式（全栈开发）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>┌──────┬──────┬──────┐
+</span></span></code></pre></div><ol start=4><li>三窗格全能模式（全栈开发）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>┌──────┬──────┬──────┐
 </span></span><span style=display:flex><span>│ 前端 │ 后端 │ 数据 │
 </span></span><span style=display:flex><span>│React │ API  │  DB  │
 </span></span><span style=display:flex><span>└──────┴──────┴──────┘
-</span></span></code></pre></div><h5 id=错误的使用方式>错误的使用方式</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 错误：创建不相关的pane</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># pane1: 项目A的代码编辑</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># pane2: 项目B的日志查看</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># pane3: 个人笔记记录</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># （这些应该在不同的Window甚至不同的Session中！）</span>
+</span></span></code></pre></div><h5 id=错误的使用方式>错误的使用方式</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 错误：创建不相关的pane</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># pane1: 项目A的代码编辑</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># pane2: 项目B的日志查看</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># pane3: 个人笔记记录</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># （这些应该在不同的Window甚至不同的Session中！）</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 错误：pane数量过多（认知超载）</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 超过4个pane，你已经开始记不清哪个是哪个了</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 错误：pane数量过多（认知超载）</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 超过4个pane，你已经开始记不清哪个是哪个了</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 错误：将pane作为&#34;后台进程存储&#34;</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 只是为了让进程不退出而开个pane，应该用nohup或systemd</span>
-</span></span></code></pre></div><h4 id=决策流程图何时使用sessionwindowpane>决策流程图：何时使用Session/Window/Pane</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>开始新任务
+</span></span><span style=display:flex><span><span style=color:#6272a4># 错误：将pane作为&#34;后台进程存储&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 只是为了让进程不退出而开个pane，应该用nohup或systemd</span>
+</span></span></code></pre></div><h4 id=决策流程图何时使用sessionwindowpane>决策流程图：何时使用Session/Window/Pane</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>开始新任务
 </span></span><span style=display:flex><span>    ↓
 </span></span><span style=display:flex><span>问：这是一个全新的项目/环境吗？
 </span></span><span style=display:flex><span>    ├── 是 → 创建新的 Session
@@ -165,221 +165,221 @@
 </span></span><span style=display:flex><span>问：我需要同时观察多个相关事物吗？
 </span></span><span style=display:flex><span>    ├── 是 → 在当前Window中创建新的 Pane
 </span></span><span style=display:flex><span>    └── 否 → 保持单Pane或关闭不需要的Pane
-</span></span></code></pre></div><h2 id=基本使用>基本使用</h2><h3 id=tmux的前缀键模型>tmux的“前缀键”模型</h3><p>tmux所有命令都要先按前缀键<br>默认前缀</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>Ctrl + b 
-</span></span></code></pre></div><blockquote><p>Prefix + command</p></blockquote><h3 id=启动和退出>启动和退出</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 启动新会话</span>
+</span></span></code></pre></div><h2 id=基本使用>基本使用</h2><h3 id=tmux的前缀键模型>tmux的“前缀键”模型</h3><p>tmux所有命令都要先按前缀键<br>默认前缀</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>Ctrl + b 
+</span></span></code></pre></div><blockquote><p>Prefix + command</p></blockquote><h3 id=启动和退出>启动和退出</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 启动新会话</span>
 </span></span><span style=display:flex><span>tmux 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 启动新会话并命名</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 启动新会话并命名</span>
 </span></span><span style=display:flex><span>tmux new -s session_name
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 退出会话</span>
-</span></span><span style=display:flex><span>exit 或 Ctrl+d 
+</span></span><span style=display:flex><span><span style=color:#6272a4># 退出会话</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>exit</span> 或 Ctrl+d 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 分离会话（保持后台运行）</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 分离会话（保持后台运行）</span>
 </span></span><span style=display:flex><span>Ctrl+b d 
-</span></span></code></pre></div><h3 id=单元管理>单元管理</h3><h4 id=pane窗格>Pane（窗格）</h4><table><thead><tr><th>操作</th><th>按键</th></tr></thead><tbody><tr><td>横向分屏</td><td><code>Ctrl+b %</code></td></tr><tr><td>纵向分屏</td><td><code>Ctrl+b "</code></td></tr><tr><td>在pane间移动</td><td><code>Ctrl+b ^v&lt;></code></td></tr><tr><td>显示窗格编号，然后输入编号切换</td><td><code>Ctrl+b q</code></td></tr><tr><td>调整窗格大小，逐步调整</td><td><code>Ctrl+b Alt+^v&lt;></code></td></tr><tr><td>调整窗格大小，快速调整</td><td><code>Ctrl+b Ctrl+^v&lt;></code></td></tr><tr><td>关闭当前窗格</td><td><code>Ctrl+b x</code></td></tr><tr><td>全屏/恢复窗格</td><td><code>Ctrl+b z</code></td></tr><tr><td>重新排列窗格布局，循环切换布局</td><td><code>Ctrl+b Space</code></td></tr><tr><td>将当前pane转换为独立窗口</td><td><code>prefix + !</code></td></tr></tbody></table><h4 id=window标签页>Window（标签页）</h4><table><thead><tr><th>操作</th><th>按键</th></tr></thead><tbody><tr><td>新建窗口</td><td><code>Ctrl+b c</code></td></tr><tr><td>下一个窗口</td><td><code>Ctrl+b n</code></td></tr><tr><td>上一个窗口</td><td><code>Ctrl+b p</code></td></tr><tr><td>切换到上次使用的窗口</td><td><code>Ctrl+b l</code></td></tr><tr><td>切换到指定编号窗口</td><td><code>Ctrl+b 0~9</code></td></tr><tr><td>重命名窗口</td><td><code>Ctrl+b ,</code></td></tr><tr><td>关闭当前窗口</td><td><code>Ctrl+b &</code></td></tr></tbody></table><h4 id=session工作区>Session（工作区）</h4><table><thead><tr><th>操作</th><th>命令</th></tr></thead><tbody><tr><td>新session</td><td><code>tmux new -s name</code></td></tr><tr><td>查看session</td><td><code>tmux ls</code></td></tr><tr><td>进入session</td><td><code>tmux attach -t name</code></td></tr><tr><td>退出session，但不结束(detach)</td><td><code>Ctrl+b d</code></td></tr><tr><td>杀session</td><td><code>tmux kill-session -t name</code></td></tr><tr><td>重新链接到session</td><td><code>tmux attach -t session_name</code></td></tr><tr><td>重命名当前session</td><td><code>Ctrl+b $</code></td></tr></tbody></table><h3 id=常用快捷键>常用快捷键</h3><p>所有操作都以<code>Ctrl+b</code>为前缀</p><h4 id=基础快捷键>基础快捷键</h4><table><thead><tr><th>command</th><th>description</th></tr></thead><tbody><tr><td><code>?</code></td><td>显示所有快捷键帮助</td></tr><tr><td><code>:</code></td><td>进入命令行模式</td></tr><tr><td><code>[</code></td><td>进入复制模式（用方向键移动，q退出）</td></tr><tr><td><code>]</code></td><td>粘贴</td></tr><tr><td><code>=</code></td><td>选择要粘贴的缓冲区</td></tr></tbody></table><h4 id=session管理快捷键>session管理快捷键</h4><table><thead><tr><th>command</th><th>description</th></tr></thead><tbody><tr><td><code>s</code></td><td>列出所有会话并切换</td></tr><tr><td><code>$</code></td><td>重命名当前会话</td></tr><tr><td><code>(</code></td><td>切换到上一个会话</td></tr><tr><td><code>)</code></td><td>切换到下一个会话</td></tr></tbody></table><h4 id=window管理快捷键>window管理快捷键</h4><table><thead><tr><th>command</th><th>description</th></tr></thead><tbody><tr><td><code>c</code></td><td>创建新窗口</td></tr><tr><td><code>,</code></td><td>重命名当前窗口</td></tr><tr><td><code>w</code></td><td>列出所有窗口</td></tr><tr><td><code>&</code></td><td>关闭当前窗口</td></tr><tr><td><code>f</code></td><td>查找窗口</td></tr><tr><td><code>.</code></td><td>移动窗口（输入新编号）</td></tr></tbody></table><h4 id=pane管理快捷键>pane管理快捷键</h4><table><thead><tr><th>command</th><th>description</th></tr></thead><tbody><tr><td><code>!</code></td><td>将当前窗格拆分为新窗口</td></tr><tr><td><code>o</code></td><td>切换到下一个窗格</td></tr><tr><td><code>;</code></td><td>切换到上一个使用的窗格</td></tr><tr><td><code>{</code></td><td>与上一个窗格交换位置</td></tr><tr><td><code>}</code></td><td>与下一个窗格交换位置</td></tr><tr><td><code>t</code></td><td>显示时钟</td></tr><tr><td><code>q</code></td><td>显示pane编号</td></tr></tbody></table><h2 id=配置文件>配置文件</h2><p>配置文件位置：<code>~/.tmux.conf</code>，是tmux的核心，它决定了tmux的外观、行为和快捷键</p><h3 id=配置文件位置与结构>配置文件位置与结构</h3><h4 id=主要配置文件>主要配置文件</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 用户级配置文件（优先级最高）</span>
+</span></span></code></pre></div><h3 id=单元管理>单元管理</h3><h4 id=pane窗格>Pane（窗格）</h4><table><thead><tr><th>操作</th><th>按键</th></tr></thead><tbody><tr><td>横向分屏</td><td><code>Ctrl+b %</code></td></tr><tr><td>纵向分屏</td><td><code>Ctrl+b "</code></td></tr><tr><td>在pane间移动</td><td><code>Ctrl+b ^v&lt;></code></td></tr><tr><td>显示窗格编号，然后输入编号切换</td><td><code>Ctrl+b q</code></td></tr><tr><td>调整窗格大小，逐步调整</td><td><code>Ctrl+b Alt+^v&lt;></code></td></tr><tr><td>调整窗格大小，快速调整</td><td><code>Ctrl+b Ctrl+^v&lt;></code></td></tr><tr><td>关闭当前窗格</td><td><code>Ctrl+b x</code></td></tr><tr><td>全屏/恢复窗格</td><td><code>Ctrl+b z</code></td></tr><tr><td>重新排列窗格布局，循环切换布局</td><td><code>Ctrl+b Space</code></td></tr><tr><td>将当前pane转换为独立窗口</td><td><code>prefix + !</code></td></tr></tbody></table><h4 id=window标签页>Window（标签页）</h4><table><thead><tr><th>操作</th><th>按键</th></tr></thead><tbody><tr><td>新建窗口</td><td><code>Ctrl+b c</code></td></tr><tr><td>下一个窗口</td><td><code>Ctrl+b n</code></td></tr><tr><td>上一个窗口</td><td><code>Ctrl+b p</code></td></tr><tr><td>切换到上次使用的窗口</td><td><code>Ctrl+b l</code></td></tr><tr><td>切换到指定编号窗口</td><td><code>Ctrl+b 0~9</code></td></tr><tr><td>重命名窗口</td><td><code>Ctrl+b ,</code></td></tr><tr><td>关闭当前窗口</td><td><code>Ctrl+b &</code></td></tr></tbody></table><h4 id=session工作区>Session（工作区）</h4><table><thead><tr><th>操作</th><th>命令</th></tr></thead><tbody><tr><td>新session</td><td><code>tmux new -s name</code></td></tr><tr><td>查看session</td><td><code>tmux ls</code></td></tr><tr><td>进入session</td><td><code>tmux attach -t name</code></td></tr><tr><td>退出session，但不结束(detach)</td><td><code>Ctrl+b d</code></td></tr><tr><td>杀session</td><td><code>tmux kill-session -t name</code></td></tr><tr><td>重新链接到session</td><td><code>tmux attach -t session_name</code></td></tr><tr><td>重命名当前session</td><td><code>Ctrl+b $</code></td></tr></tbody></table><h3 id=常用快捷键>常用快捷键</h3><p>所有操作都以<code>Ctrl+b</code>为前缀</p><h4 id=基础快捷键>基础快捷键</h4><table><thead><tr><th>command</th><th>description</th></tr></thead><tbody><tr><td><code>?</code></td><td>显示所有快捷键帮助</td></tr><tr><td><code>:</code></td><td>进入命令行模式</td></tr><tr><td><code>[</code></td><td>进入复制模式（用方向键移动，q退出）</td></tr><tr><td><code>]</code></td><td>粘贴</td></tr><tr><td><code>=</code></td><td>选择要粘贴的缓冲区</td></tr></tbody></table><h4 id=session管理快捷键>session管理快捷键</h4><table><thead><tr><th>command</th><th>description</th></tr></thead><tbody><tr><td><code>s</code></td><td>列出所有会话并切换</td></tr><tr><td><code>$</code></td><td>重命名当前会话</td></tr><tr><td><code>(</code></td><td>切换到上一个会话</td></tr><tr><td><code>)</code></td><td>切换到下一个会话</td></tr></tbody></table><h4 id=window管理快捷键>window管理快捷键</h4><table><thead><tr><th>command</th><th>description</th></tr></thead><tbody><tr><td><code>c</code></td><td>创建新窗口</td></tr><tr><td><code>,</code></td><td>重命名当前窗口</td></tr><tr><td><code>w</code></td><td>列出所有窗口</td></tr><tr><td><code>&</code></td><td>关闭当前窗口</td></tr><tr><td><code>f</code></td><td>查找窗口</td></tr><tr><td><code>.</code></td><td>移动窗口（输入新编号）</td></tr></tbody></table><h4 id=pane管理快捷键>pane管理快捷键</h4><table><thead><tr><th>command</th><th>description</th></tr></thead><tbody><tr><td><code>!</code></td><td>将当前窗格拆分为新窗口</td></tr><tr><td><code>o</code></td><td>切换到下一个窗格</td></tr><tr><td><code>;</code></td><td>切换到上一个使用的窗格</td></tr><tr><td><code>{</code></td><td>与上一个窗格交换位置</td></tr><tr><td><code>}</code></td><td>与下一个窗格交换位置</td></tr><tr><td><code>t</code></td><td>显示时钟</td></tr><tr><td><code>q</code></td><td>显示pane编号</td></tr></tbody></table><h2 id=配置文件>配置文件</h2><p>配置文件位置：<code>~/.tmux.conf</code>，是tmux的核心，它决定了tmux的外观、行为和快捷键</p><h3 id=配置文件位置与结构>配置文件位置与结构</h3><h4 id=主要配置文件>主要配置文件</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 用户级配置文件（优先级最高）</span>
 </span></span><span style=display:flex><span>~/.tmux.conf 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 系统级配置文件</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 系统级配置文件</span>
 </span></span><span style=display:flex><span>/etc/tmux.conf 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 命令行加载指定配置</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 命令行加载指定配置</span>
 </span></span><span style=display:flex><span>tmux -f /path/to/config.conf 
-</span></span></code></pre></div><h4 id=配置文件语法>配置文件语法</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 注释以#开头</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 基础格式：命令 参数</span>
+</span></span></code></pre></div><h4 id=配置文件语法>配置文件语法</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 注释以#开头</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 基础格式：命令 参数</span>
 </span></span><span style=display:flex><span>set-option -g option value 
-</span></span><span style=display:flex><span>bind-key key command 
+</span></span><span style=display:flex><span>bind-key key <span style=color:#8be9fd;font-style:italic>command</span> 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 分号分隔多个命令</span>
-</span></span><span style=display:flex><span>bind r source-file ~/.tmux.conf <span style=color:#ae81ff>\;</span> display <span style=color:#e6db74>&#34;加载完成&#34;</span>
-</span></span></code></pre></div><h3 id=配置分类详解>配置分类详解</h3><h4 id=前缀键设置>前缀键设置</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 设置前缀键为Ctrl+a </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 分号分隔多个命令</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>bind</span> r source-file ~/.tmux.conf <span style=color:#f1fa8c>\;</span> display <span style=color:#f1fa8c>&#34;加载完成&#34;</span>
+</span></span></code></pre></div><h3 id=配置分类详解>配置分类详解</h3><h4 id=前缀键设置>前缀键设置</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 设置前缀键为Ctrl+a </span>
 </span></span><span style=display:flex><span>set-option -g prefix C-a 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 取消默认前缀键绑定</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 取消默认前缀键绑定</span>
 </span></span><span style=display:flex><span>unbind-key C-b 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 允许按两次前缀键发送到应用</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 允许按两次前缀键发送到应用</span>
 </span></span><span style=display:flex><span>bind-key C-a send-prefix 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 设置第二前缀键（可选）</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 设置第二前缀键（可选）</span>
 </span></span><span style=display:flex><span>set-option -g prefix2 C-b 
-</span></span></code></pre></div><h4 id=响应时间设置>响应时间设置</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 减少前缀键响应延迟（单位：ms）</span>
-</span></span><span style=display:flex><span>set-option -sg escape-time <span style=color:#ae81ff>10</span> <span style=color:#75715e># 推荐10-50ms </span>
+</span></span></code></pre></div><h4 id=响应时间设置>响应时间设置</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 减少前缀键响应延迟（单位：ms）</span>
+</span></span><span style=display:flex><span>set-option -sg escape-time <span style=color:#bd93f9>10</span> <span style=color:#6272a4># 推荐10-50ms </span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 设置命令提示延迟</span>
-</span></span><span style=display:flex><span>set-option -g display-time <span style=color:#ae81ff>1500</span> <span style=color:#75715e># 状态消息显示时间</span>
-</span></span></code></pre></div><h4 id=编号系统>编号系统</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 窗口和窗格从1开始编号（更符合直觉）</span>
-</span></span><span style=display:flex><span>set -g base-index <span style=color:#ae81ff>1</span> <span style=color:#75715e># 窗口编号</span>
-</span></span><span style=display:flex><span>set -g pane-base-index <span style=color:#ae81ff>1</span> <span style=color:#75715e># 窗格编号</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 设置命令提示延迟</span>
+</span></span><span style=display:flex><span>set-option -g display-time <span style=color:#bd93f9>1500</span> <span style=color:#6272a4># 状态消息显示时间</span>
+</span></span></code></pre></div><h4 id=编号系统>编号系统</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 窗口和窗格从1开始编号（更符合直觉）</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g base-index <span style=color:#bd93f9>1</span> <span style=color:#6272a4># 窗口编号</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g pane-base-index <span style=color:#bd93f9>1</span> <span style=color:#6272a4># 窗格编号</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 重新编号窗口（关闭后保持连续）</span>
-</span></span><span style=display:flex><span>set -g renumber-window on 
+</span></span><span style=display:flex><span><span style=color:#6272a4># 重新编号窗口（关闭后保持连续）</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g renumber-window on 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 设置历史行数</span>
-</span></span><span style=display:flex><span>set -g history-limit <span style=color:#ae81ff>5000</span> <span style=color:#75715e># 默认2000行 </span>
-</span></span></code></pre></div><h4 id=完整鼠标配置>完整鼠标配置</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 启用鼠标支持（现代tmux）</span>
-</span></span><span style=display:flex><span>set -g mouse on 
+</span></span><span style=display:flex><span><span style=color:#6272a4># 设置历史行数</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g history-limit <span style=color:#bd93f9>5000</span> <span style=color:#6272a4># 默认2000行 </span>
+</span></span></code></pre></div><h4 id=完整鼠标配置>完整鼠标配置</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 启用鼠标支持（现代tmux）</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g mouse on 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 详细鼠标配置（旧版本兼容）</span>
-</span></span><span style=display:flex><span>set -g mouse-utf8 on <span style=color:#75715e># 废弃 </span>
-</span></span><span style=display:flex><span>set -g mouse-resize-pane on 
-</span></span><span style=display:flex><span>set -g mouse-select-pane on 
-</span></span><span style=display:flex><span>set -g mouse-select-window on 
+</span></span><span style=display:flex><span><span style=color:#6272a4># 详细鼠标配置（旧版本兼容）</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g mouse-utf8 on <span style=color:#6272a4># 废弃 </span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g mouse-resize-pane on 
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g mouse-select-pane on 
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g mouse-select-window on 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 复制模式中使用鼠标滚轮</span>
-</span></span><span style=display:flex><span>setw -g mode-mouse on <span style=color:#75715e># 废弃</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 复制模式中使用鼠标滚轮</span>
+</span></span><span style=display:flex><span>setw -g mode-mouse on <span style=color:#6272a4># 废弃</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 禁用鼠标时快速切换</span>
-</span></span><span style=display:flex><span>bind m set -g mouse on <span style=color:#ae81ff>\;</span> display <span style=color:#e6db74>&#34;Mouse: ON&#34;</span>
-</span></span><span style=display:flex><span>bind M set -g mouse off <span style=color:#ae81ff>\;</span> display <span style=color:#e6db74>&#34;Mouse: OFF&#34;</span>
-</span></span></code></pre></div><h4 id=状态栏基础配置>状态栏基础配置</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 启用状态栏</span>
-</span></span><span style=display:flex><span>set -g status on 
+</span></span><span style=display:flex><span><span style=color:#6272a4># 禁用鼠标时快速切换</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>bind</span> m <span style=color:#8be9fd;font-style:italic>set</span> -g mouse on <span style=color:#f1fa8c>\;</span> display <span style=color:#f1fa8c>&#34;Mouse: ON&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>bind</span> M <span style=color:#8be9fd;font-style:italic>set</span> -g mouse off <span style=color:#f1fa8c>\;</span> display <span style=color:#f1fa8c>&#34;Mouse: OFF&#34;</span>
+</span></span></code></pre></div><h4 id=状态栏基础配置>状态栏基础配置</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 启用状态栏</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g status on 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 状态栏设置</span>
-</span></span><span style=display:flex><span>set -g status-position top <span style=color:#75715e># top 或 bottom </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 状态栏设置</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g status-position top <span style=color:#6272a4># top 或 bottom </span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 状态栏刷新间隔（毫秒）</span>
-</span></span><span style=display:flex><span>set -g status-interval <span style=color:#ae81ff>1</span> 
+</span></span><span style=display:flex><span><span style=color:#6272a4># 状态栏刷新间隔（毫秒）</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g status-interval <span style=color:#bd93f9>1</span> 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 状态栏长度</span>
-</span></span><span style=display:flex><span>set -g status-left-length <span style=color:#ae81ff>20</span> 
-</span></span><span style=display:flex><span>set -g status-right-length <span style=color:#ae81ff>150</span> 
-</span></span></code></pre></div><h4 id=状态栏样式>状态栏样式</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 颜色设置</span>
-</span></span><span style=display:flex><span>set -g status-style <span style=color:#e6db74>&#34;bg=colour235,fg=colour250&#34;</span>  <span style=color:#75715e># 灰色系</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 或</span>
-</span></span><span style=display:flex><span>set -g status-bg black
-</span></span><span style=display:flex><span>set -g status-fg white
+</span></span><span style=display:flex><span><span style=color:#6272a4># 状态栏长度</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g status-left-length <span style=color:#bd93f9>20</span> 
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g status-right-length <span style=color:#bd93f9>150</span> 
+</span></span></code></pre></div><h4 id=状态栏样式>状态栏样式</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 颜色设置</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g status-style <span style=color:#f1fa8c>&#34;bg=colour235,fg=colour250&#34;</span>  <span style=color:#6272a4># 灰色系</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 或</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g status-bg black
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g status-fg white
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 当前窗口样式</span>
-</span></span><span style=display:flex><span>setw -g window-status-current-style <span style=color:#e6db74>&#34;bg=red,fg=black,bold&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 当前窗口样式</span>
+</span></span><span style=display:flex><span>setw -g window-status-current-style <span style=color:#f1fa8c>&#34;bg=red,fg=black,bold&#34;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 活动窗口样式</span>
-</span></span><span style=display:flex><span>setw -g window-status-activity-style <span style=color:#e6db74>&#34;bg=colour237,fg=colour250&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 活动窗口样式</span>
+</span></span><span style=display:flex><span>setw -g window-status-activity-style <span style=color:#f1fa8c>&#34;bg=colour237,fg=colour250&#34;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 铃铛样式</span>
-</span></span><span style=display:flex><span>set -g window-status-bell-style <span style=color:#e6db74>&#34;fg=colour255,bg=colour1,bold&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 铃铛样式</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g window-status-bell-style <span style=color:#f1fa8c>&#34;fg=colour255,bg=colour1,bold&#34;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 窗口列表样式</span>
-</span></span><span style=display:flex><span>setw -g window-status-style <span style=color:#e6db74>&#34;fg=colour244,bg=colour234&#34;</span>
-</span></span><span style=display:flex><span>setw -g window-status-format <span style=color:#e6db74>&#34; #I:#W#F &#34;</span>
-</span></span><span style=display:flex><span>setw -g window-status-current-format <span style=color:#e6db74>&#34; #I:#W#F &#34;</span>
-</span></span></code></pre></div><h4 id=状态栏内容>状态栏内容</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 左侧内容</span>
-</span></span><span style=display:flex><span>set -g status-left <span style=color:#e6db74>&#34;#[fg=green]#H #[fg=blue]#S #[fg=yellow]%Y-%m-%d&#34;</span>
-</span></span><span style=display:flex><span>set -g status-left-length <span style=color:#ae81ff>50</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 窗口列表样式</span>
+</span></span><span style=display:flex><span>setw -g window-status-style <span style=color:#f1fa8c>&#34;fg=colour244,bg=colour234&#34;</span>
+</span></span><span style=display:flex><span>setw -g window-status-format <span style=color:#f1fa8c>&#34; #I:#W#F &#34;</span>
+</span></span><span style=display:flex><span>setw -g window-status-current-format <span style=color:#f1fa8c>&#34; #I:#W#F &#34;</span>
+</span></span></code></pre></div><h4 id=状态栏内容>状态栏内容</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 左侧内容</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g status-left <span style=color:#f1fa8c>&#34;#[fg=green]#H #[fg=blue]#S #[fg=yellow]%Y-%m-%d&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g status-left-length <span style=color:#bd93f9>50</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 右侧内容（支持多种系统信息）</span>
-</span></span><span style=display:flex><span>set -g status-right <span style=color:#e6db74>&#34;#{cpu_percentage} | #{battery_icon} #{battery_percentage} | %a %H:%M&#34;</span>
-</span></span><span style=display:flex><span>set -g status-right-length <span style=color:#ae81ff>150</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 右侧内容（支持多种系统信息）</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g status-right <span style=color:#f1fa8c>&#34;#{cpu_percentage} | #{battery_icon} #{battery_percentage} | %a %H:%M&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g status-right-length <span style=color:#bd93f9>150</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 使用插件增强状态栏</span>
-</span></span><span style=display:flex><span>set -g @plugin <span style=color:#e6db74>&#39;tmux-plugins/tmux-cpu&#39;</span>
-</span></span><span style=display:flex><span>set -g @plugin <span style=color:#e6db74>&#39;tmux-plugins/tmux-battery&#39;</span>
-</span></span><span style=display:flex><span>set -g @plugin <span style=color:#e6db74>&#39;tmux-plugins/tmux-net-speed&#39;</span>
-</span></span></code></pre></div><h4 id=窗格边框>窗格边框</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 边框样式</span>
-</span></span><span style=display:flex><span>set -g pane-border-style <span style=color:#e6db74>&#34;fg=colour240&#34;</span>      <span style=color:#75715e># 非活动边框</span>
-</span></span><span style=display:flex><span>set -g pane-active-border-style <span style=color:#e6db74>&#34;fg=green&#34;</span>   <span style=color:#75715e># 活动边框</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 使用插件增强状态栏</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g @plugin <span style=color:#f1fa8c>&#39;tmux-plugins/tmux-cpu&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g @plugin <span style=color:#f1fa8c>&#39;tmux-plugins/tmux-battery&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g @plugin <span style=color:#f1fa8c>&#39;tmux-plugins/tmux-net-speed&#39;</span>
+</span></span></code></pre></div><h4 id=窗格边框>窗格边框</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 边框样式</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g pane-border-style <span style=color:#f1fa8c>&#34;fg=colour240&#34;</span>      <span style=color:#6272a4># 非活动边框</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g pane-active-border-style <span style=color:#f1fa8c>&#34;fg=green&#34;</span>   <span style=color:#6272a4># 活动边框</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 边框字符</span>
-</span></span><span style=display:flex><span>set -g pane-border-indicators <span style=color:#e6db74>&#34;both&#34;</span>  <span style=color:#75715e># arrows, colour, both</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 边框字符</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g pane-border-indicators <span style=color:#f1fa8c>&#34;both&#34;</span>  <span style=color:#6272a4># arrows, colour, both</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 显示窗格编号</span>
-</span></span><span style=display:flex><span>set -g display-panes-time <span style=color:#ae81ff>1500</span>        <span style=color:#75715e># 显示时间（毫秒）</span>
-</span></span><span style=display:flex><span>set -g display-panes-colour blue
-</span></span><span style=display:flex><span>set -g display-panes-active-colour red
-</span></span></code></pre></div><h4 id=窗格行为>窗格行为</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 允许窗格重命名</span>
-</span></span><span style=display:flex><span>set -g allow-rename on
+</span></span><span style=display:flex><span><span style=color:#6272a4># 显示窗格编号</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g display-panes-time <span style=color:#bd93f9>1500</span>        <span style=color:#6272a4># 显示时间（毫秒）</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g display-panes-colour blue
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g display-panes-active-colour red
+</span></span></code></pre></div><h4 id=窗格行为>窗格行为</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 允许窗格重命名</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g allow-rename on
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 鼠标选择时自动切换窗格</span>
-</span></span><span style=display:flex><span>set -g mouse-select-pane on
+</span></span><span style=display:flex><span><span style=color:#6272a4># 鼠标选择时自动切换窗格</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g mouse-select-pane on
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 同步窗格输入（广播到所有窗格）</span>
-</span></span><span style=display:flex><span>bind C-s set-window-option synchronize-panes
+</span></span><span style=display:flex><span><span style=color:#6272a4># 同步窗格输入（广播到所有窗格）</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>bind</span> C-s set-window-option synchronize-panes
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 设置窗格切换延迟</span>
-</span></span><span style=display:flex><span>set -g repeat-time <span style=color:#ae81ff>300</span>
-</span></span></code></pre></div><h4 id=窗口配置>窗口配置</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 窗口自动重命名</span>
-</span></span><span style=display:flex><span>set -g automatic-rename on
-</span></span><span style=display:flex><span>set -g automatic-rename-format <span style=color:#e6db74>&#39;#{b:pane_current_path}&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 设置窗格切换延迟</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g repeat-time <span style=color:#bd93f9>300</span>
+</span></span></code></pre></div><h4 id=窗口配置>窗口配置</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 窗口自动重命名</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g automatic-rename on
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g automatic-rename-format <span style=color:#f1fa8c>&#39;#{b:pane_current_path}&#39;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 窗口铃铛</span>
-</span></span><span style=display:flex><span>set -g visual-activity on
-</span></span><span style=display:flex><span>set -g visual-bell on
-</span></span><span style=display:flex><span>set -g visual-silence on
-</span></span><span style=display:flex><span>set -g bell-action any
+</span></span><span style=display:flex><span><span style=color:#6272a4># 窗口铃铛</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g visual-activity on
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g visual-bell on
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g visual-silence on
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g bell-action any
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 窗口列表样式</span>
-</span></span><span style=display:flex><span>setw -g window-status-separator <span style=color:#e6db74>&#34; | &#34;</span>
-</span></span></code></pre></div><h2 id=会话持久化>会话持久化</h2><p>tmux的会话默认在重启后会丢失<br>要实现会话持久化，可以使用以下方法</p><ol><li>使用tmux-resurrect插件</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 安装步骤</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 1. 安装tpm(tmux插件管理器)</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 窗口列表样式</span>
+</span></span><span style=display:flex><span>setw -g window-status-separator <span style=color:#f1fa8c>&#34; | &#34;</span>
+</span></span></code></pre></div><h2 id=会话持久化>会话持久化</h2><p>tmux的会话默认在重启后会丢失<br>要实现会话持久化，可以使用以下方法</p><ol><li>使用tmux-resurrect插件</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 安装步骤</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 1. 安装tpm(tmux插件管理器)</span>
 </span></span><span style=display:flex><span>git clone https://github.com/tmux-plugins/tpm~/.tmux/plugins/tpm 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 2. 在~/.tmux.conf中添加</span>
-</span></span><span style=display:flex><span>set -g @plugins <span style=color:#e6db74>&#39;tmux-plugins/tpm&#39;</span>
-</span></span><span style=display:flex><span>set -g @plugins <span style=color:#e6db74>&#39;tmux-plugins/tmux-resurrect&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 2. 在~/.tmux.conf中添加</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g @plugins <span style=color:#f1fa8c>&#39;tmux-plugins/tpm&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g @plugins <span style=color:#f1fa8c>&#39;tmux-plugins/tmux-resurrect&#39;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 3. 重新加载配置后配置前缀键 + I 安装插件</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 3. 重新加载配置后配置前缀键 + I 安装插件</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 使用方法</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 保存会话：前缀键 + Ctrl-s </span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 恢复会话：前缀键 + Ctrl-r </span>
-</span></span></code></pre></div><p>resurrect不能恢复进程内部状态，只能恢复session/window/pane结构、cwd、命令行（部分），tmux-resurrect解决的是”工作结构丢失“，不是”程序状态恢复“</p><ol start=2><li>手动保存和恢复</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 保存会话</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 使用方法</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 保存会话：前缀键 + Ctrl-s </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 恢复会话：前缀键 + Ctrl-r </span>
+</span></span></code></pre></div><p>resurrect不能恢复进程内部状态，只能恢复session/window/pane结构、cwd、命令行（部分），tmux-resurrect解决的是”工作结构丢失“，不是”程序状态恢复“</p><ol start=2><li>手动保存和恢复</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 保存会话</span>
 </span></span><span style=display:flex><span>tmux list-sessions &gt; ~/.tmux-sessions 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 恢复会话（脚本）</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#!/bin/bash </span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>while</span> IFS<span style=color:#f92672>=</span> read -r session; <span style=color:#66d9ef>do</span> 
-</span></span><span style=display:flex><span>    tmux new-session -d -s <span style=color:#e6db74>&#34;</span>$session<span style=color:#e6db74>&#34;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>done</span> &lt; ~/tmux-sessions 
-</span></span></code></pre></div><ol start=3><li>自动保存脚本</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 在~/.tmux.conf中添加</span>
-</span></span><span style=display:flex><span>set -g @resurrect-save <span style=color:#e6db74>&#39;S&#39;</span>
-</span></span><span style=display:flex><span>set -g @resurrect-restore <span style=color:#e6db74>&#39;R&#39;</span>
-</span></span></code></pre></div><h2 id=批量操作>批量操作</h2><ol><li>同步输入到多个窗格</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 进入同步模式</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 恢复会话（脚本）</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>#!/bin/bash </span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>while</span> <span style=color:#8be9fd;font-style:italic>IFS</span><span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>read</span> -r session; <span style=color:#ff79c6>do</span> 
+</span></span><span style=display:flex><span>    tmux new-session -d -s <span style=color:#f1fa8c>&#34;</span><span style=color:#8be9fd;font-style:italic>$session</span><span style=color:#f1fa8c>&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>done</span> &lt; ~/tmux-sessions 
+</span></span></code></pre></div><ol start=3><li>自动保存脚本</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 在~/.tmux.conf中添加</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g @resurrect-save <span style=color:#f1fa8c>&#39;S&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g @resurrect-restore <span style=color:#f1fa8c>&#39;R&#39;</span>
+</span></span></code></pre></div><h2 id=批量操作>批量操作</h2><ol><li>同步输入到多个窗格</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 进入同步模式</span>
 </span></span><span style=display:flex><span>Ctrl+b :setw synchronize-panes 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 或添加到配置文件</span>
-</span></span><span style=display:flex><span>bind y setw synchronize-panes <span style=color:#ae81ff>\;</span> display <span style=color:#e6db74>&#34;同步模式：#{?pane_synchronized,ON,OFF}&#34;</span>
-</span></span></code></pre></div><ol start=2><li>批量创建窗格</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 创建3个垂直排列的窗格</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 或添加到配置文件</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>bind</span> y setw synchronize-panes <span style=color:#f1fa8c>\;</span> display <span style=color:#f1fa8c>&#34;同步模式：#{?pane_synchronized,ON,OFF}&#34;</span>
+</span></span></code></pre></div><ol start=2><li>批量创建窗格</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 创建3个垂直排列的窗格</span>
 </span></span><span style=display:flex><span>tmux split-window -v 
 </span></span><span style=display:flex><span>tmux split-window -v 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 创建2x2网格</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 创建2x2网格</span>
 </span></span><span style=display:flex><span>tmux split-window -v
 </span></span><span style=display:flex><span>tmux split-window -h 
-</span></span><span style=display:flex><span>tmux <span style=color:#66d9ef>select</span>-pane -t <span style=color:#ae81ff>0</span> 
+</span></span><span style=display:flex><span>tmux <span style=color:#ff79c6>select</span>-pane -t <span style=color:#bd93f9>0</span> 
 </span></span><span style=display:flex><span>tmux split-window -h 
-</span></span></code></pre></div><ol start=3><li>在所有窗格执行相同命令</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 方法1：使用同步模式</span>
+</span></span></code></pre></div><ol start=3><li>在所有窗格执行相同命令</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 方法1：使用同步模式</span>
 </span></span><span style=display:flex><span>Ctrl+b :setw synchronize-panes on 
-</span></span><span style=display:flex><span><span style=color:#75715e># 然后输入命令，所有窗格都会执行</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 然后输入命令，所有窗格都会执行</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 方法2：使用 send-keys </span>
-</span></span><span style=display:flex><span>Ctrl+b :list-panes -s -F <span style=color:#e6db74>&#39;#{pane_id}&#39;</span> | xargs -I <span style=color:#f92672>{}</span> tmux send-keys -t <span style=color:#f92672>{}</span> <span style=color:#e6db74>&#39;ls&#39;</span> Enter
-</span></span></code></pre></div><ol start=4><li>布局管理</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 保存布局到文件</span>
-</span></span><span style=display:flex><span>tmux list-windows -F <span style=color:#e6db74>&#39;#{window_layout}&#39;</span> &gt; layout.txt 
+</span></span><span style=display:flex><span><span style=color:#6272a4># 方法2：使用 send-keys </span>
+</span></span><span style=display:flex><span>Ctrl+b :list-panes -s -F <span style=color:#f1fa8c>&#39;#{pane_id}&#39;</span> | xargs -I <span style=color:#ff79c6>{}</span> tmux send-keys -t <span style=color:#ff79c6>{}</span> <span style=color:#f1fa8c>&#39;ls&#39;</span> Enter
+</span></span></code></pre></div><ol start=4><li>布局管理</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 保存布局到文件</span>
+</span></span><span style=display:flex><span>tmux list-windows -F <span style=color:#f1fa8c>&#39;#{window_layout}&#39;</span> &gt; layout.txt 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 应用布局</span>
-</span></span><span style=display:flex><span>tmux <span style=color:#66d9ef>select</span>-layout <span style=color:#66d9ef>$(</span>cat layout.txt<span style=color:#66d9ef>)</span>
-</span></span></code></pre></div><h2 id=插件管理>插件管理</h2><p>使用TPM(Tmux Plugin Manager)，TPM是最流行的tmux插件管理器</p><h3 id=安装>安装</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-</span></span></code></pre></div><h3 id=配置>配置</h3><p>在<code>~/.tmux.conf</code>中添加</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 列出TPM插件</span>
-</span></span><span style=display:flex><span>set -g @plugin <span style=color:#e6db74>&#39;tmux-plugins/tpm&#39;</span>
-</span></span><span style=display:flex><span>set -g @plugin <span style=color:#e6db74>&#39;tmux-plugins/tmux-sensible&#39;</span>
-</span></span><span style=display:flex><span>set -g @plugin <span style=color:#e6db74>&#39;tmux-plugins/tmux-resurrect&#39;</span>
-</span></span><span style=display:flex><span>set -g @plugin <span style=color:#e6db74>&#39;tmux-plugins/tmux-continuum&#39;</span>
-</span></span><span style=display:flex><span>set -g @plugin <span style=color:#e6db74>&#39;tmux-plugins/tmux-yank&#39;</span>
-</span></span><span style=display:flex><span>set -g @plugin <span style=color:#e6db74>&#39;tmux-plugins/tmux-pain-control&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 应用布局</span>
+</span></span><span style=display:flex><span>tmux <span style=color:#ff79c6>select</span>-layout <span style=color:#ff79c6>$(</span>cat layout.txt<span style=color:#ff79c6>)</span>
+</span></span></code></pre></div><h2 id=插件管理>插件管理</h2><p>使用TPM(Tmux Plugin Manager)，TPM是最流行的tmux插件管理器</p><h3 id=安装>安装</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+</span></span></code></pre></div><h3 id=配置>配置</h3><p>在<code>~/.tmux.conf</code>中添加</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 列出TPM插件</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g @plugin <span style=color:#f1fa8c>&#39;tmux-plugins/tpm&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g @plugin <span style=color:#f1fa8c>&#39;tmux-plugins/tmux-sensible&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g @plugin <span style=color:#f1fa8c>&#39;tmux-plugins/tmux-resurrect&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g @plugin <span style=color:#f1fa8c>&#39;tmux-plugins/tmux-continuum&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g @plugin <span style=color:#f1fa8c>&#39;tmux-plugins/tmux-yank&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>set</span> -g @plugin <span style=color:#f1fa8c>&#39;tmux-plugins/tmux-pain-control&#39;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 其他配置</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 其他配置</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 初始化TPM（必须放在文件末尾）</span>
-</span></span><span style=display:flex><span>run <span style=color:#e6db74>&#39;~/.tmux/plugins/tpm/tpm&#39;</span>
-</span></span></code></pre></div><h4 id=常用插件列表>常用插件列表</h4><table><thead><tr><th>插件</th><th>功能</th><th>安装命令</th></tr></thead><tbody><tr><td>tmux-resurrect</td><td>会话持久化</td><td><code>set -g @plugin 'tmux-plugins/tmux-resurrect'</code></td></tr><tr><td>tmux-continuum</td><td>自动保存/恢复</td><td><code>set -g @plugin 'tmux-plugins/tmux-continuum'</code></td></tr><tr><td>tmux-yank</td><td>系统剪贴板集成</td><td><code>set -g @plugin 'tmux-plugins/tmux-yank'</code></td></tr><tr><td>tmux-pain-control</td><td>增强窗格操作</td><td><code>set -g @plugin 'tmux-plugins/tmux-pain-control'</code></td></tr><tr><td>tmux-battery</td><td>电池状态显示</td><td><code>set -g @plugin 'tmux-plugins/tmux-battery'</code></td></tr><tr><td>tmux-cpu</td><td>CPU使用率显示</td><td><code>set -g @plugin 'tmux-plugins/tmux-cpu'</code></td></tr><tr><td>tmux-net-speed</td><td>网络速度显示</td><td><code>set -g @plugin 'tmux-plugins/tmux-net-speed'</code></td></tr></tbody></table><h4 id=插件介绍>插件介绍</h4><h5 id=tmux-pluginstpm><code>tmux-plugins/tpm</code></h5><p>TPM = 插件管理器，本身不是功能插件<br>TPM(Tmux Plugin Manager)只干一件事：管理其他tmux插件的安装/更新/卸载<br>没有TPM,所有插件都不能用</p><h6 id=它解决的问题>它解决的问题</h6><ul><li>不用手动<code>git clone</code>每个插件</li><li>不用记插件路径</li><li>插件集中管理、可复现</li></ul><h6 id=使用>使用</h6><table><thead><tr><th>操作</th><th>快捷键</th></tr></thead><tbody><tr><td>安装插件</td><td><code>Ctrl+b I</code></td></tr><tr><td>更新插件</td><td><code>Ctrl+b U</code></td></tr><tr><td>卸载插件</td><td><code>Ctrl+b Alt+u</code></td></tr></tbody></table><h5 id=tmux-pluginstmux-sensible><code>tmux-plugins/tmux-sensible</code></h5><p>官方认可的”默认最佳实践集合”，它是一组社区共识的sane defaults,比如</p><ul><li>更合理的复制模式</li><li>更好的键盘行为</li><li>修复tmux的一些反直觉默认设置</li></ul><h6 id=它解决的问题-1>它解决的问题</h6><p>tmux默认配置非常“老派”，不适合现代开发者，<code>sensible</code>相当于：“你就当tmux本来就该这样工作”</p><h6 id=使用-1>使用</h6><p>安装即生效，没有快捷键，没有配置项，工程建议几乎所有人都应该装，这是tmux的“地基插件”</p><h5 id=tmux-pluginstmux-resurrect><code>tmux-plugins/tmux-resurrect</code></h5><p>会话结构保存/恢复</p><ul><li>session/window/pane结构</li><li>pane当前目录</li><li>pane中运行的命令（部分）</li></ul><h6 id=它解决的问题-2>它解决的问题</h6><p>重启机器，tmux server 被杀，SSH掉线，工作结构不丢</p><h6 id=使用-2>使用</h6><table><thead><tr><th>操作</th><th>快捷键</th></tr></thead><tbody><tr><td>保存会话</td><td><code>Ctrl+b Ctrl+s</code></td></tr><tr><td>恢复会话</td><td><code>Ctrl+b Ctrl+r</code></td></tr></tbody></table><p>它不会恢复程序内部状态，例如gdb断点，vim buffer内容，Python REPL内存等；它只恢复“壳”，不恢复“灵魂”</p><h5 id=tmux-pluginstmux-continuum><code>tmux-plugins/tmux-continuum</code></h5><p>它在<code>tmux-resurrect</code>之上做了两件事</p><ul><li>定时自动保存</li><li>tmux启动时自动恢复</li></ul><h6 id=它解决的问题-3>它解决的问题</h6><p>不需要手动保存</p><h6 id=基本配置>基本配置</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>set -g @continuum-restore &#39;on&#39;
+</span></span><span style=display:flex><span><span style=color:#6272a4># 初始化TPM（必须放在文件末尾）</span>
+</span></span><span style=display:flex><span>run <span style=color:#f1fa8c>&#39;~/.tmux/plugins/tpm/tpm&#39;</span>
+</span></span></code></pre></div><h4 id=常用插件列表>常用插件列表</h4><table><thead><tr><th>插件</th><th>功能</th><th>安装命令</th></tr></thead><tbody><tr><td>tmux-resurrect</td><td>会话持久化</td><td><code>set -g @plugin 'tmux-plugins/tmux-resurrect'</code></td></tr><tr><td>tmux-continuum</td><td>自动保存/恢复</td><td><code>set -g @plugin 'tmux-plugins/tmux-continuum'</code></td></tr><tr><td>tmux-yank</td><td>系统剪贴板集成</td><td><code>set -g @plugin 'tmux-plugins/tmux-yank'</code></td></tr><tr><td>tmux-pain-control</td><td>增强窗格操作</td><td><code>set -g @plugin 'tmux-plugins/tmux-pain-control'</code></td></tr><tr><td>tmux-battery</td><td>电池状态显示</td><td><code>set -g @plugin 'tmux-plugins/tmux-battery'</code></td></tr><tr><td>tmux-cpu</td><td>CPU使用率显示</td><td><code>set -g @plugin 'tmux-plugins/tmux-cpu'</code></td></tr><tr><td>tmux-net-speed</td><td>网络速度显示</td><td><code>set -g @plugin 'tmux-plugins/tmux-net-speed'</code></td></tr></tbody></table><h4 id=插件介绍>插件介绍</h4><h5 id=tmux-pluginstpm><code>tmux-plugins/tpm</code></h5><p>TPM = 插件管理器，本身不是功能插件<br>TPM(Tmux Plugin Manager)只干一件事：管理其他tmux插件的安装/更新/卸载<br>没有TPM,所有插件都不能用</p><h6 id=它解决的问题>它解决的问题</h6><ul><li>不用手动<code>git clone</code>每个插件</li><li>不用记插件路径</li><li>插件集中管理、可复现</li></ul><h6 id=使用>使用</h6><table><thead><tr><th>操作</th><th>快捷键</th></tr></thead><tbody><tr><td>安装插件</td><td><code>Ctrl+b I</code></td></tr><tr><td>更新插件</td><td><code>Ctrl+b U</code></td></tr><tr><td>卸载插件</td><td><code>Ctrl+b Alt+u</code></td></tr></tbody></table><h5 id=tmux-pluginstmux-sensible><code>tmux-plugins/tmux-sensible</code></h5><p>官方认可的”默认最佳实践集合”，它是一组社区共识的sane defaults,比如</p><ul><li>更合理的复制模式</li><li>更好的键盘行为</li><li>修复tmux的一些反直觉默认设置</li></ul><h6 id=它解决的问题-1>它解决的问题</h6><p>tmux默认配置非常“老派”，不适合现代开发者，<code>sensible</code>相当于：“你就当tmux本来就该这样工作”</p><h6 id=使用-1>使用</h6><p>安装即生效，没有快捷键，没有配置项，工程建议几乎所有人都应该装，这是tmux的“地基插件”</p><h5 id=tmux-pluginstmux-resurrect><code>tmux-plugins/tmux-resurrect</code></h5><p>会话结构保存/恢复</p><ul><li>session/window/pane结构</li><li>pane当前目录</li><li>pane中运行的命令（部分）</li></ul><h6 id=它解决的问题-2>它解决的问题</h6><p>重启机器，tmux server 被杀，SSH掉线，工作结构不丢</p><h6 id=使用-2>使用</h6><table><thead><tr><th>操作</th><th>快捷键</th></tr></thead><tbody><tr><td>保存会话</td><td><code>Ctrl+b Ctrl+s</code></td></tr><tr><td>恢复会话</td><td><code>Ctrl+b Ctrl+r</code></td></tr></tbody></table><p>它不会恢复程序内部状态，例如gdb断点，vim buffer内容，Python REPL内存等；它只恢复“壳”，不恢复“灵魂”</p><h5 id=tmux-pluginstmux-continuum><code>tmux-plugins/tmux-continuum</code></h5><p>它在<code>tmux-resurrect</code>之上做了两件事</p><ul><li>定时自动保存</li><li>tmux启动时自动恢复</li></ul><h6 id=它解决的问题-3>它解决的问题</h6><p>不需要手动保存</p><h6 id=基本配置>基本配置</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>set -g @continuum-restore &#39;on&#39;
 </span></span><span style=display:flex><span>set -g @continuum-save-interval &#39;15&#39; # 分钟
-</span></span></code></pre></div><h6 id=使用-3>使用</h6><p>安装好就行，tmux启动即恢复，基于resurrect</p><h5 id=tmux-pluginstmux-yank><code>tmux-plugins/tmux-yank</code></h5><p>tmux与系统剪贴板的桥梁，让你在tmux里复制的内容，真正进入到系统剪贴板，而不是tmux内部buffer</p><h6 id=它解决的问题-4>它解决的问题</h6><ul><li>tmux复制 -> 浏览器粘贴</li><li>tmux复制 -> 编辑器/GUI</li></ul><h6 id=使用-4>使用</h6><ol><li>进入复制模式</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>Ctrl+b <span style=color:#f92672>[</span>
-</span></span></code></pre></div><ol start=2><li>选中内容</li><li>按<code>y</code>，内容进入系统剪贴板</li></ol><p>前提条件，你需要系统有</p><ul><li>X11：<code>xclip</code>或<code>xsel</code></li><li>Wayland：<code>wl-clipboard</code></li></ul><p>否则插件不会报错，但也不会生效</p><h5 id=tmux-pluginstmux-pain-control><code>tmux-plugins/tmux-pain-control</code></h5><p>窗格操作效率插件，为pane操作提供更符合直觉的快捷键</p><h6 id=它解决的问题-5>它解决的问题</h6><p>原生tmux pane 操作键位分散，不连续，手感差</p><h6 id=常用快捷键-1>常用快捷键</h6><table><thead><tr><th>操作</th><th>快捷键</th></tr></thead><tbody><tr><td>向左切 pane</td><td><code>Ctrl+b h</code></td></tr><tr><td>向下</td><td><code>Ctrl+b j</code></td></tr><tr><td>向上</td><td><code>Ctrl+b k</code></td></tr><tr><td>向右</td><td><code>Ctrl+b l</code></td></tr><tr><td>横向分屏</td><td><code>Ctrl+b |</code></td></tr><tr><td>纵向分屏</td><td><code>Ctrl+b -</code></td></tr></tbody></table><h2 id=命令模式>命令模式</h2><p>按下<code>prefix + :</code> 进入命令模式</p><h3 id=pane交换>pane交换</h3><p>输入</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>swap-pane -s <span style=color:#f92672>[</span>源编号<span style=color:#f92672>]</span> -t <span style=color:#f92672>[</span>目标编号<span style=color:#f92672>]</span>
-</span></span></code></pre></div><p>可将pane进行交换</p><h3 id=移动pane到另一个window>移动pane到另一个window</h3><p>移动到指定window</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 将当前pane移动到 window 2</span>
+</span></span></code></pre></div><h6 id=使用-3>使用</h6><p>安装好就行，tmux启动即恢复，基于resurrect</p><h5 id=tmux-pluginstmux-yank><code>tmux-plugins/tmux-yank</code></h5><p>tmux与系统剪贴板的桥梁，让你在tmux里复制的内容，真正进入到系统剪贴板，而不是tmux内部buffer</p><h6 id=它解决的问题-4>它解决的问题</h6><ul><li>tmux复制 -> 浏览器粘贴</li><li>tmux复制 -> 编辑器/GUI</li></ul><h6 id=使用-4>使用</h6><ol><li>进入复制模式</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>Ctrl+b <span style=color:#ff79c6>[</span>
+</span></span></code></pre></div><ol start=2><li>选中内容</li><li>按<code>y</code>，内容进入系统剪贴板</li></ol><p>前提条件，你需要系统有</p><ul><li>X11：<code>xclip</code>或<code>xsel</code></li><li>Wayland：<code>wl-clipboard</code></li></ul><p>否则插件不会报错，但也不会生效</p><h5 id=tmux-pluginstmux-pain-control><code>tmux-plugins/tmux-pain-control</code></h5><p>窗格操作效率插件，为pane操作提供更符合直觉的快捷键</p><h6 id=它解决的问题-5>它解决的问题</h6><p>原生tmux pane 操作键位分散，不连续，手感差</p><h6 id=常用快捷键-1>常用快捷键</h6><table><thead><tr><th>操作</th><th>快捷键</th></tr></thead><tbody><tr><td>向左切 pane</td><td><code>Ctrl+b h</code></td></tr><tr><td>向下</td><td><code>Ctrl+b j</code></td></tr><tr><td>向上</td><td><code>Ctrl+b k</code></td></tr><tr><td>向右</td><td><code>Ctrl+b l</code></td></tr><tr><td>横向分屏</td><td><code>Ctrl+b |</code></td></tr><tr><td>纵向分屏</td><td><code>Ctrl+b -</code></td></tr></tbody></table><h2 id=命令模式>命令模式</h2><p>按下<code>prefix + :</code> 进入命令模式</p><h3 id=pane交换>pane交换</h3><p>输入</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>swap-pane -s <span style=color:#ff79c6>[</span>源编号<span style=color:#ff79c6>]</span> -t <span style=color:#ff79c6>[</span>目标编号<span style=color:#ff79c6>]</span>
+</span></span></code></pre></div><p>可将pane进行交换</p><h3 id=移动pane到另一个window>移动pane到另一个window</h3><p>移动到指定window</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 将当前pane移动到 window 2</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>join-pane -t :2 <span style=color:#75715e># 移动到 window 2</span>
-</span></span><span style=display:flex><span>join-pane -t 窗口名 <span style=color:#75715e># 移动到指定名称的窗口</span>
-</span></span></code></pre></div><h3 id=查看所有pane信息>查看所有pane信息</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>line-pane
+</span></span><span style=display:flex><span>join-pane -t :2 <span style=color:#6272a4># 移动到 window 2</span>
+</span></span><span style=display:flex><span>join-pane -t 窗口名 <span style=color:#6272a4># 移动到指定名称的窗口</span>
+</span></span></code></pre></div><h3 id=查看所有pane信息>查看所有pane信息</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>line-pane
 </span></span></code></pre></div></div><nav class=post-nav><a href=/unixlike/log/threelocalarea/ class=hover:underline>pre: Three Local Area</a>
 <a href=/unixlike/log/typesystem/ class=hover:underline>next: Type System</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#基本概念>基本概念</a><ul><li><a href=#session会话>Session（会话）</a><ul><li><a href=#定义>定义</a></li><li><a href=#本质>本质</a></li><li><a href=#典型用法>典型用法</a></li></ul></li><li><a href=#window窗口>Window（窗口）</a><ul><li><a href=#定义-1>定义</a></li><li><a href=#本质-1>本质</a></li><li><a href=#使用方式>使用方式</a></li></ul></li><li><a href=#pane面板>Pane（面板）</a><ul><li><a href=#定义-2>定义</a></li><li><a href=#本质-2>本质</a></li><li><a href=#使用原则>使用原则</a></li></ul></li><li><a href=#tmux解决的问题>tmux解决的问题</a></li><li><a href=#session-window-pane的正确使用方式>Session, Window, Pane的正确使用方式</a><ul><li><a href=#session战略层面的工作容器>Session：战略层面的工作容器</a><ul><li><a href=#核心职责>核心职责</a></li><li><a href=#正确理解>正确理解</a></li><li><a href=#正确使用方式>正确使用方式</a></li><li><a href=#错误使用方式>错误使用方式</a></li><li><a href=#session生命周期管理>Session生命周期管理</a></li></ul></li><li><a href=#window窗口战术层面的注意力管理器>Window（窗口）：战术层面的注意力管理器</a><ul><li><a href=#核心职责-1>核心职责</a></li><li><a href=#正确理解-1>正确理解</a></li><li><a href=#正确使用方式-1>正确使用方式</a></li><li><a href=#window的命名反映注意力焦点>Window的命名反映注意力焦点</a></li><li><a href=#错误使用方式-1>错误使用方式</a></li><li><a href=#window切换的心理模型>Window切换的心理模型</a></li></ul></li><li><a href=#pane窗格操作层面的并行视图>Pane（窗格）：操作层面的并行视图</a><ul><li><a href=#核心职责-2>核心职责</a></li><li><a href=#正确理解-2>正确理解</a></li><li><a href=#认知心理学基础72法则>认知心理学基础：7±2法则</a></li><li><a href=#正确使用方式-2>正确使用方式</a></li><li><a href=#优秀的pane组合模式>优秀的Pane组合模式</a></li><li><a href=#错误的使用方式>错误的使用方式</a></li></ul></li><li><a href=#决策流程图何时使用sessionwindowpane>决策流程图：何时使用Session/Window/Pane</a></li></ul></li></ul></li><li><a href=#基本使用>基本使用</a><ul><li><a href=#tmux的前缀键模型>tmux的“前缀键”模型</a></li><li><a href=#启动和退出>启动和退出</a></li><li><a href=#单元管理>单元管理</a><ul><li><a href=#pane窗格>Pane（窗格）</a></li><li><a href=#window标签页>Window（标签页）</a></li><li><a href=#session工作区>Session（工作区）</a></li></ul></li><li><a href=#常用快捷键>常用快捷键</a><ul><li><a href=#基础快捷键>基础快捷键</a></li><li><a href=#session管理快捷键>session管理快捷键</a></li><li><a href=#window管理快捷键>window管理快捷键</a></li><li><a href=#pane管理快捷键>pane管理快捷键</a></li></ul></li></ul></li><li><a href=#配置文件>配置文件</a><ul><li><a href=#配置文件位置与结构>配置文件位置与结构</a><ul><li><a href=#主要配置文件>主要配置文件</a></li><li><a href=#配置文件语法>配置文件语法</a></li></ul></li><li><a href=#配置分类详解>配置分类详解</a><ul><li><a href=#前缀键设置>前缀键设置</a></li><li><a href=#响应时间设置>响应时间设置</a></li><li><a href=#编号系统>编号系统</a></li><li><a href=#完整鼠标配置>完整鼠标配置</a></li><li><a href=#状态栏基础配置>状态栏基础配置</a></li><li><a href=#状态栏样式>状态栏样式</a></li><li><a href=#状态栏内容>状态栏内容</a></li><li><a href=#窗格边框>窗格边框</a></li><li><a href=#窗格行为>窗格行为</a></li><li><a href=#窗口配置>窗口配置</a></li></ul></li></ul></li><li><a href=#会话持久化>会话持久化</a></li><li><a href=#批量操作>批量操作</a></li><li><a href=#插件管理>插件管理</a><ul><li><a href=#安装>安装</a></li><li><a href=#配置>配置</a><ul><li><a href=#常用插件列表>常用插件列表</a></li><li><a href=#插件介绍>插件介绍</a><ul><li><a href=#tmux-pluginstpm><code>tmux-plugins/tpm</code></a><ul><li><a href=#它解决的问题>它解决的问题</a></li><li><a href=#使用>使用</a></li></ul></li><li><a href=#tmux-pluginstmux-sensible><code>tmux-plugins/tmux-sensible</code></a><ul><li><a href=#它解决的问题-1>它解决的问题</a></li><li><a href=#使用-1>使用</a></li></ul></li><li><a href=#tmux-pluginstmux-resurrect><code>tmux-plugins/tmux-resurrect</code></a><ul><li><a href=#它解决的问题-2>它解决的问题</a></li><li><a href=#使用-2>使用</a></li></ul></li><li><a href=#tmux-pluginstmux-continuum><code>tmux-plugins/tmux-continuum</code></a><ul><li><a href=#它解决的问题-3>它解决的问题</a></li><li><a href=#基本配置>基本配置</a></li><li><a href=#使用-3>使用</a></li></ul></li><li><a href=#tmux-pluginstmux-yank><code>tmux-plugins/tmux-yank</code></a><ul><li><a href=#它解决的问题-4>它解决的问题</a></li><li><a href=#使用-4>使用</a></li></ul></li><li><a href=#tmux-pluginstmux-pain-control><code>tmux-plugins/tmux-pain-control</code></a><ul><li><a href=#它解决的问题-5>它解决的问题</a></li><li><a href=#常用快捷键-1>常用快捷键</a></li></ul></li></ul></li></ul></li></ul></li><li><a href=#命令模式>命令模式</a><ul><li><a href=#pane交换>pane交换</a></li><li><a href=#移动pane到另一个window>移动pane到另一个window</a></li><li><a href=#查看所有pane信息>查看所有pane信息</a></li></ul></li></ul></li></ul></nav></aside><script src=/js/scrollspy.js defer></script><script type=module>
   import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
