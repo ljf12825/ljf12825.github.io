@@ -56,3 +56,66 @@
 .col.status.unstable { color: yellow; }
 .col.status.dead { color: red; }
 .col.status.archived { color: blue; }
+
+.lab-project {
+  background: #c0c0c0;
+  color: #000080;
+  padding: 20px;
+  font-family: monospace;
+  max-width: 1100px;
+  margin: 30px auto;
+  border: 2px solid #000080;
+}
+
+.lab-header {
+  border-bottom: 2px solid #000080;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+}
+
+.lab-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.lab-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.meta-row {
+  display: flex;
+}
+
+.meta-key {
+  width: 120px;
+  color: #000080;
+}
+
+.meta-value {
+  flex: 1;
+  color: #000;
+}
+
+.lab-divider {
+  border-top: 1px solid #000080;
+  margin: 20px 0;
+}
+
+.lab-content {
+  line-height: 1.6;
+}
+
+.lab-content h2 {
+  font-size: 18px;
+  border-left: 4px solid #000080;
+  padding-left: 8px;
+  margin-top: 30px;
+}
+
+.status.active { color: green; }
+.status.unstable { color: yellow; }
+.status.dead { color: red; }
+.status.archived { color: #000080; }
