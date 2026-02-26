@@ -4,10 +4,13 @@ title = "How to Develop a Game"
 
 [markup]
   [markup.highlight]
-    style = "monokai"
+    style = "dracula"
     lineNos = false
     noClasses = true
     guessSyntax = true
+
+[params]
+  codeBase = "../src/"
 
   [markup.goldmark]
     [markup.goldmark.renderer]
