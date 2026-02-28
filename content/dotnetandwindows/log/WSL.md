@@ -1,5 +1,5 @@
 ---
-title: WSL
+title: WSL instructions for use
 date: 2026-02-26
 categories: [Tool]
 tags: [WSL]
@@ -8,7 +8,7 @@ type: log
 summary: Usage of WSL
 ---
 
-WSL全称是Windows Subsystem for Linux
+[WSL](https://learn.microsoft.com/en-us/windows/wsl/)全称是Windows Subsystem for Linux
 
 WSL可以在Windows里面“原生”运行Linux
 
