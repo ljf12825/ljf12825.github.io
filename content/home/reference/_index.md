@@ -12,15 +12,19 @@
 
 [patorjk.com](https://patorjk.com/) : a software develop's navigation website, I found an online tool on this website that generates ASCII images, and I used it to generate images `VM` and `Virtual World` on my [home navigation](https://ljf12825.github.io/)
 
-[Vim](vim.org) : vim official site. [Vim Manual Source](https://vimdoc.sourceforge.net/)
+[Vim](https://vim.org/) : vim official site. [Vim Manual Source](https://vimdoc.sourceforge.net/)
 
 [Vimcdoc](https://vimcdoc.sourceforge.net/) : a site aim to translate vimdoc to Chinese. You can install use by `:help` or [read online](https://vimcdoc.sourceforge.net/doc/help.html)
 
-[Shields.io](Shields.io) : badges making
+[Shields.io](https://Shields.io/) : badges making
 
-[EmojiDB](emojidb.org) : emoji database
+[EmojiDB](https://emojidb.org/) : emoji database
 
 [Z-library](https://z-library.sk/) eBook Library. Read, download freely.
+
+[cmake.org](https://cmake.org/) CMake homepage
+
+[llvm.org](https://llvm.org/) LLVM homepage
 
 ## C++
 [ISO/IEC 14882:xxxx](https://www.iso.org/) : The official C++ standard document, serving as a legal and technical specification rather than a learning guide. Developed by the International Standardization Organization (ISO). It strictly defines C++ syntax, semantics, standard library behavior, and the principles that all implementations (compilers) must adhere to. These standards documents are paid for and must be purchased from ISO or a national standards organization. `xxxx` means publish year.
@@ -29,13 +33,11 @@
 
 [cppreference](https://cppreference.com/) : The preferred reference site for all C++ developers, recognized as the most accurate and comprehensive online resource. The content is extremely detailed, including detailed descriptions of all language features, standard library header files, functions, classes, and algorithms. The format is standardized, and each page includes syntax, parameters, return values, exceptions, complexity, sample code, related links, etc. The standard version is marked, clearly indicating which C++ standard the feature was Introductiond in. Most sample code can be edited and run on the page
 
-[GCC(GNU Compiler Collection)](https://gcc.gnu.org/onlinedocs/) and [Clang](https://clang.llvm.org/docs/) : They are not part of the C++ language itself, but the documentation of mainstream compilers is an important reference for implementation details. They include compiler options, language extensions, ABI details, library implementation documentation, static analyzers, and documentation for some tools. You can consult them when you need to query the details of a certain compilation option or the specific platform or architecture features supported by the compiler.
-
 [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines) : This project, maintained by Bjarne Stroustrup, the father of C++, and numerous experts, aims to guide developers in using modern C++ correctly, efficiently, and safely. It's not a syntax reference, but rather a collection of best practices. It includes hundreds of rules, each with rationale and examples.
 
 [open-std.org](https://https://open-std.org/)
 
-[Boost Library Docs](https://www.boost.org/libraries/) : It is a very important and high quality C++ third libraries collection. Known as the quasi-standard library of C++, many of its components later entered the standard library of new versions of C++ and later. But it is very large, and some of the features it implements are obscure and difficult to understand. Don't delve into them, if it's not necessary.
+[Boost Library Docs](https://www.boost.org/)
 
 ## C#
 [Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/csharp/) : This is Microsoft's unified official documentation platform, replacing the legacy MSDN documentation. It's the preferred and definitive reference for all .NET and C# developers. It includes documentation for the .NET platform, the C# language, all Base Class Libraries (BCLs), ASP.NET Core, EF Core, and more. You can easily switch between documentation for different .NET versions (such as .NET 8, .NET 6, and the .NET Framework) to avoid issues caused by API differences. It includes "concept" articles (tutorials and guides), automatically generated API references, code samples, and quickstarts. Many pages have built-in "Run" buttons, allowing you to edit and run code samples directly in your browser (based on .NET Jupyter Notebooks).
