@@ -5,8 +5,6 @@ draft: false
 summary: .gz .bz2 .xz .zip .tar
 ---
 
-# 压缩与打包
-
 - 打包(archive)：把多个文件合成一个文件（不减小体积）
 - 压缩(compress)：用算法缩小体积
 
