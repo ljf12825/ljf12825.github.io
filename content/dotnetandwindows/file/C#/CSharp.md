@@ -1,10 +1,8 @@
 ---
 title: C# and .NET
 date: 2025-06-01
-categories: [C#, .NET]
-tags: [Architecture]
 author: "ljf12825"
-type: log
+type: file
 summary: Overview of C# and .NET
 ---
 

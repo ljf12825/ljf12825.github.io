@@ -1,10 +1,8 @@
 ﻿---
 title: CLR
 date: 2025-06-01
-categories: [.NET]
-tags: [Architecture]
 author: "ljf12825"
-type: log
+type: file
 summary: C# type system
 ---
 

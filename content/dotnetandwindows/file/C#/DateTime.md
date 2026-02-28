@@ -1,10 +1,8 @@
 ---
 title: C# Date Time System
 date: 2025-06-01
-categories: [C#]
-tags: [API]
 author: "ljf12825"
-type: log
+type: file
 summary: C# date time
 ---
 
