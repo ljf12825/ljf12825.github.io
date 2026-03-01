@@ -52,10 +52,12 @@
   background-color: #000080;
   color: #c0c0c0;
 }
+
 .col.status.active { color: green; }
 .col.status.unstable { color: yellow; }
 .col.status.dead { color: red; }
-.col.status.archived { color: blue; }
+.col.status.archived { color: #000080; }
+.col.status.suspended { color: saddlebrown; }
 
 .lab-project {
   background: #c0c0c0;
@@ -119,3 +121,4 @@
 .status.unstable { color: yellow; }
 .status.dead { color: red; }
 .status.archived { color: #000080; }
+.status.suspended { color: saddlebrown; }
