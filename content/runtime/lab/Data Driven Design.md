@@ -1,8 +1,10 @@
 ﻿---
 title: DDD(Data Driven Design)
 type: lab
-status: active # active/archived/dead/unstable
+status: suspended # active/archived/dead/unstable/suspended
+date: 2025-12-31
 summary: Implement DDD in Unity
+repo: https://www.cctv.com/
 ---
 
 Data-Driven Design（数据驱动设计）在Unity和游戏开发中是一种将逻辑与数据分离的编程范式，它强调用数据来控制行为和流程，而不是把所有逻辑写死在代码中

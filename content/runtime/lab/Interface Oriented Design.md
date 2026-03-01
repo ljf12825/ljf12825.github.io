@@ -1,8 +1,10 @@
 ﻿---
 title: Interface Oriented Design
 type: lab
-status: active # active/archived/dead/unstable
+status: active # active/archived/dead/unstable/suspended
 summary: Implement Interface Oriented Design in Unity
+date: 2025-12-31
+repo: https://www.cctv.com/
 ---
 
 "Interface Oriented Design"面向接口设计，是软件架构中的一种重要思想，它强调通过接口而非具体实现进行编程

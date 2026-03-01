@@ -1,8 +1,10 @@
 ﻿---
 title: Design Patterns in Game Development
-status: active # active/archived/dead/unstable
+status: active # active/archived/dead/unstable/suspended
 type: lab
 summary: Implement gof23 in unity
+date: 2025-12-31
+repo: https://www.cctv.com/
 ---
 
 游戏开发中，设计模式是组织代码、提升可维护性、扩展性和复用性的基础工具。尤其是大型游戏项目或使用Unity、Unreal等引擎开发时，恰当使用设计模式能显著提高架构质量

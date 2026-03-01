@@ -1,8 +1,10 @@
 ﻿---
 title: Object Pooling
 type: lab
-status: active # active/archived/dead/unstable
+status: active # active/archived/dead/unstable/suspended
 summary: Implement Object Pooling in Unity
+date: 2025-12-31
+repo: https://www.cctv.com/
 ---
 
 对象池是一种优化性能和内存分配的设计模式，尤其常用于游戏开发和高频率实例化的场景中

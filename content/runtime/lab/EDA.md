@@ -1,8 +1,10 @@
 ﻿---
 title: EDA(Event Driven Architecture)
 type: lab
-status: active # active/archived/dead/unstable
+status: active # active/archived/dead/unstable/suspended
 summary: Implement EDA in Unity
+date: 2025-12-31
+repo: https://www.cctv.com/
 ---
 
 ```text
