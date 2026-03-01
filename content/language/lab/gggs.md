@@ -1,8 +1,9 @@
 ---
 title: GGGS
 type: lab
-status: active # active/archived/dead/unstable
+date: 2026-02-27
+status: suspended # active/archived/dead/unstable/suspended
+category: server
 summary: general game server
+repo: https://github.com/ljf12825/GGGS
 ---
-
-[link](https://github.com/ljf12825/GGGS)
