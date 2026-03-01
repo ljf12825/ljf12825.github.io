@@ -1,10 +1,8 @@
 ---
 title: size
 date: 2025-12-31
-categories: [GNU]
-tags: [coreutils]
 author: "ljf12825"
-type: log
+type: file
 draft: false
 summary: usage of gnu size
 ---

@@ -1,0 +1,7 @@
+---
+title: GNUBinutils
+date: 2025-12-31
+author: "ljf12825"
+type: file
+summary: overview of Binutils
+---
