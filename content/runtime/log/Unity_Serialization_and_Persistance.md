@@ -1,5 +1,5 @@
 ﻿---
-title: "Serialization and Persistence"
+title: Unity Serialization and Persistence
 date: 2025-06-01
 categories: [Engine]
 tags: [Unity]
