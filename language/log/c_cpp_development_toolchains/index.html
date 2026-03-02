@@ -67,7 +67,113 @@
 </span></span><span style=display:flex><span>完整的运行环境
 </span></span><span style=display:flex><span>    ↓ [CRT 初始化] 
 </span></span><span style=display:flex><span>调用 main()
-</span></span></code></pre></div></div><nav class=post-nav></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#不同平台的默认组合>不同平台的默认组合</a><ul><li><a href=#linux>Linux</a></li><li><a href=#windows>Windows</a></li><li><a href=#macos>macOS</a></li></ul></li><li><a href=#工具链流程>工具链流程</a></li></ul></li></ul></nav></aside><script src=/js/scrollspy.js defer></script><script type=module>
+</span></span></code></pre></div><hr><h2 id=构建系统>构建系统</h2><p>构建系统是自动化组织如何把一堆源码变成可执行程序的流程控制器，它不编译代码，不链接代码，它负责的是调度和管理整个编译流程</p><p>构建系统解决三个核心问题</p><ul><li>如何知道要编译什么</li><li>如何按正确顺序编译</li><li>如何避免重复编译</li></ul><h3 id=手动编译的局限性>手动编译的局限性</h3><p>假设有一个中等项目</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>engine/
+</span></span><span style=display:flex><span>  math.cc
+</span></span><span style=display:flex><span>  renderer.cc
+</span></span><span style=display:flex><span>  texture.cc
+</span></span><span style=display:flex><span>  main.cc
+</span></span></code></pre></div><p>如果手动编译</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>g++ -c math.cc
+</span></span><span style=display:flex><span>g++ -c renderer.cc
+</span></span><span style=display:flex><span>g++ -c texture.cc
+</span></span><span style=display:flex><span>g++ -c main.cc
+</span></span><span style=display:flex><span>g++ math.o renderer.o texture.o main.o -o engine
+</span></span></code></pre></div><p>会产生以下问题</p><ul><li>改动了一个源文件要全部重新编译</li><li>依赖头文件需要处理</li><li>Debug和Release如何切换</li><li>不同平台如何处理</li></ul><p>当项目变得很庞大时，根本不可能手动管理，这时候就需要构建系统</p><h3 id=构建系统行为>构建系统行为</h3><h4 id=依赖管理>依赖管理</h4><p>它会自动判断</p><ul><li>哪个源文件被修改了</li><li>哪些文件需要重新编译</li><li>哪些可以复用旧的.o</li></ul><p>这叫增量构建（incremental build）</p><h4 id=调用编译器>调用编译器</h4><p>构建系统本质上是在背后执行</p><ul><li>GCC</li><li>Clang</li><li>MSVC</li></ul><p>它只是替你组织这些命令</p><h4 id=管理构建配置>管理构建配置</h4><ul><li>Debug/Release</li><li>是否开启优化</li><li>是否开启AddressSanitizer</li><li>是否开启LTO</li></ul><h4 id=跨平台抽象>跨平台抽象</h4><ul><li>Linux用gcc</li><li>Windows用MSVC</li><li>macOS用Clang</li></ul><p>构建系统帮你统一接口</p><h3 id=常见构建系统>常见构建系统</h3><h4 id=make>Make</h4><p>最传统的，核心思想：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-makefile data-lang=makefile><span style=display:flex><span><span style=color:#50fa7b>target</span><span style=color:#ff79c6>:</span> dependency
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>command</span>
+</span></span></code></pre></div><p>它通过时间戳判断是否重新构建</p><ul><li>优点：简单直接</li><li>缺点：大型项目难维护</li></ul><h4 id=cmake>CMake</h4><p>CMake不是构建系统，它是生成构建系统的工具</p><p>它生成</p><ul><li>Makefile</li><li>Ninja文件</li><li>Visual Studio工程</li></ul><h4 id=ninja>Ninja</h4><p>特点：</p><ul><li>极快</li><li>只做构建</li><li>不处理复杂逻辑</li></ul><hr><h2 id=编译器>编译器</h2><p>编译器的作用是把一种语言的语义模型，转换成另一种语言的语义模型</p><p>对于C/C++来说</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>C/C++ 语义
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>机器指令语义
+</span></span></code></pre></div><p>编译器不是翻译器，它做的是语义保持的程序变换 + 优化</p><h3 id=现代编译器的结构>现代编译器的结构</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>源码
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>词法分析(Lexer)
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>语法分析(Parser)
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>抽象语法树(AST)
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>语义分析
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>中间表示(IR)
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>优化器
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>后端代码生成
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>汇编
+</span></span></code></pre></div><h2 id=汇编器>汇编器</h2><p>汇编器(Assembler)负责把汇编指令翻译成机器码，并生成重定位信息</p><p>典型实现</p><ul><li>GNU as</li><li>NASM</li><li>MASM</li></ul><h3 id=汇编器行为>汇编器行为</h3><p>汇编器主要做4件事情</p><h4 id=1-指令编码>1. 指令编码</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-asm data-lang=asm><span style=display:flex><span><span style=color:#50fa7b>mov</span> eax, <span style=color:#bd93f9>5</span>
+</span></span></code></pre></div><p>汇编器查表</p><ul><li>mov imm32 -> eax的opcode是<code>B8</code></li><li>立即数5转成little-endian</li></ul><p>输出</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>B8 05 00 00 00
+</span></span></code></pre></div><p>本质上是：助记符 -> 指令编码表查找</p><h4 id=2-符号解析>2. 符号解析</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-asm data-lang=asm><span style=display:flex><span><span style=color:#50fa7b>jmp</span> label
+</span></span><span style=display:flex><span><span style=color:#50fa7b>...</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>label:</span>
+</span></span></code></pre></div><p>汇编器需要</p><ul><li>记录label的位置</li><li>计算跳转偏移</li></ul><p>如果label在同一个文件里，可以直接计算；如果在别的文件里，就需要生成重定位信息</p><h4 id=3-生成目标文件格式>3. 生成目标文件格式</h4><p>在Linux上通常生成<code>ELF</code>，在Windows上则是<code>PE/COFF</code><br>目标文件包含</p><ul><li>.text（代码段）</li><li>.data（数据段）</li><li>符号表</li><li>重定位表</li></ul><p>汇编器不生成“可执行文件”，只生成“可链接单元”</p><h4 id=4-生成重定位记录>4. 生成重定位记录</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-asm data-lang=asm><span style=display:flex><span><span style=color:#50fa7b>call</span> printf
+</span></span></code></pre></div><p>printf不在本文件里</p><p>汇编器会在指令位置写一个占位地址（通常是0），在重定位表里记录</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>offset: 0x14
+</span></span><span style=display:flex><span>symbol: printf
+</span></span><span style=display:flex><span>type: R_X86_64_PC32
+</span></span></code></pre></div><p>然后交给链接器处理</p><h3 id=汇编器内部结构>汇编器内部结构</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>源码 (.s)
+</span></span><span style=display:flex><span>↓
+</span></span><span style=display:flex><span>词法分析
+</span></span><span style=display:flex><span>↓
+</span></span><span style=display:flex><span>语法分析
+</span></span><span style=display:flex><span>↓
+</span></span><span style=display:flex><span>符号表建立
+</span></span><span style=display:flex><span>↓
+</span></span><span style=display:flex><span>指令编码
+</span></span><span style=display:flex><span>↓
+</span></span><span style=display:flex><span>重定位记录生成
+</span></span><span style=display:flex><span>↓
+</span></span><span style=display:flex><span>写入目标文件
+</span></span></code></pre></div><h3 id=两种汇编器风格>两种汇编器风格</h3><ul><li>AT&amp;T风格（GAS默认）</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-asm data-lang=asm><span style=display:flex><span><span style=color:#50fa7b>movl</span> $5, <span style=color:#8be9fd;font-style:italic>%eax</span>
+</span></span></code></pre></div><ul><li>Intel风格（NASM）</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-asm data-lang=asm><span style=display:flex><span><span style=color:#50fa7b>mov</span> eax, <span style=color:#bd93f9>5</span>
+</span></span></code></pre></div><p>语法不同，本质相同</p><h3 id=总结>总结</h3><p>和编译器相比，汇编器面临着</p><ul><li>指令集是固定的</li><li>编码规则是确定的</li><li>没有复杂优化</li></ul><p>它是一个表驱动型的严格的编码器，而不是一个推理系统</p><ul><li>它定义了机器级抽象边界，机器不理解“函数”，“变量”，只有“指令”，“地址”，“内存”；汇编器是最后一层人类可读抽象</li><li>它决定目标文件结构</li></ul><p>总的来说，在现有架构下的汇编器是非常稳定的，创新和算法优化空间很小，但是理解它和使用它对于二进制安全的研究是绕不开的</p><h2 id=链接器>链接器</h2><p>链接器(Linker)的作用是把多个目标文件合并成一个完整程序，并解决所有符号引用与地址布局问题</p><p>常见实现</p><ul><li>GNU ld</li><li>LLD</li><li>Microsoft Linker</li></ul><h3 id=链接器行为>链接器行为</h3><h4 id=1-符号解析symbol-resolution>1. 符号解析(Symbol Resolution)</h4><p>假设有两个文件</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#6272a4>// a.c
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>add</span>(<span style=color:#8be9fd>int</span> a, <span style=color:#8be9fd>int</span> b)
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() { <span style=color:#ff79c6>return</span> <span style=color:#50fa7b>add</span>(<span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>2</span>); }
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#6272a4>// b.c
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>add</span>(<span style=color:#8be9fd>int</span> a, <span style=color:#8be9fd>int</span> b) { <span style=color:#ff79c6>return</span> a <span style=color:#ff79c6>+</span> b; }
+</span></span></code></pre></div><p>编译后</p><ul><li>main.o里有“对add的引用”</li><li>add.0里有“add的定义”</li></ul><p>链接器要做的就是把引用和定义匹配起来<br>如果找不到，报错：undefined reference</p><h4 id=2-重定位relocation>2. 重定位(Relocation)</h4><p>目标文件里并没有真实地址</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-asm data-lang=asm><span style=display:flex><span><span style=color:#50fa7b>call</span> add
+</span></span></code></pre></div><p>汇编器只是写了</p><ul><li>占位地址</li><li>重定位记录</li></ul><p>链接器会</p><ul><li>决定add的最终地址</li><li>修改call指令里的偏移量</li></ul><p>这一步叫地址修正</p><h4 id=3-地址空间布局layout>3. 地址空间布局(Layout)</h4><p>链接器决定</p><ul><li>.text放哪</li><li>.data放哪</li><li>.bss放哪</li><li>程序入口在哪</li></ul><h3 id=链接器内部流程>链接器内部流程</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>读取所有.o文件
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>读取符号表
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>合并相同section
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>符号解析
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>地址分配
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>执行重定位
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>写出最终可执行文件
+</span></span></code></pre></div><h3 id=静态链接-vs-动态链接>静态链接 vs 动态链接</h3><h4 id=静态链接>静态链接</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>gcc main.o -static
+</span></span></code></pre></div><ul><li>所有库代码都拷贝进可执行文件</li><li>文件变大</li><li>运行时不依赖外部库</li></ul><h4 id=动态链接>动态链接</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>gcc main.o
+</span></span></code></pre></div><ul><li>只记录库引用</li><li>运行时由动态加载器处理</li></ul><h2 id=动态链接器>动态链接器</h2><p>动态链接器是负责程序启动后加载共享库、解析动态符号、建立运行时地址映射的系统组件</p><p>典型实现</p><ul><li>ld-linux.so(Linux)</li><li>dyld(macOS)</li><li>Windows loader（内置在系统运行时）</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>可执行文件启动
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>操作系统加载器
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>动态链接器
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>解析依赖库
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>建立符号映射
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>执行程序入口
+</span></span></code></pre></div><h3 id=动态链接器行为>动态链接器行为</h3><h4 id=加载共享库>加载共享库</h4><p>例如程序依赖</p><ul><li>libc.so</li><li>libm.so</li><li>libpthread.so</li></ul><p>动态链机器会</p><ul><li>找到库文件</li><li>映射到虚拟内存</li></ul><p>涉及内存页映射，权限设置，这里通常依赖ELF文件结构</p><h4 id=符号解析>符号解析</h4><p>假设程序调用</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;hello&#34;</span>);
+</span></span></code></pre></div><p>但printf在libc动态库中，动态链接器要做的就是把printf的调用地址绑定到真实函数地址</p><blockquote><p>延迟绑定(Lazy Binding)
+这是动态链接器的经典优化，思想是：不在程序启动时解析所有符号，而是第一次调用函数时再解析。机制依赖GOT(Global Offset Table)，PLT(Procedure Linkage Table)</p></blockquote><h4 id=重定位修正>重定位修正</h4><p>程序中可能包含位置无关代码（PIC），例如</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>call [GOT + offset]
+</span></span></code></pre></div><p>动态链接器会修改GOT表中的真实地址</p><h3 id=动态链接器内部结构>动态链接器内部结构</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>ELF Header
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>Program Headers
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>加载各个 Segment
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>解析 DT_NEEDED 依赖
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>加载共享库
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>符号查找
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>重定位处理
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>跳转到程序入口
+</span></span></code></pre></div><h2 id=调试器>调试器</h2><h2 id=分析工具>分析工具</h2><h2 id=crt>CRT</h2><h2 id=使用vscode开发cc>使用VSCode开发C/C++</h2><h2 id=使用visual-studio开发cc>使用Visual Studio开发C/C++</h2></div><nav class=post-nav></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#不同平台的默认组合>不同平台的默认组合</a><ul><li><a href=#linux>Linux</a></li><li><a href=#windows>Windows</a></li><li><a href=#macos>macOS</a></li></ul></li><li><a href=#工具链流程>工具链流程</a></li><li><a href=#构建系统>构建系统</a><ul><li><a href=#手动编译的局限性>手动编译的局限性</a></li><li><a href=#构建系统行为>构建系统行为</a><ul><li><a href=#依赖管理>依赖管理</a></li><li><a href=#调用编译器>调用编译器</a></li><li><a href=#管理构建配置>管理构建配置</a></li><li><a href=#跨平台抽象>跨平台抽象</a></li></ul></li><li><a href=#常见构建系统>常见构建系统</a><ul><li><a href=#make>Make</a></li><li><a href=#cmake>CMake</a></li><li><a href=#ninja>Ninja</a></li></ul></li></ul></li><li><a href=#编译器>编译器</a><ul><li><a href=#现代编译器的结构>现代编译器的结构</a></li></ul></li><li><a href=#汇编器>汇编器</a><ul><li><a href=#汇编器行为>汇编器行为</a><ul><li><a href=#1-指令编码>1. 指令编码</a></li><li><a href=#2-符号解析>2. 符号解析</a></li><li><a href=#3-生成目标文件格式>3. 生成目标文件格式</a></li><li><a href=#4-生成重定位记录>4. 生成重定位记录</a></li></ul></li><li><a href=#汇编器内部结构>汇编器内部结构</a></li><li><a href=#两种汇编器风格>两种汇编器风格</a></li><li><a href=#总结>总结</a></li></ul></li><li><a href=#链接器>链接器</a><ul><li><a href=#链接器行为>链接器行为</a><ul><li><a href=#1-符号解析symbol-resolution>1. 符号解析(Symbol Resolution)</a></li><li><a href=#2-重定位relocation>2. 重定位(Relocation)</a></li><li><a href=#3-地址空间布局layout>3. 地址空间布局(Layout)</a></li></ul></li><li><a href=#链接器内部流程>链接器内部流程</a></li><li><a href=#静态链接-vs-动态链接>静态链接 vs 动态链接</a><ul><li><a href=#静态链接>静态链接</a></li><li><a href=#动态链接>动态链接</a></li></ul></li></ul></li><li><a href=#动态链接器>动态链接器</a><ul><li><a href=#动态链接器行为>动态链接器行为</a><ul><li><a href=#加载共享库>加载共享库</a></li><li><a href=#符号解析>符号解析</a></li><li><a href=#重定位修正>重定位修正</a></li></ul></li><li><a href=#动态链接器内部结构>动态链接器内部结构</a></li></ul></li><li><a href=#调试器>调试器</a></li><li><a href=#分析工具>分析工具</a></li><li><a href=#crt>CRT</a></li><li><a href=#使用vscode开发cc>使用VSCode开发C/C++</a></li><li><a href=#使用visual-studio开发cc>使用Visual Studio开发C/C++</a></li></ul></li></ul></nav></aside><script src=/js/scrollspy.js defer></script><script type=module>
   import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
   mermaid.initialize({ 
     startOnLoad: true, theme: "default" });
