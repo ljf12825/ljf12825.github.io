@@ -566,13 +566,168 @@ v
 跳转到程序入口
 ```
 
-## 调试器
-
-## 分析工具
-
 ## CRT
 
+CRT, C Runtime, 它不是标准库本身，而是在`main()`之前和之后负责初始化与收尾的一整套运行时支撑代码
+
+### 程序启动流程
+
+以ELF程序（Linux）为例
+
+```
+内核加载 ELF
+v
+动态链接器
+v
+CRT入口（_start）
+v
+__libc_start_main
+v
+初始化环境
+v
+调用main()
+v
+exit()
+v
+清理流程
+```
+
+真正的入口不是main，而是`_start`
+
+### CRT行为
+
+#### 建立运行时环境
+
+CRT负责
+
+- 准备栈
+- 解析argc/argv
+- 准备环境变量envp
+
+Linux下栈布局
+
+```
+argc
+argv[]
+NULL
+envp[]
+NULL
+auxv[]
+```
+
+CRT负责解析这些
+
+#### 初始化全局变量
+
+```c
+int x = 5;
+```
+
+这些数据段需要
+
+- BSS清零
+- DATA初始化
+
+如果是C++
+
+- 构造全局对象
+- 注册析构函数
+
+#### 调用libc初始化
+
+在GNU系统中，GNU C Library的核心入口是`__libc_start_main()`
+
+它负责
+
+- 初始化线程系统
+- 初始化I/O
+- 初始化malloc
+- 注册exit handler
+
+#### 调用main()
+
+#### 程序退出清理
+
+当main返回
+
+- 执行atext注册函数
+- 调用全局析构函数
+- 刷新缓冲区
+- 关闭文件
+
 ## 使用VSCode开发C/C++
+
+在VSCode里开发C/C++，核心不是编译器本身，而是VSCode + Language Server + Toolchain + Build System的组合
+
+```text
+VSCode UI
+v
+C/C++ Extension (Language Client)
+v
+C/C++ Language Server
+v
+Compiler Toolchain
+v
+Build System
+v
+Executable Binary
+```
+
+### 项目结构
+
+```text
+project/
+├── src/
+├── include/
+├── build/
+├── CMakeLists.txt
+└── main.cpp
+```
+
+### .vscode/
+
+VSCode可以抽象为三层架构
+
+```text
+VSCode UI 编辑器
+v
+Language Service（代码理解）
+v
+Build / Debug Execution 层
+```
+
+`.vscode/`就是执行层配置
+
+#### tasks.json
+
+作用：定义如何执行编译构建流程\
+本质上是VSCode调用外部命令
+
+例如
+
+```json
+{
+    "label": "build",
+    "type": "shell",
+    "command": "cmake --build build"
+}
+```
+
+tasks.json常用于
+
+- 编译项目
+- 运行脚本
+- 清理工程
+- 自动化流程
+
+它不做：
+
+- 语法分析
+- 调试控制
+
+#### launch.json
+
+作用：控制debugger如何启动和连接目标程序
 
 ## 使用Visual Studio开发C/C++
 
