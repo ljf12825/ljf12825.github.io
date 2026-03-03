@@ -173,7 +173,56 @@
 </span></span><span style=display:flex><span>重定位处理
 </span></span><span style=display:flex><span>v
 </span></span><span style=display:flex><span>跳转到程序入口
-</span></span></code></pre></div><h2 id=调试器>调试器</h2><h2 id=分析工具>分析工具</h2><h2 id=crt>CRT</h2><h2 id=使用vscode开发cc>使用VSCode开发C/C++</h2><h2 id=使用visual-studio开发cc>使用Visual Studio开发C/C++</h2></div><nav class=post-nav></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#不同平台的默认组合>不同平台的默认组合</a><ul><li><a href=#linux>Linux</a></li><li><a href=#windows>Windows</a></li><li><a href=#macos>macOS</a></li></ul></li><li><a href=#工具链流程>工具链流程</a></li><li><a href=#构建系统>构建系统</a><ul><li><a href=#手动编译的局限性>手动编译的局限性</a></li><li><a href=#构建系统行为>构建系统行为</a><ul><li><a href=#依赖管理>依赖管理</a></li><li><a href=#调用编译器>调用编译器</a></li><li><a href=#管理构建配置>管理构建配置</a></li><li><a href=#跨平台抽象>跨平台抽象</a></li></ul></li><li><a href=#常见构建系统>常见构建系统</a><ul><li><a href=#make>Make</a></li><li><a href=#cmake>CMake</a></li><li><a href=#ninja>Ninja</a></li></ul></li></ul></li><li><a href=#编译器>编译器</a><ul><li><a href=#现代编译器的结构>现代编译器的结构</a></li></ul></li><li><a href=#汇编器>汇编器</a><ul><li><a href=#汇编器行为>汇编器行为</a><ul><li><a href=#1-指令编码>1. 指令编码</a></li><li><a href=#2-符号解析>2. 符号解析</a></li><li><a href=#3-生成目标文件格式>3. 生成目标文件格式</a></li><li><a href=#4-生成重定位记录>4. 生成重定位记录</a></li></ul></li><li><a href=#汇编器内部结构>汇编器内部结构</a></li><li><a href=#两种汇编器风格>两种汇编器风格</a></li><li><a href=#总结>总结</a></li></ul></li><li><a href=#链接器>链接器</a><ul><li><a href=#链接器行为>链接器行为</a><ul><li><a href=#1-符号解析symbol-resolution>1. 符号解析(Symbol Resolution)</a></li><li><a href=#2-重定位relocation>2. 重定位(Relocation)</a></li><li><a href=#3-地址空间布局layout>3. 地址空间布局(Layout)</a></li></ul></li><li><a href=#链接器内部流程>链接器内部流程</a></li><li><a href=#静态链接-vs-动态链接>静态链接 vs 动态链接</a><ul><li><a href=#静态链接>静态链接</a></li><li><a href=#动态链接>动态链接</a></li></ul></li></ul></li><li><a href=#动态链接器>动态链接器</a><ul><li><a href=#动态链接器行为>动态链接器行为</a><ul><li><a href=#加载共享库>加载共享库</a></li><li><a href=#符号解析>符号解析</a></li><li><a href=#重定位修正>重定位修正</a></li></ul></li><li><a href=#动态链接器内部结构>动态链接器内部结构</a></li></ul></li><li><a href=#调试器>调试器</a></li><li><a href=#分析工具>分析工具</a></li><li><a href=#crt>CRT</a></li><li><a href=#使用vscode开发cc>使用VSCode开发C/C++</a></li><li><a href=#使用visual-studio开发cc>使用Visual Studio开发C/C++</a></li></ul></li></ul></nav></aside><script src=/js/scrollspy.js defer></script><script type=module>
+</span></span></code></pre></div><h2 id=crt>CRT</h2><p>CRT, C Runtime, 它不是标准库本身，而是在<code>main()</code>之前和之后负责初始化与收尾的一整套运行时支撑代码</p><h3 id=程序启动流程>程序启动流程</h3><p>以ELF程序（Linux）为例</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>内核加载 ELF
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>动态链接器
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>CRT入口（_start）
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>__libc_start_main
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>初始化环境
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>调用main()
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>exit()
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>清理流程
+</span></span></code></pre></div><p>真正的入口不是main，而是<code>_start</code></p><h3 id=crt行为>CRT行为</h3><h4 id=建立运行时环境>建立运行时环境</h4><p>CRT负责</p><ul><li>准备栈</li><li>解析argc/argv</li><li>准备环境变量envp</li></ul><p>Linux下栈布局</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>argc
+</span></span><span style=display:flex><span>argv[]
+</span></span><span style=display:flex><span>NULL
+</span></span><span style=display:flex><span>envp[]
+</span></span><span style=display:flex><span>NULL
+</span></span><span style=display:flex><span>auxv[]
+</span></span></code></pre></div><p>CRT负责解析这些</p><h4 id=初始化全局变量>初始化全局变量</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#8be9fd>int</span> x <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>5</span>;
+</span></span></code></pre></div><p>这些数据段需要</p><ul><li>BSS清零</li><li>DATA初始化</li></ul><p>如果是C++</p><ul><li>构造全局对象</li><li>注册析构函数</li></ul><h4 id=调用libc初始化>调用libc初始化</h4><p>在GNU系统中，GNU C Library的核心入口是<code>__libc_start_main()</code></p><p>它负责</p><ul><li>初始化线程系统</li><li>初始化I/O</li><li>初始化malloc</li><li>注册exit handler</li></ul><h4 id=调用main>调用main()</h4><h4 id=程序退出清理>程序退出清理</h4><p>当main返回</p><ul><li>执行atext注册函数</li><li>调用全局析构函数</li><li>刷新缓冲区</li><li>关闭文件</li></ul><h2 id=使用vscode开发cc>使用VSCode开发C/C++</h2><p>在VSCode里开发C/C++，核心不是编译器本身，而是VSCode + Language Server + Toolchain + Build System的组合</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>VSCode UI
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>C/C++ Extension (Language Client)
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>C/C++ Language Server
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>Compiler Toolchain
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>Build System
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>Executable Binary
+</span></span></code></pre></div><h3 id=项目结构>项目结构</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>project/
+</span></span><span style=display:flex><span>├── src/
+</span></span><span style=display:flex><span>├── include/
+</span></span><span style=display:flex><span>├── build/
+</span></span><span style=display:flex><span>├── CMakeLists.txt
+</span></span><span style=display:flex><span>└── main.cpp
+</span></span></code></pre></div><h3 id=vscode>.vscode/</h3><p>VSCode可以抽象为三层架构</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>VSCode UI 编辑器
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>Language Service（代码理解）
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>Build / Debug Execution 层
+</span></span></code></pre></div><p><code>.vscode/</code>就是执行层配置</p><h4 id=tasksjson>tasks.json</h4><p>作用：定义如何执行编译构建流程<br>本质上是VSCode调用外部命令</p><p>例如</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>&#34;label&#34;</span>: <span style=color:#f1fa8c>&#34;build&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;shell&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>&#34;command&#34;</span>: <span style=color:#f1fa8c>&#34;cmake --build build&#34;</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>tasks.json常用于</p><ul><li>编译项目</li><li>运行脚本</li><li>清理工程</li><li>自动化流程</li></ul><p>它不做：</p><ul><li>语法分析</li><li>调试控制</li></ul><h4 id=launchjson>launch.json</h4><p>作用：控制debugger如何启动和连接目标程序</p><h2 id=使用visual-studio开发cc>使用Visual Studio开发C/C++</h2></div><nav class=post-nav></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#不同平台的默认组合>不同平台的默认组合</a><ul><li><a href=#linux>Linux</a></li><li><a href=#windows>Windows</a></li><li><a href=#macos>macOS</a></li></ul></li><li><a href=#工具链流程>工具链流程</a></li><li><a href=#构建系统>构建系统</a><ul><li><a href=#手动编译的局限性>手动编译的局限性</a></li><li><a href=#构建系统行为>构建系统行为</a><ul><li><a href=#依赖管理>依赖管理</a></li><li><a href=#调用编译器>调用编译器</a></li><li><a href=#管理构建配置>管理构建配置</a></li><li><a href=#跨平台抽象>跨平台抽象</a></li></ul></li><li><a href=#常见构建系统>常见构建系统</a><ul><li><a href=#make>Make</a></li><li><a href=#cmake>CMake</a></li><li><a href=#ninja>Ninja</a></li></ul></li></ul></li><li><a href=#编译器>编译器</a><ul><li><a href=#现代编译器的结构>现代编译器的结构</a></li></ul></li><li><a href=#汇编器>汇编器</a><ul><li><a href=#汇编器行为>汇编器行为</a><ul><li><a href=#1-指令编码>1. 指令编码</a></li><li><a href=#2-符号解析>2. 符号解析</a></li><li><a href=#3-生成目标文件格式>3. 生成目标文件格式</a></li><li><a href=#4-生成重定位记录>4. 生成重定位记录</a></li></ul></li><li><a href=#汇编器内部结构>汇编器内部结构</a></li><li><a href=#两种汇编器风格>两种汇编器风格</a></li><li><a href=#总结>总结</a></li></ul></li><li><a href=#链接器>链接器</a><ul><li><a href=#链接器行为>链接器行为</a><ul><li><a href=#1-符号解析symbol-resolution>1. 符号解析(Symbol Resolution)</a></li><li><a href=#2-重定位relocation>2. 重定位(Relocation)</a></li><li><a href=#3-地址空间布局layout>3. 地址空间布局(Layout)</a></li></ul></li><li><a href=#链接器内部流程>链接器内部流程</a></li><li><a href=#静态链接-vs-动态链接>静态链接 vs 动态链接</a><ul><li><a href=#静态链接>静态链接</a></li><li><a href=#动态链接>动态链接</a></li></ul></li></ul></li><li><a href=#动态链接器>动态链接器</a><ul><li><a href=#动态链接器行为>动态链接器行为</a><ul><li><a href=#加载共享库>加载共享库</a></li><li><a href=#符号解析>符号解析</a></li><li><a href=#重定位修正>重定位修正</a></li></ul></li><li><a href=#动态链接器内部结构>动态链接器内部结构</a></li></ul></li><li><a href=#crt>CRT</a><ul><li><a href=#程序启动流程>程序启动流程</a></li><li><a href=#crt行为>CRT行为</a><ul><li><a href=#建立运行时环境>建立运行时环境</a></li><li><a href=#初始化全局变量>初始化全局变量</a></li><li><a href=#调用libc初始化>调用libc初始化</a></li><li><a href=#调用main>调用main()</a></li><li><a href=#程序退出清理>程序退出清理</a></li></ul></li></ul></li><li><a href=#使用vscode开发cc>使用VSCode开发C/C++</a><ul><li><a href=#项目结构>项目结构</a></li><li><a href=#vscode>.vscode/</a><ul><li><a href=#tasksjson>tasks.json</a></li><li><a href=#launchjson>launch.json</a></li></ul></li></ul></li><li><a href=#使用visual-studio开发cc>使用Visual Studio开发C/C++</a></li></ul></li></ul></nav></aside><script src=/js/scrollspy.js defer></script><script type=module>
   import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
   mermaid.initialize({ 
     startOnLoad: true, theme: "default" });
