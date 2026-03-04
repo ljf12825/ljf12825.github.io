@@ -698,6 +698,13 @@ Build / Debug Execution 层
 
 `.vscode/`就是执行层配置
 
+```text
+.vscode/
+|__tasks.json
+|__launch.json
+|__setting.json
+```
+
 #### tasks.json
 
 作用：定义如何执行编译构建流程\
@@ -729,24 +736,256 @@ tasks.json常用于
 
 作用：控制debugger如何启动和连接目标程序
 
+例如，Linux常用 GDB
+
+它主要负责
+
+- 调试器类型
+- 可执行程序路径
+- 工作目录
+
+```json
+{
+    "type": "cppdbg",
+    "request": "launch",
+    "program": "./build/app",
+    "cwd": "${workspaceFolder}"
+}
+```
+
+#### setting.json
+
+作用：覆盖VSCode全局设置
+
 ## 使用Visual Studio开发C/C++
 
+VS开发C/C++项目结构本质上是：IDE组织工程 + MSBuild构建系统 + 编译器/链接器协作
+
+### 工程结构
+
+在Windows下，用Microsoft Visual Studio创建C++项目时，一般是这样
+
+```
+Solution（解决方案）
+|__ Project（项目1）
+|   |__Source Files
+|   |__Header Files
+|   |__Resource Files
+|   |__xxx.vcxproj
+|   |__xxx.vcxproj.filters
+|
+|__ Project（项目2）
+```
+
+| 层级 | 作用 |
+| - | - |
+| Solution(.sln) | 管理多个项目 |
+| Project(.vcxproj) | 一个可编译目标(exe/dll/lib) |
+| Source Files | .cpp文件 |
+| Header Files | .h文件 |
+| Resource Files | Windows资源文件 |
+
+#### .sln
+
+- 只是一个“项目集合”
+- 记录哪些项目属于这个解决方案
+
+它不参与编译，只是管理结构
+
+#### .vcxproj文件
+
+这是最重要最核心的文件，它本质上是一个XML格式的MSBuild构建脚本
+
+```xml
+<ItemGroup>
+    <ClCompile Include="main.cpp" />
+</ItemGroup>
+
+<PropertyGroup>
+    <ConfigurationType>Application</ConfigurationType>
+</PropertyGroup>
+```
+
+它控制
+
+- 使用哪个编译器(MSVC)
+- 编译参数
+- 优化等级
+- 宏定义
+- 链接库
+- 输出路径
+
+#### .vcxproj.filters
+
+只是用来在VS里分文件夹显示，不会影响实际目录结构
+
+#### 一个标准C++项目目录
+
+```
+MyEngine/
+ ├── MyEngine.sln
+ ├── Engine/
+ │    ├── Engine.vcxproj
+ │    ├── src/
+ │    │    ├── core/
+ │    │    ├── math/
+ │    │    └── renderer/
+ │    └── include/
+ │
+ ├── Editor/
+ │    ├── Editor.vcxproj
+ │    └── src/
+ │
+ └── Game/
+      ├── Game.vcxproj
+      └── src/
+```
+
+这就是标准的多项目 + 分层结构
+
+### 编译流程
+
+当点击`生成 -> 生成解决方案`
+
+背后发生的是
+
+- VS读取`.sln`
+- 解析`.vcxproj`
+- 调用MSBuild
+- MSBuild调用
+  - cl.exe（编译器）
+  - link.exe（链接器）
+  - lib.exe（静态库工具）
+
+### Debug/Release
+
+VS的默认输出目录
+
+```
+x64/
+ ├── Debug/
+ └── Release/
+```
+
+| Debug | Release |
+| - | - |
+| 无优化 | 高优化 |
+| 带调试符号 | 无调试符号 |
+| 慢 | 快 |
+
+### VS与CMake
+
+传统VS工程模式
+
+```
+VS -> 新建 .vcxproj -> 手动配置编译参数 -> 编译
+```
+
+问题
+
+- 只能在Windows上
+- 构建逻辑写在.vcxproj里
+- 不可移植
+- 不能方便支持Linux/Mac
+
+CMake解决：同一份工程，在不同平台生成不同构建文件
+
+例如
+
+```bash
+cmake -G "Visual Studio 17 2022"
+```
+
+生成`.sln`, `.vcxproj`
+
+如果在Linux
+
+```bash
+cmake -G "Ninja"
+```
+
+生成`build.ninja`
+
+#### CMake和VS有三种合作模式
+
+##### 模式1：CMake生成VS工程
+
+```
+CMake -> 生成 .sln/.vcxproj -> 用VS打开
+```
+
+命令
+
+```bash
+cmake -S . -B build -G "Visual Studio 17 2022"
+```
+
+优点
+
+- 兼容老项目
+- VS体验完整
+
+缺点
+
+- 每次改CMakeLists需要重新生成
+
+##### 模式2：VS直接打开CMake项目
+
+现代VS可以
+
+```
+文件 -> 打开 -> 文件夹 -> 选择包含 CMakeLists.txt 的目录
+```
+
+VS内部
+
+- 自动运行CMake
+- 自动生成缓存
+- 自动配置Debug/Release
+
+##### 模式3：VS + CMake + Ninja
+
+```bash
+cmake -G Ninja
+```
+
+VS会
+
+- 用CMake
+- 用Ninja
+- 用MSVC编译器
+
+构建速度比MSBuild快很多
 
 
+#### CMake生成VS工程过程
 
+```cmake
+cmake_minimum_required(VERSION 3.20)
+project(MyEngine)
 
+add_executable(MyEngine main.cpp)
+```
 
+当执行
 
+```bash
+cmake -G "Visual Studio 17 2022"
+```
 
+CMake会
 
+- 检测MSVC编译器
+- 生成.sln
+- 生成.vcxproj
+- 写入编译参数
 
+CMake本质是一个元构建系统
 
+当用Cmake时，VS不再是构建系统，而是变成编译器 + 调试器 + CMake前端
 
+编译命令真正来源于
 
-
-
-
-
-
-
-
+```
+CMake -> MSBuild/Ninja -> cl.exe
+```
