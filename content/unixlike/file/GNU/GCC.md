@@ -1,10 +1,8 @@
 ---
 title: GCC
 date: 2025-12-31
-categories: [GNU]
-tags: [coreutils]
 author: "ljf12825"
-type: log
+type: file
 summary: introduction of gcc
 ---
 

@@ -1,10 +1,8 @@
 ---
 title: Git for Windows
 date: 2025-12-31
-categories: [Git, Windows]
-tags: [Toolchains]
 author: "ljf12825"
-type: log
+type: file
 summary: Git for Windows
 ---
 

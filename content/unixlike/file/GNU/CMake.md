@@ -1,10 +1,8 @@
 ---
 title: CMake
 date: 2025-12-31
-categories: [Linux]
-tags: [Toolchains, Build]
 author: "ljf12825"
-type: log
+type: file
 summary: Concept, usage of CMake
 ---
 

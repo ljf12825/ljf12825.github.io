@@ -1,10 +1,8 @@
 ---
 title: Ninja
 date: 2025-12-31
-categories: [Linux]
-tags: [Toolchains]
 author: "ljf12825"
-type: log
+type: file
 summary: Usage of Ninja
 ---
 

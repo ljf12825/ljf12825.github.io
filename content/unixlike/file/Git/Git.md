@@ -1,10 +1,8 @@
 ---
-title: git
+title: Git
 date: 2025-12-31
-categories: [Git, Linux]
-tags: [Toolchains]
 author: "ljf12825"
-type: log
+type: file
 summary: the git self
 ---
 
