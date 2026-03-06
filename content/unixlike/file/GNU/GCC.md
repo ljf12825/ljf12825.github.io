@@ -106,20 +106,26 @@ g++ --version
 gdb --version
 ld --version
 ```
+
 如果这些命令输出版本信息，说明安装成功
 
-**可选组件**\
+#### 可选组件
+
 安装特定版本的GCC\
 如果系统自带的GCC版本比较旧，可以手动安装新版
+
 ```bash
 sudo apt install gcc-15 g++-15 # 例如安装GCC 15
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc -15 100
 sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-15 100
 ```
+
 然后使用`sudo update-alternatives --config gcc`切换版本
 
-**手动编译安装**\
+#### 手动编译安装
+
 如果需要最新版或自定义配置，可以从源码编译
+
 ```bash
 # 下载源码
 wget https://ftp.gnu.org.gnu/gcc/gcc-15.1.0/gcc-15.1.0.tar.gz
@@ -141,33 +147,36 @@ source ~/.bashrc
 ```
 
 ## GCC的编译过程
+
 GCC隐式地经历了四个主要阶段：
-1. 预处理（Preprocessing）
-  - 执行者：`cpp`（C Preprocessor）
-  - 工作：
-    - 展开所有的宏（`#define`）
-    - 处理所有条件编译指令（`#if`, `ifdef`, `#endif`等）
-    - 包含头文件（`include`）的内容
-    - 删除所有注释和空行
-  - 命令：`gcc -E main.c -o main.i`（输出`.i`文件）
 
-2. 编译（Compilation）
-  - 工作：将预处理后的代码（高级语言）翻译成汇编语言（特定于目标CPU的低级代码）
-  - 命令：`gcc -S main.i -o main.s`（输出`.s`文件）
-  - 注意：这里的“编译”是狭义上的，广义上的编译指整个从源码到二进制的过程
+### 预处理（Preprocessing）
 
-3. 汇编（Assembly）
-  - 执行者：`as`（汇编器）
-  - 工作：将汇编代码`.s`文件翻译成机器指令，生成目标文件（`.o`或`.obj`文件）。目标文件是二进制格式，但还不能直接运行
-  - 命令：`gcc -c main.s -o main.o`（输出`.o`文件）
+- 执行者：`cpp`（C Preprocessor）
+- 工作：
+  - 展开所有的宏（`#define`）
+  - 处理所有条件编译指令（`#if`, `ifdef`, `#endif`等）
+  - 包含头文件（`include`）的内容
+  - 删除所有注释和空行
+- 命令：`gcc -E main.c -o main.i`（输出`.i`文件）
 
-4. 链接（Linking）
-  - 执行者：`ld`（链接器，GCC会调用它）
-  - 工作：
-    - 将多个目标文件（`.o`）合并成一个可执行文件
-    - 解析库文件（如 C 标准库`libc.so`）中函数引用（例如`prinf`函数在哪）
-    - 解决所有符号（函数、变量）的地址
-  - 命令：`gcc main.o utils.o -o myapp`（输出为可执行文件）
+### 编译（Compilation）
+- 工作：将预处理后的代码（高级语言）翻译成汇编语言（特定于目标CPU的低级代码）
+- 命令：`gcc -S main.i -o main.s`（输出`.s`文件）
+- 注意：这里的“编译”是狭义上的，广义上的编译指整个从源码到二进制的过程
+
+### 汇编（Assembly）
+- 执行者：`as`（汇编器）
+- 工作：将汇编代码`.s`文件翻译成机器指令，生成目标文件（`.o`或`.obj`文件）。目标文件是二进制格式，但还不能直接运行
+- 命令：`gcc -c main.s -o main.o`（输出`.o`文件）
+
+### 链接（Linking）
+- 执行者：`ld`（链接器，GCC会调用它）
+- 工作：
+  - 将多个目标文件（`.o`）合并成一个可执行文件
+  - 解析库文件（如 C 标准库`libc.so`）中函数引用（例如`prinf`函数在哪）
+  - 解决所有符号（函数、变量）的地址
+- 命令：`gcc main.o utils.o -o myapp`（输出为可执行文件）
 
 `gcc main.c -o main`，GCC自动完成了以上所有四个步骤
 
@@ -219,34 +228,38 @@ gcc src/main.c src/utils.c -I./include -L./lib -lthirdparty -o bin/myapp
 
 ## `gcc` and `g++`
 `gcc`和`g++`都是GNU编译器套件里的前端驱动程序，不是单独的编译器，而是“驱动”不同后端编译工具链的入口。它们的主要区别体现在默认行为和语言支持上
-1. `gcc`
-  - 原名是GNU C Compiler，但后来扩展成了 GNU Compiler Collection
-  - 主要职责：默认当作 C 编译器来使用
-  - 行为特点：
-    - 如果输入`.c`文件：当成C源文件处理
-    - 如果输入`.cpp`/`.cc`/`.cxx`文件：也会尝试用C++编译器，但不会自动连接C++标准库（libstdc++）
-    - 编译C++文件时，需要手动加上`-lstdc++`，否则使用C++标准库的程序（例如用`std::cout`）会报连接错误
+
+### `gcc`
+- 原名是GNU C Compiler，但后来扩展成了 GNU Compiler Collection
+- 主要职责：默认当作 C 编译器来使用
+- 行为特点：
+  - 如果输入`.c`文件：当成C源文件处理
+  - 如果输入`.cpp`/`.cc`/`.cxx`文件：也会尝试用C++编译器，但不会自动连接C++标准库（libstdc++）
+  - 编译C++文件时，需要手动加上`-lstdc++`，否则使用C++标准库的程序（例如用`std::cout`）会报连接错误
 
 示例
+
 ```bash
 gcc test.cpp -o test # 可能会报错：未定义引用 std::cout
 gcc test.cpp -o test -lstdc++ # 手动指定链接C++库，才能运行
 ```
 
-2. `g++`
-  - 是专门针对C++的编译驱动程序
-  - 主要职责：把输入文件当作C++源代码来处理
-  - 行为特点：
-    - 输入`.c`或`.cpp`文件时，都会默认按C++语法处理
-    - 编译和链接会自动加上C++标准库（libstdc++）
-    - 适合C++项目编译，不用额外指定库
+### `g++`
+- 是专门针对C++的编译驱动程序
+- 主要职责：把输入文件当作C++源代码来处理
+- 行为特点：
+  - 输入`.c`或`.cpp`文件时，都会默认按C++语法处理
+  - 编译和链接会自动加上C++标准库（libstdc++）
+  - 适合C++项目编译，不用额外指定库
 
 示例
+
 ```bash
 g++ test.cpp -o test # 自动链接 stdc++，直接可以用 std::cout
 ```
 
-### 实际建议
+#### 建议
+
 - 如果写纯C：用`gcc`
 - 如果写C++：用`g++`，避免手动添加库的麻烦
 - 如果写混合项目（C&C++）：通常使用`g++`做最终链接（因为要链上`libstdc++`），中间的`.o`文件可以用`gcc -c`或`g++ -c`来生成
@@ -317,7 +330,8 @@ GNU GCC官网提供了完整的[在线文档](https://gcc/gnu.org/onlinedocs)，
 
 可以让GCC告诉你它默认启用了哪些选项，或者不同优化级别具体包含了哪些子选项
 
-1. 查看激活的优化选项：
+#### 查看激活的优化选项：
+
 `-O2`与`-O3`有什么区别
 
 ```bash
@@ -330,7 +344,7 @@ gcc -Q -O3 --help=optimizers
 
 输出会是一个很长的列表，显示每个优化选项是 `[enabled]` 还是 `[disabled]`。通过对比，你就可以清晰地看到 `-O3` 比 `-O2` 多开启了哪些具体的优化
 
-2. 查看默认启用的警告
+#### 查看默认启用的警告
 
 ```bash
 gcc -Q --help=warnings | grep enabled
