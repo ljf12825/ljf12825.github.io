@@ -77,7 +77,9 @@ AST
 v
 GENERIC
 v
-GIMPLE(SSA IR)
+GIMPLE
+v
+SSA GIMPLE
 v
 RTL
 v
@@ -97,6 +99,8 @@ a = b + c
 ```
 
 用于优化、数据流分析、SSA
+
+#### SSA GIMPLE
 
 #### RTL(Register Trransfer Language)
 
@@ -132,7 +136,7 @@ a = b + c
   - 命令：`gcc -E main.c`
   - 输出：`main.i`
 - `cc1`/`cc1plus`（编译器）
-  - 作用：C/C++ -> Assembly
+  - 作用：C/C++ -> IR -> Assembly
   - 命令：`gcc -S main.c`
   - 输出：`main.s`
 - `as`：汇编器
@@ -302,6 +306,17 @@ sudo make install
 echo 'export PATH=/usr/local/gcc-15.1.0/bin:$PATH' >> ~/.bashrc
 source ~/.bashrc
 ```
+
+## GCC Pass System
+
+## GCC Plugin
+
+## Cross Compiler
+
+## LTO
+
+## Sanitizer
+
 
 ## 文档与帮助
 
