@@ -1,12 +1,10 @@
 ---
-title: C# Date Time System
+title: Date Time
 date: 2025-06-01
 author: "ljf12825"
 type: file
 summary: C# date time
 ---
-
-## C# 时间系统
 
 ### 基础时间类型概览
 C#中处理时间的核心结构体包括：

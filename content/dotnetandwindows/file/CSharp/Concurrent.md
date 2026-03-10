@@ -1,5 +1,5 @@
 ---
-title: C# Concurrent
+title: Concurrent
 date: 2025-06-01
 categories: [C#]
 tags: [Syntax]

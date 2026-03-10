@@ -1,5 +1,5 @@
 ---
-title: C# and .NET
+title: CSharp and .NET
 date: 2025-06-01
 author: "ljf12825"
 type: file
