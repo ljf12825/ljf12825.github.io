@@ -53,8 +53,8 @@
 当前正在开发一个功能，已经<code>git add</code>了一部分文件。这时想把当前“已暂存”的代码状态导出一个副本给别人看，但又不想做一次提交，这时就可以</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>git checkout-index -a --prefix<span style=color:#ff79c6>=</span>snapshot/
 </span></span></code></pre></div><p>然后将<code>snapshot/</code>文件夹打包发走</p><ol start=2><li><p>在脚本中清理工作目录
 在一些自动化脚本中，可能需要确保工作目录与索引完全一致，这时<code>git checkout-index -a -f</code>是一个很直接的选择</p></li><li><p>理解Git内部机制
-学习<code>git checkout-index</code>是理解<code>git checkout</code>和<code>git restore</code>等高层命令背后原理的好方法</p></li></ol></div><nav class=post-nav><a href=/unixlike/log/checkout/ class=hover:underline>pre: checkout</a>
-<a href=/unixlike/log/cherry-pick/ class=hover:underline>next: cherry-pick</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#索引>索引</a></li><li><a href=#对比>对比</a></li><li><a href=#主要用法与常用选项>主要用法与常用选项</a></li><li><a href=#实际使用场景>实际使用场景</a></li></ul></li></ul></nav></aside><script src=/js/scrollspy.js defer></script><script type=module>
+学习<code>git checkout-index</code>是理解<code>git checkout</code>和<code>git restore</code>等高层命令背后原理的好方法</p></li></ol></div><nav class=post-nav><a href=/unixlike/log/checkout/ class=hover:underline>Up: checkout</a>
+<a href=/unixlike/log/cherry-pick/ class=hover:underline>Next: cherry-pick</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#索引>索引</a></li><li><a href=#对比>对比</a></li><li><a href=#主要用法与常用选项>主要用法与常用选项</a></li><li><a href=#实际使用场景>实际使用场景</a></li></ul></li></ul></nav></aside><script src=/js/scrollspy.js defer></script><script type=module>
   import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
   mermaid.initialize({ 
     startOnLoad: true, theme: "default" });

@@ -54,8 +54,8 @@
 模拟拉取操作，不执行实际的拉取，只查看将会获取的内容</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>git fetch --dry-run
 </span></span></code></pre></div><h2 id=推荐协作习惯>推荐协作习惯</h2><ul><li>拉取用<code>fetch</code> + <code>rebase</code>而不是直接<code>pull</code></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span> git fetch origin
 </span></span><span style=display:flex><span> git rebase origin/main
-</span></span></code></pre></div><p>这样提交历史更干净（避免多余的merge commit）</p><ul><li>推送前先拉取</li></ul></div><nav class=post-nav><a href=/unixlike/log/fast-import/ class=hover:underline>pre: fast-import</a>
-<a href=/unixlike/log/fileoperator/ class=hover:underline>next: File Operator</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#推荐协作习惯>推荐协作习惯</a></li></ul></li></ul></nav></aside><script src=/js/scrollspy.js defer></script><script type=module>
+</span></span></code></pre></div><p>这样提交历史更干净（避免多余的merge commit）</p><ul><li>推送前先拉取</li></ul></div><nav class=post-nav><a href=/unixlike/log/fast-import/ class=hover:underline>Up: fast-import</a>
+<a href=/unixlike/log/fileoperator/ class=hover:underline>Next: File Operator</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#推荐协作习惯>推荐协作习惯</a></li></ul></li></ul></nav></aside><script src=/js/scrollspy.js defer></script><script type=module>
   import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
   mermaid.initialize({ 
     startOnLoad: true, theme: "default" });
