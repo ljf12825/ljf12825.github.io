@@ -19,10 +19,10 @@
 
     <nav class="post-nav">
       {{ with .NextInSection }}
-      <a href="{{ .RelPermalink }}" class="hover:underline">pre: {{ .Title }}</a>
+      <a href="{{ .RelPermalink }}" class="hover:underline">Up: {{ .Title }}</a>
       {{ end }}
       {{ with .PrevInSection }}
-      <a href="{{ .RelPermalink }}" class="hover:underline">next: {{ .Title }}</a>
+      <a href="{{ .RelPermalink }}" class="hover:underline">Next: {{ .Title }}</a>
       {{ end }}
   </nav>
 </article>
