@@ -10,7 +10,7 @@ summary: Usage of GCC in C/C++ Project
 ### 基础语法
 
 ```bash
-gcc/g++ [选项] 源文件 [选项] [目标文件]
+gcc/g++ [选项] [源文件] [选项] [目标文件]
 ```
 
 ### 常用选项
@@ -24,6 +24,84 @@ gcc/g++ [选项] 源文件 [选项] [目标文件]
 | `-E` | 只进行预处理不编译 |
 | `-S` | 编译到汇编语言，不汇编 |
 | `-v` | 显示编译过程的详细信息 |
+
+##### 输出默认文件名
+
+```bash
+gcc main.c
+```
+
+- 没有`-o`参数
+- GCC默认会把可执行文件叫`a.out`（这是Unix系统的传统名字）
+
+##### 输出指定文件名
+
+```bash
+gcc main.c -o main
+```
+
+gcc内部进行以下四个阶段
+
+1. 预处理：处理宏定义、头文件包含等
+
+```bash
+gcc -E main.c -o main.i
+```
+
+2. 编译：将预处理后的文件编译成汇编代码
+
+```bash
+gcc -S main.i -o main.s
+```
+
+3. 汇编：将汇编代码转换成机器码
+
+```bash
+gcc -c main.s -o main.o
+```
+
+4. 链接：将目标文件链接成可执行文件
+
+```bash
+gcc main.o -o main
+```
+
+在链接完成后，中间文件会被删除掉
+
+##### 分步编译
+
+###### 预处理
+
+不指定文件名
+
+```bash
+gcc -E main.c
+```
+
+这会执行标准输出，将结果打印到屏幕上
+
+指定文件名
+
+```bash
+gcc -E main.c -o main.i
+```
+
+`main.i`这个名字可以自定义，扩展名也可以自定义，比如`.txt`, `.abc`
+
+常见约定
+
+| 扩展名 | 含义 | 常用性 |
+| - | - | - |
+| `.i` | 预处理后的C文件 | 最常用 |
+| `.ii` | 预处理后的C++文件 | 最常用 |
+| `.txt` | 文本文件 | 可用 |
+| 无扩展名 | 任意文件名 | 不推荐 |
+
+同理对于`.s`, `.o`文件也是一样的，这对于gcc来说是可以的，但对于make或其他通过扩展名判断文件类型的工具来说未必行得通
+
+###### 编译
+
+
 
 #### 警告选项
 
@@ -72,11 +150,11 @@ gcc -std=c99 file.c
 
 ```bash
 # 编译单个文件
-gcc hello.c -o hello
-g++ hello.cpp -o hello
+gcc main.c -o main
+g++ main.cpp -o main
 
 # 编译并运行
-gcc hello.c -o hello && ./hello
+gcc main.c -o main && ./main
 ```
 
 #### 多文件编译
@@ -115,29 +193,6 @@ g++ program.cpp -o program -I/path/to/include
 
 gcc/g++编译分为四个阶段
 
-1. 预处理：处理宏定义、头文件包含等
-
-```bash
-gcc -E hello.c -o hello.i
-```
-
-2. 编译：将预处理后的文件编译成汇编代码
-
-```bash
-gcc -S hello.i -o hello.s
-```
-
-3. 汇编：将汇编代码转换成机器码
-
-```bash
-gcc -c hello.s -o hello.o
-```
-
-4. 链接：将目标文件链接成可执行文件
-
-```bash
-gcc hello.o -o hello
-```
 
 ## gcc vs g++
 
