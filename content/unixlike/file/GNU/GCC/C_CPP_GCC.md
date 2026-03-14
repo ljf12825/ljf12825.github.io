@@ -141,6 +141,39 @@ GCC只会报真正严重的语法错误或链接错误
 
 > GCC设计之初遵循“兼容老代码”原则，C语言历史上很多老程序有未初始化、隐式转换等现象，默认警告太多导致就代码编译报满屏，用户体验很差
 
+因此，开发中推荐的做法是
+
+```bash
+gcc -Wall -Wextra -Werror main.c
+```
+
+这样可以保证代码更安全、更规范，尤其是底层/库开发、游戏引擎开发、嵌入式开发等
+
+##### `-Wall`
+
+开启常用警告，比如
+
+- 未使用的函数或变量
+- 不匹配的格式化字符串(`printf`/`scanf`)
+- 可能的类型转换问题
+
+但不会开启一些“更严格的检查”
+
+##### `-Wextra`
+
+常见警告示例
+
+| 类型 | 示例代码 | 警告 |
+| - | - | - |
+| 未使用参数 | `int f(int x){return 0;}` | `unused parameter 'x'` |
+| 空函数体 | `void f(){}` | `empty body `(depends) |
+| 不完全初始化数组 | `int arr[5] = {1,2};` | `missing initializer for element 2` |
+| 多余的逗号 | `int arr[] = {1,2,};` | `extra comma` |
+| 隐式`int`转换 | `char c = 200;` | `oveerflow in implicit constant conversion` |
+| `return`没有值 | `int f(){}` | `control reaches end of non-void function` |
+
+不同版本GCC会有差异
+
 #### 优化选项
 
 | 选项 | 作用 |
