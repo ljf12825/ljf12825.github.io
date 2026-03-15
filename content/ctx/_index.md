@@ -2,7 +2,7 @@
 type: ctx
 ---
 
-# Creative Technology Experience
+# Creative Technical Experience
 
 ## INCLUDE
 
@@ -12,4 +12,4 @@ type: ctx
 4. Game Analyze
 5. Game Audio
 
----
+## Module
