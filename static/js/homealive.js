@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let asciiLines = [];
   let frame = 0;
   let animationId = null;
+  let originalContent = "";
+  let hoverActive = false;
 
   async function loadAscii(path) {
     const res = await fetch(path);
@@ -12,12 +14,20 @@ document.addEventListener("DOMContentLoaded", () => {
     return text.split("\n");
   }
 
+  async function loadDoc(path) {
+    const res = await fetch(path);
+    return res.text();
+  }
+
   function renderFrame() {
     if (frame >= asciiLines.length) {
       animationId = null;
       return;
     }
-    pre.textContent += asciiLines[frame] + "\n";
+    if (!hoverActive) {
+      pre.textContent += asciiLines[frame] + "\n";
+      originalContent = pre.textContent;
+    }
     frame++;
     animationId = requestAnimationFrame(renderFrame);
   }
@@ -36,9 +46,29 @@ document.addEventListener("DOMContentLoaded", () => {
     asciiLines = await loadAscii(path);
     pre.textContent = "";
     frame = 0;
-
     renderFrame();
   }
+
+  const tips = document.querySelectorAll(".tip");
+  tips.forEach(span => {
+    span.addEventListener("mouseenter", async () => {
+      hoverActive = true;
+      const docPath = span.dataset.doc;
+      if (docPath) {
+        pre.textContent = "Loading…";
+        try {
+          const content = await loadDoc(docPath);
+          if (hoverActive) pre.textContent = content;
+        } catch (e) {
+          pre.textContent = "Error!";
+        }
+      }
+    });
+    span.addEventListener("mouseleave", () => {
+      hoverActive = false;
+      pre.textContent = originalContent;
+    });
+  });
 
   let resizeTimeout = null;
   window.addEventListener("resize", () => {
