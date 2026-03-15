@@ -445,28 +445,6 @@ ol {
   cursor: help;
 }
 
-.tooltip {
-  display: none;
-  position: absolute;
-  bottom: 130%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #c0c0c0;
-  color: #000080;
-  padding: 3px 6px;
-  font-size: 12px;
-  border-top: 2px solid #fff;
-  border-left: 2px solid #fff;
-  border-right: 2px solid #000080;
-  border-bottom: 2px solid #000080;
-  white-space: nowrap;
-  z-index: 9999;
-}
-
-.tip:hover .tooltip {
-  display: block;
-}
-
 .layout {
   display: flex;
   align-items: flex-start;
@@ -475,7 +453,8 @@ ol {
 .ascii {
   font-family: monospace;
   flex: 0 0 auto;
-  margin: 0;
+  margin-right: 3rem;
+  color: #000080;
 }
 
 @keyframes neonFlicker {
