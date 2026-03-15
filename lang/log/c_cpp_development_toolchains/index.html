@@ -1,0 +1,292 @@
+<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>Overview of C/C++ Developement Toolchains</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-lua.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-rust.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/logsingle.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/lang/>★</a></li><li><a href=/lang/lab/>Lab</a></li><li><a href=/lang/log/>Log</a></li><li><a href=/lang/file/>File</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><pre class=ascii>
++——————————————————————————————————————————+
+|                   <a class=nav-item data-path=/ctx/ href=/ctx/>CTX</a>                    |
+|                    |                     |
+|                    |     <a class=nav-item data-path=/dnet/ href=/dnet/>.NET</a>            |
+|                    |    /                |
+|                    |   /                 |
+|                    |  /                  |
+|         <a class=nav-item data-path=/pm/ href=/pm/>PM</a>         | /                   |
+|          \         |/                    |
+|  <a class=nav-item data-path=/gp/ href=/gp/>GP</a> ——————\————— <a class=nav-item data-path=/home/ href=/home/>Home</a> ————————————— <a class=nav-item data-path=/eco/ href=/eco/>Eco</a>  |
+|            \      /|                     |
+|             \    / |                     |
+|              \  /  |                     |
+|               \/   |    <a class=nav-item data-path=/lang/ href=/lang/>Lang</a>             |
+|               /\   |   /                 |
+|              /  \  |  /                  |
+|            <a class=nav-item data-path=/os/ href=/os/>OS</a>    \ | /                   |
+|                   \|/                    |
+|                   <a class=nav-item data-path=/csf/ href=/csf/>CSF</a>                    |
++——————————————————————————————————————————+
+    </pre></nav><script defer src=/js/star-nav.js></script><script defer src=/js/site.js></script><script defer src=/js/star-active.js></script><div id=ref-window class="float-window open"><div class=float-header><span class="title open">>> >> >> Reference &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Ref>>>>>></span></div><div class=float-body><div class=ref-list><a href=https://www.mixamo.com/ target=_blank>Mixamo</a> |
+<a href=https://opengameart.org/ target=_blank>OpenGameArt</a><p><a href=https://sharplab.io/ target=_blank>SharpLab</a> |
+<a href=https://godbolt.org/ target=_blank>Compiler Explorer</a></p><p><a href="https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type+Something+&x=none&v=4&h=4&w=80&we=false" target=_blank>ASCII Graph Generator</a></p><p><a href=https://mermaid.js.org/ target=_blank>Mermaid</a></p><a href=https://www.vim.org/ target=_blank>Vim</a> | <a href=https://vimdoc.sourceforge.net/ target=_blank>Vim Manual Source</a> |
+<a href=https://vimcdoc.sourceforge.net/ target=_blank>Vimcdoc</a> | <a href=https://vimcdoc.sourceforge.net/doc/help.html target=_blank>Vimdoc read online</a><p><a href=https://shields.io/ target=_blank>Shields.io</a></p><p><a href=https://emojidb.org/ target=_blank>EmojiDB</a></p><p><a href=https://cppreference.com/ target=_blank>cppreference</a> |
+<a href=https://isocpp.org/ target=_blank>isocpp</a> |
+<a href=https://open-std.org target=_blank>open-std</a></p><p><a href=https://cmake.com/ target=_blank>cmake.org</a></p><p><a href=https://llvm.org/ target=_blank>llvm.org</a></p><p><a href=https://www.boost.org/ target=_blank>boost.org</a></p><p><a href=https://learn.microsoft.com/en-us/dotnet/csharp/ target=_blank>Microsoft Learn</a><p><a href=https://www.lua.org/ target=_blank>lua.org</a> |
+<a href=https://www.luarocks.org/ target=_blank>luarocks.org</a> |
+<a href=https://www.luajit.org/ target=_blank>luajit.org</a></p><p><a href=https://docs.unity3d.com/Manual/index.html target=_blank>Unity Manual</a> |
+<a href=https://docs.unity3d.com/ScriptReference/index.html target=_blank>Unity API</a></p><p><a href=https://docs.unrealengine.com/ target=_blank>Unreal Engine Docs</a></p><p><a href=https://godotengine.org target=_blank>Godot</a> |
+<a href=https://docs.godotengine.org/en/stable/ target=_blank>Godot Docs</a></p><p><a href=https://z-library.sk/ target=_blank>Z-Library</a></p><p><a href=https://docs.kernel.org/ target=_blank>Linux Kernel Docs</a></p><p><a href=https://www.gnu.org/ target=_blank>GNU</a></p><a href=https://archlinux.org/ target=_blank>ArchLinux</a><p><a href=https://help.ubuntu.com/ target=_blank>Ubuntu Doc</a> |
+<a href=https://ubuntu.com/server/docs target=_blank>Ubuntu Server Guide</a></p><p><a href=https://www.vulkan.org/ target=_blank>Vulkan</a> |
+<a href=https://docs.vulkan.org/ target=_blank>Vulkan Docs</a></p><p><a href=https://www.opengl.org/ target=_blank>OpenGL</a> |
+<a href=https://registry.khronos.org/OpenGL target=_blank>OpenGL API</a> |
+<a href=https://www.khronos.org/opengl/wiki/ target=_blank>OpenGL Wiki</a></p><p><a href=https://learn.microsoft.com/en-us/windows/win32/directx target=_blank>DirectX</a></p><p><a href=https://www.realtimerendering.com/ target=_blank>Real-Time Rendering</a></p><p><a href=https://www.pbr-book.org/ target=_blank>Physically Based Rendering</a></p><p><a href=https://www.scratchapixel.com/ target=_blank>Scratchapixel</a></p><p><a href=https://learnopengl.com/ target=_blank>LearnOpenGL</a></p><p><a href=https://raytracing.github.io/ target=_blank>Ray Tracing in One Weekend</a></p><p><a href=https://www.shadertoy.com/ target=_blank>Shadertoy</a></p><p><a href=https://arxiv.org/list/cs.GR/recent target=_blank>arXiv Graphics</a></p><p><a href=https://www.siggraph.org/ target=_blank>SIGGRAPH</a> |
+<a href=https://dl.acm.org/conference/siggraph target=_blank>SIGGRAPH Digital Library</a></p><p><a href=https://git-scm.com/ target=_blank>Git</a></p></div></div></div><script src=/js/ref-window.js></script><article class=single_article><div class=title>Overview of C/C++ Developement Toolchains<div class=meta>Modified: 2026-02-28
+| Author：ljf12825</div></div><div class=content><blockquote><p>我曾纠结过把toolchain系列文章放在unix-like模块还是language模块，最终还是决定跟language放在一起。原因有二：1. 工具链是语言的一部分，尤其是在C/C++这种依赖底层实现和平台ABI的语言中，工具链甚至比语言标准更能决定代码行为；2. C/C++是跨平台的</p></blockquote><p>一个完整的工具链通常包括</p><table><thead><tr><th>组件</th><th>作用</th><th>主流工具</th></tr></thead><tbody><tr><td>编译器</td><td>把源码变成目标文件</td><td>GCC, Clang/LLVM, MSVC</td></tr><tr><td>汇编器</td><td>把汇编变成机器码</td><td>GNU as, NASM, MASM</td></tr><tr><td>链接器</td><td>把目标文件拼成可执行文件</td><td>GNU ld, LLD, Microsoft Linker, ld64</td></tr><tr><td>构建系统</td><td>管理编译流程</td><td>Make, CMake, Ninja</td></tr><tr><td>调试器</td><td>调试程序</td><td>GDB, LLDB, Visual Studio Debugger</td></tr><tr><td>包管理</td><td>管理第三方库</td><td>vcpkg, Conan, apt/yum</td></tr><tr><td>静态/动态分析工具</td><td>代码质量保障</td><td>clang-tidy, cppcheck, Valgrind, AddressSanitizer, UBSan</td></tr><tr><td>动态链接器</td><td>加载共享库</td><td>ld-linux.so, Ldr dyld</td></tr><tr><td>CRT(C Runtime)</td><td>程序入口点之前的初始化</td><td>glibc, musl, MSVCRT, ucrt</td></tr></tbody></table><hr><h2 id=不同平台的默认组合>不同平台的默认组合</h2><h3 id=linux>Linux</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>binutils(ld/as)
+</span></span><span style=display:flex><span>+ GCC / Clang
+</span></span><span style=display:flex><span>+ glibc / musl
+</span></span><span style=display:flex><span>+ make / cmake
+</span></span></code></pre></div><p>特征：</p><ul><li>目标文件格式：ELF</li><li>动态加载器：ld-linux.so</li><li>ABI: System V ABI</li></ul><h3 id=windows>Windows</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>MSVC(cl + link)
+</span></span><span style=display:flex><span>+ Windows SDK
+</span></span><span style=display:flex><span>+ MSVCRT / UCRT
+</span></span><span style=display:flex><span>+ CMake / Ninja
+</span></span></code></pre></div><p>特征：</p><ul><li>目标文件格式：PE/COFF</li><li>动态加载器：ntdll + loader</li><li>ABI：Microsoft ABI</li></ul><h3 id=macos>macOS</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>Apple Clang
+</span></span><span style=display:flex><span>+ ld64
+</span></span><span style=display:flex><span>+ dyld
+</span></span><span style=display:flex><span>+ libSystem
+</span></span></code></pre></div><p>特征：</p><ul><li>目标文件格式：Mach-O</li><li>动态加载器：dyld</li><li>ABI：Apple ABI</li></ul><hr><h2 id=工具链流程>工具链流程</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>源码 (.c/.cpp) 
+</span></span><span style=display:flex><span>    ↓ [预处理器] 
+</span></span><span style=display:flex><span>预处理后源码 (.i)
+</span></span><span style=display:flex><span>    ↓ [编译器前端] 
+</span></span><span style=display:flex><span>抽象语法树 (AST)
+</span></span><span style=display:flex><span>    ↓ [优化器] 
+</span></span><span style=display:flex><span>中间表示 (IR)
+</span></span><span style=display:flex><span>    ↓ [编译器后端] 
+</span></span><span style=display:flex><span>汇编代码 (.s)
+</span></span><span style=display:flex><span>    ↓ [汇编器] 
+</span></span><span style=display:flex><span>目标文件 (.o) + 重定位信息
+</span></span><span style=display:flex><span>    ↓ [链接器] + [静态库] 
+</span></span><span style=display:flex><span>可执行文件 (ELF/PE)
+</span></span><span style=display:flex><span>    ↓ [加载器] 
+</span></span><span style=display:flex><span>内存中的进程镜像
+</span></span><span style=display:flex><span>    ↓ [动态链接器] + [共享库] 
+</span></span><span style=display:flex><span>完整的运行环境
+</span></span><span style=display:flex><span>    ↓ [CRT 初始化] 
+</span></span><span style=display:flex><span>调用 main()
+</span></span></code></pre></div><hr><h2 id=构建系统>构建系统</h2><p>构建系统是自动化组织如何把一堆源码变成可执行程序的流程控制器，它不编译代码，不链接代码，它负责的是调度和管理整个编译流程</p><p>构建系统解决三个核心问题</p><ul><li>如何知道要编译什么</li><li>如何按正确顺序编译</li><li>如何避免重复编译</li></ul><h3 id=手动编译的局限性>手动编译的局限性</h3><p>假设有一个中等项目</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>engine/
+</span></span><span style=display:flex><span>  math.cc
+</span></span><span style=display:flex><span>  renderer.cc
+</span></span><span style=display:flex><span>  texture.cc
+</span></span><span style=display:flex><span>  main.cc
+</span></span></code></pre></div><p>如果手动编译</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>g++ -c math.cc
+</span></span><span style=display:flex><span>g++ -c renderer.cc
+</span></span><span style=display:flex><span>g++ -c texture.cc
+</span></span><span style=display:flex><span>g++ -c main.cc
+</span></span><span style=display:flex><span>g++ math.o renderer.o texture.o main.o -o engine
+</span></span></code></pre></div><p>会产生以下问题</p><ul><li>改动了一个源文件要全部重新编译</li><li>依赖头文件需要处理</li><li>Debug和Release如何切换</li><li>不同平台如何处理</li></ul><p>当项目变得很庞大时，根本不可能手动管理，这时候就需要构建系统</p><h3 id=构建系统行为>构建系统行为</h3><h4 id=依赖管理>依赖管理</h4><p>它会自动判断</p><ul><li>哪个源文件被修改了</li><li>哪些文件需要重新编译</li><li>哪些可以复用旧的.o</li></ul><p>这叫增量构建（incremental build）</p><h4 id=调用编译器>调用编译器</h4><p>构建系统本质上是在背后执行</p><ul><li>GCC</li><li>Clang</li><li>MSVC</li></ul><p>它只是替你组织这些命令</p><h4 id=管理构建配置>管理构建配置</h4><ul><li>Debug/Release</li><li>是否开启优化</li><li>是否开启AddressSanitizer</li><li>是否开启LTO</li></ul><h4 id=跨平台抽象>跨平台抽象</h4><ul><li>Linux用gcc</li><li>Windows用MSVC</li><li>macOS用Clang</li></ul><p>构建系统帮你统一接口</p><h3 id=常见构建系统>常见构建系统</h3><h4 id=make>Make</h4><p>最传统的，核心思想：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-makefile data-lang=makefile><span style=display:flex><span><span style=color:#50fa7b>target</span><span style=color:#ff79c6>:</span> dependency
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>command</span>
+</span></span></code></pre></div><p>它通过时间戳判断是否重新构建</p><ul><li>优点：简单直接</li><li>缺点：大型项目难维护</li></ul><h4 id=cmake>CMake</h4><p>CMake不是构建系统，它是生成构建系统的工具</p><p>它生成</p><ul><li>Makefile</li><li>Ninja文件</li><li>Visual Studio工程</li></ul><h4 id=ninja>Ninja</h4><p>特点：</p><ul><li>极快</li><li>只做构建</li><li>不处理复杂逻辑</li></ul><hr><h2 id=编译器>编译器</h2><p>编译器的作用是把一种语言的语义模型，转换成另一种语言的语义模型</p><p>对于C/C++来说</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>C/C++ 语义
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>机器指令语义
+</span></span></code></pre></div><p>编译器不是翻译器，它做的是语义保持的程序变换 + 优化</p><h3 id=现代编译器的结构>现代编译器的结构</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>源码
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>词法分析(Lexer)
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>语法分析(Parser)
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>抽象语法树(AST)
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>语义分析
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>中间表示(IR)
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>优化器
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>后端代码生成
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>汇编
+</span></span></code></pre></div><h2 id=汇编器>汇编器</h2><p>汇编器(Assembler)负责把汇编指令翻译成机器码，并生成重定位信息</p><p>典型实现</p><ul><li>GNU as</li><li>NASM</li><li>MASM</li></ul><h3 id=汇编器行为>汇编器行为</h3><p>汇编器主要做4件事情</p><h4 id=1-指令编码>1. 指令编码</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-asm data-lang=asm><span style=display:flex><span><span style=color:#50fa7b>mov</span> eax, <span style=color:#bd93f9>5</span>
+</span></span></code></pre></div><p>汇编器查表</p><ul><li>mov imm32 -> eax的opcode是<code>B8</code></li><li>立即数5转成little-endian</li></ul><p>输出</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>B8 05 00 00 00
+</span></span></code></pre></div><p>本质上是：助记符 -> 指令编码表查找</p><h4 id=2-符号解析>2. 符号解析</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-asm data-lang=asm><span style=display:flex><span><span style=color:#50fa7b>jmp</span> label
+</span></span><span style=display:flex><span><span style=color:#50fa7b>...</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>label:</span>
+</span></span></code></pre></div><p>汇编器需要</p><ul><li>记录label的位置</li><li>计算跳转偏移</li></ul><p>如果label在同一个文件里，可以直接计算；如果在别的文件里，就需要生成重定位信息</p><h4 id=3-生成目标文件格式>3. 生成目标文件格式</h4><p>在Linux上通常生成<code>ELF</code>，在Windows上则是<code>PE/COFF</code><br>目标文件包含</p><ul><li>.text（代码段）</li><li>.data（数据段）</li><li>符号表</li><li>重定位表</li></ul><p>汇编器不生成“可执行文件”，只生成“可链接单元”</p><h4 id=4-生成重定位记录>4. 生成重定位记录</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-asm data-lang=asm><span style=display:flex><span><span style=color:#50fa7b>call</span> printf
+</span></span></code></pre></div><p>printf不在本文件里</p><p>汇编器会在指令位置写一个占位地址（通常是0），在重定位表里记录</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>offset: 0x14
+</span></span><span style=display:flex><span>symbol: printf
+</span></span><span style=display:flex><span>type: R_X86_64_PC32
+</span></span></code></pre></div><p>然后交给链接器处理</p><h3 id=汇编器内部结构>汇编器内部结构</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>源码 (.s)
+</span></span><span style=display:flex><span>↓
+</span></span><span style=display:flex><span>词法分析
+</span></span><span style=display:flex><span>↓
+</span></span><span style=display:flex><span>语法分析
+</span></span><span style=display:flex><span>↓
+</span></span><span style=display:flex><span>符号表建立
+</span></span><span style=display:flex><span>↓
+</span></span><span style=display:flex><span>指令编码
+</span></span><span style=display:flex><span>↓
+</span></span><span style=display:flex><span>重定位记录生成
+</span></span><span style=display:flex><span>↓
+</span></span><span style=display:flex><span>写入目标文件
+</span></span></code></pre></div><h3 id=两种汇编器风格>两种汇编器风格</h3><ul><li>AT&amp;T风格（GAS默认）</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-asm data-lang=asm><span style=display:flex><span><span style=color:#50fa7b>movl</span> $5, <span style=color:#8be9fd;font-style:italic>%eax</span>
+</span></span></code></pre></div><ul><li>Intel风格（NASM）</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-asm data-lang=asm><span style=display:flex><span><span style=color:#50fa7b>mov</span> eax, <span style=color:#bd93f9>5</span>
+</span></span></code></pre></div><p>语法不同，本质相同</p><h3 id=总结>总结</h3><p>和编译器相比，汇编器面临着</p><ul><li>指令集是固定的</li><li>编码规则是确定的</li><li>没有复杂优化</li></ul><p>它是一个表驱动型的严格的编码器，而不是一个推理系统</p><ul><li>它定义了机器级抽象边界，机器不理解“函数”，“变量”，只有“指令”，“地址”，“内存”；汇编器是最后一层人类可读抽象</li><li>它决定目标文件结构</li></ul><p>总的来说，在现有架构下的汇编器是非常稳定的，创新和算法优化空间很小，但是理解它和使用它对于二进制安全的研究是绕不开的</p><h2 id=链接器>链接器</h2><p>链接器(Linker)的作用是把多个目标文件合并成一个完整程序，并解决所有符号引用与地址布局问题</p><p>常见实现</p><ul><li>GNU ld</li><li>LLD</li><li>Microsoft Linker</li></ul><h3 id=链接器行为>链接器行为</h3><h4 id=1-符号解析symbol-resolution>1. 符号解析(Symbol Resolution)</h4><p>假设有两个文件</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#6272a4>// a.c
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>add</span>(<span style=color:#8be9fd>int</span> a, <span style=color:#8be9fd>int</span> b)
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() { <span style=color:#ff79c6>return</span> <span style=color:#50fa7b>add</span>(<span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>2</span>); }
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#6272a4>// b.c
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>add</span>(<span style=color:#8be9fd>int</span> a, <span style=color:#8be9fd>int</span> b) { <span style=color:#ff79c6>return</span> a <span style=color:#ff79c6>+</span> b; }
+</span></span></code></pre></div><p>编译后</p><ul><li>main.o里有“对add的引用”</li><li>add.0里有“add的定义”</li></ul><p>链接器要做的就是把引用和定义匹配起来<br>如果找不到，报错：undefined reference</p><h4 id=2-重定位relocation>2. 重定位(Relocation)</h4><p>目标文件里并没有真实地址</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-asm data-lang=asm><span style=display:flex><span><span style=color:#50fa7b>call</span> add
+</span></span></code></pre></div><p>汇编器只是写了</p><ul><li>占位地址</li><li>重定位记录</li></ul><p>链接器会</p><ul><li>决定add的最终地址</li><li>修改call指令里的偏移量</li></ul><p>这一步叫地址修正</p><h4 id=3-地址空间布局layout>3. 地址空间布局(Layout)</h4><p>链接器决定</p><ul><li>.text放哪</li><li>.data放哪</li><li>.bss放哪</li><li>程序入口在哪</li></ul><h3 id=链接器内部流程>链接器内部流程</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>读取所有.o文件
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>读取符号表
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>合并相同section
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>符号解析
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>地址分配
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>执行重定位
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>写出最终可执行文件
+</span></span></code></pre></div><h3 id=静态链接-vs-动态链接>静态链接 vs 动态链接</h3><h4 id=静态链接>静态链接</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>gcc main.o -static
+</span></span></code></pre></div><ul><li>所有库代码都拷贝进可执行文件</li><li>文件变大</li><li>运行时不依赖外部库</li></ul><h4 id=动态链接>动态链接</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>gcc main.o
+</span></span></code></pre></div><ul><li>只记录库引用</li><li>运行时由动态加载器处理</li></ul><h2 id=动态链接器>动态链接器</h2><p>动态链接器是负责程序启动后加载共享库、解析动态符号、建立运行时地址映射的系统组件</p><p>典型实现</p><ul><li>ld-linux.so(Linux)</li><li>dyld(macOS)</li><li>Windows loader（内置在系统运行时）</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>可执行文件启动
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>操作系统加载器
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>动态链接器
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>解析依赖库
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>建立符号映射
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>执行程序入口
+</span></span></code></pre></div><h3 id=动态链接器行为>动态链接器行为</h3><h4 id=加载共享库>加载共享库</h4><p>例如程序依赖</p><ul><li>libc.so</li><li>libm.so</li><li>libpthread.so</li></ul><p>动态链机器会</p><ul><li>找到库文件</li><li>映射到虚拟内存</li></ul><p>涉及内存页映射，权限设置，这里通常依赖ELF文件结构</p><h4 id=符号解析>符号解析</h4><p>假设程序调用</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;hello&#34;</span>);
+</span></span></code></pre></div><p>但printf在libc动态库中，动态链接器要做的就是把printf的调用地址绑定到真实函数地址</p><blockquote><p>延迟绑定(Lazy Binding)
+这是动态链接器的经典优化，思想是：不在程序启动时解析所有符号，而是第一次调用函数时再解析。机制依赖GOT(Global Offset Table)，PLT(Procedure Linkage Table)</p></blockquote><h4 id=重定位修正>重定位修正</h4><p>程序中可能包含位置无关代码（PIC），例如</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>call [GOT + offset]
+</span></span></code></pre></div><p>动态链接器会修改GOT表中的真实地址</p><h3 id=动态链接器内部结构>动态链接器内部结构</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>ELF Header
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>Program Headers
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>加载各个 Segment
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>解析 DT_NEEDED 依赖
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>加载共享库
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>符号查找
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>重定位处理
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>跳转到程序入口
+</span></span></code></pre></div><h2 id=crt>CRT</h2><p>CRT, C Runtime, 它不是标准库本身，而是在<code>main()</code>之前和之后负责初始化与收尾的一整套运行时支撑代码</p><h3 id=程序启动流程>程序启动流程</h3><p>以ELF程序（Linux）为例</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>内核加载 ELF
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>动态链接器
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>CRT入口（_start）
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>__libc_start_main
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>初始化环境
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>调用main()
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>exit()
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>清理流程
+</span></span></code></pre></div><p>真正的入口不是main，而是<code>_start</code></p><h3 id=crt行为>CRT行为</h3><h4 id=建立运行时环境>建立运行时环境</h4><p>CRT负责</p><ul><li>准备栈</li><li>解析argc/argv</li><li>准备环境变量envp</li></ul><p>Linux下栈布局</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>argc
+</span></span><span style=display:flex><span>argv[]
+</span></span><span style=display:flex><span>NULL
+</span></span><span style=display:flex><span>envp[]
+</span></span><span style=display:flex><span>NULL
+</span></span><span style=display:flex><span>auxv[]
+</span></span></code></pre></div><p>CRT负责解析这些</p><h4 id=初始化全局变量>初始化全局变量</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#8be9fd>int</span> x <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>5</span>;
+</span></span></code></pre></div><p>这些数据段需要</p><ul><li>BSS清零</li><li>DATA初始化</li></ul><p>如果是C++</p><ul><li>构造全局对象</li><li>注册析构函数</li></ul><h4 id=调用libc初始化>调用libc初始化</h4><p>在GNU系统中，GNU C Library的核心入口是<code>__libc_start_main()</code></p><p>它负责</p><ul><li>初始化线程系统</li><li>初始化I/O</li><li>初始化malloc</li><li>注册exit handler</li></ul><h4 id=调用main>调用main()</h4><h4 id=程序退出清理>程序退出清理</h4><p>当main返回</p><ul><li>执行atext注册函数</li><li>调用全局析构函数</li><li>刷新缓冲区</li><li>关闭文件</li></ul><h2 id=使用vscode开发cc>使用VSCode开发C/C++</h2><p>在VSCode里开发C/C++，核心不是编译器本身，而是VSCode + Language Server + Toolchain + Build System的组合</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>VSCode UI
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>C/C++ Extension (Language Client)
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>C/C++ Language Server
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>Compiler Toolchain
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>Build System
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>Executable Binary
+</span></span></code></pre></div><h3 id=项目结构>项目结构</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>project/
+</span></span><span style=display:flex><span>├── src/
+</span></span><span style=display:flex><span>├── include/
+</span></span><span style=display:flex><span>├── build/
+</span></span><span style=display:flex><span>├── CMakeLists.txt
+</span></span><span style=display:flex><span>└── main.cpp
+</span></span></code></pre></div><h3 id=vscode>.vscode/</h3><p>VSCode可以抽象为三层架构</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>VSCode UI 编辑器
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>Language Service（代码理解）
+</span></span><span style=display:flex><span>v
+</span></span><span style=display:flex><span>Build / Debug Execution 层
+</span></span></code></pre></div><p><code>.vscode/</code>就是执行层配置</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>.vscode/
+</span></span><span style=display:flex><span>|__tasks.json
+</span></span><span style=display:flex><span>|__launch.json
+</span></span><span style=display:flex><span>|__setting.json
+</span></span></code></pre></div><h4 id=tasksjson>tasks.json</h4><p>作用：定义如何执行编译构建流程<br>本质上是VSCode调用外部命令</p><p>例如</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>&#34;label&#34;</span>: <span style=color:#f1fa8c>&#34;build&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;shell&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>&#34;command&#34;</span>: <span style=color:#f1fa8c>&#34;cmake --build build&#34;</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>tasks.json常用于</p><ul><li>编译项目</li><li>运行脚本</li><li>清理工程</li><li>自动化流程</li></ul><p>它不做：</p><ul><li>语法分析</li><li>调试控制</li></ul><h4 id=launchjson>launch.json</h4><p>作用：控制debugger如何启动和连接目标程序</p><p>例如，Linux常用 GDB</p><p>它主要负责</p><ul><li>调试器类型</li><li>可执行程序路径</li><li>工作目录</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>&#34;type&#34;</span>: <span style=color:#f1fa8c>&#34;cppdbg&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>&#34;request&#34;</span>: <span style=color:#f1fa8c>&#34;launch&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>&#34;program&#34;</span>: <span style=color:#f1fa8c>&#34;./build/app&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>&#34;cwd&#34;</span>: <span style=color:#f1fa8c>&#34;${workspaceFolder}&#34;</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h4 id=settingjson>setting.json</h4><p>作用：覆盖VSCode全局设置</p><h2 id=使用visual-studio开发cc>使用Visual Studio开发C/C++</h2><p>VS开发C/C++项目结构本质上是：IDE组织工程 + MSBuild构建系统 + 编译器/链接器协作</p><h3 id=工程结构>工程结构</h3><p>在Windows下，用Microsoft Visual Studio创建C++项目时，一般是这样</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>Solution（解决方案）
+</span></span><span style=display:flex><span>|__ Project（项目1）
+</span></span><span style=display:flex><span>|   |__Source Files
+</span></span><span style=display:flex><span>|   |__Header Files
+</span></span><span style=display:flex><span>|   |__Resource Files
+</span></span><span style=display:flex><span>|   |__xxx.vcxproj
+</span></span><span style=display:flex><span>|   |__xxx.vcxproj.filters
+</span></span><span style=display:flex><span>|
+</span></span><span style=display:flex><span>|__ Project（项目2）
+</span></span></code></pre></div><table><thead><tr><th>层级</th><th>作用</th></tr></thead><tbody><tr><td>Solution(.sln)</td><td>管理多个项目</td></tr><tr><td>Project(.vcxproj)</td><td>一个可编译目标(exe/dll/lib)</td></tr><tr><td>Source Files</td><td>.cpp文件</td></tr><tr><td>Header Files</td><td>.h文件</td></tr><tr><td>Resource Files</td><td>Windows资源文件</td></tr></tbody></table><h4 id=sln>.sln</h4><ul><li>只是一个“项目集合”</li><li>记录哪些项目属于这个解决方案</li></ul><p>它不参与编译，只是管理结构</p><h4 id=vcxproj文件>.vcxproj文件</h4><p>这是最重要最核心的文件，它本质上是一个XML格式的MSBuild构建脚本</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-xml data-lang=xml><span style=display:flex><span><span style=color:#ff79c6>&lt;ItemGroup&gt;</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>&lt;ClCompile</span> <span style=color:#50fa7b>Include=</span><span style=color:#f1fa8c>&#34;main.cpp&#34;</span> <span style=color:#ff79c6>/&gt;</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>&lt;/ItemGroup&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>&lt;PropertyGroup&gt;</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>&lt;ConfigurationType&gt;</span>Application<span style=color:#ff79c6>&lt;/ConfigurationType&gt;</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>&lt;/PropertyGroup&gt;</span>
+</span></span></code></pre></div><p>它控制</p><ul><li>使用哪个编译器(MSVC)</li><li>编译参数</li><li>优化等级</li><li>宏定义</li><li>链接库</li><li>输出路径</li></ul><h4 id=vcxprojfilters>.vcxproj.filters</h4><p>只是用来在VS里分文件夹显示，不会影响实际目录结构</p><h4 id=一个标准c项目目录>一个标准C++项目目录</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>MyEngine/
+</span></span><span style=display:flex><span> ├── MyEngine.sln
+</span></span><span style=display:flex><span> ├── Engine/
+</span></span><span style=display:flex><span> │    ├── Engine.vcxproj
+</span></span><span style=display:flex><span> │    ├── src/
+</span></span><span style=display:flex><span> │    │    ├── core/
+</span></span><span style=display:flex><span> │    │    ├── math/
+</span></span><span style=display:flex><span> │    │    └── renderer/
+</span></span><span style=display:flex><span> │    └── include/
+</span></span><span style=display:flex><span> │
+</span></span><span style=display:flex><span> ├── Editor/
+</span></span><span style=display:flex><span> │    ├── Editor.vcxproj
+</span></span><span style=display:flex><span> │    └── src/
+</span></span><span style=display:flex><span> │
+</span></span><span style=display:flex><span> └── Game/
+</span></span><span style=display:flex><span>      ├── Game.vcxproj
+</span></span><span style=display:flex><span>      └── src/
+</span></span></code></pre></div><p>这就是标准的多项目 + 分层结构</p><h3 id=编译流程>编译流程</h3><p>当点击<code>生成 -> 生成解决方案</code></p><p>背后发生的是</p><ul><li>VS读取<code>.sln</code></li><li>解析<code>.vcxproj</code></li><li>调用MSBuild</li><li>MSBuild调用<ul><li>cl.exe（编译器）</li><li>link.exe（链接器）</li><li>lib.exe（静态库工具）</li></ul></li></ul><h3 id=debugrelease>Debug/Release</h3><p>VS的默认输出目录</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>x64/
+</span></span><span style=display:flex><span> ├── Debug/
+</span></span><span style=display:flex><span> └── Release/
+</span></span></code></pre></div><table><thead><tr><th>Debug</th><th>Release</th></tr></thead><tbody><tr><td>无优化</td><td>高优化</td></tr><tr><td>带调试符号</td><td>无调试符号</td></tr><tr><td>慢</td><td>快</td></tr></tbody></table><h3 id=vs与cmake>VS与CMake</h3><p>传统VS工程模式</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>VS -&gt; 新建 .vcxproj -&gt; 手动配置编译参数 -&gt; 编译
+</span></span></code></pre></div><p>问题</p><ul><li>只能在Windows上</li><li>构建逻辑写在.vcxproj里</li><li>不可移植</li><li>不能方便支持Linux/Mac</li></ul><p>CMake解决：同一份工程，在不同平台生成不同构建文件</p><p>例如</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>cmake -G <span style=color:#f1fa8c>&#34;Visual Studio 17 2022&#34;</span>
+</span></span></code></pre></div><p>生成<code>.sln</code>, <code>.vcxproj</code></p><p>如果在Linux</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>cmake -G <span style=color:#f1fa8c>&#34;Ninja&#34;</span>
+</span></span></code></pre></div><p>生成<code>build.ninja</code></p><h4 id=cmake和vs有三种合作模式>CMake和VS有三种合作模式</h4><h5 id=模式1cmake生成vs工程>模式1：CMake生成VS工程</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>CMake -&gt; 生成 .sln/.vcxproj -&gt; 用VS打开
+</span></span></code></pre></div><p>命令</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>cmake -S . -B build -G <span style=color:#f1fa8c>&#34;Visual Studio 17 2022&#34;</span>
+</span></span></code></pre></div><p>优点</p><ul><li>兼容老项目</li><li>VS体验完整</li></ul><p>缺点</p><ul><li>每次改CMakeLists需要重新生成</li></ul><h5 id=模式2vs直接打开cmake项目>模式2：VS直接打开CMake项目</h5><p>现代VS可以</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>文件 -&gt; 打开 -&gt; 文件夹 -&gt; 选择包含 CMakeLists.txt 的目录
+</span></span></code></pre></div><p>VS内部</p><ul><li>自动运行CMake</li><li>自动生成缓存</li><li>自动配置Debug/Release</li></ul><h5 id=模式3vs--cmake--ninja>模式3：VS + CMake + Ninja</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>cmake -G Ninja
+</span></span></code></pre></div><p>VS会</p><ul><li>用CMake</li><li>用Ninja</li><li>用MSVC编译器</li></ul><p>构建速度比MSBuild快很多</p><h4 id=cmake生成vs工程过程>CMake生成VS工程过程</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cmake data-lang=cmake><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>cmake_minimum_required</span>(<span style=color:#f1fa8c>VERSION</span> <span style=color:#f1fa8c>3.20</span>)
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>project</span>(<span style=color:#f1fa8c>MyEngine</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>add_executable</span>(<span style=color:#f1fa8c>MyEngine</span> <span style=color:#f1fa8c>main.cpp</span>)
+</span></span></code></pre></div><p>当执行</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>cmake -G <span style=color:#f1fa8c>&#34;Visual Studio 17 2022&#34;</span>
+</span></span></code></pre></div><p>CMake会</p><ul><li>检测MSVC编译器</li><li>生成.sln</li><li>生成.vcxproj</li><li>写入编译参数</li></ul><p>CMake本质是一个元构建系统</p><p>当用Cmake时，VS不再是构建系统，而是变成编译器 + 调试器 + CMake前端</p><p>编译命令真正来源于</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>CMake -&gt; MSBuild/Ninja -&gt; cl.exe
+</span></span></code></pre></div></div><nav class=post-nav><a href=/lang/log/cpp_compiler/ class=hover:underline>Up: C++ Compiler</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#不同平台的默认组合>不同平台的默认组合</a><ul><li><a href=#linux>Linux</a></li><li><a href=#windows>Windows</a></li><li><a href=#macos>macOS</a></li></ul></li><li><a href=#工具链流程>工具链流程</a></li><li><a href=#构建系统>构建系统</a><ul><li><a href=#手动编译的局限性>手动编译的局限性</a></li><li><a href=#构建系统行为>构建系统行为</a><ul><li><a href=#依赖管理>依赖管理</a></li><li><a href=#调用编译器>调用编译器</a></li><li><a href=#管理构建配置>管理构建配置</a></li><li><a href=#跨平台抽象>跨平台抽象</a></li></ul></li><li><a href=#常见构建系统>常见构建系统</a><ul><li><a href=#make>Make</a></li><li><a href=#cmake>CMake</a></li><li><a href=#ninja>Ninja</a></li></ul></li></ul></li><li><a href=#编译器>编译器</a><ul><li><a href=#现代编译器的结构>现代编译器的结构</a></li></ul></li><li><a href=#汇编器>汇编器</a><ul><li><a href=#汇编器行为>汇编器行为</a><ul><li><a href=#1-指令编码>1. 指令编码</a></li><li><a href=#2-符号解析>2. 符号解析</a></li><li><a href=#3-生成目标文件格式>3. 生成目标文件格式</a></li><li><a href=#4-生成重定位记录>4. 生成重定位记录</a></li></ul></li><li><a href=#汇编器内部结构>汇编器内部结构</a></li><li><a href=#两种汇编器风格>两种汇编器风格</a></li><li><a href=#总结>总结</a></li></ul></li><li><a href=#链接器>链接器</a><ul><li><a href=#链接器行为>链接器行为</a><ul><li><a href=#1-符号解析symbol-resolution>1. 符号解析(Symbol Resolution)</a></li><li><a href=#2-重定位relocation>2. 重定位(Relocation)</a></li><li><a href=#3-地址空间布局layout>3. 地址空间布局(Layout)</a></li></ul></li><li><a href=#链接器内部流程>链接器内部流程</a></li><li><a href=#静态链接-vs-动态链接>静态链接 vs 动态链接</a><ul><li><a href=#静态链接>静态链接</a></li><li><a href=#动态链接>动态链接</a></li></ul></li></ul></li><li><a href=#动态链接器>动态链接器</a><ul><li><a href=#动态链接器行为>动态链接器行为</a><ul><li><a href=#加载共享库>加载共享库</a></li><li><a href=#符号解析>符号解析</a></li><li><a href=#重定位修正>重定位修正</a></li></ul></li><li><a href=#动态链接器内部结构>动态链接器内部结构</a></li></ul></li><li><a href=#crt>CRT</a><ul><li><a href=#程序启动流程>程序启动流程</a></li><li><a href=#crt行为>CRT行为</a><ul><li><a href=#建立运行时环境>建立运行时环境</a></li><li><a href=#初始化全局变量>初始化全局变量</a></li><li><a href=#调用libc初始化>调用libc初始化</a></li><li><a href=#调用main>调用main()</a></li><li><a href=#程序退出清理>程序退出清理</a></li></ul></li></ul></li><li><a href=#使用vscode开发cc>使用VSCode开发C/C++</a><ul><li><a href=#项目结构>项目结构</a></li><li><a href=#vscode>.vscode/</a><ul><li><a href=#tasksjson>tasks.json</a></li><li><a href=#launchjson>launch.json</a></li><li><a href=#settingjson>setting.json</a></li></ul></li></ul></li><li><a href=#使用visual-studio开发cc>使用Visual Studio开发C/C++</a><ul><li><a href=#工程结构>工程结构</a><ul><li><a href=#sln>.sln</a></li><li><a href=#vcxproj文件>.vcxproj文件</a></li><li><a href=#vcxprojfilters>.vcxproj.filters</a></li><li><a href=#一个标准c项目目录>一个标准C++项目目录</a></li></ul></li><li><a href=#编译流程>编译流程</a></li><li><a href=#debugrelease>Debug/Release</a></li><li><a href=#vs与cmake>VS与CMake</a><ul><li><a href=#cmake和vs有三种合作模式>CMake和VS有三种合作模式</a><ul><li><a href=#模式1cmake生成vs工程>模式1：CMake生成VS工程</a></li><li><a href=#模式2vs直接打开cmake项目>模式2：VS直接打开CMake项目</a></li><li><a href=#模式3vs--cmake--ninja>模式3：VS + CMake + Ninja</a></li></ul></li><li><a href=#cmake生成vs工程过程>CMake生成VS工程过程</a></li></ul></li></ul></li></ul></li></ul></nav></aside><script src=/js/scrollspy.js defer></script><script type=module>
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ 
+    startOnLoad: true, theme: "default" });
+</script><footer><div class=container><p>© 2026 Jeff Lee(ljf12825). All rights reserved |
+<a href=https://creativecommons.org/licenses/by-nc-sa/4.0/>Article: CC BY-NC-SA 4.0</a> |
+<a href=https://creativecommons.org/licenses/by-sa/4.0/>Content: CC BY-SA 4.0</a> |
+<a href=https://opensource.org/licenses/MIT>Code: MIT License</a> |
+<a href=/LICENSES.md>Full License</a></p></div></footer></body></html>
