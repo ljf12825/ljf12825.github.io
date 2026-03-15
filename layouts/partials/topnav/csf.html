@@ -1,0 +1,11 @@
+<nav class="topnav">
+    <div class="container">
+        <ul>
+            {{ $current := .RelPermalink }}
+            <li><a href="{{ "/csf/" | relURL }}" class="{{ if eq $current "/csf/" }}active{{ end }}">★</a></li>
+            <li><a href="{{ "/csf/lab/" | relURL }}" class="{{ if eq $current "/csf/lab/" }}active{{ end }}">Lab</a></li>
+            <li><a href="{{ "/csf/log/" | relURL }}" class="{{ if eq $current "/csf/log/" }}active{{ end }}">Log</a></li>
+            <li><a href="{{ "/csf/file/" | relURL }}" class="{{ if eq $current "/csf/file/" }}active{{ end }}">File</a></li>
+        </ul>
+    </div>
+</nav>

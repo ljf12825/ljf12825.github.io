@@ -1,0 +1,11 @@
+<nav class="topnav">
+    <div class="container">
+        <ul>
+            {{ $current := .RelPermalink }}
+            <li><a href="{{ "/os/" | relURL }}" class="{{ if eq $current "/os/" }}active{{ end }}">★</a></li>
+            <li><a href="{{ "/os/lab/" | relURL }}" class="{{ if eq $current "/os/lab/" }}active{{ end }}">Lab</a></li>
+            <li><a href="{{ "/os/log/" | relURL }}" class="{{ if eq $current "/os/log/" }}active{{ end }}">Log</a></li>
+            <li><a href="{{ "/os/file/" | relURL }}" class="{{ if eq $current "/os/file/" }}active{{ end }}">File</a></li>
+        </ul>
+    </div>
+</nav>

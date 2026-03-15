@@ -1,37 +1,31 @@
 {{ $sec := .Section }}
 
-{{ if eq $sec "graphic" }}
-  {{ partial "topnav/graphic.html" . }}
+{{ if eq $sec "gp" }}
+  {{ partial "topnav/gp.html" . }}
 
-{{ else if eq $sec "runtime" }}
-  {{ partial "topnav/runtime.html" . }}
+{{ else if eq $sec "eco" }}
+  {{ partial "topnav/eco.html" . }}
 
-{{ else if eq $sec "unixlike" }}
-  {{ partial "topnav/unixlike.html" . }}
+{{ else if eq $sec "os" }}
+  {{ partial "topnav/os.html" . }}
 
-{{ else if eq $sec "leftbrain" }}
-  {{ partial "topnav/leftbrain.html" . }}
+{{ else if eq $sec "csf" }}
+  {{ partial "topnav/csf.html" . }}
 
-{{ else if eq $sec "ai" }}
-  {{ partial "topnav/ai.html" . }}
+{{ else if eq $sec "dnet" }}
+  {{ partial "topnav/dnet.html" . }}
 
-{{ else if eq $sec "dotnetandwindows" }}
-  {{ partial "topnav/dotnetandwindows.html" . }}
+{{ else if eq $sec "pm" }}
+  {{ partial "topnav/pm.html" . }}
 
-{{ else if eq $sec "miscellaneous" }}
-  {{ partial "topnav/miscellaneous.html" . }}
-
-{{ else if eq $sec "project" }}
-  {{ partial "topnav/project.html" . }}
-
-{{ else if eq $sec "rightbrain" }}
-  {{ partial "topnav/rightbrain.html" . }}
+{{ else if eq $sec "ctx" }}
+  {{ partial "topnav/ctx.html" . }}
 
 {{ else if eq $sec "home" }}
   {{ partial "topnav/home.html" . }}
 
-{{ else if eq $sec "language" }}
-  {{ partial "topnav/language.html" . }}
+{{ else if eq $sec "lang" }}
+  {{ partial "topnav/lang.html" . }}
 
 {{ else }}
   {{ partial "topnav/root.html" . }}

@@ -1,5 +1,0 @@
----
-type: miscellaneous
----
-
-# miscellaneous
