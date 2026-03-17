@@ -4,6 +4,14 @@ type: home
 
 # $HOME
 
+> INCLUDE
+
+- Website Content Overview
+- Qucik Self-Introduction
+- Link
+- Full Reference
+- Full LISCENSE
+
 > GUIDE
 <div class="layout">
 <pre class="ascii">
