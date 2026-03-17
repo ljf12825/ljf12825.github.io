@@ -15,24 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-## STRUCTURE
-
-```text
-/
-|__~/
-|   |__homepage
-|__system/
-|__unix-like/
-|__dotnetandwindows/
-|__rightbrain/
-|__graphic/
-|__csbasic/
-|__project/
-|__miscellaneous/
-|__ai/
-```
-
 ## MANUAL
+
+> edit at 20260317
 
 ### Navigation
 
@@ -55,8 +40,6 @@ Folded
 
 The meaning and content of each node in Mainnavigation are explained in detail in `~/$HOME`
 
-![guide](/images/guide.png)
-
 #### Subnavigation
 
 Subnavigation is always displayed under Prompt; it is not present on the root page
@@ -67,7 +50,7 @@ Subnavigation is always displayed under Prompt; it is not present on the root pa
 
 Similar to Mainnavigation, Reference is also a separate window displayed across the entire site, facilitating convenient external link navigation\
 It defaults to an expanded state and appears in the lower left corner of the page\
-Detailed information about Reference can be found in `~/references`
+Detailed information about Reference can be found in [`~/references`](https://ljf12825.github.io/home/reference/)
 
 ![reference](/images/reference.png) \
 Expanded
@@ -77,7 +60,26 @@ Folded
 
 ### Prompt Command
 
-The Prompt Command displays the current page's path\
-It is permanently displayed at the top of the page
+The Prompt Command format
+
+```text
+ip@url:path/$ command
+```
+
+if you are at fold
+
+```text
+command = ls | xarg cat
+```
+
+if you are at content
+
+```text
+command = less content name
+```
+
+site will query your ip from api, and it used solely for display puerposes
 
 ![prompt](/images/prompt.png)
+
+there may be a delay from query
