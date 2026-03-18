@@ -36,7 +36,24 @@
 <a href=https://registry.khronos.org/OpenGL target=_blank>OpenGL API</a> |
 <a href=https://www.khronos.org/opengl/wiki/ target=_blank>OpenGL Wiki</a></p><p><a href=https://learn.microsoft.com/en-us/windows/win32/directx target=_blank>DirectX</a></p><p><a href=https://www.realtimerendering.com/ target=_blank>Real-Time Rendering</a></p><p><a href=https://www.pbr-book.org/ target=_blank>Physically Based Rendering</a></p><p><a href=https://www.scratchapixel.com/ target=_blank>Scratchapixel</a></p><p><a href=https://learnopengl.com/ target=_blank>LearnOpenGL</a></p><p><a href=https://raytracing.github.io/ target=_blank>Ray Tracing in One Weekend</a></p><p><a href=https://www.shadertoy.com/ target=_blank>Shadertoy</a></p><p><a href=https://arxiv.org/list/cs.GR/recent target=_blank>arXiv Graphics</a></p><p><a href=https://www.siggraph.org/ target=_blank>SIGGRAPH</a> |
 <a href=https://dl.acm.org/conference/siggraph target=_blank>SIGGRAPH Digital Library</a></p><p><a href=https://git-scm.com/ target=_blank>Git</a></p></div></div></div><script src=/js/ref-window.js></script><article class=single_article><div class=title>ECS<div class=meta>Modified: 2026-03-18
-| Author：ljf12825</div></div><div class=content></div><nav class=post-nav><a href=/pm/file/architecture/monolithic/ class=hover:underline>Next: Monolithic</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents></nav></aside><script defer src=/js/scrollspy.js></script><script type=module>
+| Author：ljf12825</div></div><div class=content><p>要对ECS有全面的认识，需要拿它和OOP进行对比<br>OOP并不是一种架构，而是一种编程范式，它太过流行且和几种经典架构深度绑定<br>要将OOP，需要拿它和PP进行对比</p><h2 id=oop>OOP</h2><h3 id=oop的起源>OOP的起源</h3><p>在OOP大规模流行之前，主流的编程方式是面向过程编程，比如C语言<br>面向过程关注的是过程，反映到代码中就是函数和函数调用<br>但随着软件变得越来越复杂，面向过程的方式就暴露了严重的问题</p><ol><li>代码难以维护：一个大型软件可能有成千上万个函数，修改一个数据结构，可能会引发连锁反应，牵一发而动全身</li><li>代码复用性差：很难把一套逻辑原封不动地搬到另一个项目里</li><li>与现实世界脱节：用函数和变量来描述现实世界的复杂关系（比如，一个“人”有“姓名”、“年龄”，可以“走路”、“说话”的动作）非常别扭</li></ol><p>为解决这些问题，OOP应运而生。它的核心理念是：将数据和对数据的操作封装在一起，形成一个独立的“对象”，让计算机程序的结构更接近人类对现实世界的认知</p><p>在C中</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>struct</span> Player {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> hp;
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> atk;
+</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>void</span> <span style=color:#50fa7b>attack</span>(<span style=color:#ff79c6>struct</span> Player<span style=color:#ff79c6>*</span> p) {
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// ...
+</span></span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>数据(Player)和行为(attack)是分离的</p><p>在OOP中</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#ff79c6>class</span> <span style=color:#50fa7b>Player</span> {
+</span></span><span style=display:flex><span><span style=color:#ff79c6>public</span><span style=color:#ff79c6>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> hp;
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> atk;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>void</span> <span style=color:#50fa7b>attack</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#6272a4>// ...
+</span></span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>};
+</span></span></code></pre></div><p>数据 + 行为 = 一个对象</p><h3 id=oop的核心概念类与对象>OOP的核心概念：类与对象</h3><ul><li>类(Class)：可以理解为一个蓝图或模具。它定义了一类事物应该具有什么样的属性（数据）和行为（方法/函数）</li><li>对象(Object)：根据这个蓝图创造出来的实例</li></ul><h3 id=oop四大特性>OOP四大特性</h3><h2 id=oop与架构>OOP与架构</h2><h2 id=ecs>ECS</h2></div><nav class=post-nav><a href=/pm/file/architecture/monolithic/ class=hover:underline>Next: Monolithic</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#oop>OOP</a><ul><li><a href=#oop的起源>OOP的起源</a></li><li><a href=#oop的核心概念类与对象>OOP的核心概念：类与对象</a></li><li><a href=#oop四大特性>OOP四大特性</a></li></ul></li><li><a href=#oop与架构>OOP与架构</a></li><li><a href=#ecs>ECS</a></li></ul></li></ul></nav></aside><script defer src=/js/scrollspy.js></script><script type=module>
   import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
   mermaid.initialize({ 
     startOnLoad: true, theme: "default" });
