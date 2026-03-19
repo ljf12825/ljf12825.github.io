@@ -1,4 +1,0 @@
----
-title: "subfold"
-type: file
----
