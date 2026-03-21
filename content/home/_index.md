@@ -18,20 +18,20 @@ type: home
 +------------------------------------------+
 |                   <span class="tip" data-doc="/docs/ctx.txt">CTX</span>                    |
 |                    |                     |
-|                    |     <span class="tip" data-doc="/docs/dnet.txt">.NET</span>            |
+|                    |   <span class="tip" data-doc="/docs/dnet.txt">.NET</span>              |
 |                    |    /                |
 |                    |   /                 |
 |                    |  /                  |
 |         <span class="tip" data-doc="/docs/pm.txt">PM</span>         | /                   |
 |          \         |/                    |
 |  <span class="tip" data-doc="/docs/gp.txt">GP</span> ——————\————— <span class="tip" data-doc="/docs/home.txt">Home*</span> ———————————— <span class="tip" data-doc="/docs/eco.txt">ECO</span>  |
-|            \      /|                     |
-|             \    / |                     |
-|              \  /  |                     |
-|               \/   |  <span class="tip" data-doc="/docs/lang.txt">Lang</span>               |
-|               /\   |   /                 |
-|              /  \  |  /                  |
-|            <span class="tip" data-doc="/docs/os.txt">OS</span>    \ | /                   |
+|            \      /|\                    |
+|             \    / | \  <span class="tip" data-doc="/docs/lang.txt">Lang</span>             |
+|              \  /  |  \  /               |
+|               \/   |   \/                |
+|               /\   |   /\                |
+|              /  \  |  /  \               |
+|            <span class="tip" data-doc="/docs/os.txt">OS</span>    \ | /   <span class="tip" data-doc="/docs/net.txt">NET</span>             |
 |                   \|/                    |
 |                   <span class="tip" data-doc="/docs/csf.txt">CSF</span>                    |
 +------------------------------------------+

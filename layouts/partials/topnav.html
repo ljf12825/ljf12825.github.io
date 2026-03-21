@@ -27,6 +27,8 @@
 {{ else if eq $sec "lang" }}
   {{ partial "topnav/lang.html" . }}
 
+{{ else if eq $sec "net" }}
+  {{ partial "topnav/net.html"}}
 {{ else }}
   {{ partial "topnav/root.html" . }}
 {{ end }}
