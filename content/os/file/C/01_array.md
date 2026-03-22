@@ -1,10 +1,8 @@
 ---
 title: Array
 date: 2025-12-31
-categories: [C]
-tags: [Array]
-author: "ljf12825"
-type: log
+author: ljf12825
+type: file
 summary: usage of array and ram structure, string, array with pointer
 ---
 

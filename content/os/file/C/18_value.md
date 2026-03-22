@@ -1,10 +1,8 @@
 ---
 title: Value
 date: 2025-12-31
-categories: [C]
-tags: [Value]
-author: "ljf12825"
-type: log
+author: ljf12825
+type: file
 summary: Definition of value in C language
 ---
 

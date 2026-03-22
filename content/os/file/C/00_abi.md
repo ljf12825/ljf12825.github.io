@@ -1,10 +1,8 @@
 ---
 title: C ABI
 date: 2025-12-31
-categories: [C]
-tags: [ABI]
-author: "ljf12825"
-type: log
+author: ljf12825
+type: file
 summary: C Language ABI
 ---
 

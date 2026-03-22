@@ -1,10 +1,8 @@
 ---
 title: C Program Structure
 date: 2025-12-31
-categories: [C]
-tags: [Program, Main]
-author: "ljf12825"
-type: log
+author: ljf12825
+type: file
 summary: C Program Structure, Command Line Argument
 ---
 

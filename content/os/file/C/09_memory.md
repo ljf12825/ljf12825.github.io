@@ -1,10 +1,8 @@
 ---
 title: Memory Layout
 date: 2025-12-31
-categories: [C]
-tags: [Stack, Heap, Memory]
-author: "ljf12825"
-type: log
+author: ljf12825
+type: file
 summary: Memory Layout, Memory Management, Stack, Heap
 ---
 

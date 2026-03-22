@@ -1,10 +1,8 @@
 ---
 title: Operator
 date: 2025-12-31
-categories: [C]
-tags: [Operator]
-author: "ljf12825"
-type: log
+author: ljf12825
+type: file
 summary: Operator associativity, precedence, syntax tree
 ---
 

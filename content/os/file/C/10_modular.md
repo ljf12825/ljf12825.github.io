@@ -1,10 +1,8 @@
 ---
 title: Modular
 date: 2025-12-31
-categories: [C]
-tags: [header, source]
-author: "ljf12825"
-type: log
+author: ljf12825
+type: file
 summary: Separation of header and source files， static library and dynamic library
 ---
 
