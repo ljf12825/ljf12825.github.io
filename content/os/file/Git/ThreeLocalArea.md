@@ -1,10 +1,8 @@
 ---
 title: Three Local Area
 date: 2025-12-31
-categories: [Git]
-tags: [Note]
-author: "ljf12825"
-type: log
+author: ljf12825
+type: file
 summary: Git 3 local areas and 4 objects
 ---
 

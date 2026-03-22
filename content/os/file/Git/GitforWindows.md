@@ -1,7 +1,7 @@
 ---
 title: Git for Windows
 date: 2025-12-31
-author: "ljf12825"
+author: ljf12825
 type: file
 summary: Git for Windows
 ---

@@ -1,10 +1,8 @@
 ---
 title: Filemode
 date: 2025-12-31
-categories: [Git, Linux]
-tags: [Command, Porcelain, Mechanism]
-author: "ljf12825"
-type: log
+author: ljf12825
+type: file
 summary: Linux filemode in Git
 ---
 

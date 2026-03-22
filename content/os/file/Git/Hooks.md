@@ -1,10 +1,8 @@
 ---
 title: Hooks
 date: 2025-12-31
-categories: [Git]
-tags: [Mechanism]
-author: "ljf12825"
-type: log
+author: ljf12825
+type: file
 summary: usage of git hooks
 ---
 

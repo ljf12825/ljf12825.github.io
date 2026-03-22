@@ -1,10 +1,8 @@
 ---
 title: for-each-ref
 date: 2025-12-31
-categories: [Git]
-tags: [Command, Plumbing]
-author: "ljf12825"
-type: log
+author: ljf12825
+type: file
 summary: git for-each-ref
 ---
 

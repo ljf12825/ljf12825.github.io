@@ -1,10 +1,8 @@
 ---
 title: Git Remote
 date: 2025-12-31
-categories: [Git]
-tags: [Network, Command, Porcelain]
-author: "ljf12825"
-type: log
+author: ljf12825
+type: file
 summary: git remote
 ---
 
