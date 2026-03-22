@@ -13,7 +13,7 @@
 
     <div class="log-grid">
       {{ range where (where .Site.RegularPages "Type" "log") "Section" $sec }}
-        <a href="{{ .RelPermalink }}" class="log-card" data-tags="{{ with .Params.tags }}{{ delimit . "|"}}{{ end }}">
+        <a href="{{ .RelPermalink }}" class="log-card" data-tags="{{ with .Params.tags }}{{ delimit . "|"}}{{ end }}" data-title="{{ .Title }}" data-summary="{{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary }}{{ end }}">
           {{ with .Params.image }}
             <img src="{{ . | relURL }}" alt="{{ $.Title }}" class="log-thumb">
           {{ else }}
@@ -24,14 +24,13 @@
             <h2 class="log-title">{{ .Title }}</h2>
 
             <div class="log-meta">
-              <span class="date"><b>lastmodify:</b> {{ .Date.Format "2006-01-02" }}</span>
-              {{ with .Params.author }}<span class="author"><b>creator:</b> {{ . }}</span>{{ end }}
+              <span class="date"><b>Modified:</b> {{ .Date.Format "2006-01-02" }}</span>
+              {{ with .Params.author }}<span class="author"><b>Author:</b> {{ . }}</span>{{ end }}
               <span class="meta-line">
                 {{ with .Params.categories }}{{ range $i, $cat := . }}[{{ $cat }}]{{ if lt (add $i 1) (len .) }} {{ end }}{{ end }}{{ end }}
                 {{ with .Params.tags }}#{{ delimit . " #" }}{{ end }}
               </span>
             </div>
-
 
             <p class="log-summary">
               {{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary }}{{ end }}
@@ -80,7 +79,6 @@
         {{ end }}
       </ul>
     </div>
-
 
   </aside>
 
