@@ -4,14 +4,14 @@ type: csf
 
 # Computer Science Fundamental
 
-## INCLUDE
+> INCLUDE
 
 - Mathematics
 - Data Structure
 - Algorithm
+- Discrete Mathematics
 - Computer Architecture
-- Operating System
-- Computer Network
-- Compiler Principle
+- Calculation Principles
+- Programming
 
 ---
