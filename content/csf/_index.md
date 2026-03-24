@@ -11,7 +11,7 @@ type: csf
 - Algorithm
 - Discrete Mathematics
 - Computer Architecture
-- Calculation Principles
-- Programming
+- Theory of Computation
+- Logic and Circuits
 
 ---
