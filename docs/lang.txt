@@ -1,2 +1,7 @@
-- 形式语言与编译原理
-  - 正则表达式、文法、语法分析、编译流程
+Programing Language
+
+Programming languages are the convergence of thought and mechanism, the bridge between logic and expression.
+They shape not only how we communicate with machines, but also how we conceptualize problems.
+Here, we explore the rigor and power of low-level system languages, the flexibility and expressiveness of scripting languages, the formal foundations of language theory, and the mechanisms of toolchains and compilation.
+Each language, each set of rules, is an abstraction of computation and an expansion of possibility.
+By understanding, designing, and wielding languages, we engage not merely in coding, but in creating the order and structure of a computable world.
