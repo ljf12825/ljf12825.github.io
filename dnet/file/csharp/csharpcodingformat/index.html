@@ -35,9 +35,62 @@
 <a href=https://docs.vulkan.org/ target=_blank>Vulkan Docs</a></p><p><a href=https://www.opengl.org/ target=_blank>OpenGL</a> |
 <a href=https://registry.khronos.org/OpenGL target=_blank>OpenGL API</a> |
 <a href=https://www.khronos.org/opengl/wiki/ target=_blank>OpenGL Wiki</a></p><p><a href=https://learn.microsoft.com/en-us/windows/win32/directx target=_blank>DirectX</a></p><p><a href=https://www.realtimerendering.com/ target=_blank>Real-Time Rendering</a></p><p><a href=https://www.pbr-book.org/ target=_blank>Physically Based Rendering</a></p><p><a href=https://www.scratchapixel.com/ target=_blank>Scratchapixel</a></p><p><a href=https://learnopengl.com/ target=_blank>LearnOpenGL</a></p><p><a href=https://raytracing.github.io/ target=_blank>Ray Tracing in One Weekend</a></p><p><a href=https://www.shadertoy.com/ target=_blank>Shadertoy</a></p><p><a href=https://arxiv.org/list/cs.GR/recent target=_blank>arXiv Graphics</a></p><p><a href=https://www.siggraph.org/ target=_blank>SIGGRAPH</a> |
-<a href=https://dl.acm.org/conference/siggraph target=_blank>SIGGRAPH Digital Library</a></p><p><a href=https://git-scm.com/ target=_blank>Git</a></p></div></div></div><script src=/js/ref-window.js></script><article class=single_article><div class=title>CSharp Coding Format<div class=meta>Modified: 2025-06-01
-| Author：ljf12825</div></div><div class=content></div><nav class=post-nav><a href=/dnet/file/csharp/csharp_dotnet/ class=hover:underline>Up: CSharp and .NET</a>
-<a href=/dnet/file/csharp/datastructure/ class=hover:underline>Next: Data Structure</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents></nav></aside><script defer src=/js/scrollspy.js></script><script type=module>
+<a href=https://dl.acm.org/conference/siggraph target=_blank>SIGGRAPH Digital Library</a></p><p><a href=https://git-scm.com/ target=_blank>Git</a></p></div></div></div><script src=/js/ref-window.js></script><article class=single_article><div class=title>CSharp Coding Format<div class=meta>Modified: 2026-03-25
+| Author：ljf12825</div></div><div class=content><h2 id=命名规范>命名规范</h2><p>C#对命名有非常明确的社区共识</p><ul><li>类型/类/方法 -> PascalCase（大驼峰）</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>class</span> <span style=color:#50fa7b>PlayerController</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>void</span> MoveForward() {}
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ul><li>局部变量/参数 -> camelCase（小驼峰）</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#8be9fd>int</span> playerHealth;
+</span></span><span style=display:flex><span><span style=color:#ff79c6>void</span> SetHealth(<span style=color:#8be9fd>int</span> newHealth) {}
+</span></span></code></pre></div><ul><li>私有字段 -> <code>_camelCase</code></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>private</span> <span style=color:#8be9fd>int</span> _health;
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>private</span> Transform _target;
+</span></span></code></pre></div><ul><li>常量 -> PascalCase或ALL_CAPS</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd;font-style:italic>const</span> <span style=color:#8be9fd>int</span> MaxPlayerCount = <span style=color:#bd93f9>4</span>;
+</span></span></code></pre></div><ul><li>接口 -> <code>I</code>前缀</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>interface</span> <span style=color:#50fa7b>IMovable</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>void</span> Move()
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ul><li>布尔变量 -> 语义清晰（is/has/can）</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#8be9fd>bool</span> isDead;
+</span></span><span style=display:flex><span><span style=color:#8be9fd>bool</span> hasWeapon;
+</span></span><span style=display:flex><span><span style=color:#8be9fd>bool</span> canJump;
+</span></span></code></pre></div><h2 id=代码结构规范>代码结构规范</h2><h3 id=成员顺序>成员顺序</h3><p>推荐顺序</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#ff79c6>class</span> <span style=color:#50fa7b>Example</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 1. 常量</span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 2. 字段(private -&gt; protected -&gt; public)</span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 3. 属性</span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 4. 构造函数</span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 5. 公共方法</span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>// 6. 私有方法</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=using-顺序>using 顺序</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#ff79c6>using</span> System;
+</span></span><span style=display:flex><span><span style=color:#ff79c6>using</span> System.Collections.Generic;
+</span></span><span style=display:flex><span><span style=color:#ff79c6>using</span> UnityEngine; <span style=color:#6272a4>// 第三方/框架</span>
+</span></span></code></pre></div><p>系统 -> 第三方 -> 项目内</p><h3 id=一个文件一个类>一个文件一个类</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// Player.cs</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>class</span> <span style=color:#50fa7b>Player</span> {}
+</span></span></code></pre></div><h2 id=属性-vs-字段>属性 vs 字段</h2><p>不推荐直接暴露字段</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>int</span> health;
+</span></span></code></pre></div><p>推荐属性</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>int</span> Health { <span style=color:#ff79c6>get</span>; <span style=color:#8be9fd;font-style:italic>private</span> <span style=color:#ff79c6>set</span>; }
+</span></span></code></pre></div><h2 id=格式规范>格式规范</h2><h3 id=花括号不省略>花括号不省略</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#ff79c6>if</span> (isDead)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 不要</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>if</span> (isDead) <span style=color:#ff79c6>return</span>;
+</span></span></code></pre></div><h2 id=函数设计规范>函数设计规范</h2><h3 id=srp>SRP</h3><h3 id=方法名要表达行为>方法名要表达行为</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>CalculateDamage()
+</span></span><span style=display:flex><span>LoadConfig()
+</span></span><span style=display:flex><span>InitializeRenderer()
+</span></span></code></pre></div><p>而非</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span>DoStuff()
+</span></span><span style=display:flex><span>Handle()
+</span></span><span style=display:flex><span>Process()
+</span></span></code></pre></div><h3 id=参数数量小于等于3>参数数量小于等于3</h3><h2 id=注释规范>注释规范</h2><h3 id=优先写为什么不是做什么>优先写“为什么”，不是“做什么”</h3><p>不推荐</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// 设置血量</span>
+</span></span><span style=display:flex><span>_health = <span style=color:#bd93f9>10</span>;
+</span></span></code></pre></div><p>推荐</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>// 防止玩家初始血量为0导致死亡动画触发</span>
+</span></span><span style=display:flex><span>_health = <span style=color:#bd93f9>10</span>;
+</span></span></code></pre></div><h3 id=xml注释公共api>XML注释（公共API）</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#6272a4>/// &lt;summary&gt;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>/// 计算伤害值</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>/// &lt;/summary&gt;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>public</span> <span style=color:#8be9fd>int</span> CalculateDamage() {}
+</span></span></code></pre></div></div><nav class=post-nav><a href=/dnet/file/csharp/attribute/ class=hover:underline>Next: Attribute</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#命名规范>命名规范</a></li><li><a href=#代码结构规范>代码结构规范</a><ul><li><a href=#成员顺序>成员顺序</a></li><li><a href=#using-顺序>using 顺序</a></li><li><a href=#一个文件一个类>一个文件一个类</a></li></ul></li><li><a href=#属性-vs-字段>属性 vs 字段</a></li><li><a href=#格式规范>格式规范</a><ul><li><a href=#花括号不省略>花括号不省略</a></li></ul></li><li><a href=#函数设计规范>函数设计规范</a><ul><li><a href=#srp>SRP</a></li><li><a href=#方法名要表达行为>方法名要表达行为</a></li><li><a href=#参数数量小于等于3>参数数量小于等于3</a></li></ul></li><li><a href=#注释规范>注释规范</a><ul><li><a href=#优先写为什么不是做什么>优先写“为什么”，不是“做什么”</a></li><li><a href=#xml注释公共api>XML注释（公共API）</a></li></ul></li></ul></li></ul></nav></aside><script defer src=/js/scrollspy.js></script><script type=module>
   import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
   mermaid.initialize({ 
     startOnLoad: true, theme: "default" });
