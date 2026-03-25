@@ -4,11 +4,16 @@ type: lang
 
 # Language
 
-## INCLUDE
+> INCLUDE
 
 - C++
 - Rust
 - Lua
-- programming language development
+- Python
+- Toolchains
+- Regular Expressions
+- Principles of Compilation
+- Programming Language Theory
+- Programming Language Development
 
 ---

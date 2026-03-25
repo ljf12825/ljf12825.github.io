@@ -1,12 +1,8 @@
 Computer Science Foundation
 
-- 离散数学
-- 计算机组成原理
-- 程序设计基础
-  - 编程语言原理、语法、语义、面向对象、函数式
-- 数学
+Core Concepts, Principles, and Theoretical Foundations of Computer Science
+Focusing on the principles of computer operation, methods of data processing, and the essence of algorithm design
 
-理解计算机如何思考和运行
-计算的本质、能力以及限制
-  - 哲学方面：什么是计算
-  - 数学方面：它用形式化的方法证明某些问题是否可解，或者需要多少资源才能解决
+- Understanding Underlying Principles: The ability to comprehend what a computer does—and why it does it—without relying on specific tools
+- Cross-Domain Transferability
+- The Ability to Solve Complex Problems

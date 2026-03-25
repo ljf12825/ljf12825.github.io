@@ -7,7 +7,7 @@ type: csf
 > INCLUDE
 
 - Mathematics
-- Data Structure
+- Data Structures
 - Algorithm
 - Discrete Mathematics
 - Computer Architecture
