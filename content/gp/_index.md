@@ -4,7 +4,7 @@ type: gp
 
 # Graphic Programming
 
-## INCLUDE
+> INCLUDE
 
 - Mathematics Foundation
 - Geometry & Spatial Structure

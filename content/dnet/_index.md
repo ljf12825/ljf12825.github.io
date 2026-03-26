@@ -4,7 +4,7 @@ type: dnet
 
 # .NET
 
-## INCLUDE
+> INCLUDE
 
 - .NET with C#
   - C#
@@ -29,5 +29,3 @@ type: dnet
   - Windows Terminal
   - .NET CLI
   - Script, Automation, Batch Processing
-
----

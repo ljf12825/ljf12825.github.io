@@ -1,0 +1,8 @@
+Operating System Except Windows
+
+Every action, every allocation, relies on unseen rules and underlying structures.
+
+An operationg system is more than a tool——it is a lens to understand the essence of computation.
+
+In this module, learning is not merely about techniques, but about observing how systems organize, operate,
+and maintain balance between complexity and order.
