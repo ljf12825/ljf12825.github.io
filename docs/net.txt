@@ -1,0 +1,15 @@
+Network Programming
+
+In the landscape of modern game development and internet applications,
+network programming has become a core skill that every developer must master.
+Whether it involves the real-time interactions of multiplayer online games or the data synchronization between clients and servers,
+a profound understanding of newtworking principles and practices is indispensable.
+
+In reality, however, many tutorials tend to be fragmented---either focusing solely on theory
+or merely providing sample code---making it difficult for learners to truly systematize their newtworking knowledge and apply it within an engineering context.
+As someone with extensive experience in game and engine development, 
+I deeply appreciate the critical importance of the journey "from theory to practice, and ultimately to hith-performance engineering."
+
+This module was created specifically to address this challenge.
+It encompasses a comprehensive curriculum ranging from newtworking fundamentals and TCP/UDP principles to Socket programming and high-concurrency models,
+extending all the way to protocol design and game network synchronization.
