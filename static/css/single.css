@@ -7,6 +7,26 @@
   min-height: 100vh;
 }
 
+.layout::before,
+.layout::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #000080;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.layout::before {
+  left: calc(50% - 500px); /* 文章左侧边缘位置 */
+}
+
+.layout::after {
+  right: calc(50% - 500px); /* 文章右侧边缘位置 */
+}
+
 /* 文章主体样式 */
 .single_article {
   font-family: Arial, Helvetica, sans-serif;
