@@ -1,4 +1,3 @@
-// js/toc-window.js
 (function() {
   'use strict';
   
@@ -14,11 +13,9 @@
     
     console.log('TOC Window: Initialized');
     
-    // 保存初始高度
     let initialHeight = null;
     let initialBodyHeight = null;
     
-    // 优化窗口高度，确保不超过视口
     function adjustTocHeight() {
       if (!tocWindow || tocWindow.classList.contains('collapsed')) return;
       
@@ -63,7 +60,6 @@
       }
     }
     
-    // 拖动功能
     let isDragging = false;
     let startMouseX = 0, startMouseY = 0;
     let startWindowLeft = 0, startWindowTop = 0;
@@ -77,11 +73,9 @@
     }
     
     function onMouseDown(e) {
-      // 记录鼠标按下时的位置
       startMouseX = e.clientX;
       startMouseY = e.clientY;
       
-      // 获取当前窗口的位置
       const rect = tocWindow.getBoundingClientRect();
       startWindowLeft = rect.left;
       startWindowTop = rect.top;
@@ -94,15 +88,12 @@
     function onMouseMove(e) {
       if (!isDragging) return;
       
-      // 计算鼠标移动的距离
       const deltaX = e.clientX - startMouseX;
       const deltaY = e.clientY - startMouseY;
       
-      // 计算新位置 = 起始窗口位置 + 鼠标移动距离
       let newLeft = startWindowLeft + deltaX;
       let newTop = startWindowTop + deltaY;
       
-      // 边界限制
       newLeft = Math.max(10, Math.min(window.innerWidth - tocWindow.offsetWidth - 10, newLeft));
       newTop = Math.max(60, Math.min(window.innerHeight - tocWindow.offsetHeight - 20, newTop));
       
@@ -119,13 +110,11 @@
       isDragging = false;
       tocWindow.style.cursor = '';
       
-      // 计算总移动距离
       const deltaX = e.clientX - startMouseX;
       const deltaY = e.clientY - startMouseY;
       const moved = Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5;
       
       if (!moved) {
-        // 没有移动，判断是否是双击
         clickCount++;
         
         if (clickCount === 1) {
@@ -140,7 +129,6 @@
           clickTimer = null;
         }
       } else {
-        // 有移动，保存位置
         savePosition();
         clickCount = 0;
         if (clickTimer) {
