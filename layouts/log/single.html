@@ -10,7 +10,7 @@
       {{ .Title }}
       <div class="meta">
         Modified: {{ .Lastmod.Format "2006-01-02" | default "N/A" }}
-        {{ with .Params.author }} | Author：{{ . }}{{ end }}
+        {{ with .Params.author }} || Author：{{ . }}{{ end }}
       </div>
     </div>
 
