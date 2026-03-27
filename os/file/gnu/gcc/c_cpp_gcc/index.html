@@ -45,7 +45,123 @@
 </span></span></code></pre></div><ul><li>预处理后的文件 -> GCC转换称汇编代码</li><li>这一步就是C -> 汇编</li></ul><p><code>main.s</code>是gcc编译阶段最后的人类可读的文件</p><h5 id=汇编>汇编</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>gcc -c main.s -o main.o
 </span></span></code></pre></div><ul><li>汇编代码 -> 汇编器(<code>as</code>) -> 目标文件<code>.o</code></li><li><code>.o</code>文件是机器码二进制，基本不可读</li><li>每个<code>.c</code>文件都会生成一个<code>.o</code>文件</li></ul><p><code>.o</code>文件里有</p><ul><li>函数的机器指令</li><li>数据段、符号表</li><li>调用其他库函数的信息</li></ul><h5 id=链接>链接</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>gcc main.o -o main
 </span></span></code></pre></div><ul><li>链接器<code>ld</code>会把<code>.o</code>文件，系统库(<code>libc</code>, <code>libm</code>等)，其他<code>.o</code>问阿金，合并成最终的可执行文件<code>main</code>，这时<code>printf</code>等函数才真正找到实现</li></ul><h4 id=警告选项>警告选项</h4><table><thead><tr><th>选项</th><th>作用</th></tr></thead><tbody><tr><td><code>-Wall</code></td><td>显示所有常见警告</td></tr><tr><td><code>-Wextra</code></td><td>显示额外警告</td></tr><tr><td><code>-Werror</code></td><td>将警告视为错误</td></tr><tr><td><code>-w</code></td><td>禁止所有警告</td></tr><tr><td><code>-pedantic</code></td><td>遵循标准C,提醒非标准用法</td></tr></tbody></table><p>GCC只会报真正严重的语法错误或链接错误</p><ul><li>语法错误（如缺括号、括号不匹配）</li><li>类型错误（如<code>int *p = "abc";</code>）</li><li>链接错误（如调用不存在的函数）</li></ul><p>但像初始化、隐式转换、可能丢失精度等警告，默认不报</p><blockquote><p>GCC设计之初遵循“兼容老代码”原则，C语言历史上很多老程序有未初始化、隐式转换等现象，默认警告太多导致就代码编译报满屏，用户体验很差</p></blockquote><p>因此，开发中推荐的做法是</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>gcc -Wall -Wextra -Werror main.c
-</span></span></code></pre></div><p>这样可以保证代码更安全、更规范，尤其是底层/库开发、游戏引擎开发、嵌入式开发等</p><h5 id=-wall><code>-Wall</code></h5><p>开启常用警告，比如</p><ul><li>未使用的函数或变量</li><li>不匹配的格式化字符串(<code>printf</code>/<code>scanf</code>)</li><li>可能的类型转换问题</li></ul><p>但不会开启一些“更严格的检查”</p><h5 id=-wextra><code>-Wextra</code></h5><p>常见警告示例</p><table><thead><tr><th>类型</th><th>示例代码</th><th>警告</th></tr></thead><tbody><tr><td>未使用参数</td><td><code>int f(int x){return 0;}</code></td><td><code>unused parameter 'x'</code></td></tr><tr><td>空函数体</td><td><code>void f(){}</code></td><td><code>empty body </code>(depends)</td></tr><tr><td>不完全初始化数组</td><td><code>int arr[5] = {1,2};</code></td><td><code>missing initializer for element 2</code></td></tr><tr><td>多余的逗号</td><td><code>int arr[] = {1,2,};</code></td><td><code>extra comma</code></td></tr><tr><td>隐式<code>int</code>转换</td><td><code>char c = 200;</code></td><td><code>oveerflow in implicit constant conversion</code></td></tr><tr><td><code>return</code>没有值</td><td><code>int f(){}</code></td><td><code>control reaches end of non-void function</code></td></tr></tbody></table><p>不同版本GCC会有差异</p><h4 id=优化选项>优化选项</h4><table><thead><tr><th>选项</th><th>作用</th></tr></thead><tbody><tr><td><code>-O0</code></td><td>不优化（默认）</td></tr><tr><td><code>-O1</code></td><td>基本优化</td></tr><tr><td><code>-O2</code></td><td>进一步优化（推荐）</td></tr><tr><td><code>-O3</code></td><td>最高级别优化</td></tr><tr><td><code>-Os</code></td><td>优化代码大小</td></tr></tbody></table><h4 id=调试选项>调试选项</h4><table><thead><tr><th>选项</th><th>作用</th></tr></thead><tbody><tr><td><code>-g</code></td><td>生成调试信息</td></tr><tr><td><code>-ggdb</code></td><td>生成GDB专用的调试信息</td></tr><tr><td><code>-pg</code></td><td>生成性能分析信息</td></tr></tbody></table><h4 id=语言标准选项>语言标准选项</h4><p><code>-std</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>gcc -std<span style=color:#ff79c6>=</span>c99 file.c
+</span></span></code></pre></div><p>这样可以保证代码更安全、更规范，尤其是底层/库开发、游戏引擎开发、嵌入式开发等</p><h5 id=-wall><code>-Wall</code></h5><p>开启常用警告，比如</p><ul><li>未使用的函数或变量</li><li>不匹配的格式化字符串(<code>printf</code>/<code>scanf</code>)</li><li>可能的类型转换问题</li></ul><p>但不会开启一些“更严格的检查”</p><h5 id=-wextra><code>-Wextra</code></h5><p>常见警告示例</p><table><thead><tr><th>类型</th><th>示例代码</th><th>警告</th></tr></thead><tbody><tr><td>未使用参数</td><td><code>int f(int x){return 0;}</code></td><td><code>unused parameter 'x'</code></td></tr><tr><td>空函数体</td><td><code>void f(){}</code></td><td><code>empty body </code>(depends)</td></tr><tr><td>不完全初始化数组</td><td><code>int arr[5] = {1,2};</code></td><td><code>missing initializer for element 2</code></td></tr><tr><td>多余的逗号</td><td><code>int arr[] = {1,2,};</code></td><td><code>extra comma</code></td></tr><tr><td>隐式<code>int</code>转换</td><td><code>char c = 200;</code></td><td><code>oveerflow in implicit constant conversion</code></td></tr><tr><td><code>return</code>没有值</td><td><code>int f(){}</code></td><td><code>control reaches end of non-void function</code></td></tr></tbody></table><p>不同版本GCC会有差异</p><h4 id=优化选项>优化选项</h4><table><thead><tr><th>选项</th><th>级别</th><th>特点</th><th>适用场景</th></tr></thead><tbody><tr><td><code>-O0</code></td><td>不优化（默认）</td><td>编译最快，调试信息完整</td><td>开发调试阶段</td></tr><tr><td><code>-O1</code></td><td>基本优化</td><td>基本优化，不增加编译时间</td><td>快速测试，平衡模式</td></tr><tr><td><code>-O2</code></td><td>推荐优化</td><td>常用优化，不增加代码体积</td><td>生产环境默认选择</td></tr><tr><td><code>-O3</code></td><td>激进优化</td><td>高级优化，可能增加代码体积</td><td>性能更关键代码</td></tr><tr><td><code>-Os</code></td><td>体积优化</td><td>优化代码体积</td><td>嵌入式、移动设备</td></tr><tr><td><code>-0fast</code></td><td>极致优化</td><td>突破标准限制的优化</td><td>数值计算场景</td></tr></tbody></table><h5 id=-o0>-O0</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>gcc -O0 program.c -o program
+</span></span></code></pre></div><p>特点：</p><ul><li>编译速度最快</li><li>代码直接对应源代码，不优化</li><li>调试体验最好（变量不会被优化掉）</li><li>适合开发和调试阶段</li></ul><h5 id=-o1>-O1</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>gcc -O1 program -o program
+</span></span></code></pre></div><p>开启的优化：</p><ul><li>删除未使用的变量和函数</li><li>简单的常量传播</li><li>基本的指令调度</li><li>不增加编译时间</li></ul><p>示例：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>test</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> a <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>10</span>;
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> b <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>20</span>;
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>int</span> c <span style=color:#ff79c6>=</span> a <span style=color:#ff79c6>+</span> b; <span style=color:#6272a4>// O1会直接计算为30
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> c;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h5 id=-o2>-O2</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>gcc -O2 program.c -o program
+</span></span></code></pre></div><p>在-O1的基础上增加：</p><ul><li>函数内联（小函数）</li><li>循环展开</li><li>更激进的指令调度</li><li>寄存器分配优化</li><li>死代码消除</li></ul><p>这是生产环境最常用的选项</p><h5 id=-o3>-O3</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>gcc -O3 program.c -o program
+</span></span></code></pre></div><p>在-O2基础上增加：</p><ul><li>所有函数内联（即使是大的）</li><li>循环完全展开</li><li>预测分支优化</li><li>向量化（SIMD指令）</li></ul><p>潜在问题：</p><ul><li>可能增加代码体积</li><li>可能降低指令缓存命中率</li><li>极少情况下反而更慢</li></ul><h5 id=-os>-Os</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>gcc -Os program.c -c program
+</span></span></code></pre></div><p>特点：</p><ul><li>以-O2为基础</li><li>额外优化代码体积</li><li>不进行会增大代码体积的优化</li><li>适合嵌入式系统、移动应用</li></ul><h5 id=-ofast>-Ofast</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>gcc -Ofast program.c -o program
+</span></span></code></pre></div><p>特点：</p><ul><li>包含-O3所有优化</li><li>加上<code>-ffast-math</code>（浮点运算优化）</li><li>可能不符合IEEE/ANSI标准</li><li>适合数值计算、科学计算</li></ul><h5 id=具体优化选项>具体优化选项</h5><h6 id=控制内联>控制内联</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 禁止内联</span>
+</span></span><span style=display:flex><span>-fno-inline
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 限制内联函数大小</span>
+</span></span><span style=display:flex><span>--param inline-unit-growth<span style=color:#ff79c6>=</span><span style=color:#bd93f9>20</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 内联所有函数（即使没标记inline）</span>
+</span></span><span style=display:flex><span>-finline-functions
+</span></span></code></pre></div><h6 id=循环优化>循环优化</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 循环展开</span>
+</span></span><span style=display:flex><span>-funroll-loops
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 循环合并</span>
+</span></span><span style=display:flex><span>-fmerge-constant
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 循环向量化</span>
+</span></span><span style=display:flex><span>-ftree-vectorize
+</span></span></code></pre></div><h6 id=浮点优化>浮点优化</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 快速数学运算（不保证精度）</span>
+</span></span><span style=display:flex><span>--ffast-math
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 不进行浮点优化</span>
+</span></span><span style=display:flex><span>-fno-fast-math
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 允许重排浮点运算</span>
+</span></span><span style=display:flex><span>-funsafe-math-optimizations
+</span></span></code></pre></div><h6 id=内存优化>内存优化</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 消除未使用的变量</span>
+</span></span><span style=display:flex><span>-fdead-code-elimination
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 合并全局常量</span>
+</span></span><span style=display:flex><span>-fmerge-all-constants
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 地址空间布局随机化</span>
+</span></span><span style=display:flex><span>-fpie
+</span></span></code></pre></div><h5 id=性能对比示例>性能对比示例</h5><p>测试程序</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#6272a4>// benchmark.c
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;stdio.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;time.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>#define ITERATIONS 10000000000 </span><span style=color:#6272a4>// 10^10
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>clock_t</span> start <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>clock</span>();
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>long</span> <span style=color:#8be9fd>long</span> sum <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> (<span style=color:#8be9fd>long</span> <span style=color:#8be9fd>long</span> i <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>; i <span style=color:#ff79c6>&lt;</span> ITERATIONS; i<span style=color:#ff79c6>++</span>) {
+</span></span><span style=display:flex><span>        sum <span style=color:#ff79c6>+=</span> i <span style=color:#ff79c6>*</span> i; <span style=color:#6272a4>// 浮点运算
+</span></span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>clock_t</span> end <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>clock</span>();
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd>double</span> time <span style=color:#ff79c6>=</span> (<span style=color:#8be9fd>double</span>)(end <span style=color:#ff79c6>-</span> start) <span style=color:#ff79c6>/</span> CLOCKS_PER_SEC;
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;Time: %.3f seconds</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, time);
+</span></span><span style=display:flex><span>    <span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;Sum: %lld</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, sum);
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>编译指令</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>gcc -O0 main.c -o main_O0 <span style=color:#ff79c6>&amp;&amp;</span> <span style=color:#8be9fd;font-style:italic>time</span> ./main_O0
+</span></span><span style=display:flex><span>gcc -O1 main.c -o main_O1 <span style=color:#ff79c6>&amp;&amp;</span> <span style=color:#8be9fd;font-style:italic>time</span> ./main_O1
+</span></span><span style=display:flex><span>gcc -O2 main.c -o main_O2 <span style=color:#ff79c6>&amp;&amp;</span> <span style=color:#8be9fd;font-style:italic>time</span> ./main_O2
+</span></span><span style=display:flex><span>gcc -O3 main.c -o main_O3 <span style=color:#ff79c6>&amp;&amp;</span> <span style=color:#8be9fd;font-style:italic>time</span> ./main_O3
+</span></span><span style=display:flex><span>gcc -Ofast main.c -o main_Ofast <span style=color:#ff79c6>&amp;&amp;</span> <span style=color:#8be9fd;font-style:italic>time</span> ./main_Ofast
+</span></span></code></pre></div><p>运行结果</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>Time: 19.453 seconds
+</span></span><span style=display:flex><span>Sum: 7032546979563742720
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>real    0m19.459s
+</span></span><span style=display:flex><span>user    0m19.452s
+</span></span><span style=display:flex><span>sys     0m0.001s
+</span></span><span style=display:flex><span>Time: 7.349 seconds
+</span></span><span style=display:flex><span>Sum: 7032546979563742720
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>real    0m7.334s
+</span></span><span style=display:flex><span>user    0m7.350s
+</span></span><span style=display:flex><span>sys     0m0.000s
+</span></span><span style=display:flex><span>Time: 3.671 seconds
+</span></span><span style=display:flex><span>Sum: 7032546979563742720
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>real    0m3.646s
+</span></span><span style=display:flex><span>user    0m3.670s
+</span></span><span style=display:flex><span>sys     0m0.001s
+</span></span><span style=display:flex><span>Time: 3.659 seconds
+</span></span><span style=display:flex><span>Sum: 7032546979563742720
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>real    0m3.639s
+</span></span><span style=display:flex><span>user    0m3.660s
+</span></span><span style=display:flex><span>sys     0m0.000s
+</span></span><span style=display:flex><span>Time: 3.665 seconds
+</span></span><span style=display:flex><span>Sum: 7032546979563742720
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>real    0m3.650s
+</span></span><span style=display:flex><span>user    0m3.665s
+</span></span><span style=display:flex><span>sys     0m0.001s
+</span></span></code></pre></div><p>分析</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>-O0 ~ -O1 有2.7x的提升
+</span></span><span style=display:flex><span>-O1 ~ -O2 有2x的提升
+</span></span><span style=display:flex><span>-O2 ~ -O3 的提升不明显
+</span></span><span style=display:flex><span>-Ofast 轻微提升
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>sum值在所有优化选项下相同，说明
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>1. 所有优化都保持了计算结果一致
+</span></span><span style=display:flex><span>2. 溢出是确定的（无符号/有符号溢出是正确行为）
+</span></span><span style=display:flex><span>3. 编译器优化没有改变计算结果
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>理论计算公式（取模2^64）
+</span></span><span style=display:flex><span>sum = (N-1) * N * (2N-1) / 6
+</span></span><span style=display:flex><span>N = 10 ^ 10
+</span></span><span style=display:flex><span>结果应该是一个64位整数
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>详细优化可以对比编译后的汇编文件进行分析
+</span></span></code></pre></div><h4 id=调试选项>调试选项</h4><table><thead><tr><th>选项</th><th>作用</th></tr></thead><tbody><tr><td><code>-g</code></td><td>生成调试信息</td></tr><tr><td><code>-ggdb</code></td><td>生成GDB专用的调试信息</td></tr><tr><td><code>-pg</code></td><td>生成性能分析信息</td></tr></tbody></table><h4 id=语言标准选项>语言标准选项</h4><p><code>-std</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>gcc -std<span style=color:#ff79c6>=</span>c99 file.c
 </span></span></code></pre></div><ul><li>c99</li><li>c11</li><li>gnu99</li><li>c++11</li><li>c++20</li></ul><h3 id=使用示例>使用示例</h3><h4 id=基本编译>基本编译</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 编译单个文件</span>
 </span></span><span style=display:flex><span>gcc main.c -o main
 </span></span><span style=display:flex><span>g++ main.cpp -o main
@@ -69,7 +185,7 @@
 </span></span><span style=display:flex><span>g++ program.cpp -o program -L/path/to/lib -lmylib
 </span></span></code></pre></div><h4 id=包含头文件>包含头文件</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 添加头文件搜索路径</span>
 </span></span><span style=display:flex><span>g++ program.cpp -o program -I/path/to/include
-</span></span></code></pre></div><h2 id=编译过程>编译过程</h2><p>gcc/g++编译分为四个阶段</p><h2 id=gcc-vs-g>gcc vs g++</h2></div><nav class=post-nav><a href=/os/file/gnu/gcc/gcc/ class=hover:underline>Next: GCC</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#基本概念>基本概念</a><ul><li><a href=#基础语法>基础语法</a></li><li><a href=#常用选项>常用选项</a><ul><li><a href=#基本选项>基本选项</a><ul><li><a href=#输出默认文件名>输出默认文件名</a></li><li><a href=#输出指定文件名>输出指定文件名</a></li><li><a href=#预处理>预处理</a></li><li><a href=#编译>编译</a></li><li><a href=#汇编>汇编</a></li><li><a href=#链接>链接</a></li></ul></li><li><a href=#警告选项>警告选项</a><ul><li><a href=#-wall><code>-Wall</code></a></li><li><a href=#-wextra><code>-Wextra</code></a></li></ul></li><li><a href=#优化选项>优化选项</a></li><li><a href=#调试选项>调试选项</a></li><li><a href=#语言标准选项>语言标准选项</a></li></ul></li><li><a href=#使用示例>使用示例</a><ul><li><a href=#基本编译>基本编译</a></li><li><a href=#多文件编译>多文件编译</a></li><li><a href=#链接库文件>链接库文件</a></li><li><a href=#包含头文件>包含头文件</a></li></ul></li></ul></li><li><a href=#编译过程>编译过程</a></li><li><a href=#gcc-vs-g>gcc vs g++</a></li></ul></li></ul></nav></aside><script src=/js/scrollspy.js defer></script><script type=module>
+</span></span></code></pre></div><h2 id=编译过程>编译过程</h2><p>gcc/g++编译分为四个阶段</p><h2 id=gcc-vs-g>gcc vs g++</h2></div><nav class=post-nav><a href=/os/file/gnu/gcc/gcc/ class=hover:underline>Next: GCC</a></nav></article><aside class=toc><h3>TOC</h3><nav id=TableOfContents><ul><li><ul><li><a href=#基本概念>基本概念</a><ul><li><a href=#基础语法>基础语法</a></li><li><a href=#常用选项>常用选项</a><ul><li><a href=#基本选项>基本选项</a><ul><li><a href=#输出默认文件名>输出默认文件名</a></li><li><a href=#输出指定文件名>输出指定文件名</a></li><li><a href=#预处理>预处理</a></li><li><a href=#编译>编译</a></li><li><a href=#汇编>汇编</a></li><li><a href=#链接>链接</a></li></ul></li><li><a href=#警告选项>警告选项</a><ul><li><a href=#-wall><code>-Wall</code></a></li><li><a href=#-wextra><code>-Wextra</code></a></li></ul></li><li><a href=#优化选项>优化选项</a><ul><li><a href=#-o0>-O0</a></li><li><a href=#-o1>-O1</a></li><li><a href=#-o2>-O2</a></li><li><a href=#-o3>-O3</a></li><li><a href=#-os>-Os</a></li><li><a href=#-ofast>-Ofast</a></li><li><a href=#具体优化选项>具体优化选项</a><ul><li><a href=#控制内联>控制内联</a></li><li><a href=#循环优化>循环优化</a></li><li><a href=#浮点优化>浮点优化</a></li><li><a href=#内存优化>内存优化</a></li></ul></li><li><a href=#性能对比示例>性能对比示例</a></li></ul></li><li><a href=#调试选项>调试选项</a></li><li><a href=#语言标准选项>语言标准选项</a></li></ul></li><li><a href=#使用示例>使用示例</a><ul><li><a href=#基本编译>基本编译</a></li><li><a href=#多文件编译>多文件编译</a></li><li><a href=#链接库文件>链接库文件</a></li><li><a href=#包含头文件>包含头文件</a></li></ul></li></ul></li><li><a href=#编译过程>编译过程</a></li><li><a href=#gcc-vs-g>gcc vs g++</a></li></ul></li></ul></nav></aside><script src=/js/scrollspy.js defer></script><script type=module>
   import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
   mermaid.initialize({ 
     startOnLoad: true, theme: "default" });
