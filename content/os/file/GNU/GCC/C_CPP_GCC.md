@@ -176,13 +176,260 @@ gcc -Wall -Wextra -Werror main.c
 
 #### 优化选项
 
-| 选项 | 作用 |
-| - | - |
-| `-O0` | 不优化（默认）|
-| `-O1` | 基本优化 |
-| `-O2` | 进一步优化（推荐）|
-| `-O3` | 最高级别优化 |
-| `-Os` | 优化代码大小 |
+| 选项 | 级别 | 特点 | 适用场景 |
+| - | - | - | - |
+| `-O0` | 不优化（默认）| 编译最快，调试信息完整 | 开发调试阶段 |
+| `-O1` | 基本优化 | 基本优化，不增加编译时间 | 快速测试，平衡模式 |
+| `-O2` | 推荐优化 | 常用优化，不增加代码体积 | 生产环境默认选择 |
+| `-O3` | 激进优化 | 高级优化，可能增加代码体积 | 性能更关键代码 |
+| `-Os` | 体积优化 | 优化代码体积 | 嵌入式、移动设备 |
+| `-0fast` | 极致优化 | 突破标准限制的优化 | 数值计算场景 |
+
+##### -O0
+
+```bash
+gcc -O0 program.c -o program
+```
+
+特点：
+
+- 编译速度最快
+- 代码直接对应源代码，不优化
+- 调试体验最好（变量不会被优化掉）
+- 适合开发和调试阶段
+
+##### -O1
+
+```bash
+gcc -O1 program -o program
+```
+
+开启的优化：
+
+- 删除未使用的变量和函数
+- 简单的常量传播
+- 基本的指令调度
+- 不增加编译时间
+
+示例：
+
+```c
+int test() {
+    int a = 10;
+    int b = 20;
+    int c = a + b; // O1会直接计算为30
+    return c;
+}
+```
+
+##### -O2
+
+```bash
+gcc -O2 program.c -o program
+```
+
+在-O1的基础上增加：
+
+- 函数内联（小函数）
+- 循环展开
+- 更激进的指令调度
+- 寄存器分配优化
+- 死代码消除
+
+这是生产环境最常用的选项
+
+##### -O3
+
+```bash
+gcc -O3 program.c -o program
+```
+
+在-O2基础上增加：
+
+- 所有函数内联（即使是大的）
+- 循环完全展开
+- 预测分支优化
+- 向量化（SIMD指令）
+
+潜在问题：
+
+- 可能增加代码体积
+- 可能降低指令缓存命中率
+- 极少情况下反而更慢
+
+##### -Os
+
+```bash
+gcc -Os program.c -c program
+```
+
+特点：
+
+- 以-O2为基础
+- 额外优化代码体积
+- 不进行会增大代码体积的优化
+- 适合嵌入式系统、移动应用
+
+##### -Ofast
+
+```bash
+gcc -Ofast program.c -o program
+```
+
+特点：
+
+- 包含-O3所有优化
+- 加上`-ffast-math`（浮点运算优化）
+- 可能不符合IEEE/ANSI标准
+- 适合数值计算、科学计算
+
+##### 具体优化选项
+
+###### 控制内联
+
+```bash
+# 禁止内联
+-fno-inline
+
+# 限制内联函数大小
+--param inline-unit-growth=20
+
+# 内联所有函数（即使没标记inline）
+-finline-functions
+```
+
+###### 循环优化
+
+```bash
+# 循环展开
+-funroll-loops
+
+# 循环合并
+-fmerge-constant
+
+# 循环向量化
+-ftree-vectorize
+```
+
+###### 浮点优化
+
+```bash
+# 快速数学运算（不保证精度）
+--ffast-math
+
+# 不进行浮点优化
+-fno-fast-math
+
+# 允许重排浮点运算
+-funsafe-math-optimizations
+```
+
+###### 内存优化
+
+```bash
+# 消除未使用的变量
+-fdead-code-elimination
+
+# 合并全局常量
+-fmerge-all-constants
+
+# 地址空间布局随机化
+-fpie
+```
+
+##### 性能对比示例
+
+测试程序
+
+```c
+// benchmark.c
+#include <stdio.h>
+#include <time.h>
+
+#define ITERATIONS 10000000000 // 10^10
+
+int main() {
+    clock_t start = clock();
+    long long sum = 0;
+
+    for (long long i = 0; i < ITERATIONS; i++) {
+        sum += i * i; // 浮点运算
+    }
+
+    clock_t end = clock();
+    double time = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Time: %.3f seconds\n", time);
+    printf("Sum: %lld\n", sum);
+    return 0;
+}
+```
+
+编译指令
+
+```bash
+gcc -O0 main.c -o main_O0 && time ./main_O0
+gcc -O1 main.c -o main_O1 && time ./main_O1
+gcc -O2 main.c -o main_O2 && time ./main_O2
+gcc -O3 main.c -o main_O3 && time ./main_O3
+gcc -Ofast main.c -o main_Ofast && time ./main_Ofast
+```
+
+运行结果
+
+```text
+Time: 19.453 seconds
+Sum: 7032546979563742720
+
+real    0m19.459s
+user    0m19.452s
+sys     0m0.001s
+Time: 7.349 seconds
+Sum: 7032546979563742720
+
+real    0m7.334s
+user    0m7.350s
+sys     0m0.000s
+Time: 3.671 seconds
+Sum: 7032546979563742720
+
+real    0m3.646s
+user    0m3.670s
+sys     0m0.001s
+Time: 3.659 seconds
+Sum: 7032546979563742720
+
+real    0m3.639s
+user    0m3.660s
+sys     0m0.000s
+Time: 3.665 seconds
+Sum: 7032546979563742720
+
+real    0m3.650s
+user    0m3.665s
+sys     0m0.001s
+```
+
+分析
+
+```text
+-O0 ~ -O1 有2.7x的提升
+-O1 ~ -O2 有2x的提升
+-O2 ~ -O3 的提升不明显
+-Ofast 轻微提升
+
+sum值在所有优化选项下相同，说明
+
+1. 所有优化都保持了计算结果一致
+2. 溢出是确定的（无符号/有符号溢出是正确行为）
+3. 编译器优化没有改变计算结果
+
+理论计算公式（取模2^64）
+sum = (N-1) * N * (2N-1) / 6
+N = 10 ^ 10
+结果应该是一个64位整数
+
+详细优化可以对比编译后的汇编文件进行分析
+```
 
 #### 调试选项
 
