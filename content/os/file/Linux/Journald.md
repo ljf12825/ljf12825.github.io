@@ -1,7 +1,7 @@
 ---
-title: Journald
+title: journald
 date: 2026-01-14
-draft: false
+type: file
 summary: journalctl
 ---
 

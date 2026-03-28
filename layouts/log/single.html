@@ -29,15 +29,7 @@
   </article>
 </div>
 
-<aside id="toc-window" class="toc">
-  <div class="toc-header" id="toc-header">
-    <span class="title open">&gt;&gt; &gt;&gt; &gt;&gt; TOC &lt;&lt; &lt;&lt; &lt;&lt;</span>
-    <span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;TOC&gt;&gt;&gt;&gt;&gt;&gt;</span>
-  </div>
-  <div class="toc-body" id="toc-body">
-    {{ .TableOfContents }}
-  </div>
-</aside>
+{{ partial "toc.html" . }}
 
 <script src="/js/toc-window.js" defer></script>
 <script src="/js/scrollspy.js" defer></script>

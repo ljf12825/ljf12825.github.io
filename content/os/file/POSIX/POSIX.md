@@ -2,7 +2,7 @@
 title: POSIX
 date: 2026-01-01
 summary: POSIX concept
-draft: false
+type: file
 ---
 
 # POSIX(Portable Operating System Interface)

@@ -1,7 +1,7 @@
 ---
-title: linux software download and install
+title: software download and install
 date: 2026-01-14
-draft: false
+type: file
 summary: pakage manager, binary
 ---
 

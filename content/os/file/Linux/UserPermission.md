@@ -1,7 +1,7 @@
 ---
 title: user and permission
 date: 2026-01-14
-draft: false
+type: file
 summary: user, usergroup, file permission, umask
 ---
 

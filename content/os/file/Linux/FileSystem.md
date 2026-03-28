@@ -1,7 +1,7 @@
 ---
-title: linux file system
+title: file system
 date: 2026-01-14
-draft: false
+type: file
 summary: linux files, permission, link
 ---
 

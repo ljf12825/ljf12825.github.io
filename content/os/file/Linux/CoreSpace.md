@@ -1,6 +1,6 @@
 ---
 title: core space
 date: 2026-01-14
-draft: false
+type: file
 summary: linux core space
 ---

@@ -1,7 +1,7 @@
 ---
 title: linux gui stack
 date: 2026-01-14
-draft: false
+type: file
 summary: DM, WM, DE, GTK, Qt, Electron
 ---
 

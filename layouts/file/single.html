@@ -2,15 +2,16 @@
   <link rel="stylesheet" href="{{ "css/single.css" | relURL }}">
 {{ end }}
 
-
 {{ define "main" }}
-<article class="single_article">
-  <div class="title">
-    {{ .Title }}
-    <div class="meta">
-      Modified: {{ .Lastmod.Format "2006-01-02" | default "N/A" }}
-      {{ with .Params.author }} | Author：{{ . }}{{ end }}
-    </div>
+
+<div class="layout">
+  <article class="single_article">
+    <div class="title">
+      {{ .Title }}
+      <div class="meta">
+        Modified: {{ .Lastmod.Format "2006-01-02" | default "N/A" }}
+        {{ with .Params.author }} || Author：{{ . }}{{ end }}
+      </div>
     </div>
 
     <div class="content">
@@ -19,20 +20,18 @@
 
     <nav class="post-nav">
       {{ with .NextInSection }}
-      <a href="{{ .RelPermalink }}" class="hover:underline">Up: {{ .Title }}</a>
+      <a href="{{ .RelPermalink }}">Up: {{ .Title }}</a>
       {{ end }}
       {{ with .PrevInSection }}
-      <a href="{{ .RelPermalink }}" class="hover:underline">Next: {{ .Title }}</a>
+      <a href="{{ .RelPermalink }}">Next: {{ .Title }}</a>
       {{ end }}
-  </nav>
-</article>
+    </nav>
+  </article>
+</div>
 
-<aside class = "toc">
-  <h3>TOC</h3>
-  {{ .TableOfContents }}
-</aside>
+{{ partial "toc.html" . }}
 
-<script defer src="{{ "js/scrollspy.js" | relURL }}"></script>
-
+<script src="/js/toc-window.js" defer></script>
+<script src="/js/scrollspy.js" defer></script>
 
 {{ end }}

@@ -1,7 +1,7 @@
 ---
-title: linux graphics card
+title: graphics card on linux
 date: 2026-01-14
-draft: false
+type: file
 summary: nvidia, amd, intel
 ---
 

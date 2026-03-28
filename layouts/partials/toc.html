@@ -1,0 +1,22 @@
+<aside 
+  id="toc-window" 
+  class="toc" 
+  aria-label="目录"
+  role="complementary"
+  data-state="expanded"
+>
+  <div 
+    class="toc-header" 
+    id="toc-header"
+    role="button"
+    tabindex="0"
+    aria-label="折叠/展开目录"
+    aria-expanded="true"
+  >
+    <span class="title open" aria-hidden="true">&gt;&gt; &gt;&gt; &gt;&gt; TOC &lt;&lt; &lt;&lt; &lt;&lt;</span>
+    <span class="title closed" aria-hidden="true">&lt;&lt;&lt;&lt;&lt;&lt;TOC&gt;&gt;&gt;&gt;&gt;&gt;</span>
+  </div>
+  <div class="toc-body" id="toc-body">
+    {{ .TableOfContents }}
+  </div>
+</aside>

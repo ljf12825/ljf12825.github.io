@@ -1,7 +1,7 @@
 ---
-title: linux command
+title: command
 date: 2026-01-14
-draft: false
+type: file
 summary: linux common command
 ---
 
