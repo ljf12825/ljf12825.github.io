@@ -8,9 +8,10 @@ type: home
 
 - Website Content Overview
 - Qucik Self-Introduction
-- Link
+- Contact Information Link
 - Full Reference
 - Full LISCENSE
+- RSS Link
 
 > GUIDE
 <div class="layout">
