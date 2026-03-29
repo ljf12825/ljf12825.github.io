@@ -1,4 +1,3 @@
 ---
-title: C
 type: file
 ---
