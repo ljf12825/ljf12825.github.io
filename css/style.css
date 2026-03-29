@@ -132,6 +132,11 @@ header .banner {
 	z-index: 9999;
 }
 
+.terminal-overlay a {
+	color: #c0c0c0;
+	text-decoration: none;
+}
+
 .cursor {
 	display: inline-block;
 	margin-left: 2px;
