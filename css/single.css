@@ -29,8 +29,7 @@
 .single_article {
   font-family: Arial, Helvetica, sans-serif;
   color: black;
-  max-width: 900px;
-  width: 100%;
+  width: 900px;
   margin: 0 auto;
   position: relative;
 }
