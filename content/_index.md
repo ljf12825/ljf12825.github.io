@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 ## MANUAL
 
-> edit at 20260317
+> edit at 2026-03-29
 
 ### Navigation
 
@@ -83,3 +83,5 @@ site will query your ip from api, and it used solely for display puerposes
 ![prompt](/images/prompt.png)
 
 there may be a delay from query
+
+it also supports breadcrumb navigation, you can click path to jump
