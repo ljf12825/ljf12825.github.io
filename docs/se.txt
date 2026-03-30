@@ -1,2 +1,9 @@
-- 软件工程基础
-  - 模块化、设计模式、测试、版本控制
+Software Engineering
+
+Software engineering is not merely the act of writing code — it is a disciplined approach to designing, building, and maintaining complex systems that are reliable, scalable, and maintainable over time.
+This module provides a structured overview of the foundational principles and practices that define modern software engineering.
+Beginning with the Software Development Lifecycle, it traces the full arc of a software project from requirements analysis through deployment and long-term maintenance.
+From there, it examines the core concepts that underpin sound engineering judgment — including process models, quality standards, and project management — before turning to the design principles and patterns that enable engineers to construct systems of lasting coherence.
+The later sections address the practical dimension of the discipline: the tools, frameworks, and workflows that translate engineering knowledge into working software.
+Finally, the module closes with a focus on quality assurance, security, and the often-overlooked craft of software evolution and refactoring.
+Taken together, these topics reflect a view of software engineering as both a technical and intellectual endeavor — one that demands rigor, adaptability, and a commitment to building things that work not just today, but well into the future.
