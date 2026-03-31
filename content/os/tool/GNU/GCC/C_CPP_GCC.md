@@ -586,6 +586,8 @@ gcc file1.c file2.c file3.c -o program
 gcc -c file1.c -o file1.o
 gcc -c file2.c -o file2.o
 gcc file1.o file2.o -o program
+
+# 方式3：Makefile
 ```
 
 #### 链接库文件
@@ -615,8 +617,124 @@ gcc/g++编译分为四个阶段
 
 ## gcc vs g++
 
+## Release & Debug
+
+GCC 本身没有Debug/Release模式，这是构建系统层面的概念
+
+GCC只有一堆编译选项，而Debug/Release只是这些选项的组合约定
+
+Debug/Release通常来自：CMake, Makefile, IDE，它们自己约定
+
+- Debug = 一组“好调试”的编译参数
+- Release = 一组“高性能”的编译参数
+
+GCC只关心三件事
+
+1. 是否生成调试信息
+2. 优化级别
+3. 宏控制行为
+
+所谓Debug/Release,就是这三者的组合
+
+- Debug = 有调试信息 + 低优化
+- Release = 无调试信息 + 高优化 + 关闭断言
+
+### 示例
+
+#### Debug
+
+```bash
+-g -O0
+```
+
+或者更现代的
+
+```bash
+-g -Og
+```
+
+特点
+
+- 有完整调试信息
+- 几乎不优化
+- 变量可见
+- 断点稳定
+
+#### Release
+
+```bash
+-O2 -DNDEBUG
+```
+
+特点：
+
+- 高优化（性能好）
+- 去掉调试信息
+- 去掉断言
 
 
+##### DNDEBUG
+
+```c
+#include <assert.h>
+
+assert(x > 0);
+```
+
+Debug:
+
+```bash
+-g
+```
+
+`assert`生效
+
+Release
+
+```bash
+-DNDEBUG
+```
+
+`assert`被优化掉
+
+```c
+// 等价于
+((void)0
+```
+
+### CMake行为
+
+在Cmake里
+
+```bash
+cmake -DCMAKE_BUILD_TYPE=Debug
+```
+
+等价于
+
+```bash
+-g
+```
+
+```bash
+cmake =DCMAKE_BUILD_TYPE=Release
+```
+
+等价于
+
+```bash
+-O3 -DNDEBUG
+```
+
+```bash
+cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo
+```
+
+等价于
+
+```bash
+-O2 -g
+```
 
 
 
