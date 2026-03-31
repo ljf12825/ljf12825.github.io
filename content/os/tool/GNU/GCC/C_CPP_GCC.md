@@ -169,7 +169,7 @@ gcc -Wall -Wextra -Werror main.c
 | 空函数体 | `void f(){}` | `empty body `(depends) |
 | 不完全初始化数组 | `int arr[5] = {1,2};` | `missing initializer for element 2` |
 | 多余的逗号 | `int arr[] = {1,2,};` | `extra comma` |
-| 隐式`int`转换 | `char c = 200;` | `oveerflow in implicit constant conversion` |
+| 隐式`int`转换 | `char c = 200;` | `overflow in implicit constant conversion` |
 | `return`没有值 | `int f(){}` | `control reaches end of non-void function` |
 
 不同版本GCC会有差异
@@ -469,6 +469,47 @@ gcc -g main.c -o main
 
 - 生成GDB专用增强调试信息
 - 比`-g`更GDB友好
+
+##### 增强调试能力的选项
+
+- `-fno-inline`
+  - 禁止函数内联，否则在GDB中打不到断点、无调用栈
+- `-fno-omit-frame-pointer`
+  - 推荐在linux下使用，可保留rbp(x86_64)，让GDB,perf,火焰图更加准确
+- `-fvar-tracking`
+  - 提高变量追踪能力
+- `-fvar-tracking-assignments`
+  - 更强的变量追踪
+
+##### 调试信息格式 DWARF
+
+```bash
+-gdwarf-4
+-gdwarf-5
+```
+
+DWARF是调试信息标准
+
+- v4版本：稳定
+- v5版本：更现代（压缩更好）
+
+##### Sanitizer
+
+###### AddressSanitizer
+
+```bash
+-fsanitize=address -g
+```
+
+检查越界，user-after-free, stack overflow
+
+###### UndefinedBehaviorSanitizer
+
+```bash
+-fsanitize=undefined -g
+```
+
+检测UB
 
 #### 优化与调试的关系
 
