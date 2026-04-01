@@ -1,28 +1,82 @@
 <nav id="star-nav">
+    {{- $all := .Site.RegularPages -}}
+    {{- $total := len $all -}}
+    {{- $recentCutoff := now.AddDate 0 -3 0 -}}
+    {{- $ctxPages := where $all "Section" "ctx" -}}
+    {{- $ctxRecent := len (where $ctxPages "Date" "ge" $recentCutoff) -}}
+    {{- $dnetPages := where $all "Section" "dnet" -}}
+    {{- $dnetRecent := len (where $dnetPages "Date" "ge" $recentCutoff) -}}
+    {{- $sePages := where $all "Section" "se" -}}
+    {{- $seRecent := len (where $sePages "Date" "ge" $recentCutoff) -}}
+    {{- $gpPages := where $all "Section" "gp" -}}
+    {{- $gpRecent := len (where $gpPages "Date" "ge" $recentCutoff) -}}
+    {{- $homePages := where $all "Section" "home" -}}
+    {{- $homeRecent := len (where $homePages "Date" "ge" $recentCutoff) -}}
+    {{- $ecoPages := where $all "Section" "eco" -}}
+    {{- $ecoRecent := len (where $ecoPages "Date" "ge" $recentCutoff) -}}
+    {{- $langPages := where $all "Section" "lang" -}}
+    {{- $langRecent := len (where $langPages "Date" "ge" $recentCutoff) -}}
+    {{- $osPages := where $all "Section" "os" -}}
+    {{- $osRecent := len (where $osPages "Date" "ge" $recentCutoff) -}}
+    {{- $netPages := where $all "Section" "net" -}}
+    {{- $netRecent := len (where $netPages "Date" "ge" $recentCutoff) -}}
+    {{- $csfPages := where $all "Section" "csf" -}}
+    {{- $csfRecent := len (where $csfPages "Date" "ge" $recentCutoff) -}}
+    
     <div id="star-header">
         <span class="title open">&gt;&gt; &gt;&gt; &gt;&gt; Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
         <span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav&gt;&gt;&gt;&gt;&gt;&gt;</span>
     </div>
-    <pre class="ascii">
-+——————————————————————————————————————————+
-|                   <a class="nav-item" data-path="/ctx/" href="{{ "/ctx/" | relURL }}">CTX</a>                    |
-|                    |                     |
-|                    |   <a class="nav-item" data-path="/dnet/" href="{{ "/dnet/" | relURL }}">.NET</a>              |
-|                    |    /                |
-|                    |   /                 |
-|                    |  /                  |
-|         <a class="nav-item" data-path="/se/" href="{{ "/se/" | relURL }}">SE</a>         | /                   |
-|          \         |/                    |
-|  <a class="nav-item" data-path="/gp/" href="{{ "/gp/" | relURL }}">GP</a> ——————\————— <a class="nav-item" data-path="/home/" href="{{ "/home/" | relURL }}">Home</a> ————————————— <a class="nav-item" data-path="/eco/" href="{{ "/eco/" | relURL }}">ECO</a>  |
-|            \      /|\                    |
-|             \    / | \  <a class="nav-item" data-path="/lang/" href="{{ "/lang/" | relURL }}">Lang</a>             |
-|              \  /  |  \  /               |
-|               \/   |   \/                |
-|               /\   |   /\                |
-|              /  \  |  /  \               |
-|            <a class="nav-item" data-path="/os/" href="{{ "/os/" | relURL }}">OS</a>    \ | /   <a class="nav-item" data-path="/net/" href="{{ "/net/" | relURL }}">NET</a>             |
-|                   \|/                    |
-|                   <a class="nav-item" data-path="/csf/" href="{{ "/csf/" | relURL }}">CSF</a>                    |
-+——————————————————————————————————————————+
-    </pre>
+    
+    <div class="star-body">
+        <div class="nav-row">
+            <a class="nav-item" data-label="CTX" data-path="/ctx/" data-article-count="{{ len $ctxPages }}" data-recent-count="{{ $ctxRecent }}" data-total-count="{{ $total }}" href="{{ "/ctx/" | relURL }}">CTX</a>
+            <span class="nav-stats"></span>
+        </div>
+        
+        <div class="nav-row">
+            <a class="nav-item" data-label=".NET" data-path="/dnet/" data-article-count="{{ len $dnetPages }}" data-recent-count="{{ $dnetRecent }}" data-total-count="{{ $total }}" href="{{ "/dnet/" | relURL }}">.NET</a>
+            <span class="nav-stats"></span>
+        </div>
+        
+        <div class="nav-row">
+            <a class="nav-item" data-label="GP" data-path="/gp/" data-article-count="{{ len $gpPages }}" data-recent-count="{{ $gpRecent }}" data-total-count="{{ $total }}" href="{{ "/gp/" | relURL }}">GP</a>
+            <span class="nav-stats"></span>
+        </div>
+
+        <div class="nav-row">
+            <a class="nav-item" data-label="ECO" data-path="/eco/" data-article-count="{{ len $ecoPages }}" data-recent-count="{{ $ecoRecent }}" data-total-count="{{ $total }}" href="{{ "/eco/" | relURL }}">ECO</a>
+            <span class="nav-stats"></span>
+        </div>
+        
+        <div class="nav-row">
+            <a class="nav-item" data-label="Home" data-path="/home/" data-article-count="{{ len $homePages }}" data-recent-count="{{ $homeRecent }}" data-total-count="{{ $total }}" href="{{ "/home/" | relURL }}">Home</a>
+            <span class="nav-stats"></span>
+        </div>
+                
+        <div class="nav-row">
+            <a class="nav-item" data-label="SE" data-path="/se/" data-article-count="{{ len $sePages }}" data-recent-count="{{ $seRecent }}" data-total-count="{{ $total }}" href="{{ "/se/" | relURL }}">SE</a>
+            <span class="nav-stats"></span>
+        </div>
+        
+        <div class="nav-row">
+            <a class="nav-item" data-label="Lang" data-path="/lang/" data-article-count="{{ len $langPages }}" data-recent-count="{{ $langRecent }}" data-total-count="{{ $total }}" href="{{ "/lang/" | relURL }}">Lang</a>
+            <span class="nav-stats"></span>
+        </div>
+        
+        <div class="nav-row">
+            <a class="nav-item" data-label="OS" data-path="/os/" data-article-count="{{ len $osPages }}" data-recent-count="{{ $osRecent }}" data-total-count="{{ $total }}" href="{{ "/os/" | relURL }}">OS</a>
+            <span class="nav-stats"></span>
+        </div>
+        
+        <div class="nav-row">
+            <a class="nav-item" data-label="NET" data-path="/net/" data-article-count="{{ len $netPages }}" data-recent-count="{{ $netRecent }}" data-total-count="{{ $total }}" href="{{ "/net/" | relURL }}">NET</a>
+            <span class="nav-stats"></span>
+        </div>
+        
+        <div class="nav-row">
+            <a class="nav-item" data-label="CSF" data-path="/csf/" data-article-count="{{ len $csfPages }}" data-recent-count="{{ $csfRecent }}" data-total-count="{{ $total }}" href="{{ "/csf/" | relURL }}">CSF</a>
+            <span class="nav-stats"></span>
+        </div>
+    </div>
 </nav>
