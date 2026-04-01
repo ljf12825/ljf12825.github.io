@@ -1,8 +1,9 @@
 ---
 title: C/C++ GCC
-date: 2026-03-28
+date: 2026-04-01
 author: ljf12825
 summary: Usage of GCC in C/C++ Project
+type: file
 ---
 
 ## 基本概念
@@ -592,15 +593,116 @@ gcc file1.o file2.o -o program
 
 #### 链接库文件
 
+##### 链接静态库(.a)
+
 ```bash
-# 链接数学库
-gcc program.c -o program -lm
+gcc -o program mani.c -L库路径 -l库名
+```
 
-# 链接pthread线程库
-g++ program.cpp -o program -lpthread
+- `-L`：指定库文件所在的目录
+- `-l`：指定库名（去掉前缀`lib`和后缀`.a`）
+- 多个库可以多次使用`-l`：`-lmath_utils -lm -lpthread`
 
-# 指定库路径
-g++ program.cpp -o program -L/path/to/lib -lmylib
+##### 链接动态库(.so)
+
+编译时链接
+
+```bash
+# 基本语法（同静态库）
+gcc -o program main.c -L库路径 -l库名
+```
+
+运行时需要指定库路径，动态库需要在运行时能找到，有三种方法
+
+###### 设置LD_LIBRARY_PATH 环境变量
+
+```bash
+# 临时设置
+LD_LIBRARY_PATH=./lib ./program
+
+# 或者导出环境变量
+export LD_LIBRARY_PATH=./lib:$LD_LIBRARY_PATH
+./program
+```
+
+###### 编译时指定rpath
+
+```bash
+# 使用$ORIGIN 表示可执行文件所在目录
+gcc -o program main.c -L./lib -lmath_utils -Wl, -rpath, '$ORIGIN/lib'
+
+# 或者使用绝对路径
+gcc -o program main.c -L./lib -lmath_utils -Wl,-rpath=/path/tp/lib
+
+# 多个rpath
+gcc -o program main.c -L./lib -lmath_utils -Wl,-rpath,'$ORIGIN/lib:/usr/local/lib'
+```
+
+###### 将库安装到系统路径
+
+```bash
+# 复制到系统库目录（需要root权限）
+sudo cp lib/libmath_utils.so /usr/local/lib/
+sudo ldconfig # 更新库缓存
+
+# 然后直接运行
+./program
+```
+
+##### 优先级和搜索顺序
+
+###### 库搜索顺序
+
+1. `-L`指定的目录
+2. 环境变量`LIBRARY_PATH`（编译时）
+3. 系统默认目录(`/lib`, `/usr/lib`, `/usr/local/lib`)
+
+###### 动态库运行时搜索顺序
+
+1. `LD_LIBRARY_PATH`环境变量
+2. `rpath`编译时指定的路径
+3. `runpath`编译时指定的路径
+4. 系统默认目录
+5. `/etc/ld.so.conf`配置的目录
+
+##### 示例
+
+项目结构
+
+```text
+link-compile
+|-- include/
+|      |__ math_utils.h # 库头文件
+|-- src/
+|    |-- math_utils.c # 库源码
+|    |__ add.c # 额外功能
+|-- main.c # 测试程序
+|-- Makefile # 编译脚本
+|__ lib/ # 生成的库文件（编译后）
+```
+
+指令
+
+```bash
+# 编译库源文件为目标文件
+gcc -c -Iinclude src/math_utils.c -o src/math/utils.o
+gcc -c -Iinclude src/add.c -o src/add.o
+
+# 创建静态库
+ar rcs lib/libmath_utils.a src/math_utils.o src/add.o
+
+# 编译主程序并链接静态库
+gcc -o program main.c -Iinclude -Llib -lmath_utils
+
+# 或
+# 创建动态库
+gcc -shared -o lib/libmath_utils.so src/math_utils.o src/add.o
+
+# 编译主程序并链接动态库
+gcc -o program main.c -Iinclude -Llib -lmath_utils
+
+# 运行（需要指定库路径）
+LD_LIBRARY_PATH=./lib ./program
 ```
 
 #### 包含头文件
@@ -736,6 +838,9 @@ cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo
 -O2 -g
 ```
 
+## 静态库
+
+## 动态库
 
 
 
