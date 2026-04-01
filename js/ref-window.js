@@ -29,6 +29,10 @@
     win.classList.add("closed");
   }
 
+  requestAnimationFrame(() => {
+    applyPosition(win.offsetLeft, win.offsetTop);
+  });
+
   function start(x, y) {
     isDown = true;
     startX = x;
@@ -37,12 +41,32 @@
     oy = y - win.offsetTop;
   }
 
-  function move(x, y) {
-    if (!isDown) return;
-    win.style.left = (x - ox) + "px";
-    win.style.top  = (y - oy) + "px";
+  function clampToViewport(left, top) {
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+    const elementWidth = win.offsetWidth;
+    const elementHeight = win.offsetHeight;
+    
+    const maxLeft = Math.max(0, windowWidth - elementWidth);
+    const maxTop = Math.max(0, windowHeight - elementHeight);
+    
+    return {
+      left: Math.min(Math.max(left, 0), maxLeft),
+      top: Math.min(Math.max(top, 0), maxTop)
+    };
+  }
+
+  function applyPosition(left, top) {
+    const clamped = clampToViewport(left, top);
+    win.style.left = clamped.left + "px";
+    win.style.top = clamped.top + "px";
     win.style.right = "auto";
     win.style.bottom = "auto";
+  }
+
+  function move(x, y) {
+    if (!isDown) return;
+    applyPosition(x - ox, y - oy);
   }
 
   function end(x, y) {
@@ -66,6 +90,10 @@
     localStorage.setItem("ref-collapse",
       win.classList.contains("closed") ? "1" : "0"
     );
+    
+    setTimeout(() => {
+      applyPosition(win.offsetLeft, win.offsetTop);
+    }, 0);
   }
 
   header.addEventListener("mousedown", e => {
@@ -90,5 +118,9 @@
   document.addEventListener("touchend", e => {
     const t = e.changedTouches[0];
     end(t.clientX, t.clientY);
+  });
+
+  window.addEventListener("resize", () => {
+    applyPosition(win.offsetLeft, win.offsetTop);
   });
 })();
