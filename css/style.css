@@ -413,11 +413,23 @@ ol {
   border-bottom: 2px solid #ffffff;
 }
 
-#star-nav pre {
-	margin: 0;
-	padding: 4px 6px;
-	line-height: 1.05;
-	white-space: pre;
+#star-nav .star-body {
+  margin: 0;
+  padding: 6px 8px;
+  min-width: 280px;
+}
+
+#star-nav .nav-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  line-height: 1.2;
+}
+
+#star-nav .nav-stats {
+  color: #333;
+  font-size: 0.85em;
+  white-space: nowrap;
 }
 
 #star-nav.collapse {
@@ -426,12 +438,28 @@ ol {
   height: auto;
 }
 
-#star-nav.collapse pre {
+#star-nav.collapse .star-body {
   display: none;
 }
 
 #star-nav.collapse #star-header {
   margin: 0;
+}
+
+#star-nav .nav-item.activity-high {
+  color: #ff0000;
+}
+
+#star-nav .nav-item.activity-medium {
+  color: #ff00ff;
+}
+
+#star-nav .nav-item.activity-low {
+  color: #00ffff;
+}
+
+#star-nav .nav-item.activity-idle {
+  color: #0000ff;
 }
 
 #start-nav .nav-item.active {
