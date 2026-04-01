@@ -10,6 +10,7 @@
   let isDown = false;
   let ox = 0, oy = 0;
   let lastTap = 0;
+  let startX = 0, startY = 0;
 
   const pos = JSON.parse(localStorage.getItem("star-pos"));
   if (pos) {
@@ -23,18 +24,37 @@
     nav.classList.add("collapse");
   }
 
+  function clampToViewport(left, top) {
+    const navWidth = nav.offsetWidth;
+    const navHeight = nav.offsetHeight;
+    const maxLeft = Math.max(0, window.innerWidth - navWidth);
+    const maxTop = Math.max(0, window.innerHeight - navHeight);
+
+    return {
+      left: Math.min(Math.max(left, 0), maxLeft),
+      top: Math.min(Math.max(top, 0), maxTop)
+    };
+  }
+
+  function applyPosition(left, top) {
+    const clamped = clampToViewport(left, top);
+    nav.style.left = clamped.left + "px";
+    nav.style.top = clamped.top + "px";
+    nav.style.right = "auto";
+    nav.style.bottom = "auto";
+  }
+
   function start(x, y) {
     isDown = true;
+    startX = x;
+    startY = y;
     ox = x - nav.offsetLeft;
     oy = y - nav.offsetTop;
   }
 
   function move(x, y) {
     if (!isDown) return;
-    nav.style.left = (x - ox) + "px";
-    nav.style.top  = (y - oy) + "px";
-    nav.style.right = "auto";
-    nav.style.bottom = "auto";
+    applyPosition(x - ox, y - oy);
   }
 
   function end() {
@@ -46,7 +66,10 @@
     }));
   }
 
-  header.addEventListener("mousedown", e => start(e.clientX, e.clientY));
+  header.addEventListener("mousedown", e => {
+    e.preventDefault();
+    start(e.clientX, e.clientY);
+  });
   document.addEventListener("mousemove", e => move(e.clientX, e.clientY));
   document.addEventListener("mouseup", end);
 
@@ -75,6 +98,10 @@
   }
 
   header.addEventListener("dblclick", toggle);
+
+  window.addEventListener("resize", () => {
+    applyPosition(nav.offsetLeft, nav.offsetTop);
+  });
 
   console.log("★ star-nav mobile ready");
 })();

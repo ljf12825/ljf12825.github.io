@@ -13,6 +13,11 @@
     
     console.log('TOC Window: Initialized');
     
+    let isDragging = false;
+    let ox = 0, oy = 0;
+    let startX = 0, startY = 0;
+    let lastTap = 0;
+    
     let initialHeight = null;
     let initialBodyHeight = null;
     
@@ -60,107 +65,118 @@
       }
     }
     
-    let isDragging = false;
-    let startMouseX = 0, startMouseY = 0;
-    let startWindowLeft = 0, startWindowTop = 0;
-    let clickCount = 0;
-    let clickTimer = null;
-    
-    if (tocHeader) {
-      tocHeader.addEventListener('mousedown', onMouseDown);
-      document.addEventListener('mousemove', onMouseMove);
-      document.addEventListener('mouseup', onMouseUp);
+    function clampToViewport(left, top) {
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+      const elementWidth = tocWindow.offsetWidth;
+      const elementHeight = tocWindow.offsetHeight;
+      
+      const maxLeft = Math.max(0, windowWidth - elementWidth);
+      const maxTop = Math.max(0, windowHeight - elementHeight);
+      
+      return {
+        left: Math.min(Math.max(left, 0), maxLeft),
+        top: Math.min(Math.max(top, 0), maxTop)
+      };
     }
     
-    function onMouseDown(e) {
-      startMouseX = e.clientX;
-      startMouseY = e.clientY;
-      
-      const rect = tocWindow.getBoundingClientRect();
-      startWindowLeft = rect.left;
-      startWindowTop = rect.top;
-      
-      isDragging = true;
-      tocWindow.style.cursor = 'grabbing';
-      e.preventDefault();
-    }
-    
-    function onMouseMove(e) {
-      if (!isDragging) return;
-      
-      const deltaX = e.clientX - startMouseX;
-      const deltaY = e.clientY - startMouseY;
-      
-      let newLeft = startWindowLeft + deltaX;
-      let newTop = startWindowTop + deltaY;
-      
-      newLeft = Math.max(10, Math.min(window.innerWidth - tocWindow.offsetWidth - 10, newLeft));
-      newTop = Math.max(60, Math.min(window.innerHeight - tocWindow.offsetHeight - 20, newTop));
-      
-      tocWindow.style.left = newLeft + 'px';
-      tocWindow.style.top = newTop + 'px';
+    function applyPosition(left, top) {
+      const clamped = clampToViewport(left, top);
+      tocWindow.style.left = clamped.left + 'px';
+      tocWindow.style.top = clamped.top + 'px';
       tocWindow.style.right = 'auto';
+      tocWindow.style.bottom = 'auto';
     }
     
-    function onMouseUp(e) {
-      if (!isDragging) {
-        return;
-      }
-      
+    function start(x, y) {
+      isDragging = true;
+      startX = x;
+      startY = y;
+      ox = x - tocWindow.offsetLeft;
+      oy = y - tocWindow.offsetTop;
+      tocWindow.style.cursor = 'grabbing';
+      tocWindow.style.transition = 'none';
+    }
+    
+    function move(x, y) {
+      if (!isDragging) return;
+      const newLeft = x - ox;
+      const newTop = y - oy;
+      applyPosition(newLeft, newTop);
+    }
+    
+    function end(x, y) {
+      if (!isDragging) return;
       isDragging = false;
       tocWindow.style.cursor = '';
+      tocWindow.style.transition = '';
       
-      const deltaX = e.clientX - startMouseX;
-      const deltaY = e.clientY - startMouseY;
-      const moved = Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5;
+      localStorage.setItem("toc-pos", JSON.stringify({
+        x: tocWindow.offsetLeft,
+        y: tocWindow.offsetTop
+      }));
       
-      if (!moved) {
-        clickCount++;
-        
-        if (clickCount === 1) {
-          clickTimer = setTimeout(() => {
-            clickCount = 0;
-            clickTimer = null;
-          }, 250);
-        } else if (clickCount === 2) {
-          clearTimeout(clickTimer);
-          toggleCollapse();
-          clickCount = 0;
-          clickTimer = null;
-        }
-      } else {
-        savePosition();
-        clickCount = 0;
-        if (clickTimer) {
-          clearTimeout(clickTimer);
-          clickTimer = null;
-        }
+      const dist = Math.hypot(x - startX, y - startY);
+      const now = Date.now();
+      
+      if (dist < 6 && now - lastTap < 300) {
+        toggleCollapse();
       }
-    }
-    
-    function savePosition() {
-      const left = tocWindow.style.left;
-      const top = tocWindow.style.top;
-      if (left && top && left !== 'auto' && top !== 'auto') {
-        localStorage.setItem('tocPosition', JSON.stringify({ left, top }));
-      }
+      lastTap = now;
     }
     
     function loadPosition() {
-      const saved = localStorage.getItem('tocPosition');
+      const saved = localStorage.getItem('toc-pos');
       if (saved) {
         try {
           const pos = JSON.parse(saved);
-          if (pos.left && pos.top) {
-            tocWindow.style.left = pos.left;
-            tocWindow.style.top = pos.top;
-            tocWindow.style.right = 'auto';
-          }
+          applyPosition(pos.x, pos.y);
         } catch(e) {
           console.warn('Failed to load TOC position:', e);
+          applyPosition(20, 120);
         }
+      } else {
+        applyPosition(20, 120);
       }
     }
+    
+    if (tocHeader) {
+      tocHeader.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        start(e.clientX, e.clientY);
+      });
+    }
+    
+    document.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      move(e.clientX, e.clientY);
+    });
+    
+    document.addEventListener('mouseup', (e) => {
+      if (!isDragging) return;
+      end(e.clientX, e.clientY);
+    });
+    
+    if (tocHeader) {
+      tocHeader.addEventListener('touchstart', (e) => {
+        const t = e.touches[0];
+        start(t.clientX, t.clientY);
+      }, { passive: false });
+    }
+    
+    document.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const t = e.touches[0];
+      move(t.clientX, t.clientY);
+    }, { passive: false });
+    
+    document.addEventListener('touchend', (e) => {
+      if (!isDragging) return;
+      const t = e.changedTouches[0];
+      end(t.clientX, t.clientY);
+    });
     
     const wasCollapsed = localStorage.getItem('tocCollapsed') === 'true';
     if (wasCollapsed && tocWindow) {
@@ -170,8 +186,18 @@
     adjustTocHeight();
     loadPosition();
     
-    window.addEventListener('resize', resetAndAdjustHeight);
-    window.addEventListener('beforeunload', savePosition);
+    window.addEventListener('resize', () => {
+      resetAndAdjustHeight();
+      const currentLeft = parseFloat(tocWindow.style.left);
+      const currentTop = parseFloat(tocWindow.style.top);
+      if (!isNaN(currentLeft) && !isNaN(currentTop)) {
+        applyPosition(currentLeft, currentTop);
+        localStorage.setItem("toc-pos", JSON.stringify({
+          x: tocWindow.offsetLeft,
+          y: tocWindow.offsetTop
+        }));
+      }
+    });
   }
   
   if (document.readyState === 'loading') {
