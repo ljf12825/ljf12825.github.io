@@ -161,7 +161,83 @@ alias ll='ls -l'
 ```bash
 unalias ll
 ```
-- `export`：设置或显示环境变量
+#### `export`
+
+`export`是一个Shell内置命令，它的核心作用是：将变量设置为环境变量，使其能够被当前Shell启动的任何子进程（子Shell、脚本、其他命令）继承和使用
+
+##### 基本用法
+
+```bash
+# 先定义一个普通变量（Shell变量，只在当前Shell有效）
+MY_VAR="hello"
+
+# 导出为环境变量
+export MY_VAR
+
+# 或者定义的同时导出
+export MY_VAR="hello"
+```
+
+##### 主要区别
+
+| 类型 | 定义方式 | 作用范围 | 子进程是否能看到 |
+| - | - | - | - |
+| Shell 变量 | `VAR=value` | 仅当前Shell | 不能 |
+| 环境变量 | `export VAR=value` | 当前Shell及所有子进程 | 能 |
+
+```bash
+# 定义普通变量
+A=123
+
+# 定义并导出环境变量
+export B=456
+
+# 运行一个子 Shell
+bash
+
+# 在子Shell中
+echo $A # 输出空（看不到 A）
+echo $B # 输出 456 （能看到 B）
+exit # 退出子 Shell
+```
+
+##### 常见使用场景
+
+- 让子进程获得配置：如设置`PATH`, `JAVA_HOME`, `PYTHONPATH`
+
+```bash
+export PATH=$PATH:/my/custom/bin
+```
+
+- 临时设置程序运行参数：如让`npm`使用代理
+
+```bash
+export HTTP_PROXY=http://proxy.example.com:8080
+```
+
+- 在脚本中导出变量，以便被调用的其他脚本或命令使用
+
+##### 查看与删除
+
+```bash
+# 查看所有环境变量
+export
+
+# 或
+env
+
+# 删除一个环境变量
+unset MY_VAR
+```
+
+##### 特别注意
+
+- `export`只影响当前Shell及未来启动的子进程，不会影响父Shell或其他已运行的Shell
+- 想要永久生效，需要将`export`命令写入配置文件，如`~/.bashrc`, `~/.zshrc`或`~/.profile`
+- 在子进程中修改`export`的变量，不会传回父进程
+
+---
+
 - `unset`：删除环境变量或Shell变量
 - `env`：查看环境变量
 - `set`：设置Shell变量和显示当前Shell环境的所有变量
@@ -1631,6 +1707,58 @@ Git内部是优化版
 - `xargs`：批量传递参数
 - `awk`：文本处理利器
 - `sed`：流编辑器，做文本替换、删除
+
+## 显示文件树
+
+#### `tree`
+
+这是最简单最通用的方案，一般Linux环境有，没有就`apt install tree`
+
+##### 常用参数
+
+```bash
+tree
+tree -L 2 # 限制深度
+tree -a # 包含隐藏文件
+tree -I "build" # 忽略目录
+tree > tree.txt # 导出到文件
+```
+
+### `treel`
+
+- Python CLI
+- 支持颜色、排序、大小、导出等
+
+```bash
+pip install treel
+treel -d 2
+```
+
+比tree现代
+
+### `treely`
+
+- 支持`.gitignore`
+- 还能输出代码内容
+
+### `tree-node-cli`
+
+```bash
+npx tree-node-cli
+```
+
+- 类似`tree`
+- 支持Node项目
+
+### `tree-maker-cli`
+
+```bash
+pip install tree-maker-cli
+tree-maker .
+```
+
+- 可导出
+- 支持过滤/深度
 
 ## 网络相关
 - `ping`：测试网络
