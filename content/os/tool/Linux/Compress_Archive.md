@@ -1,6 +1,6 @@
 ---
 title: compress & archive
-date: 2026-01-14
+date: 2026-04-03
 type: file
 summary: .gz .bz2 .xz .zip .tar
 ---
@@ -95,6 +95,12 @@ unzip -l archive.zip # 查看内容
 unzip -d target_dir archive.zip # 解压到指定目录
 ```
 
+zip可以同时打包和压缩目录，但在Linux生态中会导致丢失关键信息：
+
+- 文件权限被修改（丢失原始权限）
+- 所有者信息破坏
+- 硬链接被破坏
+
 ### 其他压缩工具
 
 需要安装
@@ -105,6 +111,65 @@ unzip -d target_dir archive.zip # 解压到指定目录
 ## 归档工具`tar`
 
 `tar`主要用途是将多个文件/目录打包成一个文件
+
+1979年，tar在Unix V7中引入，用于磁带备份
+
+既然有gzip, xz等压缩工具，为什么还需要tar
+
+核心原因：压缩工具不擅长处理目录，gzip, xz, bzip2等压缩文件只能压缩单个文件，不能直接压缩目录
+
+```bash
+# 这些命令会报错或只处理单个文件
+gzip myfolder/
+gzip: myfolder/ is a directory -- ignored
+
+xz myfolder/
+xz: myfolder/: Is a directory, skipping
+```
+
+tar的作用：打包 + 保留元数据
+
+tar = Tape ARchive（磁带归档），最初设计用于磁带备份。它的核心功能是
+
+1. 将多个文件/目录合并成单个文件流
+2. 保留文件元数据（权限、所有者、时间戳、目录结构）
+3. 支持追加、增量备份等操作
+
+```bash
+# 压缩一个目录下的所有文件（每个文件独立压缩），不能包含文件夹
+$ xz folder/*
+$ ls folder/
+file1.txt.xz file2.txt.xz
+
+# 解压时需要分别处理
+xz -d test/*.xz
+# 可能导致元数据丢失
+```
+
+使用tar先打包
+
+```bash
+# 打包并压缩（常用组合）
+$ tar -czf archive.tar.gz folder/
+# -c: 创建归档
+# -z: 通过 gzip 压缩
+# -f: 指定归档文件
+
+# 一个命令完成打包+压缩，一个命令完成解压+解包
+$ tar -xzf archive.tar.gz
+# 完整恢复：目录结构、权限、时间戳全部保留
+```
+
+tar的独特优势
+
+- 保留权限（755/644）
+- 保留所有者（uid/gid）
+- 保留硬链接
+- 保留符号链接
+- 保留时间戳
+- 增量备份
+- 追加文件到已有归档
+- 跨多卷磁带/磁盘
 
 ### 常用组合
 
@@ -121,6 +186,15 @@ tar -xJvf archive.tar.xz # 解压.xz
 
 # 仅查看内容不解压
 tar -tzvf archive.tar.gz
+
+# 查看归档内容（不解压）
+tar -tf archive.tar.gz
+
+# 解压到指定目录
+tar -xzf archive.tar.gz -C /target/path/
+
+# 只打包，不压缩（速度最快）
+tar-cf archive.tar folder/
 ```
 
 ### 参数
@@ -133,20 +207,3 @@ tar -tzvf archive.tar.gz
 - `-v`：显示详细信息
 - `-f`：指定文件名
 - `-t`：列出归档内容
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
