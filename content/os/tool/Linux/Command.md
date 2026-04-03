@@ -1,6 +1,6 @@
 ---
 title: command
-date: 2026-01-14
+date: 2026-04-03
 type: file
 summary: linux common command
 ---
@@ -1531,7 +1531,6 @@ touch -r source.txt target.txt
 1. 如果文件不存在 -> `open(0_CREAT)`
 2. 如果存在 -> `utime / utimensat` 修改inode时间戳
 
-
 ### `diff`
 
 `diff`用来比较两个文件（或目录），输出它们之间的差异(difference)
@@ -1760,7 +1759,139 @@ tree-maker .
 - 可导出
 - 支持过滤/深度
 
+---
+
+## `file`
+
+`file`命令用于检测文件类型，在Linux中，文件不依赖扩展名来标识类型，`file`命令通过读取文件内容（如文件头、魔术数字等）来判断实际类型
+
+```bash
+file [option] filename
+```
+
+| 选项 | 说明 |
+| - | - |
+| `-b` | 不显示文件名，只显示类型 |
+| `-i` | 显示MIME类型（如`text/plain`）|
+| `-z` | 查看压缩文件内部 |
+| `-L` | 追踪符号链接的原文件 |
+| `-f` | 从文件读取要检测的文件列表 |
+| `-s` | 读取块设备或特殊文件 |
+
+### 示例
+
+基本用法
+
+```bash
+$ file example.txt
+example.txt: ASCII text
+
+$ file srcipt.sh
+srcipt.sh: Bourne-Again shell srcipt, ASCII text executable
+
+$ file image.jpg
+image.jpg: JPEG image data, JFIF standard 1.01
+
+$ file /bin/ls
+/bin/ls: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=daa5130f2a41f7fbc8662048f3294f3d439ca7ff, for GNU/Linux 3.2.0, stripped
+```
+
+不显示文件名
+
+```bash
+$ file -b example.txt
+ASCII text
+```
+
+显示MIME类型
+
+```bash
+$ file -i example.txt
+example.txt: text/plain; charset=us-ascii
+
+$ file -i image.png
+image.png: image/png; charset=binary
+```
+
+查看压缩文件内容
+
+```bash
+$ file -z archive.tar.gz
+archive.tar.gz: POSIX tar archive (GNU) (gzip compress data, from Unix)
+```
+
+批量检测
+
+```bash
+$ file *
+```
+
+### 工作原理
+
+file和文件后缀完全不同
+
+```bash
+mv test.txt test.jpg
+file test.jpg
+```
+
+输出
+
+```
+test.jpg: ASCII text
+```
+
+`file`不相信扩展名，只相信内容
+
+`file`的判断逻辑主要靠
+
+1. Magic Number
+2. 文本检测
+3. 特殊格式解析
+
+#### Magic Number
+
+魔术数字是文件开头的特定字节序列
+
+| 文件格式 | 魔术数字（开头字节）| ASCII表示 |
+| - | - | - |
+| PNG | `89 50 4E 47 0D 0A 1A 0A` | `‰PNG␍␊␚␊` |
+| JPEG | `FF D8 FF` | `ÿØÿ` |
+| PDF | `25 50 44 46` | `%PDF` |
+| ELF | `7F 45 4C 46` | `␇ELF` |
+| ZIP | `50 4B 03 04` | `PK␃␄` |
+| GZIP | `1F 8B` | - |
+| BMP |`42 4D` | `BM` |
+| MP3 | `FF FB` 或 `49 44 33` | `ÿû` 或 `ID3` |
+
+`file`会读取头文件，然后匹配这些规则
+
+这些规则定义在
+
+```bash
+/usr/share/misc/magic
+```
+
+#### 文本检测
+
+如果不是已知二进制，就判断是不是：
+
+- ASCII
+- UTF-8
+- Unicode
+
+#### 特殊格式解析
+
+它还能识别
+
+- 压缩文件(zip, gzip)
+- 可执行文件(ELF)
+- 脚本(bash/python)，通过shebang
+
+---
+
 ## 网络相关
+
 - `ping`：测试网络
 - `curl`/`wget`：下载文件、调接口
 - `scp`：跨机器复制文件
