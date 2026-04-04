@@ -1,0 +1,168 @@
+<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>Abstract Command</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-lua.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-rust.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/single.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/os/>★</a></li><li><a href=/os/lab/>Lab</a></li><li><a href=/os/log/>Log</a></li><li><a href=/os/tool/>Tool</a></li><li><a href=/os/posix/>POSIX</a></li><li><a href=/os/c/>C</a></li><li><a href=/os/as/>Assembly</a></li><li><a href=/os/theory/>Theory</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><div class=star-body><div class=nav-row><a class=nav-item data-label=CTX data-path=/ctx/ data-article-count=2 data-recent-count=1 data-total-count=419 href=/ctx/>CTX</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=.NET data-path=/dnet/ data-article-count=28 data-recent-count=3 data-total-count=419 href=/dnet/>.NET</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=GP data-path=/gp/ data-article-count=1 data-recent-count=1 data-total-count=419 href=/gp/>GP</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=ECO data-path=/eco/ data-article-count=88 data-recent-count=0 data-total-count=419 href=/eco/>ECO</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=Home data-path=/home/ data-article-count=5 data-recent-count=5 data-total-count=419 href=/home/>Home</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=SE data-path=/se/ data-article-count=46 data-recent-count=1 data-total-count=419 href=/se/>SE</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=Lang data-path=/lang/ data-article-count=36 data-recent-count=36 data-total-count=419 href=/lang/>Lang</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=OS data-path=/os/ data-article-count=158 data-recent-count=34 data-total-count=419 href=/os/>OS</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=NET data-path=/net/ data-article-count=7 data-recent-count=1 data-total-count=419 href=/net/>NET</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=CSF data-path=/csf/ data-article-count=48 data-recent-count=4 data-total-count=419 href=/csf/>CSF</a>
+<span class=nav-stats></span></div></div></nav><script defer src=/js/star-nav.js></script><script defer src=/js/site.js></script><script defer src=/js/star-active.js></script><div id=ref-window class="float-window open"><div class=float-header><span class="title open">>> >> >> Reference &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Ref>>>>>></span></div><div class=float-body><div class=ref-list><a href=https://www.mixamo.com/ target=_blank>Mixamo</a> |
+<a href=https://opengameart.org/ target=_blank>OpenGameArt</a><p><a href=https://sharplab.io/ target=_blank>SharpLab</a> |
+<a href=https://godbolt.org/ target=_blank>Compiler Explorer</a></p><p><a href="https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type+Something+&x=none&v=4&h=4&w=80&we=false" target=_blank>ASCII Graph Generator</a></p><p><a href=https://mermaid.js.org/ target=_blank>Mermaid</a></p><a href=https://www.vim.org/ target=_blank>Vim</a> | <a href=https://vimdoc.sourceforge.net/ target=_blank>Vim Manual Source</a> |
+<a href=https://vimcdoc.sourceforge.net/ target=_blank>Vimcdoc</a> | <a href=https://vimcdoc.sourceforge.net/doc/help.html target=_blank>Vimdoc read online</a><p><a href=https://shields.io/ target=_blank>Shields.io</a></p><p><a href=https://emojidb.org/ target=_blank>EmojiDB</a></p><p><a href=https://cppreference.com/ target=_blank>cppreference</a> |
+<a href=https://isocpp.org/ target=_blank>isocpp</a> |
+<a href=https://open-std.org target=_blank>open-std</a></p><p><a href=https://cmake.com/ target=_blank>cmake.org</a></p><p><a href=https://llvm.org/ target=_blank>llvm.org</a></p><p><a href=https://www.boost.org/ target=_blank>boost.org</a></p><p><a href=https://learn.microsoft.com/en-us/dotnet/csharp/ target=_blank>Microsoft Learn</a><p><a href=https://www.lua.org/ target=_blank>lua.org</a> |
+<a href=https://www.luarocks.org/ target=_blank>luarocks.org</a> |
+<a href=https://www.luajit.org/ target=_blank>luajit.org</a></p><p><a href=https://docs.unity3d.com/Manual/index.html target=_blank>Unity Manual</a> |
+<a href=https://docs.unity3d.com/ScriptReference/index.html target=_blank>Unity API</a></p><p><a href=https://docs.unrealengine.com/ target=_blank>Unreal Engine Docs</a></p><p><a href=https://godotengine.org target=_blank>Godot</a> |
+<a href=https://docs.godotengine.org/en/stable/ target=_blank>Godot Docs</a></p><p><a href=https://z-library.sk/ target=_blank>Z-Library</a></p><p><a href=https://docs.kernel.org/ target=_blank>Linux Kernel Docs</a></p><p><a href=https://www.gnu.org/ target=_blank>GNU</a></p><a href=https://archlinux.org/ target=_blank>ArchLinux</a><p><a href=https://help.ubuntu.com/ target=_blank>Ubuntu Doc</a> |
+<a href=https://ubuntu.com/server/docs target=_blank>Ubuntu Server Guide</a></p><p><a href=https://www.vulkan.org/ target=_blank>Vulkan</a> |
+<a href=https://docs.vulkan.org/ target=_blank>Vulkan Docs</a></p><p><a href=https://www.opengl.org/ target=_blank>OpenGL</a> |
+<a href=https://registry.khronos.org/OpenGL target=_blank>OpenGL API</a> |
+<a href=https://www.khronos.org/opengl/wiki/ target=_blank>OpenGL Wiki</a></p><p><a href=https://learn.microsoft.com/en-us/windows/win32/directx target=_blank>DirectX</a></p><p><a href=https://www.realtimerendering.com/ target=_blank>Real-Time Rendering</a></p><p><a href=https://www.pbr-book.org/ target=_blank>Physically Based Rendering</a></p><p><a href=https://www.scratchapixel.com/ target=_blank>Scratchapixel</a></p><p><a href=https://learnopengl.com/ target=_blank>LearnOpenGL</a></p><p><a href=https://raytracing.github.io/ target=_blank>Ray Tracing in One Weekend</a></p><p><a href=https://www.shadertoy.com/ target=_blank>Shadertoy</a></p><p><a href=https://arxiv.org/list/cs.GR/recent target=_blank>arXiv Graphics</a></p><p><a href=https://www.siggraph.org/ target=_blank>SIGGRAPH</a> |
+<a href=https://dl.acm.org/conference/siggraph target=_blank>SIGGRAPH Digital Library</a></p><p><a href=https://git-scm.com/ target=_blank>Git</a></p></div></div></div><script src=/js/ref-window.js></script><div class=layout><article class=single_article><div class=title>Abstract Command<div class=meta>Modified: 2026-04-04
+|| Author：ljf12825</div></div><div class=content><ul><li>xdg-open</li></ul><h2 id=统一接口>统一接口</h2><h2 id=编译器前端名>编译器前端名</h2><h2 id=posix规范接口>POSIX规范接口</h2><h2 id=环境分法器dispatcher>环境分法器(dispatcher)</h2><h2 id=alternatives-系统>Alternatives 系统</h2><p>Alternatives是Linux系统中用于管理多个软件版本或实现的工具。它允许系统存在同一个命令的多个版本（如python2和python3），并通过符号链接动态切换默认版本</p><h3 id=核心概念>核心概念</h3><ol><li>主要组件</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 管理命令</span>
+</span></span><span style=display:flex><span>update-alternatives <span style=color:#6272a4>#Debian/Ubuntu/RHEL 8+ </span>
+</span></span><span style=display:flex><span>alternatives <span style=color:#6272a4># RHEL/CentOS 7 及更早版本</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 管理目录</span>
+</span></span><span style=display:flex><span>/etc/alternatives <span style=color:#6272a4># 所有 alternatives的符号链接</span>
+</span></span><span style=display:flex><span>/var/lib/dpkg/alternatives <span style=color:#6272a4># Debian 系配置数据库</span>
+</span></span><span style=display:flex><span>/var/lib/alternatives <span style=color:#6272a4># RHEL 系配置数据库</span>
+</span></span></code></pre></div><ol start=2><li>工作原理</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>实际程序路径：/usr/bin/python3.12
+</span></span><span style=display:flex><span>                /usr/bin/python3.10 
+</span></span><span style=display:flex><span>                /usr/bin/python2.7
+</span></span><span style=display:flex><span>                v 
+</span></span><span style=display:flex><span>Alternatives 链接: /etc/alternatives/python 
+</span></span><span style=display:flex><span>                v 
+</span></span><span style=display:flex><span>系统命令路径：/usr/bin/python
+</span></span></code></pre></div><h3 id=基本使用命令>基本使用命令</h3><ol><li>查看已注册的alternatives</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 查看所有</span>
+</span></span><span style=display:flex><span>update-alternatives --get-selections 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 查看特定命令</span>
+</span></span><span style=display:flex><span>update-alternatives --list python
+</span></span><span style=display:flex><span>update-alternatives --display python 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 查看当前选择</span>
+</span></span><span style=display:flex><span>ls -l /usr/bin/python 
+</span></span><span style=display:flex><span>ls -l /etc/alternatives/python 
+</span></span></code></pre></div><ol start=2><li>注册新alternative</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 语法：--install &lt;链接&gt; &lt;名称&gt; &lt;路径&gt; &lt;优先级&gt; </span>
+</span></span><span style=display:flex><span>update-alternatives --install /usr/bin/python python /usr/bin/python3.9 <span style=color:#bd93f9>100</span> 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 详细示例</span>
+</span></span><span style=display:flex><span>update-alternatives --install <span style=color:#f1fa8c>\
+</span></span></span><span style=display:flex><span>    /usr/bin/python <span style=color:#f1fa8c>\ </span><span style=color:#6272a4># 系统命令路径</span>
+</span></span><span style=display:flex><span>    python <span style=color:#f1fa8c>\ </span><span style=color:#6272a4># alternatives名称</span>
+</span></span><span style=display:flex><span>    /usr/bin/python3.9 <span style=color:#f1fa8c>\ </span><span style=color:#6272a4># 实际程序路径</span>
+</span></span><span style=display:flex><span>    <span style=color:#bd93f9>100</span> <span style=color:#f1fa8c>\ </span><span style=color:#6272a4># 优先级</span>
+</span></span><span style=display:flex><span>    --slave /usr/share/man/man1/python.1.gz python-man /usr/share/man/man1/python3.9.1.gz 
+</span></span></code></pre></div><ol start=3><li>切换版本</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 交互式选择</span>
+</span></span><span style=display:flex><span>update-alternatives --config python
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 输出示例：</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># There are 2 choices for the alternative python (providing /usr/bin/python).</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>#   Selection    Path                Priority   Status</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># ------------------------------------------------------------</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># * 0            /usr/bin/python3.9   100       auto mode</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>#   1            /usr/bin/python2.7   50        manual mode</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>#   2            /usr/bin/python3.9   100       manual mode</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># Press &lt;enter&gt; to keep the current choice[*], or type selection number: 2</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 自动选择最高优先级</span>
+</span></span><span style=display:flex><span>update-alternatives --auto python
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 手动设置特定版本</span>
+</span></span><span style=display:flex><span>update-alternatives --set python /usr/bin/python2.7
+</span></span></code></pre></div><ol start=4><li>删除alternative</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 移除一个选项</span>
+</span></span><span style=display:flex><span>update-alternatives --remove python /usr/bin/python2.7 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 完全移除所有配置</span>
+</span></span><span style=display:flex><span>update-alternatives --remove-all python 
+</span></span></code></pre></div><h3 id=使用示例>使用示例</h3><h4 id=管理python版本>管理Python版本</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 1. 安装多个 Python 版本</span>
+</span></span><span style=display:flex><span>sudo apt install python2.7 python3.9 python3.10
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 2. 注册所有版本到 alternatives</span>
+</span></span><span style=display:flex><span>sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 <span style=color:#bd93f9>50</span>
+</span></span><span style=display:flex><span>sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.9 <span style=color:#bd93f9>100</span>
+</span></span><span style=display:flex><span>sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.10 <span style=color:#bd93f9>110</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 3. 配置关联的 man page（从属链接）</span>
+</span></span><span style=display:flex><span>sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.9 <span style=color:#bd93f9>100</span> <span style=color:#f1fa8c>\
+</span></span></span><span style=display:flex><span>  --slave /usr/share/man/man1/python.1.gz python-man /usr/share/man/man1/python3.9.1.gz
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 4. 查看当前配置</span>
+</span></span><span style=display:flex><span>update-alternatives --query python
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 5. 切换版本</span>
+</span></span><span style=display:flex><span>sudo update-alternatives --config python
+</span></span></code></pre></div><h4 id=管理编辑器>管理编辑器</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 注册多个编辑器</span>
+</span></span><span style=display:flex><span>sudo update-alternatives --install /usr/bin/editor editor /usr/bin/vim <span style=color:#bd93f9>100</span> 
+</span></span><span style=display:flex><span>sudo update-alternatives --install /usr/bin/editor editor /ur/bin/nano <span style=color:#bd93f9>50</span> 
+</span></span><span style=display:flex><span>sudo update-alternatives --install /usr/bin/editor editor /usr/bin/emacs <span style=color:#bd93f9>25</span> 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 设置默认编辑器</span>
+</span></span><span style=display:flex><span>sudo update-alternatives --set editor /usr/bin/vim 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 在其他程序中使用（如visudo 会使用 editor 变量）</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>EDITOR</span><span style=color:#ff79c6>=</span><span style=color:#ff79c6>$(</span>which editor<span style=color:#ff79c6>)</span>
+</span></span></code></pre></div><h3 id=高级用法>高级用法</h3><h4 id=从属链接slave-links>从属链接（Slave Links）</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 为主命令配置相关的从属命令</span>
+</span></span><span style=display:flex><span>update-alternatives --install /usr/bin/python python /usr/bin/python3.9 <span style=color:#bd93f9>100</span> <span style=color:#f1fa8c>\
+</span></span></span><span style=display:flex><span>  --slave /usr/bin/python-config python-config /usr/bin/python3.9-config <span style=color:#f1fa8c>\
+</span></span></span><span style=display:flex><span>  --slave /usr/bin/pip pip /usr/bin/pip3.9 <span style=color:#f1fa8c>\
+</span></span></span><span style=display:flex><span>  --slave /usr/share/man/man1/python.1.gz python-man /usr/share/man/man1/python3.9.1.gz
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 这样切换 python 时，python-config、pip 和 man page 会自动切换</span>
+</span></span></code></pre></div><h4 id=优先级系统>优先级系统</h4><p>优先级决定自动模式下的选择，数字越大优先级越高，auto模式会选择最高优先级的版本<br>设置优先级策略</p><ul><li>稳定版：1000</li><li>测试版：500</li><li>旧版本：100</li><li>开发版：50</li></ul><h4 id=手动模式-vs-自动模式>手动模式 vs 自动模式</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 查看模式</span>
+</span></span><span style=display:flex><span>update-alternatives --display python | grep mode 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 手动模式：用户明确选择了版本</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 自动模式：系统使用最高优先级的版本</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 切换回自动模式</span>
+</span></span><span style=display:flex><span>update-alternatives --auto python
+</span></span></code></pre></div><h4 id=使用groups组管理>使用groups（组管理）</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 创建组（某些系统支持）</span>
+</span></span><span style=display:flex><span>update-alternatives --install-group java-group
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 将相关命令加入组</span>
+</span></span><span style=display:flex><span>update-alternatives --add-to-group java java-group
+</span></span><span style=display:flex><span>update-alternatives --add-to-group javac-group 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 一次性切换组内所有命令</span>
+</span></span><span style=display:flex><span>update-alternatives --set-group java-group /usr/lib/jvm/java-17-openjdk/
+</span></span></code></pre></div><h3 id=配置文件和数据库>配置文件和数据库</h3><ol><li>Debian系（/var/lib/dpkg/alternatives)</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 查看 python 的配置</span>
+</span></span><span style=display:flex><span>cat /var/lib/dpkg/alternatives/python
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 示例内容：</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># auto</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># /usr/bin/python3.9</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># /usr/bin/python</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># python.1.gz</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># /usr/bin/python2.7</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># </span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># /usr/bin/python3.9</span>
+</span></span></code></pre></div><ol start=2><li>RHEL系（/var/lib/alternatives）</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 二进制格式存储，使用 alternatives 命令查看</span>
+</span></span><span style=display:flex><span>alternatives --display python
+</span></span></code></pre></div><h3 id=注意事项>注意事项</h3><p>不要随意把<code>python</code>/<code>gcc</code>/<code>ld</code>切到非发行默认版本，可能破坏系统工具，这是由Linux发行版的工程假设决定的<br>发行版不是“一堆独立软件”，而是一个强耦合系统<br>以Ubuntu/Debian为例，发行版在构建时隐含了大量硬性假设</p><ul><li><code>/usr/bin/python</code>：是某一个确定语义的Python</li><li><code>/usr/bin/gcc</code>：是某一代ABI兼容的GCC</li><li><code>/usr/bin/ld</code>：是与glibc/binutils完全匹配的linker</li></ul><p>这些不是“推荐版本”，而是系统工具链的组成部分。通过<code>update-alternatives</code>改的不是“你自己的工具”，而是：整个系统赖以运行的公共基础设施入口</p><p><code>python</code>，系统工具直接依赖<code>/usr/bin/python</code>，大量系统组件写死了shebang</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#ff79c6>#!/usr/bin/python 
+</span></span></span></code></pre></div><p>典型的例子</p><ul><li><code>apt</code></li><li><code>add-apt-repository</code></li><li><code>update-alternatives</code></li><li><code>lsb_release</code></li><li><code>software-properties-*</code></li></ul><p>这些脚本不是普通应用，而是</p><ul><li>在安装阶段运行</li><li>在系统修复阶段运行</li><li>在无GUI/最小环境下运行</li></ul><p>Python版本 != 语法兼容，一旦把<code>/usr/bin/python -> python3.12</code>而系统脚本仍假设<code>python == Python 3.x with distro patches</code>，结果只有一个：脚本在关键路径直接崩溃<br>这是不可恢复的，最危险的一点：崩溃的正是用来修系统的工具本身，例如<code>apt</code>启动失败，<code>update-alternatives</code>本身报错，无法再用包管理器恢复</p><p><code>gcc</code>/<code>ld</code>更危险，但更隐蔽<br><code>gcc</code>不是一个编译器，而是ABI决策者<br>发行版构件时固定了</p><ul><li>GCC主版本</li><li>默认<code>libstdc++</code>ABI</li><li>默认<code>libgcc_s</code></li><li>默认<code>crt*.o</code></li></ul><p>系统中几乎所有C/C++程序都假设：用系统GCC编译 == 与系统glibc / libstdc++ ABI匹配\</p><p><code>ld</code>（或<code>ld.gold</code>/<code>ld.lld</code>）直接决定</p><ul><li>ELF重定位方式</li><li>动态链接器交互</li><li>TLS/RELRO/PIE行为</li></ul><p>发行版的glibc是按特定binutils版本测试的</p><p><code>update-alternatives</code>的设计目标不是“开发者玩具”，它的原始用途是</p><ul><li><code>vi</code>/<code>vim</code></li><li><code>editor</code></li><li><code>pager</code></li><li><code>java</code></li></ul><p>这些命令的共同点，系统本身不依赖其具体语义，只是用户工具</p><p>但<code>python/gcc/ld</code>不满足这个前提<br>它们是构建期依赖，启动期依赖，系统维护期依赖<br>换句话说，alternatives假设“切换不会影响系统稳定性”，而python/gcc/ld恰恰违反了这个假设</p><h4 id=正确做法>正确做法</h4><ol><li>Python：永远不要用alternatives
+正确方式：</li></ol><ul><li><code>/usr/bin/python3</code>：系统Python</li><li><code>python3.12</code>：显式版本</li><li><code>pyenv/venv/poetry</code>：用户空间隔离</li></ul><ol start=2><li>GCC/Clang：只在PATH层面控制</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>export</span> <span style=color:#8be9fd;font-style:italic>PATH</span><span style=color:#ff79c6>=</span>/opt/gcc-14/bin:<span style=color:#8be9fd;font-style:italic>$PATH</span>
+</span></span></code></pre></div><p>或</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>CC</span><span style=color:#ff79c6>=</span>gcc-14 <span style=color:#8be9fd;font-style:italic>CXX</span><span style=color:#ff79c6>=</span>g++-14 cmake ..
+</span></span></code></pre></div><p>绝不动<code>/usr/bin/gcc</code></p><ol start=3><li>只有这些适合alternatives
+安全区</li></ol><ul><li>editor</li><li>pager</li><li>x-www-browser</li><li>java（仍需谨慎）</li><li>vi</li></ul><p>危险区</p><ul><li>python</li><li>gcc</li><li>ld</li><li>make</li><li>cmake</li><li>sh</li></ul></div><nav class=post-nav><a href=/os/tool/linux/environment_variables/>Next: Environment Variables</a></nav></article></div><aside id=toc-window class=toc aria-label=目录 role=complementary data-state=expanded><div class=toc-header id=toc-header role=button tabindex=0 aria-label=折叠/展开目录 aria-expanded=true><span class="title open" aria-hidden=true>>> >> >> TOC &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed" aria-hidden=true>&lt;&lt;&lt;&lt;&lt;&lt;TOC>>>>>></span></div><div class=toc-body id=toc-body><nav id=TableOfContents><ul><li><ul><li><a href=#统一接口>统一接口</a></li><li><a href=#编译器前端名>编译器前端名</a></li><li><a href=#posix规范接口>POSIX规范接口</a></li><li><a href=#环境分法器dispatcher>环境分法器(dispatcher)</a></li><li><a href=#alternatives-系统>Alternatives 系统</a><ul><li><a href=#核心概念>核心概念</a></li><li><a href=#基本使用命令>基本使用命令</a></li><li><a href=#使用示例>使用示例</a><ul><li><a href=#管理python版本>管理Python版本</a></li><li><a href=#管理编辑器>管理编辑器</a></li></ul></li><li><a href=#高级用法>高级用法</a><ul><li><a href=#从属链接slave-links>从属链接（Slave Links）</a></li><li><a href=#优先级系统>优先级系统</a></li><li><a href=#手动模式-vs-自动模式>手动模式 vs 自动模式</a></li><li><a href=#使用groups组管理>使用groups（组管理）</a></li></ul></li><li><a href=#配置文件和数据库>配置文件和数据库</a></li><li><a href=#注意事项>注意事项</a><ul><li><a href=#正确做法>正确做法</a></li></ul></li></ul></li></ul></li></ul></nav></div></aside><script src=/js/toc-window.js defer></script><script src=/js/scrollspy.js defer></script><script type=module>
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ 
+    startOnLoad: true, theme: "default" });
+</script><footer><div class=container><p>© 2026 Jeff Lee(ljf12825). All rights reserved |
+<a href=https://creativecommons.org/licenses/by-nc-sa/4.0/>Article: CC BY-NC-SA 4.0</a> |
+<a href=https://creativecommons.org/licenses/by-sa/4.0/>Content: CC BY-SA 4.0</a> |
+<a href=https://opensource.org/licenses/MIT>Code: MIT License</a> |
+<a href=/LICENSES.md>Full License</a> |
+<a href=/index.xml>RSS</a></p></div></footer></body></html>
