@@ -1,21 +1,41 @@
 ---
 title: Environment Variables
 author: ljf12825
-date: 2026-04-04
+date: 2026-04-05
 type: file
 summary: $PATH, $HOME, env, alternatives
 ---
 
-
 ## 环境变量(Environment Variables)
-- 定义：环境变量是存储在操作系统中的动态值，可以呗运行在系统上的程序访问。它们用于配置程序的行为，存储系统路径、用户偏好、临时数据等
+
+- 定义：环境变量是存储在操作系统中的以一组键值对(KEY=value)形式的动态命名值，可以被运行在系统上的程序访问。它们用于配置程序的行为，存储系统路径、用户偏好、临时数据等
 - 特性
-   - 继承性：子进程继承父进程的环境变量
-   - 键值对结构：`KEY=value`格式
-   - 字符串类型：所有值都以字符串形式存储
-   - 进程级作用域：每个进程有自己的环境变量副本
+
+| 特征 | 说明 |
+| - | - |
+| 键值对结构 | `PATH=/usr/bin:/bin`, KEY通常大写 |
+| 字符串存储 | 所有值都是字符串，即使是数字 |
+| 进程级隔离 | 每个进程有自己的环境变量副本 |
+| 继承性 | 子进程继承父进程的环境变量 |
+| 可修改 | 进程可以增、删、改自己的环境变量 |
+
+环境变量是父进程告诉子进程“这个世界长什么样”的方式
+
+### Shell变量 vs 环境变量
+
+| 类型 | 命令 | 子进程是否继承 |
+| Shell变量（局部）| `VAR=value` | 不继承 |
+| 环境变量 | `export VAR=value` | 继承 |
+
+```bash
+$ LOCAL_VAR="only me"
+$ export ENV_VAR="pass to child"
+$ bash -c 'echo $LOCAL_VAR; echo $ENV_VAR'
+# 输出：空行（LOCAL_VAR看不到） + "pass to child"
+```
 
 ### 重要环境变量
+
 1. 常用核心环境变量
    - `PATH`：可执行文件的搜索路径
    - `HOME`：当前用户的主目录
@@ -34,10 +54,11 @@ summary: $PATH, $HOME, env, alternatives
    - `PS1`：主提示符格式
    - `PS2`：次提示符格式（多行命令时）
 
-
 ### 相关命令
+
 #### 查看环境变量
-```bash 
+
+```bash
 # 查看所有环境变量
 $ printenv 
 $ env 
@@ -56,7 +77,8 @@ $ cat /proc/1/environ | tr '\0' '\n' # init 进程的环境
 ```
 
 #### 数据类型和限制
-```bash 
+
+```bash
 # 键的命名规则（通常）
 # - 大写字母、数字、下划线
 # - 区分大小写
@@ -78,7 +100,8 @@ Maximum length of command we could actually use: 208804
 ```
 
 #### 设置环境变量
-```bash 
+
+```bash
 # 临时设置（仅当前shell会话有效）
 export MY_VAR="value"
 
@@ -89,12 +112,14 @@ MY_VAR="value"
 ```
 
 #### 删除环境变量
-```bash 
+
+```bash
 unset MY_VAR
 ```
 
 #### 测试变量是否存在
-```bash 
+
+```bash
 # 检查变量是否设置
 if [ -z "$MY_VAR" ]; then 
     echo '变量未设置'
@@ -105,8 +130,17 @@ echo ${MY_VAR:-"默认值"}
 ```
 
 ### 环境变量的配置文件加载顺序
+
+两种Shell类型
+
+| Shell类型 | 触发场景 | 读取的配置文件 |
+| - | - | - |
+| 登录Shell | 输出密码登录、`su -`, `ssh` | profile类文件 |
+| 非登录交互式Shell | 打开终端窗口、`bash` | `~/.bashrc` |
+
 登录Shell的加载顺序
-```text  
+
+```text
 /etc/profile 
 v 
 ~/.bash_profile 
@@ -117,16 +151,20 @@ v
 v 
 /etc/bash.bashrc
 ```
+
 非登录Shell
-```text 
+
+```text
 ~/bashrc 
 v 
-/etc/bash.bashrc
+/etc/bash.bashrc（发行版不同可能有差异）
 ```
 
-### 环境变量的生命周期和作用域
+### 环境变量的生命周期，作用域和继承机制
+
 #### 作用域层次
-```text 
+
+```text
 系统级作用域（所有用户）
 |__ /etc/environment 
 |__ /etc/profile
@@ -147,7 +185,8 @@ v
 ```
 
 #### 继承机制
-```bash 
+
+```bash
 # 演示环境变量继承
 $ export PARENT_VAR="parent_value"
 
@@ -165,311 +204,39 @@ $ pstree -p $$
 $ cat /proc/<PID>/environ | tr '\0' '\n'
 ```
 
-### 环境变量的作用
+### 安全注意事项
 
-环境变量在Linux系统中起着至关重要的作用，它们就像系统的"记忆"和"配置中心"，影响和控制系统及应用程序的行为。以下是环境变量的主要作用：
+#### 敏感信息
 
-#### 系统配置与行为控制
+敏感信息不要用环境变量传递，子进程可以通过`env`看到所有变量，`/proc/<pid>/environ`可被同用户其他进程读取（权限允许时），崩溃转储(core dump)可能包含环境变量
 
-**程序路径查找**
+替代方案：
+
+- 配置文件 + 严格权限(600)
+- 密钥管理服务(Vault, AWS Secrets Manager)
+- 临时文件 + 用完删除
+
+#### PATH注入风险
+
 ```bash
-# PATH变量决定系统在哪里查找可执行文件
-echo $PATH
-# 输出示例：/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+# 危险：把当前目录放在PATH最前面
+export PATH=".:$PATH"
 
-# 当输入命令时，系统按PATH顺序查找
-ls  → 系统依次查找：
-    1. /usr/local/sbin/ls
-    2. /usr/local/bin/ls
-    3. /usr/sbin/ls
-    4. /usr/bin/ls（找到！）
+# 更危险：/tmp目录
+export PATH="/tmp:$PATH"
 ```
 
-**用户环境配置**
-```bash
-# HOME - 确定用户主目录
-echo $HOME  # /home/username
+shell会先从当前目录或/tmp目录里查询，当前目录可能不安全，/tmp是所有人可写的\
+如果有人在你执行的目录放了恶意`ls`脚本，就会出问题\
+建议：当前目录用`./script`显式执行，不要放进PATH
 
-# SHELL - 指定默认shell
-echo $SHELL # /bin/bash
+## 总结
 
-# EDITOR - 设置默认文本编辑器
-export EDITOR=vim  # 许多程序会使用此编辑器
-```
-
-**语言和区域设置**
-```bash
-# 控制程序显示语言
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-
-# 时区设置
-export TZ="Asia/Shanghai"
-```
-
-#### 程序运行与交互控制
-
-**程序行为定制**
-```bash
-# 控制程序输出详细程度
-export DEBUG=1
-export VERBOSE=true
-
-# 设置程序配置路径
-export MYAPP_CONFIG="/etc/myapp/config.yaml"
-
-# 控制颜色显示
-export CLICOLOR=1  # macOS/Linux颜色支持
-export LS_COLORS="di=1;36:ln=35:so=32:pi=33"
-```
-
-**开发与编译环境**
-```bash
-# C/C++开发
-export CC=gcc
-export CXX=g++
-export CFLAGS="-O2 -Wall"
-export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
-
-# Python开发
-export PYTHONPATH="/my/project:$PYTHONPATH"
-export PYTHONUNBUFFERED=1  # 实时输出，不缓冲
-
-# Java开发
-export JAVA_HOME="/usr/lib/jvm/java-11-openjdk"
-export CLASSPATH=".:$JAVA_HOME/lib"
-```
-
-**网络与代理配置**
-```bash
-# HTTP代理设置
-export http_proxy="http://proxy.company.com:8080"
-export https_proxy="http://proxy.company.com:8080"
-export no_proxy="localhost,127.0.0.1,.internal"
-
-# 网络超时设置
-export FTP_TIMEOUT=60
-export CURL_TIMEOUT=30
-```
-
-#### 系统管理与监控
-**Shell行为控制**
-```bash
-# 历史命令设置
-export HISTSIZE=10000      # 内存中保存的历史数量
-export HISTFILESIZE=20000  # 历史文件中的命令数量
-export HISTCONTROL=ignoreboth  # 忽略重复命令和空格开头的命令
-
-# 提示符定制
-export PS1='\[\e[1;32m\]\u@\h\[\e[0m\]:\[\e[1;34m\]\w\[\e[0m\]\$ '
-```
-
-**系统资源管理**
-```bash
-# 控制文件描述符限制
-ulimit -n  # 查看限制
-# 可通过环境变量设置某些程序的资源限制
-
-# 内存分配控制
-export MALLOC_ARENA_MAX=2  # 限制glibc内存分配
-```
-
-#### 安全与权限
-
-**安全相关配置**
-```bash
-# SSH配置
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-
-# 密码安全
-export PASSWORD_STORE_DIR="$HOME/.password-store"
-
-# 避免敏感信息泄露
-export HISTIGNORE="*password*:*secret*"  # 不记录包含密码的命令
-```
-
-**用户身份与权限**
-```bash
-# 用户和组信息
-echo $USER    # 当前用户名
-echo $UID     # 用户ID
-echo $GROUPS  # 用户所属组
-
-# Sudo相关
-export SUDO_EDITOR=vim  # sudoedit使用的编辑器
-```
-
-#### 软件开发与构建
-**构建系统控制**
-```bash
-# Make构建控制
-export MAKEFLAGS="-j4"  # 并行编译，使用4个核心
-
-# CMake配置
-export CMAKE_BUILD_TYPE="Release"
-export CMAKE_PREFIX_PATH="/opt/custom/libs"
-
-# Docker构建
-export DOCKER_BUILDKIT=1  # 启用BuildKit
-```
-
-**版本控制**
-```bash
-# Git配置
-export GIT_AUTHOR_NAME="Your Name"
-export GIT_AUTHOR_EMAIL="your@email.com"
-export GIT_EDITOR=vim
-
-# 代码仓库位置
-export REPO_BASE="$HOME/repositories"
-```
-
-#### 应用程序特定配置
-
-**数据库连接**
-```bash
-# PostgreSQL
-export PGHOST="localhost"
-export PGPORT=5432
-export PGDATABASE="mydb"
-export PGUSER="myuser"
-
-# MySQL
-export MYSQL_HOST="localhost"
-export MYSQL_PWD="password"  # 注意安全！
-```
-
-**Web开发**
-```bash
-# Node.js开发
-export NODE_ENV="development"
-export NODE_PATH="/usr/lib/node_modules"
-
-# Ruby on Rails
-export RAILS_ENV="production"
-export SECRET_KEY_BASE="your-secret-key"
-
-# Django
-export DJANGO_SETTINGS_MODULE="myproject.settings"
-```
-
-#### 系统信息传递
-**进程间通信**
-```bash
-# 父进程 → 子进程传递信息
-export TASK_ID="12345"
-export JOB_NAME="daily_backup"
-
-# 脚本执行时传递参数
-./script.sh
-# 在script.sh中可以通过环境变量获取配置
-```
-
-**容器化环境**
-```bash
-# Docker容器内部
-# 传递配置到容器
-docker run -e "DATABASE_URL=postgres://..." myapp
-
-# Kubernetes Pod环境变量
-# 在Deployment中定义
-# env:
-# - name: DATABASE_HOST
-#   value: "postgres-service"
-```
-
-#### 调试与故障排除
-**调试信息输出**
-```bash
-# 启用详细日志
-export DEBUG="app:*"  # 特定模块的debug
-export NODE_DEBUG="http,net"  # Node.js调试
-export PYTHONDEBUG=1  # Python调试
-
-# 性能分析
-export LD_DEBUG="libs"  # 动态链接器调试
-export MALLOC_CHECK_=3  # 内存分配检查
-```
-
-**兼容性设置**
-```bash
-# 向后兼容
-export GNUTLS_CPUID_OVERRIDE=0x1  # 特定加密库设置
-
-# 特定程序兼容
-export GTK_IM_MODULE="ibus"  # 输入法框架
-export QT_IM_MODULE="ibus"
-```
-
-##### 实际应用场景示例
-1. 开发环境设置
-```bash
-# 在~/.bashrc中设置开发环境
-export DEV_HOME="$HOME/development"
-export PATH="$DEV_HOME/bin:$PATH"
-export GOPATH="$DEV_HOME/go"
-export PYTHONPATH="$DEV_HOME/python:$PYTHONPATH"
-export NODE_PATH="$DEV_HOME/node_modules"
-alias devenv="cd $DEV_HOME && source venv/bin/activate"
-```
-
-2. 多版本管理
-```bash
-# 切换Python版本
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
-# 使用特定版本
-pyenv global 3.9.1
-```
-
-3. 项目特定配置
-```bash
-# 项目启动脚本 project_env.sh
-#!/bin/bash
-export PROJECT_NAME="myproject"
-export DATABASE_URL="postgresql://localhost/$PROJECT_NAME"
-export LOG_LEVEL="INFO"
-export SECRET_KEY="$(openssl rand -hex 32)"
-export DEBUG="false"
-
-# 激活项目环境
-source project_env.sh
-```
-
-### 环境变量的核心价值总结
-
-1. **灵活性** - 无需修改代码即可改变程序行为
-2. **隔离性** - 不同环境使用不同配置，互不干扰
-3. **可移植性** - 配置与代码分离，便于迁移
-4. **安全性** - 敏感信息（如密码）可以环境变量形式传递，不写入代码
-5. **动态性** - 运行时可以动态修改，立即生效
-6. **层次性** - 系统级、用户级、会话级、进程级的多层配置
-
-环境变量是Linux生态系统的重要组成部分，它们提供了一种简单而强大的方式来配置和控制系统的各个方面，从最简单的命令行工具到复杂的分布式系统都离不开环境变量的支持。
-
-## POSIX/SUS 
-在Linux系统中，那些几乎理所当然被假设存在的基础工具和运行环境，叫做POSIX或SUS. 它们是使用者工作的基石，很多脚本和软件都会默认依赖它们 
-
-### Concept
-
-| 名词 | 层次 | 含义 | 示例 |
-| - | - | - | - |
-| POSIX / SUS | 标准与规范 | 官方定义了什么工具和接口必须存在及如何行为 | sh, vi, awk, grep 的标准行为 |
-| GNU Coreutils | 具体实现 | Linux上最常见的POSIX工具集的具体实现包 | /bin/ls, /bin/cp (通常来自GNU coreutils包) |
-| Base System | 发行版定义 | 一个特定Linux发行版能启动并运行的最小软件包集合 |	Debian的base、essential包优先级 |
-| Unix Philosophy | 设计哲学 | 指导这些工具设计的思想原则 |	工具“小而专”，通过管道组合 | 
-| Userland | 系统架构 | 内核之外的所有程序，包括shell和所有您假设的工具 | 与Linux内核相对的概念 |
-| BusyBox | 嵌入式实现 | 为资源受限环境提供的多合一替代实现 | 路由器、Android Recovery中的工具 |
-| Build-Essential | 开发环境 | 用于编译软件所假设存在的一套工具 | gcc, make, ld, libc-dev |
-
-```text  
-[ 用户自行安装的工具 ]
-[ 发行版工具 ]
---------------------------
-[ 系统约定接口 ]
---------------------------
-[ 内核 + libc ]
-```
-
+| 场景 | 推荐做法 |
+| - | - |
+| 永久环境变量 | 写入`~/.bashrc`，用`export` |
+| 登录时一次性任务 | 写入`~/.profile` |
+| 脚本内部 | 使用`export`或直接在命令前赋值`VAR=value cmd` |
+| 临时覆盖 | `PATH=/custom/bin:$PATH ./my_script` |
+| 敏感信息 | 不要用环境变量，用配置文件 + 控制权限 |
+| 跨多个项目的不同配置 | 用`direnv`或`dotenv`这类目录级环境管理工具 |
