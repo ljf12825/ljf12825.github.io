@@ -136,12 +136,80 @@ Shebang的基本形式是
 使用这种方式，系统会使用`env`查找系统中第一个可用的`python3`解释器，而不需要硬编码具体的路径
 
 ##### Shebang的例外
+
 - 交互式Shell：如果在终端中直接启动一个Shell（如`bash`），而没有使用Shebang行，那么Shell会交互式地运行，而不会自动去找指定的解释器
 - Shebang脚本的兼容性：大多数Linux系统支持Bash脚本的Shebang，但如果使用了不同类型的Shell（如Zsh），确保脚本首行指向正确的Shell解释器
 
-##### 为什么有时候不写shebang也能运行
+有时候不写shebang程序也可以正常运行，这是因为shell兜底执行
 
+当运行一个文件
 
+```bash
+./script
+```
+
+实际上有两条路径
+
+##### 情况1：有shebang（内核处理）
+
+```bash
+#!/bin/bash
+echo hello
+```
+
+流程
+
+```
+shell -> execve() -> 内核
+                  -> 发现#!
+                  -> 用指定解释器执行
+```
+
+这完全由内核决定
+
+##### 情况2：没有shebang（shell兜底）
+
+```bash
+echo hello
+```
+
+流程
+
+```
+shell -> execve()
+      -> 失败（不是ELF,也没有#!）
+      -> shell 捕获错误
+      -> 用默认shell（比如bash）再执行一遍
+```
+
+是shell自己决定的
+
+##### shell的补救机制
+
+像Bash这种shell会这样处理
+
+```
+if execve() 返回ENOEXEC:
+    用/bin/sh再执行这个文件
+```
+
+所以此时的
+
+```bash
+./script
+```
+
+等价于
+
+```bash
+sh ./script
+```
+
+不写shebang是一种危险行为，不应该依赖这个机制，因为
+
+1. 不同shell行为不一样，bash，dash会fallback,有些shell不会
+2. 默认解释器$SHELL不确定，可能导致不同行为
+3. 语法可能不兼容，同上
 
 #### 如何执行脚本
 1. 添加执行权限（推荐）：
