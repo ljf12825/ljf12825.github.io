@@ -1,14 +1,36 @@
 ---
 title: Abstract Command
 author: ljf12825
-date: 2026-04-04
+date: 2026-04-05
 type: file
 summary: POSIX interface utility implemented as a wrapper/dispatcher with late binding
 ---
 
-- xdg-open
+Linux发行版操作系统提供了许多特殊的命令，比如
 
-## 统一接口
+- `xdg-open`
+- `cc`
+- `editor`
+
+它们不是“具体功能实现”，而是“调度/适配/抽象层”，也就是说，它们会选择一个合适的工具，而不是自己干活
+
+我喜欢称这些命令为“元命令”
+
+## 统一接口（跨环境抽象）
+
+```bash
+xdg-open file.txt
+```
+
+它做的事：根据当前桌面环境(GNOME/KDE/XFCE)等，找到默认程序打开文件
+
+比如：
+
+- 在GNOME -> 调用 `gio open`
+- 在KDE -> 调用 `kde-open`
+- 在服务器可能fallback
+
+这是典型的平台抽象层，它来自[freedesktop.org](https://freedesktop.org/)
 
 ## 编译器前端名
 
