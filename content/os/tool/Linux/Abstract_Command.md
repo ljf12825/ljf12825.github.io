@@ -14,6 +14,12 @@ Linux发行版操作系统提供了许多特殊的命令，比如
 
 它们不是“具体功能实现”，而是“调度/适配/抽象层”，也就是说，它们会选择一个合适的工具，而不是自己干活
 
+它们有以下核心逻辑
+
+- 解耦调用者与实现者
+- 延迟绑定(Late Binding)
+- 系统级约定优先于用户便利
+
 我喜欢称这些命令为“元命令”
 
 ## 统一接口（跨环境抽象）
@@ -322,3 +328,28 @@ CC=gcc-14 CXX=g++-14 cmake ..
 - make 
 - cmake 
 - sh 
+
+### 现代Linux正在“绕开”alternatives
+
+如今systemd和容器化潮流下，系统组件的版本切换更多通过
+
+- 模块化流(AppStream/Module Streams)：RHEL 8+ 的`dnf module`机制，在仓库层面切换整个工具链而不破坏符号链接
+- Toolbox/Distrobox：用户空间完全隔离，`/usr/bin/gcc`永远是系统原生版本，开发环境是独立的容器
+
+这实际上是在用文件系统命名空间替代符号链接重定向，避免了 alternatives的“全局副作用”
+
+## sensible-*
+
+Debian体系还有一组更“谦逊”的元命令
+
+```bash
+sensible-browser
+sensible-editor
+sensible-pager
+```
+
+它们和`xdg-open`类似，但设计目标更窄：只为终端内交互服务。它们的优势是绝不死循环（如果找不到合适的程序，就fallback到`vi`/`more`，而不是报错推出）。在写可移植脚本时，`sensible-editor`比直接调用`vim`或`nano`要健壮的多
+
+## 硬链接
+
+## 软链接
