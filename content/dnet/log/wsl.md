@@ -1,6 +1,6 @@
 ---
-title: WSL instructions for use
-date: 2026-02-26
+title: WSL
+date: 2026-04-09
 categories: [Tool]
 tags: [WSL]
 author: "ljf12825"
@@ -36,6 +36,10 @@ WSL可以在Windows里面“原生”运行Linux
 
 ## 安装
 
+### 通过`wsl --install`
+
+这是最简单的方法
+
 Windows10/11里直接在PowerShell输入
 
 ```
@@ -48,8 +52,54 @@ wsl --install
 - 安装WSL2作为默认版本
 - 安装一个默认的Linux发行版（通常是Ubuntu）
 - 安装Linux内核更新包
+- 默认安装到C盘
+
+本质就是从Microsoft Store里下载安装
 
 重启后，开始菜单中会出现安装的Linux发行版。点击打开，它会继续初始化，并提示创建一个新的用户名和密码（Linux用户名和`sudo`密码）
+
+### 通过`wsl --import`
+
+`wsl --import`命令用于将之前导出的WSL发行版`.tar`备份文件恢复为可用的WSL实例
+
+#### 基本语法
+
+```bash
+wsl --import <发行版名称> <安装位置路径> <备份文件路径.tar> [--version 1|2]
+```
+
+| 参数 | 说明 | 示例 |
+| - | - | - |
+| `<发行版名称>` | 在`wsl -l -v`列表中显示的自定义名字 | `Ubuntu-Backup` |
+| `<安装位置>` | 虚拟硬盘`ext4.vhdx`存放的文件夹路径 | `D:\WSL\Ubuntu-Backup\` |
+| `<备份文件路径>` | 之前用`wsl --export`生成的`.tar`文件 | `C:\backup\ubuntu.tar` |
+| `--version 2` | （可选）指定使用WSL 2内核，默认一般是WSL2 | `--version 2` |
+
+#### 使用示例
+
+##### 1. 基本导入（恢复备份）
+
+将之前导出的`ubuntu_backup.tar`恢复，并命名为`Ubuntu-20.04-Restored`，数据存放在`D:\WSL`下
+
+```bash
+wsl --import Ubuntu-20.04-Restored D:\WSL\Ubuntu-Restored D:\Backups\ubuntu_backup.tar
+```
+
+##### 2. 强制指定为WSL 2版本
+
+如果当前默认版本是WSL 1，或者为了保险起见，加上版本参数
+
+```bash
+wsl --import MyNewDistro D:\WSL\MyNewDistro D:\Backups\export.tar --version 2
+```
+
+##### 3. 导入Docker Desktop导出的镜像
+
+WSL2的Docker数据也可以这样备份迁移
+
+```bash
+wsl --import docker-date D:\WSL\docker-date D:\Backups\docker-desktop-data.tar
+```
 
 ## 使用
 
@@ -133,3 +183,69 @@ Linux有`rwxr-xr-x`权限体系，Windows有`ACL`权限模型\
 
 - 权限会被映射
 - 可能出现chmod不生效
+
+## 迁移
+
+如果是在微软应用商店安装的wsl（包括`wsl --install`，本质相同），那么WSL会被默认安装在C盘下\
+这会导致C盘的大量空间被WSL占用，所以迁移是很有必要的
+
+WSL实际是一个Linux文件系统，在Windows里是一个名为`ext4.vhdx`的虚拟磁盘文件，默认路径在`C:\Users\用户名\AppData\Local\Packages\...`
+
+### 迁移步骤
+
+#### 1. 查看发行版本
+
+```bash
+wsl -l -v
+```
+
+```
+Ubuntu # 以Ubuntu为例
+```
+
+#### 2. 导出
+
+```bash
+wsl --export Ubuntu D:\wsl\ubuntu.tar
+```
+
+> 需要手动创建文件夹，--export不会帮助处理
+
+这一步会生成一个tar包（系统镜像）
+
+#### 3. 注销原来的
+
+```bash
+wsl --unregister Ubuntu
+```
+
+#### 4. 导入到D盘
+
+```bash
+wsl --import Ubuntu D:\wsl\ubuntu D:\wsl\ubuntu.tar
+```
+
+vhdx就在新位置了
+
+#### 5. 启动
+
+```bash
+wsl
+```
+
+### 常见问题
+
+导出后可能会遇到默认用户变为root的问题\
+实测wsl2 ubuntu保留了原先用户名
+
+如果碰到了这个问题
+
+```bash
+ubuntu config --default-user your_username
+```
+
+或
+
+```bash
+wsl -d Ubuntu -u your_username
+```
