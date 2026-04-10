@@ -1,18 +1,16 @@
 ---
 title: POSIX & SUS
-date: 2026-04-05
+date: 2026-04-10
 author: ljf12825
 summary: POSIX concept
 type: file
 ---
 
-## 定义
+## POSIX
 
-### POSIX
+POSIX (Portable Operating System Interface，可移植操作系统接口)，一个由IEEE制定，并被ISO和IEC采纳为国际标准的家族标准编号(ISO/IEC 9945)
 
-POSIX 全称Portable Operating System Interface，可移植操作系统接口：是一套让Unix系列系统行为一致的标准
-
-- 目标：让为不同Unix系统编写的软件能够很容易地移植到其他Unix系统上，而无需大量重写代码
+- 目标：解决Unix系统碎片化为题，让为不同Unix系统编写的软件能够很容易地移植到其他Unix系统上，而无需大量重写代码
 - 本质：它是一系列的标准和规范，定义了操作系统应该为应用程序提供哪些接口（API）
 
 比如：
@@ -24,7 +22,49 @@ POSIX 全称Portable Operating System Interface，可移植操作系统接口：
 - 错误码应该返回什么
 - 路径语义怎么定义
 
-这些都不是Linux发明的，也不是macOS发明的，它们是因为POSIX定义了统一规则，Unix家族成员都得听
+简单说，只要代码只调用POSIX规定的函数，不碰特定系统的私有API, 就能在Linux, macOS, FreeBSD, Solaris甚至Windows（通过WSL）上直接编译运行
+
+### 内容
+
+POSIX不仅仅是一个库，它定义了一整套操作系统必须提供的“语言”
+
+| 模块类别 | 具体内容举例 | 日常用途 |
+| - | - | - |
+| 文件与目录 | `open()` `read()`, `write()`, `close()`, `stat` | 任何需要读写文件的程序 |
+| 进程与线程 | `fork()` `exec()`, `wait()`, `pthread_create()` | 服务器并发，Shell执行命令 |
+| Shell与工具 | `sh`, `cd`, `ls`, `grep`, `awk`的行为标准 | 编写可移植的脚本(#!/bin/sh) |
+| 系统环境 | 环境变量`PATH`, 用户ID`UID`，信号量`SIGKILL` | 程序获取系统状态、处理中断 |
+
+### 意义
+
+对于开发者而言，理解POSIX有三个立竿见影的好处
+
+1. 优雅处理跨平台代码：在Linux下使用`open()`没问题，但如果用了`open64()`或者直接操作`/proc`下的非标准文件，移植到macOS就会编译失败。遵循POSIX可以避免这种重写代价
+2. 理解“一切皆文件”的哲学：POSIX规定设备、管道、套接字、普通文件都共用一套读写接口。可以用`write()`向屏幕输出文字，也能用同一个`write()`向网络连接发送数据包
+3. 区分Linux和Unix的区别：Linux遵循POSIX标准，但Linux有很多GNU扩展。如`grep -P`(Perl正则)不是POSIX标准，而`gerp -E`才是
+
+### 实时性与并发
+
+除了基础文件操作，POSIX还有几个重要的标准子扩展，决定了现代操作系统的底层能力
+
+- POSIX线程(Pthreads)：虽然现在都是用更高层的封装（如C++的`std::thread`），但底层统一是POSIX定义的线程模型。它规定了互斥锁`mutex`、条件变量`cond`的精确语义，避免了不同CPU架构下多线程行为的诡异差异
+- POSIX信号(Signals)：定义了`SIGINT`(^C)和`SIGSEGV`（段错误）的处理流程。虽然发送信号的机制各系统略有不同，但处理函数的签名`void handler(int sig)`是统一的
+- POSIX异步I/O(AIO)：定义了在后台读写文件而不阻塞主线程的标准接口。虽然Linux实现有其历史缺陷，但这是高性能数据库（如Oracle, PostgreSQL）设计磁盘交互的逻辑基础
+
+### 局限性
+
+POSIX看起来已经很完美了，但现实中仍有很多Linux专用程序，因为以下原因
+
+- 进程创建的经典分歧：POSIX规定用`fork()`复制进程。但在Windows原生环境下，由于缺少`fork`语义，即便是遵循POSIX的Cygwin工具，其进程创建效率也远低于Linux
+- 非标准扩展的甜头：`epoll`（Linux高性能网络），`kqueue`（BSD/macOS高性能网络），`DIO`（直接I/O）是高性能服务器绕不开的API。它们不是POSIX，但为了解决POSIX标准`select/poll`在万级并发下的性能瓶颈而诞生。为了性能，开发者常常自愿放弃POSIX的可移植性
+
+### POSIX合规认证
+
+不是所有类Unix系统都是“完全POSIX兼容”的。认证由The Open Group颁发（持有UNIX商标）
+
+- macOS：自10.5 Leopard起是Single UNIX Specification认证的UNIX系统（POSIX的超集）
+- Linux：绝大多数发行版没有花钱去做正式认证（太贵且更新太快），但行为上是POSIX兼容的（Linus曾调侃“我们符合标准，除了哪些标准错的地方”）
+- Windows：原生NT内核不兼容POSIX，但WSL1通过系统调用翻译实现了极佳的POSIX模拟，WSL2则直接运行Linux内核
 
 ### SUS
 
