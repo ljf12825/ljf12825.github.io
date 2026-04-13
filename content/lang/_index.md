@@ -10,10 +10,9 @@ type: lang
 - Rust
 - Lua
 - Python
-- Toolchains
+- Compile Toolchain
 - Regular Expressions
 - Principles of Compilation
 - Programming Language Theory
 - Programming Language Development
 
----

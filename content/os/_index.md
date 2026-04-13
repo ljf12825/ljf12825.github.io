@@ -13,13 +13,4 @@ type: os
 - POSIX
 - Shell
 - Core Utils
-- Toolchains
-
-## Structure
-
-```text
-unixlike/
-|__Lab/  # experimental, radical， a fleeting moment
-|__Lib/  # tools, language, continuous evolution
-|__File/ # standards, contracts, concepts, cornerstones
-```
+- Toolchain

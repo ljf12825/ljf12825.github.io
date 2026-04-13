@@ -29,6 +29,12 @@
     </div>
     
     <div class="star-body">
+
+        <div class="nav-row">
+            <a class="nav-item" data-label="Home" data-path="/home/" data-article-count="{{ len $homePages }}" data-recent-count="{{ $homeRecent }}" data-total-count="{{ $total }}" href="{{ "/home/" | relURL }}">Home</a>
+            <span class="nav-stats"></span>
+        </div>
+
         <div class="nav-row">
             <a class="nav-item" data-label="CTX" data-path="/ctx/" data-article-count="{{ len $ctxPages }}" data-recent-count="{{ $ctxRecent }}" data-total-count="{{ $total }}" href="{{ "/ctx/" | relURL }}">CTX</a>
             <span class="nav-stats"></span>
@@ -48,12 +54,7 @@
             <a class="nav-item" data-label="ECO" data-path="/eco/" data-article-count="{{ len $ecoPages }}" data-recent-count="{{ $ecoRecent }}" data-total-count="{{ $total }}" href="{{ "/eco/" | relURL }}">ECO</a>
             <span class="nav-stats"></span>
         </div>
-        
-        <div class="nav-row">
-            <a class="nav-item" data-label="Home" data-path="/home/" data-article-count="{{ len $homePages }}" data-recent-count="{{ $homeRecent }}" data-total-count="{{ $total }}" href="{{ "/home/" | relURL }}">Home</a>
-            <span class="nav-stats"></span>
-        </div>
-                
+ 
         <div class="nav-row">
             <a class="nav-item" data-label="SE" data-path="/se/" data-article-count="{{ len $sePages }}" data-recent-count="{{ $seRecent }}" data-total-count="{{ $total }}" href="{{ "/se/" | relURL }}">SE</a>
             <span class="nav-stats"></span>

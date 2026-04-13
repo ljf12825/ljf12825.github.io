@@ -1,6 +1,6 @@
 baseURL = "https://ljf12825.github.io/"
 languageCode = "en-us"
-title = "How to Develop a Game"
+title = "ljf12825"
 
 [markup]
   [markup.highlight]
