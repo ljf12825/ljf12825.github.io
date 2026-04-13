@@ -1,4 +1,0 @@
----
-title: MSVC
-type: file
----
