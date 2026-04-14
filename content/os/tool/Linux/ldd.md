@@ -1,7 +1,7 @@
 ---
 title: ldd
 author: ljf12825
-date: 2026-04-13
+date: 2026-04-14
 type: file
 summary: using of ldd
 ---
@@ -65,8 +65,35 @@ readelf -d /path/to/binary | grep 'NEEDED'
 
 ## 原理
 
+理解`ldd`的输出内容，其实就是理解了Linux加载程序的第一步
+
+1. 内核识别：发现文件是ELF格式，查看`.interp`段，找到解释器路径（如`/lib64/ld-linux-x86-64.so.2`
+2. 解释器启动：内核将控制权交给这个`ld-linux`解释器
+3. 解析依赖：解释器读取ELF文件的`.dynamic`段，找到`DT_NEEDED`条目（即`ldd`打印出来的库名）
+4. 搜索路径：按照以下顺序查找库文件
+    - 环境变量`LD_LIBRARY_PATH`
+    - 缓存文件：`/etc/ld.so.cache`
+    - 系统默认路径`/lib`, `/usr/lib`
+5. 映射内存：找到后将库加载到内存地址（即`ldd`括号里的数字）
+
 ## 示例
 
-## 替代
+## `lddtree`
+
+如果需要可视化复杂的依赖树（即A依赖B，B又依赖C），普通`ldd`是扁平列表，不够直观，可以使用`pax-utils`包中的`lddtree`
+
+```bash
+apt install pax-utils
+lddtree /bin/ls
+```
+
+输出会以树状结构展开，清晰展示哪些库是共享的、哪些是被间接引入的
+
+```text
+/bin/ls (interpreter => /lib64/ld-linux-x86-64.so.2)
+    libselinux.so.1 => /lib/x86_64-linux-gnu/libselinux.so.1
+        libpcre2-8.so.0 => /lib/x86_64-linux-gnu/libpcre2-8.so.0
+    libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6
+```
 
 
