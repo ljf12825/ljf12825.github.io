@@ -14,6 +14,7 @@
   <div class="lab-table">
     <div class="lab-row lab-head">
       <span class="col name">NAME</span>
+      <span class="col category">CATE</span>
       <span class="col status">STATUS</span>
       <span class="col summary">SUMMARY</span>
     </div>
@@ -21,12 +22,17 @@
     {{ range .Pages.ByDate.Reverse }}
     <div class="lab-row"
          data-title="{{ .Title | lower }}"
+         data-category="{{ .Params.category | lower }}"
          data-status="{{ .Params.status | lower }}"
          data-summary="{{ .Params.summary | default "" | lower }}"
          onclick="location.href='{{ .RelPermalink }}'">
       
       <span class="col name">
         {{ .Title }}{{ if .Params.toy }}*{{ end }}
+      </span>
+
+      <span class="col category {{ .Params.category }}">
+        {{ .Params.category }}
       </span>
       <span class="col status {{ .Params.status }}">
         {{ .Params.status }}

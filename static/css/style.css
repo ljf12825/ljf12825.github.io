@@ -400,6 +400,7 @@ ol {
 }
 #star-nav a:hover {
   color: #ff0000;
+  text-decoration: underline;
 }
 
 #star-header {
