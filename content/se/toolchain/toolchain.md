@@ -2,7 +2,7 @@
 title: Toolchain
 type: file
 author: ljf12825
-date: 2026-04-13
+date: 2026-04-14
 summary: overview of toolchain
 ---
 
@@ -41,4 +41,5 @@ summary: overview of toolchain
 - 运行时/环境（部分）
   - 标准库(libc/libstdc++)
   - runtime（比如C++ ABI, GC, JIT runtime）
-
+- 固件烧录/部署工具
+  - 嵌入式开发中用于将程序写入芯片
