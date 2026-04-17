@@ -1,7 +1,7 @@
 ---
 title: ldd
 author: ljf12825
-date: 2026-04-14
+date: 2026-04-17
 type: file
 summary: using of ldd
 ---
@@ -78,6 +78,123 @@ readelf -d /path/to/binary | grep 'NEEDED'
 
 ## 示例
 
+### 查看普通程序的依赖
+
+```bash
+ldd /usr/bin/curl
+```
+
+输出
+
+```text
+linux-vdso.so.1 (0x00007ffe5bdf0000)
+libcurl.so.4 => /usr/lib/x86_64-linux-gnu/libcurl.so.4 (0x00007f5a3c000000)
+libssl.so.3 => /usr/lib/x86_64-linux-gnu/libssl.so.3 (0x00007f5a3c800000)
+libcrypto.so.3 => /usr/lib/x86_64-linux-gnu/libcrypto.so.3 (0x00007f5a3b800000)
+libc.so.6 => /usr/lib/x86_64-linux-gnu/libc.so.6 (0x00007f5a3b400000)
+/lib64/ld-linux-x86-64.so.2 (0x00007f5a3d000000)
+```
+
+每行都有`=>`指向具体路径，没有`not found`。`curl`依赖libcurl, OpenSSL等，链接器都能正常找到
+
+### 缺少依赖库
+
+假设有一个第三方程序`my_tool`，直接运行报错
+
+```bash
+./my_tool: error while loading shared libraries: libfoo.so.1: cannot open shared object file: No such file or directory
+```
+
+用`ldd`查看
+
+```bash
+ldd ./my_tool
+```
+
+输出
+
+```text
+linux-vdso.so.1 (0x00007ffd9b5e6000)
+libfoo.so.1 => not found
+libc.so.6 => /usr/lib/x86_64-linux-gnu/libc.so.6 (0x00007f8e2a400000)
+/lib64/ld-linux-x86-64.so.2 (0x00007f8e2a800000)
+```
+
+关键信息：`libfoo.so.1 => not found`\
+排查方向：
+
+1. 检查库文件是否真的在系统里：`find /usr /opt -name "libfoo.so*"`
+2. 如果存在但没被找到，临时添加路径：`export LD_LIBRARY_PATH=/path/to/lib:$LD_LIBRARY_PATH`
+
+### 架构不匹配导致的`not found`
+
+在64位系统上运行一个32位程序，`file`命令显示
+
+```bash
+file ./old_32bit_app
+# ./old_32bit_app: ELF 32-bit LSB executable, Intel 80386 ...
+```
+
+`ldd`输出
+
+```bash
+ldd ./old_32bit_app
+```
+
+输出
+
+```text
+    linux-gate.so.1 (0xf7f5d000)
+    libc.so.6 => /lib/i386-linux-gnu/libc.so.6 (0xf7d00000)
+    /lib/ld-linux.so.2 (0xf7f5f000)
+```
+
+如果输出中任然有`not found`（尤其是libc），说明没有安装32位兼容库
+
+### 使用`-r`检查缺失的函数符号（运行时symbol lookup error）
+
+程序能启动，但运行到某个功能时崩溃，报错
+
+```text
+./my_app: symbol lookup error: /usr/lib/libcustom.so: undefined symbol: calculate_offset
+```
+
+这表示库文件存在，但库里面缺少某个函数。用`ldd -r`可以提前发现
+
+```bash
+ldd -r ./my_app
+```
+
+输出
+
+```text
+linux-vdso.so.1 (0x00007ffd2f3e5000)
+libcustom.so.1 => /usr/lib/libcustom.so.1 (0x00007f1234000000)
+libc.so.6 => /usr/lib/libc.so.6 (0x00007f1233c00000)
+/lib64/ld-linux-x86-64.so.2 (0x00007f1234200000)
+undefined symbol: calculate_offset    (./my_app)
+```
+
+`-r`参数执行了重定位检查，直接指出了`undefined symbol: calculate_offset`，问题一目了然
+
+### 用`-u`找出编译时多余的链接（清理Makefile）
+
+假设在编译程序时在Makefile里写了`-lm -lpthread -ldl`，但实际上只用到了`pthread`。用`-u`可以找出那些”声明了但没用上“的直接依赖
+
+```bash
+ldd -u ./my_app
+```
+
+输出
+
+```text
+Unused direct dependencies:
+    /usr/lib/libm.so.6
+    /usr/lib/libdl.so.2
+```
+
+这表示编译时可以去掉`-lm`和`-ldl`，让程序更精简，启动稍快一些
+
 ## `lddtree`
 
 如果需要可视化复杂的依赖树（即A依赖B，B又依赖C），普通`ldd`是扁平列表，不够直观，可以使用`pax-utils`包中的`lddtree`
@@ -96,4 +213,4 @@ lddtree /bin/ls
     libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6
 ```
 
-
+[ldd 实验](https://github.com/ljf12825/unix-like/tree/main/src/ldd)
