@@ -25,7 +25,7 @@
 <a href=https://registry.khronos.org/OpenGL target=_blank>OpenGL API</a> |
 <a href=https://www.khronos.org/opengl/wiki/ target=_blank>OpenGL Wiki</a></p><p><a href=https://learn.microsoft.com/en-us/windows/win32/directx target=_blank>DirectX</a></p><p><a href=https://www.realtimerendering.com/ target=_blank>Real-Time Rendering</a></p><p><a href=https://www.pbr-book.org/ target=_blank>Physically Based Rendering</a></p><p><a href=https://www.scratchapixel.com/ target=_blank>Scratchapixel</a></p><p><a href=https://learnopengl.com/ target=_blank>LearnOpenGL</a></p><p><a href=https://raytracing.github.io/ target=_blank>Ray Tracing in One Weekend</a></p><p><a href=https://www.shadertoy.com/ target=_blank>Shadertoy</a></p><p><a href=https://arxiv.org/list/cs.GR/recent target=_blank>arXiv Graphics</a></p><p><a href=https://www.siggraph.org/ target=_blank>SIGGRAPH</a> |
 <a href=https://dl.acm.org/conference/siggraph target=_blank>SIGGRAPH Digital Library</a></p><p><a href=https://git-scm.com/ target=_blank>Git</a></p></div></div></div><script src=/js/ref-window.js></script><div class=layout><article class=single_article><div class=title>Preprocess & Macro<div class=meta>M: 2026-04-16
-- ljf12825</div></div><div class=content><p>预处理是C编译流程的第一个阶段，它在真正的编译开始之前对源代码进行文本处理</p><h2 id=预处理预处理器执行时机>预处理，预处理器，执行时机</h2><p>C 代码从源文件到可执行文件经过四个步骤</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>源代码(.c)
+- ljf12825</div></div><div class=content><h2 id=预处理>预处理</h2><p>预处理是C编译流程的第一个阶段，它在真正的编译开始之前对源代码进行文本处理</p><p>C 代码从源文件到可执行文件经过四个步骤</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-fallback data-lang=fallback><span style=display:flex><span>源代码(.c)
 </span></span><span style=display:flex><span>   v
 </span></span><span style=display:flex><span>预处理（Preprocessing）
 </span></span><span style=display:flex><span>   v
@@ -34,9 +34,128 @@
 </span></span><span style=display:flex><span>汇编（Assemble）
 </span></span><span style=display:flex><span>   v
 </span></span><span style=display:flex><span>链接（Link）
-</span></span></code></pre></div><p>预处理器(Preprocessor)是编译前的“文本处理器”，它不理解语法，不理解类型，不执行代码，只做文本替换 + 条件裁剪</p></div><nav class=post-nav><a href=/os/c/inline_code/>Prev: Inline Code</a>
+</span></span></code></pre></div><p>可以通过<code>gcc -E</code>命令观察预处理后的代码</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>gcc -E source.c -o source.i
+</span></span></code></pre></div><p>可以发现<code>source.i</code>中的<code>#define</code>消失，<code>#include</code>被展开</p><h3 id=预处理器>预处理器</h3><p>预处理器(Preprocessor)是编译前的“文本处理器”，它不理解语法，不理解类型，不执行代码，只做文本替换 + 条件裁剪</p><h4 id=预处理器指令>预处理器指令</h4><h5 id=文件包含-include>文件包含 <code>#include</code></h5><p>两种查找策略</p><p>防递归包含的标准写法（头文件保护）</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#6272a4>// my_header.h
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#ifndef MY_HEADER_H
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#define MY_HEADER_H
+</span></span></span><span style=display:flex><span><span style=color:#6272a4>// 头文件内容
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#endif
+</span></span></span></code></pre></div><p>或者更现代的写法（几乎所有编译器支持）</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#pragma once
+</span></span></span></code></pre></div><h5 id=宏定义define>宏定义<code>#define</code></h5><p>对象宏（无参数）</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#define PI 3.14159
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#define DEBUG_MODE </span><span style=color:#6272a4>// 定义为空，常用于条件编译
+</span></span></span></code></pre></div><p>函数宏（带参数）</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#define SQUARE(x) ((x) * (x))
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#define MAX(a, b) ((a) &gt; (b) ? (a) : (b))
+</span></span></span></code></pre></div><p>重要规则：函数宏的每个参数和整个表达式都要用括号包裹</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#6272a4>// 错误写法
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#define BAD_SQUARE(x) x * x
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> y <span style=color:#ff79c6>=</span> <span style=color:#50fa7b>BAD_SQUARE</span>(<span style=color:#bd93f9>1</span> <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>2</span>); <span style=color:#6272a4>// 展开为 1 + 2 * 1 + 2 = 5，而不是 9
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 正确写法
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#define GOOD_SQUARE(x) ((x) * (x))
+</span></span></span></code></pre></div><p><code>#define</code>的语法规定：宏定义必须在同一行内完成</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#6272a4>// 错误：预处理器认为宏定义在第一行就结束了
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#define ASSERT(cond)
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>do</span> { ... } <span style=color:#ff79c6>while</span>(<span style=color:#bd93f9>0</span>) <span style=color:#6272a4>// 这部分被视为普通的C代码，不属于宏
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 正确：用 \ 告诉预处理器”这还没完，继续看下一行“
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#define ASSERT(cond) \
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>    do { ... } while(0)
+</span></span></span></code></pre></div><h5 id=宏取消-undef>宏取消 <code>#undef</code></h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#define TEMP 100
+</span></span></span><span style=display:flex><span><span style=color:#6272a4>// 使用 TEMP
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#undef TEMP
+</span></span></span><span style=display:flex><span><span style=color:#6272a4>// 现在 TEMP 不再有定义
+</span></span></span></code></pre></div><h5 id=条件编译-ififdefifndef>条件编译 <code>#if</code>/<code>#ifdef</code>/<code>#ifndef</code></h5><p>这是跨平台代码的核心工具</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#ifdef _WIN32
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;windows.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>#define SLEEP(ms) Sleep(ms)
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#elif defined(__linux__) || defined(__APPLE__)
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;unistd.h&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>#define SLEEP(ms) usleep((ms) * 1000)
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#else
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>#error &#34;Unsupported platform&#34;
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#endif
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 版本控制
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#if VERSION_MAJOR &gt;= 2
+</span></span></span><span style=display:flex><span>    <span style=color:#8be9fd>void</span> <span style=color:#50fa7b>new_api</span>();
+</span></span><span style=display:flex><span><span style=color:#ff79c6>#else
+</span></span></span><span style=display:flex><span>    <span style=color:#8be9fd>void</span> <span style=color:#50fa7b>old_api</span>();
+</span></span><span style=display:flex><span><span style=color:#ff79c6>#endif
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 调试代码
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#ifndef NDEBUG
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>#define LOG(msg) printf(&#34;Debug: %s\n&#34;, msg)
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#else
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>#define LOG(msg) ((void)0) </span><span style=color:#6272a4>// 空操作
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#endif
+</span></span></span></code></pre></div><h5 id=特殊字符--和->特殊字符 <code>#</code> 和 <code>##</code></h5><p>字符串化运算符<code>#</code>：将参数转为字符串字面量</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#define STRINGIFY(x) #x
+</span></span></span><span style=display:flex><span><span style=color:#50fa7b>printf</span>(<span style=color:#f1fa8c>&#34;%s</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#34;</span>, <span style=color:#50fa7b>STRINGIFY</span>(hello world)); <span style=color:#6272a4>// 输出 &#34;hello world&#34;
+</span></span></span></code></pre></div><p>连接运算符 <code>##</code>：拼接两个符号</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#define CONCAT(a, b) a ## b
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>CONCAT</span>(my, Var) <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>10</span>; <span style=color:#6272a4>// 展开为 int myVar = 10;
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 实用案例：泛型函数生成
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#define MAKE_GETTER(type, name) type get_##name() { return name; }
+</span></span></span><span style=display:flex><span><span style=color:#50fa7b>MAKE_GETTER</span>(<span style=color:#8be9fd>int</span>, count) <span style=color:#6272a4>// 生成 int get_count()
+</span></span></span><span style=display:flex><span><span style=color:#50fa7b>MAKE_GETTER</span>(<span style=color:#8be9fd>char</span><span style=color:#ff79c6>*</span>, name) <span style=color:#6272a4>// 生成 char* get_name()
+</span></span></span></code></pre></div><h5 id=预定义宏编译器自动提供>预定义宏（编译器自动提供）</h5><table><thead><tr><th>宏</th><th>含义</th></tr></thead><tbody><tr><td><code>__FILE__</code></td><td>当前文件名（字符串）</td></tr><tr><td><code>__LINE__</code></td><td>当前行号（整数）</td></tr><tr><td><code>__DATE__</code></td><td>编译日期</td></tr><tr><td><code>__TIME__</code></td><td>编译时间</td></tr><tr><td><code>__FUNCTION__</code>/<code>__func__</code></td><td>当前函数名(C99)</td></tr><tr><td><code>__STDC__</code></td><td>是否遵循ANSI C</td></tr><tr><td><code>__cplusplus</code></td><td>在C++编译时定义</td></tr></tbody></table><p>示例，一个调试日志宏的经典写法</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#define ASSERT(cond) \
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>    do { \
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>        if (!(cond)) { \
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>            fprintf(stderr, &#34;Assertion failed: %s\nFile: %s, Line: %d\n&#34;, \
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>                    #cond, __FILE__, __LINE__); \
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>            abort(); \
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>        }\
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>    } while(0)
+</span></span></span></code></pre></div><p><code>\</code>反斜杠，是C预处理器的行连接符(Line Continuation)；它的核心作用是：把多行物理代码变成一行逻辑代码<br>预处理器在扫描源代码时，如果看到<code>\</code>后紧跟着换行符，它会</p><ol><li>删除<code>\</code></li><li>删除紧跟其后的换行符</li><li>把下一行的内容连接到当前行末尾</li></ol><p>上述调试日志宏最终会变为</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#define ASSERT(cond) do { if (!(cond)) { fprintf(stderr, &#34;Assertion failed: %s\nFile: %s, Line: %d\n&#34;, #cond, __FILE__, __LINE__); abort(); } } while(0)
+</span></span></span></code></pre></div><p>严格的使用规则</p><ol><li><code>\</code> 必须是该行的最后一个字符，之后只能跟换行符</li><li>换行符前不能有空格——如果<code>\</code>后面有空格，它连接的就是空格而不是下一行</li><li>最后一行不需要<code>\</code>，因为定义到此结束</li></ol><h5 id=其他指令>其他指令</h5><table><thead><tr><th>指令</th><th>作用</th></tr></thead><tbody><tr><td><code>#error "message"</code></td><td>强制编译报错并停止</td></tr><tr><td><code>#warning "message"</code></td><td>产生警告但不停止（GCC/Clang扩展）</td></tr><tr><td><code>#line 42 "fake.c"</code></td><td>修改<code>__LINE__</code>和<code>__FILE__</code>的值</td></tr><tr><td><code>#pragma</code></td><td>编译器特定指令</td></tr></tbody></table><h4 id=宏使用指南>宏使用指南</h4><p>推荐行为</p><ul><li>头文件保护用<code>#pragma once</code>或严格的<code>#ifndef</code>守卫</li><li>宏名全大写：<code>#define MAX_BUFFER_SIZE 1024</code></li><li>多语句宏用<code>do { ... } while(0)</code>包裹</li><li>使用<code>#ifdef __cplusplus</code>处理C/C++混编</li></ul><p>避免</p><ul><li>不要用宏定义全局变量：<code>#define global extern</code></li><li>不要在宏中忘记参数括号</li><li>不要写跨越多行但没有反斜杠的宏</li></ul><h2 id=宏>宏</h2><p>宏在C语言中有四种不可替代的用途，这些是函数、变量、类型都无法做到的事情</p><h3 id=条件编译一份代码多平台运行>条件编译——一份代码，多平台运行</h3><p>这是宏最重要的用途。没有宏，就要给各个平台分别维护一套代码</p><p>现实场景</p><ul><li>操作系统API差异</li><li>编译Debug/Release不同版本</li><li>不同CPU架构的优化代码</li><li>功能裁剪（客户版 vs 旗舰版）</li></ul><h3 id=编译期常量与静态断言>编译期常量与静态断言</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#define MAX_CONNECTIONS 1024
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#define VERSION_MAJOR 2
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#define VERSION_MINOR 1
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 编译期数组大小
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>char</span> buffer[MAX_CONNECTTIONS];
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 编译期版本检查
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#if VERSION_MAJOR &lt; 2
+</span></span></span><span style=display:flex><span>    <span style=color:#ff79c6>#error &#34;This code requires version 2.0 or higher&#34;
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#endif
+</span></span></span></code></pre></div><h3 id=元编程自动生成重复代码>元编程——自动生成重复代码</h3><h4 id=场景一为多个类型生成相同的函数>场景一：为多个类型生成相同的函数</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#define DEFINE_VECTOR(Type) \
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>    typedef struct { \
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>        Type* data; \
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>        size_t size; \
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>        size_t capacity; \
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>    } Vector ##Type; \
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>    \
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>    void vector_##Type##_push(Vector_##Type* v, Type value) { \
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>        </span><span style=color:#6272a4>// 实现 \
+</span></span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 一行生成两个完整的类型
+</span></span></span><span style=display:flex><span><span style=color:#50fa7b>DEFINE_VECTOR</span>(<span style=color:#8be9fd>int</span>) <span style=color:#6272a4>// 生成 Vector_int, vector_int_push
+</span></span></span><span style=display:flex><span><span style=color:#50fa7b>DEFINE_VECTOR</span>(<span style=color:#8be9fd>double</span>) <span style=color:#6272a4>// 生成 Vector_double, vector_double_push
+</span></span></span></code></pre></div><h4 id=场景二x-macro技巧>场景二：X-Macro技巧</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#define FRUIT_TABLE \
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>    X(APPLE, 0) \
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>    X(BANANA, 1) \
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>    X(ORANGE, 2)
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 生成枚举
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>enum</span> Fruit {
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>#define X(name, id) FRUIT_##name = id,
+</span></span></span><span style=display:flex><span>    FRUIT_TABLE
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>#undef X
+</span></span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 生成字符串数组
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>const</span> <span style=color:#8be9fd>char</span><span style=color:#ff79c6>*</span> fruit_names[] <span style=color:#ff79c6>=</span> {
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>#define X(name, id) [id] = #name,
+</span></span></span><span style=display:flex><span>    FRUIT_TABLE
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>#undef X
+</span></span></span><span style=display:flex><span>};
+</span></span></code></pre></div><h3 id=调试与日志获取代码位置信息>调试与日志——获取代码位置信息</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#ff79c6>#define LOG_ERROR(msg) \
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>    fprintf(stderr, &#34;[ERROR] %s:%d in %s(): %s\n&#34;, \
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>            __FILE__, __LINE__, __func__, msg)
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 使用
+</span></span></span><span style=display:flex><span><span style=color:#50fa7b>LOG_ERROR</span>(<span style=color:#f1fa8c>&#34;Failed to open file&#34;</span>);
+</span></span><span style=display:flex><span><span style=color:#6272a4>// 输出：{ERROR} main.c:42 in main(): Failed to open file
+</span></span></span></code></pre></div><p><code>__FILE__</code>, <code>__LINE__</code>, <code>__func__</code>是编译器在预处理阶段自动替换的，函数永远无法获取调用者的源代码位置</p><h3 id=宏与函数>宏与函数</h3><table><thead><tr><th>需求</th><th>宏</th><th>函数</th></tr></thead><tbody><tr><td>获取调用位置（文件名、行号）</td><td>可以</td><td>做不到</td></tr><tr><td>条件编译（平台/版本差异）</td><td>可以</td><td>做不到</td></tr><tr><td>类型泛型（为多个类型生成代码）</td><td>可以(<code>##</code> 拼接)</td><td>需<code>_Generic</code>或C++模板</td></tr><tr><td>编译期常量（数组大小、case标签）</td><td>可以</td><td>做不到</td></tr><tr><td>类型检查</td><td>无</td><td>有</td></tr><tr><td>调试可见</td><td>展开后消失</td><td>可单步进入</td></tr><tr><td>避免副作用</td><td>需小心</td><td>天然安全</td></tr></tbody></table><p>宏的作用是：在编译前，用文本替换的方式，做到函数和变量永远做不到的事情<br>能用函数/常量解决的，别用宏；只能用宏解决的（条件编译、元编程、调试信息），放心用</p><h3 id=现代c的替代趋势>现代C的替代趋势</h3><p>宏的部分功能正在被语言新特性取代，但核心场景仍然无法替代</p><table><thead><tr><th>宏的传统用法</th><th>现代替代方案</th><th>是否完全替代</th></tr></thead><tbody><tr><td>定义常量</td><td><code>const</code>/<code>enum</code></td><td>完全替代</td></tr><tr><td>短小函数</td><td><code>inline</code>/<code>static inline</code></td><td>大部分替代</td></tr><tr><td>类型泛型</td><td><code>_Generic</code>(C11)</td><td>部分替代，语法繁琐</td></tr><tr><td>条件编译</td><td>无</td><td>不可替代</td></tr><tr><td>符号拼接(<code>##</code>)</td><td>无</td><td>不可替代</td></tr><tr><td>字符串化(<code>#</code>)</td><td>无</td><td>不可替代</td></tr><tr><td>获取<code>__FILE__</code>/<code>__LINE__</code></td><td>无</td><td>不可替代</td></tr></tbody></table></div><nav class=post-nav><a href=/os/c/inline_code/>Prev: Inline Code</a>
 <a href=/os/c/pointer/>Next: Pointer</a></nav></article></div><aside id=toc-window class=toc aria-label=目录 role=complementary data-state=expanded><div class=toc-header id=toc-header role=button tabindex=0 aria-label=折叠/展开目录 aria-expanded=true><span class="title open" aria-hidden=true>>> >> >> TOC &lt;&lt; &lt;&lt; &lt;&lt;</span>
-<span class="title closed" aria-hidden=true>&lt;&lt;&lt;&lt;&lt;&lt;TOC>>>>>></span></div><div class=toc-body id=toc-body><nav id=TableOfContents><ul><li><ul><li><a href=#预处理预处理器执行时机>预处理，预处理器，执行时机</a></li></ul></li></ul></nav></div></aside><script src=/js/toc-window.js defer></script><script src=/js/scrollspy.js defer></script><script type=module>
+<span class="title closed" aria-hidden=true>&lt;&lt;&lt;&lt;&lt;&lt;TOC>>>>>></span></div><div class=toc-body id=toc-body><nav id=TableOfContents><ul><li><ul><li><a href=#预处理>预处理</a><ul><li><a href=#预处理器>预处理器</a><ul><li><a href=#预处理器指令>预处理器指令</a><ul><li><a href=#文件包含-include>文件包含 <code>#include</code></a></li><li><a href=#宏定义define>宏定义<code>#define</code></a></li><li><a href=#宏取消-undef>宏取消 <code>#undef</code></a></li><li><a href=#条件编译-ififdefifndef>条件编译 <code>#if</code>/<code>#ifdef</code>/<code>#ifndef</code></a></li><li><a href=#特殊字符--和->特殊字符 <code>#</code> 和 <code>##</code></a></li><li><a href=#预定义宏编译器自动提供>预定义宏（编译器自动提供）</a></li><li><a href=#其他指令>其他指令</a></li></ul></li><li><a href=#宏使用指南>宏使用指南</a></li></ul></li></ul></li><li><a href=#宏>宏</a><ul><li><a href=#条件编译一份代码多平台运行>条件编译——一份代码，多平台运行</a></li><li><a href=#编译期常量与静态断言>编译期常量与静态断言</a></li><li><a href=#元编程自动生成重复代码>元编程——自动生成重复代码</a><ul><li><a href=#场景一为多个类型生成相同的函数>场景一：为多个类型生成相同的函数</a></li><li><a href=#场景二x-macro技巧>场景二：X-Macro技巧</a></li></ul></li><li><a href=#调试与日志获取代码位置信息>调试与日志——获取代码位置信息</a></li><li><a href=#宏与函数>宏与函数</a></li><li><a href=#现代c的替代趋势>现代C的替代趋势</a></li></ul></li></ul></li></ul></nav></div></aside><script src=/js/toc-window.js defer></script><script src=/js/scrollspy.js defer></script><script type=module>
   import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
   mermaid.initialize({ 
     startOnLoad: true, theme: "default" });
