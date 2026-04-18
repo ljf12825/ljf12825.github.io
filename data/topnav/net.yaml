@@ -1,0 +1,11 @@
+- name: "★"
+  url: "/net/"
+- name: "Lab"
+  url: "/net/lab/"
+- name: "Log"
+  url: "/net/log/"
+- name: "File"
+  url: "/net/file/"
+  children:
+    - name: "Computer Network"
+      url: "/net/file/computernetwork/"

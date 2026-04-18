@@ -1,12 +1,22 @@
+{{ $data := .Site.Data.topnav.lang }}
+{{ if $data }}
 <nav class="topnav">
     <div class="container">
         <ul>
             {{ $current := .RelPermalink }}
-            <li><a href="{{ "/lang/" | relURL }}" class="{{ if eq $current "/lang/" }}active{{ end }}">★</a></li>
-            <li><a href="{{ "/lang/lab/" | relURL }}" class="{{ if eq $current "/lang/lab/" }}active{{ end }}">Lab</a></li>
-            <li><a href="{{ "/lang/implement/" | relURL }}" class="{{ if eq $current "/lang/implement/" }}active{{ end }}">Implement</a></li>
-            <li><a href="{{ "/lang/log/" | relURL }}" class="{{ if eq $current "/lang/log/" }}active{{ end }}">Log</a></li>
-            <li><a href="{{ "/lang/file/" | relURL }}" class="{{ if eq $current "/lang/file/" }}active{{ end }}">File</a></li>
+            {{ range $data }}
+                <li class="{{ if .children }}has-dropdown{{ end }}">
+                    <a href="{{ .url | relURL }}" class="{{ if eq $current .url }}active{{ end }}">{{ .name }}</a>
+                    {{ if .children }}
+                        <ul class="dropdown">
+                            {{ range .children }}
+                                <li><a href="{{ .url | relURL }}">{{ .name }}</a></li>
+                            {{ end }}
+                        </ul>
+                    {{ end }}
+                </li>
+            {{ end }}
         </ul>
     </div>
 </nav>
+{{ end }}

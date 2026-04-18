@@ -1,0 +1,8 @@
+- name: "~"
+  url: "/dnet/"
+- name: "Lab"
+  url: "/dnet/lab/"
+- name: "Log"
+  url: "/dnet/log/"
+- name: "File"
+  url: "/dnet/file/"

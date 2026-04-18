@@ -1,11 +1,22 @@
+{{ $data := .Site.Data.topnav.eco }}
+{{ if $data }}
 <nav class="topnav">
     <div class="container">
         <ul>
             {{ $current := .RelPermalink }}
-            <li><a href="{{ "/eco/" | relURL }}" class="{{ if eq $current "/eco/" }}active{{ end }}">★</a></li>
-            <li><a href="{{ "/eco/lab/" | relURL }}" class="{{ if eq $current "/eco/lab/" }}active{{ end }}">Lab</a></li>
-            <li><a href="{{ "/eco/log/" | relURL }}" class="{{ if eq $current "/eco/log/" }}active{{ end }}">Log</a></li>
-            <li><a href="{{ "/eco/file/" | relURL }}" class="{{ if eq $current "/eco/file/" }}active{{ end }}">File</a></li>
+            {{ range $data }}
+                <li class="{{ if .children }}has-dropdown{{ end }}">
+                    <a href="{{ .url | relURL }}" class="{{ if eq $current .url }}active{{ end }}">{{ .name }}</a>
+                    {{ if .children }}
+                        <ul class="dropdown">
+                            {{ range .children }}
+                                <li><a href="{{ .url | relURL }}">{{ .name }}</a></li>
+                            {{ end }}
+                        </ul>
+                    {{ end }}
+                </li>
+            {{ end }}
         </ul>
     </div>
 </nav>
+{{ end }}
