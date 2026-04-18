@@ -4,5 +4,10 @@
   url: "/dnet/lab/"
 - name: "Log"
   url: "/dnet/log/"
-- name: "File"
-  url: "/dnet/file/"
+- name: "Theory"
+  url: "/dnet/theory/"
+  children:
+    - name: "C#"
+      url: "/dnet/theory/csharp/"
+    - name: "Windows Terminal"
+      url: "/dnet/theory/windows_terminal/"

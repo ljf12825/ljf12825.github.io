@@ -6,5 +6,8 @@
   url: "/home/repository/"
 - name: "File"
   url: "/home/file/"
+  children:
+    - name: "History"
+      url: "/home/file/history/"
 - name: "Ref"
   url: "/home/reference/"
