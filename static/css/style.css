@@ -119,6 +119,42 @@ header .banner {
 	text-decoration: underline;
 }
 
+.topnav .has-dropdown {
+  position: relative;
+}
+
+.topnav .dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: auto;
+  background: #c0c0c0;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #000080;
+  border-bottom: 2px solid #000080;
+  box-shadow: 2px 2px 0 #ffffff, 4px 4px 0 #000080;
+  padding: 4px 0;
+  margin: 0;
+  list-style: none;
+  z-index: 10001;
+}
+
+.topnav .dropdown li {
+  width: 100%;
+}
+
+.topnav .dropdown a {
+  padding: 0.5em 1em;
+  white-space: nowrap;
+  display: block;
+}
+
+.topnav .has-dropdown:hover .dropdown {
+  display: block;
+}
+
 .terminal-overlay {
 	position: absolute;
 	top: 0;

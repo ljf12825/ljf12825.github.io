@@ -1,0 +1,8 @@
+- name: "~"
+  url: "/ctx/"
+- name: "Lab"
+  url: "/ctx/lab/"
+- name: "Log"
+  url: "/ctx/log/"
+- name: "File"
+  url: "/ctx/file/"
