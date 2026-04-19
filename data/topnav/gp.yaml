@@ -4,5 +4,5 @@
   url: "/gp/lab/"
 - name: "Log"
   url: "/gp/log/"
-- name: "File"
-  url: "/gp/file/"
+- name: "Theory"
+  url: "/gp/theory/"
