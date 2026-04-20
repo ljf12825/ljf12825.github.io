@@ -1,6 +1,6 @@
 ---
 title: Preprocess & Macro
-date: 2026-04-16
+date: 2026-04-20
 author: ljf12825
 type: file
 summary: C macro and preprocess
@@ -345,7 +345,14 @@ LOG_ERROR("Failed to open file");
 | 字符串化(`#`) | 无 | 不可替代 |
 | 获取`__FILE__`/`__LINE__` | 无 | 不可替代 |
 
+## 示例
 
+- [条件编译：跨平台原子操作](https://github.com/ljf12825/c/tree/main/preproccess_macro/atomic_portable)
+- [元编程：泛型数据结构生成](https://github.com/ljf12825/c/tree/main/preproccess_macro/generic_datastructure)
+- [X-Macro：状态机自动生成](https://github.com/ljf12825/c/tree/main/preproccess_macro/x-macro_fsm)
+- 断言调试
+- 日志宏
+- 编译期字符串拼接与常量生成
 
 
 
