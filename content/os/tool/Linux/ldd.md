@@ -1,7 +1,7 @@
 ---
 title: ldd
 author: ljf12825
-date: 2026-04-17
+date: 2026-04-20
 type: file
 summary: using of ldd
 ---
@@ -213,4 +213,22 @@ lddtree /bin/ls
     libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6
 ```
 
-[ldd 实验](https://github.com/ljf12825/unix-like/tree/main/src/ldd)
+## 示例：手写一个简单项目，制造问题场景用`ldd`进行排查
+
+[ldd 示例](https://github.com/ljf12825/unix-like/tree/main/src/ldd)
+
+### 条件
+
+1. 一个自定义共享库 `mymath.h`, `mymath.c`编译为共享库
+2. 一个依赖该库的主程序
+
+### 制造问题场景
+
+#### 场景1：直接运行
+
+#### 场景2：库版本升级导致符号缺失
+
+#### 场景3：使用RPATH固化路径
+
+#### 场景4：用-u找出多余的链接
+
