@@ -1,7 +1,8 @@
 ---
+title: GNU
 type: file
 ---
 
-# Tool
+# GNU
 
 <!--more-->

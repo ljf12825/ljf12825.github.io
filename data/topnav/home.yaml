@@ -4,10 +4,10 @@
   url: "/home/log/"
 - name: "Repo"
   url: "/home/repository/"
-- name: "File"
-  url: "/home/file/"
+- name: "Archives"
+  url: "/home/archives/"
   children:
     - name: "History"
-      url: "/home/file/history/"
+      url: "/home/archives/history/"
 - name: "Ref"
   url: "/home/reference/"

@@ -1,7 +1,8 @@
 ---
+title: GCC
 type: file
 ---
 
-# Tool
+# GCC
 
 <!--more-->

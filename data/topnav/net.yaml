@@ -4,8 +4,8 @@
   url: "/net/lab/"
 - name: "Log"
   url: "/net/log/"
-- name: "File"
-  url: "/net/file/"
+- name: "Theory"
+  url: "/net/theory/"
   children:
-    - name: "Computer Network"
-      url: "/net/file/computernetwork/"
+    - name: "OSI & TCP-IP"
+      url: "/net/theory/osi_tcp-ip/"

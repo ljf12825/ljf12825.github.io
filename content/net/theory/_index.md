@@ -2,6 +2,4 @@
 type: file
 ---
 
-# Tool
-
-<!--more-->
+# Theory

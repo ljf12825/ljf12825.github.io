@@ -1,4 +1,8 @@
 ---
-title: Logic and Circuits
+title: Logic & Circuits
 type: file
 ---
+
+# Logic & Circuits
+
+<!--more-->
