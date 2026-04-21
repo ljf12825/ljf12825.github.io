@@ -1,10 +1,9 @@
 ---
 title: size
-date: 2025-12-31
-author: "ljf12825"
+date: 2026-04-21
+author: ljf12825
 type: file
-draft: false
-summary: usage of gnu size
+summary: Lists the section sizes of an object or archive file
 ---
 
 GNU`size`工具列出每个二进制文件（`objfile`）的各节(section)大小以及总大小。默认情况下，对于每个文件或每个归档文件的每个模块，都会生成一行输出

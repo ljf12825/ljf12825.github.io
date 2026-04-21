@@ -1,10 +1,9 @@
 ---
 title: nm
-date: 2025-12-31
-author: "ljf12825"
+date: 2026-04-21
+author: ljf12825
 type: file
-draft: false
-summary: usage of gnu nm
+summary: Lists symbols from object files
 ---
 
 `nm`是一个非常有用的命令行工具，用于查看目标文件（如`.o`, `.a`, `.so`, `.exe`等）中的符号表。符号表包含了目标文件中所有符号的信息，符号可以是变量、函数、数组等

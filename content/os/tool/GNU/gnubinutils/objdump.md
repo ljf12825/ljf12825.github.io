@@ -1,10 +1,9 @@
 ---
 title: objdump
-date: 2025-12-31
-author: "ljf12825"
+date: 2026-04-21
+author: ljf12825
 type: file
-draft: false
-summary: usage of gnu objdump
+summary: Displays information from object files
 ---
 
 
