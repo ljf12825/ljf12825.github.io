@@ -26,6 +26,8 @@
 
 [llvm.org](https://llvm.org/) LLVM homepage
 
+[sourceware.org](https://sourceware.org/) An infrastructure-level website for low-level system software developers, primarily hosting and maintaining the GNU toolchain and critical Linux system-level libraries
+
 ## C++
 [ISO/IEC 14882:xxxx](https://www.iso.org/) : The official C++ standard document, serving as a legal and technical specification rather than a learning guide. Developed by the International Standardization Organization (ISO). It strictly defines C++ syntax, semantics, standard library behavior, and the principles that all implementations (compilers) must adhere to. These standards documents are paid for and must be purchased from ISO or a national standards organization. `xxxx` means publish year.
 
