@@ -11,6 +11,7 @@ h6 {
 .filelist-container {
   max-width: 100%;
   box-sizing: border-box;
+  margin-bottom: 10px;
 }
 
 .filelist-description {
@@ -18,8 +19,6 @@ h6 {
   font-family: Verdana, Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.6;
-  border-bottom: 1px dashed #000080;
-  margin-bottom: 16px;
 }
 
 .filelist-description p {
@@ -40,6 +39,8 @@ h6 {
   width: 100%;
   font-family: monospace;
   padding: 0 0 20px 0;
+  border-bottom: 1px solid #000000;
+  margin-bottom: 16px;
 }
 
 .file_row {
