@@ -129,15 +129,6 @@ the same license as the content they accompany, unless otherwise stated.
 - If a file or directory contains its own LICENSE file, that license takes precedence.  
 - If no license is specified, all rights are reserved.  
 - Commercial use of non-code content is prohibited unless explicitly allowed.
-
----
-
-## Contact
-
-Jeff Lee (ljf12825)  
-Email: ljf12825@graingen.com  
-GitHub: https://github.com/ljf12825
-
 ```
 
 ---
