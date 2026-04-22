@@ -6,6 +6,9 @@
   url: "/se/log/"
 - name: "Toolchain"
   url: "/se/toolchain/"
+  children:
+    - name: "Perforce"
+      url: "/se/toolchain/perforce/"
 - name: "Theory"
   url: "/se/theory/"
   children:
