@@ -1,8 +1,7 @@
 ---
-title: Framework
 type: file
 ---
 
-# Framework
+# Framework & Library
 
 <!--more-->
