@@ -259,11 +259,10 @@ th {
 code {
   background-color: #000080;
   color: #c0c0c0;
-  padding: 0px 2px;
+  padding: 0px 5px;
   border-radius: 3px;
   font-family: "Fira Code", "JetBrains Mono", Consolas, monospace;
-  font-size: 0.95em;
-  letter-spacing: 0.5px;
+  font-size: 0.9em;
 }
 
 .highlight {
@@ -400,9 +399,11 @@ blockquote::before {
     pointer-events: none;
 }
 
-ul,
-ol {
-	padding-top: 0;
+ul:not(.topnav, .topnav *) ,
+ol:not(.topnav, .topnav *) {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 	margin-left: -20px;
 }
 
