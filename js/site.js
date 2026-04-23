@@ -75,6 +75,14 @@ document.addEventListener("DOMContentLoaded", () => {
       "meta[name='page-kind']"
     )?.content;
 
+      if (raw === "" | raw === "/") {
+          return {
+              path: virtualPath("/"),
+              cmd: "hostnamectl && man -k .",
+              file: null
+          };
+      }
+
     if (kind === "page" && parts.length > 0) {
       const file = parts.pop();
       const dir = "/" + parts.join("/");
