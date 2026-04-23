@@ -1,7 +1,8 @@
 ---
+title: Ecosystem
 type: file
 ---
 
-# Rust
+# Ecosystem
 
 <!--more-->

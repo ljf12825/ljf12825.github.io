@@ -1,7 +1,8 @@
 ---
+title: Practice
 type: file
 ---
 
-# Rust
+# Practice
 
 <!--more-->

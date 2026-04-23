@@ -1,7 +1,8 @@
 ---
+title: Standard
 type: file
 ---
 
-# Rust
+# Standard
 
 <!--more-->
