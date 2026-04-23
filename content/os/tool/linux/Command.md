@@ -1890,6 +1890,96 @@ test.jpg: ASCII text
 
 ---
 
+## `stat`
+
+`stat`用来查看文件或文件系统的详细元信息，它比`ls`的输出更细致，更底层，更全面
+
+语法
+
+```bash
+stat filename
+```
+
+输出类似
+
+```txt
+  File: filename
+  Size: 16088     	Blocks: 32         IO Block: 4096   regular file
+Device: 259,6	Inode: 8141737     Links: 1
+Access: (0775/-rwxrwxr-x)  Uid: ( 1000/username)   Gid: ( 1000/username)
+Access: 2025-12-30 10:01:34.697442095 +0800
+Modify: 2025-12-07 21:04:45.777580704 +0800
+Change: 2025-12-07 21:04:45.777592199 +0800
+ Birth: 2025-12-07 21:04:45.764553639 +0800
+```
+
+- File：文件名
+- Size：文件大小(Byte)，（可以用`read()`读到的字节数）
+- Blocks / IO Block
+  - Blocks：占用磁盘块数量
+  - IO Blocks：文件系统块大小（比如 4096 bytes）
+- regula file：文件类型
+- Device：主设备号，次设备号；说明文件所在磁盘/分区
+- Inode：唯一编号，存储权限，拥有者，磁盘位置，时间信息；不存文件名
+- Links：硬链接数
+- Access：权限
+- Uid：用户信息
+- Gid：组信息
+- Access：最后访问时间，例如`cat`, `less`，程序读取
+- Modify：文件内容最后内容修改时间
+- Change：状态变化，inode matadata变化
+- Birth：创建时间，不是所有文件系统都支持，ext4/btrfs支持较好，有些系统会显示`-`
+
+### 常用参数
+
+#### 简洁输出
+
+```bash
+stat -c "%s %n" file
+```
+
+输出文件大小 + 文件名
+
+#### 自定义格式
+
+```bash
+stat -c "Size: %s bytes, Inode: %i" file
+```
+
+常见格式占位符
+
+| 格式 | 含义 |
+| - | - |
+| `%s` | size |
+| `%n` | filename |
+| `%i` | inode |
+| `%U` | user name |
+| `%G` | group |
+| `%a` | permissions |
+| `%y` | modify time |
+
+#### 查看文件系统信息
+
+```bash
+stat -f .
+```
+
+会显示文件系统容量，inode总数，剩余空间
+
+### `stat`本质
+
+`stat`不是读文件内容，而是读filesystem metadata layer
+
+对应系统调用
+
+```c
+int stat(const char *path, struct stat *buf);
+```
+
+Linux内核直接返回 inode 信息
+
+---
+
 ## 网络相关
 
 - `ping`：测试网络
