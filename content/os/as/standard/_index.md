@@ -1,8 +1,8 @@
 ---
-title: CLI
+title: Standard
 type: file
 ---
 
-# CLI
+# Standard
 
 <!--more-->

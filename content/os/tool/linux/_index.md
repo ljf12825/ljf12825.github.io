@@ -6,6 +6,4 @@ summary: linux from usage to kenel
 
 # Linux
 
----
-
-# Filelist
+<!--more-->

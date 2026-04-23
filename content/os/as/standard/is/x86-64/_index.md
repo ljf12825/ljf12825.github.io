@@ -1,8 +1,8 @@
 ---
-title: CLI
+title: x86-64
 type: file
 ---
 
-# CLI
+# x86-64
 
 <!--more-->

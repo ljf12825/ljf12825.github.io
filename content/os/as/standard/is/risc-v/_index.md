@@ -1,8 +1,8 @@
 ---
-title: CLI
+title: RISC-V
 type: file
 ---
 
-# CLI
+# RISC-V
 
 <!--more-->

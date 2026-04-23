@@ -1,8 +1,8 @@
 ---
-title: CLI
+title: ARM
 type: file
 ---
 
-# CLI
+# ARM
 
 <!--more-->
