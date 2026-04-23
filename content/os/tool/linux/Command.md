@@ -1,6 +1,6 @@
 ---
 title: command
-date: 2026-04-03
+date: 2026-04-21
 type: file
 summary: linux common command
 ---
@@ -1979,6 +1979,85 @@ int stat(const char *path, struct stat *buf);
 Linux内核直接返回 inode 信息
 
 ---
+
+## `--`
+
+```bash
+command [options] -- [arguments]
+```
+
+`--`是选项结束标志，意为后面所有内容都不再当作参数，而是当作普通输入
+
+Unix的设计哲学有：文件名可以是任何字符串，这就导致很多命令都会出现以下问题
+
+```bash
+rm -f file.txt
+```
+
+- `-f`是选项
+- `file.txt`是文件
+
+但如果文件名刚好是 `-f` 怎么办
+
+```bash
+rm -f -f
+```
+
+shell会误以为第二个`-f`也是参数\
+结果可能变成
+
+- 强制模式
+- 或错误解析
+- 或直接行为不符合预期
+
+此时`--`可以告诉命令，后面的内容不要当参数解析
+
+```bash
+rm -f -- -f
+```
+
+`-f`就被当作普通文件
+
+### 示例
+
+#### 删除奇怪名字文件
+
+```bash
+rm -- -file
+```
+
+#### grep 搜索内容
+
+```bash
+grep -- -pattern file.txt
+```
+
+搜索字符串`-pattern`，而不是参数
+
+#### 编译器场景
+
+```bash
+gcc -- -Wall
+```
+
+这里`-Wall`会被当成源文件名
+
+### 本质
+
+shell的解析规则是
+
+```bash
+command [options] [arguments]
+```
+
+而`--`是切换解析状态的分隔符
+
+等价于
+
+```
+parse_mode = ARGUMENT_ONLY
+```
+
 
 ## 网络相关
 
