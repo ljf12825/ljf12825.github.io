@@ -186,7 +186,9 @@ header .banner {
 
 .cursor.stop {
 	animation: none;
-	opacity: 0;
+	/* opacity: 0; */
+    /* transition: none; */
+    opacity: 1;
 }
 
 @keyframes blink {
