@@ -1,7 +1,7 @@
 ---
 title: ldd
 author: ljf12825
-date: 2026-04-20
+date: 2026-04-24
 type: file
 summary: using of ldd
 ---
@@ -26,6 +26,7 @@ libpcre2-8.so.0 => /lib/x86_64-linux-gnu/libpcre2-8.so.0 (0x0000717dff166000)
 ```
 
 | 输出部分 | 含义 |
+| - | - |
 | `libselinux.so.1` | 程序需要的动态库名称 |
 | `=>` | 指向符号，表示“解析到了哪里” |
 | `/lib/x86_64...` | 实际加载的文件路径。如果这里显示`not found`，说明程序启动会因缺少库而报错 |
@@ -213,22 +214,4 @@ lddtree /bin/ls
     libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6
 ```
 
-## 示例：手写一个简单项目，制造问题场景用`ldd`进行排查
-
-[ldd 示例](https://github.com/ljf12825/unix-like/tree/main/src/ldd)
-
-### 条件
-
-1. 一个自定义共享库 `mymath.h`, `mymath.c`编译为共享库
-2. 一个依赖该库的主程序
-
-### 制造问题场景
-
-#### 场景1：直接运行
-
-#### 场景2：库版本升级导致符号缺失
-
-#### 场景3：使用RPATH固化路径
-
-#### 场景4：用-u找出多余的链接
-
+[ldd using](/os/lab/ldd_using/)
