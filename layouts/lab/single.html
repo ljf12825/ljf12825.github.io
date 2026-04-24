@@ -15,14 +15,14 @@
     <div class="lab-meta">
 
     <div class="meta-row">
-        <span class="meta-key">STATUS</span>
+        <span class="meta-key">Status:</span>
         <span class="meta-value status {{ lower (.Params.status | default "unknown") }}">
         {{ .Params.status | default "UNKNOWN" }}
         </span>
     </div>
 
     <div class="meta-row">
-        <span class="meta-key">DATE</span>
+        <span class="meta-key">Modified:</span>
         <span class="meta-value">
         {{ .Date.Format "2006-01-02" }}
         </span>
@@ -30,30 +30,30 @@
 
     {{ with .Params.category }}
     <div class="meta-row">
-        <span class="meta-key">CATEGORY</span>
+        <span class="meta-key">Category:</span>
         <span class="meta-value">{{ . }}</span>
     </div>
     {{ end }}
 
     {{ with .Params.summary }}
     <div class="meta-row">
-        <span class="meta-key">SUMMARY</span>
+        <span class="meta-key">Summary:</span>
         <span class="meta-value">{{ . }}</span>
     </div>
     {{ end }}
 
     {{ with .Params.repo }}
-        <div class="meta-row">
-        <span class="meta-key">REPO</span>
-        <span class="meta-value">
-        <a href="{{ . }}" target="_blank">repolink</a>
+    <div class="meta-row">
+        <span class="meta-key">
+        <a href="{{ . }}" target="_blank">URL</a>
         </span>
-        </div>
-        {{ end }}
-
-        </div>
+         <span class="meta-value"></span>
+    </div>
+    {{ end }}
 
     </div>
+
+  </div>
 
   <div class="lab-divider"></div>
 
