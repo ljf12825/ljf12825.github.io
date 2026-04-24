@@ -1,6 +1,6 @@
 ---
 title: commit
-date: 2025-12-31
+date: 2025-04-24
 author: ljf12825
 type: file
 summary: git commit
@@ -140,26 +140,37 @@ BREAKING CHANGE：登录接口参数发生变更，客户端需更新
 - 破坏性变更（BREAKING CHANGE）需要明确写出来
 - Git工具`git commit`支持钩子（commit hooks），可以配合工具（如commitlint）自动校验提交格式
 
-## OPTIONS
+## 修改提交日期
 
-- `-m "msg"` 直接写提交信息
-- `-a` 跳过add，自动暂存已跟踪文件
-- `--amend` 修改上一次提交
-- `--no-edit` amend时保留原message
-- `--dry-run` 预览将提交什么
-- `-v` 显示diff到编辑器
-- `-p` 交互式选择hunk
-- `--reuse-message=<hash>` `-C <hash>` 复用某次commit的message
-- `-c <hash>` 复用但可编辑
-- `--reset-author` 重置作者时间
-- `--fixup <hash>` 标记为修复某提交
-- `--squash <hash>` 合并到某提交
-- `--no-verify` 跳过hook
-- `--allow-empty` 允许空提交
-- `--author="A <a@b.com>"` 改作者
-- `--date="2023-01-01"` 改时间
-- `--reset-author` 用当前用户
-- `--no-gpg-sign` 跳过签名
-- `--no-verify` 跳过pre-commit
-- `--quiet` 安静输出
-- `--short` 简短
+### 修改最近一次提交的日期
+
+```bash
+# 修改为指定日期
+git commit --amend --date="2024-01-15 14:30:00"
+
+# 修改为当前日期
+git commit --amend --date="$(date)"
+
+# 或者使用 --reset-author 重置为当前时间
+git commit --amend --reset-author
+```
+
+### 修改更早的提交日期（交互式rebase）
+
+```bash
+# 进入交互式 rebase, n 是要修改的提交之前的提交次数
+git rebase -i HEAD~n
+
+# 在编辑器中，将需要修改的提交前的pick 改为 edit
+# 保存退出后，Git 会停在第一个标记为 edit 的提交
+```
+
+然后对每个要修改的提交执行
+
+```bash
+# 修改日期
+GIT_COMMITTER_DATE="2024-01-15 14:30:00" git commit --amend --no-edit --date "2024-01-15 14:30:00"
+
+# 继续 rebase
+git rebase --continue
+```
