@@ -131,11 +131,11 @@ Linux的众多发行版迭代速度很快，且大都是社区或组织进行维
 | POSIX.1-1990 | ISO/IEC 9945-1:1990 | 无 | 国际标准化版本，内容与1988版几乎相同 |
 | POSIX.1b | 1003.1b-1993 | 无 | 实时扩展：信号量、消息队列、共享内存、定时器 |
 | POSIX.1c | 1003.1c-1995 | 无 | 线程扩展：`pthread_create`，互斥锁，条件变量 |
-| POSIX.1-1996 | SUSv1 | 首次大合并：合并了基本规范 + 实时 + 线程 |
+| POSIX.1-1996 | IEEE Std 1003.1-1996 | SUSv1 | 首次大合并：合并了基本规范 + 实时 + 线程 |
 | POSIX.1-2001 | IEEE Std 1003.1-2001 | SUSv3 | 重要分水岭。与SUSv3内容完全相同。Linux内核2.6/glibc的主要对标目标 |
 | POSIX.1-2008 | IEEE Std 1003.1-2008 | SUSv4 | 当前主流基准。移除了过时函数（如`gethostbyname`，引入`openat`等新接口。macOS、AIX以此认证 |
-| POSIX.1-2017 | IEEE std1003.1-2008 | SUSv4 2018 | 勘误维护版，无重大新特性 |
-| POSIX.1-2024 | IEEE Std 1003.1-2024 | SUSv5（推测）| 最新。引入`_FORTIFY_SOURCE`风格的安全函数，`pthread_mutex_clocklock`，修复`fork`与多线程的原子性问题 |
+| POSIX.1-2017 | IEEE std1003.1-2008 | SUSv4 | 勘误维护版，无重大新特性 |
+| POSIX.1-2024 | IEEE Std 1003.1-2024 | SUSv5 | 最新。引入`_FORTIFY_SOURCE`风格的安全函数，`pthread_mutex_clocklock`，修复`fork`与多线程的原子性问题 |
 
 特殊版本
 
