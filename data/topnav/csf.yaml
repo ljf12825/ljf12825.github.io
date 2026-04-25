@@ -4,6 +4,8 @@
   url: "/csf/lab/"
 - name: "Log"
   url: "/csf/log/"
+- name: "Puzzle"
+  url: "/csf/puzzle/"
 - name: "Theory"
   url: "/csf/theory/"
   children:
