@@ -6,9 +6,15 @@
   url: "/se/log/"
 - name: "Toolchain"
   url: "/se/toolchain/"
+- name: "VCS"
+  url: "/se/vcs/"
   children:
     - name: "Perforce"
-      url: "/se/toolchain/perforce/"
+      url: "/se/vcs/perforce/"
+    - name: "Git"
+      url: "/se/vcs/git/"
+    - name: "SVN"
+      url: "/se/vcs/svn/"
 - name: "Theory"
   url: "/se/theory/"
   children:
