@@ -10,7 +10,6 @@ body {
 	padding-top: 90px;
 	margin: 0;
 	display: flex;
-	font-family: Verdana, Helvetica, Arial, sans-serif;
 	font-size: 14px;
 	background: #c0c0c0;
 	color: #000000;
@@ -160,7 +159,6 @@ header .banner {
 	top: 0;
 	left: 0;
 	width: 100%;
-	font-family: monospace;
 	font-size: 14px;
 	padding: 20px 16px;
 	background: rgba(0, 0, 0, 0);
@@ -209,7 +207,6 @@ header .banner {
 .content h5,
 .content h6 {
 	color: #000080;
-	font-family: 'Lucida Sans', Verdana, sans-serif;
 }
 
 .content h2 {
@@ -263,7 +260,6 @@ code {
   color: #c0c0c0;
   padding: 0px 5px;
   border-radius: 3px;
-  font-family: "Fira Code", "JetBrains Mono", Consolas, monospace;
   font-size: 0.9em;
 }
 
@@ -290,7 +286,6 @@ code {
 
 
 .highlight code {
-	font-family: "Fira Code", "JetBrains Mono", "Cascadia Code";
 	color: #ffffff;
 	line-height: 20px;
 	background-color: #000080;
@@ -376,7 +371,6 @@ blockquote {
     color: #C0C0C0;
 
     position: relative;
-	font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 
 blockquote p {
@@ -421,7 +415,6 @@ ol:not(.topnav, .topnav *) {
   bottom: 20px;
   background: #c0c0c0;
   color: #000080;
-  font-family: "Fira Code", Consolas, monospace;
   border-top: 2px solid #ffffff;
   border-left: 2px solid #ffffff;
   border-right: 2px solid #000080;
@@ -524,7 +517,6 @@ ol:not(.topnav, .topnav *) {
   flex-wrap: nowrap;
 }
 .ascii {
-  font-family: monospace;
   flex: 0 0 auto;
   margin-right: 3rem;
   color: #000080;
@@ -594,12 +586,11 @@ body::-webkit-scrollbar-thumb:hover {
   position: fixed;
   right: 40px;
   bottom: 40px;
-  width: 520px;
+  width: 450px;
   max-height: 70vh;
 
   background: #c0c0c0;
   color: #000080;
-  font-family: "Fira Code", Consolas, monospace;
 
   border-top: 2px solid #ffffff;
   border-left: 2px solid #ffffff;

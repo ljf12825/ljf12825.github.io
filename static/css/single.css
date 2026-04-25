@@ -27,7 +27,6 @@
 }
 
 .single_article {
-  font-family: Arial, Helvetica, sans-serif;
   color: black;
   width: 900px;
   margin: 0 auto;
@@ -35,7 +34,6 @@
 }
 
 .single_article .title {
-  font-family: Arial, Helvetica, sans-serif;
   padding: 20px 10px 0px 40px;
   font-size: 35px;
   font-weight: bold;
@@ -96,7 +94,6 @@
   padding: 1rem;
   border-radius: 6px;
   overflow-x: auto;
-  font-family: "Fira Code", monospace;
   font-size: 0.9rem;
 }
 
@@ -130,7 +127,6 @@
   background: #c0c0c0;
   color: #000080;
   max-height: 45vh !important;
-  font-family: "Fira Code", Consolas, monospace;
   border-top: 2px solid #ffffff;
   border-left: 2px solid #ffffff;
   border-right: 2px solid #000080;
