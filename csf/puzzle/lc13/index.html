@@ -1,0 +1,148 @@
+<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>LC13.E.RomanToInt</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-lua.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-rust.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/single.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/csf/>~</a></li><li><a href=/csf/lab/>Lab</a></li><li><a href=/csf/log/>Log</a></li><li><a href=/csf/puzzle/>Puzzle</a></li><li class=has-dropdown><a href=/csf/theory/>Theory</a><ul class=dropdown><li><a href=/csf/theory/algorithm/>Algorithm</a></li><li><a href=/csf/theory/computer_architecture>Computer Architecture</a></li><li><a href=/csf/theory/data_structure/>Data Structure</a></li><li><a href=/csf/theory/mathematics/>Mathematics</a></li><li><a href=/csf/theory/theory_of_computation/>Theory of Computation</a></li><li><a href=/csf/theory/discrete_mathematics/>Discrete Mathematics</a></li><li><a href=/csf/theory/logic_circuits/>Logic Circuits</a></li></ul></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><div class=star-body><div class=nav-row><a class=nav-item data-label=Home data-path=/home/ data-article-count=6 data-recent-count=6 data-total-count=449 href=/home/>Home</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=CTX data-path=/ctx/ data-article-count=1 data-recent-count=0 data-total-count=449 href=/ctx/>CTX</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=.NET data-path=/dnet/ data-article-count=28 data-recent-count=3 data-total-count=449 href=/dnet/>.NET</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=GP data-path=/gp/ data-article-count=0 data-recent-count=0 data-total-count=449 href=/gp/>GP</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=ECO data-path=/eco/ data-article-count=90 data-recent-count=2 data-total-count=449 href=/eco/>ECO</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=SE data-path=/se/ data-article-count=130 data-recent-count=7 data-total-count=449 href=/se/>SE</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=Lang data-path=/lang/ data-article-count=38 data-recent-count=38 data-total-count=449 href=/lang/>Lang</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=OS data-path=/os/ data-article-count=100 data-recent-count=46 data-total-count=449 href=/os/>OS</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=NET data-path=/net/ data-article-count=6 data-recent-count=0 data-total-count=449 href=/net/>NET</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=CSF data-path=/csf/ data-article-count=50 data-recent-count=6 data-total-count=449 href=/csf/>CSF</a>
+<span class=nav-stats></span></div></div></nav><script defer src=/js/star-nav.js></script><script defer src=/js/site.js></script><script defer src=/js/star-active.js></script><div id=ref-window class="float-window open"><div class=float-header><span class="title open">>> >> >> Reference &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Ref>>>>>></span></div><div class=float-body><div class=ref-list><a href=https://www.mixamo.com/ target=_blank>Mixamo</a> |
+<a href=https://opengameart.org/ target=_blank>OpenGameArt</a><p><a href=https://sharplab.io/ target=_blank>SharpLab</a> |
+<a href=https://godbolt.org/ target=_blank>Compiler Explorer</a></p><p><a href="https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type+Something+&x=none&v=4&h=4&w=80&we=false" target=_blank>ASCII Graph Generator</a></p><p><a href=https://mermaid.js.org/ target=_blank>Mermaid</a></p><a href=https://www.vim.org/ target=_blank>Vim</a> | <a href=https://vimdoc.sourceforge.net/ target=_blank>Vim Manual Source</a> |
+<a href=https://vimcdoc.sourceforge.net/ target=_blank>Vimcdoc</a> | <a href=https://vimcdoc.sourceforge.net/doc/help.html target=_blank>Vimdoc read online</a><p><a href=https://shields.io/ target=_blank>Shields.io</a></p><p><a href=https://emojidb.org/ target=_blank>EmojiDB</a></p><p><a href=https://cppreference.com/ target=_blank>cppreference</a> |
+<a href=https://isocpp.org/ target=_blank>isocpp</a> |
+<a href=https://open-std.org target=_blank>open-std</a></p><p><a href=https://cmake.com/ target=_blank>cmake.org</a></p><p><a href=https://llvm.org/ target=_blank>llvm.org</a></p><p><a href=https://www.boost.org/ target=_blank>boost.org</a></p><p><a href=https://learn.microsoft.com/en-us/dotnet/csharp/ target=_blank>Microsoft Learn</a><p><a href=https://www.lua.org/ target=_blank>lua.org</a> |
+<a href=https://www.luarocks.org/ target=_blank>luarocks.org</a> |
+<a href=https://www.luajit.org/ target=_blank>luajit.org</a></p><p><a href=https://docs.unity3d.com/Manual/index.html target=_blank>Unity Manual</a> |
+<a href=https://docs.unity3d.com/ScriptReference/index.html target=_blank>Unity API</a></p><p><a href=https://docs.unrealengine.com/ target=_blank>Unreal Engine Docs</a></p><p><a href=https://godotengine.org target=_blank>Godot</a> |
+<a href=https://docs.godotengine.org/en/stable/ target=_blank>Godot Docs</a></p><p><a href=https://z-library.sk/ target=_blank>Z-Library</a></p><p><a href=https://docs.kernel.org/ target=_blank>Linux Kernel Docs</a></p><p><a href=https://www.gnu.org/ target=_blank>GNU</a></p><a href=https://archlinux.org/ target=_blank>ArchLinux</a><p><a href=https://help.ubuntu.com/ target=_blank>Ubuntu Doc</a> |
+<a href=https://ubuntu.com/server/docs target=_blank>Ubuntu Server Guide</a></p><p><a href=https://www.vulkan.org/ target=_blank>Vulkan</a> |
+<a href=https://docs.vulkan.org/ target=_blank>Vulkan Docs</a></p><p><a href=https://www.opengl.org/ target=_blank>OpenGL</a> |
+<a href=https://registry.khronos.org/OpenGL target=_blank>OpenGL API</a> |
+<a href=https://www.khronos.org/opengl/wiki/ target=_blank>OpenGL Wiki</a></p><p><a href=https://learn.microsoft.com/en-us/windows/win32/directx target=_blank>DirectX</a></p><p><a href=https://www.realtimerendering.com/ target=_blank>Real-Time Rendering</a></p><p><a href=https://www.pbr-book.org/ target=_blank>Physically Based Rendering</a></p><p><a href=https://www.scratchapixel.com/ target=_blank>Scratchapixel</a></p><p><a href=https://learnopengl.com/ target=_blank>LearnOpenGL</a></p><p><a href=https://raytracing.github.io/ target=_blank>Ray Tracing in One Weekend</a></p><p><a href=https://www.shadertoy.com/ target=_blank>Shadertoy</a></p><p><a href=https://arxiv.org/list/cs.GR/recent target=_blank>arXiv Graphics</a></p><p><a href=https://www.siggraph.org/ target=_blank>SIGGRAPH</a> |
+<a href=https://dl.acm.org/conference/siggraph target=_blank>SIGGRAPH Digital Library</a></p><p><a href=https://git-scm.com/ target=_blank>Git</a></p><p><a href=https://sourceware.org/ target=_blank>sourceware</a></p></div></div></div><script src=/js/ref-window.js></script><div class=layout><article class=single_article><div class=title>LC13.E.RomanToInt<div class=meta>M: 2026-04-25
+- ljf12825</div></div><div class=content><blockquote><p>题目</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-txt data-lang=txt><span style=display:flex><span>罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>字符          数值
+</span></span><span style=display:flex><span>I             1
+</span></span><span style=display:flex><span>V             5
+</span></span><span style=display:flex><span>X             10
+</span></span><span style=display:flex><span>L             50
+</span></span><span style=display:flex><span>C             100
+</span></span><span style=display:flex><span>D             500
+</span></span><span style=display:flex><span>M             1000
+</span></span><span style=display:flex><span>例如， 罗马数字 2 写做 II ，即为两个并列的 1 。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，
+</span></span><span style=display:flex><span>例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 ，数字 9 表示为 IX。
+</span></span><span style=display:flex><span>这个特殊的规则只适用于以下六种情况：
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>I 可以放在 V(5) 和 X(10) 的左边，来表示 4 和 9。
+</span></span><span style=display:flex><span>X 可以放在 L(50) 和 C(100) 的左边，来表示 40 和 90。
+</span></span><span style=display:flex><span>C 可以放在 D(500) 和 M(1000) 的左边，来表示 400 和 900。
+</span></span><span style=display:flex><span>给定一个罗马数字，将其转换成整数。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>示例 1:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>输入: s = &#34;III&#34;
+</span></span><span style=display:flex><span>输出 : 3
+</span></span><span style=display:flex><span>示例 2 :
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>输入 : s = &#34;IV&#34;
+</span></span><span style=display:flex><span>输出 : 4
+</span></span><span style=display:flex><span>示例 3 :
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>输入 : s = &#34;IX&#34;
+</span></span><span style=display:flex><span>输出 : 9
+</span></span><span style=display:flex><span>示例 4 :
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>输入 : s = &#34;LVIII&#34;
+</span></span><span style=display:flex><span>输出 : 58
+</span></span><span style=display:flex><span>解释 : L = 50, V = 5, III = 3.
+</span></span><span style=display:flex><span>示例 5 :
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>输入 : s = &#34;MCMXCIV&#34;
+</span></span><span style=display:flex><span>输出 : 1994
+</span></span><span style=display:flex><span>解释 : M = 1000, CM = 900, XC = 90, IV = 4.
+</span></span><span style=display:flex><span>提示：
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>1 &lt;= s.length &lt;= 15
+</span></span><span style=display:flex><span>s 仅含字符(&#39;I&#39;, &#39;V&#39;, &#39;X&#39;, &#39;L&#39;, &#39;C&#39;, &#39;D&#39;, &#39;M&#39;)
+</span></span><span style=display:flex><span>题目数据保证 s 是一个有效的罗马数字，且表示整数在范围[1, 3999] 内
+</span></span><span style=display:flex><span>题目所给测试用例皆符合罗马数字书写规则，不会出现跨位等情况。
+</span></span><span style=display:flex><span>IL 和 IM 这样的例子并不符合题目要求，49 应该写作 XLIX，999 应该写作 CMXCIX 。
+</span></span></code></pre></div><blockquote><p>题解</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;unordered_map&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#ff79c6>#include</span> <span style=color:#ff79c6>&lt;iostream&gt;</span><span style=color:#ff79c6>
+</span></span></span><span style=display:flex><span><span style=color:#6272a4>//不使用unordered_map
+</span></span></span><span style=display:flex><span><span style=color:#8be9fd>int</span> <span style=color:#50fa7b>romanToInt</span>(std<span style=color:#ff79c6>::</span>string s)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>	<span style=color:#ff79c6>auto</span> getValue <span style=color:#ff79c6>=</span> [](<span style=color:#8be9fd>char</span><span style=color:#ff79c6>&amp;</span> value)<span style=color:#ff79c6>-&gt;</span><span style=color:#8be9fd>int</span>{
+</span></span><span style=display:flex><span>			<span style=color:#ff79c6>switch</span> (value)
+</span></span><span style=display:flex><span>			{
+</span></span><span style=display:flex><span>			<span style=color:#ff79c6>case</span><span style=color:#f1fa8c>&#39;I&#39;</span><span style=color:#ff79c6>:</span>
+</span></span><span style=display:flex><span>				<span style=color:#ff79c6>return</span> <span style=color:#bd93f9>1</span>;
+</span></span><span style=display:flex><span>			<span style=color:#ff79c6>case</span> <span style=color:#f1fa8c>&#39;V&#39;</span><span style=color:#ff79c6>:</span>
+</span></span><span style=display:flex><span>				<span style=color:#ff79c6>return</span> <span style=color:#bd93f9>5</span>;
+</span></span><span style=display:flex><span>			<span style=color:#ff79c6>case</span> <span style=color:#f1fa8c>&#39;X&#39;</span><span style=color:#ff79c6>:</span>
+</span></span><span style=display:flex><span>				<span style=color:#ff79c6>return</span> <span style=color:#bd93f9>10</span>;
+</span></span><span style=display:flex><span>			<span style=color:#ff79c6>case</span> <span style=color:#f1fa8c>&#39;L&#39;</span><span style=color:#ff79c6>:</span>
+</span></span><span style=display:flex><span>				<span style=color:#ff79c6>return</span> <span style=color:#bd93f9>50</span>;
+</span></span><span style=display:flex><span>			<span style=color:#ff79c6>case</span> <span style=color:#f1fa8c>&#39;C&#39;</span><span style=color:#ff79c6>:</span>
+</span></span><span style=display:flex><span>				<span style=color:#ff79c6>return</span> <span style=color:#bd93f9>100</span>;
+</span></span><span style=display:flex><span>			<span style=color:#ff79c6>case</span> <span style=color:#f1fa8c>&#39;D&#39;</span><span style=color:#ff79c6>:</span>
+</span></span><span style=display:flex><span>				<span style=color:#ff79c6>return</span> <span style=color:#bd93f9>500</span>;
+</span></span><span style=display:flex><span>			<span style=color:#ff79c6>case</span> <span style=color:#f1fa8c>&#39;M&#39;</span><span style=color:#ff79c6>:</span>
+</span></span><span style=display:flex><span>				<span style=color:#ff79c6>return</span> <span style=color:#bd93f9>1000</span>;
+</span></span><span style=display:flex><span>			<span style=color:#ff79c6>default</span><span style=color:#ff79c6>:</span>
+</span></span><span style=display:flex><span>				<span style=color:#ff79c6>return</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>			}
+</span></span><span style=display:flex><span>	};
+</span></span><span style=display:flex><span>	<span style=color:#8be9fd>int</span> sum <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>	<span style=color:#ff79c6>for</span> (<span style=color:#8be9fd>int</span> i <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>; i <span style=color:#ff79c6>&lt;</span> s.size() <span style=color:#ff79c6>-</span> <span style=color:#bd93f9>1</span>; <span style=color:#ff79c6>++</span>i)
+</span></span><span style=display:flex><span>	{
+</span></span><span style=display:flex><span>		sum <span style=color:#ff79c6>+=</span> (getValue(s[i <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>1</span>]) <span style=color:#ff79c6>&gt;</span> getValue(s[i]) <span style=color:#ff79c6>?</span> (<span style=color:#ff79c6>-</span>getValue(s[i])) <span style=color:#ff79c6>:</span> getValue(s[i]));
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>	sum <span style=color:#ff79c6>+=</span> getValue(s.back());
+</span></span><span style=display:flex><span>	<span style=color:#ff79c6>return</span> sum;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>//使用unordered_map
+</span></span></span><span style=display:flex><span>std<span style=color:#ff79c6>::</span>unordered_map<span style=color:#ff79c6>&lt;</span><span style=color:#8be9fd>char</span>, <span style=color:#8be9fd>int</span><span style=color:#ff79c6>&gt;</span> ROMAN <span style=color:#ff79c6>=</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>	{<span style=color:#f1fa8c>&#39;I&#39;</span>, <span style=color:#bd93f9>1</span>},
+</span></span><span style=display:flex><span>	{<span style=color:#f1fa8c>&#39;V&#39;</span>, <span style=color:#bd93f9>5</span>},
+</span></span><span style=display:flex><span>	{<span style=color:#f1fa8c>&#39;X&#39;</span>, <span style=color:#bd93f9>10</span>},
+</span></span><span style=display:flex><span>	{<span style=color:#f1fa8c>&#39;L&#39;</span>, <span style=color:#bd93f9>50</span>},
+</span></span><span style=display:flex><span>	{<span style=color:#f1fa8c>&#39;C&#39;</span>, <span style=color:#bd93f9>100</span>},
+</span></span><span style=display:flex><span>	{<span style=color:#f1fa8c>&#39;D&#39;</span>, <span style=color:#bd93f9>500</span>},
+</span></span><span style=display:flex><span>	{<span style=color:#f1fa8c>&#39;M&#39;</span>, <span style=color:#bd93f9>1000</span>},
+</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span><span style=color:#ff79c6>class</span> <span style=color:#50fa7b>Solution</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span><span style=color:#ff79c6>public</span><span style=color:#ff79c6>:</span>
+</span></span><span style=display:flex><span>	<span style=color:#8be9fd>int</span> romanToInt(std<span style=color:#ff79c6>::</span>string s)
+</span></span><span style=display:flex><span>	{
+</span></span><span style=display:flex><span>		<span style=color:#8be9fd>int</span> ans <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>;
+</span></span><span style=display:flex><span>		<span style=color:#ff79c6>for</span> (<span style=color:#8be9fd>int</span> i <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>; i <span style=color:#ff79c6>&lt;</span> s.size() <span style=color:#ff79c6>-</span> <span style=color:#bd93f9>1</span>; <span style=color:#ff79c6>++</span>i)
+</span></span><span style=display:flex><span>		{
+</span></span><span style=display:flex><span>			<span style=color:#8be9fd>int</span> x <span style=color:#ff79c6>=</span> ROMAN[s[i]], y <span style=color:#ff79c6>=</span> ROMAN[s[i <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>1</span>]];
+</span></span><span style=display:flex><span>			ans <span style=color:#ff79c6>+=</span> x <span style=color:#ff79c6>&lt;</span> y <span style=color:#ff79c6>?</span> <span style=color:#ff79c6>-</span><span style=color:#8be9fd;font-style:italic>x</span> : x;
+</span></span><span style=display:flex><span>		}
+</span></span><span style=display:flex><span>		<span style=color:#ff79c6>return</span> ans <span style=color:#ff79c6>+</span> ROMAN[s.back()];
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>};
+</span></span></code></pre></div></div><nav class=post-nav><a href=/csf/puzzle/lc14/>Next: LC14.E.LongestCommonPrefix</a></nav></article></div><aside id=toc-window class=toc aria-label=目录 role=complementary data-state=expanded><div class=toc-header id=toc-header role=button tabindex=0 aria-label=折叠/展开目录 aria-expanded=true><span class="title open" aria-hidden=true>>> >> >> TOC &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed" aria-hidden=true>&lt;&lt;&lt;&lt;&lt;&lt;TOC>>>>>></span></div><div class=toc-body id=toc-body><nav id=TableOfContents></nav></div></aside><script src=/js/toc-window.js defer></script><script src=/js/scrollspy.js defer></script><script type=module>
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ 
+    startOnLoad: true, theme: "default" });
+</script><footer><div class=container><p>© 2026 Jeff Lee(ljf12825). All rights reserved |
+<a href=https://creativecommons.org/licenses/by-nc-sa/4.0/>Article: CC BY-NC-SA 4.0</a> |
+<a href=https://creativecommons.org/licenses/by-sa/4.0/>Content: CC BY-SA 4.0</a> |
+<a href=https://opensource.org/licenses/MIT>Code: MIT License</a> |
+<a href=/LICENSES.md>Full License</a> |
+<a href=/index.xml>RSS</a></p></div></footer></body></html>
