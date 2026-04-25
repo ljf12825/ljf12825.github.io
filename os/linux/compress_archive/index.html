@@ -1,0 +1,124 @@
+<!doctype html><html lang=en><head><meta name=page-kind content="page"><meta charset=UTF-8><title>compress & archive</title><link rel=stylesheet href=/css/style.css><link href=https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css rel=stylesheet><script src=https://cdn.jsdelivr.net/npm/prismjs@1/prism.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-lua.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js></script><script src=https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-rust.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><link rel=stylesheet href=/css/single.css></head><body><header class=site-header><div class=container><div class=terminal-overlay aria-label=terminal-prompt><span id=typed-line></span><span class=cursor>█</span></div></div></header><nav class=topnav><div class=container><ul><li><a href=/os/>★</a></li><li><a href=/os/lab/>Lab</a></li><li><a href=/os/log/>Log</a></li><li><a href=/os/tool/>Tool</a></li><li><a href=/os/posix/>POSIX</a></li><li class=has-dropdown><a href=/os/c/>C</a><ul class=dropdown><li><a href=/os/c/standard/>standard</a></li><li><a href=/os/c/implementation/>implementation</a></li><li><a href=/os/c/practice/>practice</a></li><li><a href=/os/c/ecosystem>ecosystem</a></li></ul></li><li class=has-dropdown><a href=/os/as/>Assembly</a><ul class=dropdown><li><a href=/os/as/standard/>Standard</a></li><li><a href=/os/as/implementation/>Implementation</a></li><li><a href=/os/as/practice/>Practice</a></li><li><a href=/os/as/ecosystem/>Ecosystem</a></li></ul></li><li><a href=/os/linux/>Linux</a></li><li><a href=/os/gnu/>GNU</a></li><li><a href=/os/theory/>Theory</a></li></ul></div></nav><nav id=star-nav><div id=star-header><span class="title open">>> >> >> Navigation &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Nav>>>>>></span></div><div class=star-body><div class=nav-row><a class=nav-item data-label=Home data-path=/home/ data-article-count=6 data-recent-count=6 data-total-count=451 href=/home/>Home</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=CTX data-path=/ctx/ data-article-count=2 data-recent-count=1 data-total-count=451 href=/ctx/>CTX</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=.NET data-path=/dnet/ data-article-count=29 data-recent-count=4 data-total-count=451 href=/dnet/>.NET</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=GP data-path=/gp/ data-article-count=1 data-recent-count=1 data-total-count=451 href=/gp/>GP</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=ECO data-path=/eco/ data-article-count=90 data-recent-count=2 data-total-count=451 href=/eco/>ECO</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=SE data-path=/se/ data-article-count=129 data-recent-count=6 data-total-count=451 href=/se/>SE</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=Lang data-path=/lang/ data-article-count=38 data-recent-count=38 data-total-count=451 href=/lang/>Lang</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=OS data-path=/os/ data-article-count=100 data-recent-count=46 data-total-count=451 href=/os/>OS</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=NET data-path=/net/ data-article-count=7 data-recent-count=1 data-total-count=451 href=/net/>NET</a>
+<span class=nav-stats></span></div><div class=nav-row><a class=nav-item data-label=CSF data-path=/csf/ data-article-count=49 data-recent-count=5 data-total-count=451 href=/csf/>CSF</a>
+<span class=nav-stats></span></div></div></nav><script defer src=/js/star-nav.js></script><script defer src=/js/site.js></script><script defer src=/js/star-active.js></script><div id=ref-window class="float-window open"><div class=float-header><span class="title open">>> >> >> Reference &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Ref>>>>>></span></div><div class=float-body><div class=ref-list><a href=https://www.mixamo.com/ target=_blank>Mixamo</a> |
+<a href=https://opengameart.org/ target=_blank>OpenGameArt</a><p><a href=https://sharplab.io/ target=_blank>SharpLab</a> |
+<a href=https://godbolt.org/ target=_blank>Compiler Explorer</a></p><p><a href="https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type+Something+&x=none&v=4&h=4&w=80&we=false" target=_blank>ASCII Graph Generator</a></p><p><a href=https://mermaid.js.org/ target=_blank>Mermaid</a></p><a href=https://www.vim.org/ target=_blank>Vim</a> | <a href=https://vimdoc.sourceforge.net/ target=_blank>Vim Manual Source</a> |
+<a href=https://vimcdoc.sourceforge.net/ target=_blank>Vimcdoc</a> | <a href=https://vimcdoc.sourceforge.net/doc/help.html target=_blank>Vimdoc read online</a><p><a href=https://shields.io/ target=_blank>Shields.io</a></p><p><a href=https://emojidb.org/ target=_blank>EmojiDB</a></p><p><a href=https://cppreference.com/ target=_blank>cppreference</a> |
+<a href=https://isocpp.org/ target=_blank>isocpp</a> |
+<a href=https://open-std.org target=_blank>open-std</a></p><p><a href=https://cmake.com/ target=_blank>cmake.org</a></p><p><a href=https://llvm.org/ target=_blank>llvm.org</a></p><p><a href=https://www.boost.org/ target=_blank>boost.org</a></p><p><a href=https://learn.microsoft.com/en-us/dotnet/csharp/ target=_blank>Microsoft Learn</a><p><a href=https://www.lua.org/ target=_blank>lua.org</a> |
+<a href=https://www.luarocks.org/ target=_blank>luarocks.org</a> |
+<a href=https://www.luajit.org/ target=_blank>luajit.org</a></p><p><a href=https://docs.unity3d.com/Manual/index.html target=_blank>Unity Manual</a> |
+<a href=https://docs.unity3d.com/ScriptReference/index.html target=_blank>Unity API</a></p><p><a href=https://docs.unrealengine.com/ target=_blank>Unreal Engine Docs</a></p><p><a href=https://godotengine.org target=_blank>Godot</a> |
+<a href=https://docs.godotengine.org/en/stable/ target=_blank>Godot Docs</a></p><p><a href=https://z-library.sk/ target=_blank>Z-Library</a></p><p><a href=https://docs.kernel.org/ target=_blank>Linux Kernel Docs</a></p><p><a href=https://www.gnu.org/ target=_blank>GNU</a></p><a href=https://archlinux.org/ target=_blank>ArchLinux</a><p><a href=https://help.ubuntu.com/ target=_blank>Ubuntu Doc</a> |
+<a href=https://ubuntu.com/server/docs target=_blank>Ubuntu Server Guide</a></p><p><a href=https://www.vulkan.org/ target=_blank>Vulkan</a> |
+<a href=https://docs.vulkan.org/ target=_blank>Vulkan Docs</a></p><p><a href=https://www.opengl.org/ target=_blank>OpenGL</a> |
+<a href=https://registry.khronos.org/OpenGL target=_blank>OpenGL API</a> |
+<a href=https://www.khronos.org/opengl/wiki/ target=_blank>OpenGL Wiki</a></p><p><a href=https://learn.microsoft.com/en-us/windows/win32/directx target=_blank>DirectX</a></p><p><a href=https://www.realtimerendering.com/ target=_blank>Real-Time Rendering</a></p><p><a href=https://www.pbr-book.org/ target=_blank>Physically Based Rendering</a></p><p><a href=https://www.scratchapixel.com/ target=_blank>Scratchapixel</a></p><p><a href=https://learnopengl.com/ target=_blank>LearnOpenGL</a></p><p><a href=https://raytracing.github.io/ target=_blank>Ray Tracing in One Weekend</a></p><p><a href=https://www.shadertoy.com/ target=_blank>Shadertoy</a></p><p><a href=https://arxiv.org/list/cs.GR/recent target=_blank>arXiv Graphics</a></p><p><a href=https://www.siggraph.org/ target=_blank>SIGGRAPH</a> |
+<a href=https://dl.acm.org/conference/siggraph target=_blank>SIGGRAPH Digital Library</a></p><p><a href=https://git-scm.com/ target=_blank>Git</a></p><p><a href=https://sourceware.org/ target=_blank>sourceware</a></p></div></div></div><script src=/js/ref-window.js></script><div class=layout><article class=single_article><div class=title>compress & archive<div class=meta>M: 2026-04-03
+-</div></div><div class=content><ul><li>打包(archive)：把多个文件合成一个文件（不减小体积）</li><li>压缩(compress)：用算法缩小体积</li></ul><p>在Linux中最经典的组合就是：tar打包，gzip/bzip2/xz压缩工具</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>xxx.tar.gz
+</span></span><span style=display:flex><span>xxx.tar.bz2
+</span></span><span style=display:flex><span>xxx.tar.xz
+</span></span></code></pre></div><p>意思是：先tar打包，再用不同算法压缩</p><h2 id=常用压缩格式及工具>常用压缩格式及工具</h2><h3 id=gz><code>.gz</code></h3><ul><li>工具：<code>gzip</code></li><li>特点：速度快，压缩率中等</li><li>几乎所有服务器都默认支持</li><li>底层：LZ77 + Huffman</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 压缩</span>
+</span></span><span style=display:flex><span>gizp file.txt
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 解压</span>
+</span></span><span style=display:flex><span>gzip -d file.txt.gz
+</span></span><span style=display:flex><span><span style=color:#6272a4># 或</span>
+</span></span><span style=display:flex><span>gunzip file.txt.gz
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 查看压缩文件内容</span>
+</span></span><span style=display:flex><span>zcat filename.gz
+</span></span></code></pre></div><h3 id=bz2><code>.bz2</code></h3><ul><li>工具：<code>bzip2</code></li><li>特点：压缩率比gzip高，但慢</li><li>底层：Burrows-Wheeler</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 压缩</span>
+</span></span><span style=display:flex><span>bzip2 filename
+</span></span><span style=display:flex><span>bzip2 -9 filename <span style=color:#6272a4># 最大压缩率</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 解压缩</span>
+</span></span><span style=display:flex><span>bunzip2 filename.bz2
+</span></span><span style=display:flex><span>bzip2 -d filename.bz2
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 查看内容</span>
+</span></span><span style=display:flex><span>bzcat filename.bz2
+</span></span></code></pre></div><h3 id=xz><code>.xz</code></h3><ul><li>工具：<code>xz</code></li><li>特点：压缩率最高，但最慢</li><li>内核源码、发行版常用</li><li>底层：LZMA2</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 压缩</span>
+</span></span><span style=display:flex><span>xz filename
+</span></span><span style=display:flex><span>xz -9 filename <span style=color:#6272a4># 最大压缩率</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 解压缩</span>
+</span></span><span style=display:flex><span>unxz filename.xz
+</span></span><span style=display:flex><span>xz -d filename.xz
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 查看内容</span>
+</span></span><span style=display:flex><span>xzcat filename.xz
+</span></span></code></pre></div><h3 id=zip><code>.zip</code></h3><ul><li>Windows/Linux通用</li><li>特点：跨平台兼容性好</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 压缩</span>
+</span></span><span style=display:flex><span>zip archive.zip file1 file2 dir1
+</span></span><span style=display:flex><span>zip -r archive.zip directory/ <span style=color:#6272a4># 递归压缩目录</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 解压</span>
+</span></span><span style=display:flex><span>unzip archive.zip
+</span></span><span style=display:flex><span>unzip -l archive.zip <span style=color:#6272a4># 查看内容</span>
+</span></span><span style=display:flex><span>unzip -d target_dir archive.zip <span style=color:#6272a4># 解压到指定目录</span>
+</span></span></code></pre></div><p>zip可以同时打包和压缩目录，但在Linux生态中会导致丢失关键信息：</p><ul><li>文件权限被修改（丢失原始权限）</li><li>所有者信息破坏</li><li>硬链接被破坏</li></ul><h3 id=其他压缩工具>其他压缩工具</h3><p>需要安装</p><ul><li><code>7z</code>(.7z)：压缩率很高</li><li><code>Zstandard</code>(.zst)</li></ul><h2 id=归档工具tar>归档工具<code>tar</code></h2><p><code>tar</code>主要用途是将多个文件/目录打包成一个文件</p><p>1979年，tar在Unix V7中引入，用于磁带备份</p><p>既然有gzip, xz等压缩工具，为什么还需要tar</p><p>核心原因：压缩工具不擅长处理目录，gzip, xz, bzip2等压缩文件只能压缩单个文件，不能直接压缩目录</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 这些命令会报错或只处理单个文件</span>
+</span></span><span style=display:flex><span>gzip myfolder/
+</span></span><span style=display:flex><span>gzip: myfolder/ is a directory -- ignored
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>xz myfolder/
+</span></span><span style=display:flex><span>xz: myfolder/: Is a directory, skipping
+</span></span></code></pre></div><p>tar的作用：打包 + 保留元数据</p><p>tar = Tape ARchive（磁带归档），最初设计用于磁带备份。它的核心功能是</p><ol><li>将多个文件/目录合并成单个文件流</li><li>保留文件元数据（权限、所有者、时间戳、目录结构）</li><li>支持追加、增量备份等操作</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 压缩一个目录下的所有文件（每个文件独立压缩），不能包含文件夹</span>
+</span></span><span style=display:flex><span>$ xz folder/*
+</span></span><span style=display:flex><span>$ ls folder/
+</span></span><span style=display:flex><span>file1.txt.xz file2.txt.xz
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 解压时需要分别处理</span>
+</span></span><span style=display:flex><span>xz -d test/*.xz
+</span></span><span style=display:flex><span><span style=color:#6272a4># 可能导致元数据丢失</span>
+</span></span></code></pre></div><p>使用tar先打包</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 打包并压缩（常用组合）</span>
+</span></span><span style=display:flex><span>$ tar -czf archive.tar.gz folder/
+</span></span><span style=display:flex><span><span style=color:#6272a4># -c: 创建归档</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># -z: 通过 gzip 压缩</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># -f: 指定归档文件</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 一个命令完成打包+压缩，一个命令完成解压+解包</span>
+</span></span><span style=display:flex><span>$ tar -xzf archive.tar.gz
+</span></span><span style=display:flex><span><span style=color:#6272a4># 完整恢复：目录结构、权限、时间戳全部保留</span>
+</span></span></code></pre></div><p>tar的独特优势</p><ul><li>保留权限（755/644）</li><li>保留所有者（uid/gid）</li><li>保留硬链接</li><li>保留符号链接</li><li>保留时间戳</li><li>增量备份</li><li>追加文件到已有归档</li><li>跨多卷磁带/磁盘</li></ul><h3 id=常用组合>常用组合</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#6272a4># 打包并压缩</span>
+</span></span><span style=display:flex><span>tar -czvf archive.tar.gz file1 file2 dir1 <span style=color:#6272a4># gzip压缩</span>
+</span></span><span style=display:flex><span>tar -cjvf archive.tar.baz file1 file2 dir1 <span style=color:#6272a4># bzip2压缩</span>
+</span></span><span style=display:flex><span>tar -cJvf archive.tar.xz file1 file2 dir1 <span style=color:#6272a4># xz压缩</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 解包解压</span>
+</span></span><span style=display:flex><span>tar -xzvf archive.tar.gz <span style=color:#6272a4># 解压.gz</span>
+</span></span><span style=display:flex><span>tar -xjvf archive.tar.bz2 <span style=color:#6272a4># 解压.bz2</span>
+</span></span><span style=display:flex><span>tar -xJvf archive.tar.xz <span style=color:#6272a4># 解压.xz</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 仅查看内容不解压</span>
+</span></span><span style=display:flex><span>tar -tzvf archive.tar.gz
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 查看归档内容（不解压）</span>
+</span></span><span style=display:flex><span>tar -tf archive.tar.gz
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 解压到指定目录</span>
+</span></span><span style=display:flex><span>tar -xzf archive.tar.gz -C /target/path/
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 只打包，不压缩（速度最快）</span>
+</span></span><span style=display:flex><span>tar-cf archive.tar folder/
+</span></span></code></pre></div><h3 id=参数>参数</h3><ul><li><code>-c</code>：创建归档</li><li><code>-x</code>：提取归档</li><li><code>-z</code>：使用gzip</li><li><code>-j</code>：使用bzip2</li><li><code>-J</code>：使用xz</li><li><code>-v</code>：显示详细信息</li><li><code>-f</code>：指定文件名</li><li><code>-t</code>：列出归档内容</li></ul></div><nav class=post-nav><a href=/os/linux/environment_variables/>Prev: Environment Variables</a>
+<a href=/os/linux/systemd/>Next: systemd</a></nav></article></div><aside id=toc-window class=toc aria-label=目录 role=complementary data-state=expanded><div class=toc-header id=toc-header role=button tabindex=0 aria-label=折叠/展开目录 aria-expanded=true><span class="title open" aria-hidden=true>>> >> >> TOC &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<span class="title closed" aria-hidden=true>&lt;&lt;&lt;&lt;&lt;&lt;TOC>>>>>></span></div><div class=toc-body id=toc-body><nav id=TableOfContents><ul><li><ul><li><a href=#常用压缩格式及工具>常用压缩格式及工具</a><ul><li><a href=#gz><code>.gz</code></a></li><li><a href=#bz2><code>.bz2</code></a></li><li><a href=#xz><code>.xz</code></a></li><li><a href=#zip><code>.zip</code></a></li><li><a href=#其他压缩工具>其他压缩工具</a></li></ul></li><li><a href=#归档工具tar>归档工具<code>tar</code></a><ul><li><a href=#常用组合>常用组合</a></li><li><a href=#参数>参数</a></li></ul></li></ul></li></ul></nav></div></aside><script src=/js/toc-window.js defer></script><script src=/js/scrollspy.js defer></script><script type=module>
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ 
+    startOnLoad: true, theme: "default" });
+</script><footer><div class=container><p>© 2026 Jeff Lee(ljf12825). All rights reserved |
+<a href=https://creativecommons.org/licenses/by-nc-sa/4.0/>Article: CC BY-NC-SA 4.0</a> |
+<a href=https://creativecommons.org/licenses/by-sa/4.0/>Content: CC BY-SA 4.0</a> |
+<a href=https://opensource.org/licenses/MIT>Code: MIT License</a> |
+<a href=/LICENSES.md>Full License</a> |
+<a href=/index.xml>RSS</a></p></div></footer></body></html>
