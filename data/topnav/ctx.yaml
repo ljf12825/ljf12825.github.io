@@ -12,3 +12,5 @@
   url: "/ctx/flashback-core/"
 - name: "Low Code"
   url: "/ctx/low_code/"
+- name: "Pixel"
+  url: "/ctx/pixel/"

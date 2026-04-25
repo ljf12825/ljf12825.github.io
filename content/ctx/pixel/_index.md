@@ -1,0 +1,7 @@
+---
+type: file
+---
+
+# Pixel
+
+<!--more-->
