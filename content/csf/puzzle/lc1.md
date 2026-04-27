@@ -1,12 +1,12 @@
 ---
-title: LC1.E.TwoNumsSum
+title: LC1.TwoNumsSum
 type: file
 author: ljf12825
-date: 2026-04-26
-summary: ...
+date: 2026-04-27
+summary: Easy
 ---
 
-> 问题
+> 题目
 
 ```txt
 两数之和
