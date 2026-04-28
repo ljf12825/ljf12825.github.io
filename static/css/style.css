@@ -395,6 +395,7 @@ blockquote::before {
     pointer-events: none;
 }
 
+<<<<<<< Updated upstream
 ul:not(.topnav, .topnav *) ,
 ol:not(.topnav, .topnav *) {
   display: flex;
@@ -403,6 +404,8 @@ ol:not(.topnav, .topnav *) {
 	margin-left: -20px;
 }
 
+=======
+>>>>>>> Stashed changes
 .hugo-logo {
 	max-width: 100px;
 	height: auto;
