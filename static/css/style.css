@@ -395,7 +395,7 @@ blockquote::before {
     pointer-events: none;
 }
 
-ul:not(.topnav, .topnav *, #tagList, #categoryList) ,
+ul:not(.topnav, .topnav *) ,
 ol:not(.topnav, .topnav *) {
   display: flex;
   flex-direction: column;
