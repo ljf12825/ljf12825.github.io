@@ -1,5 +1,5 @@
 ---
-title: practice
+title: Practice
 type: file
 ---
 

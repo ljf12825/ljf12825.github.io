@@ -5,6 +5,4 @@ type: file
 
 # Shell
 
----
-
-# Filelist
+<!--more-->

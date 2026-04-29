@@ -1,7 +1,7 @@
 ---
 title: GCC
-date: 2026-04-21
-author: "ljf12825"
+date: 2026-04-29
+author: ljf12825
 type: file
 summary: GCC general content overview
 ---
