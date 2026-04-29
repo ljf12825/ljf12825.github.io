@@ -3,7 +3,7 @@
 {{- $currentType := .Type -}}
 {{- $currentPath := .RelPermalink -}}
 <div id="global-indexer" 
-     class="float-window open"
+     class="float-window open" 
      data-current-section="{{ $currentSection }}"
      data-current-type="{{ $currentType }}"
      data-current-path="{{ $currentPath }}">
@@ -30,12 +30,11 @@
     </div>
 
     <div class="index-preview-box">
-      <h3>Top Results</h3>
+      <div class="preview-header">
+        <h3>Top Results</h3>
+        <button type="button" id="openGlobalSearchPage">SEEALL</button>
+      </div>
       <ul id="globalIndexPreview"></ul>
-    </div>
-
-    <div class="index-actions">
-      <button type="button" id="openGlobalSearchPage">Open Result Page</button>
     </div>
   </div>
 </div>
