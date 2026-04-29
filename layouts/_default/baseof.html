@@ -52,6 +52,9 @@
 	{{ partial "ref.html" . }}
 	<script src="{{ "/js/ref-window.js" | relURL }}"></script>
 
+	{{ partial "global-indexer.html" . }}
+	<script defer src="{{ "/js/global-indexer.js" | relURL }}"></script>
+
 	{{ if eq .Type "home" }}
   	<script defer src="{{ "/js/homealive.js" | relURL }}"></script>
 	{{ end }}

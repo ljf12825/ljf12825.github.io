@@ -1,0 +1,14 @@
+{{ define "head_extra" }}
+<link rel="stylesheet" href="{{ "css/log.css" | relURL }}">
+{{ end }}
+
+{{ define "main" }}
+<div class="log-container">
+    <main class="log-main">
+        <h1 class="page-title">Global Search Result</h1>
+        <div id="global-search-result" class="log-grid"></div>
+    </main>
+</div>
+
+<script defer src="{{ "js/global-search.js" | relURL }}"></script>
+{{ end }}
