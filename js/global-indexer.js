@@ -266,7 +266,11 @@ function refresh() {
 
     const clamp = (l, t) => ({ left: Math.min(Math.max(0, l), Math.max(0, innerWidth - root.offsetWidth)), top: Math.min(Math.max(0, t), Math.max(0, innerHeight - root.offsetHeight)) });
     const apply = (l, t) => { const c = clamp(l, t); root.style.left = `${c.left}px`; root.style.top = `${c.top}px`; root.style.right = "auto"; root.style.bottom = "auto"; };
-    const toggle = () => { root.classList.toggle("closed"); localStorage.setItem("global-index-collapse", root.classList.contains("closed") ? "1" : "0"); setTimeout(() => apply(root.offsetLeft, root.offsetTop), 0); };
+    const toggle = () => { 
+    root.classList.toggle("closed"); 
+    localStorage.setItem("global-index-collapse", root.classList.contains("closed") ? "1" : "0"); 
+    setTimeout(() => apply(root.offsetLeft, root.offsetTop), 0); 
+};
 
     header.addEventListener("mousedown", e => { e.preventDefault(); isDown = true; sx = e.clientX; sy = e.clientY; ox = e.clientX - root.offsetLeft; oy = e.clientY - root.offsetTop; });
     document.addEventListener("mousemove", e => { if (isDown) apply(e.clientX - ox, e.clientY - oy); });
