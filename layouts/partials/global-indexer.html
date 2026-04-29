@@ -1,0 +1,53 @@
+{{- $pages := where .Site.RegularPages "Draft" "ne" true -}}
+{{- $currentSection := .Section -}}
+<div id="global-indexer" class="float-window open" data-current-section="{{ $currentSection }}">
+  <div class="float-header">
+    <span class="title open">&gt;&gt; &gt;&gt; &gt;&gt; Index &lt;&lt; &lt;&lt; &lt;&lt;</span>
+    <span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Idx&gt;&gt;&gt;&gt;&gt;&gt;</span>
+  </div>
+  <div class="float-body">
+    <div class="index-mode">
+      <button type="button" class="scope-btn active" data-scope="global">Global</button>
+      <button type="button" class="scope-btn" data-scope="section">Current</button>
+    </div>
+    <input id="globalIndexInput" type="text" placeholder="title/tag/category/summary" />
+
+    <div class="index-meta">Matched: <span id="globalIndexCount">0</span></div>
+
+    <div class="index-tags-box">
+      <h3>Tags</h3>
+      <ul id="globalIndexTags"></ul>
+    </div>
+    <div class="index-categories-box">
+      <h3>Categories</h3>
+      <ul id="globalIndexCategories"></ul>
+    </div>
+
+    <div class="index-preview-box">
+      <h3>Top Results</h3>
+      <ul id="globalIndexPreview"></ul>
+    </div>
+
+    <div class="index-actions">
+      <button type="button" id="openGlobalSearchPage">Open Result Page</button>
+    </div>
+  </div>
+</div>
+
+<script id="global-index-data" type="application/json">
+{{- $pages := where .Site.RegularPages "Draft" "ne" true -}}
+{{- $result := slice -}}
+{{- range $pages -}}
+  {{- $pageData := dict 
+    "title" .Title 
+    "summary" (or .Params.summary .Summary | plainify) 
+    "tags" .Params.tags 
+    "categories" .Params.categories 
+    "section" .Section 
+    "type" .Type 
+    "permalink" .RelPermalink
+  -}}
+  {{- $result = $result | append $pageData -}}
+{{- end -}}
+{{ $result | jsonify | safeJS }}
+</script>

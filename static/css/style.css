@@ -395,17 +395,6 @@ blockquote::before {
     pointer-events: none;
 }
 
-<<<<<<< Updated upstream
-ul:not(.topnav, .topnav *) ,
-ol:not(.topnav, .topnav *) {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-	margin-left: -20px;
-}
-
-=======
->>>>>>> Stashed changes
 .hugo-logo {
 	max-width: 100px;
 	height: auto;
@@ -677,3 +666,36 @@ body::-webkit-scrollbar-thumb:hover {
   max-width: 100%;
   display: block;
 }
+
+#global-indexer {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 360px;
+  max-height: 72vh;
+  background: #c0c0c0;
+  color: #000080;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #000080;
+  border-bottom: 2px solid #000080;
+  box-shadow: 2px 2px 0 #ffffff, 4px 4px 0 #000080;
+  z-index: 9999;
+}
+#global-indexer .float-header { background:#000080; color:#fff; cursor:move; text-align:center; font-weight:bold; border-bottom:2px solid #fff; }
+#global-indexer .float-body { padding:8px 10px; overflow-y:auto; max-height: calc(72vh - 30px); }
+#global-indexer.closed .float-body { display:none; }
+#global-indexer .title { display:none; }
+#global-indexer:not(.closed) .title.open { display:inline; }
+#global-indexer.closed .title.closed { display:inline; }
+#global-indexer input { width:100%; padding:4px 6px; background:#c0c0c0; border:1px solid #000080; color:#000080; margin: 6px 0; }
+#global-indexer .scope-btn, #global-indexer #openGlobalSearchPage { border:1px solid #000080; background:#c0c0c0; color:#000080; cursor:pointer; }
+#global-indexer .scope-btn.active { background:#000080; color:#fff; }
+#global-indexer ul { list-style:none; margin:4px 0; padding:0; display:flex; flex-wrap:wrap; gap:6px; }
+#global-indexer a { color:#000080; text-decoration:none; }
+#global-indexer a.active { color:red; font-weight:bold; }
+#global-indexer .index-actions { margin-top: 8px; }
+
+#global-indexer .index-meta { font-size: 12px; margin: 2px 0 6px; }
+#global-indexer .index-preview-box ul { max-height: 120px; overflow-y: auto; }
+#global-indexer .index-preview-box li { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
