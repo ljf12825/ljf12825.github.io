@@ -184,24 +184,43 @@
         });
     }
 
-    function refresh() {
-        const matched = matchedPages();
-        countEl.textContent = String(matched.length);
+function refresh() {
+    const matched = matchedPages();
+    countEl.textContent = String(matched.length);
 
-        const tagSet = new Set();
-        const catSet = new Set();
-        matched.forEach(p => {
-            ensureArray(p.tags).map(norm).filter(Boolean).forEach(t => tagSet.add(t));
-            ensureArray(p.categories).map(norm).filter(Boolean).forEach(c => catSet.add(c));
-        });
+    const tagSet = new Set();
+    const catSet = new Set();
+    matched.forEach(p => {
+      ensureArray(p.tags).map(norm).filter(Boolean).forEach(t => tagSet.add(t));
+      ensureArray(p.categories).map(norm).filter(Boolean).forEach(c => catSet.add(c));
+    });
 
-        renderFacet([...tagSet].sort(), tagsEl, selectedTags, "#");
-        renderFacet([...catSet].sort(), catsEl, selectedCategories, "[", "]");
+    renderFacet([...tagSet].sort(), tagsEl, selectedTags, "#");
+    renderFacet([...catSet].sort(), catsEl, selectedCategories, "[", "]");
 
-        previewEl.innerHTML = matched.slice(0, 8).map(p => `
-      <li><a href="${p.permalink}">${p.title}</a></li>
-    `).join("");
+    const q = norm(input.value);
+    const hasFilters = q || selectedTags.size > 0 || selectedCategories.size > 0;
+    
+    if (!hasFilters) {
+      previewEl.innerHTML = "";
+      return;
     }
+    
+    previewEl.innerHTML = matched.slice(0, 8).map(p => {
+      const matchScore = score(p, q);
+      const maxScore = 200;
+      const percentage = Math.min(100, Math.round((matchScore / maxScore) * 100));
+      
+      return `
+        <li style="display: flex; align-items: baseline; gap: 8px;">
+          <a href="${p.permalink}" title="${p.title}" style="flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${p.title}</a>
+          <span style="font-size: 0.7em; color: #666; flex-shrink: 0;">[${p.type}]</span>
+          <span style="font-size: 0.7em; color: #666; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 120px;">${p.permalink}</span>
+          <span style="font-size: 0.75em; color: #666; flex-shrink: 0;">${percentage}%</span>
+        </li>
+      `;
+    }).join("");
+  }
 
     function openResultPage() {
         const q = encodeURIComponent(input.value || "");
