@@ -3,6 +3,8 @@
 
 <head>
 	<meta name="page-kind" content="{{ .Kind }}">
+	<meta name="page-type" content="{{ .Type }}">
+	<meta name="page-section" content="{{ .Section }}">
 	<meta charset="UTF-8">
 	<title>{{ .Title }}</title>
 	<link rel="stylesheet" href="{{ "css/style.css" | relURL}}">
@@ -35,7 +37,7 @@
 	{{ block "head_extra" . }}{{ end }}
 </head>
 
-<body>
+<body data-page-type="{{ .Type }}" date-page-section="{{ .Section }}" data-page-path="{{ .RelPermalink }}">
 	<!-- 页眉 -->
 	{{ partial "header.html" . }}
 

@@ -1,6 +1,12 @@
 {{- $pages := where .Site.RegularPages "Draft" "ne" true -}}
 {{- $currentSection := .Section -}}
-<div id="global-indexer" class="float-window open" data-current-section="{{ $currentSection }}">
+{{- $currentType := .Type -}}
+{{- $currentPath := .RelPermalink -}}
+<div id="global-indexer" 
+     class="float-window open"
+     data-current-section="{{ $currentSection }}"
+     data-current-type="{{ $currentType }}"
+     data-current-path="{{ $currentPath }}">
   <div class="float-header">
     <span class="title open">&gt;&gt; &gt;&gt; &gt;&gt; Index &lt;&lt; &lt;&lt; &lt;&lt;</span>
     <span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Idx&gt;&gt;&gt;&gt;&gt;&gt;</span>
@@ -38,14 +44,41 @@
 {{- $pages := where .Site.RegularPages "Draft" "ne" true -}}
 {{- $result := slice -}}
 {{- range $pages -}}
+  {{- $tags := slice -}}
+  {{- if reflect.IsSlice .Params.tags -}}
+    {{- $tags = .Params.tags -}}
+  {{- else if .Params.tags -}}
+    {{- $tags = split (string .Params.tags) "," -}}
+  {{- end -}}
+  {{- $categories := slice -}}
+  {{- if reflect.IsSlice .Params.categories -}}
+    {{- $categories = .Params.categories -}}
+  {{- else if .Params.categories -}}
+    {{- $categories = split (string .Params.categories) "," -}}
+  {{- end -}}
+  
+  {{- /* 计算父路径 */ -}}
+  {{- $permalink := .RelPermalink -}}
+  {{- $parentPath := "" -}}
+  {{- if $permalink -}}
+    {{- $parts := split (trim $permalink "/") "/" -}}
+    {{- if gt (len $parts) 1 -}}
+      {{- $parentParts := first (sub (len $parts) 1) $parts -}}
+      {{- $parentPath = printf "/%s/" (delimit $parentParts "/") -}}
+    {{- else -}}
+      {{- $parentPath = "/" -}}
+    {{- end -}}
+  {{- end -}}
+  
   {{- $pageData := dict 
     "title" .Title 
     "summary" (or .Params.summary .Summary | plainify) 
-    "tags" .Params.tags 
-    "categories" .Params.categories 
+    "tags" $tags 
+    "categories" $categories 
     "section" .Section 
     "type" .Type 
     "permalink" .RelPermalink
+    "parentPath" $parentPath
   -}}
   {{- $result = $result | append $pageData -}}
 {{- end -}}
