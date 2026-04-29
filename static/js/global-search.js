@@ -13,7 +13,6 @@
   const tags = new Set((params.get('tags') || '').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean));
   const cats = new Set((params.get('categories') || '').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean));
   
-  // Helper function to ensure value is an array
   const ensureArray = (arr) => {
     if (!arr) return [];
     if (Array.isArray(arr)) return arr;
@@ -23,7 +22,6 @@
   
   const norm = v => String(v || '').toLowerCase();
   
-  // 标准化路径
   const normalizePath = (p) => {
     if (!p) return "/";
     let normalized = p.toLowerCase().trim();
@@ -31,41 +29,46 @@
     if (!normalized.endsWith("/")) normalized = normalized + "/";
     return normalized;
   };
+
+  // 评分函数（和索引器一致）
+  const score = (page, query) => {
+    if (!query) return 0;
+    const title = norm(page.title);
+    const summary = norm(page.summary);
+    const pageTags = ensureArray(page.tags).map(norm);
+    const pageCats = ensureArray(page.categories).map(norm);
+    let s = 0;
+    if (title === query) s += 200;
+    if (title.includes(query)) s += 120;
+    if (pageTags.some(t => t === query)) s += 90;
+    if (pageTags.some(t => t.includes(query))) s += 60;
+    if (pageCats.some(c => c === query)) s += 80;
+    if (pageCats.some(c => c.includes(query))) s += 55;
+    if (summary.includes(query)) s += 30;
+    return s;
+  };
   
-  // P1 修复：只要 scope 不是 global，就应用 current 过滤
   const isCurrentScope = scope !== 'global';
   
   const hit = p => {
-    // 应用 current 范围的过滤
     if (isCurrentScope) {
-      // 按 section 过滤
       if (searchType === 'section' && section) {
         if (norm(p.section) !== section) return false;
       }
-      
-      // 按 section + type 过滤（lab/log）
       if (searchType === 'section_type') {
         if (section && norm(p.section) !== section) return false;
         if (pageType && norm(p.type) !== pageType) return false;
       }
-      
-      // P2 & P3 修复：按 path 过滤，只显示直接子页面
       if (searchType === 'path' && path) {
         const normalizedPath = normalizePath(path);
         const pageParentPath = normalizePath(p.parentPath || "");
-        
-        // 只允许直接子页面，不进行任何回退
-        if (pageParentPath !== normalizedPath) {
-          return false;
-        }
+        if (pageParentPath !== normalizedPath) return false;
       }
     }
     
-    // 文本搜索
     const txt = `${norm(p.title)} ${norm(p.summary)} ${ensureArray(p.tags).map(norm).join(' ')} ${ensureArray(p.categories).map(norm).join(' ')}`;
     if (q && !txt.includes(q)) return false;
     
-    // 标签和分类过滤
     const pTags = new Set(ensureArray(p.tags).map(norm));
     const pCats = new Set(ensureArray(p.categories).map(norm));
     for (const t of tags) if (!pTags.has(t)) return false;
@@ -74,23 +77,72 @@
     return true;
   };
   
-  const result = pages.filter(hit);
+  // 过滤并计算分数
+  const matched = pages
+    .filter(hit)
+    .map(p => ({ page: p, score: score(p, q) }))
+    .sort((a, b) => b.score - a.score);
   
-  holder.innerHTML = result.length > 0 
-    ? result.map(p => `
-      <a href="${p.permalink}" class="log-card">
-        <div class="log-content">
-          <h2 class="log-title">${p.title}</h2>
-          <div class="log-meta">
-            <span class="meta-line">
-              ${ensureArray(p.categories).map(c=>`[${c}]`).join(' ')} 
-              ${ensureArray(p.tags).map(t=>`#${t}`).join(' ')}
-            </span>
-          </div>
-          <p class="log-summary">${p.summary||''}</p>
-          <span class="read-more">ReadMore</span>
+  const result = matched.map(m => m.page);
+  const scores = matched.map(m => m.score);
+  
+  // 搜索摘要
+  const filterInfo = [];
+  if (q) filterInfo.push(`query "${q}"`);
+  if (tags.size > 0) filterInfo.push(`tags: ${[...tags].join(', ')}`);
+  if (cats.size > 0) filterInfo.push(`categories: ${[...cats].join(', ')}`);
+  if (scope !== 'global') {
+    if (searchType === 'section') filterInfo.push(`section: ${section}`);
+    if (searchType === 'section_type') filterInfo.push(`section: ${section}, type: ${pageType}`);
+    if (searchType === 'path') filterInfo.push(`path: ${path}`);
+  }
+  
+  const summaryHTML = filterInfo.length > 0 
+    ? `<p class="search-summary">${result.length} result${result.length !== 1 ? 's' : ''} for ${filterInfo.join(' | ')}</p>`
+    : `<p class="search-summary">${result.length} total page${result.length !== 1 ? 's' : ''}</p>`;
+  
+  // 渲染结果列表
+  const listHTML = result.length > 0
+    ? `<div class="searchlist">
+        <div class="search_row header">
+          <span>Name</span>
+          <span>Path</span>
+          <span>Type</span>
+          <span>Section</span>
+          <span>Tags</span>
+          <span>Categories</span>
+          <span>Summary</span>
+          <span>Score</span>
         </div>
-      </a>
-    `).join('')
+        ${result.map((p, i) => {
+          const matchScore = scores[i];
+          const maxScore = 200;
+          const percentage = Math.min(100, Math.round((matchScore / maxScore) * 100));
+          
+          return `
+          <div class="search_row">
+            <span class="search_name">
+              <a href="${p.permalink}">${p.title}</a>
+            </span>
+            <span class="search_path">${p.permalink}</span>
+            <span class="search_type">${p.type.toUpperCase()}</span>
+            <span class="search_section">${p.section || '/'}</span>
+            <span class="search_tags">
+              ${ensureArray(p.tags).length > 0 
+                ? ensureArray(p.tags).map(t => `<span class="tag">#${t}</span>`).join(' ') 
+                : '<span class="empty">-</span>'}
+            </span>
+            <span class="search_cats">
+              ${ensureArray(p.categories).length > 0 
+                ? ensureArray(p.categories).map(c => `<span class="cat">[${c}]</span>`).join(' ') 
+                : '<span class="empty">-</span>'}
+            </span>
+            <span class="search_summary">${p.summary || '-'}</span>
+            <span class="search_score">${percentage}%</span>
+          </div>
+        `}).join('')}
+      </div>`
     : '<p class="no-results">No results found</p>';
+  
+  holder.innerHTML = summaryHTML + listHTML;
 })();
