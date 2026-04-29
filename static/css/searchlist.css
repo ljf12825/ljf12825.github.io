@@ -1,0 +1,126 @@
+.searchlist-container {
+  max-width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  padding: 0 16px;
+}
+
+.searchlist-container .page-title {
+  font-size: 1.4em;
+  margin-bottom: 8px;
+  color: #000080;
+}
+
+.search-summary {
+  font-size: 14px;
+  color: #000000;
+  margin: 0 0 12px 0;
+  padding: 8px 0;
+  border-bottom: 1px solid #c0c0c0;
+}
+
+.searchlist {
+  width: 100%;
+  padding: 0 0 20px 0;
+}
+
+.search_row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 0.5fr 0.5fr 1fr 1fr 2fr 0.4fr;
+  border-bottom: 1px dashed #000000;
+}
+
+.search_row.header {
+  border-top: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  color: #000080;
+  font-weight: bold;
+}
+
+.search_row.header span {
+  cursor: default;
+}
+
+.search_name a {
+  text-decoration: none;
+  color: #000080;
+}
+
+.search_name a:hover {
+  text-decoration: underline;
+  color: #ff0000;
+}
+
+.search_path {
+  color: #000000;
+  word-break: break-all;
+}
+
+.search_type {
+  color: #000000;
+}
+
+.search_section {
+  color: #000000;
+}
+
+.search_tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 4px;
+}
+
+.search_tags .tag {
+  color: #000080;
+}
+
+.search_cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 4px;
+}
+
+.search_cats .cat {
+  color: #000000;
+}
+
+.search_summary {
+  color: #000000;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-right: 8px;
+}
+
+.search_score {
+  color: #000000;
+  text-align: center;
+}
+
+.empty {
+  color: #999;
+}
+
+.no-results {
+  text-align: center;
+  color: #000000;
+  font-size: 14px;
+  padding: 40px 0;
+}
+
+@media (max-width: 768px) {
+  .searchlist-container {
+    padding: 0 8px;
+  }
+  
+  .search_row {
+    grid-template-columns: 2fr 0.8fr 1fr 2fr;
+  }
+  
+  .search_path,
+  .search_type,
+  .search_cats,
+  .search_summary {
+    display: none;
+  }
+}
