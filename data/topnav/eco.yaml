@@ -13,8 +13,6 @@
       url: "/eco/engine/ue/"
     - name: "Godot"
       url: "/eco/engine/godot/"
-    - name: "Dev"
-      url: "/eco/engine/dev/"
 - name: "Framework & Library"
   url: "/eco/framework_lib/"
 - name: "Platform"
