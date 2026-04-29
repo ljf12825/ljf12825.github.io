@@ -8,17 +8,18 @@
      data-current-type="{{ $currentType }}"
      data-current-path="{{ $currentPath }}">
   <div class="float-header">
-    <span class="title open">&gt;&gt; &gt;&gt; &gt;&gt; Index &lt;&lt; &lt;&lt; &lt;&lt;</span>
+    <span class="title open">&gt;&gt; &gt;&gt; &gt;&gt; Indexer &lt;&lt; &lt;&lt; &lt;&lt;</span>
     <span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Idx&gt;&gt;&gt;&gt;&gt;&gt;</span>
   </div>
   <div class="float-body">
-    <div class="index-mode">
-      <button type="button" class="scope-btn active" data-scope="global">Global</button>
-      <button type="button" class="scope-btn" data-scope="section">Current</button>
+    <div class="index-controls">
+      <div class="index-mode">
+        <button type="button" class="scope-btn active" data-scope="global">Global</button>
+        <button type="button" class="scope-btn" data-scope="section">Current</button>
+      </div>
+      <div class="index-meta">Matched: <span id="globalIndexCount">0</span></div>
     </div>
     <input id="globalIndexInput" type="text" placeholder="title/tag/category/summary" />
-
-    <div class="index-meta">Matched: <span id="globalIndexCount">0</span></div>
 
     <div class="index-tags-box">
       <h3>Tags</h3>
