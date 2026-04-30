@@ -413,6 +413,7 @@ blockquote::before {
   border-right: 2px solid #000080;
   border-bottom: 2px solid #000080;
   z-index: 9999;
+  box-sizing: content-box;
   box-shadow:
     2px 2px 0 #ffffff,
     4px 4px 0 #000080;
@@ -443,6 +444,7 @@ blockquote::before {
   margin: 0;
   padding: 6px 8px;
   min-width: 280px;
+  box-sizing: content-box;
 }
 
 #star-nav .nav-row {
@@ -581,6 +583,7 @@ body::-webkit-scrollbar-thumb:hover {
   bottom: 40px;
   width: 350px;
   max-height: 70vh;
+  box-sizing: content-box;
 
   background: #c0c0c0;
   color: #000080;
@@ -616,6 +619,7 @@ body::-webkit-scrollbar-thumb:hover {
   max-height: calc(70vh - 30px);
   background: #c0c0c0;
   color: #000080;
+  box-sizing: content-box;
 }
 
 #ref-window .float-body::-webkit-scrollbar {
@@ -682,6 +686,7 @@ body::-webkit-scrollbar-thumb:hover {
   border-bottom: 2px solid #000080;
   box-shadow: 2px 2px 0 #ffffff, 4px 4px 0 #000080;
   z-index: 9999;
+  box-sizing: content-box;
 }
 #great-indexer .float-header { background:#000080; color:#fff; cursor:move; text-align:center; font-weight:bold; border-bottom:2px solid #fff; padding: 2px 0; font-size: 14px; }
 #great-indexer .float-body { padding:6px 8px; overflow-y:auto; max-height: calc(72vh - 30px); }
