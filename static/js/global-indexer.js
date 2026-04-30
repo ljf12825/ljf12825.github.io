@@ -5,10 +5,11 @@
     const dataScript = document.getElementById("global-index-data");
     const tagsEl = document.getElementById("globalIndexTags");
     const catsEl = document.getElementById("globalIndexCategories");
+    const typesEl = document.getElementById("globalIndexTypes");
     const previewEl = document.getElementById("globalIndexPreview");
     const countEl = document.getElementById("globalIndexCount");
     const openBtn = document.getElementById("openGlobalSearchPage");
-    if (!root || !header || !input || !dataScript || !tagsEl || !catsEl || !previewEl || !countEl || !openBtn) return;
+    if (!root || !header || !input || !dataScript || !tagsEl || !catsEl || !typesEl || !previewEl || !countEl || !openBtn) return;
 
     const pages = JSON.parse(dataScript.textContent || "[]");
     const currentSection = (root.dataset.currentSection || "").toLowerCase();
@@ -17,16 +18,8 @@
     let scope = "global";
     const selectedTags = new Set();
     const selectedCategories = new Set();
+    const selectedTypes = new Set();
 
-    // 调试：打印页面数据
-    console.log("Global Indexer Debug:");
-    console.log("Current Section:", currentSection);
-    console.log("Current Type:", currentType);
-    console.log("Current Path:", currentPath);
-    console.log("Total Pages:", pages.length);
-    console.log("Sample Page Data:", pages.slice(0, 3));
-
-    // Helper function to ensure value is an array
     const ensureArray = (arr) => {
         if (!arr) return [];
         if (Array.isArray(arr)) return arr;
@@ -36,7 +29,6 @@
 
     const norm = (v) => String(v || "").trim().toLowerCase();
 
-    // 标准化路径，确保都以 / 开头和结尾（用于目录比较）
     const normalizePath = (path) => {
         if (!path) return "/";
         let normalized = path.toLowerCase().trim();
@@ -46,7 +38,7 @@
     };
 
     const score = (page, q) => {
-        if (!q) return 1;
+        if (!q) return 0;
         const title = norm(page.title);
         const summary = norm(page.summary);
         const tags = ensureArray(page.tags).map(norm);
@@ -62,27 +54,18 @@
         return s;
     };
 
-    // 智能搜索范围确定
     const getSearchScope = () => {
         if (scope === "global") {
             return { type: "global" };
         }
 
-        // Current 模式下的智能判断
-        if (currentType === "home") {
-            // home 类型：等同于全局
-            return { type: "global" };
-        } else if (currentType === "lab") {
-            // lab 类型：显示当前 section 下所有 lab 类型的页面
+        if (currentType === "lab") {
             return { type: "section_type", section: currentSection, pageType: "lab" };
         } else if (currentType === "log") {
-            // log 类型：显示当前 section 下所有 log 类型的页面
             return { type: "section_type", section: currentSection, pageType: "log" };
         } else if (currentType === "file") {
-            // file 类型：显示当前路径下的子页面
             return { type: "path", path: normalizePath(currentPath) };
         } else {
-            // 默认：显示当前 section
             return { type: "section", section: currentSection };
         }
     };
@@ -90,66 +73,25 @@
     const scopedPages = () => {
         const searchScope = getSearchScope();
 
-        console.log("Search Scope:", searchScope);
-
         switch (searchScope.type) {
             case "global":
                 return pages;
 
             case "section":
-                const sectionPages = pages.filter(p => norm(p.section) === searchScope.section);
-                console.log(`Section "${searchScope.section}" pages:`, sectionPages.length);
-                return sectionPages;
+                return pages.filter(p => norm(p.section) === searchScope.section);
 
             case "section_type":
-                // 新增：过滤 section 和 type
-                const sectionTypePages = pages.filter(p =>
+                return pages.filter(p =>
                     norm(p.section) === searchScope.section &&
                     norm(p.type) === searchScope.pageType
                 );
-                console.log(`Section "${searchScope.section}" type "${searchScope.pageType}" pages:`, sectionTypePages.length);
-                return sectionTypePages;
 
             case "path":
-                // 查找当前路径下的直接子页面
                 const normalizedCurrentPath = normalizePath(currentPath);
-                console.log("Looking for children of:", normalizedCurrentPath);
-
-                const childPages = pages.filter(p => {
+                return pages.filter(p => {
                     const pageParentPath = normalizePath(p.parentPath || "");
-                    const isChild = pageParentPath === normalizedCurrentPath;
-
-                    if (isChild) {
-                        console.log(`Found child: ${p.title} (permalink: ${p.permalink}, parent: ${pageParentPath})`);
-                    }
-
-                    return isChild;
+                    return pageParentPath === normalizedCurrentPath;
                 });
-
-                console.log(`Path "${normalizedCurrentPath}" children:`, childPages.length);
-
-                // 如果没有找到子页面，可能当前页面本身就是叶子节点
-                // 回退到显示同级页面
-                if (childPages.length === 0) {
-                    console.log("No children found, showing sibling pages");
-
-                    // 获取当前路径的父路径
-                    const pathParts = normalizedCurrentPath.split('/').filter(Boolean);
-                    const currentParentPath = pathParts.length > 0
-                        ? normalizePath(pathParts.join('/'))
-                        : "/";
-                    console.log("Looking for siblings with parent:", currentParentPath);
-
-                    const siblingPages = pages.filter(p => {
-                        const pageParentPath = normalizePath(p.parentPath || "");
-                        return pageParentPath === currentParentPath;
-                    });
-
-                    console.log(`Found ${siblingPages.length} sibling pages`);
-                    return siblingPages;
-                }
-
-                return childPages;
 
             default:
                 return pages;
@@ -158,11 +100,35 @@
 
     function matchedPages() {
         const q = norm(input.value);
-        return scopedPages().map(p => ({ p, s: score(p, q) })).filter(({ p, s }) => {
-            if (q && s <= 0) return false;
+
+        if (!q) {
+            if (selectedTags.size > 0 || selectedCategories.size > 0 || selectedTypes.size > 0) {
+                return scopedPages().filter(p => {
+                    const pTags = new Set(ensureArray(p.tags).map(norm));
+                    const pCats = new Set(ensureArray(p.categories).map(norm));
+                    return [...selectedTags].every(t => pTags.has(t)) &&
+                        [...selectedCategories].every(c => pCats.has(c)) &&
+                        (selectedTypes.size === 0 || selectedTypes.has(norm(p.type)));
+                });
+            }
+            return [];
+        }
+
+        if (q === '/*') return scopedPages().filter(p => {
             const pTags = new Set(ensureArray(p.tags).map(norm));
             const pCats = new Set(ensureArray(p.categories).map(norm));
-            return [...selectedTags].every(t => pTags.has(t)) && [...selectedCategories].every(c => pCats.has(c));
+            return [...selectedTags].every(t => pTags.has(t)) &&
+                [...selectedCategories].every(c => pCats.has(c)) &&
+                (selectedTypes.size === 0 || selectedTypes.has(norm(p.type)));
+        });
+
+        return scopedPages().map(p => ({ p, s: score(p, q) })).filter(({ p, s }) => {
+            if (s <= 0) return false;
+            const pTags = new Set(ensureArray(p.tags).map(norm));
+            const pCats = new Set(ensureArray(p.categories).map(norm));
+            return [...selectedTags].every(t => pTags.has(t)) &&
+                [...selectedCategories].every(c => pCats.has(c)) &&
+                (selectedTypes.size === 0 || selectedTypes.has(norm(p.type)));
         }).sort((a, b) => b.s - a.s).map(x => x.p);
     }
 
@@ -184,48 +150,59 @@
         });
     }
 
-function refresh() {
-    const matched = matchedPages();
-    countEl.textContent = String(matched.length);
+    function refresh() {
+        const matched = matchedPages();
+        countEl.textContent = String(matched.length);
 
-    const tagSet = new Set();
-    const catSet = new Set();
-    matched.forEach(p => {
-      ensureArray(p.tags).map(norm).filter(Boolean).forEach(t => tagSet.add(t));
-      ensureArray(p.categories).map(norm).filter(Boolean).forEach(c => catSet.add(c));
-    });
+        // 从 matched 结果中动态收集 tags/categories/types
+        const tagSet = new Set();
+        const catSet = new Set();
+        const typeSet = new Set();
 
-    renderFacet([...tagSet].sort(), tagsEl, selectedTags, "#");
-    renderFacet([...catSet].sort(), catsEl, selectedCategories, "[", "]");
+        // 如果有过滤条件，从 matched 收集；否则从 scoped 收集全部
+        const q = norm(input.value);
+        const hasFilters = q || selectedTags.size > 0 || selectedCategories.size > 0 || selectedTypes.size > 0;
 
-    const q = norm(input.value);
-    const hasFilters = q || selectedTags.size > 0 || selectedCategories.size > 0;
-    
-    if (!hasFilters) {
-      previewEl.innerHTML = "";
-      return;
+        const source = hasFilters ? matched : scopedPages();
+        source.forEach(p => {
+            ensureArray(p.tags).map(norm).filter(Boolean).forEach(t => tagSet.add(t));
+            ensureArray(p.categories).map(norm).filter(Boolean).forEach(c => catSet.add(c));
+            typeSet.add(norm(p.type));
+        });
+
+        renderFacet([...tagSet].sort(), tagsEl, selectedTags, "#");
+        renderFacet([...catSet].sort(), catsEl, selectedCategories, "[", "]");
+        renderFacet([...typeSet].sort(), typesEl, selectedTypes, "<", ">");
+
+        if (!hasFilters) {
+            previewEl.innerHTML = "";
+            return;
+        }
+
+        const isShowAll = q === '/*';
+
+        previewEl.innerHTML = matched.slice(0, 8).map(p => {
+            const matchScore = isShowAll ? 0 : score(p, q);
+            const maxScore = 200;
+            const percentage = isShowAll ? '-' : Math.min(100, Math.round((matchScore / maxScore) * 100)) + '%';
+
+            return `
+            <li style="display: flex; align-items: baseline; gap: 8px;">
+              <a href="${p.permalink}" title="${p.title}" style="flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${p.title}</a>
+              <span style="font-size: 0.7em; color: #666; flex-shrink: 0;">[${p.type}]</span>
+              <span style="font-size: 0.7em; color: #666; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 120px;">${p.permalink}</span>
+              <span style="font-size: 0.75em; color: #666; flex-shrink: 0;">${percentage}</span>
+            </li>
+        `;
+        }).join("");
     }
-    
-    previewEl.innerHTML = matched.slice(0, 8).map(p => {
-      const matchScore = score(p, q);
-      const maxScore = 200;
-      const percentage = Math.min(100, Math.round((matchScore / maxScore) * 100));
-      
-      return `
-        <li style="display: flex; align-items: baseline; gap: 8px;">
-          <a href="${p.permalink}" title="${p.title}" style="flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${p.title}</a>
-          <span style="font-size: 0.7em; color: #666; flex-shrink: 0;">[${p.type}]</span>
-          <span style="font-size: 0.7em; color: #666; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 120px;">${p.permalink}</span>
-          <span style="font-size: 0.75em; color: #666; flex-shrink: 0;">${percentage}%</span>
-        </li>
-      `;
-    }).join("");
-  }
 
     function openResultPage() {
-        const q = encodeURIComponent(input.value || "");
-        const tags = encodeURIComponent([...selectedTags].join(","));
-        const categories = encodeURIComponent([...selectedCategories].join(","));
+        const q = input.value.trim();
+        const hasFilters = q || selectedTags.size > 0 || selectedCategories.size > 0 || selectedTypes.size > 0;
+
+        if (!hasFilters) return;
+
         const searchScope = getSearchScope();
 
         let scopeParam = "";
@@ -237,7 +214,7 @@ function refresh() {
             scopeParam = `&path=${encodeURIComponent(currentPath)}`;
         }
 
-        window.location.href = `/global-search/?q=${q}&scope=${scope}&type=${searchScope.type}${scopeParam}&tags=${tags}&categories=${categories}`;
+        window.location.href = `/global-search/?q=${encodeURIComponent(q || '/*')}&scope=${scope}&type=${searchScope.type}${scopeParam}&tags=${encodeURIComponent([...selectedTags].join(","))}&categories=${encodeURIComponent([...selectedCategories].join(","))}&types=${encodeURIComponent([...selectedTypes].join(","))}`;
     }
 
     root.querySelectorAll(".scope-btn").forEach(btn => {
@@ -247,6 +224,7 @@ function refresh() {
             scope = btn.dataset.scope || "global";
             selectedTags.clear();
             selectedCategories.clear();
+            selectedTypes.clear();
             refresh();
         });
     });
@@ -255,7 +233,7 @@ function refresh() {
     input.addEventListener("keydown", (e) => { if (e.key === "Enter") openResultPage(); });
     openBtn.addEventListener("click", openResultPage);
 
-    let isDown = false, ox = 0, oy = 0, lastTap = 0, sx = 0, sy = 0;
+        let isDown = false, ox = 0, oy = 0, lastTap = 0, sx = 0, sy = 0;
     const saved = JSON.parse(localStorage.getItem("global-index-pos") || "null");
     if (saved) {
         root.style.left = `${saved.x}px`; root.style.top = `${saved.y}px`; root.style.right = "auto"; root.style.bottom = "auto";
@@ -266,22 +244,51 @@ function refresh() {
 
     const clamp = (l, t) => ({ left: Math.min(Math.max(0, l), Math.max(0, innerWidth - root.offsetWidth)), top: Math.min(Math.max(0, t), Math.max(0, innerHeight - root.offsetHeight)) });
     const apply = (l, t) => { const c = clamp(l, t); root.style.left = `${c.left}px`; root.style.top = `${c.top}px`; root.style.right = "auto"; root.style.bottom = "auto"; };
-    const toggle = () => { 
-    root.classList.toggle("closed"); 
-    localStorage.setItem("global-index-collapse", root.classList.contains("closed") ? "1" : "0"); 
-    setTimeout(() => apply(root.offsetLeft, root.offsetTop), 0); 
-};
+    const toggle = () => {
+        root.classList.toggle("closed");
+        localStorage.setItem("global-index-collapse", root.classList.contains("closed") ? "1" : "0");
+        setTimeout(() => apply(root.offsetLeft, root.offsetTop), 0);
+    };
 
-    header.addEventListener("mousedown", e => { e.preventDefault(); isDown = true; sx = e.clientX; sy = e.clientY; ox = e.clientX - root.offsetLeft; oy = e.clientY - root.offsetTop; });
-    document.addEventListener("mousemove", e => { if (isDown) apply(e.clientX - ox, e.clientY - oy); });
-    document.addEventListener("mouseup", e => {
+    const getClientPos = (e) => {
+        if (e.touches) {
+            return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        }
+        return { x: e.clientX, y: e.clientY };
+    };
+
+    const onStart = (e) => {
+        e.preventDefault();
+        isDown = true;
+        const pos = getClientPos(e);
+        sx = pos.x;
+        sy = pos.y;
+        ox = pos.x - root.offsetLeft;
+        oy = pos.y - root.offsetTop;
+    };
+
+    const onMove = (e) => {
+        if (!isDown) return;
+        const pos = getClientPos(e);
+        apply(pos.x - ox, pos.y - oy);
+    };
+
+    const onEnd = (e) => {
         if (!isDown) return;
         isDown = false;
         localStorage.setItem("global-index-pos", JSON.stringify({ x: root.offsetLeft, y: root.offsetTop }));
-        const d = Math.hypot(e.clientX - sx, e.clientY - sy), n = Date.now();
-        if (d < 6 && n - lastTap < 300) toggle();
+        const pos = e.changedTouches ? { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY } : { x: e.clientX, y: e.clientY };
+        const d = Math.hypot(pos.x - sx, pos.y - sy), n = Date.now();
+        if (d < 10 && n - lastTap < 300) toggle();
         lastTap = n;
-    });
+    };
+
+    header.addEventListener("mousedown", onStart);
+    header.addEventListener("touchstart", onStart, { passive: false });
+    document.addEventListener("mousemove", onMove);
+    document.addEventListener("touchmove", onMove, { passive: false });
+    document.addEventListener("mouseup", onEnd);
+    document.addEventListener("touchend", onEnd);
 
     refresh();
 })();

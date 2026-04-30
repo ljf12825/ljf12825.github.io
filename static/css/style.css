@@ -689,7 +689,6 @@ body::-webkit-scrollbar-thumb:hover {
 #global-indexer:not(.closed) .title.open { display:inline; }
 #global-indexer.closed .title.closed { display:inline; }
 
-/* 控制栏：Global/Current 和 Matched 在同一行 */
 #global-indexer .index-controls {
   display: flex;
   justify-content: space-between;
@@ -710,27 +709,36 @@ body::-webkit-scrollbar-thumb:hover {
 #global-indexer a.active { color:red; font-weight:bold; }
 #global-indexer .index-actions { display: none; }
 
-/* Tags 和 Categories 区域紧凑 */
 #global-indexer .index-tags-box,
-#global-indexer .index-categories-box {
+#global-indexer .index-categories-box,
+#global-indexer .index-types-box {
   margin: 2px 0;
 }
 #global-indexer .index-tags-box h3,
 #global-indexer .index-categories-box h3 {
-  font-size: 13px;
+  font-size: 0.8em;
   margin: 2px 0;
   display: inline-block;
   margin-right: 6px;
 }
+
+#global-indexer .index-types-box h3 {
+  font-size: 0.8em;
+  margin: 2px 0;
+  display: block;
+}
+
 #global-indexer .index-tags-box ul,
 #global-indexer .index-categories-box ul {
   display: inline-flex;
   flex-wrap: wrap;
   gap: 2px 6px;
 }
-#global-indexer .index-tags-box li,
-#global-indexer .index-categories-box li {
-  font-size: 14px;
+
+#global-indexer .index-types-box ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 6px;
 }
 
 #global-indexer .index-preview-box {
@@ -767,7 +775,6 @@ body::-webkit-scrollbar-thumb:hover {
   white-space: nowrap;
 }
 
-/* 最小化状态 */
 #global-indexer.closed {
   width: fit-content;
   height: auto;

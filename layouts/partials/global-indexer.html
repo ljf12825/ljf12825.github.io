@@ -2,11 +2,8 @@
 {{- $currentSection := .Section -}}
 {{- $currentType := .Type -}}
 {{- $currentPath := .RelPermalink -}}
-<div id="global-indexer" 
-     class="float-window open" 
-     data-current-section="{{ $currentSection }}"
-     data-current-type="{{ $currentType }}"
-     data-current-path="{{ $currentPath }}">
+<div id="global-indexer" class="float-window open" data-current-section="{{ $currentSection }}"
+  data-current-type="{{ $currentType }}" data-current-path="{{ $currentPath }}">
   <div class="float-header">
     <span class="title open">&gt;&gt; &gt;&gt; &gt;&gt; Indexer &lt;&lt; &lt;&lt; &lt;&lt;</span>
     <span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;Idx&gt;&gt;&gt;&gt;&gt;&gt;</span>
@@ -29,7 +26,10 @@
       <h3>Categories</h3>
       <ul id="globalIndexCategories"></ul>
     </div>
-
+    <div class="index-types-box">
+      <h3>Types</h3>
+      <ul id="globalIndexTypes"></ul>
+    </div>
     <div class="index-preview-box">
       <div class="preview-header">
         <h3>Top Results</h3>

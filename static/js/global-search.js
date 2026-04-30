@@ -4,7 +4,8 @@
   if (!holder || !dataScript) return;
   const pages = JSON.parse(dataScript.textContent || '[]');
   const params = new URLSearchParams(location.search);
-  const q = (params.get('q') || '').toLowerCase().trim();
+  const qRaw = params.get('q') || '';
+  const q = decodeURIComponent(qRaw).toLowerCase().trim();
   const scope = (params.get('scope') || 'global').toLowerCase();
   const searchType = (params.get('type') || '').toLowerCase();
   const section = (params.get('section') || '').toLowerCase();
@@ -12,6 +13,7 @@
   const path = (params.get('path') || '').toLowerCase();
   const tags = new Set((params.get('tags') || '').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean));
   const cats = new Set((params.get('categories') || '').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean));
+  const types = new Set((params.get('types') || '').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean));
   
   const ensureArray = (arr) => {
     if (!arr) return [];
@@ -30,7 +32,6 @@
     return normalized;
   };
 
-  // 评分函数（和索引器一致）
   const score = (page, query) => {
     if (!query) return 0;
     const title = norm(page.title);
@@ -49,6 +50,7 @@
   };
   
   const isCurrentScope = scope !== 'global';
+  const isShowAll = q === '/*';
   
   const hit = p => {
     if (isCurrentScope) {
@@ -66,31 +68,40 @@
       }
     }
     
-    const txt = `${norm(p.title)} ${norm(p.summary)} ${ensureArray(p.tags).map(norm).join(' ')} ${ensureArray(p.categories).map(norm).join(' ')}`;
-    if (q && !txt.includes(q)) return false;
-    
     const pTags = new Set(ensureArray(p.tags).map(norm));
     const pCats = new Set(ensureArray(p.categories).map(norm));
     for (const t of tags) if (!pTags.has(t)) return false;
     for (const c of cats) if (!pCats.has(c)) return false;
+    if (types.size > 0 && !types.has(norm(p.type))) return false;
+    
+    if (isShowAll) return true;
+    
+    const txt = `${norm(p.title)} ${norm(p.summary)} ${ensureArray(p.tags).map(norm).join(' ')} ${ensureArray(p.categories).map(norm).join(' ')}`;
+    if (q && !txt.includes(q)) return false;
     
     return true;
   };
   
-  // 过滤并计算分数
   const matched = pages
     .filter(hit)
-    .map(p => ({ page: p, score: score(p, q) }))
+    .map(p => ({ 
+      page: p, 
+      score: isShowAll ? 0 : score(p, q) 
+    }))
     .sort((a, b) => b.score - a.score);
   
   const result = matched.map(m => m.page);
   const scores = matched.map(m => m.score);
   
-  // 搜索摘要
   const filterInfo = [];
-  if (q) filterInfo.push(`query "${q}"`);
+  if (isShowAll) {
+    filterInfo.push(`all pages`);
+  } else if (q) {
+    filterInfo.push(`query "${q}"`);
+  }
   if (tags.size > 0) filterInfo.push(`tags: ${[...tags].join(', ')}`);
   if (cats.size > 0) filterInfo.push(`categories: ${[...cats].join(', ')}`);
+  if (types.size > 0) filterInfo.push(`types: ${[...types].join(', ')}`);
   if (scope !== 'global') {
     if (searchType === 'section') filterInfo.push(`section: ${section}`);
     if (searchType === 'section_type') filterInfo.push(`section: ${section}, type: ${pageType}`);
@@ -101,7 +112,6 @@
     ? `<p class="search-summary">${result.length} result${result.length !== 1 ? 's' : ''} for ${filterInfo.join(' | ')}</p>`
     : `<p class="search-summary">${result.length} total page${result.length !== 1 ? 's' : ''}</p>`;
   
-  // 渲染结果列表
   const listHTML = result.length > 0
     ? `<div class="searchlist">
         <div class="search_row header">
@@ -117,7 +127,7 @@
         ${result.map((p, i) => {
           const matchScore = scores[i];
           const maxScore = 200;
-          const percentage = Math.min(100, Math.round((matchScore / maxScore) * 100));
+          const percentage = isShowAll ? '-' : Math.min(100, Math.round((matchScore / maxScore) * 100)) + '%';
           
           return `
           <div class="search_row">
@@ -138,7 +148,7 @@
                 : '<span class="empty">-</span>'}
             </span>
             <span class="search_summary">${p.summary || '-'}</span>
-            <span class="search_score">${percentage}%</span>
+            <span class="search_score">${percentage}</span>
           </div>
         `}).join('')}
       </div>`
