@@ -2,6 +2,7 @@
 title: command
 date: 2026-04-21
 type: file
+author: ljf12825
 summary: linux common command
 ---
 

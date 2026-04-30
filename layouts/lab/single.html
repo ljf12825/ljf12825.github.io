@@ -30,6 +30,13 @@
         </span>
     </div>
 
+    {{ with .Params.author }}
+    <div class="meta-row">
+        <span class="meta-key">Author:</span>
+        <span class="meta-value">{{ . }}</span>
+    </div>
+    {{ end }}
+
     {{ $tags := .Params.tags }}
     {{ if $tags }}
     <div class="meta-row">

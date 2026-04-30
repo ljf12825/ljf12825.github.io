@@ -1,6 +1,7 @@
 ---
 title: GitPS1
 type: lab
+author: ljf12825
 date: 2025-12-31
 status: suspended # active/archived/dead/unstable/suspended
 tags: [git, shell]

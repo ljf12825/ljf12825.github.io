@@ -1,6 +1,7 @@
 ---
 title: GGAllocator
 type: lab
+author: ljf12825
 date: 2026-03-01
 status: suspended # active/archived/dead/unstable/suspended
 tags: memory

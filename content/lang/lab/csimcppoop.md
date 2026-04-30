@@ -1,6 +1,7 @@
 ---
 title: C Sim C++ OOP
 type: lab
+author: ljf12825
 date: 2026-04-15
 status: active # active/archived/dead/unstable/suspended
 tags: oop

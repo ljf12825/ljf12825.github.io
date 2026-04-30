@@ -4,6 +4,7 @@ type: lab
 status: active # active/archived/dead/unstable/suspended
 summary: Implement EDA in Unity
 tags: eda
+author: ljf12825
 categories: experiment
 date: 2025-12-31
 repo: https://www.cctv.com/

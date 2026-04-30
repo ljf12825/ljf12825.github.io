@@ -3,6 +3,7 @@ title: Service Locator
 type: lab
 status: active # active/archived/dead/unstable/suspended
 tags: sl
+author: ljf12825
 categories: framework
 summary: Implement Service Locator in Unity
 date: 2025-12-31

@@ -3,6 +3,7 @@ title: Unity Object Pool
 type: lab
 status: active # active/archived/dead/unstable/suspended
 tags: objectpool
+author: ljf12825
 categories: conponent
 summary: Implement Object Pool in Unity
 date: 2025-12-31

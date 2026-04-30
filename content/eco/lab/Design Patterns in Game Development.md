@@ -2,6 +2,7 @@
 title: Design Patterns in Game Development
 status: active # active/archived/dead/unstable/suspended
 type: lab
+author: ljf12825
 tags: design patterns
 categories: experiment
 summary: Implement gof23 in unity

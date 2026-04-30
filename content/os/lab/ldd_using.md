@@ -1,6 +1,7 @@
 ---
 title: ldd using
 date: 2026-04-24
+author: ljf12825
 type: lab
 status: archived # active/archived/dead/unstable/suspended
 tags: ldd

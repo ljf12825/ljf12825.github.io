@@ -158,13 +158,12 @@
 .meta-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
 }
 
 .meta-key {
-  width: 120px;
   color: #000080;
-  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .meta-value {
@@ -209,10 +208,10 @@
 }
 
 .lab-content code {
-  background: #d4d4d4;
+  background: #000080;
   padding: 2px 4px;
   border-radius: 2px;
-  color: #000080;
+  color: #c0c0c0;
 }
 
 .lab-content pre {

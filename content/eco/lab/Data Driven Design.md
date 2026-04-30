@@ -1,6 +1,7 @@
 ﻿---
 title: DDD(Data Driven Design)
 type: lab
+author: ljf12825
 status: suspended # active/archived/dead/unstable/suspended
 tags: ddd
 categories: architecture

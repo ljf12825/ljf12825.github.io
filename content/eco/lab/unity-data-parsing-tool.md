@@ -3,6 +3,7 @@ title: Unity Data Parsing Tool
 type: lab
 status: active # active/archived/dead/unstable/suspended
 tags: serialization
+author: ljf12825
 categories: utils
 summary: Unity serialization/deserialization tools
 date: 2025-12-31

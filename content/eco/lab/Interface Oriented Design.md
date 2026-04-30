@@ -3,6 +3,7 @@ title: Interface Oriented Design
 type: lab
 status: active # active/archived/dead/unstable/suspended
 tags: iod
+author: ljf12825
 categories: experiment
 summary: Implement Interface Oriented Design in Unity
 date: 2025-12-31
