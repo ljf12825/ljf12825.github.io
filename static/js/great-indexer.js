@@ -1,5 +1,5 @@
 (function initGlobalIndexer() {
-    const root = document.getElementById("global-indexer");
+    const root = document.getElementById("great-indexer");
     const header = root?.querySelector(".float-header");
     const input = document.getElementById("globalIndexInput");
     const dataScript = document.getElementById("global-index-data");
