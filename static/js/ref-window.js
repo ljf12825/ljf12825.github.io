@@ -10,9 +10,9 @@
   let isDown = false;
   let ox = 0, oy = 0;
   let lastTap = 0;
-  let startX = 0, startY = 0;
+  let sx = 0, sy = 0;
 
-  const pos = JSON.parse(localStorage.getItem("ref-pos"));
+  const pos = JSON.parse(localStorage.getItem("ref-pos") || "null");
   if (pos) {
     win.style.left = pos.x + "px";
     win.style.top  = pos.y + "px";
@@ -29,27 +29,13 @@
     win.classList.add("closed");
   }
 
-  requestAnimationFrame(() => {
-    applyPosition(win.offsetLeft, win.offsetTop);
-  });
-
-  function start(x, y) {
-    isDown = true;
-    startX = x;
-    startY = y;
-    ox = x - win.offsetLeft;
-    oy = y - win.offsetTop;
-  }
-
   function clampToViewport(left, top) {
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
     const elementWidth = win.offsetWidth;
     const elementHeight = win.offsetHeight;
-    
     const maxLeft = Math.max(0, windowWidth - elementWidth);
     const maxTop = Math.max(0, windowHeight - elementHeight);
-    
     return {
       left: Math.min(Math.max(left, 0), maxLeft),
       top: Math.min(Math.max(top, 0), maxTop)
@@ -64,61 +50,59 @@
     win.style.bottom = "auto";
   }
 
-  function move(x, y) {
-    if (!isDown) return;
-    applyPosition(x - ox, y - oy);
-  }
-
-  function end(x, y) {
-    if (!isDown) return;
-    isDown = false;
-
-    localStorage.setItem("ref-pos", JSON.stringify({
-      x: win.offsetLeft,
-      y: win.offsetTop
-    }));
-
-    const dist = Math.hypot(x - startX, y - startY);
-    const now = Date.now();
-
-    if (dist < 6 && now - lastTap < 300) toggle();
-    lastTap = now;
-  }
-
   function toggle() {
     win.classList.toggle("closed");
     localStorage.setItem("ref-collapse",
       win.classList.contains("closed") ? "1" : "0"
     );
-    
-    setTimeout(() => {
-      applyPosition(win.offsetLeft, win.offsetTop);
-    }, 0);
+    setTimeout(() => applyPosition(win.offsetLeft, win.offsetTop), 0);
   }
 
-  header.addEventListener("mousedown", e => {
+  const getClientPos = (e) => {
+    if (e.touches) {
+      return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }
+    return { x: e.clientX, y: e.clientY };
+  };
+
+  const onStart = (e) => {
     e.preventDefault();
-    start(e.clientX, e.clientY);
-  });
+    isDown = true;
+    const pos = getClientPos(e);
+    sx = pos.x;
+    sy = pos.y;
+    ox = pos.x - win.offsetLeft;
+    oy = pos.y - win.offsetTop;
+  };
 
-  document.addEventListener("mousemove", e => move(e.clientX, e.clientY));
-  document.addEventListener("mouseup", e => end(e.clientX, e.clientY));
-
-  header.addEventListener("touchstart", e => {
-    const t = e.touches[0];
-    start(t.clientX, t.clientY);
-  }, { passive: true });
-
-  document.addEventListener("touchmove", e => {
+  const onMove = (e) => {
     if (!isDown) return;
-    const t = e.touches[0];
-    move(t.clientX, t.clientY);
-  }, { passive: true });
+    const pos = getClientPos(e);
+    applyPosition(pos.x - ox, pos.y - oy);
+  };
 
-  document.addEventListener("touchend", e => {
-    const t = e.changedTouches[0];
-    end(t.clientX, t.clientY);
-  });
+  const onEnd = (e) => {
+    if (!isDown) return;
+    isDown = false;
+    localStorage.setItem("ref-pos", JSON.stringify({
+      x: win.offsetLeft,
+      y: win.offsetTop
+    }));
+    const pos = e.changedTouches
+      ? { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY }
+      : { x: e.clientX, y: e.clientY };
+    const d = Math.hypot(pos.x - sx, pos.y - sy);
+    const n = Date.now();
+    if (d < 10 && n - lastTap < 300) toggle();
+    lastTap = n;
+  };
+
+  header.addEventListener("mousedown", onStart);
+  header.addEventListener("touchstart", onStart, { passive: false });
+  document.addEventListener("mousemove", onMove);
+  document.addEventListener("touchmove", onMove, { passive: false });
+  document.addEventListener("mouseup", onEnd);
+  document.addEventListener("touchend", onEnd);
 
   window.addEventListener("resize", () => {
     applyPosition(win.offsetLeft, win.offsetTop);

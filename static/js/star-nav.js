@@ -10,9 +10,9 @@
   let isDown = false;
   let ox = 0, oy = 0;
   let lastTap = 0;
-  let startX = 0, startY = 0;
+  let sx = 0, sy = 0;
 
-  const pos = JSON.parse(localStorage.getItem("star-pos"));
+  const pos = JSON.parse(localStorage.getItem("star-pos") || "null");
   if (pos) {
     nav.style.left = pos.x + "px";
     nav.style.top  = pos.y + "px";
@@ -29,7 +29,6 @@
     const navHeight = nav.offsetHeight;
     const maxLeft = Math.max(0, window.innerWidth - navWidth);
     const maxTop = Math.max(0, window.innerHeight - navHeight);
-
     return {
       left: Math.min(Math.max(left, 0), maxLeft),
       top: Math.min(Math.max(top, 0), maxTop)
@@ -44,64 +43,61 @@
     nav.style.bottom = "auto";
   }
 
-  function start(x, y) {
+  function toggle() {
+    nav.classList.toggle("collapse");
+    localStorage.setItem("star-collapse",
+      nav.classList.contains("collapse") ? "1" : "0"
+    );
+    setTimeout(() => applyPosition(nav.offsetLeft, nav.offsetTop), 0);
+  }
+
+  const getClientPos = (e) => {
+    if (e.touches) {
+      return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }
+    return { x: e.clientX, y: e.clientY };
+  };
+
+  const onStart = (e) => {
+    e.preventDefault();
     isDown = true;
-    startX = x;
-    startY = y;
-    ox = x - nav.offsetLeft;
-    oy = y - nav.offsetTop;
-  }
+    const pos = getClientPos(e);
+    sx = pos.x;
+    sy = pos.y;
+    ox = pos.x - nav.offsetLeft;
+    oy = pos.y - nav.offsetTop;
+  };
 
-  function move(x, y) {
+  const onMove = (e) => {
     if (!isDown) return;
-    applyPosition(x - ox, y - oy);
-  }
+    const pos = getClientPos(e);
+    applyPosition(pos.x - ox, pos.y - oy);
+  };
 
-  function end() {
+  const onEnd = (e) => {
     if (!isDown) return;
     isDown = false;
     localStorage.setItem("star-pos", JSON.stringify({
       x: nav.offsetLeft,
       y: nav.offsetTop
     }));
-  }
+    const pos = e.changedTouches
+      ? { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY }
+      : { x: e.clientX, y: e.clientY };
+    const d = Math.hypot(pos.x - sx, pos.y - sy);
+    const n = Date.now();
+    if (d < 10 && n - lastTap < 300) toggle();
+    lastTap = n;
+  };
 
-  header.addEventListener("mousedown", e => {
-    e.preventDefault();
-    start(e.clientX, e.clientY);
-  });
-  document.addEventListener("mousemove", e => move(e.clientX, e.clientY));
-  document.addEventListener("mouseup", end);
-
-  header.addEventListener("touchstart", e => {
-    const t = e.touches[0];
-    start(t.clientX, t.clientY);
-
-    const now = Date.now();
-    if (now - lastTap < 300) toggle();
-    lastTap = now;
-  }, { passive: true });
-
-  document.addEventListener("touchmove", e => {
-    if (!isDown) return;
-    const t = e.touches[0];
-    move(t.clientX, t.clientY);
-  }, { passive: true });
-
-  document.addEventListener("touchend", end);
-
-  function toggle() {
-    nav.classList.toggle("collapse");
-    localStorage.setItem("star-collapse",
-      nav.classList.contains("collapse") ? "1" : "0"
-    );
-  }
-
-  header.addEventListener("dblclick", toggle);
+  header.addEventListener("mousedown", onStart);
+  header.addEventListener("touchstart", onStart, { passive: false });
+  document.addEventListener("mousemove", onMove);
+  document.addEventListener("touchmove", onMove, { passive: false });
+  document.addEventListener("mouseup", onEnd);
+  document.addEventListener("touchend", onEnd);
 
   window.addEventListener("resize", () => {
     applyPosition(nav.offsetLeft, nav.offsetTop);
   });
-
-  console.log("★ star-nav mobile ready");
 })();
