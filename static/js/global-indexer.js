@@ -214,7 +214,7 @@
             scopeParam = `&path=${encodeURIComponent(currentPath)}`;
         }
 
-        window.location.href = `/global-search/?q=${encodeURIComponent(q || '/*')}&scope=${scope}&type=${searchScope.type}${scopeParam}&tags=${encodeURIComponent([...selectedTags].join(","))}&categories=${encodeURIComponent([...selectedCategories].join(","))}&types=${encodeURIComponent([...selectedTypes].join(","))}`;
+        window.location.href = `/searchlist/?q=${encodeURIComponent(q || '/*')}&scope=${scope}&type=${searchScope.type}${scopeParam}&tags=${encodeURIComponent([...selectedTags].join(","))}&categories=${encodeURIComponent([...selectedCategories].join(","))}&types=${encodeURIComponent([...selectedTypes].join(","))}`;
     }
 
     root.querySelectorAll(".scope-btn").forEach(btn => {

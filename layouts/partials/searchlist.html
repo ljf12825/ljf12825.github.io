@@ -79,6 +79,8 @@
     "type" .Type 
     "permalink" .RelPermalink
     "parentPath" $parentPath
+    "author" .Params.author
+    "date" (.Date.Format "2006-01-02")
   -}}
   {{- $result = $result | append $pageData -}}
 {{- end -}}

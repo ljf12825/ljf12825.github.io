@@ -78,6 +78,7 @@ header .banner {
 	left: 0;
 	background: #c0c0c0;
 	width: 100%;
+  min-height: 37px;
 	margin: 0 auto;
 	z-index: 9999;
 	border-top: 2px solid #ffffff;

@@ -1,3 +1,19 @@
+.search-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.search-header .page-title {
+  margin: 0;
+}
+
+.search-summary-inline {
+  font-size: 14px;
+  color: #666;
+}
+
 .searchlist-container {
   max-width: 100%;
   box-sizing: border-box;
@@ -22,14 +38,26 @@
 .searchlist {
   width: 100%;
   padding: 0 0 20px 0;
+  margin-top: 25px;
 }
 
 .search_row {
   display: grid;
-  grid-template-columns: 2fr 1fr 0.5fr 0.5fr 1fr 1fr 2fr 0.4fr;
+  grid-template-columns: 1.5fr 1.2fr 0.3fr 0.3fr 0.3fr 0.5fr 1.0fr 1.0fr 0.1fr;
   border-bottom: 1px dashed #000000;
 }
 
+.search_author {
+  color: #000000;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.search_date {
+  color: #000000;
+  white-space: nowrap;
+}
 .search_row.header {
   border-top: 1px solid #000000;
   border-bottom: 1px solid #000000;

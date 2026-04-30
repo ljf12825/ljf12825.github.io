@@ -1,5 +1,6 @@
 (function () {
-  const holder = document.getElementById('global-search-result');
+  const holder = document.getElementById('searchlist-result');
+  const summaryInline = document.getElementById('search-summary-inline');
   const dataScript = document.getElementById('global-index-data');
   if (!holder || !dataScript) return;
   const pages = JSON.parse(dataScript.textContent || '[]');
@@ -11,19 +12,19 @@
   const section = (params.get('section') || '').toLowerCase();
   const pageType = (params.get('pageType') || '').toLowerCase();
   const path = (params.get('path') || '').toLowerCase();
-  const tags = new Set((params.get('tags') || '').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean));
-  const cats = new Set((params.get('categories') || '').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean));
-  const types = new Set((params.get('types') || '').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean));
-  
+  const tags = new Set((params.get('tags') || '').split(',').map(s => s.trim().toLowerCase()).filter(Boolean));
+  const cats = new Set((params.get('categories') || '').split(',').map(s => s.trim().toLowerCase()).filter(Boolean));
+  const types = new Set((params.get('types') || '').split(',').map(s => s.trim().toLowerCase()).filter(Boolean));
+
   const ensureArray = (arr) => {
     if (!arr) return [];
     if (Array.isArray(arr)) return arr;
     if (typeof arr === 'string') return arr.split(',').map(s => s.trim()).filter(Boolean);
     return [];
   };
-  
+
   const norm = v => String(v || '').toLowerCase();
-  
+
   const normalizePath = (p) => {
     if (!p) return "/";
     let normalized = p.toLowerCase().trim();
@@ -48,10 +49,10 @@
     if (summary.includes(query)) s += 30;
     return s;
   };
-  
+
   const isCurrentScope = scope !== 'global';
   const isShowAll = q === '/*';
-  
+
   const hit = p => {
     if (isCurrentScope) {
       if (searchType === 'section' && section) {
@@ -67,32 +68,32 @@
         if (pageParentPath !== normalizedPath) return false;
       }
     }
-    
+
     const pTags = new Set(ensureArray(p.tags).map(norm));
     const pCats = new Set(ensureArray(p.categories).map(norm));
     for (const t of tags) if (!pTags.has(t)) return false;
     for (const c of cats) if (!pCats.has(c)) return false;
     if (types.size > 0 && !types.has(norm(p.type))) return false;
-    
+
     if (isShowAll) return true;
-    
+
     const txt = `${norm(p.title)} ${norm(p.summary)} ${ensureArray(p.tags).map(norm).join(' ')} ${ensureArray(p.categories).map(norm).join(' ')}`;
     if (q && !txt.includes(q)) return false;
-    
+
     return true;
   };
-  
+
   const matched = pages
     .filter(hit)
-    .map(p => ({ 
-      page: p, 
-      score: isShowAll ? 0 : score(p, q) 
+    .map(p => ({
+      page: p,
+      score: isShowAll ? 0 : score(p, q)
     }))
     .sort((a, b) => b.score - a.score);
-  
+
   const result = matched.map(m => m.page);
   const scores = matched.map(m => m.score);
-  
+
   const filterInfo = [];
   if (isShowAll) {
     filterInfo.push(`all pages`);
@@ -107,11 +108,25 @@
     if (searchType === 'section_type') filterInfo.push(`section: ${section}, type: ${pageType}`);
     if (searchType === 'path') filterInfo.push(`path: ${path}`);
   }
-  
-  const summaryHTML = filterInfo.length > 0 
-    ? `<p class="search-summary">${result.length} result${result.length !== 1 ? 's' : ''} for ${filterInfo.join(' | ')}</p>`
-    : `<p class="search-summary">${result.length} total page${result.length !== 1 ? 's' : ''}</p>`;
-  
+
+  const summaryText = filterInfo.length > 0
+    ? `${result.length} result${result.length !== 1 ? 's' : ''} for ${filterInfo.join(' | ')}`
+    : `${result.length} total page${result.length !== 1 ? 's' : ''}`;
+
+  const topnav = document.querySelector('.topnav .container ul');
+  if (topnav) {
+    const existing = topnav.querySelector('.search-info');
+    if (existing) existing.remove();
+    const li = document.createElement('li');
+    li.className = 'search-info';
+    li.innerHTML = `<span style="color: #000080; font-weight: bold; font-size: large">Search List<br></span><span style="color: black;">${summaryText}</span>`;
+    topnav.appendChild(li);
+  }
+
+  if (summaryInline) {
+    summaryInline.textContent = summaryText;
+  }
+
   const listHTML = result.length > 0
     ? `<div class="searchlist">
         <div class="search_row header">
@@ -119,40 +134,42 @@
           <span>Path</span>
           <span>Type</span>
           <span>Section</span>
+          <span>Author</span>
+          <span>Modified</span>
           <span>Tags</span>
           <span>Categories</span>
-          <span>Summary</span>
           <span>Score</span>
         </div>
         ${result.map((p, i) => {
-          const matchScore = scores[i];
-          const maxScore = 200;
-          const percentage = isShowAll ? '-' : Math.min(100, Math.round((matchScore / maxScore) * 100)) + '%';
-          
-          return `
+      const matchScore = scores[i];
+      const maxScore = 200;
+      const percentage = isShowAll ? '-' : Math.min(100, Math.round((matchScore / maxScore) * 100)) + '%';
+
+      return `
           <div class="search_row">
             <span class="search_name">
               <a href="${p.permalink}">${p.title}</a>
             </span>
             <span class="search_path">${p.permalink}</span>
-            <span class="search_type">${p.type.toUpperCase()}</span>
-            <span class="search_section">${p.section || '/'}</span>
+            <span class="search_type">&lt;${(p.type || '').toLowerCase()}&gt;</span>
+            <span class="search_section">{${p.section || '/'}}</span>
+            <span class="search_author">${p.author || '-'}</span>
+            <span class="search_date">${p.date || '-'}</span>
             <span class="search_tags">
-              ${ensureArray(p.tags).length > 0 
-                ? ensureArray(p.tags).map(t => `<span class="tag">#${t}</span>`).join(' ') 
-                : '<span class="empty">-</span>'}
+              ${ensureArray(p.tags).length > 0
+          ? ensureArray(p.tags).map(t => `<span class="tag">#${t}</span>`).join(' ')
+          : '<span class="empty">-</span>'}
             </span>
             <span class="search_cats">
-              ${ensureArray(p.categories).length > 0 
-                ? ensureArray(p.categories).map(c => `<span class="cat">[${c}]</span>`).join(' ') 
-                : '<span class="empty">-</span>'}
+              ${ensureArray(p.categories).length > 0
+          ? ensureArray(p.categories).map(c => `<span class="cat">[${c}]</span>`).join(' ')
+          : '<span class="empty">-</span>'}
             </span>
-            <span class="search_summary">${p.summary || '-'}</span>
             <span class="search_score">${percentage}</span>
           </div>
         `}).join('')}
       </div>`
     : '<p class="no-results">No results found</p>';
-  
-  holder.innerHTML = summaryHTML + listHTML;
+
+  holder.innerHTML = listHTML;
 })();

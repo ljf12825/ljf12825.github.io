@@ -30,6 +30,9 @@
 {{ else if eq $sec "net" }}
   {{ partial "topnav/net.html" . }}
 
+{{ else if eq $sec "searchlist" }}
+  {{ partial "topnav/searchlist.html" . }}
+
 {{ else }}
   {{ partial "topnav/root.html" . }}
 {{ end }}
