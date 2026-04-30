@@ -71,7 +71,7 @@
 </span></span><span style=display:flex><span><span style=color:#f1fa8c>??</span> file4<span style=color:#ff79c6>.</span>txt   <span style=color:#6272a4># 未跟踪文件</span>
 </span></span></code></pre></div><p>两列含义</p><ul><li>第一列：暂存区的状态（相对于HEAD）</li><li>第二列：工作区的状态（相对于暂存区）</li></ul><h2 id=底层原理-1>底层原理</h2><p><code>git status</code>比较三份快照：</p><ol><li>HEAD（最新提交）</li><li>暂存区（.git/index）</li><li>工作区对比
 它会用哈希比较 + 文件时间戳优化，保证速度快</li></ol></div><nav class=post-nav><a href=/se/vcs/git/lfs/>Prev: LFS</a>
-<a href=/se/vcs/git/ls-files/>Next: ls-files</a></nav></article></div><aside id=toc-window class=toc aria-label=目录 role=complementary data-state=expanded><div class=toc-header id=toc-header role=button tabindex=0 aria-label=折叠/展开目录 aria-expanded=true><span class="title open" aria-hidden=true>>> >> >> TOC &lt;&lt; &lt;&lt; &lt;&lt;</span>
+<a href=/se/vcs/git/ls-files/>Next: ls-files</a></nav></article></div><aside id=toc-window class=toc aria-label=目录 role=complementary data-state=expanded><div class=toc-header id=toc-header role=button tabindex=0 aria-label=折叠/展开目录 aria-expanded=true><span class="title open" aria-hidden=true>>> >> >> Table of Contents &lt;&lt; &lt;&lt; &lt;&lt;</span>
 <span class="title closed" aria-hidden=true>&lt;&lt;&lt;&lt;&lt;&lt;TOC>>>>>></span></div><div class=toc-body id=toc-body><nav id=TableOfContents><ul><li><a href=#git-log><code>git log</code></a><ul><li><a href=#底层原理>底层原理</a></li></ul></li><li><a href=#git-status><code>git status</code></a><ul><li><a href=#底层原理-1>底层原理</a></li></ul></li></ul></nav></div></aside><script src=/js/toc-window.js defer></script><script src=/js/scrollspy.js defer></script><script type=module>
   import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
   mermaid.initialize({ 

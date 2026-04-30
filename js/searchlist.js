@@ -131,7 +131,7 @@
           <span>Modified</span>
           <span>Tags</span>
           <span>Categories</span>
-          <span>Score</span>
+          <span>Match</span>
         </div>
         ${result.map((p, i) => {
       const matchScore = scores[i];
