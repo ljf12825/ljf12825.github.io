@@ -6,11 +6,6 @@
 
 <div class="lab-terminal">
 
-  <div class="lab-toolbar">
-    <input type="text" id="labSearch" placeholder="title/lang/status/tag/summary/category">
-    <span class="count">{{ len .Pages }} items</span>
-  </div>
-
   <div class="lab-table">
     <div class="lab-row lab-head">
       <span class="col name">NAME</span>
@@ -24,11 +19,6 @@
     {{ $tags := .Params.tags }}
     {{ $categories := .Params.categories }}
     <div class="lab-row"
-         data-title="{{ .Title | lower }}"
-         data-tags="{{ if $tags }}{{ if reflect.IsSlice $tags }}{{ delimit $tags "," | lower }}{{ else }}{{ $tags | lower }}{{ end }}{{ end }}"
-         data-categories="{{ if $categories }}{{ if reflect.IsSlice $categories }}{{ delimit $categories "," | lower }}{{ else }}{{ $categories | lower }}{{ end }}{{ end }}"
-         data-status="{{ .Params.status | default "unknown" | lower }}"
-         data-summary="{{ .Params.summary | default "" | lower }}"
          onclick="location.href='{{ .RelPermalink }}'">
       
       <span class="col name">
@@ -71,7 +61,5 @@
 
   </div>
 </div>
-
-<script src="{{ "js/labfilter.js" | relURL }}"></script>
 
 {{ end }}
