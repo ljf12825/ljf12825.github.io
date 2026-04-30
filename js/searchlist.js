@@ -1,6 +1,5 @@
 (function () {
   const holder = document.getElementById('searchlist-result');
-  const summaryInline = document.getElementById('search-summary-inline');
   const dataScript = document.getElementById('global-index-data');
   if (!holder || !dataScript) return;
   const pages = JSON.parse(dataScript.textContent || '[]');
@@ -113,18 +112,12 @@
     ? `${result.length} result${result.length !== 1 ? 's' : ''} for ${filterInfo.join(' | ')}`
     : `${result.length} total page${result.length !== 1 ? 's' : ''}`;
 
-  const topnav = document.querySelector('.topnav .container ul');
-  if (topnav) {
-    const existing = topnav.querySelector('.search-info');
-    if (existing) existing.remove();
-    const li = document.createElement('li');
-    li.className = 'search-info';
-    li.innerHTML = `<span style="color: #000080; font-weight: bold; font-size: large">Search List<br></span><span style="color: black;">${summaryText}</span>`;
-    topnav.appendChild(li);
-  }
-
-  if (summaryInline) {
-    summaryInline.textContent = summaryText;
+  const titleEl = document.getElementById('topnav-search-title');
+  if (titleEl) {
+    const resultSpan = titleEl.querySelector('span:last-child');
+    if (resultSpan) {
+      resultSpan.textContent = summaryText;
+    }
   }
 
   const listHTML = result.length > 0
