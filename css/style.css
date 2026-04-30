@@ -78,6 +78,7 @@ header .banner {
 	left: 0;
 	background: #c0c0c0;
 	width: 100%;
+  min-height: 37px;
 	margin: 0 auto;
 	z-index: 9999;
 	border-top: 2px solid #ffffff;
@@ -667,7 +668,7 @@ body::-webkit-scrollbar-thumb:hover {
   display: block;
 }
 
-#global-indexer {
+#great-indexer {
   position: fixed;
   right: 20px;
   bottom: 20px;
@@ -682,92 +683,92 @@ body::-webkit-scrollbar-thumb:hover {
   box-shadow: 2px 2px 0 #ffffff, 4px 4px 0 #000080;
   z-index: 9999;
 }
-#global-indexer .float-header { background:#000080; color:#fff; cursor:move; text-align:center; font-weight:bold; border-bottom:2px solid #fff; padding: 2px 0; font-size: 14px; }
-#global-indexer .float-body { padding:6px 8px; overflow-y:auto; max-height: calc(72vh - 30px); }
-#global-indexer.closed .float-body { display:none; }
-#global-indexer .title { display:none; font-size: 14px; }
-#global-indexer:not(.closed) .title.open { display:inline; }
-#global-indexer.closed .title.closed { display:inline; }
+#great-indexer .float-header { background:#000080; color:#fff; cursor:move; text-align:center; font-weight:bold; border-bottom:2px solid #fff; padding: 2px 0; font-size: 14px; }
+#great-indexer .float-body { padding:6px 8px; overflow-y:auto; max-height: calc(72vh - 30px); }
+#great-indexer.closed .float-body { display:none; }
+#great-indexer .title { display:none; font-size: 14px; }
+#great-indexer:not(.closed) .title.open { display:inline; }
+#great-indexer.closed .title.closed { display:inline; }
 
-#global-indexer .index-controls {
+#great-indexer .index-controls {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 4px;
 }
-#global-indexer .index-mode {
+#great-indexer .index-mode {
   display: flex;
   gap: 4px;
 }
-#global-indexer .index-meta { font-size: 12px; }
+#great-indexer .index-meta { font-size: 12px; }
 
-#global-indexer input { width:100%; padding:4px 6px; background:#c0c0c0; border:1px solid #000080; color:#000080; margin: 4px 0; box-sizing: border-box; font-size: 14px; }
-#global-indexer .scope-btn, #global-indexer #openGlobalSearchPage { border: none; background:#c0c0c0; color:#000080; cursor:pointer; padding: 2px 8px; font-size: 14px; text-decoration: underline; }
-#global-indexer .scope-btn.active { color: red; }
-#global-indexer ul { list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:4px; font-size: 14px; }
-#global-indexer a { color:#000080; text-decoration:none; font-size: 14px; }
-#global-indexer a.active { color:red; font-weight:bold; }
-#global-indexer .index-actions { display: none; }
+#great-indexer input { width:100%; padding:4px 6px; background:#c0c0c0; border:1px solid #000080; color:#000080; margin: 4px 0; box-sizing: border-box; font-size: 14px; }
+#great-indexer .scope-btn, #great-indexer #openGlobalSearchPage { border: none; background:#c0c0c0; color:#000080; cursor:pointer; padding: 2px 8px; font-size: 14px; text-decoration: underline; }
+#great-indexer .scope-btn.active { color: red; }
+#great-indexer ul { list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:4px; font-size: 14px; }
+#great-indexer a { color:#000080; text-decoration:none; font-size: 14px; }
+#great-indexer a.active { color:red; font-weight:bold; }
+#great-indexer .index-actions { display: none; }
 
-#global-indexer .index-tags-box,
-#global-indexer .index-categories-box,
-#global-indexer .index-types-box {
+#great-indexer .index-tags-box,
+#great-indexer .index-categories-box,
+#great-indexer .index-types-box {
   margin: 2px 0;
 }
-#global-indexer .index-tags-box h3,
-#global-indexer .index-categories-box h3 {
+#great-indexer .index-tags-box h3,
+#great-indexer .index-categories-box h3 {
   font-size: 0.8em;
   margin: 2px 0;
   display: inline-block;
   margin-right: 6px;
 }
 
-#global-indexer .index-types-box h3 {
+#great-indexer .index-types-box h3 {
   font-size: 0.8em;
   margin: 2px 0;
   display: block;
 }
 
-#global-indexer .index-tags-box ul,
-#global-indexer .index-categories-box ul {
+#great-indexer .index-tags-box ul,
+#great-indexer .index-categories-box ul {
   display: inline-flex;
   flex-wrap: wrap;
   gap: 2px 6px;
 }
 
-#global-indexer .index-types-box ul {
+#great-indexer .index-types-box ul {
   display: flex;
   flex-wrap: wrap;
   gap: 2px 6px;
 }
 
-#global-indexer .index-preview-box {
+#great-indexer .index-preview-box {
   margin-top: 4px;
 }
-#global-indexer .index-preview-box .preview-header {
+#great-indexer .index-preview-box .preview-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2px;
 }
-#global-indexer .index-preview-box .preview-header h3 {
+#great-indexer .index-preview-box .preview-header h3 {
   margin: 0;
   font-size: 13px;
 }
-#global-indexer .index-preview-box ul { 
+#great-indexer .index-preview-box ul { 
   max-height: 160px; 
   overflow-y: auto; 
   display: block;
   margin: 0;
 }
-#global-indexer .index-preview-box li { 
+#great-indexer .index-preview-box li { 
   display: flex;
   align-items: baseline;
   gap: 6px;
   padding: 1px 0;
   font-size: 13px;
 }
-#global-indexer .index-preview-box li a {
+#great-indexer .index-preview-box li a {
   flex: 1;
   min-width: 0;
   overflow: hidden;
@@ -775,11 +776,11 @@ body::-webkit-scrollbar-thumb:hover {
   white-space: nowrap;
 }
 
-#global-indexer.closed {
+#great-indexer.closed {
   width: fit-content;
   height: auto;
   max-height: none;
 }
-#global-indexer.closed .float-header {
+#great-indexer.closed .float-header {
   border-bottom: none;
 }

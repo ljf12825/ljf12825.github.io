@@ -1,5 +1,5 @@
 (function initGlobalIndexer() {
-    const root = document.getElementById("global-indexer");
+    const root = document.getElementById("great-indexer");
     const header = root?.querySelector(".float-header");
     const input = document.getElementById("globalIndexInput");
     const dataScript = document.getElementById("global-index-data");
@@ -214,7 +214,7 @@
             scopeParam = `&path=${encodeURIComponent(currentPath)}`;
         }
 
-        window.location.href = `/global-search/?q=${encodeURIComponent(q || '/*')}&scope=${scope}&type=${searchScope.type}${scopeParam}&tags=${encodeURIComponent([...selectedTags].join(","))}&categories=${encodeURIComponent([...selectedCategories].join(","))}&types=${encodeURIComponent([...selectedTypes].join(","))}`;
+        window.location.href = `/searchlist/?q=${encodeURIComponent(q || '/*')}&scope=${scope}&type=${searchScope.type}${scopeParam}&tags=${encodeURIComponent([...selectedTags].join(","))}&categories=${encodeURIComponent([...selectedCategories].join(","))}&types=${encodeURIComponent([...selectedTypes].join(","))}`;
     }
 
     root.querySelectorAll(".scope-btn").forEach(btn => {
