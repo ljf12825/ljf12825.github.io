@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const sharePercent = totalCount > 0 ? Math.round(share * 100) : 0;
     const stat = el.parentElement?.querySelector(".nav-stats");
     if (stat) {
-      stat.textContent = `${articleCount}(${sharePercent}%) ${recentCount}/3m`;
+      stat.textContent = `${articleCount}(${sharePercent}%) - ${recentCount} / 90d`;
     }
     
     el.classList.remove("activity-high", "activity-medium", "activity-low", "activity-idle");
