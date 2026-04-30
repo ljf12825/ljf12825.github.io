@@ -2,6 +2,7 @@
 title: compress & archive
 date: 2026-04-03
 type: file
+author: ljf12825
 summary: .gz .bz2 .xz .zip .tar
 ---
 

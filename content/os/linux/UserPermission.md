@@ -1,6 +1,7 @@
 ---
 title: user and permission
 date: 2026-01-14
+author: ljf12825
 type: file
 summary: user, usergroup, file permission, umask
 ---

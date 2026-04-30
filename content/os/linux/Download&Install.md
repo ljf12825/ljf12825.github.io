@@ -1,6 +1,7 @@
 ---
 title: software download and install
 date: 2026-01-14
+author: ljf12825
 type: file
 summary: pakage manager, binary
 ---

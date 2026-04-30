@@ -1,6 +1,7 @@
 ---
 title: graphics card on linux
 date: 2026-01-14
+author: ljf12825
 type: file
 summary: nvidia, amd, intel
 ---

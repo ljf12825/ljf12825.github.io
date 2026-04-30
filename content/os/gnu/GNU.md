@@ -1,5 +1,6 @@
 ---
 title: GNU
+author: ljf12825
 date: 2026-01-01
 summary: overview of GNU
 type: file
