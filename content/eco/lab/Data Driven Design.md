@@ -2,6 +2,8 @@
 title: DDD(Data Driven Design)
 type: lab
 status: suspended # active/archived/dead/unstable/suspended
+tags: ddd
+categories: architecture
 date: 2025-12-31
 summary: Implement DDD in Unity
 repo: https://www.cctv.com/

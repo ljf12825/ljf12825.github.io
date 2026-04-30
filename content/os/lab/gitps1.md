@@ -3,7 +3,8 @@ title: GitPS1
 type: lab
 date: 2025-12-31
 status: suspended # active/archived/dead/unstable/suspended
-category: Tool
+tags: [git, shell]
+categories: tool
 summary: a git state command prompt implemented
 repo: https://github.com/ljf12825/GitPS1
 ---

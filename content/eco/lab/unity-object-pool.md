@@ -2,6 +2,8 @@
 title: Unity Object Pool
 type: lab
 status: active # active/archived/dead/unstable/suspended
+tags: objectpool
+categories: conponent
 summary: Implement Object Pool in Unity
 date: 2025-12-31
 repo: https://github.com/ljf12825/unity-object-pool

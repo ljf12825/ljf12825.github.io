@@ -14,16 +14,20 @@
   <div class="lab-table">
     <div class="lab-row lab-head">
       <span class="col name">NAME</span>
-      <span class="col category">CATE</span>
+      <span class="col tags">TAG</span>
+      <span class="col categories">CATEGORY</span>
       <span class="col status">STATUS</span>
       <span class="col summary">SUMMARY</span>
     </div>
 
     {{ range .Pages.ByDate.Reverse }}
+    {{ $tags := .Params.tags }}
+    {{ $categories := .Params.categories }}
     <div class="lab-row"
          data-title="{{ .Title | lower }}"
-         data-category="{{ .Params.category | lower }}"
-         data-status="{{ .Params.status | lower }}"
+         data-tags="{{ if $tags }}{{ if reflect.IsSlice $tags }}{{ delimit $tags "," | lower }}{{ else }}{{ $tags | lower }}{{ end }}{{ end }}"
+         data-categories="{{ if $categories }}{{ if reflect.IsSlice $categories }}{{ delimit $categories "," | lower }}{{ else }}{{ $categories | lower }}{{ end }}{{ end }}"
+         data-status="{{ .Params.status | default "unknown" | lower }}"
          data-summary="{{ .Params.summary | default "" | lower }}"
          onclick="location.href='{{ .RelPermalink }}'">
       
@@ -31,11 +35,34 @@
         {{ .Title }}{{ if .Params.toy }}*{{ end }}
       </span>
 
-      <span class="col category {{ .Params.category }}">
-        {{ .Params.category }}
+      <span class="col tags">
+        {{ if $tags }}
+          {{ if reflect.IsSlice $tags }}
+            {{ range $tags }}
+              <span class="tag-item {{ . | urlize }}">{{ . }}</span>
+            {{ end }}
+          {{ else }}
+            <span class="tag-item {{ $tags | urlize }}">{{ $tags }}</span>
+          {{ end }}
+        {{ end }}
       </span>
-      <span class="col status {{ .Params.status }}">
-        {{ .Params.status }}
+
+      <span class="col categories">
+        {{ if $categories }}
+          {{ if reflect.IsSlice $categories }}
+            {{ range $categories }}
+              <span class="category-item {{ . | urlize }}">{{ . }}</span>
+            {{ end }}
+          {{ else }}
+            <span class="category-item {{ $categories | urlize }}">{{ $categories }}</span>
+          {{ end }}
+        {{ end }}
+      </span>
+
+      <span class="col status">
+        <span class="status-badge {{ .Params.status | default "unknown" | urlize }}">
+          {{ .Params.status | default "UNKNOWN" }}
+        </span>
       </span>
 
       <span class="col summary">{{ with .Params.summary }}{{ . }}{{ end }}</span>
@@ -45,6 +72,6 @@
   </div>
 </div>
 
-<script src="/js/labfilter.js/"></script>
+<script src="{{ "js/labfilter.js" | relURL }}"></script>
 
 {{ end }}

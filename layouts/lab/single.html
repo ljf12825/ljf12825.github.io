@@ -16,22 +16,49 @@
 
     <div class="meta-row">
         <span class="meta-key">Status:</span>
-        <span class="meta-value status {{ lower (.Params.status | default "unknown") }}">
-        {{ .Params.status | default "UNKNOWN" }}
+        <span class="meta-value">
+          <span class="status-badge {{ .Params.status | default "unknown" | urlize }}">
+            {{ .Params.status | default "UNKNOWN" }}
+          </span>
         </span>
     </div>
 
     <div class="meta-row">
         <span class="meta-key">Modified:</span>
         <span class="meta-value">
-        {{ .Date.Format "2006-01-02" }}
+          {{ .Date.Format "2006-01-02" }}
         </span>
     </div>
 
-    {{ with .Params.category }}
+    {{ $tags := .Params.tags }}
+    {{ if $tags }}
     <div class="meta-row">
-        <span class="meta-key">Category:</span>
-        <span class="meta-value">{{ . }}</span>
+      <span class="meta-key">Tags:</span>
+      <span class="meta-value">
+        {{ if reflect.IsSlice $tags }}
+          {{ range $index, $tag := $tags }}
+            <span class="tag-item {{ $tag | urlize }}">{{ $tag }}</span>{{ if ne $index (sub (len $tags) 1) }}、{{ end }}
+          {{ end }}
+        {{ else }}
+          <span class="tag-item {{ $tags | urlize }}">{{ $tags }}</span>
+        {{ end }}
+      </span>
+    </div>
+    {{ end }}
+
+    {{ $categories := .Params.categories }}
+    {{ if $categories }}
+    <div class="meta-row">
+        <span class="meta-key">Categories:</span>
+        <span class="meta-value">
+          {{ if reflect.IsSlice $categories }}
+            {{ range $index, $category := $categories }}
+              <span class="category-item {{ $category | urlize }}">{{ $category }}</span>{{ if ne $index (sub (len $categories) 1) }}, {{ end }}
+            {{ end }}
+          {{ else }}
+            <span class="category-item {{ $categories | urlize }}">{{ $categories }}</span>
+          {{ end }}
+        </span>
     </div>
     {{ end }}
 
@@ -44,10 +71,9 @@
 
     {{ with .Params.repo }}
     <div class="meta-row">
-        <span class="meta-key">
-        <a href="{{ . }}" target="_blank">URL</a>
+        <span class="meta-value">
+          <a href="{{ . }}" target="_blank" rel="noopener noreferrer">URL</a>
         </span>
-         <span class="meta-value"></span>
     </div>
     {{ end }}
 

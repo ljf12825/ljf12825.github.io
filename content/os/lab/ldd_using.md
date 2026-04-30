@@ -3,7 +3,8 @@ title: ldd using
 date: 2026-04-24
 type: lab
 status: archived # active/archived/dead/unstable/suspended
-category: experiment
+tags: ldd
+categories: experiment
 summary: Write a project by hand and use the ldd command to troubleshoot
 repo: https://github.com/ljf12825/unix-like/tree/main/src/ldd 
 ---

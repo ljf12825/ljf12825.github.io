@@ -2,6 +2,8 @@
 title: Interface Oriented Design
 type: lab
 status: active # active/archived/dead/unstable/suspended
+tags: iod
+categories: experiment
 summary: Implement Interface Oriented Design in Unity
 date: 2025-12-31
 repo: https://www.cctv.com/

@@ -2,6 +2,8 @@
 title: Design Patterns in Game Development
 status: active # active/archived/dead/unstable/suspended
 type: lab
+tags: design patterns
+categories: experiment
 summary: Implement gof23 in unity
 date: 2025-12-31
 repo: https://www.cctv.com/

@@ -3,7 +3,8 @@ title: C Sim C++ OOP
 type: lab
 date: 2026-04-15
 status: active # active/archived/dead/unstable/suspended
-category: experiment
+tags: oop
+categories: experiment
 summary: Use C to simulate C++ OOP
 repo: https://github.com/ljf12825/cpp/tree/main/csimcppoop
 ---
