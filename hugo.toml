@@ -1,5 +1,5 @@
 baseURL = "https://ljf12825.github.io/"
-languageCode = "en-us"
+locale = "en_US"
 title = "ljf12825"
 
 [markup]

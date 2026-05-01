@@ -238,7 +238,7 @@
     if (saved) {
         root.style.left = `${saved.x}px`; root.style.top = `${saved.y}px`; root.style.right = "auto"; root.style.bottom = "auto";
     } else {
-        root.style.left = "20px"; root.style.bottom = "20px"; root.style.right = "auto"; root.style.top = "auto";
+        root.style.left = "0"; root.style.bottom = "0"; root.style.right = "auto"; root.style.top = "auto";
     }
     if (localStorage.getItem("global-index-collapse") === "1") root.classList.add("closed");
 

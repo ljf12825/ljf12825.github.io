@@ -132,12 +132,18 @@
           const pos = JSON.parse(saved);
           applyPosition(pos.x, pos.y);
         } catch(e) {
-          console.warn('Failed to load TOC position:', e);
-          applyPosition(20, 120);
+          applyDefaultPosition();
         }
       } else {
-        applyPosition(20, 120);
+        applyDefaultPosition();
       }
+    }
+
+    function applyDefaultPosition() {
+      tocWindow.style.left = 'auto';
+      tocWindow.style.top = '100px';
+      tocWindow.style.right = '0px';
+      tocWindow.style.bottom = 'auto';
     }
     
     if (tocHeader) {
