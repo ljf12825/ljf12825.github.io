@@ -7,7 +7,7 @@ type: file
 
 <!--more-->
 
-This patterns focus on how objects communicate and how to handle interactions between them.
+Behaviorall patterns are concerned with algorithms and the assignment of responsibilities between objects. They describe not just patterns of objects or classes but also the patterns of communication between them.
 
 The GoF categorizes 11 patterns into behavioral patterns, which can be broadly divided into two categories:
 
@@ -23,7 +23,7 @@ The GoF categorizes 11 patterns into behavioral patterns, which can be broadly d
 ## Communication Patterns(Focusing on Object Relationships)
 
 - Observer Pattern: Defines a one-to-many dependency, allowing multiple observers to automatically listen to a single topic.
-- Interator Pattern: Sequentially accesses aggregate objects without exposing their internal representation.
+- Iterator Pattern: Sequentially accesses aggregate objects without exposing their internal representation.
 - Mediator Pattern: Encapsulates the interactions of a group of objects using a mediator object, avoiding mesh communication.
 - Memento Pattern: Captures the internal state of an object for later recovery.
-- Vistor Pattern: Define new operations that can be performed on elements without changing their classes.
+- Visitor Pattern: Define new operations that can be performed on elements without changing their classes.
