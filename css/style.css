@@ -689,7 +689,15 @@ body::-webkit-scrollbar-thumb:hover {
   z-index: 9999;
   box-sizing: content-box;
 }
-#great-indexer .float-header { background:#000080; color:#fff; cursor:move; text-align:center; font-weight:bold; border-bottom:2px solid #fff; padding: 2px 0; font-size: 14px; }
+#great-indexer .float-header {
+  background:#000080;
+  color:#fff;
+  cursor:move;
+  text-align:center;
+  font-weight:bold;
+  border-bottom:2px solid #fff;
+  font-size: 14px;
+}
 #great-indexer .float-body { padding:6px 8px; overflow-y:auto; max-height: calc(72vh - 30px); }
 #great-indexer.closed .float-body { display:none; }
 #great-indexer .title { display:none; font-size: 14px; }
@@ -803,4 +811,15 @@ body::-webkit-scrollbar-thumb:hover {
 
 #great-indexer.closed .float-body {
   display: none;
+}
+
+#great-indexer *::-webkit-scrollbar {
+  width: 10px;
+}
+#great-indexer *::-webkit-scrollbar-track {
+  background: #000080;
+}
+#great-indexer *::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border: 2px solid #000080;
 }
