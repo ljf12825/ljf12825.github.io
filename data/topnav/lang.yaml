@@ -6,9 +6,6 @@
   url: "/lang/log/"
 - name: "Theory"
   url: "/lang/theory/"
-  children:
-      - name: "Compiler Principle"
-        url: "/lang/theory/compilerprinciples/"
 - name: "C++"
   url: "/lang/cpp/"
   children:
@@ -53,3 +50,5 @@
       url: "/lang/python/practice/"
     - name: "Ecosystem"
       url: "/lang/python/ecosystem/"
+- name: "LLVM"
+  url: "/lang/llvm/"
