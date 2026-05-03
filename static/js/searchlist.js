@@ -129,6 +129,7 @@
           <span>Section</span>
           <span>Author</span>
           <span>Modified</span>
+          <span>Summary</span>
           <span>Tags</span>
           <span>Categories</span>
           <span>Match</span>
@@ -148,6 +149,7 @@
             <span class="search_section">{${p.section || '/'}}</span>
             <span class="search_author">${p.author || '-'}</span>
             <span class="search_date">${p.date || '-'}</span>
+            <span class="search_summary">${p.summary || '-'}</span>
             <span class="search_tags">
               ${ensureArray(p.tags).length > 0
           ? ensureArray(p.tags).map(t => `<span class="tag">#${t}</span>`).join(' ')
