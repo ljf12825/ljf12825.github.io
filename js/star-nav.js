@@ -1,23 +1,28 @@
 (function waitStarNav() {
-  const nav = document.getElementById("star-nav");
-  const header = document.getElementById("star-header");
+  var nav = document.getElementById("star-nav");
+  var header = document.getElementById("star-header");
 
   if (!nav || !header) {
     setTimeout(waitStarNav, 50);
     return;
   }
 
-  let isDown = false;
-  let ox = 0, oy = 0;
-  let lastTap = 0;
-  let sx = 0, sy = 0;
+  var isDown = false;
+  var ox = 0, oy = 0;
+  var lastTap = 0;
+  var sx = 0, sy = 0;
 
-  const pos = JSON.parse(localStorage.getItem("star-pos") || "null");
-  if (pos) {
+  var pos = JSON.parse(localStorage.getItem("star-pos") || "null");
+  if (pos && typeof pos.x === 'number' && typeof pos.y === 'number') {
     nav.style.left = pos.x + "px";
     nav.style.top  = pos.y + "px";
     nav.style.right = "auto";
     nav.style.bottom = "auto";
+  } else {
+    nav.style.right = "0";
+    nav.style.bottom = "0";
+    nav.style.left = "auto";
+    nav.style.top = "auto";
   }
 
   if (localStorage.getItem("star-collapse") === "1") {
@@ -25,10 +30,10 @@
   }
 
   function clampToViewport(left, top) {
-    const navWidth = nav.offsetWidth;
-    const navHeight = nav.offsetHeight;
-    const maxLeft = Math.max(0, window.innerWidth - navWidth);
-    const maxTop = Math.max(0, window.innerHeight - navHeight);
+    var navWidth = nav.offsetWidth;
+    var navHeight = nav.offsetHeight;
+    var maxLeft = Math.max(0, window.innerWidth - navWidth);
+    var maxTop = Math.max(0, window.innerHeight - navHeight);
     return {
       left: Math.min(Math.max(left, 0), maxLeft),
       top: Math.min(Math.max(top, 0), maxTop)
@@ -36,11 +41,19 @@
   }
 
   function applyPosition(left, top) {
-    const clamped = clampToViewport(left, top);
+    var clamped = clampToViewport(left, top);
     nav.style.left = clamped.left + "px";
     nav.style.top = clamped.top + "px";
     nav.style.right = "auto";
     nav.style.bottom = "auto";
+  }
+
+  function savePos() {
+    var x = parseFloat(nav.style.left);
+    var y = parseFloat(nav.style.top);
+    if (!isNaN(x) && !isNaN(y)) {
+      localStorage.setItem("star-pos", JSON.stringify({ x: x, y: y }));
+    }
   }
 
   function toggle() {
@@ -48,44 +61,45 @@
     localStorage.setItem("star-collapse",
       nav.classList.contains("collapse") ? "1" : "0"
     );
-    setTimeout(() => applyPosition(nav.offsetLeft, nav.offsetTop), 0);
+    setTimeout(function() {
+      var x = parseFloat(nav.style.left);
+      var y = parseFloat(nav.style.top);
+      if (!isNaN(x) && !isNaN(y)) applyPosition(x, y);
+    }, 50);
   }
 
-  const getClientPos = (e) => {
+  var getClientPos = function(e) {
     if (e.touches) {
       return { x: e.touches[0].clientX, y: e.touches[0].clientY };
     }
     return { x: e.clientX, y: e.clientY };
   };
 
-  const onStart = (e) => {
+  var onStart = function(e) {
     e.preventDefault();
     isDown = true;
-    const pos = getClientPos(e);
+    var pos = getClientPos(e);
     sx = pos.x;
     sy = pos.y;
     ox = pos.x - nav.offsetLeft;
     oy = pos.y - nav.offsetTop;
   };
 
-  const onMove = (e) => {
+  var onMove = function(e) {
     if (!isDown) return;
-    const pos = getClientPos(e);
+    var pos = getClientPos(e);
     applyPosition(pos.x - ox, pos.y - oy);
   };
 
-  const onEnd = (e) => {
+  var onEnd = function(e) {
     if (!isDown) return;
     isDown = false;
-    localStorage.setItem("star-pos", JSON.stringify({
-      x: nav.offsetLeft,
-      y: nav.offsetTop
-    }));
-    const pos = e.changedTouches
+    savePos();
+    var pos = e.changedTouches
       ? { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY }
       : { x: e.clientX, y: e.clientY };
-    const d = Math.hypot(pos.x - sx, pos.y - sy);
-    const n = Date.now();
+    var d = Math.hypot(pos.x - sx, pos.y - sy);
+    var n = Date.now();
     if (d < 10 && n - lastTap < 300) toggle();
     lastTap = n;
   };
@@ -97,7 +111,24 @@
   document.addEventListener("mouseup", onEnd);
   document.addEventListener("touchend", onEnd);
 
-  window.addEventListener("resize", () => {
-    applyPosition(nav.offsetLeft, nav.offsetTop);
+  window.addEventListener("resize", function() {
+    var x = parseFloat(nav.style.left);
+    var y = parseFloat(nav.style.top);
+    if (!isNaN(x) && !isNaN(y)) {
+      applyPosition(x, y);
+    }
+  });
+
+  window.addEventListener("pageshow", function() {
+    var x = parseFloat(nav.style.left);
+    var y = parseFloat(nav.style.top);
+    if (!isNaN(x) && !isNaN(y)) {
+      applyPosition(x, y);
+    } else {
+      var saved = JSON.parse(localStorage.getItem("star-pos") || "null");
+      if (saved && typeof saved.x === 'number') {
+        applyPosition(saved.x, saved.y);
+      }
+    }
   });
 })();

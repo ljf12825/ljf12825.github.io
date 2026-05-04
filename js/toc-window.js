@@ -2,47 +2,47 @@
   'use strict';
   
   function initTocWindow() {
-    const tocWindow = document.getElementById('toc-window');
+    var tocWindow = document.getElementById('toc-window');
     if (!tocWindow) {
       console.log('TOC Window: Element not found');
       return;
     }
     
-    const tocHeader = document.getElementById('toc-header');
-    const tocBody = document.getElementById('toc-body');
+    var tocHeader = document.getElementById('toc-header');
+    var tocBody = document.getElementById('toc-body');
     
     console.log('TOC Window: Initialized');
     
-    let isDragging = false;
-    let ox = 0, oy = 0;
-    let startX = 0, startY = 0;
-    let lastTap = 0;
+    var isDragging = false;
+    var ox = 0, oy = 0;
+    var startX = 0, startY = 0;
+    var lastTap = 0;
     
-    let initialHeight = null;
-    let initialBodyHeight = null;
+    var initialHeight = null;
+    var initialBodyHeight = null;
     
     function adjustTocHeight() {
       if (!tocWindow || tocWindow.classList.contains('collapsed')) return;
       
-      const windowHeight = window.innerHeight;
-      const headerHeight = tocHeader ? tocHeader.offsetHeight : 0;
-      const topPosition = parseInt(tocWindow.style.top) || 120;
+      var windowHeight = window.innerHeight;
+      var headerHeight = tocHeader ? tocHeader.offsetHeight : 0;
+      var topPosition = parseInt(tocWindow.style.top) || 120;
       
-      const maxHeight = windowHeight - topPosition - 40;
-      const newHeight = Math.min(maxHeight, windowHeight * 0.7);
+      var maxHeight = windowHeight - topPosition - 40;
+      var newHeight = Math.min(maxHeight, windowHeight * 0.7);
       
       if (newHeight > 100) {
         if (!initialHeight) {
-          tocWindow.style.maxHeight = `${newHeight}px`;
+          tocWindow.style.maxHeight = newHeight + 'px';
           if (tocBody) {
-            tocBody.style.maxHeight = `${newHeight - headerHeight - 16}px`;
+            tocBody.style.maxHeight = (newHeight - headerHeight - 16) + 'px';
           }
           initialHeight = newHeight;
           initialBodyHeight = newHeight - headerHeight - 16;
         } else {
-          tocWindow.style.maxHeight = `${initialHeight}px`;
+          tocWindow.style.maxHeight = initialHeight + 'px';
           if (tocBody) {
-            tocBody.style.maxHeight = `${initialBodyHeight}px`;
+            tocBody.style.maxHeight = initialBodyHeight + 'px';
           }
         }
       }
@@ -57,7 +57,7 @@
     function toggleCollapse() {
       tocWindow.classList.toggle('collapsed');
       
-      const isCollapsed = tocWindow.classList.contains('collapsed');
+      var isCollapsed = tocWindow.classList.contains('collapsed');
       localStorage.setItem('tocCollapsed', isCollapsed);
       
       if (!isCollapsed) {
@@ -66,13 +66,13 @@
     }
     
     function clampToViewport(left, top) {
-      const windowWidth = window.innerWidth;
-      const windowHeight = window.innerHeight;
-      const elementWidth = tocWindow.offsetWidth;
-      const elementHeight = tocWindow.offsetHeight;
+      var windowWidth = window.innerWidth;
+      var windowHeight = window.innerHeight;
+      var elementWidth = tocWindow.offsetWidth;
+      var elementHeight = tocWindow.offsetHeight;
       
-      const maxLeft = Math.max(0, windowWidth - elementWidth);
-      const maxTop = Math.max(0, windowHeight - elementHeight);
+      var maxLeft = Math.max(0, windowWidth - elementWidth);
+      var maxTop = Math.max(0, windowHeight - elementHeight);
       
       return {
         left: Math.min(Math.max(left, 0), maxLeft),
@@ -81,11 +81,19 @@
     }
     
     function applyPosition(left, top) {
-      const clamped = clampToViewport(left, top);
+      var clamped = clampToViewport(left, top);
       tocWindow.style.left = clamped.left + 'px';
       tocWindow.style.top = clamped.top + 'px';
       tocWindow.style.right = 'auto';
       tocWindow.style.bottom = 'auto';
+    }
+
+    function savePos() {
+      var x = parseFloat(tocWindow.style.left);
+      var y = parseFloat(tocWindow.style.top);
+      if (!isNaN(x) && !isNaN(y)) {
+        localStorage.setItem("toc-pos", JSON.stringify({ x: x, y: y }));
+      }
     }
     
     function start(x, y) {
@@ -100,8 +108,8 @@
     
     function move(x, y) {
       if (!isDragging) return;
-      const newLeft = x - ox;
-      const newTop = y - oy;
+      var newLeft = x - ox;
+      var newTop = y - oy;
       applyPosition(newLeft, newTop);
     }
     
@@ -111,13 +119,10 @@
       tocWindow.style.cursor = '';
       tocWindow.style.transition = '';
       
-      localStorage.setItem("toc-pos", JSON.stringify({
-        x: tocWindow.offsetLeft,
-        y: tocWindow.offsetTop
-      }));
+      savePos();
       
-      const dist = Math.hypot(x - startX, y - startY);
-      const now = Date.now();
+      var dist = Math.hypot(x - startX, y - startY);
+      var now = Date.now();
       
       if (dist < 6 && now - lastTap < 300) {
         toggleCollapse();
@@ -126,17 +131,17 @@
     }
     
     function loadPosition() {
-      const saved = localStorage.getItem('toc-pos');
+      var saved = localStorage.getItem('toc-pos');
       if (saved) {
         try {
-          const pos = JSON.parse(saved);
-          applyPosition(pos.x, pos.y);
-        } catch(e) {
-          applyDefaultPosition();
-        }
-      } else {
-        applyDefaultPosition();
+          var pos = JSON.parse(saved);
+          if (pos && typeof pos.x === 'number' && typeof pos.y === 'number') {
+            applyPosition(pos.x, pos.y);
+            return;
+          }
+        } catch(e) {}
       }
+      applyDefaultPosition();
     }
 
     function applyDefaultPosition() {
@@ -147,44 +152,44 @@
     }
     
     if (tocHeader) {
-      tocHeader.addEventListener('mousedown', (e) => {
+      tocHeader.addEventListener('mousedown', function(e) {
         e.preventDefault();
         start(e.clientX, e.clientY);
       });
     }
     
-    document.addEventListener('mousemove', (e) => {
+    document.addEventListener('mousemove', function(e) {
       if (!isDragging) return;
       e.preventDefault();
       move(e.clientX, e.clientY);
     });
     
-    document.addEventListener('mouseup', (e) => {
+    document.addEventListener('mouseup', function(e) {
       if (!isDragging) return;
       end(e.clientX, e.clientY);
     });
     
     if (tocHeader) {
-      tocHeader.addEventListener('touchstart', (e) => {
-        const t = e.touches[0];
+      tocHeader.addEventListener('touchstart', function(e) {
+        var t = e.touches[0];
         start(t.clientX, t.clientY);
       }, { passive: false });
     }
     
-    document.addEventListener('touchmove', (e) => {
+    document.addEventListener('touchmove', function(e) {
       if (!isDragging) return;
       e.preventDefault();
-      const t = e.touches[0];
+      var t = e.touches[0];
       move(t.clientX, t.clientY);
     }, { passive: false });
     
-    document.addEventListener('touchend', (e) => {
+    document.addEventListener('touchend', function(e) {
       if (!isDragging) return;
-      const t = e.changedTouches[0];
+      var t = e.changedTouches[0];
       end(t.clientX, t.clientY);
     });
     
-    const wasCollapsed = localStorage.getItem('tocCollapsed') === 'true';
+    var wasCollapsed = localStorage.getItem('tocCollapsed') === 'true';
     if (wasCollapsed && tocWindow) {
       tocWindow.classList.add('collapsed');
     }
@@ -192,16 +197,26 @@
     adjustTocHeight();
     loadPosition();
     
-    window.addEventListener('resize', () => {
+    window.addEventListener('resize', function() {
       resetAndAdjustHeight();
-      const currentLeft = parseFloat(tocWindow.style.left);
-      const currentTop = parseFloat(tocWindow.style.top);
+      var currentLeft = parseFloat(tocWindow.style.left);
+      var currentTop = parseFloat(tocWindow.style.top);
       if (!isNaN(currentLeft) && !isNaN(currentTop)) {
         applyPosition(currentLeft, currentTop);
-        localStorage.setItem("toc-pos", JSON.stringify({
-          x: tocWindow.offsetLeft,
-          y: tocWindow.offsetTop
-        }));
+        savePos();
+      }
+    });
+
+    window.addEventListener("pageshow", function() {
+      var x = parseFloat(tocWindow.style.left);
+      var y = parseFloat(tocWindow.style.top);
+      if (!isNaN(x) && !isNaN(y)) {
+        applyPosition(x, y);
+      } else {
+        var saved = JSON.parse(localStorage.getItem("toc-pos") || "null");
+        if (saved && typeof saved.x === 'number') {
+          applyPosition(saved.x, saved.y);
+        }
       }
     });
   }
