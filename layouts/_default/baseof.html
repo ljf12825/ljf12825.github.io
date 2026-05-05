@@ -56,12 +56,12 @@
 
 	{{ partial "great-indexer.html" . }}
 	<script defer src="{{ "/js/great-indexer.js" | relURL }}"></script>
+	
 	<script defer src="{{ "/js/reset-layout.js" | relURL }}"></script>
 	
 	{{ if eq .Type "home" }}
   	<script defer src="{{ "/js/homealive.js" | relURL }}"></script>
 	{{ end }}
-
 
 	<!-- 主体内容 -->
 	{{ block "main" . }}{{ end }}

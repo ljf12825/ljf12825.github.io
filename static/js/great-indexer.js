@@ -21,6 +21,11 @@
     var selectedCategories = new Set();
     var selectedTypes = new Set();
 
+    var hasNav3d = root.dataset.hasNav3d === 'true';
+    var searchPanel = document.getElementById('index-panel-search');
+    var nav3dPanel = document.getElementById('index-panel-nav3d');
+    var scopeBtns = root.querySelectorAll(".scope-btn");
+
     var ensureArray = function(arr) {
         if (!arr) return [];
         if (Array.isArray(arr)) return arr;
@@ -56,92 +61,59 @@
     };
 
     var getSearchScope = function() {
-        if (scope === "global") {
-            return { type: "global" };
-        }
-
-        if (currentType === "lab") {
-            return { type: "section_type", section: currentSection, pageType: "lab" };
-        } else if (currentType === "log") {
-            return { type: "section_type", section: currentSection, pageType: "log" };
-        } else if (currentType === "file") {
-            return { type: "path", path: normalizePath(currentPath) };
-        } else {
-            return { type: "section", section: currentSection };
-        }
+        if (scope === "global") return { type: "global" };
+        if (currentType === "lab") return { type: "section_type", section: currentSection, pageType: "lab" };
+        if (currentType === "log") return { type: "section_type", section: currentSection, pageType: "log" };
+        if (currentType === "file") return { type: "path", path: normalizePath(currentPath) };
+        return { type: "section", section: currentSection };
     };
 
     var scopedPages = function() {
         var searchScope = getSearchScope();
-
         switch (searchScope.type) {
-            case "global":
-                return pages;
-
-            case "section":
-                return pages.filter(function(p) { return norm(p.section) === searchScope.section; });
-
-            case "section_type":
-                return pages.filter(function(p) {
-                    return norm(p.section) === searchScope.section &&
-                        norm(p.type) === searchScope.pageType;
-                });
-
+            case "global": return pages;
+            case "section": return pages.filter(function(p) { return norm(p.section) === searchScope.section; });
+            case "section_type": return pages.filter(function(p) { return norm(p.section) === searchScope.section && norm(p.type) === searchScope.pageType; });
             case "path":
-                var normalizedCurrentPath = normalizePath(currentPath);
-                return pages.filter(function(p) {
-                    var pageParentPath = normalizePath(p.parentPath || "");
-                    return pageParentPath === normalizedCurrentPath;
-                });
-
-            default:
-                return pages;
+                var ncp = normalizePath(currentPath);
+                return pages.filter(function(p) { return normalizePath(p.parentPath || "") === ncp; });
+            default: return pages;
         }
     };
 
     function matchedPages() {
         var q = norm(input.value);
-
         if (!q) {
             if (selectedTags.size > 0 || selectedCategories.size > 0 || selectedTypes.size > 0) {
                 return scopedPages().filter(function(p) {
                     var pTags = new Set(ensureArray(p.tags).map(norm));
                     var pCats = new Set(ensureArray(p.categories).map(norm));
-                    var tagsMatch = true;
-                    var catsMatch = true;
+                    var tagsMatch = true, catsMatch = true;
                     selectedTags.forEach(function(t) { if (!pTags.has(t)) tagsMatch = false; });
                     selectedCategories.forEach(function(c) { if (!pCats.has(c)) catsMatch = false; });
-                    return tagsMatch && catsMatch &&
-                        (selectedTypes.size === 0 || selectedTypes.has(norm(p.type)));
+                    return tagsMatch && catsMatch && (selectedTypes.size === 0 || selectedTypes.has(norm(p.type)));
                 });
             }
             return [];
         }
-
         if (q === '/*') return scopedPages().filter(function(p) {
             var pTags = new Set(ensureArray(p.tags).map(norm));
             var pCats = new Set(ensureArray(p.categories).map(norm));
-            var tagsMatch = true;
-            var catsMatch = true;
+            var tagsMatch = true, catsMatch = true;
             selectedTags.forEach(function(t) { if (!pTags.has(t)) tagsMatch = false; });
             selectedCategories.forEach(function(c) { if (!pCats.has(c)) catsMatch = false; });
-            return tagsMatch && catsMatch &&
-                (selectedTypes.size === 0 || selectedTypes.has(norm(p.type)));
+            return tagsMatch && catsMatch && (selectedTypes.size === 0 || selectedTypes.has(norm(p.type)));
         });
-
-        return scopedPages().map(function(p) {
-            return { p: p, s: score(p, q) };
-        }).filter(function(x) {
-            if (x.s <= 0) return false;
-            var pTags = new Set(ensureArray(x.p.tags).map(norm));
-            var pCats = new Set(ensureArray(x.p.categories).map(norm));
-            var tagsMatch = true;
-            var catsMatch = true;
-            selectedTags.forEach(function(t) { if (!pTags.has(t)) tagsMatch = false; });
-            selectedCategories.forEach(function(c) { if (!pCats.has(c)) catsMatch = false; });
-            return tagsMatch && catsMatch &&
-                (selectedTypes.size === 0 || selectedTypes.has(norm(x.p.type)));
-        }).sort(function(a, b) { return b.s - a.s; }).map(function(x) { return x.p; });
+        return scopedPages().map(function(p) { return { p: p, s: score(p, q) }; })
+            .filter(function(x) {
+                if (x.s <= 0) return false;
+                var pTags = new Set(ensureArray(x.p.tags).map(norm));
+                var pCats = new Set(ensureArray(x.p.categories).map(norm));
+                var tagsMatch = true, catsMatch = true;
+                selectedTags.forEach(function(t) { if (!pTags.has(t)) tagsMatch = false; });
+                selectedCategories.forEach(function(c) { if (!pCats.has(c)) catsMatch = false; });
+                return tagsMatch && catsMatch && (selectedTypes.size === 0 || selectedTypes.has(norm(x.p.type)));
+            }).sort(function(a, b) { return b.s - a.s; }).map(function(x) { return x.p; });
     }
 
     function renderFacet(list, mountEl, activeSet, prefix, suffix) {
@@ -155,11 +127,7 @@
             if (activeSet.has(item)) a.classList.add("active");
             a.addEventListener("click", function(e) {
                 e.preventDefault();
-                if (activeSet.has(item)) {
-                    activeSet.delete(item);
-                } else {
-                    activeSet.add(item);
-                }
+                if (activeSet.has(item)) activeSet.delete(item); else activeSet.add(item);
                 refresh();
             });
             li.appendChild(a);
@@ -168,100 +136,111 @@
     }
 
     function refresh() {
+        if (scope === 'nav3d') {
+            return;
+        }
         var matched = matchedPages();
         countEl.textContent = String(matched.length);
-
-        var tagSet = new Set();
-        var catSet = new Set();
-        var typeSet = new Set();
-
+        var tagSet = new Set(), catSet = new Set(), typeSet = new Set();
         var q = norm(input.value);
         var hasFilters = q || selectedTags.size > 0 || selectedCategories.size > 0 || selectedTypes.size > 0;
         var source = hasFilters ? matched : scopedPages();
-
         source.forEach(function(p) {
             ensureArray(p.tags).map(norm).filter(Boolean).forEach(function(t) { tagSet.add(t); });
             ensureArray(p.categories).map(norm).filter(Boolean).forEach(function(c) { catSet.add(c); });
             typeSet.add(norm(p.type));
         });
-
-        var tagArr = [];
-        tagSet.forEach(function(t) { tagArr.push(t); });
-        tagArr.sort();
-        var catArr = [];
-        catSet.forEach(function(c) { catArr.push(c); });
-        catArr.sort();
-        var typeArr = [];
-        typeSet.forEach(function(t) { typeArr.push(t); });
-        typeArr.sort();
-
+        var tagArr = [], catArr = [], typeArr = [];
+        tagSet.forEach(function(t) { tagArr.push(t); }); tagArr.sort();
+        catSet.forEach(function(c) { catArr.push(c); }); catArr.sort();
+        typeSet.forEach(function(t) { typeArr.push(t); }); typeArr.sort();
         renderFacet(tagArr, tagsEl, selectedTags, "#");
         renderFacet(catArr, catsEl, selectedCategories, "[", "]");
         renderFacet(typeArr, typesEl, selectedTypes, "<", ">");
-
-        if (!hasFilters) {
-            previewEl.innerHTML = "";
-            return;
-        }
-
+        if (!hasFilters) { previewEl.innerHTML = ""; return; }
         var isShowAll = q === '/*';
-
         previewEl.innerHTML = matched.slice(0, 8).map(function(p) {
             var matchScore = isShowAll ? 0 : score(p, q);
-            var maxScore = 200;
-            var percentage = isShowAll ? '-' : Math.min(100, Math.round((matchScore / maxScore) * 100)) + '%';
-
-            return '<li style="display: flex; align-items: baseline; gap: 8px;">' +
-              '<a href="' + p.permalink + '" title="' + p.title + '" style="flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">' + p.title + '</a>' +
-              '<span style="font-size: 0.7em; color: #666; flex-shrink: 0;">[' + p.type + ']</span>' +
-              '<span style="font-size: 0.7em; color: #666; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 120px;">' + p.permalink + '</span>' +
-              '<span style="font-size: 0.75em; color: #666; flex-shrink: 0;">' + percentage + '</span>' +
-            '</li>';
+            var percentage = isShowAll ? '-' : Math.min(100, Math.round((matchScore / 200) * 100)) + '%';
+            return '<li style="display:flex;align-items:baseline;gap:8px;">' +
+              '<a href="' + p.permalink + '" title="' + p.title + '" style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + p.title + '</a>' +
+              '<span style="font-size:0.7em;color:#666;flex-shrink:0;">[' + p.type + ']</span>' +
+              '<span style="font-size:0.7em;color:#666;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:120px;">' + p.permalink + '</span>' +
+              '<span style="font-size:0.75em;color:#666;flex-shrink:0;">' + percentage + '</span></li>';
         }).join("");
     }
 
     function openResultPage() {
         var q = input.value.trim();
-        var hasFilters = q || selectedTags.size > 0 || selectedCategories.size > 0 || selectedTypes.size > 0;
-
-        if (!hasFilters) return;
-
+        if (!q && selectedTags.size === 0 && selectedCategories.size === 0 && selectedTypes.size === 0) return;
         var searchScope = getSearchScope();
         var scopeParam = "";
-
-        if (searchScope.type === "section") {
-            scopeParam = "&section=" + encodeURIComponent(currentSection);
-        } else if (searchScope.type === "section_type") {
-            scopeParam = "&section=" + encodeURIComponent(currentSection) + "&pageType=" + encodeURIComponent(searchScope.pageType);
-        } else if (searchScope.type === "path") {
-            scopeParam = "&path=" + encodeURIComponent(currentPath);
-        }
-
-        var tagsArr = [];
+        if (searchScope.type === "section") scopeParam = "&section=" + encodeURIComponent(currentSection);
+        else if (searchScope.type === "section_type") scopeParam = "&section=" + encodeURIComponent(currentSection) + "&pageType=" + encodeURIComponent(searchScope.pageType);
+        else if (searchScope.type === "path") scopeParam = "&path=" + encodeURIComponent(currentPath);
+        var tagsArr = [], catsArr = [], typesArr = [];
         selectedTags.forEach(function(t) { tagsArr.push(t); });
-        var catsArr = [];
         selectedCategories.forEach(function(c) { catsArr.push(c); });
-        var typesArr = [];
         selectedTypes.forEach(function(t) { typesArr.push(t); });
-
         window.location.href = "/searchlist/?q=" + encodeURIComponent(q || '/*') +
-            "&scope=" + scope +
-            "&type=" + searchScope.type +
-            scopeParam +
+            "&scope=" + scope + "&type=" + searchScope.type + scopeParam +
             "&tags=" + encodeURIComponent(tagsArr.join(",")) +
             "&categories=" + encodeURIComponent(catsArr.join(",")) +
             "&types=" + encodeURIComponent(typesArr.join(","));
     }
 
-    root.querySelectorAll(".scope-btn").forEach(function(btn) {
+    // scope 按钮切换（含面板切换）
+    scopeBtns.forEach(function(btn) {
         btn.addEventListener("click", function() {
-            root.querySelectorAll(".scope-btn").forEach(function(b) { b.classList.remove("active"); });
+            scopeBtns.forEach(function(b) { b.classList.remove("active"); });
             btn.classList.add("active");
             scope = btn.dataset.scope || "global";
             selectedTags.clear();
             selectedCategories.clear();
             selectedTypes.clear();
-            refresh();
+
+            if (scope === 'nav3d') {
+                if (searchPanel) searchPanel.style.display = 'none';
+                if (nav3dPanel) nav3dPanel.style.display = 'block';
+
+                var navDataEl = document.getElementById('nav3d-data');
+                if (navDataEl) {
+                    try {
+                        var raw = navDataEl.textContent.trim();
+                        if (raw.startsWith('"') && raw.endsWith('"')) {
+                            raw = raw.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+                        }
+                        var navData = JSON.parse(raw);
+                        countEl.textContent = String(navData.length);
+                    } catch(e) {
+                        countEl.textContent = '-';
+                    }
+                } else {
+                    countEl.textContent = '-';
+                }
+
+                if (hasNav3d) {
+                    setTimeout(function() {
+                        if (!window._nav3dInited) {
+                            window._nav3dInited = true;
+                            if (!document.querySelector('script[type="importmap"]')) {
+                                var im = document.createElement('script');
+                                im.type = 'importmap';
+                                im.textContent = '{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.157.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.157.0/examples/jsm/"}}';
+                                document.head.appendChild(im);
+                            }
+                            var s = document.createElement('script');
+                            s.type = 'module';
+                            s.src = '/js/nav3d-float.js';
+                            document.body.appendChild(s);
+                        }
+                    }, 200);
+                }
+            } else {
+                if (searchPanel) searchPanel.style.display = 'block';
+                if (nav3dPanel) nav3dPanel.style.display = 'none';
+                refresh();
+            }
         });
     });
 
@@ -269,94 +248,26 @@
     input.addEventListener("keydown", function(e) { if (e.key === "Enter") openResultPage(); });
     openBtn.addEventListener("click", openResultPage);
 
-    // ====== 位置管理 ======
     var saved = JSON.parse(localStorage.getItem("global-index-pos") || "null");
     if (saved && typeof saved.x === 'number' && typeof saved.y === 'number') {
-        root.style.left = saved.x + "px";
-        root.style.top = saved.y + "px";
-        root.style.right = "auto";
-        root.style.bottom = "auto";
+        root.style.left = saved.x + "px"; root.style.top = saved.y + "px"; root.style.right = "auto"; root.style.bottom = "auto";
     } else {
-        root.style.left = "0";
-        root.style.bottom = "0";
-        root.style.right = "auto";
-        root.style.top = "auto";
+        root.style.left = "0"; root.style.bottom = "0"; root.style.right = "auto"; root.style.top = "auto";
     }
-
-    if (localStorage.getItem("global-index-collapse") === "1") {
-        root.classList.add("closed");
-    }
+    if (localStorage.getItem("global-index-collapse") === "1") root.classList.add("closed");
 
     var isDown = false, ox = 0, oy = 0, lastTap = 0, sx = 0, sy = 0;
 
     function clamp(l, t) {
-        return {
-            left: Math.min(Math.max(0, l), Math.max(0, window.innerWidth - root.offsetWidth)),
-            top: Math.min(Math.max(0, t), Math.max(0, window.innerHeight - root.offsetHeight))
-        };
+        return { left: Math.min(Math.max(0, l), Math.max(0, window.innerWidth - root.offsetWidth)), top: Math.min(Math.max(0, t), Math.max(0, window.innerHeight - root.offsetHeight)) };
     }
-
-    function apply(l, t) {
-        var c = clamp(l, t);
-        root.style.left = c.left + "px";
-        root.style.top = c.top + "px";
-        root.style.right = "auto";
-        root.style.bottom = "auto";
-    }
-
-    function savePos() {
-        var x = parseFloat(root.style.left);
-        var y = parseFloat(root.style.top);
-        if (!isNaN(x) && !isNaN(y)) {
-            localStorage.setItem("global-index-pos", JSON.stringify({ x: x, y: y }));
-        }
-    }
-
-    function toggle() {
-        root.classList.toggle("closed");
-        localStorage.setItem("global-index-collapse", root.classList.contains("closed") ? "1" : "0");
-        setTimeout(function() {
-            var x = parseFloat(root.style.left);
-            var y = parseFloat(root.style.top);
-            if (!isNaN(x) && !isNaN(y)) apply(x, y);
-        }, 50);
-    }
-
-    function getClientPos(e) {
-        if (e.touches) {
-            return { x: e.touches[0].clientX, y: e.touches[0].clientY };
-        }
-        return { x: e.clientX, y: e.clientY };
-    }
-
-    function onStart(e) {
-        e.preventDefault();
-        isDown = true;
-        var pos = getClientPos(e);
-        sx = pos.x;
-        sy = pos.y;
-        ox = pos.x - root.offsetLeft;
-        oy = pos.y - root.offsetTop;
-    }
-
-    function onMove(e) {
-        if (!isDown) return;
-        var pos = getClientPos(e);
-        apply(pos.x - ox, pos.y - oy);
-    }
-
-    function onEnd(e) {
-        if (!isDown) return;
-        isDown = false;
-        savePos();
-        var pos = e.changedTouches
-            ? { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY }
-            : { x: e.clientX, y: e.clientY };
-        var d = Math.hypot(pos.x - sx, pos.y - sy);
-        var n = Date.now();
-        if (d < 10 && n - lastTap < 300) toggle();
-        lastTap = n;
-    }
+    function apply(l, t) { var c = clamp(l, t); root.style.left = c.left + "px"; root.style.top = c.top + "px"; root.style.right = "auto"; root.style.bottom = "auto"; }
+    function savePos() { var x = parseFloat(root.style.left), y = parseFloat(root.style.top); if (!isNaN(x) && !isNaN(y)) localStorage.setItem("global-index-pos", JSON.stringify({ x: x, y: y })); }
+    function toggle() { root.classList.toggle("closed"); localStorage.setItem("global-index-collapse", root.classList.contains("closed") ? "1" : "0"); setTimeout(function() { var x = parseFloat(root.style.left), y = parseFloat(root.style.top); if (!isNaN(x) && !isNaN(y)) apply(x, y); }, 50); }
+    function getClientPos(e) { if (e.touches) return { x: e.touches[0].clientX, y: e.touches[0].clientY }; return { x: e.clientX, y: e.clientY }; }
+    function onStart(e) { e.preventDefault(); isDown = true; var p = getClientPos(e); sx = p.x; sy = p.y; ox = p.x - root.offsetLeft; oy = p.y - root.offsetTop; }
+    function onMove(e) { if (!isDown) return; var p = getClientPos(e); apply(p.x - ox, p.y - oy); }
+    function onEnd(e) { if (!isDown) return; isDown = false; savePos(); var p = e.changedTouches ? { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY } : { x: e.clientX, y: e.clientY }; var d = Math.hypot(p.x - sx, p.y - sy); var n = Date.now(); if (d < 10 && n - lastTap < 300) toggle(); lastTap = n; }
 
     header.addEventListener("mousedown", onStart);
     header.addEventListener("touchstart", onStart, { passive: false });
@@ -366,16 +277,9 @@
     document.addEventListener("touchend", onEnd);
 
     window.addEventListener("pageshow", function() {
-        var x = parseFloat(root.style.left);
-        var y = parseFloat(root.style.top);
-        if (!isNaN(x) && !isNaN(y)) {
-            apply(x, y);
-        } else {
-            var savedAgain = JSON.parse(localStorage.getItem("global-index-pos") || "null");
-            if (savedAgain && typeof savedAgain.x === 'number') {
-                apply(savedAgain.x, savedAgain.y);
-            }
-        }
+        var x = parseFloat(root.style.left), y = parseFloat(root.style.top);
+        if (!isNaN(x) && !isNaN(y)) apply(x, y);
+        else { var sa = JSON.parse(localStorage.getItem("global-index-pos") || "null"); if (sa && typeof sa.x === 'number') apply(sa.x, sa.y); }
     });
 
     refresh();

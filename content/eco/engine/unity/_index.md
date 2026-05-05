@@ -8,25 +8,23 @@ type: file
 <!--more-->
 
 ```txt
-       Z(Operation)
+       Y(Layer)
        |
-       |Source
-       |Expand
-       |Configurate
-       |Use
-       |
-       /----------------Y (Scope)
-      /
-     /Editor
-    /Script
-   /Pipeline
-  /Native
- /
-X(Layer)
+       |Native
+       |Pipeline
+       |Script
+       |Editor
+       /----------------X (Scope)
+      /Source
+     /Expand
+    /Configurate
+   /Use
+  /
+Z(Depth)
 ```
 
-- X(layer)
-- Y(Scope)
-- Z(Operation)
+- X(Scope)
+- Y(Layer)
+- Z(Depth)
 
 Not all coordinate points are meaningful.
