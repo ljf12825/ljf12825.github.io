@@ -20,11 +20,11 @@ type: file
     /Configurate
    /Use
   /
-Z(Deepth)
+Z(Depth)
 ```
 
 - X(Scope)
 - Y(Layer)
-- Z(Deepth)
+- Z(Depth)
 
 Not all coordinate points are meaningful.
