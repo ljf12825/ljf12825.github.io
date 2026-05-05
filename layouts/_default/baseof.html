@@ -56,12 +56,27 @@
 
 	{{ partial "great-indexer.html" . }}
 	<script defer src="{{ "/js/great-indexer.js" | relURL }}"></script>
+	
+	<!-- 3D Navigator - 仅在 unity 页面显示 -->
+	{{ if in .RelPermalink "/eco/engine/unity/" }}
+	{{ partial "nav3d.html" . }}
+	<link rel="stylesheet" href="{{ "css/nav3d-float.css" | relURL }}">
+	<script type="importmap">
+	{
+		"imports": {
+			"three": "https://cdn.jsdelivr.net/npm/three@0.157.0/build/three.module.js",
+			"three/addons/": "https://cdn.jsdelivr.net/npm/three@0.157.0/examples/jsm/"
+		}
+	}
+	</script>
+	<script type="module" src="{{ "js/nav3d-float.js" | relURL }}"></script>
+	{{ end }}
+	
 	<script defer src="{{ "/js/reset-layout.js" | relURL }}"></script>
 	
 	{{ if eq .Type "home" }}
   	<script defer src="{{ "/js/homealive.js" | relURL }}"></script>
 	{{ end }}
-
 
 	<!-- 主体内容 -->
 	{{ block "main" . }}{{ end }}

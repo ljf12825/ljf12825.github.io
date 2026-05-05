@@ -1,0 +1,43 @@
+{{- $nodes := slice -}}
+{{- $allPages := where site.Pages "File" "!=" nil -}}
+{{- range $allPages -}}
+  {{- if and .File (in .File.Dir "eco/engine/unity/") -}}
+    {{- if .Params.tags -}}
+      {{- $tags := .Params.tags -}}
+      {{- if ge (len $tags) 3 -}}
+        {{- $y := index $tags 1 | int | default 0 -}}
+        {{- $z := index $tags 2 | int | default 0 -}}
+        {{- if and (ge $y 0) (le $y 3) (ge $z 0) (le $z 3) -}}
+          {{- $node := dict 
+            "title" .Title
+            "permalink" .RelPermalink
+            "x" (index $tags 0 | lower)
+            "y" $y
+            "z" $z
+            "summary" (.Summary | plainify | truncate 80)
+            "author" (.Params.author | default "")
+            "date" (.Date.Format "2006-01-02")
+          -}}
+          {{- $nodes = $nodes | append $node -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+<div id="nav3d-win">
+  <div id="nav3d-header">
+    <span class="title open">&gt;&gt; &gt;&gt; &gt;&gt; 3D Navigator &lt;&lt; &lt;&lt; &lt;&lt;</span>
+    <span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt;3D&gt;&gt;&gt;&gt;&gt;&gt;</span>
+  </div>
+  <div id="nav3d-toolbar">
+    <span id="nav3d-node-count">Nodes: {{ len $nodes }}</span>
+    <a href="#" id="btn-reset">Reset</a>
+  </div>
+  <div id="nav3d-scene"></div>
+  <div id="nav3d-status">Loading...</div>
+</div>
+
+<script id="nav3d-data" type="application/json">
+{{ $nodes | jsonify | safeJS }}
+</script>
