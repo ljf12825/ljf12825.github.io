@@ -28,6 +28,8 @@
 
 [sourceware.org](https://sourceware.org/) An infrastructure-level website for low-level system software developers, primarily hosting and maintaining the GNU toolchain and critical Linux system-level libraries
 
+[blender.org](https://blender.org/) blender offical website. You can stay up to date with the latest news there, and also access Blender's self-hosted platform[projects.blender.org/](https://projects.blender.org/) to contribute to its open-source development. 
+
 ## C++
 [ISO/IEC 14882:xxxx](https://www.iso.org/) : The official C++ standard document, serving as a legal and technical specification rather than a learning guide. Developed by the International Standardization Organization (ISO). It strictly defines C++ syntax, semantics, standard library behavior, and the principles that all implementations (compilers) must adhere to. These standards documents are paid for and must be purchased from ISO or a national standards organization. `xxxx` means publish year.
 
