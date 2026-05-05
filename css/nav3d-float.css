@@ -1,0 +1,40 @@
+#nav3d-scene {
+    position: relative;
+}
+
+.nav3d-tooltip {
+    display: none;
+    position: fixed;
+    background: #ffffcc;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+    padding: 8px 12px;
+    font-family: "MS Sans Serif", Arial, sans-serif;
+    font-size: 11px;
+    z-index: 10003;
+    pointer-events: none;
+    max-width: 260px;
+    color: #000000;
+    box-sizing: border-box;
+}
+
+.nav3d-tooltip b {
+    color: #000080;
+    font-size: 12px;
+}
+
+.nav3d-tooltip span {
+    font-size: 10px;
+    color: #808080;
+}
+
+.nav3d-empty {
+    padding: 40px;
+    text-align: center;
+    color: #000000;
+    font-family: "MS Sans Serif", Arial, sans-serif;
+    font-size: 12px;
+    background: #c0c0c0;
+}
