@@ -60,17 +60,17 @@ waitForElements(function (sceneDiv, dataEl) {
   canvasEl.style.zIndex = '1';
   sceneDiv.appendChild(canvasEl);
 
-var controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-controls.target.set(0.2, 0.2, 0.4);
+  var controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.target.set(0.2, 0.2, 0.4);
 
-controls.mouseButtons = {
-  LEFT: THREE.MOUSE.PAN,
-  MIDDLE: THREE.MOUSE.DOLLY,
-  RIGHT: THREE.MOUSE.ROTATE
-};
+  controls.mouseButtons = {
+    LEFT: THREE.MOUSE.PAN,
+    MIDDLE: THREE.MOUSE.DOLLY,
+    RIGHT: THREE.MOUSE.ROTATE
+  };
 
-controls.update();
+  controls.update();
 
   scene.add(new THREE.AmbientLight(0x999999));
   var light = new THREE.DirectionalLight(0xffffff, 0.6);
@@ -214,6 +214,7 @@ controls.update();
       var tagsStr = '[' + d.x + ', ' + layerLabels[d.y] + ', ' + depthLabels[d.z] + ']';
       var parts = [];
       parts.push(d.title);
+      if (d.filepath) parts.push(d.filepath);
       if (d.author) parts.push(d.author);
       if (d.date) parts.push(d.date);
       parts.push(tagsStr);

@@ -3,7 +3,6 @@
 {{- $currentType := .Type -}}
 {{- $currentPath := .RelPermalink -}}
 
-{{- /* 检测当前引擎 */ -}}
 {{- $engineName := "" -}}
 {{- $engineDir := "" -}}
 {{- if in .RelPermalink "/eco/engine/unity/" -}}
@@ -17,7 +16,6 @@
   {{- $engineDir = "eco/engine/godot/" -}}
 {{- end -}}
 
-{{- /* 收集 3D 导航数据 */ -}}
 {{- $nav3dNodes := slice -}}
 {{- if $engineName -}}
   {{- $allPages := where site.Pages "File" "!=" nil -}}
@@ -32,6 +30,7 @@
             {{- $node := dict 
               "title" .Title
               "permalink" .RelPermalink
+              "filepath" .File.Dir
               "x" (index $tags 0 | lower)
               "y" $y
               "z" $z
