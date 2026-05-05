@@ -3,33 +3,50 @@
 {{- $currentType := .Type -}}
 {{- $currentPath := .RelPermalink -}}
 
+{{- /* 检测当前引擎 */ -}}
+{{- $engineName := "" -}}
+{{- $engineDir := "" -}}
+{{- if in .RelPermalink "/eco/engine/unity/" -}}
+  {{- $engineName = "Unity" -}}
+  {{- $engineDir = "eco/engine/unity/" -}}
+{{- else if in .RelPermalink "/eco/engine/ue/" -}}
+  {{- $engineName = "UE" -}}
+  {{- $engineDir = "eco/engine/ue/" -}}
+{{- else if in .RelPermalink "/eco/engine/godot/" -}}
+  {{- $engineName = "Godot" -}}
+  {{- $engineDir = "eco/engine/godot/" -}}
+{{- end -}}
+
+{{- /* 收集 3D 导航数据 */ -}}
 {{- $nav3dNodes := slice -}}
-{{- $allPages := where site.Pages "File" "!=" nil -}}
-{{- range $allPages -}}
-  {{- if and .File (in .File.Dir "eco/engine/unity/") -}}
-    {{- if .Params.tags -}}
-      {{- $tags := .Params.tags -}}
-      {{- if ge (len $tags) 3 -}}
-        {{- $y := index $tags 1 | int | default 0 -}}
-        {{- $z := index $tags 2 | int | default 0 -}}
-        {{- if and (ge $y 0) (le $y 3) (ge $z 0) (le $z 3) -}}
-          {{- $node := dict 
-            "title" .Title
-            "permalink" .RelPermalink
-            "x" (index $tags 0 | lower)
-            "y" $y
-            "z" $z
-            "summary" (.Summary | plainify | truncate 80)
-            "author" (.Params.author | default "")
-            "date" (.Date.Format "2006-01-02")
-          -}}
-          {{- $nav3dNodes = $nav3dNodes | append $node -}}
+{{- if $engineName -}}
+  {{- $allPages := where site.Pages "File" "!=" nil -}}
+  {{- range $allPages -}}
+    {{- if and .File (in .File.Dir $engineDir) -}}
+      {{- if .Params.tags -}}
+        {{- $tags := .Params.tags -}}
+        {{- if ge (len $tags) 3 -}}
+          {{- $y := index $tags 1 | int | default 0 -}}
+          {{- $z := index $tags 2 | int | default 0 -}}
+          {{- if and (ge $y 0) (le $y 3) (ge $z 0) (le $z 3) -}}
+            {{- $node := dict 
+              "title" .Title
+              "permalink" .RelPermalink
+              "x" (index $tags 0 | lower)
+              "y" $y
+              "z" $z
+              "summary" (.Summary | plainify | truncate 80)
+              "author" (.Params.author | default "")
+              "date" (.Date.Format "2006-01-02")
+            -}}
+            {{- $nav3dNodes = $nav3dNodes | append $node -}}
+          {{- end -}}
         {{- end -}}
       {{- end -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
-{{- $hasNav3D := and (gt (len $nav3dNodes) 0) (in .RelPermalink "/eco/engine/unity/") -}}
+{{- $hasNav3D := and (gt (len $nav3dNodes) 0) (ne $engineName "") -}}
 
 <div id="great-indexer" class="float-window open" data-current-section="{{ $currentSection }}"
   data-current-type="{{ $currentType }}" data-current-path="{{ $currentPath }}"
@@ -44,7 +61,7 @@
         <button type="button" class="scope-btn active" data-scope="global">Global</button>
         <button type="button" class="scope-btn" data-scope="section">Current</button>
         {{ if $hasNav3D }}
-        <button type="button" class="scope-btn" data-scope="nav3d">Unity</button>
+        <button type="button" class="scope-btn" data-scope="nav3d">{{ $engineName }}</button>
         {{ end }}
       </div>
       <div class="index-meta">Matched: <span id="globalIndexCount">0</span></div>
