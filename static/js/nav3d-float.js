@@ -64,6 +64,7 @@ waitForElements(function (sceneDiv, dataEl) {
   controls.enableDamping = true;
   controls.target.set(0.2, 0.2, 0.4);
 
+  // 桌面端鼠标操作保持原样
   controls.mouseButtons = {
     LEFT: THREE.MOUSE.PAN,
     MIDDLE: THREE.MOUSE.DOLLY,
@@ -71,6 +72,15 @@ waitForElements(function (sceneDiv, dataEl) {
   };
 
   controls.update();
+
+  var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  
+  if (isTouchDevice) {
+    controls.touches = {
+      ONE: THREE.TOUCH.ROTATE,
+      TWO: THREE.TOUCH.DOLLY_ROTATE
+    };
+  }
 
   scene.add(new THREE.AmbientLight(0x999999));
   var light = new THREE.DirectionalLight(0xffffff, 0.6);
@@ -254,6 +264,20 @@ waitForElements(function (sceneDiv, dataEl) {
     }
   });
 
+  renderer.domElement.addEventListener('touchstart', function (e) {
+    if (e.touches.length === 1) {
+      var r = renderer.domElement.getBoundingClientRect();
+      mouse.x = ((e.touches[0].clientX - r.left) / r.width) * 2 - 1;
+      mouse.y = -((e.touches[0].clientY - r.top) / r.height) * 2 + 1;
+      raycaster.setFromCamera(mouse, camera);
+      var hits = raycaster.intersectObjects(balls);
+      if (hits.length > 0) {
+        var d = hits[0].object.userData;
+        if (d.permalink) window.location.href = d.permalink;
+      }
+    }
+  });
+
   renderer.domElement.addEventListener('click', function (e) {
     var r = renderer.domElement.getBoundingClientRect();
     mouse.x = ((e.clientX - r.left) / r.width) * 2 - 1;
@@ -275,6 +299,38 @@ waitForElements(function (sceneDiv, dataEl) {
       controls.target.set(maxX / 2, maxY / 2, maxZ / 2);
       controls.update();
     });
+  }
+
+  var panBtn = document.getElementById('btn-pan-nav3d');
+  var isPanMode = false;
+  
+  if (panBtn && isTouchDevice) {
+    // 移动端显示按钮
+    panBtn.style.display = 'inline';
+    
+    panBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      isPanMode = !isPanMode;
+      
+      if (isPanMode) {
+        controls.touches = {
+          ONE: THREE.TOUCH.PAN,
+          TWO: THREE.TOUCH.DOLLY_ROTATE
+        };
+        panBtn.style.color = '#ff0000';
+        panBtn.textContent = 'Pan ON';
+      } else {
+        controls.touches = {
+          ONE: THREE.TOUCH.ROTATE,
+          TWO: THREE.TOUCH.DOLLY_ROTATE
+        };
+        panBtn.style.color = '#000080';
+        panBtn.textContent = 'Pan';
+      }
+    });
+  } else if (panBtn) {
+    panBtn.style.display = 'none';
   }
 
   function resize() {
