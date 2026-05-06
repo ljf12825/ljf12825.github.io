@@ -16,23 +16,23 @@ document.addEventListener("DOMContentLoaded", () => {
     if (path === "/") {
       return `<a href="/" class="path-link" data-path="/">/</a>`;
     }
-    
+
     let realPath = path;
     let hasTilde = false;
-    
+
     if (path.startsWith("~")) {
       hasTilde = true;
       realPath = "/home" + path.slice(1);
     }
-    
+
     const segments = realPath.split("/").filter(Boolean);
     let clickablePath = "";
     let accumulatedPath = "";
-    
+
     if (hasTilde) {
       clickablePath = `<a href="/home" class="path-link" data-path="/home">~</a>`;
       accumulatedPath = "/home";
-      
+
       if (segments.length > 0) {
         const hasNonHome = segments.some((seg, idx) => !(idx === 0 && seg === "home"));
         if (hasNonHome) {
@@ -40,30 +40,30 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
     } else {
-      clickablePath = "/";
+      clickablePath = `<a href="/" class="path-link" data-path="/">/</a>`;
     }
-    
+
     for (let i = 0; i < segments.length; i++) {
       const segment = segments[i];
-      
+
       if (hasTilde && i === 0 && segment === "home") {
         continue;
       }
-      
+
       accumulatedPath += "/" + segment;
-      
+
       clickablePath += `<a href="${accumulatedPath}" class="path-link" data-path="${accumulatedPath}">${segment}</a>`;
-      
-      const isLast = (hasTilde && i === segments.length - 1) || (!hasTilde && i === segments.length - 1);
+
+      const isLast = i === segments.length - 1;
       if (!isLast) {
         clickablePath += "/";
       }
     }
-    
+
     if (!hasTilde && segments.length === 0) {
-      clickablePath = "/";
+      clickablePath = `<a href="/" class="path-link" data-path="/">/</a>`;
     }
-    
+
     return clickablePath;
   }
 
@@ -75,13 +75,13 @@ document.addEventListener("DOMContentLoaded", () => {
       "meta[name='page-kind']"
     )?.content;
 
-      if (raw === "" | raw === "/") {
-          return {
-              path: virtualPath("/"),
-              cmd: "hostnamectl && man -k .",
-              file: null
-          };
-      }
+    if (raw === "" || raw === "/") {
+      return {
+        path: virtualPath("/"),
+        cmd: "hostnamectl && man -k .",
+        file: null
+      };
+    }
 
     if (kind === "page" && parts.length > 0) {
       const file = parts.pop();
@@ -110,15 +110,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function typeWithHTML(htmlString) {
     el.innerHTML = "";
-    
+
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = htmlString;
     const nodes = Array.from(tempDiv.childNodes);
-    
+
     let nodeIndex = 0;
     let charIndex = 0;
     let currentNode = nodes[nodeIndex];
-    
+
     function typeNextChar() {
       if (!currentNode) {
         setTimeout(() => {
@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 2500);
         return;
       }
-      
+
       if (currentNode.nodeType === Node.TEXT_NODE) {
         const text = currentNode.textContent;
         if (charIndex < text.length) {
@@ -141,8 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
           charIndex = 0;
           setTimeout(typeNextChar, 10);
         }
-      } 
-      else if (currentNode.nodeType === Node.ELEMENT_NODE) {
+      } else if (currentNode.nodeType === Node.ELEMENT_NODE) {
         const elementHtml = currentNode.outerHTML;
         el.innerHTML += elementHtml;
         nodeIndex++;
@@ -155,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(typeNextChar, 10);
       }
     }
-    
+
     typeNextChar();
   }
 
@@ -186,7 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (ip) {
           return ip;
         }
-      } catch {}
+      } catch { }
     }
 
     return "guest";

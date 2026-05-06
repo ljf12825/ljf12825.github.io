@@ -1,9 +1,3 @@
-{{ define "head_extra" }}
-  {{ if eq .Section "article" }}
-    <link rel="stylesheet" href="{{ "css/article.css" | relURL }}">
-  {{ end }}
-{{ end }}
-
 {{ define "main" }}
 <h1 class="article_page_title">{{ .Title }}</h1>
 
