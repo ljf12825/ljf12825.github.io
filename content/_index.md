@@ -15,8 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 ## USER MANUAL
 
-> Edit 
-
 ### Navigation
 
 Navigation will be permanently displayed on all pages of this site.\
@@ -65,8 +63,11 @@ The `Top Results` section will provide up to eight of the most relevant results.
 Typing `/*` will match all options.
 
 ![Indexer](/images/indexer.jpg)
-
 ![Idx](/images/idx.jpg)
+
+When you are located within a subfolder under `eco/engine/`, the Indexer displays a 3D scatter plot, allowing you to quickly gain an overview and navigate.
+
+![Indexer3dnav](/images/indexer3dnav.jpg)
 
 #### Search List
 
@@ -78,9 +79,9 @@ Typing `/*` will match all options.
 
 The Prompt Command format `ip@url:path/$ command`
 
-if you are at fold `command = ls | xarg cat`
-
-if you are at content `command = less content name`
+- if you are at fold `command = ls | xarg cat`
+- if you are at content `command = less content name`
+- if you are at root `command = hostnamectl && man -k .`
 
 site will query your ip from api, and it used solely for display puerposes
 
@@ -90,4 +91,4 @@ there may be a delay from query
 
 it also supports breadcrumb navigation, you can click path to jump
 
-April 2026
+May 2026
