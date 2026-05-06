@@ -26,6 +26,9 @@
     var nav3dPanel = document.getElementById('index-panel-nav3d');
     var scopeBtns = root.querySelectorAll(".scope-btn");
 
+    // 检测是否为触摸设备
+    var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
     var ensureArray = function(arr) {
         if (!arr) return [];
         if (Array.isArray(arr)) return arr;
@@ -189,12 +192,18 @@
             "&types=" + encodeURIComponent(typesArr.join(","));
     }
 
-    // scope 按钮切换（含面板切换）
     scopeBtns.forEach(function(btn) {
         btn.addEventListener("click", function() {
+            var targetScope = btn.dataset.scope || "global";
+
+            // 移动端不允许切换到 nav3d
+            if (targetScope === 'nav3d' && isTouchDevice) {
+                return;
+            }
+
             scopeBtns.forEach(function(b) { b.classList.remove("active"); });
             btn.classList.add("active");
-            scope = btn.dataset.scope || "global";
+            scope = targetScope;
             selectedTags.clear();
             selectedCategories.clear();
             selectedTypes.clear();
@@ -243,6 +252,14 @@
             }
         });
     });
+
+    // 移动端隐藏 nav3d 按钮
+    if (isTouchDevice) {
+        var nav3dBtn = document.getElementById('scope-btn-nav3d');
+        if (nav3dBtn) {
+            nav3dBtn.style.display = 'none';
+        }
+    }
 
     input.addEventListener("input", refresh);
     input.addEventListener("keydown", function(e) { if (e.key === "Enter") openResultPage(); });
