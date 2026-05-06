@@ -173,7 +173,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function getIP() {
     const apis = [
-      async () => (await fetch("https://ip.sb/jsonip")).json().then(d => d.ip),
       async () => (await fetch("https://api.ipify.org?format=json")).json().then(d => d.ip),
       async () => (await fetch("https://myip.ipip.net")).text()
         .then(t => t.match(/\d+\.\d+\.\d+\.\d+/)?.[0])
