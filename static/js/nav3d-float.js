@@ -74,7 +74,7 @@ waitForElements(function (sceneDiv, dataEl) {
   controls.update();
 
   var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-  
+
   if (isTouchDevice) {
     controls.touches = {
       ONE: THREE.TOUCH.ROTATE,
@@ -93,7 +93,9 @@ waitForElements(function (sceneDiv, dataEl) {
   });
   scopeLabels.sort();
 
-  var scopeColors = [0x800000, 0x008000, 0x000080, 0x808000, 0x800080, 0x008080, 0x808080, 0x000000];
+  // var scopeColors = [0x800000, 0x008000, 0x000080, 0x808000, 0x800080, 0x008080, 0x808080, 0x000000];
+  // var scopeColors = [0x4e79a7, 0xf28e2b, 0xe15759, 0x76b7b2, 0x59a14f, 0xedc948, 0xb07aa1, 0xff9da7];
+  var scopeColors = [0x4285f4, 0xea4335, 0xfbbc04, 0x34a853, 0xff6d01, 0x46bdc6, 0x7b1fa2, 0xc2185b];
 
   var layerLabels = { 0: 'Editor', 1: 'Script', 2: 'Pipeline', 3: 'Native' };
   var depthLabels = { 0: 'Use', 1: 'Config', 2: 'Expand', 3: 'Source' };
@@ -141,20 +143,30 @@ waitForElements(function (sceneDiv, dataEl) {
   scene.add(create3DGrid());
 
   function axisLine(sx, sy, sz, ex, ey, ez, c) {
-    scene.add(new THREE.Line(
-      new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(sx, sy, sz), new THREE.Vector3(ex, ey, ez)]),
-      new THREE.LineBasicMaterial({ color: c })));
+    var dir = new THREE.Vector3(ex - sx, ey - sy, ez - sz);
+    var length = dir.length();
+    var mid = new THREE.Vector3(sx, sy, sz).add(dir.clone().multiplyScalar(0.5));
+    var cylGeo = new THREE.CylinderGeometry(0.005, 0.005, length, 8);
+    var cylMat = new THREE.MeshBasicMaterial({ color: c });
+    var cyl = new THREE.Mesh(cylGeo, cylMat);
+    cyl.position.copy(mid);
+    cyl.quaternion.setFromUnitVectors(
+      new THREE.Vector3(0, 1, 0),
+      dir.clone().normalize()
+    );
+    scene.add(cyl);
   }
-  axisLine(-0.05, 0, 0, maxX + 0.1, 0, 0, 0x000080);
-  axisLine(0, -0.05, 0, 0, maxY + 0.1, 0, 0x800000);
-  axisLine(0, 0, -0.05, 0, 0, maxZ + 0.1, 0x808000);
+
+  axisLine(-0.05, 0, 0, maxX + 0.1, 0, 0, 0x0000ff);
+  axisLine(0, -0.05, 0, 0, maxY + 0.1, 0, 0xff0000);
+  axisLine(0, 0, -0.05, 0, 0, maxZ + 0.1, 0x00ff00);
 
   function mkTextLabel(text, x, y, z, color, fontSize) {
     var cv = document.createElement('canvas');
     cv.width = 128; cv.height = 32;
     var ctx = cv.getContext('2d');
     ctx.fillStyle = color;
-    ctx.font = (fontSize || '10px') + ' "MS Sans Serif", Arial';
+    ctx.font = (fontSize || '10px');
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(text, 64, 16);
@@ -170,11 +182,11 @@ waitForElements(function (sceneDiv, dataEl) {
   }
 
   for (var i = 0; i < scopeLabels.length; i++) {
-    mkTextLabel(scopeLabels[i], i * SPACING, -0.06, -0.1, '#000080', '9px');
+    mkTextLabel(scopeLabels[i], i * SPACING, -0.06, -0.1, '#0000ff', '9px');
   }
   for (var v = 0; v <= 3; v++) {
-    mkTextLabel(layerLabels[v], -0.08, v * SPACING, -0.06, '#800000', '9px');
-    mkTextLabel(depthLabels[v], -0.08, -0.06, v * SPACING, '#808000', '9px');
+    mkTextLabel(layerLabels[v], -0.08, v * SPACING, -0.06, '#ff0000', '9px');
+    mkTextLabel(depthLabels[v], -0.08, -0.06, v * SPACING, '#00ff00', '9px');
   }
 
   var balls = [];
@@ -210,7 +222,7 @@ waitForElements(function (sceneDiv, dataEl) {
   if (!statusEl) {
     statusEl = document.createElement('div');
     statusEl.id = 'nav3d-status';
-    statusEl.style.cssText = 'position:absolute;bottom:4px;left:4px;z-index:10;color:#000;font-size:10px;font-family:"MS Sans Serif",Arial,sans-serif;background:#c0c0c0;padding:1px 4px;border-top:1px solid #fff;border-left:1px solid #fff;border-right:1px solid #000;border-bottom:1px solid #000;max-width:90%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;';
+    statusEl.style.cssText = 'position:absolute;bottom:4px;left:4px;z-index:10;color:#000;font-size:10px;background:#c0c0c0;padding:1px 4px;border-top:1px solid #fff;border-left:1px solid #fff;border-right:1px solid #000;border-bottom:1px solid #000;max-width:90%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;';
     sceneDiv.appendChild(statusEl);
   }
 
@@ -303,16 +315,16 @@ waitForElements(function (sceneDiv, dataEl) {
 
   var panBtn = document.getElementById('btn-pan-nav3d');
   var isPanMode = false;
-  
+
   if (panBtn && isTouchDevice) {
     // 移动端显示按钮
     panBtn.style.display = 'inline';
-    
-    panBtn.addEventListener('click', function(e) {
+
+    panBtn.addEventListener('click', function (e) {
       e.preventDefault();
       e.stopPropagation();
       isPanMode = !isPanMode;
-      
+
       if (isPanMode) {
         controls.touches = {
           ONE: THREE.TOUCH.PAN,
