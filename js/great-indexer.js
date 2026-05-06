@@ -26,7 +26,6 @@
     var nav3dPanel = document.getElementById('index-panel-nav3d');
     var scopeBtns = root.querySelectorAll(".scope-btn");
 
-    // 检测是否为触摸设备
     var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
     var ensureArray = function(arr) {
@@ -149,7 +148,7 @@
         var hasFilters = q || selectedTags.size > 0 || selectedCategories.size > 0 || selectedTypes.size > 0;
         var source = hasFilters ? matched : scopedPages();
         source.forEach(function(p) {
-            ensureArray(p.tags).map(norm).filter(Boolean).forEach(function(t) { tagSet.add(t); });
+            ensureArray(p.tags).filter(function(t) { return t && String(t).trim(); }).forEach(function(t) { tagSet.add(String(t).trim()); });
             ensureArray(p.categories).map(norm).filter(Boolean).forEach(function(c) { catSet.add(c); });
             typeSet.add(norm(p.type));
         });
@@ -196,7 +195,6 @@
         btn.addEventListener("click", function() {
             var targetScope = btn.dataset.scope || "global";
 
-            // 移动端不允许切换到 nav3d
             if (targetScope === 'nav3d' && isTouchDevice) {
                 return;
             }
@@ -253,7 +251,6 @@
         });
     });
 
-    // 移动端隐藏 nav3d 按钮
     if (isTouchDevice) {
         var nav3dBtn = document.getElementById('scope-btn-nav3d');
         if (nav3dBtn) {
