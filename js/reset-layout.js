@@ -72,10 +72,15 @@
   }
 
   var resizeTimer;
+  var lastWidth = window.innerWidth;
+
   window.addEventListener('resize', function() {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function() {
-      resetAllToDefault();
+      if (window.innerWidth !== lastWidth) {
+        lastWidth = window.innerWidth;
+        resetAllToDefault();
+      }
     }, 300);
   });
 
