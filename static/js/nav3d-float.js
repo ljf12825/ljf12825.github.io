@@ -73,15 +73,6 @@ waitForElements(function (sceneDiv, dataEl) {
 
   controls.update();
 
-  var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-
-  if (isTouchDevice) {
-    controls.touches = {
-      ONE: THREE.TOUCH.ROTATE,
-      TWO: THREE.TOUCH.DOLLY_ROTATE
-    };
-  }
-
   scene.add(new THREE.AmbientLight(0x999999));
   var light = new THREE.DirectionalLight(0xffffff, 0.6);
   light.position.set(5, 8, 5);
@@ -93,9 +84,36 @@ waitForElements(function (sceneDiv, dataEl) {
   });
   scopeLabels.sort();
 
-  // var scopeColors = [0x800000, 0x008000, 0x000080, 0x808000, 0x800080, 0x008080, 0x808080, 0x000000];
-  // var scopeColors = [0x4e79a7, 0xf28e2b, 0xe15759, 0x76b7b2, 0x59a14f, 0xedc948, 0xb07aa1, 0xff9da7];
-  var scopeColors = [0x4285f4, 0xea4335, 0xfbbc04, 0x34a853, 0xff6d01, 0x46bdc6, 0x7b1fa2, 0xc2185b];
+var scopeColors = [
+    0x00ff99, // 湖绿
+    0xff33cc, // 亮粉
+    0x6633ff, // 靛紫
+    0xffcc00, // 金橙
+    0x0099ff, // 宝蓝
+    0x33ff66, // 翠绿
+    0xff0066, // 玫红
+    0xccff00, // 酸橙
+    0xff99cc, // 柔和粉
+    0x6600ff, // 蓝紫
+    0xff9900, // 橙黄
+    0x00ccff, // 亮青
+    0x33ff33, // 亮翠绿
+    0xff6699, // 浅玫红
+    0x9933ff, // 紫罗兰
+    0xff6600, // 亮橙
+    0xff33ff, // 亮品红
+    0x00ff66, // 春绿
+    0x3366ff, // 深蓝
+    0xffcc66, // 香槟金
+    0xcc00ff, // 纯紫
+    0x66ff00, // 亮绿
+    0xff3366, // 粉红
+    0x00ffcc, // 青绿
+    0xff9933, // 橘橙
+    0xff00cc, // 品红
+    0x33ccff, // 天蓝
+    0x99ff00  // 黄绿
+];
 
   var layerLabels = { 0: 'Editor', 1: 'Script', 2: 'Pipeline', 3: 'Native' };
   var depthLabels = { 0: 'Use', 1: 'Config', 2: 'Expand', 3: 'Source' };
@@ -190,28 +208,149 @@ waitForElements(function (sceneDiv, dataEl) {
   }
 
   var balls = [];
+  var positionGroups = {};
+
   nodes.forEach(function (n) {
     var sx = scopePositions[n.x] !== undefined ? scopePositions[n.x] : 0;
-    var p = new THREE.Vector3(sx, n.y * SPACING, n.z * SPACING);
-    var ci = scopeColors[scopeLabels.indexOf(n.x) % scopeColors.length];
-    var g = new THREE.SphereGeometry(0.04, 8, 8);
-    var m = new THREE.MeshStandardMaterial({ color: ci, roughness: 0.3, metalness: 0.1 });
-    var b = new THREE.Mesh(g, m);
-    b.position.copy(p);
-    b.userData = n;
-    scene.add(b);
-    balls.push(b);
+    var baseX = sx;
+    var baseY = n.y * SPACING;
+    var baseZ = n.z * SPACING;
+    var posKey = baseX.toFixed(4) + ',' + baseY.toFixed(4) + ',' + baseZ.toFixed(4);
+    if (!positionGroups[posKey]) {
+      positionGroups[posKey] = [];
+    }
+    positionGroups[posKey].push(n);
   });
 
+  function seededRandom(seed) {
+    var x = Math.sin(seed) * 10000;
+    return x - Math.floor(x);
+  }
+
+  var sharedSphereGeo = {};
+  var sharedCylGeo = new THREE.CylinderGeometry(0.004, 0.004, 1, 5);
+  var sharedDotGeo = new THREE.SphereGeometry(0.006, 3, 3);
+
+  function getSphereGeo(radius) {
+    var key = radius.toFixed(4);
+    if (!sharedSphereGeo[key]) {
+      var seg = radius > 0.03 ? 8 : (radius > 0.02 ? 6 : 4);
+      sharedSphereGeo[key] = new THREE.SphereGeometry(radius, seg, seg);
+    }
+    return sharedSphereGeo[key];
+  }
+
+  var sharedMaterials = {};
+
+  function getBallMaterial(colorHex) {
+    var key = 'ball_' + colorHex;
+    if (!sharedMaterials[key]) {
+      sharedMaterials[key] = new THREE.MeshStandardMaterial({
+        color: colorHex,
+        roughness: 0.3,
+        metalness: 0.1
+      });
+    }
+    return sharedMaterials[key];
+  }
+
+  function getLineMaterial(colorHex) {
+    var key = 'line_' + colorHex;
+    if (!sharedMaterials[key]) {
+      sharedMaterials[key] = new THREE.MeshBasicMaterial({ color: colorHex });
+    }
+    return sharedMaterials[key];
+  }
+
+  Object.keys(positionGroups).forEach(function (posKey) {
+    var groupNodes = positionGroups[posKey];
+    var count = groupNodes.length;
+    var baseRadius = 0.04;
+    var radius = baseRadius / Math.sqrt(count);
+    radius = Math.max(radius, 0.015);
+
+    var parts = posKey.split(',');
+    var baseX = parseFloat(parts[0]);
+    var baseY = parseFloat(parts[1]);
+    var baseZ = parseFloat(parts[2]);
+    var centerPos = new THREE.Vector3(baseX, baseY, baseZ);
+
+    var posSeed = 0;
+    for (var i = 0; i < posKey.length; i++) {
+      posSeed += posKey.charCodeAt(i);
+    }
+
+    groupNodes.forEach(function (n, idx) {
+      var offset = new THREE.Vector3();
+
+      if (idx > 0 && count > 1) {
+        var r1 = seededRandom(posSeed + idx * 7);
+        var r2 = seededRandom(posSeed + idx * 13);
+        var r3 = seededRandom(posSeed + idx * 17);
+
+        var dist = 0.06;
+        var angle = r1 * Math.PI * 2;
+        var heightFactor = (r2 - 0.5) * 2;
+
+        offset.x = Math.cos(angle) * dist * (0.7 + r3 * 0.6);
+        offset.y = Math.sin(angle) * dist * (0.7 + r1 * 0.6);
+        offset.z = heightFactor * 0.04;
+      }
+
+      var p = new THREE.Vector3(baseX + offset.x, baseY + offset.y, baseZ + offset.z);
+      var colorIndex = scopeLabels.indexOf(n.x) % scopeColors.length;
+      var ci = scopeColors[colorIndex];
+
+      var g = getSphereGeo(radius);
+      var m = getBallMaterial(ci);
+      var b = new THREE.Mesh(g, m);
+      b.position.copy(p);
+      b.userData = n;
+      scene.add(b);
+      balls.push(b);
+
+      if (offset.length() > 0.001) {
+        var dir = new THREE.Vector3().subVectors(centerPos, p);
+        var length = dir.length();
+        var midPoint = new THREE.Vector3().addVectors(p, centerPos).multiplyScalar(0.5);
+
+        var cylMat = getLineMaterial(ci);
+        var cyl = new THREE.Mesh(sharedCylGeo, cylMat);
+        cyl.position.copy(midPoint);
+        cyl.scale.set(1, length, 1);
+        cyl.quaternion.setFromUnitVectors(
+          new THREE.Vector3(0, 1, 0),
+          dir.clone().normalize()
+        );
+        scene.add(cyl);
+
+        var dotMat = getLineMaterial(ci);
+        var dot = new THREE.Mesh(sharedDotGeo, dotMat);
+        dot.position.copy(centerPos);
+        scene.add(dot);
+      }
+    });
+  });
+
+  var ringGeometryCache = {};
+
+  function getRingGeometry(outerRadius, tubeRadius) {
+    var key = outerRadius.toFixed(3) + '_' + tubeRadius.toFixed(3);
+    if (!ringGeometryCache[key]) {
+      ringGeometryCache[key] = new THREE.TorusGeometry(outerRadius, tubeRadius, 8, 16);
+    }
+    return ringGeometryCache[key];
+  }
+
   var ringV = new THREE.Mesh(
-    new THREE.TorusGeometry(0.055, 0.008, 8, 16),
+    getRingGeometry(0.055, 0.008),
     new THREE.MeshBasicMaterial({ color: 0xffff00 })
   );
   ringV.visible = false;
   scene.add(ringV);
 
   var ringH = new THREE.Mesh(
-    new THREE.TorusGeometry(0.06, 0.008, 8, 16),
+    getRingGeometry(0.06, 0.008),
     new THREE.MeshBasicMaterial({ color: 0xffff00 })
   );
   ringH.visible = false;
@@ -258,11 +397,19 @@ waitForElements(function (sceneDiv, dataEl) {
       if (hovered !== o) {
         if (hovered) hovered.material.emissive.setHex(0);
         hovered = o;
-        hovered.material.emissive.setHex(0x444444);
+
         ringV.position.copy(o.position);
         ringV.visible = true;
         ringH.position.copy(o.position);
         ringH.visible = true;
+
+        var ballRadius = o.geometry.parameters.radius || 0.04;
+        var ringRadius = ballRadius * 1.4;
+        var tubeRadius = Math.max(ballRadius * 0.2, 0.003);
+
+        ringV.geometry = getRingGeometry(ringRadius, tubeRadius);
+        ringH.geometry = getRingGeometry(ringRadius * 1.1, tubeRadius);
+
         updateStatus(o.userData);
       }
     } else {
@@ -272,20 +419,6 @@ waitForElements(function (sceneDiv, dataEl) {
         ringV.visible = false;
         ringH.visible = false;
         updateStatus(null);
-      }
-    }
-  });
-
-  renderer.domElement.addEventListener('touchstart', function (e) {
-    if (e.touches.length === 1) {
-      var r = renderer.domElement.getBoundingClientRect();
-      mouse.x = ((e.touches[0].clientX - r.left) / r.width) * 2 - 1;
-      mouse.y = -((e.touches[0].clientY - r.top) / r.height) * 2 + 1;
-      raycaster.setFromCamera(mouse, camera);
-      var hits = raycaster.intersectObjects(balls);
-      if (hits.length > 0) {
-        var d = hits[0].object.userData;
-        if (d.permalink) window.location.href = d.permalink;
       }
     }
   });
@@ -311,38 +444,6 @@ waitForElements(function (sceneDiv, dataEl) {
       controls.target.set(maxX / 2, maxY / 2, maxZ / 2);
       controls.update();
     });
-  }
-
-  var panBtn = document.getElementById('btn-pan-nav3d');
-  var isPanMode = false;
-
-  if (panBtn && isTouchDevice) {
-    // 移动端显示按钮
-    panBtn.style.display = 'inline';
-
-    panBtn.addEventListener('click', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      isPanMode = !isPanMode;
-
-      if (isPanMode) {
-        controls.touches = {
-          ONE: THREE.TOUCH.PAN,
-          TWO: THREE.TOUCH.DOLLY_ROTATE
-        };
-        panBtn.style.color = '#ff0000';
-        panBtn.textContent = 'Pan ON';
-      } else {
-        controls.touches = {
-          ONE: THREE.TOUCH.ROTATE,
-          TWO: THREE.TOUCH.DOLLY_ROTATE
-        };
-        panBtn.style.color = '#000080';
-        panBtn.textContent = 'Pan';
-      }
-    });
-  } else if (panBtn) {
-    panBtn.style.display = 'none';
   }
 
   function resize() {
