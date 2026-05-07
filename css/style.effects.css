@@ -218,3 +218,19 @@
   background: #c0c0c0;
   border: 2px solid #000080;
 }
+
+#great-indexer input:focus {
+  background: #c0c0c0;
+  color: #000080;
+  outline: none;
+}
+
+#great-indexer input:-webkit-autofill,
+#great-indexer input:-webkit-autofill:hover,
+#great-indexer input:-webkit-autofill:focus,
+#great-indexer input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #c0c0c0 inset !important;
+  -webkit-text-fill-color: #000080 !important;
+  transition: background-color 5000s ease-in-out 0s;
+  caret-color: #000080;
+}

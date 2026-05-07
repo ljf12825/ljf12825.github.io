@@ -23,7 +23,10 @@ waitForElements(function (sceneDiv, dataEl) {
       }
       var data = JSON.parse(raw);
       return data.filter(function (n) {
-        return n.y >= 0 && n.y <= 3 && n.z >= 0 && n.z <= 3;
+        if (typeof n.y !== 'number' || typeof n.z !== 'number') return false;
+        if (!Number.isInteger(n.y) || n.y < 0 || n.y > 3) return false;
+        if (!Number.isInteger(n.z) || n.z < 0 || n.z > 3) return false;
+        return true;
       });
     } catch (e) {
       console.error('Parse error:', e);
@@ -64,7 +67,6 @@ waitForElements(function (sceneDiv, dataEl) {
   controls.enableDamping = true;
   controls.target.set(0.2, 0.2, 0.4);
 
-  // 桌面端鼠标操作保持原样
   controls.mouseButtons = {
     LEFT: THREE.MOUSE.PAN,
     MIDDLE: THREE.MOUSE.DOLLY,
@@ -84,7 +86,7 @@ waitForElements(function (sceneDiv, dataEl) {
   });
   scopeLabels.sort();
 
-var scopeColors = [
+  var scopeColors = [
     0x00ff99, // 湖绿
     0xff33cc, // 亮粉
     0x6633ff, // 靛紫
@@ -113,7 +115,7 @@ var scopeColors = [
     0xff00cc, // 品红
     0x33ccff, // 天蓝
     0x99ff00  // 黄绿
-];
+  ];
 
   var layerLabels = { 0: 'Editor', 1: 'Script', 2: 'Pipeline', 3: 'Native' };
   var depthLabels = { 0: 'Use', 1: 'Config', 2: 'Expand', 3: 'Source' };
