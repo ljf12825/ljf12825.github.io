@@ -35,7 +35,10 @@
         return [];
     };
 
-    var norm = function (v) { return String(v || "").trim().toLowerCase(); };
+   var norm = function (v) {
+    if (v === null || v === undefined) return "";
+    return String(v).trim().toLowerCase();
+};
 
     var normalizePath = function (path) {
         if (!path) return "/";
@@ -147,7 +150,10 @@
         var hasFilters = q || selectedTags.size > 0 || selectedCategories.size > 0 || selectedTypes.size > 0;
         var source = hasFilters ? matched : scopedPages();
         source.forEach(function (p) {
-            ensureArray(p.tags).filter(function (t) { return t && String(t).trim(); }).forEach(function (t) { tagSet.add(String(t).trim()); });
+            ensureArray(p.tags)
+    .map(function (t) { return String(t).trim(); })
+    .filter(function (t) { return t !== ''; })
+    .forEach(function (t) { tagSet.add(t); });
             ensureArray(p.categories).map(norm).filter(Boolean).forEach(function (c) { catSet.add(c); });
             typeSet.add(norm(p.type));
         });

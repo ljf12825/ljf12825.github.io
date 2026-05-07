@@ -21,41 +21,48 @@
   {{- $allPages := where site.Pages "File" "!=" nil -}}
   {{- range $allPages -}}
     {{- if and .File (in .File.Dir $engineDir) -}}
-      {{- if .Params.tags -}}
-        {{- $tags := .Params.tags -}}
-        {{- if ge (len $tags) 3 -}}
-          {{- $yRaw := index $tags 1 -}}
-          {{- $zRaw := index $tags 2 -}}
-          {{- $y := 0 -}}
-          {{- $z := 0 -}}
-          {{- if findRE `^\d+$` (string $yRaw) -}}
-            {{- $y = int $yRaw -}}
-          {{- else -}}
-            {{- $yStr := replaceRE `^[A-Za-z]+` "" (string $yRaw) -}}
-            {{- $y = int $yStr | default 0 -}}
-          {{- end -}}
-          {{- if findRE `^\d+$` (string $zRaw) -}}
-            {{- $z = int $zRaw -}}
-          {{- else -}}
-            {{- $zStr := replaceRE `^[A-Za-z]+` "" (string $zRaw) -}}
-            {{- $z = int $zStr | default 0 -}}
-          {{- end -}}
-          {{- if and (ge $y 0) (le $y 3) (ge $z 0) (le $z 3) -}}
-            {{- $node := dict 
-              "title" .Title
-              "permalink" .RelPermalink
-              "filepath" .File.Dir
-              "x" (index $tags 0)
-              "y" $y
-              "z" $z
-              "summary" (.Summary | plainify | truncate 80)
-              "author" (.Params.author | default "")
-              "date" (.Date.Format "2006-01-02")
-            -}}
-            {{- $nav3dNodes = $nav3dNodes | append $node -}}
-          {{- end -}}
+    {{- if .Params.tags -}}
+      {{- $tags := .Params.tags -}}
+      {{- if ge (len $tags) 3 -}}
+        {{- $yRaw := string (index $tags 1) -}}
+        {{- $zRaw := string (index $tags 2) -}}
+        {{- $y := -1 -}}
+        {{- $z := -1 -}}
+        
+        {{- $hasL := findRE `^L[0-3]$` $yRaw -}}
+        {{- $hasD := findRE `^D[0-3]$` $zRaw -}}
+        {{- $hasLWrong := and (findRE `^L` $yRaw) (not $hasL) -}}
+        {{- $hasDWrong := and (findRE `^D` $zRaw) (not $hasD) -}}
+        
+        {{- if and $hasL $hasD -}}
+          {{- $y = int (replaceRE `^L` "" $yRaw) -}}
+          {{- $z = int (replaceRE `^D` "" $zRaw) -}}
+        {{- else if $hasL -}}
+          {{- errorf "Page %q: missing D tag (has L%s but no matching D0-D3)" .RelPermalink $yRaw -}}
+        {{- else if $hasD -}}
+          {{- errorf "Page %q: missing L tag (has %s but no matching L0-L3)" .RelPermalink $zRaw -}}
+        {{- else if $hasLWrong -}}
+          {{- errorf "Page %q: invalid L tag %q, must be L0-L3" .RelPermalink $yRaw -}}
+        {{- else if $hasDWrong -}}
+          {{- errorf "Page %q: invalid D tag %q, must be D0-D3" .RelPermalink $zRaw -}}
+        {{- end -}}
+        
+        {{- if and (ge $y 0) (le $y 3) (ge $z 0) (le $z 3) -}}
+          {{- $node := dict 
+            "title" .Title
+            "permalink" .RelPermalink
+            "filepath" .File.Dir
+            "x" (index $tags 0)
+            "y" $y
+            "z" $z
+            "summary" (.Summary | plainify | truncate 80)
+            "author" (.Params.author | default "")
+            "date" (.Date.Format "2006-01-02")
+          -}}
+          {{- $nav3dNodes = $nav3dNodes | append $node -}}
         {{- end -}}
       {{- end -}}
+    {{- end -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
