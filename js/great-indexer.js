@@ -35,10 +35,10 @@
         return [];
     };
 
-   var norm = function (v) {
-    if (v === null || v === undefined) return "";
-    return String(v).trim().toLowerCase();
-};
+    var norm = function (v) {
+        if (v === null || v === undefined) return "";
+        return String(v).trim().toLowerCase();
+    };
 
     var normalizePath = function (path) {
         if (!path) return "/";
@@ -67,10 +67,10 @@
 
     var getSearchScope = function () {
         if (scope === "global") return { type: "global" };
+        if (scope === "section") return { type: "path", path: normalizePath(currentPath) };
         if (currentType === "lab") return { type: "section_type", section: currentSection, pageType: "lab" };
         if (currentType === "log") return { type: "section_type", section: currentSection, pageType: "log" };
-        if (currentType === "file") return { type: "path", path: normalizePath(currentPath) };
-        return { type: "section", section: currentSection };
+        return { type: "path", path: normalizePath(currentPath) };
     };
 
     var scopedPages = function () {
@@ -81,7 +81,11 @@
             case "section_type": return pages.filter(function (p) { return norm(p.section) === searchScope.section && norm(p.type) === searchScope.pageType; });
             case "path":
                 var ncp = normalizePath(currentPath);
-                return pages.filter(function (p) { return normalizePath(p.parentPath || "") === ncp; });
+                return pages.filter(function (p) {
+                    var pPermalink = normalizePath(p.permalink || "");
+                    var pParentPath = normalizePath(p.parentPath || "");
+                    return pParentPath === ncp || pPermalink.startsWith(ncp);
+                });
             default: return pages;
         }
     };
@@ -120,6 +124,7 @@
                 return tagsMatch && catsMatch && (selectedTypes.size === 0 || selectedTypes.has(norm(x.p.type)));
             }).sort(function (a, b) { return b.s - a.s; }).map(function (x) { return x.p; });
     }
+
     function renderFacet(list, mountEl, activeSet, prefix, suffix) {
         mountEl.innerHTML = "";
         if (!suffix) suffix = "";
@@ -151,9 +156,9 @@
         var source = hasFilters ? matched : scopedPages();
         source.forEach(function (p) {
             ensureArray(p.tags)
-    .map(function (t) { return String(t).trim(); })
-    .filter(function (t) { return t !== ''; })
-    .forEach(function (t) { tagSet.add(t); });
+                .map(function (t) { return String(t).trim(); })
+                .filter(function (t) { return t !== ''; })
+                .forEach(function (t) { tagSet.add(t); });
             ensureArray(p.categories).map(norm).filter(Boolean).forEach(function (c) { catSet.add(c); });
             typeSet.add(norm(p.type));
         });
