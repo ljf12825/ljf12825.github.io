@@ -35,10 +35,10 @@
         return [];
     };
 
-   var norm = function (v) {
-    if (v === null || v === undefined) return "";
-    return String(v).trim().toLowerCase();
-};
+    var norm = function (v) {
+        if (v === null || v === undefined) return "";
+        return String(v).trim().toLowerCase();
+    };
 
     var normalizePath = function (path) {
         if (!path) return "/";

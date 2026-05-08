@@ -24,8 +24,8 @@ waitForElements(function (sceneDiv, dataEl) {
       var data = JSON.parse(raw);
       return data.filter(function (n) {
         if (typeof n.y !== 'number' || typeof n.z !== 'number') return false;
-        if (!Number.isInteger(n.y) || n.y < 0 || n.y > 3) return false;
-        if (!Number.isInteger(n.z) || n.z < 0 || n.z > 3) return false;
+        if (!Number.isInteger(n.y) || n.y < 0 || n.y > 5) return false;
+        if (!Number.isInteger(n.z) || n.z < 0) return false;
         return true;
       });
     } catch (e) {
@@ -87,38 +87,53 @@ waitForElements(function (sceneDiv, dataEl) {
   scopeLabels.sort();
 
   var scopeColors = [
-    0x00ff99, // 湖绿
-    0xff33cc, // 亮粉
-    0x6633ff, // 靛紫
-    0xffcc00, // 金橙
-    0x0099ff, // 宝蓝
-    0x33ff66, // 翠绿
-    0xff0066, // 玫红
-    0xccff00, // 酸橙
-    0xff99cc, // 柔和粉
-    0x6600ff, // 蓝紫
-    0xff9900, // 橙黄
-    0x00ccff, // 亮青
-    0x33ff33, // 亮翠绿
-    0xff6699, // 浅玫红
-    0x9933ff, // 紫罗兰
-    0xff6600, // 亮橙
-    0xff33ff, // 亮品红
-    0x00ff66, // 春绿
-    0x3366ff, // 深蓝
-    0xffcc66, // 香槟金
-    0xcc00ff, // 纯紫
-    0x66ff00, // 亮绿
-    0xff3366, // 粉红
-    0x00ffcc, // 青绿
-    0xff9933, // 橘橙
-    0xff00cc, // 品红
-    0x33ccff, // 天蓝
-    0x99ff00  // 黄绿
+    0x00ff99, 0xff33cc, 0x6633ff, 0xffcc00, 0x0099ff, 0x33ff66, 0xff0066,
+    0xccff00, 0xff99cc, 0x6600ff, 0xff9900, 0x00ccff, 0x33ff33, 0xff6699,
+    0x9933ff, 0xff6600, 0xff33ff, 0x00ff66, 0x3366ff, 0xffcc66, 0xcc00ff,
+    0x66ff00, 0xff3366, 0x00ffcc, 0xff9933, 0xff00cc, 0x33ccff, 0x99ff00
   ];
 
-  var layerLabels = { 0: 'Editor', 1: 'Script', 2: 'Pipeline', 3: 'Native' };
-  var depthLabels = { 0: 'Use', 1: 'Config', 2: 'Expand', 3: 'Source' };
+  var depthNames = ['Aware', 'Use', 'Configure', 'Extend', 'Analyze', 'Internals'];
+  var versionSequence = [];
+  var versionDataEl = document.getElementById('nav3d-version-data');
+  console.log('versionDataEl found:', !!versionDataEl);
+
+  if (versionDataEl) {
+    try {
+      var versionRaw = versionDataEl.textContent.trim();
+      console.log('versionRaw:', versionRaw);
+      var parsed = JSON.parse(versionRaw);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        versionSequence = parsed;
+      }
+      console.log('versionSequence parsed:', versionSequence);
+    } catch (e) {
+      console.error('Parse version data error:', e);
+    }
+  }
+
+  if (!versionSequence || versionSequence.length === 0) {
+    console.log('Using hardcoded version sequence');
+    var maxZ = 0;
+    var tempLabels = {};
+    nodes.forEach(function (n) {
+      if (n.z > maxZ) maxZ = n.z;
+      if (n.zLabel && !tempLabels[n.z]) {
+        tempLabels[n.z] = n.zLabel;
+      }
+    });
+
+    for (var i = 0; i <= maxZ; i++) {
+      if (tempLabels[i]) {
+        versionSequence.push(tempLabels[i]);
+      } else {
+        versionSequence.push('Z' + i);
+      }
+    }
+  }
+
+  console.log('Final versionSequence length:', versionSequence.length);
+  console.log('Final versionSequence:', versionSequence);
 
   var SPACING = 0.2;
   var scopePositions = {};
@@ -204,9 +219,15 @@ waitForElements(function (sceneDiv, dataEl) {
   for (var i = 0; i < scopeLabels.length; i++) {
     mkTextLabel(scopeLabels[i], i * SPACING, -0.06, -0.1, '#0000ff', '9px');
   }
-  for (var v = 0; v <= 3; v++) {
-    mkTextLabel(layerLabels[v], -0.08, v * SPACING, -0.06, '#ff0000', '9px');
-    mkTextLabel(depthLabels[v], -0.08, -0.06, v * SPACING, '#00ff00', '9px');
+
+  for (var v = 0; v <= 5; v++) {
+    mkTextLabel(depthNames[v], -0.1, v * SPACING, -0.06, '#ff0000', '8px');
+  }
+
+  console.log('Drawing Z labels, count:', versionSequence.length);
+  for (var z = 0; z < versionSequence.length; z++) {
+    console.log('Z label', z, ':', versionSequence[z]);
+    mkTextLabel(versionSequence[z], -0.08, -0.08, z * SPACING, '#00ff00', '7px');
   }
 
   var balls = [];
@@ -374,7 +395,9 @@ waitForElements(function (sceneDiv, dataEl) {
   function updateStatus(d) {
     if (!statusEl) return;
     if (d) {
-      var tagsStr = '[' + d.x + ', ' + layerLabels[d.y] + ', ' + depthLabels[d.z] + ']';
+      var depthName = depthNames[d.y] || ('Y' + d.y);
+      var versionName = d.zLabel || ('Z' + d.z);
+      var tagsStr = d.x + ' / ' + depthName + ' / ' + versionName;
       var parts = [];
       parts.push(d.title);
       if (d.filepath) parts.push(d.filepath);

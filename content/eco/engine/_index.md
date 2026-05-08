@@ -7,19 +7,22 @@ type: file
 <!--more-->
 
 ```txt
-       Y(Layer)
+       Y(Depth)
        |
-       |Native(L3)
-       |Pipeline(L2)
-       |Script(L1)
-       |Editor(L0)
-       /----------------X (Scope)
-      /Use(D0)
-     /Configurate(D1)
-    /Expand(D2)
-   /Source(D3)
+       |Internals(D5)
+       |Analyze(D4)
+       |Extend(D3)
+       |Configure(D2)
+       |Use(D1)
+       |Aware(D0)
+       |
+       /----------------X (Domain)
+      /
+     /
+    /
+   /
   /
- Z(Depth)
+ Z(Evolution)
 ```
 
 - X(Scope)
