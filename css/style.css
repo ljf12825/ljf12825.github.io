@@ -467,9 +467,8 @@ blockquote::before {
 }
 
 #star-nav .nav-item.active {
-  color: #ff0000;
   font-weight: bold;
-  text-shadow: 0 0 2px #ff0000;
+  text-decoration: underline;
 }
 
 #star-header .title {
