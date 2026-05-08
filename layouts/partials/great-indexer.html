@@ -16,45 +16,50 @@
   {{- $engineDir = "eco/engine/godot/" -}}
 {{- end -}}
 
+{{- $versionSequence := slice -}}
+{{- if eq $engineName "Unity" -}}
+  {{- $versionSequence = slice "Unity1.x" "Unity2.x" "Unity3.x" "Unity4.x" "Unity5.x" "Unity2017" "Unity2018" "Unity2019" "Unity2020" "Unity2021" "Unity2022" "Unity6" -}}
+{{- else if eq $engineName "UE" -}}
+  {{- $versionSequence = slice "UE3" "UE4" "UE5" -}}
+{{- else if eq $engineName "Godot" -}}
+  {{- $versionSequence = slice "Godot1.x" "Godot2.x" "Godot3.x" "Godot4.x" -}}
+{{- end -}}
+
 {{- $nav3dNodes := slice -}}
 {{- if $engineName -}}
   {{- $allPages := where site.Pages "File" "!=" nil -}}
+  
   {{- range $allPages -}}
     {{- if and .File (in .File.Dir $engineDir) -}}
     {{- if .Params.tags -}}
       {{- $tags := .Params.tags -}}
       {{- if ge (len $tags) 3 -}}
-        {{- $yRaw := string (index $tags 1) -}}
-        {{- $zRaw := string (index $tags 2) -}}
+        {{- $xTag := index $tags 0 -}}
+        {{- $yRaw := index $tags 1 -}}
+        {{- $zRaw := index $tags 2 -}}
         {{- $y := -1 -}}
         {{- $z := -1 -}}
         
-        {{- $hasL := findRE `^L[0-3]$` $yRaw -}}
-        {{- $hasD := findRE `^D[0-3]$` $zRaw -}}
-        {{- $hasLWrong := and (findRE `^L` $yRaw) (not $hasL) -}}
-        {{- $hasDWrong := and (findRE `^D` $zRaw) (not $hasD) -}}
-        
-        {{- if and $hasL $hasD -}}
-          {{- $y = int (replaceRE `^L` "" $yRaw) -}}
-          {{- $z = int (replaceRE `^D` "" $zRaw) -}}
-        {{- else if $hasL -}}
-          {{- errorf "Page %q: missing D tag (has L%s but no matching D0-D3)" .RelPermalink $yRaw -}}
-        {{- else if $hasD -}}
-          {{- errorf "Page %q: missing L tag (has %s but no matching L0-L3)" .RelPermalink $zRaw -}}
-        {{- else if $hasLWrong -}}
-          {{- errorf "Page %q: invalid L tag %q, must be L0-L3" .RelPermalink $yRaw -}}
-        {{- else if $hasDWrong -}}
-          {{- errorf "Page %q: invalid D tag %q, must be D0-D3" .RelPermalink $zRaw -}}
+        {{- if findRE `^D[0-5]$` $yRaw -}}
+          {{- $y = int (replaceRE `^D` "" $yRaw) -}}
         {{- end -}}
         
-        {{- if and (ge $y 0) (le $y 3) (ge $z 0) (le $z 3) -}}
+        {{- range $idx, $ver := $versionSequence -}}
+          {{- if eq $zRaw $ver -}}
+            {{- $z = $idx -}}
+          {{- end -}}
+        {{- end -}}
+        
+        {{- if and (ge $y 0) (ge $z 0) -}}
           {{- $node := dict 
             "title" .Title
             "permalink" .RelPermalink
             "filepath" .File.Dir
-            "x" (index $tags 0)
+            "x" $xTag
             "y" $y
             "z" $z
+            "yLabel" $yRaw
+            "zLabel" $zRaw
             "summary" (.Summary | plainify | truncate 80)
             "author" (.Params.author | default "")
             "date" (.Date.Format "2006-01-02")
@@ -115,7 +120,6 @@
     <div id="index-panel-nav3d" style="display:none;position:relative;">
       <div id="nav3d-scene" style="width:100%;height:320px;overflow:hidden;border-top:2px solid #808080;border-left:2px solid #808080;border-right:2px solid #ffffff;border-bottom:2px solid #ffffff;background:#c0c0c0;position:relative;">
         <a href="#" id="btn-reset-nav3d" style="position:absolute;top:4px;right:6px;z-index:10;color:#000080;text-decoration:underline;font-size:10px;font-family:'MS Sans Serif',Arial,sans-serif;">Reset</a>
-        <a href="#" id="btn-pan-nav3d" style="display:none;position:absolute;top:4px;right:56px;z-index:10;color:#000080;text-decoration:underline;font-size:10px;font-family:'MS Sans Serif',Arial,sans-serif;">Pan</a>
         <div id="nav3d-status" style="position:absolute;bottom:4px;left:4px;z-index:10;color:#000;font-size:10px;font-family:'MS Sans Serif',Arial,sans-serif;">Hover over a node</div>
       </div>
     </div>
@@ -171,5 +175,8 @@
 {{ if $hasNav3D }}
 <script id="nav3d-data" type="application/json">
 {{ $nav3dNodes | jsonify | safeJS }}
+</script>
+<script id="nav3d-version-data" type="application/json">
+{{ $versionSequence | jsonify | safeJS }}
 </script>
 {{ end }}

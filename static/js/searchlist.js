@@ -52,6 +52,13 @@
   const isCurrentScope = scope !== 'global';
   const isShowAll = q === '/*';
 
+  console.log('=== searchlist debug ===');
+  console.log('scope:', scope);
+  console.log('searchType:', searchType);
+  console.log('path:', path);
+  console.log('isCurrentScope:', isCurrentScope);
+  console.log('isShowAll:', isShowAll);
+
   const hit = p => {
     if (isCurrentScope) {
       if (searchType === 'section' && section) {
@@ -64,7 +71,11 @@
       if (searchType === 'path' && path) {
         const normalizedPath = normalizePath(path);
         const pageParentPath = normalizePath(p.parentPath || "");
-        if (pageParentPath !== normalizedPath) return false;
+        const pagePermalink = normalizePath(p.permalink || "");
+        console.log('checking:', p.permalink, 'parentPath:', pageParentPath, 'normalizedPath:', normalizedPath, 'match:', pageParentPath === normalizedPath || pagePermalink.startsWith(normalizedPath));
+        if (pageParentPath !== normalizedPath && !pagePermalink.startsWith(normalizedPath)) {
+          return false;
+        }
       }
     }
 
@@ -89,6 +100,8 @@
       score: isShowAll ? 0 : score(p, q)
     }))
     .sort((a, b) => b.score - a.score);
+
+  console.log('matched count:', matched.length);
 
   const result = matched.map(m => m.page);
   const scores = matched.map(m => m.score);
