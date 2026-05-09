@@ -22,12 +22,21 @@ waitForElements(function (sceneDiv, dataEl) {
         raw = raw.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
       }
       var data = JSON.parse(raw);
-      return data.filter(function (n) {
+      var filtered = data.filter(function (n) {
         if (typeof n.y !== 'number' || typeof n.z !== 'number') return false;
         if (!Number.isInteger(n.y) || n.y < 0 || n.y > 5) return false;
         if (!Number.isInteger(n.z) || n.z < 0) return false;
         return true;
       });
+
+      filtered.forEach(function (n) {
+        if (typeof n.alive !== 'number' || (n.alive !== 0 && n.alive !== 1)) {
+          console.warn('Node missing valid alive field, defaulting to 1:', n.title);
+          n.alive = 1;
+        }
+      });
+
+      return filtered;
     } catch (e) {
       console.error('Parse error:', e);
       return [];
@@ -53,8 +62,9 @@ waitForElements(function (sceneDiv, dataEl) {
   var camera = new THREE.PerspectiveCamera(45, W / H, 0.1, 100);
   camera.position.set(-0.5, 1.2, 1.5);
 
-  var renderer = new THREE.WebGLRenderer({ antialias: false });
+  var renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(W, H);
+  renderer.setPixelRatio(window.devicePixelRatio);
   var canvasEl = renderer.domElement;
   canvasEl.style.position = 'absolute';
   canvasEl.style.top = '0';
@@ -75,9 +85,13 @@ waitForElements(function (sceneDiv, dataEl) {
   controls.update();
 
   scene.add(new THREE.AmbientLight(0x999999));
-  var light = new THREE.DirectionalLight(0xffffff, 0.6);
+  var light = new THREE.DirectionalLight(0xffffff, 0.8);
   light.position.set(5, 8, 5);
   scene.add(light);
+
+  var backLight = new THREE.DirectionalLight(0xffffff, 0.3);
+  backLight.position.set(-5, -3, -5);
+  scene.add(backLight);
 
   var scopeLabels = [];
   nodes.forEach(function (n) {
@@ -95,24 +109,20 @@ waitForElements(function (sceneDiv, dataEl) {
   var depthNames = ['Aware', 'Use', 'Configure', 'Extend', 'Analyze', 'Internals'];
   var versionSequence = [];
   var versionDataEl = document.getElementById('nav3d-version-data');
-  console.log('versionDataEl found:', !!versionDataEl);
 
   if (versionDataEl) {
     try {
       var versionRaw = versionDataEl.textContent.trim();
-      console.log('versionRaw:', versionRaw);
       var parsed = JSON.parse(versionRaw);
       if (Array.isArray(parsed) && parsed.length > 0) {
         versionSequence = parsed;
       }
-      console.log('versionSequence parsed:', versionSequence);
     } catch (e) {
       console.error('Parse version data error:', e);
     }
   }
 
   if (!versionSequence || versionSequence.length === 0) {
-    console.log('Using hardcoded version sequence');
     var maxZ = 0;
     var tempLabels = {};
     nodes.forEach(function (n) {
@@ -132,7 +142,6 @@ waitForElements(function (sceneDiv, dataEl) {
   }
 
   console.log('Final versionSequence length:', versionSequence.length);
-  console.log('Final versionSequence:', versionSequence);
 
   var SPACING = 0.2;
   var scopePositions = {};
@@ -237,10 +246,63 @@ waitForElements(function (sceneDiv, dataEl) {
     mkTextLabel(depthNames[v], -0.1, v * SPACING, -0.06, '#ff0000', '8px');
   }
 
-  console.log('Drawing Z labels, count:', versionSequence.length);
   for (var z = 0; z < versionSequence.length; z++) {
-    console.log('Z label', z, ':', versionSequence[z]);
     mkTextLabel(versionSequence[z], -0.08, -0.08, z * SPACING, '#00ff00', '7px');
+  }
+
+  function createSpikyBall(radius, spikeCount, colorHex) {
+    var group = new THREE.Group();
+
+    var centerGeo = new THREE.SphereGeometry(radius * 0.12, 4, 4);
+    var centerMat = new THREE.MeshStandardMaterial({
+      color: colorHex,
+      roughness: 0.8,
+      metalness: 0.0
+    });
+    var center = new THREE.Mesh(centerGeo, centerMat);
+    group.add(center);
+
+    var spikeRadius = radius * 0.18;
+    var spikeGeo = new THREE.ConeGeometry(spikeRadius, radius * 1.8, 5, 2);
+    var spikeMat = new THREE.MeshStandardMaterial({
+      color: colorHex,
+      roughness: 0.5,
+      metalness: 0.0,
+      flatShading: true
+    });
+
+    var phi = Math.PI * (3 - Math.sqrt(5));
+
+    for (var i = 0; i < spikeCount; i++) {
+      var y = 1 - (i / (spikeCount - 1)) * 2;
+      var radiusAtY = Math.sqrt(1 - y * y);
+      var theta = phi * i;
+
+      var nx = Math.cos(theta) * radiusAtY;
+      var ny = y;
+      var nz = Math.sin(theta) * radiusAtY;
+
+      var direction = new THREE.Vector3(nx, ny, nz).normalize();
+
+      var spikeLength = radius * 1.8;
+      var startDist = radius * 0.08;
+
+      var spike = new THREE.Mesh(spikeGeo, spikeMat);
+      spike.position.copy(
+        direction.clone().multiplyScalar(startDist + spikeLength / 2)
+      );
+
+      var quaternion = new THREE.Quaternion();
+      quaternion.setFromUnitVectors(
+        new THREE.Vector3(0, 1, 0),
+        direction
+      );
+      spike.setRotationFromQuaternion(quaternion);
+
+      group.add(spike);
+    }
+
+    return group;
   }
 
   var balls = [];
@@ -270,7 +332,7 @@ waitForElements(function (sceneDiv, dataEl) {
   function getSphereGeo(radius) {
     var key = radius.toFixed(4);
     if (!sharedSphereGeo[key]) {
-      var seg = radius > 0.03 ? 8 : (radius > 0.02 ? 6 : 4);
+      var seg = radius > 0.03 ? 12 : (radius > 0.02 ? 8 : 6);
       sharedSphereGeo[key] = new THREE.SphereGeometry(radius, seg, seg);
     }
     return sharedSphereGeo[key];
@@ -298,12 +360,23 @@ waitForElements(function (sceneDiv, dataEl) {
     return sharedMaterials[key];
   }
 
+  function getDeprecatedLineMaterial() {
+    if (!sharedMaterials['deprecated_line']) {
+      sharedMaterials['deprecated_line'] = new THREE.MeshBasicMaterial({
+        color: 0xff4444,
+        transparent: true,
+        opacity: 0.5
+      });
+    }
+    return sharedMaterials['deprecated_line'];
+  }
+
   Object.keys(positionGroups).forEach(function (posKey) {
     var groupNodes = positionGroups[posKey];
     var count = groupNodes.length;
     var baseRadius = 0.04;
     var radius = baseRadius / Math.sqrt(count);
-    radius = Math.max(radius, 0.015);
+    radius = Math.max(radius, 0.02);
 
     var parts = posKey.split(',');
     var baseX = parseFloat(parts[0]);
@@ -335,20 +408,41 @@ waitForElements(function (sceneDiv, dataEl) {
       var colorIndex = scopeLabels.indexOf(n.x) % scopeColors.length;
       var ci = scopeColors[colorIndex];
 
-      var g = getSphereGeo(radius);
-      var m = getBallMaterial(ci);
-      var b = new THREE.Mesh(g, m);
-      b.position.copy(p);
-      b.userData = n;
-      scene.add(b);
-      balls.push(b);
+      var nodeObj;
+
+      if (n.alive === 0) {
+        var spikeCount = 20;
+        nodeObj = createSpikyBall(radius, spikeCount, ci);
+        nodeObj.position.copy(p);
+        nodeObj.userData = n;
+        nodeObj.userData.isDeprecated = true;
+        nodeObj.userData.nodeType = 'spiky';
+      } else {
+        var normalGeo = getSphereGeo(radius);
+        var normalMat = getBallMaterial(ci);
+
+        nodeObj = new THREE.Mesh(normalGeo, normalMat);
+        nodeObj.position.copy(p);
+        nodeObj.userData = n;
+        nodeObj.userData.isDeprecated = false;
+        nodeObj.userData.nodeType = 'sphere';
+      }
+
+      scene.add(nodeObj);
+      balls.push(nodeObj);
 
       if (offset.length() > 0.001) {
         var dir = new THREE.Vector3().subVectors(centerPos, p);
         var length = dir.length();
         var midPoint = new THREE.Vector3().addVectors(p, centerPos).multiplyScalar(0.5);
 
-        var cylMat = getLineMaterial(ci);
+        var cylMat;
+        if (n.alive === 0) {
+          cylMat = getDeprecatedLineMaterial();
+        } else {
+          cylMat = getLineMaterial(ci);
+        }
+
         var cyl = new THREE.Mesh(sharedCylGeo, cylMat);
         cyl.position.copy(midPoint);
         cyl.scale.set(1, length, 1);
@@ -358,7 +452,13 @@ waitForElements(function (sceneDiv, dataEl) {
         );
         scene.add(cyl);
 
-        var dotMat = getLineMaterial(ci);
+        var dotMat;
+        if (n.alive === 0) {
+          dotMat = getDeprecatedLineMaterial();
+        } else {
+          dotMat = getLineMaterial(ci);
+        }
+
         var dot = new THREE.Mesh(sharedDotGeo, dotMat);
         dot.position.copy(centerPos);
         scene.add(dot);
@@ -377,19 +477,34 @@ waitForElements(function (sceneDiv, dataEl) {
   }
 
   var ringV = new THREE.Mesh(
-    getRingGeometry(0.055, 0.008),
+    getRingGeometry(0.04, 0.006),
     new THREE.MeshBasicMaterial({ color: 0xffff00 })
   );
   ringV.visible = false;
   scene.add(ringV);
 
   var ringH = new THREE.Mesh(
-    getRingGeometry(0.06, 0.008),
+    getRingGeometry(0.045, 0.006),
     new THREE.MeshBasicMaterial({ color: 0xffff00 })
   );
   ringH.visible = false;
   ringH.rotation.x = Math.PI / 2;
   scene.add(ringH);
+
+  var ringVDeprecated = new THREE.Mesh(
+    getRingGeometry(0.05, 0.006),
+    new THREE.MeshBasicMaterial({ color: 0xff0000 })
+  );
+  ringVDeprecated.visible = false;
+  scene.add(ringVDeprecated);
+
+  var ringHDeprecated = new THREE.Mesh(
+    getRingGeometry(0.055, 0.006),
+    new THREE.MeshBasicMaterial({ color: 0xff0000 })
+  );
+  ringHDeprecated.visible = false;
+  ringHDeprecated.rotation.x = Math.PI / 2;
+  scene.add(ringHDeprecated);
 
   var statusEl = document.getElementById('nav3d-status');
   if (!statusEl) {
@@ -408,7 +523,8 @@ waitForElements(function (sceneDiv, dataEl) {
     if (d) {
       var depthName = depthNames[d.y] || ('Y' + d.y);
       var versionName = d.zLabel || ('Z' + d.z);
-      var tagsStr = d.x + ' / ' + depthName + ' / ' + versionName;
+      var aliveStatus = d.alive === 0 ? 'DEPRECATED' : 'ACTIVE';
+      var tagsStr = '[' + d.x + ', ' + depthName + ', ' + versionName + ']' + ' | ' + aliveStatus;
       var parts = [];
       parts.push(d.title);
       if (d.filepath) parts.push(d.filepath);
@@ -422,38 +538,73 @@ waitForElements(function (sceneDiv, dataEl) {
     }
   }
 
+  function getWorldPos(obj) {
+    var pos = new THREE.Vector3();
+    obj.getWorldPosition(pos);
+    return pos;
+  }
+
   renderer.domElement.addEventListener('mousemove', function (e) {
     var r = renderer.domElement.getBoundingClientRect();
     mouse.x = ((e.clientX - r.left) / r.width) * 2 - 1;
     mouse.y = -((e.clientY - r.top) / r.height) * 2 + 1;
     raycaster.setFromCamera(mouse, camera);
-    var hits = raycaster.intersectObjects(balls);
+
+    var allTargets = [];
+    var meshToBall = new Map();
+
+    balls.forEach(function (ball) {
+      if (ball.isGroup) {
+        ball.traverse(function (child) {
+          if (child.isMesh) {
+            allTargets.push(child);
+            meshToBall.set(child, ball);
+          }
+        });
+      } else {
+        allTargets.push(ball);
+        meshToBall.set(ball, ball);
+      }
+    });
+
+    var hits = raycaster.intersectObjects(allTargets);
     if (hits.length > 0) {
-      var o = hits[0].object;
-      if (hovered !== o) {
-        if (hovered) hovered.material.emissive.setHex(0);
-        hovered = o;
+      var hitMesh = hits[0].object;
+      var ball = meshToBall.get(hitMesh) || hitMesh;
+      var data = ball.userData;
 
-        ringV.position.copy(o.position);
-        ringV.visible = true;
-        ringH.position.copy(o.position);
-        ringH.visible = true;
+      if (hovered !== ball) {
+        hovered = ball;
 
-        var ballRadius = o.geometry.parameters.radius || 0.04;
-        var ringRadius = ballRadius * 1.4;
-        var tubeRadius = Math.max(ballRadius * 0.2, 0.003);
+        ringV.visible = false;
+        ringH.visible = false;
+        ringVDeprecated.visible = false;
+        ringHDeprecated.visible = false;
 
-        ringV.geometry = getRingGeometry(ringRadius, tubeRadius);
-        ringH.geometry = getRingGeometry(ringRadius * 1.1, tubeRadius);
+        var worldPos = getWorldPos(ball);
+        var isDep = data.alive === 0;
 
-        updateStatus(o.userData);
+        if (isDep) {
+          ringVDeprecated.position.copy(worldPos);
+          ringVDeprecated.visible = true;
+          ringHDeprecated.position.copy(worldPos);
+          ringHDeprecated.visible = true;
+        } else {
+          ringV.position.copy(worldPos);
+          ringV.visible = true;
+          ringH.position.copy(worldPos);
+          ringH.visible = true;
+        }
+
+        updateStatus(data);
       }
     } else {
       if (hovered) {
-        hovered.material.emissive.setHex(0);
         hovered = null;
         ringV.visible = false;
         ringH.visible = false;
+        ringVDeprecated.visible = false;
+        ringHDeprecated.visible = false;
         updateStatus(null);
       }
     }
@@ -464,9 +615,28 @@ waitForElements(function (sceneDiv, dataEl) {
     mouse.x = ((e.clientX - r.left) / r.width) * 2 - 1;
     mouse.y = -((e.clientY - r.top) / r.height) * 2 + 1;
     raycaster.setFromCamera(mouse, camera);
-    var hits = raycaster.intersectObjects(balls);
+
+    var allTargets = [];
+    var meshToBall = new Map();
+
+    balls.forEach(function (ball) {
+      if (ball.isGroup) {
+        ball.traverse(function (child) {
+          if (child.isMesh) {
+            allTargets.push(child);
+            meshToBall.set(child, ball);
+          }
+        });
+      } else {
+        allTargets.push(ball);
+        meshToBall.set(ball, ball);
+      }
+    });
+
+    var hits = raycaster.intersectObjects(allTargets);
     if (hits.length > 0) {
-      var d = hits[0].object.userData;
+      var ball = meshToBall.get(hits[0].object) || hits[0].object;
+      var d = ball.userData;
       if (d.permalink) window.location.href = d.permalink;
     }
   });
@@ -506,10 +676,19 @@ waitForElements(function (sceneDiv, dataEl) {
   function anim() {
     requestAnimationFrame(anim);
     controls.update();
-    if (ringV.visible && hovered) {
-      ringV.position.copy(hovered.position);
-      ringH.position.copy(hovered.position);
+
+    if (hovered) {
+      var worldPos = getWorldPos(hovered);
+      if (ringV.visible) {
+        ringV.position.copy(worldPos);
+        ringH.position.copy(worldPos);
+      }
+      if (ringVDeprecated.visible) {
+        ringVDeprecated.position.copy(worldPos);
+        ringHDeprecated.position.copy(worldPos);
+      }
     }
+
     renderer.render(scene, camera);
   }
   anim();

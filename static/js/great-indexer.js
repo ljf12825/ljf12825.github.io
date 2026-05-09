@@ -248,6 +248,11 @@
 
                 if (hasNav3d) {
                     setTimeout(function () {
+                        var oldScript = document.querySelector('script[src*="nav3d-float"]');
+                        if (oldScript) oldScript.remove();
+
+                        window._nav3dInited = false;
+
                         if (!window._nav3dInited) {
                             window._nav3dInited = true;
                             if (!document.querySelector('script[type="importmap"]')) {
@@ -258,7 +263,7 @@
                             }
                             var s = document.createElement('script');
                             s.type = 'module';
-                            s.src = '/js/nav3d-float.js';
+                            s.src = '/js/nav3d-float.js?v=' + Date.now();
                             document.body.appendChild(s);
                         }
                     }, 200);

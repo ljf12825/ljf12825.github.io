@@ -31,41 +31,71 @@
   
   {{- range $allPages -}}
     {{- if and .File (in .File.Dir $engineDir) -}}
-    {{- if .Params.tags -}}
-      {{- $tags := .Params.tags -}}
-      {{- if ge (len $tags) 3 -}}
-        {{- $xTag := index $tags 0 -}}
-        {{- $yRaw := index $tags 1 -}}
-        {{- $zRaw := index $tags 2 -}}
-        {{- $y := -1 -}}
-        {{- $z := -1 -}}
-        
-        {{- if findRE `^D[0-5]$` $yRaw -}}
-          {{- $y = int (replaceRE `^D` "" $yRaw) -}}
-        {{- end -}}
-        
-        {{- range $idx, $ver := $versionSequence -}}
-          {{- if eq $zRaw $ver -}}
-            {{- $z = $idx -}}
+    {{- if isset .Params "alive" -}}
+      {{- if .Params.tags -}}
+        {{- $tags := .Params.tags -}}
+        {{- if ge (len $tags) 3 -}}
+          {{- $xTag := index $tags 0 -}}
+          {{- $yRaw := index $tags 1 -}}
+          {{- $zRaw := index $tags 2 -}}
+          {{- $y := -1 -}}
+          {{- $z := -1 -}}
+          
+          {{- if findRE `^D[0-5]$` $yRaw -}}
+            {{- $y = int (replaceRE `^D` "" $yRaw) -}}
+          {{- else -}}
+            {{- errorf "Page %s: Depth tag '%s' is invalid. Must be D0-D5" .RelPermalink $yRaw -}}
           {{- end -}}
+          
+          {{- range $idx, $ver := $versionSequence -}}
+            {{- if eq $zRaw $ver -}}
+              {{- $z = $idx -}}
+            {{- end -}}
+          {{- end -}}
+          
+          {{- if eq $z -1 -}}
+            {{- errorf "Page %s: Time tag '%s' not found in version sequence" .RelPermalink $zRaw -}}
+          {{- end -}}
+          
+          {{- $alive := 1 -}}
+          {{- if eq (printf "%T" .Params.alive) "bool" -}}
+            {{- if .Params.alive -}}
+              {{- $alive = 1 -}}
+            {{- else -}}
+              {{- $alive = 0 -}}
+            {{- end -}}
+          {{- else if or (eq .Params.alive 0) (eq .Params.alive 1) -}}
+            {{- $alive = int .Params.alive -}}
+          {{- else if eq .Params.alive "0" -}}
+            {{- $alive = 0 -}}
+          {{- else if eq .Params.alive "1" -}}
+            {{- $alive = 1 -}}
+          {{- else -}}
+            {{- errorf "Page %s: alive parameter '%v' is invalid. Must be true/false or 0/1" .RelPermalink .Params.alive -}}
+          {{- end -}}
+          
+          {{- if and (ge $y 0) (ge $z 0) (ge $alive 0) -}}
+            {{- $node := dict 
+              "title" .Title
+              "permalink" .RelPermalink
+              "filepath" .File.Dir
+              "x" $xTag
+              "y" $y
+              "z" $z
+              "yLabel" $yRaw
+              "zLabel" $zRaw
+              "alive" $alive
+              "summary" (.Summary | plainify | truncate 80)
+              "author" (.Params.author | default "")
+              "date" (.Date.Format "2006-01-02")
+            -}}
+            {{- $nav3dNodes = $nav3dNodes | append $node -}}
+          {{- end -}}
+        {{- else -}}
+          {{- errorf "Page %s: has 'alive' field but tags must be [Scope, Depth, Time] format (at least 3 tags)" .RelPermalink -}}
         {{- end -}}
-        
-        {{- if and (ge $y 0) (ge $z 0) -}}
-          {{- $node := dict 
-            "title" .Title
-            "permalink" .RelPermalink
-            "filepath" .File.Dir
-            "x" $xTag
-            "y" $y
-            "z" $z
-            "yLabel" $yRaw
-            "zLabel" $zRaw
-            "summary" (.Summary | plainify | truncate 80)
-            "author" (.Params.author | default "")
-            "date" (.Date.Format "2006-01-02")
-          -}}
-          {{- $nav3dNodes = $nav3dNodes | append $node -}}
-        {{- end -}}
+      {{- else -}}
+        {{- errorf "Page %s: has 'alive' field but missing tags. Tags must be [Scope, Depth, Time] format" .RelPermalink -}}
       {{- end -}}
     {{- end -}}
     {{- end -}}
