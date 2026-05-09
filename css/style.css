@@ -417,7 +417,7 @@ blockquote::before {
 
 #star-header .title {
   display: none;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 #star-nav:not(.collapse) .title.open {
@@ -651,7 +651,6 @@ body::-webkit-scrollbar-thumb:hover {
   text-align: center;
   font-weight: bold;
   border-bottom: 2px solid #fff;
-  font-size: 14px;
 }
 
 #great-indexer .float-body {
@@ -666,7 +665,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 #great-indexer .title {
   display: none;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 #great-indexer:not(.closed) .title.open {
