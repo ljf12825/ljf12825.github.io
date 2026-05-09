@@ -71,10 +71,11 @@
   window.addEventListener('resize', function() {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function() {
-      if (window.innerWidth !== lastWidth) {
-        lastWidth = window.innerWidth;
+      var currentWidth = window.innerWidth;
+      if (currentWidth < lastWidth) {
         resetAllToDefault();
       }
+      lastWidth = currentWidth;
     }, 300);
   });
 
