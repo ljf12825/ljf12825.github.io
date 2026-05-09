@@ -4,27 +4,23 @@
   const DEFAULT_POSITIONS = {
     'toc-window':    { left: 'auto', top: '100px', right: '0', bottom: 'auto' },
     'star-nav':      { left: 'auto', top: 'auto', right: '0', bottom: '0' },
-    'great-indexer': { left: '0', top: 'auto', right: 'auto', bottom: '0' },
-    'ref-window':    { left: '0', top: '100px', right: 'auto', bottom: 'auto' }
+    'great-indexer': { left: '0', top: 'auto', right: 'auto', bottom: '0' }
   };
 
   const SINGLE_POSITIONS = {
     'toc-window':    { left: 'auto', top: '100px', right: '0', bottom: 'auto' },
     'star-nav':      { left: 'auto', top: 'auto', right: '0', bottom: '0' },
-    'great-indexer': { left: '0', top: 'auto', right: 'auto', bottom: '0' },
-    'ref-window':    { left: '0', top: '100px', right: 'auto', bottom: 'auto' }
+    'great-indexer': { left: '0', top: 'auto', right: 'auto', bottom: '0' }
   };
 
   const STORAGE_KEYS = {
     'toc-window':    'toc-pos',
     'star-nav':      'star-pos',
-    'great-indexer': 'global-index-pos',
-    'ref-window':    'ref-pos'
+    'great-indexer': 'global-index-pos'
   };
 
   const COLLAPSE_KEYS = {
     'great-indexer': 'global-index-collapse',
-    'ref-window':    'ref-collapse',
     'star-nav':      'star-collapse',
     'toc-window':    'tocCollapsed'
   };
@@ -39,12 +35,10 @@
 
   function closeAllPanels() {
     var indexer = document.getElementById('great-indexer');
-    var ref = document.getElementById('ref-window');
     var star = document.getElementById('star-nav');
     var toc = document.getElementById('toc-window');
     
     if (indexer) indexer.classList.add('closed');
-    if (ref) ref.classList.add('closed');
     if (star) star.classList.add('collapse');
     if (toc) toc.classList.add('collapsed');
   }
