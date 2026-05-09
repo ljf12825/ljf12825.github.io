@@ -148,11 +148,21 @@
         if (scope === 'nav3d') {
             return;
         }
+
+        var q = norm(input.value);
+        var hasFilters = q || selectedTags.size > 0 || selectedCategories.size > 0 || selectedTypes.size > 0;
+
+        var tagsBox = tagsEl.closest('.index-tags-box');
+        var catsBox = catsEl.closest('.index-categories-box');
+        var typesBox = typesEl.closest('.index-types-box');
+
+        if (tagsBox) tagsBox.style.display = hasFilters ? '' : 'none';
+        if (catsBox) catsBox.style.display = hasFilters ? '' : 'none';
+        if (typesBox) typesBox.style.display = hasFilters ? '' : 'none';
+
         var matched = matchedPages();
         countEl.textContent = String(matched.length);
         var tagSet = new Set(), catSet = new Set(), typeSet = new Set();
-        var q = norm(input.value);
-        var hasFilters = q || selectedTags.size > 0 || selectedCategories.size > 0 || selectedTypes.size > 0;
         var source = hasFilters ? matched : scopedPages();
         source.forEach(function (p) {
             ensureArray(p.tags)

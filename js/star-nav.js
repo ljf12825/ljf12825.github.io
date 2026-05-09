@@ -131,4 +131,41 @@
       }
     }
   });
+
+  // 保存当前激活的 tab
+  var savedTab = localStorage.getItem("star-tab") || "nav-panel";
+  
+  // Tab 切换逻辑
+  var tabBtns = nav.querySelectorAll('.tab-btn');
+  tabBtns.forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation(); // 防止触发拖动
+      
+      // 更新按钮状态
+      tabBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      
+      // 切换面板
+      var targetId = btn.dataset.tab;
+      nav.querySelectorAll('.tab-panel').forEach(function(panel) {
+        panel.style.display = 'none';
+        panel.classList.remove('active');
+      });
+      var targetPanel = document.getElementById(targetId);
+      if (targetPanel) {
+        targetPanel.style.display = 'block';
+        targetPanel.classList.add('active');
+      }
+      
+      // 保存当前 tab
+      localStorage.setItem("star-tab", targetId);
+    });
+  });
+  
+  // 恢复上次的 tab
+  var targetBtn = nav.querySelector('.tab-btn[data-tab="' + savedTab + '"]');
+  if (targetBtn) {
+    targetBtn.click();
+  }
+
 })();
