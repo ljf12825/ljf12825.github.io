@@ -1,8 +1,9 @@
 ﻿---
 title: MonoBehaviour
 date: 2026-05-07
-tags: [Core]
+tags: [Core, D0, Unity1.x]
 author: ljf12825
+alive: true
 type: file
 summary: Unity buildin class MonoBehaviour
 ---

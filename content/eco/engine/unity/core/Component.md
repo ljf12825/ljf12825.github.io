@@ -1,8 +1,9 @@
 ﻿---
 title: Component
 date: 2026-05-07
-tags: [Core]
+tags: [Core, D0, Unity1.x]
 author: ljf12825
+alive: true
 type: file
 summary: All builldin Component in Unity
 ---

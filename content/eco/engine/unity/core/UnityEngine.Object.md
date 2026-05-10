@@ -1,7 +1,8 @@
 ﻿---
-title: Object
-date: 2025-06-01
-tags: [Core]
+title: UnityEngine.Object
+date: 2026-05-10
+tags: [Core, D0, Unity1.x]
+alive: true
 author: ljf12825
 type: file
 summary: Unity's class Object

@@ -1,5 +1,5 @@
 ﻿---
-title: Audio System
+title: Audio
 date: 2026-05-07
 tags: [Audio]
 author: ljf12825

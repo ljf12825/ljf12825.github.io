@@ -2,6 +2,7 @@
 title: Behaviour Tree
 date: 2026-05-07
 tags: [Behaviour, D0, Unity6]
+alive: true
 author: ljf12825
 type: file
 summary: The Introduction of behaviour tree in unity. Explanation and implementation examples of behavior tree structure

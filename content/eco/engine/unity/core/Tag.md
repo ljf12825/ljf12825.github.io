@@ -1,7 +1,8 @@
 ﻿---
 title: Tag
 date: 2026-05-07
-tags: [Tag]
+tags: [Core, D0, Unity1.x]
+alive: true
 author: ljf12825
 type: log
 summary: Tag system in Unity. Usage, Examples and Specifications.

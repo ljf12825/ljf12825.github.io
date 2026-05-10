@@ -1,8 +1,9 @@
 ﻿---
 title: GameObject
 date: 2026-05-07
-tags: [Core]
+tags: [Core, D0, Unity1.x]
 author: ljf12825
+alive: true
 type: file
 summary: GameObject introduction, usage and API
 ---

@@ -3,6 +3,7 @@ title: ML Agents
 date: 2026-05-07
 tags: [ML Agents, D0, Unity2017]
 author: ljf12825
+alive: true
 type: file
 summary: Tutorial of Unity's ML Agents
 ---

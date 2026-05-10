@@ -3,6 +3,7 @@ title: Navigation
 date: 2026-05-07
 tags: [Navigation, D0, Unity2022]
 author: ljf12825
+alive: true
 type: file
 summary: Navigation System in Unity. Introduction, usage and document。
 ---
