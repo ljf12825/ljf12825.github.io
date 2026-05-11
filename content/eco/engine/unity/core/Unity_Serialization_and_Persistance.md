@@ -1,7 +1,8 @@
 ﻿---
 title: Unity Serialization and Persistence
 date: 2026-05-07
-tags: [Core]
+tags: [Core, D0, Unity1.x]
+alive: true
 author: ljf12825
 type: file
 summary: Data serialization and persistence in Unity, introduction and practice
