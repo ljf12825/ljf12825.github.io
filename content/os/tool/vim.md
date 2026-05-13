@@ -1739,5 +1739,270 @@ autocmd FileType c,cpp,javascript,typescript set formatoptions-=cro
 
 ## `gq`, `gw`
 
+## 缩进
+
+Vim的缩进系统非常复杂，Vim把缩进当成一种代码结构编辑能力\
+很多编辑器：缩进 = UI行为，但Vim：缩进 = 可编程文本结构系统\
+Vim的缩进大概分成：
+
+1. 手动缩进
+2. 自动缩进（简单规则）
+3. 智能缩进（语言规则）
+4. 表达式缩进（最强）
+5. 格式化系统（= =）
+
+逐层增强
+
+### 手动缩进
+
+#### `>>` 和 `<<`
+
+```vim
+>> " 向右缩进
+<< " 向左缩进
+```
+
+比如
+
+```c
+if (x) {
+printf("hi");
+}
+```
+
+光标在 `printf`那行 `>>`
+
+变成
+
+```vim
+if (x) {
+    printf("hi");
+}
+```
+
+#### 多行缩进
+
+```vim
+3>>
+```
+
+表示当前行开始，3行一起右移
+
+#### Visual 模式缩进
+
+```vim
+Vjj>
+```
+在`V-Line`模式下，三行向右缩进
+
+#### 段落缩进
+
+```vim
+>ip " 当前段落右移
+<ip " 当前段落左移
+```
+
+#### 括号内缩进
+
+```vim
+>i{ " 花括号内右移
+```
+
+### Tab 和 Space
+
+`tabstop`
+
+```vim
+:set tabstop=4
+```
+
+意为：一个TAB字符显示成几个空格宽度\
+注意：视觉上的空格，还是制表符
+
+`shiftwidth`
+
+```vim
+:setd shiftwidth=4
+```
+
+意为：`>>`缩进时移动多少列
+
+`softtabstop`
+
+```vim
+:set softtabstop-4
+```
+
+意为：按Tab键“感觉像”4个空格
+
+`expandtab`
+
+```vim
+:set expandtab
+```
+
+意为：按Tab时实际插入空格而不是`\t`
+
+### 自动缩进 `autoindent`
+
+```vim
+:set autoindent
+```
+
+效果
+
+```c
+if (x) {
+    | // <- 光标位置
+}
+```
+
+这会自动继承上一行缩进
+
+### 智能缩进 `smartindent`
+
+```vim
+:set smartindent
+```
+
+这让Vim能够理解
+
+```c
+{
+
+}
+```
+
+这种结构，但它只懂C风格，对现代语言支持有限，需要安装插件
+
+### `cindent`
+
+```vim
+:set cindent
+```
+
+Vim会分析
+
+- `{`
+- `}`
+- `case`
+- `switch`
+- continuation line
+- 函数参数
+- 宏
+- labels
+
+等结构
+
+#### 示例
+
+```c
+if (x &&
+y &&
+z
+)
+```
+
+会自动变成
+
+```c
+if (x &&
+    y &&
+    z)
+```
+
+### `indentexpr`
+
+```vim
+:set indentexpr=...
+```
+
+意为：每一行缩进由一个表达式决定\
+这里可以：
+
+- 调Vimscript
+- 调Lua
+- 分析AST
+- 分析语法树
+- Tree-sitter
+- LSP
+
+### `=` 格式化
+
+`=` 是Vim内置的格式化操作符，本质上是”重新计算缩进“，而不是像`clang-format`那样的代码美化工具\
+
+#### 工作原理
+
+当对某段代码按`=`，Vim会调用当前缓冲区的`equalprg`（外部格式化程序）或`indentexpr`（内部缩进表达式）来重新计算每一行的缩进级别
+
+```vim
+" 查看当前文件类型使用的缩进方式
+:set equalprg? " 外部程序（如果有的话）
+:set indentexpr? " 内部缩进表达式
+```
+
+- 如果有`equalprg`：Vim把选中的代码传给这个外部程序，用它的输出替换原文
+- 如果没有`equalprg`：Vim用`indentexpr`逐行重新计算缩进（这是默认的）
+
+`indentexpr`（内置缩进规则）
+
+这是Vim根据文件类型自带的缩进逻辑。比如C文件
+
+```vim
+" C 语言的缩进表达式(Vim 内置，不需要配置)
+:set indentexpr? " indentexpr=cindent(v:lnum)
+```
+
+`cindent`会分析代码结构（`{`, `}`, `if`, `else` 等关键词）来判断每行应该缩进多少
+
+`equalprg`（外部格式化程序）
+
+可以指定一个外部程序来做格式化
+
+```vim
+" 对 C 文件使用 clang-format
+autocmd FileType c,cpp setlocal equalprg=clang-format
+
+" 对 Python 使用 black
+autocmd FileType python setlocal equalprg=black\ --quiet\ -
+
+" 对 JSON 使用 jq
+autocmd FileType json setlocal equalprg=jq\ .
+```
+
+设置后，按`=` 就会调用这些外部程序
+
+#### 常用操作
+
+| 命令 | 作用 |
+| - | - |
+| `==` | 格式化当前行 |
+| `=j`/`=k` | 格式化当前行和下一行/上一行 |
+| `=3j` | 格式化当前行以及下面3行 |
+| `=%` | 光标在括号上时，格式化括号内的整个块 |
+| `=ip` | 格式化当前段落(paragraph) |
+| `=i{` | 格式化当前花括号块内部 |
+| `=a{` | 格式化当前花括号块（包括花括号所在行）|
+| `gg=G` | 格式化整个文件（从第一行到最后一行）|
+| `=` 后在Visual下选中 | 格式化选中的区域 |
+
+#### 示例
+
+```c
+void foo() {
+if (a) {
+bar();
+}
+}
+
+// 光标放在第一行，按 =% 变成
+
+void foo() {
+    if (a) {
+        bar();
+    }
+}
+```
+
 
 
