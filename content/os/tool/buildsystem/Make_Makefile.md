@@ -1,7 +1,7 @@
 ---
 title: Make and Makefile
 date: 2025-12-31
-author: "ljf12825"
+author: ljf12825
 type: file
 summary: Usage of Make and Makefile
 ---
