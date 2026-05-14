@@ -49,5 +49,6 @@
   { "name": "SIGGRAPH Digital Library", "url": "https://dl.acm.org/conference/siggraph" },
   { "name": "Git", "url": "https://git-scm.com/" },
   { "name": "sourceware", "url": "https://sourceware.org/" },
-  { "name": "blender.org", "url": "https://blender.org/" }
+  { "name": "blender.org", "url": "https://blender.org/" },
+  { "name": "linuxfromscratch.org", "url": "https://linuxfromscratch.org/" }
 ]

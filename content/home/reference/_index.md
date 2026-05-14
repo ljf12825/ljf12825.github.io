@@ -30,6 +30,8 @@
 
 [blender.org](https://blender.org/) blender offical website. You can stay up to date with the latest news there, and also access Blender's self-hosted platform[projects.blender.org/](https://projects.blender.org/) to contribute to its open-source development. 
 
+[linuxfromscratch.org](https://linuxfromscratch.org/) Linux From Scratch(LFS) is a project that provides developer with step-by-step instructions for building your own custom Linux system, entirely from source code.
+
 ## C++
 [ISO/IEC 14882:xxxx](https://www.iso.org/) : The official C++ standard document, serving as a legal and technical specification rather than a learning guide. Developed by the International Standardization Organization (ISO). It strictly defines C++ syntax, semantics, standard library behavior, and the principles that all implementations (compilers) must adhere to. These standards documents are paid for and must be purchased from ISO or a national standards organization. `xxxx` means publish year.
 
