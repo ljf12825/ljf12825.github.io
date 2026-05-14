@@ -152,6 +152,104 @@ set tags=./tags;,tags;
 
 ## ctags 的局限
 
+ctags只理解”文本结构“，而不真正理解”程序语义“\
+换句话说，ctags擅长：这个名字在哪里定义；但不擅长：这个程序真正是什么意思
+
+### 它不是真正完整编译器
+
+ctags通常不会
+
+- 完整 type checking
+- 完整 template instantiation
+- 完整 macro expansion
+- 完整 semantic analysis
+
+举例
+
+```cpp
+template<typename T>
+void foo(T t);
+```
+
+ctags 能看到：`foo` 是个函数模板，但它不知道`foo<int>` 实际语义
+
+### 对 C++ 极其吃力
+
+C++是 parser 地狱
+
+```cpp
+A<B<C>> x
+```
+
+到底是
+
+- template
+- shift operator
+- nested type
+
+只有真正的 compiler frontend 才能完全理解
+
+### 预处理器问题
+
+```cpp
+#ifdef PLATFORM_WINDOWS
+...
+#endif
+```
+
+ctags 很难知道：当前到底启用了哪个分支
+
+### 它通常没有完整项目上下文
+
+很多 ctags 按文件解析，而不是整个 compilation unit
+
+### 类型推导能力弱
+
+例如现代C++
+
+```cpp
+auto x = foo();
+```
+
+ctags 通常不知道 x 的真正类型
+
+### 无法真正做语义跳转
+
+比如
+
+```cpp
+obj.foo();
+```
+
+ctags 可能只能找到所有`foo`，而不能确定：到底调用的是哪个类的方法
+
+### overload 支持受限
+
+```cpp
+void foo(int);
+void foo(float);
+```
+
+ctags 很难完整处理具体调用目标
+
+### namespace/scope 有时不可靠
+
+特别
+
+- macro
+- typedef
+- nested class
+- anonymous namespace
+
+会让结果不稳定
+
+### 静态snapshot
+
+一次生成后tags文件不会自动更新，除非重新生成
+
+### 没有真正 AST
+
+这是最大本质，ctags 更接近 `enhanced tokenizer + lightweight parse`，而不是 `compiler frontend
 
 
 
