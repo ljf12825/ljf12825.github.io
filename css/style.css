@@ -254,16 +254,15 @@ th {
 
 code {
   background-color: #000080;
-  color: #c0c0c0;
-  padding: 0px 5px;
-  border-radius: 3px;
+  color: #cccccc;
+  border-radius: 5px;
   font-size: 0.9em;
 }
 
 .highlight {
   background-color: #000080;
   overflow-x: auto;
-  margin: 20px 0;
+  margin: 2px 0;
   word-break: normal;
   display: block;
   white-space: pre;
