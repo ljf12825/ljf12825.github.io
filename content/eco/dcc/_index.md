@@ -1,5 +1,4 @@
 ---
-title: DCC
 type: file
 ---
 

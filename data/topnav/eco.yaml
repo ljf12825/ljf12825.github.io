@@ -35,3 +35,5 @@
       url: "/eco/asset/audio/"
     - name: "DCC"
       url: "/eco/asset/dcc/"
+- name: "DCC"
+  url: "/eco/dcc/"
