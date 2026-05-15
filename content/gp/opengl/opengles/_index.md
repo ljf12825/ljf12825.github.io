@@ -1,7 +1,8 @@
 ---
+title: OpenGL ES
 type: file
 ---
 
-# Theory
+# OpenGL ES
 
 <!--more-->

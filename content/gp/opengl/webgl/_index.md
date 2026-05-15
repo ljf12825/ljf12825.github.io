@@ -1,7 +1,8 @@
 ---
+title: WebGL
 type: file
 ---
 
-# Theory
+# WebGL
 
 <!--more-->

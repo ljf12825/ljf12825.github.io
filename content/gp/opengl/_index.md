@@ -2,6 +2,6 @@
 type: file
 ---
 
-# Theory
+# OpenGL
 
 <!--more-->
