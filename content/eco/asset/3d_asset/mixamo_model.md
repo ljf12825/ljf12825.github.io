@@ -1,10 +1,8 @@
 ﻿---
 title: Mixamo Model
-date: 2025-06-01
-categories: [Toolchains]
-tags: [Model]
+date: 2026-05-16
 author: "ljf12825"
-type: log
+type: file
 summary: Generate model by Mixamo
 ---
 
