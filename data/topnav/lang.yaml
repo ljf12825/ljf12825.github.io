@@ -52,3 +52,5 @@
       url: "/lang/python/ecosystem/"
 - name: "LLVM"
   url: "/lang/llvm/"
+- name: "LSP"
+  url: "/lang/lsp/"
