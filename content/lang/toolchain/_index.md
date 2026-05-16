@@ -2,6 +2,6 @@
 type: file
 ---
 
-# LSP
+# Toolchain
 
 <!--more-->
