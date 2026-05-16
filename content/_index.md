@@ -25,12 +25,14 @@ As shown in the STRUCTURE, this site uses the root page(`/`, i.e. this page) as 
 
 #### Mainnavigation
 
-If this is your first time opening this website or you have cleared the website's data, the Mainnavigation will be expanded by default and displayed in the lower right corner of the webpage\
-Dragging the title bar moves the `Mainnavigation` position, and double-clicking the title bar minimizes it. The website will remember the position and expanded state, and retain the state on the next visit
+The main navigation's default position is in the bottom-right corner of the page. When you first open the page—or if the page width is reduced—the main navigation will revert to its default position and remain in a closed state.\
+Dragging the title bar moves the `Mainnavigation` position, and double-clicking the title bar minimizes it. The website will remember the position and expanded state, and retain the state on the next visit\
+Navigation comprises two pages—Internal and External—which handle internal and external site redirects, respectively. 
 
 ![navigation](/images/navigation.png)  ![nav](/images/nav.png)
 
-The meaning and content of each node in Mainnavigation are explained in detail in `~/$HOME`
+- The meaning and content of each node in Mainnavigation are explained in detail in `~/$HOME`
+- The specific details regarding the external redirect links can be found under `～/reference/`.
 
 #### Subnavigation
 
@@ -40,15 +42,7 @@ It displays special information on the root and search list pages instead of the
 
 ![subnav](/images/subnav.png)
 
-### Reference
-
-Similar to Mainnavigation, Reference is also a separate window displayed across the entire site, facilitating convenient external link navigation\
-It defaults to an expanded state and appears in the lower left corner of the page\
-Detailed information about Reference can be found in [`~/references`](https://ljf12825.github.io/home/reference/)
-
-![reference](/images/reference.png)  ![ref](/images/ref.png)
-
-### TOC
+### ToC
 
 TOC(Table of Contents) is a floating window that appears only on the article page and is responsible for quick article title navigation.
 
@@ -62,12 +56,12 @@ You can also perform a fuzzy search by gradually narrowing down the search scope
 The `Top Results` section will provide up to eight of the most relevant results. To view the complete search results, click `SEEALL` to jump to the `Search List` for more details.\
 Typing `/*` will match all options.
 
-![Indexer](/images/indexer.jpg)
+![Indexer](/images/indexer.png)
 ![Idx](/images/idx.jpg)
 
 When you are located within a subfolder under `eco/engine/`, the Indexer displays a 3D scatter plot, allowing you to quickly gain an overview and navigate.
 
-![Indexer3dnav](/images/indexer3dnav.jpg)
+![Indexersp](/images/indexersp.png)
 
 #### Search List
 
