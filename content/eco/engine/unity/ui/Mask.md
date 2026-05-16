@@ -4,7 +4,7 @@ date: 2025-06-01
 categories: [Engine]
 tags: [Unity, Component, Rendering, Graphics, UGUI]
 author: "ljf12825"
-type: log
+type: file
 summary: Introduction mask principle and usage in Unity
 ---
 遮罩，用于实现遮挡效果，控制子物体的显示区域

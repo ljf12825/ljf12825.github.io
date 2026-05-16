@@ -4,7 +4,7 @@ date: 2025-06-01
 categories: [Engine]
 tags: [Unity, Unity System]
 author: "ljf12825"
-type: log
+type: file
 summary: How to write scripts in Unity
 ---
 Unity脚本就是你编写的C#类，它控制游戏中物体的行为、交互、动画、输入、碰撞、UI等逻辑

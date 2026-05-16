@@ -4,7 +4,7 @@ date: 2025-06-01
 categories: [Engine]
 tags: [Unity, Unity System]
 author: "ljf12825"
-type: log
+type: file
 summary: Physics System in Unity(2D, 3D). Combination of Collider, Rigidbody and Trigger.
 ---
 Unity实际上提供了两个物理系统：3D物理（基于PhysX）和2D物理（基于Box2D），它们是独立的

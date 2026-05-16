@@ -4,7 +4,7 @@ date: 2025-06-01
 categories: [Engine]
 tags: [Unity, Component, Rendering, Graphics]
 author: "ljf12825"
-type: log
+type: file
 summary: Texture and Texture in Unity
 ---
 `Texture`是图形学开发中的一个核心概念，用于在3D模型、UI、地形等物体表面显示图像或图案  

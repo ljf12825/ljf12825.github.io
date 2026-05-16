@@ -4,7 +4,7 @@ date: 2025-06-01
 categories: [Engine]
 tags: [Unity, Unity System]
 author: "ljf12825"
-type: log
+type: file
 summary: Unity's class Time
 ---
 Unity的时间系统管理游戏中的时间流逝，包括帧率、时间步长、暂停和加速等

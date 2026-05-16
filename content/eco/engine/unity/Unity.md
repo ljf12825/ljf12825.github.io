@@ -2,7 +2,7 @@
 title: "Unity"
 date: 2025-06-01
 author: "ljf12825"
-type: log
+type: file
 summary: Overview of Unity overall architecture
 ---
 # 引擎整体架构

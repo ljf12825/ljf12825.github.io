@@ -4,7 +4,7 @@ date: 2025-06-01
 categories: [Engine]
 tags: [Unity, C#]
 author: "ljf12825"
-type: log
+type: file
 summary: The Range of C# in Unity Game Development
 image: "/images/content/ScriptingIntroPic.jpg"
 ---

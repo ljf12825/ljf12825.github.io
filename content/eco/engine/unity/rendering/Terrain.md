@@ -4,7 +4,7 @@ date: 2025-06-01
 categories: [Engine]
 tags: [Unity, Rendering, Unity System, Component]
 author: "ljf12825"
-type: log
+type: file
 summary: Usage of Terrian in Unity
 ---
 在Unity中，Terrain是一个专门用于制作大规模、自然风格场景的强大工具  

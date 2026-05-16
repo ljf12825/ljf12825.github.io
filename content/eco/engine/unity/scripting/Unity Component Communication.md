@@ -4,7 +4,7 @@ date: 2025-06-01
 categories: [Engine]
 tags: [Unity, Syntax, Class]
 author: "ljf12825"
-type: log
+type: file
 summary: GetComponent<T>(), Unity Event, C# Delegate and Event, Interface call, ScriptableObject Event, SendMessage()/BroadcastMessage()
 ---
 在Unity中，组件之间的通信是非常重要的，因为它决定了不同模块如何相互交互和协作

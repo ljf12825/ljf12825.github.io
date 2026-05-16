@@ -4,7 +4,7 @@ date: 2025-06-01
 categories: [Engine]
 tags: [Unity, Underlying Principle]
 author: "ljf12825"
-type: log
+type: file
 summary: Unity's double layer structure
 ---
 ## The Bridge between Native Layer and Script Layer

@@ -4,7 +4,7 @@ date: 2025-06-01
 categories: [Engine]
 tags: [Unity, Rendering]
 author: "ljf12825"
-type: log
+type: file
 summary: Unity Rendering Pipeline, Unity Rendering Resources and Material System, Rendering effects and post-processing system
 ---
 ## 传统渲染管线

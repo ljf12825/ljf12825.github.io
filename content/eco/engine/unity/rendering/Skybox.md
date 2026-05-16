@@ -4,7 +4,7 @@ date: 2025-06-01
 categories: [Engine]
 tags: [Unity, Component, Light, Rendering, Graphics]
 author: "ljf12825"
-type: log
+type: file
 summary: Introduction, example and usage of Skybox in Unity
 image: "/images/content/Skybox.jpg"
 ---

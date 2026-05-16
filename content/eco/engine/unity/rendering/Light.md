@@ -4,7 +4,7 @@ date: 2025-05-29
 categories: [Engine]
 tags: [Unity, Component, Light, Rendering, Graphics]
 author: "ljf12825"
-type: log
+type: file
 summary: Introduction Light' usage and implement in Unity
 ---
 Unity中的Light是照亮场景和物体的核心组件，也是实现逼真视觉效果的关键之一。合理使用光源可以极大提升游戏画面质量，同时也对性能有重要影响

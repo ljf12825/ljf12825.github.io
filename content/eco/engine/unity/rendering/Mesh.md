@@ -4,7 +4,7 @@ date: 2025-06-01
 categories: [Engine]
 tags: [Unity, Rendering, Graphics]
 author: "ljf12825"
-type: log
+type: file
 summary: Introduction Mesh，Mesh in Unity
 ---
 Unity中的Mesh（网格）是一切3D模型、地形、角色、道具、甚至某些UI元素的几何基础，是“物体的骨架”  

@@ -4,7 +4,7 @@ date: 2025-06-01
 categories: [Engine]
 tags: [Unity, Hot Update, Lua]
 author: "ljf12825"
-type: log
+type: file
 summary: Introduction to hot update ideas and several commonly used hot update methods
 ---
 热更新指的是在游戏运行后，不需要重写打包和分发客户端，就能更新或修复代码、资源的机制\

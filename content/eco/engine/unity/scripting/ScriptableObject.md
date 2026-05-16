@@ -4,7 +4,7 @@ date: 2025-06-01
 categories: [Engine]
 tags: [Unity, Syntax]
 author: "ljf12825"
-type: log
+type: file
 summary: Introduction and Usage Examples of ScriptableObject
 ---
 `ScriptableObject` 是 Unity 中的一种特殊类型的对象，它是用于存储数据的，类似于普通的 C# 类，但它不需要与游戏对象（`GameObject`）关联

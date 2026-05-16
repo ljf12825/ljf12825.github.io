@@ -4,7 +4,7 @@ date: 2025-06-01
 categories: [Engine]
 tags: [Unity, Physics System]
 author: "ljf12825"
-type: log
+type: file
 summary: Introduction of physical system in Unity
 ---
 ## Physx

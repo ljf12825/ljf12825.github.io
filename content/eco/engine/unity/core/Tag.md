@@ -4,7 +4,7 @@ date: 2026-05-07
 tags: [Core, D0, Unity1.x]
 alive: true
 author: ljf12825
-type: log
+type: file
 summary: Tag system in Unity. Usage, Examples and Specifications.
 ---
 在Unity中，Tag是用来标记和分类GameObject的一种轻量级方法，主要用于在代码中查找和判断物体的类型或身份

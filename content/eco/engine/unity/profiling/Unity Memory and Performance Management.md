@@ -4,7 +4,7 @@ date: 2025-06-01
 categories: [Engine]
 tags: [Unity, Memory]
 author: "ljf12825"
-type: log
+type: file
 summary: "Memory and Performance"
 ---
 

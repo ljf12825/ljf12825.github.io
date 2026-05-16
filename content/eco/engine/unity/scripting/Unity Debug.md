@@ -4,7 +4,7 @@ date: 2025-06-01
 categories: [Engine]
 tags: [Unity, Unity Tool]
 author: "ljf12825"
-type: log
+type: file
 summary: classDebug, Breaking Debugging, Profiler, UnityTest
 ---
 Unity调试时游戏开发中非常重要的一环，能够帮助开发者快速定位和解决问题。Unity提供了多种调试工具和方法，主要包括日志输出、断点调试、内存和性能分析等
