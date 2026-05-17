@@ -1,7 +1,7 @@
 ---
 title: '-,eol:$'
 author: ljf12825
-date: 2026-05-15
+date: 2026-05-16
 type: log
 tags: [Vim]
 categories: [Debug]
@@ -42,7 +42,7 @@ set listchars=space:·,tab:>-,eol:$
 一旦Shell解析到`>`符号，它会立刻去目标路径下检查，如果文件不存在，创建一个；如果存在，它会truncate它\
 然后Shell会尝试执行`>`左边的命令，但这是Vim命令而非Bash命令，`set`是Bash的合法命令，但是其他内容`set`并不认识，结果就是执行失败，它产生的只有标准错误(stderr)，而stderr并没有被重定向，因此它直接显示在屏幕上，怪异名称空文件就这么产生了
 
-`source .vimrc`时，Bash会逐行解析，到`set listchars=space:·,tab:>-,elo:$`这一行时
+`source .vimrc`时，Bash会逐行解析，到`set listchars=space:·,tab:>-,eol:$`这一行时
 
 - 先创建（或清空）文件`-,eol:$`
 - 然后尝试执行命令：`set listchars=space:·,tab:`

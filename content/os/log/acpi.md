@@ -1,10 +1,10 @@
 ---
 title: ACPI
-date: 2026-03-22
+date: 2026-05-16
 author: ljf12825
 type: log
-categories: [LOG]
-tags: [OS, BIOS]
+tags: [Linux, Hardware]
+categories: [Debug]
 summary: Computer ACPI Table 
 ---
 
