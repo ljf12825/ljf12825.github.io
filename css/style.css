@@ -254,8 +254,9 @@ th {
 
 code {
   background-color: #000080;
-  color: #cccccc;
-  font-size: 0.9em;
+  color: #ffffff;
+  padding: 2px;
+  font-size: 0.8em;
 }
 
 .highlight {
