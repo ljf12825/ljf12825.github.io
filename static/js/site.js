@@ -121,6 +121,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function typeNextChar() {
       if (!currentNode) {
+        const cInitial = document.querySelector(".cursor");
+        if (cInitial) cInitial.classList.add("typing-done");
         setTimeout(() => {
           const c = document.querySelector(".cursor");
           if (c) c.classList.add("stop");
