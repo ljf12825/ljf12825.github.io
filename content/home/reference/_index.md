@@ -32,6 +32,8 @@
 
 [linuxfromscratch.org](https://linuxfromscratch.org/) Linux From Scratch(LFS) is a project that provides developer with step-by-step instructions for building your own custom Linux system, entirely from source code.
 
+[kernel.org](https://kernel.org/) Linux kernel offical website. It provides kernel source code, patches and updates, documentation, and image downloads.
+
 ## C++
 [ISO/IEC 14882:xxxx](https://www.iso.org/) : The official C++ standard document, serving as a legal and technical specification rather than a learning guide. Developed by the International Standardization Organization (ISO). It strictly defines C++ syntax, semantics, standard library behavior, and the principles that all implementations (compilers) must adhere to. These standards documents are paid for and must be purchased from ISO or a national standards organization. `xxxx` means publish year.
 
@@ -61,8 +63,6 @@
 
 [GoDot](godotengine.org) : GoDot Engine official. [GoDot Doc](https://docs.godotengine.org/en/stable/)
 
-## Linux
-[Linux Kernel Docs](https://docs.kernel.org/) : The official Linux kernel documentation is the core and most official Linux documentation, primarily for developers, driver writers, and system-level researchers. This is the official webpage version of the documentation in the kernel source tree (located in the `/Documentation` directory). It includes the following: Development Guide, which explains how to compile the kernel and submit patches; Driver documentation, which explains how to write and configure various hardware drivers; Subsystem documentation, which explains detailed descriptions of file systems, networking, memory management, etc.; API documentation, which explains the interfaces provided by the kernel to modules.
 
 [GNU](https://www.gnu.org/) : This is the center of GNU documentation. It mainly contains three aspects. The first is the official manual, which is the most important part. GNU has written detailed tutorials and reference manuals for almost all the software it develops and maintains. The second is philosophy and papers. The GNU project is not just software, but also a free software movement. It contains a large number of articles written by Richard Stallman and others on the philosophy, copyright, ethics and social significance of free software. Finally, there is the FAQ, which contains common questions about the GNU project, the Free Software Foundation (FSF) and various licenses (such as GPL).
 
