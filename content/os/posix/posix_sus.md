@@ -1,6 +1,6 @@
 ---
 title: POSIX & SUS
-date: 2026-04-14
+date: 2026-05-18
 author: ljf12825
 summary: Overview of POSIX and SUS
 type: file
@@ -14,7 +14,7 @@ Bell UNIX, BSD, HP-UX, AIX, Solaris...\
 为一个Unix系统（比如SunOS）写的程序，在另一个Unix系统（比如HP-UX）上可能完全编译不过或者运行异常\
 为了解决这个原因，IEEE牵头制定了POSIX标准。它统一了“游戏规则”，告诉操作系统厂商：要提供的接口的标准
 
-POSIX (Portable Operating System Interface，可移植操作系统接口)，是一个由IEEE制定，并被ISO和IEC采纳为国际标准的家族标准编号(ISO/IEC 9945)
+POSIX (Portable Operating System Interface，可移植操作系统接口)，是一个由IEEE制定(IEEE 1003)，并被ISO和IEC采纳为国际标准的家族标准编号(ISO/IEC 9945)
 
 - 目标：解决Unix系统碎片化为题，让为不同Unix系统编写的软件能够很容易地移植到其他Unix系统上，而无需大量重写代码
 - 本质：它是一系列的标准和规范，定义了操作系统应该为应用程序提供哪些接口（API）；更工程化，精准化的说法是POSIX定义了用户态的ABI + 行为语义契约
@@ -148,18 +148,3 @@ Linux的众多发行版迭代速度很快，且大都是社区或组织进行维
 - `_POSIX_C_SOURCE=199506L` 包含POSIX.1c（线程）
 - `_POSIX_C_SOURCE=200112L` POSIX.1-2001（Linux默认版本）
 - `_POSIX_C_SOURCE=200809L` POSIX.1-2008（macOS默认基础）
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
