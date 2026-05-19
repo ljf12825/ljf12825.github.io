@@ -71,11 +71,12 @@
 }
 
 .single_article .meta {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: black;
   font-weight: normal;
-  padding-left: 0px;
+  padding-left: 8px, 0, 12px, 40px;
   border-bottom: 2px solid black;
+  line-height: 1.6;
 }
 
 .single_article .content {
