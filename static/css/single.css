@@ -89,7 +89,6 @@
   object-fit: contain;
 }
 
-/* ===== 修改点：排除高亮代码块 ===== */
 .single_article pre:not(div.highlight pre) {
   background: #2d2d2d;
   color: #f8f8f2;
