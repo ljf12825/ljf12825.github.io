@@ -1,8 +1,7 @@
 ---
+title: Operating System
 type: os
 ---
-
-# Operating System
 
 > INCLUDE
 

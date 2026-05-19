@@ -1,7 +1,7 @@
 ---
+title: Software Engineering
 type: se
 ---
-# Software Engineering
 
 > INCLUDE
 

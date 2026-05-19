@@ -1,8 +1,7 @@
 ---
+title: $HOME
 type: home
 ---
-
-# $HOME
 
 > INCLUDE
 

@@ -1,8 +1,7 @@
 ---
+title: Graphic Programming
 type: gp
 ---
-
-# Graphic Programming
 
 > INCLUDE
 

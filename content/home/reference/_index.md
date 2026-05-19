@@ -1,4 +1,4 @@
-# reference
+# Reference
 
 [Mixamo](https://www.mixamo.com/) : A very popular and powerful online service under Adobe, which mainly provides functions related to 3D character animation.
 

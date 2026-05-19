@@ -1,8 +1,7 @@
 ---
+title: Language
 type: lang
 ---
-
-# Language
 
 > INCLUDE
 

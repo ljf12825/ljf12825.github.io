@@ -1,8 +1,7 @@
 ---
+title: NET
 type: net
 ---
-
-# NET
 
 > INCLUDE
 

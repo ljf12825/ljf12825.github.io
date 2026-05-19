@@ -1,8 +1,7 @@
 ---
+title: Ecosystem
 type: eco
 ---
-
-# Ecosystem
 
 > INCLUDE
 

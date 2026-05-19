@@ -1,8 +1,7 @@
 ---
+title: Computer Science Fundamental
 type: csf
 ---
-
-# Computer Science Fundamental
 
 > INCLUDE
 

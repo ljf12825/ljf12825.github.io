@@ -1,7 +1,6 @@
 ---
+title: Creative Technical Experience
 type: ctx
 ---
-
-# Creative Technical Experience
 
 > INCLUDE

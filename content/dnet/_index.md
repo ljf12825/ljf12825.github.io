@@ -1,8 +1,7 @@
 ---
+title: .NET
 type: dnet
 ---
-
-# .NET
 
 > INCLUDE
 
