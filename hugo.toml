@@ -9,9 +9,10 @@ enableGitInfo = true
 
 [markup]
   [markup.highlight]
+    codeFences = true
     style = "dracula"
     lineNos = false
-    noClasses = true
+    noClasses = false
     guessSyntax = true
 
   [markup.goldmark]
