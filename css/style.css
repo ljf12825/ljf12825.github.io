@@ -222,14 +222,16 @@ header .banner {
 .content h4,
 .content h5,
 .content h6 {
+  font-size: 18px;
   color: #000080;
 }
 
-.content h2 {
-  border-bottom: 1px solid #000080;
-  padding-bottom: 0.3em;
-  margin-top: 1.5em;
-}
+.content h1::before { content: "# "; }
+.content h2::before { content: "## "; }
+.content h3::before { content: "### "; }
+.content h4::before { content: "#### "; }
+.content h5::before { content: "##### "; }
+.content h6::before { content: "###### "; }
 
 .home-page {
   max-width: none !important;
