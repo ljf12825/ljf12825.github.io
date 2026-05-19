@@ -7,7 +7,35 @@ document.addEventListener("DOMContentLoaded", () => {
   items.forEach(el => {
     totalAllArticles += Number(el.dataset.articleCount || 0);
   });
-  
+
+  let globalMaxSqrt = 0;
+  const processedDataMap = new Map();
+
+  items.forEach(el => {
+    const trendDataStr = el.dataset.trend;
+    if (trendDataStr) {
+      const rawData = trendDataStr.split(",").map(Number).reverse();
+      // 3 点轻量平均滤波器
+      const smoothedData = rawData.map((val, idx) => {
+        const start = Math.max(0, idx - 1);
+        const end = Math.min(rawData.length - 1, idx + 1);
+        let sum = 0;
+        for (let i = start; i <= end; i++) {
+          sum += rawData[i];
+        }
+        return sum / (end - start + 1);
+      });
+      processedDataMap.set(el, smoothedData);
+      
+      const localMaxSqrt = Math.max(...smoothedData.map(v => Math.sqrt(v)));
+      if (localMaxSqrt > globalMaxSqrt) {
+        globalMaxSqrt = localMaxSqrt;
+      }
+    }
+  });
+
+  const finalScaleMaxSqrt = globalMaxSqrt > 0 ? globalMaxSqrt : 1;
+
   items.forEach(el => {
     const label = el.dataset.label || el.textContent.trim();
     const articleCount = Number(el.dataset.articleCount || 0);
@@ -26,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     const sharePercent = totalCount > 0 ? Math.round(share * 100) : 0;
-    const stat = el.parentElement?.querySelector(".nav-stats");
+    const stat = el.closest(".nav-row")?.querySelector(".nav-stats");
     if (stat) {
       stat.textContent = `${articleCount}(${sharePercent}%) - ${recentCount} / 90d`;
     }
@@ -40,6 +68,49 @@ document.addEventListener("DOMContentLoaded", () => {
       el.classList.add("activity-medium");
     } else {
       el.classList.add("activity-low");
+    }
+
+    const sparklineContainer = el.closest(".nav-row")?.querySelector(".nav-sparkline");
+    const data = processedDataMap.get(el);
+    
+    if (data && sparklineContainer) {
+      const width = 150;
+      const height = 14; 
+      const paddingX = 1;
+      const paddingY = 1; 
+      
+      const points = data.map((val, index) => {
+        const x = paddingX + (index / (data.length - 1)) * (width - paddingX * 2);
+        const currentSqrt = Math.sqrt(val);
+        const y = height - paddingY - (currentSqrt / finalScaleMaxSqrt) * (height - paddingY * 2);
+        return `${x.toFixed(1)},${y.toFixed(1)}`;
+      }).join(" ");
+      
+      let strokeColor = "#000080";
+      if (el.classList.contains("activity-high")) strokeColor = "#ff0000";
+      else if (el.classList.contains("activity-medium")) strokeColor = "#ff00ff";
+      else if (el.classList.contains("activity-low")) strokeColor = "#00ffff";
+      else if (el.classList.contains("activity-idle")) strokeColor = "#0000ff";
+      
+      const hasAnyActivity = Math.max(...data) > 0;
+      const lineOpacity = hasAnyActivity ? "1.0" : "0.2";
+      
+      sparklineContainer.innerHTML = `
+        <svg width="${width}" height="${height}" style="display: block; overflow: visible;" shape-rendering="geometricPrecision">
+          <path d="M ${paddingX},${height - paddingY} L ${points} L ${width - paddingX},${height - paddingY} Z" 
+                fill="${strokeColor}" 
+                opacity="${hasAnyActivity ? '0.04' : '0'}">
+          </path>
+          <polyline points="${points}" 
+                    fill="none" 
+                    stroke="${strokeColor}" 
+                    stroke-width="1.0" 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round"
+                    opacity="${lineOpacity}">
+          </polyline>
+        </svg>
+      `;
     }
   });
   
