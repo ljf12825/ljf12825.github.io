@@ -1,6 +1,11 @@
 baseURL = "https://ljf12825.github.io/"
-locale = "en_US"
+locale = "en-us"
 title = "ljf12825"
+enableGitInfo = true
+
+[frontmatter]
+  date = ["date", "publishDate", ":default"]
+  lastmod = [":git", "lastmod", "fileModTime", ":default"]
 
 [markup]
   [markup.highlight]
@@ -28,3 +33,7 @@ title = "ljf12825"
 [services]
   [services.rss]
     limit = 20
+
+[author]
+  name = "ljf12825"
+  email = "ljf12825@graingen.com"

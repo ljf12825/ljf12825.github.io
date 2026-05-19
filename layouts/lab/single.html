@@ -15,7 +15,7 @@
     <div class="lab-meta">
 
     <div class="meta-row">
-        <span class="meta-key">Status:</span>
+        <span class="meta-key">status:</span>
         <span class="meta-value">
           <span class="status-badge {{ .Params.status | default "unknown" | urlize }}">
             {{ .Params.status | default "UNKNOWN" }}
@@ -24,15 +24,24 @@
     </div>
 
     <div class="meta-row">
-        <span class="meta-key">Modified:</span>
+        <span class="meta-key">crtime:</span>
         <span class="meta-value">
-          {{ .Date.Format "2006-01-02" }}
+          {{ if not .Date.IsZero }}{{ .Date.Format "2006-01-02" }}{{ else }}N/A{{ end }}
         </span>
     </div>
 
+    {{ if and (not .Lastmod.IsZero) (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) }}
+    <div class="meta-row">
+        <span class="meta-key">mtime:</span>
+        <span class="meta-value">
+          {{ .Lastmod.Format "2006-01-02" }}
+        </span>
+    </div>
+    {{ end }}
+
     {{ with .Params.author }}
     <div class="meta-row">
-        <span class="meta-key">Author:</span>
+        <span class="meta-key">author:</span>
         <span class="meta-value">{{ . }}</span>
     </div>
     {{ end }}
@@ -40,7 +49,7 @@
     {{ $tags := .Params.tags }}
     {{ if $tags }}
     <div class="meta-row">
-      <span class="meta-key">Tags:</span>
+      <span class="meta-key">tags:</span>
       <span class="meta-value">
         {{ if reflect.IsSlice $tags }}
           {{ range $index, $tag := $tags }}
@@ -56,7 +65,7 @@
     {{ $categories := .Params.categories }}
     {{ if $categories }}
     <div class="meta-row">
-        <span class="meta-key">Categories:</span>
+        <span class="meta-key">categories:</span>
         <span class="meta-value">
           {{ if reflect.IsSlice $categories }}
             {{ range $index, $category := $categories }}
@@ -71,7 +80,7 @@
 
     {{ with .Params.summary }}
     <div class="meta-row">
-        <span class="meta-key">Summary:</span>
+        <span class="meta-key">summary:</span>
         <span class="meta-value">{{ . }}</span>
     </div>
     {{ end }}
@@ -79,7 +88,7 @@
     {{ with .Params.repo }}
     <div class="meta-row">
         <span class="meta-value">
-          <a href="{{ . }}" target="_blank" rel="noopener noreferrer">URL</a>
+          <a href="{{ . }}" target="_blank" rel="noopener noreferrer">url</a>
         </span>
     </div>
     {{ end }}
