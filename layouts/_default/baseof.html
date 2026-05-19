@@ -7,6 +7,7 @@
 	<meta name="page-section" content="{{ .Section }}">
 	<meta charset="UTF-8">
 	<title>{{ .Title }}</title>
+	{{ if ne .Type "root" }}
 	<link rel="stylesheet" href="{{ "css/style.css" | relURL}}">
 	{{ with .OutputFormats.Get "RSS" }}
 	<link rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }} RSS" href="{{ .RelPermalink }}">
@@ -17,11 +18,12 @@
 	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
 	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
 		onload="renderMathInElement(document.body);"></script>
-
+	{{ end }}
 	{{ block "head_extra" . }}{{ end }}
 </head>
 
 <body data-page-type="{{ .Type }}" date-page-section="{{ .Section }}" data-page-path="{{ .RelPermalink }}">
+	{{ if ne .Type "root" }}
 	<!-- 页眉 -->
 	{{ partial "header.html" . }}
 
@@ -39,6 +41,7 @@
 	<script defer src="{{ "/js/great-indexer.js" | relURL }}"></script>
 
 	<script defer src="{{ "/js/reset-layout.js" | relURL }}"></script>
+	{{ end }}
 
 	{{ if eq .Type "home" }}
 	<script defer src="{{ "/js/homealive.js" | relURL }}"></script>
@@ -49,11 +52,12 @@
 	<!-- 主体内容 -->
 	{{ block "main" . }}{{ end }}
 
+	{{ if ne .Type "root" }}
 	{{ partial "mermaid.html" . }}
 
 	<!-- 页脚 -->
 	{{ partial "footer.html" . }}
-
+	{{ end }}
 </body>
 
 </html>
