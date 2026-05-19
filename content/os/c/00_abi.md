@@ -74,7 +74,7 @@ void func(int x, double y); // 符号名可能：_Z4funcid
 
 x86-64 System V ABI（Linux/MacOS）
 
-```assembly
+```asm
 ; 前6个整数参数：RDI, RSI, RDX, RCX, R8, R9
 ; 前8个浮点参数：XMM0-XMM7 
 ; 返回值：RAX（整数），XMM0（浮点）
@@ -82,7 +82,7 @@ x86-64 System V ABI（Linux/MacOS）
 
 x86-64 Microsoft ABI（Windows）
 
-```assembly
+```asm
 ; 前4个参数：RCX, RDX, R8, R9
 ; 浮点参数也使用整数寄存器
 ; 栈空间必须预留32字节的"影子空间"
@@ -90,7 +90,7 @@ x86-64 Microsoft ABI（Windows）
 
 ARM AArch64 ABI
 
-```assembly
+```asm
 ; 前8个参数：X0-X7 或 D0-D7
 ; 返回值：X0 或 D0
 ```
