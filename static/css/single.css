@@ -47,18 +47,8 @@
 .single_article h5,
 .single_article h6 {
   color: #000080;
-  border-bottom: none;
-  margin-top: 0;
-  margin-bottom: 5px;
-  scroll-margin: 100px;
+  font-size: 18px;
 }
-
-.single_article h1 { font-size: 35px; font-weight: normal; }
-.single_article h2 { font-size: 30px; font-weight: normal; }
-.single_article h3 { font-size: 26px; font-weight: normal; }
-.single_article h4 { font-size: 22px; font-weight: normal; }
-.single_article h5 { font-size: 20px; font-weight: normal; }
-.single_article h6 { font-size: 18px; font-weight: bold; }
 
 .single_article p {
   font-size: 18px;
