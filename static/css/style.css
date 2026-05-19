@@ -483,12 +483,39 @@ blockquote::before {
 #star-nav .nav-row {
   display: flex;
   justify-content: space-between;
-  gap: 12px;
+  align-items: center;
+  gap: 8px;
   line-height: 1.6;
 }
 
 #star-nav .nav-item {
   font-weight: bold;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#star-nav .nav-sparkline {
+  width: 120px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  opacity: 0.8;
+  transition: opacity 0.2 ease;
+}
+
+#star-nav .nav-row:hover .nav-sparkline {
+  opacity: 1;
+}
+
+#star-nav .nav-stats {
+  color: #333;
+  font-size: 0.85em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-align: right;
 }
 
 #star-nav .nav-item.active {
