@@ -89,7 +89,7 @@
 
         <div id="ref-panel" class="tab-panel" style="display:none;">
             <div class="ref-list">
-                {{- range .Site.Data.ref_links }}
+                {{- range hugo.Data.ref_links }}
                 <a href="{{ .url }}" target="_blank">{{ .name }}</a> |
                 {{- end }}
             </div>

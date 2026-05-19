@@ -24,8 +24,15 @@
             <h2 class="log-title">{{ .Title }}</h2>
 
             <div class="log-meta">
-              <span class="date"><b>Modified:</b> {{ .Date.Format "2006-01-02" }}</span>
-              {{ with .Params.author }}<span class="author"><b>Author:</b> {{ . }}</span>{{ end }}
+              <span class="date">
+                <b>crtime:</b> {{ .Date.Format "2006-01-02" }}
+                {{ if and (not .Lastmod.IsZero) (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) }}
+                  &nbsp;&nbsp; <b>mtime:</b> {{ .Lastmod.Format "2006-01-02" }}
+                {{ end }}
+              </span>
+              
+              {{ with .Params.author }}<span class="author"><b>author:</b> {{ . }}</span>{{ end }}
+              
               <span class="meta-line">
                 {{ with .Params.categories }}{{ range $i, $cat := . }}[{{ $cat }}]{{ if lt (add $i 1) (len .) }} {{ end }}{{ end }}{{ end }}
                 {{ with .Params.tags }}#{{ delimit . " #" }}{{ end }}

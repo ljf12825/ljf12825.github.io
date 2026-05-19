@@ -9,8 +9,15 @@
     <div class="title">
       {{ .Title }}
       <div class="meta">
-        M: {{ .Lastmod.Format "2006-01-02" | default "N/A" }}
-       - {{ with .Params.author }}{{ . }}{{ end }}
+        {{ if not .Date.IsZero }}
+          crtime: {{ .Date.Format "2006-01-02" }}
+        {{ end }}
+        
+        {{ if and (not .Lastmod.IsZero) (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) }}
+          &nbsp;&nbsp;&nbsp; mtime: {{ .Lastmod.Format "2006-01-02" }}
+        {{ end }}
+        
+        {{ with .Params.author }} &nbsp;&nbsp;&nbsp; author: {{ . }}{{ end }}
       </div>
     </div>
 
@@ -19,10 +26,10 @@
     </div>
 
     <nav class="post-nav">
-      {{ with .NextInSection }}
+      {{ with .PrevInSection }}
       <a href="{{ .RelPermalink }}">Prev: {{ .Title }}</a>
       {{ end }}
-      {{ with .PrevInSection }}
+      {{ with .NextInSection }}
       <a href="{{ .RelPermalink }}">Next: {{ .Title }}</a>
       {{ end }}
     </nav>

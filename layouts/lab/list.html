@@ -12,6 +12,8 @@
       <span class="col tags">TAG</span>
       <span class="col categories">CATEGORY</span>
       <span class="col status">STATUS</span>
+      <span class="col date">BIRTH</span>
+      <span class="col date">MODIFY</span>
       <span class="col summary">SUMMARY</span>
     </div>
 
@@ -53,6 +55,18 @@
         <span class="status-badge {{ .Params.status | default "unknown" | urlize }}">
           {{ .Params.status | default "UNKNOWN" }}
         </span>
+      </span>
+
+      <span class="col date">
+        {{ if not .Date.IsZero }}{{ .Date.Format "2006-01-02" }}{{ else }}—{{ end }}
+      </span>
+
+      <span class="col date">
+        {{ if and (not .Lastmod.IsZero) (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) }}
+          {{ .Lastmod.Format "2006-01-02" }}
+        {{ else }}
+          —
+        {{ end }}
       </span>
 
       <span class="col summary">{{ with .Params.summary }}{{ . }}{{ end }}</span>
