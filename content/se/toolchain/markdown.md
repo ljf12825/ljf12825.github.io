@@ -1,10 +1,12 @@
 ---
-title: Markdown
+title: Markdown(md)
 author: ljf12825
 date: 2026-05-17
 type: file
-summary: Overview and Standard of Markdown(md)
+summary: Standards, Non-standards, and Practice of Markdown 
 ---
+
+## 标准
 
 Markdown 最初是由 John Gruber 发明，它在2004年发布里最初的语法说明和转换工具。者可以看作是最初的官方标准。但问题在于，这份说明非常简略，留下了很多模糊地带（比如缩进代码块、列表嵌套等），而且Gruber明确表示Markdown已经完成，不再进行重大更新\
 <https://daringfireball.net/projects/markdown/> John Gruber 文档
@@ -15,4 +17,14 @@ Markdown 最初是由 John Gruber 发明，它在2004年发布里最初的语法
 目前影响力最大的，地球上使用最广泛的Markdown方言是 GFM(GitHub Flavored Markdown)。它基于CommonMark 扩展而成，增加了表格、任务列表、删除线、自动链接等常用功能。由于GitHub是程序员最大的聚集地，它的渲染规则几乎成了“行业标准”\
 <https://github.github.com/gfm/> GFM 文档
 
+## 非标准语法
 
+### 数学公式
+
+- 语法选择
+- 渲染引擎
+- 宏包与宏定义
+
+### 图表(Mermaid, PlantUML, Graphviz)
+
+## Pandoc
