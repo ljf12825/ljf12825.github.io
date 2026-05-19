@@ -29,7 +29,7 @@
 	{{ partial "topnav.html" . }}
 
 	<!-- 主导航 -->
-	{{ partial "star-nav.html" . }}
+	{{ partialCached "star-nav.html" . }}
 
 	<script defer src="{{ "/js/star-nav.js" | relURL }}"></script>
 	<script defer src="{{ "/js/site.js" | relURL }}"></script>
