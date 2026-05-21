@@ -33,3 +33,6 @@ Web2C 源码 <https://github.com/TeX-Live/texlive-source>
 
 ## LaTeX
 
+LaTeX 可以理解为构建在TeX引擎之上的一套高级排版工具集\
+它是由Leslie Lamport在1980s开发，它发现不需要重复设计标题样式，需要的是“这是标题”“这是引用”这样的逻辑标记\
+于是在TeX的基础上，用TeX的原语写了一套宏集，就是LaTeX
