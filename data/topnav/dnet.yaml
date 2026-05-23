@@ -17,3 +17,5 @@
       url: "/dnet/csharp/ecosystem/"
 - name: "Windows Terminal"
   url: "/dnet/windows_terminal/"
+- name: "DirextX"
+  url: "/dnet/directx/"

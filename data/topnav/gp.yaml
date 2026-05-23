@@ -17,8 +17,6 @@
       url: "gp/opengl/webgl/"
 - name: "Vulkan"
   url: "/gp/vulkan/"
-- name: "DirectX"
-  url: "/gp/directx/"
 - name: "CUDA"
   url: "/gp/cuda/"
 - name: "OpenCL"
