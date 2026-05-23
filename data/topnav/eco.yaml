@@ -35,5 +35,7 @@
       url: "/eco/asset/audio/"
     - name: "DCC"
       url: "/eco/asset/dcc/"
+    - name: "Data Interchange Format"
+      url: "/eco/asset/data_interchange_format/"
 - name: "DCC"
   url: "/eco/dcc/"
