@@ -1,4 +1,4 @@
 - name: "Si"
   url: "/si/"
-- name: "Logic Circuits"
-  url: "/si/logic_circuits/"
+- name: "Digital Circuits"
+  url: "/si/digital_circuits/"

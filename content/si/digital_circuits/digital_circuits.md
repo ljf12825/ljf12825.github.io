@@ -1,9 +1,9 @@
 ---
-title: Logic and Circuits
+title: Digital Circuits
 author: ljf12825
 date: 2026-03-24
 type: file
-summary: overview of logic and circuits
+summary: overview of digital circuits
 ---
 
 - 逻辑：如何表达和推理信息
