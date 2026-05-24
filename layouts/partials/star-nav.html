@@ -5,8 +5,8 @@
     
     {{- $bucketOffsets := seq 0 120 -}}
 
-    {{- $ctxPages := where $all "Section" "ctx" -}}
-    {{- $ctxRecent := len (where $ctxPages "Lastmod" "ge" $recentCutoff) -}}
+    {{- $cPages := where $all "Section" "c" -}}
+    {{- $cRecent := len (where $cPages "Lastmod" "ge" $recentCutoff) -}}
     {{- $dnetPages := where $all "Section" "dnet" -}}
     {{- $dnetRecent := len (where $dnetPages "Lastmod" "ge" $recentCutoff) -}}
     {{- $sePages := where $all "Section" "se" -}}
@@ -40,7 +40,7 @@
         <div id="nav-panel" class="tab-panel active">
             {{- $sectionsInfo := slice 
                 (dict "name" "Home" "path" "/home/" "pages" $homePages "recent" $homeRecent)
-                (dict "name" "CTX" "path" "/ctx/" "pages" $ctxPages "recent" $ctxRecent)
+                (dict "name" "C" "path" "/c/" "pages" $cPages "recent" $cRecent)
                 (dict "name" ".NET" "path" "/dnet/" "pages" $dnetPages "recent" $dnetRecent)
                 (dict "name" "GP" "path" "/gp/" "pages" $gpPages "recent" $gpRecent)
                 (dict "name" "ECO" "path" "/eco/" "pages" $ecoPages "recent" $ecoRecent)
