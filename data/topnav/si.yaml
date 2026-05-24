@@ -1,0 +1,4 @@
+- name: "Si"
+  url: "/si/"
+- name: "Logic Circuits"
+  url: "/si/logic_circuits/"

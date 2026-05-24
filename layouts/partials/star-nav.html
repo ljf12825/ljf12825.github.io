@@ -25,6 +25,8 @@
     {{- $netRecent := len (where $netPages "Lastmod" "ge" $recentCutoff) -}}
     {{- $basePages := where $all "Section" "base" -}}
     {{- $baseRecent := len (where $basePages "Lastmod" "ge" $recentCutoff) -}}
+    {{- $siPages := where $all "Section" "si" -}}
+    {{- $siRecent := len (where $siPages "Lastmod" "ge" $recentCutoff) -}}
 
     <div id="star-header">
         <span class="title open">&gt;&gt; &gt;&gt; &gt;&gt;Navigation&lt;&lt; &lt;&lt; &lt;&lt;</span>
@@ -49,6 +51,7 @@
                 (dict "name" "OS" "path" "/os/" "pages" $osPages "recent" $osRecent)
                 (dict "name" "NET" "path" "/net/" "pages" $netPages "recent" $netRecent)
                 (dict "name" "Base" "path" "/base/" "pages" $basePages "recent" $baseRecent)
+                (dict "name" "Si" "path" "/si/" "pages" $siPages "recent" $siRecent)
             -}}
 
             {{- range $sectionsInfo -}}
