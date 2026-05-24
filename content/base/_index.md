@@ -1,6 +1,6 @@
 ---
-title: Computer Science Fundamental
-type: csf
+title: Base
+type: base
 ---
 
 > INCLUDE
@@ -12,5 +12,3 @@ type: csf
 - Computer Architecture
 - Theory of Computation
 - Logic and Circuits
-
----
