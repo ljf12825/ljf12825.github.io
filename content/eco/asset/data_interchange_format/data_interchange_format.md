@@ -8,18 +8,16 @@ summary: Overview of Data Interchange Format
 
 数据交换格式本质上是：让不同程序、语言、系统、机器之间能够稳定交换数据的一套编码规则
 
-| 类型 | 代表 | 特点 |
+| 维度 classification | 代表技术 Representative | 核心特征 & 适用场景 Key Features |
 | - | - | - |
-| 文本型 | JSON, XML, YAML, CSV, TOML | 可读性强 |
-| 二进制型 | Protocol Buffers, MessagePack, FlatBuffers | 高性能、紧凑 |
-| 自描述型 | XML, JSON | 数据里包含结构信息 |
-| Schema驱动 | Protobuf, Avro, Thrift | 强类型、可演化 |
-| 表格型 | CSV, TSV | 二维数据 |
-| 配置型 | TOML, INI, YAML | 人类友好 |
-| 科学/大数据 | Parquet, Avro, ORC | 列式存储 |
-| 游戏/图形 | glTF, FBX | 资源交换 |
-| Web/API | JSON, GraphQL | 网络通信 |
-| IPC/RPC | Protobuf, Cap'n Proto | 进程/服务通信 |
+| 文本型 (Text-based) | JSON, XML, YAML, CSV, TOML | 可读性强，人类友好，易于调试，但解析开销大、体积大 |
+| 二进制型 (Binary) | Protocol Buffers, MessagePack, FlatBuffers | 高性能、紧凑、省带宽，但不可读，依赖工具链 |
+| 自描述型 (Self-describing) | XML, JSON | 数据本身包含结构信息（Key-Value 结构），灵活性高 |
+| Schema驱动 (Schema-driven) | Protobuf, Avro, Thrift | 强类型，依赖 IDL 定义，具备可演化性与严格契约 |
+| 表格/列式 (Columnar/Tabular) | CSV, Apache Parquet, ORC | 二维或多维数据，针对大数据分析、列式存储深度优化 |
+| 配置型 (Configuration) | TOML, INI, YAML | 极高的人类阅读和修改友好度，多用于系统初始化 |
+| 领域特定 (Domain-specific) | glTF, FBX (游戏图形) | 专为特定工业领域（如3D资产、地理信息）定制的交换标准 |
+| 通信层 (IPC/RPC/Web) | JSON, GraphQL, gRPC (Protobuf) | 针对网络传输、微服务通信、前后端交互优化的协议 |
 
 所有数据交换格式，本质都在解决
 
@@ -54,8 +52,8 @@ Object <-> Byte Stream
 - 工具链成熟度
 
 很多人对数据交换格式的理解停留在语法和文件格式上，没有对其进行深入研究过\
-数据格式表面上只是“数据的排列方式”，往底层说，它能决定一家公司数十万台服务器的生死\
-往深处看，数据格式的研究价值主要集中在三个核心方向：
+数据格式表面上只是“数据的排列方式”，在底层上牵扯到内存布局，缓存命中等问题；它能决定一家公司数十万台服务器的生死\
+数据格式的研究价值主要集中在三个核心方向：
 
 - 极致的性能优化
 - 优雅的工程结构
@@ -64,7 +62,6 @@ Object <-> Byte Stream
 ### 极致的性能优化
 
 当数据量极其庞大时，数据格式的微小改变会直接带来数百万美元的成本差异\
-这里面牵扯到几个非常值得研究的底层技术
 
 #### 内存布局与CPU缓存友好度
 
