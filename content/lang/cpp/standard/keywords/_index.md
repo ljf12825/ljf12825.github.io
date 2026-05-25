@@ -1,8 +1,8 @@
 ---
-title: Standard
+title: Keywords
 type: file
 ---
 
-# Standard
+# Keywords
 
 <!--more-->
