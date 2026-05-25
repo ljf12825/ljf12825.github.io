@@ -88,6 +88,7 @@
               "summary" (.Summary | plainify | truncate 80)
               "author" (.Params.author | default "")
               "date" (.Date.Format "2006-01-02")
+              "modify" (.Lastmod.Format "2006-01-02")
             -}}
             {{- $nav3dNodes = $nav3dNodes | append $node -}}
           {{- end -}}
@@ -196,6 +197,7 @@
     "parentPath" $parentPath
     "author" .Params.author
     "date" (.Date.Format "2006-01-02")
+    "modify" (.Lastmod.Format "2006-01-02")
   -}}
   {{- $result = $result | append $pageData -}}
 {{- end -}}
