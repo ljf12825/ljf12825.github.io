@@ -175,20 +175,20 @@
   display: none;
 }
 
-.toc .toc-body ul {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
-
 .toc .toc-body li {
   margin: 0.2rem 0;
   font-size: 15px;
   line-height: 1.0;
 }
 
+.toc .toc-body ul {
+  list-style: none;
+  padding-left: 0 !important;
+  margin: 0;
+}
+
 .toc .toc-body ul ul {
-  margin-left: 1rem;
+  margin-left: 0 !important;
 }
 
 .toc .toc-body a {
