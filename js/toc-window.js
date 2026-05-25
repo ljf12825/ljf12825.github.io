@@ -47,6 +47,38 @@
         }
       }
     }
+
+    function applyHashesToLevels() {
+      if (!tocBody) return;
+
+      var convertLevelsToHashes = function(container, depth) {
+        var children = container.children;
+        for (var i = 0; i < children.length; i++) {
+          var li = children[i];
+          if (li.tagName.toLowerCase() === 'li') {
+            var link = li.querySelector(':scope > a');
+            if (link) {
+              var hashes = '#'.repeat(depth) + ' ';
+              if (!link.hasAttribute('data-has-hash')) {
+                link.textContent = hashes + link.textContent;
+                link.setAttribute('data-has-hash', 'true');
+              }
+            }
+            var subUl = li.querySelector(':scope > ul');
+            if (subUl) {
+              convertLevelsToHashes(subUl, depth + 1);
+            }
+          } else if (li.tagName.toLowerCase() === 'ul') {
+            convertLevelsToHashes(li, depth);
+          }
+        }
+      };
+
+      var rootUl = tocBody.querySelector('ul');
+      if (rootUl) {
+        convertLevelsToHashes(rootUl, 1);
+      }
+    }
     
     function resetAndAdjustHeight() {
       initialHeight = null;
@@ -194,6 +226,8 @@
       tocWindow.classList.add('collapsed');
     }
     
+    // 初始化时执行转换与高度调整
+    applyHashesToLevels();
     adjustTocHeight();
     loadPosition();
     
@@ -208,6 +242,7 @@
     });
 
     window.addEventListener("pageshow", function() {
+      applyHashesToLevels();
       var x = parseFloat(tocWindow.style.left);
       var y = parseFloat(tocWindow.style.top);
       if (!isNaN(x) && !isNaN(y)) {

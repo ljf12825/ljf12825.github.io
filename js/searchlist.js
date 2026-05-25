@@ -99,7 +99,16 @@
       page: p,
       score: isShowAll ? 0 : score(p, q)
     }))
-    .sort((a, b) => b.score - a.score);
+    .sort((a, b) => {
+      if (b.score !== a.score) {
+        return b.score - a.score;
+      }
+      const dateA = a.page.modify || '';
+      const dateB = b.page.modify || '';
+      if (dateA < dateB) return 1;
+      if (dateA > dateB) return -1;
+      return 0;
+    });
 
   console.log('matched count:', matched.length);
 
@@ -141,7 +150,8 @@
           <span>Type</span>
           <span>Section</span>
           <span>Author</span>
-          <span>Modified</span>
+          <span>Ctime</span>
+          <span>Mtime</span>
           <span>Summary</span>
           <span>Tags</span>
           <span>Categories</span>
@@ -162,6 +172,7 @@
             <span class="search_section">{${p.section || '/'}}</span>
             <span class="search_author">${p.author || '-'}</span>
             <span class="search_date">${p.date || '-'}</span>
+            <span class="search_date">${p.modify || '-'}</span>
             <span class="search_summary">${p.summary || '-'}</span>
             <span class="search_tags">
               ${ensureArray(p.tags).length > 0
