@@ -16,3 +16,10 @@
   url: "/base/theory_of_computation/"
 - name: "DM"
   url: "/base/discrete_mathematics/"
+- name: "Cryptography"
+  url: "/base/cryptography"
+  children:
+    - name: "Theory"
+      url: "/base/cryptography/theory/"
+    - name: "Engineering"
+      url: "/base/cryptography/engineering/"
