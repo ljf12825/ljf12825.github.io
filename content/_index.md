@@ -99,5 +99,7 @@ If the query fails, `guest` is displayed by default.\
 
 `path` consists of a series of links; clicking on a specific segment allows for navigation, thereby implementing a breadcrumb trail.
 
+--- END ---
+
 Jeff Lee\
 20 May 2026

@@ -69,53 +69,71 @@ sudo pacman -S vim
 ```
 
 ### 从源码安装
+
 从源码编译安装Vim可以让你根据自己的需求定制Vim的功能
 
-1. 安装必要的依赖
+#### 安装必要的依赖
+
 ```bash 
 sudo apt update 
 sudo apt install -y git build-essential ncurses-dev 
 ```
+
 对于其他Linux发行版，安装方式可能不同，但大致依赖是`git`, `build-essential`（或`gcc`, `make`）和`ncurses`库
 
-2. 获取Vim源码
+#### 获取Vim源码
+
 ```bash 
 git clone https://github.com/vim/vim.git
 ```
-3. 配置编译选项
-进入Vim源码目录并执行`./configure`来设置编译选项。可以通过`./configure --help`查看可用的选项。以下是一些常用的编译选项
-- `--enable-gui=gtk2`：启用GTK2图形界面（如果需要图形界面版本）
-- `--with-feature=huge`：启用尽可能多的功能
-- `--enable-multibyte`：支持多字节字符集（如果需要支持其他语言）
-- `--enable-python3interp`：启用Python3插件支持
-- `--enable-cscope`：启用Cscope支持
 
-示例：如果只想编译一个支持Python3和最大功能的Vim,可以这样写
-```bash 
-cd vim 
-./configure --with-feature=huge --enable-python3interp --enable-multibyte
+#### 配置编译选项
+
+进入Vim源码目录并执行`./configure`来设置编译选项\
+可以通过`./configure --help`查看可用的选项 
+
+##### 示例
+
+```bash
+./configure --with-features=huge \
+            --enable-python3interp=yes \
+            --enable-luainterp=yes \
+            --enable-gui=no \
+            --prefix=/usr/local \
+            --enable-multibyte \
+            --enable-cscope \
+            --with-compiledby="ljf12825" \
+            --with-python3-config-dir=$(python3-config --configdir) \
+            --with-x=yes
 ```
+
+这是一个支持python3, lua，没有GUI，支持cscope，支持x图形界面，提供尽可能多的功能，编译者为ljf12825的版本
 
 当运行`./configure`时，它会生成一个名为`config.log`的文件，里面详细记录了配置过程中检查每个功能是否可用的结果\
 在运行`./configure`后，它会生成一个`Makefile`文件，其中包含了配置的选项。在其中，可以找到一些启用的功能，尤其是和编译相关的设置
 
-4. 编译Vim
+#### 编译Vim
+
 配置完成后，使用`make`命令进行编译。这一步会编译Vim的所有源代码，过程可能需要几分钟时间，取决于机器性能
 
-5. 安装Vim
+#### 安装Vim
+
 编译完成后，可以用以下命令进行安装
+
 ```bash 
 sudo make install 
 ```
 
-6. 检查安装
+#### 检查安装
+
 安装完成后，可以通过以下命令检查Vim是否正确安装
 ```bash 
 vim --version 
 ```
 如果显示了你配置时选择的功能选项，说明安装成功
 
-7. 卸载Vim
+#### 卸载Vim
+
 如果不再需要编译版的Vim,或者想要重新配置，使用以下命令卸载
 ```bash 
 sudo make uninstall

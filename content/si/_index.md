@@ -1,5 +1,5 @@
 ---
-title: Si
+title: Silicon
 type: si
 ---
 

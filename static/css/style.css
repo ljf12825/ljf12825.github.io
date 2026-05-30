@@ -695,6 +695,39 @@ blockquote::before {
   background: #e0e0e0;
 }
 
+.star-nav-flat, 
+.star-nav-flat .nav-row, 
+.star-nav-flat div, 
+.star-nav-flat span, 
+.star-nav-flat a {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+.star-nav-flat {
+    width: 400px;
+    display: inline-block;
+}
+
+.star-nav-flat .nav-row {
+    position: relative;
+    height: 16px;
+    margin: 4px 0 !important;
+    display: flex;
+    align-items: center;
+}
+
+.star-nav-flat .nav-label { width: 95px; }
+.star-nav-flat .nav-stats { width: 60px; font-size: 12px; color: #555; }
+.star-nav-flat .nav-sparkline { width: 150px; height: 14px; }
+
+.star-nav-flat .nav-item {
+    text-decoration: underline;
+    color: #000080;
+}
+
 .tip {
   position: relative;
   cursor: help;
