@@ -4,13 +4,13 @@
   const DEFAULT_POSITIONS = {
     'toc-window':    { left: 'auto', top: '100px', right: '0', bottom: 'auto' },
     'star-nav':      { left: 'auto', top: 'auto', right: '0', bottom: '0' },
-    'great-indexer': { left: '0', top: 'auto', right: 'auto', bottom: '0' }
+    'great-indexer': { left: 'auto', top: '0', right: '0', bottom: 'auto' }
   };
 
   const SINGLE_POSITIONS = {
     'toc-window':    { left: 'auto', top: '100px', right: '0', bottom: 'auto' },
     'star-nav':      { left: 'auto', top: 'auto', right: '0', bottom: '0' },
-    'great-indexer': { left: '0', top: 'auto', right: 'auto', bottom: '0' }
+    'great-indexer': { left: 'auto', top: '0', right: '0', bottom: 'auto' }
   };
 
   const STORAGE_KEYS = {
