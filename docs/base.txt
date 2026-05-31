@@ -1,14 +1,1 @@
 Base
-
-Core Concepts, Principles, and Theoretical Foundations of Computer Science
-Focusing on
-
-- the principles of computer operation
-- methods of data processing
-- the essence of algorithm design
-
----
-
-- Understanding Underlying Principles: The ability to comprehend what a computer does—and why it does it—without relying on specific tools
-- Cross-Domain Transferability
-- The Ability to Solve Complex Problems

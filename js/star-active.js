@@ -1,21 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
   const normalizePath = (path) => (path || "").replace(/\/$/, "") || "/";
   const currentPath = normalizePath(location.pathname);
-  const items = document.querySelectorAll("#star-nav .nav-item");
+  const items = document.querySelectorAll("#star-nav .nav-item, #star-nav-inline .nav-item");
   
   let totalAllArticles = 0;
   items.forEach(el => {
     totalAllArticles += Number(el.dataset.articleCount || 0);
   });
 
-  let globalMaxSqrt = 0;
+  let maxSqrtInline = 0;
+  let maxSqrtHover = 0;
   const processedDataMap = new Map();
 
   items.forEach(el => {
     const trendDataStr = el.dataset.trend;
     if (trendDataStr) {
       const rawData = trendDataStr.split(",").map(Number).reverse();
-      // 3 点轻量平均滤波器
       const smoothedData = rawData.map((val, idx) => {
         const start = Math.max(0, idx - 1);
         const end = Math.min(rawData.length - 1, idx + 1);
@@ -28,13 +28,17 @@ document.addEventListener("DOMContentLoaded", () => {
       processedDataMap.set(el, smoothedData);
       
       const localMaxSqrt = Math.max(...smoothedData.map(v => Math.sqrt(v)));
-      if (localMaxSqrt > globalMaxSqrt) {
-        globalMaxSqrt = localMaxSqrt;
+      
+      if (el.closest("#star-nav-inline")) {
+        if (localMaxSqrt > maxSqrtInline) maxSqrtInline = localMaxSqrt;
+      } else {
+        if (localMaxSqrt > maxSqrtHover) maxSqrtHover = localMaxSqrt;
       }
     }
   });
 
-  const finalScaleMaxSqrt = globalMaxSqrt > 0 ? globalMaxSqrt : 1;
+  const scaleMaxSqrtInline = maxSqrtInline > 0 ? maxSqrtInline : 1;
+  const scaleMaxSqrtHover = maxSqrtHover > 0 ? maxSqrtHover : 1;
 
   items.forEach(el => {
     const label = el.dataset.label || el.textContent.trim();
@@ -74,7 +78,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const data = processedDataMap.get(el);
     
     if (data && sparklineContainer) {
-      const width = 150;
+      const isInlineNav = el.closest("#star-nav-inline") !== null;
+      
+      const width = isInlineNav ? 360 : 150; 
+      const finalScaleMaxSqrt = isInlineNav ? scaleMaxSqrtInline : scaleMaxSqrtHover;
+      
+      const strokeWidth = isInlineNav ? 1.5 : 1.0;
+      
       const height = 14; 
       const paddingX = 1;
       const paddingY = 1; 
@@ -104,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <polyline points="${points}" 
                     fill="none" 
                     stroke="${strokeColor}" 
-                    stroke-width="1.0" 
+                    stroke-width="${strokeWidth}" 
                     stroke-linecap="round" 
                     stroke-linejoin="round"
                     opacity="${lineOpacity}">
