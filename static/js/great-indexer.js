@@ -287,11 +287,15 @@
     input.addEventListener("keydown", function (e) { if (e.key === "Enter") openResultPage(); });
     openBtn.addEventListener("click", openResultPage);
 
+
     var saved = JSON.parse(localStorage.getItem("global-index-pos") || "null");
     if (saved && typeof saved.x === 'number' && typeof saved.y === 'number') {
         root.style.left = saved.x + "px"; root.style.top = saved.y + "px"; root.style.right = "auto"; root.style.bottom = "auto";
     } else {
-        root.style.left = "0"; root.style.bottom = "0"; root.style.right = "auto"; root.style.top = "auto";
+        root.style.left = "auto";
+        root.style.right = "0";
+        root.style.top = "0";
+        root.style.bottom = "auto";
     }
     if (localStorage.getItem("global-index-collapse") === "1") root.classList.add("closed");
 
