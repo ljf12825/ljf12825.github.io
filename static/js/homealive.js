@@ -38,13 +38,23 @@ document.addEventListener("DOMContentLoaded", () => {
       animationId = null;
     }
 
-    const path =
-      window.innerWidth <= 1080
-        ? "/ascii/alive-narrow.txt"
-        : "/ascii/alive-wide.txt";
+    const width = window.innerWidth;
+
+    if (width < 950) {
+      pre.textContent = "";
+      asciiLines = [];
+      originalContent = "";
+      frame = 0;
+      return;
+    }
+
+    const path = width <= 1900
+      ? "/ascii/alive-narrow.txt"
+      : "/ascii/alive-wide.txt";
 
     asciiLines = await loadAscii(path);
     pre.textContent = "";
+    originalContent = "";
     frame = 0;
     renderFrame();
   }
@@ -52,6 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const tips = document.querySelectorAll(".tip");
   tips.forEach(span => {
     span.addEventListener("mouseenter", async () => {
+      if (window.innerWidth < 960) return;
       hoverActive = true;
       const docPath = span.dataset.doc;
       if (docPath) {
