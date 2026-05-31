@@ -14,12 +14,14 @@ type: home
 
 > GUIDE
 
-<div class="layout">
+<div class="layout" style="display: flex; gap: 2.5rem; align-items: flex-start; width: 100%;">
+
   {{< star-nav-flat >}}
 
-  <div class="side">
-    <pre id="alive"></pre>
+  <div class="side" style="flex: 1; min-width: 0; display: block;">
+    <pre id="alive" style="white-space: pre-wrap; word-break: break-all; margin: 0; font-family: 'Courier New', Consolas, monospace; line-height: 1.3; text-align: left; color: #000080;"></pre>
   </div>
+
 </div>
 
 ---
