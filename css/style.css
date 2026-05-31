@@ -728,7 +728,6 @@ blockquote::before {
 
 .tip {
   position: relative;
-  cursor: help;
 }
 
 .layout {
