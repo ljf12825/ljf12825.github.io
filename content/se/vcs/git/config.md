@@ -119,3 +119,4 @@ git config --global push.default matching
 ```bash
 git config --global pull.rebase true
 ```
+- 三级配置
