@@ -1,8 +1,8 @@
 ---
-title: CLI
+title: Linux CLI
 type: file
 ---
 
-# CLI
+# Linux CLI
 
 <!--more-->

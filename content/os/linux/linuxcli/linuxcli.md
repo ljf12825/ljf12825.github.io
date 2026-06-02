@@ -1,10 +1,12 @@
 ---
-title: CLI(Command Line Interface)
+title: Linux CLI
 date: 2026-04-04
 author: ljf12825
 type: file
-summary: Concept of CLI
+summary: Overview of Linux CLI
 ---
+
+## CLI 的概念
 
 CLI(Command Line Interface)即命令行界面，是一种用户与计算机交互方式，用户通过输入文本命令来控制计算机系统，而不是通过图形界面（GUI）或文本界面(TUI)来进行操作。CLI是一种基于文本的用户界面，用户通过键盘输入命令，计算机则执行相应的操作并返回文本结果
 
