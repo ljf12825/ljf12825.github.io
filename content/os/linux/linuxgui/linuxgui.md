@@ -1,5 +1,5 @@
 ---
-title: linux gui stack
+title: Linux GUI
 date: 2026-01-14
 author: ljf12825
 type: file

@@ -1,8 +1,8 @@
 ---
-title: GUI
+title: Linux GUI
 type: file
 ---
 
-# GUI
+# Linux GUI
 
 <!--more-->
