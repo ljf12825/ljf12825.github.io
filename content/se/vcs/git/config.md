@@ -6,6 +6,8 @@ type: file
 summary: git config
 ---
 
+<https://git-scm.com/docs/git-config>
+
 `git config`是Git用来设置配置的命令个，允许你定义Git的行为，适应不同共工作流。通过它，你可以配置Git用户信息、颜色、别名、文件忽略规则等等。`git config`的配置分为三个级别：
  1. 系统级别（`--system`）：对整个系统有效，通常用于全局配置文件，如`/etc/gitconfig`
  2. 用户级别（`--global`）：对当前用户有效，配置存储在用户的`~/.gitconfig`文件中
@@ -119,4 +121,68 @@ git config --global push.default matching
 ```bash
 git config --global pull.rebase true
 ```
-- 三级配置
+## 三级配置
+
+Git的配置文件不是只有一个，而是分三层，优先级从高到低是
+
+```txt
+项目级 > 用户级 > 系统级
+```
+
+### 项目级
+
+位于`.git/config`，具有最高优先级，只对当前仓库生效。通常存的是
+
+- 这个仓库专用的用户名和邮箱
+- 项目特定的`remote`地址
+- Git hooks 路径
+- 子模块配置
+
+### 用户级
+
+位于`~/.gitconfig`。对当前用户的所有仓库生效。通常存的是
+
+- 全局的用户名和邮箱
+- 个人常用的 alias
+- diff/merge 工具的偏好
+- GPG签名密钥
+
+### 系统级
+
+位于`etc/gitconfig`，最低优先级，对所有用户的所有仓库生效。一般公司或团队做统一配置时会用到，个人很少碰
+
+### 用命令操作三层
+
+读取配置时，Git自动合并三层，高优先级覆盖低优先级
+
+```bash
+# 查看生效的最终值（已经合并三层后的结果）
+git config <key>
+
+# 查看某一层的原始值
+git config --local <key> # 项目级
+git config --global <key> # 用户级
+git config --system <key> # 系统级
+
+# 写入某一层
+git config --local user.name "Project Name" # 写入 .git/config
+git config --global user.name "My Name" # 写入 ~/.gitconfig
+git config --system user.name "Admin" # 写入 /etc/gitconfig
+
+# 查看某一层的整个文件
+git config --local --list
+git config --global --list
+git config --system --list
+```
+
+### 配置文件格式
+
+`~/.gitconfig`里可以用`include`引入额外文件，方便管理
+
+```ini
+[include]
+    path = ~/.gitconfig.local    # 机器特定的配置
+    path = ~/.gitconfig.company  # 公司项目的通用配置
+```
+
+### 示例
