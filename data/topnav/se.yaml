@@ -20,14 +20,7 @@
 - name: "Toolchain"
   url: "/se/toolchain/"
   children:
-    - name: "Data Format"
-      url: "/se/toolchain/dataformat/"
-- name: "VCS"
-  url: "/se/vcs/"
-  children:
-    - name: "Perforce"
-      url: "/se/vcs/perforce/"
-    - name: "Git"
-      url: "/se/vcs/git/"
-    - name: "SVN"
-      url: "/se/vcs/svn/"
+    - name: "Build System"
+      url: "/se/toolchain/buildsystem/"
+    - name: "VCS"
+      url: "/se/toolchain/vcs/"
