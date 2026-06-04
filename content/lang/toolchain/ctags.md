@@ -250,11 +250,3 @@ ctags 很难完整处理具体调用目标
 ### 没有真正 AST
 
 这是最大本质，ctags 更接近 `enhanced tokenizer + lightweight parse`，而不是 `compiler frontend
-
-
-
-
-
-- Cscope
-- Gutentags
-- vim-clang
