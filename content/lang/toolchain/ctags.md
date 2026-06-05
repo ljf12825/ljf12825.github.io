@@ -17,23 +17,23 @@ Ctags存在两个主要的分支
 1. Exuberant Ctags
     - 原作者：Darren Hiebert
     - 这是Ctags本尊，最后版本是5.8（2009年），目前已不再更新
-    - [ctags.source.forge.net](https://ctags.source.forge.net/)
+    - <https://ctags.source.forge.net/>
 2. Universal Ctags
     - 这是Exuberant Ctags的一个Fork
     - 目前全行业标准使用的独立项目。各大Linux发行版里运行`ctags`命令实际上安装的都是它
-    - [ctags.io](https://ctags.io/)
+    - <https://ctags.io/>
 
-### 安装 Universal Ctags
+## 安装 Universal Ctags
 
 `ctags`变种很多，Universal Ctags 是支持最多语言且仍在维护的
 
-#### 通过包管理器安装
+### 通过包管理器安装
 
 ```bash
 # Debian's
 sudo apt install universal-ctags
 ```
-#### 在GitHub上下载二进制文件
+### 在GitHub上下载二进制文件
 
 Universal Ctags 每天晚上会通过 GitHub Action 编译一版最新的二进制文件，详情参见Ctags的README
 
@@ -51,11 +51,11 @@ uctags/
 可以将其放在`~/.local`下，然后加PATH写进`~/.bashrc`\
 或者可以将其放在/usr/local/bin/`下
 
-#### 源码编译安装
+### 源码编译安装
 
-Ctags的构建系统是典型的Autotools\
+Ctags的构建系统是典型的Autotools
 
-拿到源码后，需要先生成configure
+拿到源码后，切换到某个稳定版本，需要先生成configure
 
 ```bash
 ./autogen.sh
@@ -148,7 +148,13 @@ set tags=./tags;,tags;
 | `:tp` | 跳转到上一个匹配的标签 |
 | `:ts <名字>` | 列出所有匹配的标签，选择一个跳转 |
 
+### vim-gutentags 插件
+
 ### 参数
+
+#### 输入/输出选项
+
+## ctags 的优势
 
 ## ctags 的局限
 
