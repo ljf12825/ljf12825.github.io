@@ -24,3 +24,5 @@
       url: "/se/toolchain/buildsystem/"
     - name: "VCS"
       url: "/se/toolchain/vcs/"
+- name: "Archives"
+  url: "/se/archives/"

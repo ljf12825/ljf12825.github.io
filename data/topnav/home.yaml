@@ -2,8 +2,6 @@
   url: "/home/"
 - name: "Log"
   url: "/home/log/"
-- name: "Archives"
-  url: "/home/archives/"
   children:
     - name: "History"
       url: "/home/archives/history/"
