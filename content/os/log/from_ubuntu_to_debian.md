@@ -1,11 +1,11 @@
 ---
-title: From Ubuntu to Debian
+title: "From Ubuntu to Debian ? Ultimate control : Ultimate simplicity"
 author: ljf12825
 date: 2026-05-26
 tags: [Linux, Ubuntu, Debian]
 categories: [Recording]
 type: log
-summary: A recording from Ubuntu to Debian
+summary: A record of the transition from Ubuntu to Debian
 ---
 
 ## 从 Windows 到 Ubuntu
