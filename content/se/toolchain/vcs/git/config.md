@@ -6,8 +6,6 @@ type: file
 summary: git config
 ---
 
-<https://git-scm.com/docs/git-config>
-
 ## 配置作用域
 
 Git的配置文件不是只有一个，而是分三层，优先级从高到低是
@@ -180,3 +178,33 @@ git commit -m "automated commit"
 进程结束配置就会消失，不需要修改任何配置文件
 
 ## 常用配置文件字段和对应命令参数
+
+### 身份配置
+
+`user.name` 提交作者名
+
+```ini
+[user]
+    name = ljf12825
+```
+
+等价命令
+
+```bash
+git config --global user.name "ljf12825"
+```
+
+对应提交对象里的 `author`, `committer`，只影响后续新提交，不会修改历史commit
+
+`user.email` 提交作者邮箱
+
+```ini
+[user]
+    email = xxx@example.com
+```
+
+等价命令
+
+```bash
+git config --global user.email "xxx@example.com"
+```
