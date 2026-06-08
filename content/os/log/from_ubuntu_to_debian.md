@@ -149,7 +149,7 @@ sync
 ### 安装
 
 重启电脑，选择从U盘进入Debian安装程序\
-此处可以选择Graphical Install 或 Install（非图形化）\
+此处可以选择Graphical Install 或 Install（非图形化）
 
 会经历：
 
@@ -202,3 +202,14 @@ sudo update-grub
 清理GRUB菜单里的残留Ubuntu启动项
 
 在终端里输入`sudo nmtui`，会弹出一个友好的伪图形界面，可以选择无线网络
+
+## 实践
+
+### apt 源
+
+Debian会根据你所在地区，提供多个apt源供选择
+
+![debian_install_apt_source](/images/content/debian_install_apt_source.png)
+
+`deb.debian.org`不用代理用不了
+
