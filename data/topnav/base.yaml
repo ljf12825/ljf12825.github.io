@@ -1,7 +1,5 @@
 - name: "Base"
   url: "/base/"
-- name: "Lab"
-  url: "/base/lab/"
 - name: "Log"
   url: "/base/log/"
 - name: "Puzzle"

@@ -1,7 +1,5 @@
 - name: "Lang"
   url: "/lang/"
-- name: "Lab"
-  url: "/lang/lab/"
 - name: "Log"
   url: "/lang/log/"
 - name: "Theory"

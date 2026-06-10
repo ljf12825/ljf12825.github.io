@@ -1,7 +1,5 @@
 - name: "GP"
   url: "/gp/"
-- name: "Lab"
-  url: "/gp/lab/"
 - name: "Log"
   url: "/gp/log/"
 - name: "Theory"

@@ -1,7 +1,5 @@
 - name: ".NET"
   url: "/dnet/"
-- name: "Lab"
-  url: "/dnet/lab/"
 - name: "Log"
   url: "/dnet/log/"
 - name: "C#"

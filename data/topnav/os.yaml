@@ -1,7 +1,5 @@
 - name: "OS"
   url: "/os/"
-- name: "Lab"
-  url: "/os/lab/"
 - name: "Log"
   url: "/os/log/"
 - name: "Toolchain"

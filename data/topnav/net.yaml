@@ -1,7 +1,5 @@
 - name: "Net"
   url: "/net/"
-- name: "Lab"
-  url: "/net/lab/"
 - name: "Log"
   url: "/net/log/"
 - name: "Theory"

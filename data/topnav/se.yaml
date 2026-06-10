@@ -1,7 +1,5 @@
 - name: "SE"
   url: "/se/"
-- name: "Lab"
-  url: "/se/lab/"
 - name: "Log"
   url: "/se/log/"
 - name: "Theory"

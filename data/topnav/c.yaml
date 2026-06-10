@@ -1,7 +1,5 @@
 - name: "C"
   url: "/c/"
-- name: "Lab"
-  url: "/c/lab/"
 - name: "Log"
   url: "/c/log/"
 - name: "Mod"
