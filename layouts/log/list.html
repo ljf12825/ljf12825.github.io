@@ -6,50 +6,139 @@
 
 {{ define "main" }}
 {{ $sec := .Section }}
-<div class="log-container">
+<div class="git-fluid-viewport">
+  <main class="git-terminal-buffer">
+    <div class="git-graph-matrix">
+      
+      {{ range (where (where .Site.RegularPages "Type" "log") "Section" $sec).ByDate.Reverse }}
+        {{ $hasMtime := and (not .Lastmod.IsZero) (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) }}
+        {{ $sha := substr (md5 .Title) 0 7 }}
+        {{ $msha := substr (md5 (print .Title "mtime")) 0 7 }}
+        {{ $mergeSha := substr (md5 (print .Title "merge")) 0 7 }}
+        {{ $summary := .Summary }}{{ if .Params.summary }}{{ $summary = .Params.summary }}{{ end }}
 
-  <main class="log-main">
-    <h1 class="page-title">{{ .Title }}</h1>
+        {{ if $hasMtime }}
+          <div class="git-terminal-line historical-stub-row">
+            <div class="git-graph-col"><span class="main-node">*</span></div>
+            <div class="git-text-col"><span class="t-sha">commit {{ $sha }}</span></div>
+          </div>
 
-    <div class="log-grid">
-      {{ range where (where .Site.RegularPages "Type" "log") "Section" $sec }}
-        <a href="{{ .RelPermalink }}" class="log-card">
-          {{ with .Params.image }}
-            <img src="{{ . | relURL }}" alt="{{ $.Title }}" class="log-thumb">
-          {{ else }}
-            <img src="{{ "images/gamelife.jpg" | relURL }}" alt="{{ $.Title }}" class="log-thumb">
+          <div class="git-terminal-line routing-row">
+            <div class="git-graph-col"><span class="main-pipe">|</span><span class="branch-slash"> \</span></div>
+            <div class="git-text-col"></div>
+          </div>
+
+          <div class="git-terminal-line branch-row">
+            <div class="git-graph-col"><span class="main-pipe">|</span><span class="branch-node"> *</span></div>
+            <div class="git-text-col">
+              <span class="t-sha branch-sha">modify {{ $msha }}</span>
+            </div>
+          </div>
+          
+          {{ if .Params.author }}
+            <div class="git-terminal-line branch-row">
+              <div class="git-graph-col"><span class="main-pipe">|</span><span class="branch-pipe"> |</span></div>
+              <div class="git-text-col"><span class="t-meta">Author: {{ .Params.author }}</span></div>
+            </div>
           {{ end }}
 
-          <div class="log-content">
-            <h2 class="log-title">{{ .Title }}</h2>
-
-            <div class="log-meta">
-              <span class="date">
-                <b>crtime:</b> {{ .Date.Format "2006-01-02" }}
-                {{ if and (not .Lastmod.IsZero) (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) }}
-                  &nbsp;&nbsp; <b>mtime:</b> {{ .Lastmod.Format "2006-01-02" }}
-                {{ end }}
-              </span>
-              
-              {{ with .Params.author }}<span class="author"><b>author:</b> {{ . }}</span>{{ end }}
-              
-              <span class="meta-line">
-                {{ with .Params.categories }}{{ range $i, $cat := . }}[{{ $cat }}]{{ if lt (add $i 1) (len .) }} {{ end }}{{ end }}{{ end }}
-                {{ with .Params.tags }}#{{ delimit . " #" }}{{ end }}
-              </span>
-            </div>
-
-            <p class="log-summary">
-              {{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary }}{{ end }}
-            </p>
-
-            <span class="read-more">ReadMore</span>
+          <div class="git-terminal-line branch-row">
+            <div class="git-graph-col"><span class="main-pipe">|</span><span class="branch-pipe"> |</span></div>
+            <div class="git-text-col"><span class="t-meta mtime-alert">Date:   {{ .Lastmod.Format "2006-01-02 15:04" }}</span></div>
           </div>
-        </a>
+
+          <div class="git-terminal-line routing-row">
+            <div class="git-graph-col"><span class="main-pipe">|</span><span class="branch-slash"> /</span></div>
+            <div class="git-text-col"></div>
+          </div>
+
+          <a href="{{ .RelPermalink }}" class="git-terminal-line merge-joint-row is-clickable">
+            <div class="git-graph-col"><span class="merge-node">*</span></div>
+            <div class="git-text-col"><span class="t-sha merge-sha">merge {{ $mergeSha }}</span></div>
+          </a>
+
+          {{ if .Params.author }}
+            <div class="git-terminal-line info-row">
+              <div class="git-graph-col"><span class="main-pipe">|</span></div>
+              <div class="git-text-col"><span class="t-meta">Author: {{ .Params.author }}</span></div>
+            </div>
+          {{ end }}
+
+          <div class="git-terminal-line info-row">
+            <div class="git-graph-col"><span class="main-pipe">|</span></div>
+            <div class="git-text-col"><span class="t-meta">Date:   {{ .Date.Format "2006-01-02 15:04" }}</span></div>
+          </div>
+
+          <div class="git-terminal-line message-row">
+            <div class="git-graph-col"><span class="main-pipe">|</span></div>
+            <div class="git-text-col"><span class="t-subject">{{ .Title }}{{ if .Params.toy }} <span class="t-toy">[TOY]</span>{{ end }}</span></div>
+          </div>
+
+          {{ if or .Params.categories .Params.tags }}
+            <div class="git-terminal-line message-row">
+              <div class="git-graph-col"><span class="main-pipe">|</span></div>
+              <div class="git-text-col">
+                <span class="text-tax">
+                  {{ if .Params.categories }}{{ range .Params.categories }}[{{ . }}]{{ end }}{{ end }}
+                  {{ if .Params.tags }}#{{ delimit .Params.tags " #" }}{{ end }}
+                </span>
+              </div>
+            </div>
+          {{ end }}
+
+          <div class="git-terminal-line message-row">
+            <div class="git-graph-col"><span class="main-pipe">|</span></div>
+            <div class="git-text-col"><span class="t-summary">{{ $summary }}</span></div>
+          </div>
+
+        {{ else }}
+          <a href="{{ .RelPermalink }}" class="git-terminal-line active-commit-row is-clickable">
+            <div class="git-graph-col"><span class="main-node">*</span></div>
+            <div class="git-text-col"><span class="t-sha">commit {{ $sha }}</span></div>
+          </a>
+
+          {{ if .Params.author }}
+            <div class="git-terminal-line info-row">
+              <div class="git-graph-col"><span class="main-pipe">|</span></div>
+              <div class="git-text-col"><span class="t-meta">Author: {{ .Params.author }}</span></div>
+            </div>
+          {{ end }}
+
+          <div class="git-terminal-line info-row">
+            <div class="git-graph-col"><span class="main-pipe">|</span></div>
+            <div class="git-text-col"><span class="t-meta">Date:   {{ .Date.Format "2006-01-02 15:04" }}</span></div>
+          </div>
+
+          <div class="git-terminal-line message-row">
+            <div class="git-graph-col"><span class="main-pipe">|</span></div>
+            <div class="git-text-col"><span class="t-subject">{{ .Title }}{{ if .Params.toy }} <span class="t-toy">[TOY]</span>{{ end }}</span></div>
+          </div>
+
+          {{ if or .Params.categories .Params.tags }}
+            <div class="git-terminal-line message-row">
+              <div class="git-graph-col"><span class="main-pipe">|</span></div>
+              <div class="git-text-col">
+                <span class="text-tax">
+                  {{ if .Params.categories }}{{ range .Params.categories }}[{{ . }}]{{ end }}{{ end }}
+                  {{ if .Params.tags }}#{{ delimit .Params.tags " #" }}{{ end }}
+                </span>
+              </div>
+            </div>
+          {{ end }}
+
+          <div class="git-terminal-line message-row">
+            <div class="git-graph-col"><span class="main-pipe">|</span></div>
+            <div class="git-text-col"><span class="t-summary">{{ $summary }}</span></div>
+          </div>
+        {{ end }}
+
+        <div class="git-terminal-line routing-row">
+          <div class="git-graph-col"><span class="main-pipe">|</span></div>
+          <div class="git-text-col"></div>
+        </div>
+
       {{ end }}
     </div>
   </main>
-
 </div>
-
 {{ end }}

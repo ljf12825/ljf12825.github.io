@@ -1,153 +1,149 @@
 :root {
-	--page-max-width: 1750px;
-	--gap: 1rem;
-	--card-radius: 20px;
-	--card-shadow: 0 6px 18px rgba(17, 24, 39, 0.15);
-	--card-shadow-hover: 0 10px 30px rgba(17, 24, 39, 0.25);
-	--accent: white;
-	--muted: #d1d5db;
-	--text: white;
+  --sys-bg: #c0c0c0;
+  --sys-navy: #000080;
+  --sys-white: #ffffff;
+  --sys-black: #000000;
+  --sys-dark-gray: #808080;
+  --sys-red: #cc0000;
+  --sys-green: #2c6e2c;
+  
+  /* 🎨 终端命令行标准分线配色方案 */
+  --git-main-color: #808080;     /* 主轴主干线：暗灰色 */
+  --git-branch-color: #a04000;   /* 分支修改线：经典红橙色 */
+  --git-merge-color: #000080;    /* 合流主干点：深蓝色 */
+  
+  --focus-ring: 2px solid var(--sys-navy);
+  --line-height: 22px; 
 }
 
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
-.log-container {
-	max-width: var(--page-max-width);
-	margin: 0 auto;
+.git-fluid-viewport {
+  width: 100%;
+  padding: 10px 15px;
 }
 
-.log-main {
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
+.git-terminal-buffer {
+  width: 100%;
+  background: var(--sys-bg);
+  font-family: "Consolas", "Liberation Mono", "Menlo", "Monaco", "Courier New", Courier, monospace;
+  font-size: 14px;
+  color: var(--sys-black);
+  overflow-x: auto;
 }
 
-.page-title {
-	text-align: left;
-	color: #000080;
+.git-graph-matrix {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 12px 0;
 }
 
-.log-grid {
-	display: flex;
-	flex-wrap: wrap;
-	gap: var(--gap);
-	align-items: start;
+/* ==========================================================================
+   🧬 物理单行双轨栅格化系统 (锁死尺寸彻底解决断线隙缝)
+   ========================================================================== */
+.git-terminal-line {
+  display: grid;
+  grid-template-columns: 78px 1fr; /* 78px 像素级固定轨道宽度，完美咬合 */
+  height: var(--line-height);
+  line-height: var(--line-height);
+  text-decoration: none !important;
+  color: inherit;
 }
 
-.log-card {
-	flex: 0 0 270px;
-	max-width: 340px;
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	background: #000080;
-	overflow: hidden;
-	text-decoration: none;
-	color: inherit;
-
-	border-top: 2px solid #ffffff;
-	border-left: 2px solid #ffffff;
-	border-right: 2px solid #000080;
-	border-bottom: 2px solid #000080;
-
-	box-shadow:
-	2px 2px 0 #ffffff,
-    2px 2px 0 #000080;
-
-	transition: transform 0.15s ease, box-shadow 0.15s ease;
+.git-graph-col {
+  white-space: pre;
+  padding-left: 20px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  user-select: none;
+  display: flex;
+  align-items: stretch; /* 强行纵向拉伸，填补物理行间的任何缝隙 */
 }
 
-.log-card:hover {
-  transform: translate(2px, 2px);
-  box-shadow: none;
-  border-top-color: #000000;
-  border-left-color: #000000;
-  border-bottom-color: #ffffff;
-  border-right-color: #ffffff;
+.git-graph-col span {
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
 }
 
-.log-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  box-shadow: inset 1px 1px 0 rgba(255,255,255,0.4),
-              inset -1px -1px 0 rgba(0,0,0,0.4);
-  pointer-events: none;
+.git-text-col {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  white-space: nowrap; /* 🔒 严格防折行控制 */
+  overflow: hidden;
 }
 
-.log-thumb {
-	width: 100%;
-	height: 140px;
-	object-fit: cover;
-	display: block;
+.message-row .git-text-col {
+  padding-left: 16px; /* Commit message 按规范向右悬挂缩进 */
 }
 
-.log-content {
-	padding: 0.85rem 1rem;
-	display: flex;
-	flex-direction: column;
-	gap: 0.6rem;
-	flex: 1;
+/* ==========================================================================
+   🌈 Git Graph 多色拓扑符号着色器
+   ========================================================================== */
+.main-pipe { color: var(--git-main-color); }       /* 主轴直线：暗灰 */
+.main-node { color: var(--git-main-color); }       /* 基础存根 * ：暗灰 */
+
+.branch-node { color: var(--git-branch-color); }  /* 修改分支 * ：红橙 */
+.branch-pipe { color: var(--git-branch-color); }  /* 修改分支 | ：红橙 */
+.branch-slash { color: var(--git-branch-color); } /* 分支折线 \ 或 / ：红橙 */
+
+.merge-node { color: var(--sys-red); font-size: 16px; } /* Merge 节点核心高亮红星 */
+.merge-sha { color: var(--sys-navy); }
+
+/* ==========================================================================
+   ⚡ 精准 Hover 联动机制（仅 Merge 行和无修改常规主干行可触发）
+   ========================================================================== */
+.is-clickable {
+  cursor: pointer;
+  transition: background-color 0.06s ease, color 0.06s ease;
 }
 
-.log-title {
-	margin: 0;
-	font-size: 1.05rem;
-	font-weight: bold;
-	line-height: 1.2;
-	color: var(--text);
+.is-clickable:hover {
+  background-color: var(--sys-navy) !important;
+  color: var(--sys-white) !important;
 }
 
-.log-meta {
-	font-size: 0.82rem;
-	color: var(--muted);
-	display: flex;
-	flex-direction: column;
-	gap: 0.25rem;
+/* 当目标物理行被悬停时，强行让左边的星号、右边的哈希内容一体化变成白色 */
+.is-clickable:hover * {
+  color: var(--sys-white) !important;
+  background: transparent !important;
 }
 
-.log-meta .author,
-.log-meta .categories,
-.log-meta .tags {
-	color: white;
+.is-clickable:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: -1px;
 }
 
-.log-summary {
-	margin: 0;
-	color: white;
-	font-size: 0.92rem;
-	line-height: 1.5;
-	letter-spacing: 0.2px;
+/* ==========================================================================
+   🎨 终端文本内容着色器
+   ========================================================================== */
+.t-sha { color: #a04000; font-weight: bold; }
+.branch-sha { color: var(--sys-green); font-weight: bold; }
+.t-meta { color: var(--sys-black); }
+.text-tax { color: var(--sys-dark-gray); }
+
+.mtime-alert { 
+  color: var(--sys-red); 
+  font-weight: bold;
 }
 
-.read-more {
-	margin-top: auto;
-	font-size: 0.9rem;
-	font-weight: 600;
-	color: var(--accent);
-	text-align: right;
-	text-decoration: none;
+.t-subject { font-weight: bold; color: var(--sys-navy); }
+.t-summary { color: #333333; font-style: italic; }
+
+.t-toy {
+  color: var(--sys-red);
+  font-weight: bold;
+  background: rgba(204, 0, 0, 0.08);
+  padding: 1px 4px;
+  border-radius: 2px;
+  font-size: 11px;
 }
 
-.read-more:hover {
-	color: red;
-}
-
-@media (max-width: 640px) {
-	.log-grid {
-		grid-template-columns: repeat(2, 1fr);
-		gap: 0.75rem;
-	}
-
-	.log-thumb {
-		height: 160px;
-	}
-
-	.page-title {
-		font-size: 1.4rem;
-	}
+.routing-row, .historical-stub-row, .branch-row {
+  white-space: nowrap;
 }
