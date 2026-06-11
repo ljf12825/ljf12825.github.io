@@ -3,77 +3,80 @@
 {{ end }}
 
 {{ define "main" }}
+<div class="lab-card-container">
+  <main class="lab-card-main">
+    <h1 class="lab-page-title">{{ .Title }}</h1>
 
-<div class="lab-terminal">
-
-  <div class="lab-table">
-    <div class="lab-row lab-head">
-      <span class="col name">NAME</span>
-      <span class="col tags">TAG</span>
-      <span class="col categories">CATEGORY</span>
-      <span class="col status">STATUS</span>
-      <span class="col date">BIRTH</span>
-      <span class="col date">MODIFY</span>
-      <span class="col summary">SUMMARY</span>
-    </div>
-
-    {{ range .Pages.ByDate.Reverse }}
-    {{ $tags := .Params.tags }}
-    {{ $categories := .Params.categories }}
-    <div class="lab-row"
-         onclick="location.href='{{ .RelPermalink }}'">
-      
-      <span class="col name">
-        {{ .Title }}{{ if .Params.toy }}*{{ end }}
-      </span>
-
-      <span class="col tags">
-        {{ if $tags }}
-          {{ if reflect.IsSlice $tags }}
-            {{ range $tags }}
-              <span class="tag-item {{ . | urlize }}">{{ . }}</span>
+    <div class="lab-card-grid">
+      {{ range .Pages.ByDate.Reverse }}
+      {{ $tags := .Params.tags }}
+      {{ $categories := .Params.categories }}
+      {{ $status := .Params.status | default "unknown" }}
+      <div class="lab-item-card status-{{ $status | urlize }}" onclick="this.classList.toggle('flipped')">
+        <div class="lab-card-inner">
+          <div class="lab-card-front">
+            {{ with .Params.image }}
+              <img src="{{ . | relURL }}" alt="{{ .Title }}" class="lab-card-thumb">
+            {{ else }}
+              <img src="{{ "images/gamelife.jpg" | relURL }}" alt="{{ .Title }}" class="lab-card-thumb">
             {{ end }}
-          {{ else }}
-            <span class="tag-item {{ $tags | urlize }}">{{ $tags }}</span>
-          {{ end }}
-        {{ end }}
-      </span>
 
-      <span class="col categories">
-        {{ if $categories }}
-          {{ if reflect.IsSlice $categories }}
-            {{ range $categories }}
-              <span class="category-item {{ . | urlize }}">{{ . }}</span>
-            {{ end }}
-          {{ else }}
-            <span class="category-item {{ $categories | urlize }}">{{ $categories }}</span>
-          {{ end }}
-        {{ end }}
-      </span>
+            <div class="lab-card-content">
+              <h2 class="lab-card-title">{{ .Title }}{{ if .Params.toy }}<span class="toy-suffix">*</span>{{ end }}</h2>
 
-      <span class="col status">
-        <span class="status-badge {{ .Params.status | default "unknown" | urlize }}">
-          {{ .Params.status | default "UNKNOWN" }}
-        </span>
-      </span>
+              <div class="lab-card-meta">
+                <div class="meta-line">
+                  <span class="meta-label">Tags:</span>
+                  <div class="tag-list">
+                    {{ if $tags }}
+                      {{ if reflect.IsSlice $tags }}
+                        {{ range $tags }}<span class="tag-chip">{{ . }}</span>{{ end }}
+                      {{ else }}
+                        <span class="tag-chip">{{ $tags }}</span>
+                      {{ end }}
+                    {{ end }}
+                  </div>
+                </div>
 
-      <span class="col date">
-        {{ if not .Date.IsZero }}{{ .Date.Format "2006-01-02" }}{{ else }}—{{ end }}
-      </span>
+                <div class="meta-line">
+                  <span class="meta-label">Categories:</span>
+                  <div class="category-list">
+                    {{ if $categories }}
+                      {{ if reflect.IsSlice $categories }}
+                        {{ range $categories }}<span class="category-chip">{{ . }}</span>{{ end }}
+                      {{ else }}
+                        <span class="category-chip">{{ $categories }}</span>
+                      {{ end }}
+                    {{ end }}
+                  </div>
+                </div>
 
-      <span class="col date">
-        {{ if and (not .Lastmod.IsZero) (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) }}
-          {{ .Lastmod.Format "2006-01-02" }}
-        {{ else }}
-          —
-        {{ end }}
-      </span>
+                <div class="meta-line">
+                  <span class="meta-label">Status:</span>
+                  <span class="status-text {{ $status | urlize }}">{{ $status | upper }}</span>
+                </div>
 
-      <span class="col summary">{{ with .Params.summary }}{{ . }}{{ end }}</span>
+                <div class="date-row">
+                  <span><span class="meta-label">Birth:</span> {{ if not .Date.IsZero }}{{ .Date.Format "2006-01-02" }}{{ else }}—{{ end }}</span>
+                  {{ if and (not .Lastmod.IsZero) (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) }}
+                    <span><span class="meta-label">Mtime:</span> {{ .Lastmod.Format "2006-01-02" }}</span>
+                  {{ end }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lab-card-back">
+            <div class="lab-card-back-content">
+              <h3 class="back-title">Summary</h3>
+              <p class="back-summary">{{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary }}{{ end }}</p>
+              <a href="{{ .RelPermalink }}" class="back-read-more" onclick="event.stopPropagation()">MORE</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{ end }}
     </div>
-    {{ end }}
-
-  </div>
+  </main>
 </div>
-
 {{ end }}
