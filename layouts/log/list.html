@@ -6,50 +6,56 @@
 
 {{ define "main" }}
 {{ $sec := .Section }}
-<div class="log-container">
+<div class="retro-clean-container">
+  <div class="retro-clean-matrix">
+    {{ range (where (where .Site.RegularPages "Type" "log") "Section" $sec).ByDate.Reverse }}
+      {{ $hasMtime := and (not .Lastmod.IsZero) (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) }}
+      {{ $summary := .Summary }}{{ if .Params.summary }}{{ $summary = .Params.summary }}{{ end }}
 
-  <main class="log-main">
-    <h1 class="page-title">{{ .Title }}</h1>
-
-    <div class="log-grid">
-      {{ range where (where .Site.RegularPages "Type" "log") "Section" $sec }}
-        <a href="{{ .RelPermalink }}" class="log-card">
-          {{ with .Params.image }}
-            <img src="{{ . | relURL }}" alt="{{ $.Title }}" class="log-thumb">
-          {{ else }}
-            <img src="{{ "images/gamelife.jpg" | relURL }}" alt="{{ $.Title }}" class="log-thumb">
+      <div class="retro-clean-row">
+        <div class="retro-clean-time-rail">
+          <div class="time-item">
+            <span class="time-label">Create:</span>
+            <span class="time-value">{{ .Date.Format "2006-01-02 15:04" }}</span>
+          </div>
+          {{ if $hasMtime }}
+            <div class="time-item is-modified">
+              <span class="time-label">Modify:</span>
+              <span class="time-value">{{ .Lastmod.Format "2006-01-02 15:04" }}</span>
+            </div>
           {{ end }}
+          {{ if .Params.author }}
+            <div class="time-item author-item">
+              <span class="time-label">Author:</span>
+              <span class="time-value">{{ .Params.author }}</span>
+            </div>
+          {{ end }}
+        </div>
 
-          <div class="log-content">
-            <h2 class="log-title">{{ .Title }}</h2>
+        <a href="{{ .RelPermalink }}" class="retro-clean-content-block">
+          <div class="content-line title-line">
+            <h2 class="retro-post-title">
+              {{ .Title }}{{ if .Params.toy }} <span class="retro-toy-pill">[TOY]</span>{{ end }}
+            </h2>
+          </div>
 
-            <div class="log-meta">
-              <span class="date">
-                <b>crtime:</b> {{ .Date.Format "2006-01-02" }}
-                {{ if and (not .Lastmod.IsZero) (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) }}
-                  &nbsp;&nbsp; <b>mtime:</b> {{ .Lastmod.Format "2006-01-02" }}
-                {{ end }}
-              </span>
-              
-              {{ with .Params.author }}<span class="author"><b>author:</b> {{ . }}</span>{{ end }}
-              
-              <span class="meta-line">
-                {{ with .Params.categories }}{{ range $i, $cat := . }}[{{ $cat }}]{{ if lt (add $i 1) (len .) }} {{ end }}{{ end }}{{ end }}
-                {{ with .Params.tags }}#{{ delimit . " #" }}{{ end }}
+          {{ if or .Params.categories .Params.tags }}
+            <div class="content-line taxonomy-line">
+              <span class="retro-tax-text">
+                {{ if .Params.categories }}{{ range .Params.categories }}[{{ . }}]{{ end }}{{ end }}
+                {{ if .Params.tags }}#{{ delimit .Params.tags " #" }}{{ end }}
               </span>
             </div>
+          {{ else }}
+            <div class="content-line taxonomy-line empty-line"></div>
+          {{ end }}
 
-            <p class="log-summary">
-              {{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary }}{{ end }}
-            </p>
-
-            <span class="read-more">ReadMore</span>
+          <div class="content-line summary-line">
+            <span class="retro-post-summary">{{ if $summary }}{{ $summary }}{{ else }}No summary available.{{ end }}</span>
           </div>
         </a>
-      {{ end }}
-    </div>
-  </main>
-
+      </div>
+    {{ end }}
+  </div>
 </div>
-
 {{ end }}
