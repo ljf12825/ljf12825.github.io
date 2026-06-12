@@ -6,139 +6,56 @@
 
 {{ define "main" }}
 {{ $sec := .Section }}
-<div class="git-fluid-viewport">
-  <main class="git-terminal-buffer">
-    <div class="git-graph-matrix">
-      
-      {{ range (where (where .Site.RegularPages "Type" "log") "Section" $sec).ByDate.Reverse }}
-        {{ $hasMtime := and (not .Lastmod.IsZero) (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) }}
-        {{ $sha := substr (md5 .Title) 0 7 }}
-        {{ $msha := substr (md5 (print .Title "mtime")) 0 7 }}
-        {{ $mergeSha := substr (md5 (print .Title "merge")) 0 7 }}
-        {{ $summary := .Summary }}{{ if .Params.summary }}{{ $summary = .Params.summary }}{{ end }}
+<div class="retro-clean-container">
+  <div class="retro-clean-matrix">
+    {{ range (where (where .Site.RegularPages "Type" "log") "Section" $sec).ByDate.Reverse }}
+      {{ $hasMtime := and (not .Lastmod.IsZero) (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) }}
+      {{ $summary := .Summary }}{{ if .Params.summary }}{{ $summary = .Params.summary }}{{ end }}
 
-        {{ if $hasMtime }}
-          <div class="git-terminal-line historical-stub-row">
-            <div class="git-graph-col"><span class="main-node">*</span></div>
-            <div class="git-text-col"><span class="t-sha">commit {{ $sha }}</span></div>
+      <div class="retro-clean-row">
+        <div class="retro-clean-time-rail">
+          <div class="time-item">
+            <span class="time-label">Create:</span>
+            <span class="time-value">{{ .Date.Format "2006-01-02 15:04" }}</span>
           </div>
-
-          <div class="git-terminal-line routing-row">
-            <div class="git-graph-col"><span class="main-pipe">|</span><span class="branch-slash"> \</span></div>
-            <div class="git-text-col"></div>
-          </div>
-
-          <div class="git-terminal-line branch-row">
-            <div class="git-graph-col"><span class="main-pipe">|</span><span class="branch-node"> *</span></div>
-            <div class="git-text-col">
-              <span class="t-sha branch-sha">modify {{ $msha }}</span>
+          {{ if $hasMtime }}
+            <div class="time-item is-modified">
+              <span class="time-label">Modify:</span>
+              <span class="time-value">{{ .Lastmod.Format "2006-01-02 15:04" }}</span>
             </div>
-          </div>
-          
+          {{ end }}
           {{ if .Params.author }}
-            <div class="git-terminal-line branch-row">
-              <div class="git-graph-col"><span class="main-pipe">|</span><span class="branch-pipe"> |</span></div>
-              <div class="git-text-col"><span class="t-meta">Author: {{ .Params.author }}</span></div>
+            <div class="time-item author-item">
+              <span class="time-label">Author:</span>
+              <span class="time-value">{{ .Params.author }}</span>
             </div>
           {{ end }}
-
-          <div class="git-terminal-line branch-row">
-            <div class="git-graph-col"><span class="main-pipe">|</span><span class="branch-pipe"> |</span></div>
-            <div class="git-text-col"><span class="t-meta mtime-alert">Date:   {{ .Lastmod.Format "2006-01-02 15:04" }}</span></div>
-          </div>
-
-          <div class="git-terminal-line routing-row">
-            <div class="git-graph-col"><span class="main-pipe">|</span><span class="branch-slash"> /</span></div>
-            <div class="git-text-col"></div>
-          </div>
-
-          <a href="{{ .RelPermalink }}" class="git-terminal-line merge-joint-row is-clickable">
-            <div class="git-graph-col"><span class="merge-node">*</span></div>
-            <div class="git-text-col"><span class="t-sha merge-sha">merge {{ $mergeSha }}</span></div>
-          </a>
-
-          {{ if .Params.author }}
-            <div class="git-terminal-line info-row">
-              <div class="git-graph-col"><span class="main-pipe">|</span></div>
-              <div class="git-text-col"><span class="t-meta">Author: {{ .Params.author }}</span></div>
-            </div>
-          {{ end }}
-
-          <div class="git-terminal-line info-row">
-            <div class="git-graph-col"><span class="main-pipe">|</span></div>
-            <div class="git-text-col"><span class="t-meta">Date:   {{ .Date.Format "2006-01-02 15:04" }}</span></div>
-          </div>
-
-          <div class="git-terminal-line message-row">
-            <div class="git-graph-col"><span class="main-pipe">|</span></div>
-            <div class="git-text-col"><span class="t-subject">{{ .Title }}{{ if .Params.toy }} <span class="t-toy">[TOY]</span>{{ end }}</span></div>
-          </div>
-
-          {{ if or .Params.categories .Params.tags }}
-            <div class="git-terminal-line message-row">
-              <div class="git-graph-col"><span class="main-pipe">|</span></div>
-              <div class="git-text-col">
-                <span class="text-tax">
-                  {{ if .Params.categories }}{{ range .Params.categories }}[{{ . }}]{{ end }}{{ end }}
-                  {{ if .Params.tags }}#{{ delimit .Params.tags " #" }}{{ end }}
-                </span>
-              </div>
-            </div>
-          {{ end }}
-
-          <div class="git-terminal-line message-row">
-            <div class="git-graph-col"><span class="main-pipe">|</span></div>
-            <div class="git-text-col"><span class="t-summary">{{ $summary }}</span></div>
-          </div>
-
-        {{ else }}
-          <a href="{{ .RelPermalink }}" class="git-terminal-line active-commit-row is-clickable">
-            <div class="git-graph-col"><span class="main-node">*</span></div>
-            <div class="git-text-col"><span class="t-sha">commit {{ $sha }}</span></div>
-          </a>
-
-          {{ if .Params.author }}
-            <div class="git-terminal-line info-row">
-              <div class="git-graph-col"><span class="main-pipe">|</span></div>
-              <div class="git-text-col"><span class="t-meta">Author: {{ .Params.author }}</span></div>
-            </div>
-          {{ end }}
-
-          <div class="git-terminal-line info-row">
-            <div class="git-graph-col"><span class="main-pipe">|</span></div>
-            <div class="git-text-col"><span class="t-meta">Date:   {{ .Date.Format "2006-01-02 15:04" }}</span></div>
-          </div>
-
-          <div class="git-terminal-line message-row">
-            <div class="git-graph-col"><span class="main-pipe">|</span></div>
-            <div class="git-text-col"><span class="t-subject">{{ .Title }}{{ if .Params.toy }} <span class="t-toy">[TOY]</span>{{ end }}</span></div>
-          </div>
-
-          {{ if or .Params.categories .Params.tags }}
-            <div class="git-terminal-line message-row">
-              <div class="git-graph-col"><span class="main-pipe">|</span></div>
-              <div class="git-text-col">
-                <span class="text-tax">
-                  {{ if .Params.categories }}{{ range .Params.categories }}[{{ . }}]{{ end }}{{ end }}
-                  {{ if .Params.tags }}#{{ delimit .Params.tags " #" }}{{ end }}
-                </span>
-              </div>
-            </div>
-          {{ end }}
-
-          <div class="git-terminal-line message-row">
-            <div class="git-graph-col"><span class="main-pipe">|</span></div>
-            <div class="git-text-col"><span class="t-summary">{{ $summary }}</span></div>
-          </div>
-        {{ end }}
-
-        <div class="git-terminal-line routing-row">
-          <div class="git-graph-col"><span class="main-pipe">|</span></div>
-          <div class="git-text-col"></div>
         </div>
 
-      {{ end }}
-    </div>
-  </main>
+        <a href="{{ .RelPermalink }}" class="retro-clean-content-block">
+          <div class="content-line title-line">
+            <h2 class="retro-post-title">
+              {{ .Title }}{{ if .Params.toy }} <span class="retro-toy-pill">[TOY]</span>{{ end }}
+            </h2>
+          </div>
+
+          {{ if or .Params.categories .Params.tags }}
+            <div class="content-line taxonomy-line">
+              <span class="retro-tax-text">
+                {{ if .Params.categories }}{{ range .Params.categories }}[{{ . }}]{{ end }}{{ end }}
+                {{ if .Params.tags }}#{{ delimit .Params.tags " #" }}{{ end }}
+              </span>
+            </div>
+          {{ else }}
+            <div class="content-line taxonomy-line empty-line"></div>
+          {{ end }}
+
+          <div class="content-line summary-line">
+            <span class="retro-post-summary">{{ if $summary }}{{ $summary }}{{ else }}No summary available.{{ end }}</span>
+          </div>
+        </a>
+      </div>
+    {{ end }}
+  </div>
 </div>
 {{ end }}
