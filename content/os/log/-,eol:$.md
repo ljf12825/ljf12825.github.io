@@ -6,7 +6,6 @@ type: log
 tags: [Vim]
 categories: [Debug]
 summary: An erroneous operation and the mechanism behind it
-image: "/images/content/vim_title.png"
 ---
 
 ## 问题
