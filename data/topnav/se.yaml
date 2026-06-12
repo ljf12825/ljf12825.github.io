@@ -24,3 +24,5 @@
       url: "/se/toolchain/vcs/"
 - name: "Archives"
   url: "/se/archives/"
+- name: "Cooperation"
+  url: "/se/cooperation/"
