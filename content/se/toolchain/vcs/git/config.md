@@ -3,7 +3,7 @@ title: config
 date: 2025-12-31
 author: ljf12825
 type: file
-summary: git config
+summary: git config command, three level config and environment variables
 ---
 
 ## 配置作用域
@@ -208,3 +208,254 @@ git config --global user.name "ljf12825"
 ```bash
 git config --global user.email "xxx@example.com"
 ```
+
+### editor / pager
+
+`core.editor` Git需要输入长文本时调用的编辑器(commit message, rebase todo等)
+
+```ini
+[core]
+    editor = vim
+```
+
+等价命令
+
+```bash
+git config --global core.editor "vim"
+```
+
+优先级低于环境变量
+
+```txt
+GIT_EDITOR > VISUAL > EDITOR > core.editor
+```
+
+`core.pager` 分页器
+
+```ini
+[core]
+    pager = less -FRX
+```
+
+控制
+
+- `git log`
+- `git diff`
+- `git show`
+
+等命令的输出分页行为
+
+禁用分页
+
+```bash
+git --no-pager log
+```
+
+或
+
+```bash
+[core]
+    pager = cat
+```
+
+### line ending
+
+`core.autocrlf` 换行符自动转换
+
+```ini
+[core]
+    autocrlf = input
+```
+
+常见值
+
+| 值 | 行为 |
+| - | - |
+| `true` | checkout转CRLF，commit转LF |
+| `input` | 仅commit时转LF |
+| `false` | 不转换 |
+
+Linux/macOS通常用`input`，Windows团队通常用`true`
+
+真正决定文本规范的通常还是`.gitattributes`
+
+而不是`autocrlf`
+
+### merge / rebase
+
+`pull.rebase` `git pull`时是否默认rebase
+
+```ini
+[pull]
+    rebase = true
+```
+
+等价
+
+```bash
+git pull --rebase
+```
+
+开启后`fetch + rebase`，替代`fetch + merge`
+
+可以避免无意义merge commit
+
+`rebase.autoStash` rebase前自动stash工作区
+
+```ini
+[rebase]
+    autoStash = true
+```
+
+适合：有未提交修改，但想先pull --rebase 的场景
+
+### alias
+
+`alias.co`
+
+```ini
+[alias]
+    co = checkout
+```
+
+等价
+
+```bash
+git co
+```
+
+复杂alias支持shell
+
+```ini
+[alias]
+    lg = log --graph --online --decorate
+```
+
+带`!`会交给shell执行
+
+```ini
+[alias]
+    cleanup = "!git branch --merged | grep -v main | xargs git branch -d"
+```
+
+### signing
+
+`commit.gpgSign` 提交默认开启GPG签名
+
+```ini
+[commit]
+    gpgSign = true
+```
+
+对应
+
+```bash
+git commit -S
+```
+
+`user.signingKey` 指定签名key
+
+```ini
+[user]
+    signingKey = ABCDEF123456
+```
+
+### network
+
+`remote.origin.url` 远程仓库地址
+
+```ini
+[remote "origin"]
+url = git@github.com:user/repo.git
+```
+
+对应
+
+```bash
+git remote set-url origin ...
+```
+
+`push.default` `git push`的默认行为
+
+```ini
+[push]
+    default = simple
+```
+
+现代Git默认是`simple`，即“当前分支推送到同名upstream”
+
+### diff
+
+`merge.tool` 配置 merge 工具
+
+```ini
+[merge]
+    tool = vscode
+```
+
+### performance
+
+`core.fsmonitor` 文件系统监控优化，大型仓库能显著降低`git status`扫描成本
+
+`feature.manyFiles` Git官方提供的大仓库优化preset
+
+```ini
+[feature]
+    manyFiles = true
+```
+
+适合：
+
+- monorepo
+- node_modules 巨多
+- UE/Unity 工程
+
+## Git与环境变量
+
+Git在很多场景下都会主动查询环境变量，但是不是所有配置都有对应的环境变量；Git的配置系统和环境变量是两套机制，某些行为有限读取环境变量，某些则只看配置文件
+
+提交时
+
+```bash
+export GIT_AUTHOR_NAME="Jeff"
+export GIT_AUTHOR_EMAIL="jeff@example.com"
+
+git commit
+```
+
+Git会读取
+
+```txt
+GIT_AUTHOR_NAME
+GIT_AUTHOR_EMAIL
+```
+
+作为提交作者信息
+
+同理
+
+```txt
+GIT_COMMITTER_NAME
+GIT_COMMITTER_EMAIL
+```
+
+用于提交者信息
+
+Git启动时还会检查
+
+```bash
+GIT_DIR
+GIT_WORK_TREE
+```
+
+例如
+
+```bash
+GIT_DIR=/tmp/repo/.git git status
+```
+
+Git 不再去当前目录寻找`.git`
+
+### config与环境变量、CLI参数的优先级
+
+CLI参数 > 环境变量 > repo config > global config > system config > builtin default
