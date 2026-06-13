@@ -38,6 +38,8 @@
 - name: "Linux"
   url: "/os/linux/"
   children:
+    - name: "GNU"
+      url: "/os/linux/gnu/"
     - name: "GUI"
       url: "/os/linux/gui/"
     - name: "CLI"
@@ -54,12 +56,5 @@
       url: "/os/linux/permission_model/"
     - name: "Service Manager"
       url: "/os/linux/service_manager/"
-- name: "GNU"
-  url: "/os/gnu/"
-  children:
-    - name: "GCC"
-      url: "/os/gnu/gcc/"
-    - name: "GNU Binutils"
-      url: "/os/gnu/gnubinutils/"
 - name: "Theory"
   url: "/os/theory/"
