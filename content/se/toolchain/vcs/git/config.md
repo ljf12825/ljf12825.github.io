@@ -3,7 +3,7 @@ title: config
 date: 2025-12-31
 author: ljf12825
 type: file
-summary: git config command, three level config and environment variables
+summary: git config command, three level config
 ---
 
 ## 配置作用域
@@ -328,7 +328,7 @@ git co
 
 ```ini
 [alias]
-    lg = log --graph --online --decorate
+    lg = log --graph --oneline --decorate
 ```
 
 带`!`会交给shell执行
@@ -409,53 +409,3 @@ git remote set-url origin ...
 - monorepo
 - node_modules 巨多
 - UE/Unity 工程
-
-## Git与环境变量
-
-Git在很多场景下都会主动查询环境变量，但是不是所有配置都有对应的环境变量；Git的配置系统和环境变量是两套机制，某些行为有限读取环境变量，某些则只看配置文件
-
-提交时
-
-```bash
-export GIT_AUTHOR_NAME="Jeff"
-export GIT_AUTHOR_EMAIL="jeff@example.com"
-
-git commit
-```
-
-Git会读取
-
-```txt
-GIT_AUTHOR_NAME
-GIT_AUTHOR_EMAIL
-```
-
-作为提交作者信息
-
-同理
-
-```txt
-GIT_COMMITTER_NAME
-GIT_COMMITTER_EMAIL
-```
-
-用于提交者信息
-
-Git启动时还会检查
-
-```bash
-GIT_DIR
-GIT_WORK_TREE
-```
-
-例如
-
-```bash
-GIT_DIR=/tmp/repo/.git git status
-```
-
-Git 不再去当前目录寻找`.git`
-
-### config与环境变量、CLI参数的优先级
-
-CLI参数 > 环境变量 > repo config > global config > system config > builtin default
