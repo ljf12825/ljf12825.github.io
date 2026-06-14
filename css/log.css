@@ -22,7 +22,6 @@
   border-bottom: 1px solid #ffffff;
 }
 
-
 .retro-clean-time-rail {
   flex: 0 0 170px;
   display: flex;
@@ -62,9 +61,6 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  text-decoration: none !important;
-  color: #000000 !important;
-  cursor: pointer;
 }
 
 .content-line {
@@ -83,17 +79,17 @@
   visibility: hidden;
 }
 
-
 .retro-post-title {
   font-size: 15px;
   font-weight: bold;
   color: #000080 !important;
   margin: 0;
   display: inline;
+  text-decoration: none;
+  cursor: pointer;
 }
 
-
-.retro-clean-content-block:hover .retro-post-title {
+.retro-post-title:hover {
   color: #ff0000 !important;
   text-decoration: underline;
 }
