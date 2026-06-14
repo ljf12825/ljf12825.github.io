@@ -32,11 +32,11 @@
           {{ end }}
         </div>
 
-        <a href="{{ .RelPermalink }}" class="retro-clean-content-block">
+        <div class="retro-clean-content-block">
           <div class="content-line title-line">
-            <h2 class="retro-post-title">
+            <a href="{{ .RelPermalink }}" class="retro-post-title">
               {{ .Title }}{{ if .Params.toy }} <span class="retro-toy-pill">[TOY]</span>{{ end }}
-            </h2>
+            </a>
           </div>
 
           {{ if or .Params.categories .Params.tags }}
@@ -53,7 +53,7 @@
           <div class="content-line summary-line">
             <span class="retro-post-summary">{{ if $summary }}{{ $summary }}{{ else }}No summary available.{{ end }}</span>
           </div>
-        </a>
+        </div>
       </div>
     {{ end }}
   </div>
