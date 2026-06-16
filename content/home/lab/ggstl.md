@@ -4,8 +4,8 @@ type: lab
 date: 2026-02-27
 author: ljf12825
 status: suspended # active/archived/dead/unstable/suspended
-tags: stl
-categories: component
+tags: [stl]
+categories: [GG]
 summary: self implement stl
 repo: https://github.com/ljf12825/GGSTL/
 ---
