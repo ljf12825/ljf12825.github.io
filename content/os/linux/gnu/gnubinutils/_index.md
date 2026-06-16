@@ -1,8 +1,8 @@
 ---
-title: GNU Binutils
+title: GNU Binary Utilities
 type: file
 ---
 
-# GNU Binutils
+# GNU Binary Utilities
 
 <!--more-->
