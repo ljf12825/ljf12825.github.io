@@ -1,12 +1,10 @@
 ---
-title: file system
+title: Linux file system
 date: 2026-01-14
 author: ljf12825
 type: file
-summary: linux files, permission, link
+summary: Overview of Linux file system
 ---
-
-# File System
 
 Linux文件系统就像是整个操作系统的地基和骨架——所有数据都靠它来组织和存取。要理解它，需要同时把它当作一棵“倒挂的树”和一套“抽象层”
 
