@@ -30,10 +30,48 @@ summary: sudo command
 
 ## 从源码编译，安装，配置
 
-大多数Linux发行版是自带`sudo`的，但如果是某些最小化版本或者LFS则需要手动安装
+大多数Linux发行版内置`sudo`，但如果是某些最小化版本或者LFS则需要手动安装\
+该部分内容是从源码进行编译和安装的步骤\
 
-$ sudo apt update
+`sudo`是典型的Autotools构建系统
 
+进入`sudo`的源码根路径下，需要先配置编译参数，并生成Makefile。为了保证`sudo`的正常运行，建议指定一些标准的系统路径
+
+```bash
+./configure --prefix=/usr \
+            --libexecdir=/usr/lib \
+            --with-secure-path \
+            --sysconfdir=/etc
+```
+
+- `--prefix=/usr`：确保sudo安装到系统的标准二进制目录(`/usr/bin`)，而不是默认的`usr/local`
+- `--sysconfdir=/etc`：确保其配置文件放在`/etc/sudoers`
+- `--with-secure-path`：当`secure_path`为`no`时，用户在使用`sudo`执行命令时，会直接继承
+
+然后编译并安装
+
+通过`make install`安装的`sudo`二进制文件，可能并没有被正确赋予SUID权限以及root所有权，普通用户运行`sudo`时会直接报错：`sudo: must be setuid root`
+在root身份下执行以下两条命令修复权限
+
+```bash
+# 确保 sudo 的所有者和所属组都是 root
+chown root:root /usr/bin/sudo
+
+# 赋予 SUID 权限（让普通用户执行它时，能临时获得 root 身份）
+chmod 4755 /usr/bin/sudo
+```
+
+但现代版本的`sudo`会在configure时自动修复SUID权限
+
+```bash
+/bin/bash ../scripts/install-sh -c -o 0 -g 0 -m 04755 .libs/sudo /usr/bin/sudo
+```
+
+`-m 04755`说明安装脚本在把`sudo`复制到`usr/bin`的同时，自己已自动赋予了他核心的SUID权限，且所有者改为了root(`-o 0 -g 0`)
+
+当第一次使用sudo时，会弹出以下内容
+
+```txt
 We trust you have received the usual lecture from the local System
 Administrator. It usually boils down to these three things:
 
@@ -42,8 +80,46 @@ Administrator. It usually boils down to these three things:
     #3) With great power comes great responsibility.
 
 For security reasons, the password you type will not be visible.
+```
 
+如果弹出类似的错误
+
+```txt
+username is not in the suders file. This incident will be reported.
+```
+
+说明虽然装好了`sudo`，但没有把普通用户`username`加入允许提权的“白名单”中
+
+切换回root用户，在root执行
+
+```bash
 visudo
+```
+
+在打开的文件中找到
+```txt
+root    ALL=(ALL:ALL) ALL
+```
+
+在这行下面添加
+
+```txt
+username    ALL=(ALL:ALL) ALL
+```
+
+保存并退出即可
+
+安装配置后可以使用
+
+```bash
+sudo whoami
+```
+
+进行测试，如果输出`root`，则说明配置成功
+
+### `/etc/sudoers`
+
+`visudo`是Linux系统中专门用来编辑和配置`sudo`权限白名单（即
 
 ## 使用
 
