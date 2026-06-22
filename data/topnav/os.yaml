@@ -24,17 +24,6 @@
       url: "/os/c/practice/"
     - name: "Ecosystem"
       url: "/os/c/ecosystem"
-- name: "Assembly"
-  url: "/os/as/"
-  children:
-    - name: "Standard"
-      url: "/os/as/standard/"
-    - name: "Implementation"
-      url: "/os/as/implementation/"
-    - name: "Practice"
-      url: "/os/as/practice/"
-    - name: "Ecosystem"
-      url: "/os/as/ecosystem/"
 - name: "Linux"
   url: "/os/linux/"
   children:
