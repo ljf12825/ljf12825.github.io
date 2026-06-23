@@ -2,6 +2,6 @@
 type: file
 ---
 
-# Puzzle
+# Online Judge
 
 <!--more-->

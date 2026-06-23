@@ -6,3 +6,5 @@
   url: "/home/reference/"
 - name: "Lab"
   url: "/home/lab/"
+- name: "OJ"
+  url: "/home/oj/"

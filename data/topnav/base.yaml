@@ -2,8 +2,6 @@
   url: "/base/"
 - name: "Log"
   url: "/base/log/"
-- name: "Puzzle"
-  url: "/base/puzzle/"
 - name: "ASM"
   url: "/base/asm/"
   children:
