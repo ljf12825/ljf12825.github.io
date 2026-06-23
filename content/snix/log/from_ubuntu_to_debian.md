@@ -209,23 +209,23 @@ sudo update-grub
 
 Debian会根据你所在地区，提供多个apt源供选择
 
-[[![debian_install_apt_source](/images/content/debian_install_apt_source.png)](/images/content/debian_install_apt_source.png)](/images/content/debian_install_apt_source.png)
+[![debian_install_apt_source](/images/content/debian_install_apt_source.png)](/images/content/debian_install_apt_source.png)
 
-`deb.debian.org`不用代理用不了
+`deb.debian.org`需要代理才能访问
 
-[[![partition_disk_0](/images/content/partition_disk_0.png)](/images/content/partition_disk_0.png)](/images/content/partition_disk_0.png)
+[![partition_disk_0](/images/content/partition_disk_0.png)](/images/content/partition_disk_0.png)
 
-[[![partition_disk](/images/content/partition_disk.png)](/images/content/partition_disk.png)](/images/content/partition_disk.png)
+[![partition_disk](/images/content/partition_disk.png)](/images/content/partition_disk.png)
 
-[[![partition_disk_select](/images/content/partition_disk_select.png)](/images/content/partition_disk_select.png)](/images/content/partition_disk_select.png)
+[![partition_disk_select](/images/content/partition_disk_select.png)](/images/content/partition_disk_select.png)
 
-[[![debian_contest](/images/content/debian_contest.png)](/images/content/debian_contest.png)](/images/content/debian_contest.png)
+[![debian_contest](/images/content/debian_contest.png)](/images/content/debian_contest.png)
 
-[[![debian_install_complete](/images/content/debian_install_complete.png)](/images/content/debian_install_complete.png)](/images/content/debian_install_complete.png)
+[![debian_install_complete](/images/content/debian_install_complete.png)](/images/content/debian_install_complete.png)
 
-[[![partition_mount_option](/images/content/partition_mount_option.png)](/images/content/partition_mount_option.png)](/images/content/partition_mount_option.png)
+[![partition_mount_option](/images/content/partition_mount_option.png)](/images/content/partition_mount_option.png)
 
-[[![partition_mount](/images/content/partition_mount.png)](/images/content/partition_mount.png)](/images/content/partition_mount.png)
+[![partition_mount](/images/content/partition_mount.png)](/images/content/partition_mount.png)
 
-[[![software_selection](/images/content/software_selection.png)](/images/content/software_selection.png)](/images/content/software_selection.png)
+[![software_selection](/images/content/software_selection.png)](/images/content/software_selection.png)
 

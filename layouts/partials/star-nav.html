@@ -19,12 +19,14 @@
     {{- $ecoRecent := len (where $ecoPages "Lastmod" "ge" $recentCutoff) -}}
     {{- $langPages := where $all "Section" "lang" -}}
     {{- $langRecent := len (where $langPages "Lastmod" "ge" $recentCutoff) -}}
-    {{- $osPages := where $all "Section" "os" -}}
-    {{- $osRecent := len (where $osPages "Lastmod" "ge" $recentCutoff) -}}
+    {{- $snixPages := where $all "Section" "snix" -}}
+    {{- $snixRecent := len (where $snixPages "Lastmod" "ge" $recentCutoff) -}}
     {{- $netPages := where $all "Section" "net" -}}
     {{- $netRecent := len (where $netPages "Lastmod" "ge" $recentCutoff) -}}
-    {{- $basePages := where $all "Section" "base" -}}
-    {{- $baseRecent := len (where $basePages "Lastmod" "ge" $recentCutoff) -}}
+    {{- $cryptoPages := where $all "Section" "crypto" -}}
+    {{- $cryptoRecent := len (where $cryptoPages "Lastmod" "ge" $recentCutoff) -}}
+    {{- $csappPages := where $all "Section" "csapp" -}}
+    {{- $csappRecent := len (where $csappPages "Lastmod" "ge" $recentCutoff) -}}
     {{- $siPages := where $all "Section" "si" -}}
     {{- $siRecent := len (where $siPages "Lastmod" "ge" $recentCutoff) -}}
 
@@ -48,9 +50,10 @@
                 (dict "name" "SE" "path" "/se/" "pages" $sePages "recent" $seRecent)
                 (dict "name" "Home" "path" "/home/" "pages" $homePages "recent" $homeRecent)
                 (dict "name" "Lang" "path" "/lang/" "pages" $langPages "recent" $langRecent)
-                (dict "name" "OS" "path" "/os/" "pages" $osPages "recent" $osRecent)
+                (dict "name" "*nix" "path" "/snix/" "pages" $snixPages "recent" $snixRecent)
                 (dict "name" "NET" "path" "/net/" "pages" $netPages "recent" $netRecent)
-                (dict "name" "Base" "path" "/base/" "pages" $basePages "recent" $baseRecent)
+                (dict "name" "Crypto" "path" "/crypto/" "pages" $cryptoPages "recent" $cryptoRecent)
+                (dict "name" "CSAPP" "path" "/csapp/" "pages" $csappPages "recent" $csappRecent)
                 (dict "name" "Si" "path" "/si/" "pages" $siPages "recent" $siRecent)
             -}}
 

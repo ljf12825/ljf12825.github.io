@@ -1,6 +1,6 @@
 ---
-title: Operating System
-type: os
+title: "*nix"
+type: "*nix"
 ---
 
 > INCLUDE

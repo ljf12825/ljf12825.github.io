@@ -6,11 +6,11 @@
 {{ else if eq $sec "eco" }}
   {{ partial "topnav/eco.html" . }}
 
-{{ else if eq $sec "os" }}
-  {{ partial "topnav/os.html" . }}
+{{ else if eq $sec "snix" }}
+  {{ partial "topnav/snix.html" . }}
 
-{{ else if eq $sec "base" }}
-  {{ partial "topnav/base.html" . }}
+{{ else if eq $sec "csapp" }}
+  {{ partial "topnav/csapp.html" . }}
 
 {{ else if eq $sec "dnet" }}
   {{ partial "topnav/dnet.html" . }}
@@ -32,6 +32,9 @@
 
 {{ else if eq $sec "si" }}
   {{ partial "topnav/si.html" . }}
+
+{{ else if eq $sec "crypto" }}
+  {{ partial "topnav/crypto.html" . }}
 
 {{ else if eq $sec "searchlist" }}
   {{ partial "topnav/searchlist.html" . }}

@@ -1,6 +1,5 @@
 ---
-title: Cryptography
-type: file
+type: crypto
 ---
 
 # Cryptography

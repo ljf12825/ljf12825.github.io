@@ -1,0 +1,6 @@
+- name: "Crypto"
+  url: "/crypto/"
+- name: "Engineering"
+  url: "/crypto/engineering/"
+- name: "Theory"
+  url: "/crypto/theory/"
