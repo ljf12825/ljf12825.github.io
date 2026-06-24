@@ -1,7 +1,0 @@
----
-type: file
----
-
-# Theory
-
-<!--more-->

@@ -1,4 +1,0 @@
----
-title: API
-type: file
----
