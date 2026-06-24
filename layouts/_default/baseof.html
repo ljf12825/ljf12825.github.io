@@ -23,41 +23,21 @@
 </head>
 
 <body data-page-type="{{ .Type }}" date-page-section="{{ .Section }}" data-page-path="{{ .RelPermalink }}">
-	{{ if ne .Type "root" }}
-	<!-- 页眉 -->
-	{{ partial "header.html" . }}
-
 	<!-- 副导航 -->
 	{{ partial "topnav.html" . }}
 
-	<!-- 主导航 -->
-	{{ partialCached "star-nav.html" . }}
-
-	<script defer src="{{ "/js/star-nav.js" | relURL }}"></script>
-	<script defer src="{{ "/js/site.js" | relURL }}"></script>
-	<script defer src="{{ "/js/star-active.js" | relURL }}"></script>
-
 	{{ partial "great-indexer.html" . }}
 	<script defer src="{{ "/js/great-indexer.js" | relURL }}"></script>
-
-	<script defer src="{{ "/js/reset-layout.js" | relURL }}"></script>
-	{{ end }}
-
-	{{ if eq .Type "home" }}
-	<script defer src="{{ "/js/homealive.js" | relURL }}"></script>
-	{{ end }}
 
 	<script src="/js/code-lang.js"></script>
 
 	<!-- 主体内容 -->
 	{{ block "main" . }}{{ end }}
 
-	{{ if ne .Type "root" }}
 	{{ partial "mermaid.html" . }}
 
 	<!-- 页脚 -->
 	{{ partial "footer.html" . }}
-	{{ end }}
 </body>
 
 </html>
