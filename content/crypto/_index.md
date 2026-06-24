@@ -1,7 +1,0 @@
----
-type: crypto
----
-
-# Cryptography
-
-<!--more-->

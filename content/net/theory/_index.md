@@ -1,5 +1,0 @@
----
-type: file
----
-
-# Theory

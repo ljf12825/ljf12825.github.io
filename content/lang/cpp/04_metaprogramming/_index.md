@@ -1,4 +1,0 @@
----
-title: TMP
-type: file
----
