@@ -23,12 +23,13 @@
 </head>
 
 <body data-page-type="{{ .Type }}" date-page-section="{{ .Section }}" data-page-path="{{ .RelPermalink }}">
-	<!-- 副导航 -->
-	{{ partial "topnav.html" . }}
 
+	<!-- 顶端索引框（HTML结构 + JSON数据） -->
 	{{ partial "great-indexer.html" . }}
+	
+	<!-- 独立的JavaScript逻辑 -->
+	<script defer src="{{ "/js/data-loader.js" | relURL }}"></script>
 	<script defer src="{{ "/js/great-indexer.js" | relURL }}"></script>
-
 	<script src="/js/code-lang.js"></script>
 
 	<!-- 主体内容 -->
