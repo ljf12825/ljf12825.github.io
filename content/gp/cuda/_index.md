@@ -1,7 +1,0 @@
----
-type: file
----
-
-# CUDA
-
-<!--more-->

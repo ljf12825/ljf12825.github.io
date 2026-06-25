@@ -1,9 +1,0 @@
-- name: "Net"
-  url: "/net/"
-- name: "Log"
-  url: "/net/log/"
-- name: "Theory"
-  url: "/net/theory/"
-  children:
-    - name: "OSI & TCP-IP"
-      url: "/net/theory/osi_tcp-ip/"

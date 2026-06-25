@@ -1,4 +1,0 @@
----
-title: Implementation
-type: file
----

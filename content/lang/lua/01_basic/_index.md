@@ -1,4 +1,0 @@
----
-title: Basic
-type: file
----

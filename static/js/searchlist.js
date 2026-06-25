@@ -1,11 +1,27 @@
 (function () {
-  const holder = document.getElementById('searchlist-result');
+  // 自己读取数据，不依赖外部加载器
   const dataScript = document.getElementById('global-index-data');
-  if (!holder || !dataScript) return;
-  const pages = JSON.parse(dataScript.textContent || '[]');
+  if (!dataScript) {
+    console.error('global-index-data script not found');
+    return;
+  }
+  
+  let pages = [];
+  try {
+    pages = JSON.parse(dataScript.textContent || '[]');
+  } catch (e) {
+    console.error('Failed to parse global-index-data:', e);
+    pages = [];
+  }
+  
+  if (pages.length === 0) {
+    console.warn('No pages data found');
+  }
+  
   const params = new URLSearchParams(location.search);
   const qRaw = params.get('q') || '';
   const q = decodeURIComponent(qRaw).toLowerCase().trim();
+  
   const scope = (params.get('scope') || 'global').toLowerCase();
   const searchType = (params.get('type') || '').toLowerCase();
   const section = (params.get('section') || '').toLowerCase();
@@ -52,13 +68,6 @@
   const isCurrentScope = scope !== 'global';
   const isShowAll = q === '/*';
 
-  console.log('=== searchlist debug ===');
-  console.log('scope:', scope);
-  console.log('searchType:', searchType);
-  console.log('path:', path);
-  console.log('isCurrentScope:', isCurrentScope);
-  console.log('isShowAll:', isShowAll);
-
   const hit = p => {
     if (isCurrentScope) {
       if (searchType === 'section' && section) {
@@ -72,7 +81,6 @@
         const normalizedPath = normalizePath(path);
         const pageParentPath = normalizePath(p.parentPath || "");
         const pagePermalink = normalizePath(p.permalink || "");
-        console.log('checking:', p.permalink, 'parentPath:', pageParentPath, 'normalizedPath:', normalizedPath, 'match:', pageParentPath === normalizedPath || pagePermalink.startsWith(normalizedPath));
         if (pageParentPath !== normalizedPath && !pagePermalink.startsWith(normalizedPath)) {
           return false;
         }
@@ -110,8 +118,6 @@
       return 0;
     });
 
-  console.log('matched count:', matched.length);
-
   const result = matched.map(m => m.page);
   const scores = matched.map(m => m.score);
 
@@ -134,61 +140,57 @@
     ? `${result.length} result${result.length !== 1 ? 's' : ''} for ${filterInfo.join(' | ')}`
     : `${result.length} total page${result.length !== 1 ? 's' : ''}`;
 
+  // 更新顶部统计信息
   const titleEl = document.getElementById('topnav-search-title');
   if (titleEl) {
-    const resultSpan = titleEl.querySelector('span:last-child');
-    if (resultSpan) {
-      resultSpan.textContent = summaryText;
-    }
+    titleEl.textContent = summaryText;
+  }
+
+  // 检查是否有结果渲染容器
+  const holder = document.getElementById('searchlist-result');
+  if (!holder) return;
+
+  // 构建表格 - 固定占满宽度，标题可点击
+  let rowsHTML = '';
+  for (let i = 0; i < result.length; i++) {
+    const p = result[i];
+    const matchScore = scores[i];
+    const maxScore = 200;
+    const percentage = isShowAll ? '-' : Math.min(100, Math.round((matchScore / maxScore) * 100)) + '%';
+    
+    rowsHTML += `
+      <tr>
+        <td><a href="${p.permalink}" style="color: #0000ee; text-decoration: underline;">${p.title}</a></td>
+        <td>{${p.section || '/'}}</td>
+        <td>${p.author || '-'}</td>
+        <td>${p.date || '-'}</td>
+        <td>${p.modify || '-'}</td>
+        <td style="word-break: break-word; white-space: normal;">${p.summary || '-'}</td>
+        <td>${ensureArray(p.tags).length > 0 ? ensureArray(p.tags).map(t => `#${t}`).join(' ') : '-'}</td>
+        <td>${percentage}</td>
+      </tr>
+    `;
   }
 
   const listHTML = result.length > 0
-    ? `<div class="searchlist">
-        <div class="search_row header">
-          <span>Name</span>
-          <span>Path</span>
-          <span>Type</span>
-          <span>Section</span>
-          <span>Author</span>
-          <span>Ctime</span>
-          <span>Mtime</span>
-          <span>Summary</span>
-          <span>Tags</span>
-          <span>Categories</span>
-          <span>Match</span>
-        </div>
-        ${result.map((p, i) => {
-      const matchScore = scores[i];
-      const maxScore = 200;
-      const percentage = isShowAll ? '-' : Math.min(100, Math.round((matchScore / maxScore) * 100)) + '%';
-
-      return `
-          <div class="search_row">
-            <span class="search_name">
-              <a href="${p.permalink}">${p.title}</a>
-            </span>
-            <span class="search_path">${p.permalink}</span>
-            <span class="search_type">&lt;${(p.type || '').toLowerCase()}&gt;</span>
-            <span class="search_section">{${p.section || '/'}}</span>
-            <span class="search_author">${p.author || '-'}</span>
-            <span class="search_date">${p.date || '-'}</span>
-            <span class="search_date">${p.modify || '-'}</span>
-            <span class="search_summary">${p.summary || '-'}</span>
-            <span class="search_tags">
-              ${ensureArray(p.tags).length > 0
-          ? ensureArray(p.tags).map(t => `<span class="tag">#${t}</span>`).join(' ')
-          : '<span class="empty">-</span>'}
-            </span>
-            <span class="search_cats">
-              ${ensureArray(p.categories).length > 0
-          ? ensureArray(p.categories).map(c => `<span class="cat">[${c}]</span>`).join(' ')
-          : '<span class="empty">-</span>'}
-            </span>
-            <span class="search_score">${percentage}</span>
-          </div>
-        `}).join('')}
-      </div>`
-    : '<p class="no-results">No results found</p>';
+    ? `<table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
+        <thead>
+          <tr>
+            <th style="text-align: left; border-bottom: 2px solid #000; padding: 4px 8px; width: 15%;">Name</th>
+            <th style="text-align: left; border-bottom: 2px solid #000; padding: 4px 8px; width: 10%;">Section</th>
+            <th style="text-align: left; border-bottom: 2px solid #000; padding: 4px 8px; width: 10%;">Author</th>
+            <th style="text-align: left; border-bottom: 2px solid #000; padding: 4px 8px; width: 10%;">Ctime</th>
+            <th style="text-align: left; border-bottom: 2px solid #000; padding: 4px 8px; width: 10%;">Mtime</th>
+            <th style="text-align: left; border-bottom: 2px solid #000; padding: 4px 8px; width: 20%;">Summary</th>
+            <th style="text-align: left; border-bottom: 2px solid #000; padding: 4px 8px; width: 15%;">Tags</th>
+            <th style="text-align: left; border-bottom: 2px solid #000; padding: 4px 8px; width: 10%;">Match</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rowsHTML}
+        </tbody>
+      </table>`
+    : '<p>No results found</p>';
 
   holder.innerHTML = listHTML;
 })();

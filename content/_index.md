@@ -1,5 +1,6 @@
 ---
-type: root
+title: $HOME
+type: home
 ---
 
 ## BUILD INFO
@@ -13,93 +14,97 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-## USER MANUAL
+## Code for myself
 
-### Website Structure
+```text
+The brain works much like an LRU cache,
+so some knowledge needs an external environment to be stored.
 
-This website consists of multiple sub-websites.\
-This page is [root(/)](/), provides build informations, a user manual and entrance to [$HOME(~)](/home/)\
-If this is your first time here, I recommend that you read through this user manual.
+Everything—and our understanding of it—is constantly changing.
+Therefore, everything must keep evolving.
 
-### Floating Window
+I pursue first principles, original documents, and unprocessed sources of knowledge:
+pure, solid, independent, and thoughtful—like a shot of espresso.
 
-This website makes extensive use of floating windows to minimize page real estate and accommodate certain extreme screen aspect ratios.\
-The floating window is characterized by a blue title bar and is draggable.\
-Double-click the title to toggle between expanded and collapsed states.\
-The title structure takes the form `>> >> >> NAME << << <<` or `<<<<<<NAME>>>>>>`, corresponding to the expanded and collapsed states, respectively.\
-The floating window features state and position memory capabilities; it reverts to its default layout—and only does so—when the page width is reduced, in order to prevent it from being obscured.\
-The `NAME` includes:
+If what I record here is helpful to you, it is my pleasure.
+If you find any errors, please feel free to contact me.
 
-- `Navigation` and `Nav`
-- `Table of Contents` and `Toc`
-- `Indexer` and `Idx`
+If one day this site is no longer updated,
+please check the latest commit for the most recent changes.
 
-### Two Types of Navigation
+Status: ALIVE
+```
 
-This site has two Navigation options: `Main Navigation` and `Top Navigation`.\
-As shown in the STRUCTURE, this site uses the root page(`/`, i.e. this page) as the root node for all pages.\
-`Main Navigation` is responsible for navigating between different subsites/modules/second-level directories and external websites.\
-`Top Navigation` is responsible for navigation within the same subsite's third-level directory; different subsites have different `Top Navigation`.
+## Full License
 
-#### Main Navigation
+```md
+# Multi-License Declaration
 
-`Main Navigation` is floating window `Navigation`
-The main navigation's default position is in the bottom-right corner of the page. \
-The website will remember the position and expanded state, and retain the state on the next visit.\
-Navigation comprises two modes: `INTERNAL` and `EXTERNAL` which handle internal and external site redirects, respectively. 
+Copyright © 2026 Jeff Lee (ljf12825)
 
-- The `Internal` meaning and content of each node in `Main Navigation` are explained in detail in `~/$HOME`
-- The specific details regarding the `External` redirect links can be found under `～/reference/`.
+This repository contains different types of content, each licensed separately.
 
-#### Top Navigation
+---
 
-`Top Navigation` is used to provide navigation for the current sub-site.\
-It always displays under `Prompt Command`.\
-If this option has sub-options, a floating window will appear when you hover the mouse over this item.\
-On `Search List` pages, it switches to displaying search result metadata instead.
+## 1. Website & log Content
 
-### ToC
+Unless otherwise noted, log posts and general website content are licensed under:
 
-ToC(Table of Contents) is a floating window that appears only on the article page and is responsible for quick article title navigation.\
-The default position of ToC is the right-top corner of content page.
+**Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)**  
+https://creativecommons.org/licenses/by-sa/4.0/
 
-### Indexer
+Applies to:
+- `content/`
+- All Markdown/HTML content unless otherwise specified.
 
-Indexer is a floatting windows which default position is left-bottom corner of page.\
-Indexer is a global search engine that allows you to quickly index articles by entering their titles or keywords.\
-The search scope has two modes: `Global` and `Current`. `Global` mode searches all content on the website from anywhere within the site, while `Current` mode searches within the most granular possible scope.\
-You can also perform a fuzzy search by gradually narrowing down the search scope by selecting `Tags`, `Categories`, and `Types`.\
-The `Top Results` section will provide up to eight of the most relevant results. To view the complete search results, click `MORE` to jump to the `Search List` for more details.\
-If there are no results, `MORE` cannot be clicked.\
-Typing `/*` will match all options.
+---
 
-When you are located within a subfolder under `eco/engine/`, the Indexer displays a 3D scatter plot, allowing you to quickly gain an overview and navigate.
+## 2. Article / Academic Content
 
-#### Search List
+Papers and academic-level writings are licensed under:
 
-`Search List` is a special page which shows all results filtered by `Indexer`, and it supports as detailed information as possible of results.
+**Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**  
+https://creativecommons.org/licenses/by-nc/4.0/
 
-### Prompt Command
+Applies to:
+- `content/home/article/`
+- `content/hoem/reference/`
 
-The Prompt Command format `ip@url:path/$ command`
+---
 
-#### ip
+## 3. Code Examples in Documentation
 
-Site will query your ip from api, and it used solely for display purposes.\
-If the query fails, `guest` is displayed by default.\
+All code snippets and examples contained within Markdown or HTML documents
+are considered part of the documentation and are licensed under the same
+license as the document in which they appear, unless otherwise stated.
 
-#### command
+These code examples are provided for educational and illustrative purposes
+and are not intended as production-ready software.
 
-`command` includes:
+---
 
-- `ls | xarg cat` at fold 
-- `command = less content name` at content
+## 4. Assets and Other Materials
 
-#### path
+Images, diagrams, datasets, and other project assets are licensed under
+the same license as the content they accompany, unless otherwise stated.
 
-`path` consists of a series of links; clicking on a specific segment allows for navigation, thereby implementing a breadcrumb trail.
+---
 
---- END ---
+## Notes
 
-Jeff Lee\
-20 May 2026
+- If a file or directory contains its own LICENSE file, that license takes precedence.  
+- If no license is specified, all rights are reserved.  
+- Commercial use of non-code content is prohibited unless explicitly allowed.
+```
+
+>Me: Jeff Lee(ljf12825)
+
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <span>GitHub: <a href="https://github.com/ljf12825">Jeff Lee(ljf12825)</a></span>
+  <span>Build with <a href="https://gohugo.io/">Hugo</a></span>
+</div>
+
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <span>E-mail: <a href="mailto:ljf12825@graingen.com">ljf12825@graingen.com</a></span>
+  <span><img src="/images/imgi_2_hugo-logo-wide.svg" alt="HugoLogo" width="150" height="40" class="hugo-logo"></span>
+</div>

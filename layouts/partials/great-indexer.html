@@ -1,163 +1,22 @@
-{{- $pages := where .Site.RegularPages "Draft" "ne" true -}}
-{{- $currentSection := .Section -}}
-{{- $currentType := .Type -}}
-{{- $currentPath := .RelPermalink -}}
-
-{{- $engineName := "" -}}
-{{- $engineDir := "" -}}
-{{- if in .RelPermalink "/eco/engine/unity/" -}}
-  {{- $engineName = "Unity" -}}
-  {{- $engineDir = "eco/engine/unity/" -}}
-{{- else if in .RelPermalink "/eco/engine/ue/" -}}
-  {{- $engineName = "UE" -}}
-  {{- $engineDir = "eco/engine/ue/" -}}
-{{- else if in .RelPermalink "/eco/engine/godot/" -}}
-  {{- $engineName = "Godot" -}}
-  {{- $engineDir = "eco/engine/godot/" -}}
-{{- end -}}
-
-{{- $versionSequence := slice -}}
-{{- if eq $engineName "Unity" -}}
-  {{- $versionSequence = slice "Unity1.x" "Unity2.x" "Unity3.x" "Unity4.x" "Unity5.x" "Unity2017" "Unity2018" "Unity2019" "Unity2020" "Unity2021" "Unity2022" "Unity6" -}}
-{{- else if eq $engineName "UE" -}}
-  {{- $versionSequence = slice "UE3" "UE4" "UE5" -}}
-{{- else if eq $engineName "Godot" -}}
-  {{- $versionSequence = slice "Godot1.x" "Godot2.x" "Godot3.x" "Godot4.x" -}}
-{{- end -}}
-
-{{- $nav3dNodes := slice -}}
-{{- if $engineName -}}
-  {{- $allPages := where site.Pages "File" "!=" nil -}}
-  
-  {{- range $allPages -}}
-    {{- if and .File (in .File.Dir $engineDir) -}}
-    {{- if isset .Params "alive" -}}
-      {{- if .Params.tags -}}
-        {{- $tags := .Params.tags -}}
-        {{- if ge (len $tags) 3 -}}
-          {{- $xTag := index $tags 0 -}}
-          {{- $yRaw := index $tags 1 -}}
-          {{- $zRaw := index $tags 2 -}}
-          {{- $y := -1 -}}
-          {{- $z := -1 -}}
-          
-          {{- if findRE `^D[0-5]$` $yRaw -}}
-            {{- $y = int (replaceRE `^D` "" $yRaw) -}}
-          {{- else -}}
-            {{- errorf "Page %s: Depth tag '%s' is invalid. Must be D0-D5" .RelPermalink $yRaw -}}
-          {{- end -}}
-          
-          {{- range $idx, $ver := $versionSequence -}}
-            {{- if eq $zRaw $ver -}}
-              {{- $z = $idx -}}
-            {{- end -}}
-          {{- end -}}
-          
-          {{- if eq $z -1 -}}
-            {{- errorf "Page %s: Time tag '%s' not found in version sequence" .RelPermalink $zRaw -}}
-          {{- end -}}
-          
-          {{- $alive := 1 -}}
-          {{- if eq (printf "%T" .Params.alive) "bool" -}}
-            {{- if .Params.alive -}}
-              {{- $alive = 1 -}}
-            {{- else -}}
-              {{- $alive = 0 -}}
-            {{- end -}}
-          {{- else if or (eq .Params.alive 0) (eq .Params.alive 1) -}}
-            {{- $alive = int .Params.alive -}}
-          {{- else if eq .Params.alive "0" -}}
-            {{- $alive = 0 -}}
-          {{- else if eq .Params.alive "1" -}}
-            {{- $alive = 1 -}}
-          {{- else -}}
-            {{- errorf "Page %s: alive parameter '%v' is invalid. Must be true/false or 0/1" .RelPermalink .Params.alive -}}
-          {{- end -}}
-          
-          {{- if and (ge $y 0) (ge $z 0) (ge $alive 0) -}}
-            {{- $node := dict 
-              "title" .Title
-              "permalink" .RelPermalink
-              "filepath" .File.Dir
-              "x" $xTag
-              "y" $y
-              "z" $z
-              "yLabel" $yRaw
-              "zLabel" $zRaw
-              "alive" $alive
-              "summary" (.Summary | plainify | truncate 80)
-              "author" (.Params.author | default "")
-              "date" (.Date.Format "2006-01-02")
-              "modify" (.Lastmod.Format "2006-01-02")
-            -}}
-            {{- $nav3dNodes = $nav3dNodes | append $node -}}
-          {{- end -}}
-        {{- else -}}
-          {{- errorf "Page %s: has 'alive' field but tags must be [Scope, Depth, Time] format (at least 3 tags)" .RelPermalink -}}
-        {{- end -}}
-      {{- else -}}
-        {{- errorf "Page %s: has 'alive' field but missing tags. Tags must be [Scope, Depth, Time] format" .RelPermalink -}}
-      {{- end -}}
-    {{- end -}}
-    {{- end -}}
-  {{- end -}}
-{{- end -}}
-{{- $hasNav3D := and (gt (len $nav3dNodes) 0) (ne $engineName "") -}}
-
-<div id="great-indexer" class="float-window open" data-current-section="{{ $currentSection }}"
-  data-current-type="{{ $currentType }}" data-current-path="{{ $currentPath }}"
-  data-has-nav3d="{{ $hasNav3D }}">
-  <div class="float-header">
-    <span class="title open">&gt;&gt; &gt;&gt; &gt;&gt;Indexer&lt;&lt; &lt;&lt; &lt;&lt;</span>
-    <span class="title closed">&lt;&lt;&lt;&lt;&lt;&lt; Idx &gt;&gt;&gt;&gt;&gt;&gt;</span>
+<div id="great-indexer" style="position: fixed; top: 0; left: 0; width: 100%; height: 38px; background: #ffffff; border-bottom: 1px solid #000000; padding: 4px 20px; box-sizing: border-box; display: flex; align-items: center; gap: 12px; font-family: monospace; font-size: 13px; z-index: 9999; overflow: hidden;">
+  <div style="display: flex; align-items: center; gap: 6px; flex: 0 1 460px; min-width: 200px;">
+    <input 
+      id="globalIndexInput" 
+      type="text" 
+      placeholder="Search title/tag/summary/*..." 
+      style="flex: 1; min-width: 80px; border: 1px solid #000000; padding: 2px 6px; font-family: monospace; font-size: 13px; outline: none; box-sizing: border-box; height: 26px; background: #ffffff; color: #000000;"
+    />
+    <button 
+      id="globalSearchBtn" 
+      style="border: 1px solid #000000; background: #f0f0f0; padding: 2px 12px; font-family: monospace; font-size: 13px; cursor: pointer; height: 26px; box-sizing: border-box; white-space: nowrap;"
+    >Search</button>
   </div>
-  <div class="float-body">
-    <div class="index-controls">
-      <div class="index-mode">
-        <button type="button" class="scope-btn active" data-scope="global">Global</button>
-        <button type="button" class="scope-btn" data-scope="section">Current</button>
-        {{ if $hasNav3D }}
-        <button type="button" class="scope-btn" data-scope="nav3d" id="scope-btn-nav3d">{{ $engineName }}</button>
-        {{ end }}
-      </div>
-      <div class="index-meta">Matched: <span id="globalIndexCount">0</span></div>
-    </div>
-
-    <div id="index-panel-search">
-      <input id="globalIndexInput" type="text" placeholder="title/tag/category/summary/type//*" />
-
-      <div class="index-tags-box">
-        <h3>Tags</h3>
-        <ul id="globalIndexTags"></ul>
-      </div>
-      <div class="index-categories-box">
-        <h3>Categories</h3>
-        <ul id="globalIndexCategories"></ul>
-      </div>
-      <div class="index-types-box">
-        <h3>Types</h3>
-        <ul id="globalIndexTypes"></ul>
-      </div>
-      <div class="index-preview-box">
-        <div class="preview-header">
-          <h3>Top Results</h3>
-          <button type="button" id="openGlobalSearchPage">MORE</button>
-        </div>
-        <ul id="globalIndexPreview"></ul>
-      </div>
-    </div>
-
-    {{ if $hasNav3D }}
-    <div id="index-panel-nav3d" style="display:none;position:relative;">
-      <div id="nav3d-scene" style="width:100%;height:320px;overflow:hidden;border-top:2px solid #808080;border-left:2px solid #808080;border-right:2px solid #ffffff;border-bottom:2px solid #ffffff;background:#c0c0c0;position:relative;">
-        <a href="#" id="btn-reset-nav3d" style="position:absolute;top:4px;right:6px;z-index:10;color:#000080;text-decoration:underline;font-size:10px;font-family:'MS Sans Serif',Arial,sans-serif;">Reset</a>
-        <div id="nav3d-status" style="position:absolute;bottom:4px;left:4px;z-index:10;color:#000;font-size:10px;font-family:'MS Sans Serif',Arial,sans-serif;">Hover over a node</div>
-      </div>
-    </div>
-    {{ end }}
-  </div>
+  <span id="topnav-search-title" style="color: #000000; font-size: 12px; white-space: nowrap; flex: 1; overflow: hidden; text-overflow: ellipsis;"></span>
 </div>
 
+<div style="height: 38px; width: 100%;"></div>
+
+{{- $pages := where .Site.RegularPages "Draft" "ne" true -}}
 <script id="global-index-data" type="application/json">
 {{- $result := slice -}}
 {{- range $pages -}}
@@ -203,12 +62,3 @@
 {{- end -}}
 {{ $result | jsonify | safeJS }}
 </script>
-
-{{ if $hasNav3D }}
-<script id="nav3d-data" type="application/json">
-{{ $nav3dNodes | jsonify | safeJS }}
-</script>
-<script id="nav3d-version-data" type="application/json">
-{{ $versionSequence | jsonify | safeJS }}
-</script>
-{{ end }}

@@ -1,4 +1,0 @@
----
-title: Exception
-type: file
----

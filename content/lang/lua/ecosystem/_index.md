@@ -1,4 +1,0 @@
----
-title: Ecosystem
-type: file
----
