@@ -3,32 +3,17 @@ body {
   margin: 0;
   padding: 0;
   max-width: 100vw;
-  background-color: #ffffff; /* 强行洗白底色 */
-  color: #000000;            /* 强行洗黑文字 */
+  background-color: #ffffff;
+  color: #000000;
 }
 
 body {
-  padding-top: 80px; /* 为顶部极简导航留出空间 */
   margin: 0;
   display: flex;
-  font-family: "Times New Roman", Times, serif; /* 切换为学术长文标准的衬线体 */
-  font-size: 16px;                              /* 提高标准阅读字号 */
+  font-family: "Times New Roman", Times, serif;
+  font-size: 13px;
   line-height: 1.4;
   flex-direction: column;
-}
-
-/* 经典初代互联网超链接美学 */
-body a:link { color: #0000ee; text-decoration: underline; }
-body a:visited { color: #551a8b; text-decoration: underline; }
-body a:hover { color: #ff0000; text-decoration: underline; }
-body a:active { color: #ff0000; }
-
-/* 无情细黑线 */
-body hr {
-  border: none;
-  border-top: 1px solid #000000;
-  height: 0;
-  margin: 15px 0;
 }
 
 main {
@@ -44,9 +29,6 @@ main {
   box-sizing: border-box;
 }
 
-/* ==============================================================================
-   顶部导航栏（从 Win95 灰蓝条转型为 GCC 扁平学术顶栏）
-   ============================================================================== */
 .topnav {
   position: fixed;
   top: 0;
@@ -56,7 +38,7 @@ main {
   min-height: 35px;
   margin: 0 auto;
   z-index: 9999;
-  border-bottom: 1px solid #000000; /* 单条黑线断路 */
+  border-bottom: 1px solid #000000;
 }
 
 .topnav > .container > ul {
@@ -134,17 +116,11 @@ main {
 .content h6 {
   font-family: "Times New Roman", Times, serif;
   font-weight: bold;
-  color: #000000; /* 斩断海军蓝，回归纯黑 */
+  color: #000000;
   margin-top: 20px;
   margin-bottom: 8px;
 }
 
-.content h1 { font-size: 24px; border-bottom: 1px solid #000000; padding-bottom: 3px; }
-.content h2 { font-size: 20px; border-bottom: 1px dashed #666666; padding-bottom: 2px; }
-.content h3 { font-size: 18px; }
-.content h4 { font-size: 16px; }
-
-/* 保留你极具极客个性的原生 Markdown 符号渲染 */
 .content h1::before { content: "# "; }
 .content h2::before { content: "## "; }
 .content h3::before { content: "### "; }
@@ -165,7 +141,6 @@ footer {
   font-size: 12px;
 }
 
-/* 无情学术图表 */
 table {
   border-collapse: collapse;
   width: auto;
@@ -178,18 +153,14 @@ th,
 td {
   border: 1px solid #000000;
   padding: 6px 12px;
-  text-align: left; /* 回归左对齐的文档规范 */
+  text-align: left;
 }
 
 th {
-  background-color: #f2f2f2; /* 浅灰底 */
-  color: #000000;            /* 黑字 */
+  background-color: #f2f2f2;
+  color: #000000;
   font-weight: bold;
 }
-
-/* ==============================================================================
-   硬核代码区排版（剥离 Dracula 的高饱和度背景，采用白底高密度单色流）
-   ============================================================================== */
 
 /* 行内代码 */
 :not(pre):not(div.highlight) > code {
@@ -207,16 +178,13 @@ div.highlight {
   margin: 16px 0;
   position: relative;
   padding: 0;
-  border: 1px solid #000000; /* 坚硬黑线框 */
+  border: 1px solid #000000;
 }
 
 /* 语言标签 */
 div.highlight::before {
   content: attr(data-lang);
   position: absolute;
-  top: 2px;
-  right: 5px; /* 改到右侧防止挡住行号 */
-  left: auto;
   color: #666666;
   font-family: monospace;
   font-size: 11px;
@@ -227,9 +195,7 @@ div.highlight:not([data-lang])::before {
   display: none;
 }
 
-/* 纯粹的等宽代码输出 */
 div.highlight > pre {
-  background: #fafafa !important; /* 极浅灰纸张感底色 */
   color: #000000 !important;
   margin: 0;
   padding: 16px !important;
