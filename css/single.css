@@ -1,243 +1,125 @@
+/* 外层整体实体分栏布局 */
 .layout {
-  position: relative;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  min-height: 100vh;
-}
-
-.layout::before,
-.layout::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: #000080;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.layout::before {
-  left: calc(50% - 500px);
-}
-
-.layout::after {
-  right: calc(50% - 500px);
-}
-
-.single_article {
-  color: black;
-  width: 900px;
-  margin: 0 auto;
-  position: relative;
-}
-
-.single_article .title {
-  padding: 20px 10px 0px 40px;
-  font-size: 35px;
-  font-weight: bold;
-  color: #000080;
-}
-
-.single_article h1,
-.single_article h2,
-.single_article h3,
-.single_article h4,
-.single_article h5,
-.single_article h6 {
-  color: #000080;
-  font-size: 18px;
-}
-
-.single_article p {
-  font-size: 18px;
-  line-height: 1.7;
-  margin-bottom: 10px;
-}
-
-.single_article a {
-  text-decoration: underline;
-}
-
-.single_article .meta {
-  font-size: 0.95rem;
-  color: black;
-  font-weight: normal;
-  padding-left: 8px, 0, 12px, 40px;
-  border-bottom: 2px solid black;
-  line-height: 1.6;
-}
-
-.single_article .content {
-  margin-left: 40px;
-}
-
-.single_article .content img {
-  width: 300px;
-  height: auto;
-  object-fit: contain;
-}
-
-.single_article pre:not(div.highlight pre) {
-  background: #2d2d2d;
-  color: #f8f8f2;
-  padding: 1rem;
-  border-radius: 6px;
-  overflow-x: auto;
-  font-size: 0.9rem;
-}
-
-.single_article nav {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 35px;
-  flex-wrap: wrap;
+  gap: 30px;
+  align-items: flex-start;
+  max-width: 100%;
+  min-height: 100vh;
+  position: relative;
+  margin-top: -20px;
+  margin-bottom: -40px;
+  box-sizing: border-box;
 }
 
-.single_article nav a {
-  color: #000080;
-  font-size: 1rem;
-  transition: color 0.2s ease;
+/* 左侧文章主体 */
+.single_article {
+  flex: 1;
+  min-width: 0;
+  padding: 20px 0 40px 20px; /* 左侧留出 20px 优雅边距 */
 }
 
-.single_article nav a:hover {
-  color: red;
-}
-
-.single_article li {
-  font-size: large;
-}
-
-.toc {
-  position: fixed;
-  right: 40px;
-  top: 120px;
-  width: 350px;
-  background: #c0c0c0;
-  color: #000080;
-  max-height: 45vh !important;
-  border-top: 2px solid #ffffff;
-  border-left: 2px solid #ffffff;
-  border-right: 2px solid #000080;
-  border-bottom: 2px solid #000080;
-  box-shadow: 2px 2px 0 #ffffff, 4px 4px 0 #000080;
-  z-index: 9999;
-  overflow: hidden;
-  transition: all 0.2s ease;
-}
-
-.toc.collapsed {
-  width: auto;
-  max-width: none;
-}
-
-.toc.collapsed .toc-body {
-  display: none;
-}
-
-.toc .toc-header {
-  background: #000080;
-  color: #ffffff;
-  user-select: none;
-  text-align: center;
+/* 文章主标题 */
+.single_article h1.article-title {
+  font-size: 20px;
   font-weight: bold;
-  border-bottom: 2px solid #ffffff;
-  cursor: move;
-  transition: background 0.2s ease;
+  margin-top: 0;
 }
 
-.toc .toc-header h3 {
-  margin: 0;
-  color: #ffffff;
-  background: none;
-  border: none;
-  padding: 0;
-  pointer-events: none;
+/* 文章元数据 */
+.article-meta {
+  color: #666666;
+  font-size: 13px;
+  margin-bottom: 20px;
 }
 
-.toc .toc-body {
-  overflow-y: auto;
-  max-height: 40vh !important;
-  background: #c0c0c0;
+/* 极简分割线 */
+.article-hr {
+  border: 0;
+  border-top: 1px solid #000000;
+  margin: 20px 0;
 }
 
-.toc .title {
-  display: inline;
+/* 核心：正文内所有 H1-H6 标题字号洗平，仅靠 # 区分 */
+.content h1, 
+.content h2, 
+.content h3, 
+.content h4, 
+.content h5, 
+.content h6 { 
+  font-size: 16px !important; 
+  font-weight: bold !important; 
+  margin-top: 20px !important; 
+  margin-bottom: 8px !important; 
 }
 
-.toc.collapsed .title.open {
-  display: none;
+/* 底部翻页导航 */
+.post-nav {
+  font-size: 13px;
+  margin-bottom: 40px;
 }
 
-.toc:not(.collapsed) .title.closed {
-  display: none;
-}
-
-.toc .toc-body li {
-  margin: 0.2rem 0;
-  font-size: 15px;
-  line-height: 1.0;
-}
-
-.toc .toc-body ul {
-  list-style: none;
-  padding-left: 0 !important;
-  margin: 0;
-}
-
-.toc .toc-body ul ul {
-  margin-left: 0 !important;
-}
-
-.toc .toc-body a {
-  text-decoration: none;
-  color: #000080;
-  transition: all 0.2s ease;
-  display: block;
-  padding: 3px 0 3px 8px;
-  font-size: 15px;
-  word-break: break-word;
-  font-weight: 500;
-}
-
-.toc .toc-body a:hover {
-  color: red;
-  padding-left: 12px;
-}
-
-.toc .toc-body a.active {
-  color: red;
-  border-left: 3px solid red;
-  padding-left: 5px;
-}
-
-.toc .toc-body::-webkit-scrollbar {
-  width: 10px;
-}
-
-.toc .toc-body::-webkit-scrollbar-track {
-  background: #000080;
-}
-
-.toc .toc-body::-webkit-scrollbar-thumb {
-  background: #c0c0c0;
-  border: 2px solid #000080;
-}
-
-.toc .toc-body::-webkit-scrollbar-thumb:hover {
+/* 右侧顶天立地实体 TOC 容器 */
+.toc {
+  position: sticky;
+  top: 0;
+  width: 240px;
+  flex-shrink: 0;
+  height: 100vh;
+  font-size: 12px;
+  font-family: monospace;
   background: #ffffff;
+  border-left: 1px dashed #000000;
+  padding: 20px 0 20px 15px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
-@media (max-width: 768px) {
-  .toc {
-    right: 10px;
-    top: 100px;
-    width: 260px;
-  }
-  
-  .toc .toc-body {
-    max-height: calc(60vh - 42px);
-  }
+/* TOC 静态头部 */
+.toc-title {
+  font-weight: bold;
+  padding-bottom: 12px;
+  text-transform: uppercase;
+  color: #000000;
+  user-select: none;
+}
+
+/* TOC 目录树内容区 */
+.toc-body {
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1;
+}
+
+/* 清除默认嵌套列表大缩进和圆点 */
+.toc-body ul {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin: 0 !important;
+}
+
+.toc-body li {
+  margin-bottom: 6px !important;
+  padding-left: 0 !important;
+}
+
+/* TOC 默认链接样式 */
+.toc-body a { 
+  display: block !important; 
+  color: #0000ee !important; 
+  text-decoration: underline !important; 
+  white-space: nowrap !important; 
+  overflow: hidden !important; 
+  text-overflow: ellipsis !important; 
+}
+
+.toc-body a:hover {
+  color: #ff0000 !important;
+}
+
+/* scrollspy.js 激活当前所在标题时，强行标红加粗并去掉下划线 */
+.toc-body a.active { 
+  color: #ff0000 !important; 
+  font-weight: bold !important; 
+  text-decoration: none !important; 
 }
