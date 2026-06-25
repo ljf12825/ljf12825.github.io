@@ -14,8 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
----
-
 ## Code for myself
 
 ```text
@@ -36,8 +34,6 @@ please check the latest commit for the most recent changes.
 
 Status: ALIVE
 ```
-
----
 
 ## Full License
 
@@ -100,8 +96,6 @@ the same license as the content they accompany, unless otherwise stated.
 - If no license is specified, all rights are reserved.  
 - Commercial use of non-code content is prohibited unless explicitly allowed.
 ```
-
----
 
 >Me: Jeff Lee(ljf12825)
 
