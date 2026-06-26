@@ -29,78 +29,6 @@ main {
   box-sizing: border-box;
 }
 
-.topnav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: #ffffff;
-  width: 100%;
-  min-height: 35px;
-  margin: 0 auto;
-  z-index: 9999;
-  border-bottom: 1px solid #000000;
-}
-
-.topnav > .container > ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.topnav li {
-  position: relative;
-}
-
-.topnav a {
-  display: block;
-  padding: 8px 12px;
-  color: #0000ee;
-  font-weight: bold;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.topnav a:hover {
-  color: #ff0000;
-}
-
-.topnav a.active {
-  color: #000000;
-  text-decoration: none; /* 激活项无下划线，呈现纯文本态 */
-}
-
-/* 下拉菜单扁平化 */
-.topnav .dropdown {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: #ffffff;
-  border: 1px solid #000000;
-  padding: 4px 0;
-  margin: 0;
-  list-style: none;
-  z-index: 10001;
-}
-
-.topnav .dropdown li {
-  width: 100%;
-}
-
-.topnav .dropdown a {
-  padding: 6px 12px;
-  white-space: nowrap;
-}
-
-.topnav .has-dropdown:hover .dropdown {
-  display: block;
-}
-
-/* ==============================================================================
-   文章正文排版（保留你的 Markdown 伪类偏好）
-   ============================================================================= */
 .content {
   margin: 0 auto;
   max-width: 100%;
@@ -115,6 +43,7 @@ main {
 .content h5,
 .content h6 {
   font-family: "Times New Roman", Times, serif;
+  font-size: 20px;
   font-weight: bold;
   color: #000000;
   margin-top: 20px;
@@ -164,12 +93,10 @@ th {
 
 /* 行内代码 */
 :not(pre):not(div.highlight) > code {
-  background-color: #f5f5f5;
-  color: #000000;
+  color: #666666;
   padding: 1px 4px;
-  font-family: "Courier New", Courier, monospace;
+  font-family: 'Courier New', 'Consolas', monospace;
   font-size: 14px;
-  border: 1px solid #cccccc;
 }
 
 /* 独立代码块外壳 */
@@ -178,15 +105,13 @@ div.highlight {
   margin: 16px 0;
   position: relative;
   padding: 0;
-  border: 1px solid #000000;
+  border: 1px solid black;
 }
 
-/* 语言标签 */
 div.highlight::before {
   content: attr(data-lang);
   position: absolute;
   color: #666666;
-  font-family: monospace;
   font-size: 11px;
   text-transform: uppercase;
 }
@@ -241,11 +166,6 @@ div.highlight table td:last-child pre {
   color: #000000 !important;
 }
 
-/* 
-   重锤微调：语法高亮洗白。
-   由于你走的是 GCC 纯文本路线，我们把五颜六色的高亮大幅度调暗，
-   只保留加粗、斜体和最克制的暗色调，以契合全站的衬线印刷质感。
-*/
 .highlight .k, .highlight .kd, .highlight .kn, .highlight .kr, .highlight .kt { color: #000000 !important; font-weight: bold; } /* 关键字纯黑加粗 */
 .highlight .nf, .highlight .fm { color: #000000 !important; font-weight: bold; }
 .highlight .nc, .highlight .nn { color: #000000 !important; }
@@ -256,9 +176,6 @@ div.highlight table td:last-child pre {
 .highlight .o, .highlight .ow { color: #d73a49 !important; } /* 运算符暗红 */
 .highlight .p { color: #000000 !important; }
 
-/* ==============================================================================
-   数学公式与引用区
-   ============================================================================== */
 .katex {
   font-size: 1.1rem;
   color: #000000;
@@ -292,9 +209,6 @@ blockquote::before {
   background: #ffffff;
 }
 
-/* ==============================================================================
-   大索引器 Widget（#great-indexer）扁平重构区
-   ============================================================================== */
 #great-indexer {
   position: fixed;
   right: 20px;

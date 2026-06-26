@@ -1,6 +1,5 @@
 ---
-title: $HOME
-type: home
+title: "ljf12825.github.io/"
 ---
 
 ## BUILD INFO
@@ -10,9 +9,31 @@ type: home
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const el = document.getElementById("runtime-host");
-  if (el) el.textContent = window.location.host;
+  if (el) {
+    el.textContent = window.location.host;
+    el.style.display = "block";
+    el.style.overflowWrap = "break-word"; 
+  }
 });
 </script>
+
+## Guide
+
+### Website structure
+
+```txt
+content/
+    |-- _index.md   # current page
+    |-- article/    # notes
+    |-- lab/        # projects and experiments
+    |-- log/        # log blogs
+    |-- oj/         # online judge problems
+    |-- searchlist/ # search result page
+```
+
+### Search
+
+Input tag, title, summary to search result, you will jump to searchlist and return result
 
 ## Code for myself
 
