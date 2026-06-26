@@ -1,6 +1,6 @@
 baseURL = "https://ljf12825.github.io/"
 locale = "en-us"
-title = "ljf12825"
+title = "ljf12825.github.io"
 enableGitInfo = true
 
 [frontmatter]
