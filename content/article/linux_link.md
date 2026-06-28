@@ -1,9 +1,9 @@
 ---
-title: ln
+title: Linux Link
 author: ljf12825
 date: 2026-06-18
 type: file
-summary: Overview of linux command "ln"
+summary: command "ln" and "update-alternatives" system in Debian
 ---
 
 ## 硬连接与软链接
@@ -100,3 +100,5 @@ readlink -f linkname # 输出解析后的绝对真实路径（跟随所有中间
   - 想要“快捷方式”或允许目标不存在（先建链接，稍后填目标）
   - 在包管理、配置、版本切换场景（例如`python3 -> python3.10`）非常常用
   - 想让链接在移动整个目录树时仍然有效时优先用相对symlink
+
+## update-alternatives
