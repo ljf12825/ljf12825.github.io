@@ -11,7 +11,7 @@ body {
   margin: 0;
   display: flex;
   font-family: "Times New Roman", Times, serif;
-  font-size: 13px;
+  font-size: 16px;
   line-height: 1.4;
   flex-direction: column;
 }
@@ -63,11 +63,41 @@ main {
 }
 
 footer {
-  border-top: 1px solid #000000;
   width: 100%;
-  margin: 40px auto 10px auto;
-  padding-top: 10px;
+  margin: 60px auto 20px auto;
   font-size: 12px;
+}
+
+.footer-box {
+  border: 1px solid #000000;
+  background-color: #ffffff;
+
+  max-width: 550px;
+  margin: 0 auto;
+  padding: 20px;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.footer-line {
+  margin: 4px 0;
+  line-height: 1.6;
+}
+
+.hugo-tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.hugo-logo {
+  height: 16px;
+  width: auto;
 }
 
 table {
@@ -191,17 +221,17 @@ blockquote {
   margin: 1rem 0;
   background-color: #f9f9f9;
   color: #333333;
-  border-left: 3px solid #000000; /* 学术引用黑粗线 */
+  border-left: 3px solid #000000;
 }
 
 blockquote p {
   color: #333333;
   font-size: 15px;
-  font-style: italic; /* 引用强行化为斜体 */
+  font-style: italic;
 }
 
 blockquote::before {
-  display: none; /* 剔除巨大的 Win95 风格双引号 */
+  display: none;
 }
 
 .mermaid {
@@ -217,12 +247,12 @@ blockquote::before {
   max-height: 70vh;
   background: #ffffff;
   color: #000000;
-  border: 1px solid #000000; /* 干掉 3D 浮雕，回归单线 */
+  border: 1px solid #000000;
   z-index: 9999;
 }
 
 #great-indexer .float-header {
-  background: #000000; /* 洗成纯黑控制台头部 */
+  background: #000000;
   color: #ffffff;
   padding: 4px;
   font-family: monospace;
@@ -261,7 +291,6 @@ blockquote::before {
   color: #ff0000;
 }
 
-/* 滚动条清洗 */
 #great-indexer *::-webkit-scrollbar {
   width: 6px;
 }

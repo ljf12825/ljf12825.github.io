@@ -117,15 +117,3 @@ the same license as the content they accompany, unless otherwise stated.
 - If no license is specified, all rights are reserved.  
 - Commercial use of non-code content is prohibited unless explicitly allowed.
 ```
-
->Me: Jeff Lee(ljf12825)
-
-<div style="display: flex; justify-content: space-between; align-items: center;">
-  <span>GitHub: <a href="https://github.com/ljf12825">Jeff Lee(ljf12825)</a></span>
-  <span>Build with <a href="https://gohugo.io/">Hugo</a></span>
-</div>
-
-<div style="display: flex; justify-content: space-between; align-items: center;">
-  <span>E-mail: <a href="mailto:ljf12825@graingen.com">ljf12825@graingen.com</a></span>
-  <span><img src="/images/imgi_2_hugo-logo-wide.svg" alt="HugoLogo" width="150" height="40" class="hugo-logo"></span>
-</div>
