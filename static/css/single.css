@@ -1,45 +1,36 @@
-/* 外层整体实体分栏布局 */
 .layout {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 250px;
   gap: 30px;
-  align-items: flex-start;
+  align-items: stretch;
   max-width: 100%;
-  min-height: 100vh;
   position: relative;
-  margin-top: -20px;
-  margin-bottom: -40px;
   box-sizing: border-box;
 }
 
-/* 左侧文章主体 */
 .single_article {
-  flex: 1;
   min-width: 0;
-  padding: 20px 0 40px 20px; /* 左侧留出 20px 优雅边距 */
+  padding: 20px 0 40px 20px;
 }
 
-/* 文章主标题 */
 .single_article h1.article-title {
   font-size: 20px;
   font-weight: bold;
   margin-top: 0;
 }
 
-/* 文章元数据 */
 .article-meta {
   color: #666666;
   font-size: 13px;
   margin-bottom: 20px;
 }
 
-/* 极简分割线 */
 .article-hr {
   border: 0;
   border-top: 1px solid #000000;
   margin: 20px 0;
 }
 
-/* 核心：正文内所有 H1-H6 标题字号洗平，仅靠 # 区分 */
 .content h1, 
 .content h2, 
 .content h3, 
@@ -52,30 +43,30 @@
   margin-bottom: 8px !important; 
 }
 
-/* 底部翻页导航 */
 .post-nav {
   font-size: 13px;
   margin-bottom: 40px;
 }
 
-/* 右侧顶天立地实体 TOC 容器 */
 .toc {
-  position: sticky;
-  top: 0;
-  width: 240px;
+  position: fixed;
+  top: 40px;
+  width: 250px;
   flex-shrink: 0;
-  height: 100vh;
+  height: 70%;
+  right: calc((100vw - 100%)/2);
+  max-height: calc(100vh - 80px);
   font-size: 12px;
   font-family: monospace;
   background: #ffffff;
-  border-left: 1px dashed #000000;
+  border-left: 1px solid #000000;
+  border-bottom: 1px solid #000000;
   padding: 20px 0 20px 15px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
 }
 
-/* TOC 静态头部 */
 .toc-title {
   font-weight: bold;
   padding-bottom: 12px;
@@ -84,14 +75,12 @@
   user-select: none;
 }
 
-/* TOC 目录树内容区 */
 .toc-body {
   overflow-y: auto;
   overflow-x: hidden;
   flex: 1;
 }
 
-/* 清除默认嵌套列表大缩进和圆点 */
 .toc-body ul {
   list-style: none !important;
   padding-left: 0 !important;
@@ -103,21 +92,21 @@
   padding-left: 0 !important;
 }
 
-/* TOC 默认链接样式 */
 .toc-body a { 
   display: block !important; 
-  color: #0000ee !important; 
-  text-decoration: underline !important; 
-  white-space: nowrap !important; 
-  overflow: hidden !important; 
-  text-overflow: ellipsis !important; 
+  color: #0000ff !important; 
+  text-decoration: none !important; 
+  white-space: normal !important; 
+  overflow: visible !important; 
+  text-overflow: clip !important; 
+  line-height: 1.4 !important;
+  margin-bottom: 2px !important;
 }
 
 .toc-body a:hover {
   color: #ff0000 !important;
 }
 
-/* scrollspy.js 激活当前所在标题时，强行标红加粗并去掉下划线 */
 .toc-body a.active { 
   color: #ff0000 !important; 
   font-weight: bold !important; 
