@@ -203,15 +203,130 @@ sudo update-grub
 
 在终端里输入`sudo nmtui`，会弹出一个友好的伪图形界面，可以选择无线网络
 
-## 实践
+---
 
-### apt 源
+以下是从Ubuntu换到Debian的真实感受，和出现的问题
 
-Debian会根据你所在地区，提供多个apt源供选择
+## apt 源
+
+Debian会根据你所在地区，提供多个apt源供选择，这是Debian的引导安装时的源选择界面
 
 [![debian_install_apt_source](/images/content/debian_install_apt_source.png)](/images/content/debian_install_apt_source.png)
 
-`deb.debian.org`需要代理才能访问
+`deb.debian.org`需要代理才能访问，我选择的是ftp.cn.debian.org，最快速度能跑到80Mbps，但是也出现过问题\
+选完源后直接是系统必须的软件下载和安装，我在这里卡住过两次，下载到最后提示该阶段安装失败，我也没有查清楚原因，选择直接重启从头开始引导，就这样失败了两次，第三次成功。这浪费了我一个晚上加一个上午
+
+如果在中国大陆，不建议使用Debian的官方源，可以使用清华，中科大或阿里的镜像源，速度会很快
+
+### 换源
+
+Debian的APT源的配置在`/etc/apt/`下\
+首先确定Debain版本
+
+```bash
+cat /etc/os-release
+```
+
+可能会输出
+
+```txt
+VERSION_CODENAME=trixie
+或者 bookworm 或 bullseye
+Deiban的版本命名都是以玩具总动员中的角色命名的
+```
+
+然后查看当前使用的是哪种源配置\
+Debian12以后及很多安装默认使用
+
+```bash
+ls /etc/apt
+```
+
+如果看到
+
+```txt
+sources.list.d/
+```
+
+再查看
+
+```bash
+ls /etc/apt/sources.list.d
+```
+
+如果里面有`debain.sources`，则说明使用的是新的`.source`格式\
+如果只有`/etc/apt/source.list`，那就是传统格式
+
+#### 修改传统`sources.list`
+
+先备份
+
+```bash
+sudo cp /etc/apt/source.lsit /etc/apt/source.list.bak
+```
+
+然后编辑
+
+```bash
+sudo vi /etc/apt/source.list
+```
+
+例如Debian 13(Trixie)可以写
+
+```txt
+
+deb http://ftp.cn.debian.org/debian/ trixie main contrib non-free non-free-firmware non-free-firmware
+deb-src http://ftp.cn.debian.org/debian/ trixie main contrib non-free non-free-firmware non-free-firmware
+
+deb https://mirrors.tuna.tsinghua.edu.cn/debian-security trixie-security main contrib non-free non-free-firmware
+deb-src https://mirrors.tuna.tsinghua.edu.cn/debian-security trixie-security main contrib non-free non-free-firmware
+
+deb http://ftp.cn.debian.org/debian/ trixie-updates main contrib non-free non-free-firmware non-free-firmware
+deb-src http://ftp.cn.debian.org/debian/ trixie-updates main contrib non-free non-free-firmware non-free-firmware
+```
+
+- deb-src是APT软件源中的源代码仓库，通过`apt source softname`,可以下载Debian打包的源码，看看Debain对软件增加了哪些补丁
+
+保存退出
+
+```bash
+sudo apt update
+```
+
+刷新源
+
+#### 修改`debain.sources`
+
+如果存在`/etc/apt/sources.list.d/debian.sources`\
+编辑
+
+```bash
+sudo vi /etc/apt/source/list.d/debain.sources
+```
+
+例如将
+
+```txt
+URIs: http://deb.debian.org/debian
+```
+
+改成
+
+```txt
+URIs: https://mirrors.tuna.tsinghua.edu.cn/debian
+```
+
+将
+
+```txt
+URIs: http://security.debian.org/debian-security
+```
+
+改成
+
+```txt
+URIs: https://mirrors.tuna.tsinghua.edu.cn/debian-security
+```
 
 [![partition_disk_0](/images/content/partition_disk_0.png)](/images/content/partition_disk_0.png)
 
