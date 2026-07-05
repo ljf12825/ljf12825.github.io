@@ -11,8 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const el = document.getElementById("runtime-host");
   if (el) {
     el.textContent = window.location.host;
-    el.style.display = "block";
+    el.style.display = "inline-block";
     el.style.overflowWrap = "break-word"; 
+    el.style.maxWidth = "100%";
   }
 });
 </script>

@@ -35,30 +35,49 @@ jobs:
         with:
           hugo-version: 'latest'
           extended: true # 必须使用 extended 版本！
-      
+
       # 3. 生成构建信息（注入到 Hugo data）
       - name: Generate build info
         run: |
           mkdir -p data
+          
+          # 获取原始的完整版本字符串
+          RAW_VERSION="$(hugo version)"
+          
+          # 解析各个字段
+          HUGO_VER=$(echo "$RAW_VERSION" | awk '{print $2}')         # v0.140.0+extended
+          GO_VER=$(echo "$RAW_VERSION" | awk '{print $3}')           # linux/amd64
+          BUILD_PLATFORM=$(echo "$RAW_VERSION" | awk '{print $4}')   # BuildDate=...
+          BUILD_DATE=$(echo "$RAW_VERSION" | awk '{print $5}' | cut -d'=' -f2) # 提取日期
+          
+          # 写入 YAML
           echo "build_host: ljf12825.github.io" >> data/build.yaml
-          echo "engine: $(hugo version)" >> data/build.yaml
           echo "build_time: $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> data/build.yaml
-          echo "commit: $GITHUB_SHA" >> data/build.yaml
+          
+          # Hugo 引擎详情拆分
+          echo "engine_version: $HUGO_VER" >> data/build.yaml
+          echo "engine_platform: $GO_VER" >> data/build.yaml
+          echo "engine_compile: $BUILD_PLATFORM" >> data/build.yaml
+          echo "engine_build_date: $BUILD_DATE" >> data/build.yaml
+          
+          # 代码版本拆分
+          echo "commit_full: $GITHUB_SHA" >> data/build.yaml
+          echo "commit_short: $(echo $GITHUB_SHA | cut -c1-7)" >> data/build.yaml
           echo "branch: $GITHUB_REF_NAME" >> data/build.yaml
           echo "actor: $GITHUB_ACTOR" >> data/build.yaml
           echo "runner_os: $RUNNER_OS" >> data/build.yaml
 
-      # 3. 构建静态网站 (文件将生成在 ./public 目录)
+      # 4. 构建静态网站 (文件将生成在 ./public 目录)
       - name: Build with Hugo
         run: hugo --minify
 
-      # 4. 检查构建产物
+      # 5. 检查构建产物
       - name: List public files
         run: ls -la public/
 
-      # 5. 部署到 gh-pages 分支
+      # 6. 部署到 gh-pages 分支 (升级到 v4 版本，彻底告别旧版 Node 警告)
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           # GITHUB_TOKEN 是GitHub自动创建的密钥，无需自己配置
           github_token: ${{ secrets.GITHUB_TOKEN }}

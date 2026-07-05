@@ -1,10 +1,12 @@
 <pre class="ascii">
-Engine: {{ site.Data.build.engine }}
-Build Time: {{ site.Data.build.build_time }}
-Commit: {{ site.Data.build.commit | truncate 7 "" }}
-Branch: {{ site.Data.build.branch }}
-Actor: {{ site.Data.build.actor }}
-Runner OS: {{ site.Data.build.runner_os }}
-Host(Build): {{ site.Data.build.build_host }}
-Host(Runtime): <span id="runtime-host"></span>
+Engine Version:  {{ site.Data.build.engine_version }}
+Engine Platform: {{ site.Data.build.engine_platform }}
+Engine Compile:  {{ site.Data.build.engine_compile }}
+Build Time:      {{ site.Data.build.build_time }}
+Commit:          {{ site.Data.build.commit_short }}
+Branch:          {{ site.Data.build.branch }}
+Actor:           {{ site.Data.build.actor }}
+Runner OS:       {{ site.Data.build.runner_os }}
+Host(Build):     {{ site.Data.build.build_host }}
+Host(Runtime):   <span id="runtime-host"></span>
 </pre>
