@@ -29,9 +29,9 @@ jobs:
           submodules: recursive # 重要！如果主题是git子模块，必须递归拉取
           fetch-depth: 0        # 拉取所有历史，便于Hugo计算最近文章等
 
-      # 2. 安装 Hugo (使用 extended 版本，支持 Sass/SCSS)
+      # 2. 安装 Hugo
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: 'latest'
           extended: true # 必须使用 extended 版本！
