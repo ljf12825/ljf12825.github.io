@@ -121,7 +121,6 @@ th {
   font-weight: bold;
 }
 
-/* 行内代码 */
 :not(pre):not(div.highlight) > code {
   color: #666666;
   padding: 1px 4px;
@@ -129,7 +128,6 @@ th {
   font-size: 14px;
 }
 
-/* 独立代码块外壳 */
 div.highlight {
   background: #ffffff !important;
   margin: 16px 0;
@@ -165,7 +163,6 @@ div.highlight > pre > code {
   color: #000000 !important;
 }
 
-/* 带行号的代码表 */
 div.highlight table {
   background: #ffffff !important;
   width: 100%;
@@ -175,7 +172,7 @@ div.highlight table td:first-child {
   width: 2.5em;
   min-width: 2.5em;
   padding: 16px 8px 16px 8px;
-  color: #999999 !important; /* 暗淡行号 */
+  color: #999999 !important;
   border-right: 1px solid #dddddd;
   text-align: right;
   font-size: 13px;
@@ -196,14 +193,19 @@ div.highlight table td:last-child pre {
   color: #000000 !important;
 }
 
-.highlight .k, .highlight .kd, .highlight .kn, .highlight .kr, .highlight .kt { color: #000000 !important; font-weight: bold; } /* 关键字纯黑加粗 */
+pre.ascii {
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.highlight .k, .highlight .kd, .highlight .kn, .highlight .kr, .highlight .kt { color: #000000 !important; font-weight: bold; }
 .highlight .nf, .highlight .fm { color: #000000 !important; font-weight: bold; }
 .highlight .nc, .highlight .nn { color: #000000 !important; }
 .highlight .s, .highlight .s1, .highlight .s2, .highlight .sb, .highlight .sc,
-.highlight .sd, .highlight .sh, .highlight .si, .highlight .sx { color: #032f62 !important; } /* 字符串收敛为硬核暗蓝 */
-.highlight .c, .highlight .c1, .highlight .cm, .highlight .cs { color: #6a737d !important; font-style: italic; } /* 注释为经典代码灰 */
-.highlight .m, .highlight .mi, .highlight .mf, .highlight .mb, .highlight .mx { color: #005cc5 !important; } /* 数字 */
-.highlight .o, .highlight .ow { color: #d73a49 !important; } /* 运算符暗红 */
+.highlight .sd, .highlight .sh, .highlight .si, .highlight .sx { color: #032f62 !important; }
+.highlight .c, .highlight .c1, .highlight .cm, .highlight .cs { color: #6a737d !important; font-style: italic; }
+.highlight .m, .highlight .mi, .highlight .mf, .highlight .mb, .highlight .mx { color: #005cc5 !important; }
+.highlight .o, .highlight .ow { color: #d73a49 !important; }
 .highlight .p { color: #000000 !important; }
 
 .katex {
