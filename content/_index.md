@@ -32,6 +32,12 @@ content/
     |-- searchlist/ # search result page
 ```
 
+- [article](/article/)
+- [lab](/lab/)
+- [log](/log/)
+- [oj](/oj/)
+- [searchlist](/searchlist/) <- this equivalent to entering `/*` in the search bar
+
 ### Search
 
 Input tag, title, summary to search result, you will jump to searchlist and return result
