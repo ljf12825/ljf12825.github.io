@@ -1,7 +1,7 @@
 ---
-title: CXX Main Function
+title: C++ Main Function
 author: ljf12825
 date: 2026-07-01
-tags: [cxx]
+tags: [C++]
 summary: Principle of main function in C++
 ---
