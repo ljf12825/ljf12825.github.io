@@ -1,11 +1,9 @@
 ---
-title: 20260606
+title: The evolution and versions of this website
 author: ljf12825
 date: 2026-06-06
-type: log
-tags: [Edition]
-categories: [./]
-summary: Overview of 2026-06-06 website edition
+tags: [website]
+summary: Overview of this website evolution and versions
 ---
 
 本网站作为一个项目体量和复杂度已经相当大了，已经不能称之为博客，更像是一个文档系统，这是就是我预期的方向\
