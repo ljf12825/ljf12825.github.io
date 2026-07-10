@@ -1,9 +1,9 @@
 ---
-title: Concurrency & Parallelism
+title: Concurrency Model
 date: 2025-12-31
 author: ljf12825
+tags: [Concurrency, Parallelism]
 summary: Process, Thread and Concurrency
-type: file
 ---
 
 # 并发(Concurrency)与并行(Parallelism)
