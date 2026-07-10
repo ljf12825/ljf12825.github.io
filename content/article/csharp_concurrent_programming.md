@@ -1,8 +1,7 @@
 ---
-title: Concurrent
+title: C# Concurrent Programming
 date: 2025-06-01
-categories: [C#]
-tags: [Syntax]
+tags: [C#]
 author: "ljf12825"
 type: file
 summary: C# concurrent
