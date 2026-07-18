@@ -2,8 +2,8 @@
 title: config
 date: 2025-12-31
 author: ljf12825
-type: file
-summary: git config command, three level config
+tags: [Git]
+summary: git config command, three level config, the first time on a new computer
 ---
 
 ## 配置作用域
@@ -409,3 +409,16 @@ git remote set-url origin ...
 - monorepo
 - node_modules 巨多
 - UE/Unity 工程
+
+## 在一台新电脑上首次使用Git
+
+### 安装Git
+
+Windows下，去<https://git-scm.com/>下载安装包，Linux用`apt`安装就行
+
+### 配置身份
+
+```bash
+git config --global user.name "yourname"
+git config --global user.email "your@email.com"
+```
