@@ -2,7 +2,7 @@
 title: Git Remote
 date: 2025-12-31
 author: ljf12825
-type: file
+tags: [Git]
 summary: git remote
 ---
 
@@ -360,3 +360,23 @@ ssh -T git@github.com
 Hi username! You've successfully authenticated...
 ```
 
+## 为什么GitHub的HTTPS端口很多时候用不了
+
+在国内通常会遇到这种情况：当配置Git的remote为https时，有时可能很顺畅的push，但大多数时刻都是没有反应的\
+国内的网络会屏蔽GitHub IP 或污染DNS，需要设置git或tty走代理
+
+```bash
+# 配置 HTTP/HTTPS 代理
+git config --global http.proxy http://127.0.0.1:你的HTTP代理端口
+git config --global https.proxy http://127.0.0.1:你的HTTP代理端口
+
+# 或配置 SOCKS5 代理（如 Clash 等）
+git config --global http.proxy socks5://127.0.0.1:你的SOCKS5端口
+git config --global https.proxy socks5://127.0.0.1:你的SOCKS5端口
+
+# 取消代理
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+```
+
+但是最稳妥的方式是换成SSH协议，SSH连接的是22端口，走的是另一种协议，很多时候不受上述阻断影响
