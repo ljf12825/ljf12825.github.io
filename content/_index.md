@@ -32,7 +32,32 @@ content/
     |__ oj/         # online judge problems
 ```
 
-[article](/article/) | [lab](/lab/) | [log](/log/) | [oj](/oj/)
+### Search
+
+This website is search-driven, with the fellowing search rules:
+
+- keyword: the subject of the input content
+  - title
+  - tags
+  - summary
+- scope: which section the content belonging
+  - `a::`: global which include all sections
+  - `art::`: all the content under the {article}
+  - `lab::`
+  - `log::`
+  - `oj::`
+- logical operators: support simple combination filtering of multiple keywords
+  - `&&`: and
+  - `||`: or
+  - `!`: nor
+
+example:
+
+```txt
+a::!Linux&&!Unity&&!Git
+```
+
+Meaning: Content that does not include keywords: Linux, Unity, and Git in all sections
 
 ---
 

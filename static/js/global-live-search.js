@@ -19,7 +19,6 @@
   if (!resultHolder) {
     resultHolder = document.createElement('div');
     resultHolder.id = 'searchlist-live-result';
-    
     resultHolder.style.cssText = `
       display: none;
       width: 100% !important;
@@ -27,8 +26,8 @@
       word-break: break-all;
       white-space: normal;
       background: #ffffff;
+      padding: 8px 16px;
     `;
-    
     document.body.appendChild(resultHolder);
   }
 
@@ -36,10 +35,8 @@
     const rect = searchBarContainer.getBoundingClientRect();
     const computedStyle = window.getComputedStyle(searchBarContainer);
     const isFixedOrSticky = computedStyle.position === 'fixed' || computedStyle.position === 'sticky';
-
     if (isFixedOrSticky) {
-      const offsetTop = rect.bottom;
-      resultHolder.style.marginTop = offsetTop + 'px';
+      resultHolder.style.marginTop = rect.bottom + 'px';
     } else {
       resultHolder.style.marginTop = '0px';
     }
@@ -54,34 +51,106 @@
 
   const norm = v => String(v || '').toLowerCase();
 
-  const score = (page, query) => {
-    if (!query) return 0;
-    const title = norm(page.title);
-    const summary = norm(page.summary);
-    const pageTags = ensureArray(page.tags).map(norm);
-    const pageCats = ensureArray(page.categories).map(norm);
-    let s = 0;
-    if (title === query) s += 200;
-    if (title.includes(query)) s += 120;
-    if (pageTags.some(t => t === query)) s += 90;
-    if (pageTags.some(t => t.includes(query))) s += 60;
-    if (pageCats.some(c => c === query)) s += 80;
-    if (pageCats.some(c => c.includes(query))) s += 55;
-    if (summary.includes(query)) s += 30;
-    return s;
-  };
+  function parseQueryInput(rawQuery) {
+    let q = rawQuery.trim();
+    let targetSection = null;
 
-  const hit = (p, query, isShowAll) => {
-    if (isShowAll) return true;
-    const txt = `${norm(p.title)} ${norm(p.summary)} ${ensureArray(p.tags).map(norm).join(' ')} ${ensureArray(p.categories).map(norm).join(' ')}`;
-    return txt.includes(query);
-  };
+    if (q === 'a::') {
+      return { targetSection: null, conditionStr: 'a::' };
+    }
+
+    if (q.startsWith('a::')) {
+      q = q.slice(3).trim();
+      return { targetSection: null, conditionStr: q };
+    }
+
+    const nsMatch = q.match(/^([a-zA-Z0-9_-]+)::\s*/i);
+    if (nsMatch) {
+      let secName = nsMatch[1].toLowerCase();
+      if (secName === 'art') {
+        secName = 'article';
+      }
+      targetSection = secName;
+      q = q.slice(nsMatch[0].length).trim();
+    }
+
+    return { targetSection, conditionStr: q };
+  }
+
+  function evaluateCondition(pageText, conditionStr) {
+    if (!conditionStr) return { match: true, highlightTokens: [] };
+
+    const tokensToHighlight = new Set();
+    const orGroups = conditionStr.split('||');
+
+    let overallMatch = false;
+
+    for (let orGroup of orGroups) {
+      const andTokens = orGroup.split('&&').map(t => t.trim()).filter(Boolean);
+      if (andTokens.length === 0) continue;
+
+      let groupMatched = true;
+      const groupHighlights = [];
+
+      for (let token of andTokens) {
+        let isNot = false;
+        let word = token;
+
+        if (word.startsWith('!')) {
+          isNot = true;
+          word = word.slice(1).trim();
+        }
+
+        if (!word) continue;
+
+        const lowerWord = norm(word);
+        const hasWord = pageText.includes(lowerWord);
+
+        if (isNot) {
+          if (hasWord) {
+            groupMatched = false;
+            break;
+          }
+        } else {
+          if (!hasWord) {
+            groupMatched = false;
+            break;
+          } else {
+            groupHighlights.push(word);
+          }
+        }
+      }
+
+      if (groupMatched) {
+        overallMatch = true;
+        groupHighlights.forEach(w => tokensToHighlight.add(w));
+      }
+    }
+
+    return {
+      match: overallMatch,
+      highlightTokens: Array.from(tokensToHighlight)
+    };
+  }
+
+  function highlightText(text, tokens) {
+    if (!text || !tokens || tokens.length === 0) return text || '-';
+
+    const validTokens = tokens
+      .filter(t => t && t.trim().length > 0)
+      .map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+
+    if (validTokens.length === 0) return text;
+
+    const pattern = new RegExp(`(${validTokens.join('|')})`, 'gi');
+    return String(text).replace(pattern, '<mark style="background-color: #ffff00; color: #000000; padding: 0 2px;">$1</mark>');
+  }
 
   function renderLiveSearch() {
-    const q = inputEl.value.trim().toLowerCase();
+    const rawQuery = inputEl.value;
     const bodyChildren = Array.from(document.body.children);
 
-    if (!q) {
+    if (!rawQuery.trim()) {
       bodyChildren.forEach(child => {
         if (child !== resultHolder && child.dataset.searchHidden) {
           child.style.display = child.dataset.oldDisplay || '';
@@ -106,36 +175,55 @@
       }
     });
 
-    const isShowAll = q === '/*';
-    const matched = pages
-      .filter(p => hit(p, q, isShowAll))
-      .map(p => ({ page: p, score: isShowAll ? 0 : score(p, q) }))
-      .sort((a, b) => {
-        if (b.score !== a.score) return b.score - a.score;
-        return (a.page.modify || '') < (b.page.modify || '') ? 1 : -1;
-      });
+    const { targetSection, conditionStr } = parseQueryInput(rawQuery);
+    
+    const isShowAll = (rawQuery.trim() === 'a::') || (targetSection && !conditionStr);
 
-    const result = matched.map(m => m.page);
+    const matchedResults = [];
+
+    for (let p of pages) {
+      if (targetSection && norm(p.section) !== targetSection) {
+        continue;
+      }
+
+      if (isShowAll) {
+        matchedResults.push({ page: p, highlights: [] });
+        continue;
+      }
+
+      const pageText = `${norm(p.title)} ${norm(p.summary)} ${ensureArray(p.tags).map(norm).join(' ')} ${ensureArray(p.categories).map(norm).join(' ')}`;
+
+      const { match, highlightTokens } = evaluateCondition(pageText, conditionStr);
+
+      if (match) {
+        matchedResults.push({ page: p, highlights: highlightTokens });
+      }
+    }
 
     let listHTML = '';
-    for (let i = 0; i < result.length; i++) {
-      const p = result[i];
-      const tagsStr = ensureArray(p.tags).length > 0 ? ensureArray(p.tags).map(t => `#${t}`).join(' ') : '-';
+    for (let i = 0; i < matchedResults.length; i++) {
+      const { page: p, highlights } = matchedResults[i];
+      const tagsArr = ensureArray(p.tags);
+      const tagsStr = tagsArr.length > 0 ? tagsArr.map(t => `#${t}`).join(' ') : '-';
+
+      const hTitle = highlightText(p.title, highlights);
+      const hSummary = highlightText(p.summary, highlights);
+      const hTags = highlightText(tagsStr, highlights);
 
       listHTML += `
-        <div style="margin-bottom: 4px; white-space: normal; line-height: 1.4;">
-          <a href="${p.permalink}" style="color: #0000ee; text-decoration: underline;">${p.title}</a>
-          {${p.section || '/'}}
+        <div style="margin-bottom: 6px; white-space: normal; line-height: 1.4; border-bottom: 1px dashed #eee; padding-bottom: 4px;">
+          <a href="${p.permalink}" style="color: #0000ee; text-decoration: underline; font-weight: bold;">${hTitle}</a>
+          <span style="color: #666;">{${p.section || '/'}}</span>
           ${p.author || '-'}
           ${p.date || '-'}
           ${p.modify || '-'}
-          ${p.summary || '-'}
-          ${tagsStr}
+          ${hSummary}
+          <span style="color: #008000;">${hTags}</span>
         </div>
       `;
     }
 
-    resultHolder.innerHTML = result.length > 0 ? listHTML : '<div>No results found</div>';
+    resultHolder.innerHTML = matchedResults.length > 0 ? listHTML : '<div>No results found</div>';
     resultHolder.style.display = 'block';
   }
 
