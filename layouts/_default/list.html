@@ -9,12 +9,11 @@
 
   {{ range .RegularPages }}
     <div style="white-space: nowrap;">
-      <a href="{{ .RelPermalink }}">{{ .Title }}</a> 
-      
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a> -
       <span>
         {{- if not .Date.IsZero }}Ctime: {{ .Date.Format "2006-01-02" }}{{ end -}}
-        {{- if not .Lastmod.IsZero }}{{ if not .Date.IsZero }} {{ end }}Mtime: {{ .Lastmod.Format "2006-01-02" }}{{ end -}}
-        {{- if .Params.tags }}{{ if or (not .Date.IsZero) (not .Lastmod.IsZero) }} {{ end }}Tags: #{{ delimit .Params.tags " #" }}{{ end -}}
+        {{- if not .Lastmod.IsZero }}{{ if not .Date.IsZero }} {{ end }}Mtime: {{ .Lastmod.Format "2006-01-02" }}{{ end -}}&nbsp;|
+        {{- if .Params.tags }}{{ if or (not .Date.IsZero) (not .Lastmod.IsZero) }} {{ end }}Tags: #{{ delimit .Params.tags " #" }}{{ end -}}&nbsp;|
         {{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary | truncate 50 }}{{ end }}
       </span>
     </div>
