@@ -1,9 +1,9 @@
 ---
-title: Git Remote
+title: Git Remote Server
 date: 2025-12-31
 author: ljf12825
 tags: [Git]
-summary: git remote
+summary: git remote server
 ---
 
 ## git remote
