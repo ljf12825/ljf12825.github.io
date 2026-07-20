@@ -25,23 +25,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 ```txt
 content/
-    |-- _index.md   # current page
-    |-- article/    # notes
-    |-- lab/        # projects and experiments
-    |-- log/        # log blogs
-    |-- oj/         # online judge problems
-    |-- searchlist/ # search result page
+    |__ _index.md   # current page
+    |__ article/    # notes
+    |__ lab/        # projects and experiments
+    |__ log/        # log blogs
+    |__ oj/         # online judge problems
 ```
 
-- [article](/article/)
-- [lab](/lab/)
-- [log](/log/)
-- [oj](/oj/)
-- [searchlist](/searchlist/) <- this equivalent to entering `/*` in the search bar
-
-### Search
-
-Input tag, title, summary to search result, you will jump to searchlist and return result
+[article](/article/) | [lab](/lab/) | [log](/log/) | [oj](/oj/)
 
 ---
 
