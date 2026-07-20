@@ -1,5 +1,4 @@
 (function () {
-  // 自己读取数据，不依赖外部加载器
   const dataScript = document.getElementById('global-index-data');
   if (!dataScript) {
     console.error('global-index-data script not found');
@@ -119,7 +118,6 @@
     });
 
   const result = matched.map(m => m.page);
-  const scores = matched.map(m => m.score);
 
   const filterInfo = [];
   if (isShowAll) {
@@ -140,57 +138,31 @@
     ? `${result.length} result${result.length !== 1 ? 's' : ''} for ${filterInfo.join(' | ')}`
     : `${result.length} total page${result.length !== 1 ? 's' : ''}`;
 
-  // 更新顶部统计信息
   const titleEl = document.getElementById('topnav-search-title');
   if (titleEl) {
     titleEl.textContent = summaryText;
   }
 
-  // 检查是否有结果渲染容器
   const holder = document.getElementById('searchlist-result');
   if (!holder) return;
 
-  // 构建表格 - 固定占满宽度，标题可点击
-  let rowsHTML = '';
+  let listHTML = '';
   for (let i = 0; i < result.length; i++) {
     const p = result[i];
-    const matchScore = scores[i];
-    const maxScore = 200;
-    const percentage = isShowAll ? '-' : Math.min(100, Math.round((matchScore / maxScore) * 100)) + '%';
-    
-    rowsHTML += `
-      <tr>
-        <td><a href="${p.permalink}" style="color: #0000ee; text-decoration: underline;">${p.title}</a></td>
-        <td>{${p.section || '/'}}</td>
-        <td>${p.author || '-'}</td>
-        <td>${p.date || '-'}</td>
-        <td>${p.modify || '-'}</td>
-        <td style="word-break: break-word; white-space: normal;">${p.summary || '-'}</td>
-        <td>${ensureArray(p.tags).length > 0 ? ensureArray(p.tags).map(t => `#${t}`).join(' ') : '-'}</td>
-        <td>${percentage}</td>
-      </tr>
+    const tagsStr = ensureArray(p.tags).length > 0 ? ensureArray(p.tags).map(t => `#${t}`).join(' ') : '-';
+
+    listHTML += `
+      <div>
+        <a href="${p.permalink}">${p.title}</a>
+        {${p.section || '/'}}
+        ${p.author || '-'}
+        ${p.date || '-'}
+        ${p.modify || '-'}
+        ${p.summary || '-'}
+        ${tagsStr}
+      </div>
     `;
   }
 
-  const listHTML = result.length > 0
-    ? `<table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
-        <thead>
-          <tr>
-            <th style="text-align: left; border-bottom: 2px solid #000; padding: 4px 8px; width: 15%;">Name</th>
-            <th style="text-align: left; border-bottom: 2px solid #000; padding: 4px 8px; width: 10%;">Section</th>
-            <th style="text-align: left; border-bottom: 2px solid #000; padding: 4px 8px; width: 10%;">Author</th>
-            <th style="text-align: left; border-bottom: 2px solid #000; padding: 4px 8px; width: 10%;">Ctime</th>
-            <th style="text-align: left; border-bottom: 2px solid #000; padding: 4px 8px; width: 10%;">Mtime</th>
-            <th style="text-align: left; border-bottom: 2px solid #000; padding: 4px 8px; width: 20%;">Summary</th>
-            <th style="text-align: left; border-bottom: 2px solid #000; padding: 4px 8px; width: 15%;">Tags</th>
-            <th style="text-align: left; border-bottom: 2px solid #000; padding: 4px 8px; width: 10%;">Match</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${rowsHTML}
-        </tbody>
-      </table>`
-    : '<p>No results found</p>';
-
-  holder.innerHTML = listHTML;
+  holder.innerHTML = result.length > 0 ? listHTML : '';
 })();

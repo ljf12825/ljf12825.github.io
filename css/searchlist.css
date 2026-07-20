@@ -1,175 +1,42 @@
+/* 基础重置 - 清除容器内外的空白距离 */
+.searchlist-container {
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 顶部标题与摘要统计样式 */
 .search-header {
   display: flex;
   align-items: baseline;
   gap: 8px;
-  margin-bottom: 4px;
-}
-
-.search-header .page-title {
   margin: 0;
-  font-size: 1.2em;
+  padding: 0;
 }
 
-.searchlist-container {
-  max-width: 100%;
-  box-sizing: border-box;
-  margin-bottom: 8px;
-  padding: 0 8px;
-}
-
+.search-header .page-title,
 .searchlist-container .page-title {
+  margin: 0;
+  padding: 0;
   font-size: 1.2em;
-  margin-bottom: 4px;
   color: #000080;
 }
 
-.search-summary {
-  font-size: 12px;
-  color: #000000;
-  margin: 0 0 8px 0;
-  padding: 4px 0;
-  border-bottom: 1px solid #c0c0c0;
+#searchlist-result {
+  margin: 0;
+  padding: 0;
 }
 
-.searchlist {
-  width: 100%;
-  padding: 0 0 10px 0;
-  margin-top: 12px;
-  border-bottom: 1px solid #000000;
-
-}
-
-.search_row {
-  display: grid;
-  grid-template-columns: 1.0fr 1.0fr 0.3fr 0.3fr 0.3fr 0.3fr 0.3fr 1.2fr 1.0fr 0.4fr 0.2fr;
-  border-bottom: 1px dashed #000000;
-  font-size: 13px;
-}
-
-.search_row span {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.search_author {
-  color: #000000;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.search_date {
-  color: #000000;
-  white-space: nowrap;
-}
-
-.search_row.header {
-  border-top: 1px solid #000000;
-  border-bottom: 1px solid #000000;
-  color: #000080;
-  font-weight: bold;
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-}
-
-.search_row.header span {
-  cursor: default;
-  padding: 3px 4px;
-}
-
-.search_name a {
-  text-decoration: none;
-  color: #000080;
-  font-weight: 500;
-}
-
-.search_name a:hover {
-  text-decoration: underline;
-  color: #ff0000;
-}
-
-.search_path {
-  color: #000000;
+#searchlist-result div {
+  margin: 0;
+  padding: 0;
   word-break: break-all;
-}
-
-.search_type {
-  color: #000000;
-}
-
-.search_section {
-  color: #000000;
-}
-
-.search_summary {
-  color: #000000;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  padding-right: 4px;
-}
-
-.search_tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1px 3px;
-}
-
-.search_tags .tag {
-  color: #000080;
-}
-
-.search_cats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1px 3px;
-}
-
-.search_cats .cat {
-  color: #000000;
-}
-
-.search_score {
-  color: #000000;
-  text-align: center;
+  white-space: normal;
 }
 
 .no-results {
-  text-align: center;
   color: #000000;
-  padding: 20px 0;
-}
-
-@media (max-width: 768px) {
-  .searchlist-container {
-    padding: 0 4px;
-  }
-  
-  .search_row {
-    grid-template-columns: 1.5fr 0.8fr 0.8fr 1fr;
-    font-size: 11px;
-    gap: 2px;
-  }
-  
-  .search_row span {
-    padding: 2px 3px;
-  }
-  
-  .search_path,
-  .search_type,
-  .search_section,
-  .search_cats {
-    display: none;
-  }
-  
-  .search_summary {
-    display: block;
-    font-size: 10px;
-  }
-  
-  .search_tags .tag {
-    font-size: 9px;
-  }
+  margin: 0;
+  padding: 0;
 }
