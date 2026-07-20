@@ -1,12 +1,20 @@
 ---
-title: Ctags
-date: 2026-05-13
+title: Code Navigation Tool
 author: ljf12825
-type: file
-summary: usage and overview of Ctags
+date: 2026-07-20
+tags: [CheckList]
+summary: Overview and usage of ctags, gtags, cscope
 ---
 
-## 前言
+早期代码导航工具，像Univeral Ctags, GNU Global, Cscope是在LSP出现之前用于在Vim/Neovim或Emacs里能够按快捷键跳转到函数定义，查找谁调用了这个函数、或者查看函数列表
+
+在LSP蓬勃发展的今日，这些传统工具仍然活跃在开发一线，特别是在以下场景中：
+
+1. 阅读无法编译的古老代码/缺少依赖的代码库，现代LSP会因为缺少`compile_commands.json`直接报错，但这些代码导航工具不需要任何编译环境，直接硬扫描就能生成索引，完成大部分的代码跳转
+2. 超大型C/C++工程，如Linux内核，Chromium等，在几千万行代码的项目里，LSP启动和建立索引需要耗费大量CPU和几GB内存。使用代码导航工具能瞬间响应，极其节省资源
+3. 低配设备或远程服务器上，在内存受限的VPS上看代码，跑LSP可能会爆内存，而ctags/gtags几乎不占资源
+
+## Ctags
 
 Ctags是一个经典的代码索引工具，核心作用是为源代码中的符号（函数、变量、类、宏）生成一个标签文件（通常叫`tags`），供编辑器和IED快速定位定义位置
 
@@ -286,3 +294,11 @@ ctags 很难完整处理具体调用目标
 ### 没有真正 AST
 
 这是最大本质，ctags 更接近 `enhanced tokenizer + lightweight parse`，而不是 `compiler frontend
+
+---
+
+## GNU Global
+
+---
+
+## Cscope
