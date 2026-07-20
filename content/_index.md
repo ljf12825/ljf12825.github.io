@@ -1,5 +1,4 @@
 ---
-title: "ljf12825.github.io/"
 ---
 
 ## BUILD INFO
@@ -17,6 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 </script>
+
+---
 
 ## Guide
 
@@ -42,6 +43,8 @@ content/
 
 Input tag, title, summary to search result, you will jump to searchlist and return result
 
+---
+
 ## Code for myself
 
 ```text
@@ -62,6 +65,8 @@ please check the latest commit for the most recent changes.
 
 Status: ALIVE
 ```
+
+---
 
 ## Full License
 

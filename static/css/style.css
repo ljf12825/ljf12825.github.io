@@ -58,14 +58,14 @@ main {
 .content h6::before { content: "###### "; }
 
 .home-page {
-  max-width: none !important;
-  margin: 0 !important;
+  max-width: 800px !important;
+  margin: 0 auto !important;
 }
 
 footer {
   width: 100%;
   margin: 60px auto 20px auto;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .footer-box {
