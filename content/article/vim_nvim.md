@@ -1,9 +1,9 @@
 ---
-title: Vim
+title: Vim/Neovim
 date: 2026-04-21
 author: ljf12825
-type: file
-summary: usage of vim
+tags: [Vim, Neovim]
+summary: summary of vim and neovim
 ---
 
 # vi（历史背景 from Wikipedia）
@@ -2021,6 +2021,3 @@ void foo() {
     }
 }
 ```
-
-
-
