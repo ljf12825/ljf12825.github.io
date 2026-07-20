@@ -1,20 +1,16 @@
-<div id="great-indexer" style="position: fixed; top: 0; left: 0; width: 100%; height: 38px; background: #ffffff; border-bottom: 1px solid #000000; padding: 4px 20px; box-sizing: border-box; display: flex; align-items: center; gap: 12px; font-family: monospace; font-size: 13px; z-index: 9999; overflow: hidden;">
-  <div style="display: flex; align-items: center; gap: 6px; flex: 0 1 460px; min-width: 200px;">
+<link rel="stylesheet" href="{{ "css/great-indexer.css" | relURL }}">
+<div id="great-indexer">
+  <div class="indexer-input-wrapper">
     <input 
       id="globalIndexInput" 
       type="text" 
-      placeholder="Search title/tag/summary/*..." 
-      style="flex: 1; min-width: 80px; border: 1px solid #000000; padding: 2px 6px; font-family: monospace; font-size: 13px; outline: none; box-sizing: border-box; height: 26px; background: #ffffff; color: #000000;"
+      placeholder="Input title/tag/summary and `/*` for full list" 
     />
-    <button 
-      id="globalSearchBtn" 
-      style="border: 1px solid #000000; background: #f0f0f0; padding: 2px 12px; font-family: monospace; font-size: 13px; cursor: pointer; height: 26px; box-sizing: border-box; white-space: nowrap;"
-    >Search</button>
   </div>
-  <span id="topnav-search-title" style="color: #000000; font-size: 12px; white-space: nowrap; flex: 1; overflow: hidden; text-overflow: ellipsis;"></span>
+  <span id="topnav-search-title"></span>
 </div>
 
-<div style="height: 38px; width: 100%;"></div>
+<div class="indexer-placeholder"></div>
 
 {{- $pages := where .Site.RegularPages "Draft" "ne" true -}}
 <script id="global-index-data" type="application/json">
