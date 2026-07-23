@@ -146,6 +146,16 @@
     return String(text).replace(pattern, '<mark style="background-color: #ffff00; color: #000000; padding: 0 2px;">$1</mark>');
   }
 
+  // 安全解析时间字符串为时间戳
+  function getTimestamp(val) {
+    if (!val) return 0;
+    if (typeof val === 'number') return val;
+    // 将 2026-07-23 转换为 2026/07/23 提高各种浏览器的兼容性
+    const str = String(val).trim().replace(/-/g, '/');
+    const ts = new Date(str).getTime();
+    return isNaN(ts) ? 0 : ts;
+  }
+
   function renderLiveSearch() {
     const rawQuery = inputEl.value;
     const bodyChildren = Array.from(document.body.children);
@@ -200,6 +210,17 @@
       }
     }
 
+    // 匹配 Hugo 的配置 (lastmod)，按照修改时间降序排列
+    matchedResults.sort((a, b) => {
+      const pageA = a.page || {};
+      const pageB = b.page || {};
+
+      const timeA = getTimestamp(pageA.lastmod || pageA.modify || pageA.updated || pageA.date);
+      const timeB = getTimestamp(pageB.lastmod || pageB.modify || pageB.updated || pageB.date);
+
+      return timeB - timeA;
+    });
+
     let listHTML = '';
     for (let i = 0; i < matchedResults.length; i++) {
       const { page: p, highlights } = matchedResults[i];
@@ -216,7 +237,7 @@
           <span style="color: #666;">{${p.section || '/'}}</span>
           ${p.author || '-'}
           ${p.date || '-'}
-          ${p.modify || '-'}
+          ${p.lastmod || p.modify || '-'}
           ${hSummary}
           <span style="color: #008000;">${hTags}</span>
         </div>
