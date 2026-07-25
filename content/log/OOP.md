@@ -1,9 +1,9 @@
 ---
-title: Object Oriented
+title: Object Oriented Programming
 author: ljf12825
-type: file
+tags: [OOP, Paradigm]
 date: 2026-05-01
-summary: the history of OO
+summary: A study on object-oriented programming
 ---
 
 ## GoF23
