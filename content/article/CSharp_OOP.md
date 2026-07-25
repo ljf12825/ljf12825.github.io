@@ -1,9 +1,9 @@
 ---
-title: OOP
+title: C# OOP
 date: 2025-06-01
 author: "ljf12825"
-type: file
-summary: C# oop
+tags: [Syntax]
+summary: C# Oriented Object Programming
 ---
 
 C#是强类型，面向对象语言
