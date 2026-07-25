@@ -13,6 +13,8 @@
       {{- with .Params.author }} &nbsp;|&nbsp; Author: {{ . }}{{ end -}}
       {{- $tags := .Params.tags -}}
       {{- if $tags }} &nbsp;|&nbsp; Tags: {{ if reflect.IsSlice $tags }}{{ delimit $tags ", " }}{{ else }}{{ $tags }}{{ end }}{{ end -}}
+      <br>
+      {{- with .Params.summary }} Summary: {{ . }}{{ end -}}
     </p>
 
     <hr class="article-hr">
