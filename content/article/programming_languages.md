@@ -2,7 +2,7 @@
 title: Programming Languages
 author: ljf12825
 date: 2026-07-15
-tags: [C, C++, C#, Rust, Lua, Python, Assembly]
+tags: [Language]
 summary: Horizontal comparison and vertical exploration of programming languages
 ---
 
@@ -1047,4 +1047,24 @@ AOT vs Interpreter vs JIT
 
 ## 静态类型与动态类型
 
+所谓静态类型和动态类型，区别在于类型检查发生在什么时候
+
+- 静态类型语言：在编译阶段就确定所有变量和表达式的类型。类型错误在运行前就会被揪出来
+  - 特点：写代码时需要声明类型（或能被自动推导），有智能提示，运行效率通常更高
+  - 典型代表：C, C++, Java, Rust, Go, TypeScript
+- 动态类型语言：类型检查发生在运行时。变量没有固定类型，可以随时赋不同类型的值
+  - 特点：写起来更灵活自由，但更容易出现运行时类型错误
+  - 典型代表：Python, JavaScript, Ruby, PHP
+
 ## 强类型与弱类型
+
+类型规则有多严格，是否允许隐式类型转换
+
+- 强类型语言：类型一旦确定，基本不会自动转换。不允许在需要A类型的地方，偷偷塞个B类型进去，显式转换才算安全
+  - 特点：更严格，减少因隐式转换带来的怪异bug
+  - 典型代表：Python, Java, Rust, Go
+- 弱类型语言：类型约束宽松，会频繁进行隐式类型转换。语言会揣测你的意图，自动把一种类型转成另一种
+  - 特点：写起来快，但可能出现意想不到的结果
+  - 典型代表：JavaScript, PHP, C
+
+
