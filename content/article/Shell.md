@@ -3,8 +3,33 @@ title: Shell
 author: ljf12825
 date: 2026-04-04
 type: file
-summary: overview of Shell and syntax of Shell
+summary: Shell and Shell Script
 ---
+
+# Shell
+
+## 配置
+
+- 环境变量
+- 启动配置文件
+
+## Shell解析管线
+
+Shell对输入的一行字符串，逐步变成“可执行结构（命令+参数+进程）的一整套处理流程，大致分为五个核心阶段
+
+```txt
+Input
+v
+1. Tokenization（词法拆分）
+v
+2. Expansion（各种展开）
+v
+3. Parsing（语法结构生成）
+v
+4. Resolution（命令解析）
+v
+5. Execution（执行）
+```
 
 ## 定义
 
@@ -559,3 +584,8 @@ set -euo pipefail # 严格的错误处理模式
 Bash(Bourne Again Shell)是一个命令行解释器和脚本语言，是Linux和macOS等类Unix操作系统中最常用的Shell之一。Bash是由Brian Fox为GNU项目开发的，是Unix的Bourne Shell(sh)的替代品，因此得名"Bourne Again Shell"
 
 Bash不仅作为一个交互式命令行解释器使用，也广泛用于编写脚本来自动化各种系统管理任务、应用程序部署等工作
+
+# Shell Script
+
+- source
+- exec
