@@ -1,9 +1,9 @@
 ---
-title: CPU ISA
-date: 2025-12-31
+title: CPU
 author: ljf12825
-summary: CPU Instruction Set Architecture
-type: file
+date: 2026-07-30
+tags: [Hardware]
+summary: Overview of CPU
 ---
 
 # CPU 指令集架构（ISA, Instruction Set Architecture）
