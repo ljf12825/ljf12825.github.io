@@ -26,10 +26,73 @@ DOS作为主流桌面操作系统的时代已经在2000年就结束了，但DOS�
 在Linux上使用QEMU来模拟DOS所需硬件环境
 
 先创建虚拟机所在目录`~/freedos_sandbox/`\
-从<https://freedos.org/>下载Live CD，得到一个.zip压缩包，将其内容解压到`~/freedos_sandbox/`中\
+从<https://freedos.org/>下载Live CD，得到一个.zip压缩包，将其内容解压到`~/freedos_sandbox/`中
 
+安装qemu：`sudo apt update && sudo apt install qemu-system-x86`
 
-- qemu
+使用`qemu-img`分配一个虚拟硬盘空间；对FreeDOS而言，500MB到2GB就足够存放大量DOS软件与游戏
+
+```bash
+qemu-img create -f qcow2 freedos.qcow2 500M
+```
+
+挂载镜像并启动ISO安装
+
+```bash
+qemu-system-x86_64 -m 64 \
+    -hda freedos.qcow \
+    -cdrom FD14LIVE.iso \
+    -boot d
+```
+
+[![freedos_erase_c](/images/content/freedos_erase_c.png)](/images/content/freedos_erase_c.png)
+
+[![freedos_formatting_c](/images/content/freedos_formatting_c.png)](/images/content/freedos_formatting_c.png)
+
+[![freedos_guide](/images/content/freedos_guide.png)](/images/content/freedos_guide.png)
+
+[![freedos_installing](/images/content/freedos_installing.png)](/images/content/freedos_installing.png)
+
+[![freedos_install](/images/content/freedos_install.png)](/images/content/freedos_install.png)
+
+[![freedos_packages_select](/images/content/freedos_packages_select.png)](/images/content/freedos_packages_select.png)
+
+[![freedos_partition](/images/content/freedos_partition.png)](/images/content/freedos_partition.png)
+
+[![freedos_installed](/images/content/freedos_installed.png)](/images/content/freedos_installed.png)
+
+### QEMU中的DOS启动
+
+以后日常使用时，直接运行下述命令即可引导已安装好的FreeDOS，无需再挂载ISO CD-ROM
+
+```bash
+qemu-system-x86_64 -m 64 -hda freedos.qcow2
+```
+
+[![freedos_boot](/images/content/freedos_boot.png)](/images/content/freedos_boot.png)
+
+1. Load FreeDOS JEMMEX, no EMS(most UMBs), max RAM free
+    - 作用：使用JEMMEX内存管理器，提供扩展内存(XMS)，但关闭扩充内存(EMS)。这样可以释放出最多的上位内存块(UMB)，把驱动程序加载到高位区
+    - 效果：能节省出最大的常规内存空间（接近640KB全满）
+    - 适用场景：绝大多数常规DOS软件与后期DOS游戏（如《仙剑奇侠传》，《大航海时代2》，《三国志4》等需要大量Conventional Memory的程序）
+    - 这是日常首选模式
+2. Load FreeDOS with JEMMEX(more compatible)
+    - 作用：使用JEMMEX同时提供XMS和EMS两种内存规范，兼容性更好
+    - 效果：稍微多占用一点基本内存，但能同时满足需要扩充内存的项目
+    - 适用场景：需要EMS支持的软件，或者选项1启动报错时的备选
+3. Load FreeDOS with JEMM386(Expanded Memory)
+    - 作用：采用独立的`HIMEMX.EXE` + `JEMM386.EXE`组合，显式开启EMS扩展内存
+    - 效果：模拟出老式的EMS内存（Page Frame映射），满足极少数特定旧游戏的要求
+    - 适用场景：某些明确提示"Require EMS / Expanded Memory"的早中期386/480时代老游戏（如某些早期的模拟经营或战棋游戏）
+4. Load FreeDOS low with some drivers(Safe Mode)
+    - 作用：安全模式。不加载复杂的386/480高级内存管理器（把FreeDOS载入基本内存）
+    - 效果：系统极为稳定，但可用基本内存较少，无法运行大程序
+    - 适用场景：排查内存冲突、驱动冲突，或者运行对386保护模式/虚拟86模式(V86)敏感的极老程序
+5. Load FreeDOS without drivers(Emergency Mode)
+    - 作用：纯净/紧急模式。不加载任何驱动和内存管理器（相当于原生的`COMMAND.COM`命令行）
+    - 效果：最原始的DOS环境
+    - 适用场景：系统配置文件（如`CONFIG.SYS`或`AUTOEXEC.BAT`)写错导致死机时，进入次模式进行修改修复；或用于刷写BIOS，硬件低级调试
+
 - mtools
 
 ## DOS的使用
@@ -171,28 +234,16 @@ FreeDOS自动化联网脚本，一键加载Packet Driver并通过DHCP获取IP
 
 ### 批处理
 
+## QEMU中的DOS与Linux宿主机互传文件
+
+在QEMU中与Linux宿主机互传文件有多种方式。由于DOS系统本身不原生支持网络共享协议，最推荐的方法是通过挂载虚拟磁盘镜像或使用FAT虚拟ISO/磁盘来传递文件
+
+### 方法一：通过挂载`qcow2`/`img`磁盘镜像
+
+在QEMU虚拟机关闭状态下，可以在Linux宿主机上使用`qemu-nbd`将FreeDOS的磁盘镜像直接挂载到Linux的目录中
+
 ## DOSBox-X 的使用
 
 ## 开发环境
 
 - open watcom
-
-<https://freedos.org/>
-
-[![freedos_erase_c](/images/content/freedos_erase_c.png)](/images/content/freedos_erase_c.png)
-
-[![freedos_formatting_c](/images/content/freedos_formatting_c.png)](/images/content/freedos_formatting_c.png)
-
-[![freedos_guide](/images/content/freedos_guide.png)](/images/content/freedos_guide.png)
-
-[![freedos_installing](/images/content/freedos_installing.png)](/images/content/freedos_installing.png)
-
-[![freedos_install](/images/content/freedos_install.png)](/images/content/freedos_install.png)
-
-[![freedos_packages_select](/images/content/freedos_packages_select.png)](/images/content/freedos_packages_select.png)
-
-[![freedos_partition](/images/content/freedos_partition.png)](/images/content/freedos_partition.png)
-
-[![freedos_boot](/images/content/freedos_boot.png)](/images/content/freedos_boot.png)
-
-[![freedos_installed](/images/content/freedos_installed.png)](/images/content/freedos_installed.png)
