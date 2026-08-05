@@ -242,6 +242,59 @@ FreeDOS自动化联网脚本，一键加载Packet Driver并通过DHCP获取IP
 
 在QEMU虚拟机关闭状态下，可以在Linux宿主机上使用`qemu-nbd`将FreeDOS的磁盘镜像直接挂载到Linux的目录中
 
+#### 1. 挂载FreeDOS磁盘到Linux
+
+```bash
+# 加载 nbd 模块
+sudo modprobe nbd max_part=8
+
+# 将 freedos.qcow2 链接到 /dev/nbd0
+sudo qemu-nbd --connect=/dev/nbd0 freedos.qcow2
+
+# 查看分区（通常为 /dev/nbd0p1）
+lsblk /dev/nbd0
+
+# 创建挂载点并挂载（FAT32/FAT16格式）
+mkdir -p ~/freedos_mnt
+sudo mount /dev/nbd0p1 ~/freedos_mnt
+```
+
+#### 2. 进行文件读写
+
+挂载成功后，直接在Linux的`~freedos_mnt`目录下复制、删除或修改文件即可
+
+```bash
+# 例如：把Linux 下的程序复制进 FreeDOS
+cp ~/my_game.exe ~/freedos_mnt/
+```
+
+#### 3. 卸载镜像
+
+写完文件后，必须解除挂载，必须在启动虚拟机前完成，否则会导致磁盘文件损坏
+
+```bash
+sudo umount ~/freedow_mnt
+sudo qemu-nbd --disconnect /dev/nbd0
+```
+
+### 方法二：利用QEMU虚拟FAT目录映射（运行时单向/双向传输）
+
+QEMU内置了将Linux的一个本地文件夹动态模拟为DOS磁盘的功能
+
+```bash
+qemu-system-x86_64 -m 64 \
+    -hda freedos.qcow2 \
+    -drive file=fat:rw:/path/to/linux/shared_folder.format=raw
+```
+
+进入FreeDOS后，切换到`D:`盘即可看到`shared_folder`内的文件\
+DOS下的文件名遵循8.3格式，即文件名不超过8个字符，扩展名不超过3个字符，多余字符会被截断\
+尽可能只做“从Linux读取到DOS”的操作。如果在DOS端频繁写入此虚拟盘，QEMU的动态VFAT引擎有时容易出现同步延迟或错误
+
+### 方法三：制作ISO镜像文件
+
+如果需要把大量的软件、游戏或ISO数据打包导入到FreeDOS中，最稳妥的方式是在Linux上生成ISO文件，然后作为光驱挂载
+
 ## DOSBox-X 的使用
 
 ## 开发环境
