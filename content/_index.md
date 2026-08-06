@@ -49,7 +49,7 @@ This website is search-driven, with the fellowing search rules:
 example:
 
 ```txt
-a::!Linux&&!Unity&&!Git
+all::!Linux&&!Unity&&!Git
 ```
 
 Meaning: Content that does not include keywords: Linux, Unity, and Git in all sections
