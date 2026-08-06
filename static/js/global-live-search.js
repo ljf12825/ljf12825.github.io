@@ -51,7 +51,7 @@
 
   const norm = v => String(v || '').toLowerCase();
 
-  function parseQueryInput(rawQuery) {
+function parseQueryInput(rawQuery) {
     let q = rawQuery.trim();
 
     if (q === 'all::') {
