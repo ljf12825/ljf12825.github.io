@@ -53,28 +53,26 @@
 
   function parseQueryInput(rawQuery) {
     let q = rawQuery.trim();
-    let targetSection = null;
 
-    if (q === 'a::') {
-      return { targetSection: null, conditionStr: 'a::' };
+    if (q === 'all::') {
+      return { targetSection: null, conditionStr: 'all::' };
     }
 
-    if (q.startsWith('a::')) {
-      q = q.slice(3).trim();
+    if (q.startsWith('all::')) {
+      q = q.slice(5).trim();
       return { targetSection: null, conditionStr: q };
     }
 
-    const nsMatch = q.match(/^([a-zA-Z0-9_-]+)::\s*/i);
-    if (nsMatch) {
-      let secName = nsMatch[1].toLowerCase();
-      if (secName === 'art') {
-        secName = 'article';
-      }
-      targetSection = secName;
-      q = q.slice(nsMatch[0].length).trim();
+    if (q === 'lab::') {
+      return { targetSection: 'lab', conditionStr: '' };
     }
 
-    return { targetSection, conditionStr: q };
+    if (q.startsWith('lab::')) {
+      q = q.slice(5).trim();
+      return { targetSection: 'lab', conditionStr: q };
+    }
+
+    return { targetSection: '', conditionStr: q };
   }
 
   function evaluateCondition(pageText, conditionStr) {
@@ -82,11 +80,23 @@
 
     const tokensToHighlight = new Set();
     const orGroups = conditionStr.split('||');
-
     let overallMatch = false;
 
     for (let orGroup of orGroups) {
-      const andTokens = orGroup.split('&&').map(t => t.trim()).filter(Boolean);
+      if (!orGroup.trim()) continue;
+
+      const rawAndTokens = orGroup.split('&&').map(t => t.trim()).filter(Boolean);
+      const andTokens = [];
+
+      for (let rawToken of rawAndTokens) {
+        if (rawToken.startsWith('!')) {
+          andTokens.push(rawToken);
+        } else {
+          const words = rawToken.split(/\s+/).filter(Boolean);
+          andTokens.push(...words);
+        }
+      }
+
       if (andTokens.length === 0) continue;
 
       let groupMatched = true;
@@ -146,11 +156,9 @@
     return String(text).replace(pattern, '<mark style="background-color: #ffff00; color: #000000; padding: 0 2px;">$1</mark>');
   }
 
-  // 安全解析时间字符串为时间戳
   function getTimestamp(val) {
     if (!val) return 0;
     if (typeof val === 'number') return val;
-    // 将 2026-07-23 转换为 2026/07/23 提高各种浏览器的兼容性
     const str = String(val).trim().replace(/-/g, '/');
     const ts = new Date(str).getTime();
     return isNaN(ts) ? 0 : ts;
@@ -187,12 +195,12 @@
 
     const { targetSection, conditionStr } = parseQueryInput(rawQuery);
     
-    const isShowAll = (rawQuery.trim() === 'a::') || (targetSection && !conditionStr);
+    const isShowAll = (conditionStr === 'all::') || (targetSection !== null && !conditionStr);
 
     const matchedResults = [];
 
     for (let p of pages) {
-      if (targetSection && norm(p.section) !== targetSection) {
+      if (targetSection !== null && norm(p.section) !== targetSection) {
         continue;
       }
 
@@ -201,7 +209,15 @@
         continue;
       }
 
-      const pageText = `${norm(p.title)} ${norm(p.summary)} ${ensureArray(p.tags).map(norm).join(' ')} ${ensureArray(p.categories).map(norm).join(' ')}`;
+      const pageText = [
+        norm(p.title),
+        norm(p.summary),
+        norm(p.content),
+        norm(p.permalink),
+        norm(p.section),
+        ...ensureArray(p.tags).map(norm),
+        ...ensureArray(p.categories).map(norm)
+      ].join(' ');
 
       const { match, highlightTokens } = evaluateCondition(pageText, conditionStr);
 
@@ -210,7 +226,6 @@
       }
     }
 
-    // 匹配 Hugo 的配置 (lastmod)，按照修改时间降序排列
     matchedResults.sort((a, b) => {
       const pageA = a.page || {};
       const pageB = b.page || {};
@@ -231,10 +246,12 @@
       const hSummary = highlightText(p.summary, highlights);
       const hTags = highlightText(tagsStr, highlights);
 
+      const sectionTag = norm(p.section) === 'lab' ? `<span style="color: #666;">{lab}</span>` : '';
+
       listHTML += `
         <div style="margin-bottom: 6px; white-space: normal; line-height: 1.4; border-bottom: 1px dashed #eee; padding-bottom: 4px;">
           <a href="${p.permalink}" style="color: #0000ee; text-decoration: underline; font-weight: bold;">${hTitle}</a>
-          <span style="color: #666;">{${p.section || '/'}}</span>
+          ${sectionTag}
           ${p.author || '-'}
           ${p.date || '-'}
           ${p.lastmod || p.modify || '-'}
