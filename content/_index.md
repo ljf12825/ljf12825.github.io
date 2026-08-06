@@ -39,8 +39,8 @@ This website is search-driven, with the fellowing search rules:
   - tags
   - summary
 - scope: which section the content belonging
-  - `a::`: global which include all sections
-  - `lab::` all content from `lab/`
+  - `all::`: global which include all sections
+  - `lab::` all content from `lab/`(will display `{lab}` tag on search list)
 - logical operators: support simple combination filtering of multiple keywords
   - `&&`: and
   - `||`: or
