@@ -26,10 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
 ```txt
 content/
     |__ _index.md   # current page
-    |__ article/    # notes
     |__ lab/        # projects and experiments
-    |__ log/        # log blogs
-    |__ oj/         # online judge problems
+         |__ _index.md
 ```
 
 ### Search
@@ -41,11 +39,8 @@ This website is search-driven, with the fellowing search rules:
   - tags
   - summary
 - scope: which section the content belonging
-  - `a::`: global which include all sections
-  - `art::`: all the content under the {article}
-  - `lab::`
-  - `log::`
-  - `oj::`
+  - `all::`: global which include all sections
+  - `lab::` all content from `lab/`(will display `{lab}` tag on search list)
 - logical operators: support simple combination filtering of multiple keywords
   - `&&`: and
   - `||`: or
