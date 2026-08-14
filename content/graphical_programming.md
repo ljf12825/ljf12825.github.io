@@ -1,16 +1,67 @@
 ---
-title: Graphical Programming
+title: Computer Graphics
 author: ljf12825
 date: 2026-07-11
 tags: [Graphic]
 summary: Overview of graphical programming
 ---
 
-图形学编程包含三大块
+Computer Graphics 是利用计算机程序处理、生成、表示、分析和绘制图形/视觉数据的一大类编程
 
-- 生成图像(渲染)：从几何数据 + 材质 + 光照 -> 像素
-- 处理图像(后处理)：对已有像素做变换（模糊、锐化、调色）
-- 模拟与动画：物理模拟（布料、流体、刚体碰撞）
+```
+Computer Graphics
+|
+|-- Rendering
+|   |-- Resterization
+|   |-- Ray Tracing
+|   |-- Path Tracing
+|   |-- Lighting
+|   |-- Shadows
+|   |-- PBR
+|
+|-- Geometry Processing
+|   |-- Mesh
+|   |-- Mesh Simplification
+|   |-- Subdivision
+|   |-- Collision Geometry
+|   |-- Procedural Geometry
+|
+|-- Animation
+|   |-- Keyframe
+|   |-- Skeletal Animation
+|   |-- Skinning
+|   |-- Physics Animation
+|   |-- Procedural Animation
+|
+|-- Image Processing
+|   |-- Filtering
+|   |-- HDR
+|   |-- Denoising
+|   |-- Tone Mapping
+|   |-- Image Reconstruction
+|
+|-- Simulation
+|   |-- Fluid
+|   |-- Cloth
+|   |-- Rigid Body
+|   |-- Particle
+|
+|-- Computer Vision
+|   |-- Image Recognition
+|   |-- Feature Detection
+|   |-- 3D Reconstruction
+|   |-- SLAM
+|
+|-- Visualization
+|   |-- Scientific Visualization
+|   |-- Data Visualization
+|   |-- Volume Rendering
+|
+|-- GPU Computing
+    |-- Compute Shader
+    |-- CUDA
+    |-- General GPU Algorithms
+```
 
 ## 生成图像（渲染）
 
