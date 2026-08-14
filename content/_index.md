@@ -1,7 +1,7 @@
 ---
 ---
 
-## BUILD INFO
+---
 
 {{< buildinfo >}}
 
@@ -140,3 +140,5 @@ the same license as the content they accompany, unless otherwise stated.
 - If no license is specified, all rights are reserved.  
 - Commercial use of non-code content is prohibited unless explicitly allowed.
 ```
+
+---
