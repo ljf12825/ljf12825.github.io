@@ -1,22 +1,41 @@
 ---
-title: Email
-date: 2025-12-31
+title: Mailing List
 author: ljf12825
-type: file
-summary: git Email interaction
+date: 2026-06-12
+tags: [Git, Cooperation]
+summary: Overview of mailing list, and Git usage on it
 ---
 
+邮件列表(Mailing List) 本质上是一个公开的邮件广播与归档系统
+
+- 公开地址：项目组会设立一个专门的邮箱（例如Git的`git@vger.kernel.org`或Linux内核的`linux-kernel@vger.kernel.org`，俗称LKML）
+- 订阅机制：任何人都可以通过发送特定邮件来订阅该列表，之后发送到该地址的所有邮件（议题讨论、补丁等）都会抄送给所有订阅者
+- 公共归档：系统会自动将所有历史邮件以网页形式归档（如lore.kernel.org），方便所有人搜索和通过链接引用
+
+## 核心工作流程
+
+在邮件列表体系中，没有PR/MR概念，取而代之的是补丁(Patch)
+
+1. 准备与补丁生成(Generate Patch)：开发者在本地提交Commit后，使用`git format-patch`将命令变更导出为符合标准的纯文本`.patch`文件。这个文件包含了Commit说明、作者信息以及diff代码
+2. 发送补丁(Send Patch)：为了避免传统邮件客户端破坏代码格式，通常使用命令行工具`git send-email`直连SMTP服务器，将补丁以纯文本格式发送到邮件列表，并抄送给相关子模块的维护者
+3. 评审与讨论(Code Review)：审查者直接在邮件客户端中对补丁进行内联回复(In-line Reply)。评论会直接插入到代码行下方，大家在邮件线程中讨论算法、代码风格和架构设计
+4. 迭代与修订(Iterate)：作者根据意见修改代码，然后重新生成表姐有版本号的补丁集（如`[PATCH v2]`, `[PATCH v3]`），再次发送到邮件列表，直到没有人有异议
+5. 合入代码(Merge)：维护者确认没问题后，使用`git am`命令直接将邮件列表中的`.patch`文件一键应用合并到官方Git仓库中
+
 ## apply
+
 `git apply`是一个用于将补丁（patch）文件中的更改应用到当前工作区和暂存区的Git命令。它接收一个由`git diff`或`diff -u`生成的标准diff格式的补丁文件，并直接修改你的文件\
 它的核心特点是：它只应用文件的更改，而不会生成新的提交。需要手动将更改暂存并创建提交
 
 ### 使用场景
+
 1. 测试补丁：检查一个补丁是否能无冲突地应用到当前代码上（使用`--check`）
 2. 临时应用更改：向应用更改但暂时还不想做提交，或者需要先修改一下
 3. 应用非标准补丁：应用的补丁文件不是由`git format-patch`生成的的（即不包含提交信息等元数据），而是普通的`.diff`或`.patch`文件
 4. 只修改工作区：可以选择只将补丁应用到工作目录的文件，而不添加到暂存区
 
 ### 基本用法
+
 1. 检查补丁是否能成功应用（试运行）
 在真正应用之前，先检查补丁是否会产生冲突。这是一个非常好的习惯
 ```bash
@@ -63,6 +82,7 @@ git apply --reverse your_patch_file.patch
 | `--3way` | | 如果补丁不能干净应用，尝试进行三方合并。这需要补丁中包含必要的blob ID（如果补丁是由`git diff`或`git format-patch`生成的则会有 |
 
 ### 三方合并（Three-way merge）
+
 是一种解决分支冲突或合并分支时常用的机制\
 顾名思义，就是利用三个版本（commit）进行合并
 1. 共同祖先（Base）
@@ -75,6 +95,7 @@ git apply --reverse your_patch_file.patch
 Git会根据共同祖先来对比本地分支和目标分支的不同，从而决定如何合并
 
 #### 举例
+
 假设有两个分支
 - `main`
 - `feature`
@@ -106,6 +127,7 @@ A --- B --- C (main)
 | 三方合并（Three-way merge）| 两个分支都往前推进过，需要找到最近公共祖先再合并 | 3个 | `main`和`feature`各自有新提交 |
 
 ### 工作流程
+
 假设有一个`bugfix.patch`文件，需要测试并应用他
 1. 首先，检查补丁
 ```bash
@@ -132,16 +154,19 @@ git commit -m "Apply the bugfix patch"
 ```
 
 ## am
+
 `git am`是一个Git命令，用于从邮箱格式文件（mailbox）中应用一个或多个补丁（patch）。这些补丁文件通常是由`git format-patch`命令生成的（`.patch`文件），或者是从邮件中直接保存出来的\
 它的核心功能是将补丁文件转换成一个个完整的提交（commit），并保留原提交的所有信息，如作者、日期、提交说明等
 
 
 ### 特点
+
 1. 保留提交历史：它会为每个补丁创建一个新的提交，历史记录清晰
 2. 保留作者信息：应用的提交会显示原始作者，而不是执行`git am`的人。这对于项目维护非常重要
 3. 高效处理系列补丁：可以一次性应用一个补丁序列（如`0001-*.patch`,`0002-*.patch`），并保持正确的顺序
 
 ### 基本用法
+
 1. 应用一个或多个补丁文件
 这是最常见的用法。首先需要将补丁文件放在项目目录下
 ```bash
@@ -178,6 +203,7 @@ cat patch.patch | git am
 | `-v` | `--verbose` | 详细模式，输出更多信息 |
 
 ### 工作流程：应用补丁并解决冲突
+
 假设收到了一个`feature.patch`文件，需要将它应用到代码库中
 1. 尝试应用补丁
 ```bash
@@ -209,6 +235,7 @@ git am --resolved
 | 适用场景 | 接收别人通过`git format-patch`生成的完整补丁 | 临时应用一个代码差异，或者测试一个补丁是否能成功应用（用`--check`）|
 
 ## imap-send 
+
 `git imap-send`用于通过IMAP协议发送补丁(patch)文件。它最常用于从Git提交中生成补丁，并将其通过邮件发送给其他开发者。这通常在代码审查、贡献代码或协作开发时使用
 
 ```bash
@@ -226,6 +253,7 @@ options
 - `--no-signature`：不附加签名
 
 ### 使用场景
+
 1. 邮件发送补丁
 如果有一组本地的提交，想要将这些提交作为补丁文件发送到一个邮件列表或团队成员，可以先将这些提交转化为补丁格式，然后通过`git imap-send`将其发送出去
 2. 代码审查
@@ -234,6 +262,7 @@ options
 在一些开发流程中，团队成员可能通过邮件来传递补丁。`git imap-send`便是将Git提交转化为补丁并通过邮件发送的工具
 
 ### 示例：发送补丁
+
 生成补丁
 ```bash
 git format-patch -1 <commit-hash>
@@ -245,6 +274,7 @@ git imap-send 0001-<commit-message>.patch
 在发送过程中，Git会要求你输入邮件相关的设置（如SMTP服务器、收件人等）
 
 #### 配置SMTP服务器
+
 要使`git imap-send`能正常工作，需要配置Git使用的邮件发送服务器（SMTP服务器）。这通常通过Git配置文件设置
 ```bash
 git config --global sendemail.smtpServer smtp.example.com 
@@ -255,6 +285,7 @@ git config --global sendemail.from "you@example.com"
 ```
 
 ### 注意事项
+
 - 在某些情况下，Git会要求你提供SMTP服务器的认证信息（例如用户名和密码）
 - 邮件发送功能需要配置正确的IMAP或SMTP设置，否则可能无法正常工作
 - 并非所有的Git安装都默认包含`imap-send`，可能需要安装额外的组件或者工具
@@ -295,6 +326,7 @@ git format-patch -1 <commit-hash> --stdout
 在生成多个补丁时，使得补丁之间的邮件能够形成线程，通常用于提交多个相关的补丁
 
 ### 示例
+
 1. 生成单个提交的补丁
 ```bash
 git format-patch -1 <commit-hash>
@@ -337,6 +369,7 @@ git format-patch -1 <commit-hash> --attach
 这个命令会将补丁生成并附加为邮件附件
 
 ### 补丁文件结构
+
 生成的补丁文件通常包含以下几个部分
 1. 邮件头部（Message Header）
 包括补丁文件的元数据，如补丁编号、作者、日期、主题等
@@ -361,6 +394,7 @@ index 1234567..89abcd0 100644
 ```
 
 ### 使用场景
+
 1. 代码审查
 开发者提交补丁而不是直接推送到主仓库，其他开发者可以通过邮件审查这些补丁，然后合并
 2. 跨仓库补丁传递
@@ -369,6 +403,7 @@ index 1234567..89abcd0 100644
 许多开源项目仍然使用邮件来接受贡献者的补丁，`git format-patch`是生成这种邮件补丁的标准工具
 
 ## send-email
+
 `git send-email`用于将生成的补丁通过电子邮件发送给指定的收件人。它常用于开源项目中的代码审查、提交补丁等场景，尤其是在开发者没有权限直接推送到仓库时。通过`git send-email`，开发者可以将补丁以邮件的方式发送给仓库的维护者或其他贡献者
 ```bash
 git send-email [options] <patch-file>
@@ -412,6 +447,7 @@ git config --global sendemail.smtpServer smtp.gmail.com
 使邮件形成链式回复。适用于多个补丁或多次讨论的场景
 
 ### 邮件格式
+
 `git send-email`会将补丁内容（diff格式）作为邮件正文发送，默认格式为`PATCH`。它会包含邮件头部、补丁内容、以及作者的签名等信息。邮件头部包含以下信息
 ```markdown
 - From:发件人地址
@@ -422,6 +458,7 @@ git config --global sendemail.smtpServer smtp.gmail.com
 ```
 
 ### 示例
+
 1. 发送补丁文件
 假设已经用`git format-patch`生成了补丁文件，接下来可以使用`git send-email`发送这些补丁
 ```bash
@@ -462,6 +499,7 @@ git send-email 0001-<commit-message>.patch --to="maintainer@example.com" --signo
 ```
 
 ## request-pull
+
 `git request-pull`用于生成一个拉取请求（pull request）邮件模板。它会根据你本地分支的变更，生成一封包含变更信息的邮件，通常用于请求将这些变更合并到远程仓库。这个命令经常用于开源项目，特别是在开发者无法直接推送代码到主仓库时
 
 `git request-pull`的作用是创建一个邮件内容，其中包含了从一个特定提交或分支到目标仓库的变更。然后，可以通过邮件将这个请求发送给项目维护者或者相关开发者，请求他们将这些变更合并到主仓库
@@ -478,8 +516,8 @@ git request-pull <start> <url> <end>
 - `verbose`：显示更多的信息，包括变更的具体内容
 - `--no-edit`：在请求邮件中不包含变更的详细描述，适用于简单的变更
 - `--signoff`：在请求邮件的尾部添加`Signed-off-by`行，通常用于开源贡献，表示你同意贡献代码
-
 ### 示例
+
 1. 基本的拉取请求
 假设在本地分支`feature-branch`上做了修改，想要将这些修改提交给远程仓库进行合并。可以使用`git request-pull`生成一个拉取请求
 ```bash
@@ -510,6 +548,7 @@ git request-pull master https"//github.com/maintainer/repo.git feature-branch --
 ```
 
 ### 输出格式
+
 `git request-pull`会生成一封标准的拉取请求邮件，邮件包括
 1. 邮件头部：包含拉取请求的基本信息，如分支起点、目标仓库等
 2. 邮件正文：显示本地分支与目标分支的差异
@@ -529,6 +568,7 @@ Signed-off-by: Your Name <your.email@example.com>
 ```
 
 ### 使用场景
+
 1. 开源项目贡献
 很多开源项目仍然使用邮件列表来提交补丁和合并请求，`git request-pull`能帮助开发者生成符合标准的拉取请求邮件
 2. 没有直接推送权限仓库
