@@ -6,39 +6,99 @@
 	<meta name="page-type" content="{{ .Type }}">
 	<meta name="page-section" content="{{ .Section }}">
 	<meta charset="UTF-8">
+
 	<title>{{ .Title }}</title>
+
 	{{ if ne .Type "root" }}
-	<link rel="stylesheet" href="{{ "css/style.css" | relURL}}">
+
+	<!-- Main stylesheet -->
+	<link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+
+	<!-- RSS -->
 	{{ with .OutputFormats.Get "RSS" }}
-	<link rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }} RSS" href="{{ .RelPermalink }}">
+	<link
+		rel="alternate"
+		type="application/rss+xml"
+		title="{{ $.Site.Title }} RSS"
+		href="{{ .RelPermalink }}"
+	>
 	{{ end }}
 
-	<!-- KaTeX -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
-		onload="renderMathInElement(document.body);"></script>
+	<!-- ==================== KaTeX ==================== -->
+
+	<link
+		rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"
+	>
+
+	<script
+		defer
+		src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js">
+	</script>
+
+	<script
+		defer
+		src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+		onload="
+			renderMathInElement(document.body, {
+				delimiters: [
+					{ left: '$$', right: '$$', display: true },
+					{ left: '\\[', right: '\\]', display: true },
+					{ left: '\\(', right: '\\)', display: false }
+				]
+			});
+		">
+	</script>
+
 	{{ end }}
+
 	{{ block "head_extra" . }}{{ end }}
+
 </head>
 
-<body data-page-type="{{ .Type }}" date-page-section="{{ .Section }}" data-page-path="{{ .RelPermalink }}">
+
+<body
+	data-page-type="{{ .Type }}"
+	date-page-section="{{ .Section }}"
+	data-page-path="{{ .RelPermalink }}"
+>
 
 	<!-- 顶端索引框（HTML结构 + JSON数据） -->
 	{{ partial "great-indexer.html" . }}
-	
-	<!-- 独立的JavaScript逻辑 -->
-	<script defer src="{{ "/js/data-loader.js" | relURL }}"></script>
+
+
+	<!-- ==================== JavaScript ==================== -->
+
+	<!-- Data loader -->
+	<script
+		defer
+		src="{{ "/js/data-loader.js" | relURL }}">
+	</script>
+
+	<!-- Code language -->
 	<script src="/js/code-lang.js"></script>
+
+	<!-- Global live search -->
 	<script src="/js/global-live-search.js"></script>
 
-	<!-- 主体内容 -->
-	{{ block "main" . }}{{ end }}
+
+	<!-- ==================== Main content ==================== -->
+
+	{{ block "main" . }}
+
+
+	{{ end }}
+
+
+	<!-- ==================== Mermaid ==================== -->
 
 	{{ partial "mermaid.html" . }}
 
-	<!-- 页脚 -->
+
+	<!-- ==================== Footer ==================== -->
+
 	{{ partial "footer.html" . }}
+
 </body>
 
 </html>
