@@ -1,10 +1,61 @@
 ---
-title: command
+title: Linux Command
 date: 2026-04-21
-type: file
+tags: [Manual]
 author: ljf12825
-summary: linux common command
+summary: linux common commands
 ---
+
+## 命令
+
+Linux中的命令根据系统底层的执行机制和来源来看，可以被划分为4大核心种类\
+可以通过`type <command_name>`来查看某个命令到底属于哪一类
+
+### 1. 内置命令(Shell Builtins)
+
+内置命令是指直接写在Shell（如Bash, Zsh）源码内部的命令。当终端启动时，这些命令就已经随着Shell进程一起加载到内存中了
+
+- 执行机制：默认不会创建子进程（不fork)。Shell收到命令后，直接在当前的Shell进程内部调用相应的C语言函数来执行。但某些builtin在pipeline中仍可能在subshell执行（如`(cd /tmp)`）
+- 为什么需要内置：因为有些操作必须改变当前Shell进程的状态。如果创建子进程去执行，子进程一退出，对父进程毫无影响
+- 经典代表：
+  - `cd`：必须在当前进程调用`chdir()`系统调用来改变工作目录
+  - `exit`：终止当前Shell进程
+  - `export`, `set`, `unset`：修改当前Shell的环境变量
+  - `alias`：设置当前Shell的别名
+- 如何识别：运行`type cd`，会输出`cd is a shell builtin`
+
+### 2. 外部命令(External Commands / Disk Commands)
+
+外部命令是独立于Shell之外的、存在于磁盘上的可执行文件（二进制程序文件或脚本）。它们通常存放在`/bin`, `/sbin`, `/usr/bin`等目录下
+
+- 执行机制：必须创建子进程。Shell会通过`fork()`创建一个子进程，然后子进程调用`exec()`家族系统调用（如`execve`），将磁盘上的可执行文件加载到内存中替换自己，最后父进程(Shell)等待子进程执行完毕
+- 环境变量`PATH`：当输入一个外部命令（如`ls`）且没有执行绝对路径时，Shell会根据系统的`PATH`环境变量中定义的目录顺序，挨个去磁盘上搜寻对应的同名文件
+- 经典代表：`ls`, `cp`, `mv`, `grep`, `awk`, `tar`等
+- 如何识别：运行`type ls`，会输出`ls is hashed(/usr/bin/ls)`或绝对路径
+
+### 3. 别名(Aliases)
+
+别名是用户或系统自定义的命令“快捷方式”。它允许用户用一个简短的词来代替一长串复杂的命令
+
+- 执行机制：它属于Shell的文本替换阶段。在Shell解析命令的骨架之前，如果发现第一个词匹配别名，就会直接把它替换成原本的长命令，然后再去判断它是内置命令还是外部命令
+- 经典代表：很多Linux发行版默认会将`ll`设置为`ls -l`或`ls -la --color=auto`的别名
+- 如何识别：运行`type ll`，会输出`ll is an alias for ls -l`
+
+### 4. Shell函数(Shell Functions)
+
+Shell函数是写在Shell配置文件（如`.bashrc`, `zshrc`）或者脚本中的一段代码块。它类似于编程语言中的函数
+
+- 执行机制：与内置命令类似，函数通常在当前Shell的上下文环境中执行（除非在函数内部显式使用了管道或括号导致触发subshell）。它的优先级高于外部命令
+- 为什么需要：用于将多个复杂的命令组合在一起，封装成一个自定义的高级命令，并且可以接收参数
+- 如何识别：运行`type <function_name>`，会输出`... is a function`以及函数的具体实现代码
+
+### Linux命令的执行优先级
+
+当在终端输入一个名字时（假设这个名字同时存在于别名、函数、内置和外部命令中），Shell会按照以下严格的优先级顺序去匹配并执行它
+
+```txt
+Alias > Function > Builtin > External/PATH
+```
 
 # Command in Linux
 Linux命令系统是基于Shell（常见的有`bash`, `zsh`, `fish`）的交互环境
@@ -2104,3 +2155,468 @@ parse_mode = ARGUMENT_ONLY
   - `-a`：列出所有别名
 - `ls /bin /usr/bin /usr/local/bin`：列出这些目录里的可执行文件（大多数命令就在那里）
 - `which <命令>`：查看某个命令的真实路径
+
+---
+
+`wget`
+
+`wget`是Linux/Unix环境里非常经典的命令行下载工具，给它一个URL，它就负责把网络上的资源下载到本地
+
+基本用法
+
+```bash
+wget https://example.com/file.zip
+```
+
+指定下载后的文件名
+
+```bash
+wget -O myfile.txt https://example.com/text.txt
+```
+
+指定下载目录
+
+```bash
+wget -P ~/Download https://example.com/text.txt
+```
+
+显示下载过程
+
+
+---
+
+`curl`
+
+---
+
+- 打包(archive)：把多个文件合成一个文件（不减小体积）
+- 压缩(compress)：用算法缩小体积
+
+在Linux中最经典的组合就是：tar打包，gzip/bzip2/xz压缩工具
+
+```bash
+xxx.tar.gz
+xxx.tar.bz2
+xxx.tar.xz
+```
+
+意思是：先tar打包，再用不同算法压缩
+
+## 常用压缩格式及工具
+
+### `.gz`
+
+- 工具：`gzip`
+- 特点：速度快，压缩率中等
+- 几乎所有服务器都默认支持
+- 底层：LZ77 + Huffman
+
+```bash
+# 压缩
+gizp file.txt
+
+# 解压
+gzip -d file.txt.gz
+# 或
+gunzip file.txt.gz
+
+# 查看压缩文件内容
+zcat filename.gz
+```
+
+### `.bz2`
+
+- 工具：`bzip2`
+- 特点：压缩率比gzip高，但慢
+- 底层：Burrows-Wheeler
+
+```bash
+# 压缩
+bzip2 filename
+bzip2 -9 filename # 最大压缩率
+
+# 解压缩
+bunzip2 filename.bz2
+bzip2 -d filename.bz2
+
+# 查看内容
+bzcat filename.bz2
+```
+
+### `.xz`
+
+- 工具：`xz`
+- 特点：压缩率最高，但最慢
+- 内核源码、发行版常用
+- 底层：LZMA2
+
+```bash
+# 压缩
+xz filename
+xz -9 filename # 最大压缩率
+
+# 解压缩
+unxz filename.xz
+xz -d filename.xz
+
+# 查看内容
+xzcat filename.xz
+```
+
+### `.zip`
+
+- Windows/Linux通用
+- 特点：跨平台兼容性好
+
+```bash
+# 压缩
+zip archive.zip file1 file2 dir1
+zip -r archive.zip directory/ # 递归压缩目录
+
+# 解压
+unzip archive.zip
+unzip -l archive.zip # 查看内容
+unzip -d target_dir archive.zip # 解压到指定目录
+```
+
+zip可以同时打包和压缩目录，但在Linux生态中会导致丢失关键信息：
+
+- 文件权限被修改（丢失原始权限）
+- 所有者信息破坏
+- 硬链接被破坏
+
+### 其他压缩工具
+
+需要安装
+
+- `7z`(.7z)：压缩率很高
+- `Zstandard`(.zst)
+
+## 归档工具`tar`
+
+`tar`主要用途是将多个文件/目录打包成一个文件
+
+1979年，tar在Unix V7中引入，用于磁带备份
+
+既然有gzip, xz等压缩工具，为什么还需要tar
+
+核心原因：压缩工具不擅长处理目录，gzip, xz, bzip2等压缩文件只能压缩单个文件，不能直接压缩目录
+
+```bash
+# 这些命令会报错或只处理单个文件
+gzip myfolder/
+gzip: myfolder/ is a directory -- ignored
+
+xz myfolder/
+xz: myfolder/: Is a directory, skipping
+```
+
+tar的作用：打包 + 保留元数据
+
+tar = Tape ARchive（磁带归档），最初设计用于磁带备份。它的核心功能是
+
+1. 将多个文件/目录合并成单个文件流
+2. 保留文件元数据（权限、所有者、时间戳、目录结构）
+3. 支持追加、增量备份等操作
+
+```bash
+# 压缩一个目录下的所有文件（每个文件独立压缩），不能包含文件夹
+$ xz folder/*
+$ ls folder/
+file1.txt.xz file2.txt.xz
+
+# 解压时需要分别处理
+xz -d test/*.xz
+# 可能导致元数据丢失
+```
+
+使用tar先打包
+
+```bash
+# 打包并压缩（常用组合）
+$ tar -czf archive.tar.gz folder/
+# -c: 创建归档
+# -z: 通过 gzip 压缩
+# -f: 指定归档文件
+
+# 一个命令完成打包+压缩，一个命令完成解压+解包
+$ tar -xzf archive.tar.gz
+# 完整恢复：目录结构、权限、时间戳全部保留
+```
+
+tar的独特优势
+
+- 保留权限（755/644）
+- 保留所有者（uid/gid）
+- 保留硬链接
+- 保留符号链接
+- 保留时间戳
+- 增量备份
+- 追加文件到已有归档
+- 跨多卷磁带/磁盘
+
+### 常用组合
+
+```bash
+# 打包并压缩
+tar -czvf archive.tar.gz file1 file2 dir1 # gzip压缩
+tar -cjvf archive.tar.baz file1 file2 dir1 # bzip2压缩
+tar -cJvf archive.tar.xz file1 file2 dir1 # xz压缩
+
+# 解包解压
+tar -xzvf archive.tar.gz # 解压.gz
+tar -xjvf archive.tar.bz2 # 解压.bz2
+tar -xJvf archive.tar.xz # 解压.xz
+
+# 仅查看内容不解压
+tar -tzvf archive.tar.gz
+
+# 查看归档内容（不解压）
+tar -tf archive.tar.gz
+
+# 解压到指定目录
+tar -xzf archive.tar.gz -C /target/path/
+
+# 只打包，不压缩（速度最快）
+tar-cf archive.tar folder/
+```
+
+### 参数
+
+- `-c`：创建归档
+- `-x`：提取归档
+- `-z`：使用gzip
+- `-j`：使用bzip2
+- `-J`：使用xz
+- `-v`：显示详细信息
+- `-f`：指定文件名
+- `-t`：列出归档内容
+
+---
+
+## `find`
+
+`find`是Linux下的文件搜索命令，它的核心哲学是查找并执行操作
+
+### 核心语法
+
+`find`不像`ls`那样简单，它必须遵循固定结构
+
+```bash
+find [搜索起始路径] [搜索条件表达式] [对结果执行的动作]
+```
+
+- 搜索路径：从yali开始找，可以指定多个目录。当前目录用`.`
+- 表达式：如何过滤文件
+- 动作：找到后做什么，默认是`-print`（打印换行路径）。如果换成`-print0`，会将分隔符换成`\0`字符，常配合`xargs -0`安全地处理带空格或特殊字符的文件名
+
+如果不指定任何条件，`find`会递归列出该目录下的所有文件和文件夹
+
+### 常用的筛选条件
+
+#### 按文件名
+
+```bash
+find . -name "*.log" # 严格区分大小写，通配符需引号
+find . -iname "readme.txt" # 不区分大小写
+```
+
+#### 按文件类型
+
+```bash
+find . -type f # 普通文件
+find . -type d # 目录
+find . -type l # 符号链接
+```
+
+#### 按文件大小
+
+```bash
+find . -size +100M # 大于 100MB
+find . -size -10k # 小于 10KB
+find . -size 0 # 空文件
+```
+
+#### 按时间
+
+`find`的按时间查找比较特别
+
+| 选项 | 含义 |
+| - | - |
+| `-mtime` | 文件内容修改时间 |
+| `-ctime` | inode状态变化时间（权限、属主等）|
+| `-atime` | 访问时间 |
+
+`-mtime`/`-mmin`的时间单位和取整规则如下
+
+`-mtime`的时间单位是天，也就是24小时
+
+```bash
+find . -mtime 1
+```
+
+表示“24～48小时”内修改的文件，因为基本单位是天，就像昨天任意时间修改一个文件，从今天开始到今天结束，这24小时内都叫昨天修改
+
+| 写法 | 含义 |
+| - | - |
+| `-mtime 0` | 24小时内 |
+| `-mtime 1` | 24~48小时 |
+| `-mtime +1` | 超过48小时 |
+| `-mtime -1` | 不到24小时 |
+
+- `+` 意为超过
+- `-` 意为不足
+
+`-mmin` 同理，基本单位是分钟，提供更精细的时间刻度
+
+`-newer` 谁比谁新
+
+```bash
+find . -newer reference_file
+```
+
+找出所有修改时间严格晚于`reference_file`的文件
+
+#### 按权限和属主
+
+```bash
+find . -user jeff
+find . -perm 644 # 精确匹配
+find . -perm -u+w # 属主有写权限
+```
+
+### 对结果执行操作
+
+#### 删除
+
+```bash
+# 先确认列出的无误
+find . -name "*.tmp"
+# 再执行删除
+find . -name "*.tmp" -delete
+```
+
+#### 批量执行命令
+
+写法1：每找到一个文件就执行一次
+
+```bash
+# 结尾的\;是必须的
+find . -name "*.jpg" -exec ls -lh {} \;
+```
+
+- `find .` 从当前目录开始找
+- `-name "*.jpg"` 文件名匹配
+- `-exec` 对找到的每个文件，执行后面的命令
+- `ls -lh` 要执行的命令
+- `{}` 占位符，代表“当前找到的那个文件的路径”
+- `\;` 结束标记，告诉`find`命令到这里就结束了
+- `;` Shell里的特殊字符（命令分隔符），所以用`\`转义
+
+写法2：收集一批文件一起执行
+
+```bash
+find . -name "*.jpg" -exec chmod 644 {} +
+```
+
+这种效率更高，因为它减少了命令启动的次数，类似xargs的效果\
+不过，`+`会把文件名都堆在命令末尾，而`\;`可以把`{}`嵌在命令中间
+
+管道与xargs处理复杂逻辑
+
+当`-exec`不够用时
+
+```bash
+# 删除文件名带空格的文件，安全做法
+find . -name "*.tmp" -print0 | xargs -0 rm
+```
+
+---
+
+`ssh`
+
+---
+
+# System Information
+Linux的系统信息来源可以分成三个层级
+1. 内核层(Kernel Space)
+内核维护着系统所有运行状态的真实数据，例如CPU状态，内存分配表、进程表、块设备队列、网络接口状态等\
+用户空间程序无法直接访问这些数据，只能通过系统调用或虚拟文件系统接口间接读取
+
+2. 接口层（/proc与/sys文件系统）
+这是Linux的“信息桥梁”层
+    - `/proc`提供运行时状态信息（进程、内存、CPU、系统负载等）
+    - `/sys`提供静态与硬件属性信息（设备拓扑、驱动参数、功耗控制、热插拔支持等）
+3. 用户空间层（命令行工具与库）
+各种命令（`lscpu`, `free`, `lsblk`, `top`, `uname`等）或系统调用库函数（如`sysinfo()`, `uname()`）这是对这些接口的封装
+
+## 命令
+
+- 当前用户：`whoami`
+- 登录信息：`who`
+- 所有登录：`w`
+- 用户ID：`id`
+- Shell：`echo $SHELL`
+- 终端：`tty`
+- 历史命令：`history`
+- 上次登录：`last`
+- 主机名：`hostname`
+- 详细系统：`hostnamectl`
+- 发行版：`cat /etc/os-release`
+- 内核：`uname -a`
+- CPU架构：`arch`
+- 运行时间：`uptime`
+- 当前时间：`date`
+- CPU
+
+```bash
+lscpu
+cat /proc/cpuinfo
+```
+
+- 内存
+
+```bash
+free -h
+cat /proc/meminfo
+vmstat
+```
+
+- 磁盘
+
+```bash
+lsblk
+df -h
+mount
+```
+
+- PCI/USB
+
+```bash
+lspci
+lsusb
+```
+
+- 内核参数：`sysctl -a`
+- 模块：`lsmod`
+- slab：`slabtop`
+- 中断：`cat /proc/self/interrupts`
+- 内存映射：`cat /proc/self/maps`
+- 调度：`cat /proc/sched_debug`
+- 进程自身信息
+
+```bash
+echo $$ # 当前 shell PID
+cat /proc/$$/status
+cat /proc/$$/limits
+cat /proc/$$/maps
+cat /proc/$$/fd
+```
+
+- IP：`ip a`
+- 路由：`ip r`
+- DNS：`cat /etc/resolv.conf`
+- 环境变量：`env`
+- PATH：`echo $PATH`
+
+---
