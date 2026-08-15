@@ -2180,8 +2180,168 @@ wget -O myfile.txt https://example.com/text.txt
 wget -P ~/Download https://example.com/text.txt
 ```
 
-显示下载过程
+显示下载过程，`wget`默认显示下载过程
 
+```
+$ wget -m https://ljf12825.github.io
+--2026-08-15 10:37:18--  https://ljf12825.github.io/
+Resolving ljf12825.github.io (ljf12825.github.io)... 198.18.0.86
+Connecting to ljf12825.github.io (ljf12825.github.io)|198.18.0.86|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 110884 (108K) [text/html]
+Saving to: ‘ljf12825.github.io/index.html’
+
+ljf12825.github 100%[=======>] 108.29K   200KB/s    in 0.5s
+```
+
+这里面有很多有价值的信息，比如
+
+```
+HTTP request sent, awaiting response... 200 OK
+```
+
+说明HTTP请求成功
+
+```
+Length: 110884(108K) [text/html]
+```
+
+服务器告诉`wget`文件大小和类型
+
+断点续传
+
+假设下载一个很大的文件，下载到一半网络断了，可以使用
+
+```bash
+wget -c https://example.com/large.iso
+```
+
+`-c` 即 continue，继续下载
+
+限制下载速度
+
+```bash
+wget --limit-rate=1M https://exampel.com/file.iso
+```
+
+后台下载
+
+```bash
+wget -b https://exampel.com/large.iso
+```
+
+`-b` background，`wget`会把下载放到后台，可以通过
+
+```bash
+cat wget-log
+```
+
+查看日志
+
+下载整个网站/目录
+
+```bash
+wget --mirror https://example.com/
+```
+
+或`-m`，它会尝试递归地把网站内容下载下来
+
+网页镜像不是简单地下载一个网页，wget会涉及
+
+```
+URL
+v
+HTTP/HTTPS
+v
+HTML
+v
+解析链接
+v
+继续请求下载
+v
+递归下载
+```
+
+类似爬虫的性质
+
+只下载某种类型的文件
+
+```bash
+wget -r -A pdf https://example.com/
+```
+
+`-r` 表示递归，`-A`表示accept，只接受`.pdf`
+
+设置User-Agent
+
+HTTP请求通常会带
+
+```http
+User-Agent: ...
+```
+
+`wget`默认有自己的User-Agent，可以手动指定
+
+```bash
+wget --user-agent="Mozilla/5.0" https://example.com/
+```
+
+`-U` 等同于`--user-agent`，这在某些服务器会检查客户端类型的时候比较有用
+
+`wget`支持POST请求
+
+```bash
+wget --post-data="name=ljf12825&age=25" https://example.com/login
+```
+
+发送
+
+```http
+POST /login HTTP/1.1
+
+name=ljf12825&age=25
+```
+
+也可以
+
+```bash
+wget --post-file=data.txt https://example.com/upload
+```
+
+不过如果大量进行API调试，通常会更倾向于使用`curl`
+
+`wget`偏向“下载/获取资源”，`curl`偏向“操作HTTP/网络协议”，当然二者能力有大量重叠
+
+查看HTTP响应而不下载
+
+```bash
+wget --spider https://example.com/file.zip
+```
+
+`--spider`的意思可以理解为：像蜘蛛一样探测，但不真正下载
+
+它可以用来检测：
+
+- URL是否存在
+- HTTP状态
+- 重定向
+- 文件是否可访问
+
+不验证HTTPS证书
+
+```bash
+wget --no-check-certificate https://example.com/file
+```
+
+这个选项不要随意使用，因为HTTPS的证书验证本来就是为了确认你访问的服务器确实是它自己
+
+关闭之后，相当于降低了TLS身份验证，一般只在：
+
+- 测试环境
+- 自签名证书
+- 自己控制的服务器
+
+等情况下使用
 
 ---
 
