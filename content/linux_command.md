@@ -2345,7 +2345,65 @@ wget --no-check-certificate https://example.com/file
 
 ---
 
-`curl`
+`curl` 是Linux中的一个通用网络传输工具\
+`wget`是把这个资源下载下来，`curl`是和这个URL对话，看看网络协议到底发生了什么
+
+`curl`全称可以理解为：Client URL，它的核心能力是
+
+```
+URL
+v
+curl
+v
+网络协议
+v
+服务器
+```
+
+它支持很多协议，例如：HTTP, HTTPS, FTP, FTPS, SFTP, SCP, LDAP, SMTP
+
+```bash
+curl https://exampel.com
+```
+
+服务器返回的内容会直接输出到终端，这和`wget`有区别，`wget`是保存成文件，`curl`直接stdout
+
+虽然`curl`默认输出到stdout，但是它也可以下载文件
+
+```bash
+curl -o file.zip https://example.com/file.zip
+```
+
+`-o` output file.zip
+
+```bash
+curl -O https://example.com/test.txt
+```
+
+`-O` 使用服务器URL中的文件名 test.txt
+
+```bash
+curl -I https://example.com
+```
+
+`-I` HEAD request，查看 HTTP Header
+
+```bash
+$ curl -I https://example.com
+HTTP/2 200
+date: Sun, 16 Aug 2026 15:32:27 GMT
+content-type: text/html
+server: cloudflare
+last-modified: Wed, 12 Aug 2026 20:17:18 GMT
+allow: GET, HEAD
+accept-ranges: bytes
+age: 5766
+cf-cache-status: HIT
+cf-ray: a2c17de67c702773-LAX
+```
+
+
+
 
 ---
 
