@@ -247,16 +247,15 @@ function parseQueryInput(rawQuery) {
       const hTags = highlightText(tagsStr, highlights);
 
       const sectionTag = norm(p.section) === 'lab' ? `<span style="color: #666;">{lab}</span>` : '';
-
-      listHTML += `
-        <div style="margin-bottom: 6px; white-space: normal; line-height: 1.4; border-bottom: 1px dashed #eee; padding-bottom: 4px;">
-          <a href="${p.permalink}" style="color: #0000ee; text-decoration: underline; font-weight: bold;">${hTitle}</a>
+        listHTML += `
+          <div style="margin-bottom: 0; white-space: normal; line-height: 1.1; border-bottom: 1px dashed #eee; padding-bottom: 1px;">
+          <a href="${p.permalink}" style="color: #0000ff; text-decoration: underline; font-weight: bold;">${hTitle}</a>
           ${sectionTag}
+          ${hSummary}
+          <span style="color: #ff00ff;">${hTags}</span>
           ${p.author || '-'}
           ${p.date || '-'}
           ${p.lastmod || p.modify || '-'}
-          ${hSummary}
-          <span style="color: #008000;">${hTags}</span>
         </div>
       `;
     }
