@@ -241,6 +241,100 @@ Hash可以用于加密，但Hash不等于加密
 
 # 算法层
 
+计算机科学/工程上的hash function 主要可以分成两个不同的大方向：
+
+- 面向数据结构的Hash
+- 面向密码学的Hash
+
+## 面向数据结构的Hash
+
+核心目标是：把输入快速、均匀地映射到一个整数空间，例如
+
+```
+key
+v
+hash(key)
+v
+0 ~ 2^64 - 1
+v
+bucket index
+```
+
+典型用途：
+
+- `std::unordered_map`
+- `std::unordered_set`
+- C# `Dictionary<TKey, TValue>`
+- Python `dict`/`set`
+- 哈希表、缓存、符号表等
+
+这里最重要的指通常是：
+
+- 速度
+- 分布均匀
+- 低碰撞概率
+- 对特定输入分布表现稳定
+- 有时还要考虑HashDoS / 恶意输入
+
+这个方向上常见的Hash Function
+
+```
+MurmurHash
+xxHash
+wyhash
+CityHash
+FNV-1a
+SipHash
+```
+
+## 面向密码学的Hash
+
+这个方向完全是另一套设计目标
+
+```
+message
+v
+SHA-256
+v
+256-bit digest
+```
+
+它关注的是：
+
+- 抗原像攻击(preimage resistance)
+- 抗第二原像攻击
+- 抗碰撞攻击
+- 雪崩效应
+- 对输入的微小变化产生完全不同的结果
+- 难以从hash值反推出输入
+
+这个方向上的典型算法有
+
+```
+MD5（不安全）
+SHA-1（不安全）
+SHA-2
+SHA-3
+BLAKE2
+BLAKE3
+```
+
+它们主要用于：
+
+- 密码学
+- 文件完整性
+- 数字签名
+- 内容寻址
+- Merkle Tree
+- 密码存储方案中的基础构件
+- 区块链等
+
+## 散列与分布机制(Distribution & Mixing)
+
+为了让上层哈希表尽量不发生碰撞，算法层必须保证计算结果具有极高的随机性和均匀度
+
+- 雪崩效应(Avalanche Effect)：这是衡量哈希算法质量的最核心指标。算法必须确保输入数据中只要改变了1个Bit（比如`cat`变成`car`），经过算法计算后，输出的整数中平均要有50%的Bit发生反转
+
 # 容器层
 
 # 应用层
