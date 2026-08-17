@@ -53,3 +53,5 @@ enableGitInfo = true
 [author]
   name = "ljf12825"
   email = "ljf12825@graingen.com"
+
+[taxonomies]
