@@ -24,3 +24,45 @@ summary: Attempting to implement a super-container
     - 测试`ggvessel::hash`在处理8-byte整数、短字符串、长文本时的GB/s吞吐量，和现有的哈希函数如`std::hash`, `MurmurHash3`, `xxHash`对比
 2. `ggvessel::unordered_map` 与 `std::unordered_map`对比
     - 在不同数据规模（如100k到10000k数据）下的插入/查找/删除延迟(Latency) 和 Cache Miss 概率
+
+## 设计目标
+
+- One Container Concept：对外提供一致的`ggvessel::vessel`抽象
+- Requirement-Driven：用户描述需求，而不是直接绑定传统容器类型
+- Compile-Time Resolution：容器结构在模板实例化过程中解析
+- Physical Structure Synthesis：根据约束推存储、索引、布局与元数据结构
+- Algorithm Specialization：为最终物理结构匹配对应的访问与操作算法
+- Hardware Awareness：在适用场景下利用Cache, SIMD与目标ISA特征
+- Zero Runtime Structure Selection：容器结构的主要选择不依赖运行时分支
+- Extensible Primitives：新的存储、索引、布局与算法原语可以加入合成系统
+
+## Project Status
+
+```
+Phase 1
+Compile-Time Strategy Resolution
+v
+Phase 2
+Composable Storage / Index / Layout Primitives
+v
+Phase 3
+Algorithm Specialization
+v
+Phase 4
+Hardware-Aware Structure Resolution
+v
+Phase 5
+Compile-Time Container Synthesis
+```
+
+```
+Phase 1
+
+One Public Container
+v
+Compile-Time Requirements
+v
+Compile-TIme Resolution
+v
+Different Physical Implementations
+```
