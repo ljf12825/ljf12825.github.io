@@ -2390,6 +2390,11 @@ curl -I https://example.com
 
 ```bash
 $ curl -I https://example.com
+```
+
+会返回
+
+```
 HTTP/2 200
 date: Sun, 16 Aug 2026 15:32:27 GMT
 content-type: text/html
@@ -2402,8 +2407,53 @@ cf-cache-status: HIT
 cf-ray: a2c17de67c702773-LAX
 ```
 
+- `HTTP/2 200`：`HTTP/2`协议版本，`200`是HTTP状态码，表示请求成功
+- `date`：日期
+- `content-type`：服务器返回的内容类型
 
+`-i` 同时看 Header + Body
 
+`-v` verbose
+
+```bash
+curl -v https://example.com
+```
+
+会看到很多信息
+
+`curl`可以操作HTTP的所有方法
+
+首先`curl`不带参数默认是GET方法
+
+```bash
+curl https:/api.example.com/users
+```
+
+POST（创建资源/提交数据）
+
+发送POST请求时，最常用的是通过`-d`传递数据，或者用`-X POST`
+
+提交表单数据（默认Content-Type: application/x-www-form-urlencoded）
+
+```bash
+curl -X POST https://api.example.com/users -d "name=Alice&age=25"
+```
+
+提交JSON数据（需显示指定Header）
+
+```
+curl -X POST https://api.example.com/users \
+    -H "Content-Type: application/json"\
+    -d '{"name": "Alice", "age": 25}'
+```
+
+提交文件 / 表单 Multipart（用于上传文件，Content-Type: multipart/form-data）
+
+```bash
+curl -X POST https://api.example.com/upload \
+    -F "file=@/path/to/image.png" \
+    -F "description=Avatar"
+```
 
 ---
 
