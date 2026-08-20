@@ -53,6 +53,7 @@
     "author" .Params.author
     "date" (.Date.Format "2006-01-02")
     "modify" (.Lastmod.Format "2006-01-02")
+    "lab" (eq .Params.lab true)
   -}}
   {{- $result = $result | append $pageData -}}
 {{- end -}}
