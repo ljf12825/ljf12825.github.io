@@ -3,6 +3,7 @@ title: GGHS
 author: ljf12825
 date: 2026-07-19
 tags: [Hardware, Virtualization, Simulation]
+lab: true
 summary: Hardware simlution
 ---
 

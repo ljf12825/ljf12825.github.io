@@ -3,6 +3,7 @@ title: Linux IPC
 author: ljf12825
 date: 2026-08-15
 tags: [Exp]
+lab: true
 summary: A set of ipc on linux
 ---
 
