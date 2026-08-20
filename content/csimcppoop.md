@@ -1,13 +1,10 @@
 ---
 title: C Sim C++ OOP
-type: lab
 author: ljf12825
 date: 2026-04-15
-status: active # active/archived/dead/unstable/suspended
-tags: oop
-categories: experiment
+tags: [OOP, EXP]
+lab: true
 summary: Use C to simulate C++ OOP
-repo: https://github.com/ljf12825/cpp/tree/main/csimcppoop
 ---
 
 C++ 面向对象的三大特性在 C 中的模拟方式

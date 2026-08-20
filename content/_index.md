@@ -19,38 +19,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
 ---
 
-## Guide
-
-### Website structure
-
-```txt
-content/
-    |__ _index.md   # current page
-    |__ lab/        # projects and experiments
-         |__ _index.md
-```
-
-### Search
+## Search
 
 This website is search-driven, with the fellowing search rules:
 
-- keyword: the subject of the input content
+- Keyword: the subject of the input content
   - title
   - tags
   - summary
-- scope: which section the content belonging
-  - `all::`: global which include all sections
-  - `lab::` all content from `lab/`(will display `{lab}` tag on search list)
-- logical operators: support simple combination filtering of multiple keywords
+  - lab(will indicate if this content is lab)
+- Logical operators: support simple combination filtering of multiple keywords
   - `&&`: and
   - `||`: or
   - `!`: nor
+- Type `/` can match all contents
 
-example:
+Example:
 
 ```txt
-all::!Linux&&!Unity&&!Git
+!Linux&&!Unity&&!Git
 ```
+
 
 Meaning: Content that does not include keywords: Linux, Unity, and Git in all sections
 

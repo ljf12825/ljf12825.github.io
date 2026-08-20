@@ -3,6 +3,7 @@ title: ggvessel
 date: 2026-02-27
 author: ljf12825
 tags: [GG, Lib]
+lab: true
 summary: Attempting to implement a super-container
 ---
 

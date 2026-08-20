@@ -51,30 +51,6 @@
 
   const norm = v => String(v || '').toLowerCase();
 
-function parseQueryInput(rawQuery) {
-    let q = rawQuery.trim();
-
-    if (q === 'all::') {
-      return { targetSection: null, conditionStr: 'all::' };
-    }
-
-    if (q.startsWith('all::')) {
-      q = q.slice(5).trim();
-      return { targetSection: null, conditionStr: q };
-    }
-
-    if (q === 'lab::') {
-      return { targetSection: 'lab', conditionStr: '' };
-    }
-
-    if (q.startsWith('lab::')) {
-      q = q.slice(5).trim();
-      return { targetSection: 'lab', conditionStr: q };
-    }
-
-    return { targetSection: '', conditionStr: q };
-  }
-
   function evaluateCondition(pageText, conditionStr) {
     if (!conditionStr) return { match: true, highlightTokens: [] };
 
@@ -166,9 +142,10 @@ function parseQueryInput(rawQuery) {
 
   function renderLiveSearch() {
     const rawQuery = inputEl.value;
+    const conditionStr = rawQuery.trim();
     const bodyChildren = Array.from(document.body.children);
 
-    if (!rawQuery.trim()) {
+    if (!conditionStr) {
       bodyChildren.forEach(child => {
         if (child !== resultHolder && child.dataset.searchHidden) {
           child.style.display = child.dataset.oldDisplay || '';
@@ -193,28 +170,16 @@ function parseQueryInput(rawQuery) {
       }
     });
 
-    const { targetSection, conditionStr } = parseQueryInput(rawQuery);
-    
-    const isShowAll = (conditionStr === 'all::') || (targetSection !== null && !conditionStr);
-
     const matchedResults = [];
 
     for (let p of pages) {
-      if (targetSection !== null && norm(p.section) !== targetSection) {
-        continue;
-      }
-
-      if (isShowAll) {
-        matchedResults.push({ page: p, highlights: [] });
-        continue;
-      }
+      const labText = p.lab ? '{lab}' : '';
 
       const pageText = [
         norm(p.title),
         norm(p.summary),
-        norm(p.content),
         norm(p.permalink),
-        norm(p.section),
+        norm(labText),
         ...ensureArray(p.tags).map(norm),
         ...ensureArray(p.categories).map(norm)
       ].join(' ');
@@ -245,10 +210,13 @@ function parseQueryInput(rawQuery) {
       const hTitle = highlightText(p.title, highlights);
       const hSummary = highlightText(p.summary, highlights);
       const hTags = highlightText(tagsStr, highlights);
+      
+      const rawLabText = p.lab ? '{lab}' : '';
+      const hLabText = highlightText(rawLabText, highlights);
+      const sectionTag = p.lab ? `<span style="color: #00FFFF;">${hLabText}</span>` : '';
 
-      const sectionTag = norm(p.section) === 'lab' ? `<span style="color: #666;">{lab}</span>` : '';
-        listHTML += `
-          <div style="margin-bottom: 0; white-space: normal; line-height: 1.1; border-bottom: 1px dashed #eee; padding-bottom: 1px;">
+      listHTML += `
+        <div style="margin-bottom: 0; white-space: normal; line-height: 1.1; padding-bottom: 1px;">
           <a href="${p.permalink}" style="color: #0000ff; text-decoration: underline; font-weight: bold;">${hTitle}</a>
           ${sectionTag}
           ${hSummary}
