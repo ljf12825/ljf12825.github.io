@@ -27,6 +27,7 @@
       white-space: normal;
       background: #ffffff;
       padding: 8px 16px;
+      font-family: monospace
     `;
     document.body.appendChild(resultHolder);
   }
@@ -216,16 +217,22 @@
       const sectionTag = p.lab ? `<span style="color: #00FFFF;">${hLabText}</span>` : '';
 
       listHTML += `
-        <div style="margin-bottom: 0; white-space: normal; line-height: 1.1; padding-bottom: 1px;">
-          <a href="${p.permalink}" style="color: #0000ff; text-decoration: underline; font-weight: bold;">${hTitle}</a>
-          ${sectionTag}
-          ${hSummary}
-          <span style="color: #ff00ff;">${hTags}</span>
-          ${p.author || '-'}
-          ${p.date || '-'}
-          ${p.lastmod || p.modify || '-'}
-        </div>
-      `;
+      <div style="
+        margin-bottom: 8px;
+        padding-bottom: 8px;
+        white-space: normal;
+        line-height: 1.5;
+        border-bottom: 1px solid #cccccc;
+      ">
+        <a href="${p.permalink}" style="color: #0000ff; text-decoration: underline; font-weight: bold;">${hTitle}</a>
+        ${sectionTag}
+        ${hSummary}
+        <span style="color: #ff00ff;">${hTags}</span>
+        ${p.author || '-'}
+        ${p.date || '-'}
+        ${p.lastmod || p.modify || '-'}
+      </div>
+    `;
     }
 
     resultHolder.innerHTML = matchedResults.length > 0 ? listHTML : '<div>No results found</div>';
