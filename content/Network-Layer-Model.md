@@ -2,8 +2,8 @@
 title: Network Layer Model
 date: 2025-12-31
 author: ljf12825
-summary: network layer model overview
-type: file
+summary: "OSI, TCP/IP and others"
+tags: [OSI, TCP/IP, Network]
 ---
 
 计算机网络模型指的是用分层结构来描述网络通信过程的抽象模型，主要有两个重要模型。
