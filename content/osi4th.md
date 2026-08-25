@@ -1,9 +1,9 @@
 ---
-title: Transport Layer
+title: "OSI 4th Layer: Transport Layer"
 date: 2025-12-31
 author: ljf12825
 summary: transport layer
-type: file
+tags: [OSI, Network]
 ---
 
 传输层处于OSI七层模型的第4层，TCP/IP模型的第4层

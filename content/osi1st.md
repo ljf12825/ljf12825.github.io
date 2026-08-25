@@ -1,9 +1,9 @@
 ---
-title: Physical Layer
+title: "OSI 1st Layer: Physical Layer"
 date: 2025-12-31
 author: ljf12825
 summary: physical layer
-type: file
+tags: [OSI, Network]
 ---
 
 计算机网络的物理层是网络通信中的最底层，它涉及到数据的实际传输介质、信号的编码方式、传输速率、以及网络硬件的物理特性等  

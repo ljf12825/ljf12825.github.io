@@ -1,9 +1,9 @@
 ---
-title: Network Layer
+title: "OSI 3rd Layer: Network Layer"
 date: 2025-12-31
 author: ljf12825
 summary: network layer
-type: file
+tags: [OSI, Network]
 ---
 
 OSI七层模型中的第3层，网络层的主要职责是处理数据的路由、转发以及寻址问题，确保数据从源主机到目标主机的顺利传输
