@@ -27,7 +27,6 @@
       white-space: normal;
       background: #ffffff;
       padding: 8px 16px;
-      font-family: monospace
     `;
     document.body.appendChild(resultHolder);
   }
