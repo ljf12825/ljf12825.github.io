@@ -1,5 +1,5 @@
 ---
-title: GGAllocator
+title: ggmalloc
 author: ljf12825
 date: 2026-03-01
 tags: [memory management]
