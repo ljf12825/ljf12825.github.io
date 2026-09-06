@@ -357,3 +357,13 @@ sudo snap install <包名> --channel=<channel_name>
 ## APPImage
 
 ## Flatpak
+
+## .deb 的包结构
+
+`.deb`是Debian的软件包，本质上是一个标准的ar归档文件可以使用`ar x package.deb`命令对其进行解包
+
+解包后通常包含以下3个核心文件
+
+- `debian-binary`：纯文本，标注`.deb`包的版本格式（通常内容为`2.0\n`）
+- `control.tar.gz`:压缩归档，存放包的元数据与维护者脚本（安装前/后脚本等）
+- `data.tar.gz`：压缩归档，存放软件实际要安装到系统的二进制程序、配置文件及文档
