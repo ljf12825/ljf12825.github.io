@@ -1,10 +1,37 @@
 ---
-title: graphics card on linux
+title: Linux Graphics Stack
 date: 2026-01-14
 author: ljf12825
-type: file
-summary: nvidia, amd, intel
+tags: [Linux, Graphic]
+summary: Linux Graphics Stack
 ---
+
+# X11 与 Wayland
+
+# DE & WM
+
+# GUI Toolkits / Frameworks
+
+# freedesktop.org
+
+# UserSpace
+
+## Mesa
+
+## EGL / GBM
+
+## Nvidia
+
+# syscall `/dev/dri/`
+
+# DRM & KMS
+
+# Kernel Drivers
+
+- `i915`/`xe`(Intel)
+- `amdgpu`(AMD)
+- `nouveau`/`nvgpu`（Nvidia开源版）
+- `nvidia` + `nvidia-drm`(NVIDIA官方专有内核模块)
 
 # GraphicsCard on Linux
 对于Linux用户而言，显卡主要涉及两大阵营：NVIDIA和AMD（以及集成显卡巨头Intel）。它们在Linux上的体验和哲学截然不同
