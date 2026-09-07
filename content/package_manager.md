@@ -2,8 +2,8 @@
 title: Package Manager
 date: 2026-05-14
 author: ljf12825
-type: file
-summary: apt, appimage, snap, flatpak
+tags: [Linux]
+summary: Debian package manager apt, dpkg, appimage, snap, flatpak
 ---
 
 ## 包
@@ -360,6 +360,9 @@ sudo snap install <包名> --channel=<channel_name>
 
 ## .deb 的包结构
 
+Debian官方提供了`.deb`包的规范文档 <https://www.debian.org/doc/debian-policy/>\
+也可以通过`man 5 deb` 命令在本地查看包相关说明
+
 `.deb`是Debian的软件包，本质上是一个标准的ar归档文件可以使用`ar x package.deb`命令对其进行解包
 
 解包后通常包含以下3个核心文件
@@ -367,3 +370,74 @@ sudo snap install <包名> --channel=<channel_name>
 - `debian-binary`：纯文本，标注`.deb`包的版本格式（通常内容为`2.0\n`）
 - `control.tar.gz`:压缩归档，存放包的元数据与维护者脚本（安装前/后脚本等）
 - `data.tar.gz`：压缩归档，存放软件实际要安装到系统的二进制程序、配置文件及文档
+
+### `debian-binary`的历史
+
+`debian-binary`中的`2.0`代表的是Debian软件包格式的版本号
+
+Debian项目在1995年(Debian 0.93 era) 对`.deb`的打包规范进行了一次重构，引入了基于`ar`归档工具的新格式，并将其版本定为`2.0`
+
+从1995年至今，这套基于`ar`容器、内含`control.tar`和`data.tar`的三件套文件结构表现得极其稳定和成功，因此`2.0`这个格式标准沿用至今
+
+`debain-binary`是`dpkg`等包管理工具在解包和解析时检查的第一个文件，它的主要作用有两个：
+
+1. 格式校验(Magic Identifier)：`dpkg`读取`.deb`包时，先看第一个文件是不是`debain-binary`，内容是不是`2.0`。如果不是，`dpkg`会直接报错并停止解析，告知“这不是一个有效的Debian软件包”或“不支持包格式版本”
+
+2. 向前/向后兼容性保护：如果未来Debain社区推出了破坏性的新打包规范，老旧版本的`dpkg`读到`debain-binary`里的`3.0`时，就会知道自己无法正确解析内部的`control.tar`或`data.tar`，从而安全退出，避免因强行解包导致系统损坏
+
+在1995年前，Debian使用过极其原始的`1.0`格式，是直接用`tar`和`gzip`拼接起来的，由于缺乏统一的元数据头，解析效率低下且非常脆弱。随着`2.0`格式引入`ar`容器，`1.0`格式便被彻底废弃了
+
+### `control.tar` 的内部细节
+
+这个归档包含了包管理工具解析和控制安装过程所需的信息
+
+- `control`（核心配置文件）：记录包名、版本、架构、依赖关系、冲突关系、维护者及软件描述等
+- Maintainer Scripts
+  - `preinst`：安装/更新包之前执行的Shell脚本
+  - `postinst`：解压并复制文件之后执行的Shell脚本（常用于配置服务、创建系统用户等）
+  - `prerm`：卸载包之前执行的Shell脚本
+  - `postrm`：卸载包之后执行的Shell脚本（常用于清理临时文件）
+- `md5sums`：记录`data.tar`中所有文件的MD5校验和，用于安装后检测文件损坏或完整性
+- `conffiles`：标记那些文件属于配置文件。卸载时若未接`--purge`参数，这些文件会被保留
+- `templates`：定义了软件在安装或配置阶段需要向用户询问的所有问题、问题的类型、默认值以及各种语言的国际化翻译
+
+### `data.tar` 的内部细节
+
+这个归档还原了软件被晚装到系统的完整文件目录树。解压后会直接映射到Linux的根目录
+
+```txt
+data.tar.xz
+├── usr/
+│   ├── bin/             # 可执行文件 (例如 myapp)
+│   ├── lib/             # 动态链接库
+│   └── share/
+│       ├── doc/         # 软件文档与版权说明 (copyright)
+│       └── man/         # Man 帮助手册
+└── etc/                 # 默认配置文件
+```
+
+### 制作一个`.deb`
+
+打包一个名为`mytool`的工具，版本是`1.0`\
+首先建立打包的根目录，并在其中模拟文件被安装到系统后的路径
+
+```bash
+# 1. 创建项目根目录与 DEBIAN 元数据目录
+mkdir -p mytool_1.0.1_amd64/DEBIAN
+
+# 2. 创建软件未来要安装到的系统路径
+mkdir -p mytool_1.0-1_amd64/usr/bin
+mkdir -p mytool_1.0-1_amd64/etc/mytool
+```
+
+
+
+
+
+
+
+
+
+
+
+
