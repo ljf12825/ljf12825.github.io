@@ -3,8 +3,6 @@ title: "From Ubuntu to Debian ? Ultimate control : Ultimate simplicity"
 author: ljf12825
 date: 2026-05-26
 tags: [Linux, Ubuntu, Debian]
-categories: [Recording]
-type: log
 summary: A record of the transition from Ubuntu to Debian
 ---
 
@@ -344,3 +342,30 @@ URIs: https://mirrors.tuna.tsinghua.edu.cn/debian-security
 
 [![software_selection](/images/content/software_selection.png)](/images/content/software_selection.png)
 
+## Debian的打包体系
+
+Debain系喜欢把软件包拆分的比较细
+
+比如一个软件`foo`，在Debian里可能被拆成
+
+```txt
+foo
+foo-dev
+foo-doc
+foo-tools
+foo-common
+foo-data
+libfoo1
+libfoo-dev
+```
+
+核心是把运行时依赖、开发依赖、文档、数据、工具分开\
+这样一个普通用户不需要安装一堆开发文件
+
+与之有鲜明对比的是Arch\
+Arch更倾向于一个上游项目尽可能对应一个比较完整的包
+
+这背后对应了两种不同的打包哲学
+
+- Debian -> 精细拆包 -> 最小化安装 -> 依赖关系非常严格
+- Arch -> 相对完整的包 -> 简单直接 -> 由用户决定系统需要什么
