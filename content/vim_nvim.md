@@ -114,7 +114,13 @@ git clone https://github.com/vim/vim.git
 
 #### 编译Vim
 
-配置完成后，使用`make`命令进行编译。这一步会编译Vim的所有源代码，过程可能需要几分钟时间，取决于机器性能
+配置完成后，使用
+
+```bash
+make -j$(nproc)
+```
+
+命令进行编译。这一步会编译Vim的所有源代码，过程可能需要几分钟时间
 
 #### 安装Vim
 
@@ -134,11 +140,72 @@ vim --version
 
 #### 卸载Vim
 
-如果不再需要编译版的Vim,或者想要重新配置，使用以下命令卸载
+如果不再需要编译版的Vim,或者想要重新配置，在vim/下使用以下命令卸载
 ```bash 
 sudo make uninstall
 ```
 如果需要卸载其他版本的Vim,记得先删除系统的Vim或将其替换
+
+## nvim 安装
+
+与Vim相比，Nvim的安装简单不少
+
+### 从包管理器安装
+
+```bash
+sudo pacman -S neovim
+```
+
+Arch官方仓库的neovim版本很新，功能齐全，自带`+clipboard`, `+python3`, `+lua`
+
+卸载也简单
+
+```bash
+sudo pacman -Rns neovim
+```
+
+也可以在AUR里下载最新版
+
+```bash
+yay -S neovim-git
+```
+
+`neovim-git` 跟着 git 主干走
+
+### 手动编译
+
+Neovim的构建比Vim简单
+
+```bash
+git clone https://github.com/neovim/neovim
+
+cd neovim
+
+make CMAKE_BUILD_TYPE = Release
+sudo make install
+```
+
+或者用CMake 直接
+
+```bash
+cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local
+cmake --build build
+sudo cmake --install build
+```
+
+`CMAKE_BUILD_TYPE` 决定编译器开哪些优化、带不带调试信息，常见值如下
+
+- `Debug`：调试版，优化选项是`-O0 -g`，包含调试信息，编译快但运行慢，可以用gdb单步，适合做Neovim开发或调试
+- `Release`：发布版，优化选项是`-O3 -DNDEBUG`，不包含调试信息，关掉`assert`，去掉运行时检查，性能最好，日常使用
+- `RelWithDebInfo`：发布 + 调试，优化选项是`-O2 -g -DNDEBUG`，适合想日常用，但偶尔要抓崩溃栈
+- `MinSizeRel`：最小体积，优化选项是`-Os -DNDEBUG`，适合嵌入式，空间受限场景
+- `空`：无优化，不推荐，容易出问题，又慢又没法调试
+
+Neovim官方文档一般建议
+
+```bash
+make CMAKE_BUILD_TYPE=RelWithDebInfo
+```
 
 ## 使用
 ### 内置帮助
