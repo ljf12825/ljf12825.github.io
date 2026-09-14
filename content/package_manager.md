@@ -3,7 +3,7 @@ title: Package Manager
 date: 2026-05-14
 author: ljf12825
 tags: [Linux]
-summary: Debian package manager apt, dpkg, appimage, snap, flatpak
+summary: Debian package manager apt, dpkg, appimage, snap, flatpak, Arch, AUR, pacman, yay
 ---
 
 ## 包
@@ -430,9 +430,70 @@ mkdir -p mytool_1.0-1_amd64/usr/bin
 mkdir -p mytool_1.0-1_amd64/etc/mytool
 ```
 
+- `DEBIAN/`是`dpkg-deb`的强制性硬规定，`dpkg-deb`需要通过目录名来区分“包的元数据”和“要安装到系统中的文件”：
+  - `DEBIAN/`目录：被视为控制信息缓冲区。在最终打成的`.deb`包里，这个目录下的所有内容会被提出来，单独压缩成`control.tar.xz`
+  - 根目录下的其他所有目录（如`usr/`, `etc/`等）：被视为系统镜像载荷(Payload)。他们会被全部压缩成`data.tar.xz`，并在用户安装包时原封不动地解压到系统的根目录`/`下
+- 目录命名惯例：打包根目录通常推荐命名为`<包名>_<版本号>-<修订号>_<架构>`
 
+将需要分发的文件（编译好的二进制程序、Shell脚本、配置文件等）放到对应的模拟路径下
 
+关于模拟路径，在构建`.deb`包时
 
+```bash
+# 假设把写好的可执行程序放入 /usr/bin
+cat << 'EOF' > mytool_1.0-1_amd64/usr/bin/mytool
+#!/bin/bash
+echo "Hello! mytool is running successfully."
+
+# 给二进制文件/脚本赋予可执行权限
+chmod +x mytool_1.0-1_amd64/usr/bin/mytool
+
+# 放一个默认配置文件到 /etc/tool/
+echo "LOG_LEVEL=info" > mytool_1.0-1_amd64/etc/mytool/config.conf
+```
+
+编写`DEBIAN/control` 描述文件\
+在`DEBIAN`目录下创建一个名为`control`的纯文本文件（注意大小写），填入包的元信息
+
+```bash
+cat << 'EOF' > mytool_1.0-1_amd64/DEBIAN/control
+Package: mytool
+Version: 1.0-1
+Section: utils
+Priority: optional
+Architecture: amd64
+Maintainer: Your Name <your.email@example.com>
+Depends: bash (>=4.0), curl
+Description: My custom CLI tool
+ A lightweight custom utility written for internal usage.
+EOF
+```
+
+- `Package`：包名（只能包含小写字母、数字、`-`, `_`）
+- `Architecture`：架构（`amd64`/`arm64`/`all`；`all`表示平台无关的脚本或架构无关文件）
+- `Depends`：依赖项，安装时`apt`会自动补齐这些依赖
+
+如果需要安装前后执行钩子，可以在`DEBIAN/`目录下放可执行的`postinst`或`prerm`
+
+最后使用系统自带的`dpkg-deb`工具进行构建
+
+```bash
+dpkg-deb --build mytool_1.0-1_amd64
+```
+
+运行后当前目录下会生成`mytool_1.0-1_amd64.deb`
+
+- 关于`debian-binary`：这个不用手写，当运行`dpkg-deb --build`时，`dpkg-deb`工具会自动进行以下工作
+  - 自动生成一个内容为`2.0\n`的`debian-binary`文件
+  - 将写好的`DEBIAN/`目录下的元信息打包并压缩为`control.tar.gz`（或`.gz`/`.zst`）
+  - 将你放置的`usr/`, `etc/`等Payload目录打包为`data.tar.xz`
+  - 使用`ar`工具将这三部分合并成一个标准的`.deb`归档文件
+
+# Arch的包管理器
+
+## pacman
+
+## AUR
 
 
 
