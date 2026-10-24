@@ -55,7 +55,7 @@
   flex-shrink: 0;
   height: auto;
   right: calc((100vw - 100%)/2);
-  max-height: calc(100vh - 80px);
+  max-height: calc(100vh - 220px);
   font-size: 12px;
   font-family: monospace;
   background: #ffffff;
