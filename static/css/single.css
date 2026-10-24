@@ -53,7 +53,7 @@
   top: 40px;
   width: 250px;
   flex-shrink: 0;
-  height: 70%;
+  height: auto;
   right: calc((100vw - 100%)/2);
   max-height: calc(100vh - 80px);
   font-size: 12px;
