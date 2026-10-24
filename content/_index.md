@@ -19,39 +19,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 ---
 
-## Search
-
-This website is search-driven, with the fellowing search rules:
-
-- Keyword: the subject of the input content
-  - title
-  - tags
-  - summary
-  - lab(will indicate if this content is lab)
-- Logical operators: support simple combination filtering of multiple keywords
-  - `&&`: and
-  - `||`: or
-  - `!`: nor
-- Type `/` can match all contents
-
-Example:
-
-```txt
-!Linux&&!Unity&&!Git
-```
-
-
-Meaning: Content that does not include keywords: Linux, Unity, and Git in all sections
-
----
-
-## Code for myself
+## Write to you
 
 ```text
-The brain works much like an LRU cache,
+The brain is forgetful,
 so some knowledge needs an external environment to be stored.
 
-Everything—and our understanding of it—is constantly changing.
+Everything and my understanding of it—is constantly changing.
 Therefore, everything must keep evolving.
 
 I pursue first principles, original documents, and unprocessed sources of knowledge:
@@ -62,8 +36,6 @@ If you find any errors, please feel free to contact me.
 
 If one day this site is no longer updated,
 please check the latest commit for the most recent changes.
-
-Status: ALIVE
 ```
 
 ---
@@ -92,20 +64,7 @@ Applies to:
 
 ---
 
-## 2. Article / Academic Content
-
-Papers and academic-level writings are licensed under:
-
-**Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**  
-https://creativecommons.org/licenses/by-nc/4.0/
-
-Applies to:
-- `content/home/article/`
-- `content/hoem/reference/`
-
----
-
-## 3. Code Examples in Documentation
+## 2. Code Examples in Documentation
 
 All code snippets and examples contained within Markdown or HTML documents
 are considered part of the documentation and are licensed under the same
@@ -116,7 +75,7 @@ and are not intended as production-ready software.
 
 ---
 
-## 4. Assets and Other Materials
+## 3. Assets and Other Materials
 
 Images, diagrams, datasets, and other project assets are licensed under
 the same license as the content they accompany, unless otherwise stated.
