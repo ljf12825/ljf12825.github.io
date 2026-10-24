@@ -19,20 +19,7 @@ Applies to:
 
 ---
 
-## 2. Article / Academic Content
-
-Papers and academic-level writings are licensed under:
-
-**Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**  
-https://creativecommons.org/licenses/by-nc/4.0/
-
-Applies to:
-- `content/home/article/`
-- `content/hoem/reference/`
-
----
-
-## 3. Code Examples in Documentation
+## 2. Code Examples in Documentation
 
 All code snippets and examples contained within Markdown or HTML documents
 are considered part of the documentation and are licensed under the same
@@ -43,7 +30,7 @@ and are not intended as production-ready software.
 
 ---
 
-## 4. Assets and Other Materials
+## 3. Assets and Other Materials
 
 Images, diagrams, datasets, and other project assets are licensed under
 the same license as the content they accompany, unless otherwise stated.
