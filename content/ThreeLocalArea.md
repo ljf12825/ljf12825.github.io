@@ -616,7 +616,7 @@ git clone -c core.autocrlf=input <repoURL>
 - HTTPS：`https://github.com/user/repo.git`
 - SSH：`git@github.com:user/repo.git`
 - Git：`git://github.com/user/repo.git`
-- 本地路径：`/path/to/repo` 或 `file:///path/to/repo`
+- 本地路径：`/path/to/repo` 或 `file://` + `/path/to/repo`
 
 ### 注意事项
 1. 克隆大型仓库可能需要较长时间和足够的磁盘空间
