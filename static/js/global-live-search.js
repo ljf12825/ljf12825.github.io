@@ -3,6 +3,8 @@
   const dataScript = document.getElementById('global-index-data');
   if (!inputEl || !dataScript) return;
 
+  const countEl = document.getElementById('globalIndexCount');
+
   let pages = [];
   try {
     pages = JSON.parse(dataScript.textContent || '[]');
@@ -140,6 +142,17 @@
     return isNaN(ts) ? 0 : ts;
   }
 
+  function updateCount(count, isSearching) {
+    if (!countEl) return;
+    if (isSearching) {
+      countEl.textContent = 'total: ' + count;
+      countEl.style.display = '';
+    } else {
+      countEl.textContent = 'total: 0';
+      countEl.style.display = 'none';
+    }
+  }
+
   function renderLiveSearch() {
     const rawQuery = inputEl.value;
     const conditionStr = rawQuery.trim();
@@ -155,6 +168,7 @@
       });
       resultHolder.innerHTML = '';
       resultHolder.style.display = 'none';
+      updateCount(0, false);  // 非搜索状态，隐藏计数
       return;
     }
 
@@ -200,6 +214,8 @@
 
       return timeB - timeA;
     });
+
+    updateCount(matchedResults.length, true);
 
     let listHTML = '';
     for (let i = 0; i < matchedResults.length; i++) {
