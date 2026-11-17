@@ -19,27 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 ---
 
-## Write to you
-
-```text
-The brain is forgetful,
-so some knowledge needs an external environment to be stored.
-
-Everything and my understanding of it—is constantly changing.
-Therefore, everything must keep evolving.
-
-I pursue first principles, original documents, and unprocessed sources of knowledge:
-pure, solid, independent, and thoughtful—like a shot of espresso.
-
-If what I record here is helpful to you, it is my pleasure.
-If you find any errors, please feel free to contact me.
-
-If one day this site is no longer updated,
-please check the latest commit for the most recent changes.
-```
-
----
-
 ## Full License
 
 ```md
